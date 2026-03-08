@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 98%;
+    --background: 30 20% 98%;
     --foreground: 215 28% 17%;
     --card: 0 0% 100%;
     --card-foreground: 215 28% 17%;
@@ -14,9 +14,9 @@
     --primary-foreground: 0 0% 100%;
     --primary-dark: 21 88% 40%;
     --primary-light: 27 97% 87%;
-    --secondary: 210 40% 96%;
+    --secondary: 220 14% 96%;
     --secondary-foreground: 215 28% 17%;
-    --muted: 210 40% 96%;
+    --muted: 220 14% 96%;
     --muted-foreground: 215 16% 47%;
     --accent: 27 97% 87%;
     --accent-foreground: 21 88% 40%;
@@ -26,19 +26,17 @@
     --success-foreground: 0 0% 100%;
     --warning: 38 92% 50%;
     --warning-foreground: 0 0% 100%;
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
     --ring: 21 90% 48%;
     --radius: 0.75rem;
-    --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.06);
-    --shadow-hover: 0 4px 16px rgba(0,0,0,0.08), 0 12px 40px rgba(0,0,0,0.1);
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 215 28% 17%;
     --sidebar-primary: 21 90% 48%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 27 97% 87%;
     --sidebar-accent-foreground: 21 88% 40%;
-    --sidebar-border: 214 32% 91%;
+    --sidebar-border: 220 13% 91%;
     --sidebar-ring: 21 90% 48%;
   }
 
@@ -57,7 +55,7 @@
     --secondary-foreground: 210 40% 98%;
     --muted: 217 33% 17%;
     --muted-foreground: 215 20% 65%;
-    --accent: 217 33% 17%;
+    --accent: 217 33% 20%;
     --accent-foreground: 210 40% 98%;
     --destructive: 0 63% 31%;
     --destructive-foreground: 210 40% 98%;
@@ -89,38 +87,8 @@
 }
 
 @layer utilities {
-  .text-brand {
-    @apply text-primary;
-  }
-  .bg-brand {
-    @apply bg-primary;
-  }
-  .bg-brand-light {
-    background-color: hsl(var(--primary-light));
-  }
-  .text-brand-dark {
-    color: hsl(var(--primary-dark));
-  }
-  .border-brand {
-    @apply border-primary;
-  }
-  .bg-section-alt {
-    @apply bg-secondary;
-  }
-  .shadow-card {
-    box-shadow: var(--shadow);
-  }
-  .shadow-card-hover {
-    box-shadow: var(--shadow-hover);
-  }
-  .glass {
-    @apply bg-card/70 backdrop-blur-xl border;
-  }
-  .glass-strong {
-    @apply bg-card/90 backdrop-blur-2xl border;
-  }
   .hero-gradient {
-    background: linear-gradient(160deg, hsl(27 97% 96%) 0%, hsl(30 100% 97%) 40%, hsl(var(--background)) 100%);
+    background: linear-gradient(160deg, hsl(30 60% 97%) 0%, hsl(25 50% 96%) 30%, hsl(var(--background)) 100%);
   }
   .dark .hero-gradient {
     background: linear-gradient(160deg, hsl(222 47% 13%) 0%, hsl(217 33% 14%) 50%, hsl(222 47% 11%) 100%);
@@ -132,27 +100,39 @@
     background: linear-gradient(160deg, hsl(215 28% 14%), hsl(222 47% 9%));
   }
   .card-base {
-    @apply bg-card rounded-2xl border shadow-card transition-all duration-300;
+    @apply bg-card rounded-2xl border transition-all duration-200;
   }
   .card-hover {
-    @apply hover:-translate-y-1.5 hover:shadow-card-hover;
+    @apply hover:-translate-y-1 hover:shadow-lg;
+  }
+  .card-active {
+    @apply border-primary/40 shadow-md shadow-primary/5;
+  }
+  .icon-box {
+    @apply w-12 h-12 rounded-xl flex items-center justify-center;
+  }
+  .icon-box-lg {
+    @apply w-14 h-14 rounded-2xl flex items-center justify-center;
   }
   .badge-brand {
-    @apply bg-brand-light text-brand-dark px-3.5 py-1.5 rounded-full text-sm font-semibold;
+    @apply bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-semibold;
   }
   .input-base {
-    @apply w-full border-2 border-input bg-card rounded-xl px-4 py-3 text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all duration-200;
+    @apply w-full border bg-card rounded-xl px-4 py-3 text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/10 transition-all duration-200;
   }
   .btn-primary {
-    @apply bg-primary text-primary-foreground px-6 py-3 rounded-xl font-bold transition-all duration-200 hover:opacity-90 hover:shadow-lg hover:shadow-primary/20;
+    @apply bg-primary text-primary-foreground px-6 py-3 rounded-xl font-bold transition-all duration-200 hover:bg-primary-dark;
   }
   .btn-outline {
     @apply border-2 border-primary text-primary px-6 py-3 rounded-xl font-bold transition-all duration-200 hover:bg-primary hover:text-primary-foreground;
   }
-  .icon-box {
-    @apply w-12 h-12 rounded-2xl flex items-center justify-center;
+  .btn-dark {
+    @apply bg-foreground/80 text-background px-6 py-3 rounded-xl font-semibold transition-all duration-200 hover:bg-foreground/90 text-sm;
   }
-  .icon-box-sm {
-    @apply w-10 h-10 rounded-xl flex items-center justify-center;
+  .tag-outline {
+    @apply border rounded-lg px-3 py-1 text-xs font-medium text-muted-foreground;
+  }
+  .bg-section-alt {
+    @apply bg-secondary;
   }
 }

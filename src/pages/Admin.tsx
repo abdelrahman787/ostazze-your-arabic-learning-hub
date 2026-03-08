@@ -1,147 +1,186 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 import { mockTeachers } from "@/data/mockData";
-import { Menu } from "lucide-react";
+import {
+  GraduationCap, Users, CalendarCheck, TrendingUp, Search, Plus,
+  Shield, Video, BookOpen, ArrowUpLeft
+} from "lucide-react";
+import { motion } from "framer-motion";
+
+const tabs = [
+  { id: "teachers", label: "المعلمون", icon: GraduationCap },
+  { id: "admins", label: "المشرفون", icon: Shield },
+  { id: "videos", label: "الفيديوهات", icon: Video },
+  { id: "content", label: "المحتوى", icon: BookOpen },
+];
 
 const Admin = () => {
   const { logout } = useAuth();
   const navigate = useNavigate();
-  const [tab, setTab] = useState("overview");
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState("teachers");
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const sidebarLinks = [
-    { icon: "📊", label: "نظرة عامة", tab: "overview" },
-    { icon: "👥", label: "المستخدمون", tab: "users" },
-    { icon: "👨‍🏫", label: "المعلمون", tab: "teachers" },
-    { icon: "📅", label: "الجلسات", tab: "sessions" },
-    { icon: "📂", label: "التصنيفات", tab: "categories" },
-    { icon: "📖", label: "المواد", tab: "subjects" },
-    { icon: "🎓", label: "الجامعات", tab: "universities" },
+  const stats = [
+    { label: "المعلمون", value: "0", icon: GraduationCap, color: "bg-primary/10 text-primary" },
+    { label: "الطلاب", value: "0", icon: Users, color: "bg-warning/10 text-warning" },
+    { label: "الجلسات", value: "0", icon: CalendarCheck, color: "bg-muted text-muted-foreground" },
+    { label: "الإيرادات", value: "0", icon: TrendingUp, color: "bg-destructive/5 text-destructive" },
   ];
 
   return (
-    <div className="flex min-h-screen">
-      <aside className={`fixed lg:static inset-y-0 right-0 z-40 w-[260px] bg-card border-l flex flex-col transition-transform duration-300 ${sidebarOpen ? "translate-x-0" : "translate-x-full lg:translate-x-0"}`}>
-        <div className="p-5 border-b"><Link to="/" className="text-xl font-black text-primary">🎓 OSTAZZE</Link><div className="text-xs text-muted-foreground mt-1">لوحة الإدارة</div></div>
-        <nav className="flex-1 overflow-y-auto p-4">
-          {sidebarLinks.map((item) => (
-            <button key={item.tab} onClick={() => { setTab(item.tab); setSidebarOpen(false); }}
-              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-[10px] text-sm transition-colors mb-1 ${tab === item.tab ? "bg-primary text-primary-foreground font-bold" : "text-muted-foreground hover:bg-primary-light hover:text-primary-dark"}`}>
-              <span>{item.icon}</span>{item.label}
-            </button>
-          ))}
-        </nav>
-        <div className="p-4 border-t">
-          <button onClick={() => { logout(); navigate("/"); }} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-[10px] text-sm text-destructive hover:bg-destructive/10 transition-colors">🚪 تسجيل الخروج</button>
-        </div>
-      </aside>
-
-      {sidebarOpen && <div className="fixed inset-0 z-30 bg-foreground/30 lg:hidden" onClick={() => setSidebarOpen(false)} />}
-
-      <main className="flex-1 min-w-0">
-        <header className="bg-card border-b px-6 py-4 flex items-center justify-between sticky top-0 z-20">
-          <div className="flex items-center gap-3">
-            <button onClick={() => setSidebarOpen(true)} className="lg:hidden"><Menu size={20} /></button>
-            <h2 className="font-bold">لوحة الإدارة</h2>
+    <div className="min-h-screen bg-background">
+      <div className="container py-8">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-8"
+        >
+          <div className="flex items-center gap-2 mb-1">
+            <Shield size={20} className="text-primary" />
+            <h1 className="text-2xl font-extrabold">لوحة الإدارة</h1>
           </div>
-        </header>
+          <p className="text-muted-foreground text-sm">إدارة المعلمين والمشرفين والمحتوى</p>
+        </motion.div>
 
-        <div className="p-6">
-          {tab === "overview" && (
-            <div className="space-y-6 animate-fade-in">
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                {[
-                  { label: "إجمالي المستخدمين", value: "1,250", icon: "👥" },
-                  { label: "المعلمون", value: "200", icon: "👨‍🏫" },
-                  { label: "الجلسات الكلية", value: "12,500", icon: "📅" },
-                  { label: "إجمالي الإيرادات", value: "450K ر.س", icon: "💰" },
-                ].map((s) => (
-                  <div key={s.label} className="card-base p-5">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-muted-foreground text-sm">{s.label}</span>
-                      <span className="text-2xl">{s.icon}</span>
-                    </div>
-                    <div className="text-xl font-black text-primary">{s.value}</div>
-                  </div>
-                ))}
+        {/* Stats Cards */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          {stats.map((s, i) => (
+            <motion.div
+              key={s.label}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.06 }}
+              className="card-base p-5"
+            >
+              <div className="flex items-center gap-3">
+                <div className={`icon-box ${s.color}`}>
+                  <s.icon size={20} />
+                </div>
+                <div>
+                  <div className="text-2xl font-black">{s.value}</div>
+                  <div className="text-muted-foreground text-xs">{s.label}</div>
+                </div>
               </div>
-            </div>
-          )}
+            </motion.div>
+          ))}
+        </div>
 
-          {tab === "teachers" && (
-            <div className="card-base overflow-x-auto animate-fade-in">
+        {/* Tabs */}
+        <div className="card-base overflow-hidden">
+          <div className="flex border-b bg-secondary/30">
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`flex-1 flex items-center justify-center gap-2 py-3.5 text-sm font-medium transition-all ${
+                  activeTab === tab.id
+                    ? "bg-card text-foreground border-b-2 border-primary font-bold"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                <tab.icon size={16} />
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Toolbar */}
+          <div className="p-4 flex items-center justify-between gap-4">
+            <div className="relative flex-1 max-w-md">
+              <Search size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+              <input
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="بحث عن معلم..."
+                className="input-base !pr-10 !py-2.5 text-sm"
+              />
+            </div>
+            <button className="btn-primary !py-2.5 text-sm flex items-center gap-2">
+              <Plus size={16} />
+              إضافة معلم
+            </button>
+          </div>
+
+          {/* Table */}
+          {activeTab === "teachers" && (
+            <div className="overflow-x-auto">
               <table className="w-full text-sm">
-                <thead><tr className="bg-secondary">
-                  <th className="text-start p-4 font-bold text-muted-foreground text-xs">#</th>
-                  <th className="text-start p-4 font-bold text-muted-foreground text-xs">الاسم</th>
-                  <th className="text-start p-4 font-bold text-muted-foreground text-xs">السعر</th>
-                  <th className="text-start p-4 font-bold text-muted-foreground text-xs">التقييم</th>
-                  <th className="text-start p-4 font-bold text-muted-foreground text-xs">التوثيق</th>
-                  <th className="text-start p-4 font-bold text-muted-foreground text-xs">الإجراء</th>
-                </tr></thead>
+                <thead>
+                  <tr className="bg-muted/60">
+                    <th className="text-start p-4 font-bold text-muted-foreground text-xs">المعلم</th>
+                    <th className="text-start p-4 font-bold text-muted-foreground text-xs">الجامعة</th>
+                    <th className="text-start p-4 font-bold text-muted-foreground text-xs">المواد</th>
+                    <th className="text-start p-4 font-bold text-muted-foreground text-xs">الحالة</th>
+                    <th className="text-start p-4 font-bold text-muted-foreground text-xs">الإجراءات</th>
+                  </tr>
+                </thead>
                 <tbody>
-                  {mockTeachers.map((t, i) => (
-                    <tr key={t.id} className="border-t hover:bg-secondary/50">
-                      <td className="p-4 text-muted-foreground">{i + 1}</td>
-                      <td className="p-4 font-bold">{t.name}</td>
-                      <td className="p-4">{t.price} ر.س</td>
-                      <td className="p-4">{t.rating} ★</td>
-                      <td className="p-4">
-                        {t.verified
-                          ? <span className="text-xs bg-success/10 text-success px-2 py-1 rounded-full font-semibold">موثق ✓</span>
-                          : <span className="text-xs bg-warning/10 text-warning px-2 py-1 rounded-full font-semibold">غير موثق</span>}
-                      </td>
-                      <td className="p-4">
-                        {!t.verified && <button className="text-xs bg-success/10 text-success px-3 py-1 rounded-[10px] font-semibold">توثيق ✓</button>}
+                  {mockTeachers.length === 0 ? (
+                    <tr>
+                      <td colSpan={5} className="p-16 text-center">
+                        <GraduationCap size={40} className="mx-auto text-muted-foreground/30 mb-3" />
+                        <p className="text-muted-foreground">لا يوجد معلمون</p>
                       </td>
                     </tr>
-                  ))}
+                  ) : (
+                    mockTeachers.map((t) => (
+                      <tr key={t.id} className="border-t hover:bg-secondary/30 transition-colors">
+                        <td className="p-4">
+                          <div className="flex items-center gap-3">
+                            <div className="icon-box bg-primary/10">
+                              <GraduationCap size={18} className="text-primary" />
+                            </div>
+                            <div>
+                              <div className="font-bold text-sm">{t.name}</div>
+                              <div className="text-muted-foreground text-xs">{t.price} ر.س / جلسة</div>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="p-4 text-muted-foreground text-sm">{t.university || "—"}</td>
+                        <td className="p-4">
+                          <div className="flex gap-1.5">
+                            {t.subjects.slice(0, 2).map((s) => (
+                              <span key={s} className="tag-outline text-[0.7rem]">{s}</span>
+                            ))}
+                          </div>
+                        </td>
+                        <td className="p-4">
+                          {t.verified ? (
+                            <span className="text-xs bg-success/10 text-success px-2.5 py-1 rounded-full font-semibold">موثق</span>
+                          ) : (
+                            <span className="text-xs bg-warning/10 text-warning px-2.5 py-1 rounded-full font-semibold">قيد المراجعة</span>
+                          )}
+                        </td>
+                        <td className="p-4">
+                          <div className="flex gap-2">
+                            {!t.verified && (
+                              <button className="text-xs bg-success/10 text-success px-3 py-1.5 rounded-lg font-semibold hover:bg-success/20 transition-colors">
+                                توثيق
+                              </button>
+                            )}
+                            <button className="text-xs bg-destructive/10 text-destructive px-3 py-1.5 rounded-lg font-semibold hover:bg-destructive/20 transition-colors">
+                              حذف
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))
+                  )}
                 </tbody>
               </table>
             </div>
           )}
 
-          {tab === "users" && (
-            <div className="card-base overflow-x-auto animate-fade-in">
-              <table className="w-full text-sm">
-                <thead><tr className="bg-secondary">
-                  <th className="text-start p-4 font-bold text-muted-foreground text-xs">#</th>
-                  <th className="text-start p-4 font-bold text-muted-foreground text-xs">الاسم</th>
-                  <th className="text-start p-4 font-bold text-muted-foreground text-xs">البريد</th>
-                  <th className="text-start p-4 font-bold text-muted-foreground text-xs">النوع</th>
-                  <th className="text-start p-4 font-bold text-muted-foreground text-xs">الحالة</th>
-                  <th className="text-start p-4 font-bold text-muted-foreground text-xs">الإجراء</th>
-                </tr></thead>
-                <tbody>
-                  {[
-                    { name: "عبدالله المالكي", email: "abdullah@email.com", type: "طالب", active: true },
-                    { name: "د. أحمد الراشد", email: "ahmed@email.com", type: "معلم", active: true },
-                    { name: "نورا الشمري", email: "noura@email.com", type: "طالب", active: false },
-                  ].map((u, i) => (
-                    <tr key={i} className="border-t hover:bg-secondary/50">
-                      <td className="p-4 text-muted-foreground">{i + 1}</td>
-                      <td className="p-4 font-bold">{u.name}</td>
-                      <td className="p-4 text-muted-foreground">{u.email}</td>
-                      <td className="p-4"><span className="badge-brand text-xs">{u.type}</span></td>
-                      <td className="p-4">{u.active ? <span className="text-xs bg-success/10 text-success px-2 py-1 rounded-full font-semibold">نشط</span> : <span className="text-xs bg-destructive/10 text-destructive px-2 py-1 rounded-full font-semibold">موقف</span>}</td>
-                      <td className="p-4"><button className={`text-xs px-3 py-1 rounded-[10px] font-semibold ${u.active ? "bg-destructive/10 text-destructive" : "bg-success/10 text-success"}`}>{u.active ? "إيقاف" : "تفعيل"}</button></td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-
-          {!["overview", "teachers", "users"].includes(tab) && (
-            <div className="card-base p-12 text-center animate-fade-in">
-              <div className="text-5xl mb-4">🚧</div>
-              <h3 className="font-extrabold text-xl mb-2">قريباً</h3>
-              <p className="text-muted-foreground">هذا القسم قيد التطوير</p>
+          {activeTab !== "teachers" && (
+            <div className="p-16 text-center">
+              <GraduationCap size={40} className="mx-auto text-muted-foreground/30 mb-3" />
+              <p className="text-muted-foreground">قسم قيد التطوير</p>
             </div>
           )}
         </div>
-      </main>
+      </div>
     </div>
   );
 };
