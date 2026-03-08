@@ -2,8 +2,11 @@ import { Link } from "react-router-dom";
 import type { Teacher } from "@/data/mockData";
 import { Star, User, ArrowUpLeft } from "lucide-react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const TeacherCard = ({ teacher, index = 0 }: { teacher: Teacher; index?: number }) => {
+  const { t } = useLanguage();
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -12,14 +15,22 @@ const TeacherCard = ({ teacher, index = 0 }: { teacher: Teacher; index?: number 
       transition={{ duration: 0.4, delay: index * 0.08 }}
       className="card-base flex flex-col hover:border-primary/30 hover:shadow-lg transition-all duration-200"
     >
-      {/* Header */}
       <div className="p-5 pb-3 flex gap-3">
         <div className="relative shrink-0">
-          <div className="icon-box-lg bg-primary/10 text-primary">
+          <motion.div
+            whileHover={{ scale: 1.1, rotate: 5 }}
+            transition={{ type: "spring", stiffness: 300 }}
+            className="icon-box-lg bg-primary/10 text-primary"
+          >
             <User size={22} />
-          </div>
+          </motion.div>
           {teacher.verified && (
-            <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-success rounded-full border-2 border-card" />
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: "spring", delay: 0.3 }}
+              className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-success rounded-full border-2 border-card"
+            />
           )}
         </div>
         <div className="min-w-0 flex-1">
@@ -28,39 +39,38 @@ const TeacherCard = ({ teacher, index = 0 }: { teacher: Teacher; index?: number 
         </div>
       </div>
 
-      {/* Subjects */}
       <div className="px-5 pb-4 flex flex-wrap gap-1.5">
         {teacher.subjects.slice(0, 3).map((s) => (
           <span key={s} className="tag-outline">{s}</span>
         ))}
       </div>
 
-      {/* Spacer */}
       <div className="flex-1" />
 
-      {/* Footer */}
       <div className="px-5 pb-4 flex items-center justify-between">
         <div className="flex items-center gap-1.5">
-          <Star size={14} className="fill-warning text-warning" />
+          <motion.div whileHover={{ rotate: 72, scale: 1.3 }} transition={{ type: "spring" }}>
+            <Star size={14} className="fill-warning text-warning" />
+          </motion.div>
           <span className="font-bold text-sm">{teacher.rating}</span>
           <span className="text-muted-foreground text-xs">({teacher.reviews})</span>
         </div>
         <div className="text-left">
           <span className="text-lg font-extrabold text-primary">{teacher.price}</span>
           <span className="text-muted-foreground text-xs mr-1">{teacher.currency}</span>
-          <div className="text-muted-foreground text-[0.65rem]">لكل جلسة</div>
+          <div className="text-muted-foreground text-[0.65rem]">{t("teacher_per_session")}</div>
         </div>
       </div>
 
-      {/* CTA */}
       <div className="px-5 pb-5">
-        <Link
-          to={`/teachers/${teacher.id}`}
-          className="btn-primary flex items-center justify-center gap-2 text-sm w-full"
-        >
-          عرض الملف الشخصي
-          <ArrowUpLeft size={14} />
-        </Link>
+        <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+          <Link to={`/teachers/${teacher.id}`} className="btn-primary flex items-center justify-center gap-2 text-sm w-full">
+            {t("teacher_view_profile")}
+            <motion.div whileHover={{ x: -3, y: -3 }}>
+              <ArrowUpLeft size={14} />
+            </motion.div>
+          </Link>
+        </motion.div>
       </div>
     </motion.div>
   );
