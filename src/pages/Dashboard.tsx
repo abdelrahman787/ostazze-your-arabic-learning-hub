@@ -26,6 +26,7 @@ const Dashboard = () => {
     { section: t("section_main"), items: [{ icon: LayoutDashboard, label: t("dash_overview"), tab: "overview" }] },
     { section: t("section_as_student"), items: [
       { icon: Search, label: t("dash_search_teacher"), tab: "search", href: "/teachers" },
+      { icon: BookOpen, label: "محاضراتي", tab: "lectures" },
       { icon: CalendarCheck, label: t("dash_sessions"), tab: "sessions" },
       { icon: Wallet, label: t("dash_payments"), tab: "payments" },
       { icon: Heart, label: t("dash_favorites"), tab: "favorites" },
