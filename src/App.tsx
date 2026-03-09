@@ -27,7 +27,7 @@ const queryClient = new QueryClient();
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
-  const hideNavFooter = ["/dashboard", "/dashboard/teacher", "/admin"].includes(location.pathname) || location.pathname.startsWith("/lectures/");
+  const hideNavFooter = ["/dashboard", "/dashboard/teacher"].includes(location.pathname) || location.pathname.startsWith("/lectures/");
   const hideFooter = ["/login", "/register", "/forgot-password"].includes(location.pathname);
 
   return (
