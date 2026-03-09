@@ -50,6 +50,39 @@ export type Database = {
         }
         Relationships: []
       }
+      teacher_profiles: {
+        Row: {
+          created_at: string
+          id: string
+          price: number | null
+          subjects: string[] | null
+          university: string | null
+          updated_at: string
+          user_id: string
+          verified: boolean | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          price?: number | null
+          subjects?: string[] | null
+          university?: string | null
+          updated_at?: string
+          user_id: string
+          verified?: boolean | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          price?: number | null
+          subjects?: string[] | null
+          university?: string | null
+          updated_at?: string
+          user_id?: string
+          verified?: boolean | null
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           id: string
