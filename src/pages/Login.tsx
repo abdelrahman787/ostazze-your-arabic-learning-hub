@@ -30,9 +30,8 @@ const Login = () => {
     const result = await login(email, password);
     if (result.error) {
       setError(result.error);
-      setLoading(false);
     }
-    // Navigation happens via auth state change in AuthContext
+    setLoading(false);
   };
 
   return (
