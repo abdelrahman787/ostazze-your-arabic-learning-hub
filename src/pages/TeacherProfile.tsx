@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const TeacherProfile = () => {
   const { id } = useParams();
-  const { t } = useLanguage();
+  const { t, d } = useLanguage();
   const teacher = mockTeachers.find((tc) => tc.id === id);
   const [showBooking, setShowBooking] = useState(false);
 
@@ -20,13 +20,13 @@ const TeacherProfile = () => {
     );
   }
 
-  const initials = teacher.name.split(" ").map((w) => w[0]).join("").slice(0, 2);
+  const initials = d(teacher.name).split(" ").map((w) => w[0]).join("").slice(0, 2);
 
   return (
     <div>
       <section className="hero-gradient py-8">
         <div className="container">
-          <p className="text-muted-foreground text-sm"><Link to="/teachers" className="hover:text-primary">{t("nav_teachers")}</Link> / {teacher.name}</p>
+          <p className="text-muted-foreground text-sm"><Link to="/teachers" className="hover:text-primary">{t("nav_teachers")}</Link> / {d(teacher.name)}</p>
         </div>
       </section>
 
@@ -40,14 +40,14 @@ const TeacherProfile = () => {
                 </motion.div>
                 <div>
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <h1 className="text-xl font-black">{teacher.name}</h1>
+                    <h1 className="text-xl font-black">{d(teacher.name)}</h1>
                     {teacher.verified && <span className="text-xs bg-success/10 text-success px-2.5 py-1 rounded-full font-semibold">{t("teacher_verified")}</span>}
                   </div>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{teacher.title}</p>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{d(teacher.title)}</p>
                   {teacher.university && (
                     <div className="inline-flex items-center gap-1.5 mt-2 text-xs bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 px-3 py-1 rounded-full">
                       <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}><BookOpen size={12} /></motion.div>
-                      {teacher.university}
+                      {d(teacher.university)}
                     </div>
                   )}
                 </div>
@@ -68,15 +68,15 @@ const TeacherProfile = () => {
                 </div>
               </div>
 
-              {teacher.bio && <p className="text-muted-foreground leading-relaxed mb-6">{teacher.bio}</p>}
+              {teacher.bio && <p className="text-muted-foreground leading-relaxed mb-6">{d(teacher.bio)}</p>}
 
               <div className="flex flex-wrap gap-2 mb-6">
-                {teacher.subjects.map((s) => <span key={s} className="badge-brand">{s}</span>)}
+                {teacher.subjects.map((s, i) => <span key={i} className="badge-brand">{d(s)}</span>)}
               </div>
 
               <div className="flex gap-4 items-center flex-wrap">
                 <div className="bg-secondary rounded-xl p-4 text-center">
-                  <div className="text-xl font-black text-primary">{teacher.price} {teacher.currency}</div>
+                  <div className="text-xl font-black text-primary">{teacher.price} {d(teacher.currency)}</div>
                   <div className="text-muted-foreground text-xs">{t("teacher_per_session")}</div>
                 </div>
                 <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} onClick={() => setShowBooking(true)} className="btn-primary flex-1 text-center text-lg">
@@ -92,9 +92,9 @@ const TeacherProfile = () => {
                   {t("teacher_availability")}
                 </h3>
                 <div className="space-y-3">
-                  {teacher.availability.map((a) => (
-                    <div key={a.day} className="flex items-center justify-between p-3 bg-secondary rounded-xl">
-                      <span className="font-bold text-sm">{a.day}</span>
+                  {teacher.availability.map((a, i) => (
+                    <div key={i} className="flex items-center justify-between p-3 bg-secondary rounded-xl">
+                      <span className="font-bold text-sm">{d(a.day)}</span>
                       <span className="text-muted-foreground text-sm">{a.start} - {a.end}</span>
                     </div>
                   ))}
@@ -118,13 +118,13 @@ const TeacherProfile = () => {
                   <div key={r.id} className="border-b pb-4 last:border-0">
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold">{r.studentName.charAt(0)}</div>
-                        <span className="font-bold text-sm">{r.studentName}</span>
+                        <div className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold">{d(r.studentName).charAt(0)}</div>
+                        <span className="font-bold text-sm">{d(r.studentName)}</span>
                       </div>
-                      <span className="text-muted-foreground text-xs">{r.date}</span>
+                      <span className="text-muted-foreground text-xs">{d(r.date)}</span>
                     </div>
                     <div className="flex gap-0.5 mb-2">{Array.from({ length: r.rating }).map((_, i) => <Star key={i} size={12} className="fill-warning text-warning" />)}</div>
-                    <p className="text-muted-foreground text-sm leading-relaxed">{r.comment}</p>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{d(r.comment)}</p>
                   </div>
                 ))}
               </div>
@@ -144,7 +144,7 @@ const TeacherProfile = () => {
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-bold mb-1.5">{t("booking_select_subject")}</label>
-                  <select className="input-base">{teacher.subjects.map((s) => <option key={s}>{s}</option>)}</select>
+                  <select className="input-base">{teacher.subjects.map((s, i) => <option key={i}>{d(s)}</option>)}</select>
                 </div>
                 <div>
                   <label className="block text-sm font-bold mb-1.5">{t("booking_datetime")}</label>
@@ -156,7 +156,7 @@ const TeacherProfile = () => {
                 </div>
                 <div className="bg-primary/5 border border-primary/20 rounded-xl p-4 flex items-center justify-between">
                   <span className="font-bold text-foreground">{t("booking_price")}</span>
-                  <span className="font-extrabold text-primary">{teacher.price} {teacher.currency}</span>
+                  <span className="font-extrabold text-primary">{teacher.price} {d(teacher.currency)}</span>
                 </div>
                 <motion.button whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }} className="btn-primary w-full text-lg">{t("booking_confirm")}</motion.button>
               </div>

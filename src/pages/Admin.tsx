@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 
 const Admin = () => {
   const { logout } = useAuth();
-  const { t } = useLanguage();
+  const { t, d } = useLanguage();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("teachers");
   const [searchQuery, setSearchQuery] = useState("");
@@ -99,13 +99,13 @@ const Admin = () => {
                             <GraduationCap size={18} className="text-primary" />
                           </motion.div>
                           <div>
-                            <div className="font-bold text-sm">{tc.name}</div>
+                            <div className="font-bold text-sm">{d(tc.name)}</div>
                             <div className="text-muted-foreground text-xs">{tc.price} {t("sar")} / {t("teacher_per_session")}</div>
                           </div>
                         </div>
                       </td>
-                      <td className="p-4 text-muted-foreground text-sm">{tc.university || "—"}</td>
-                      <td className="p-4"><div className="flex gap-1.5">{tc.subjects.slice(0, 2).map((s) => <span key={s} className="tag-outline text-[0.7rem]">{s}</span>)}</div></td>
+                      <td className="p-4 text-muted-foreground text-sm">{tc.university ? d(tc.university) : "—"}</td>
+                      <td className="p-4"><div className="flex gap-1.5">{tc.subjects.slice(0, 2).map((s, i) => <span key={i} className="tag-outline text-[0.7rem]">{d(s)}</span>)}</div></td>
                       <td className="p-4">
                         {tc.verified
                           ? <span className="text-xs bg-success/10 text-success px-2.5 py-1 rounded-full font-semibold">{t("teacher_verified")}</span>

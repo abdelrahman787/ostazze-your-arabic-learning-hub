@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 
 const Dashboard = () => {
   const { user, logout } = useAuth();
-  const { t } = useLanguage();
+  const { t, d } = useLanguage();
   const navigate = useNavigate();
   const [tab, setTab] = useState("overview");
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -115,7 +115,7 @@ const Dashboard = () => {
                   <div className="space-y-3">
                     {mockSessions.slice(0, 3).map((s) => (
                       <div key={s.id} className="flex items-center justify-between p-3 bg-secondary rounded-xl">
-                        <div><div className="font-bold text-sm">{s.teacherName}</div><div className="text-muted-foreground text-xs">{s.date}</div></div>
+                        <div><div className="font-bold text-sm">{d(s.teacherName)}</div><div className="text-muted-foreground text-xs">{s.date}</div></div>
                         <span className={`text-xs px-2 py-1 rounded-full font-semibold ${statusMap[s.status].cls}`}>{statusMap[s.status].label}</span>
                       </div>
                     ))}
@@ -154,8 +154,8 @@ const Dashboard = () => {
                   <tbody>
                     {filteredSessions.map((s) => (
                       <tr key={s.id} className="border-t hover:bg-secondary/30 transition-colors">
-                        <td className="p-4 font-bold">{s.teacherName}</td>
-                        <td className="p-4">{s.subject}</td>
+                        <td className="p-4 font-bold">{d(s.teacherName)}</td>
+                        <td className="p-4">{d(s.subject)}</td>
                         <td className="p-4 text-muted-foreground">{s.date}</td>
                         <td className="p-4 font-bold text-primary">{s.price} {t("sar")}</td>
                         <td className="p-4"><span className={`text-xs px-2 py-1 rounded-full font-semibold ${statusMap[s.status].cls}`}>{statusMap[s.status].label}</span></td>

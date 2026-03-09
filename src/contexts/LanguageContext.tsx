@@ -292,6 +292,7 @@ interface LanguageContextType {
   setLang: (lang: Lang) => void;
   toggleLang: () => void;
   t: (key: TranslationKey) => string;
+  d: (obj: { ar: string; en: string } | string | undefined) => string;
   dir: "rtl" | "ltr";
 }
 
@@ -300,6 +301,7 @@ const LanguageContext = createContext<LanguageContextType>({
   setLang: () => {},
   toggleLang: () => {},
   t: (key) => translations[key]?.ar || key,
+  d: (obj) => (typeof obj === "string" ? obj : obj?.ar || ""),
   dir: "rtl",
 });
 
@@ -326,8 +328,17 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     [lang]
   );
 
+  const d = useCallback(
+    (obj: { ar: string; en: string } | string | undefined): string => {
+      if (!obj) return "";
+      if (typeof obj === "string") return obj;
+      return obj[lang] || obj.ar || "";
+    },
+    [lang]
+  );
+
   return (
-    <LanguageContext.Provider value={{ lang, setLang, toggleLang, t, dir }}>
+    <LanguageContext.Provider value={{ lang, setLang, toggleLang, t, d, dir }}>
       {children}
     </LanguageContext.Provider>
   );

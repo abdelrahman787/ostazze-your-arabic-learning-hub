@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const Universities = () => {
-  const { t } = useLanguage();
+  const { t, d } = useLanguage();
 
   return (
     <div>
@@ -23,7 +23,7 @@ const Universities = () => {
               <motion.div whileHover={{ scale: 1.15, rotate: 10 }} transition={{ type: "spring", stiffness: 300 }} className="icon-box-lg bg-primary/10 mb-5">
                 <GraduationCap size={24} className="text-primary" />
               </motion.div>
-              <h3 className={`font-bold text-base mb-3 ${i === 0 ? "text-primary" : ""}`}>{u.name}</h3>
+              <h3 className={`font-bold text-base mb-3 ${i === 0 ? "text-primary" : ""}`}>{d(u.name)}</h3>
               <div className="flex items-center gap-4 text-muted-foreground text-sm mb-5">
                 <div className="flex items-center gap-1.5"><GraduationCap size={14} /><span>{Math.floor(Math.random() * 30 + 30)}</span></div>
                 <div className="flex items-center gap-1.5"><Users size={14} /><span>{Math.floor(Math.random() * 80 + 60)}</span></div>
