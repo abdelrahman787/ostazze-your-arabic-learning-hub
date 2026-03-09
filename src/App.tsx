@@ -20,6 +20,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import Dashboard from "./pages/Dashboard";
 import TeacherDashboard from "./pages/TeacherDashboard";
 import Admin from "./pages/Admin";
+import LectureView from "./pages/LectureView";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
