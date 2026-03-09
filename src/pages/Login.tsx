@@ -18,8 +18,7 @@ const Login = () => {
   // Redirect if already logged in
   useEffect(() => {
     if (isLoggedIn && user) {
-      if (user.role === "admin") navigate("/admin");
-      else if (user.role === "teacher") navigate("/dashboard/teacher");
+      if (user.role === "teacher") navigate("/dashboard/teacher");
       else navigate("/dashboard");
     }
   }, [isLoggedIn, user, navigate]);
