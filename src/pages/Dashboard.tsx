@@ -3,7 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { mockSessions } from "@/data/mockData";
-import { Search, Calendar, CreditCard, Star, Heart, User, MessageSquare, Bell, Settings, LogOut, Menu, LayoutDashboard, CalendarCheck, Wallet, GraduationCap } from "lucide-react";
+import { Search, Calendar, CreditCard, Star, Heart, User, MessageSquare, Bell, Settings, LogOut, Menu, LayoutDashboard, CalendarCheck, Wallet, GraduationCap, BookOpen } from "lucide-react";
+import StudentLectures from "@/pages/StudentLectures";
 import { motion } from "framer-motion";
 
 const Dashboard = () => {
