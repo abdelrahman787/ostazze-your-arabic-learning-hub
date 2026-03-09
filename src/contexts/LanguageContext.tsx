@@ -328,8 +328,17 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     [lang]
   );
 
+  const d = useCallback(
+    (obj: { ar: string; en: string } | string | undefined): string => {
+      if (!obj) return "";
+      if (typeof obj === "string") return obj;
+      return obj[lang] || obj.ar || "";
+    },
+    [lang]
+  );
+
   return (
-    <LanguageContext.Provider value={{ lang, setLang, toggleLang, t, dir }}>
+    <LanguageContext.Provider value={{ lang, setLang, toggleLang, t, d, dir }}>
       {children}
     </LanguageContext.Provider>
   );
