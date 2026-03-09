@@ -1,15 +1,16 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, forwardRef } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import {
-  GraduationCap, Users, CalendarCheck, TrendingUp, Search, Plus,
-  Shield, Video, BookOpen, Loader2, Upload, Trash2, X, FileText
+  GraduationCap, Users, TrendingUp, Search, Plus,
+  Shield, Video, BookOpen, Loader2, Upload, X, FileText
 } from "lucide-react";
 import { motion } from "framer-motion";
 
+// --- Types ---
 interface TeacherRow {
   user_id: string;
   full_name: string | null;
@@ -33,10 +34,42 @@ interface LectureRow {
   student_name?: string;
 }
 
-const Admin = () => {
-  const { user } = useAuth();
-  const { t, d } = useLanguage();
+interface AdminUser {
+  user_id: string;
+  full_name: string | null;
+  email?: string;
+}
+
+interface ProfileOption {
+  user_id: string;
+  full_name: string | null;
+  account_type: string | null;
+}
+
+// --- Sub-components ---
+
+const StatCard = ({ label, value, icon: Icon, color, index }: { label: string; value: string; icon: any; color: string; index: number }) => (
+  <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.06 }} className="card-base p-5">
+    <div className="flex items-center gap-3">
+      <motion.div whileHover={{ scale: 1.15, rotate: 10 }} className={`icon-box ${color}`}><Icon size={20} /></motion.div>
+      <div>
+        <div className="text-2xl font-black">{value}</div>
+        <div className="text-muted-foreground text-xs">{label}</div>
+      </div>
+    </div>
+  </motion.div>
+);
+
+const TeachersTab = ({ teachers, loading, searchQuery, t }: { teachers: TeacherRow[]; loading: boolean; searchQuery: string; t: any }) => {
+  return null; // Placeholder, rendered inline for handlers access
+};
+
+// --- Main Component ---
+const Admin = forwardRef<HTMLDivElement>((_, ref) => {
+  const { user, loading: authLoading } = useAuth();
+  const { t } = useLanguage();
   const navigate = useNavigate();
+
   const [activeTab, setActiveTab] = useState("teachers");
   const [searchQuery, setSearchQuery] = useState("");
   const [teachers, setTeachers] = useState<TeacherRow[]>([]);
@@ -45,16 +78,28 @@ const Admin = () => {
 
   // Lectures state
   const [lectures, setLectures] = useState<LectureRow[]>([]);
-  const [lecturesLoading, setLecturesLoading] = useState(false);
+  const [lecturesLoading, setLecturesLoading] = useState(true);
   const [showAddLecture, setShowAddLecture] = useState(false);
   const [lectureForm, setLectureForm] = useState({ title: "", subject: "", teacher_id: "", student_id: "" });
   const [videoFile, setVideoFile] = useState<File | null>(null);
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
-  const [allProfiles, setAllProfiles] = useState<{ user_id: string; full_name: string | null; account_type: string | null }[]>([]);
+  const [allProfiles, setAllProfiles] = useState<ProfileOption[]>([]);
   const videoRef = useRef<HTMLInputElement>(null);
   const pdfRef = useRef<HTMLInputElement>(null);
 
+  // Admins state
+  const [admins, setAdmins] = useState<AdminUser[]>([]);
+  const [adminsLoading, setAdminsLoading] = useState(true);
+
+  // --- Auth Guard ---
+  useEffect(() => {
+    if (!authLoading && (!user || user.role !== "admin")) {
+      navigate("/login", { replace: true });
+    }
+  }, [user, authLoading, navigate]);
+
+  // --- Data Fetching ---
   const fetchTeachers = useCallback(async () => {
     setLoading(true);
     const { data: teacherProfiles } = await supabase
@@ -120,13 +165,30 @@ const Admin = () => {
     setAllProfiles(data || []);
   }, []);
 
+  const fetchAdmins = useCallback(async () => {
+    setAdminsLoading(true);
+    const { data: roles } = await supabase.from("user_roles").select("user_id").eq("role", "admin");
+    if (roles && roles.length > 0) {
+      const ids = roles.map((r) => r.user_id);
+      const { data: profiles } = await supabase.from("profiles").select("user_id, full_name").in("user_id", ids);
+      const profileMap = new Map(profiles?.map((p) => [p.user_id, p.full_name]) || []);
+      setAdmins(ids.map((id) => ({ user_id: id, full_name: profileMap.get(id) || null })));
+    } else {
+      setAdmins([]);
+    }
+    setAdminsLoading(false);
+  }, []);
+
   useEffect(() => {
+    if (!user || user.role !== "admin") return;
     fetchTeachers();
     fetchStats();
     fetchLectures();
     fetchProfiles();
-  }, [fetchTeachers, fetchStats, fetchLectures, fetchProfiles]);
+    fetchAdmins();
+  }, [user, fetchTeachers, fetchStats, fetchLectures, fetchProfiles, fetchAdmins]);
 
+  // --- Handlers ---
   const handleVerify = async (userId: string) => {
     const { error } = await supabase.from("teacher_profiles").update({ verified: true }).eq("user_id", userId);
     if (error) {
@@ -206,6 +268,7 @@ const Admin = () => {
     fetchStats();
   };
 
+  // --- Filters ---
   const filteredTeachers = teachers.filter((tc) => {
     if (!searchQuery) return true;
     const q = searchQuery.toLowerCase();
@@ -221,6 +284,7 @@ const Admin = () => {
   const teacherProfiles = allProfiles.filter((p) => p.account_type === "teacher");
   const studentProfiles = allProfiles.filter((p) => p.account_type === "student");
 
+  // --- Config ---
   const tabs = [
     { id: "teachers", label: t("admin_teachers"), icon: GraduationCap },
     { id: "lectures", label: "المحاضرات", icon: BookOpen },
@@ -234,9 +298,23 @@ const Admin = () => {
     { label: t("admin_revenue"), value: "0", icon: TrendingUp, color: "bg-destructive/5 text-destructive" },
   ];
 
+  // --- Auth loading / guard ---
+  if (authLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <Loader2 className="animate-spin text-primary" size={32} />
+      </div>
+    );
+  }
+
+  if (!user || user.role !== "admin") {
+    return null;
+  }
+
   return (
-    <div className="min-h-screen bg-background">
+    <div ref={ref} className="min-h-screen bg-background">
       <div className="container py-8">
+        {/* Header */}
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <div className="flex items-center gap-2 mb-1">
             <motion.div whileHover={{ scale: 1.15, rotate: 15 }}><Shield size={20} className="text-primary" /></motion.div>
@@ -245,31 +323,27 @@ const Admin = () => {
           <p className="text-muted-foreground text-sm">{t("admin_subtitle")}</p>
         </motion.div>
 
+        {/* Stats */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {statCards.map((s, i) => (
-            <motion.div key={s.label} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }} className="card-base p-5">
-              <div className="flex items-center gap-3">
-                <motion.div whileHover={{ scale: 1.15, rotate: 10 }} className={`icon-box ${s.color}`}><s.icon size={20} /></motion.div>
-                <div>
-                  <div className="text-2xl font-black">{s.value}</div>
-                  <div className="text-muted-foreground text-xs">{s.label}</div>
-                </div>
-              </div>
-            </motion.div>
+            <StatCard key={s.label} label={s.label} value={s.value} icon={s.icon} color={s.color} index={i} />
           ))}
         </div>
 
+        {/* Tabs Card */}
         <div className="card-base overflow-hidden">
+          {/* Tab Headers */}
           <div className="flex border-b bg-secondary/30">
             {tabs.map((tab) => (
               <button key={tab.id} onClick={() => { setActiveTab(tab.id); setSearchQuery(""); }}
                 className={`flex-1 flex items-center justify-center gap-2 py-3.5 text-sm font-medium transition-all ${activeTab === tab.id ? "bg-card text-foreground border-b-2 border-primary font-bold" : "text-muted-foreground hover:text-foreground"}`}>
-                <motion.div whileHover={{ scale: 1.2, rotate: 10 }}><tab.icon size={16} /></motion.div>
+                <tab.icon size={16} />
                 {tab.label}
               </button>
             ))}
           </div>
 
+          {/* Search + Actions */}
           <div className="p-4 flex items-center justify-between gap-4">
             <div className="relative flex-1 max-w-md">
               <Search size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
@@ -283,7 +357,7 @@ const Admin = () => {
             )}
           </div>
 
-          {/* Teachers Tab */}
+          {/* ===== Teachers Tab ===== */}
           {activeTab === "teachers" && (
             loading ? (
               <div className="p-16 text-center"><Loader2 className="mx-auto animate-spin text-muted-foreground mb-3" size={32} /><p className="text-muted-foreground text-sm">جاري التحميل...</p></div>
@@ -302,11 +376,34 @@ const Admin = () => {
                   <tbody>
                     {filteredTeachers.map((tc) => (
                       <tr key={tc.user_id} className="border-t hover:bg-secondary/30 transition-colors">
-                        <td className="p-4"><div className="flex items-center gap-3"><div className="icon-box bg-primary/10"><GraduationCap size={18} className="text-primary" /></div><div><div className="font-bold text-sm">{tc.full_name || "—"}</div><div className="text-muted-foreground text-xs">{tc.price} {t("sar")} / {t("teacher_per_session")}</div></div></div></td>
+                        <td className="p-4">
+                          <div className="flex items-center gap-3">
+                            <div className="icon-box bg-primary/10"><GraduationCap size={18} className="text-primary" /></div>
+                            <div>
+                              <div className="font-bold text-sm">{tc.full_name || "—"}</div>
+                              <div className="text-muted-foreground text-xs">{tc.price} {t("sar")} / {t("teacher_per_session")}</div>
+                            </div>
+                          </div>
+                        </td>
                         <td className="p-4 text-muted-foreground text-sm">{tc.university || "—"}</td>
-                        <td className="p-4"><div className="flex gap-1.5 flex-wrap">{tc.subjects.length > 0 ? tc.subjects.slice(0, 2).map((s, i) => <span key={i} className="tag-outline text-[0.7rem]">{s}</span>) : <span className="text-muted-foreground text-xs">—</span>}</div></td>
-                        <td className="p-4">{tc.verified ? <span className="text-xs bg-success/10 text-success px-2.5 py-1 rounded-full font-semibold">{t("teacher_verified")}</span> : <span className="text-xs bg-warning/10 text-warning px-2.5 py-1 rounded-full font-semibold">{t("admin_under_review")}</span>}</td>
-                        <td className="p-4"><div className="flex gap-2">{!tc.verified && <button onClick={() => handleVerify(tc.user_id)} className="text-xs bg-success/10 text-success px-3 py-1.5 rounded-lg font-semibold hover:bg-success/20 transition-colors">{t("admin_verify")}</button>}<button onClick={() => handleDeleteTeacher(tc.user_id)} className="text-xs bg-destructive/10 text-destructive px-3 py-1.5 rounded-lg font-semibold hover:bg-destructive/20 transition-colors">{t("admin_delete")}</button></div></td>
+                        <td className="p-4">
+                          <div className="flex gap-1.5 flex-wrap">
+                            {tc.subjects.length > 0 ? tc.subjects.slice(0, 2).map((s, i) => <span key={i} className="tag-outline text-[0.7rem]">{s}</span>) : <span className="text-muted-foreground text-xs">—</span>}
+                          </div>
+                        </td>
+                        <td className="p-4">
+                          {tc.verified
+                            ? <span className="text-xs bg-success/10 text-success px-2.5 py-1 rounded-full font-semibold">{t("teacher_verified")}</span>
+                            : <span className="text-xs bg-warning/10 text-warning px-2.5 py-1 rounded-full font-semibold">{t("admin_under_review")}</span>}
+                        </td>
+                        <td className="p-4">
+                          <div className="flex gap-2">
+                            {!tc.verified && (
+                              <button onClick={() => handleVerify(tc.user_id)} className="text-xs bg-success/10 text-success px-3 py-1.5 rounded-lg font-semibold hover:bg-success/20 transition-colors">{t("admin_verify")}</button>
+                            )}
+                            <button onClick={() => handleDeleteTeacher(tc.user_id)} className="text-xs bg-destructive/10 text-destructive px-3 py-1.5 rounded-lg font-semibold hover:bg-destructive/20 transition-colors">{t("admin_delete")}</button>
+                          </div>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -315,10 +412,10 @@ const Admin = () => {
             )
           )}
 
-          {/* Lectures Tab */}
+          {/* ===== Lectures Tab ===== */}
           {activeTab === "lectures" && (
             lecturesLoading ? (
-              <div className="p-16 text-center"><Loader2 className="mx-auto animate-spin text-muted-foreground mb-3" size={32} /></div>
+              <div className="p-16 text-center"><Loader2 className="mx-auto animate-spin text-muted-foreground mb-3" size={32} /><p className="text-muted-foreground text-sm">جاري التحميل...</p></div>
             ) : filteredLectures.length === 0 ? (
               <div className="p-16 text-center"><BookOpen size={40} className="mx-auto text-muted-foreground/30 mb-3" /><p className="text-muted-foreground">{searchQuery ? "لا توجد نتائج" : "لا توجد محاضرات بعد"}</p></div>
             ) : (
@@ -357,17 +454,44 @@ const Admin = () => {
             )
           )}
 
-          {/* Other tabs */}
+          {/* ===== Admins Tab ===== */}
           {activeTab === "admins" && (
-            <div className="p-16 text-center">
-              <Shield size={40} className="mx-auto text-muted-foreground/30 mb-3" />
-              <p className="text-muted-foreground">{t("admin_developing")}</p>
-            </div>
+            adminsLoading ? (
+              <div className="p-16 text-center"><Loader2 className="mx-auto animate-spin text-muted-foreground mb-3" size={32} /><p className="text-muted-foreground text-sm">جاري التحميل...</p></div>
+            ) : admins.length === 0 ? (
+              <div className="p-16 text-center"><Shield size={40} className="mx-auto text-muted-foreground/30 mb-3" /><p className="text-muted-foreground">لا يوجد مدراء</p></div>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead><tr className="bg-muted/60">
+                    <th className="text-start p-4 font-bold text-muted-foreground text-xs">المدير</th>
+                    <th className="text-start p-4 font-bold text-muted-foreground text-xs">معرّف المستخدم</th>
+                    <th className="text-start p-4 font-bold text-muted-foreground text-xs">الحالة</th>
+                  </tr></thead>
+                  <tbody>
+                    {admins.map((admin) => (
+                      <tr key={admin.user_id} className="border-t hover:bg-secondary/30 transition-colors">
+                        <td className="p-4">
+                          <div className="flex items-center gap-3">
+                            <div className="icon-box bg-primary/10"><Shield size={18} className="text-primary" /></div>
+                            <div className="font-bold text-sm">{admin.full_name || "مدير بدون اسم"}</div>
+                          </div>
+                        </td>
+                        <td className="p-4 text-muted-foreground text-xs font-mono">{admin.user_id.slice(0, 8)}...</td>
+                        <td className="p-4">
+                          <span className="text-xs bg-success/10 text-success px-2.5 py-1 rounded-full font-semibold">مدير نشط</span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )
           )}
         </div>
       </div>
 
-      {/* Add Lecture Modal */}
+      {/* ===== Add Lecture Modal ===== */}
       {showAddLecture && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/40">
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-card rounded-2xl shadow-xl w-full max-w-lg mx-4 max-h-[90vh] overflow-y-auto">
@@ -429,6 +553,8 @@ const Admin = () => {
       )}
     </div>
   );
-};
+});
+
+Admin.displayName = "Admin";
 
 export default Admin;
