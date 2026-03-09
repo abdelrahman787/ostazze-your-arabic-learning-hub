@@ -199,7 +199,13 @@ const Dashboard = () => {
             </div>
           )}
 
-          {!["overview", "sessions", "profile"].includes(tab) && (
+          {tab === "lectures" && (
+            <div className="animate-fade-in">
+              <StudentLectures />
+            </div>
+          )}
+
+          {!["overview", "sessions", "profile", "lectures"].includes(tab) && (
             <div className="card-base p-12 text-center animate-fade-in">
               <motion.div whileHover={{ scale: 1.1, rotate: 10 }} className="inline-block mb-4">
                 <GraduationCap size={48} className="text-muted-foreground/30" />
