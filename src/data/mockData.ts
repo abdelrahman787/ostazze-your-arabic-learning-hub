@@ -1,115 +1,115 @@
 export interface Teacher {
   id: string;
-  name: string;
-  title: string;
-  subjects: string[];
+  name: { ar: string; en: string };
+  title: { ar: string; en: string };
+  subjects: { ar: string; en: string }[];
   price: number;
-  currency: string;
+  currency: { ar: string; en: string };
   rating: number;
   reviews: number;
   verified: boolean;
   featured: boolean;
   avatar?: string;
-  university?: string;
+  university?: { ar: string; en: string };
   yearsExperience?: number;
-  bio?: string;
+  bio?: { ar: string; en: string };
   zoomLink?: string;
   totalSessions?: number;
-  availability?: { day: string; start: string; end: string }[];
+  availability?: { day: { ar: string; en: string }; start: string; end: string }[];
 }
 
 export interface Category {
   id: string;
   icon: string;
-  name: string;
-  count: string;
+  name: { ar: string; en: string };
+  count: { ar: string; en: string };
 }
 
 export interface Subject {
   id: string;
-  name: string;
+  name: { ar: string; en: string };
   teacherCount: number;
   category: string;
 }
 
 export interface University {
   id: string;
-  name: string;
-  country: string;
+  name: { ar: string; en: string };
+  country: { ar: string; en: string };
 }
 
 export interface Review {
   id: string;
-  studentName: string;
+  studentName: { ar: string; en: string };
   rating: number;
-  comment: string;
-  date: string;
-  university?: string;
+  comment: { ar: string; en: string };
+  date: { ar: string; en: string };
+  university?: { ar: string; en: string };
 }
 
 export const mockTeachers: Teacher[] = [
-  { id: "1", name: "د. أحمد الراشد", title: "دكتوراه في الرياضيات من MIT. أكثر من 10 سنوات خبرة في التدريس الجامعي", subjects: ["التفاضل والتكامل", "الإحصاء"], price: 150, currency: "ر.س", rating: 4.9, reviews: 156, verified: true, featured: true, university: "جامعة الملك سعود", yearsExperience: 10, totalSessions: 234, bio: "أستاذ رياضيات متميز حاصل على الدكتوراه من معهد ماساتشوستس للتكنولوجيا. أتميز بأسلوب تدريسي مبسّط يركز على الفهم العميق للمفاهيم الرياضية.", zoomLink: "https://zoom.us/j/123", availability: [{ day: "الأحد", start: "9:00", end: "17:00" }, { day: "الثلاثاء", start: "9:00", end: "17:00" }, { day: "الخميس", start: "14:00", end: "20:00" }] },
-  { id: "2", name: "د. فاطمة الخالد", title: "أستاذ مشارك في علوم الحاسب. متخصصة في هياكل البيانات والخوارزميات", subjects: ["أساسيات البرمجة", "هياكل البيانات"], price: 180, currency: "ر.س", rating: 4.8, reviews: 142, verified: true, featured: true, university: "جامعة الملك عبدالعزيز", yearsExperience: 8, totalSessions: 198, bio: "أستاذة علوم حاسب شغوفة بتعليم البرمجة بطريقة عملية وتفاعلية.", availability: [{ day: "الاثنين", start: "10:00", end: "18:00" }, { day: "الأربعاء", start: "10:00", end: "18:00" }] },
-  { id: "3", name: "د. محمد السعود", title: "طبيب متخصص في علم التشريح ووظائف الأعضاء", subjects: ["الكيمياء العضوية", "علم التشريح"], price: 200, currency: "ر.س", rating: 4.7, reviews: 98, verified: false, featured: false, university: "جامعة القاهرة", yearsExperience: 6, totalSessions: 145, bio: "طبيب وباحث متخصص في علم التشريح مع شغف بتعليم طلاب الطب.", availability: [{ day: "الأحد", start: "14:00", end: "20:00" }, { day: "الثلاثاء", start: "14:00", end: "20:00" }] },
-  { id: "4", name: "د. سارة القاسم", title: "أستاذة إدارة أعمال مع خبرة استشارية عملية في الشركات الكبرى", subjects: ["المحاسبة المالية", "التسويق"], price: 160, currency: "ر.س", rating: 4.9, reviews: 187, verified: true, featured: true, university: "الجامعة الأمريكية في بيروت", yearsExperience: 12, totalSessions: 312, bio: "خبيرة في إدارة الأعمال مع سنوات من الخبرة الاستشارية في كبرى الشركات.", availability: [{ day: "الأحد", start: "8:00", end: "14:00" }, { day: "الثلاثاء", start: "8:00", end: "14:00" }, { day: "الخميس", start: "8:00", end: "14:00" }] },
-  { id: "5", name: "د. خالد المنصور", title: "باحث ومعلم في الفيزياء. نشر أكثر من 30 ورقة بحثية دولية", subjects: ["الفيزياء", "التفاضل والتكامل"], price: 170, currency: "ر.س", rating: 4.8, reviews: 134, verified: true, featured: false, university: "جامعة الملك فهد للبترول", yearsExperience: 9, totalSessions: 267, bio: "باحث في الفيزياء النظرية مع شغف كبير بتبسيط المفاهيم المعقدة.", availability: [{ day: "الاثنين", start: "9:00", end: "15:00" }, { day: "الأربعاء", start: "9:00", end: "15:00" }] },
-  { id: "6", name: "د. نورة الحربي", title: "متخصصة في الإحصاء مع التركيز على التطبيقات العملية والبحثية", subjects: ["الإحصاء", "أساسيات البرمجة"], price: 140, currency: "ر.س", rating: 4.7, reviews: 89, verified: false, featured: false, university: "جامعة الإمارات", yearsExperience: 5, totalSessions: 112, bio: "متخصصة في الإحصاء التطبيقي مع التركيز على استخدام البيانات في اتخاذ القرار.", availability: [{ day: "الأحد", start: "16:00", end: "21:00" }, { day: "الثلاثاء", start: "16:00", end: "21:00" }] },
+  { id: "1", name: { ar: "د. أحمد الراشد", en: "Dr. Ahmed Al-Rashed" }, title: { ar: "دكتوراه في الرياضيات من MIT. أكثر من 10 سنوات خبرة في التدريس الجامعي", en: "PhD in Mathematics from MIT. Over 10 years of university teaching experience" }, subjects: [{ ar: "التفاضل والتكامل", en: "Calculus" }, { ar: "الإحصاء", en: "Statistics" }], price: 150, currency: { ar: "ر.س", en: "SAR" }, rating: 4.9, reviews: 156, verified: true, featured: true, university: { ar: "جامعة الملك سعود", en: "King Saud University" }, yearsExperience: 10, totalSessions: 234, bio: { ar: "أستاذ رياضيات متميز حاصل على الدكتوراه من معهد ماساتشوستس للتكنولوجيا. أتميز بأسلوب تدريسي مبسّط يركز على الفهم العميق للمفاهيم الرياضية.", en: "Distinguished mathematics professor with a PhD from MIT. Known for a simplified teaching style focused on deep understanding of mathematical concepts." }, zoomLink: "https://zoom.us/j/123", availability: [{ day: { ar: "الأحد", en: "Sunday" }, start: "9:00", end: "17:00" }, { day: { ar: "الثلاثاء", en: "Tuesday" }, start: "9:00", end: "17:00" }, { day: { ar: "الخميس", en: "Thursday" }, start: "14:00", end: "20:00" }] },
+  { id: "2", name: { ar: "د. فاطمة الخالد", en: "Dr. Fatima Al-Khaled" }, title: { ar: "أستاذ مشارك في علوم الحاسب. متخصصة في هياكل البيانات والخوارزميات", en: "Associate Professor in Computer Science. Specialized in data structures and algorithms" }, subjects: [{ ar: "أساسيات البرمجة", en: "Programming Basics" }, { ar: "هياكل البيانات", en: "Data Structures" }], price: 180, currency: { ar: "ر.س", en: "SAR" }, rating: 4.8, reviews: 142, verified: true, featured: true, university: { ar: "جامعة الملك عبدالعزيز", en: "King Abdulaziz University" }, yearsExperience: 8, totalSessions: 198, bio: { ar: "أستاذة علوم حاسب شغوفة بتعليم البرمجة بطريقة عملية وتفاعلية.", en: "Passionate computer science professor who teaches programming in a practical and interactive way." }, availability: [{ day: { ar: "الاثنين", en: "Monday" }, start: "10:00", end: "18:00" }, { day: { ar: "الأربعاء", en: "Wednesday" }, start: "10:00", end: "18:00" }] },
+  { id: "3", name: { ar: "د. محمد السعود", en: "Dr. Mohammed Al-Saud" }, title: { ar: "طبيب متخصص في علم التشريح ووظائف الأعضاء", en: "Physician specialized in anatomy and physiology" }, subjects: [{ ar: "الكيمياء العضوية", en: "Organic Chemistry" }, { ar: "علم التشريح", en: "Anatomy" }], price: 200, currency: { ar: "ر.س", en: "SAR" }, rating: 4.7, reviews: 98, verified: false, featured: false, university: { ar: "جامعة القاهرة", en: "Cairo University" }, yearsExperience: 6, totalSessions: 145, bio: { ar: "طبيب وباحث متخصص في علم التشريح مع شغف بتعليم طلاب الطب.", en: "Physician and researcher specialized in anatomy with a passion for teaching medical students." }, availability: [{ day: { ar: "الأحد", en: "Sunday" }, start: "14:00", end: "20:00" }, { day: { ar: "الثلاثاء", en: "Tuesday" }, start: "14:00", end: "20:00" }] },
+  { id: "4", name: { ar: "د. سارة القاسم", en: "Dr. Sara Al-Qasem" }, title: { ar: "أستاذة إدارة أعمال مع خبرة استشارية عملية في الشركات الكبرى", en: "Business Administration professor with practical consulting experience at major companies" }, subjects: [{ ar: "المحاسبة المالية", en: "Financial Accounting" }, { ar: "التسويق", en: "Marketing" }], price: 160, currency: { ar: "ر.س", en: "SAR" }, rating: 4.9, reviews: 187, verified: true, featured: true, university: { ar: "الجامعة الأمريكية في بيروت", en: "American University of Beirut" }, yearsExperience: 12, totalSessions: 312, bio: { ar: "خبيرة في إدارة الأعمال مع سنوات من الخبرة الاستشارية في كبرى الشركات.", en: "Business administration expert with years of consulting experience at major companies." }, availability: [{ day: { ar: "الأحد", en: "Sunday" }, start: "8:00", end: "14:00" }, { day: { ar: "الثلاثاء", en: "Tuesday" }, start: "8:00", end: "14:00" }, { day: { ar: "الخميس", en: "Thursday" }, start: "8:00", end: "14:00" }] },
+  { id: "5", name: { ar: "د. خالد المنصور", en: "Dr. Khaled Al-Mansour" }, title: { ar: "باحث ومعلم في الفيزياء. نشر أكثر من 30 ورقة بحثية دولية", en: "Physics researcher and teacher. Published over 30 international research papers" }, subjects: [{ ar: "الفيزياء", en: "Physics" }, { ar: "التفاضل والتكامل", en: "Calculus" }], price: 170, currency: { ar: "ر.س", en: "SAR" }, rating: 4.8, reviews: 134, verified: true, featured: false, university: { ar: "جامعة الملك فهد للبترول", en: "KFUPM" }, yearsExperience: 9, totalSessions: 267, bio: { ar: "باحث في الفيزياء النظرية مع شغف كبير بتبسيط المفاهيم المعقدة.", en: "Theoretical physics researcher with a great passion for simplifying complex concepts." }, availability: [{ day: { ar: "الاثنين", en: "Monday" }, start: "9:00", end: "15:00" }, { day: { ar: "الأربعاء", en: "Wednesday" }, start: "9:00", end: "15:00" }] },
+  { id: "6", name: { ar: "د. نورة الحربي", en: "Dr. Noura Al-Harbi" }, title: { ar: "متخصصة في الإحصاء مع التركيز على التطبيقات العملية والبحثية", en: "Statistics specialist focusing on practical and research applications" }, subjects: [{ ar: "الإحصاء", en: "Statistics" }, { ar: "أساسيات البرمجة", en: "Programming Basics" }], price: 140, currency: { ar: "ر.س", en: "SAR" }, rating: 4.7, reviews: 89, verified: false, featured: false, university: { ar: "جامعة الإمارات", en: "UAE University" }, yearsExperience: 5, totalSessions: 112, bio: { ar: "متخصصة في الإحصاء التطبيقي مع التركيز على استخدام البيانات في اتخاذ القرار.", en: "Specialist in applied statistics focusing on data-driven decision making." }, availability: [{ day: { ar: "الأحد", en: "Sunday" }, start: "16:00", end: "21:00" }, { day: { ar: "الثلاثاء", en: "Tuesday" }, start: "16:00", end: "21:00" }] },
 ];
 
 export const mockCategories: Category[] = [
-  { id: "1", icon: "⚙️", name: "الهندسة", count: "15 مادة" },
-  { id: "2", icon: "🏥", name: "الطب والصحة", count: "12 مادة" },
-  { id: "3", icon: "💻", name: "علوم الحاسب", count: "18 مادة" },
-  { id: "4", icon: "📐", name: "الرياضيات", count: "9 مواد" },
-  { id: "5", icon: "📊", name: "إدارة الأعمال", count: "11 مادة" },
-  { id: "6", icon: "🌍", name: "اللغات", count: "8 مواد" },
-  { id: "7", icon: "🔬", name: "العلوم الأساسية", count: "10 مواد" },
-  { id: "8", icon: "⚖️", name: "القانون", count: "7 مواد" },
+  { id: "1", icon: "⚙️", name: { ar: "الهندسة", en: "Engineering" }, count: { ar: "15 مادة", en: "15 subjects" } },
+  { id: "2", icon: "🏥", name: { ar: "الطب والصحة", en: "Medicine & Health" }, count: { ar: "12 مادة", en: "12 subjects" } },
+  { id: "3", icon: "💻", name: { ar: "علوم الحاسب", en: "Computer Science" }, count: { ar: "18 مادة", en: "18 subjects" } },
+  { id: "4", icon: "📐", name: { ar: "الرياضيات", en: "Mathematics" }, count: { ar: "9 مواد", en: "9 subjects" } },
+  { id: "5", icon: "📊", name: { ar: "إدارة الأعمال", en: "Business Administration" }, count: { ar: "11 مادة", en: "11 subjects" } },
+  { id: "6", icon: "🌍", name: { ar: "اللغات", en: "Languages" }, count: { ar: "8 مواد", en: "8 subjects" } },
+  { id: "7", icon: "🔬", name: { ar: "العلوم الأساسية", en: "Basic Sciences" }, count: { ar: "10 مواد", en: "10 subjects" } },
+  { id: "8", icon: "⚖️", name: { ar: "القانون", en: "Law" }, count: { ar: "7 مواد", en: "7 subjects" } },
 ];
 
 export const mockSubjects: Subject[] = [
-  { id: "1", name: "التفاضل والتكامل", teacherCount: 24, category: "الرياضيات" },
-  { id: "2", name: "الفيزياء", teacherCount: 18, category: "العلوم الأساسية" },
-  { id: "3", name: "التسويق", teacherCount: 16, category: "إدارة الأعمال" },
-  { id: "4", name: "علم التشريح", teacherCount: 12, category: "الطب" },
-  { id: "5", name: "الأدب الإنجليزي", teacherCount: 14, category: "اللغات" },
-  { id: "6", name: "الإحصاء", teacherCount: 19, category: "الرياضيات" },
-  { id: "7", name: "أساسيات البرمجة", teacherCount: 22, category: "علوم الحاسب" },
-  { id: "8", name: "هياكل البيانات", teacherCount: 15, category: "علوم الحاسب" },
-  { id: "9", name: "الكيمياء العضوية", teacherCount: 11, category: "الطب" },
-  { id: "10", name: "المحاسبة المالية", teacherCount: 17, category: "إدارة الأعمال" },
-  { id: "11", name: "الدوائر الكهربائية", teacherCount: 13, category: "الهندسة" },
-  { id: "12", name: "الكيمياء العامة", teacherCount: 20, category: "العلوم الأساسية" },
+  { id: "1", name: { ar: "التفاضل والتكامل", en: "Calculus" }, teacherCount: 24, category: "الرياضيات" },
+  { id: "2", name: { ar: "الفيزياء", en: "Physics" }, teacherCount: 18, category: "العلوم الأساسية" },
+  { id: "3", name: { ar: "التسويق", en: "Marketing" }, teacherCount: 16, category: "إدارة الأعمال" },
+  { id: "4", name: { ar: "علم التشريح", en: "Anatomy" }, teacherCount: 12, category: "الطب" },
+  { id: "5", name: { ar: "الأدب الإنجليزي", en: "English Literature" }, teacherCount: 14, category: "اللغات" },
+  { id: "6", name: { ar: "الإحصاء", en: "Statistics" }, teacherCount: 19, category: "الرياضيات" },
+  { id: "7", name: { ar: "أساسيات البرمجة", en: "Programming Basics" }, teacherCount: 22, category: "علوم الحاسب" },
+  { id: "8", name: { ar: "هياكل البيانات", en: "Data Structures" }, teacherCount: 15, category: "علوم الحاسب" },
+  { id: "9", name: { ar: "الكيمياء العضوية", en: "Organic Chemistry" }, teacherCount: 11, category: "الطب" },
+  { id: "10", name: { ar: "المحاسبة المالية", en: "Financial Accounting" }, teacherCount: 17, category: "إدارة الأعمال" },
+  { id: "11", name: { ar: "الدوائر الكهربائية", en: "Electrical Circuits" }, teacherCount: 13, category: "الهندسة" },
+  { id: "12", name: { ar: "الكيمياء العامة", en: "General Chemistry" }, teacherCount: 20, category: "العلوم الأساسية" },
 ];
 
 export const mockUniversities: University[] = [
-  { id: "1", name: "جامعة الملك سعود", country: "المملكة العربية السعودية" },
-  { id: "2", name: "جامعة الملك عبدالعزيز", country: "المملكة العربية السعودية" },
-  { id: "3", name: "جامعة الملك فهد للبترول", country: "المملكة العربية السعودية" },
-  { id: "4", name: "جامعة القاهرة", country: "مصر" },
-  { id: "5", name: "الجامعة الأمريكية في بيروت", country: "لبنان" },
-  { id: "6", name: "جامعة الإمارات", country: "الإمارات العربية المتحدة" },
-  { id: "7", name: "جامعة الكويت", country: "الكويت" },
-  { id: "8", name: "KFUPM", country: "المملكة العربية السعودية" },
+  { id: "1", name: { ar: "جامعة الملك سعود", en: "King Saud University" }, country: { ar: "المملكة العربية السعودية", en: "Saudi Arabia" } },
+  { id: "2", name: { ar: "جامعة الملك عبدالعزيز", en: "King Abdulaziz University" }, country: { ar: "المملكة العربية السعودية", en: "Saudi Arabia" } },
+  { id: "3", name: { ar: "جامعة الملك فهد للبترول", en: "KFUPM" }, country: { ar: "المملكة العربية السعودية", en: "Saudi Arabia" } },
+  { id: "4", name: { ar: "جامعة القاهرة", en: "Cairo University" }, country: { ar: "مصر", en: "Egypt" } },
+  { id: "5", name: { ar: "الجامعة الأمريكية في بيروت", en: "American University of Beirut" }, country: { ar: "لبنان", en: "Lebanon" } },
+  { id: "6", name: { ar: "جامعة الإمارات", en: "UAE University" }, country: { ar: "الإمارات العربية المتحدة", en: "UAE" } },
+  { id: "7", name: { ar: "جامعة الكويت", en: "Kuwait University" }, country: { ar: "الكويت", en: "Kuwait" } },
+  { id: "8", name: { ar: "KFUPM", en: "KFUPM" }, country: { ar: "المملكة العربية السعودية", en: "Saudi Arabia" } },
 ];
 
 export const mockReviews: Review[] = [
-  { id: "1", studentName: "عبدالله السالم", rating: 5, comment: "معلم ممتاز جداً، يشرح بطريقة مبسطة وسهلة الفهم. استفدت كثيراً من جلساته.", date: "قبل 3 أيام", university: "جامعة الملك سعود" },
-  { id: "2", studentName: "مريم الحسن", rating: 5, comment: "أفضل معلم رياضيات! ساعدني في رفع درجاتي بشكل ملحوظ خلال فترة قصيرة.", date: "قبل أسبوع", university: "جامعة الملك عبدالعزيز" },
-  { id: "3", studentName: "فهد العتيبي", rating: 4, comment: "شرح واضح ومنظم. أنصح به بشدة لطلاب الرياضيات.", date: "قبل أسبوعين", university: "جامعة القاهرة" },
-  { id: "4", studentName: "لينا محمد", rating: 5, comment: "تجربة تعليمية رائعة! المعلم صبور ومتفهم ويراعي مستوى الطالب.", date: "قبل 3 أسابيع", university: "الجامعة الأمريكية في بيروت" },
-  { id: "5", studentName: "أحمد الغامدي", rating: 5, comment: "جلسات احترافية جداً، استخدام ممتاز للوسائل التعليمية.", date: "قبل شهر", university: "جامعة الملك فهد" },
+  { id: "1", studentName: { ar: "عبدالله السالم", en: "Abdullah Al-Salem" }, rating: 5, comment: { ar: "معلم ممتاز جداً، يشرح بطريقة مبسطة وسهلة الفهم. استفدت كثيراً من جلساته.", en: "Excellent teacher, explains in a simple and easy-to-understand way. I benefited greatly from his sessions." }, date: { ar: "قبل 3 أيام", en: "3 days ago" }, university: { ar: "جامعة الملك سعود", en: "King Saud University" } },
+  { id: "2", studentName: { ar: "مريم الحسن", en: "Maryam Al-Hassan" }, rating: 5, comment: { ar: "أفضل معلم رياضيات! ساعدني في رفع درجاتي بشكل ملحوظ خلال فترة قصيرة.", en: "Best math teacher! Helped me significantly improve my grades in a short period." }, date: { ar: "قبل أسبوع", en: "1 week ago" }, university: { ar: "جامعة الملك عبدالعزيز", en: "King Abdulaziz University" } },
+  { id: "3", studentName: { ar: "فهد العتيبي", en: "Fahd Al-Otaibi" }, rating: 4, comment: { ar: "شرح واضح ومنظم. أنصح به بشدة لطلاب الرياضيات.", en: "Clear and organized explanation. I highly recommend him for math students." }, date: { ar: "قبل أسبوعين", en: "2 weeks ago" }, university: { ar: "جامعة القاهرة", en: "Cairo University" } },
+  { id: "4", studentName: { ar: "لينا محمد", en: "Lina Mohammed" }, rating: 5, comment: { ar: "تجربة تعليمية رائعة! المعلم صبور ومتفهم ويراعي مستوى الطالب.", en: "Wonderful learning experience! The teacher is patient, understanding, and considerate of the student's level." }, date: { ar: "قبل 3 أسابيع", en: "3 weeks ago" }, university: { ar: "الجامعة الأمريكية في بيروت", en: "American University of Beirut" } },
+  { id: "5", studentName: { ar: "أحمد الغامدي", en: "Ahmed Al-Ghamdi" }, rating: 5, comment: { ar: "جلسات احترافية جداً، استخدام ممتاز للوسائل التعليمية.", en: "Very professional sessions, excellent use of teaching tools." }, date: { ar: "قبل شهر", en: "1 month ago" }, university: { ar: "جامعة الملك فهد", en: "KFUPM" } },
 ];
 
 export const mockTestimonials = [
-  { name: "عبدالله المالكي", university: "جامعة الملك سعود", quote: "بفضل Ostazze، تمكنت من رفع معدلي في مادة التفاضل والتكامل من C إلى A+. المعلمون محترفون والمنصة سهلة الاستخدام." },
-  { name: "نورا الشمري", university: "جامعة الملك عبدالعزيز", quote: "أفضل منصة تعليمية استخدمتها! حجز الجلسات سهل والمعلمون متميزون. أنصح بها لكل طالب جامعي." },
-  { name: "فيصل الدوسري", university: "جامعة القاهرة", quote: "ساعدتني المنصة في التغلب على صعوبات مادة الفيزياء. المعلم كان صبوراً ومحترفاً في شرحه." },
+  { name: { ar: "عبدالله المالكي", en: "Abdullah Al-Malki" }, university: { ar: "جامعة الملك سعود", en: "King Saud University" }, quote: { ar: "بفضل Ostazze، تمكنت من رفع معدلي في مادة التفاضل والتكامل من C إلى A+. المعلمون محترفون والمنصة سهلة الاستخدام.", en: "Thanks to Ostazze, I was able to raise my Calculus grade from C to A+. The teachers are professional and the platform is easy to use." } },
+  { name: { ar: "نورا الشمري", en: "Noura Al-Shammari" }, university: { ar: "جامعة الملك عبدالعزيز", en: "King Abdulaziz University" }, quote: { ar: "أفضل منصة تعليمية استخدمتها! حجز الجلسات سهل والمعلمون متميزون. أنصح بها لكل طالب جامعي.", en: "Best learning platform I've used! Booking sessions is easy and the teachers are outstanding. I recommend it to every university student." } },
+  { name: { ar: "فيصل الدوسري", en: "Faisal Al-Dosari" }, university: { ar: "جامعة القاهرة", en: "Cairo University" }, quote: { ar: "ساعدتني المنصة في التغلب على صعوبات مادة الفيزياء. المعلم كان صبوراً ومحترفاً في شرحه.", en: "The platform helped me overcome difficulties in Physics. The teacher was patient and professional in his explanations." } },
 ];
 
 export const mockSessions = [
-  { id: "1", teacherName: "د. أحمد الراشد", subject: "التفاضل والتكامل", date: "2026-03-10", time: "10:00", price: 150, status: "confirmed" as const, zoomLink: "https://zoom.us/j/123" },
-  { id: "2", teacherName: "د. فاطمة الخالد", subject: "هياكل البيانات", date: "2026-03-12", time: "14:00", price: 180, status: "pending" as const },
-  { id: "3", teacherName: "د. سارة القاسم", subject: "المحاسبة المالية", date: "2026-02-28", time: "09:00", price: 160, status: "completed" as const },
-  { id: "4", teacherName: "د. خالد المنصور", subject: "الفيزياء", date: "2026-02-20", time: "16:00", price: 170, status: "cancelled" as const },
+  { id: "1", teacherName: { ar: "د. أحمد الراشد", en: "Dr. Ahmed Al-Rashed" }, subject: { ar: "التفاضل والتكامل", en: "Calculus" }, date: "2026-03-10", time: "10:00", price: 150, status: "confirmed" as const, zoomLink: "https://zoom.us/j/123" },
+  { id: "2", teacherName: { ar: "د. فاطمة الخالد", en: "Dr. Fatima Al-Khaled" }, subject: { ar: "هياكل البيانات", en: "Data Structures" }, date: "2026-03-12", time: "14:00", price: 180, status: "pending" as const },
+  { id: "3", teacherName: { ar: "د. سارة القاسم", en: "Dr. Sara Al-Qasem" }, subject: { ar: "المحاسبة المالية", en: "Financial Accounting" }, date: "2026-02-28", time: "09:00", price: 160, status: "completed" as const },
+  { id: "4", teacherName: { ar: "د. خالد المنصور", en: "Dr. Khaled Al-Mansour" }, subject: { ar: "الفيزياء", en: "Physics" }, date: "2026-02-20", time: "16:00", price: 170, status: "cancelled" as const },
 ];
