@@ -20,13 +20,14 @@ import ForgotPassword from "./pages/ForgotPassword";
 import Dashboard from "./pages/Dashboard";
 import TeacherDashboard from "./pages/TeacherDashboard";
 import Admin from "./pages/Admin";
+import LectureView from "./pages/LectureView";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
-  const hideNavFooter = ["/dashboard", "/dashboard/teacher", "/admin"].includes(location.pathname);
+  const hideNavFooter = ["/dashboard", "/dashboard/teacher", "/admin"].includes(location.pathname) || location.pathname.startsWith("/lectures/");
   const hideFooter = ["/login", "/register", "/forgot-password"].includes(location.pathname);
 
   return (
@@ -61,6 +62,7 @@ const App = () => (
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/dashboard/teacher" element={<TeacherDashboard />} />
                   <Route path="/admin" element={<Admin />} />
+                  <Route path="/lectures/:id" element={<LectureView />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </Layout>

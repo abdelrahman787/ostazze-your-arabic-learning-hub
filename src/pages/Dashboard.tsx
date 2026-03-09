@@ -3,7 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { mockSessions } from "@/data/mockData";
-import { Search, Calendar, CreditCard, Star, Heart, User, MessageSquare, Bell, Settings, LogOut, Menu, LayoutDashboard, CalendarCheck, Wallet, GraduationCap } from "lucide-react";
+import { Search, Calendar, CreditCard, Star, Heart, User, MessageSquare, Bell, Settings, LogOut, Menu, LayoutDashboard, CalendarCheck, Wallet, GraduationCap, BookOpen } from "lucide-react";
+import StudentLectures from "@/pages/StudentLectures";
 import { motion } from "framer-motion";
 
 const Dashboard = () => {
@@ -25,6 +26,7 @@ const Dashboard = () => {
     { section: t("section_main"), items: [{ icon: LayoutDashboard, label: t("dash_overview"), tab: "overview" }] },
     { section: t("section_as_student"), items: [
       { icon: Search, label: t("dash_search_teacher"), tab: "search", href: "/teachers" },
+      { icon: BookOpen, label: "محاضراتي", tab: "lectures" },
       { icon: CalendarCheck, label: t("dash_sessions"), tab: "sessions" },
       { icon: Wallet, label: t("dash_payments"), tab: "payments" },
       { icon: Heart, label: t("dash_favorites"), tab: "favorites" },
@@ -197,7 +199,13 @@ const Dashboard = () => {
             </div>
           )}
 
-          {!["overview", "sessions", "profile"].includes(tab) && (
+          {tab === "lectures" && (
+            <div className="animate-fade-in">
+              <StudentLectures />
+            </div>
+          )}
+
+          {!["overview", "sessions", "profile", "lectures"].includes(tab) && (
             <div className="card-base p-12 text-center animate-fade-in">
               <motion.div whileHover={{ scale: 1.1, rotate: 10 }} className="inline-block mb-4">
                 <GraduationCap size={48} className="text-muted-foreground/30" />
