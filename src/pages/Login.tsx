@@ -6,7 +6,7 @@ import { Eye, EyeOff, Mail, Lock, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 
 const Login = () => {
-  const { login } = useAuth();
+  const { login, isLoggedIn, user } = useAuth();
   const { t } = useLanguage();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
