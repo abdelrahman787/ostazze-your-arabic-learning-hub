@@ -21,7 +21,7 @@ const item = {
 };
 
 const HomePage = () => {
-  const { t } = useLanguage();
+  const { t, d } = useLanguage();
   const featuredTeachers = mockTeachers.slice(0, 3);
   const statsRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: statsRef, offset: ["start end", "end start"] });
@@ -163,7 +163,7 @@ const HomePage = () => {
             </Link>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featuredTeachers.map((t, i) => <TeacherCard key={t.id} teacher={t} index={i} />)}
+            {featuredTeachers.map((tc, i) => <TeacherCard key={tc.id} teacher={tc} index={i} />)}
           </div>
         </div>
       </section>
@@ -208,12 +208,12 @@ const HomePage = () => {
                     </motion.div>
                   ))}
                 </div>
-                <p className="text-muted-foreground text-sm leading-relaxed mb-5">"{tst.quote}"</p>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-5">"{d(tst.quote)}"</p>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold">{tst.name.charAt(0)}</div>
+                  <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold">{d(tst.name).charAt(0)}</div>
                   <div>
-                    <div className="font-bold text-sm">{tst.name}</div>
-                    <div className="text-muted-foreground text-xs">{tst.university}</div>
+                    <div className="font-bold text-sm">{d(tst.name)}</div>
+                    <div className="text-muted-foreground text-xs">{d(tst.university)}</div>
                   </div>
                 </div>
               </motion.div>

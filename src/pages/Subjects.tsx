@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const Subjects = () => {
-  const { t } = useLanguage();
+  const { t, d } = useLanguage();
 
   return (
     <div>
@@ -23,7 +23,7 @@ const Subjects = () => {
               <motion.div whileHover={{ scale: 1.15, rotate: -10 }} transition={{ type: "spring", stiffness: 300 }} className="icon-box-lg bg-primary/10 mb-5">
                 <BookOpen size={22} className="text-primary" />
               </motion.div>
-              <h3 className={`font-bold text-base mb-2 ${i === 0 ? "text-primary" : ""}`}>{s.name}</h3>
+              <h3 className={`font-bold text-base mb-2 ${i === 0 ? "text-primary" : ""}`}>{d(s.name)}</h3>
               <div className="flex items-center gap-1.5 text-muted-foreground text-sm mb-5">
                 <Users size={14} />
                 <span>{s.teacherCount} {t("subjects_teacher_count")}</span>

@@ -7,13 +7,13 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
 
 const Teachers = () => {
-  const { t } = useLanguage();
+  const { t, d } = useLanguage();
   const [search, setSearch] = useState("");
   const [showFilters, setShowFilters] = useState(false);
   const [sortBy, setSortBy] = useState("");
 
   const filtered = mockTeachers.filter((tc) =>
-    tc.name.includes(search) || tc.subjects.some((s) => s.includes(search)) || tc.title.includes(search)
+    d(tc.name).includes(search) || tc.subjects.some((s) => d(s).includes(search)) || d(tc.title).includes(search)
   );
 
   const sorted = [...filtered].sort((a, b) => {

@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const TeacherCard = ({ teacher, index = 0 }: { teacher: Teacher; index?: number }) => {
-  const { t } = useLanguage();
+  const { t, d } = useLanguage();
 
   return (
     <motion.div
@@ -34,14 +34,14 @@ const TeacherCard = ({ teacher, index = 0 }: { teacher: Teacher; index?: number 
           )}
         </div>
         <div className="min-w-0 flex-1">
-          <h3 className="font-bold text-[0.95rem] mb-1">{teacher.name}</h3>
-          <p className="text-muted-foreground text-xs leading-relaxed line-clamp-2">{teacher.title}</p>
+          <h3 className="font-bold text-[0.95rem] mb-1">{d(teacher.name)}</h3>
+          <p className="text-muted-foreground text-xs leading-relaxed line-clamp-2">{d(teacher.title)}</p>
         </div>
       </div>
 
       <div className="px-5 pb-4 flex flex-wrap gap-1.5">
-        {teacher.subjects.slice(0, 3).map((s) => (
-          <span key={s} className="tag-outline">{s}</span>
+        {teacher.subjects.slice(0, 3).map((s, i) => (
+          <span key={i} className="tag-outline">{d(s)}</span>
         ))}
       </div>
 
@@ -57,7 +57,7 @@ const TeacherCard = ({ teacher, index = 0 }: { teacher: Teacher; index?: number 
         </div>
         <div className="text-left">
           <span className="text-lg font-extrabold text-primary">{teacher.price}</span>
-          <span className="text-muted-foreground text-xs mr-1">{teacher.currency}</span>
+          <span className="text-muted-foreground text-xs mr-1">{d(teacher.currency)}</span>
           <div className="text-muted-foreground text-[0.65rem]">{t("teacher_per_session")}</div>
         </div>
       </div>
