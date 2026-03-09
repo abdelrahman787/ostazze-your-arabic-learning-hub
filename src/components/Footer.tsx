@@ -52,7 +52,7 @@ const Footer = () => {
             <div className="flex flex-col gap-3 text-sm">
               <div className="flex items-center gap-2.5 opacity-50"><Mail size={14} /><span>info@ostazze.com</span></div>
               <div className="flex items-center gap-2.5 opacity-50"><Phone size={14} /><span dir="ltr">+966 50 000 0000</span></div>
-              <div className="flex items-center gap-2.5 opacity-50"><MapPin size={14} /><span>الرياض، المملكة العربية السعودية</span></div>
+              <div className="flex items-center gap-2.5 opacity-50"><MapPin size={14} /><span>{t("footer_location")}</span></div>
             </div>
           </div>
         </div>

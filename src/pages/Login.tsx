@@ -21,7 +21,7 @@ const Login = () => {
     setError("");
     setTimeout(() => {
       if (email && password.length >= 6) {
-        login({ id: "1", name: "مستخدم تجريبي", email, role: "student" });
+        login({ id: "1", name: t("mock_user_name"), email, role: "student" });
         navigate("/dashboard");
       } else {
         setError(t("login_error"));
