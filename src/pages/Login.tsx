@@ -15,6 +15,15 @@ const Login = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // Redirect if already logged in
+  useEffect(() => {
+    if (isLoggedIn && user) {
+      if (user.role === "admin") navigate("/admin");
+      else if (user.role === "teacher") navigate("/dashboard/teacher");
+      else navigate("/dashboard");
+    }
+  }, [isLoggedIn, user, navigate]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
