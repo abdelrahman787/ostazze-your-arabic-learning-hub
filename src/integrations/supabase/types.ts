@@ -14,6 +14,74 @@ export type Database = {
   }
   public: {
     Tables: {
+      chat_messages: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          lecture_id: string
+          sender_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          lecture_id: string
+          sender_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          lecture_id?: string
+          sender_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chat_messages_lecture_id_fkey"
+            columns: ["lecture_id"]
+            isOneToOne: false
+            referencedRelation: "lectures"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lectures: {
+        Row: {
+          created_at: string
+          id: string
+          pdf_url: string | null
+          student_id: string
+          subject: string | null
+          teacher_id: string
+          title: string
+          updated_at: string
+          video_url: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          pdf_url?: string | null
+          student_id: string
+          subject?: string | null
+          teacher_id: string
+          title: string
+          updated_at?: string
+          video_url?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          pdf_url?: string | null
+          student_id?: string
+          subject?: string | null
+          teacher_id?: string
+          title?: string
+          updated_at?: string
+          video_url?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           account_type: string | null
