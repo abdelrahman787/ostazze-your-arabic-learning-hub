@@ -292,6 +292,7 @@ interface LanguageContextType {
   setLang: (lang: Lang) => void;
   toggleLang: () => void;
   t: (key: TranslationKey) => string;
+  d: (obj: { ar: string; en: string } | string | undefined) => string;
   dir: "rtl" | "ltr";
 }
 
@@ -300,6 +301,7 @@ const LanguageContext = createContext<LanguageContextType>({
   setLang: () => {},
   toggleLang: () => {},
   t: (key) => translations[key]?.ar || key,
+  d: (obj) => (typeof obj === "string" ? obj : obj?.ar || ""),
   dir: "rtl",
 });
 
