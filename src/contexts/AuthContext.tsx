@@ -31,20 +31,31 @@ const AuthContext = createContext<AuthContextType>({
 export const useAuth = () => useContext(AuthContext);
 
 async function fetchUserRole(userId: string): Promise<"student" | "teacher" | "admin"> {
-  const { data } = await supabase
-    .from("user_roles")
-    .select("role")
-    .eq("user_id", userId)
-    .single();
-  if (data?.role === "admin") return "admin";
+  try {
+    const { data, error } = await supabase
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", userId)
+      .maybeSingle();
+    
+    if (!error && data?.role === "admin") return "admin";
+    if (!error && data?.role === "moderator") return "admin"; // moderators get admin access
+  } catch (e) {
+    console.warn("Failed to fetch user role:", e);
+  }
   
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("account_type")
-    .eq("user_id", userId)
-    .single();
-  
-  return (profile?.account_type as "student" | "teacher") || "student";
+  try {
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("account_type")
+      .eq("user_id", userId)
+      .maybeSingle();
+    
+    return (profile?.account_type as "student" | "teacher") || "student";
+  } catch (e) {
+    console.warn("Failed to fetch profile:", e);
+    return "student";
+  }
 }
 
 async function buildAppUser(supaUser: SupabaseUser): Promise<AppUser> {
