@@ -3,11 +3,23 @@ import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { KeyRound, Mail } from "lucide-react";
 import { motion } from "framer-motion";
+import { supabase } from "@/integrations/supabase/client";
 
 const ForgotPassword = () => {
   const { t } = useLanguage();
   const [sent, setSent] = useState(false);
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/reset-password`,
+    });
+    setSent(true);
+    setLoading(false);
+  };
 
   return (
     <div className="hero-gradient min-h-screen flex items-center justify-center p-4">
@@ -27,7 +39,7 @@ const ForgotPassword = () => {
             <Link to="/login" className="btn-primary inline-block">{t("forgot_back")}</Link>
           </motion.div>
         ) : (
-          <form onSubmit={(e) => { e.preventDefault(); setSent(true); }} className="space-y-4 text-start">
+          <form onSubmit={handleSubmit} className="space-y-4 text-start">
             <div>
               <label className="block text-sm font-bold mb-1.5">{t("login_email")}</label>
               <div className="relative">
@@ -35,7 +47,10 @@ const ForgotPassword = () => {
                 <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="email@example.com" className="input-base !pr-10" required />
               </div>
             </div>
-            <motion.button whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }} type="submit" className="btn-primary w-full">{t("forgot_submit")}</motion.button>
+            <motion.button whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }} type="submit" disabled={loading} className="btn-primary w-full flex items-center justify-center gap-2">
+              {loading && <span className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />}
+              {t("forgot_submit")}
+            </motion.button>
             <Link to="/login" className="block text-center text-primary text-sm font-semibold hover:underline">{t("forgot_back")}</Link>
           </form>
         )}
