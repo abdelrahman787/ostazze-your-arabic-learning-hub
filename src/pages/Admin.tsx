@@ -1,12 +1,12 @@
 import { useState, useEffect, useCallback, useRef, forwardRef } from "react";
 import { useAuth } from "@/contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import {
   GraduationCap, Users, TrendingUp, Search, Plus,
-  Shield, Video, BookOpen, Loader2, Upload, X, FileText
+  Shield, Video, BookOpen, Loader2, Upload, X, FileText, UserPlus, Home
 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -37,7 +37,6 @@ interface LectureRow {
 interface AdminUser {
   user_id: string;
   full_name: string | null;
-  email?: string;
 }
 
 interface ProfileOption {
@@ -47,7 +46,6 @@ interface ProfileOption {
 }
 
 // --- Sub-components ---
-
 const StatCard = ({ label, value, icon: Icon, color, index }: { label: string; value: string; icon: any; color: string; index: number }) => (
   <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.06 }} className="card-base p-5">
     <div className="flex items-center gap-3">
@@ -60,9 +58,13 @@ const StatCard = ({ label, value, icon: Icon, color, index }: { label: string; v
   </motion.div>
 );
 
-const TeachersTab = ({ teachers, loading, searchQuery, t }: { teachers: TeacherRow[]; loading: boolean; searchQuery: string; t: any }) => {
-  return null; // Placeholder, rendered inline for handlers access
-};
+const ModalWrapper = ({ children, onClose }: { children: React.ReactNode; onClose: () => void }) => (
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/40">
+    <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-card rounded-2xl shadow-xl w-full max-w-lg mx-4 max-h-[90vh] overflow-y-auto">
+      {children}
+    </motion.div>
+  </div>
+);
 
 // --- Main Component ---
 const Admin = forwardRef<HTMLDivElement>((_, ref) => {
@@ -92,12 +94,16 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
   const [admins, setAdmins] = useState<AdminUser[]>([]);
   const [adminsLoading, setAdminsLoading] = useState(true);
 
-  // --- Auth Guard ---
-  useEffect(() => {
-    if (!authLoading && (!user || user.role !== "admin")) {
-      navigate("/login", { replace: true });
-    }
-  }, [user, authLoading, navigate]);
+  // Add teacher modal
+  const [showAddTeacher, setShowAddTeacher] = useState(false);
+  const [addTeacherUserId, setAddTeacherUserId] = useState("");
+  const [addingTeacher, setAddingTeacher] = useState(false);
+
+  // Add admin/moderator modal
+  const [showAddAdmin, setShowAddAdmin] = useState(false);
+  const [addAdminEmail, setAddAdminEmail] = useState("");
+  const [addAdminRole, setAddAdminRole] = useState<"admin" | "moderator">("moderator");
+  const [addingAdmin, setAddingAdmin] = useState(false);
 
   // --- Data Fetching ---
   const fetchTeachers = useCallback(async () => {
@@ -207,6 +213,7 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
     toast({ title: "تم حذف المعلم بنجاح" });
     setTeachers((prev) => prev.filter((tc) => tc.user_id !== userId));
     fetchStats();
+    fetchProfiles();
   };
 
   const handleAddLecture = async () => {
@@ -268,6 +275,58 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
     fetchStats();
   };
 
+  const handleAddTeacher = async () => {
+    if (!addTeacherUserId) {
+      toast({ title: "يرجى اختيار مستخدم", variant: "destructive" });
+      return;
+    }
+    setAddingTeacher(true);
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      const res = await supabase.functions.invoke("manage-roles", {
+        body: { action: "add_teacher", user_id: addTeacherUserId },
+        headers: { Authorization: `Bearer ${session?.access_token}` },
+      });
+      if (res.error) throw new Error(res.error.message);
+      const result = res.data as any;
+      if (result?.error) throw new Error(result.error);
+      toast({ title: "تمت إضافة المعلم بنجاح" });
+      setShowAddTeacher(false);
+      setAddTeacherUserId("");
+      fetchTeachers();
+      fetchStats();
+      fetchProfiles();
+    } catch (err: any) {
+      toast({ title: "خطأ", description: err.message, variant: "destructive" });
+    }
+    setAddingTeacher(false);
+  };
+
+  const handleAddAdmin = async () => {
+    if (!addAdminEmail) {
+      toast({ title: "يرجى إدخال البريد الإلكتروني", variant: "destructive" });
+      return;
+    }
+    setAddingAdmin(true);
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      const res = await supabase.functions.invoke("manage-roles", {
+        body: { action: "add_role", email: addAdminEmail, role: addAdminRole },
+        headers: { Authorization: `Bearer ${session?.access_token}` },
+      });
+      if (res.error) throw new Error(res.error.message);
+      const result = res.data as any;
+      if (result?.error) throw new Error(result.error);
+      toast({ title: addAdminRole === "admin" ? "تمت إضافة المدير بنجاح" : "تمت إضافة المشرف بنجاح" });
+      setShowAddAdmin(false);
+      setAddAdminEmail("");
+      fetchAdmins();
+    } catch (err: any) {
+      toast({ title: "خطأ", description: err.message, variant: "destructive" });
+    }
+    setAddingAdmin(false);
+  };
+
   // --- Filters ---
   const filteredTeachers = teachers.filter((tc) => {
     if (!searchQuery) return true;
@@ -281,8 +340,10 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
     return l.title.toLowerCase().includes(q) || l.subject?.toLowerCase().includes(q) || l.teacher_name?.toLowerCase().includes(q) || l.student_name?.toLowerCase().includes(q);
   });
 
-  const teacherProfiles = allProfiles.filter((p) => p.account_type === "teacher");
-  const studentProfiles = allProfiles.filter((p) => p.account_type === "student");
+  const teacherProfilesList = allProfiles.filter((p) => p.account_type === "teacher");
+  const studentProfilesList = allProfiles.filter((p) => p.account_type === "student");
+  // Students who are not yet teachers (for add teacher modal)
+  const nonTeacherProfiles = allProfiles.filter((p) => p.account_type === "student");
 
   // --- Config ---
   const tabs = [
@@ -308,7 +369,15 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
   }
 
   if (!user || user.role !== "admin") {
-    return null;
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-background gap-4">
+        <Shield size={48} className="text-muted-foreground/30" />
+        <p className="text-muted-foreground font-bold">ليس لديك صلاحية الوصول لهذه الصفحة</p>
+        <Link to="/" className="btn-primary text-sm flex items-center gap-2">
+          <Home size={16} /> العودة للرئيسية
+        </Link>
+      </div>
+    );
   }
 
   return (
@@ -316,11 +385,18 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
       <div className="container py-8">
         {/* Header */}
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
-          <div className="flex items-center gap-2 mb-1">
-            <motion.div whileHover={{ scale: 1.15, rotate: 15 }}><Shield size={20} className="text-primary" /></motion.div>
-            <h1 className="text-2xl font-extrabold">{t("admin_title")}</h1>
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <Shield size={20} className="text-primary" />
+                <h1 className="text-2xl font-extrabold">{t("admin_title")}</h1>
+              </div>
+              <p className="text-muted-foreground text-sm">{t("admin_subtitle")}</p>
+            </div>
+            <Link to="/" className="btn-outline !py-2 !px-4 text-sm flex items-center gap-2">
+              <Home size={14} /> الموقع
+            </Link>
           </div>
-          <p className="text-muted-foreground text-sm">{t("admin_subtitle")}</p>
         </motion.div>
 
         {/* Stats */}
@@ -344,17 +420,31 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
           </div>
 
           {/* Search + Actions */}
-          <div className="p-4 flex items-center justify-between gap-4">
-            <div className="relative flex-1 max-w-md">
+          <div className="p-4 flex items-center justify-between gap-4 flex-wrap">
+            <div className="relative flex-1 max-w-md min-w-[200px]">
               <Search size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
               <input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="بحث..." className="input-base !pr-10 !py-2.5 text-sm" />
             </div>
-            {activeTab === "lectures" && (
-              <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setShowAddLecture(true)}
-                className="btn-primary !py-2.5 text-sm flex items-center gap-2">
-                <Plus size={16} /> إضافة محاضرة
-              </motion.button>
-            )}
+            <div className="flex gap-2">
+              {activeTab === "teachers" && (
+                <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setShowAddTeacher(true)}
+                  className="btn-primary !py-2.5 text-sm flex items-center gap-2">
+                  <UserPlus size={16} /> إضافة معلم
+                </motion.button>
+              )}
+              {activeTab === "lectures" && (
+                <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setShowAddLecture(true)}
+                  className="btn-primary !py-2.5 text-sm flex items-center gap-2">
+                  <Plus size={16} /> إضافة محاضرة
+                </motion.button>
+              )}
+              {activeTab === "admins" && (
+                <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setShowAddAdmin(true)}
+                  className="btn-primary !py-2.5 text-sm flex items-center gap-2">
+                  <Shield size={16} /> إضافة مشرف
+                </motion.button>
+              )}
+            </div>
           </div>
 
           {/* ===== Teachers Tab ===== */}
@@ -493,63 +583,122 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
 
       {/* ===== Add Lecture Modal ===== */}
       {showAddLecture && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/40">
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-card rounded-2xl shadow-xl w-full max-w-lg mx-4 max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between p-5 border-b">
-              <h3 className="font-extrabold text-lg">إضافة محاضرة جديدة</h3>
-              <button onClick={() => setShowAddLecture(false)} className="text-muted-foreground hover:text-foreground"><X size={20} /></button>
+        <ModalWrapper onClose={() => setShowAddLecture(false)}>
+          <div className="flex items-center justify-between p-5 border-b">
+            <h3 className="font-extrabold text-lg">إضافة محاضرة جديدة</h3>
+            <button onClick={() => setShowAddLecture(false)} className="text-muted-foreground hover:text-foreground"><X size={20} /></button>
+          </div>
+          <div className="p-5 space-y-4">
+            <div>
+              <label className="block text-sm font-bold mb-1.5">اسم المحاضرة *</label>
+              <input value={lectureForm.title} onChange={(e) => setLectureForm((f) => ({ ...f, title: e.target.value }))} className="input-base" placeholder="مثال: مقدمة في التفاضل" />
             </div>
-            <div className="p-5 space-y-4">
-              <div>
-                <label className="block text-sm font-bold mb-1.5">اسم المحاضرة *</label>
-                <input value={lectureForm.title} onChange={(e) => setLectureForm((f) => ({ ...f, title: e.target.value }))} className="input-base" placeholder="مثال: مقدمة في التفاضل" />
-              </div>
-              <div>
-                <label className="block text-sm font-bold mb-1.5">المادة</label>
-                <input value={lectureForm.subject} onChange={(e) => setLectureForm((f) => ({ ...f, subject: e.target.value }))} className="input-base" placeholder="مثال: الرياضيات" />
-              </div>
-              <div>
-                <label className="block text-sm font-bold mb-1.5">المعلم *</label>
-                <select value={lectureForm.teacher_id} onChange={(e) => setLectureForm((f) => ({ ...f, teacher_id: e.target.value }))} className="input-base">
-                  <option value="">اختر المعلم</option>
-                  {teacherProfiles.map((p) => <option key={p.user_id} value={p.user_id}>{p.full_name || p.user_id}</option>)}
-                  {teacherProfiles.length === 0 && <option disabled>لا يوجد معلمون مسجلون</option>}
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-bold mb-1.5">الطالب *</label>
-                <select value={lectureForm.student_id} onChange={(e) => setLectureForm((f) => ({ ...f, student_id: e.target.value }))} className="input-base">
-                  <option value="">اختر الطالب</option>
-                  {studentProfiles.map((p) => <option key={p.user_id} value={p.user_id}>{p.full_name || p.user_id}</option>)}
-                  {studentProfiles.length === 0 && <option disabled>لا يوجد طلاب مسجلون</option>}
-                </select>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-bold mb-1.5">فيديو المحاضرة</label>
-                  <input ref={videoRef} type="file" accept="video/*" className="hidden" onChange={(e) => setVideoFile(e.target.files?.[0] || null)} />
-                  <button onClick={() => videoRef.current?.click()} className="w-full flex items-center justify-center gap-2 p-3 border-2 border-dashed rounded-xl text-sm text-muted-foreground hover:border-primary hover:text-primary transition-colors">
-                    <Upload size={16} />
-                    {videoFile ? videoFile.name.slice(0, 20) : "رفع فيديو"}
-                  </button>
-                </div>
-                <div>
-                  <label className="block text-sm font-bold mb-1.5">ملف PDF</label>
-                  <input ref={pdfRef} type="file" accept=".pdf" className="hidden" onChange={(e) => setPdfFile(e.target.files?.[0] || null)} />
-                  <button onClick={() => pdfRef.current?.click()} className="w-full flex items-center justify-center gap-2 p-3 border-2 border-dashed rounded-xl text-sm text-muted-foreground hover:border-destructive hover:text-destructive transition-colors">
-                    <FileText size={16} />
-                    {pdfFile ? pdfFile.name.slice(0, 20) : "رفع PDF"}
-                  </button>
-                </div>
-              </div>
-
-              <button onClick={handleAddLecture} disabled={uploading} className="btn-primary w-full flex items-center justify-center gap-2">
-                {uploading ? <><Loader2 size={16} className="animate-spin" /> جاري الرفع...</> : <><Plus size={16} /> إضافة المحاضرة</>}
-              </button>
+            <div>
+              <label className="block text-sm font-bold mb-1.5">المادة</label>
+              <input value={lectureForm.subject} onChange={(e) => setLectureForm((f) => ({ ...f, subject: e.target.value }))} className="input-base" placeholder="مثال: الرياضيات" />
             </div>
-          </motion.div>
-        </div>
+            <div>
+              <label className="block text-sm font-bold mb-1.5">المعلم *</label>
+              <select value={lectureForm.teacher_id} onChange={(e) => setLectureForm((f) => ({ ...f, teacher_id: e.target.value }))} className="input-base">
+                <option value="">اختر المعلم</option>
+                {teacherProfilesList.map((p) => <option key={p.user_id} value={p.user_id}>{p.full_name || p.user_id}</option>)}
+                {teacherProfilesList.length === 0 && <option disabled>لا يوجد معلمون مسجلون</option>}
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-bold mb-1.5">الطالب *</label>
+              <select value={lectureForm.student_id} onChange={(e) => setLectureForm((f) => ({ ...f, student_id: e.target.value }))} className="input-base">
+                <option value="">اختر الطالب</option>
+                {studentProfilesList.map((p) => <option key={p.user_id} value={p.user_id}>{p.full_name || p.user_id}</option>)}
+                {studentProfilesList.length === 0 && <option disabled>لا يوجد طلاب مسجلون</option>}
+              </select>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-bold mb-1.5">فيديو المحاضرة</label>
+                <input ref={videoRef} type="file" accept="video/*" className="hidden" onChange={(e) => setVideoFile(e.target.files?.[0] || null)} />
+                <button onClick={() => videoRef.current?.click()} className="w-full flex items-center justify-center gap-2 p-3 border-2 border-dashed rounded-xl text-sm text-muted-foreground hover:border-primary hover:text-primary transition-colors">
+                  <Upload size={16} />
+                  {videoFile ? videoFile.name.slice(0, 20) : "رفع فيديو"}
+                </button>
+              </div>
+              <div>
+                <label className="block text-sm font-bold mb-1.5">ملف PDF</label>
+                <input ref={pdfRef} type="file" accept=".pdf" className="hidden" onChange={(e) => setPdfFile(e.target.files?.[0] || null)} />
+                <button onClick={() => pdfRef.current?.click()} className="w-full flex items-center justify-center gap-2 p-3 border-2 border-dashed rounded-xl text-sm text-muted-foreground hover:border-destructive hover:text-destructive transition-colors">
+                  <FileText size={16} />
+                  {pdfFile ? pdfFile.name.slice(0, 20) : "رفع PDF"}
+                </button>
+              </div>
+            </div>
+            <button onClick={handleAddLecture} disabled={uploading} className="btn-primary w-full flex items-center justify-center gap-2">
+              {uploading ? <><Loader2 size={16} className="animate-spin" /> جاري الرفع...</> : <><Plus size={16} /> إضافة المحاضرة</>}
+            </button>
+          </div>
+        </ModalWrapper>
+      )}
+
+      {/* ===== Add Teacher Modal ===== */}
+      {showAddTeacher && (
+        <ModalWrapper onClose={() => setShowAddTeacher(false)}>
+          <div className="flex items-center justify-between p-5 border-b">
+            <h3 className="font-extrabold text-lg">إضافة معلم جديد</h3>
+            <button onClick={() => setShowAddTeacher(false)} className="text-muted-foreground hover:text-foreground"><X size={20} /></button>
+          </div>
+          <div className="p-5 space-y-4">
+            <p className="text-muted-foreground text-sm">اختر مستخدم مسجّل لتحويله إلى معلم. سيتم تفعيل حساب المعلم تلقائياً.</p>
+            <div>
+              <label className="block text-sm font-bold mb-1.5">اختر المستخدم *</label>
+              <select value={addTeacherUserId} onChange={(e) => setAddTeacherUserId(e.target.value)} className="input-base">
+                <option value="">اختر مستخدم...</option>
+                {nonTeacherProfiles.map((p) => (
+                  <option key={p.user_id} value={p.user_id}>{p.full_name || p.user_id}</option>
+                ))}
+                {nonTeacherProfiles.length === 0 && <option disabled>لا يوجد مستخدمون متاحون</option>}
+              </select>
+            </div>
+            <button onClick={handleAddTeacher} disabled={addingTeacher} className="btn-primary w-full flex items-center justify-center gap-2">
+              {addingTeacher ? <><Loader2 size={16} className="animate-spin" /> جاري الإضافة...</> : <><UserPlus size={16} /> إضافة كمعلم</>}
+            </button>
+          </div>
+        </ModalWrapper>
+      )}
+
+      {/* ===== Add Admin/Moderator Modal ===== */}
+      {showAddAdmin && (
+        <ModalWrapper onClose={() => setShowAddAdmin(false)}>
+          <div className="flex items-center justify-between p-5 border-b">
+            <h3 className="font-extrabold text-lg">إضافة مشرف / مدير</h3>
+            <button onClick={() => setShowAddAdmin(false)} className="text-muted-foreground hover:text-foreground"><X size={20} /></button>
+          </div>
+          <div className="p-5 space-y-4">
+            <p className="text-muted-foreground text-sm">أدخل البريد الإلكتروني لمستخدم مسجّل لمنحه صلاحية الإشراف أو الإدارة.</p>
+            <div>
+              <label className="block text-sm font-bold mb-1.5">البريد الإلكتروني *</label>
+              <input value={addAdminEmail} onChange={(e) => setAddAdminEmail(e.target.value)} className="input-base" placeholder="example@email.com" type="email" />
+            </div>
+            <div>
+              <label className="block text-sm font-bold mb-1.5">نوع الصلاحية</label>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setAddAdminRole("moderator")}
+                  className={`flex-1 p-3 rounded-xl border-2 text-sm font-bold transition-all ${addAdminRole === "moderator" ? "border-primary bg-primary/5 text-primary" : "border-border text-muted-foreground hover:border-muted-foreground"}`}
+                >
+                  مشرف
+                </button>
+                <button
+                  onClick={() => setAddAdminRole("admin")}
+                  className={`flex-1 p-3 rounded-xl border-2 text-sm font-bold transition-all ${addAdminRole === "admin" ? "border-primary bg-primary/5 text-primary" : "border-border text-muted-foreground hover:border-muted-foreground"}`}
+                >
+                  مدير
+                </button>
+              </div>
+            </div>
+            <button onClick={handleAddAdmin} disabled={addingAdmin} className="btn-primary w-full flex items-center justify-center gap-2">
+              {addingAdmin ? <><Loader2 size={16} className="animate-spin" /> جاري الإضافة...</> : <><Shield size={16} /> إضافة الصلاحية</>}
+            </button>
+          </div>
+        </ModalWrapper>
       )}
     </div>
   );

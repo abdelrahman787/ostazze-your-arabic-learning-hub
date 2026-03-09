@@ -2,8 +2,8 @@ import { Link, useLocation } from "react-router-dom";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useState } from "react";
-import { Moon, Sun, Menu, X, LogOut, Globe, User, ChevronDown } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { Moon, Sun, Menu, X, LogOut, Globe, User, ChevronDown, Shield, LayoutDashboard } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
 const Navbar = () => {
@@ -12,6 +12,18 @@ const Navbar = () => {
   const { t, toggleLang, lang } = useLanguage();
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setProfileOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, []);
 
   const navLinks = [
     { label: t("nav_universities"), path: "/universities" },
@@ -19,6 +31,8 @@ const Navbar = () => {
     { label: t("nav_categories"), path: "/categories" },
     { label: t("nav_teachers"), path: "/teachers" },
   ];
+
+  const dashboardPath = user?.role === "teacher" ? "/dashboard/teacher" : "/dashboard";
 
   return (
     <nav className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b h-16 flex items-center">
@@ -63,17 +77,64 @@ const Navbar = () => {
           </motion.button>
 
           {isLoggedIn ? (
-            <div className="hidden md:flex items-center gap-3">
-              <Link
-                to={user?.role === "teacher" ? "/dashboard/teacher" : user?.role === "admin" ? "/admin" : "/dashboard"}
+            <div className="hidden md:block relative" ref={dropdownRef}>
+              <button
+                onClick={() => setProfileOpen(!profileOpen)}
                 className="flex items-center gap-2 text-sm font-medium text-foreground/70 hover:text-foreground transition-colors"
               >
                 <motion.div whileHover={{ scale: 1.1 }} className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
                   <User size={16} className="text-primary" />
                 </motion.div>
                 <span>{user?.name?.split(" ")[0]}...</span>
-                <ChevronDown size={14} />
-              </Link>
+                <ChevronDown size={14} className={`transition-transform ${profileOpen ? "rotate-180" : ""}`} />
+              </button>
+
+              <AnimatePresence>
+                {profileOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -8, scale: 0.95 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute left-0 top-full mt-2 w-56 bg-card rounded-xl border shadow-lg overflow-hidden z-50"
+                  >
+                    <div className="p-3 border-b">
+                      <div className="font-bold text-sm">{user?.name}</div>
+                      <div className="text-muted-foreground text-xs">{user?.email}</div>
+                      {user?.role === "admin" && (
+                        <span className="text-[0.6rem] bg-primary/10 text-primary px-2 py-0.5 rounded-full font-semibold mt-1 inline-block">مدير</span>
+                      )}
+                    </div>
+                    <div className="p-1.5">
+                      <Link
+                        to={dashboardPath}
+                        onClick={() => setProfileOpen(false)}
+                        className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm hover:bg-secondary transition-colors"
+                      >
+                        <LayoutDashboard size={15} className="text-muted-foreground" />
+                        لوحة التحكم
+                      </Link>
+                      {user?.role === "admin" && (
+                        <Link
+                          to="/admin"
+                          onClick={() => setProfileOpen(false)}
+                          className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm hover:bg-secondary transition-colors"
+                        >
+                          <Shield size={15} className="text-primary" />
+                          لوحة الإدارة
+                        </Link>
+                      )}
+                      <button
+                        onClick={() => { logout(); setProfileOpen(false); }}
+                        className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-destructive hover:bg-destructive/10 transition-colors"
+                      >
+                        <LogOut size={15} />
+                        {t("nav_logout")}
+                      </button>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           ) : (
             <div className="hidden md:flex items-center gap-3">
@@ -112,7 +173,14 @@ const Navbar = () => {
               <div className="border-t my-2" />
               {isLoggedIn ? (
                 <>
-                  <Link to="/dashboard" onClick={() => setMobileOpen(false)} className="btn-primary text-center text-sm">{t("nav_dashboard")}</Link>
+                  <Link to={dashboardPath} onClick={() => setMobileOpen(false)} className="px-4 py-3 rounded-xl text-sm font-medium hover:bg-secondary flex items-center gap-2">
+                    <LayoutDashboard size={16} /> لوحة التحكم
+                  </Link>
+                  {user?.role === "admin" && (
+                    <Link to="/admin" onClick={() => setMobileOpen(false)} className="px-4 py-3 rounded-xl text-sm font-medium hover:bg-secondary flex items-center gap-2">
+                      <Shield size={16} className="text-primary" /> لوحة الإدارة
+                    </Link>
+                  )}
                   <button onClick={() => { logout(); setMobileOpen(false); }} className="text-destructive text-sm font-medium py-2.5 flex items-center justify-center gap-2">
                     <LogOut size={15} />{t("nav_logout")}
                   </button>
