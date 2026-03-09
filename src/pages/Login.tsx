@@ -23,15 +23,8 @@ const Login = () => {
     if (result.error) {
       setError(result.error);
       setLoading(false);
-    } else {
-      // Role-based redirect will happen after auth state changes
-      // We need to wait briefly for the user state to update
-      setTimeout(async () => {
-        const { useAuth: getAuth } = await import("@/contexts/AuthContext");
-        navigate("/dashboard");
-        setLoading(false);
-      }, 500);
     }
+    // Navigation happens via auth state change in AuthContext
   };
 
   return (
