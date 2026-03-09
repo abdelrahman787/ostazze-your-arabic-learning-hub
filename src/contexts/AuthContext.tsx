@@ -64,7 +64,7 @@ async function buildAppUser(supaUser: SupabaseUser): Promise<AppUser> {
     .from("profiles")
     .select("full_name, avatar_url")
     .eq("user_id", supaUser.id)
-    .single();
+    .maybeSingle();
 
   return {
     id: supaUser.id,
