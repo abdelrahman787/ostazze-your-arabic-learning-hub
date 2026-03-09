@@ -258,12 +258,31 @@ const translations = {
   coming_soon_desc: { ar: "هذا القسم قيد التطوير", en: "This section is under development" },
   user_word: { ar: "مستخدم", en: "User" },
   sar: { ar: "ر.س", en: "SAR" },
+  mock_user_name: { ar: "مستخدم تجريبي", en: "Test User" },
 
   // Sections
   section_main: { ar: "الرئيسية", en: "Main" },
   section_as_student: { ar: "كطالب", en: "As Student" },
   section_account: { ar: "الحساب", en: "Account" },
   section_as_teacher: { ar: "كمعلم", en: "As Teacher" },
+
+  // Footer location
+  footer_location: { ar: "الرياض، المملكة العربية السعودية", en: "Riyadh, Saudi Arabia" },
+
+  // 404
+  not_found_title: { ar: "الصفحة غير موجودة", en: "Page not found" },
+  not_found_desc: { ar: "عذراً! الصفحة التي تبحث عنها غير موجودة", en: "Oops! The page you're looking for doesn't exist" },
+  not_found_back: { ar: "العودة للرئيسية", en: "Return to Home" },
+
+  // Categories counts
+  cat_subjects_count: { ar: "مادة", en: "subjects" },
+  cat_subjects_count_plural: { ar: "مواد", en: "subjects" },
+
+  // Teacher profile breadcrumb / misc
+  teacher_about: { ar: "نبذة عن المعلم", en: "About the Teacher" },
+
+  // Navbar home
+  nav_home_link: { ar: "الرئيسية", en: "Home" },
 } as const;
 
 type TranslationKey = keyof typeof translations;
