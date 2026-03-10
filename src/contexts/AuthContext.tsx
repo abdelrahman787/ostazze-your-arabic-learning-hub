@@ -80,20 +80,35 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
+    // IMPORTANT: Do NOT await inside onAuthStateChange to avoid deadlocks
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       if (session?.user) {
-        const appUser = await buildAppUser(session.user);
-        setUser(appUser);
+        // Set basic user immediately, then fetch role async
+        const su = session.user;
+        setUser({
+          id: su.id,
+          name: su.user_metadata?.full_name || "",
+          email: su.email || "",
+          role: "student",
+        });
+        // Fetch role and profile in background (no await!)
+        buildAppUser(su).then((appUser) => setUser(appUser));
       } else {
         setUser(null);
       }
       setLoading(false);
     });
 
-    supabase.auth.getSession().then(async ({ data: { session } }) => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
       if (session?.user) {
-        const appUser = await buildAppUser(session.user);
-        setUser(appUser);
+        const su = session.user;
+        setUser({
+          id: su.id,
+          name: su.user_metadata?.full_name || "",
+          email: su.email || "",
+          role: "student",
+        });
+        buildAppUser(su).then((appUser) => setUser(appUser));
       }
       setLoading(false);
     });
