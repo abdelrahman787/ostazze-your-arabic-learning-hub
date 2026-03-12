@@ -14,6 +14,59 @@ export type Database = {
   }
   public: {
     Tables: {
+      bookings: {
+        Row: {
+          created_at: string
+          id: string
+          lecture_id: string | null
+          notes: string | null
+          reject_reason: string | null
+          scheduled_date: string
+          scheduled_time: string
+          status: Database["public"]["Enums"]["booking_status"]
+          student_id: string
+          subject: string | null
+          teacher_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          lecture_id?: string | null
+          notes?: string | null
+          reject_reason?: string | null
+          scheduled_date: string
+          scheduled_time: string
+          status?: Database["public"]["Enums"]["booking_status"]
+          student_id: string
+          subject?: string | null
+          teacher_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          lecture_id?: string | null
+          notes?: string | null
+          reject_reason?: string | null
+          scheduled_date?: string
+          scheduled_time?: string
+          status?: Database["public"]["Enums"]["booking_status"]
+          student_id?: string
+          subject?: string | null
+          teacher_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookings_lecture_id_fkey"
+            columns: ["lecture_id"]
+            isOneToOne: false
+            referencedRelation: "lectures"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       chat_messages: {
         Row: {
           audio_url: string | null
@@ -162,6 +215,36 @@ export type Database = {
         }
         Relationships: []
       }
+      teacher_availability: {
+        Row: {
+          created_at: string
+          day_of_week: number
+          end_time: string
+          id: string
+          is_active: boolean
+          start_time: string
+          teacher_id: string
+        }
+        Insert: {
+          created_at?: string
+          day_of_week: number
+          end_time: string
+          id?: string
+          is_active?: boolean
+          start_time: string
+          teacher_id: string
+        }
+        Update: {
+          created_at?: string
+          day_of_week?: number
+          end_time?: string
+          id?: string
+          is_active?: boolean
+          start_time?: string
+          teacher_id?: string
+        }
+        Relationships: []
+      }
       teacher_profiles: {
         Row: {
           created_at: string
@@ -228,6 +311,12 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
+      booking_status:
+        | "pending"
+        | "confirmed"
+        | "rejected"
+        | "cancelled"
+        | "completed"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -356,6 +445,13 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "moderator", "user"],
+      booking_status: [
+        "pending",
+        "confirmed",
+        "rejected",
+        "cancelled",
+        "completed",
+      ],
     },
   },
 } as const
