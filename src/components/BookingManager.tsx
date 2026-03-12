@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Calendar, Check, X, Loader2, Clock, BookOpen, AlertCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
@@ -24,22 +25,23 @@ interface Props {
   role: "student" | "teacher";
 }
 
-const statusMap: Record<string, { label: string; color: string }> = {
-  pending: { label: "قيد الانتظار", color: "bg-warning/10 text-warning" },
-  confirmed: { label: "مؤكد", color: "bg-success/10 text-success" },
-  rejected: { label: "مرفوض", color: "bg-destructive/10 text-destructive" },
-  cancelled: { label: "ملغي", color: "bg-muted text-muted-foreground" },
-  completed: { label: "مكتمل", color: "bg-primary/10 text-primary" },
-};
-
 const BookingManager = ({ role }: Props) => {
   const { user } = useAuth();
+  const { t, lang } = useLanguage();
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("all");
   const [rejectId, setRejectId] = useState<string | null>(null);
   const [rejectReason, setRejectReason] = useState("");
   const [actionLoading, setActionLoading] = useState<string | null>(null);
+
+  const statusMap: Record<string, { label: string; color: string }> = {
+    pending: { label: t("bstatus_pending"), color: "bg-warning/10 text-warning" },
+    confirmed: { label: t("bstatus_confirmed"), color: "bg-success/10 text-success" },
+    rejected: { label: t("bstatus_rejected"), color: "bg-destructive/10 text-destructive" },
+    cancelled: { label: t("bstatus_cancelled"), color: "bg-muted text-muted-foreground" },
+    completed: { label: t("bstatus_completed"), color: "bg-primary/10 text-primary" },
+  };
 
   const fetchBookings = useCallback(async () => {
     if (!user) return;
@@ -72,12 +74,11 @@ const BookingManager = ({ role }: Props) => {
       const { error } = await supabase.from("bookings").update(updateData).eq("id", id);
       if (error) throw error;
 
-      // If confirmed, create a lecture automatically
       if (status === "confirmed") {
         const booking = bookings.find((b) => b.id === id);
         if (booking) {
           const { data: lecture, error: lecErr } = await supabase.from("lectures").insert({
-            title: `جلسة: ${booking.subject || "مادة"}`,
+            title: `${t("session_label")} ${booking.subject || t("subject_word")}`,
             subject: booking.subject,
             student_id: booking.student_id,
             teacher_id: booking.teacher_id,
@@ -89,30 +90,29 @@ const BookingManager = ({ role }: Props) => {
         }
       }
 
-      toast.success(status === "confirmed" ? "تم قبول الحجز وإنشاء المحاضرة ✅" : status === "rejected" ? "تم رفض الحجز" : "تم تحديث الحجز");
+      toast.success(status === "confirmed" ? t("booking_accepted") : status === "rejected" ? t("booking_rejected") : t("booking_updated"));
       setRejectId(null);
       setRejectReason("");
       fetchBookings();
     } catch (e: any) {
-      toast.error("خطأ: " + e.message);
+      toast.error("Error: " + e.message);
     }
     setActionLoading(null);
   };
 
   const filters = [
-    { value: "all", label: "الكل" },
-    { value: "pending", label: "قيد الانتظار" },
-    { value: "confirmed", label: "مؤكد" },
-    { value: "completed", label: "مكتمل" },
-    { value: "rejected", label: "مرفوض" },
-    { value: "cancelled", label: "ملغي" },
+    { value: "all", label: t("status_all") },
+    { value: "pending", label: t("bstatus_pending") },
+    { value: "confirmed", label: t("bstatus_confirmed") },
+    { value: "completed", label: t("bstatus_completed") },
+    { value: "rejected", label: t("bstatus_rejected") },
+    { value: "cancelled", label: t("bstatus_cancelled") },
   ];
 
   if (loading) return <div className="flex justify-center py-12"><Loader2 className="animate-spin text-primary" size={32} /></div>;
 
   return (
     <div className="space-y-4">
-      {/* Filters */}
       <div className="flex gap-2 flex-wrap">
         {filters.map((f) => (
           <button key={f.value} onClick={() => setFilter(f.value)}
@@ -125,7 +125,7 @@ const BookingManager = ({ role }: Props) => {
       {bookings.length === 0 ? (
         <div className="card-base p-12 text-center">
           <Calendar size={48} className="mx-auto text-muted-foreground/30 mb-3" />
-          <p className="text-muted-foreground">لا توجد حجوزات</p>
+          <p className="text-muted-foreground">{t("no_bookings")}</p>
         </div>
       ) : (
         <div className="space-y-3">
@@ -139,7 +139,7 @@ const BookingManager = ({ role }: Props) => {
                   </div>
                   <div>
                     <div className="font-bold text-sm">{b.other_name}</div>
-                    <div className="text-muted-foreground text-xs">{role === "teacher" ? "طالب" : "معلم"}</div>
+                    <div className="text-muted-foreground text-xs">{role === "teacher" ? t("the_student") : t("the_teacher")}</div>
                   </div>
                 </div>
                 <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${statusMap[b.status]?.color || ""}`}>
@@ -164,11 +164,10 @@ const BookingManager = ({ role }: Props) => {
               {b.notes && <p className="text-muted-foreground text-xs bg-secondary rounded-lg p-2 mb-3">{b.notes}</p>}
               {b.reject_reason && (
                 <p className="text-destructive text-xs bg-destructive/5 rounded-lg p-2 mb-3 flex items-center gap-1">
-                  <AlertCircle size={12} /> سبب الرفض: {b.reject_reason}
+                  <AlertCircle size={12} /> {t("rejection_reason_label")} {b.reject_reason}
                 </p>
               )}
 
-              {/* Actions */}
               {b.status === "pending" && (
                 <div className="flex gap-2 mt-2">
                   {role === "teacher" && (
@@ -176,11 +175,11 @@ const BookingManager = ({ role }: Props) => {
                       <motion.button whileTap={{ scale: 0.95 }} onClick={() => updateStatus(b.id, "confirmed")}
                         disabled={actionLoading === b.id}
                         className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl bg-success/10 text-success font-bold text-sm hover:bg-success/20 transition-colors">
-                        {actionLoading === b.id ? <Loader2 size={14} className="animate-spin" /> : <Check size={14} />} قبول
+                        {actionLoading === b.id ? <Loader2 size={14} className="animate-spin" /> : <Check size={14} />} {t("accept_btn")}
                       </motion.button>
                       <motion.button whileTap={{ scale: 0.95 }} onClick={() => setRejectId(b.id)}
                         className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl bg-destructive/10 text-destructive font-bold text-sm hover:bg-destructive/20 transition-colors">
-                        <X size={14} /> رفض
+                        <X size={14} /> {t("reject_btn")}
                       </motion.button>
                     </>
                   )}
@@ -188,7 +187,7 @@ const BookingManager = ({ role }: Props) => {
                     <motion.button whileTap={{ scale: 0.95 }} onClick={() => updateStatus(b.id, "cancelled")}
                       disabled={actionLoading === b.id}
                       className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl bg-destructive/10 text-destructive font-bold text-sm hover:bg-destructive/20 transition-colors">
-                      {actionLoading === b.id ? <Loader2 size={14} className="animate-spin" /> : <X size={14} />} إلغاء الحجز
+                      {actionLoading === b.id ? <Loader2 size={14} className="animate-spin" /> : <X size={14} />} {t("cancel_booking")}
                     </motion.button>
                   )}
                 </div>
@@ -196,23 +195,22 @@ const BookingManager = ({ role }: Props) => {
 
               {b.status === "confirmed" && b.lecture_id && (
                 <a href={`/lectures/${b.lecture_id}`} className="btn-primary block text-center text-sm mt-2">
-                  دخول المحاضرة →
+                  {t("enter_lecture")}
                 </a>
               )}
 
-              {/* Reject dialog inline */}
               {rejectId === b.id && (
                 <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} className="mt-3 p-3 bg-destructive/5 rounded-xl space-y-2">
                   <textarea value={rejectReason} onChange={(e) => setRejectReason(e.target.value)}
-                    placeholder="سبب الرفض (اختياري)..." rows={2} className="input-base resize-none text-sm" />
+                    placeholder={t("reject_reason")} rows={2} className="input-base resize-none text-sm" />
                   <div className="flex gap-2">
                     <button onClick={() => updateStatus(b.id, "rejected", rejectReason)}
                       disabled={actionLoading === b.id}
                       className="flex-1 py-2 rounded-xl bg-destructive text-destructive-foreground font-bold text-sm">
-                      {actionLoading === b.id ? "جاري..." : "تأكيد الرفض"}
+                      {actionLoading === b.id ? t("processing") : t("confirm_reject")}
                     </button>
                     <button onClick={() => { setRejectId(null); setRejectReason(""); }}
-                      className="px-4 py-2 rounded-xl bg-secondary text-sm font-bold">إلغاء</button>
+                      className="px-4 py-2 rounded-xl bg-secondary text-sm font-bold">{t("action_cancel")}</button>
                   </div>
                 </motion.div>
               )}

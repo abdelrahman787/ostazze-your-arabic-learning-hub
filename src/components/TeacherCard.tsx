@@ -68,7 +68,7 @@ const TeacherCard = ({ teacher, index = 0 }: { teacher: TeacherData; index?: num
         </div>
         <div className="text-left">
           <span className="text-lg font-extrabold text-primary">{teacher.price}</span>
-          <span className="text-muted-foreground text-xs mr-1">ر.س</span>
+          <span className="text-muted-foreground text-xs mr-1">{t("sar")}</span>
           <div className="text-muted-foreground text-[0.65rem]">{t("teacher_per_session")}</div>
         </div>
       </div>

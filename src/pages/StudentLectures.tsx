@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
 import { GraduationCap, Video, FileText, MessageSquare, Loader2, ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
@@ -18,6 +19,7 @@ interface LectureItem {
 
 const StudentLectures = () => {
   const { user } = useAuth();
+  const { t, lang } = useLanguage();
   const [lectures, setLectures] = useState<LectureItem[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -58,15 +60,15 @@ const StudentLectures = () => {
     return (
       <div className="text-center p-12">
         <GraduationCap size={48} className="mx-auto text-muted-foreground/30 mb-3" />
-        <p className="text-muted-foreground">لا توجد محاضرات بعد</p>
-        <p className="text-muted-foreground text-xs mt-1">سيتم إضافة المحاضرات من قبل الإدارة</p>
+        <p className="text-muted-foreground">{t("no_lectures_yet")}</p>
+        <p className="text-muted-foreground text-xs mt-1">{t("lectures_added_by_admin")}</p>
       </div>
     );
   }
 
   return (
     <div className="space-y-4">
-      <h3 className="font-extrabold text-lg">محاضراتي</h3>
+      <h3 className="font-extrabold text-lg">{t("sidebar_my_lectures")}</h3>
       <div className="grid gap-4 md:grid-cols-2">
         {lectures.map((lec, i) => (
           <motion.div
@@ -89,25 +91,25 @@ const StudentLectures = () => {
 
               <div className="flex items-center gap-2 mb-3">
                 <div className="w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold">{lec.teacher_name?.charAt(0) || "م"}</div>
-                <span className="text-sm text-muted-foreground">المعلم: <span className="text-foreground font-medium">{lec.teacher_name}</span></span>
+                <span className="text-sm text-muted-foreground">{t("the_teacher")}: <span className="text-foreground font-medium">{lec.teacher_name}</span></span>
               </div>
 
               <div className="flex items-center gap-4 text-xs text-muted-foreground">
                 <span className="flex items-center gap-1">
                   <Video size={12} className={lec.video_url ? "text-success" : ""} />
-                  {lec.video_url ? "فيديو متاح" : "بدون فيديو"}
+                  {lec.video_url ? t("video_available") : t("no_video")}
                 </span>
                 <span className="flex items-center gap-1">
                   <FileText size={12} className={lec.pdf_url ? "text-destructive" : ""} />
-                  {lec.pdf_url ? "PDF متاح" : "بدون ملف"}
+                  {lec.pdf_url ? t("pdf_available") : t("no_file")}
                 </span>
                 <span className="flex items-center gap-1">
                   <MessageSquare size={12} />
-                  محادثة
+                  {t("chat_word")}
                 </span>
               </div>
               <div className="text-[0.65rem] text-muted-foreground mt-2">
-                {new Date(lec.created_at).toLocaleDateString("ar", { year: "numeric", month: "long", day: "numeric" })}
+                {new Date(lec.created_at).toLocaleDateString(lang === "ar" ? "ar" : "en", { year: "numeric", month: "long", day: "numeric" })}
               </div>
             </Link>
           </motion.div>

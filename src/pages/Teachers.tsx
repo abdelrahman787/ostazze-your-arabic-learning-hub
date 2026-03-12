@@ -105,7 +105,7 @@ const Teachers = () => {
               {sorted.map((tc, i) => <TeacherCard key={tc.user_id} teacher={tc} index={i} />)}
             </div>
             {sorted.length === 0 && (
-              <div className="text-center py-12 text-muted-foreground">لا يوجد معلمون مسجلون حالياً</div>
+              <div className="text-center py-12 text-muted-foreground">{t("no_teachers_registered")}</div>
             )}
           </>
         )}
