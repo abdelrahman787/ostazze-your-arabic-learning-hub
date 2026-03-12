@@ -144,37 +144,6 @@ const TeacherProfile = () => {
         </div>
       </div>
 
-      <AnimatePresence>
-        {showBooking && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-50 bg-foreground/50 flex items-center justify-center p-4" onClick={() => setShowBooking(false)}>
-            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="bg-card rounded-2xl p-8 w-full max-w-lg shadow-lg" onClick={(e) => e.stopPropagation()}>
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-extrabold">{t("booking_title")}</h2>
-                <button onClick={() => setShowBooking(false)} className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center hover:bg-destructive hover:text-destructive-foreground transition-colors"><X size={16} /></button>
-              </div>
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-bold mb-1.5">{t("booking_select_subject")}</label>
-                  <select className="input-base">{teacher.subjects.map((s, i) => <option key={i}>{d(s)}</option>)}</select>
-                </div>
-                <div>
-                  <label className="block text-sm font-bold mb-1.5">{t("booking_datetime")}</label>
-                  <input type="datetime-local" className="input-base" />
-                </div>
-                <div>
-                  <label className="block text-sm font-bold mb-1.5">{t("booking_notes")}</label>
-                  <textarea rows={3} className="input-base resize-none" />
-                </div>
-                <div className="bg-primary/5 border border-primary/20 rounded-xl p-4 flex items-center justify-between">
-                  <span className="font-bold text-foreground">{t("booking_price")}</span>
-                  <span className="font-extrabold text-primary">{teacher.price} {d(teacher.currency)}</span>
-                </div>
-                <motion.button whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }} className="btn-primary w-full text-lg">{t("booking_confirm")}</motion.button>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 };
