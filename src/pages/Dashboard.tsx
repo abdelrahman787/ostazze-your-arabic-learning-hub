@@ -192,6 +192,13 @@ const Dashboard = () => {
             </div>
           )}
 
+          {/* === Bookings === */}
+          {tab === "bookings" && (
+            <div className="animate-fade-in">
+              <BookingManager role="student" />
+            </div>
+          )}
+
           {/* === Profile === */}
           {tab === "profile" && (
             <div className="grid lg:grid-cols-2 gap-6 animate-fade-in">
