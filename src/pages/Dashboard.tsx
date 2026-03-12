@@ -224,7 +224,7 @@ const Dashboard = () => {
           )}
 
           {/* === Fallback === */}
-          {!["overview", "lectures", "profile"].includes(tab) && (
+          {!["overview", "lectures", "profile", "bookings"].includes(tab) && (
             <div className="card-base p-12 text-center animate-fade-in">
               <GraduationCap size={48} className="mx-auto text-muted-foreground/30 mb-4" />
               <h3 className="font-extrabold text-xl mb-2">{t("coming_soon")}</h3>
