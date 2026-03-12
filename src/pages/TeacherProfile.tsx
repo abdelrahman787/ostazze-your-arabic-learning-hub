@@ -4,6 +4,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { Star, Clock, User, ArrowUpLeft, X, BookOpen } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import BookSessionModal from "@/components/BookSessionModal";
 
 const TeacherProfile = () => {
   const { id } = useParams();
