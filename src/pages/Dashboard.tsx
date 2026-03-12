@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import StudentLectures from "@/pages/StudentLectures";
 import NotificationBell from "@/components/NotificationBell";
+import { motion } from "framer-motion";
 
 interface RecentLecture {
   id: string;
