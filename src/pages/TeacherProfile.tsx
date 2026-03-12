@@ -1,16 +1,87 @@
 import { useParams, Link } from "react-router-dom";
-import { mockTeachers, mockReviews } from "@/data/mockData";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Star, Clock, User, ArrowUpLeft, X, BookOpen } from "lucide-react";
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { Star, Clock, BookOpen, Loader2 } from "lucide-react";
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import BookSessionModal from "@/components/BookSessionModal";
+import { supabase } from "@/integrations/supabase/client";
+
+interface TeacherFull {
+  user_id: string;
+  full_name: string;
+  bio: string | null;
+  avatar_url: string | null;
+  subjects: string[];
+  university: string | null;
+  price: number;
+  verified: boolean;
+}
+
+interface AvailSlot {
+  day_of_week: number;
+  start_time: string;
+  end_time: string;
+}
+
+const DAYS = ["الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
 
 const TeacherProfile = () => {
   const { id } = useParams();
-  const { t, d } = useLanguage();
-  const teacher = mockTeachers.find((tc) => tc.id === id);
+  const { t } = useLanguage();
+  const [teacher, setTeacher] = useState<TeacherFull | null>(null);
+  const [availability, setAvailability] = useState<AvailSlot[]>([]);
+  const [loading, setLoading] = useState(true);
   const [showBooking, setShowBooking] = useState(false);
+
+  useEffect(() => {
+    if (!id) return;
+    const fetch = async () => {
+      setLoading(true);
+      const { data: tp } = await supabase
+        .from("teacher_profiles")
+        .select("user_id, subjects, university, price, verified")
+        .eq("user_id", id)
+        .single();
+
+      if (!tp) { setLoading(false); return; }
+
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("full_name, bio, avatar_url")
+        .eq("user_id", id)
+        .single();
+
+      setTeacher({
+        user_id: tp.user_id,
+        full_name: profile?.full_name || "معلم",
+        bio: profile?.bio || null,
+        avatar_url: profile?.avatar_url || null,
+        subjects: tp.subjects || [],
+        university: tp.university || null,
+        price: tp.price || 0,
+        verified: tp.verified || false,
+      });
+
+      const { data: avail } = await supabase
+        .from("teacher_availability")
+        .select("day_of_week, start_time, end_time")
+        .eq("teacher_id", id)
+        .eq("is_active", true)
+        .order("day_of_week");
+
+      setAvailability((avail as AvailSlot[]) || []);
+      setLoading(false);
+    };
+    fetch();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center py-32">
+        <Loader2 className="animate-spin text-primary" size={32} />
+      </div>
+    );
+  }
 
   if (!teacher) {
     return (
@@ -21,13 +92,15 @@ const TeacherProfile = () => {
     );
   }
 
-  const initials = d(teacher.name).split(" ").map((w) => w[0]).join("").slice(0, 2);
+  const initials = teacher.full_name.split(" ").map((w) => w[0]).join("").slice(0, 2);
 
   return (
     <div>
       <section className="hero-gradient py-8">
         <div className="container">
-          <p className="text-muted-foreground text-sm"><Link to="/teachers" className="hover:text-primary">{t("nav_teachers")}</Link> / {d(teacher.name)}</p>
+          <p className="text-muted-foreground text-sm">
+            <Link to="/teachers" className="hover:text-primary">{t("nav_teachers")}</Link> / {teacher.full_name}
+          </p>
         </div>
       </section>
 
@@ -41,43 +114,27 @@ const TeacherProfile = () => {
                 </motion.div>
                 <div>
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <h1 className="text-xl font-black">{d(teacher.name)}</h1>
+                    <h1 className="text-xl font-black">{teacher.full_name}</h1>
                     {teacher.verified && <span className="text-xs bg-success/10 text-success px-2.5 py-1 rounded-full font-semibold">{t("teacher_verified")}</span>}
                   </div>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{d(teacher.title)}</p>
                   {teacher.university && (
                     <div className="inline-flex items-center gap-1.5 mt-2 text-xs bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 px-3 py-1 rounded-full">
                       <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}><BookOpen size={12} /></motion.div>
-                      {d(teacher.university)}
+                      {teacher.university}
                     </div>
                   )}
                 </div>
               </div>
 
-              <div className="flex gap-8 mb-6 flex-wrap">
-                <div className="text-center">
-                  <div className="flex items-center gap-1 text-warning"><motion.div whileHover={{ rotate: 72, scale: 1.3 }}><Star size={20} className="fill-warning" /></motion.div><span className="text-xl font-black">{teacher.rating}</span></div>
-                  <div className="text-muted-foreground text-xs">{teacher.reviews} {t("teacher_review_count")}</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-xl font-black text-primary">{teacher.totalSessions || 0}</div>
-                  <div className="text-muted-foreground text-xs">{t("teacher_sessions")}</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-xl font-black">{teacher.yearsExperience || 0}</div>
-                  <div className="text-muted-foreground text-xs">{t("teacher_experience")}</div>
-                </div>
-              </div>
-
-              {teacher.bio && <p className="text-muted-foreground leading-relaxed mb-6">{d(teacher.bio)}</p>}
+              {teacher.bio && <p className="text-muted-foreground leading-relaxed mb-6">{teacher.bio}</p>}
 
               <div className="flex flex-wrap gap-2 mb-6">
-                {teacher.subjects.map((s, i) => <span key={i} className="badge-brand">{d(s)}</span>)}
+                {teacher.subjects.map((s, i) => <span key={i} className="badge-brand">{s}</span>)}
               </div>
 
               <div className="flex gap-4 items-center flex-wrap">
                 <div className="bg-secondary rounded-xl p-4 text-center">
-                  <div className="text-xl font-black text-primary">{teacher.price} {d(teacher.currency)}</div>
+                  <div className="text-xl font-black text-primary">{teacher.price} ر.س</div>
                   <div className="text-muted-foreground text-xs">{t("teacher_per_session")}</div>
                 </div>
                 <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} onClick={() => setShowBooking(true)} className="btn-primary flex-1 text-center text-lg">
@@ -88,25 +145,25 @@ const TeacherProfile = () => {
               <BookSessionModal
                 open={showBooking}
                 onClose={() => setShowBooking(false)}
-                teacherId={teacher.id}
-                teacherName={d(teacher.name)}
-                subjects={teacher.subjects.map((s) => d(s))}
+                teacherId={teacher.user_id}
+                teacherName={teacher.full_name}
+                subjects={teacher.subjects}
                 price={teacher.price}
-                currency={d(teacher.currency)}
+                currency="ر.س"
               />
             </div>
 
-            {teacher.availability && (
+            {availability.length > 0 && (
               <div className="card-base p-6">
                 <h3 className="font-extrabold text-lg mb-4 flex items-center gap-2">
                   <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}><Clock size={20} className="text-primary" /></motion.div>
                   {t("teacher_availability")}
                 </h3>
                 <div className="space-y-3">
-                  {teacher.availability.map((a, i) => (
+                  {availability.map((a, i) => (
                     <div key={i} className="flex items-center justify-between p-3 bg-secondary rounded-xl">
-                      <span className="font-bold text-sm">{d(a.day)}</span>
-                      <span className="text-muted-foreground text-sm">{a.start} - {a.end}</span>
+                      <span className="font-bold text-sm">{DAYS[a.day_of_week]}</span>
+                      <span className="text-muted-foreground text-sm">{a.start_time.slice(0, 5)} - {a.end_time.slice(0, 5)}</span>
                     </div>
                   ))}
                 </div>
@@ -116,34 +173,14 @@ const TeacherProfile = () => {
 
           <div className="space-y-6">
             <div className="card-base p-6">
-              <h3 className="font-extrabold text-lg mb-4">{t("teacher_reviews")} ({teacher.reviews})</h3>
-              <div className="text-center mb-6 p-4 bg-secondary rounded-xl">
-                <div className="flex items-center justify-center gap-1 mb-1">
-                  <span className="text-3xl font-black">{teacher.rating}</span>
-                  <motion.div whileHover={{ rotate: 72, scale: 1.3 }}><Star size={24} className="fill-warning text-warning" /></motion.div>
-                </div>
-                <div className="text-muted-foreground text-sm">{t("booking_from5")}</div>
-              </div>
-              <div className="space-y-4">
-                {mockReviews.map((r) => (
-                  <div key={r.id} className="border-b pb-4 last:border-0">
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold">{d(r.studentName).charAt(0)}</div>
-                        <span className="font-bold text-sm">{d(r.studentName)}</span>
-                      </div>
-                      <span className="text-muted-foreground text-xs">{d(r.date)}</span>
-                    </div>
-                    <div className="flex gap-0.5 mb-2">{Array.from({ length: r.rating }).map((_, i) => <Star key={i} size={12} className="fill-warning text-warning" />)}</div>
-                    <p className="text-muted-foreground text-sm leading-relaxed">{d(r.comment)}</p>
-                  </div>
-                ))}
+              <h3 className="font-extrabold text-lg mb-4">{t("teacher_reviews")}</h3>
+              <div className="text-center py-8 text-muted-foreground text-sm">
+                لا توجد تقييمات حتى الآن
               </div>
             </div>
           </div>
         </div>
       </div>
-
     </div>
   );
 };

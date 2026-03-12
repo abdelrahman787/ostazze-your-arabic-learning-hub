@@ -1,26 +1,65 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import TeacherCard from "@/components/TeacherCard";
-import { mockTeachers } from "@/data/mockData";
-import { Search, SlidersHorizontal } from "lucide-react";
+import type { TeacherData } from "@/components/TeacherCard";
+import { Search, SlidersHorizontal, Loader2 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
+import { supabase } from "@/integrations/supabase/client";
 
 const Teachers = () => {
-  const { t, d } = useLanguage();
+  const { t } = useLanguage();
   const [search, setSearch] = useState("");
   const [showFilters, setShowFilters] = useState(false);
   const [sortBy, setSortBy] = useState("");
+  const [teachers, setTeachers] = useState<TeacherData[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const filtered = mockTeachers.filter((tc) =>
-    d(tc.name).includes(search) || tc.subjects.some((s) => d(s).includes(search)) || d(tc.title).includes(search)
+  useEffect(() => {
+    const fetchTeachers = async () => {
+      setLoading(true);
+      const { data: tps } = await supabase
+        .from("teacher_profiles")
+        .select("user_id, subjects, university, price, verified");
+
+      if (!tps || tps.length === 0) { setLoading(false); return; }
+
+      const userIds = tps.map((tp) => tp.user_id);
+      const { data: profiles } = await supabase
+        .from("profiles")
+        .select("user_id, full_name, bio, avatar_url")
+        .in("user_id", userIds);
+
+      const profileMap = new Map((profiles || []).map((p) => [p.user_id, p]));
+
+      const merged: TeacherData[] = tps.map((tp) => {
+        const profile = profileMap.get(tp.user_id);
+        return {
+          user_id: tp.user_id,
+          full_name: profile?.full_name || "معلم",
+          bio: profile?.bio || null,
+          avatar_url: profile?.avatar_url || null,
+          subjects: tp.subjects || [],
+          university: tp.university || null,
+          price: tp.price || 0,
+          verified: tp.verified || false,
+        };
+      });
+
+      setTeachers(merged);
+      setLoading(false);
+    };
+    fetchTeachers();
+  }, []);
+
+  const filtered = teachers.filter((tc) =>
+    tc.full_name.includes(search) ||
+    tc.subjects.some((s) => s.includes(search)) ||
+    (tc.university && tc.university.includes(search))
   );
 
   const sorted = [...filtered].sort((a, b) => {
     if (sortBy === "price-low") return a.price - b.price;
     if (sortBy === "price-high") return b.price - a.price;
-    if (sortBy === "rating") return b.rating - a.rating;
-    if (sortBy === "reviews") return b.reviews - a.reviews;
     return 0;
   });
 
@@ -50,20 +89,26 @@ const Teachers = () => {
             <div className="flex flex-wrap gap-3 mt-4 animate-fade-in">
               <select className="input-base !w-auto" onChange={(e) => setSortBy(e.target.value)}>
                 <option value="">{t("filter_sort")}</option>
-                <option value="rating">{t("filter_rating")}</option>
                 <option value="price-low">{t("filter_price_low")}</option>
                 <option value="price-high">{t("filter_price_high")}</option>
-                <option value="reviews">{t("filter_reviews")}</option>
               </select>
             </div>
           )}
         </div>
 
-        <p className="text-muted-foreground text-sm mb-6">{t("showing_results")} {sorted.length} {t("of_results")} {mockTeachers.length} {t("teacher_word")}</p>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {sorted.map((tc) => <TeacherCard key={tc.id} teacher={tc} />)}
-        </div>
+        {loading ? (
+          <div className="flex justify-center py-12"><Loader2 className="animate-spin text-primary" size={32} /></div>
+        ) : (
+          <>
+            <p className="text-muted-foreground text-sm mb-6">{t("showing_results")} {sorted.length} {t("teacher_word")}</p>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {sorted.map((tc, i) => <TeacherCard key={tc.user_id} teacher={tc} index={i} />)}
+            </div>
+            {sorted.length === 0 && (
+              <div className="text-center py-12 text-muted-foreground">لا يوجد معلمون مسجلون حالياً</div>
+            )}
+          </>
+        )}
       </div>
     </div>
   );

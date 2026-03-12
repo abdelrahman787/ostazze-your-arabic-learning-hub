@@ -1,11 +1,21 @@
 import { Link } from "react-router-dom";
-import type { Teacher } from "@/data/mockData";
 import { Star, User, ArrowUpLeft } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-const TeacherCard = ({ teacher, index = 0 }: { teacher: Teacher; index?: number }) => {
-  const { t, d } = useLanguage();
+export interface TeacherData {
+  user_id: string;
+  full_name: string;
+  bio: string | null;
+  avatar_url: string | null;
+  subjects: string[];
+  university: string | null;
+  price: number;
+  verified: boolean;
+}
+
+const TeacherCard = ({ teacher, index = 0 }: { teacher: TeacherData; index?: number }) => {
+  const { t } = useLanguage();
 
   return (
     <motion.div
@@ -34,14 +44,16 @@ const TeacherCard = ({ teacher, index = 0 }: { teacher: Teacher; index?: number 
           )}
         </div>
         <div className="min-w-0 flex-1">
-          <h3 className="font-bold text-[0.95rem] mb-1">{d(teacher.name)}</h3>
-          <p className="text-muted-foreground text-xs leading-relaxed line-clamp-2">{d(teacher.title)}</p>
+          <h3 className="font-bold text-[0.95rem] mb-1">{teacher.full_name}</h3>
+          {teacher.university && (
+            <p className="text-muted-foreground text-xs leading-relaxed line-clamp-2">{teacher.university}</p>
+          )}
         </div>
       </div>
 
       <div className="px-5 pb-4 flex flex-wrap gap-1.5">
         {teacher.subjects.slice(0, 3).map((s, i) => (
-          <span key={i} className="tag-outline">{d(s)}</span>
+          <span key={i} className="tag-outline">{s}</span>
         ))}
       </div>
 
@@ -52,19 +64,18 @@ const TeacherCard = ({ teacher, index = 0 }: { teacher: Teacher; index?: number 
           <motion.div whileHover={{ rotate: 72, scale: 1.3 }} transition={{ type: "spring" }}>
             <Star size={14} className="fill-warning text-warning" />
           </motion.div>
-          <span className="font-bold text-sm">{teacher.rating}</span>
-          <span className="text-muted-foreground text-xs">({teacher.reviews})</span>
+          <span className="font-bold text-sm">-</span>
         </div>
         <div className="text-left">
           <span className="text-lg font-extrabold text-primary">{teacher.price}</span>
-          <span className="text-muted-foreground text-xs mr-1">{d(teacher.currency)}</span>
+          <span className="text-muted-foreground text-xs mr-1">ر.س</span>
           <div className="text-muted-foreground text-[0.65rem]">{t("teacher_per_session")}</div>
         </div>
       </div>
 
       <div className="px-5 pb-5">
         <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-          <Link to={`/teachers/${teacher.id}`} className="btn-primary flex items-center justify-center gap-2 text-sm w-full">
+          <Link to={`/teachers/${teacher.user_id}`} className="btn-primary flex items-center justify-center gap-2 text-sm w-full">
             {t("teacher_view_profile")}
             <motion.div whileHover={{ x: -3, y: -3 }}>
               <ArrowUpLeft size={14} />

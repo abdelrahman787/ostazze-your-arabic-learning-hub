@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
 import TeacherCard from "@/components/TeacherCard";
-import { mockTeachers, mockTestimonials } from "@/data/mockData";
+import type { TeacherData } from "@/components/TeacherCard";
+import { mockTestimonials } from "@/data/mockData";
 import {
   Star, ArrowLeft, Sparkles, GraduationCap, CalendarCheck, Video,
   CheckCircle2, Play, Users, TrendingUp
 } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { supabase } from "@/integrations/supabase/client";
 
 const heroImage = "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80";
 
@@ -22,9 +24,39 @@ const item = {
 
 const HomePage = () => {
   const { t, d } = useLanguage();
-  const featuredTeachers = mockTeachers.slice(0, 3);
+  const [featuredTeachers, setFeaturedTeachers] = useState<TeacherData[]>([]);
   const statsRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: statsRef, offset: ["start end", "end start"] });
+
+  useEffect(() => {
+    const fetchTeachers = async () => {
+      const { data: tps } = await supabase
+        .from("teacher_profiles")
+        .select("user_id, subjects, university, price, verified")
+        .limit(3);
+      if (!tps || tps.length === 0) return;
+      const userIds = tps.map((tp) => tp.user_id);
+      const { data: profiles } = await supabase
+        .from("profiles")
+        .select("user_id, full_name, bio, avatar_url")
+        .in("user_id", userIds);
+      const profileMap = new Map((profiles || []).map((p) => [p.user_id, p]));
+      setFeaturedTeachers(tps.map((tp) => {
+        const profile = profileMap.get(tp.user_id);
+        return {
+          user_id: tp.user_id,
+          full_name: profile?.full_name || "معلم",
+          bio: profile?.bio || null,
+          avatar_url: profile?.avatar_url || null,
+          subjects: tp.subjects || [],
+          university: tp.university || null,
+          price: tp.price || 0,
+          verified: tp.verified || false,
+        };
+      }));
+    };
+    fetchTeachers();
+  }, []);
   const statsScale = useTransform(scrollYProgress, [0, 0.5], [0.96, 1]);
 
   return (
@@ -163,7 +195,7 @@ const HomePage = () => {
             </Link>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featuredTeachers.map((tc, i) => <TeacherCard key={tc.id} teacher={tc} index={i} />)}
+            {featuredTeachers.map((tc, i) => <TeacherCard key={tc.user_id} teacher={tc} index={i} />)}
           </div>
         </div>
       </section>
