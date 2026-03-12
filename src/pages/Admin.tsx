@@ -104,7 +104,7 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
 
   // Add teacher modal
   const [showAddTeacher, setShowAddTeacher] = useState(false);
-  const [addTeacherUserId, setAddTeacherUserId] = useState("");
+  const [teacherForm, setTeacherForm] = useState({ email: "", password: "", full_name: "", university: "", subjects: "", price: "" });
   const [addingTeacher, setAddingTeacher] = useState(false);
 
   // Add admin/moderator modal
