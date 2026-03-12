@@ -117,7 +117,7 @@ const Navbar = () => {
                       <div className="font-bold text-sm">{user?.name}</div>
                       <div className="text-muted-foreground text-xs">{user?.email}</div>
                       {user?.role === "admin" && (
-                        <span className="text-[0.6rem] bg-primary/10 text-primary px-2 py-0.5 rounded-full font-semibold mt-1 inline-block">مدير</span>
+                        <span className="text-[0.6rem] bg-primary/10 text-primary px-2 py-0.5 rounded-full font-semibold mt-1 inline-block">{t("admin_title")}</span>
                       )}
                     </div>
                     <div className="p-1.5">
