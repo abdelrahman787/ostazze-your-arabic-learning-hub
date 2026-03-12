@@ -743,19 +743,33 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
             <button onClick={() => setShowAddTeacher(false)} className="text-muted-foreground hover:text-foreground"><X size={20} /></button>
           </div>
           <div className="p-5 space-y-4">
-            <p className="text-muted-foreground text-sm">اختر مستخدم مسجّل لتحويله إلى معلم. سيتم تفعيل حساب المعلم تلقائياً.</p>
+            <p className="text-muted-foreground text-sm">أدخل بيانات المعلم لإنشاء حساب جديد.</p>
             <div>
-              <label className="block text-sm font-bold mb-1.5">اختر المستخدم *</label>
-              <select value={addTeacherUserId} onChange={(e) => setAddTeacherUserId(e.target.value)} className="input-base">
-                <option value="">اختر مستخدم...</option>
-                {nonTeacherProfiles.map((p) => (
-                  <option key={p.user_id} value={p.user_id}>{p.full_name || p.user_id}</option>
-                ))}
-                {nonTeacherProfiles.length === 0 && <option disabled>لا يوجد مستخدمون متاحون</option>}
-              </select>
+              <label className="block text-sm font-bold mb-1.5">الاسم الكامل *</label>
+              <input value={teacherForm.full_name} onChange={(e) => setTeacherForm((f) => ({ ...f, full_name: e.target.value }))} className="input-base" placeholder="مثال: أحمد محمد" />
+            </div>
+            <div>
+              <label className="block text-sm font-bold mb-1.5">البريد الإلكتروني *</label>
+              <input value={teacherForm.email} onChange={(e) => setTeacherForm((f) => ({ ...f, email: e.target.value }))} className="input-base" placeholder="example@email.com" type="email" />
+            </div>
+            <div>
+              <label className="block text-sm font-bold mb-1.5">كلمة المرور *</label>
+              <input value={teacherForm.password} onChange={(e) => setTeacherForm((f) => ({ ...f, password: e.target.value }))} className="input-base" placeholder="كلمة مرور قوية" type="password" />
+            </div>
+            <div>
+              <label className="block text-sm font-bold mb-1.5">الجامعة</label>
+              <input value={teacherForm.university} onChange={(e) => setTeacherForm((f) => ({ ...f, university: e.target.value }))} className="input-base" placeholder="مثال: جامعة الملك سعود" />
+            </div>
+            <div>
+              <label className="block text-sm font-bold mb-1.5">المواد (مفصولة بفاصلة)</label>
+              <input value={teacherForm.subjects} onChange={(e) => setTeacherForm((f) => ({ ...f, subjects: e.target.value }))} className="input-base" placeholder="مثال: رياضيات, فيزياء, كيمياء" />
+            </div>
+            <div>
+              <label className="block text-sm font-bold mb-1.5">سعر الجلسة (ريال)</label>
+              <input value={teacherForm.price} onChange={(e) => setTeacherForm((f) => ({ ...f, price: e.target.value }))} className="input-base" placeholder="مثال: 150" type="number" />
             </div>
             <button onClick={handleAddTeacher} disabled={addingTeacher} className="btn-primary w-full flex items-center justify-center gap-2">
-              {addingTeacher ? <><Loader2 size={16} className="animate-spin" /> جاري الإضافة...</> : <><UserPlus size={16} /> إضافة كمعلم</>}
+              {addingTeacher ? <><Loader2 size={16} className="animate-spin" /> جاري الإنشاء...</> : <><UserPlus size={16} /> إنشاء حساب المعلم</>}
             </button>
           </div>
         </ModalWrapper>
