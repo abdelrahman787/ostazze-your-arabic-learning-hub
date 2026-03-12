@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
 import TeacherCard from "@/components/TeacherCard";
-import { mockTeachers, mockTestimonials } from "@/data/mockData";
+import type { TeacherData } from "@/components/TeacherCard";
+import { mockTestimonials } from "@/data/mockData";
 import {
   Star, ArrowLeft, Sparkles, GraduationCap, CalendarCheck, Video,
   CheckCircle2, Play, Users, TrendingUp
 } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { supabase } from "@/integrations/supabase/client";
 
 const heroImage = "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80";
 
