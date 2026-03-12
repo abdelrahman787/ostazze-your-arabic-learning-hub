@@ -5,10 +5,11 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
 import {
   Search, LogOut, Menu, LayoutDashboard, BookOpen, User,
-  GraduationCap, Loader2, ArrowLeft, Video, FileText, MessageSquare
+  GraduationCap, Loader2, ArrowLeft, Video, FileText, MessageSquare, CalendarCheck
 } from "lucide-react";
 import StudentLectures from "@/pages/StudentLectures";
 import NotificationBell from "@/components/NotificationBell";
+import BookingManager from "@/components/BookingManager";
 import { motion } from "framer-motion";
 
 interface RecentLecture {
@@ -64,6 +65,7 @@ const Dashboard = () => {
     { section: "كطالب", items: [
       { icon: Search, label: "ابحث عن معلم", tab: "search", href: "/teachers" },
       { icon: BookOpen, label: "محاضراتي", tab: "lectures" },
+      { icon: CalendarCheck, label: "حجوزاتي", tab: "bookings" },
     ]},
     { section: "الحساب", items: [
       { icon: User, label: "ملفي الشخصي", tab: "profile" },
@@ -105,7 +107,7 @@ const Dashboard = () => {
           <div className="flex items-center gap-3">
             <button onClick={() => setSidebarOpen(true)} className="lg:hidden"><Menu size={20} /></button>
             <h2 className="font-bold">
-              {tab === "overview" ? "نظرة عامة" : tab === "lectures" ? "محاضراتي" : tab === "profile" ? "ملفي الشخصي" : ""}
+              {tab === "overview" ? "نظرة عامة" : tab === "lectures" ? "محاضراتي" : tab === "profile" ? "ملفي الشخصي" : tab === "bookings" ? "حجوزاتي" : ""}
             </h2>
           </div>
           <div className="flex items-center gap-3">
@@ -190,6 +192,13 @@ const Dashboard = () => {
             </div>
           )}
 
+          {/* === Bookings === */}
+          {tab === "bookings" && (
+            <div className="animate-fade-in">
+              <BookingManager role="student" />
+            </div>
+          )}
+
           {/* === Profile === */}
           {tab === "profile" && (
             <div className="grid lg:grid-cols-2 gap-6 animate-fade-in">
@@ -215,7 +224,7 @@ const Dashboard = () => {
           )}
 
           {/* === Fallback === */}
-          {!["overview", "lectures", "profile"].includes(tab) && (
+          {!["overview", "lectures", "profile", "bookings"].includes(tab) && (
             <div className="card-base p-12 text-center animate-fade-in">
               <GraduationCap size={48} className="mx-auto text-muted-foreground/30 mb-4" />
               <h3 className="font-extrabold text-xl mb-2">{t("coming_soon")}</h3>
