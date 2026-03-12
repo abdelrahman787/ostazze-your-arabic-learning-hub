@@ -195,7 +195,7 @@ const HomePage = () => {
             </Link>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featuredTeachers.map((tc, i) => <TeacherCard key={tc.id} teacher={tc} index={i} />)}
+            {featuredTeachers.map((tc, i) => <TeacherCard key={tc.user_id} teacher={tc} index={i} />)}
           </div>
         </div>
       </section>
