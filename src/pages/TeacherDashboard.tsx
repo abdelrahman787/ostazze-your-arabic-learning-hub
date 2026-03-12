@@ -75,6 +75,7 @@ const TeacherDashboard = () => {
     ]},
     { section: "التدريس", items: [
       { icon: BookOpen, label: "محاضراتي", tab: "lectures" },
+      { icon: CalendarCheck, label: "الحجوزات", tab: "bookings" },
       { icon: Clock, label: "الأوقات المتاحة", tab: "availability" },
       { icon: Wallet, label: "أرباحي", tab: "earnings" },
     ]},
