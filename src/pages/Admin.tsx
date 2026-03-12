@@ -90,6 +90,14 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
   const videoRef = useRef<HTMLInputElement>(null);
   const pdfRef = useRef<HTMLInputElement>(null);
 
+  // Edit lecture state
+  const [editLecture, setEditLecture] = useState<LectureRow | null>(null);
+  const [editVideoFile, setEditVideoFile] = useState<File | null>(null);
+  const [editPdfFile, setEditPdfFile] = useState<File | null>(null);
+  const [editUploading, setEditUploading] = useState(false);
+  const editVideoRef = useRef<HTMLInputElement>(null);
+  const editPdfRef = useRef<HTMLInputElement>(null);
+
   // Admins state
   const [admins, setAdmins] = useState<AdminUser[]>([]);
   const [adminsLoading, setAdminsLoading] = useState(true);
@@ -264,6 +272,44 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
       toast({ title: "خطأ", description: err.message, variant: "destructive" });
     }
     setUploading(false);
+  };
+
+  const handleEditLecture = async () => {
+    if (!editLecture) return;
+    setEditUploading(true);
+    try {
+      let video_url = editLecture.video_url;
+      let pdf_url = editLecture.pdf_url;
+
+      if (editVideoFile) {
+        const ext = editVideoFile.name.split(".").pop();
+        const path = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+        const { error } = await supabase.storage.from("lecture-videos").upload(path, editVideoFile);
+        if (error) throw error;
+        const { data: urlData } = supabase.storage.from("lecture-videos").getPublicUrl(path);
+        video_url = urlData.publicUrl;
+      }
+      if (editPdfFile) {
+        const ext = editPdfFile.name.split(".").pop();
+        const path = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+        const { error } = await supabase.storage.from("lecture-pdfs").upload(path, editPdfFile);
+        if (error) throw error;
+        const { data: urlData } = supabase.storage.from("lecture-pdfs").getPublicUrl(path);
+        pdf_url = urlData.publicUrl;
+      }
+
+      const { error } = await supabase.from("lectures").update({ video_url, pdf_url }).eq("id", editLecture.id);
+      if (error) throw error;
+
+      toast({ title: "تم تحديث المحاضرة بنجاح" });
+      setEditLecture(null);
+      setEditVideoFile(null);
+      setEditPdfFile(null);
+      fetchLectures();
+    } catch (err: any) {
+      toast({ title: "خطأ", description: err.message, variant: "destructive" });
+    }
+    setEditUploading(false);
   };
 
   const handleDeleteLecture = async (id: string) => {
@@ -534,7 +580,10 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
                           </div>
                         </td>
                         <td className="p-4">
-                          <button onClick={() => handleDeleteLecture(l.id)} className="text-xs bg-destructive/10 text-destructive px-3 py-1.5 rounded-lg font-semibold hover:bg-destructive/20 transition-colors">حذف</button>
+                          <div className="flex gap-2">
+                            <button onClick={() => { setEditLecture(l); setEditVideoFile(null); setEditPdfFile(null); }} className="text-xs bg-primary/10 text-primary px-3 py-1.5 rounded-lg font-semibold hover:bg-primary/20 transition-colors flex items-center gap-1"><Upload size={10} /> تعديل</button>
+                            <button onClick={() => handleDeleteLecture(l.id)} className="text-xs bg-destructive/10 text-destructive px-3 py-1.5 rounded-lg font-semibold hover:bg-destructive/20 transition-colors">حذف</button>
+                          </div>
                         </td>
                       </tr>
                     ))}
@@ -633,6 +682,46 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
             </div>
             <button onClick={handleAddLecture} disabled={uploading} className="btn-primary w-full flex items-center justify-center gap-2">
               {uploading ? <><Loader2 size={16} className="animate-spin" /> جاري الرفع...</> : <><Plus size={16} /> إضافة المحاضرة</>}
+            </button>
+          </div>
+        </ModalWrapper>
+      )}
+
+      {/* ===== Edit Lecture Modal ===== */}
+      {editLecture && (
+        <ModalWrapper onClose={() => setEditLecture(null)}>
+          <div className="flex items-center justify-between p-5 border-b">
+            <h3 className="font-extrabold text-lg">تعديل محاضرة: {editLecture.title}</h3>
+            <button onClick={() => setEditLecture(null)} className="text-muted-foreground hover:text-foreground"><X size={20} /></button>
+          </div>
+          <div className="p-5 space-y-4">
+            <div className="text-sm text-muted-foreground space-y-1">
+              <p>المادة: <span className="font-bold text-foreground">{editLecture.subject || "—"}</span></p>
+              <p>المعلم: <span className="font-bold text-foreground">{editLecture.teacher_name || "—"}</span></p>
+              <p>الطالب: <span className="font-bold text-foreground">{editLecture.student_name || "—"}</span></p>
+            </div>
+
+            <div className="border-t pt-4 space-y-3">
+              <div>
+                <label className="block text-sm font-bold mb-1.5">فيديو المحاضرة {editLecture.video_url && <span className="text-success text-xs font-normal">(يوجد فيديو حالياً)</span>}</label>
+                <input ref={editVideoRef} type="file" accept="video/*" className="hidden" onChange={(e) => setEditVideoFile(e.target.files?.[0] || null)} />
+                <button onClick={() => editVideoRef.current?.click()} className="w-full flex items-center justify-center gap-2 p-3 border-2 border-dashed rounded-xl text-sm text-muted-foreground hover:border-primary hover:text-primary transition-colors">
+                  <Upload size={16} />
+                  {editVideoFile ? editVideoFile.name.slice(0, 30) : editLecture.video_url ? "استبدال الفيديو" : "رفع فيديو"}
+                </button>
+              </div>
+              <div>
+                <label className="block text-sm font-bold mb-1.5">ملف PDF {editLecture.pdf_url && <span className="text-success text-xs font-normal">(يوجد ملف حالياً)</span>}</label>
+                <input ref={editPdfRef} type="file" accept=".pdf" className="hidden" onChange={(e) => setEditPdfFile(e.target.files?.[0] || null)} />
+                <button onClick={() => editPdfRef.current?.click()} className="w-full flex items-center justify-center gap-2 p-3 border-2 border-dashed rounded-xl text-sm text-muted-foreground hover:border-destructive hover:text-destructive transition-colors">
+                  <FileText size={16} />
+                  {editPdfFile ? editPdfFile.name.slice(0, 30) : editLecture.pdf_url ? "استبدال PDF" : "رفع PDF"}
+                </button>
+              </div>
+            </div>
+
+            <button onClick={handleEditLecture} disabled={editUploading || (!editVideoFile && !editPdfFile)} className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50">
+              {editUploading ? <><Loader2 size={16} className="animate-spin" /> جاري الرفع...</> : <><Upload size={16} /> حفظ التعديلات</>}
             </button>
           </div>
         </ModalWrapper>
