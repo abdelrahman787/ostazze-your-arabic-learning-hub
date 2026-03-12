@@ -15,9 +15,9 @@ const Login = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // Redirect if already logged in
+  // Redirect if already logged in — only after role is fully resolved
   useEffect(() => {
-    if (isLoggedIn && user) {
+    if (isLoggedIn && user && user.roleResolved) {
       if (user.role === "admin") navigate("/");
       else if (user.role === "teacher") navigate("/dashboard/teacher");
       else navigate("/dashboard");

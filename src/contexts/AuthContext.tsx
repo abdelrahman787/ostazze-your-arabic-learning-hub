@@ -8,6 +8,7 @@ interface AppUser {
   email: string;
   role: "student" | "teacher" | "admin";
   avatar?: string;
+  roleResolved?: boolean;
 }
 
 interface AuthContextType {
@@ -72,6 +73,7 @@ async function buildAppUser(supaUser: SupabaseUser): Promise<AppUser> {
     email: supaUser.email || "",
     role,
     avatar: profile?.avatar_url || undefined,
+    roleResolved: true,
   };
 }
 
