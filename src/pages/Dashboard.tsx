@@ -8,6 +8,7 @@ import {
   GraduationCap, Loader2, ArrowLeft, Video, FileText, MessageSquare
 } from "lucide-react";
 import StudentLectures from "@/pages/StudentLectures";
+import NotificationBell from "@/components/NotificationBell";
 import { motion } from "framer-motion";
 
 interface RecentLecture {
@@ -108,6 +109,7 @@ const Dashboard = () => {
             </h2>
           </div>
           <div className="flex items-center gap-3">
+            <NotificationBell />
             <div className="w-9 h-9 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold">{user?.name?.charAt(0) || "ط"}</div>
             <span className="text-sm font-medium hidden sm:block">{user?.name}</span>
           </div>
