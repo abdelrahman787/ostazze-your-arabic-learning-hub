@@ -2,16 +2,18 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
-import { GraduationCap, Video, FileText, MessageSquare, Loader2, ArrowRight } from "lucide-react";
+import { GraduationCap, Video, FileText, MessageSquare, Loader2, ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface LectureItem {
   id: string;
   title: string;
   subject: string | null;
+  teacher_id: string;
   video_url: string | null;
   pdf_url: string | null;
   created_at: string;
+  teacher_name?: string;
 }
 
 const StudentLectures = () => {
@@ -21,16 +23,27 @@ const StudentLectures = () => {
 
   useEffect(() => {
     if (!user) return;
-    const fetch = async () => {
+    const fetchData = async () => {
       const { data } = await supabase
         .from("lectures")
-        .select("id, title, subject, video_url, pdf_url, created_at")
+        .select("id, title, subject, teacher_id, video_url, pdf_url, created_at")
         .eq("student_id", user.id)
         .order("created_at", { ascending: false });
-      setLectures((data as LectureItem[]) || []);
+
+      if (data && data.length > 0) {
+        const teacherIds = [...new Set(data.map((l) => l.teacher_id))];
+        const { data: profiles } = await supabase
+          .from("profiles")
+          .select("user_id, full_name")
+          .in("user_id", teacherIds);
+        const pMap = new Map(profiles?.map((p) => [p.user_id, p.full_name]) || []);
+        setLectures(data.map((l) => ({ ...l, teacher_name: pMap.get(l.teacher_id) || "—" })));
+      } else {
+        setLectures([]);
+      }
       setLoading(false);
     };
-    fetch();
+    fetchData();
   }, [user]);
 
   if (loading) {
@@ -45,14 +58,15 @@ const StudentLectures = () => {
     return (
       <div className="text-center p-12">
         <GraduationCap size={48} className="mx-auto text-muted-foreground/30 mb-3" />
-        <p className="text-muted-foreground">لا توجد محاضرات سابقة</p>
+        <p className="text-muted-foreground">لا توجد محاضرات بعد</p>
+        <p className="text-muted-foreground text-xs mt-1">سيتم إضافة المحاضرات من قبل الإدارة</p>
       </div>
     );
   }
 
   return (
     <div className="space-y-4">
-      <h3 className="font-extrabold text-lg">محاضراتي السابقة</h3>
+      <h3 className="font-extrabold text-lg">محاضراتي</h3>
       <div className="grid gap-4 md:grid-cols-2">
         {lectures.map((lec, i) => (
           <motion.div
@@ -63,15 +77,21 @@ const StudentLectures = () => {
           >
             <Link
               to={`/lectures/${lec.id}`}
-              className="card-base p-4 block hover:shadow-md transition-shadow group"
+              className="card-base p-5 block hover:shadow-md transition-shadow group"
             >
               <div className="flex items-start justify-between mb-3">
                 <div>
                   <h4 className="font-bold text-sm group-hover:text-primary transition-colors">{lec.title}</h4>
                   {lec.subject && <span className="tag-outline text-[0.65rem] mt-1 inline-block">{lec.subject}</span>}
                 </div>
-                <ArrowRight size={16} className="text-muted-foreground group-hover:text-primary transition-colors mt-1 rotate-180" />
+                <ArrowLeft size={16} className="text-muted-foreground group-hover:text-primary transition-colors mt-1" />
               </div>
+
+              <div className="flex items-center gap-2 mb-3">
+                <div className="w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold">{lec.teacher_name?.charAt(0) || "م"}</div>
+                <span className="text-sm text-muted-foreground">المعلم: <span className="text-foreground font-medium">{lec.teacher_name}</span></span>
+              </div>
+
               <div className="flex items-center gap-4 text-xs text-muted-foreground">
                 <span className="flex items-center gap-1">
                   <Video size={12} className={lec.video_url ? "text-success" : ""} />

@@ -1,50 +1,81 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { mockSessions } from "@/data/mockData";
-import { Search, Calendar, CreditCard, Star, Heart, User, MessageSquare, Bell, Settings, LogOut, Menu, LayoutDashboard, CalendarCheck, Wallet, GraduationCap, BookOpen } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import {
+  Search, LogOut, Menu, LayoutDashboard, BookOpen, User,
+  GraduationCap, Loader2, ArrowLeft, Video, FileText, MessageSquare
+} from "lucide-react";
 import StudentLectures from "@/pages/StudentLectures";
 import { motion } from "framer-motion";
 
+interface RecentLecture {
+  id: string;
+  title: string;
+  subject: string | null;
+  teacher_id: string;
+  video_url: string | null;
+  pdf_url: string | null;
+  teacher_name?: string;
+}
+
 const Dashboard = () => {
   const { user, logout } = useAuth();
-  const { t, d } = useLanguage();
+  const { t } = useLanguage();
   const navigate = useNavigate();
   const [tab, setTab] = useState("overview");
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [sessionFilter, setSessionFilter] = useState("all");
 
-  const statusMap: Record<string, { label: string; cls: string }> = {
-    pending: { label: t("status_pending"), cls: "bg-warning/10 text-warning" },
-    confirmed: { label: t("status_confirmed"), cls: "bg-success/10 text-success" },
-    completed: { label: t("status_completed"), cls: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400" },
-    cancelled: { label: t("status_cancelled"), cls: "bg-destructive/10 text-destructive" },
-  };
+  const [recentLectures, setRecentLectures] = useState<RecentLecture[]>([]);
+  const [stats, setStats] = useState({ totalLectures: 0, totalTeachers: 0 });
+  const [loadingData, setLoadingData] = useState(true);
+
+  const fetchData = useCallback(async () => {
+    if (!user) return;
+    const { data } = await supabase
+      .from("lectures")
+      .select("id, title, subject, teacher_id, video_url, pdf_url")
+      .eq("student_id", user.id)
+      .order("created_at", { ascending: false })
+      .limit(3);
+
+    if (data && data.length > 0) {
+      const teacherIds = [...new Set(data.map((l) => l.teacher_id))];
+      const { data: profiles } = await supabase.from("profiles").select("user_id, full_name").in("user_id", teacherIds);
+      const pMap = new Map(profiles?.map((p) => [p.user_id, p.full_name]) || []);
+      setRecentLectures(data.map((l) => ({ ...l, teacher_name: pMap.get(l.teacher_id) || "—" })));
+    }
+
+    const { count } = await supabase.from("lectures").select("*", { count: "exact", head: true }).eq("student_id", user.id);
+    const { data: allLecs } = await supabase.from("lectures").select("teacher_id").eq("student_id", user.id);
+    const uniqueTeachers = new Set(allLecs?.map((l) => l.teacher_id) || []);
+    setStats({ totalLectures: count || 0, totalTeachers: uniqueTeachers.size });
+    setLoadingData(false);
+  }, [user]);
+
+  useEffect(() => { fetchData(); }, [fetchData]);
 
   const sidebarLinks = [
-    { section: t("section_main"), items: [{ icon: LayoutDashboard, label: t("dash_overview"), tab: "overview" }] },
-    { section: t("section_as_student"), items: [
-      { icon: Search, label: t("dash_search_teacher"), tab: "search", href: "/teachers" },
-      { icon: BookOpen, label: "محاضراتي", tab: "lectures" },
-      { icon: CalendarCheck, label: t("dash_sessions"), tab: "sessions" },
-      { icon: Wallet, label: t("dash_payments"), tab: "payments" },
-      { icon: Heart, label: t("dash_favorites"), tab: "favorites" },
+    { section: "الرئيسية", items: [
+      { icon: LayoutDashboard, label: "نظرة عامة", tab: "overview" },
     ]},
-    { section: t("section_account"), items: [
-      { icon: User, label: t("dash_profile"), tab: "profile" },
-      { icon: MessageSquare, label: t("dash_messages"), tab: "messages" },
-      { icon: Bell, label: t("dash_notifications"), tab: "notifications" },
-      { icon: Settings, label: t("dash_settings"), tab: "settings" },
+    { section: "كطالب", items: [
+      { icon: Search, label: "ابحث عن معلم", tab: "search", href: "/teachers" },
+      { icon: BookOpen, label: "محاضراتي", tab: "lectures" },
+    ]},
+    { section: "الحساب", items: [
+      { icon: User, label: "ملفي الشخصي", tab: "profile" },
     ]},
   ];
-
-  const filteredSessions = sessionFilter === "all" ? mockSessions : mockSessions.filter((s) => s.status === sessionFilter);
 
   return (
     <div className="flex min-h-screen">
       <aside className={`fixed lg:static inset-y-0 right-0 z-40 w-[260px] bg-card border-l flex flex-col transition-transform duration-300 ${sidebarOpen ? "translate-x-0" : "translate-x-full lg:translate-x-0"}`}>
-        <div className="p-5 border-b"><Link to="/" className="text-xl font-black text-primary tracking-tight">OSTAZZE</Link></div>
+        <div className="p-5 border-b">
+          <Link to="/" className="text-xl font-black text-primary tracking-tight">OSTAZZE</Link>
+          <p className="text-xs text-muted-foreground mt-0.5">لوحة تحكم الطالب</p>
+        </div>
         <nav className="flex-1 overflow-y-auto p-4 space-y-6">
           {sidebarLinks.map((s) => (
             <div key={s.section}>
@@ -61,7 +92,7 @@ const Dashboard = () => {
         </nav>
         <div className="p-4 border-t">
           <button onClick={() => { logout(); navigate("/"); }} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-destructive hover:bg-destructive/10 transition-colors">
-            <LogOut size={16} /> {t("nav_logout")}
+            <LogOut size={16} /> تسجيل الخروج
           </button>
         </div>
       </aside>
@@ -72,23 +103,25 @@ const Dashboard = () => {
         <header className="bg-card border-b px-6 py-4 flex items-center justify-between sticky top-0 z-20">
           <div className="flex items-center gap-3">
             <button onClick={() => setSidebarOpen(true)} className="lg:hidden"><Menu size={20} /></button>
-            <h2 className="font-bold">{tab === "overview" ? t("dash_overview") : tab === "sessions" ? t("dash_sessions") : tab === "profile" ? t("dash_profile") : ""}</h2>
+            <h2 className="font-bold">
+              {tab === "overview" ? "نظرة عامة" : tab === "lectures" ? "محاضراتي" : tab === "profile" ? "ملفي الشخصي" : ""}
+            </h2>
           </div>
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold">{user?.name?.charAt(0) || "م"}</div>
-            <span className="text-sm font-medium hidden sm:block">{user?.name || t("user_word")}</span>
+            <div className="w-9 h-9 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold">{user?.name?.charAt(0) || "ط"}</div>
+            <span className="text-sm font-medium hidden sm:block">{user?.name}</span>
           </div>
         </header>
 
         <div className="p-6">
+          {/* === Overview === */}
           {tab === "overview" && (
             <div className="space-y-6 animate-fade-in">
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
                 {[
-                  { label: t("dash_total_sessions"), value: "12", icon: CalendarCheck, color: "bg-primary/10 text-primary" },
-                  { label: t("dash_upcoming"), value: "3", icon: Calendar, color: "bg-success/10 text-success" },
-                  { label: t("dash_total_payments"), value: "1,850 " + t("sar"), icon: Wallet, color: "bg-warning/10 text-warning" },
-                  { label: t("dash_given_rating"), value: "4.8 ★", icon: Star, color: "bg-primary/10 text-primary" },
+                  { label: "إجمالي المحاضرات", value: String(stats.totalLectures), icon: BookOpen, color: "bg-primary/10 text-primary" },
+                  { label: "عدد المعلمين", value: String(stats.totalTeachers), icon: GraduationCap, color: "bg-success/10 text-success" },
+                  { label: "المحادثات", value: String(stats.totalLectures), icon: MessageSquare, color: "bg-warning/10 text-warning" },
                 ].map((s) => (
                   <div key={s.label} className="card-base p-5">
                     <div className="flex items-center gap-3">
@@ -100,82 +133,62 @@ const Dashboard = () => {
               </div>
 
               <div className="stats-gradient rounded-2xl p-7 text-primary-foreground">
-                <h3 className="text-xl font-extrabold mb-2">{t("dash_welcome")} 👋</h3>
-                <p className="opacity-90 text-sm">{t("dash_welcome_sub")}</p>
+                <h3 className="text-xl font-extrabold mb-2">مرحباً {user?.name} 👋</h3>
+                <p className="opacity-90 text-sm">هنا يمكنك متابعة محاضراتك والتواصل مع معلميك.</p>
               </div>
 
               <div className="grid lg:grid-cols-2 gap-6">
                 <div className="card-base p-6">
-                  <h3 className="font-extrabold mb-4">{t("dash_quick_actions")}</h3>
+                  <h3 className="font-extrabold mb-4">إجراءات سريعة</h3>
                   <div className="space-y-3">
-                    <Link to="/teachers" className="btn-primary block text-center text-sm">{t("dash_search_teacher")}</Link>
-                    <button onClick={() => setTab("sessions")} className="btn-outline w-full text-sm">{t("dash_sessions")}</button>
+                    <Link to="/teachers" className="btn-primary block text-center text-sm">ابحث عن معلم</Link>
+                    <button onClick={() => setTab("lectures")} className="btn-outline w-full text-sm">محاضراتي</button>
                   </div>
                 </div>
                 <div className="card-base p-6">
-                  <h3 className="font-extrabold mb-4">{t("dash_recent_sessions")}</h3>
-                  <div className="space-y-3">
-                    {mockSessions.slice(0, 3).map((s) => (
-                      <div key={s.id} className="flex items-center justify-between p-3 bg-secondary rounded-xl">
-                        <div><div className="font-bold text-sm">{d(s.teacherName)}</div><div className="text-muted-foreground text-xs">{s.date}</div></div>
-                        <span className={`text-xs px-2 py-1 rounded-full font-semibold ${statusMap[s.status].cls}`}>{statusMap[s.status].label}</span>
-                      </div>
-                    ))}
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="font-extrabold">أحدث المحاضرات</h3>
+                    {recentLectures.length > 0 && (
+                      <button onClick={() => setTab("lectures")} className="text-primary text-sm font-bold hover:underline">عرض الكل</button>
+                    )}
                   </div>
+                  {loadingData ? (
+                    <div className="flex justify-center py-6"><Loader2 className="animate-spin text-primary" size={24} /></div>
+                  ) : recentLectures.length === 0 ? (
+                    <p className="text-muted-foreground text-sm text-center py-4">لا توجد محاضرات بعد</p>
+                  ) : (
+                    <div className="space-y-3">
+                      {recentLectures.map((lec) => (
+                        <Link key={lec.id} to={`/lectures/${lec.id}`} className="flex items-center justify-between p-3 bg-secondary rounded-xl hover:bg-secondary/80 transition-colors group">
+                          <div className="flex items-center gap-3">
+                            <div className="icon-box bg-primary/10"><BookOpen size={16} className="text-primary" /></div>
+                            <div>
+                              <div className="font-bold text-sm group-hover:text-primary transition-colors">{lec.title}</div>
+                              <div className="text-muted-foreground text-xs">المعلم: {lec.teacher_name} {lec.subject && `• ${lec.subject}`}</div>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            {lec.video_url && <Video size={14} className="text-success" />}
+                            {lec.pdf_url && <FileText size={14} className="text-destructive" />}
+                            <ArrowLeft size={14} className="text-muted-foreground group-hover:text-primary" />
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
           )}
 
-          {tab === "sessions" && (
+          {/* === Lectures === */}
+          {tab === "lectures" && (
             <div className="animate-fade-in">
-              <div className="flex gap-2 mb-6 flex-wrap">
-                {[
-                  { key: "all", label: t("status_all") },
-                  { key: "pending", label: t("status_pending") },
-                  { key: "confirmed", label: t("status_confirmed") },
-                  { key: "completed", label: t("status_completed") },
-                  { key: "cancelled", label: t("status_cancelled") },
-                ].map((f) => (
-                  <button key={f.key} onClick={() => setSessionFilter(f.key)}
-                    className={`px-4 py-2 rounded-xl text-sm font-semibold transition-colors ${sessionFilter === f.key ? "bg-primary text-primary-foreground" : "bg-secondary text-muted-foreground hover:text-foreground"}`}>
-                    {f.label}
-                  </button>
-                ))}
-              </div>
-              <div className="card-base overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead><tr className="bg-muted/60">
-                    <th className="text-start p-4 font-bold text-muted-foreground text-xs">{t("th_teacher")}</th>
-                    <th className="text-start p-4 font-bold text-muted-foreground text-xs">{t("th_subject")}</th>
-                    <th className="text-start p-4 font-bold text-muted-foreground text-xs">{t("th_date")}</th>
-                    <th className="text-start p-4 font-bold text-muted-foreground text-xs">{t("th_price")}</th>
-                    <th className="text-start p-4 font-bold text-muted-foreground text-xs">{t("th_status")}</th>
-                    <th className="text-start p-4 font-bold text-muted-foreground text-xs">{t("th_action")}</th>
-                  </tr></thead>
-                  <tbody>
-                    {filteredSessions.map((s) => (
-                      <tr key={s.id} className="border-t hover:bg-secondary/30 transition-colors">
-                        <td className="p-4 font-bold">{d(s.teacherName)}</td>
-                        <td className="p-4">{d(s.subject)}</td>
-                        <td className="p-4 text-muted-foreground">{s.date}</td>
-                        <td className="p-4 font-bold text-primary">{s.price} {t("sar")}</td>
-                        <td className="p-4"><span className={`text-xs px-2 py-1 rounded-full font-semibold ${statusMap[s.status].cls}`}>{statusMap[s.status].label}</span></td>
-                        <td className="p-4">
-                          <div className="flex gap-2">
-                            {s.status === "completed" && <button className="text-xs btn-primary !py-1 !px-3">{t("action_rate")}</button>}
-                            {s.status === "confirmed" && s.zoomLink && <a href={s.zoomLink} target="_blank" rel="noreferrer" className="text-xs bg-success text-success-foreground px-3 py-1 rounded-lg font-semibold">{t("action_join")} →</a>}
-                            {(s.status === "pending" || s.status === "confirmed") && <button className="text-xs bg-destructive/10 text-destructive px-3 py-1 rounded-lg font-semibold">{t("action_cancel")}</button>}
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+              <StudentLectures />
             </div>
           )}
 
+          {/* === Profile === */}
           {tab === "profile" && (
             <div className="grid lg:grid-cols-2 gap-6 animate-fade-in">
               <div className="card-base p-6">
@@ -199,17 +212,10 @@ const Dashboard = () => {
             </div>
           )}
 
-          {tab === "lectures" && (
-            <div className="animate-fade-in">
-              <StudentLectures />
-            </div>
-          )}
-
-          {!["overview", "sessions", "profile", "lectures"].includes(tab) && (
+          {/* === Fallback === */}
+          {!["overview", "lectures", "profile"].includes(tab) && (
             <div className="card-base p-12 text-center animate-fade-in">
-              <motion.div whileHover={{ scale: 1.1, rotate: 10 }} className="inline-block mb-4">
-                <GraduationCap size={48} className="text-muted-foreground/30" />
-              </motion.div>
+              <GraduationCap size={48} className="mx-auto text-muted-foreground/30 mb-4" />
               <h3 className="font-extrabold text-xl mb-2">{t("coming_soon")}</h3>
               <p className="text-muted-foreground">{t("coming_soon_desc")}</p>
             </div>
