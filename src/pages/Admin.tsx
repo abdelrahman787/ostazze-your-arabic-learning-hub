@@ -687,6 +687,46 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
         </ModalWrapper>
       )}
 
+      {/* ===== Edit Lecture Modal ===== */}
+      {editLecture && (
+        <ModalWrapper onClose={() => setEditLecture(null)}>
+          <div className="flex items-center justify-between p-5 border-b">
+            <h3 className="font-extrabold text-lg">تعديل محاضرة: {editLecture.title}</h3>
+            <button onClick={() => setEditLecture(null)} className="text-muted-foreground hover:text-foreground"><X size={20} /></button>
+          </div>
+          <div className="p-5 space-y-4">
+            <div className="text-sm text-muted-foreground space-y-1">
+              <p>المادة: <span className="font-bold text-foreground">{editLecture.subject || "—"}</span></p>
+              <p>المعلم: <span className="font-bold text-foreground">{editLecture.teacher_name || "—"}</span></p>
+              <p>الطالب: <span className="font-bold text-foreground">{editLecture.student_name || "—"}</span></p>
+            </div>
+
+            <div className="border-t pt-4 space-y-3">
+              <div>
+                <label className="block text-sm font-bold mb-1.5">فيديو المحاضرة {editLecture.video_url && <span className="text-success text-xs font-normal">(يوجد فيديو حالياً)</span>}</label>
+                <input ref={editVideoRef} type="file" accept="video/*" className="hidden" onChange={(e) => setEditVideoFile(e.target.files?.[0] || null)} />
+                <button onClick={() => editVideoRef.current?.click()} className="w-full flex items-center justify-center gap-2 p-3 border-2 border-dashed rounded-xl text-sm text-muted-foreground hover:border-primary hover:text-primary transition-colors">
+                  <Upload size={16} />
+                  {editVideoFile ? editVideoFile.name.slice(0, 30) : editLecture.video_url ? "استبدال الفيديو" : "رفع فيديو"}
+                </button>
+              </div>
+              <div>
+                <label className="block text-sm font-bold mb-1.5">ملف PDF {editLecture.pdf_url && <span className="text-success text-xs font-normal">(يوجد ملف حالياً)</span>}</label>
+                <input ref={editPdfRef} type="file" accept=".pdf" className="hidden" onChange={(e) => setEditPdfFile(e.target.files?.[0] || null)} />
+                <button onClick={() => editPdfRef.current?.click()} className="w-full flex items-center justify-center gap-2 p-3 border-2 border-dashed rounded-xl text-sm text-muted-foreground hover:border-destructive hover:text-destructive transition-colors">
+                  <FileText size={16} />
+                  {editPdfFile ? editPdfFile.name.slice(0, 30) : editLecture.pdf_url ? "استبدال PDF" : "رفع PDF"}
+                </button>
+              </div>
+            </div>
+
+            <button onClick={handleEditLecture} disabled={editUploading || (!editVideoFile && !editPdfFile)} className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50">
+              {editUploading ? <><Loader2 size={16} className="animate-spin" /> جاري الرفع...</> : <><Upload size={16} /> حفظ التعديلات</>}
+            </button>
+          </div>
+        </ModalWrapper>
+      )}
+
       {/* ===== Add Teacher Modal ===== */}
       {showAddTeacher && (
         <ModalWrapper onClose={() => setShowAddTeacher(false)}>
