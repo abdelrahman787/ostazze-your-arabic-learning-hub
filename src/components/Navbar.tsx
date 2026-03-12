@@ -193,7 +193,7 @@ const Navbar = () => {
                   </Link>
                   {user?.role === "admin" && (
                     <Link to="/admin" onClick={() => setMobileOpen(false)} className="px-4 py-3 rounded-xl text-sm font-medium hover:bg-secondary flex items-center gap-2">
-                      <Shield size={16} className="text-primary" /> لوحة الإدارة
+                      <Shield size={16} className="text-primary" /> {t("admin_title")}
                     </Link>
                   )}
                   <button onClick={() => { logout(); setMobileOpen(false); }} className="text-destructive text-sm font-medium py-2.5 flex items-center justify-center gap-2">
