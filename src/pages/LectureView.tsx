@@ -83,6 +83,16 @@ const LectureView = () => {
     setSending(false);
   };
 
+  const handleAudioRecorded = async (audioUrl: string) => {
+    if (!user || !id) return;
+    await supabase.from("chat_messages").insert({
+      lecture_id: id,
+      sender_id: user.id,
+      content: "🎤 رسالة صوتية",
+      audio_url: audioUrl,
+    });
+  };
+
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); handleSend(); }
   };
