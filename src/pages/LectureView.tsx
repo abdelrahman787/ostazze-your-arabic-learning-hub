@@ -2,8 +2,8 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
-import { FileText, Send, ArrowRight, Loader2, MessageSquare, Video } from "lucide-react";
-import { motion } from "framer-motion";
+import { FileText, Send, ArrowRight, Loader2, MessageSquare, Video, ChevronLeft, ChevronRight, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import AudioRecorder from "@/components/AudioRecorder";
 import AudioPlayer from "@/components/AudioPlayer";
 
@@ -33,6 +33,8 @@ const LectureView = () => {
   const [newMsg, setNewMsg] = useState("");
   const [loading, setLoading] = useState(true);
   const [sending, setSending] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
+  const [pdfOpen, setPdfOpen] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -59,7 +61,6 @@ const LectureView = () => {
     fetchMessages();
   }, [fetchLecture, fetchMessages]);
 
-  // Realtime subscription
   useEffect(() => {
     if (!id) return;
     const channel = supabase
@@ -115,9 +116,9 @@ const LectureView = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       {/* Header */}
-      <header className="bg-card border-b px-6 py-3 flex items-center justify-between sticky top-0 z-20">
+      <header className="bg-card border-b px-4 py-2.5 flex items-center justify-between sticky top-0 z-30">
         <div className="flex items-center gap-3">
           <Link to="/dashboard" className="text-muted-foreground hover:text-foreground transition-colors">
             <ArrowRight size={20} />
@@ -127,130 +128,182 @@ const LectureView = () => {
             {lecture.subject && <p className="text-muted-foreground text-xs">{lecture.subject}</p>}
           </div>
         </div>
+        <div className="flex items-center gap-2">
+          {lecture.pdf_url && (
+            <button
+              onClick={() => setPdfOpen(!pdfOpen)}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${pdfOpen ? "bg-primary text-primary-foreground" : "bg-secondary text-foreground hover:bg-secondary/80"}`}
+            >
+              <FileText size={14} />
+              {pdfOpen ? "إخفاء الملف" : "عرض الملف"}
+            </button>
+          )}
+          <button
+            onClick={() => setChatOpen(!chatOpen)}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${chatOpen ? "bg-primary text-primary-foreground" : "bg-secondary text-foreground hover:bg-secondary/80"}`}
+          >
+            <MessageSquare size={14} />
+            {chatOpen ? "إخفاء المحادثة" : "المحادثة"}
+          </button>
+        </div>
       </header>
 
-      {/* 3-column layout */}
-      <div className="flex flex-col lg:flex-row h-[calc(100vh-53px)]">
-        {/* Right: Lecture name + PDF */}
-        <div className="lg:w-72 border-l bg-card p-4 order-1 lg:order-3 flex flex-col gap-4 overflow-y-auto">
-          <div>
-            <h2 className="font-extrabold text-lg mb-1">{lecture.title}</h2>
-            {lecture.subject && (
-              <span className="tag-outline text-xs">{lecture.subject}</span>
-            )}
-          </div>
-
-          <div className="border-t pt-4">
-            <h3 className="font-bold text-sm mb-3 flex items-center gap-2">
-              <FileText size={16} className="text-primary" /> ملف المادة
-            </h3>
-            {lecture.pdf_url ? (
-              <a
-                href={lecture.pdf_url}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-3 p-3 bg-primary/5 rounded-xl hover:bg-primary/10 transition-colors"
-              >
-                <div className="w-10 h-10 rounded-lg bg-destructive/10 flex items-center justify-center">
-                  <FileText size={20} className="text-destructive" />
+      {/* Main content */}
+      <div className="flex-1 flex h-[calc(100vh-49px)] overflow-hidden">
+        {/* Video + PDF area */}
+        <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
+          {/* Video */}
+          <div className={`flex-1 flex items-center justify-center p-4 ${pdfOpen ? "lg:w-1/2" : "w-full"}`}>
+            {lecture.video_url ? (
+              <div className="w-full max-w-5xl">
+                <div className="aspect-video bg-foreground/5 rounded-2xl overflow-hidden">
+                  <video
+                    src={lecture.video_url}
+                    controls
+                    className="w-full h-full object-contain"
+                    controlsList="nodownload"
+                  />
                 </div>
-                <div>
-                  <div className="font-bold text-sm">تحميل PDF</div>
-                  <div className="text-muted-foreground text-xs">اضغط لفتح الملف</div>
-                </div>
-              </a>
+              </div>
             ) : (
-              <p className="text-muted-foreground text-xs text-center p-4">لا يوجد ملف مرفق</p>
+              <div className="text-center">
+                <Video size={48} className="mx-auto text-muted-foreground/30 mb-3" />
+                <p className="text-muted-foreground">لا يوجد فيديو لهذه المحاضرة</p>
+              </div>
             )}
           </div>
-        </div>
 
-        {/* Center: Video */}
-        <div className="flex-1 order-2 bg-background p-4 flex flex-col items-center justify-center">
-          {lecture.video_url ? (
-            <div className="w-full max-w-4xl">
-              <div className="aspect-video bg-foreground/5 rounded-2xl overflow-hidden">
-                <video
-                  src={lecture.video_url}
-                  controls
-                  className="w-full h-full object-contain"
-                  controlsList="nodownload"
+          {/* PDF inline viewer */}
+          <AnimatePresence>
+            {pdfOpen && lecture.pdf_url && (
+              <motion.div
+                initial={{ width: 0, opacity: 0 }}
+                animate={{ width: "50%", opacity: 1 }}
+                exit={{ width: 0, opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="border-l bg-card flex flex-col overflow-hidden hidden lg:flex"
+              >
+                <div className="p-2 border-b flex items-center justify-between">
+                  <span className="text-xs font-bold flex items-center gap-1.5">
+                    <FileText size={14} className="text-primary" /> ملف المادة
+                  </span>
+                  <button onClick={() => setPdfOpen(false)} className="text-muted-foreground hover:text-foreground">
+                    <X size={16} />
+                  </button>
+                </div>
+                <div className="flex-1">
+                  <iframe
+                    src={lecture.pdf_url}
+                    className="w-full h-full"
+                    title="PDF Viewer"
+                  />
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* PDF mobile: show below video */}
+          {pdfOpen && lecture.pdf_url && (
+            <div className="lg:hidden border-t bg-card flex flex-col h-[50vh]">
+              <div className="p-2 border-b flex items-center justify-between">
+                <span className="text-xs font-bold flex items-center gap-1.5">
+                  <FileText size={14} className="text-primary" /> ملف المادة
+                </span>
+                <button onClick={() => setPdfOpen(false)} className="text-muted-foreground hover:text-foreground">
+                  <X size={16} />
+                </button>
+              </div>
+              <div className="flex-1">
+                <iframe
+                  src={lecture.pdf_url}
+                  className="w-full h-full"
+                  title="PDF Viewer"
                 />
               </div>
-            </div>
-          ) : (
-            <div className="text-center">
-              <Video size={48} className="mx-auto text-muted-foreground/30 mb-3" />
-              <p className="text-muted-foreground">لا يوجد فيديو لهذه المحاضرة</p>
             </div>
           )}
         </div>
 
-        {/* Left: Chat */}
-        <div className="lg:w-80 border-r bg-card order-3 lg:order-1 flex flex-col h-80 lg:h-auto">
-          <div className="p-3 border-b flex items-center gap-2">
-            <MessageSquare size={16} className="text-primary" />
-            <h3 className="font-bold text-sm">المحادثة</h3>
-          </div>
+        {/* Chat panel - collapsible */}
+        <AnimatePresence>
+          {chatOpen && (
+            <motion.div
+              initial={{ width: 0, opacity: 0 }}
+              animate={{ width: 320, opacity: 1 }}
+              exit={{ width: 0, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="border-r bg-card flex flex-col overflow-hidden"
+            >
+              <div className="p-3 border-b flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <MessageSquare size={16} className="text-primary" />
+                  <h3 className="font-bold text-sm">المحادثة</h3>
+                </div>
+                <button onClick={() => setChatOpen(false)} className="text-muted-foreground hover:text-foreground">
+                  <X size={16} />
+                </button>
+              </div>
 
-          <div className="flex-1 overflow-y-auto p-3 space-y-2">
-            {messages.length === 0 && (
-              <p className="text-muted-foreground text-xs text-center mt-8">لا توجد رسائل بعد. ابدأ المحادثة!</p>
-            )}
-            {messages.map((msg) => {
-              const isMe = msg.sender_id === user?.id;
-              return (
-                <motion.div
-                  key={msg.id}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className={`flex ${isMe ? "justify-end" : "justify-start"}`}
-                >
-                  <div className={`max-w-[80%] px-3 py-2 rounded-2xl text-sm ${isMe ? "bg-primary text-primary-foreground rounded-br-sm" : "bg-secondary text-foreground rounded-bl-sm"}`}>
-                    {msg.audio_url ? (
-                      <AudioPlayer src={msg.audio_url} isMe={isMe} />
-                    ) : (
-                      msg.content
-                    )}
-                    <div className={`text-[0.6rem] mt-1 ${isMe ? "text-primary-foreground/60" : "text-muted-foreground"}`}>
-                      {new Date(msg.created_at).toLocaleTimeString("ar", { hour: "2-digit", minute: "2-digit" })}
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
-            <div ref={chatEndRef} />
-          </div>
+              <div className="flex-1 overflow-y-auto p-3 space-y-2">
+                {messages.length === 0 && (
+                  <p className="text-muted-foreground text-xs text-center mt-8">لا توجد رسائل بعد. ابدأ المحادثة!</p>
+                )}
+                {messages.map((msg) => {
+                  const isMe = msg.sender_id === user?.id;
+                  return (
+                    <motion.div
+                      key={msg.id}
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className={`flex ${isMe ? "justify-end" : "justify-start"}`}
+                    >
+                      <div className={`max-w-[80%] px-3 py-2 rounded-2xl text-sm ${isMe ? "bg-primary text-primary-foreground rounded-br-sm" : "bg-secondary text-foreground rounded-bl-sm"}`}>
+                        {msg.audio_url ? (
+                          <AudioPlayer src={msg.audio_url} isMe={isMe} />
+                        ) : (
+                          msg.content
+                        )}
+                        <div className={`text-[0.6rem] mt-1 ${isMe ? "text-primary-foreground/60" : "text-muted-foreground"}`}>
+                          {new Date(msg.created_at).toLocaleTimeString("ar", { hour: "2-digit", minute: "2-digit" })}
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+                <div ref={chatEndRef} />
+              </div>
 
-          <div className="p-3 border-t">
-            <div className="flex gap-2">
-              <input
-                value={newMsg}
-                onChange={(e) => setNewMsg(e.target.value)}
-                onKeyDown={handleKeyDown}
-                placeholder="اكتب رسالة..."
-                className="input-base flex-1 !py-2 text-sm"
-                disabled={sending}
-              />
-              {user && id && (
-                <AudioRecorder
-                  onRecorded={handleAudioRecorded}
-                  disabled={sending}
-                  userId={user.id}
-                  lectureId={id}
-                />
-              )}
-              <motion.button
-                whileTap={{ scale: 0.9 }}
-                onClick={handleSend}
-                disabled={sending || !newMsg.trim()}
-                className="w-9 h-9 rounded-xl bg-primary text-primary-foreground flex items-center justify-center disabled:opacity-50"
-              >
-                <Send size={16} />
-              </motion.button>
-            </div>
-          </div>
-        </div>
+              <div className="p-3 border-t">
+                <div className="flex gap-2">
+                  <input
+                    value={newMsg}
+                    onChange={(e) => setNewMsg(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    placeholder="اكتب رسالة..."
+                    className="input-base flex-1 !py-2 text-sm"
+                    disabled={sending}
+                  />
+                  {user && id && (
+                    <AudioRecorder
+                      onRecorded={handleAudioRecorded}
+                      disabled={sending}
+                      userId={user.id}
+                      lectureId={id}
+                    />
+                  )}
+                  <motion.button
+                    whileTap={{ scale: 0.9 }}
+                    onClick={handleSend}
+                    disabled={sending || !newMsg.trim()}
+                    className="w-9 h-9 rounded-xl bg-primary text-primary-foreground flex items-center justify-center disabled:opacity-50"
+                  >
+                    <Send size={16} />
+                  </motion.button>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );
