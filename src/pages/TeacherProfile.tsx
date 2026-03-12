@@ -23,8 +23,6 @@ interface AvailSlot {
   end_time: string;
 }
 
-const DAYS = ["الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
-
 const TeacherProfile = () => {
   const { id } = useParams();
   const { t } = useLanguage();
@@ -32,6 +30,8 @@ const TeacherProfile = () => {
   const [availability, setAvailability] = useState<AvailSlot[]>([]);
   const [loading, setLoading] = useState(true);
   const [showBooking, setShowBooking] = useState(false);
+
+  const DAYS = [t("day_sun"), t("day_mon"), t("day_tue"), t("day_wed"), t("day_thu"), t("day_fri"), t("day_sat")];
 
   useEffect(() => {
     if (!id) return;
@@ -134,7 +134,7 @@ const TeacherProfile = () => {
 
               <div className="flex gap-4 items-center flex-wrap">
                 <div className="bg-secondary rounded-xl p-4 text-center">
-                  <div className="text-xl font-black text-primary">{teacher.price} ر.س</div>
+                  <div className="text-xl font-black text-primary">{teacher.price} {t("sar")}</div>
                   <div className="text-muted-foreground text-xs">{t("teacher_per_session")}</div>
                 </div>
                 <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} onClick={() => setShowBooking(true)} className="btn-primary flex-1 text-center text-lg">
@@ -149,7 +149,7 @@ const TeacherProfile = () => {
                 teacherName={teacher.full_name}
                 subjects={teacher.subjects}
                 price={teacher.price}
-                currency="ر.س"
+                currency={t("sar")}
               />
             </div>
 
@@ -175,7 +175,7 @@ const TeacherProfile = () => {
             <div className="card-base p-6">
               <h3 className="font-extrabold text-lg mb-4">{t("teacher_reviews")}</h3>
               <div className="text-center py-8 text-muted-foreground text-sm">
-                لا توجد تقييمات حتى الآن
+                {t("no_reviews_yet")}
               </div>
             </div>
           </div>
