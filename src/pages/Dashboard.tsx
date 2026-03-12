@@ -8,7 +8,7 @@ import {
   GraduationCap, Loader2, ArrowLeft, Video, FileText, MessageSquare
 } from "lucide-react";
 import StudentLectures from "@/pages/StudentLectures";
-import { motion } from "framer-motion";
+import NotificationBell from "@/components/NotificationBell";
 
 interface RecentLecture {
   id: string;
