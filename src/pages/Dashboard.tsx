@@ -107,7 +107,7 @@ const Dashboard = () => {
           <div className="flex items-center gap-3">
             <button onClick={() => setSidebarOpen(true)} className="lg:hidden"><Menu size={20} /></button>
             <h2 className="font-bold">
-              {tab === "overview" ? "نظرة عامة" : tab === "lectures" ? "محاضراتي" : tab === "profile" ? "ملفي الشخصي" : ""}
+              {tab === "overview" ? "نظرة عامة" : tab === "lectures" ? "محاضراتي" : tab === "profile" ? "ملفي الشخصي" : tab === "bookings" ? "حجوزاتي" : ""}
             </h2>
           </div>
           <div className="flex items-center gap-3">
