@@ -39,8 +39,22 @@ const Navbar = () => {
   return (
     <nav className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b h-16 flex items-center">
       <div className="container flex items-center justify-between">
-        <Link to="/" className="text-2xl font-black text-primary tracking-tight">
-          OSTAZZE
+        <div className="flex items-center gap-3">
+          {showBackButton && (
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => navigate(-1)}
+              className="w-8 h-8 rounded-full flex items-center justify-center text-foreground/50 hover:text-foreground hover:bg-secondary transition-colors"
+              title="رجوع"
+            >
+              <ArrowRight size={18} />
+            </motion.button>
+          )}
+          <Link to="/" className="text-2xl font-black text-primary tracking-tight">
+            OSTAZZE
+          </Link>
+        </div>
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
