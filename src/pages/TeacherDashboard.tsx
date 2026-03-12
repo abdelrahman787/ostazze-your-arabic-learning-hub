@@ -123,7 +123,7 @@ const TeacherDashboard = () => {
           <div className="flex items-center gap-3">
             <button onClick={() => setSidebarOpen(true)} className="lg:hidden"><Menu size={20} /></button>
             <h2 className="font-bold">
-              {tab === "overview" ? "نظرة عامة" : tab === "lectures" ? "محاضراتي" : tab === "profile" ? "الملف الشخصي" : tab === "availability" ? "الأوقات المتاحة" : "أرباحي"}
+              {tab === "overview" ? "نظرة عامة" : tab === "lectures" ? "محاضراتي" : tab === "profile" ? "الملف الشخصي" : tab === "availability" ? "الأوقات المتاحة" : tab === "bookings" ? "الحجوزات" : "أرباحي"}
             </h2>
           </div>
           <div className="flex items-center gap-3">
