@@ -17,8 +17,7 @@ import Categories from "./pages/Categories";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
-import Dashboard from "./pages/Dashboard";
-import TeacherDashboard from "./pages/TeacherDashboard";
+import SmartDashboard from "./pages/SmartDashboard";
 import Admin from "./pages/Admin";
 import LectureView from "./pages/LectureView";
 import NotFound from "./pages/NotFound";
@@ -27,14 +26,14 @@ const queryClient = new QueryClient();
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
-  const hideNavFooter = ["/dashboard", "/dashboard/teacher"].includes(location.pathname) || location.pathname.startsWith("/lectures/");
-  const hideFooter = ["/login", "/register", "/forgot-password"].includes(location.pathname);
+  const hideFooter = ["/login", "/register", "/forgot-password", "/dashboard", "/dashboard/teacher"].includes(location.pathname) 
+    || location.pathname.startsWith("/lectures/");
 
   return (
     <>
-      {!hideNavFooter && <Navbar />}
+      <Navbar />
       {children}
-      {!hideNavFooter && !hideFooter && <Footer />}
+      {!hideFooter && <Footer />}
     </>
   );
 };
@@ -59,8 +58,8 @@ const App = () => (
                   <Route path="/login" element={<Login />} />
                   <Route path="/register" element={<Register />} />
                   <Route path="/forgot-password" element={<ForgotPassword />} />
-                  <Route path="/dashboard" element={<Dashboard />} />
-                  <Route path="/dashboard/teacher" element={<TeacherDashboard />} />
+                  <Route path="/dashboard" element={<SmartDashboard />} />
+                  <Route path="/dashboard/teacher" element={<SmartDashboard />} />
                   <Route path="/admin" element={<Admin />} />
                   <Route path="/lectures/:id" element={<LectureView />} />
                   <Route path="*" element={<NotFound />} />

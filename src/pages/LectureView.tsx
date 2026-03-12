@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
-import { FileText, Send, ArrowRight, Loader2, MessageSquare, Video, ChevronLeft, ChevronRight, X } from "lucide-react";
+import { FileText, Send, Loader2, MessageSquare, Video, X, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import AudioRecorder from "@/components/AudioRecorder";
 import AudioPlayer from "@/components/AudioPlayer";
@@ -28,6 +28,7 @@ interface ChatMsg {
 const LectureView = () => {
   const { id } = useParams<{ id: string }>();
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [lecture, setLecture] = useState<Lecture | null>(null);
   const [messages, setMessages] = useState<ChatMsg[]>([]);
   const [newMsg, setNewMsg] = useState("");
@@ -110,19 +111,19 @@ const LectureView = () => {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-background gap-4">
         <p className="text-muted-foreground">المحاضرة غير موجودة</p>
-        <Link to="/dashboard" className="btn-primary text-sm">العودة للوحة التحكم</Link>
+        <button onClick={() => navigate(-1)} className="btn-primary text-sm">العودة</button>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
-      {/* Header */}
-      <header className="bg-card border-b px-4 py-2.5 flex items-center justify-between sticky top-0 z-30">
+    <div className="min-h-[calc(100vh-64px)] bg-background flex flex-col">
+      {/* Sub-header for lecture */}
+      <div className="bg-card border-b px-4 py-2 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <Link to="/dashboard" className="text-muted-foreground hover:text-foreground transition-colors">
+          <button onClick={() => navigate(-1)} className="text-muted-foreground hover:text-foreground transition-colors">
             <ArrowRight size={20} />
-          </Link>
+          </button>
           <div>
             <h1 className="font-bold text-sm">{lecture.title}</h1>
             {lecture.subject && <p className="text-muted-foreground text-xs">{lecture.subject}</p>}
@@ -146,14 +147,43 @@ const LectureView = () => {
             {chatOpen ? "إخفاء المحادثة" : "المحادثة"}
           </button>
         </div>
-      </header>
+      </div>
 
-      {/* Main content */}
-      <div className="flex-1 flex h-[calc(100vh-49px)] overflow-hidden">
-        {/* Video + PDF area */}
-        <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
-          {/* Video */}
-          <div className={`flex-1 flex items-center justify-center p-4 ${pdfOpen ? "lg:w-1/2" : "w-full"}`}>
+      {/* Main content: Chat (left) | Video (center) | PDF (right) */}
+      {/* In RTL: first = right, last = left */}
+      <div className="flex-1 flex h-[calc(100vh-64px-45px)] overflow-hidden">
+        {/* PDF panel - RIGHT side (first in RTL) */}
+        <AnimatePresence>
+          {pdfOpen && lecture.pdf_url && (
+            <motion.div
+              initial={{ width: 0, opacity: 0 }}
+              animate={{ width: 380, opacity: 1 }}
+              exit={{ width: 0, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="border-l bg-card flex-col overflow-hidden hidden lg:flex"
+            >
+              <div className="p-2 border-b flex items-center justify-between">
+                <span className="text-xs font-bold flex items-center gap-1.5">
+                  <FileText size={14} className="text-primary" /> ملف المادة
+                </span>
+                <button onClick={() => setPdfOpen(false)} className="text-muted-foreground hover:text-foreground">
+                  <X size={16} />
+                </button>
+              </div>
+              <div className="flex-1">
+                <iframe
+                  src={`https://docs.google.com/gview?url=${encodeURIComponent(lecture.pdf_url)}&embedded=true`}
+                  className="w-full h-full"
+                  title="PDF Viewer"
+                />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Video - CENTER */}
+        <div className="flex-1 flex flex-col overflow-hidden">
+          <div className="flex-1 flex items-center justify-center p-4">
             {lecture.video_url ? (
               <div className="w-full max-w-5xl">
                 <div className="aspect-video bg-foreground/5 rounded-2xl overflow-hidden">
@@ -172,35 +202,6 @@ const LectureView = () => {
               </div>
             )}
           </div>
-
-          {/* PDF inline viewer */}
-          <AnimatePresence>
-            {pdfOpen && lecture.pdf_url && (
-              <motion.div
-                initial={{ width: 0, opacity: 0 }}
-                animate={{ width: "50%", opacity: 1 }}
-                exit={{ width: 0, opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                className="border-l bg-card flex flex-col overflow-hidden hidden lg:flex"
-              >
-                <div className="p-2 border-b flex items-center justify-between">
-                  <span className="text-xs font-bold flex items-center gap-1.5">
-                    <FileText size={14} className="text-primary" /> ملف المادة
-                  </span>
-                  <button onClick={() => setPdfOpen(false)} className="text-muted-foreground hover:text-foreground">
-                    <X size={16} />
-                  </button>
-                </div>
-                <div className="flex-1">
-                  <iframe
-                    src={`https://docs.google.com/gview?url=${encodeURIComponent(lecture.pdf_url)}&embedded=true`}
-                    className="w-full h-full"
-                    title="PDF Viewer"
-                  />
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
 
           {/* PDF mobile: show below video */}
           {pdfOpen && lecture.pdf_url && (
@@ -224,7 +225,7 @@ const LectureView = () => {
           )}
         </div>
 
-        {/* Chat panel - collapsible */}
+        {/* Chat panel - LEFT side (last in RTL) */}
         <AnimatePresence>
           {chatOpen && (
             <motion.div
@@ -232,7 +233,7 @@ const LectureView = () => {
               animate={{ width: 320, opacity: 1 }}
               exit={{ width: 0, opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="border-r bg-card flex flex-col overflow-hidden"
+              className="border-l bg-card flex flex-col overflow-hidden"
             >
               <div className="p-3 border-b flex items-center justify-between">
                 <div className="flex items-center gap-2">
