@@ -24,9 +24,39 @@ const item = {
 
 const HomePage = () => {
   const { t, d } = useLanguage();
-  const featuredTeachers = mockTeachers.slice(0, 3);
+  const [featuredTeachers, setFeaturedTeachers] = useState<TeacherData[]>([]);
   const statsRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: statsRef, offset: ["start end", "end start"] });
+
+  useEffect(() => {
+    const fetchTeachers = async () => {
+      const { data: tps } = await supabase
+        .from("teacher_profiles")
+        .select("user_id, subjects, university, price, verified")
+        .limit(3);
+      if (!tps || tps.length === 0) return;
+      const userIds = tps.map((tp) => tp.user_id);
+      const { data: profiles } = await supabase
+        .from("profiles")
+        .select("user_id, full_name, bio, avatar_url")
+        .in("user_id", userIds);
+      const profileMap = new Map((profiles || []).map((p) => [p.user_id, p]));
+      setFeaturedTeachers(tps.map((tp) => {
+        const profile = profileMap.get(tp.user_id);
+        return {
+          user_id: tp.user_id,
+          full_name: profile?.full_name || "معلم",
+          bio: profile?.bio || null,
+          avatar_url: profile?.avatar_url || null,
+          subjects: tp.subjects || [],
+          university: tp.university || null,
+          price: tp.price || 0,
+          verified: tp.verified || false,
+        };
+      }));
+    };
+    fetchTeachers();
+  }, []);
   const statsScale = useTransform(scrollYProgress, [0, 0.5], [0.96, 1]);
 
   return (
