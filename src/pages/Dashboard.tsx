@@ -59,16 +59,16 @@ const Dashboard = () => {
   useEffect(() => { fetchData(); }, [fetchData]);
 
   const sidebarLinks = [
-    { section: "الرئيسية", items: [
-      { icon: LayoutDashboard, label: "نظرة عامة", tab: "overview" },
+    { section: t("section_main"), items: [
+      { icon: LayoutDashboard, label: t("dash_overview"), tab: "overview" },
     ]},
-    { section: "كطالب", items: [
-      { icon: Search, label: "ابحث عن معلم", tab: "search", href: "/teachers" },
-      { icon: BookOpen, label: "محاضراتي", tab: "lectures" },
-      { icon: CalendarCheck, label: "حجوزاتي", tab: "bookings" },
+    { section: t("section_as_student"), items: [
+      { icon: Search, label: t("sidebar_find_teacher"), tab: "search", href: "/teachers" },
+      { icon: BookOpen, label: t("sidebar_my_lectures"), tab: "lectures" },
+      { icon: CalendarCheck, label: t("sidebar_my_bookings"), tab: "bookings" },
     ]},
-    { section: "الحساب", items: [
-      { icon: User, label: "ملفي الشخصي", tab: "profile" },
+    { section: t("section_account"), items: [
+      { icon: User, label: t("dash_profile"), tab: "profile" },
     ]},
   ];
 
@@ -77,7 +77,7 @@ const Dashboard = () => {
       <aside className={`fixed lg:static inset-y-0 right-0 z-40 w-[260px] bg-card border-l flex flex-col transition-transform duration-300 ${sidebarOpen ? "translate-x-0" : "translate-x-full lg:translate-x-0"}`}>
         <div className="p-5 border-b">
           <Link to="/" className="text-xl font-black text-primary tracking-tight">OSTAZZE</Link>
-          <p className="text-xs text-muted-foreground mt-0.5">لوحة تحكم الطالب</p>
+          <p className="text-xs text-muted-foreground mt-0.5">{t("sidebar_student_dashboard")}</p>
         </div>
         <nav className="flex-1 overflow-y-auto p-4 space-y-6">
           {sidebarLinks.map((s) => (
@@ -95,7 +95,7 @@ const Dashboard = () => {
         </nav>
         <div className="p-4 border-t">
           <button onClick={() => { logout(); navigate("/"); }} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-destructive hover:bg-destructive/10 transition-colors">
-            <LogOut size={16} /> تسجيل الخروج
+            <LogOut size={16} /> {t("nav_logout")}
           </button>
         </div>
       </aside>
@@ -107,7 +107,7 @@ const Dashboard = () => {
           <div className="flex items-center gap-3">
             <button onClick={() => setSidebarOpen(true)} className="lg:hidden"><Menu size={20} /></button>
             <h2 className="font-bold">
-              {tab === "overview" ? "نظرة عامة" : tab === "lectures" ? "محاضراتي" : tab === "profile" ? "ملفي الشخصي" : tab === "bookings" ? "حجوزاتي" : ""}
+              {tab === "overview" ? t("dash_overview") : tab === "lectures" ? t("sidebar_my_lectures") : tab === "profile" ? t("dash_profile") : tab === "bookings" ? t("sidebar_my_bookings") : ""}
             </h2>
           </div>
           <div className="flex items-center gap-3">
@@ -118,14 +118,13 @@ const Dashboard = () => {
         </header>
 
         <div className="p-6">
-          {/* === Overview === */}
           {tab === "overview" && (
             <div className="space-y-6 animate-fade-in">
               <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
                 {[
-                  { label: "إجمالي المحاضرات", value: String(stats.totalLectures), icon: BookOpen, color: "bg-primary/10 text-primary" },
-                  { label: "عدد المعلمين", value: String(stats.totalTeachers), icon: GraduationCap, color: "bg-success/10 text-success" },
-                  { label: "المحادثات", value: String(stats.totalLectures), icon: MessageSquare, color: "bg-warning/10 text-warning" },
+                  { label: t("stat_total_lectures"), value: String(stats.totalLectures), icon: BookOpen, color: "bg-primary/10 text-primary" },
+                  { label: t("stat_num_teachers"), value: String(stats.totalTeachers), icon: GraduationCap, color: "bg-success/10 text-success" },
+                  { label: t("stat_conversations"), value: String(stats.totalLectures), icon: MessageSquare, color: "bg-warning/10 text-warning" },
                 ].map((s) => (
                   <div key={s.label} className="card-base p-5">
                     <div className="flex items-center gap-3">
@@ -137,29 +136,29 @@ const Dashboard = () => {
               </div>
 
               <div className="stats-gradient rounded-2xl p-7 text-primary-foreground">
-                <h3 className="text-xl font-extrabold mb-2">مرحباً {user?.name} 👋</h3>
-                <p className="opacity-90 text-sm">هنا يمكنك متابعة محاضراتك والتواصل مع معلميك.</p>
+                <h3 className="text-xl font-extrabold mb-2">{t("welcome_student")} {user?.name} 👋</h3>
+                <p className="opacity-90 text-sm">{t("welcome_student_sub")}</p>
               </div>
 
               <div className="grid lg:grid-cols-2 gap-6">
                 <div className="card-base p-6">
-                  <h3 className="font-extrabold mb-4">إجراءات سريعة</h3>
+                  <h3 className="font-extrabold mb-4">{t("quick_actions")}</h3>
                   <div className="space-y-3">
-                    <Link to="/teachers" className="btn-primary block text-center text-sm">ابحث عن معلم</Link>
-                    <button onClick={() => setTab("lectures")} className="btn-outline w-full text-sm">محاضراتي</button>
+                    <Link to="/teachers" className="btn-primary block text-center text-sm">{t("sidebar_find_teacher")}</Link>
+                    <button onClick={() => setTab("lectures")} className="btn-outline w-full text-sm">{t("sidebar_my_lectures")}</button>
                   </div>
                 </div>
                 <div className="card-base p-6">
                   <div className="flex items-center justify-between mb-4">
-                    <h3 className="font-extrabold">أحدث المحاضرات</h3>
+                    <h3 className="font-extrabold">{t("recent_lectures")}</h3>
                     {recentLectures.length > 0 && (
-                      <button onClick={() => setTab("lectures")} className="text-primary text-sm font-bold hover:underline">عرض الكل</button>
+                      <button onClick={() => setTab("lectures")} className="text-primary text-sm font-bold hover:underline">{t("view_all")}</button>
                     )}
                   </div>
                   {loadingData ? (
                     <div className="flex justify-center py-6"><Loader2 className="animate-spin text-primary" size={24} /></div>
                   ) : recentLectures.length === 0 ? (
-                    <p className="text-muted-foreground text-sm text-center py-4">لا توجد محاضرات بعد</p>
+                    <p className="text-muted-foreground text-sm text-center py-4">{t("no_lectures_yet")}</p>
                   ) : (
                     <div className="space-y-3">
                       {recentLectures.map((lec) => (
@@ -168,7 +167,7 @@ const Dashboard = () => {
                             <div className="icon-box bg-primary/10"><BookOpen size={16} className="text-primary" /></div>
                             <div>
                               <div className="font-bold text-sm group-hover:text-primary transition-colors">{lec.title}</div>
-                              <div className="text-muted-foreground text-xs">المعلم: {lec.teacher_name} {lec.subject && `• ${lec.subject}`}</div>
+                              <div className="text-muted-foreground text-xs">{t("the_teacher")}: {lec.teacher_name} {lec.subject && `• ${lec.subject}`}</div>
                             </div>
                           </div>
                           <div className="flex items-center gap-2">
@@ -185,21 +184,18 @@ const Dashboard = () => {
             </div>
           )}
 
-          {/* === Lectures === */}
           {tab === "lectures" && (
             <div className="animate-fade-in">
               <StudentLectures />
             </div>
           )}
 
-          {/* === Bookings === */}
           {tab === "bookings" && (
             <div className="animate-fade-in">
               <BookingManager role="student" />
             </div>
           )}
 
-          {/* === Profile === */}
           {tab === "profile" && (
             <div className="grid lg:grid-cols-2 gap-6 animate-fade-in">
               <div className="card-base p-6">
@@ -223,7 +219,6 @@ const Dashboard = () => {
             </div>
           )}
 
-          {/* === Fallback === */}
           {!["overview", "lectures", "profile", "bookings"].includes(tab) && (
             <div className="card-base p-12 text-center animate-fade-in">
               <GraduationCap size={48} className="mx-auto text-muted-foreground/30 mb-4" />
