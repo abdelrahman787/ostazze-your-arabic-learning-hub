@@ -11,6 +11,7 @@ const Navbar = () => {
   const { isLoggedIn, user, logout } = useAuth();
   const { t, toggleLang, lang } = useLanguage();
   const location = useLocation();
+  const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
