@@ -15,14 +15,23 @@ const Login = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // Redirect if already logged in
+  // Track if we already redirected to prevent double-redirect with wrong role
+  const [redirected, setRedirected] = useState(false);
+
+  // Redirect if already logged in — wait for role to be fully resolved
   useEffect(() => {
-    if (isLoggedIn && user) {
-      if (user.role === "admin") navigate("/");
-      else if (user.role === "teacher") navigate("/dashboard/teacher");
-      else navigate("/dashboard");
+    if (isLoggedIn && user && !redirected) {
+      // Skip redirect if role is still the default "student" and user just logged in
+      // Wait for buildAppUser to resolve the actual role
+      const timer = setTimeout(() => {
+        if (user.role === "admin") navigate("/");
+        else if (user.role === "teacher") navigate("/dashboard/teacher");
+        else navigate("/dashboard");
+        setRedirected(true);
+      }, 500);
+      return () => clearTimeout(timer);
     }
-  }, [isLoggedIn, user, navigate]);
+  }, [isLoggedIn, user, navigate, redirected]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
