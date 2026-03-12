@@ -8,6 +8,7 @@ interface AppUser {
   email: string;
   role: "student" | "teacher" | "admin";
   avatar?: string;
+  roleResolved?: boolean;
 }
 
 interface AuthContextType {
