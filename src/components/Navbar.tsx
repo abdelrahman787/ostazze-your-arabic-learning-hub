@@ -189,7 +189,7 @@ const Navbar = () => {
               {isLoggedIn ? (
                 <>
                   <Link to={dashboardPath} onClick={() => setMobileOpen(false)} className="px-4 py-3 rounded-xl text-sm font-medium hover:bg-secondary flex items-center gap-2">
-                    <LayoutDashboard size={16} /> لوحة التحكم
+                    <LayoutDashboard size={16} /> {t("nav_dashboard")}
                   </Link>
                   {user?.role === "admin" && (
                     <Link to="/admin" onClick={() => setMobileOpen(false)} className="px-4 py-3 rounded-xl text-sm font-medium hover:bg-secondary flex items-center gap-2">
