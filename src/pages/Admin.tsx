@@ -274,6 +274,44 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
     setUploading(false);
   };
 
+  const handleEditLecture = async () => {
+    if (!editLecture) return;
+    setEditUploading(true);
+    try {
+      let video_url = editLecture.video_url;
+      let pdf_url = editLecture.pdf_url;
+
+      if (editVideoFile) {
+        const ext = editVideoFile.name.split(".").pop();
+        const path = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+        const { error } = await supabase.storage.from("lecture-videos").upload(path, editVideoFile);
+        if (error) throw error;
+        const { data: urlData } = supabase.storage.from("lecture-videos").getPublicUrl(path);
+        video_url = urlData.publicUrl;
+      }
+      if (editPdfFile) {
+        const ext = editPdfFile.name.split(".").pop();
+        const path = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+        const { error } = await supabase.storage.from("lecture-pdfs").upload(path, editPdfFile);
+        if (error) throw error;
+        const { data: urlData } = supabase.storage.from("lecture-pdfs").getPublicUrl(path);
+        pdf_url = urlData.publicUrl;
+      }
+
+      const { error } = await supabase.from("lectures").update({ video_url, pdf_url }).eq("id", editLecture.id);
+      if (error) throw error;
+
+      toast({ title: "تم تحديث المحاضرة بنجاح" });
+      setEditLecture(null);
+      setEditVideoFile(null);
+      setEditPdfFile(null);
+      fetchLectures();
+    } catch (err: any) {
+      toast({ title: "خطأ", description: err.message, variant: "destructive" });
+    }
+    setEditUploading(false);
+  };
+
   const handleDeleteLecture = async (id: string) => {
     if (!confirm("هل أنت متأكد من حذف هذه المحاضرة؟")) return;
     const { error } = await supabase.from("lectures").delete().eq("id", id);
