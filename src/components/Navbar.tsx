@@ -136,7 +136,7 @@ const Navbar = () => {
                           className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm hover:bg-secondary transition-colors"
                         >
                           <Shield size={15} className="text-primary" />
-                          لوحة الإدارة
+                           {t("admin_title")}
                         </Link>
                       )}
                       <button
