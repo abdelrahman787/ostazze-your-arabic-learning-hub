@@ -65,6 +65,7 @@ const Dashboard = () => {
     { section: "كطالب", items: [
       { icon: Search, label: "ابحث عن معلم", tab: "search", href: "/teachers" },
       { icon: BookOpen, label: "محاضراتي", tab: "lectures" },
+      { icon: CalendarCheck, label: "حجوزاتي", tab: "bookings" },
     ]},
     { section: "الحساب", items: [
       { icon: User, label: "ملفي الشخصي", tab: "profile" },
