@@ -73,6 +73,7 @@ async function buildAppUser(supaUser: SupabaseUser): Promise<AppUser> {
     email: supaUser.email || "",
     role,
     avatar: profile?.avatar_url || undefined,
+    roleResolved: true,
   };
 }
 
