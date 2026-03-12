@@ -232,6 +232,14 @@ const LectureView = () => {
                 className="input-base flex-1 !py-2 text-sm"
                 disabled={sending}
               />
+              {user && id && (
+                <AudioRecorder
+                  onRecorded={handleAudioRecorded}
+                  disabled={sending}
+                  userId={user.id}
+                  lectureId={id}
+                />
+              )}
               <motion.button
                 whileTap={{ scale: 0.9 }}
                 onClick={handleSend}
