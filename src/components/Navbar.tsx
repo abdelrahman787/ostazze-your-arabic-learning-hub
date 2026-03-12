@@ -1,9 +1,9 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useState, useRef, useEffect } from "react";
-import { Moon, Sun, Menu, X, LogOut, Globe, User, ChevronDown, Shield, LayoutDashboard } from "lucide-react";
+import { Moon, Sun, Menu, X, LogOut, Globe, User, ChevronDown, Shield, LayoutDashboard, ArrowRight } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
 const Navbar = () => {
@@ -11,6 +11,7 @@ const Navbar = () => {
   const { isLoggedIn, user, logout } = useAuth();
   const { t, toggleLang, lang } = useLanguage();
   const location = useLocation();
+  const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -32,14 +33,28 @@ const Navbar = () => {
     { label: t("nav_teachers"), path: "/teachers" },
   ];
 
-  const dashboardPath = user?.role === "teacher" ? "/dashboard/teacher" : "/dashboard";
+  const dashboardPath = "/dashboard";
+  const showBackButton = location.pathname !== "/";
 
   return (
     <nav className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b h-16 flex items-center">
       <div className="container flex items-center justify-between">
-        <Link to="/" className="text-2xl font-black text-primary tracking-tight">
-          OSTAZZE
-        </Link>
+        <div className="flex items-center gap-3">
+          {showBackButton && (
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => navigate(-1)}
+              className="w-8 h-8 rounded-full flex items-center justify-center text-foreground/50 hover:text-foreground hover:bg-secondary transition-colors"
+              title="رجوع"
+            >
+              <ArrowRight size={18} />
+            </motion.button>
+          )}
+          <Link to="/" className="text-2xl font-black text-primary tracking-tight">
+            OSTAZZE
+          </Link>
+        </div>
 
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((l) => (
