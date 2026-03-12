@@ -84,6 +84,16 @@ const TeacherProfile = () => {
                   {t("teacher_book")} →
                 </motion.button>
               </div>
+
+              <BookSessionModal
+                open={showBooking}
+                onClose={() => setShowBooking(false)}
+                teacherId={teacher.id}
+                teacherName={d(teacher.name)}
+                subjects={teacher.subjects.map((s) => d(s))}
+                price={teacher.price}
+                currency={d(teacher.currency)}
+              />
             </div>
 
             {teacher.availability && (
