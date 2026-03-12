@@ -207,7 +207,11 @@ const LectureView = () => {
                   className={`flex ${isMe ? "justify-end" : "justify-start"}`}
                 >
                   <div className={`max-w-[80%] px-3 py-2 rounded-2xl text-sm ${isMe ? "bg-primary text-primary-foreground rounded-br-sm" : "bg-secondary text-foreground rounded-bl-sm"}`}>
-                    {msg.content}
+                    {msg.audio_url ? (
+                      <AudioPlayer src={msg.audio_url} isMe={isMe} />
+                    ) : (
+                      msg.content
+                    )}
                     <div className={`text-[0.6rem] mt-1 ${isMe ? "text-primary-foreground/60" : "text-muted-foreground"}`}>
                       {new Date(msg.created_at).toLocaleTimeString("ar", { hour: "2-digit", minute: "2-digit" })}
                     </div>
