@@ -33,7 +33,8 @@ const Navbar = () => {
     { label: t("nav_teachers"), path: "/teachers" },
   ];
 
-  const dashboardPath = user?.role === "teacher" ? "/dashboard/teacher" : "/dashboard";
+  const dashboardPath = "/dashboard";
+  const showBackButton = location.pathname !== "/";
 
   return (
     <nav className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b h-16 flex items-center">
