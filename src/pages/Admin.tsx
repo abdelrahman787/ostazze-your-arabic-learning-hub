@@ -90,6 +90,14 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
   const videoRef = useRef<HTMLInputElement>(null);
   const pdfRef = useRef<HTMLInputElement>(null);
 
+  // Edit lecture state
+  const [editLecture, setEditLecture] = useState<LectureRow | null>(null);
+  const [editVideoFile, setEditVideoFile] = useState<File | null>(null);
+  const [editPdfFile, setEditPdfFile] = useState<File | null>(null);
+  const [editUploading, setEditUploading] = useState(false);
+  const editVideoRef = useRef<HTMLInputElement>(null);
+  const editPdfRef = useRef<HTMLInputElement>(null);
+
   // Admins state
   const [admins, setAdmins] = useState<AdminUser[]>([]);
   const [adminsLoading, setAdminsLoading] = useState(true);
