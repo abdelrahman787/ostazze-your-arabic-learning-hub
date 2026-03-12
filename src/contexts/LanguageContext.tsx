@@ -388,6 +388,17 @@ const translations = {
   custom_tag: { ar: "[موعد مخصص]", en: "[Custom appointment]" },
   session_label: { ar: "جلسة:", en: "Session:" },
   subject_word: { ar: "مادة", en: "Subject" },
+
+  // Availability manager
+  manage_availability: { ar: "إدارة أوقات التوفر", en: "Manage Availability" },
+  add_time: { ar: "إضافة وقت", en: "Add Time" },
+  no_times_set: { ar: "لا توجد أوقات محددة", en: "No times set" },
+  to_word: { ar: "إلى", en: "to" },
+  time_deleted: { ar: "تم حذف الوقت", en: "Time deleted" },
+  schedule_saved: { ar: "تم حفظ الجدول بنجاح ✅", en: "Schedule saved successfully ✅" },
+  save_error: { ar: "خطأ في الحفظ:", en: "Save error:" },
+  saving: { ar: "جاري الحفظ...", en: "Saving..." },
+  save_schedule: { ar: "حفظ الجدول", en: "Save Schedule" },
 } as const;
 
 type TranslationKey = keyof typeof translations;

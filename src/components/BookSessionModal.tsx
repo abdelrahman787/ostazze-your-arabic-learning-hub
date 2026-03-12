@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { X, Loader2, Calendar, Clock, BookOpen, CalendarCheck, CalendarPlus } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
@@ -21,8 +22,6 @@ interface Props {
   currency: string;
 }
 
-const DAYS = ["الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
-
 type BookingMode = "available" | "custom";
 
 /** Get the next date for a given day_of_week (0=Sun) */
@@ -30,7 +29,7 @@ function getNextDateForDay(dayOfWeek: number): string {
   const today = new Date();
   const todayDay = today.getDay();
   let diff = dayOfWeek - todayDay;
-  if (diff <= 0) diff += 7; // next week
+  if (diff <= 0) diff += 7;
   const next = new Date(today);
   next.setDate(today.getDate() + diff);
   return next.toISOString().split("T")[0];
@@ -38,12 +37,15 @@ function getNextDateForDay(dayOfWeek: number): string {
 
 const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects, price, currency }: Props) => {
   const { user } = useAuth();
+  const { t } = useLanguage();
   const [availability, setAvailability] = useState<AvailSlot[]>([]);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [mode, setMode] = useState<BookingMode>("available");
   const [selectedSlotIndex, setSelectedSlotIndex] = useState<number | null>(null);
   const [form, setForm] = useState({ subject: subjects[0] || "", date: "", time: "", notes: "" });
+
+  const DAYS = [t("day_sun"), t("day_mon"), t("day_tue"), t("day_wed"), t("day_thu"), t("day_fri"), t("day_sat")];
 
   useEffect(() => {
     if (!open) return;
@@ -81,13 +83,13 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects, pri
   };
 
   const handleSubmit = async () => {
-    if (!user) { toast.error("يجب تسجيل الدخول أولاً"); return; }
-    if (!form.date || !form.time) { toast.error("اختر التاريخ والوقت"); return; }
+    if (!user) { toast.error(t("login_required")); return; }
+    if (!form.date || !form.time) { toast.error(t("select_date_time")); return; }
 
     setSubmitting(true);
     try {
       const notesWithMode = mode === "custom"
-        ? `[موعد مخصص] ${form.notes || ""}`.trim()
+        ? `${t("custom_tag")} ${form.notes || ""}`.trim()
         : form.notes || null;
 
       const { error } = await supabase.from("bookings").insert({
@@ -100,9 +102,8 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects, pri
       });
 
       if (error) {
-        // Check for conflict (unique index violation)
         if (error.code === "23505" || error.message?.includes("idx_bookings_no_conflict")) {
-          toast.error("هذا الموعد محجوز بالفعل! اختر وقتاً آخر ⚠️");
+          toast.error(t("slot_taken"));
         } else {
           throw error;
         }
@@ -110,15 +111,11 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects, pri
         return;
       }
 
-      toast.success(
-        mode === "available"
-          ? "تم إرسال طلب الحجز بنجاح! ✅"
-          : "تم إرسال طلب الموعد المخصص للمعلم! ⏳"
-      );
+      toast.success(mode === "available" ? t("booking_success") : t("custom_booking_success"));
       onClose();
       setForm({ subject: subjects[0] || "", date: "", time: "", notes: "" });
     } catch (e: any) {
-      toast.error("خطأ: " + e.message);
+      toast.error("Error: " + e.message);
     }
     setSubmitting(false);
   };
@@ -134,7 +131,7 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects, pri
             className="bg-card rounded-2xl p-6 w-full max-w-lg shadow-lg max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             
             <div className="flex items-center justify-between mb-5">
-              <h2 className="text-lg font-extrabold">حجز جلسة مع {teacherName}</h2>
+              <h2 className="text-lg font-extrabold">{t("book_with")} {teacherName}</h2>
               <button onClick={onClose} className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center hover:bg-destructive hover:text-destructive-foreground transition-colors">
                 <X size={16} />
               </button>
@@ -155,7 +152,7 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects, pri
                     }`}
                   >
                     <CalendarCheck size={16} />
-                    من المواعيد المتاحة
+                    {t("from_available")}
                   </button>
                   <button
                     onClick={() => { setMode("custom"); setSelectedSlotIndex(null); setForm(f => ({ ...f, date: "", time: "" })); }}
@@ -166,7 +163,7 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects, pri
                     }`}
                   >
                     <CalendarPlus size={16} />
-                    موعد مخصص
+                    {t("custom_appointment")}
                   </button>
                 </div>
 
@@ -174,7 +171,7 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects, pri
                 {mode === "available" && availability.length > 0 && (
                   <div>
                     <label className="block text-sm font-bold mb-2 flex items-center gap-1">
-                      <Calendar size={14} /> اختر اليوم المناسب
+                      <Calendar size={14} /> {t("choose_day")}
                     </label>
                     <div className="grid grid-cols-2 gap-2">
                       {availability.map((a, i) => {
@@ -204,9 +201,9 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects, pri
 
                 {mode === "available" && availability.length === 0 && (
                   <div className="bg-muted rounded-xl p-4 text-center">
-                    <p className="text-sm text-muted-foreground">لا توجد مواعيد متاحة حالياً</p>
+                    <p className="text-sm text-muted-foreground">{t("no_available_slots")}</p>
                     <button onClick={() => setMode("custom")} className="text-primary text-sm font-bold mt-2 hover:underline">
-                      اطلب موعد مخصص ←
+                      {t("request_custom")}
                     </button>
                   </div>
                 )}
@@ -215,20 +212,20 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects, pri
                 {mode === "available" && selectedSlot && (
                   <div>
                     <label className="block text-sm font-bold mb-2 flex items-center gap-1">
-                      <Clock size={14} /> اختر الوقت
+                      <Clock size={14} /> {t("choose_time")}
                     </label>
                     <div className="flex flex-wrap gap-2">
-                      {getTimeSlotsForSlot(selectedSlot).map((t) => (
+                      {getTimeSlotsForSlot(selectedSlot).map((timeSlot) => (
                         <button
-                          key={t}
-                          onClick={() => setForm((f) => ({ ...f, time: t }))}
+                          key={timeSlot}
+                          onClick={() => setForm((f) => ({ ...f, time: timeSlot }))}
                           className={`px-4 py-2 rounded-xl text-sm font-bold transition-colors ${
-                            form.time === t
+                            form.time === timeSlot
                               ? "bg-primary text-primary-foreground"
                               : "bg-secondary hover:bg-primary/10 text-foreground"
                           }`}
                         >
-                          {t}
+                          {timeSlot}
                         </button>
                       ))}
                     </div>
@@ -239,7 +236,7 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects, pri
                 {mode === "custom" && (
                   <div className="bg-accent/50 border border-accent rounded-xl p-3">
                     <p className="text-xs text-muted-foreground">
-                      💡 اختر التاريخ والوقت المناسب لك وسيتم إرسال الطلب للمعلم للموافقة عليه
+                      💡 {t("custom_note")}
                     </p>
                   </div>
                 )}
@@ -247,7 +244,7 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects, pri
                 {/* Subject */}
                 {subjects.length > 0 && (
                   <div>
-                    <label className="block text-sm font-bold mb-1.5 flex items-center gap-1"><BookOpen size={14} /> المادة</label>
+                    <label className="block text-sm font-bold mb-1.5 flex items-center gap-1"><BookOpen size={14} /> {t("the_subject")}</label>
                     <select value={form.subject} onChange={(e) => setForm((f) => ({ ...f, subject: e.target.value }))} className="input-base">
                       {subjects.map((s, i) => <option key={i} value={s}>{s}</option>)}
                     </select>
@@ -258,12 +255,12 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects, pri
                 {mode === "custom" && (
                   <>
                     <div>
-                      <label className="block text-sm font-bold mb-1.5 flex items-center gap-1"><Calendar size={14} /> التاريخ</label>
+                      <label className="block text-sm font-bold mb-1.5 flex items-center gap-1"><Calendar size={14} /> {t("the_date")}</label>
                       <input type="date" value={form.date} min={new Date().toISOString().split("T")[0]}
                         onChange={(e) => setForm((f) => ({ ...f, date: e.target.value, time: "" }))} className="input-base" />
                     </div>
                     <div>
-                      <label className="block text-sm font-bold mb-1.5 flex items-center gap-1"><Clock size={14} /> الوقت</label>
+                      <label className="block text-sm font-bold mb-1.5 flex items-center gap-1"><Clock size={14} /> {t("the_time")}</label>
                       <input type="time" value={form.time} onChange={(e) => setForm((f) => ({ ...f, time: e.target.value }))} className="input-base" />
                     </div>
                   </>
@@ -272,16 +269,15 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects, pri
                 {/* Notes */}
                 <div>
                   <label className="block text-sm font-bold mb-1.5">
-                    {mode === "custom" ? "سبب اختيار هذا الموعد (اختياري)" : "ملاحظات (اختياري)"}
+                    {mode === "custom" ? t("custom_reason") : t("notes_optional")}
                   </label>
                   <textarea value={form.notes} onChange={(e) => setForm((f) => ({ ...f, notes: e.target.value }))}
-                    rows={2} className="input-base resize-none"
-                    placeholder={mode === "custom" ? "مثال: أفضل هذا الموعد لأن..." : "مثال: أحتاج مراجعة الفصل الثالث..."} />
+                    rows={2} className="input-base resize-none" />
                 </div>
 
                 {/* Price */}
                 <div className="bg-primary/5 border border-primary/20 rounded-xl p-4 flex items-center justify-between">
-                  <span className="font-bold text-foreground">سعر الجلسة</span>
+                  <span className="font-bold text-foreground">{t("session_price")}</span>
                   <span className="font-extrabold text-primary">{price} {currency}</span>
                 </div>
 
@@ -290,10 +286,10 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects, pri
                   className="btn-primary w-full text-lg flex items-center justify-center gap-2 disabled:opacity-50">
                   {submitting ? <Loader2 size={18} className="animate-spin" /> : null}
                   {submitting
-                    ? "جاري الإرسال..."
+                    ? t("sending")
                     : mode === "available"
-                      ? "تأكيد الحجز →"
-                      : "إرسال طلب الموعد →"
+                      ? t("confirm_booking_btn")
+                      : t("send_request_btn")
                   }
                 </motion.button>
               </div>

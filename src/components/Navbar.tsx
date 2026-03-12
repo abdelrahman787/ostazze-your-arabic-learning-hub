@@ -117,7 +117,7 @@ const Navbar = () => {
                       <div className="font-bold text-sm">{user?.name}</div>
                       <div className="text-muted-foreground text-xs">{user?.email}</div>
                       {user?.role === "admin" && (
-                        <span className="text-[0.6rem] bg-primary/10 text-primary px-2 py-0.5 rounded-full font-semibold mt-1 inline-block">مدير</span>
+                        <span className="text-[0.6rem] bg-primary/10 text-primary px-2 py-0.5 rounded-full font-semibold mt-1 inline-block">{t("admin_title")}</span>
                       )}
                     </div>
                     <div className="p-1.5">
@@ -127,7 +127,7 @@ const Navbar = () => {
                         className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm hover:bg-secondary transition-colors"
                       >
                         <LayoutDashboard size={15} className="text-muted-foreground" />
-                        لوحة التحكم
+                         {t("nav_dashboard")}
                       </Link>
                       {user?.role === "admin" && (
                         <Link
@@ -136,7 +136,7 @@ const Navbar = () => {
                           className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm hover:bg-secondary transition-colors"
                         >
                           <Shield size={15} className="text-primary" />
-                          لوحة الإدارة
+                           {t("admin_title")}
                         </Link>
                       )}
                       <button
@@ -189,11 +189,11 @@ const Navbar = () => {
               {isLoggedIn ? (
                 <>
                   <Link to={dashboardPath} onClick={() => setMobileOpen(false)} className="px-4 py-3 rounded-xl text-sm font-medium hover:bg-secondary flex items-center gap-2">
-                    <LayoutDashboard size={16} /> لوحة التحكم
+                    <LayoutDashboard size={16} /> {t("nav_dashboard")}
                   </Link>
                   {user?.role === "admin" && (
                     <Link to="/admin" onClick={() => setMobileOpen(false)} className="px-4 py-3 rounded-xl text-sm font-medium hover:bg-secondary flex items-center gap-2">
-                      <Shield size={16} className="text-primary" /> لوحة الإدارة
+                      <Shield size={16} className="text-primary" /> {t("admin_title")}
                     </Link>
                   )}
                   <button onClick={() => { logout(); setMobileOpen(false); }} className="text-destructive text-sm font-medium py-2.5 flex items-center justify-center gap-2">
