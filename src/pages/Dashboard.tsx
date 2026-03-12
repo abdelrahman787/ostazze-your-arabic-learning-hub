@@ -5,10 +5,11 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
 import {
   Search, LogOut, Menu, LayoutDashboard, BookOpen, User,
-  GraduationCap, Loader2, ArrowLeft, Video, FileText, MessageSquare
+  GraduationCap, Loader2, ArrowLeft, Video, FileText, MessageSquare, CalendarCheck
 } from "lucide-react";
 import StudentLectures from "@/pages/StudentLectures";
 import NotificationBell from "@/components/NotificationBell";
+import BookingManager from "@/components/BookingManager";
 import { motion } from "framer-motion";
 
 interface RecentLecture {
