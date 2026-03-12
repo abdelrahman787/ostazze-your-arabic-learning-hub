@@ -322,23 +322,31 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
   };
 
   const handleAddTeacher = async () => {
-    if (!addTeacherUserId) {
-      toast({ title: "يرجى اختيار مستخدم", variant: "destructive" });
+    if (!teacherForm.email || !teacherForm.password || !teacherForm.full_name) {
+      toast({ title: "يرجى ملء الحقول المطلوبة (الاسم، الإيميل، الباسورد)", variant: "destructive" });
       return;
     }
     setAddingTeacher(true);
     try {
       const { data: { session } } = await supabase.auth.getSession();
       const res = await supabase.functions.invoke("manage-roles", {
-        body: { action: "add_teacher", user_id: addTeacherUserId },
+        body: {
+          action: "create_teacher",
+          email: teacherForm.email,
+          password: teacherForm.password,
+          full_name: teacherForm.full_name,
+          university: teacherForm.university || null,
+          subjects: teacherForm.subjects ? teacherForm.subjects.split(",").map((s) => s.trim()).filter(Boolean) : [],
+          price: teacherForm.price ? Number(teacherForm.price) : 0,
+        },
         headers: { Authorization: `Bearer ${session?.access_token}` },
       });
       if (res.error) throw new Error(res.error.message);
       const result = res.data as any;
       if (result?.error) throw new Error(result.error);
-      toast({ title: "تمت إضافة المعلم بنجاح" });
+      toast({ title: "تم إنشاء حساب المعلم بنجاح" });
       setShowAddTeacher(false);
-      setAddTeacherUserId("");
+      setTeacherForm({ email: "", password: "", full_name: "", university: "", subjects: "", price: "" });
       fetchTeachers();
       fetchStats();
       fetchProfiles();
