@@ -22,6 +22,7 @@ interface ChatMsg {
   sender_id: string;
   content: string;
   created_at: string;
+  audio_url?: string | null;
 }
 
 const LectureView = () => {
