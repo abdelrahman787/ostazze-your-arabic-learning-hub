@@ -265,22 +265,16 @@ const TeacherDashboard = () => {
             </div>
           )}
 
-          {/* === Availability === */}
           {tab === "availability" && (
-            <div className="card-base p-6 animate-fade-in max-w-2xl">
-              <h3 className="font-extrabold text-lg mb-6">الأوقات المتاحة</h3>
-              <div className="space-y-3">
-                {days.map((day) => (
-                  <div key={day} className="flex items-center gap-4 p-3 bg-secondary rounded-xl">
-                    <input type="checkbox" className="w-4 h-4 accent-primary" />
-                    <span className="font-bold text-sm w-20">{day}</span>
-                    <input type="time" className="input-base !w-auto" defaultValue="09:00" />
-                    <span className="text-muted-foreground">إلى</span>
-                    <input type="time" className="input-base !w-auto" defaultValue="17:00" />
-                  </div>
-                ))}
-              </div>
-              <button className="btn-primary mt-4">حفظ الجدول</button>
+            <div className="animate-fade-in">
+              <TeacherAvailabilityManager />
+            </div>
+          )}
+
+          {/* === Bookings === */}
+          {tab === "bookings" && (
+            <div className="animate-fade-in">
+              <BookingManager role="teacher" />
             </div>
           )}
 
