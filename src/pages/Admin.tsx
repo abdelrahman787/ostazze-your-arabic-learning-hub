@@ -580,7 +580,10 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
                           </div>
                         </td>
                         <td className="p-4">
-                          <button onClick={() => handleDeleteLecture(l.id)} className="text-xs bg-destructive/10 text-destructive px-3 py-1.5 rounded-lg font-semibold hover:bg-destructive/20 transition-colors">حذف</button>
+                          <div className="flex gap-2">
+                            <button onClick={() => { setEditLecture(l); setEditVideoFile(null); setEditPdfFile(null); }} className="text-xs bg-primary/10 text-primary px-3 py-1.5 rounded-lg font-semibold hover:bg-primary/20 transition-colors flex items-center gap-1"><Upload size={10} /> تعديل</button>
+                            <button onClick={() => handleDeleteLecture(l.id)} className="text-xs bg-destructive/10 text-destructive px-3 py-1.5 rounded-lg font-semibold hover:bg-destructive/20 transition-colors">حذف</button>
+                          </div>
                         </td>
                       </tr>
                     ))}
