@@ -215,7 +215,7 @@ const LectureView = () => {
               </div>
               <div className="flex-1">
                 <iframe
-                  src={lecture.pdf_url}
+                  src={`https://docs.google.com/gview?url=${encodeURIComponent(lecture.pdf_url)}&embedded=true`}
                   className="w-full h-full"
                   title="PDF Viewer"
                 />
