@@ -4,6 +4,8 @@ import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { FileText, Send, ArrowRight, Loader2, MessageSquare, Video } from "lucide-react";
 import { motion } from "framer-motion";
+import AudioRecorder from "@/components/AudioRecorder";
+import AudioPlayer from "@/components/AudioPlayer";
 
 interface Lecture {
   id: string;
