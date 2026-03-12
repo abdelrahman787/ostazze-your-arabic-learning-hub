@@ -4,6 +4,8 @@ import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { FileText, Send, ArrowRight, Loader2, MessageSquare, Video } from "lucide-react";
 import { motion } from "framer-motion";
+import AudioRecorder from "@/components/AudioRecorder";
+import AudioPlayer from "@/components/AudioPlayer";
 
 interface Lecture {
   id: string;
@@ -20,6 +22,7 @@ interface ChatMsg {
   sender_id: string;
   content: string;
   created_at: string;
+  audio_url?: string | null;
 }
 
 const LectureView = () => {
@@ -78,6 +81,16 @@ const LectureView = () => {
     await supabase.from("chat_messages").insert({ lecture_id: id, sender_id: user.id, content: newMsg.trim() });
     setNewMsg("");
     setSending(false);
+  };
+
+  const handleAudioRecorded = async (audioUrl: string) => {
+    if (!user || !id) return;
+    await supabase.from("chat_messages").insert({
+      lecture_id: id,
+      sender_id: user.id,
+      content: "🎤 رسالة صوتية",
+      audio_url: audioUrl,
+    });
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -194,7 +207,11 @@ const LectureView = () => {
                   className={`flex ${isMe ? "justify-end" : "justify-start"}`}
                 >
                   <div className={`max-w-[80%] px-3 py-2 rounded-2xl text-sm ${isMe ? "bg-primary text-primary-foreground rounded-br-sm" : "bg-secondary text-foreground rounded-bl-sm"}`}>
-                    {msg.content}
+                    {msg.audio_url ? (
+                      <AudioPlayer src={msg.audio_url} isMe={isMe} />
+                    ) : (
+                      msg.content
+                    )}
                     <div className={`text-[0.6rem] mt-1 ${isMe ? "text-primary-foreground/60" : "text-muted-foreground"}`}>
                       {new Date(msg.created_at).toLocaleTimeString("ar", { hour: "2-digit", minute: "2-digit" })}
                     </div>
@@ -215,6 +232,14 @@ const LectureView = () => {
                 className="input-base flex-1 !py-2 text-sm"
                 disabled={sending}
               />
+              {user && id && (
+                <AudioRecorder
+                  onRecorded={handleAudioRecorded}
+                  disabled={sending}
+                  userId={user.id}
+                  lectureId={id}
+                />
+              )}
               <motion.button
                 whileTap={{ scale: 0.9 }}
                 onClick={handleSend}
