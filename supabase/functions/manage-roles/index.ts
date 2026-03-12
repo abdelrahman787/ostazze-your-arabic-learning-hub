@@ -34,19 +34,56 @@ serve(async (req) => {
 
     if (!callerRole) throw new Error("Only admins can manage roles");
 
-    const { action, email, role, user_id } = await req.json();
+    const body = await req.json();
+    const { action } = body;
+
+    if (action === "create_teacher") {
+      const { email, password, full_name, university, subjects, price } = body;
+      if (!email || !password || !full_name) throw new Error("الاسم والإيميل وكلمة المرور مطلوبة");
+
+      // Create user via admin API
+      const { data: newUser, error: createError } = await supabaseAdmin.auth.admin.createUser({
+        email,
+        password,
+        email_confirm: true,
+        user_metadata: { full_name, account_type: "teacher" },
+      });
+      if (createError) throw createError;
+
+      const userId = newUser.user.id;
+
+      // Update profile to teacher
+      await supabaseAdmin
+        .from("profiles")
+        .update({ account_type: "teacher", full_name })
+        .eq("user_id", userId);
+
+      // Create teacher_profile
+      await supabaseAdmin
+        .from("teacher_profiles")
+        .insert({
+          user_id: userId,
+          verified: true,
+          university: university || null,
+          subjects: subjects || [],
+          price: price || 0,
+        });
+
+      return new Response(
+        JSON.stringify({ message: "تم إنشاء حساب المعلم بنجاح", user_id: userId }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
 
     if (action === "add_role") {
-      // Add role to existing user by email
+      const { email, role } = body;
       if (!email || !role) throw new Error("Email and role are required");
       if (!["admin", "moderator"].includes(role)) throw new Error("Invalid role");
 
-      // Find user by email
       const { data: users } = await supabaseAdmin.auth.admin.listUsers();
       const targetUser = users?.users?.find((u) => u.email === email);
       if (!targetUser) throw new Error("المستخدم غير موجود بهذا البريد الإلكتروني");
 
-      // Check if already has role
       const { data: existing } = await supabaseAdmin
         .from("user_roles")
         .select("id")
@@ -69,9 +106,9 @@ serve(async (req) => {
     }
 
     if (action === "remove_role") {
+      const { user_id, role } = body;
       if (!user_id || !role) throw new Error("user_id and role are required");
 
-      // Don't let admin remove their own admin role
       if (user_id === caller.id && role === "admin") {
         throw new Error("لا يمكنك إزالة دور المدير من نفسك");
       }
@@ -91,10 +128,9 @@ serve(async (req) => {
     }
 
     if (action === "add_teacher") {
-      // Convert existing student to teacher
+      const { user_id } = body;
       if (!user_id) throw new Error("user_id is required");
 
-      // Update profile account_type
       const { error: profileError } = await supabaseAdmin
         .from("profiles")
         .update({ account_type: "teacher" })
@@ -102,7 +138,6 @@ serve(async (req) => {
 
       if (profileError) throw profileError;
 
-      // Create teacher_profile if not exists
       const { data: existingTP } = await supabaseAdmin
         .from("teacher_profiles")
         .select("id")
