@@ -102,14 +102,18 @@ const TeacherProfile = () => {
     );
   }
 
-  const initials = teacher.full_name.split(" ").map((w) => w[0]).join("").slice(0, 2);
+  const displayName = b(teacher.full_name, teacher.full_name_en, t("the_teacher"));
+  const displayUni = b(teacher.university, teacher.university_en);
+  const displayBio = b(teacher.bio, teacher.bio_en);
+  const displaySubjects = bArr(teacher.subjects, teacher.subjects_en);
+  const initials = displayName.split(" ").map((w) => w[0]).join("").slice(0, 2);
 
   return (
     <div>
       <section className="hero-gradient py-8">
         <div className="container">
           <p className="text-muted-foreground text-sm">
-            <Link to="/teachers" className="hover:text-primary">{t("nav_teachers")}</Link> / {teacher.full_name}
+            <Link to="/teachers" className="hover:text-primary">{t("nav_teachers")}</Link> / {displayName}
           </p>
         </div>
       </section>
@@ -124,22 +128,22 @@ const TeacherProfile = () => {
                 </motion.div>
                 <div>
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <h1 className="text-xl font-black">{teacher.full_name}</h1>
+                    <h1 className="text-xl font-black">{displayName}</h1>
                     {teacher.verified && <span className="text-xs bg-success/10 text-success px-2.5 py-1 rounded-full font-semibold">{t("teacher_verified")}</span>}
                   </div>
-                  {teacher.university && (
+                  {displayUni && (
                     <div className="inline-flex items-center gap-1.5 mt-2 text-xs bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 px-3 py-1 rounded-full">
                       <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}><BookOpen size={12} /></motion.div>
-                      {teacher.university}
+                      {displayUni}
                     </div>
                   )}
                 </div>
               </div>
 
-              {teacher.bio && <p className="text-muted-foreground leading-relaxed mb-6">{teacher.bio}</p>}
+              {displayBio && <p className="text-muted-foreground leading-relaxed mb-6">{displayBio}</p>}
 
               <div className="flex flex-wrap gap-2 mb-6">
-                {teacher.subjects.map((s, i) => <span key={i} className="badge-brand">{s}</span>)}
+                {displaySubjects.map((s, i) => <span key={i} className="badge-brand">{s}</span>)}
               </div>
 
               <div className="flex gap-4 items-center flex-wrap">
