@@ -53,7 +53,7 @@ const TeacherProfile = () => {
 
       setTeacher({
         user_id: tp.user_id,
-        full_name: profile?.full_name || "معلم",
+        full_name: profile?.full_name || t("the_teacher"),
         bio: profile?.bio || null,
         avatar_url: profile?.avatar_url || null,
         subjects: tp.subjects || [],

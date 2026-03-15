@@ -123,7 +123,7 @@ const TeacherDashboard = () => {
           </div>
           <div className="flex items-center gap-3">
             <NotificationBell />
-            <div className="w-9 h-9 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold">{user?.name?.charAt(0) || "م"}</div>
+            <div className="w-9 h-9 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold">{user?.name?.charAt(0) || "T"}</div>
             <span className="text-sm font-medium hidden sm:block">{user?.name}</span>
           </div>
         </header>
@@ -211,7 +211,7 @@ const TeacherDashboard = () => {
                         </div>
 
                         <div className="flex items-center gap-2 mb-3">
-                          <div className="w-6 h-6 rounded-full bg-success/10 text-success flex items-center justify-center text-xs font-bold">{lec.student_name?.charAt(0) || "ط"}</div>
+                          <div className="w-6 h-6 rounded-full bg-success/10 text-success flex items-center justify-center text-xs font-bold">{lec.student_name?.charAt(0) || "S"}</div>
                           <span className="text-sm text-muted-foreground">{t("the_student")}: <span className="text-foreground font-medium">{lec.student_name}</span></span>
                         </div>
 

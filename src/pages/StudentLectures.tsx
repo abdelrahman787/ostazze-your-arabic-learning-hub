@@ -90,7 +90,7 @@ const StudentLectures = () => {
               </div>
 
               <div className="flex items-center gap-2 mb-3">
-                <div className="w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold">{lec.teacher_name?.charAt(0) || "م"}</div>
+                <div className="w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold">{lec.teacher_name?.charAt(0) || "T"}</div>
                 <span className="text-sm text-muted-foreground">{t("the_teacher")}: <span className="text-foreground font-medium">{lec.teacher_name}</span></span>
               </div>
 
