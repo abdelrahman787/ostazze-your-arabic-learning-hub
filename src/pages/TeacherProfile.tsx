@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useBilingual } from "@/hooks/useBilingual";
 import { Star, Clock, BookOpen, Loader2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
@@ -9,10 +10,14 @@ import { supabase } from "@/integrations/supabase/client";
 interface TeacherFull {
   user_id: string;
   full_name: string;
+  full_name_en: string | null;
   bio: string | null;
+  bio_en: string | null;
   avatar_url: string | null;
   subjects: string[];
+  subjects_en: string[];
   university: string | null;
+  university_en: string | null;
   price: number;
   verified: boolean;
 }
