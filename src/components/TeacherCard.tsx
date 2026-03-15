@@ -2,20 +2,30 @@ import { Link } from "react-router-dom";
 import { Star, User, ArrowUpLeft } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useBilingual } from "@/hooks/useBilingual";
 
 export interface TeacherData {
   user_id: string;
   full_name: string;
+  full_name_en?: string | null;
   bio: string | null;
+  bio_en?: string | null;
   avatar_url: string | null;
   subjects: string[];
+  subjects_en?: string[];
   university: string | null;
+  university_en?: string | null;
   price: number;
   verified: boolean;
 }
 
 const TeacherCard = ({ teacher, index = 0 }: { teacher: TeacherData; index?: number }) => {
   const { t } = useLanguage();
+  const { b, bArr } = useBilingual();
+
+  const displayName = b(teacher.full_name, teacher.full_name_en, t("the_teacher"));
+  const displayUni = b(teacher.university, teacher.university_en);
+  const displaySubjects = bArr(teacher.subjects, teacher.subjects_en);
 
   return (
     <motion.div
@@ -44,15 +54,15 @@ const TeacherCard = ({ teacher, index = 0 }: { teacher: TeacherData; index?: num
           )}
         </div>
         <div className="min-w-0 flex-1">
-          <h3 className="font-bold text-[0.95rem] mb-1">{teacher.full_name}</h3>
-          {teacher.university && (
-            <p className="text-muted-foreground text-xs leading-relaxed line-clamp-2">{teacher.university}</p>
+          <h3 className="font-bold text-[0.95rem] mb-1">{displayName}</h3>
+          {displayUni && (
+            <p className="text-muted-foreground text-xs leading-relaxed line-clamp-2">{displayUni}</p>
           )}
         </div>
       </div>
 
       <div className="px-5 pb-4 flex flex-wrap gap-1.5">
-        {teacher.subjects.slice(0, 3).map((s, i) => (
+        {displaySubjects.slice(0, 3).map((s, i) => (
           <span key={i} className="tag-outline">{s}</span>
         ))}
       </div>
