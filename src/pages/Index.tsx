@@ -32,13 +32,13 @@ const HomePage = () => {
     const fetchTeachers = async () => {
       const { data: tps } = await supabase
         .from("teacher_profiles")
-        .select("user_id, subjects, university, price, verified")
+        .select("user_id, subjects, subjects_en, university, university_en, price, verified")
         .limit(3);
       if (!tps || tps.length === 0) return;
       const userIds = tps.map((tp) => tp.user_id);
       const { data: profiles } = await supabase
         .from("profiles")
-        .select("user_id, full_name, bio, avatar_url")
+        .select("user_id, full_name, full_name_en, bio, bio_en, avatar_url")
         .in("user_id", userIds);
       const profileMap = new Map((profiles || []).map((p) => [p.user_id, p]));
       setFeaturedTeachers(tps.map((tp) => {
@@ -46,10 +46,14 @@ const HomePage = () => {
         return {
           user_id: tp.user_id,
           full_name: profile?.full_name || t("the_teacher"),
+          full_name_en: profile?.full_name_en || null,
           bio: profile?.bio || null,
+          bio_en: profile?.bio_en || null,
           avatar_url: profile?.avatar_url || null,
           subjects: tp.subjects || [],
+          subjects_en: (tp as any).subjects_en || [],
           university: tp.university || null,
+          university_en: (tp as any).university_en || null,
           price: tp.price || 0,
           verified: tp.verified || false,
         };
