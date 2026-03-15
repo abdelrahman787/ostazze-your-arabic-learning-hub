@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useBilingual } from "@/hooks/useBilingual";
 import { Star, Clock, BookOpen, Loader2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
@@ -9,10 +10,14 @@ import { supabase } from "@/integrations/supabase/client";
 interface TeacherFull {
   user_id: string;
   full_name: string;
+  full_name_en: string | null;
   bio: string | null;
+  bio_en: string | null;
   avatar_url: string | null;
   subjects: string[];
+  subjects_en: string[];
   university: string | null;
+  university_en: string | null;
   price: number;
   verified: boolean;
 }
@@ -26,6 +31,7 @@ interface AvailSlot {
 const TeacherProfile = () => {
   const { id } = useParams();
   const { t } = useLanguage();
+  const { b, bArr } = useBilingual();
   const [teacher, setTeacher] = useState<TeacherFull | null>(null);
   const [availability, setAvailability] = useState<AvailSlot[]>([]);
   const [loading, setLoading] = useState(true);
@@ -39,7 +45,7 @@ const TeacherProfile = () => {
       setLoading(true);
       const { data: tp } = await supabase
         .from("teacher_profiles")
-        .select("user_id, subjects, university, price, verified")
+        .select("user_id, subjects, subjects_en, university, university_en, price, verified")
         .eq("user_id", id)
         .single();
 
@@ -47,17 +53,21 @@ const TeacherProfile = () => {
 
       const { data: profile } = await supabase
         .from("profiles")
-        .select("full_name, bio, avatar_url")
+        .select("full_name, full_name_en, bio, bio_en, avatar_url")
         .eq("user_id", id)
         .single();
 
       setTeacher({
         user_id: tp.user_id,
         full_name: profile?.full_name || t("the_teacher"),
+        full_name_en: profile?.full_name_en || null,
         bio: profile?.bio || null,
+        bio_en: profile?.bio_en || null,
         avatar_url: profile?.avatar_url || null,
         subjects: tp.subjects || [],
+        subjects_en: (tp as any).subjects_en || [],
         university: tp.university || null,
+        university_en: (tp as any).university_en || null,
         price: tp.price || 0,
         verified: tp.verified || false,
       });
@@ -92,14 +102,18 @@ const TeacherProfile = () => {
     );
   }
 
-  const initials = teacher.full_name.split(" ").map((w) => w[0]).join("").slice(0, 2);
+  const displayName = b(teacher.full_name, teacher.full_name_en, t("the_teacher"));
+  const displayUni = b(teacher.university, teacher.university_en);
+  const displayBio = b(teacher.bio, teacher.bio_en);
+  const displaySubjects = bArr(teacher.subjects, teacher.subjects_en);
+  const initials = displayName.split(" ").map((w) => w[0]).join("").slice(0, 2);
 
   return (
     <div>
       <section className="hero-gradient py-8">
         <div className="container">
           <p className="text-muted-foreground text-sm">
-            <Link to="/teachers" className="hover:text-primary">{t("nav_teachers")}</Link> / {teacher.full_name}
+            <Link to="/teachers" className="hover:text-primary">{t("nav_teachers")}</Link> / {displayName}
           </p>
         </div>
       </section>
@@ -114,22 +128,22 @@ const TeacherProfile = () => {
                 </motion.div>
                 <div>
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <h1 className="text-xl font-black">{teacher.full_name}</h1>
+                    <h1 className="text-xl font-black">{displayName}</h1>
                     {teacher.verified && <span className="text-xs bg-success/10 text-success px-2.5 py-1 rounded-full font-semibold">{t("teacher_verified")}</span>}
                   </div>
-                  {teacher.university && (
+                  {displayUni && (
                     <div className="inline-flex items-center gap-1.5 mt-2 text-xs bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 px-3 py-1 rounded-full">
                       <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}><BookOpen size={12} /></motion.div>
-                      {teacher.university}
+                      {displayUni}
                     </div>
                   )}
                 </div>
               </div>
 
-              {teacher.bio && <p className="text-muted-foreground leading-relaxed mb-6">{teacher.bio}</p>}
+              {displayBio && <p className="text-muted-foreground leading-relaxed mb-6">{displayBio}</p>}
 
               <div className="flex flex-wrap gap-2 mb-6">
-                {teacher.subjects.map((s, i) => <span key={i} className="badge-brand">{s}</span>)}
+                {displaySubjects.map((s, i) => <span key={i} className="badge-brand">{s}</span>)}
               </div>
 
               <div className="flex gap-4 items-center flex-wrap">
@@ -146,8 +160,8 @@ const TeacherProfile = () => {
                 open={showBooking}
                 onClose={() => setShowBooking(false)}
                 teacherId={teacher.user_id}
-                teacherName={teacher.full_name}
-                subjects={teacher.subjects}
+                teacherName={displayName}
+                subjects={displaySubjects}
                 price={teacher.price}
                 currency={t("sar")}
               />

@@ -184,8 +184,10 @@ export type Database = {
           account_type: string | null
           avatar_url: string | null
           bio: string | null
+          bio_en: string | null
           created_at: string
           full_name: string | null
+          full_name_en: string | null
           id: string
           phone: string | null
           updated_at: string
@@ -195,8 +197,10 @@ export type Database = {
           account_type?: string | null
           avatar_url?: string | null
           bio?: string | null
+          bio_en?: string | null
           created_at?: string
           full_name?: string | null
+          full_name_en?: string | null
           id?: string
           phone?: string | null
           updated_at?: string
@@ -206,8 +210,10 @@ export type Database = {
           account_type?: string | null
           avatar_url?: string | null
           bio?: string | null
+          bio_en?: string | null
           created_at?: string
           full_name?: string | null
+          full_name_en?: string | null
           id?: string
           phone?: string | null
           updated_at?: string
@@ -251,7 +257,9 @@ export type Database = {
           id: string
           price: number | null
           subjects: string[] | null
+          subjects_en: string[] | null
           university: string | null
+          university_en: string | null
           updated_at: string
           user_id: string
           verified: boolean | null
@@ -261,7 +269,9 @@ export type Database = {
           id?: string
           price?: number | null
           subjects?: string[] | null
+          subjects_en?: string[] | null
           university?: string | null
+          university_en?: string | null
           updated_at?: string
           user_id: string
           verified?: boolean | null
@@ -271,7 +281,9 @@ export type Database = {
           id?: string
           price?: number | null
           subjects?: string[] | null
+          subjects_en?: string[] | null
           university?: string | null
+          university_en?: string | null
           updated_at?: string
           user_id?: string
           verified?: boolean | null

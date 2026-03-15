@@ -44,7 +44,7 @@ const Dashboard = () => {
 
     if (data && data.length > 0) {
       const teacherIds = [...new Set(data.map((l) => l.teacher_id))];
-      const { data: profiles } = await supabase.from("profiles").select("user_id, full_name").in("user_id", teacherIds);
+      const { data: profiles } = await supabase.from("profiles").select("user_id, full_name, full_name_en").in("user_id", teacherIds);
       const pMap = new Map(profiles?.map((p) => [p.user_id, p.full_name]) || []);
       setRecentLectures(data.map((l) => ({ ...l, teacher_name: pMap.get(l.teacher_id) || "—" })));
     }
