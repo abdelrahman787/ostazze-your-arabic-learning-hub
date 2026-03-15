@@ -160,8 +160,8 @@ const TeacherProfile = () => {
                 open={showBooking}
                 onClose={() => setShowBooking(false)}
                 teacherId={teacher.user_id}
-                teacherName={teacher.full_name}
-                subjects={teacher.subjects}
+                teacherName={displayName}
+                subjects={displaySubjects}
                 price={teacher.price}
                 currency={t("sar")}
               />
