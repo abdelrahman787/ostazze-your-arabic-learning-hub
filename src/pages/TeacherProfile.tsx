@@ -45,7 +45,7 @@ const TeacherProfile = () => {
       setLoading(true);
       const { data: tp } = await supabase
         .from("teacher_profiles")
-        .select("user_id, subjects, university, price, verified")
+        .select("user_id, subjects, subjects_en, university, university_en, price, verified")
         .eq("user_id", id)
         .single();
 
@@ -53,17 +53,21 @@ const TeacherProfile = () => {
 
       const { data: profile } = await supabase
         .from("profiles")
-        .select("full_name, bio, avatar_url")
+        .select("full_name, full_name_en, bio, bio_en, avatar_url")
         .eq("user_id", id)
         .single();
 
       setTeacher({
         user_id: tp.user_id,
         full_name: profile?.full_name || t("the_teacher"),
+        full_name_en: profile?.full_name_en || null,
         bio: profile?.bio || null,
+        bio_en: profile?.bio_en || null,
         avatar_url: profile?.avatar_url || null,
         subjects: tp.subjects || [],
+        subjects_en: (tp as any).subjects_en || [],
         university: tp.university || null,
+        university_en: (tp as any).university_en || null,
         price: tp.price || 0,
         verified: tp.verified || false,
       });
