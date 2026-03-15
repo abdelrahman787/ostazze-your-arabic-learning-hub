@@ -112,7 +112,7 @@ const Dashboard = () => {
           </div>
           <div className="flex items-center gap-3">
             <NotificationBell />
-            <div className="w-9 h-9 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold">{user?.name?.charAt(0) || "ط"}</div>
+            <div className="w-9 h-9 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold">{user?.name?.charAt(0) || "U"}</div>
             <span className="text-sm font-medium hidden sm:block">{user?.name}</span>
           </div>
         </header>

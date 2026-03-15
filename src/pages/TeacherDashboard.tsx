@@ -211,7 +211,7 @@ const TeacherDashboard = () => {
                         </div>
 
                         <div className="flex items-center gap-2 mb-3">
-                          <div className="w-6 h-6 rounded-full bg-success/10 text-success flex items-center justify-center text-xs font-bold">{lec.student_name?.charAt(0) || "ط"}</div>
+                          <div className="w-6 h-6 rounded-full bg-success/10 text-success flex items-center justify-center text-xs font-bold">{lec.student_name?.charAt(0) || "S"}</div>
                           <span className="text-sm text-muted-foreground">{t("the_student")}: <span className="text-foreground font-medium">{lec.student_name}</span></span>
                         </div>
 
