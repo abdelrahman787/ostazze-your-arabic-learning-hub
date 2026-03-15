@@ -31,6 +31,7 @@ interface AvailSlot {
 const TeacherProfile = () => {
   const { id } = useParams();
   const { t } = useLanguage();
+  const { b, bArr } = useBilingual();
   const [teacher, setTeacher] = useState<TeacherFull | null>(null);
   const [availability, setAvailability] = useState<AvailSlot[]>([]);
   const [loading, setLoading] = useState(true);
