@@ -3,6 +3,7 @@ import TeacherCard from "@/components/TeacherCard";
 import type { TeacherData } from "@/components/TeacherCard";
 import { Search, SlidersHorizontal, Loader2 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useBilingual } from "@/hooks/useBilingual";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 
