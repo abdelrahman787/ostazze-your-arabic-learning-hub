@@ -8,6 +8,7 @@ import {
   GraduationCap, Loader2, ArrowLeft, Video, FileText, MessageSquare, CalendarCheck
 } from "lucide-react";
 import StudentLectures from "@/pages/StudentLectures";
+import MyLessons from "@/components/MyLessons";
 import NotificationBell from "@/components/NotificationBell";
 import BookingManager from "@/components/BookingManager";
 import { motion } from "framer-motion";
