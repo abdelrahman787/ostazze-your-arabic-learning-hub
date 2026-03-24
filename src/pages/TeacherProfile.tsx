@@ -147,10 +147,6 @@ const TeacherProfile = () => {
               </div>
 
               <div className="flex gap-4 items-center flex-wrap">
-                <div className="bg-secondary rounded-xl p-4 text-center">
-                  <div className="text-xl font-black text-primary">{teacher.price} {t("sar")}</div>
-                  <div className="text-muted-foreground text-xs">{t("teacher_per_session")}</div>
-                </div>
                 <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} onClick={() => setShowBooking(true)} className="btn-primary flex-1 text-center text-lg">
                   {t("teacher_book")} →
                 </motion.button>
@@ -162,8 +158,6 @@ const TeacherProfile = () => {
                 teacherId={teacher.user_id}
                 teacherName={displayName}
                 subjects={displaySubjects}
-                price={teacher.price}
-                currency={t("sar")}
               />
             </div>
 

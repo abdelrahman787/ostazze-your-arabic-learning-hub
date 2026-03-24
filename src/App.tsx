@@ -35,6 +35,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <Navbar />
       {children}
       {!hideFooter && <Footer />}
+      <FloatingWhatsApp />
     </>
   );
 };
