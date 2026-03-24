@@ -49,7 +49,7 @@ const translations = {
   teacher_verified: { ar: "موثق", en: "Verified" },
   teacher_not_found: { ar: "المعلم غير موجود", en: "Teacher not found" },
   teacher_back: { ar: "العودة للمعلمين", en: "Back to Teachers" },
-  teacher_book: { ar: "احجز جلسة", en: "Book Session" },
+  teacher_book: { ar: "اطلب جلسة", en: "Request Session" },
   teacher_reviews: { ar: "تقييمات الطلاب", en: "Student Reviews" },
   teacher_availability: { ar: "أوقات الإتاحة", en: "Availability" },
   teacher_experience: { ar: "سنة خبرة", en: "Years Experience" },
@@ -113,7 +113,7 @@ const translations = {
   login_email_note: { ar: "ملاحظة: بعد التسجيل، ستحتاج لتأكيد بريدك الإلكتروني", en: "Note: After registration, you'll need to verify your email" },
 
   // Register
-  register_title: { ar: "إنشاء حساب جديد", en: "Create New Account" },
+  register_title: { ar: "إنشاء حساب طالب", en: "Create Student Account" },
   register_subtitle: { ar: "أنشئ حسابك وابدأ رحلة التعلم", en: "Create your account and start learning" },
   register_google: { ar: "التسجيل بجوجل", en: "Sign up with Google" },
   register_name: { ar: "الاسم الكامل", en: "Full Name" },
@@ -128,6 +128,7 @@ const translations = {
   register_success_title: { ar: "تم إنشاء الحساب!", en: "Account Created!" },
   register_success_msg: { ar: "تم إرسال رسالة تأكيد إلى بريدك الإلكتروني. يرجى التحقق منه لتفعيل حسابك.", en: "A verification email has been sent to your inbox. Please verify to activate your account." },
   register_go_login: { ar: "الذهاب إلى تسجيل الدخول", en: "Go to Login" },
+  register_timezone: { ar: "المنطقة الزمنية", en: "Timezone" },
 
   // Forgot Password
   forgot_title: { ar: "نسيت كلمة المرور؟", en: "Forgot Password?" },
@@ -234,14 +235,86 @@ const translations = {
   day_fri: { ar: "الجمعة", en: "Friday" },
   day_sat: { ar: "السبت", en: "Saturday" },
 
-  // Booking
-  booking_title: { ar: "حجز جلسة", en: "Book a Session" },
+  // Booking / Session Request
+  booking_title: { ar: "طلب جلسة", en: "Request a Session" },
   booking_select_subject: { ar: "اختر المادة", en: "Select Subject" },
   booking_datetime: { ar: "تاريخ ووقت الجلسة", en: "Session Date & Time" },
-  booking_notes: { ar: "ملاحظات للمعلم (اختياري)", en: "Notes for teacher (optional)" },
+  booking_notes: { ar: "ملاحظات (اختياري)", en: "Notes (optional)" },
   booking_price: { ar: "سعر الجلسة", en: "Session Price" },
   booking_confirm: { ar: "تأكيد الحجز", en: "Confirm Booking" },
   booking_from5: { ar: "من 5", en: "out of 5" },
+
+  book_with: { ar: "طلب جلسة مع", en: "Request session with" },
+  from_available: { ar: "من المواعيد المتاحة", en: "From available slots" },
+  custom_appointment: { ar: "موعد مخصص", en: "Custom appointment" },
+  choose_day: { ar: "اختر اليوم المناسب", en: "Choose suitable day" },
+  choose_time: { ar: "اختر الوقت", en: "Choose time" },
+  no_available_slots: { ar: "لا توجد مواعيد متاحة حالياً", en: "No available slots currently" },
+  request_custom: { ar: "اطلب موعد مخصص ←", en: "Request custom slot →" },
+  custom_note: { ar: "اختر التاريخ والوقت المناسب لك وسيتم إرسال الطلب للإدارة", en: "Choose your preferred date and time, and the request will be sent to administration" },
+  the_subject: { ar: "المادة", en: "Subject" },
+  the_date: { ar: "التاريخ", en: "Date" },
+  the_time: { ar: "الوقت", en: "Time" },
+  custom_reason: { ar: "ملاحظات إضافية (اختياري)", en: "Additional notes (optional)" },
+  notes_optional: { ar: "ملاحظات (اختياري)", en: "Notes (optional)" },
+  session_price: { ar: "سعر الجلسة", en: "Session Price" },
+  confirm_booking_btn: { ar: "إرسال الطلب →", en: "Send Request →" },
+  send_request_btn: { ar: "إرسال طلب الموعد →", en: "Send Appointment Request →" },
+  sending: { ar: "جاري الإرسال...", en: "Sending..." },
+  login_required: { ar: "يجب تسجيل الدخول أولاً", en: "You must login first" },
+  select_date_time: { ar: "اختر التاريخ والوقت", en: "Select date and time" },
+  booking_success: { ar: "تم إرسال طلب الجلسة بنجاح! ✅", en: "Session request sent successfully! ✅" },
+  custom_booking_success: { ar: "تم إرسال طلب الموعد المخصص! ⏳", en: "Custom appointment request sent! ⏳" },
+  slot_taken: { ar: "هذا الموعد محجوز بالفعل! اختر وقتاً آخر ⚠️", en: "This slot is already booked! Choose another time ⚠️" },
+  custom_tag: { ar: "[موعد مخصص]", en: "[Custom appointment]" },
+
+  // Booking manager
+  no_bookings: { ar: "لا توجد طلبات", en: "No requests" },
+  accept_btn: { ar: "قبول", en: "Accept" },
+  reject_btn: { ar: "رفض", en: "Reject" },
+  cancel_booking: { ar: "إلغاء الطلب", en: "Cancel Request" },
+  enter_lecture: { ar: "دخول المحاضرة →", en: "Enter Lecture →" },
+  reject_reason: { ar: "سبب الرفض (اختياري)...", en: "Rejection reason (optional)..." },
+  confirm_reject: { ar: "تأكيد الرفض", en: "Confirm Rejection" },
+  processing: { ar: "جاري...", en: "Processing..." },
+  booking_accepted: { ar: "تم قبول الطلب وإنشاء المحاضرة ✅", en: "Request accepted and lecture created ✅" },
+  booking_rejected: { ar: "تم رفض الطلب", en: "Request rejected" },
+  booking_updated: { ar: "تم تحديث الطلب", en: "Request updated" },
+  rejection_reason_label: { ar: "سبب الرفض:", en: "Rejection reason:" },
+
+  // Booking status
+  bstatus_pending: { ar: "قيد الانتظار", en: "Pending" },
+  bstatus_confirmed: { ar: "مؤكد", en: "Confirmed" },
+  bstatus_rejected: { ar: "مرفوض", en: "Rejected" },
+  bstatus_cancelled: { ar: "ملغي", en: "Cancelled" },
+  bstatus_completed: { ar: "مكتمل", en: "Completed" },
+  bstatus_assigned: { ar: "تم التعيين", en: "Assigned" },
+
+  // Teacher profile page
+  no_reviews_yet: { ar: "لا توجد تقييمات حتى الآن", en: "No reviews yet" },
+  no_teachers_registered: { ar: "لا يوجد معلمون مسجلون حالياً", en: "No registered teachers currently" },
+
+  // Teacher dashboard profile
+  academic_title: { ar: "اللقب الأكاديمي", en: "Academic Title" },
+  academic_title_placeholder: { ar: "مثال: أستاذ مساعد", en: "e.g. Assistant Professor" },
+  bio_label: { ar: "نبذة تعريفية", en: "Bio" },
+  bio_placeholder: { ar: "اكتب نبذة عنك وخبراتك...", en: "Write about yourself and your experience..." },
+  session_price_label: { ar: "سعر الجلسة", en: "Session Price" },
+  years_experience: { ar: "سنوات الخبرة", en: "Years of Experience" },
+  earnings_system_dev: { ar: "نظام الأرباح قيد التطوير وسيكون متاحاً قريباً", en: "Earnings system is under development and will be available soon" },
+  session_label: { ar: "جلسة:", en: "Session:" },
+  subject_word: { ar: "مادة", en: "Subject" },
+
+  // Availability manager
+  manage_availability: { ar: "إدارة أوقات التوفر", en: "Manage Availability" },
+  add_time: { ar: "إضافة وقت", en: "Add Time" },
+  no_times_set: { ar: "لا توجد أوقات محددة", en: "No times set" },
+  to_word: { ar: "إلى", en: "to" },
+  time_deleted: { ar: "تم حذف الوقت", en: "Time deleted" },
+  schedule_saved: { ar: "تم حفظ الجدول بنجاح ✅", en: "Schedule saved successfully ✅" },
+  save_error: { ar: "خطأ في الحفظ:", en: "Save error:" },
+  saving: { ar: "جاري الحفظ...", en: "Saving..." },
+  save_schedule: { ar: "حفظ الجدول", en: "Save Schedule" },
 
   // Footer
   footer_desc: { ar: "منصة تعليمية متميزة تربطك بأفضل المدرسين الخصوصيين لجلسات مباشرة عبر الإنترنت.", en: "A premium educational platform connecting you with the best private tutors for live online sessions." },
@@ -252,6 +325,7 @@ const translations = {
   footer_privacy: { ar: "سياسة الخصوصية", en: "Privacy Policy" },
   footer_contact_us: { ar: "تواصل معنا", en: "Contact Us" },
   footer_rights: { ar: "© 2026 Ostazze. جميع الحقوق محفوظة", en: "© 2026 Ostazze. All rights reserved" },
+  footer_location: { ar: "الرياض، المملكة العربية السعودية", en: "Riyadh, Saudi Arabia" },
 
   // Common
   coming_soon: { ar: "قريباً", en: "Coming Soon" },
@@ -266,9 +340,6 @@ const translations = {
   section_account: { ar: "الحساب", en: "Account" },
   section_as_teacher: { ar: "كمعلم", en: "As Teacher" },
 
-  // Footer location
-  footer_location: { ar: "الرياض، المملكة العربية السعودية", en: "Riyadh, Saudi Arabia" },
-
   // 404
   not_found_title: { ar: "الصفحة غير موجودة", en: "Page not found" },
   not_found_desc: { ar: "عذراً! الصفحة التي تبحث عنها غير موجودة", en: "Oops! The page you're looking for doesn't exist" },
@@ -278,10 +349,8 @@ const translations = {
   cat_subjects_count: { ar: "مادة", en: "subjects" },
   cat_subjects_count_plural: { ar: "مواد", en: "subjects" },
 
-  // Teacher profile breadcrumb / misc
+  // Teacher profile breadcrumb
   teacher_about: { ar: "نبذة عن المعلم", en: "About the Teacher" },
-
-  // Navbar home
   nav_home_link: { ar: "الرئيسية", en: "Home" },
 
   // Dashboard sidebar & labels
@@ -289,8 +358,9 @@ const translations = {
   sidebar_teacher_dashboard: { ar: "لوحة تحكم المعلم", en: "Teacher Dashboard" },
   sidebar_teaching: { ar: "التدريس", en: "Teaching" },
   sidebar_my_lectures: { ar: "محاضراتي", en: "My Lectures" },
-  sidebar_bookings: { ar: "الحجوزات", en: "Bookings" },
-  sidebar_my_bookings: { ar: "حجوزاتي", en: "My Bookings" },
+  sidebar_my_lessons: { ar: "دروسي", en: "My Lessons" },
+  sidebar_bookings: { ar: "الطلبات", en: "Requests" },
+  sidebar_my_bookings: { ar: "طلباتي", en: "My Requests" },
   sidebar_available_times: { ar: "الأوقات المتاحة", en: "Available Times" },
   sidebar_my_earnings: { ar: "أرباحي", en: "My Earnings" },
   sidebar_profile: { ar: "الملف الشخصي", en: "Profile" },
@@ -308,7 +378,7 @@ const translations = {
   welcome_student: { ar: "مرحباً", en: "Welcome" },
   welcome_student_sub: { ar: "هنا يمكنك متابعة محاضراتك والتواصل مع معلميك.", en: "Here you can follow your lectures and communicate with your teachers." },
   welcome_teacher: { ar: "مرحباً أستاذ", en: "Welcome, Professor" },
-  welcome_teacher_sub: { ar: "هنا يمكنك إدارة محاضراتك والتواصل مع طلابك ومتابعة أرباحك.", en: "Here you can manage your lectures, communicate with students, and track your earnings." },
+  welcome_teacher_sub: { ar: "هنا يمكنك إدارة محاضراتك والتواصل مع طلابك.", en: "Here you can manage your lectures and communicate with your students." },
 
   // Quick actions & recent
   quick_actions: { ar: "إجراءات سريعة", en: "Quick Actions" },
@@ -328,77 +398,33 @@ const translations = {
   no_file: { ar: "بدون ملف", en: "No file" },
   chat_word: { ar: "محادثة", en: "Chat" },
 
-  // Booking modal
-  book_with: { ar: "حجز جلسة مع", en: "Book session with" },
-  from_available: { ar: "من المواعيد المتاحة", en: "From available slots" },
-  custom_appointment: { ar: "موعد مخصص", en: "Custom appointment" },
-  choose_day: { ar: "اختر اليوم المناسب", en: "Choose suitable day" },
-  choose_time: { ar: "اختر الوقت", en: "Choose time" },
-  no_available_slots: { ar: "لا توجد مواعيد متاحة حالياً", en: "No available slots currently" },
-  request_custom: { ar: "اطلب موعد مخصص ←", en: "Request custom slot →" },
-  custom_note: { ar: "اختر التاريخ والوقت المناسب لك وسيتم إرسال الطلب للمعلم للموافقة عليه", en: "Choose your preferred date and time, and the request will be sent to the teacher for approval" },
-  the_subject: { ar: "المادة", en: "Subject" },
-  the_date: { ar: "التاريخ", en: "Date" },
-  the_time: { ar: "الوقت", en: "Time" },
-  custom_reason: { ar: "سبب اختيار هذا الموعد (اختياري)", en: "Reason for this time (optional)" },
-  notes_optional: { ar: "ملاحظات (اختياري)", en: "Notes (optional)" },
-  session_price: { ar: "سعر الجلسة", en: "Session Price" },
-  confirm_booking_btn: { ar: "تأكيد الحجز →", en: "Confirm Booking →" },
-  send_request_btn: { ar: "إرسال طلب الموعد →", en: "Send Appointment Request →" },
-  sending: { ar: "جاري الإرسال...", en: "Sending..." },
-  login_required: { ar: "يجب تسجيل الدخول أولاً", en: "You must login first" },
-  select_date_time: { ar: "اختر التاريخ والوقت", en: "Select date and time" },
-  booking_success: { ar: "تم إرسال طلب الحجز بنجاح! ✅", en: "Booking request sent successfully! ✅" },
-  custom_booking_success: { ar: "تم إرسال طلب الموعد المخصص للمعلم! ⏳", en: "Custom appointment request sent to teacher! ⏳" },
-  slot_taken: { ar: "هذا الموعد محجوز بالفعل! اختر وقتاً آخر ⚠️", en: "This slot is already booked! Choose another time ⚠️" },
+  // Sales Hub
+  sales_hub: { ar: "مركز المبيعات", en: "Sales Hub" },
+  sales_requests: { ar: "طلبات الجلسات", en: "Session Requests" },
+  sales_stats: { ar: "الإحصائيات", en: "Statistics" },
+  sales_payments: { ar: "المدفوعات", en: "Payments" },
+  sales_assign_teacher: { ar: "تعيين معلم", en: "Assign Teacher" },
+  sales_total_requests: { ar: "إجمالي الطلبات", en: "Total Requests" },
+  sales_pending_requests: { ar: "طلبات معلقة", en: "Pending Requests" },
+  sales_assigned_requests: { ar: "طلبات معيّنة", en: "Assigned Requests" },
+  sales_completed_requests: { ar: "طلبات مكتملة", en: "Completed Requests" },
+  sales_no_requests: { ar: "لا توجد طلبات جلسات بعد", en: "No session requests yet" },
+  sales_assign: { ar: "تعيين", en: "Assign" },
+  sales_assigned: { ar: "تم التعيين", en: "Assigned" },
+  sales_select_teacher: { ar: "اختر المعلم", en: "Select Teacher" },
+  sales_zoom_url: { ar: "رابط Zoom", en: "Zoom Link" },
+  sales_confirm_assign: { ar: "تأكيد التعيين", en: "Confirm Assignment" },
 
-  // Booking manager
-  no_bookings: { ar: "لا توجد حجوزات", en: "No bookings" },
-  accept_btn: { ar: "قبول", en: "Accept" },
-  reject_btn: { ar: "رفض", en: "Reject" },
-  cancel_booking: { ar: "إلغاء الحجز", en: "Cancel Booking" },
-  enter_lecture: { ar: "دخول المحاضرة →", en: "Enter Lecture →" },
-  reject_reason: { ar: "سبب الرفض (اختياري)...", en: "Rejection reason (optional)..." },
-  confirm_reject: { ar: "تأكيد الرفض", en: "Confirm Rejection" },
-  processing: { ar: "جاري...", en: "Processing..." },
-  booking_accepted: { ar: "تم قبول الحجز وإنشاء المحاضرة ✅", en: "Booking accepted and lecture created ✅" },
-  booking_rejected: { ar: "تم رفض الحجز", en: "Booking rejected" },
-  booking_updated: { ar: "تم تحديث الحجز", en: "Booking updated" },
-  rejection_reason_label: { ar: "سبب الرفض:", en: "Rejection reason:" },
+  // My Lessons
+  my_lessons: { ar: "دروسي", en: "My Lessons" },
+  no_lessons: { ar: "لا توجد دروس مجدولة", en: "No scheduled lessons" },
+  lesson_zoom: { ar: "دخول Zoom", en: "Join Zoom" },
+  lesson_no_zoom: { ar: "لم يُضف رابط Zoom بعد", en: "No Zoom link added yet" },
+  lesson_date: { ar: "التاريخ", en: "Date" },
+  lesson_time: { ar: "الوقت", en: "Time" },
 
-  // Booking status
-  bstatus_pending: { ar: "قيد الانتظار", en: "Pending" },
-  bstatus_confirmed: { ar: "مؤكد", en: "Confirmed" },
-  bstatus_rejected: { ar: "مرفوض", en: "Rejected" },
-  bstatus_cancelled: { ar: "ملغي", en: "Cancelled" },
-  bstatus_completed: { ar: "مكتمل", en: "Completed" },
-
-  // Teacher profile page
-  no_reviews_yet: { ar: "لا توجد تقييمات حتى الآن", en: "No reviews yet" },
-  no_teachers_registered: { ar: "لا يوجد معلمون مسجلون حالياً", en: "No registered teachers currently" },
-
-  // Teacher dashboard profile
-  academic_title: { ar: "اللقب الأكاديمي", en: "Academic Title" },
-  academic_title_placeholder: { ar: "مثال: أستاذ مساعد", en: "e.g. Assistant Professor" },
-  bio_label: { ar: "نبذة تعريفية", en: "Bio" },
-  bio_placeholder: { ar: "اكتب نبذة عنك وخبراتك...", en: "Write about yourself and your experience..." },
-  session_price_label: { ar: "سعر الجلسة", en: "Session Price" },
-  years_experience: { ar: "سنوات الخبرة", en: "Years of Experience" },
-  earnings_system_dev: { ar: "نظام الأرباح قيد التطوير وسيكون متاحاً قريباً", en: "Earnings system is under development and will be available soon" },
-  custom_tag: { ar: "[موعد مخصص]", en: "[Custom appointment]" },
-  session_label: { ar: "جلسة:", en: "Session:" },
-  subject_word: { ar: "مادة", en: "Subject" },
-
-  // Availability manager
-  manage_availability: { ar: "إدارة أوقات التوفر", en: "Manage Availability" },
-  add_time: { ar: "إضافة وقت", en: "Add Time" },
-  no_times_set: { ar: "لا توجد أوقات محددة", en: "No times set" },
-  to_word: { ar: "إلى", en: "to" },
-  time_deleted: { ar: "تم حذف الوقت", en: "Time deleted" },
-  schedule_saved: { ar: "تم حفظ الجدول بنجاح ✅", en: "Schedule saved successfully ✅" },
-  save_error: { ar: "خطأ في الحفظ:", en: "Save error:" },
-  saving: { ar: "جاري الحفظ...", en: "Saving..." },
-  save_schedule: { ar: "حفظ الجدول", en: "Save Schedule" },
+  // WhatsApp
+  whatsapp_msg: { ar: "مرحباً، أريد الاستفسار عن خدمات أسطازي", en: "Hello, I'd like to inquire about Ostazze services" },
 } as const;
 
 type TranslationKey = keyof typeof translations;

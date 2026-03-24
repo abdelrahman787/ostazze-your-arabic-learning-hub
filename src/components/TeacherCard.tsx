@@ -76,11 +76,11 @@ const TeacherCard = ({ teacher, index = 0 }: { teacher: TeacherData; index?: num
           </motion.div>
           <span className="font-bold text-sm">-</span>
         </div>
-        <div className="text-left">
-          <span className="text-lg font-extrabold text-primary">{teacher.price}</span>
-          <span className="text-muted-foreground text-xs mr-1">{t("sar")}</span>
-          <div className="text-muted-foreground text-[0.65rem]">{t("teacher_per_session")}</div>
-        </div>
+        {teacher.verified && (
+          <span className="text-xs bg-success/10 text-success px-2.5 py-1 rounded-full font-semibold">
+            {t("teacher_verified")}
+          </span>
+        )}
       </div>
 
       <div className="px-5 pb-5">

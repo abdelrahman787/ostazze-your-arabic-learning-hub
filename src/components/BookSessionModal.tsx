@@ -2,15 +2,9 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { X, Loader2, Calendar, Clock, BookOpen, CalendarCheck, CalendarPlus } from "lucide-react";
+import { X, Loader2, Calendar, Clock, BookOpen } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
-
-interface AvailSlot {
-  day_of_week: number;
-  start_time: string;
-  end_time: string;
-}
 
 interface Props {
   open: boolean;
@@ -18,69 +12,18 @@ interface Props {
   teacherId: string;
   teacherName: string;
   subjects: string[];
-  price: number;
-  currency: string;
 }
 
-type BookingMode = "available" | "custom";
-
-/** Get the next date for a given day_of_week (0=Sun) */
-function getNextDateForDay(dayOfWeek: number): string {
-  const today = new Date();
-  const todayDay = today.getDay();
-  let diff = dayOfWeek - todayDay;
-  if (diff <= 0) diff += 7;
-  const next = new Date(today);
-  next.setDate(today.getDate() + diff);
-  return next.toISOString().split("T")[0];
-}
-
-const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects, price, currency }: Props) => {
+const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects }: Props) => {
   const { user } = useAuth();
   const { t } = useLanguage();
-  const [availability, setAvailability] = useState<AvailSlot[]>([]);
-  const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
-  const [mode, setMode] = useState<BookingMode>("available");
-  const [selectedSlotIndex, setSelectedSlotIndex] = useState<number | null>(null);
   const [form, setForm] = useState({ subject: subjects[0] || "", date: "", time: "", notes: "" });
-
-  const DAYS = [t("day_sun"), t("day_mon"), t("day_tue"), t("day_wed"), t("day_thu"), t("day_fri"), t("day_sat")];
 
   useEffect(() => {
     if (!open) return;
-    setLoading(true);
-    setMode("available");
-    setSelectedSlotIndex(null);
     setForm({ subject: subjects[0] || "", date: "", time: "", notes: "" });
-    supabase
-      .from("teacher_availability")
-      .select("day_of_week, start_time, end_time")
-      .eq("teacher_id", teacherId)
-      .eq("is_active", true)
-      .order("day_of_week")
-      .then(({ data }) => {
-        setAvailability((data as AvailSlot[]) || []);
-        setLoading(false);
-      });
-  }, [open, teacherId]);
-
-  const handleSelectDaySlot = (index: number) => {
-    const slot = availability[index];
-    const nextDate = getNextDateForDay(slot.day_of_week);
-    setSelectedSlotIndex(index);
-    setForm((f) => ({ ...f, date: nextDate, time: "" }));
-  };
-
-  const getTimeSlotsForSlot = (slot: AvailSlot): string[] => {
-    const start = parseInt(slot.start_time.split(":")[0]);
-    const end = parseInt(slot.end_time.split(":")[0]);
-    const times: string[] = [];
-    for (let h = start; h < end; h++) {
-      times.push(`${String(h).padStart(2, "0")}:00`);
-    }
-    return times;
-  };
+  }, [open]);
 
   const handleSubmit = async () => {
     if (!user) { toast.error(t("login_required")); return; }
@@ -88,39 +31,25 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects, pri
 
     setSubmitting(true);
     try {
-      const notesWithMode = mode === "custom"
-        ? `${t("custom_tag")} ${form.notes || ""}`.trim()
-        : form.notes || null;
-
-      const { error } = await supabase.from("bookings").insert({
+      const { error } = await supabase.from("session_requests" as any).insert({
         student_id: user.id,
         teacher_id: teacherId,
         subject: form.subject || null,
-        scheduled_date: form.date,
-        scheduled_time: form.time,
-        notes: notesWithMode,
+        preferred_date: form.date,
+        preferred_time: form.time,
+        notes: form.notes || null,
+        status: "pending",
       });
 
-      if (error) {
-        if (error.code === "23505" || error.message?.includes("idx_bookings_no_conflict")) {
-          toast.error(t("slot_taken"));
-        } else {
-          throw error;
-        }
-        setSubmitting(false);
-        return;
-      }
+      if (error) throw error;
 
-      toast.success(mode === "available" ? t("booking_success") : t("custom_booking_success"));
+      toast.success(t("booking_success"));
       onClose();
-      setForm({ subject: subjects[0] || "", date: "", time: "", notes: "" });
     } catch (e: any) {
       toast.error("Error: " + e.message);
     }
     setSubmitting(false);
   };
-
-  const selectedSlot = selectedSlotIndex !== null ? availability[selectedSlotIndex] : null;
 
   return (
     <AnimatePresence>
@@ -137,163 +66,45 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects, pri
               </button>
             </div>
 
-            {loading ? (
-              <div className="flex justify-center py-8"><Loader2 className="animate-spin text-primary" size={24} /></div>
-            ) : (
-              <div className="space-y-4">
-                {/* Mode selector */}
-                <div className="grid grid-cols-2 gap-2">
-                  <button
-                    onClick={() => { setMode("available"); setSelectedSlotIndex(null); setForm(f => ({ ...f, date: "", time: "" })); }}
-                    className={`flex items-center justify-center gap-2 p-3 rounded-xl text-sm font-bold transition-all border-2 ${
-                      mode === "available"
-                        ? "border-primary bg-primary/10 text-primary"
-                        : "border-border bg-secondary text-muted-foreground hover:border-primary/30"
-                    }`}
-                  >
-                    <CalendarCheck size={16} />
-                    {t("from_available")}
-                  </button>
-                  <button
-                    onClick={() => { setMode("custom"); setSelectedSlotIndex(null); setForm(f => ({ ...f, date: "", time: "" })); }}
-                    className={`flex items-center justify-center gap-2 p-3 rounded-xl text-sm font-bold transition-all border-2 ${
-                      mode === "custom"
-                        ? "border-primary bg-primary/10 text-primary"
-                        : "border-border bg-secondary text-muted-foreground hover:border-primary/30"
-                    }`}
-                  >
-                    <CalendarPlus size={16} />
-                    {t("custom_appointment")}
-                  </button>
-                </div>
-
-                {/* Available mode: pick a day slot */}
-                {mode === "available" && availability.length > 0 && (
-                  <div>
-                    <label className="block text-sm font-bold mb-2 flex items-center gap-1">
-                      <Calendar size={14} /> {t("choose_day")}
-                    </label>
-                    <div className="grid grid-cols-2 gap-2">
-                      {availability.map((a, i) => {
-                        const nextDate = getNextDateForDay(a.day_of_week);
-                        const isSelected = selectedSlotIndex === i;
-                        return (
-                          <button
-                            key={i}
-                            onClick={() => handleSelectDaySlot(i)}
-                            className={`p-3 rounded-xl text-sm font-bold transition-all border-2 text-right ${
-                              isSelected
-                                ? "border-primary bg-primary/10 text-primary"
-                                : "border-border bg-secondary text-foreground hover:border-primary/30"
-                            }`}
-                          >
-                            <div className="font-extrabold">{DAYS[a.day_of_week]}</div>
-                            <div className="text-xs text-muted-foreground mt-1">{nextDate}</div>
-                            <div className="text-xs text-primary mt-0.5">
-                              {a.start_time.slice(0, 5)} - {a.end_time.slice(0, 5)}
-                            </div>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-                )}
-
-                {mode === "available" && availability.length === 0 && (
-                  <div className="bg-muted rounded-xl p-4 text-center">
-                    <p className="text-sm text-muted-foreground">{t("no_available_slots")}</p>
-                    <button onClick={() => setMode("custom")} className="text-primary text-sm font-bold mt-2 hover:underline">
-                      {t("request_custom")}
-                    </button>
-                  </div>
-                )}
-
-                {/* Available mode: pick time from selected slot */}
-                {mode === "available" && selectedSlot && (
-                  <div>
-                    <label className="block text-sm font-bold mb-2 flex items-center gap-1">
-                      <Clock size={14} /> {t("choose_time")}
-                    </label>
-                    <div className="flex flex-wrap gap-2">
-                      {getTimeSlotsForSlot(selectedSlot).map((timeSlot) => (
-                        <button
-                          key={timeSlot}
-                          onClick={() => setForm((f) => ({ ...f, time: timeSlot }))}
-                          className={`px-4 py-2 rounded-xl text-sm font-bold transition-colors ${
-                            form.time === timeSlot
-                              ? "bg-primary text-primary-foreground"
-                              : "bg-secondary hover:bg-primary/10 text-foreground"
-                          }`}
-                        >
-                          {timeSlot}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* Custom mode */}
-                {mode === "custom" && (
-                  <div className="bg-accent/50 border border-accent rounded-xl p-3">
-                    <p className="text-xs text-muted-foreground">
-                      💡 {t("custom_note")}
-                    </p>
-                  </div>
-                )}
-
-                {/* Subject */}
-                {subjects.length > 0 && (
-                  <div>
-                    <label className="block text-sm font-bold mb-1.5 flex items-center gap-1"><BookOpen size={14} /> {t("the_subject")}</label>
-                    <select value={form.subject} onChange={(e) => setForm((f) => ({ ...f, subject: e.target.value }))} className="input-base">
-                      {subjects.map((s, i) => <option key={i} value={s}>{s}</option>)}
-                    </select>
-                  </div>
-                )}
-
-                {/* Custom mode: date & time inputs */}
-                {mode === "custom" && (
-                  <>
-                    <div>
-                      <label className="block text-sm font-bold mb-1.5 flex items-center gap-1"><Calendar size={14} /> {t("the_date")}</label>
-                      <input type="date" value={form.date} min={new Date().toISOString().split("T")[0]}
-                        onChange={(e) => setForm((f) => ({ ...f, date: e.target.value, time: "" }))} className="input-base" />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-bold mb-1.5 flex items-center gap-1"><Clock size={14} /> {t("the_time")}</label>
-                      <input type="time" value={form.time} onChange={(e) => setForm((f) => ({ ...f, time: e.target.value }))} className="input-base" />
-                    </div>
-                  </>
-                )}
-
-                {/* Notes */}
-                <div>
-                  <label className="block text-sm font-bold mb-1.5">
-                    {mode === "custom" ? t("custom_reason") : t("notes_optional")}
-                  </label>
-                  <textarea value={form.notes} onChange={(e) => setForm((f) => ({ ...f, notes: e.target.value }))}
-                    rows={2} className="input-base resize-none" />
-                </div>
-
-                {/* Price */}
-                <div className="bg-primary/5 border border-primary/20 rounded-xl p-4 flex items-center justify-between">
-                  <span className="font-bold text-foreground">{t("session_price")}</span>
-                  <span className="font-extrabold text-primary">{price} {currency}</span>
-                </div>
-
-                <motion.button whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }} onClick={handleSubmit}
-                  disabled={submitting || !form.date || !form.time}
-                  className="btn-primary w-full text-lg flex items-center justify-center gap-2 disabled:opacity-50">
-                  {submitting ? <Loader2 size={18} className="animate-spin" /> : null}
-                  {submitting
-                    ? t("sending")
-                    : mode === "available"
-                      ? t("confirm_booking_btn")
-                      : t("send_request_btn")
-                  }
-                </motion.button>
+            <div className="space-y-4">
+              <div className="bg-accent/50 border border-accent rounded-xl p-3">
+                <p className="text-xs text-muted-foreground">
+                  💡 {t("custom_note")}
+                </p>
               </div>
-            )}
+
+              {subjects.length > 0 && (
+                <div>
+                  <label className="block text-sm font-bold mb-1.5 flex items-center gap-1"><BookOpen size={14} /> {t("the_subject")}</label>
+                  <select value={form.subject} onChange={(e) => setForm((f) => ({ ...f, subject: e.target.value }))} className="input-base">
+                    {subjects.map((s, i) => <option key={i} value={s}>{s}</option>)}
+                  </select>
+                </div>
+              )}
+
+              <div>
+                <label className="block text-sm font-bold mb-1.5 flex items-center gap-1"><Calendar size={14} /> {t("the_date")}</label>
+                <input type="date" value={form.date} min={new Date().toISOString().split("T")[0]}
+                  onChange={(e) => setForm((f) => ({ ...f, date: e.target.value }))} className="input-base" />
+              </div>
+              <div>
+                <label className="block text-sm font-bold mb-1.5 flex items-center gap-1"><Clock size={14} /> {t("the_time")}</label>
+                <input type="time" value={form.time} onChange={(e) => setForm((f) => ({ ...f, time: e.target.value }))} className="input-base" />
+              </div>
+
+              <div>
+                <label className="block text-sm font-bold mb-1.5">{t("notes_optional")}</label>
+                <textarea value={form.notes} onChange={(e) => setForm((f) => ({ ...f, notes: e.target.value }))}
+                  rows={2} className="input-base resize-none" />
+              </div>
+
+              <motion.button whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }} onClick={handleSubmit}
+                disabled={submitting || !form.date || !form.time}
+                className="btn-primary w-full text-lg flex items-center justify-center gap-2 disabled:opacity-50">
+                {submitting ? <Loader2 size={18} className="animate-spin" /> : null}
+                {submitting ? t("sending") : t("confirm_booking_btn")}
+              </motion.button>
+            </div>
           </motion.div>
         </motion.div>
       )}
