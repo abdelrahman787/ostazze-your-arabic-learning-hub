@@ -4,8 +4,8 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
 import {
-  Menu, LogOut, LayoutDashboard, BookOpen, User, Clock, Wallet,
-  GraduationCap, Video, FileText, MessageSquare, Loader2, ArrowLeft, CalendarCheck
+  Menu, LogOut, LayoutDashboard, BookOpen, User, Clock,
+  GraduationCap, Video, FileText, MessageSquare, Loader2, ArrowLeft, CalendarCheck, GraduationCap as LessonsIcon
 } from "lucide-react";
 import { motion } from "framer-motion";
 import NotificationBell from "@/components/NotificationBell";
