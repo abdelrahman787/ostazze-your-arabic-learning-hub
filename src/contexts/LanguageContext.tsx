@@ -425,6 +425,66 @@ const translations = {
 
   // WhatsApp
   whatsapp_msg: { ar: "مرحباً، أريد الاستفسار عن خدمات أسطازي", en: "Hello, I'd like to inquire about Ostazze services" },
+
+  // LectureView
+  lecture_not_found: { ar: "المحاضرة غير موجودة", en: "Lecture not found" },
+  lecture_access_denied: { ar: "ليس لديك صلاحية لعرض هذه المحاضرة", en: "You do not have permission to view this lecture" },
+  go_back: { ar: "العودة", en: "Go Back" },
+  audio_message: { ar: "رسالة صوتية", en: "Voice message" },
+  hide_file: { ar: "إخفاء الملف", en: "Hide File" },
+  show_file: { ar: "عرض الملف", en: "Show File" },
+  hide_chat: { ar: "إخفاء المحادثة", en: "Hide Chat" },
+  open_chat: { ar: "المحادثة", en: "Chat" },
+  material_file: { ar: "ملف المادة", en: "Material File" },
+  no_messages_yet: { ar: "لا توجد رسائل بعد. ابدأ المحادثة!", en: "No messages yet. Start the conversation!" },
+  type_message: { ar: "اكتب رسالة...", en: "Type a message..." },
+  join_zoom: { ar: "انضم عبر Zoom", en: "Join via Zoom" },
+  zoom_link: { ar: "رابط Zoom متاح", en: "Zoom Link Available" },
+
+  // Email verification
+  email_not_verified_title: { ar: "بريدك الإلكتروني لم يتم تأكيده", en: "Your email is not verified" },
+  email_not_verified_body: { ar: "يرجى التحقق من بريدك الإلكتروني والنقر على رابط التأكيد لتفعيل جميع الميزات.", en: "Please check your inbox and click the verification link to unlock all features." },
+  resend_email: { ar: "إعادة إرسال رابط التأكيد", en: "Resend Verification Email" },
+  email_resent: { ar: "تم إرسال رابط التأكيد مجدداً ✅", en: "Verification link resent ✅" },
+
+  // Profile save
+  profile_saved: { ar: "تم حفظ الملف الشخصي بنجاح ✅", en: "Profile saved successfully ✅" },
+  password_changed: { ar: "تم تغيير كلمة المرور بنجاح ✅", en: "Password changed successfully ✅" },
+  password_mismatch: { ar: "كلمة المرور الجديدة غير متطابقة", en: "New passwords do not match" },
+  password_too_short: { ar: "كلمة المرور يجب أن تكون 8 أحرف على الأقل", en: "Password must be at least 8 characters" },
+  current_password_wrong: { ar: "كلمة المرور الحالية غير صحيحة", en: "Current password is incorrect" },
+
+  // Reviews
+  rate_teacher: { ar: "تقييم المعلم", en: "Rate Teacher" },
+  your_review: { ar: "تقييمك", en: "Your Review" },
+  submit_review: { ar: "إرسال التقييم", en: "Submit Review" },
+  review_comment_placeholder: { ar: "شارك تجربتك مع هذا المعلم...", en: "Share your experience with this teacher..." },
+  review_submitted: { ar: "تم إرسال التقييم بنجاح ✅", en: "Review submitted successfully ✅" },
+  review_login_required: { ar: "يجب تسجيل الدخول لتقديم تقييم", en: "You must be logged in to submit a review" },
+  review_booking_required: { ar: "يجب إكمال جلسة مع هذا المعلم أولاً", en: "You must complete a session with this teacher first" },
+  avg_rating: { ar: "متوسط التقييم", en: "Average Rating" },
+  reviews_count_label: { ar: "تقييمات", en: "reviews" },
+  already_reviewed: { ar: "لقد قدّمت تقييماً بالفعل", en: "You have already submitted a review" },
+
+  // Admin search
+  admin_search_placeholder: { ar: "بحث...", en: "Search..." },
+  admin_fill_required_fields: { ar: "يرجى ملء جميع الحقول المطلوبة", en: "Please fill all required fields" },
+  admin_enter_email: { ar: "يرجى إدخال البريد الإلكتروني", en: "Please enter an email address" },
+  admin_role_added: { ar: "تمت إضافة الصلاحية بنجاح", en: "Role added successfully" },
+  teacher_account_created: { ar: "تم إنشاء حساب المعلم بنجاح", en: "Teacher account created successfully" },
+  lecture_added: { ar: "تمت إضافة المحاضرة بنجاح", en: "Lecture added successfully" },
+  lecture_updated: { ar: "تم تحديث المحاضرة بنجاح", en: "Lecture updated successfully" },
+  loading: { ar: "جاري التحميل...", en: "Loading..." },
+  no_results: { ar: "لا توجد نتائج", en: "No results found" },
+
+  // Pagination
+  page_prev: { ar: "السابق", en: "Previous" },
+  page_next: { ar: "التالي", en: "Next" },
+  page_of: { ar: "من", en: "of" },
+  page_label: { ar: "صفحة", en: "Page" },
+
+  // MediaRecorder
+  mic_not_supported: { ar: "التسجيل الصوتي غير مدعوم في هذا المتصفح", en: "Voice recording is not supported in this browser" },
 } as const;
 
 type TranslationKey = keyof typeof translations;

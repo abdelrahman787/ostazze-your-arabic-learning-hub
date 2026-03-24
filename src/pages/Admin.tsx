@@ -1,12 +1,14 @@
-import { useState, useEffect, useCallback, useRef, forwardRef } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
-import { toast } from "@/hooks/use-toast";
+import { toast } from "sonner";
+import type { LucideIcon } from "lucide-react";
 import {
   GraduationCap, Users, TrendingUp, Search, Plus,
-  Shield, Video, BookOpen, Loader2, Upload, X, FileText, UserPlus, Home, ShoppingBag
+  Shield, Video, BookOpen, Loader2, Upload, X, FileText, UserPlus, Home, ShoppingBag,
+  ChevronLeft, ChevronRight
 } from "lucide-react";
 import { motion } from "framer-motion";
 import SalesHub from "@/components/SalesHub";
@@ -48,7 +50,7 @@ interface ProfileOption {
 }
 
 // --- Sub-components ---
-const StatCard = ({ label, value, icon: Icon, color, index }: { label: string; value: string; icon: any; color: string; index: number }) => (
+const StatCard = ({ label, value, icon: Icon, color, index }: { label: string; value: string; icon: LucideIcon; color: string; index: number }) => (
   <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.06 }} className="card-base p-5">
     <div className="flex items-center gap-3">
       <motion.div whileHover={{ scale: 1.15, rotate: 10 }} className={`icon-box ${color}`}><Icon size={20} /></motion.div>
@@ -69,7 +71,7 @@ const ModalWrapper = ({ children, onClose }: { children: React.ReactNode; onClos
 );
 
 // --- Main Component ---
-const Admin = forwardRef<HTMLDivElement>((_, ref) => {
+const Admin = () => {
   const { user, loading: authLoading } = useAuth();
   const { t } = useLanguage();
   const navigate = useNavigate();
@@ -78,7 +80,9 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [teachers, setTeachers] = useState<TeacherRow[]>([]);
   const [loading, setLoading] = useState(true);
-  const [stats, setStats] = useState({ teachers: 0, students: 0, lectures: 0 });
+  const [stats, setStats] = useState({ teachers: 0, students: 0, lectures: 0, revenue: 0 });
+  const [teacherPage, setTeacherPage] = useState(0);
+  const TEACHERS_PER_PAGE = 10;
 
   // Lectures state
   const [lectures, setLectures] = useState<LectureRow[]>([]);
@@ -154,12 +158,22 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
   }, []);
 
   const fetchStats = useCallback(async () => {
-    const [{ count: teacherCount }, { count: studentCount }, { count: lectureCount }] = await Promise.all([
+    const [{ count: teacherCount }, { count: studentCount }, { count: lectureCount }, completedBookings] = await Promise.all([
       supabase.from("profiles").select("*", { count: "exact", head: true }).eq("account_type", "teacher"),
       supabase.from("profiles").select("*", { count: "exact", head: true }).eq("account_type", "student"),
       supabase.from("lectures").select("*", { count: "exact", head: true }),
+      supabase.from("bookings").select("teacher_id").eq("status", "completed"),
     ]);
-    setStats({ teachers: teacherCount || 0, students: studentCount || 0, lectures: lectureCount || 0 });
+
+    let revenue = 0;
+    if (completedBookings.data && completedBookings.data.length > 0) {
+      const teacherIds = [...new Set(completedBookings.data.map((b) => b.teacher_id))];
+      const { data: tps } = await supabase.from("teacher_profiles").select("user_id, price").in("user_id", teacherIds);
+      const priceMap = new Map(tps?.map((tp) => [tp.user_id, tp.price]) || []);
+      revenue = completedBookings.data.reduce((sum, b) => sum + (priceMap.get(b.teacher_id) || 0), 0);
+    }
+
+    setStats({ teachers: teacherCount || 0, students: studentCount || 0, lectures: lectureCount || 0, revenue });
   }, []);
 
   const fetchLectures = useCallback(async () => {
@@ -208,19 +222,19 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
   const handleVerify = async (userId: string) => {
     const { error } = await supabase.from("teacher_profiles").update({ verified: true }).eq("user_id", userId);
     if (error) {
-      toast({ title: "خطأ", description: error.message, variant: "destructive" });
+      toast.error(error.message);
     } else {
-      toast({ title: "تم التوثيق بنجاح" });
+      toast.success(t("teacher_verified"));
       setTeachers((prev) => prev.map((tc) => tc.user_id === userId ? { ...tc, verified: true } : tc));
     }
   };
 
   const handleDeleteTeacher = async (userId: string) => {
-    if (!confirm("هل أنت متأكد من حذف هذا المعلم؟")) return;
+    if (!confirm(t("admin_delete") + "?")) return;
     const { error } = await supabase.from("teacher_profiles").delete().eq("user_id", userId);
-    if (error) { toast({ title: "خطأ", description: error.message, variant: "destructive" }); return; }
+    if (error) { toast.error(error.message); return; }
     await supabase.from("profiles").update({ account_type: "student" }).eq("user_id", userId);
-    toast({ title: "تم حذف المعلم بنجاح" });
+    toast.success(t("admin_delete") + " ✓");
     setTeachers((prev) => prev.filter((tc) => tc.user_id !== userId));
     fetchStats();
     fetchProfiles();
@@ -228,12 +242,14 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
 
   const handleAddLecture = async () => {
     if (!lectureForm.title || !lectureForm.teacher_id || !lectureForm.student_id) {
-      toast({ title: "يرجى ملء جميع الحقول المطلوبة", variant: "destructive" });
+      toast.error(t("admin_fill_required_fields"));
       return;
     }
     setUploading(true);
     let video_url: string | null = null;
     let pdf_url: string | null = null;
+    let uploadedVideoPaths: string[] = [];
+    let uploadedPdfPaths: string[] = [];
 
     try {
       if (videoFile) {
@@ -241,6 +257,7 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
         const path = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
         const { error } = await supabase.storage.from("lecture-videos").upload(path, videoFile);
         if (error) throw error;
+        uploadedVideoPaths.push(path);
         const { data: urlData } = supabase.storage.from("lecture-videos").getPublicUrl(path);
         video_url = urlData.publicUrl;
       }
@@ -249,6 +266,7 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
         const path = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
         const { error } = await supabase.storage.from("lecture-pdfs").upload(path, pdfFile);
         if (error) throw error;
+        uploadedPdfPaths.push(path);
         const { data: urlData } = supabase.storage.from("lecture-pdfs").getPublicUrl(path);
         pdf_url = urlData.publicUrl;
       }
@@ -261,9 +279,18 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
         video_url,
         pdf_url,
       });
-      if (error) throw error;
+      if (error) {
+        // Clean up orphaned storage files since DB insert failed
+        if (uploadedVideoPaths.length > 0) {
+          await supabase.storage.from("lecture-videos").remove(uploadedVideoPaths);
+        }
+        if (uploadedPdfPaths.length > 0) {
+          await supabase.storage.from("lecture-pdfs").remove(uploadedPdfPaths);
+        }
+        throw error;
+      }
 
-      toast({ title: "تمت إضافة المحاضرة بنجاح" });
+      toast.success(t("lecture_added"));
       setShowAddLecture(false);
       setLectureForm({ title: "", subject: "", teacher_id: "", student_id: "" });
       setVideoFile(null);
@@ -271,7 +298,7 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
       fetchLectures();
       fetchStats();
     } catch (err: any) {
-      toast({ title: "خطأ", description: err.message, variant: "destructive" });
+      toast.error(err.message);
     }
     setUploading(false);
   };
@@ -303,29 +330,29 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
       const { error } = await supabase.from("lectures").update({ video_url, pdf_url }).eq("id", editLecture.id);
       if (error) throw error;
 
-      toast({ title: "تم تحديث المحاضرة بنجاح" });
+      toast.success(t("lecture_updated"));
       setEditLecture(null);
       setEditVideoFile(null);
       setEditPdfFile(null);
       fetchLectures();
     } catch (err: any) {
-      toast({ title: "خطأ", description: err.message, variant: "destructive" });
+      toast.error(err.message);
     }
     setEditUploading(false);
   };
 
   const handleDeleteLecture = async (id: string) => {
-    if (!confirm("هل أنت متأكد من حذف هذه المحاضرة؟")) return;
+    if (!confirm(t("admin_delete") + "?")) return;
     const { error } = await supabase.from("lectures").delete().eq("id", id);
-    if (error) { toast({ title: "خطأ", description: error.message, variant: "destructive" }); return; }
-    toast({ title: "تم حذف المحاضرة" });
+    if (error) { toast.error(error.message); return; }
+    toast.success(t("admin_delete") + " ✓");
     setLectures((prev) => prev.filter((l) => l.id !== id));
     fetchStats();
   };
 
   const handleAddTeacher = async () => {
     if (!teacherForm.email || !teacherForm.password || !teacherForm.full_name) {
-      toast({ title: "يرجى ملء الحقول المطلوبة (الاسم، الإيميل، الباسورد)", variant: "destructive" });
+      toast.error(t("admin_fill_required_fields"));
       return;
     }
     setAddingTeacher(true);
@@ -346,21 +373,21 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
       if (res.error) throw new Error(res.error.message);
       const result = res.data as any;
       if (result?.error) throw new Error(result.error);
-      toast({ title: "تم إنشاء حساب المعلم بنجاح" });
+      toast.success(t("teacher_account_created"));
       setShowAddTeacher(false);
       setTeacherForm({ email: "", password: "", full_name: "", university: "", subjects: "", price: "" });
       fetchTeachers();
       fetchStats();
       fetchProfiles();
     } catch (err: any) {
-      toast({ title: "خطأ", description: err.message, variant: "destructive" });
+      toast.error(err.message);
     }
     setAddingTeacher(false);
   };
 
   const handleAddAdmin = async () => {
     if (!addAdminEmail) {
-      toast({ title: "يرجى إدخال البريد الإلكتروني", variant: "destructive" });
+      toast.error(t("admin_enter_email"));
       return;
     }
     setAddingAdmin(true);
@@ -373,12 +400,12 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
       if (res.error) throw new Error(res.error.message);
       const result = res.data as any;
       if (result?.error) throw new Error(result.error);
-      toast({ title: addAdminRole === "admin" ? "تمت إضافة المدير بنجاح" : "تمت إضافة المشرف بنجاح" });
+      toast.success(t("admin_role_added"));
       setShowAddAdmin(false);
       setAddAdminEmail("");
       fetchAdmins();
     } catch (err: any) {
-      toast({ title: "خطأ", description: err.message, variant: "destructive" });
+      toast.error(err.message);
     }
     setAddingAdmin(false);
   };
@@ -413,7 +440,7 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
     { label: t("admin_teachers"), value: String(stats.teachers), icon: GraduationCap, color: "bg-primary/10 text-primary" },
     { label: t("admin_students"), value: String(stats.students), icon: Users, color: "bg-warning/10 text-warning" },
     { label: "المحاضرات", value: String(stats.lectures), icon: BookOpen, color: "bg-muted text-muted-foreground" },
-    { label: t("admin_revenue"), value: "0", icon: TrendingUp, color: "bg-destructive/5 text-destructive" },
+    { label: t("admin_revenue"), value: `${stats.revenue.toLocaleString()} ${t("sar")}`, icon: TrendingUp, color: "bg-destructive/5 text-destructive" },
   ];
 
   // --- Auth loading / guard ---
@@ -438,7 +465,7 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
   }
 
   return (
-    <div ref={ref} className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background">
       <div className="container py-8">
         {/* Header */}
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
@@ -480,7 +507,7 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
           <div className="p-4 flex items-center justify-between gap-4 flex-wrap">
             <div className="relative flex-1 max-w-md min-w-[200px]">
               <Search size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-              <input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="بحث..." className="input-base !pr-10 !py-2.5 text-sm" />
+              <input value={searchQuery} onChange={(e) => { setSearchQuery(e.target.value); setTeacherPage(0); }} placeholder={t("admin_search_placeholder")} className="input-base !pr-10 !py-2.5 text-sm" />
             </div>
             <div className="flex gap-2">
               {activeTab === "teachers" && (
@@ -507,55 +534,80 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
           {/* ===== Teachers Tab ===== */}
           {activeTab === "teachers" && (
             loading ? (
-              <div className="p-16 text-center"><Loader2 className="mx-auto animate-spin text-muted-foreground mb-3" size={32} /><p className="text-muted-foreground text-sm">جاري التحميل...</p></div>
+              <div className="p-16 text-center"><Loader2 className="mx-auto animate-spin text-muted-foreground mb-3" size={32} /><p className="text-muted-foreground text-sm">{t("loading")}</p></div>
             ) : filteredTeachers.length === 0 ? (
-              <div className="p-16 text-center"><GraduationCap size={40} className="mx-auto text-muted-foreground/30 mb-3" /><p className="text-muted-foreground">{searchQuery ? "لا توجد نتائج" : "لا يوجد معلمون"}</p></div>
+              <div className="p-16 text-center"><GraduationCap size={40} className="mx-auto text-muted-foreground/30 mb-3" /><p className="text-muted-foreground">{searchQuery ? t("no_results") : t("no_teachers_registered")}</p></div>
             ) : (
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead><tr className="bg-muted/60">
-                    <th className="text-start p-4 font-bold text-muted-foreground text-xs">{t("th_teacher")}</th>
-                    <th className="text-start p-4 font-bold text-muted-foreground text-xs">{t("th_university")}</th>
-                    <th className="text-start p-4 font-bold text-muted-foreground text-xs">{t("th_subjects")}</th>
-                    <th className="text-start p-4 font-bold text-muted-foreground text-xs">{t("th_status")}</th>
-                    <th className="text-start p-4 font-bold text-muted-foreground text-xs">{t("th_actions")}</th>
-                  </tr></thead>
-                  <tbody>
-                    {filteredTeachers.map((tc) => (
-                      <tr key={tc.user_id} className="border-t hover:bg-secondary/30 transition-colors">
-                        <td className="p-4">
-                          <div className="flex items-center gap-3">
-                            <div className="icon-box bg-primary/10"><GraduationCap size={18} className="text-primary" /></div>
-                            <div>
-                              <div className="font-bold text-sm">{tc.full_name || "—"}</div>
-                              <div className="text-muted-foreground text-xs">{tc.price} {t("sar")} / {t("teacher_per_session")}</div>
+              <>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead><tr className="bg-muted/60">
+                      <th className="text-start p-4 font-bold text-muted-foreground text-xs">{t("th_teacher")}</th>
+                      <th className="text-start p-4 font-bold text-muted-foreground text-xs">{t("th_university")}</th>
+                      <th className="text-start p-4 font-bold text-muted-foreground text-xs">{t("th_subjects")}</th>
+                      <th className="text-start p-4 font-bold text-muted-foreground text-xs">{t("th_status")}</th>
+                      <th className="text-start p-4 font-bold text-muted-foreground text-xs">{t("th_actions")}</th>
+                    </tr></thead>
+                    <tbody>
+                      {filteredTeachers.slice(teacherPage * TEACHERS_PER_PAGE, (teacherPage + 1) * TEACHERS_PER_PAGE).map((tc) => (
+                        <tr key={tc.user_id} className="border-t hover:bg-secondary/30 transition-colors">
+                          <td className="p-4">
+                            <div className="flex items-center gap-3">
+                              <div className="icon-box bg-primary/10"><GraduationCap size={18} className="text-primary" /></div>
+                              <div>
+                                <div className="font-bold text-sm">{tc.full_name || "—"}</div>
+                                <div className="text-muted-foreground text-xs">{tc.price} {t("sar")} / {t("teacher_per_session")}</div>
+                              </div>
                             </div>
-                          </div>
-                        </td>
-                        <td className="p-4 text-muted-foreground text-sm">{tc.university || "—"}</td>
-                        <td className="p-4">
-                          <div className="flex gap-1.5 flex-wrap">
-                            {tc.subjects.length > 0 ? tc.subjects.slice(0, 2).map((s, i) => <span key={i} className="tag-outline text-[0.7rem]">{s}</span>) : <span className="text-muted-foreground text-xs">—</span>}
-                          </div>
-                        </td>
-                        <td className="p-4">
-                          {tc.verified
-                            ? <span className="text-xs bg-success/10 text-success px-2.5 py-1 rounded-full font-semibold">{t("teacher_verified")}</span>
-                            : <span className="text-xs bg-warning/10 text-warning px-2.5 py-1 rounded-full font-semibold">{t("admin_under_review")}</span>}
-                        </td>
-                        <td className="p-4">
-                          <div className="flex gap-2">
-                            {!tc.verified && (
-                              <button onClick={() => handleVerify(tc.user_id)} className="text-xs bg-success/10 text-success px-3 py-1.5 rounded-lg font-semibold hover:bg-success/20 transition-colors">{t("admin_verify")}</button>
-                            )}
-                            <button onClick={() => handleDeleteTeacher(tc.user_id)} className="text-xs bg-destructive/10 text-destructive px-3 py-1.5 rounded-lg font-semibold hover:bg-destructive/20 transition-colors">{t("admin_delete")}</button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                          </td>
+                          <td className="p-4 text-muted-foreground text-sm">{tc.university || "—"}</td>
+                          <td className="p-4">
+                            <div className="flex gap-1.5 flex-wrap">
+                              {tc.subjects.length > 0 ? tc.subjects.slice(0, 2).map((s, i) => <span key={i} className="tag-outline text-[0.7rem]">{s}</span>) : <span className="text-muted-foreground text-xs">—</span>}
+                            </div>
+                          </td>
+                          <td className="p-4">
+                            {tc.verified
+                              ? <span className="text-xs bg-success/10 text-success px-2.5 py-1 rounded-full font-semibold">{t("teacher_verified")}</span>
+                              : <span className="text-xs bg-warning/10 text-warning px-2.5 py-1 rounded-full font-semibold">{t("admin_under_review")}</span>}
+                          </td>
+                          <td className="p-4">
+                            <div className="flex gap-2">
+                              {!tc.verified && (
+                                <button onClick={() => handleVerify(tc.user_id)} className="text-xs bg-success/10 text-success px-3 py-1.5 rounded-lg font-semibold hover:bg-success/20 transition-colors">{t("admin_verify")}</button>
+                              )}
+                              <button onClick={() => handleDeleteTeacher(tc.user_id)} className="text-xs bg-destructive/10 text-destructive px-3 py-1.5 rounded-lg font-semibold hover:bg-destructive/20 transition-colors">{t("admin_delete")}</button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                {filteredTeachers.length > TEACHERS_PER_PAGE && (
+                  <div className="flex items-center justify-between px-4 py-3 border-t">
+                    <span className="text-xs text-muted-foreground">
+                      {t("page_label")} {teacherPage + 1} {t("page_of")} {Math.ceil(filteredTeachers.length / TEACHERS_PER_PAGE)}
+                    </span>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => setTeacherPage((p) => Math.max(0, p - 1))}
+                        disabled={teacherPage === 0}
+                        className="px-3 py-1.5 rounded-lg bg-secondary text-xs font-bold disabled:opacity-40 flex items-center gap-1 hover:bg-secondary/80"
+                      >
+                        <ChevronRight size={14} /> {t("page_prev")}
+                      </button>
+                      <button
+                        onClick={() => setTeacherPage((p) => Math.min(Math.ceil(filteredTeachers.length / TEACHERS_PER_PAGE) - 1, p + 1))}
+                        disabled={teacherPage >= Math.ceil(filteredTeachers.length / TEACHERS_PER_PAGE) - 1}
+                        className="px-3 py-1.5 rounded-lg bg-secondary text-xs font-bold disabled:opacity-40 flex items-center gap-1 hover:bg-secondary/80"
+                      >
+                        {t("page_next")} <ChevronLeft size={14} />
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </>
             )
           )}
 
@@ -819,8 +871,6 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
       )}
     </div>
   );
-});
-
-Admin.displayName = "Admin";
+};
 
 export default Admin;

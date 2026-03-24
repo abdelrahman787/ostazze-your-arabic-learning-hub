@@ -27,7 +27,7 @@ const MyLessons = ({ role }: { role: "student" | "teacher" }) => {
     setLoading(true);
     const col = role === "teacher" ? "teacher_id" : "student_id";
     const { data } = await supabase
-      .from("session_requests" as any)
+      .from("session_requests")
       .select("*")
       .eq(col, user.id)
       .in("status", ["assigned", "confirmed", "completed"])

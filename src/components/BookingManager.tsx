@@ -3,6 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Calendar, Check, X, Loader2, Clock, BookOpen, AlertCircle } from "lucide-react";
+import type { Database } from "@/integrations/supabase/types";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 
@@ -49,7 +50,7 @@ const BookingManager = ({ role }: Props) => {
     const otherCol = role === "teacher" ? "student_id" : "teacher_id";
     
     let query = supabase.from("bookings").select("*").eq(col, user.id).order("scheduled_date", { ascending: false });
-    if (filter !== "all") query = query.eq("status", filter as any);
+    if (filter !== "all") query = query.eq("status", filter as Database["public"]["Enums"]["booking_status"]);
     
     const { data } = await query;
     if (data && data.length > 0) {

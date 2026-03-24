@@ -66,6 +66,12 @@ const TeacherAvailabilityManager = () => {
   const saveAll = async () => {
     if (!user) return;
     setSaving(true);
+    // Snapshot current DB state so we can restore if insert fails
+    const { data: previousSlots } = await supabase
+      .from("teacher_availability")
+      .select("*")
+      .eq("teacher_id", user.id);
+
     try {
       await supabase.from("teacher_availability").delete().eq("teacher_id", user.id);
       const activeSlots = slots.filter((s) => s.is_active);
@@ -79,7 +85,15 @@ const TeacherAvailabilityManager = () => {
             is_active: true,
           }))
         );
-        if (error) throw error;
+        if (error) {
+          // Restore previous slots to prevent data loss
+          if (previousSlots && previousSlots.length > 0) {
+            await supabase.from("teacher_availability").insert(
+              previousSlots.map(({ id: _id, ...rest }) => rest)
+            );
+          }
+          throw error;
+        }
       }
       toast.success(t("schedule_saved"));
       fetchSlots();

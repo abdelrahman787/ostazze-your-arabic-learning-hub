@@ -44,7 +44,7 @@ const Register = () => {
     e.preventDefault();
     setLoading(true);
     setError("");
-    const result = await register(email, password, fullName, "student");
+    const result = await register(email, password, fullName, "student", timezone);
     if (result.error) {
       setError(result.error);
     } else {

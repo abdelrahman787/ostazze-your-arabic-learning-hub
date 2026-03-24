@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
-import { toast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 import { Loader2, ShoppingBag, Clock, CheckCircle, Users, UserCheck, Video } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -39,7 +39,7 @@ const SalesHub = () => {
 
   const fetchRequests = useCallback(async () => {
     setLoading(true);
-    const { data } = await supabase.from("session_requests" as any).select("*").order("created_at", { ascending: false });
+    const { data } = await supabase.from("session_requests").select("*").order("created_at", { ascending: false });
     if (data && data.length > 0) {
       const allIds = [...new Set((data as any[]).flatMap((r: any) => [r.student_id, r.teacher_id].filter(Boolean)))];
       const { data: profiles } = await supabase.from("profiles").select("user_id, full_name").in("user_id", allIds);
@@ -70,19 +70,19 @@ const SalesHub = () => {
     if (!assigningId || !assignTeacherId) return;
     setAssigning(true);
     try {
-      const { error } = await supabase.from("session_requests" as any).update({
+      const { error } = await supabase.from("session_requests").update({
         teacher_id: assignTeacherId,
         zoom_url: assignZoom || null,
         status: "assigned",
       }).eq("id", assigningId);
       if (error) throw error;
-      toast({ title: t("sales_assigned") });
+      toast.success(t("sales_assigned"));
       setAssigningId(null);
       setAssignTeacherId("");
       setAssignZoom("");
       fetchRequests();
     } catch (err: any) {
-      toast({ title: "Error", description: err.message, variant: "destructive" });
+      toast.error("Error: " + err.message);
     }
     setAssigning(false);
   };

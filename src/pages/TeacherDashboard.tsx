@@ -5,12 +5,14 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
 import {
   Menu, LogOut, LayoutDashboard, BookOpen, User, Clock,
-  GraduationCap, Video, FileText, MessageSquare, Loader2, ArrowLeft, CalendarCheck, GraduationCap as LessonsIcon
+  GraduationCap, Video, FileText, MessageSquare, Loader2, ArrowLeft, CalendarCheck, Star
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 import NotificationBell from "@/components/NotificationBell";
 import TeacherAvailabilityManager from "@/components/TeacherAvailabilityManager";
 import BookingManager from "@/components/BookingManager";
+import MyLessons from "@/components/MyLessons";
 
 interface TeacherLecture {
   id: string;
@@ -24,7 +26,7 @@ interface TeacherLecture {
 }
 
 const TeacherDashboard = () => {
-  const { user, logout } = useAuth();
+  const { user, logout, updateProfile } = useAuth();
   const { t, lang } = useLanguage();
   const navigate = useNavigate();
   const [tab, setTab] = useState("overview");
@@ -32,7 +34,12 @@ const TeacherDashboard = () => {
 
   const [lectures, setLectures] = useState<TeacherLecture[]>([]);
   const [lecturesLoading, setLecturesLoading] = useState(true);
-  const [stats, setStats] = useState({ totalLectures: 0, totalStudents: 0 });
+  const [stats, setStats] = useState({ totalLectures: 0, totalStudents: 0, conversations: 0 });
+
+  // Profile form state
+  const [profileForm, setProfileForm] = useState({ fullName: "", bio: "", price: "" });
+  const [profileLoading, setProfileLoading] = useState(true);
+  const [profileSaving, setProfileSaving] = useState(false);
 
   const fetchLectures = useCallback(async () => {
     if (!user) return;
@@ -45,21 +52,31 @@ const TeacherDashboard = () => {
 
     if (data && data.length > 0) {
       const studentIds = [...new Set(data.map((l) => l.student_id))];
-      const { data: profiles } = await supabase
-        .from("profiles")
-        .select("user_id, full_name, full_name_en")
-        .in("user_id", studentIds);
-      const pMap = new Map(profiles?.map((p) => [p.user_id, p.full_name]) || []);
+      const lectureIds = data.map((l) => l.id);
+
+      const [profilesResult, convResult] = await Promise.all([
+        supabase
+          .from("profiles")
+          .select("user_id, full_name, full_name_en")
+          .in("user_id", studentIds),
+        supabase
+          .from("chat_messages")
+          .select("lecture_id")
+          .in("lecture_id", lectureIds),
+      ]);
+
+      const pMap = new Map(profilesResult.data?.map((p) => [p.user_id, p.full_name]) || []);
+      const conversations = new Set(convResult.data?.map((m) => m.lecture_id) || []).size;
 
       const mapped = data.map((l) => ({
         ...l,
         student_name: pMap.get(l.student_id) || "—",
       }));
       setLectures(mapped);
-      setStats({ totalLectures: mapped.length, totalStudents: studentIds.length });
+      setStats({ totalLectures: mapped.length, totalStudents: studentIds.length, conversations });
     } else {
       setLectures([]);
-      setStats({ totalLectures: 0, totalStudents: 0 });
+      setStats({ totalLectures: 0, totalStudents: 0, conversations: 0 });
     }
     setLecturesLoading(false);
   }, [user]);
@@ -68,15 +85,49 @@ const TeacherDashboard = () => {
     fetchLectures();
   }, [fetchLectures]);
 
+  // Load profile data for the profile form
+  useEffect(() => {
+    if (!user) return;
+    const loadProfile = async () => {
+      setProfileLoading(true);
+      const [profileResult, tpResult] = await Promise.all([
+        supabase.from("profiles").select("full_name, bio").eq("user_id", user.id).maybeSingle(),
+        supabase.from("teacher_profiles").select("price").eq("user_id", user.id).maybeSingle(),
+      ]);
+      setProfileForm({
+        fullName: profileResult.data?.full_name || user.name || "",
+        bio: profileResult.data?.bio || "",
+        price: tpResult.data?.price ? String(tpResult.data.price) : "",
+      });
+      setProfileLoading(false);
+    };
+    loadProfile();
+  }, [user]);
+
+  const handleSaveProfile = async () => {
+    setProfileSaving(true);
+    const { error } = await updateProfile({
+      full_name: profileForm.fullName,
+      bio: profileForm.bio,
+      price: profileForm.price ? Number(profileForm.price) : undefined,
+    });
+    if (error) {
+      toast.error(error);
+    } else {
+      toast.success(t("profile_saved"));
+    }
+    setProfileSaving(false);
+  };
+
   const sidebarLinks = [
     { section: t("section_main"), items: [
       { icon: LayoutDashboard, label: t("dash_overview"), tab: "overview" },
     ]},
     { section: t("sidebar_teaching"), items: [
       { icon: BookOpen, label: t("sidebar_my_lectures"), tab: "lectures" },
+      { icon: Star, label: t("sidebar_my_lessons"), tab: "mylessons" },
       { icon: CalendarCheck, label: t("sidebar_bookings"), tab: "bookings" },
       { icon: Clock, label: t("sidebar_available_times"), tab: "availability" },
-      
     ]},
     { section: t("section_account"), items: [
       { icon: User, label: t("sidebar_profile"), tab: "profile" },
@@ -118,7 +169,7 @@ const TeacherDashboard = () => {
           <div className="flex items-center gap-3">
             <button onClick={() => setSidebarOpen(true)} className="lg:hidden"><Menu size={20} /></button>
             <h2 className="font-bold">
-              {tab === "overview" ? t("dash_overview") : tab === "lectures" ? t("sidebar_my_lectures") : tab === "profile" ? t("sidebar_profile") : tab === "availability" ? t("sidebar_available_times") : tab === "bookings" ? t("sidebar_bookings") : ""}
+              {tab === "overview" ? t("dash_overview") : tab === "lectures" ? t("sidebar_my_lectures") : tab === "mylessons" ? t("sidebar_my_lessons") : tab === "profile" ? t("sidebar_profile") : tab === "availability" ? t("sidebar_available_times") : tab === "bookings" ? t("sidebar_bookings") : ""}
             </h2>
           </div>
           <div className="flex items-center gap-3">
@@ -135,7 +186,7 @@ const TeacherDashboard = () => {
                 {[
                   { label: t("stat_total_lectures"), value: String(stats.totalLectures), icon: BookOpen, color: "bg-primary/10 text-primary" },
                   { label: t("stat_num_students"), value: String(stats.totalStudents), icon: GraduationCap, color: "bg-success/10 text-success" },
-                  { label: t("stat_conversations"), value: String(stats.totalLectures), icon: MessageSquare, color: "bg-warning/10 text-warning" },
+                  { label: t("stat_conversations"), value: String(stats.conversations), icon: MessageSquare, color: "bg-warning/10 text-warning" },
                   { label: t("stat_rating"), value: "—", icon: Clock, color: "bg-muted text-muted-foreground" },
                 ].map((s) => (
                   <div key={s.label} className="card-base p-5">
@@ -241,18 +292,58 @@ const TeacherDashboard = () => {
             </div>
           )}
 
+          {tab === "mylessons" && (
+            <div className="animate-fade-in">
+              <MyLessons role="teacher" />
+            </div>
+          )}
+
           {tab === "profile" && (
             <div className="card-base p-6 animate-fade-in max-w-2xl">
               <h3 className="font-extrabold text-lg mb-6">{t("dash_edit_profile")}</h3>
-              <div className="space-y-4">
-                <div><label className="block text-sm font-bold mb-1.5">{t("academic_title")}</label><input className="input-base" placeholder={t("academic_title_placeholder")} /></div>
-                <div><label className="block text-sm font-bold mb-1.5">{t("bio_label")}</label><textarea rows={4} className="input-base resize-none" placeholder={t("bio_placeholder")} /></div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div><label className="block text-sm font-bold mb-1.5">{t("session_price_label")} ({t("sar")})</label><input type="number" className="input-base" placeholder="150" /></div>
-                  <div><label className="block text-sm font-bold mb-1.5">{t("years_experience")}</label><input type="number" className="input-base" placeholder="5" /></div>
+              {profileLoading ? (
+                <div className="flex justify-center py-8"><Loader2 className="animate-spin text-primary" size={24} /></div>
+              ) : (
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-bold mb-1.5">{t("register_name")}</label>
+                    <input
+                      className="input-base"
+                      value={profileForm.fullName}
+                      onChange={(e) => setProfileForm((f) => ({ ...f, fullName: e.target.value }))}
+                      placeholder={t("register_name")}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-bold mb-1.5">{t("bio_label")}</label>
+                    <textarea
+                      rows={4}
+                      className="input-base resize-none"
+                      value={profileForm.bio}
+                      onChange={(e) => setProfileForm((f) => ({ ...f, bio: e.target.value }))}
+                      placeholder={t("bio_placeholder")}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-bold mb-1.5">{t("session_price_label")} ({t("sar")})</label>
+                    <input
+                      type="number"
+                      className="input-base"
+                      value={profileForm.price}
+                      onChange={(e) => setProfileForm((f) => ({ ...f, price: e.target.value }))}
+                      placeholder="150"
+                    />
+                  </div>
+                  <button
+                    onClick={handleSaveProfile}
+                    disabled={profileSaving}
+                    className="btn-primary flex items-center gap-2 disabled:opacity-50"
+                  >
+                    {profileSaving && <Loader2 size={16} className="animate-spin" />}
+                    {t("dash_save")}
+                  </button>
                 </div>
-                <button className="btn-primary">{t("dash_save")}</button>
-              </div>
+              )}
             </div>
           )}
 

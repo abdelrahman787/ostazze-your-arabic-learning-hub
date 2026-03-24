@@ -1,7 +1,13 @@
 import { useState, useRef, useCallback } from "react";
-import { Mic, Square, Loader2 } from "lucide-react";
+import { Mic, Square, Loader2, MicOff } from "lucide-react";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const isMediaRecorderSupported = () =>
+  typeof window !== "undefined" &&
+  typeof navigator.mediaDevices?.getUserMedia === "function" &&
+  typeof window.MediaRecorder !== "undefined";
 
 interface AudioRecorderProps {
   onRecorded: (audioUrl: string) => void;
@@ -11,6 +17,7 @@ interface AudioRecorderProps {
 }
 
 const AudioRecorder = ({ onRecorded, disabled, userId, lectureId }: AudioRecorderProps) => {
+  const { t } = useLanguage();
   const [recording, setRecording] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [duration, setDuration] = useState(0);
@@ -19,9 +26,11 @@ const AudioRecorder = ({ onRecorded, disabled, userId, lectureId }: AudioRecorde
   const timerRef = useRef<ReturnType<typeof setInterval>>();
 
   const startRecording = useCallback(async () => {
+    if (!isMediaRecorderSupported()) return;
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const mediaRecorder = new MediaRecorder(stream, { mimeType: "audio/webm" });
+      const mimeType = MediaRecorder.isTypeSupported("audio/webm") ? "audio/webm" : "audio/ogg";
+      const mediaRecorder = new MediaRecorder(stream, { mimeType });
       mediaRecorderRef.current = mediaRecorder;
       chunksRef.current = [];
 
@@ -34,11 +43,13 @@ const AudioRecorder = ({ onRecorded, disabled, userId, lectureId }: AudioRecorde
         clearInterval(timerRef.current);
         setDuration(0);
 
-        const blob = new Blob(chunksRef.current, { type: "audio/webm" });
+        const mimeType = MediaRecorder.isTypeSupported("audio/webm") ? "audio/webm" : "audio/ogg";
+        const ext = mimeType === "audio/webm" ? "webm" : "ogg";
+        const blob = new Blob(chunksRef.current, { type: mimeType });
         if (blob.size === 0) return;
 
         setUploading(true);
-        const fileName = `${userId}/${lectureId}_${Date.now()}.webm`;
+        const fileName = `${userId}/${lectureId}_${Date.now()}.${ext}`;
         const { error } = await supabase.storage.from("chat-audio").upload(fileName, blob);
 
         if (!error) {
@@ -63,6 +74,17 @@ const AudioRecorder = ({ onRecorded, disabled, userId, lectureId }: AudioRecorde
   }, []);
 
   const formatTime = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+
+  if (!isMediaRecorderSupported()) {
+    return (
+      <div
+        className="w-9 h-9 rounded-xl bg-muted flex items-center justify-center opacity-40 cursor-not-allowed"
+        title={t("mic_not_supported")}
+      >
+        <MicOff size={16} className="text-muted-foreground" />
+      </div>
+    );
+  }
 
   if (uploading) {
     return (
@@ -93,7 +115,7 @@ const AudioRecorder = ({ onRecorded, disabled, userId, lectureId }: AudioRecorde
       onClick={startRecording}
       disabled={disabled}
       className="w-9 h-9 rounded-xl bg-secondary text-secondary-foreground flex items-center justify-center disabled:opacity-50 hover:bg-secondary/80 transition-colors"
-      title="تسجيل صوتي"
+      title={t("audio_message")}
     >
       <Mic size={16} />
     </motion.button>

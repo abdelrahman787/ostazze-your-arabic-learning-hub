@@ -31,7 +31,7 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects }: P
 
     setSubmitting(true);
     try {
-      const { error } = await supabase.from("session_requests" as any).insert({
+      const { error } = await supabase.from("session_requests").insert({
         student_id: user.id,
         teacher_id: teacherId,
         subject: form.subject || null,

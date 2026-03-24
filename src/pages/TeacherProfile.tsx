@@ -1,11 +1,13 @@
 import { useParams, Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useBilingual } from "@/hooks/useBilingual";
-import { Star, Clock, BookOpen, Loader2 } from "lucide-react";
+import { Star, Clock, BookOpen, Loader2, Send } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 import BookSessionModal from "@/components/BookSessionModal";
 import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface TeacherFull {
   user_id: string;
@@ -28,14 +30,54 @@ interface AvailSlot {
   end_time: string;
 }
 
+interface Review {
+  id: string;
+  student_id: string;
+  rating: number;
+  comment: string | null;
+  created_at: string;
+  student_name?: string;
+}
+
+const StarRating = ({ value, onChange, readonly = false }: { value: number; onChange?: (v: number) => void; readonly?: boolean }) => (
+  <div className="flex gap-1">
+    {[1, 2, 3, 4, 5].map((star) => (
+      <motion.button
+        key={star}
+        type="button"
+        whileHover={!readonly ? { scale: 1.2 } : undefined}
+        whileTap={!readonly ? { scale: 0.9 } : undefined}
+        onClick={() => !readonly && onChange?.(star)}
+        className={`transition-colors ${readonly ? "cursor-default" : "cursor-pointer"}`}
+        disabled={readonly}
+      >
+        <Star
+          size={readonly ? 14 : 20}
+          className={star <= value ? "text-yellow-400 fill-yellow-400" : "text-muted-foreground/30"}
+        />
+      </motion.button>
+    ))}
+  </div>
+);
+
 const TeacherProfile = () => {
   const { id } = useParams();
   const { t } = useLanguage();
   const { b, bArr } = useBilingual();
+  const { user } = useAuth();
   const [teacher, setTeacher] = useState<TeacherFull | null>(null);
   const [availability, setAvailability] = useState<AvailSlot[]>([]);
   const [loading, setLoading] = useState(true);
   const [showBooking, setShowBooking] = useState(false);
+
+  // Reviews state
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [reviewsLoading, setReviewsLoading] = useState(true);
+  const [canReview, setCanReview] = useState(false);
+  const [alreadyReviewed, setAlreadyReviewed] = useState(false);
+  const [reviewRating, setReviewRating] = useState(5);
+  const [reviewComment, setReviewComment] = useState("");
+  const [submittingReview, setSubmittingReview] = useState(false);
 
   const DAYS = [t("day_sun"), t("day_mon"), t("day_tue"), t("day_wed"), t("day_thu"), t("day_fri"), t("day_sat")];
 
@@ -84,6 +126,91 @@ const TeacherProfile = () => {
     };
     fetch();
   }, [id]);
+
+  // Fetch reviews
+  useEffect(() => {
+    if (!id) return;
+    const fetchReviews = async () => {
+      setReviewsLoading(true);
+      const { data } = await supabase
+        .from("teacher_reviews" as any)
+        .select("*")
+        .eq("teacher_id", id)
+        .order("created_at", { ascending: false });
+
+      if (data && (data as any[]).length > 0) {
+        const studentIds = [...new Set((data as any[]).map((r: any) => r.student_id))];
+        const { data: profiles } = await supabase
+          .from("profiles")
+          .select("user_id, full_name")
+          .in("user_id", studentIds);
+        const pMap = new Map(profiles?.map((p) => [p.user_id, p.full_name]) || []);
+        setReviews((data as any[]).map((r: any) => ({ ...r, student_name: pMap.get(r.student_id) || "—" })));
+      } else {
+        setReviews([]);
+      }
+      setReviewsLoading(false);
+    };
+    fetchReviews();
+  }, [id]);
+
+  // Check if current user can leave a review
+  useEffect(() => {
+    if (!user || !id) return;
+    const checkEligibility = async () => {
+      // Must have a completed booking with this teacher
+      const { data: completedBooking } = await supabase
+        .from("bookings")
+        .select("id")
+        .eq("student_id", user.id)
+        .eq("teacher_id", id)
+        .eq("status", "completed")
+        .maybeSingle();
+
+      if (!completedBooking) { setCanReview(false); return; }
+
+      // Check if already reviewed
+      const { data: existingReview } = await supabase
+        .from("teacher_reviews" as any)
+        .select("id")
+        .eq("teacher_id", id)
+        .eq("student_id", user.id)
+        .maybeSingle();
+
+      setAlreadyReviewed(!!existingReview);
+      setCanReview(!existingReview);
+    };
+    checkEligibility();
+  }, [user, id]);
+
+  const handleSubmitReview = async () => {
+    if (!user || !id) { toast.error(t("review_login_required")); return; }
+    if (!canReview) { toast.error(t("review_booking_required")); return; }
+    setSubmittingReview(true);
+    const { error } = await supabase
+      .from("teacher_reviews" as any)
+      .insert({ teacher_id: id, student_id: user.id, rating: reviewRating, comment: reviewComment || null });
+    if (error) {
+      toast.error(error.message);
+    } else {
+      toast.success(t("review_submitted"));
+      setCanReview(false);
+      setAlreadyReviewed(true);
+      // Reload reviews
+      const { data } = await supabase
+        .from("teacher_reviews" as any)
+        .select("*")
+        .eq("teacher_id", id)
+        .order("created_at", { ascending: false });
+      if (data) {
+        const studentIds = [...new Set((data as any[]).map((r: any) => r.student_id))];
+        const { data: profiles } = await supabase.from("profiles").select("user_id, full_name").in("user_id", studentIds);
+        const pMap = new Map(profiles?.map((p) => [p.user_id, p.full_name]) || []);
+        setReviews((data as any[]).map((r: any) => ({ ...r, student_name: pMap.get(r.student_id) || "—" })));
+      }
+    }
+    setSubmittingReview(false);
+  };
 
   if (loading) {
     return (
@@ -181,10 +308,71 @@ const TeacherProfile = () => {
 
           <div className="space-y-6">
             <div className="card-base p-6">
-              <h3 className="font-extrabold text-lg mb-4">{t("teacher_reviews")}</h3>
-              <div className="text-center py-8 text-muted-foreground text-sm">
-                {t("no_reviews_yet")}
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="font-extrabold text-lg">{t("teacher_reviews")}</h3>
+                {reviews.length > 0 && (
+                  <div className="flex items-center gap-2">
+                    <StarRating value={Math.round(reviews.reduce((s, r) => s + r.rating, 0) / reviews.length)} readonly />
+                    <span className="text-sm font-bold">
+                      {(reviews.reduce((s, r) => s + r.rating, 0) / reviews.length).toFixed(1)}
+                    </span>
+                    <span className="text-xs text-muted-foreground">({reviews.length} {t("reviews_count_label")})</span>
+                  </div>
+                )}
               </div>
+
+              {reviewsLoading ? (
+                <div className="flex justify-center py-6"><Loader2 className="animate-spin text-primary" size={20} /></div>
+              ) : reviews.length === 0 ? (
+                <p className="text-center py-6 text-muted-foreground text-sm">{t("no_reviews_yet")}</p>
+              ) : (
+                <div className="space-y-3 mb-4">
+                  {reviews.map((r) => (
+                    <motion.div key={r.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="p-3 bg-secondary rounded-xl">
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="font-bold text-sm">{r.student_name}</span>
+                        <StarRating value={r.rating} readonly />
+                      </div>
+                      {r.comment && <p className="text-muted-foreground text-sm">{r.comment}</p>}
+                      <p className="text-xs text-muted-foreground mt-1">
+                        {new Date(r.created_at).toLocaleDateString()}
+                      </p>
+                    </motion.div>
+                  ))}
+                </div>
+              )}
+
+              {/* Review form */}
+              {user && user.id !== id && (
+                <div className="border-t pt-4">
+                  {alreadyReviewed ? (
+                    <p className="text-xs text-muted-foreground text-center">{t("already_reviewed")}</p>
+                  ) : canReview ? (
+                    <div className="space-y-3">
+                      <h4 className="font-bold text-sm">{t("rate_teacher")}</h4>
+                      <StarRating value={reviewRating} onChange={setReviewRating} />
+                      <textarea
+                        value={reviewComment}
+                        onChange={(e) => setReviewComment(e.target.value)}
+                        rows={2}
+                        className="input-base resize-none text-sm"
+                        placeholder={t("review_comment_placeholder")}
+                      />
+                      <motion.button
+                        whileTap={{ scale: 0.97 }}
+                        onClick={handleSubmitReview}
+                        disabled={submittingReview}
+                        className="btn-primary w-full text-sm flex items-center justify-center gap-2 disabled:opacity-50"
+                      >
+                        {submittingReview ? <Loader2 size={14} className="animate-spin" /> : <Send size={14} />}
+                        {t("submit_review")}
+                      </motion.button>
+                    </div>
+                  ) : (
+                    <p className="text-xs text-muted-foreground text-center">{t("review_booking_required")}</p>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>

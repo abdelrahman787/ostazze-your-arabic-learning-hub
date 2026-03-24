@@ -54,12 +54,14 @@ const Teachers = () => {
       setLoading(false);
     };
     fetchTeachers();
-  }, []);
+  }, [t]);
 
+  const q = search.toLowerCase();
   const filtered = teachers.filter((tc) =>
-    tc.full_name.includes(search) ||
-    tc.subjects.some((s) => s.includes(search)) ||
-    (tc.university && tc.university.includes(search))
+    !search ||
+    tc.full_name.toLowerCase().includes(q) ||
+    tc.subjects.some((s) => s.toLowerCase().includes(q)) ||
+    (tc.university && tc.university.toLowerCase().includes(q))
   );
 
   const sorted = [...filtered].sort((a, b) => {
