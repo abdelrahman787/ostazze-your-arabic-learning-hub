@@ -10,15 +10,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import SalesHub from "@/components/SalesHub";
-import { useNavigate, Link } from "react-router-dom";
-import { useLanguage } from "@/contexts/LanguageContext";
-import { supabase } from "@/integrations/supabase/client";
-import { toast } from "@/hooks/use-toast";
-import {
-  GraduationCap, Users, TrendingUp, Search, Plus,
-  Shield, Video, BookOpen, Loader2, Upload, X, FileText, UserPlus, Home
-} from "lucide-react";
-import { motion } from "framer-motion";
+
 
 // --- Types ---
 interface TeacherRow {
