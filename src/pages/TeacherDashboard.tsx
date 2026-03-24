@@ -268,15 +268,6 @@ const TeacherDashboard = () => {
             </div>
           )}
 
-          {tab === "earnings" && (
-            <div className="card-base p-12 text-center animate-fade-in">
-              <motion.div whileHover={{ scale: 1.1, rotate: 10 }} className="inline-block mb-4">
-                <Wallet size={48} className="text-warning" />
-              </motion.div>
-              <h3 className="font-extrabold text-xl mb-2">0 {t("sar")}</h3>
-              <p className="text-muted-foreground">{t("earnings_system_dev")}</p>
-            </div>
-          )}
         </div>
       </main>
     </div>
