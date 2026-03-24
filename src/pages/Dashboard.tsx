@@ -198,6 +198,12 @@ const Dashboard = () => {
             </div>
           )}
 
+          {tab === "mylessons" && (
+            <div className="animate-fade-in">
+              <MyLessons role="student" />
+            </div>
+          )}
+
           {tab === "profile" && (
             <div className="grid lg:grid-cols-2 gap-6 animate-fade-in">
               <div className="card-base p-6">

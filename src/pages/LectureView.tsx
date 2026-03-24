@@ -130,7 +130,7 @@ const LectureView = () => {
           </div>
         </div>
         <div className="flex items-center gap-2">
-          {lecture.pdf_url && (
+          {lecture.pdf_url && user?.id === lecture.teacher_id && (
             <button
               onClick={() => setPdfOpen(!pdfOpen)}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${pdfOpen ? "bg-primary text-primary-foreground" : "bg-secondary text-foreground hover:bg-secondary/80"}`}
