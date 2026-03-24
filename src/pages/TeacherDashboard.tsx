@@ -76,7 +76,7 @@ const TeacherDashboard = () => {
       { icon: BookOpen, label: t("sidebar_my_lectures"), tab: "lectures" },
       { icon: CalendarCheck, label: t("sidebar_bookings"), tab: "bookings" },
       { icon: Clock, label: t("sidebar_available_times"), tab: "availability" },
-      { icon: Wallet, label: t("sidebar_my_earnings"), tab: "earnings" },
+      
     ]},
     { section: t("section_account"), items: [
       { icon: User, label: t("sidebar_profile"), tab: "profile" },
