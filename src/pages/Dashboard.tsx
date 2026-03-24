@@ -66,6 +66,7 @@ const Dashboard = () => {
     { section: t("section_as_student"), items: [
       { icon: Search, label: t("sidebar_find_teacher"), tab: "search", href: "/teachers" },
       { icon: BookOpen, label: t("sidebar_my_lectures"), tab: "lectures" },
+      { icon: GraduationCap, label: t("sidebar_my_lessons"), tab: "mylessons" },
       { icon: CalendarCheck, label: t("sidebar_my_bookings"), tab: "bookings" },
     ]},
     { section: t("section_account"), items: [
