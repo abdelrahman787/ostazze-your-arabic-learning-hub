@@ -411,6 +411,7 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
 
   // --- Config ---
   const tabs = [
+    { id: "sales", label: t("sales_hub"), icon: ShoppingBag },
     { id: "teachers", label: t("admin_teachers"), icon: GraduationCap },
     { id: "lectures", label: "المحاضرات", icon: BookOpen },
     { id: "admins", label: t("admin_admins"), icon: Shield },
