@@ -8,6 +8,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import Index from "./pages/Index";
 import Teachers from "./pages/Teachers";
 import TeacherProfile from "./pages/TeacherProfile";
