@@ -604,6 +604,9 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
             )
           )}
 
+          {/* ===== Sales Hub Tab ===== */}
+          {activeTab === "sales" && <SalesHub />}
+
           {/* ===== Admins Tab ===== */}
           {activeTab === "admins" && (
             adminsLoading ? (
