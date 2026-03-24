@@ -135,7 +135,7 @@ const TeacherDashboard = () => {
                 {[
                   { label: t("stat_total_lectures"), value: String(stats.totalLectures), icon: BookOpen, color: "bg-primary/10 text-primary" },
                   { label: t("stat_num_students"), value: String(stats.totalStudents), icon: GraduationCap, color: "bg-success/10 text-success" },
-                  { label: t("stat_total_earnings"), value: "0 " + t("sar"), icon: Wallet, color: "bg-warning/10 text-warning" },
+                  { label: t("stat_conversations"), value: String(stats.totalLectures), icon: MessageSquare, color: "bg-warning/10 text-warning" },
                   { label: t("stat_rating"), value: "—", icon: Clock, color: "bg-muted text-muted-foreground" },
                 ].map((s) => (
                   <div key={s.label} className="card-base p-5">
