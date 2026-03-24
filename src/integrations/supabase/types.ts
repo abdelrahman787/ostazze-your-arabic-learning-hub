@@ -113,6 +113,7 @@ export type Database = {
           title: string
           updated_at: string
           video_url: string | null
+          zoom_url: string | null
         }
         Insert: {
           created_at?: string
@@ -124,6 +125,7 @@ export type Database = {
           title: string
           updated_at?: string
           video_url?: string | null
+          zoom_url?: string | null
         }
         Update: {
           created_at?: string
@@ -135,6 +137,7 @@ export type Database = {
           title?: string
           updated_at?: string
           video_url?: string | null
+          zoom_url?: string | null
         }
         Relationships: []
       }
@@ -190,6 +193,7 @@ export type Database = {
           full_name_en: string | null
           id: string
           phone: string | null
+          timezone: string | null
           updated_at: string
           user_id: string
         }
@@ -203,6 +207,7 @@ export type Database = {
           full_name_en?: string | null
           id?: string
           phone?: string | null
+          timezone?: string | null
           updated_at?: string
           user_id: string
         }
@@ -216,8 +221,57 @@ export type Database = {
           full_name_en?: string | null
           id?: string
           phone?: string | null
+          timezone?: string | null
           updated_at?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      session_requests: {
+        Row: {
+          assigned_by: string | null
+          created_at: string
+          id: string
+          notes: string | null
+          preferred_date: string | null
+          preferred_time: string | null
+          reject_reason: string | null
+          status: string
+          student_id: string
+          subject: string | null
+          teacher_id: string | null
+          updated_at: string
+          zoom_url: string | null
+        }
+        Insert: {
+          assigned_by?: string | null
+          created_at?: string
+          id?: string
+          notes?: string | null
+          preferred_date?: string | null
+          preferred_time?: string | null
+          reject_reason?: string | null
+          status?: string
+          student_id: string
+          subject?: string | null
+          teacher_id?: string | null
+          updated_at?: string
+          zoom_url?: string | null
+        }
+        Update: {
+          assigned_by?: string | null
+          created_at?: string
+          id?: string
+          notes?: string | null
+          preferred_date?: string | null
+          preferred_time?: string | null
+          reject_reason?: string | null
+          status?: string
+          student_id?: string
+          subject?: string | null
+          teacher_id?: string | null
+          updated_at?: string
+          zoom_url?: string | null
         }
         Relationships: []
       }

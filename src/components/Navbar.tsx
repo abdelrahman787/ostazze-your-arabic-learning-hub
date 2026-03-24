@@ -37,7 +37,7 @@ const Navbar = () => {
   const showBackButton = location.pathname !== "/";
 
   return (
-    <nav className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b h-16 flex items-center">
+    <nav className="sticky top-0 z-50 glass-strong border-b h-16 flex items-center">
       <div className="container flex items-center justify-between">
         <div className="flex items-center gap-3">
           {showBackButton && (

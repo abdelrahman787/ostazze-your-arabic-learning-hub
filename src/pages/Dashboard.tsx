@@ -8,6 +8,7 @@ import {
   GraduationCap, Loader2, ArrowLeft, Video, FileText, MessageSquare, CalendarCheck
 } from "lucide-react";
 import StudentLectures from "@/pages/StudentLectures";
+import MyLessons from "@/components/MyLessons";
 import NotificationBell from "@/components/NotificationBell";
 import BookingManager from "@/components/BookingManager";
 import { motion } from "framer-motion";
@@ -65,6 +66,7 @@ const Dashboard = () => {
     { section: t("section_as_student"), items: [
       { icon: Search, label: t("sidebar_find_teacher"), tab: "search", href: "/teachers" },
       { icon: BookOpen, label: t("sidebar_my_lectures"), tab: "lectures" },
+      { icon: GraduationCap, label: t("sidebar_my_lessons"), tab: "mylessons" },
       { icon: CalendarCheck, label: t("sidebar_my_bookings"), tab: "bookings" },
     ]},
     { section: t("section_account"), items: [
@@ -107,7 +109,7 @@ const Dashboard = () => {
           <div className="flex items-center gap-3">
             <button onClick={() => setSidebarOpen(true)} className="lg:hidden"><Menu size={20} /></button>
             <h2 className="font-bold">
-              {tab === "overview" ? t("dash_overview") : tab === "lectures" ? t("sidebar_my_lectures") : tab === "profile" ? t("dash_profile") : tab === "bookings" ? t("sidebar_my_bookings") : ""}
+              {tab === "overview" ? t("dash_overview") : tab === "lectures" ? t("sidebar_my_lectures") : tab === "mylessons" ? t("sidebar_my_lessons") : tab === "profile" ? t("dash_profile") : tab === "bookings" ? t("sidebar_my_bookings") : ""}
             </h2>
           </div>
           <div className="flex items-center gap-3">
@@ -193,6 +195,12 @@ const Dashboard = () => {
           {tab === "bookings" && (
             <div className="animate-fade-in">
               <BookingManager role="student" />
+            </div>
+          )}
+
+          {tab === "mylessons" && (
+            <div className="animate-fade-in">
+              <MyLessons role="student" />
             </div>
           )}
 

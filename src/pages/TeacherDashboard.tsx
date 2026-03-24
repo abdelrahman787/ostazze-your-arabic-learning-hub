@@ -4,8 +4,8 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
 import {
-  Menu, LogOut, LayoutDashboard, BookOpen, User, Clock, Wallet,
-  GraduationCap, Video, FileText, MessageSquare, Loader2, ArrowLeft, CalendarCheck
+  Menu, LogOut, LayoutDashboard, BookOpen, User, Clock,
+  GraduationCap, Video, FileText, MessageSquare, Loader2, ArrowLeft, CalendarCheck, GraduationCap as LessonsIcon
 } from "lucide-react";
 import { motion } from "framer-motion";
 import NotificationBell from "@/components/NotificationBell";
@@ -76,7 +76,7 @@ const TeacherDashboard = () => {
       { icon: BookOpen, label: t("sidebar_my_lectures"), tab: "lectures" },
       { icon: CalendarCheck, label: t("sidebar_bookings"), tab: "bookings" },
       { icon: Clock, label: t("sidebar_available_times"), tab: "availability" },
-      { icon: Wallet, label: t("sidebar_my_earnings"), tab: "earnings" },
+      
     ]},
     { section: t("section_account"), items: [
       { icon: User, label: t("sidebar_profile"), tab: "profile" },
@@ -118,7 +118,7 @@ const TeacherDashboard = () => {
           <div className="flex items-center gap-3">
             <button onClick={() => setSidebarOpen(true)} className="lg:hidden"><Menu size={20} /></button>
             <h2 className="font-bold">
-              {tab === "overview" ? t("dash_overview") : tab === "lectures" ? t("sidebar_my_lectures") : tab === "profile" ? t("sidebar_profile") : tab === "availability" ? t("sidebar_available_times") : tab === "bookings" ? t("sidebar_bookings") : t("sidebar_my_earnings")}
+              {tab === "overview" ? t("dash_overview") : tab === "lectures" ? t("sidebar_my_lectures") : tab === "profile" ? t("sidebar_profile") : tab === "availability" ? t("sidebar_available_times") : tab === "bookings" ? t("sidebar_bookings") : ""}
             </h2>
           </div>
           <div className="flex items-center gap-3">
@@ -135,7 +135,7 @@ const TeacherDashboard = () => {
                 {[
                   { label: t("stat_total_lectures"), value: String(stats.totalLectures), icon: BookOpen, color: "bg-primary/10 text-primary" },
                   { label: t("stat_num_students"), value: String(stats.totalStudents), icon: GraduationCap, color: "bg-success/10 text-success" },
-                  { label: t("stat_total_earnings"), value: "0 " + t("sar"), icon: Wallet, color: "bg-warning/10 text-warning" },
+                  { label: t("stat_conversations"), value: String(stats.totalLectures), icon: MessageSquare, color: "bg-warning/10 text-warning" },
                   { label: t("stat_rating"), value: "—", icon: Clock, color: "bg-muted text-muted-foreground" },
                 ].map((s) => (
                   <div key={s.label} className="card-base p-5">
@@ -268,15 +268,6 @@ const TeacherDashboard = () => {
             </div>
           )}
 
-          {tab === "earnings" && (
-            <div className="card-base p-12 text-center animate-fade-in">
-              <motion.div whileHover={{ scale: 1.1, rotate: 10 }} className="inline-block mb-4">
-                <Wallet size={48} className="text-warning" />
-              </motion.div>
-              <h3 className="font-extrabold text-xl mb-2">0 {t("sar")}</h3>
-              <p className="text-muted-foreground">{t("earnings_system_dev")}</p>
-            </div>
-          )}
         </div>
       </main>
     </div>

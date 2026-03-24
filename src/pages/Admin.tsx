@@ -6,9 +6,11 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import {
   GraduationCap, Users, TrendingUp, Search, Plus,
-  Shield, Video, BookOpen, Loader2, Upload, X, FileText, UserPlus, Home
+  Shield, Video, BookOpen, Loader2, Upload, X, FileText, UserPlus, Home, ShoppingBag
 } from "lucide-react";
 import { motion } from "framer-motion";
+import SalesHub from "@/components/SalesHub";
+
 
 // --- Types ---
 interface TeacherRow {
@@ -401,6 +403,7 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
 
   // --- Config ---
   const tabs = [
+    { id: "sales", label: t("sales_hub"), icon: ShoppingBag },
     { id: "teachers", label: t("admin_teachers"), icon: GraduationCap },
     { id: "lectures", label: "المحاضرات", icon: BookOpen },
     { id: "admins", label: t("admin_admins"), icon: Shield },
@@ -600,6 +603,9 @@ const Admin = forwardRef<HTMLDivElement>((_, ref) => {
               </div>
             )
           )}
+
+          {/* ===== Sales Hub Tab ===== */}
+          {activeTab === "sales" && <SalesHub />}
 
           {/* ===== Admins Tab ===== */}
           {activeTab === "admins" && (
