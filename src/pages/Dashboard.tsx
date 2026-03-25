@@ -6,7 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import {
   Search, LogOut, Menu, LayoutDashboard, BookOpen, User,
   GraduationCap, Loader2, ArrowLeft, Video, FileText,
-  MessageSquare, CalendarCheck, MailWarning,
+  MessageSquare, CalendarCheck, MailWarning, Lock,
 } from "lucide-react";
 import StudentLectures from "@/pages/StudentLectures";
 import MyLessons from "@/components/MyLessons";
@@ -46,10 +46,19 @@ const Dashboard = () => {
 
   const [resendingEmail, setResendingEmail] = useState(false);
 
+  // Listen for notification-driven tab switch
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent).detail;
+      if (detail) setTab(detail);
+    };
+    window.addEventListener("switch-dashboard-tab", handler);
+    return () => window.removeEventListener("switch-dashboard-tab", handler);
+  }, []);
+
   const fetchData = useCallback(async () => {
     if (!user) return;
 
-    // Fetch 3 most recent lectures for overview
     const { data } = await supabase
       .from("lectures")
       .select("id, title, subject, teacher_id, video_url, pdf_url")
@@ -69,7 +78,6 @@ const Dashboard = () => {
       );
     }
 
-    // Fetch full counts
     const { count: lectureCount } = await supabase
       .from("lectures")
       .select("*", { count: "exact", head: true })
@@ -82,7 +90,6 @@ const Dashboard = () => {
 
     const uniqueTeachers = new Set(allLecs?.map((l) => l.teacher_id) || []);
 
-    // Count distinct conversations (chat threads this student participated in)
     let chatCount = 0;
     if (allLecs && allLecs.length > 0) {
       const lectureIds = allLecs.map((l) => l.id);
@@ -102,7 +109,6 @@ const Dashboard = () => {
     setLoadingData(false);
   }, [user]);
 
-  // Load profile data into the form on mount
   useEffect(() => {
     const loadProfile = async () => {
       if (!user) return;
@@ -181,7 +187,10 @@ const Dashboard = () => {
     },
     {
       section: t("section_account"),
-      items: [{ icon: User, label: t("dash_profile"), tab: "profile" }],
+      items: [
+        { icon: User, label: t("dash_profile"), tab: "profile" },
+        { icon: Lock, label: t("dash_change_password"), tab: "password" },
+      ],
     },
   ];
 
@@ -253,16 +262,12 @@ const Dashboard = () => {
               <Menu size={20} />
             </button>
             <h2 className="font-bold">
-              {tab === "overview"
-                ? t("dash_overview")
-                : tab === "lectures"
-                ? t("sidebar_my_lectures")
-                : tab === "mylessons"
-                ? t("sidebar_my_lessons")
-                : tab === "profile"
-                ? t("dash_profile")
-                : tab === "bookings"
-                ? t("sidebar_my_bookings")
+              {tab === "overview" ? t("dash_overview")
+                : tab === "lectures" ? t("sidebar_my_lectures")
+                : tab === "mylessons" ? t("sidebar_my_lessons")
+                : tab === "profile" ? t("dash_profile")
+                : tab === "password" ? t("dash_change_password")
+                : tab === "bookings" ? t("sidebar_my_bookings")
                 : ""}
             </h2>
           </div>
@@ -304,10 +309,7 @@ const Dashboard = () => {
                 ].map((s) => (
                   <div key={s.label} className="card-base p-5">
                     <div className="flex items-center gap-3">
-                      <motion.div
-                        whileHover={{ scale: 1.15, rotate: 10 }}
-                        className={`icon-box ${s.color}`}
-                      >
+                      <motion.div whileHover={{ scale: 1.15, rotate: 10 }} className={`icon-box ${s.color}`}>
                         <s.icon size={20} />
                       </motion.div>
                       <div>
@@ -333,10 +335,7 @@ const Dashboard = () => {
                     <Link to="/teachers" className="btn-primary block text-center text-sm">
                       {t("sidebar_find_teacher")}
                     </Link>
-                    <button
-                      onClick={() => setTab("lectures")}
-                      className="btn-outline w-full text-sm"
-                    >
+                    <button onClick={() => setTab("lectures")} className="btn-outline w-full text-sm">
                       {t("sidebar_my_lectures")}
                     </button>
                   </div>
@@ -345,10 +344,7 @@ const Dashboard = () => {
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="font-extrabold">{t("recent_lectures")}</h3>
                     {recentLectures.length > 0 && (
-                      <button
-                        onClick={() => setTab("lectures")}
-                        className="text-primary text-sm font-bold hover:underline"
-                      >
+                      <button onClick={() => setTab("lectures")} className="text-primary text-sm font-bold hover:underline">
                         {t("view_all")}
                       </button>
                     )}
@@ -364,19 +360,14 @@ const Dashboard = () => {
                   ) : (
                     <div className="space-y-3">
                       {recentLectures.map((lec) => (
-                        <Link
-                          key={lec.id}
-                          to={`/lectures/${lec.id}`}
-                          className="flex items-center justify-between p-3 bg-secondary rounded-xl hover:bg-secondary/80 transition-colors group"
-                        >
+                        <Link key={lec.id} to={`/lectures/${lec.id}`}
+                          className="flex items-center justify-between p-3 bg-secondary rounded-xl hover:bg-secondary/80 transition-colors group">
                           <div className="flex items-center gap-3">
                             <div className="icon-box bg-primary/10">
                               <BookOpen size={16} className="text-primary" />
                             </div>
                             <div>
-                              <div className="font-bold text-sm group-hover:text-primary transition-colors">
-                                {lec.title}
-                              </div>
+                              <div className="font-bold text-sm group-hover:text-primary transition-colors">{lec.title}</div>
                               <div className="text-muted-foreground text-xs">
                                 {t("the_teacher")}: {lec.teacher_name}
                                 {lec.subject && ` • ${lec.subject}`}
@@ -416,93 +407,54 @@ const Dashboard = () => {
           )}
 
           {tab === "profile" && (
-            <div className="grid lg:grid-cols-2 gap-6 animate-fade-in">
-              <div className="card-base p-6">
-                <h3 className="font-extrabold mb-4">{t("dash_edit_profile")}</h3>
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-bold mb-1.5">{t("dash_full_name")}</label>
-                    <input
-                      value={profileForm.fullName}
-                      onChange={(e) => setProfileForm((f) => ({ ...f, fullName: e.target.value }))}
-                      className="input-base"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-bold mb-1.5">{t("dash_phone")}</label>
-                    <input
-                      value={profileForm.phone}
-                      onChange={(e) => setProfileForm((f) => ({ ...f, phone: e.target.value }))}
-                      placeholder="+966"
-                      className="input-base"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-bold mb-1.5">{t("dash_bio")}</label>
-                    <textarea
-                      value={profileForm.bio}
-                      onChange={(e) => setProfileForm((f) => ({ ...f, bio: e.target.value }))}
-                      rows={3}
-                      className="input-base resize-none"
-                    />
-                  </div>
-                  <button
-                    onClick={handleSaveProfile}
-                    disabled={profileSaving}
-                    className="btn-primary flex items-center gap-2 disabled:opacity-50"
-                  >
-                    {profileSaving && <Loader2 size={14} className="animate-spin" />}
-                    {t("dash_save")}
-                  </button>
+            <div className="card-base p-6 animate-fade-in max-w-2xl">
+              <h3 className="font-extrabold mb-4">{t("dash_edit_profile")}</h3>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-bold mb-1.5">{t("dash_full_name")}</label>
+                  <input value={profileForm.fullName} onChange={(e) => setProfileForm((f) => ({ ...f, fullName: e.target.value }))} className="input-base" />
                 </div>
-              </div>
-
-              <div className="card-base p-6">
-                <h3 className="font-extrabold mb-4">{t("dash_change_password")}</h3>
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-bold mb-1.5">{t("dash_current_password")}</label>
-                    <input
-                      type="password"
-                      value={pwForm.current}
-                      onChange={(e) => setPwForm((f) => ({ ...f, current: e.target.value }))}
-                      className="input-base"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-bold mb-1.5">{t("dash_new_password")}</label>
-                    <input
-                      type="password"
-                      value={pwForm.newPw}
-                      onChange={(e) => setPwForm((f) => ({ ...f, newPw: e.target.value }))}
-                      className="input-base"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-bold mb-1.5">{t("register_confirm")}</label>
-                    <input
-                      type="password"
-                      value={pwForm.confirm}
-                      onChange={(e) => setPwForm((f) => ({ ...f, confirm: e.target.value }))}
-                      className="input-base"
-                    />
-                  </div>
-                  <button
-                    onClick={handleChangePassword}
-                    disabled={pwSaving}
-                    className="btn-primary flex items-center gap-2 disabled:opacity-50"
-                  >
-                    {pwSaving && <Loader2 size={14} className="animate-spin" />}
-                    {t("dash_update_password")}
-                  </button>
+                <div>
+                  <label className="block text-sm font-bold mb-1.5">{t("dash_phone")}</label>
+                  <input value={profileForm.phone} onChange={(e) => setProfileForm((f) => ({ ...f, phone: e.target.value }))} placeholder="+966" className="input-base" />
                 </div>
+                <div>
+                  <label className="block text-sm font-bold mb-1.5">{t("dash_bio")}</label>
+                  <textarea value={profileForm.bio} onChange={(e) => setProfileForm((f) => ({ ...f, bio: e.target.value }))} rows={3} className="input-base resize-none" />
+                </div>
+                <button onClick={handleSaveProfile} disabled={profileSaving} className="btn-primary flex items-center gap-2 disabled:opacity-50">
+                  {profileSaving && <Loader2 size={14} className="animate-spin" />}
+                  {t("dash_save")}
+                </button>
               </div>
             </div>
           )}
 
-          {/* "mylessons" is intentionally listed above so it renders its own panel.
-              This guard only shows "coming soon" for truly unknown tabs. */}
-          {!["overview", "lectures", "profile", "bookings", "mylessons"].includes(tab) && (
+          {tab === "password" && (
+            <div className="card-base p-6 animate-fade-in max-w-lg">
+              <h3 className="font-extrabold text-lg mb-6">{t("dash_change_password")}</h3>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-bold mb-1.5">{t("dash_current_password")}</label>
+                  <input type="password" value={pwForm.current} onChange={(e) => setPwForm((f) => ({ ...f, current: e.target.value }))} className="input-base" />
+                </div>
+                <div>
+                  <label className="block text-sm font-bold mb-1.5">{t("dash_new_password")}</label>
+                  <input type="password" value={pwForm.newPw} onChange={(e) => setPwForm((f) => ({ ...f, newPw: e.target.value }))} className="input-base" />
+                </div>
+                <div>
+                  <label className="block text-sm font-bold mb-1.5">{t("register_confirm")}</label>
+                  <input type="password" value={pwForm.confirm} onChange={(e) => setPwForm((f) => ({ ...f, confirm: e.target.value }))} className="input-base" />
+                </div>
+                <button onClick={handleChangePassword} disabled={pwSaving} className="btn-primary flex items-center gap-2 disabled:opacity-50">
+                  {pwSaving && <Loader2 size={14} className="animate-spin" />}
+                  {t("dash_update_password")}
+                </button>
+              </div>
+            </div>
+          )}
+
+          {!["overview", "lectures", "profile", "bookings", "mylessons", "password"].includes(tab) && (
             <div className="card-base p-12 text-center animate-fade-in">
               <GraduationCap size={48} className="mx-auto text-muted-foreground/30 mb-4" />
               <h3 className="font-extrabold text-xl mb-2">{t("coming_soon")}</h3>

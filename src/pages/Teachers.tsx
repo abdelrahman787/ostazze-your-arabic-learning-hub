@@ -3,7 +3,6 @@ import TeacherCard from "@/components/TeacherCard";
 import type { TeacherData } from "@/components/TeacherCard";
 import { Search, SlidersHorizontal, Loader2 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useBilingual } from "@/hooks/useBilingual";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -12,8 +11,15 @@ const Teachers = () => {
   const [search, setSearch] = useState("");
   const [showFilters, setShowFilters] = useState(false);
   const [sortBy, setSortBy] = useState("");
+  const [filterUniversity, setFilterUniversity] = useState("");
+  const [filterSubject, setFilterSubject] = useState("");
+  const [filterVerified, setFilterVerified] = useState("");
   const [teachers, setTeachers] = useState<TeacherData[]>([]);
   const [loading, setLoading] = useState(true);
+
+  // Extract unique values for filters
+  const universities = [...new Set(teachers.map((tc) => tc.university).filter(Boolean))] as string[];
+  const subjects = [...new Set(teachers.flatMap((tc) => tc.subjects))] as string[];
 
   useEffect(() => {
     const fetchTeachers = async () => {
@@ -57,18 +63,41 @@ const Teachers = () => {
   }, [t]);
 
   const q = search.toLowerCase();
-  const filtered = teachers.filter((tc) =>
-    !search ||
-    tc.full_name.toLowerCase().includes(q) ||
-    tc.subjects.some((s) => s.toLowerCase().includes(q)) ||
-    (tc.university && tc.university.toLowerCase().includes(q))
-  );
+  const filtered = teachers.filter((tc) => {
+    // Text search
+    if (search && !(
+      tc.full_name.toLowerCase().includes(q) ||
+      tc.subjects.some((s) => s.toLowerCase().includes(q)) ||
+      (tc.university && tc.university.toLowerCase().includes(q))
+    )) return false;
+
+    // University filter
+    if (filterUniversity && tc.university !== filterUniversity) return false;
+
+    // Subject filter
+    if (filterSubject && !tc.subjects.includes(filterSubject)) return false;
+
+    // Verified filter
+    if (filterVerified === "verified" && !tc.verified) return false;
+    if (filterVerified === "unverified" && tc.verified) return false;
+
+    return true;
+  });
 
   const sorted = [...filtered].sort((a, b) => {
-    if (sortBy === "price-low") return a.price - b.price;
-    if (sortBy === "price-high") return b.price - a.price;
+    if (sortBy === "name-asc") return (a.full_name || "").localeCompare(b.full_name || "");
+    if (sortBy === "name-desc") return (b.full_name || "").localeCompare(a.full_name || "");
     return 0;
   });
+
+  const clearFilters = () => {
+    setFilterUniversity("");
+    setFilterSubject("");
+    setFilterVerified("");
+    setSortBy("");
+  };
+
+  const hasActiveFilters = filterUniversity || filterSubject || filterVerified || sortBy;
 
   return (
     <div>
@@ -89,16 +118,37 @@ const Teachers = () => {
             <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setShowFilters(!showFilters)} className="btn-outline !py-2 flex items-center gap-2">
               <motion.div whileHover={{ rotate: 90 }}><SlidersHorizontal size={16} /></motion.div>
               {t("filter_btn")}
+              {hasActiveFilters && <span className="w-2 h-2 rounded-full bg-primary" />}
             </motion.button>
           </div>
 
           {showFilters && (
-            <div className="flex flex-wrap gap-3 mt-4 animate-fade-in">
-              <select className="input-base !w-auto" onChange={(e) => setSortBy(e.target.value)}>
-                <option value="">{t("filter_sort")}</option>
-                <option value="price-low">{t("filter_price_low")}</option>
-                <option value="price-high">{t("filter_price_high")}</option>
-              </select>
+            <div className="mt-4 animate-fade-in space-y-3">
+              <div className="flex flex-wrap gap-3">
+                <select className="input-base !w-auto" value={filterUniversity} onChange={(e) => setFilterUniversity(e.target.value)}>
+                  <option value="">{t("th_university")} - الكل</option>
+                  {universities.map((u) => <option key={u} value={u}>{u}</option>)}
+                </select>
+                <select className="input-base !w-auto" value={filterSubject} onChange={(e) => setFilterSubject(e.target.value)}>
+                  <option value="">{t("th_subject")} - الكل</option>
+                  {subjects.map((s) => <option key={s} value={s}>{s}</option>)}
+                </select>
+                <select className="input-base !w-auto" value={filterVerified} onChange={(e) => setFilterVerified(e.target.value)}>
+                  <option value="">{t("th_status")} - الكل</option>
+                  <option value="verified">{t("teacher_verified")}</option>
+                  <option value="unverified">{t("admin_under_review")}</option>
+                </select>
+                <select className="input-base !w-auto" value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+                  <option value="">{t("filter_sort")}</option>
+                  <option value="name-asc">الاسم (أ-ي)</option>
+                  <option value="name-desc">الاسم (ي-أ)</option>
+                </select>
+              </div>
+              {hasActiveFilters && (
+                <button onClick={clearFilters} className="text-xs text-destructive font-bold hover:underline">
+                  مسح الفلاتر
+                </button>
+              )}
             </div>
           )}
         </div>
