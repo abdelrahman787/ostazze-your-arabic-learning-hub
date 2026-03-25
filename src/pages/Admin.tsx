@@ -6,13 +6,14 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import type { LucideIcon } from "lucide-react";
 import {
-  GraduationCap, Users, TrendingUp, Search, Plus,
+  GraduationCap, Users, Search, Plus,
   Shield, Video, BookOpen, Loader2, Upload, X, FileText, UserPlus, Home, ShoppingBag,
-  ChevronLeft, ChevronRight
+  ChevronLeft, ChevronRight, Clock, Menu, LogOut, LayoutDashboard, User, Lock,
+  Calendar
 } from "lucide-react";
 import { motion } from "framer-motion";
 import SalesHub from "@/components/SalesHub";
-
+import NotificationBell from "@/components/NotificationBell";
 
 // --- Types ---
 interface TeacherRow {
@@ -21,7 +22,6 @@ interface TeacherRow {
   avatar_url: string | null;
   university: string | null;
   subjects: string[];
-  price: number;
   verified: boolean;
 }
 
@@ -49,6 +49,16 @@ interface ProfileOption {
   account_type: string | null;
 }
 
+interface AvailabilitySlot {
+  id: string;
+  teacher_id: string;
+  day_of_week: number;
+  start_time: string;
+  end_time: string;
+  is_active: boolean;
+  teacher_name?: string;
+}
+
 // --- Sub-components ---
 const StatCard = ({ label, value, icon: Icon, color, index }: { label: string; value: string; icon: LucideIcon; color: string; index: number }) => (
   <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.06 }} className="card-base p-5">
@@ -72,17 +82,18 @@ const ModalWrapper = ({ children, onClose }: { children: React.ReactNode; onClos
 
 // --- Main Component ---
 const Admin = () => {
-  const { user, loading: authLoading } = useAuth();
+  const { user, loading: authLoading, logout, changePassword } = useAuth();
   const { t } = useLanguage();
   const navigate = useNavigate();
 
-  const [activeTab, setActiveTab] = useState("teachers");
+  const [activeTab, setActiveTab] = useState("sales");
   const [searchQuery, setSearchQuery] = useState("");
   const [teachers, setTeachers] = useState<TeacherRow[]>([]);
   const [loading, setLoading] = useState(true);
-  const [stats, setStats] = useState({ teachers: 0, students: 0, lectures: 0, revenue: 0 });
+  const [stats, setStats] = useState({ teachers: 0, students: 0, lectures: 0 });
   const [teacherPage, setTeacherPage] = useState(0);
   const TEACHERS_PER_PAGE = 10;
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Lectures state
   const [lectures, setLectures] = useState<LectureRow[]>([]);
@@ -108,9 +119,13 @@ const Admin = () => {
   const [admins, setAdmins] = useState<AdminUser[]>([]);
   const [adminsLoading, setAdminsLoading] = useState(true);
 
+  // Teacher availability state
+  const [teacherAvailability, setTeacherAvailability] = useState<AvailabilitySlot[]>([]);
+  const [availabilityLoading, setAvailabilityLoading] = useState(true);
+
   // Add teacher modal
   const [showAddTeacher, setShowAddTeacher] = useState(false);
-  const [teacherForm, setTeacherForm] = useState({ email: "", password: "", full_name: "", university: "", subjects: "", price: "" });
+  const [teacherForm, setTeacherForm] = useState({ email: "", password: "", full_name: "", university: "", subjects: "" });
   const [addingTeacher, setAddingTeacher] = useState(false);
 
   // Add admin/moderator modal
@@ -119,12 +134,18 @@ const Admin = () => {
   const [addAdminRole, setAddAdminRole] = useState<"admin" | "moderator">("moderator");
   const [addingAdmin, setAddingAdmin] = useState(false);
 
+  // Password change
+  const [pwForm, setPwForm] = useState({ current: "", newPw: "", confirm: "" });
+  const [pwSaving, setPwSaving] = useState(false);
+
+  const DAYS = [t("day_sun"), t("day_mon"), t("day_tue"), t("day_wed"), t("day_thu"), t("day_fri"), t("day_sat")];
+
   // --- Data Fetching ---
   const fetchTeachers = useCallback(async () => {
     setLoading(true);
     const { data: teacherProfiles } = await supabase
       .from("teacher_profiles")
-      .select("user_id, university, price, verified, subjects");
+      .select("user_id, university, verified, subjects");
 
     if (!teacherProfiles || teacherProfiles.length === 0) {
       setTeachers([]);
@@ -148,7 +169,6 @@ const Admin = () => {
         avatar_url: profile?.avatar_url || null,
         university: tp.university,
         subjects: (tp.subjects as string[]) || [],
-        price: Number(tp.price) || 0,
         verified: tp.verified ?? false,
       };
     });
@@ -158,22 +178,13 @@ const Admin = () => {
   }, []);
 
   const fetchStats = useCallback(async () => {
-    const [{ count: teacherCount }, { count: studentCount }, { count: lectureCount }, completedBookings] = await Promise.all([
+    const [{ count: teacherCount }, { count: studentCount }, { count: lectureCount }] = await Promise.all([
       supabase.from("profiles").select("*", { count: "exact", head: true }).eq("account_type", "teacher"),
       supabase.from("profiles").select("*", { count: "exact", head: true }).eq("account_type", "student"),
       supabase.from("lectures").select("*", { count: "exact", head: true }),
-      supabase.from("bookings").select("teacher_id").eq("status", "completed"),
     ]);
 
-    let revenue = 0;
-    if (completedBookings.data && completedBookings.data.length > 0) {
-      const teacherIds = [...new Set(completedBookings.data.map((b) => b.teacher_id))];
-      const { data: tps } = await supabase.from("teacher_profiles").select("user_id, price").in("user_id", teacherIds);
-      const priceMap = new Map(tps?.map((tp) => [tp.user_id, tp.price]) || []);
-      revenue = completedBookings.data.reduce((sum, b) => sum + (priceMap.get(b.teacher_id) || 0), 0);
-    }
-
-    setStats({ teachers: teacherCount || 0, students: studentCount || 0, lectures: lectureCount || 0, revenue });
+    setStats({ teachers: teacherCount || 0, students: studentCount || 0, lectures: lectureCount || 0 });
   }, []);
 
   const fetchLectures = useCallback(async () => {
@@ -209,6 +220,26 @@ const Admin = () => {
     setAdminsLoading(false);
   }, []);
 
+  const fetchTeacherAvailability = useCallback(async () => {
+    setAvailabilityLoading(true);
+    const { data } = await supabase
+      .from("teacher_availability")
+      .select("*")
+      .eq("is_active", true)
+      .order("day_of_week")
+      .order("start_time");
+
+    if (data && data.length > 0) {
+      const teacherIds = [...new Set(data.map((s) => s.teacher_id))];
+      const { data: profiles } = await supabase.from("profiles").select("user_id, full_name").in("user_id", teacherIds);
+      const pMap = new Map(profiles?.map((p) => [p.user_id, p.full_name]) || []);
+      setTeacherAvailability(data.map((s) => ({ ...s, teacher_name: pMap.get(s.teacher_id) || "—" })));
+    } else {
+      setTeacherAvailability([]);
+    }
+    setAvailabilityLoading(false);
+  }, []);
+
   useEffect(() => {
     if (!user || user.role !== "admin") return;
     fetchTeachers();
@@ -216,7 +247,8 @@ const Admin = () => {
     fetchLectures();
     fetchProfiles();
     fetchAdmins();
-  }, [user, fetchTeachers, fetchStats, fetchLectures, fetchProfiles, fetchAdmins]);
+    fetchTeacherAvailability();
+  }, [user, fetchTeachers, fetchStats, fetchLectures, fetchProfiles, fetchAdmins, fetchTeacherAvailability]);
 
   // --- Handlers ---
   const handleVerify = async (userId: string) => {
@@ -280,13 +312,8 @@ const Admin = () => {
         pdf_url,
       });
       if (error) {
-        // Clean up orphaned storage files since DB insert failed
-        if (uploadedVideoPaths.length > 0) {
-          await supabase.storage.from("lecture-videos").remove(uploadedVideoPaths);
-        }
-        if (uploadedPdfPaths.length > 0) {
-          await supabase.storage.from("lecture-pdfs").remove(uploadedPdfPaths);
-        }
+        if (uploadedVideoPaths.length > 0) await supabase.storage.from("lecture-videos").remove(uploadedVideoPaths);
+        if (uploadedPdfPaths.length > 0) await supabase.storage.from("lecture-pdfs").remove(uploadedPdfPaths);
         throw error;
       }
 
@@ -366,7 +393,7 @@ const Admin = () => {
           full_name: teacherForm.full_name,
           university: teacherForm.university || null,
           subjects: teacherForm.subjects ? teacherForm.subjects.split(",").map((s) => s.trim()).filter(Boolean) : [],
-          price: teacherForm.price ? Number(teacherForm.price) : 0,
+          price: 0,
         },
         headers: { Authorization: `Bearer ${session?.access_token}` },
       });
@@ -375,7 +402,7 @@ const Admin = () => {
       if (result?.error) throw new Error(result.error);
       toast.success(t("teacher_account_created"));
       setShowAddTeacher(false);
-      setTeacherForm({ email: "", password: "", full_name: "", university: "", subjects: "", price: "" });
+      setTeacherForm({ email: "", password: "", full_name: "", university: "", subjects: "" });
       fetchTeachers();
       fetchStats();
       fetchProfiles();
@@ -410,6 +437,26 @@ const Admin = () => {
     setAddingAdmin(false);
   };
 
+  const handleChangePassword = async () => {
+    if (pwForm.newPw !== pwForm.confirm) {
+      toast.error(t("password_mismatch"));
+      return;
+    }
+    if (pwForm.newPw.length < 8) {
+      toast.error(t("password_too_short"));
+      return;
+    }
+    setPwSaving(true);
+    const result = await changePassword(pwForm.current, pwForm.newPw);
+    if (result.error) {
+      toast.error(result.error === "current_password_wrong" ? t("current_password_wrong") : result.error);
+    } else {
+      toast.success(t("password_changed"));
+      setPwForm({ current: "", newPw: "", confirm: "" });
+    }
+    setPwSaving(false);
+  };
+
   // --- Filters ---
   const filteredTeachers = teachers.filter((tc) => {
     if (!searchQuery) return true;
@@ -425,22 +472,27 @@ const Admin = () => {
 
   const teacherProfilesList = allProfiles.filter((p) => p.account_type === "teacher");
   const studentProfilesList = allProfiles.filter((p) => p.account_type === "student");
-  // Students who are not yet teachers (for add teacher modal)
-  const nonTeacherProfiles = allProfiles.filter((p) => p.account_type === "student");
 
-  // --- Config ---
-  const tabs = [
-    { id: "sales", label: t("sales_hub"), icon: ShoppingBag },
-    { id: "teachers", label: t("admin_teachers"), icon: GraduationCap },
-    { id: "lectures", label: "المحاضرات", icon: BookOpen },
-    { id: "admins", label: t("admin_admins"), icon: Shield },
-  ];
+  // Group availability by teacher
+  const availabilityByTeacher = teacherAvailability.reduce((acc, slot) => {
+    const key = slot.teacher_id;
+    if (!acc[key]) acc[key] = { name: slot.teacher_name || "—", slots: [] };
+    acc[key].slots.push(slot);
+    return acc;
+  }, {} as Record<string, { name: string; slots: AvailabilitySlot[] }>);
 
-  const statCards = [
-    { label: t("admin_teachers"), value: String(stats.teachers), icon: GraduationCap, color: "bg-primary/10 text-primary" },
-    { label: t("admin_students"), value: String(stats.students), icon: Users, color: "bg-warning/10 text-warning" },
-    { label: "المحاضرات", value: String(stats.lectures), icon: BookOpen, color: "bg-muted text-muted-foreground" },
-    { label: t("admin_revenue"), value: `${stats.revenue.toLocaleString()} ${t("sar")}`, icon: TrendingUp, color: "bg-destructive/5 text-destructive" },
+  // --- Sidebar config ---
+  const sidebarLinks = [
+    { section: t("section_main"), items: [
+      { icon: ShoppingBag, label: t("sales_hub"), tab: "sales" },
+      { icon: GraduationCap, label: t("admin_teachers"), tab: "teachers" },
+      { icon: BookOpen, label: "المحاضرات", tab: "lectures" },
+      { icon: Clock, label: t("sidebar_available_times"), tab: "availability" },
+    ]},
+    { section: t("section_account"), items: [
+      { icon: Shield, label: t("admin_admins"), tab: "admins" },
+      { icon: Lock, label: t("dash_change_password"), tab: "password" },
+    ]},
   ];
 
   // --- Auth loading / guard ---
@@ -464,237 +516,322 @@ const Admin = () => {
     );
   }
 
+  const currentTabLabel = sidebarLinks.flatMap((s) => s.items).find((i) => i.tab === activeTab)?.label || t("admin_title");
+
   return (
-    <div className="min-h-screen bg-background">
-      <div className="container py-8">
-        {/* Header */}
-        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
-          <div className="flex items-center justify-between">
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <Shield size={20} className="text-primary" />
-                <h1 className="text-2xl font-extrabold">{t("admin_title")}</h1>
-              </div>
-              <p className="text-muted-foreground text-sm">{t("admin_subtitle")}</p>
-            </div>
-            <Link to="/" className="btn-outline !py-2 !px-4 text-sm flex items-center gap-2">
-              <Home size={14} /> الموقع
-            </Link>
-          </div>
-        </motion.div>
-
-        {/* Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          {statCards.map((s, i) => (
-            <StatCard key={s.label} label={s.label} value={s.value} icon={s.icon} color={s.color} index={i} />
-          ))}
+    <div className="flex min-h-screen">
+      {/* Sidebar */}
+      <aside className={`fixed lg:static inset-y-0 right-0 z-40 w-[260px] bg-card border-l flex flex-col transition-transform duration-300 ${sidebarOpen ? "translate-x-0" : "translate-x-full lg:translate-x-0"}`}>
+        <div className="p-5 border-b">
+          <Link to="/" className="text-xl font-black text-primary tracking-tight">OSTAZZE</Link>
+          <p className="text-xs text-muted-foreground mt-0.5">{t("admin_title")}</p>
         </div>
-
-        {/* Tabs Card */}
-        <div className="card-base overflow-hidden">
-          {/* Tab Headers */}
-          <div className="flex border-b bg-secondary/30">
-            {tabs.map((tab) => (
-              <button key={tab.id} onClick={() => { setActiveTab(tab.id); setSearchQuery(""); }}
-                className={`flex-1 flex items-center justify-center gap-2 py-3.5 text-sm font-medium transition-all ${activeTab === tab.id ? "bg-card text-foreground border-b-2 border-primary font-bold" : "text-muted-foreground hover:text-foreground"}`}>
-                <tab.icon size={16} />
-                {tab.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Search + Actions */}
-          <div className="p-4 flex items-center justify-between gap-4 flex-wrap">
-            <div className="relative flex-1 max-w-md min-w-[200px]">
-              <Search size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-              <input value={searchQuery} onChange={(e) => { setSearchQuery(e.target.value); setTeacherPage(0); }} placeholder={t("admin_search_placeholder")} className="input-base !pr-10 !py-2.5 text-sm" />
+        <nav className="flex-1 overflow-y-auto p-4 space-y-6">
+          {sidebarLinks.map((s) => (
+            <div key={s.section}>
+              <div className="text-xs font-bold text-muted-foreground mb-2 px-3">{s.section}</div>
+              {s.items.map((item) => (
+                <button key={item.tab} onClick={() => { setActiveTab(item.tab); setSearchQuery(""); setSidebarOpen(false); }}
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-colors mb-1 ${activeTab === item.tab ? "bg-primary text-primary-foreground font-bold" : "text-muted-foreground hover:bg-primary/5 hover:text-foreground"}`}>
+                  <motion.div whileHover={{ scale: 1.2, rotate: 10 }}><item.icon size={16} /></motion.div>
+                  {item.label}
+                </button>
+              ))}
             </div>
-            <div className="flex gap-2">
-              {activeTab === "teachers" && (
+          ))}
+        </nav>
+        <div className="p-4 border-t">
+          <button onClick={() => { logout(); navigate("/"); }} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-destructive hover:bg-destructive/10 transition-colors">
+            <LogOut size={16} /> {t("nav_logout")}
+          </button>
+        </div>
+      </aside>
+
+      {sidebarOpen && <div className="fixed inset-0 z-30 bg-foreground/30 lg:hidden" onClick={() => setSidebarOpen(false)} />}
+
+      {/* Main Content */}
+      <main className="flex-1 min-w-0">
+        <header className="bg-card border-b px-6 py-4 flex items-center justify-between sticky top-0 z-20">
+          <div className="flex items-center gap-3">
+            <button onClick={() => setSidebarOpen(true)} className="lg:hidden"><Menu size={20} /></button>
+            <h2 className="font-bold">{currentTabLabel}</h2>
+          </div>
+          <div className="flex items-center gap-3">
+            <NotificationBell />
+            <div className="w-9 h-9 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold">{user?.name?.charAt(0) || "A"}</div>
+            <span className="text-sm font-medium hidden sm:block">{user?.name}</span>
+          </div>
+        </header>
+
+        <div className="p-6">
+          {/* Stats — show on sales tab */}
+          {activeTab === "sales" && (
+            <div className="space-y-6 animate-fade-in">
+              <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                {[
+                  { label: t("admin_teachers"), value: String(stats.teachers), icon: GraduationCap, color: "bg-primary/10 text-primary" },
+                  { label: t("admin_students"), value: String(stats.students), icon: Users, color: "bg-warning/10 text-warning" },
+                  { label: "المحاضرات", value: String(stats.lectures), icon: BookOpen, color: "bg-muted text-muted-foreground" },
+                ].map((s, i) => (
+                  <StatCard key={s.label} label={s.label} value={s.value} icon={s.icon} color={s.color} index={i} />
+                ))}
+              </div>
+              <SalesHub />
+            </div>
+          )}
+
+          {/* Teachers Tab */}
+          {activeTab === "teachers" && (
+            <div className="space-y-4 animate-fade-in">
+              <div className="flex items-center justify-between gap-4 flex-wrap">
+                <div className="relative flex-1 max-w-md min-w-[200px]">
+                  <Search size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                  <input value={searchQuery} onChange={(e) => { setSearchQuery(e.target.value); setTeacherPage(0); }} placeholder={t("admin_search_placeholder")} className="input-base !pr-10 !py-2.5 text-sm" />
+                </div>
                 <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setShowAddTeacher(true)}
                   className="btn-primary !py-2.5 text-sm flex items-center gap-2">
                   <UserPlus size={16} /> إضافة معلم
                 </motion.button>
+              </div>
+
+              {loading ? (
+                <div className="card-base p-16 text-center"><Loader2 className="mx-auto animate-spin text-muted-foreground mb-3" size={32} /></div>
+              ) : filteredTeachers.length === 0 ? (
+                <div className="card-base p-16 text-center"><GraduationCap size={40} className="mx-auto text-muted-foreground/30 mb-3" /><p className="text-muted-foreground">{searchQuery ? t("no_results") : t("no_teachers_registered")}</p></div>
+              ) : (
+                <div className="card-base overflow-hidden">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm">
+                      <thead><tr className="bg-muted/60">
+                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">{t("th_teacher")}</th>
+                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">{t("th_university")}</th>
+                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">{t("th_subjects")}</th>
+                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">{t("th_status")}</th>
+                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">{t("th_actions")}</th>
+                      </tr></thead>
+                      <tbody>
+                        {filteredTeachers.slice(teacherPage * TEACHERS_PER_PAGE, (teacherPage + 1) * TEACHERS_PER_PAGE).map((tc) => (
+                          <tr key={tc.user_id} className="border-t hover:bg-secondary/30 transition-colors">
+                            <td className="p-4">
+                              <div className="flex items-center gap-3">
+                                <div className="icon-box bg-primary/10"><GraduationCap size={18} className="text-primary" /></div>
+                                <div className="font-bold text-sm">{tc.full_name || "—"}</div>
+                              </div>
+                            </td>
+                            <td className="p-4 text-muted-foreground text-sm">{tc.university || "—"}</td>
+                            <td className="p-4">
+                              <div className="flex gap-1.5 flex-wrap">
+                                {tc.subjects.length > 0 ? tc.subjects.slice(0, 2).map((s, i) => <span key={i} className="tag-outline text-[0.7rem]">{s}</span>) : <span className="text-muted-foreground text-xs">—</span>}
+                              </div>
+                            </td>
+                            <td className="p-4">
+                              {tc.verified
+                                ? <span className="text-xs bg-success/10 text-success px-2.5 py-1 rounded-full font-semibold">{t("teacher_verified")}</span>
+                                : <span className="text-xs bg-warning/10 text-warning px-2.5 py-1 rounded-full font-semibold">{t("admin_under_review")}</span>}
+                            </td>
+                            <td className="p-4">
+                              <div className="flex gap-2">
+                                {!tc.verified && (
+                                  <button onClick={() => handleVerify(tc.user_id)} className="text-xs bg-success/10 text-success px-3 py-1.5 rounded-lg font-semibold hover:bg-success/20 transition-colors">{t("admin_verify")}</button>
+                                )}
+                                <button onClick={() => handleDeleteTeacher(tc.user_id)} className="text-xs bg-destructive/10 text-destructive px-3 py-1.5 rounded-lg font-semibold hover:bg-destructive/20 transition-colors">{t("admin_delete")}</button>
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  {filteredTeachers.length > TEACHERS_PER_PAGE && (
+                    <div className="flex items-center justify-between px-4 py-3 border-t">
+                      <span className="text-xs text-muted-foreground">
+                        {t("page_label")} {teacherPage + 1} {t("page_of")} {Math.ceil(filteredTeachers.length / TEACHERS_PER_PAGE)}
+                      </span>
+                      <div className="flex gap-2">
+                        <button onClick={() => setTeacherPage((p) => Math.max(0, p - 1))} disabled={teacherPage === 0}
+                          className="px-3 py-1.5 rounded-lg bg-secondary text-xs font-bold disabled:opacity-40 flex items-center gap-1 hover:bg-secondary/80">
+                          <ChevronRight size={14} /> {t("page_prev")}
+                        </button>
+                        <button onClick={() => setTeacherPage((p) => Math.min(Math.ceil(filteredTeachers.length / TEACHERS_PER_PAGE) - 1, p + 1))}
+                          disabled={teacherPage >= Math.ceil(filteredTeachers.length / TEACHERS_PER_PAGE) - 1}
+                          className="px-3 py-1.5 rounded-lg bg-secondary text-xs font-bold disabled:opacity-40 flex items-center gap-1 hover:bg-secondary/80">
+                          {t("page_next")} <ChevronLeft size={14} />
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
               )}
-              {activeTab === "lectures" && (
+            </div>
+          )}
+
+          {/* Lectures Tab */}
+          {activeTab === "lectures" && (
+            <div className="space-y-4 animate-fade-in">
+              <div className="flex items-center justify-between gap-4 flex-wrap">
+                <div className="relative flex-1 max-w-md min-w-[200px]">
+                  <Search size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                  <input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder={t("admin_search_placeholder")} className="input-base !pr-10 !py-2.5 text-sm" />
+                </div>
                 <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setShowAddLecture(true)}
                   className="btn-primary !py-2.5 text-sm flex items-center gap-2">
                   <Plus size={16} /> إضافة محاضرة
                 </motion.button>
+              </div>
+
+              {lecturesLoading ? (
+                <div className="card-base p-16 text-center"><Loader2 className="mx-auto animate-spin text-muted-foreground mb-3" size={32} /></div>
+              ) : filteredLectures.length === 0 ? (
+                <div className="card-base p-16 text-center"><BookOpen size={40} className="mx-auto text-muted-foreground/30 mb-3" /><p className="text-muted-foreground">{searchQuery ? "لا توجد نتائج" : "لا توجد محاضرات بعد"}</p></div>
+              ) : (
+                <div className="card-base overflow-hidden">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm">
+                      <thead><tr className="bg-muted/60">
+                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">المحاضرة</th>
+                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">المادة</th>
+                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">المعلم</th>
+                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">الطالب</th>
+                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">المحتوى</th>
+                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">الإجراءات</th>
+                      </tr></thead>
+                      <tbody>
+                        {filteredLectures.map((l) => (
+                          <tr key={l.id} className="border-t hover:bg-secondary/30 transition-colors">
+                            <td className="p-4 font-bold text-sm">{l.title}</td>
+                            <td className="p-4 text-muted-foreground text-sm">{l.subject || "—"}</td>
+                            <td className="p-4 text-sm">{l.teacher_name}</td>
+                            <td className="p-4 text-sm">{l.student_name}</td>
+                            <td className="p-4">
+                              <div className="flex gap-2">
+                                {l.video_url && <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full font-semibold flex items-center gap-1"><Video size={10} /> فيديو</span>}
+                                {l.pdf_url && <span className="text-xs bg-destructive/10 text-destructive px-2 py-1 rounded-full font-semibold flex items-center gap-1"><FileText size={10} /> PDF</span>}
+                                {!l.video_url && !l.pdf_url && <span className="text-muted-foreground text-xs">—</span>}
+                              </div>
+                            </td>
+                            <td className="p-4">
+                              <div className="flex gap-2">
+                                <button onClick={() => { setEditLecture(l); setEditVideoFile(null); setEditPdfFile(null); }} className="text-xs bg-primary/10 text-primary px-3 py-1.5 rounded-lg font-semibold hover:bg-primary/20 transition-colors flex items-center gap-1"><Upload size={10} /> تعديل</button>
+                                <button onClick={() => handleDeleteLecture(l.id)} className="text-xs bg-destructive/10 text-destructive px-3 py-1.5 rounded-lg font-semibold hover:bg-destructive/20 transition-colors">حذف</button>
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               )}
-              {activeTab === "admins" && (
+            </div>
+          )}
+
+          {/* Teacher Availability Tab */}
+          {activeTab === "availability" && (
+            <div className="space-y-4 animate-fade-in">
+              {availabilityLoading ? (
+                <div className="card-base p-16 text-center"><Loader2 className="mx-auto animate-spin text-muted-foreground mb-3" size={32} /></div>
+              ) : Object.keys(availabilityByTeacher).length === 0 ? (
+                <div className="card-base p-16 text-center">
+                  <Clock size={40} className="mx-auto text-muted-foreground/30 mb-3" />
+                  <p className="text-muted-foreground">لا توجد مواعيد متاحة من المعلمين</p>
+                </div>
+              ) : (
+                <div className="grid gap-4 md:grid-cols-2">
+                  {Object.entries(availabilityByTeacher).map(([teacherId, { name, slots }]) => (
+                    <motion.div key={teacherId} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="card-base p-5">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="icon-box bg-primary/10"><GraduationCap size={18} className="text-primary" /></div>
+                        <h4 className="font-bold">{name}</h4>
+                      </div>
+                      <div className="space-y-2">
+                        {slots.map((slot) => (
+                          <div key={slot.id} className="flex items-center justify-between p-3 bg-secondary rounded-xl text-sm">
+                            <div className="flex items-center gap-2">
+                              <Calendar size={14} className="text-primary" />
+                              <span className="font-medium">{DAYS[slot.day_of_week]}</span>
+                            </div>
+                            <span className="text-muted-foreground">{slot.start_time.slice(0, 5)} - {slot.end_time.slice(0, 5)}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Admins Tab */}
+          {activeTab === "admins" && (
+            <div className="space-y-4 animate-fade-in">
+              <div className="flex justify-end">
                 <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setShowAddAdmin(true)}
                   className="btn-primary !py-2.5 text-sm flex items-center gap-2">
                   <Shield size={16} /> إضافة مشرف
                 </motion.button>
+              </div>
+              {adminsLoading ? (
+                <div className="card-base p-16 text-center"><Loader2 className="mx-auto animate-spin text-muted-foreground mb-3" size={32} /></div>
+              ) : admins.length === 0 ? (
+                <div className="card-base p-16 text-center"><Shield size={40} className="mx-auto text-muted-foreground/30 mb-3" /><p className="text-muted-foreground">لا يوجد مدراء</p></div>
+              ) : (
+                <div className="card-base overflow-hidden">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm">
+                      <thead><tr className="bg-muted/60">
+                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">المدير</th>
+                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">معرّف المستخدم</th>
+                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">الحالة</th>
+                      </tr></thead>
+                      <tbody>
+                        {admins.map((admin) => (
+                          <tr key={admin.user_id} className="border-t hover:bg-secondary/30 transition-colors">
+                            <td className="p-4">
+                              <div className="flex items-center gap-3">
+                                <div className="icon-box bg-primary/10"><Shield size={18} className="text-primary" /></div>
+                                <div className="font-bold text-sm">{admin.full_name || "مدير بدون اسم"}</div>
+                              </div>
+                            </td>
+                            <td className="p-4 text-muted-foreground text-xs font-mono">{admin.user_id.slice(0, 8)}...</td>
+                            <td className="p-4">
+                              <span className="text-xs bg-success/10 text-success px-2.5 py-1 rounded-full font-semibold">مدير نشط</span>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               )}
             </div>
-          </div>
+          )}
 
-          {/* ===== Teachers Tab ===== */}
-          {activeTab === "teachers" && (
-            loading ? (
-              <div className="p-16 text-center"><Loader2 className="mx-auto animate-spin text-muted-foreground mb-3" size={32} /><p className="text-muted-foreground text-sm">{t("loading")}</p></div>
-            ) : filteredTeachers.length === 0 ? (
-              <div className="p-16 text-center"><GraduationCap size={40} className="mx-auto text-muted-foreground/30 mb-3" /><p className="text-muted-foreground">{searchQuery ? t("no_results") : t("no_teachers_registered")}</p></div>
-            ) : (
-              <>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-sm">
-                    <thead><tr className="bg-muted/60">
-                      <th className="text-start p-4 font-bold text-muted-foreground text-xs">{t("th_teacher")}</th>
-                      <th className="text-start p-4 font-bold text-muted-foreground text-xs">{t("th_university")}</th>
-                      <th className="text-start p-4 font-bold text-muted-foreground text-xs">{t("th_subjects")}</th>
-                      <th className="text-start p-4 font-bold text-muted-foreground text-xs">{t("th_status")}</th>
-                      <th className="text-start p-4 font-bold text-muted-foreground text-xs">{t("th_actions")}</th>
-                    </tr></thead>
-                    <tbody>
-                      {filteredTeachers.slice(teacherPage * TEACHERS_PER_PAGE, (teacherPage + 1) * TEACHERS_PER_PAGE).map((tc) => (
-                        <tr key={tc.user_id} className="border-t hover:bg-secondary/30 transition-colors">
-                          <td className="p-4">
-                            <div className="flex items-center gap-3">
-                              <div className="icon-box bg-primary/10"><GraduationCap size={18} className="text-primary" /></div>
-                              <div>
-                                <div className="font-bold text-sm">{tc.full_name || "—"}</div>
-                                <div className="text-muted-foreground text-xs">{tc.price} {t("sar")} / {t("teacher_per_session")}</div>
-                              </div>
-                            </div>
-                          </td>
-                          <td className="p-4 text-muted-foreground text-sm">{tc.university || "—"}</td>
-                          <td className="p-4">
-                            <div className="flex gap-1.5 flex-wrap">
-                              {tc.subjects.length > 0 ? tc.subjects.slice(0, 2).map((s, i) => <span key={i} className="tag-outline text-[0.7rem]">{s}</span>) : <span className="text-muted-foreground text-xs">—</span>}
-                            </div>
-                          </td>
-                          <td className="p-4">
-                            {tc.verified
-                              ? <span className="text-xs bg-success/10 text-success px-2.5 py-1 rounded-full font-semibold">{t("teacher_verified")}</span>
-                              : <span className="text-xs bg-warning/10 text-warning px-2.5 py-1 rounded-full font-semibold">{t("admin_under_review")}</span>}
-                          </td>
-                          <td className="p-4">
-                            <div className="flex gap-2">
-                              {!tc.verified && (
-                                <button onClick={() => handleVerify(tc.user_id)} className="text-xs bg-success/10 text-success px-3 py-1.5 rounded-lg font-semibold hover:bg-success/20 transition-colors">{t("admin_verify")}</button>
-                              )}
-                              <button onClick={() => handleDeleteTeacher(tc.user_id)} className="text-xs bg-destructive/10 text-destructive px-3 py-1.5 rounded-lg font-semibold hover:bg-destructive/20 transition-colors">{t("admin_delete")}</button>
-                            </div>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+          {/* Password Change Tab */}
+          {activeTab === "password" && (
+            <div className="card-base p-6 animate-fade-in max-w-lg">
+              <h3 className="font-extrabold text-lg mb-6">{t("dash_change_password")}</h3>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-bold mb-1.5">{t("dash_current_password")}</label>
+                  <input type="password" value={pwForm.current} onChange={(e) => setPwForm((f) => ({ ...f, current: e.target.value }))} className="input-base" />
                 </div>
-                {filteredTeachers.length > TEACHERS_PER_PAGE && (
-                  <div className="flex items-center justify-between px-4 py-3 border-t">
-                    <span className="text-xs text-muted-foreground">
-                      {t("page_label")} {teacherPage + 1} {t("page_of")} {Math.ceil(filteredTeachers.length / TEACHERS_PER_PAGE)}
-                    </span>
-                    <div className="flex gap-2">
-                      <button
-                        onClick={() => setTeacherPage((p) => Math.max(0, p - 1))}
-                        disabled={teacherPage === 0}
-                        className="px-3 py-1.5 rounded-lg bg-secondary text-xs font-bold disabled:opacity-40 flex items-center gap-1 hover:bg-secondary/80"
-                      >
-                        <ChevronRight size={14} /> {t("page_prev")}
-                      </button>
-                      <button
-                        onClick={() => setTeacherPage((p) => Math.min(Math.ceil(filteredTeachers.length / TEACHERS_PER_PAGE) - 1, p + 1))}
-                        disabled={teacherPage >= Math.ceil(filteredTeachers.length / TEACHERS_PER_PAGE) - 1}
-                        className="px-3 py-1.5 rounded-lg bg-secondary text-xs font-bold disabled:opacity-40 flex items-center gap-1 hover:bg-secondary/80"
-                      >
-                        {t("page_next")} <ChevronLeft size={14} />
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </>
-            )
-          )}
-
-          {/* ===== Lectures Tab ===== */}
-          {activeTab === "lectures" && (
-            lecturesLoading ? (
-              <div className="p-16 text-center"><Loader2 className="mx-auto animate-spin text-muted-foreground mb-3" size={32} /><p className="text-muted-foreground text-sm">جاري التحميل...</p></div>
-            ) : filteredLectures.length === 0 ? (
-              <div className="p-16 text-center"><BookOpen size={40} className="mx-auto text-muted-foreground/30 mb-3" /><p className="text-muted-foreground">{searchQuery ? "لا توجد نتائج" : "لا توجد محاضرات بعد"}</p></div>
-            ) : (
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead><tr className="bg-muted/60">
-                    <th className="text-start p-4 font-bold text-muted-foreground text-xs">المحاضرة</th>
-                    <th className="text-start p-4 font-bold text-muted-foreground text-xs">المادة</th>
-                    <th className="text-start p-4 font-bold text-muted-foreground text-xs">المعلم</th>
-                    <th className="text-start p-4 font-bold text-muted-foreground text-xs">الطالب</th>
-                    <th className="text-start p-4 font-bold text-muted-foreground text-xs">المحتوى</th>
-                    <th className="text-start p-4 font-bold text-muted-foreground text-xs">الإجراءات</th>
-                  </tr></thead>
-                  <tbody>
-                    {filteredLectures.map((l) => (
-                      <tr key={l.id} className="border-t hover:bg-secondary/30 transition-colors">
-                        <td className="p-4 font-bold text-sm">{l.title}</td>
-                        <td className="p-4 text-muted-foreground text-sm">{l.subject || "—"}</td>
-                        <td className="p-4 text-sm">{l.teacher_name}</td>
-                        <td className="p-4 text-sm">{l.student_name}</td>
-                        <td className="p-4">
-                          <div className="flex gap-2">
-                            {l.video_url && <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full font-semibold flex items-center gap-1"><Video size={10} /> فيديو</span>}
-                            {l.pdf_url && <span className="text-xs bg-destructive/10 text-destructive px-2 py-1 rounded-full font-semibold flex items-center gap-1"><FileText size={10} /> PDF</span>}
-                            {!l.video_url && !l.pdf_url && <span className="text-muted-foreground text-xs">—</span>}
-                          </div>
-                        </td>
-                        <td className="p-4">
-                          <div className="flex gap-2">
-                            <button onClick={() => { setEditLecture(l); setEditVideoFile(null); setEditPdfFile(null); }} className="text-xs bg-primary/10 text-primary px-3 py-1.5 rounded-lg font-semibold hover:bg-primary/20 transition-colors flex items-center gap-1"><Upload size={10} /> تعديل</button>
-                            <button onClick={() => handleDeleteLecture(l.id)} className="text-xs bg-destructive/10 text-destructive px-3 py-1.5 rounded-lg font-semibold hover:bg-destructive/20 transition-colors">حذف</button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                <div>
+                  <label className="block text-sm font-bold mb-1.5">{t("dash_new_password")}</label>
+                  <input type="password" value={pwForm.newPw} onChange={(e) => setPwForm((f) => ({ ...f, newPw: e.target.value }))} className="input-base" />
+                </div>
+                <div>
+                  <label className="block text-sm font-bold mb-1.5">{t("register_confirm")}</label>
+                  <input type="password" value={pwForm.confirm} onChange={(e) => setPwForm((f) => ({ ...f, confirm: e.target.value }))} className="input-base" />
+                </div>
+                <button onClick={handleChangePassword} disabled={pwSaving} className="btn-primary flex items-center gap-2 disabled:opacity-50">
+                  {pwSaving && <Loader2 size={14} className="animate-spin" />}
+                  {t("dash_update_password")}
+                </button>
               </div>
-            )
-          )}
-
-          {/* ===== Sales Hub Tab ===== */}
-          {activeTab === "sales" && <SalesHub />}
-
-          {/* ===== Admins Tab ===== */}
-          {activeTab === "admins" && (
-            adminsLoading ? (
-              <div className="p-16 text-center"><Loader2 className="mx-auto animate-spin text-muted-foreground mb-3" size={32} /><p className="text-muted-foreground text-sm">جاري التحميل...</p></div>
-            ) : admins.length === 0 ? (
-              <div className="p-16 text-center"><Shield size={40} className="mx-auto text-muted-foreground/30 mb-3" /><p className="text-muted-foreground">لا يوجد مدراء</p></div>
-            ) : (
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead><tr className="bg-muted/60">
-                    <th className="text-start p-4 font-bold text-muted-foreground text-xs">المدير</th>
-                    <th className="text-start p-4 font-bold text-muted-foreground text-xs">معرّف المستخدم</th>
-                    <th className="text-start p-4 font-bold text-muted-foreground text-xs">الحالة</th>
-                  </tr></thead>
-                  <tbody>
-                    {admins.map((admin) => (
-                      <tr key={admin.user_id} className="border-t hover:bg-secondary/30 transition-colors">
-                        <td className="p-4">
-                          <div className="flex items-center gap-3">
-                            <div className="icon-box bg-primary/10"><Shield size={18} className="text-primary" /></div>
-                            <div className="font-bold text-sm">{admin.full_name || "مدير بدون اسم"}</div>
-                          </div>
-                        </td>
-                        <td className="p-4 text-muted-foreground text-xs font-mono">{admin.user_id.slice(0, 8)}...</td>
-                        <td className="p-4">
-                          <span className="text-xs bg-success/10 text-success px-2.5 py-1 rounded-full font-semibold">مدير نشط</span>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )
+            </div>
           )}
         </div>
-      </div>
+      </main>
 
       {/* ===== Add Lecture Modal ===== */}
       {showAddLecture && (
@@ -717,7 +854,6 @@ const Admin = () => {
               <select value={lectureForm.teacher_id} onChange={(e) => setLectureForm((f) => ({ ...f, teacher_id: e.target.value }))} className="input-base">
                 <option value="">اختر المعلم</option>
                 {teacherProfilesList.map((p) => <option key={p.user_id} value={p.user_id}>{p.full_name || p.user_id}</option>)}
-                {teacherProfilesList.length === 0 && <option disabled>لا يوجد معلمون مسجلون</option>}
               </select>
             </div>
             <div>
@@ -725,7 +861,6 @@ const Admin = () => {
               <select value={lectureForm.student_id} onChange={(e) => setLectureForm((f) => ({ ...f, student_id: e.target.value }))} className="input-base">
                 <option value="">اختر الطالب</option>
                 {studentProfilesList.map((p) => <option key={p.user_id} value={p.user_id}>{p.full_name || p.user_id}</option>)}
-                {studentProfilesList.length === 0 && <option disabled>لا يوجد طلاب مسجلون</option>}
               </select>
             </div>
             <div className="grid grid-cols-2 gap-4">
@@ -766,7 +901,6 @@ const Admin = () => {
               <p>المعلم: <span className="font-bold text-foreground">{editLecture.teacher_name || "—"}</span></p>
               <p>الطالب: <span className="font-bold text-foreground">{editLecture.student_name || "—"}</span></p>
             </div>
-
             <div className="border-t pt-4 space-y-3">
               <div>
                 <label className="block text-sm font-bold mb-1.5">فيديو المحاضرة {editLecture.video_url && <span className="text-success text-xs font-normal">(يوجد فيديو حالياً)</span>}</label>
@@ -785,7 +919,6 @@ const Admin = () => {
                 </button>
               </div>
             </div>
-
             <button onClick={handleEditLecture} disabled={editUploading || (!editVideoFile && !editPdfFile)} className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50">
               {editUploading ? <><Loader2 size={16} className="animate-spin" /> جاري الرفع...</> : <><Upload size={16} /> حفظ التعديلات</>}
             </button>
@@ -822,10 +955,6 @@ const Admin = () => {
               <label className="block text-sm font-bold mb-1.5">المواد (مفصولة بفاصلة)</label>
               <input value={teacherForm.subjects} onChange={(e) => setTeacherForm((f) => ({ ...f, subjects: e.target.value }))} className="input-base" placeholder="مثال: رياضيات, فيزياء, كيمياء" />
             </div>
-            <div>
-              <label className="block text-sm font-bold mb-1.5">سعر الجلسة (ريال)</label>
-              <input value={teacherForm.price} onChange={(e) => setTeacherForm((f) => ({ ...f, price: e.target.value }))} className="input-base" placeholder="مثال: 150" type="number" />
-            </div>
             <button onClick={handleAddTeacher} disabled={addingTeacher} className="btn-primary w-full flex items-center justify-center gap-2">
               {addingTeacher ? <><Loader2 size={16} className="animate-spin" /> جاري الإنشاء...</> : <><UserPlus size={16} /> إنشاء حساب المعلم</>}
             </button>
@@ -849,16 +978,12 @@ const Admin = () => {
             <div>
               <label className="block text-sm font-bold mb-1.5">نوع الصلاحية</label>
               <div className="flex gap-3">
-                <button
-                  onClick={() => setAddAdminRole("moderator")}
-                  className={`flex-1 p-3 rounded-xl border-2 text-sm font-bold transition-all ${addAdminRole === "moderator" ? "border-primary bg-primary/5 text-primary" : "border-border text-muted-foreground hover:border-muted-foreground"}`}
-                >
+                <button onClick={() => setAddAdminRole("moderator")}
+                  className={`flex-1 p-3 rounded-xl border-2 text-sm font-bold transition-all ${addAdminRole === "moderator" ? "border-primary bg-primary/5 text-primary" : "border-border text-muted-foreground hover:border-muted-foreground"}`}>
                   مشرف
                 </button>
-                <button
-                  onClick={() => setAddAdminRole("admin")}
-                  className={`flex-1 p-3 rounded-xl border-2 text-sm font-bold transition-all ${addAdminRole === "admin" ? "border-primary bg-primary/5 text-primary" : "border-border text-muted-foreground hover:border-muted-foreground"}`}
-                >
+                <button onClick={() => setAddAdminRole("admin")}
+                  className={`flex-1 p-3 rounded-xl border-2 text-sm font-bold transition-all ${addAdminRole === "admin" ? "border-primary bg-primary/5 text-primary" : "border-border text-muted-foreground hover:border-muted-foreground"}`}>
                   مدير
                 </button>
               </div>

@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
-import { Bell, BookOpen, MessageSquare, Check, X, Loader2 } from "lucide-react";
+import { Bell, BookOpen, MessageSquare, Check, X, Loader2, CalendarCheck, CheckCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface NotificationItem {
@@ -17,6 +17,7 @@ interface NotificationItem {
 
 const NotificationBell = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [notifications, setNotifications] = useState<NotificationItem[]>([]);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -65,6 +66,48 @@ const NotificationBell = () => {
     if (!user) return;
     await supabase.from("notifications").update({ is_read: true }).eq("user_id", user.id).eq("is_read", false);
     setNotifications((prev) => prev.map((n) => ({ ...n, is_read: true })));
+  };
+
+  const handleNotificationClick = (n: NotificationItem) => {
+    markAsRead(n.id);
+    setOpen(false);
+
+    // Navigate based on notification type
+    if (n.type === "new_lecture" && n.lecture_id) {
+      navigate(`/lectures/${n.lecture_id}`);
+    } else if (n.type === "new_message" && n.lecture_id) {
+      navigate(`/lectures/${n.lecture_id}`);
+    } else if (n.type === "booking_confirmed" || n.type === "booking_rejected" || n.type === "booking_cancelled" || n.type === "new_booking") {
+      // Navigate to My Lessons tab in dashboard
+      navigate("/dashboard");
+      // Set a small delay to switch to mylessons tab
+      setTimeout(() => {
+        const event = new CustomEvent("switch-dashboard-tab", { detail: "mylessons" });
+        window.dispatchEvent(event);
+      }, 100);
+    }
+  };
+
+  const getNotificationIcon = (type: string) => {
+    switch (type) {
+      case "new_lecture": return <BookOpen size={14} className="text-primary" />;
+      case "new_message": return <MessageSquare size={14} className="text-success" />;
+      case "booking_confirmed": return <CheckCircle size={14} className="text-success" />;
+      case "booking_rejected": return <X size={14} className="text-destructive" />;
+      case "new_booking": return <CalendarCheck size={14} className="text-primary" />;
+      default: return <Bell size={14} className="text-muted-foreground" />;
+    }
+  };
+
+  const getNotificationColor = (type: string) => {
+    switch (type) {
+      case "new_lecture": return "bg-primary/10";
+      case "new_message": return "bg-success/10";
+      case "booking_confirmed": return "bg-success/10";
+      case "booking_rejected": return "bg-destructive/10";
+      case "new_booking": return "bg-primary/10";
+      default: return "bg-muted";
+    }
   };
 
   const timeAgo = (date: string) => {
@@ -133,37 +176,25 @@ const NotificationBell = () => {
                   </div>
                 ) : (
                   notifications.map((n) => (
-                    <div
+                    <button
                       key={n.id}
-                      className={`flex gap-3 p-3 border-b last:border-0 transition-colors hover:bg-secondary/50 ${!n.is_read ? "bg-primary/5" : ""}`}
+                      onClick={() => handleNotificationClick(n)}
+                      className={`w-full text-right flex gap-3 p-3 border-b last:border-0 transition-colors hover:bg-secondary/50 ${!n.is_read ? "bg-primary/5" : ""}`}
                     >
-                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${n.type === "new_lecture" ? "bg-primary/10" : "bg-success/10"}`}>
-                        {n.type === "new_lecture" ? <BookOpen size={14} className="text-primary" /> : <MessageSquare size={14} className="text-success" />}
+                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${getNotificationColor(n.type)}`}>
+                        {getNotificationIcon(n.type)}
                       </div>
                       <div className="flex-1 min-w-0">
-                        {n.lecture_id ? (
-                          <Link
-                            to={`/lectures/${n.lecture_id}`}
-                            onClick={() => { markAsRead(n.id); setOpen(false); }}
-                            className="block"
-                          >
-                            <p className="font-bold text-xs leading-relaxed">{n.title}</p>
-                            {n.body && <p className="text-muted-foreground text-[0.7rem] truncate">{n.body}</p>}
-                          </Link>
-                        ) : (
-                          <div>
-                            <p className="font-bold text-xs leading-relaxed">{n.title}</p>
-                            {n.body && <p className="text-muted-foreground text-[0.7rem] truncate">{n.body}</p>}
-                          </div>
-                        )}
+                        <p className="font-bold text-xs leading-relaxed">{n.title}</p>
+                        {n.body && <p className="text-muted-foreground text-[0.7rem] truncate">{n.body}</p>}
                         <p className="text-[0.6rem] text-muted-foreground mt-1">{timeAgo(n.created_at)}</p>
                       </div>
                       {!n.is_read && (
-                        <button onClick={() => markAsRead(n.id)} className="shrink-0 self-start mt-1">
-                          <Check size={14} className="text-primary hover:text-primary/80" />
-                        </button>
+                        <div className="shrink-0 self-start mt-1">
+                          <div className="w-2 h-2 rounded-full bg-primary" />
+                        </div>
                       )}
-                    </div>
+                    </button>
                   ))
                 )}
               </div>
