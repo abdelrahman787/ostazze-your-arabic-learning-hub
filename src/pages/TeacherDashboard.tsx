@@ -5,13 +5,12 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
 import {
   Menu, LogOut, LayoutDashboard, BookOpen, User, Clock,
-  GraduationCap, Video, FileText, MessageSquare, Loader2, ArrowLeft, CalendarCheck, Star
+  GraduationCap, Video, FileText, MessageSquare, Loader2, ArrowLeft, Star, Lock
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import NotificationBell from "@/components/NotificationBell";
 import TeacherAvailabilityManager from "@/components/TeacherAvailabilityManager";
-import BookingManager from "@/components/BookingManager";
 import MyLessons from "@/components/MyLessons";
 
 interface TeacherLecture {
@@ -23,10 +22,11 @@ interface TeacherLecture {
   pdf_url: string | null;
   created_at: string;
   student_name?: string;
+  has_messages?: boolean;
 }
 
 const TeacherDashboard = () => {
-  const { user, logout, updateProfile } = useAuth();
+  const { user, logout, updateProfile, changePassword } = useAuth();
   const { t, lang } = useLanguage();
   const navigate = useNavigate();
   const [tab, setTab] = useState("overview");
@@ -37,9 +37,16 @@ const TeacherDashboard = () => {
   const [stats, setStats] = useState({ totalLectures: 0, totalStudents: 0, conversations: 0 });
 
   // Profile form state
-  const [profileForm, setProfileForm] = useState({ fullName: "", bio: "", price: "" });
+  const [profileForm, setProfileForm] = useState({ fullName: "", bio: "" });
   const [profileLoading, setProfileLoading] = useState(true);
   const [profileSaving, setProfileSaving] = useState(false);
+
+  // Password form state
+  const [pwForm, setPwForm] = useState({ current: "", newPw: "", confirm: "" });
+  const [pwSaving, setPwSaving] = useState(false);
+
+  // Conversations view
+  const [showConversations, setShowConversations] = useState(false);
 
   const fetchLectures = useCallback(async () => {
     if (!user) return;
@@ -66,11 +73,13 @@ const TeacherDashboard = () => {
       ]);
 
       const pMap = new Map(profilesResult.data?.map((p) => [p.user_id, p.full_name]) || []);
-      const conversations = new Set(convResult.data?.map((m) => m.lecture_id) || []).size;
+      const convLectureIds = new Set(convResult.data?.map((m) => m.lecture_id) || []);
+      const conversations = convLectureIds.size;
 
       const mapped = data.map((l) => ({
         ...l,
         student_name: pMap.get(l.student_id) || "—",
+        has_messages: convLectureIds.has(l.id),
       }));
       setLectures(mapped);
       setStats({ totalLectures: mapped.length, totalStudents: studentIds.length, conversations });
@@ -90,14 +99,10 @@ const TeacherDashboard = () => {
     if (!user) return;
     const loadProfile = async () => {
       setProfileLoading(true);
-      const [profileResult, tpResult] = await Promise.all([
-        supabase.from("profiles").select("full_name, bio").eq("user_id", user.id).maybeSingle(),
-        supabase.from("teacher_profiles").select("price").eq("user_id", user.id).maybeSingle(),
-      ]);
+      const { data: profileResult } = await supabase.from("profiles").select("full_name, bio").eq("user_id", user.id).maybeSingle();
       setProfileForm({
-        fullName: profileResult.data?.full_name || user.name || "",
-        bio: profileResult.data?.bio || "",
-        price: tpResult.data?.price ? String(tpResult.data.price) : "",
+        fullName: profileResult?.full_name || user.name || "",
+        bio: profileResult?.bio || "",
       });
       setProfileLoading(false);
     };
@@ -109,7 +114,6 @@ const TeacherDashboard = () => {
     const { error } = await updateProfile({
       full_name: profileForm.fullName,
       bio: profileForm.bio,
-      price: profileForm.price ? Number(profileForm.price) : undefined,
     });
     if (error) {
       toast.error(error);
@@ -119,6 +123,28 @@ const TeacherDashboard = () => {
     setProfileSaving(false);
   };
 
+  const handleChangePassword = async () => {
+    if (pwForm.newPw !== pwForm.confirm) {
+      toast.error(t("password_mismatch"));
+      return;
+    }
+    if (pwForm.newPw.length < 8) {
+      toast.error(t("password_too_short"));
+      return;
+    }
+    setPwSaving(true);
+    const result = await changePassword(pwForm.current, pwForm.newPw);
+    if (result.error) {
+      toast.error(result.error === "current_password_wrong" ? t("current_password_wrong") : result.error);
+    } else {
+      toast.success(t("password_changed"));
+      setPwForm({ current: "", newPw: "", confirm: "" });
+    }
+    setPwSaving(false);
+  };
+
+  const lecturesWithMessages = lectures.filter((l) => l.has_messages);
+
   const sidebarLinks = [
     { section: t("section_main"), items: [
       { icon: LayoutDashboard, label: t("dash_overview"), tab: "overview" },
@@ -126,11 +152,11 @@ const TeacherDashboard = () => {
     { section: t("sidebar_teaching"), items: [
       { icon: BookOpen, label: t("sidebar_my_lectures"), tab: "lectures" },
       { icon: Star, label: t("sidebar_my_lessons"), tab: "mylessons" },
-      { icon: CalendarCheck, label: t("sidebar_bookings"), tab: "bookings" },
       { icon: Clock, label: t("sidebar_available_times"), tab: "availability" },
     ]},
     { section: t("section_account"), items: [
       { icon: User, label: t("sidebar_profile"), tab: "profile" },
+      { icon: Lock, label: t("dash_change_password"), tab: "password" },
     ]},
   ];
 
@@ -146,7 +172,7 @@ const TeacherDashboard = () => {
             <div key={s.section}>
               <div className="text-xs font-bold text-muted-foreground mb-2 px-3">{s.section}</div>
               {s.items.map((item) => (
-                <button key={item.tab} onClick={() => { setTab(item.tab); setSidebarOpen(false); }}
+                <button key={item.tab} onClick={() => { setTab(item.tab); setSidebarOpen(false); setShowConversations(false); }}
                   className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-colors mb-1 ${tab === item.tab ? "bg-primary text-primary-foreground font-bold" : "text-muted-foreground hover:bg-primary/5 hover:text-foreground"}`}>
                   <motion.div whileHover={{ scale: 1.2, rotate: 10 }}><item.icon size={16} /></motion.div>
                   {item.label}
@@ -169,7 +195,8 @@ const TeacherDashboard = () => {
           <div className="flex items-center gap-3">
             <button onClick={() => setSidebarOpen(true)} className="lg:hidden"><Menu size={20} /></button>
             <h2 className="font-bold">
-              {tab === "overview" ? t("dash_overview") : tab === "lectures" ? t("sidebar_my_lectures") : tab === "mylessons" ? t("sidebar_my_lessons") : tab === "profile" ? t("sidebar_profile") : tab === "availability" ? t("sidebar_available_times") : tab === "bookings" ? t("sidebar_bookings") : ""}
+              {showConversations ? t("stat_conversations") : 
+               tab === "overview" ? t("dash_overview") : tab === "lectures" ? t("sidebar_my_lectures") : tab === "mylessons" ? t("sidebar_my_lessons") : tab === "profile" ? t("sidebar_profile") : tab === "availability" ? t("sidebar_available_times") : tab === "password" ? t("dash_change_password") : ""}
             </h2>
           </div>
           <div className="flex items-center gap-3">
@@ -180,16 +207,16 @@ const TeacherDashboard = () => {
         </header>
 
         <div className="p-6">
-          {tab === "overview" && (
+          {tab === "overview" && !showConversations && (
             <div className="space-y-6 animate-fade-in">
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
                 {[
-                  { label: t("stat_total_lectures"), value: String(stats.totalLectures), icon: BookOpen, color: "bg-primary/10 text-primary" },
-                  { label: t("stat_num_students"), value: String(stats.totalStudents), icon: GraduationCap, color: "bg-success/10 text-success" },
-                  { label: t("stat_conversations"), value: String(stats.conversations), icon: MessageSquare, color: "bg-warning/10 text-warning" },
-                  { label: t("stat_rating"), value: "—", icon: Clock, color: "bg-muted text-muted-foreground" },
+                  { label: t("stat_total_lectures"), value: String(stats.totalLectures), icon: BookOpen, color: "bg-primary/10 text-primary", clickable: false },
+                  { label: t("stat_num_students"), value: String(stats.totalStudents), icon: GraduationCap, color: "bg-success/10 text-success", clickable: false },
+                  { label: t("stat_conversations"), value: String(stats.conversations), icon: MessageSquare, color: "bg-warning/10 text-warning", clickable: true },
                 ].map((s) => (
-                  <div key={s.label} className="card-base p-5">
+                  <div key={s.label} className={`card-base p-5 ${s.clickable ? "cursor-pointer hover:border-primary/30 hover:shadow-md transition-all" : ""}`}
+                    onClick={() => s.clickable && setShowConversations(true)}>
                     <div className="flex items-center gap-3">
                       <motion.div whileHover={{ scale: 1.15, rotate: 10 }} className={`icon-box ${s.color}`}><s.icon size={20} /></motion.div>
                       <div><div className="text-xl font-black">{s.value}</div><div className="text-muted-foreground text-xs">{s.label}</div></div>
@@ -238,6 +265,37 @@ const TeacherDashboard = () => {
             </div>
           )}
 
+          {/* Conversations list */}
+          {tab === "overview" && showConversations && (
+            <div className="space-y-4 animate-fade-in">
+              <button onClick={() => setShowConversations(false)} className="text-sm text-primary font-bold hover:underline flex items-center gap-1 mb-4">
+                <ArrowLeft size={14} /> {t("dash_overview")}
+              </button>
+              {lecturesLoading ? (
+                <div className="flex justify-center py-12"><Loader2 className="animate-spin text-primary" size={32} /></div>
+              ) : lecturesWithMessages.length === 0 ? (
+                <div className="card-base p-12 text-center">
+                  <MessageSquare size={48} className="mx-auto text-muted-foreground/30 mb-3" />
+                  <p className="text-muted-foreground">لا توجد محادثات بعد</p>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {lecturesWithMessages.map((lec) => (
+                    <Link key={lec.id} to={`/lectures/${lec.id}`}
+                      className="card-base p-4 flex items-center gap-4 hover:border-primary/30 hover:shadow-md transition-all group">
+                      <div className="icon-box bg-warning/10"><MessageSquare size={18} className="text-warning" /></div>
+                      <div className="flex-1 min-w-0">
+                        <div className="font-bold text-sm group-hover:text-primary transition-colors">{lec.title}</div>
+                        <div className="text-muted-foreground text-xs">{t("the_student")}: {lec.student_name} {lec.subject && `• ${lec.subject}`}</div>
+                      </div>
+                      <ArrowLeft size={16} className="text-muted-foreground group-hover:text-primary shrink-0" />
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
           {tab === "lectures" && (
             <div className="animate-fade-in">
               {lecturesLoading ? (
@@ -260,12 +318,10 @@ const TeacherDashboard = () => {
                           </div>
                           <ArrowLeft size={16} className="text-muted-foreground group-hover:text-primary transition-colors mt-1" />
                         </div>
-
                         <div className="flex items-center gap-2 mb-3">
                           <div className="w-6 h-6 rounded-full bg-success/10 text-success flex items-center justify-center text-xs font-bold">{lec.student_name?.charAt(0) || "S"}</div>
                           <span className="text-sm text-muted-foreground">{t("the_student")}: <span className="text-foreground font-medium">{lec.student_name}</span></span>
                         </div>
-
                         <div className="flex items-center gap-4 text-xs text-muted-foreground">
                           <span className="flex items-center gap-1">
                             <Video size={12} className={lec.video_url ? "text-success" : ""} />
@@ -280,7 +336,6 @@ const TeacherDashboard = () => {
                             {t("chat_word")}
                           </span>
                         </div>
-
                         <div className="text-[0.65rem] text-muted-foreground mt-2">
                           {new Date(lec.created_at).toLocaleDateString(lang === "ar" ? "ar" : "en", { year: "numeric", month: "long", day: "numeric" })}
                         </div>
@@ -307,38 +362,18 @@ const TeacherDashboard = () => {
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-bold mb-1.5">{t("register_name")}</label>
-                    <input
-                      className="input-base"
-                      value={profileForm.fullName}
+                    <input className="input-base" value={profileForm.fullName}
                       onChange={(e) => setProfileForm((f) => ({ ...f, fullName: e.target.value }))}
-                      placeholder={t("register_name")}
-                    />
+                      placeholder={t("register_name")} />
                   </div>
                   <div>
                     <label className="block text-sm font-bold mb-1.5">{t("bio_label")}</label>
-                    <textarea
-                      rows={4}
-                      className="input-base resize-none"
-                      value={profileForm.bio}
+                    <textarea rows={4} className="input-base resize-none" value={profileForm.bio}
                       onChange={(e) => setProfileForm((f) => ({ ...f, bio: e.target.value }))}
-                      placeholder={t("bio_placeholder")}
-                    />
+                      placeholder={t("bio_placeholder")} />
                   </div>
-                  <div>
-                    <label className="block text-sm font-bold mb-1.5">{t("session_price_label")} ({t("sar")})</label>
-                    <input
-                      type="number"
-                      className="input-base"
-                      value={profileForm.price}
-                      onChange={(e) => setProfileForm((f) => ({ ...f, price: e.target.value }))}
-                      placeholder="150"
-                    />
-                  </div>
-                  <button
-                    onClick={handleSaveProfile}
-                    disabled={profileSaving}
-                    className="btn-primary flex items-center gap-2 disabled:opacity-50"
-                  >
+                  <button onClick={handleSaveProfile} disabled={profileSaving}
+                    className="btn-primary flex items-center gap-2 disabled:opacity-50">
                     {profileSaving && <Loader2 size={16} className="animate-spin" />}
                     {t("dash_save")}
                   </button>
@@ -347,18 +382,35 @@ const TeacherDashboard = () => {
             </div>
           )}
 
+          {tab === "password" && (
+            <div className="card-base p-6 animate-fade-in max-w-lg">
+              <h3 className="font-extrabold text-lg mb-6">{t("dash_change_password")}</h3>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-bold mb-1.5">{t("dash_current_password")}</label>
+                  <input type="password" value={pwForm.current} onChange={(e) => setPwForm((f) => ({ ...f, current: e.target.value }))} className="input-base" />
+                </div>
+                <div>
+                  <label className="block text-sm font-bold mb-1.5">{t("dash_new_password")}</label>
+                  <input type="password" value={pwForm.newPw} onChange={(e) => setPwForm((f) => ({ ...f, newPw: e.target.value }))} className="input-base" />
+                </div>
+                <div>
+                  <label className="block text-sm font-bold mb-1.5">{t("register_confirm")}</label>
+                  <input type="password" value={pwForm.confirm} onChange={(e) => setPwForm((f) => ({ ...f, confirm: e.target.value }))} className="input-base" />
+                </div>
+                <button onClick={handleChangePassword} disabled={pwSaving} className="btn-primary flex items-center gap-2 disabled:opacity-50">
+                  {pwSaving && <Loader2 size={14} className="animate-spin" />}
+                  {t("dash_update_password")}
+                </button>
+              </div>
+            </div>
+          )}
+
           {tab === "availability" && (
             <div className="animate-fade-in">
               <TeacherAvailabilityManager />
             </div>
           )}
-
-          {tab === "bookings" && (
-            <div className="animate-fade-in">
-              <BookingManager role="teacher" />
-            </div>
-          )}
-
         </div>
       </main>
     </div>

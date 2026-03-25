@@ -1,5 +1,6 @@
 import { useAuth } from "@/contexts/AuthContext";
 import { Loader2 } from "lucide-react";
+import { Navigate } from "react-router-dom";
 import Dashboard from "./Dashboard";
 import TeacherDashboard from "./TeacherDashboard";
 
@@ -21,6 +22,11 @@ const SmartDashboard = () => {
         <Loader2 className="animate-spin text-primary" size={32} />
       </div>
     );
+  }
+
+  // Admin goes directly to admin panel
+  if (user.role === "admin") {
+    return <Navigate to="/admin" replace />;
   }
 
   if (user.role === "teacher") {
