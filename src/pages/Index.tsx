@@ -237,8 +237,7 @@ const HomePage = () => {
       </section>
 
       {/* Stats - Glassmorphism */}
-      <motion.section ref={statsRef} style={{ scale: statsScale }} className="py-16 mx-4 lg:mx-8 rounded-3xl relative overflow-hidden"
-        style2="na">
+      <motion.section ref={statsRef} className="py-16 mx-4 lg:mx-8 rounded-3xl relative overflow-hidden">
         {/* Gradient background */}
         <div className="absolute inset-0 bg-gradient-to-br from-[hsl(21,90%,48%)] via-[hsl(24,94%,50%)] to-[hsl(30,95%,55%)] rounded-3xl" />
         {/* Floating bg circles */}
