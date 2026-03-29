@@ -5,9 +5,28 @@ import { Search, SlidersHorizontal, Loader2 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
+import { Skeleton } from "@/components/ui/skeleton";
+import PageHelmet from "@/components/PageHelmet";
+
+const TeacherCardSkeleton = () => (
+  <div className="card-base flex flex-col p-5 gap-3">
+    <div className="flex gap-3">
+      <Skeleton className="w-14 h-14 rounded-2xl" />
+      <div className="flex-1 space-y-2">
+        <Skeleton className="h-4 w-3/4" />
+        <Skeleton className="h-3 w-1/2" />
+      </div>
+    </div>
+    <div className="flex gap-1.5 mt-2">
+      <Skeleton className="h-6 w-16 rounded-lg" />
+      <Skeleton className="h-6 w-20 rounded-lg" />
+    </div>
+    <Skeleton className="h-10 w-full rounded-xl mt-auto" />
+  </div>
+);
 
 const Teachers = () => {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [search, setSearch] = useState("");
   const [showFilters, setShowFilters] = useState(false);
   const [sortBy, setSortBy] = useState("");
@@ -17,7 +36,6 @@ const Teachers = () => {
   const [teachers, setTeachers] = useState<TeacherData[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Extract unique values for filters
   const universities = [...new Set(teachers.map((tc) => tc.university).filter(Boolean))] as string[];
   const subjects = [...new Set(teachers.flatMap((tc) => tc.subjects))] as string[];
 
@@ -64,23 +82,15 @@ const Teachers = () => {
 
   const q = search.toLowerCase();
   const filtered = teachers.filter((tc) => {
-    // Text search
     if (search && !(
       tc.full_name.toLowerCase().includes(q) ||
       tc.subjects.some((s) => s.toLowerCase().includes(q)) ||
       (tc.university && tc.university.toLowerCase().includes(q))
     )) return false;
-
-    // University filter
     if (filterUniversity && tc.university !== filterUniversity) return false;
-
-    // Subject filter
     if (filterSubject && !tc.subjects.includes(filterSubject)) return false;
-
-    // Verified filter
     if (filterVerified === "verified" && !tc.verified) return false;
     if (filterVerified === "unverified" && tc.verified) return false;
-
     return true;
   });
 
@@ -99,8 +109,14 @@ const Teachers = () => {
 
   const hasActiveFilters = filterUniversity || filterSubject || filterVerified || sortBy;
 
+  const allLabel = lang === "ar" ? "الكل" : "All";
+  const nameAsc = lang === "ar" ? "الاسم (أ-ي)" : "Name (A-Z)";
+  const nameDesc = lang === "ar" ? "الاسم (ي-أ)" : "Name (Z-A)";
+  const clearLabel = lang === "ar" ? "مسح الفلاتر" : "Clear Filters";
+
   return (
     <div>
+      <PageHelmet title={t("teachers_title")} description={t("teachers_choose")} />
       <section className="py-16 bg-section-alt">
         <div className="container">
           <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="text-3xl font-extrabold mb-2">{t("teachers_title")}</motion.h1>
@@ -115,38 +131,38 @@ const Teachers = () => {
               <Search size={18} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
               <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder={t("search_placeholder")} className="input-base !pr-10" />
             </div>
-            <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setShowFilters(!showFilters)} className="btn-outline !py-2 flex items-center gap-2">
-              <motion.div whileHover={{ rotate: 90 }}><SlidersHorizontal size={16} /></motion.div>
+            <button onClick={() => setShowFilters(!showFilters)} className="btn-outline !py-2 flex items-center gap-2">
+              <SlidersHorizontal size={16} />
               {t("filter_btn")}
               {hasActiveFilters && <span className="w-2 h-2 rounded-full bg-primary" />}
-            </motion.button>
+            </button>
           </div>
 
           {showFilters && (
             <div className="mt-4 animate-fade-in space-y-3">
               <div className="flex flex-wrap gap-3">
                 <select className="input-base !w-auto" value={filterUniversity} onChange={(e) => setFilterUniversity(e.target.value)}>
-                  <option value="">{t("th_university")} - الكل</option>
+                  <option value="">{t("th_university")} - {allLabel}</option>
                   {universities.map((u) => <option key={u} value={u}>{u}</option>)}
                 </select>
                 <select className="input-base !w-auto" value={filterSubject} onChange={(e) => setFilterSubject(e.target.value)}>
-                  <option value="">{t("th_subject")} - الكل</option>
+                  <option value="">{t("th_subject")} - {allLabel}</option>
                   {subjects.map((s) => <option key={s} value={s}>{s}</option>)}
                 </select>
                 <select className="input-base !w-auto" value={filterVerified} onChange={(e) => setFilterVerified(e.target.value)}>
-                  <option value="">{t("th_status")} - الكل</option>
+                  <option value="">{t("th_status")} - {allLabel}</option>
                   <option value="verified">{t("teacher_verified")}</option>
                   <option value="unverified">{t("admin_under_review")}</option>
                 </select>
                 <select className="input-base !w-auto" value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
                   <option value="">{t("filter_sort")}</option>
-                  <option value="name-asc">الاسم (أ-ي)</option>
-                  <option value="name-desc">الاسم (ي-أ)</option>
+                  <option value="name-asc">{nameAsc}</option>
+                  <option value="name-desc">{nameDesc}</option>
                 </select>
               </div>
               {hasActiveFilters && (
                 <button onClick={clearFilters} className="text-xs text-destructive font-bold hover:underline">
-                  مسح الفلاتر
+                  {clearLabel}
                 </button>
               )}
             </div>
@@ -154,7 +170,9 @@ const Teachers = () => {
         </div>
 
         {loading ? (
-          <div className="flex justify-center py-12"><Loader2 className="animate-spin text-primary" size={32} /></div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[...Array(6)].map((_, i) => <TeacherCardSkeleton key={i} />)}
+          </div>
         ) : (
           <>
             <p className="text-muted-foreground text-sm mb-6">{t("showing_results")} {sorted.length} {t("teacher_word")}</p>

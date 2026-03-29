@@ -4,13 +4,14 @@ import type { TeacherData } from "@/components/TeacherCard";
 import { mockTestimonials } from "@/data/mockData";
 import {
   Star, ArrowLeft, Sparkles, GraduationCap, CalendarCheck, Video,
-  CheckCircle2, Play, Users, TrendingUp
+  Users, TrendingUp
 } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
 import CountUpNumber from "@/components/CountUpNumber";
+import PageHelmet from "@/components/PageHelmet";
 
 const heroImage = "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80";
 
@@ -23,40 +24,10 @@ const item = {
   show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
 };
 
-// Floating shapes for hero
-const FloatingShapes = () => (
-  <div className="absolute inset-0 overflow-hidden pointer-events-none">
-    {[...Array(6)].map((_, i) => (
-      <motion.div
-        key={i}
-        className="absolute rounded-full bg-primary/5"
-        style={{
-          width: 40 + i * 30,
-          height: 40 + i * 30,
-          top: `${10 + i * 14}%`,
-          left: `${5 + i * 15}%`,
-        }}
-        animate={{
-          y: [0, -15, 0],
-          x: [0, 8, 0],
-          scale: [1, 1.05, 1],
-        }}
-        transition={{
-          duration: 4 + i * 0.7,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: i * 0.5,
-        }}
-      />
-    ))}
-  </div>
-);
-
 const HomePage = () => {
   const { t, d } = useLanguage();
   const [featuredTeachers, setFeaturedTeachers] = useState<TeacherData[]>([]);
   const statsRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: statsRef, offset: ["start end", "end start"] });
 
   useEffect(() => {
     const fetchTeachers = async () => {
@@ -91,20 +62,25 @@ const HomePage = () => {
     };
     fetchTeachers();
   }, []);
-  const statsScale = useTransform(scrollYProgress, [0, 0.5], [0.96, 1]);
 
   return (
     <div>
+      <PageHelmet title={t("hero_badge")} description={t("hero_subtitle")} />
+
       {/* Hero */}
       <section className="hero-gradient min-h-[85vh] flex items-center overflow-hidden relative">
-        <FloatingShapes />
+        {/* Static decorative shapes instead of animated ones */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute w-[200px] h-[200px] rounded-full bg-primary/5 top-[10%] left-[5%]" />
+          <div className="absolute w-[120px] h-[120px] rounded-full bg-primary/3 top-[40%] right-[10%]" />
+          <div className="absolute w-[160px] h-[160px] rounded-full bg-primary/4 bottom-[15%] left-[20%]" />
+        </div>
+
         <div className="container relative z-10">
           <div className="grid lg:grid-cols-2 gap-8 items-center">
             <motion.div variants={container} initial="hidden" animate="show">
               <motion.div variants={item} className="badge-brand inline-flex items-center gap-2 mb-6">
-                <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}>
-                  <Sparkles size={14} />
-                </motion.div>
+                <Sparkles size={14} />
                 <span>{t("hero_badge")}</span>
               </motion.div>
 
@@ -118,17 +94,13 @@ const HomePage = () => {
               </motion.p>
 
               <motion.div variants={item} className="flex flex-wrap gap-3 mb-10">
-                <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-                  <Link to="/teachers" className="btn-primary text-base !px-8 flex items-center gap-2">
-                    {t("hero_cta")}
-                    <motion.div whileHover={{ x: -4 }}><ArrowLeft size={16} /></motion.div>
-                  </Link>
-                </motion.div>
-                <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-                  <Link to="/teachers" className="border-2 border-border text-foreground px-8 py-3 rounded-xl font-bold hover:border-primary/50 transition-all">
-                    {t("hero_browse")}
-                  </Link>
-                </motion.div>
+                <Link to="/teachers" className="btn-primary text-base !px-8 flex items-center gap-2">
+                  {t("hero_cta")}
+                  <ArrowLeft size={16} />
+                </Link>
+                <Link to="/teachers" className="border-2 border-border text-foreground px-8 py-3 rounded-xl font-bold hover:border-primary/50 transition-all">
+                  {t("hero_browse")}
+                </Link>
               </motion.div>
 
               <motion.div variants={item} className="flex gap-10">
@@ -151,7 +123,7 @@ const HomePage = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.7, ease: "easeOut" }}
               >
-                <img src={heroImage} alt="Students" className="rounded-3xl w-full object-cover h-[440px] opacity-90" />
+                <img src={heroImage} alt="Students learning together" className="rounded-3xl w-full object-cover h-[440px] opacity-90" loading="lazy" />
               </motion.div>
 
               <motion.div
@@ -160,14 +132,14 @@ const HomePage = () => {
                 transition={{ delay: 0.6, type: "spring" }}
                 className="absolute top-6 -left-4 bg-card rounded-2xl border p-3.5 flex items-center gap-3 shadow-lg"
               >
-                <motion.div whileHover={{ scale: 1.15, rotate: 10 }} className="icon-box bg-primary/10">
+                <div className="icon-box bg-primary/10">
                   <GraduationCap size={20} className="text-primary" />
-                </motion.div>
+                </div>
                 <div>
                   <div className="font-bold text-sm">{t("hero_certified")}</div>
                   <div className="text-muted-foreground text-xs">{t("hero_certified_sub")}</div>
                 </div>
-                <motion.div animate={{ scale: [1, 1.3, 1] }} transition={{ repeat: Infinity, duration: 2 }} className="w-2.5 h-2.5 bg-success rounded-full mr-2" />
+                <div className="w-2.5 h-2.5 bg-success rounded-full mr-2 animate-pulse" />
               </motion.div>
 
               <motion.div
@@ -180,10 +152,10 @@ const HomePage = () => {
                   <div className="font-bold text-sm">{t("hero_live")}</div>
                   <div className="text-muted-foreground text-xs">{t("hero_live_sub")}</div>
                 </div>
-                <motion.div whileHover={{ scale: 1.15, rotate: -10 }} className="icon-box bg-success/10">
+                <div className="icon-box bg-success/10">
                   <Video size={20} className="text-success" />
-                </motion.div>
-                <motion.div animate={{ scale: [1, 1.3, 1] }} transition={{ repeat: Infinity, duration: 2, delay: 0.5 }} className="w-2.5 h-2.5 bg-success rounded-full" />
+                </div>
+                <div className="w-2.5 h-2.5 bg-success rounded-full animate-pulse" />
               </motion.div>
             </div>
           </div>
@@ -204,12 +176,10 @@ const HomePage = () => {
               { icon: Video, title: t("why_remote"), desc: t("why_remote_desc"), active: false },
             ].map((step, i) => (
               <motion.div key={step.title} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.1 }}
-                whileHover={{ y: -6, boxShadow: "0 20px 40px rgba(0,0,0,0.1)" }}
-                className={`card-base p-7 text-center transition-all duration-300 ${i === 0 ? "card-active" : ""}`}>
-                <motion.div whileHover={{ scale: 1.15, rotate: 10 }} transition={{ type: "spring", stiffness: 300 }}
-                  className="icon-box-lg bg-primary/10 text-primary mx-auto mb-4">
+                className={`card-base p-7 text-center hover:-translate-y-1 hover:shadow-lg transition-all duration-300 ${i === 0 ? "card-active" : ""}`}>
+                <div className="icon-box-lg bg-primary/10 text-primary mx-auto mb-4">
                   <step.icon size={24} />
-                </motion.div>
+                </div>
                 <h3 className={`font-bold text-lg mb-2 ${i === 0 ? "text-primary" : ""}`}>{step.title}</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">{step.desc}</p>
               </motion.div>
@@ -236,15 +206,11 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Stats - Glassmorphism */}
-      <motion.section ref={statsRef} className="py-16 mx-4 lg:mx-8 rounded-3xl relative overflow-hidden">
-        {/* Gradient background */}
+      {/* Stats */}
+      <section ref={statsRef} className="py-16 mx-4 lg:mx-8 rounded-3xl relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[hsl(21,90%,48%)] via-[hsl(24,94%,50%)] to-[hsl(30,95%,55%)] rounded-3xl" />
-        {/* Floating bg circles */}
-        <motion.div className="absolute top-[-40px] right-[-40px] w-[200px] h-[200px] rounded-full bg-white/10"
-          animate={{ scale: [1, 1.15, 1] }} transition={{ duration: 5, repeat: Infinity }} />
-        <motion.div className="absolute bottom-[-30px] left-[10%] w-[150px] h-[150px] rounded-full bg-white/5"
-          animate={{ y: [0, -20, 0] }} transition={{ duration: 6, repeat: Infinity }} />
+        <div className="absolute top-[-40px] right-[-40px] w-[200px] h-[200px] rounded-full bg-white/10" />
+        <div className="absolute bottom-[-30px] left-[10%] w-[150px] h-[150px] rounded-full bg-white/5" />
 
         <div className="container relative z-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-5 text-center text-white">
@@ -256,9 +222,9 @@ const HomePage = () => {
             ].map((s, i) => (
               <motion.div key={s.label} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
                 className="rounded-2xl p-5 backdrop-blur-[10px] bg-white/10 border border-white/20">
-                <motion.div whileHover={{ scale: 1.2, rotate: 15 }} className="inline-block mb-2 opacity-90">
+                <div className="inline-block mb-2 opacity-90">
                   <s.icon size={22} />
-                </motion.div>
+                </div>
                 <div className="text-3xl md:text-4xl font-black">
                   <CountUpNumber target={s.num} />
                 </div>
@@ -267,7 +233,7 @@ const HomePage = () => {
             ))}
           </div>
         </div>
-      </motion.section>
+      </section>
 
       {/* Testimonials */}
       <section className="py-16">
@@ -279,12 +245,10 @@ const HomePage = () => {
           <div className="grid md:grid-cols-3 gap-5">
             {mockTestimonials.map((tst, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                whileHover={{ y: -6, boxShadow: "0 20px 40px rgba(0,0,0,0.12)" }} className="card-base p-6 transition-all duration-300">
+                className="card-base p-6 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
                 <div className="flex gap-0.5 mb-3">
                   {[1, 2, 3, 4, 5].map((n) => (
-                    <motion.div key={n} whileHover={{ scale: 1.3, rotate: 15 }}>
-                      <Star size={14} className="fill-warning text-warning" />
-                    </motion.div>
+                    <Star key={n} size={14} className="fill-warning text-warning" />
                   ))}
                 </div>
                 <p className="text-muted-foreground text-sm leading-relaxed mb-4">"{d(tst.quote)}"</p>
@@ -308,14 +272,10 @@ const HomePage = () => {
             <h2 className="text-3xl font-black text-white mb-3">{t("cta_title")}</h2>
             <p className="text-[hsl(210,15%,65%)] mb-8 max-w-lg mx-auto">{t("cta_subtitle")}</p>
             <div className="flex justify-center gap-4 flex-wrap">
-              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-                <Link to="/register" className="btn-primary text-base !px-8">{t("cta_register")}</Link>
-              </motion.div>
-              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-                <Link to="/teachers" className="border-2 border-white/20 text-white px-8 py-3 rounded-xl font-bold hover:bg-white/5 transition-all">
-                  {t("hero_browse")}
-                </Link>
-              </motion.div>
+              <Link to="/register" className="btn-primary text-base !px-8">{t("cta_register")}</Link>
+              <Link to="/teachers" className="border-2 border-white/20 text-white px-8 py-3 rounded-xl font-bold hover:bg-white/5 transition-all">
+                {t("hero_browse")}
+              </Link>
             </div>
           </motion.div>
         </div>
