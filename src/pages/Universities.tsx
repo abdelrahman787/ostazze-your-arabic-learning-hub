@@ -97,7 +97,7 @@ const DepartmentItem = ({ dept, lang, index }: { dept: College["departments"][0]
                 <div key={course.code} className="flex items-center gap-2 py-1.5 px-2.5 rounded-md bg-secondary/30 text-xs">
                   <Hash size={10} className="text-primary shrink-0" />
                   <span className="font-mono text-primary/80 font-bold shrink-0">{course.code}</span>
-                  <span className="text-foreground/70">{course.name_en}</span>
+                  <span className="text-foreground/70">{lang === "ar" ? course.name_ar : course.name_en}</span>
                   <span className="text-muted-foreground shrink-0 ms-auto text-[0.6rem]">{course.credits}h</span>
                 </div>
               ))}
