@@ -1,14 +1,29 @@
 import { mockCategories } from "@/data/mockData";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
-import { Cog, Stethoscope, Monitor, Calculator, BarChart3, Globe2, FlaskConical, Scale, BookOpen } from "lucide-react";
+import {
+  Cog, Stethoscope, Monitor, Calculator, BarChart3, Globe2,
+  FlaskConical, Scale, BookOpen, GraduationCap, Heart, Pill,
+  Palette, Wrench, BookText
+} from "lucide-react";
 import { Link } from "react-router-dom";
 
 const categoryIcons: Record<string, React.ElementType> = {
-  "الهندسة": Cog, "الطب والصحة": Stethoscope, "علوم الحاسب": Monitor, "الرياضيات": Calculator,
-  "إدارة الأعمال": BarChart3, "اللغات": Globe2, "العلوم الأساسية": FlaskConical, "القانون": Scale,
-  "Engineering": Cog, "Medicine & Health": Stethoscope, "Computer Science": Monitor, "Mathematics": Calculator,
-  "Business Administration": BarChart3, "Languages": Globe2, "Basic Sciences": FlaskConical, "Law": Scale,
+  "الهندسة والبترول": Cog, "Engineering & Petroleum": Cog,
+  "الطب": Stethoscope, "Medicine": Stethoscope,
+  "الحوسبة وتقنية المعلومات": Monitor, "Computing & IT": Monitor,
+  "العلوم": FlaskConical, "Sciences": FlaskConical,
+  "إدارة الأعمال": BarChart3, "Business Administration": BarChart3,
+  "الآداب والعلوم الإنسانية": Globe2, "Arts & Humanities": Globe2,
+  "الحقوق والقانون": Scale, "Law": Scale,
+  "التربية": GraduationCap, "Education": GraduationCap,
+  "الصيدلة": Pill, "Pharmacy": Pill,
+  "التمريض": Heart, "Nursing": Heart,
+  "الشريعة والدراسات الإسلامية": BookText, "Sharia & Islamic Studies": BookText,
+  "العلوم الطبية المساندة": Stethoscope, "Allied Health Sciences": Stethoscope,
+  "الفنون والتصميم": Palette, "Fine Arts & Design": Palette,
+  "العلوم الصحية": Heart, "Health Sciences": Heart,
+  "التكنولوجيا": Wrench, "Technology": Wrench,
 };
 
 const Categories = () => {
