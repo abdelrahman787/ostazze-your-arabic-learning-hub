@@ -71,6 +71,7 @@ const PageHeader = ({ title, subtitle, children, variant = "default" }: PageHead
     <section className="py-16 bg-section-alt relative overflow-hidden">
       <PageHeaderIllustration variant={variant} />
       <div className="container text-center relative z-10">
+        {children}
         <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="text-3xl font-extrabold mb-3">
           {title}
         </motion.h1>
@@ -79,7 +80,6 @@ const PageHeader = ({ title, subtitle, children, variant = "default" }: PageHead
             {subtitle}
           </motion.p>
         )}
-        {children}
       </div>
     </section>
   );
