@@ -2,13 +2,14 @@ import { mockCategories } from "@/data/mockData";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
 import {
-  Cog, Stethoscope, Monitor, Calculator, BarChart3, Globe2,
+  Cog, Stethoscope, Monitor, BarChart3, Globe2,
   FlaskConical, Scale, BookOpen, GraduationCap, Heart, Pill,
-  Palette, Wrench, BookText, TrendingUp, Users, Search
+  Palette, Wrench, BookText, TrendingUp, Search
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { allUniversities } from "@/data/universitiesData";
 import { useState, useMemo } from "react";
+import PageHeader from "@/components/PageHeader";
 
 const categoryIcons: Record<string, React.ElementType> = {
   "الهندسة والبترول": Cog, "Engineering & Petroleum": Cog,
@@ -32,9 +33,8 @@ const Categories = () => {
   const { t, d, lang } = useLanguage();
   const [search, setSearch] = useState("");
 
-  // Compute stats
   const stats = useMemo(() => {
-    const totalCourses = allUniversities.reduce((s, u) => s + u.colleges.reduce((s2, c) => s2 + c.departments.reduce((s3, d) => s3 + d.courses.length, 0), 0), 0);
+    const totalCourses = allUniversities.reduce((s, u) => s + u.colleges.reduce((s2, c) => s2 + c.departments.reduce((s3, dd) => s3 + dd.courses.length, 0), 0), 0);
     const totalDepts = allUniversities.reduce((s, u) => s + u.colleges.reduce((s2, c) => s2 + c.departments.length, 0), 0);
     return { categories: mockCategories.length, totalDepts, totalCourses };
   }, []);
@@ -49,21 +49,16 @@ const Categories = () => {
 
   return (
     <div>
-      <section className="py-16 bg-section-alt">
-        <div className="container text-center">
-          <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="text-3xl font-extrabold mb-3">{t("categories_title")}</motion.h1>
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="text-muted-foreground">{t("categories_subtitle")}</motion.p>
-        </div>
-      </section>
+      <PageHeader title={t("categories_title")} subtitle={t("categories_subtitle")} />
 
       {/* Stats Bar */}
       <div className="bg-primary/5 border-b border-border/50">
         <div className="container py-4">
           <div className="flex items-center justify-center gap-8 flex-wrap">
             {[
-              { icon: BookOpen, value: stats.categories, label: lang === "ar" ? "تصنيف دراسي" : "Academic Categories" },
-              { icon: GraduationCap, value: stats.totalDepts, label: lang === "ar" ? "قسم أكاديمي" : "Academic Departments" },
-              { icon: TrendingUp, value: stats.totalCourses, label: lang === "ar" ? "مادة دراسية" : "Courses Available" },
+              { icon: BookOpen, value: stats.categories, label: lang === "ar" ? "تصنيف دراسي" : "Categories" },
+              { icon: GraduationCap, value: stats.totalDepts, label: lang === "ar" ? "قسم أكاديمي" : "Departments" },
+              { icon: TrendingUp, value: stats.totalCourses, label: lang === "ar" ? "مادة دراسية" : "Courses" },
             ].map((s, i) => (
               <div key={i} className="flex items-center gap-2.5">
                 <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center">
