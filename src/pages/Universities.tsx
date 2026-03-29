@@ -4,6 +4,7 @@ import {
   GraduationCap, Building2, ChevronLeft, Globe, Calendar,
   BookOpen, ChevronDown, ExternalLink, Layers, Search, Hash
 } from "lucide-react";
+import PageHeader from "@/components/PageHeader";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { allUniversities, University, College } from "@/data/universitiesData";
 import { Input } from "@/components/ui/input";
