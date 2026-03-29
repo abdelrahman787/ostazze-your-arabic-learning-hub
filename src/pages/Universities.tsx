@@ -7,8 +7,8 @@ import {
 import { useLanguage } from "@/contexts/LanguageContext";
 import { allUniversities, University, College } from "@/data/universitiesData";
 import { Input } from "@/components/ui/input";
-import flagKW from "@/assets/flag-kw.png";
-import flagQA from "@/assets/flag-qa.png";
+import flagKW from "@/assets/flag-kw-wave.gif";
+import flagQA from "@/assets/flag-qa-wave.gif";
 
 // Group universities by country
 const getCountries = () => {
@@ -29,25 +29,20 @@ const countryColors: Record<string, { from: string; to: string; accent: string }
   QA: { from: "from-red-600/20", to: "to-red-400/10", accent: "text-red-600 dark:text-red-400" },
 };
 
-// ===== Animated Flag with CSS fabric wave =====
+// ===== Animated Flag using real waving GIFs =====
 const AnimatedFlag = ({ code, size = 120 }: { code: string; size?: number }) => (
   <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
-    {/* Soft glow */}
     <motion.div
       className="absolute inset-0 rounded-full blur-2xl opacity-25"
       style={{ background: code === "KW" ? "radial-gradient(circle, #007A3D 0%, #CE1126 100%)" : "radial-gradient(circle, #8A1538 0%, #FFFFFF 100%)" }}
       animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.3, 0.15] }}
       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
     />
-    {/* Flag with CSS wave animation */}
-    <div
-      className="relative z-10 flag-wave-container"
+    <img
+      src={flagImages[code]}
+      alt={code}
+      className="relative z-10 object-contain drop-shadow-xl"
       style={{ width: size, height: size }}
-    >
-      <img
-        src={flagImages[code]}
-        alt={code}
-        className="w-full h-full object-contain drop-shadow-xl flag-wave"
         loading="lazy"
       />
     </div>
