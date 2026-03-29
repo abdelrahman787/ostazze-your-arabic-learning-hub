@@ -97,7 +97,7 @@ const DepartmentItem = ({ dept, lang, index }: { dept: College["departments"][0]
                 <div key={course.code} className="flex items-center gap-2 py-1.5 px-2.5 rounded-md bg-secondary/30 text-xs">
                   <Hash size={10} className="text-primary shrink-0" />
                   <span className="font-mono text-primary/80 font-bold shrink-0">{course.code}</span>
-                  <span className="text-foreground/70 truncate">{course.name_en}</span>
+                  <span className="text-foreground/70">{course.name_en}</span>
                   <span className="text-muted-foreground shrink-0 ms-auto text-[0.6rem]">{course.credits}h</span>
                 </div>
               ))}
@@ -367,7 +367,7 @@ const Universities = () => {
             <motion.div key="university" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
               {/* Header Card */}
               <div className="card-base p-6 md:p-8 mb-8 relative overflow-hidden">
-                <div className="absolute top-0 end-0 w-40 h-40 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-full" />
+                <div className="absolute top-0 end-0 w-40 h-40 bg-gradient-to-bl from-primary/10 to-transparent ltr:rounded-bl-full rtl:rounded-br-full" />
                 <div className="flex items-start gap-5 relative z-10">
                   <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/10 flex items-center justify-center shrink-0 shadow-lg">
                     <GraduationCap size={30} className="text-primary" />
