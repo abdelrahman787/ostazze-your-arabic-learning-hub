@@ -10,6 +10,18 @@ import { Input } from "@/components/ui/input";
 import flagKW from "@/assets/flag-kw.png";
 import flagQA from "@/assets/flag-qa.png";
 
+// Group universities by country
+const getCountries = () => {
+  const map = new Map<string, { code: string; name_ar: string; name_en: string; universities: University[] }>();
+  allUniversities.forEach((u) => {
+    if (!map.has(u.country_code)) {
+      map.set(u.country_code, { code: u.country_code, name_ar: u.country_ar, name_en: u.country_en, universities: [] });
+    }
+    map.get(u.country_code)!.universities.push(u);
+  });
+  return Array.from(map.values());
+};
+
 const flagImages: Record<string, string> = { KW: flagKW, QA: flagQA };
 
 const countryColors: Record<string, { from: string; to: string; accent: string }> = {
