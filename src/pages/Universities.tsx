@@ -43,9 +43,7 @@ const AnimatedFlag = ({ code, size = 120 }: { code: string; size?: number }) => 
       alt={code}
       className="relative z-10 object-contain drop-shadow-xl"
       style={{ width: size, height: size }}
-        loading="lazy"
-      />
-    </div>
+    />
   </div>
 );
 
