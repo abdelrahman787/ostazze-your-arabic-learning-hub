@@ -236,6 +236,7 @@ const TeacherProfile = () => {
   const displayBio = b(teacher.bio, teacher.bio_en);
   const displaySubjects = bArr(teacher.subjects, teacher.subjects_en);
   const initials = displayName.split(" ").map((w) => w[0]).join("").slice(0, 2);
+  const universityData = findUniversityByName(teacher.university) || findUniversityByName(teacher.university_en);
 
   return (
     <div>
