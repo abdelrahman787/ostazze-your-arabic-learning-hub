@@ -1,162 +1,251 @@
 import { ReactNode } from "react";
 import { motion } from "framer-motion";
 
-/** Categories: books, folders, grid */
+/** Categories: open book, folder tabs, grid pattern */
 const CategoriesIllustration = () => (
   <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-    {/* Large open book - right side */}
-    <svg className="absolute -end-4 top-1/2 -translate-y-1/2 w-52 h-52 text-primary/[0.12]" viewBox="0 0 200 200" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M100 40 L100 170" />
-      <path d="M100 40 C80 35, 40 30, 20 50 L20 160 C40 145, 80 148, 100 170" />
-      <path d="M100 40 C120 35, 160 30, 180 50 L180 160 C160 145, 120 148, 100 170" />
-      <path d="M40 70 L80 65" />
-      <path d="M40 90 L80 85" />
-      <path d="M40 110 L75 107" />
-      <path d="M120 65 L160 70" />
-      <path d="M120 85 L160 90" />
-      <path d="M120 107 L155 110" />
+    {/* Large open book - right */}
+    <svg className="absolute -end-6 top-1/2 -translate-y-1/2 w-44 h-44" viewBox="0 0 200 200" fill="none" strokeLinecap="round" strokeLinejoin="round">
+      <defs>
+        <linearGradient id="cat-g1" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.18" />
+          <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.06" />
+        </linearGradient>
+        <linearGradient id="cat-g2" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.12" />
+          <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.03" />
+        </linearGradient>
+      </defs>
+      <path d="M100 45 C80 40, 40 35, 25 52 L25 155 C45 142, 80 144, 100 162 C120 144, 155 142, 175 155 L175 52 C160 35, 120 40, 100 45 Z" fill="url(#cat-g2)" stroke="url(#cat-g1)" strokeWidth="1.5" />
+      <path d="M100 45 L100 162" stroke="hsl(var(--primary))" strokeOpacity="0.12" strokeWidth="1" />
+      <path d="M45 75 L85 70" stroke="hsl(var(--primary))" strokeOpacity="0.1" strokeWidth="1.2" />
+      <path d="M45 92 L80 88" stroke="hsl(var(--primary))" strokeOpacity="0.08" strokeWidth="1.2" />
+      <path d="M45 109 L72 106" stroke="hsl(var(--primary))" strokeOpacity="0.06" strokeWidth="1.2" />
+      <path d="M115 70 L155 75" stroke="hsl(var(--primary))" strokeOpacity="0.1" strokeWidth="1.2" />
+      <path d="M118 88 L152 92" stroke="hsl(var(--primary))" strokeOpacity="0.08" strokeWidth="1.2" />
+      <path d="M120 106 L148 109" stroke="hsl(var(--primary))" strokeOpacity="0.06" strokeWidth="1.2" />
     </svg>
 
-    {/* Folder stack - left side */}
-    <svg className="absolute start-6 bottom-4 w-36 h-36 text-primary/[0.10]" viewBox="0 0 120 120" fill="none" stroke="currentColor" strokeWidth="1.8">
-      <rect x="10" y="45" width="80" height="55" rx="4" />
-      <path d="M10 45 L10 38 C10 35, 12 33, 15 33 L38 33 L45 40 L85 40 C88 40, 90 42, 90 45" />
-      <rect x="20" y="35" width="80" height="55" rx="4" opacity="0.5" />
-      <path d="M20 35 L20 28 C20 25, 22 23, 25 23 L48 23 L55 30 L95 30 C98 30, 100 32, 100 35" opacity="0.5" />
+    {/* Folder tabs - left */}
+    <svg className="absolute start-4 bottom-1 w-32 h-28" viewBox="0 0 120 100" fill="none">
+      <defs>
+        <linearGradient id="cat-f1" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.14" />
+          <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.04" />
+        </linearGradient>
+      </defs>
+      <rect x="8" y="40" width="75" height="48" rx="5" fill="url(#cat-f1)" stroke="hsl(var(--primary))" strokeOpacity="0.12" strokeWidth="1.2" />
+      <path d="M8 40 L8 34 C8 31, 10 29, 13 29 L35 29 L42 36 L78 36 C81 36, 83 38, 83 40" stroke="hsl(var(--primary))" strokeOpacity="0.12" strokeWidth="1.2" fill="none" />
+      <rect x="20" y="30" width="75" height="48" rx="5" fill="url(#cat-f1)" stroke="hsl(var(--primary))" strokeOpacity="0.08" strokeWidth="1" opacity="0.6" />
+      <rect x="32" y="20" width="75" height="48" rx="5" fill="url(#cat-f1)" stroke="hsl(var(--primary))" strokeOpacity="0.05" strokeWidth="1" opacity="0.35" />
     </svg>
 
-    {/* Grid dots */}
-    <svg className="absolute start-1/4 top-3 w-28 h-28 text-primary/[0.08]" viewBox="0 0 100 100" fill="currentColor">
-      {Array.from({ length: 16 }).map((_, i) => (
-        <circle key={i} cx={(i % 4) * 28 + 14} cy={Math.floor(i / 4) * 28 + 14} r="3" />
+    {/* Dots pattern - top center-left */}
+    <svg className="absolute start-1/4 top-1 w-20 h-20" viewBox="0 0 80 80">
+      <defs>
+        <radialGradient id="cat-dot">
+          <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.15" />
+          <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.04" />
+        </radialGradient>
+      </defs>
+      {Array.from({ length: 9 }).map((_, i) => (
+        <circle key={i} cx={(i % 3) * 30 + 15} cy={Math.floor(i / 3) * 30 + 15} r="3.5" fill="url(#cat-dot)" />
       ))}
     </svg>
 
-    {/* Small bookmark */}
-    <svg className="absolute end-1/4 bottom-6 w-10 h-16 text-primary/[0.10]" viewBox="0 0 30 50" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M5 3 L25 3 L25 47 L15 37 L5 47 Z" />
+    {/* Bookmark */}
+    <svg className="absolute end-1/4 bottom-3 w-8 h-14" viewBox="0 0 30 50" fill="none">
+      <defs>
+        <linearGradient id="cat-bk" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.16" />
+          <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.05" />
+        </linearGradient>
+      </defs>
+      <path d="M5 3 L25 3 L25 45 L15 35 L5 45 Z" fill="url(#cat-bk)" stroke="hsl(var(--primary))" strokeOpacity="0.1" strokeWidth="1.2" />
     </svg>
   </div>
 );
 
-/** Subjects: flask, atom, pencil */
+/** Subjects: pencil writing, lightbulb, graduation cap */
 const SubjectsIllustration = () => (
   <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-    {/* Pencil - right side */}
-    <svg className="absolute -end-2 top-1/2 -translate-y-1/2 w-44 h-44 text-primary/[0.12]" viewBox="0 0 200 200" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M140 30 L170 60 L70 160 L30 170 L40 130 Z" />
-      <path d="M130 40 L160 70" />
-      <path d="M40 130 L70 160" />
-      <circle cx="35" cy="165" r="5" fill="currentColor" opacity="0.3" />
+    {/* Pencil writing - right */}
+    <svg className="absolute -end-4 top-1/2 -translate-y-1/2 w-40 h-40" viewBox="0 0 180 180" fill="none" strokeLinecap="round" strokeLinejoin="round">
+      <defs>
+        <linearGradient id="sub-g1" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.2" />
+          <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.05" />
+        </linearGradient>
+        <linearGradient id="sub-g2" x1="1" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.15" />
+          <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.03" />
+        </linearGradient>
+      </defs>
+      {/* Pencil body */}
+      <path d="M125 25 L155 55 L60 150 L25 158 L33 123 Z" fill="url(#sub-g2)" stroke="hsl(var(--primary))" strokeOpacity="0.15" strokeWidth="1.5" />
+      <path d="M118 32 L148 62" stroke="hsl(var(--primary))" strokeOpacity="0.1" strokeWidth="1" />
+      <path d="M33 123 L60 150" stroke="hsl(var(--primary))" strokeOpacity="0.08" strokeWidth="1" />
+      {/* Writing trail */}
+      <path d="M40 148 Q60 140, 80 148 Q100 156, 120 148" stroke="hsl(var(--primary))" strokeOpacity="0.08" strokeWidth="1.5" fill="none" />
     </svg>
 
     {/* Graduation cap - left */}
-    <svg className="absolute start-4 bottom-2 w-40 h-40 text-primary/[0.10]" viewBox="0 0 150 150" fill="none" stroke="currentColor" strokeWidth="2">
-      <polygon points="75,30 140,60 75,90 10,60" />
-      <path d="M30 68 L30 105 C30 105, 75 125, 120 105 L120 68" />
-      <line x1="140" y1="60" x2="140" y2="110" />
-      <circle cx="140" cy="114" r="4" fill="currentColor" opacity="0.3" />
+    <svg className="absolute start-3 bottom-0 w-36 h-32" viewBox="0 0 140 120" fill="none">
+      <defs>
+        <linearGradient id="sub-cap" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.16" />
+          <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.04" />
+        </linearGradient>
+      </defs>
+      <polygon points="70,20 135,48 70,76 5,48" fill="url(#sub-cap)" stroke="hsl(var(--primary))" strokeOpacity="0.12" strokeWidth="1.5" />
+      <path d="M25 55 L25 88 C25 88, 70 108, 115 88 L115 55" stroke="hsl(var(--primary))" strokeOpacity="0.1" strokeWidth="1.2" fill="none" />
+      <line x1="135" y1="48" x2="135" y2="92" stroke="hsl(var(--primary))" strokeOpacity="0.1" strokeWidth="1.2" />
+      <circle cx="135" cy="95" r="3.5" fill="hsl(var(--primary))" fillOpacity="0.1" />
     </svg>
 
-    {/* Lightbulb */}
-    <svg className="absolute start-1/3 top-2 w-16 h-20 text-primary/[0.09]" viewBox="0 0 60 80" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M30 10 C15 10, 8 22, 8 32 C8 42, 18 48, 20 55 L40 55 C42 48, 52 42, 52 32 C52 22, 45 10, 30 10 Z" />
-      <line x1="22" y1="60" x2="38" y2="60" />
-      <line x1="24" y1="65" x2="36" y2="65" />
-      <path d="M28 70 L32 70" />
-      <line x1="30" y1="2" x2="30" y2="7" />
-      <line x1="50" y1="15" x2="55" y2="10" />
-      <line x1="10" y1="15" x2="5" y2="10" />
-    </svg>
-
-    {/* ABC letters */}
-    <svg className="absolute end-1/4 bottom-5 w-24 h-12 text-primary/[0.08]" viewBox="0 0 100 40" fill="currentColor" style={{ fontFamily: "serif" }}>
-      <text x="5" y="30" fontSize="28" fontWeight="bold">A</text>
-      <text x="35" y="30" fontSize="28" fontWeight="bold" opacity="0.7">B</text>
-      <text x="65" y="30" fontSize="28" fontWeight="bold" opacity="0.5">C</text>
+    {/* Lightbulb - top */}
+    <svg className="absolute start-1/3 top-0 w-14 h-18" viewBox="0 0 55 70" fill="none">
+      <defs>
+        <radialGradient id="sub-bulb" cx="50%" cy="40%">
+          <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.14" />
+          <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.02" />
+        </radialGradient>
+      </defs>
+      <path d="M27 8 C14 8, 7 19, 7 28 C7 37, 16 42, 18 48 L36 48 C38 42, 47 37, 47 28 C47 19, 40 8, 27 8 Z" fill="url(#sub-bulb)" stroke="hsl(var(--primary))" strokeOpacity="0.12" strokeWidth="1.2" />
+      <line x1="20" y1="52" x2="34" y2="52" stroke="hsl(var(--primary))" strokeOpacity="0.1" strokeWidth="1" />
+      <line x1="22" y1="56" x2="32" y2="56" stroke="hsl(var(--primary))" strokeOpacity="0.08" strokeWidth="1" />
+      {/* Rays */}
+      <line x1="27" y1="1" x2="27" y2="5" stroke="hsl(var(--primary))" strokeOpacity="0.1" strokeWidth="1" />
+      <line x1="46" y1="12" x2="50" y2="8" stroke="hsl(var(--primary))" strokeOpacity="0.08" strokeWidth="1" />
+      <line x1="8" y1="12" x2="4" y2="8" stroke="hsl(var(--primary))" strokeOpacity="0.08" strokeWidth="1" />
     </svg>
   </div>
 );
 
-/** Teachers: person, chalkboard, star */
+/** Teachers: chalkboard, person, speech bubble */
 const TeachersIllustration = () => (
   <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
     {/* Chalkboard - right */}
-    <svg className="absolute -end-4 top-1/2 -translate-y-1/2 w-48 h-48 text-primary/[0.12]" viewBox="0 0 200 200" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-      <rect x="30" y="30" width="140" height="100" rx="6" />
-      <line x1="70" y1="140" x2="70" y2="170" />
-      <line x1="130" y1="140" x2="130" y2="170" />
-      <line x1="50" y1="170" x2="150" y2="170" />
-      {/* Writing on board */}
-      <path d="M50 60 Q70 45, 90 60" strokeWidth="1.5" />
-      <path d="M50 80 L110 80" strokeWidth="1.5" />
-      <path d="M50 95 L90 95" strokeWidth="1.5" />
-      <path d="M120 55 L145 55 L132 75 Z" strokeWidth="1.5" />
+    <svg className="absolute -end-6 top-1/2 -translate-y-1/2 w-44 h-40" viewBox="0 0 200 180" fill="none" strokeLinecap="round">
+      <defs>
+        <linearGradient id="tch-g1" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.16" />
+          <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.04" />
+        </linearGradient>
+      </defs>
+      <rect x="25" y="20" width="150" height="100" rx="8" fill="url(#tch-g1)" stroke="hsl(var(--primary))" strokeOpacity="0.14" strokeWidth="1.5" />
+      {/* Board content */}
+      <path d="M50 50 Q75 35, 100 50 Q125 65, 150 50" stroke="hsl(var(--primary))" strokeOpacity="0.1" strokeWidth="1.2" fill="none" />
+      <line x1="50" y1="70" x2="120" y2="70" stroke="hsl(var(--primary))" strokeOpacity="0.08" strokeWidth="1" />
+      <line x1="50" y1="82" x2="100" y2="82" stroke="hsl(var(--primary))" strokeOpacity="0.06" strokeWidth="1" />
+      {/* Triangle */}
+      <path d="M130 65 L150 65 L140 80 Z" stroke="hsl(var(--primary))" strokeOpacity="0.08" strokeWidth="1" fill="hsl(var(--primary))" fillOpacity="0.04" />
+      {/* Legs */}
+      <line x1="70" y1="120" x2="70" y2="155" stroke="hsl(var(--primary))" strokeOpacity="0.1" strokeWidth="1.5" />
+      <line x1="130" y1="120" x2="130" y2="155" stroke="hsl(var(--primary))" strokeOpacity="0.1" strokeWidth="1.5" />
+      <line x1="50" y1="155" x2="150" y2="155" stroke="hsl(var(--primary))" strokeOpacity="0.08" strokeWidth="2" />
     </svg>
 
-    {/* Person silhouette - left */}
-    <svg className="absolute start-6 bottom-2 w-32 h-40 text-primary/[0.10]" viewBox="0 0 100 130" fill="none" stroke="currentColor" strokeWidth="2">
-      <circle cx="50" cy="25" r="18" />
-      <path d="M20 130 C20 85, 25 65, 50 60 C75 65, 80 85, 80 130" />
-      <line x1="20" y1="90" x2="0" y2="75" strokeWidth="1.5" />
-      <line x1="80" y1="90" x2="100" y2="75" strokeWidth="1.5" />
+    {/* Person - left */}
+    <svg className="absolute start-5 bottom-0 w-28 h-32" viewBox="0 0 90 110" fill="none">
+      <defs>
+        <linearGradient id="tch-p" x1="0.5" y1="0" x2="0.5" y2="1">
+          <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.14" />
+          <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.04" />
+        </linearGradient>
+      </defs>
+      <circle cx="45" cy="22" r="16" fill="url(#tch-p)" stroke="hsl(var(--primary))" strokeOpacity="0.12" strokeWidth="1.3" />
+      <path d="M15 105 C15 75, 22 58, 45 52 C68 58, 75 75, 75 105" fill="url(#tch-p)" stroke="hsl(var(--primary))" strokeOpacity="0.1" strokeWidth="1.3" />
     </svg>
 
     {/* Star */}
-    <svg className="absolute start-1/3 top-3 w-14 h-14 text-primary/[0.10]" viewBox="0 0 50 50" fill="currentColor" opacity="0.4">
-      <polygon points="25,2 31,18 48,18 34,29 39,46 25,36 11,46 16,29 2,18 19,18" />
+    <svg className="absolute start-1/3 top-1 w-10 h-10" viewBox="0 0 40 40" fill="none">
+      <defs>
+        <linearGradient id="tch-star" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.18" />
+          <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.05" />
+        </linearGradient>
+      </defs>
+      <polygon points="20,2 25,14 38,14 27,22 31,35 20,28 9,35 13,22 2,14 15,14" fill="url(#tch-star)" />
     </svg>
 
     {/* Chat bubble */}
-    <svg className="absolute end-1/4 bottom-4 w-16 h-14 text-primary/[0.09]" viewBox="0 0 60 50" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M5 5 L55 5 C55 5, 55 5, 55 5 L55 32 L40 32 L30 45 L28 32 L5 32 Z" rx="6" />
-      <line x1="15" y1="15" x2="45" y2="15" strokeWidth="1.5" />
-      <line x1="15" y1="23" x2="35" y2="23" strokeWidth="1.5" />
+    <svg className="absolute end-1/4 bottom-2 w-14 h-12" viewBox="0 0 55 45" fill="none">
+      <defs>
+        <linearGradient id="tch-chat" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.12" />
+          <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.03" />
+        </linearGradient>
+      </defs>
+      <path d="M5 5 Q5 2, 8 2 L47 2 Q50 2, 50 5 L50 28 Q50 31, 47 31 L22 31 L12 42 L14 31 L8 31 Q5 31, 5 28 Z" fill="url(#tch-chat)" stroke="hsl(var(--primary))" strokeOpacity="0.1" strokeWidth="1.2" />
+      <line x1="14" y1="12" x2="40" y2="12" stroke="hsl(var(--primary))" strokeOpacity="0.08" strokeWidth="1" />
+      <line x1="14" y1="20" x2="32" y2="20" stroke="hsl(var(--primary))" strokeOpacity="0.06" strokeWidth="1" />
     </svg>
   </div>
 );
 
-/** Universities: building, globe, cap */
+/** Universities: building with pillars, globe, diploma */
 const UniversitiesIllustration = () => (
   <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
     {/* University building - right */}
-    <svg className="absolute -end-4 top-1/2 -translate-y-1/2 w-52 h-52 text-primary/[0.12]" viewBox="0 0 200 200" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      {/* Roof */}
-      <polygon points="100,25 170,65 30,65" />
+    <svg className="absolute -end-6 top-1/2 -translate-y-1/2 w-48 h-44" viewBox="0 0 200 190" fill="none" strokeLinecap="round" strokeLinejoin="round">
+      <defs>
+        <linearGradient id="uni-g1" x1="0.5" y1="0" x2="0.5" y2="1">
+          <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.18" />
+          <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.04" />
+        </linearGradient>
+      </defs>
+      {/* Roof triangle */}
+      <polygon points="100,18 175,58 25,58" fill="url(#uni-g1)" stroke="hsl(var(--primary))" strokeOpacity="0.14" strokeWidth="1.5" />
+      {/* Entablature */}
+      <rect x="28" y="58" width="144" height="8" fill="hsl(var(--primary))" fillOpacity="0.06" />
       {/* Pillars */}
-      <line x1="55" y1="70" x2="55" y2="150" />
-      <line x1="80" y1="70" x2="80" y2="150" />
-      <line x1="120" y1="70" x2="120" y2="150" />
-      <line x1="145" y1="70" x2="145" y2="150" />
+      {[50, 80, 120, 150].map(x => (
+        <rect key={x} x={x - 4} y="66" width="8" height="80" rx="2" fill="hsl(var(--primary))" fillOpacity="0.08" stroke="hsl(var(--primary))" strokeOpacity="0.1" strokeWidth="0.8" />
+      ))}
       {/* Base */}
-      <line x1="30" y1="150" x2="170" y2="150" strokeWidth="3" />
-      <line x1="35" y1="65" x2="165" y2="65" strokeWidth="2.5" />
+      <rect x="22" y="146" width="156" height="6" rx="2" fill="hsl(var(--primary))" fillOpacity="0.08" />
+      {/* Steps */}
+      <rect x="30" y="152" width="140" height="4" rx="1" fill="hsl(var(--primary))" fillOpacity="0.05" />
+      <rect x="38" y="156" width="124" height="4" rx="1" fill="hsl(var(--primary))" fillOpacity="0.03" />
       {/* Door */}
-      <path d="M90 150 L90 115 C90 108, 110 108, 110 115 L110 150" />
+      <path d="M88 146 L88 115 C88 107, 112 107, 112 115 L112 146" fill="hsl(var(--primary))" fillOpacity="0.06" stroke="hsl(var(--primary))" strokeOpacity="0.1" strokeWidth="1" />
       {/* Flag */}
-      <line x1="100" y1="25" x2="100" y2="10" />
-      <path d="M100 10 L115 15 L100 20" fill="currentColor" opacity="0.3" />
+      <line x1="100" y1="18" x2="100" y2="6" stroke="hsl(var(--primary))" strokeOpacity="0.12" strokeWidth="1.2" />
+      <path d="M100 6 L116 11 L100 16" fill="hsl(var(--primary))" fillOpacity="0.1" />
     </svg>
 
     {/* Globe - left */}
-    <svg className="absolute start-6 bottom-4 w-36 h-36 text-primary/[0.10]" viewBox="0 0 120 120" fill="none" stroke="currentColor" strokeWidth="1.8">
-      <circle cx="60" cy="60" r="45" />
-      <ellipse cx="60" cy="60" rx="20" ry="45" />
-      <path d="M18 45 Q60 35, 102 45" />
-      <path d="M18 75 Q60 85, 102 75" />
-      <line x1="60" y1="15" x2="60" y2="105" strokeWidth="1" />
+    <svg className="absolute start-4 bottom-1 w-32 h-30" viewBox="0 0 110 105" fill="none">
+      <defs>
+        <radialGradient id="uni-globe" cx="40%" cy="40%">
+          <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.14" />
+          <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.02" />
+        </radialGradient>
+      </defs>
+      <circle cx="55" cy="48" r="38" fill="url(#uni-globe)" stroke="hsl(var(--primary))" strokeOpacity="0.12" strokeWidth="1.3" />
+      <ellipse cx="55" cy="48" rx="16" ry="38" stroke="hsl(var(--primary))" strokeOpacity="0.08" strokeWidth="1" fill="none" />
+      <path d="M20 36 Q55 28, 90 36" stroke="hsl(var(--primary))" strokeOpacity="0.07" strokeWidth="1" fill="none" />
+      <path d="M20 60 Q55 68, 90 60" stroke="hsl(var(--primary))" strokeOpacity="0.07" strokeWidth="1" fill="none" />
+      <line x1="55" y1="10" x2="55" y2="86" stroke="hsl(var(--primary))" strokeOpacity="0.06" strokeWidth="0.8" />
       {/* Stand */}
-      <path d="M35 108 L60 115 L85 108" strokeWidth="1.5" />
-      <line x1="60" y1="105" x2="60" y2="115" />
+      <line x1="55" y1="86" x2="55" y2="95" stroke="hsl(var(--primary))" strokeOpacity="0.08" strokeWidth="1.2" />
+      <path d="M38 95 L55 100 L72 95" stroke="hsl(var(--primary))" strokeOpacity="0.08" strokeWidth="1.2" fill="none" />
     </svg>
 
-    {/* Scroll/diploma */}
-    <svg className="absolute start-1/3 top-3 w-16 h-18 text-primary/[0.09]" viewBox="0 0 60 70" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M10 10 C5 10, 5 20, 10 20 L50 20 C55 20, 55 10, 50 10 Z" />
-      <path d="M10 20 L10 55 C10 60, 15 60, 15 55 L15 20" />
-      <path d="M50 10 L50 45 C50 50, 45 50, 45 45 L45 20" />
-      <line x1="20" y1="30" x2="42" y2="30" strokeWidth="1" />
-      <line x1="22" y1="37" x2="40" y2="37" strokeWidth="1" />
+    {/* Diploma scroll - top */}
+    <svg className="absolute start-1/3 top-0 w-14 h-14" viewBox="0 0 50 50" fill="none">
+      <defs>
+        <linearGradient id="uni-scroll" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.14" />
+          <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.04" />
+        </linearGradient>
+      </defs>
+      <rect x="8" y="8" width="34" height="34" rx="3" fill="url(#uni-scroll)" stroke="hsl(var(--primary))" strokeOpacity="0.1" strokeWidth="1" />
+      <line x1="14" y1="18" x2="36" y2="18" stroke="hsl(var(--primary))" strokeOpacity="0.08" strokeWidth="0.8" />
+      <line x1="14" y1="24" x2="32" y2="24" stroke="hsl(var(--primary))" strokeOpacity="0.06" strokeWidth="0.8" />
+      <line x1="14" y1="30" x2="28" y2="30" stroke="hsl(var(--primary))" strokeOpacity="0.05" strokeWidth="0.8" />
+      <circle cx="32" cy="34" r="5" fill="hsl(var(--primary))" fillOpacity="0.06" stroke="hsl(var(--primary))" strokeOpacity="0.08" strokeWidth="0.8" />
     </svg>
   </div>
 );
@@ -180,15 +269,15 @@ const PageHeader = ({ title, subtitle, children, variant = "default" }: PageHead
   const Illustration = illustrationMap[variant] || illustrationMap.default;
 
   return (
-    <section className="py-16 bg-section-alt relative overflow-hidden">
+    <section className="py-10 bg-section-alt relative overflow-hidden">
       <Illustration />
       <div className="container text-center relative z-10">
         {children}
-        <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="text-3xl font-extrabold mb-3">
+        <motion.h1 initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="text-2xl md:text-3xl font-extrabold mb-2">
           {title}
         </motion.h1>
         {subtitle && (
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="text-muted-foreground">
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="text-muted-foreground text-sm">
             {subtitle}
           </motion.p>
         )}
