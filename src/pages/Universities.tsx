@@ -120,7 +120,7 @@ const CollegeCard = ({ college, lang, index }: { college: College; lang: "ar" | 
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.05 }}
-      className={`rounded-2xl border border-border/40 bg-card overflow-hidden shadow-sm hover:shadow-lg transition-shadow ${open ? "lg:col-span-2" : ""}`}
+      className="rounded-2xl border border-border/40 bg-card overflow-hidden shadow-sm hover:shadow-lg transition-shadow"
     >
       {/* College header with colored top bar */}
       <div className="h-1 bg-gradient-to-r from-primary/60 to-primary/20" />
@@ -418,7 +418,7 @@ const Universities = () => {
                 </span>
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 lg:grid-cols-2 items-start gap-4">
                 {filteredColleges.map((college, i) => (
                   <CollegeCard key={college.id} college={college} lang={lang} index={i} />
                 ))}
