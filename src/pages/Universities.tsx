@@ -34,29 +34,23 @@ const countryColors: Record<string, { from: string; to: string; accent: string }
   QA: { from: "from-red-600/20", to: "to-red-400/10", accent: "text-red-600 dark:text-red-400" },
 };
 
-// ===== Animated Flag =====
+// ===== Animated Flag (uses waving GIF) =====
 const AnimatedFlag = ({ code, size = 120 }: { code: string; size?: number }) => (
-  <div className="relative" style={{ width: size, height: size }}>
+  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
     {/* Soft glow behind flag */}
     <motion.div
-      className="absolute inset-0 rounded-full blur-2xl opacity-30"
+      className="absolute inset-0 rounded-full blur-2xl opacity-25"
       style={{ background: code === "KW" ? "radial-gradient(circle, #007A3D 0%, #CE1126 100%)" : "radial-gradient(circle, #8A1538 0%, #FFFFFF 100%)" }}
-      animate={{ scale: [1, 1.15, 1], opacity: [0.2, 0.35, 0.2] }}
+      animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.3, 0.15] }}
       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
     />
-    {/* Flag with fabric flutter - origin at the pole (left side) */}
-    <motion.img
-      src={flagImages[code]}
+    {/* Waving GIF flag */}
+    <img
+      src={flagGifs[code] || flagImages[code]}
       alt={code}
-      width={size}
-      height={size}
-      className="relative z-10 object-contain drop-shadow-lg"
-      style={{ width: size, height: size, transformOrigin: "left center" }}
-      animate={{
-        skewY: [0, -1.2, 1.5, -0.8, 1, -0.5, 0],
-        scaleX: [1, 0.98, 1.01, 0.99, 1.005, 0.995, 1],
-      }}
-      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+      className="relative z-10 object-contain drop-shadow-xl"
+      style={{ width: size, height: size }}
+      loading="lazy"
     />
   </div>
 );
