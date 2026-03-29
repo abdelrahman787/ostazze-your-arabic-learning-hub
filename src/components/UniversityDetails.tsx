@@ -68,8 +68,7 @@ const CollegeAccordion = ({ college, lang }: { college: College; lang: "ar" | "e
 };
 
 const UniversityDetails = ({ university }: Props) => {
-  const { language } = useLanguage();
-  const lang = language as "ar" | "en";
+  const { lang } = useLanguage();
   const name = lang === "ar" ? university.name_ar : university.name_en;
   const country = lang === "ar" ? university.country_ar : university.country_en;
   const totalColleges = university.colleges.length;
