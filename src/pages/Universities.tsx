@@ -10,6 +10,12 @@ import { Input } from "@/components/ui/input";
 import flagKW from "@/assets/flag-kw.png";
 import flagQA from "@/assets/flag-qa.png";
 
+// Animated waving flag GIFs
+const flagGifs: Record<string, string> = {
+  KW: "https://media.tenor.com/EvSbYG9mMlkAAAAi/kuwait-flag.gif",
+  QA: "https://media.tenor.com/DHTEq6dJOhQAAAAi/qatar-flag.gif",
+};
+
 const getCountries = () => {
   const map = new Map<string, { code: string; name_ar: string; name_en: string; universities: University[] }>();
   allUniversities.forEach((u) => {
