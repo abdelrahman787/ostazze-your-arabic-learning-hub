@@ -8,6 +8,8 @@ import { toast } from "sonner";
 import BookSessionModal from "@/components/BookSessionModal";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
+import UniversityDetails from "@/components/UniversityDetails";
+import { findUniversityByName } from "@/data/universitiesData";
 
 interface TeacherFull {
   user_id: string;
@@ -234,6 +236,7 @@ const TeacherProfile = () => {
   const displayBio = b(teacher.bio, teacher.bio_en);
   const displaySubjects = bArr(teacher.subjects, teacher.subjects_en);
   const initials = displayName.split(" ").map((w) => w[0]).join("").slice(0, 2);
+  const universityData = findUniversityByName(teacher.university) || findUniversityByName(teacher.university_en);
 
   return (
     <div>
@@ -307,6 +310,7 @@ const TeacherProfile = () => {
           </div>
 
           <div className="space-y-6">
+            {universityData && <UniversityDetails university={universityData} />}
             <div className="card-base p-6">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="font-extrabold text-lg">{t("teacher_reviews")}</h3>
