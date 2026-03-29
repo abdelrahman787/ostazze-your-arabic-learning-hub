@@ -49,7 +49,7 @@ const Categories = () => {
 
   return (
     <div>
-      <PageHeader title={t("categories_title")} subtitle={t("categories_subtitle")} />
+      <PageHeader title={t("categories_title")} subtitle={t("categories_subtitle")} variant="categories" />
 
       {/* Stats Bar */}
       <div className="bg-primary/5 border-b border-border/50">

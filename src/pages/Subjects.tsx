@@ -69,6 +69,7 @@ const Subjects = () => {
   return (
     <div>
       <PageHeader
+        variant="subjects"
         title={categoryDisplay || t("subjects_title")}
         subtitle={categoryDisplay
           ? (lang === "ar" ? `المواد الدراسية في تصنيف ${categoryDisplay}` : `Subjects in ${categoryDisplay}`)
