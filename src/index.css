@@ -157,3 +157,49 @@
     border: 1px solid hsl(var(--glass-border));
   }
 }
+
+/* Flag waving animation - realistic fabric flutter */
+@keyframes flag-wave {
+  0% {
+    transform: perspective(400px) rotateY(0deg) skewX(0deg) scaleX(1);
+  }
+  10% {
+    transform: perspective(400px) rotateY(-2deg) skewX(-1.5deg) scaleX(0.98);
+  }
+  20% {
+    transform: perspective(400px) rotateY(3deg) skewX(2deg) scaleX(1.01);
+  }
+  30% {
+    transform: perspective(400px) rotateY(-1.5deg) skewX(-2.5deg) scaleX(0.97);
+  }
+  40% {
+    transform: perspective(400px) rotateY(2.5deg) skewX(1.5deg) scaleX(1.02);
+  }
+  50% {
+    transform: perspective(400px) rotateY(-1deg) skewX(-1deg) scaleX(0.99);
+  }
+  60% {
+    transform: perspective(400px) rotateY(2deg) skewX(2.5deg) scaleX(1.01);
+  }
+  70% {
+    transform: perspective(400px) rotateY(-2.5deg) skewX(-2deg) scaleX(0.98);
+  }
+  80% {
+    transform: perspective(400px) rotateY(1.5deg) skewX(1deg) scaleX(1.01);
+  }
+  90% {
+    transform: perspective(400px) rotateY(-0.5deg) skewX(-0.5deg) scaleX(0.995);
+  }
+  100% {
+    transform: perspective(400px) rotateY(0deg) skewX(0deg) scaleX(1);
+  }
+}
+
+.flag-wave {
+  transform-origin: left center;
+  animation: flag-wave 3s ease-in-out infinite;
+}
+
+.flag-wave-container {
+  perspective: 500px;
+}
