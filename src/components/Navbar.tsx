@@ -2,7 +2,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { Moon, Sun, Menu, X, LogOut, Globe, User, ChevronDown, Shield, LayoutDashboard, ArrowRight } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -26,6 +26,18 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
+  // Keyboard: Escape to close dropdown
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setProfileOpen(false);
+        setMobileOpen(false);
+      }
+    };
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
+  }, []);
+
   const navLinks = [
     { label: t("nav_universities"), path: "/universities" },
     { label: t("nav_subjects"), path: "/subjects" },
@@ -36,20 +48,27 @@ const Navbar = () => {
   const dashboardPath = "/dashboard";
   const showBackButton = location.pathname !== "/";
 
+  // Smart back: if there's history go back, otherwise go home
+  const handleBack = useCallback(() => {
+    if (window.history.length > 2) {
+      navigate(-1);
+    } else {
+      navigate("/");
+    }
+  }, [navigate]);
+
   return (
-    <nav className="sticky top-0 z-50 glass-strong border-b h-16 flex items-center">
+    <nav className="sticky top-0 z-50 bg-card/90 backdrop-blur-md border-b h-16 flex items-center">
       <div className="container flex items-center justify-between">
         <div className="flex items-center gap-3">
           {showBackButton && (
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={() => navigate(-1)}
+            <button
+              onClick={handleBack}
               className="w-8 h-8 rounded-full flex items-center justify-center text-foreground/50 hover:text-foreground hover:bg-secondary transition-colors"
-              title="رجوع"
+              aria-label={lang === "ar" ? "رجوع" : "Go back"}
             >
               <ArrowRight size={18} />
-            </motion.button>
+            </button>
           )}
           <Link to="/" className="text-2xl font-black text-primary tracking-tight">
             OSTAZZE
@@ -73,33 +92,32 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          <motion.button
-            whileHover={{ scale: 1.15, rotate: 15 }}
-            whileTap={{ scale: 0.9 }}
+          <button
             onClick={toggleTheme}
             className="w-9 h-9 rounded-full flex items-center justify-center text-foreground/50 hover:text-foreground hover:bg-secondary transition-colors"
+            aria-label={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
           >
             {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
-          </motion.button>
-          <motion.button
-            whileHover={{ scale: 1.15, rotate: -15 }}
-            whileTap={{ scale: 0.9 }}
+          </button>
+          <button
             onClick={toggleLang}
             className="w-9 h-9 rounded-full flex items-center justify-center text-foreground/50 hover:text-foreground hover:bg-secondary transition-colors"
-            title={lang === "ar" ? "Switch to English" : "التبديل للعربية"}
+            aria-label={lang === "ar" ? "Switch to English" : "التبديل للعربية"}
           >
             <Globe size={18} />
-          </motion.button>
+          </button>
 
           {isLoggedIn ? (
             <div className="hidden md:block relative" ref={dropdownRef}>
               <button
                 onClick={() => setProfileOpen(!profileOpen)}
                 className="flex items-center gap-2 text-sm font-medium text-foreground/70 hover:text-foreground transition-colors"
+                aria-expanded={profileOpen}
+                aria-haspopup="true"
               >
-                <motion.div whileHover={{ scale: 1.1 }} className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
                   <User size={16} className="text-primary" />
-                </motion.div>
+                </div>
                 <span>{user?.name?.split(" ")[0]}...</span>
                 <ChevronDown size={14} className={`transition-transform ${profileOpen ? "rotate-180" : ""}`} />
               </button>
@@ -112,6 +130,7 @@ const Navbar = () => {
                     exit={{ opacity: 0, y: -8, scale: 0.95 }}
                     transition={{ duration: 0.15 }}
                     className="absolute left-0 top-full mt-2 w-56 bg-card rounded-xl border shadow-lg overflow-hidden z-50"
+                    role="menu"
                   >
                     <div className="p-3 border-b">
                       <div className="font-bold text-sm">{user?.name}</div>
@@ -121,30 +140,16 @@ const Navbar = () => {
                       )}
                     </div>
                     <div className="p-1.5">
-                      <Link
-                        to={dashboardPath}
-                        onClick={() => setProfileOpen(false)}
-                        className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm hover:bg-secondary transition-colors"
-                      >
-                        <LayoutDashboard size={15} className="text-muted-foreground" />
-                         {t("nav_dashboard")}
+                      <Link to={dashboardPath} onClick={() => setProfileOpen(false)} className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm hover:bg-secondary transition-colors" role="menuitem">
+                        <LayoutDashboard size={15} className="text-muted-foreground" /> {t("nav_dashboard")}
                       </Link>
                       {user?.role === "admin" && (
-                        <Link
-                          to="/admin"
-                          onClick={() => setProfileOpen(false)}
-                          className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm hover:bg-secondary transition-colors"
-                        >
-                          <Shield size={15} className="text-primary" />
-                           {t("admin_title")}
+                        <Link to="/admin" onClick={() => setProfileOpen(false)} className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm hover:bg-secondary transition-colors" role="menuitem">
+                          <Shield size={15} className="text-primary" /> {t("admin_title")}
                         </Link>
                       )}
-                      <button
-                        onClick={() => { logout(); setProfileOpen(false); }}
-                        className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-destructive hover:bg-destructive/10 transition-colors"
-                      >
-                        <LogOut size={15} />
-                        {t("nav_logout")}
+                      <button onClick={() => { logout(); setProfileOpen(false); }} className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-destructive hover:bg-destructive/10 transition-colors" role="menuitem">
+                        <LogOut size={15} /> {t("nav_logout")}
                       </button>
                     </div>
                   </motion.div>
@@ -153,16 +158,12 @@ const Navbar = () => {
             </div>
           ) : (
             <div className="hidden md:flex items-center gap-3">
-              <Link to="/login" className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors">
-                {t("nav_login")}
-              </Link>
-              <Link to="/register" className="btn-primary text-sm !py-2 !px-5">
-                {t("nav_register")}
-              </Link>
+              <Link to="/login" className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors">{t("nav_login")}</Link>
+              <Link to="/register" className="btn-primary text-sm !py-2 !px-5">{t("nav_register")}</Link>
             </div>
           )}
 
-          <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden w-9 h-9 rounded-full flex items-center justify-center hover:bg-secondary">
+          <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden w-9 h-9 rounded-full flex items-center justify-center hover:bg-secondary" aria-label="Menu">
             {mobileOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
@@ -181,9 +182,7 @@ const Navbar = () => {
               {navLinks.map((l) => (
                 <Link key={l.path} to={l.path} onClick={() => setMobileOpen(false)}
                   className={`px-4 py-3 rounded-xl text-sm font-medium transition-all ${location.pathname === l.path ? "bg-primary text-primary-foreground font-bold" : "text-foreground/70 hover:bg-secondary"}`}
-                >
-                  {l.label}
-                </Link>
+                >{l.label}</Link>
               ))}
               <div className="border-t my-2" />
               {isLoggedIn ? (

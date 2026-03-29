@@ -37,20 +37,11 @@ const TeacherCard = ({ teacher, index = 0 }: { teacher: TeacherData; index?: num
     >
       <div className="p-5 pb-3 flex gap-3">
         <div className="relative shrink-0">
-          <motion.div
-            whileHover={{ scale: 1.1, rotate: 5 }}
-            transition={{ type: "spring", stiffness: 300 }}
-            className="icon-box-lg bg-primary/10 text-primary"
-          >
+          <div className="icon-box-lg bg-primary/10 text-primary">
             <User size={22} />
-          </motion.div>
+          </div>
           {teacher.verified && (
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ type: "spring", delay: 0.3 }}
-              className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-success rounded-full border-2 border-card"
-            />
+            <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-success rounded-full border-2 border-card" />
           )}
         </div>
         <div className="min-w-0 flex-1">
@@ -71,9 +62,7 @@ const TeacherCard = ({ teacher, index = 0 }: { teacher: TeacherData; index?: num
 
       <div className="px-5 pb-4 flex items-center justify-between">
         <div className="flex items-center gap-1.5">
-          <motion.div whileHover={{ rotate: 72, scale: 1.3 }} transition={{ type: "spring" }}>
-            <Star size={14} className="fill-warning text-warning" />
-          </motion.div>
+          <Star size={14} className="fill-warning text-warning" />
           <span className="font-bold text-sm">-</span>
         </div>
         {teacher.verified && (
@@ -84,14 +73,10 @@ const TeacherCard = ({ teacher, index = 0 }: { teacher: TeacherData; index?: num
       </div>
 
       <div className="px-5 pb-5">
-        <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-          <Link to={`/teachers/${teacher.user_id}`} className="btn-primary flex items-center justify-center gap-2 text-sm w-full">
-            {t("teacher_view_profile")}
-            <motion.div whileHover={{ x: -3, y: -3 }}>
-              <ArrowUpLeft size={14} />
-            </motion.div>
-          </Link>
-        </motion.div>
+        <Link to={`/teachers/${teacher.user_id}`} className="btn-primary flex items-center justify-center gap-2 text-sm w-full">
+          {t("teacher_view_profile")}
+          <ArrowUpLeft size={14} />
+        </Link>
       </div>
     </motion.div>
   );
