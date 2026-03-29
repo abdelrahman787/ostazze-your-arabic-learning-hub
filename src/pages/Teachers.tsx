@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import { Skeleton } from "@/components/ui/skeleton";
 import PageHelmet from "@/components/PageHelmet";
+import PageHeader from "@/components/PageHeader";
 
 const TeacherCardSkeleton = () => (
   <div className="card-base flex flex-col p-5 gap-3">
@@ -117,12 +118,7 @@ const Teachers = () => {
   return (
     <div>
       <PageHelmet title={t("teachers_title")} description={t("teachers_choose")} />
-      <section className="py-16 bg-section-alt">
-        <div className="container">
-          <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="text-3xl font-extrabold mb-2">{t("teachers_title")}</motion.h1>
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="text-muted-foreground">{t("teachers_choose")}</motion.p>
-        </div>
-      </section>
+      <PageHeader title={t("teachers_title")} subtitle={t("teachers_choose")} />
 
       <div className="container py-8">
         <div className="card-base p-6 mb-8">

@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useMemo, useState } from "react";
 import { allUniversities } from "@/data/universitiesData";
+import PageHeader from "@/components/PageHeader";
 
-// Map category en name to its ar name for filtering
 const categoryEnToAr = new Map<string, string>();
 mockCategories.forEach(c => categoryEnToAr.set(c.name.en, c.name.ar));
 
@@ -16,11 +16,9 @@ const Subjects = () => {
   const categoryParam = searchParams.get("category") || "";
   const [search, setSearch] = useState("");
 
-  // Get category ar name for filtering
   const categoryAr = categoryEnToAr.get(categoryParam) || "";
   const categoryDisplay = categoryParam ? (lang === "ar" ? categoryAr : categoryParam) : "";
 
-  // Filter subjects by category
   const filteredSubjects = useMemo(() => {
     let subjects = mockSubjects;
     if (categoryAr) {
@@ -35,22 +33,18 @@ const Subjects = () => {
     return subjects;
   }, [categoryAr, search]);
 
-  // Get courses count for this subject from university data
   const getCoursesForSubject = (subjectNameEn: string) => {
     let count = 0;
     allUniversities.forEach(u => {
       u.colleges.forEach(c => {
         c.departments.forEach(dept => {
-          if (dept.name_en === subjectNameEn) {
-            count += dept.courses.length;
-          }
+          if (dept.name_en === subjectNameEn) count += dept.courses.length;
         });
       });
     });
     return count;
   };
 
-  // Get universities that have this department
   const getUniversitiesForSubject = (subjectNameEn: string) => {
     const unis: string[] = [];
     allUniversities.forEach(u => {
@@ -74,23 +68,16 @@ const Subjects = () => {
 
   return (
     <div>
-      <section className="py-16 bg-section-alt">
-        <div className="container text-center">
-          <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="text-3xl font-extrabold mb-3">
-            {categoryDisplay ? categoryDisplay : t("subjects_title")}
-          </motion.h1>
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="text-muted-foreground">
-            {categoryDisplay
-              ? (lang === "ar" ? `المواد الدراسية في تصنيف ${categoryDisplay}` : `Subjects in ${categoryDisplay}`)
-              : t("subjects_subtitle")}
-          </motion.p>
-        </div>
-      </section>
+      <PageHeader
+        title={categoryDisplay || t("subjects_title")}
+        subtitle={categoryDisplay
+          ? (lang === "ar" ? `المواد الدراسية في تصنيف ${categoryDisplay}` : `Subjects in ${categoryDisplay}`)
+          : t("subjects_subtitle")}
+      />
 
       <div className="container py-10">
         {/* Toolbar */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
-          {/* Back to categories + active filter */}
           <div className="flex items-center gap-3 flex-wrap">
             <Link to="/categories" className="flex items-center gap-1.5 text-sm text-primary hover:underline font-medium">
               <BackIcon size={14} />
@@ -105,7 +92,6 @@ const Subjects = () => {
             )}
           </div>
 
-          {/* Search */}
           <div className="relative w-full sm:w-64">
             <Search size={14} className="absolute top-1/2 -translate-y-1/2 start-3 text-muted-foreground" />
             <input
@@ -118,7 +104,6 @@ const Subjects = () => {
           </div>
         </div>
 
-        {/* Results count */}
         <p className="text-sm text-muted-foreground mb-5">
           {lang === "ar"
             ? `${filteredSubjects.length} قسم أكاديمي`
@@ -131,45 +116,47 @@ const Subjects = () => {
             const universities = getUniversitiesForSubject(s.name.en);
             return (
               <motion.div key={s.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.03 }}
-                className={`card-base p-6 hover:border-primary/30 hover:shadow-lg transition-all ${i === 0 && !categoryParam ? "card-active" : ""}`}>
-                <div className="flex items-start gap-4">
-                  <div className="icon-box-lg bg-primary/10 shrink-0">
-                    <BookOpen size={20} className="text-primary" />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <h3 className="font-bold text-base mb-1">{d(s.name)}</h3>
-                    <div className="flex items-center gap-3 text-muted-foreground text-xs mb-2">
-                      <span className="flex items-center gap-1">
-                        <Users size={12} />
-                        {s.teacherCount} {t("subjects_teacher_count")}
-                      </span>
-                      {coursesCount > 0 && (
-                        <span className="flex items-center gap-1">
-                          <BookOpen size={12} />
-                          {coursesCount} {lang === "ar" ? "مادة" : "courses"}
-                        </span>
-                      )}
+                className="h-full">
+                <div className={`card-base p-6 hover:border-primary/30 hover:shadow-lg transition-all h-full flex flex-col ${i === 0 && !categoryParam ? "card-active" : ""}`}>
+                  <div className="flex items-start gap-4 flex-1">
+                    <div className="icon-box-lg bg-primary/10 shrink-0">
+                      <BookOpen size={20} className="text-primary" />
                     </div>
-                    {universities.length > 0 && (
-                      <div className="flex flex-wrap gap-1 mb-3">
-                        {universities.slice(0, 2).map((uni, j) => (
-                          <span key={j} className="text-[0.6rem] bg-secondary text-muted-foreground px-2 py-0.5 rounded-full">
-                            {uni}
-                          </span>
-                        ))}
-                        {universities.length > 2 && (
-                          <span className="text-[0.6rem] bg-secondary text-muted-foreground px-2 py-0.5 rounded-full">
-                            +{universities.length - 2}
+                    <div className="min-w-0 flex-1">
+                      <h3 className="font-bold text-base mb-1">{d(s.name)}</h3>
+                      <div className="flex items-center gap-3 text-muted-foreground text-xs mb-2">
+                        <span className="flex items-center gap-1">
+                          <Users size={12} />
+                          {s.teacherCount} {t("subjects_teacher_count")}
+                        </span>
+                        {coursesCount > 0 && (
+                          <span className="flex items-center gap-1">
+                            <BookOpen size={12} />
+                            {coursesCount} {lang === "ar" ? "مادة" : "courses"}
                           </span>
                         )}
                       </div>
-                    )}
+                      {universities.length > 0 && (
+                        <div className="flex flex-wrap gap-1">
+                          {universities.slice(0, 2).map((uni, j) => (
+                            <span key={j} className="text-[0.6rem] bg-secondary text-muted-foreground px-2 py-0.5 rounded-full">
+                              {uni}
+                            </span>
+                          ))}
+                          {universities.length > 2 && (
+                            <span className="text-[0.6rem] bg-secondary text-muted-foreground px-2 py-0.5 rounded-full">
+                              +{universities.length - 2}
+                            </span>
+                          )}
+                        </div>
+                      )}
+                    </div>
                   </div>
+                  <Link to="/teachers" className="btn-dark flex items-center justify-center gap-2 w-full mt-4 text-sm">
+                    {t("subjects_view_teachers")}
+                    <ArrowUpLeft size={14} />
+                  </Link>
                 </div>
-                <Link to="/teachers" className="btn-dark flex items-center justify-center gap-2 w-full mt-4 text-sm">
-                  {t("subjects_view_teachers")}
-                  <ArrowUpLeft size={14} />
-                </Link>
               </motion.div>
             );
           })}
