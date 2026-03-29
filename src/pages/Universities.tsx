@@ -214,24 +214,12 @@ const Universities = () => {
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <section className="py-16 bg-gradient-to-b from-primary/8 via-primary/3 to-transparent relative overflow-hidden">
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-10 start-10 w-32 h-32 rounded-full bg-primary blur-3xl" />
-          <div className="absolute bottom-10 end-20 w-40 h-40 rounded-full bg-accent blur-3xl" />
-        </div>
-        <div className="container text-center relative z-10">
-          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-bold mb-4">
-            <GraduationCap size={16} />
-            {lang === "ar" ? "الدليل الأكاديمي" : "Academic Directory"}
-          </motion.div>
-          <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="text-3xl md:text-4xl font-black mb-3">
-            {t("universities_title")}
-          </motion.h1>
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="text-muted-foreground max-w-lg mx-auto">
-            {t("universities_subtitle")}
-          </motion.p>
-        </div>
-      </section>
+      <PageHeader title={t("universities_title")} subtitle={t("universities_subtitle")}>
+        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-bold mb-4">
+          <GraduationCap size={16} />
+          {lang === "ar" ? "الدليل الأكاديمي" : "Academic Directory"}
+        </motion.div>
+      </PageHeader>
 
       <div className="container py-8">
         {view !== "countries" && (
