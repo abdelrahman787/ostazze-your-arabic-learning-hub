@@ -275,7 +275,7 @@ const Universities = () => {
                     
                     {/* Animated Flag Image */}
                     <div className="relative z-10">
-                      <AnimatedFlag code={c.code} size={110} />
+                      <AnimatedFlag code={c.code} size={160} />
                     </div>
 
                     {/* Static text - no animation */}
