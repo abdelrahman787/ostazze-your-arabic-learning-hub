@@ -310,6 +310,7 @@ const TeacherProfile = () => {
           </div>
 
           <div className="space-y-6">
+            {universityData && <UniversityDetails university={universityData} />}
             <div className="card-base p-6">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="font-extrabold text-lg">{t("teacher_reviews")}</h3>
