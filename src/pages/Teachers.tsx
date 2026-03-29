@@ -118,7 +118,7 @@ const Teachers = () => {
   return (
     <div>
       <PageHelmet title={t("teachers_title")} description={t("teachers_choose")} />
-      <PageHeader title={t("teachers_title")} subtitle={t("teachers_choose")} />
+      <PageHeader title={t("teachers_title")} subtitle={t("teachers_choose")} variant="teachers" />
 
       <div className="container py-8">
         <div className="card-base p-6 mb-8">
