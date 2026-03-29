@@ -8,6 +8,8 @@ import { toast } from "sonner";
 import BookSessionModal from "@/components/BookSessionModal";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
+import UniversityDetails from "@/components/UniversityDetails";
+import { findUniversityByName } from "@/data/universitiesData";
 
 interface TeacherFull {
   user_id: string;
