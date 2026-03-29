@@ -3,9 +3,11 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+import ErrorBoundary from "@/components/ErrorBoundary";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
@@ -27,7 +29,7 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 1000 * 60 * 2, // 2 minutes — avoids unnecessary re-fetches
+      staleTime: 1000 * 60 * 2,
       retry: 1,
     },
   },
@@ -47,8 +49,12 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <>
+      {/* Skip Navigation for Accessibility */}
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:bg-primary focus:text-primary-foreground focus:px-4 focus:py-2 focus:rounded-lg focus:font-bold">
+        Skip to content
+      </a>
       <Navbar />
-      {children}
+      <main id="main-content">{children}</main>
       {!hideFooter && <Footer />}
       <FloatingWhatsApp />
     </>
@@ -56,72 +62,42 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 };
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <ThemeProvider>
-      <LanguageProvider>
-        <AuthProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
-              <Layout>
-                <Routes>
-                  {/* Public routes */}
-                  <Route path="/" element={<Index />} />
-                  <Route path="/teachers" element={<Teachers />} />
-                  <Route path="/teachers/:id" element={<TeacherProfile />} />
-                  <Route path="/subjects" element={<Subjects />} />
-                  <Route path="/universities" element={<Universities />} />
-                  <Route path="/categories" element={<Categories />} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/register" element={<Register />} />
-                  <Route path="/forgot-password" element={<ForgotPassword />} />
-
-                  {/* Protected routes — redirect to /login if not authenticated */}
-                  <Route
-                    path="/dashboard"
-                    element={
-                      <ProtectedRoute>
-                        <SmartDashboard />
-                      </ProtectedRoute>
-                    }
-                  />
-                  <Route
-                    path="/dashboard/teacher"
-                    element={
-                      <ProtectedRoute>
-                        <SmartDashboard />
-                      </ProtectedRoute>
-                    }
-                  />
-                  <Route
-                    path="/lectures/:id"
-                    element={
-                      <ProtectedRoute>
-                        <LectureView />
-                      </ProtectedRoute>
-                    }
-                  />
-
-                  {/* Admin-only route */}
-                  <Route
-                    path="/admin"
-                    element={
-                      <ProtectedRoute adminOnly>
-                        <Admin />
-                      </ProtectedRoute>
-                    }
-                  />
-
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </Layout>
-            </BrowserRouter>
-          </TooltipProvider>
-        </AuthProvider>
-      </LanguageProvider>
-    </ThemeProvider>
-  </QueryClientProvider>
+  <ErrorBoundary>
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider>
+          <LanguageProvider>
+            <AuthProvider>
+              <TooltipProvider>
+                <Toaster />
+                <Sonner />
+                <BrowserRouter>
+                  <Layout>
+                    <Routes>
+                      <Route path="/" element={<Index />} />
+                      <Route path="/teachers" element={<Teachers />} />
+                      <Route path="/teachers/:id" element={<TeacherProfile />} />
+                      <Route path="/subjects" element={<Subjects />} />
+                      <Route path="/universities" element={<Universities />} />
+                      <Route path="/categories" element={<Categories />} />
+                      <Route path="/login" element={<Login />} />
+                      <Route path="/register" element={<Register />} />
+                      <Route path="/forgot-password" element={<ForgotPassword />} />
+                      <Route path="/dashboard" element={<ProtectedRoute><SmartDashboard /></ProtectedRoute>} />
+                      <Route path="/dashboard/teacher" element={<ProtectedRoute><SmartDashboard /></ProtectedRoute>} />
+                      <Route path="/lectures/:id" element={<ProtectedRoute><LectureView /></ProtectedRoute>} />
+                      <Route path="/admin" element={<ProtectedRoute adminOnly><Admin /></ProtectedRoute>} />
+                      <Route path="*" element={<NotFound />} />
+                    </Routes>
+                  </Layout>
+                </BrowserRouter>
+              </TooltipProvider>
+            </AuthProvider>
+          </LanguageProvider>
+        </ThemeProvider>
+      </QueryClientProvider>
+    </HelmetProvider>
+  </ErrorBoundary>
 );
 
 export default App;

@@ -17,7 +17,7 @@
     --secondary: 220 14% 96%;
     --secondary-foreground: 215 28% 17%;
     --muted: 220 14% 96%;
-    --muted-foreground: 215 16% 47%;
+    --muted-foreground: 215 20% 40%;
     --accent: 27 97% 87%;
     --accent-foreground: 21 88% 40%;
     --destructive: 0 72% 51%;
@@ -88,7 +88,12 @@
   body {
     @apply bg-background text-foreground font-tajawal antialiased;
   }
-  html * {
+  /* Targeted transitions for interactive elements only */
+  a, button, [role="button"],
+  input, select, textarea,
+  .card-base, .btn-primary, .btn-outline, .btn-dark,
+  .tag-outline, .badge-brand, .icon-box, .icon-box-lg,
+  nav, .glass, .glass-strong {
     transition: background-color 0.3s ease, color 0.15s ease, border-color 0.3s ease, box-shadow 0.3s ease;
   }
 }

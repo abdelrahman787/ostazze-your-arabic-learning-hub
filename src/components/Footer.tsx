@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { Facebook, Linkedin, Twitter, Mail, Phone, MapPin } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { motion } from "framer-motion";
 
 const Footer = () => {
   const { t } = useLanguage();
@@ -14,15 +13,19 @@ const Footer = () => {
             <Link to="/" className="text-2xl font-black text-primary mb-4 block tracking-tight">🎓 OSTAZZE</Link>
             <p className="text-sm leading-relaxed text-[hsl(210,15%,65%)] mb-5">{t("footer_desc")}</p>
             <div className="flex gap-2">
-              {[Facebook, Linkedin, Twitter].map((Icon, i) => (
-                <motion.button
-                  key={i}
-                  whileHover={{ scale: 1.15, rotate: 5 }}
-                  whileTap={{ scale: 0.9 }}
+              {[
+                { Icon: Facebook, label: "Facebook", href: "#" },
+                { Icon: Linkedin, label: "LinkedIn", href: "#" },
+                { Icon: Twitter, label: "Twitter", href: "#" },
+              ].map(({ Icon, label, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  aria-label={label}
                   className="w-9 h-9 rounded-lg bg-white/10 text-[hsl(210,20%,78%)] hover:bg-primary hover:text-white flex items-center justify-center transition-colors"
                 >
                   <Icon size={16} />
-                </motion.button>
+                </a>
               ))}
             </div>
           </div>
