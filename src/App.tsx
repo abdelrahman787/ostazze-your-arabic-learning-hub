@@ -11,6 +11,7 @@ import ErrorBoundary from "@/components/ErrorBoundary";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
+import AIChatWidget from "@/components/AIChatWidget";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
 import Teachers from "./pages/Teachers";
@@ -57,6 +58,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <main id="main-content">{children}</main>
       {!hideFooter && <Footer />}
       <FloatingWhatsApp />
+      <AIChatWidget />
     </>
   );
 };
