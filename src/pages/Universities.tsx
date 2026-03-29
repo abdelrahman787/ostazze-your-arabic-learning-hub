@@ -38,19 +38,19 @@ const AnimatedFlag = ({ code, size = 120 }: { code: string; size?: number }) => 
       animate={{ scale: [1, 1.15, 1], opacity: [0.2, 0.35, 0.2] }}
       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
     />
-    {/* Flag image with gentle wave */}
+    {/* Flag with fabric flutter - origin at the pole (left side) */}
     <motion.img
       src={flagImages[code]}
       alt={code}
       width={size}
       height={size}
       className="relative z-10 object-contain drop-shadow-lg"
-      style={{ width: size, height: size }}
+      style={{ width: size, height: size, transformOrigin: "left center" }}
       animate={{
-        rotate: [0, -1.5, 1.5, -1, 1, 0],
-        scale: [1, 1.01, 1.01, 1.005, 1.005, 1],
+        skewY: [0, -1.2, 1.5, -0.8, 1, -0.5, 0],
+        scaleX: [1, 0.98, 1.01, 0.99, 1.005, 0.995, 1],
       }}
-      transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
     />
   </div>
 );
