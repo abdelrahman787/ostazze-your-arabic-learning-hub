@@ -207,11 +207,11 @@ async function executeToolCall(
         // Filter by subject/university text match
         let results = teachers || [];
         if (args.subject) {
-          const s = (args.subject as string).toLowerCase();
+          const searchTerms = expandSubjectSearch(args.subject as string);
           results = results.filter(
             (t) =>
-              t.subjects?.some((sub: string) => sub.toLowerCase().includes(s)) ||
-              t.subjects_en?.some((sub: string) => sub.toLowerCase().includes(s))
+              t.subjects?.some((sub: string) => searchTerms.some(term => sub.toLowerCase().includes(term) || term.includes(sub.toLowerCase()))) ||
+              t.subjects_en?.some((sub: string) => searchTerms.some(term => sub.toLowerCase().includes(term) || term.includes(sub.toLowerCase())))
           );
         }
         if (args.university) {
