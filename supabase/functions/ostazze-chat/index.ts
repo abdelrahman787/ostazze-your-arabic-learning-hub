@@ -160,6 +160,29 @@ const tools = [
   },
 ];
 
+// ─── Subject synonyms for fuzzy matching ──────────────────────────
+const SUBJECT_SYNONYMS: Record<string, string[]> = {
+  "رياضيات": ["رياضيات", "التفاضل والتكامل", "الإحصاء", "الجبر", "حساب", "تفاضل", "تكامل", "إحصاء", "جبر"],
+  "math": ["math", "mathematics", "calculus", "statistics", "algebra", "linear algebra"],
+  "فيزياء": ["فيزياء", "فيزياء عامة", "ميكانيكا", "كهرومغناطيسية"],
+  "physics": ["physics", "general physics", "mechanics"],
+  "كيمياء": ["كيمياء", "كيمياء عامة", "كيمياء عضوية"],
+  "chemistry": ["chemistry", "general chemistry", "organic chemistry"],
+  "برمجة": ["برمجة", "أساسيات البرمجة", "هياكل البيانات", "خوارزميات"],
+  "programming": ["programming", "data structures", "algorithms", "coding", "computer science"],
+};
+
+function expandSubjectSearch(subject: string): string[] {
+  const s = subject.toLowerCase();
+  const expanded = new Set<string>([s]);
+  for (const [key, synonyms] of Object.entries(SUBJECT_SYNONYMS)) {
+    if (s.includes(key.toLowerCase()) || key.toLowerCase().includes(s)) {
+      synonyms.forEach(syn => expanded.add(syn.toLowerCase()));
+    }
+  }
+  return Array.from(expanded);
+}
+
 // ─── Tool implementations ─────────────────────────────────────────
 
 async function executeToolCall(
