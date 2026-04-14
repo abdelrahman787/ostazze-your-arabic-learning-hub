@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { Facebook, Linkedin, Twitter, Mail, Phone, MapPin } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useState } from "react";
 
 const Footer = () => {
   const { t } = useLanguage();
+  const [email, setEmail] = useState("");
 
   return (
     <footer className="bg-[hsl(215,28%,14%)] text-[hsl(210,20%,78%)]">
@@ -52,15 +54,30 @@ const Footer = () => {
           </div>
           <div>
             <h4 className="font-bold text-white mb-5 text-sm">{t("footer_contact_us")}</h4>
-            <div className="flex flex-col gap-3 text-sm">
+            <div className="flex flex-col gap-3 text-sm mb-6">
               <div className="flex items-center gap-2.5 text-[hsl(210,15%,65%)]"><Mail size={14} /><span>info@ostazze.com</span></div>
-              <div className="flex items-center gap-2.5 text-[hsl(210,15%,65%)]"><Phone size={14} /><span dir="ltr">+966 50 000 0000</span></div>
+              <div className="flex items-center gap-2.5 text-[hsl(210,15%,65%)]"><Phone size={14} /><span dir="ltr">+966 55 900 3498</span></div>
               <div className="flex items-center gap-2.5 text-[hsl(210,15%,65%)]"><MapPin size={14} /><span>{t("footer_location")}</span></div>
             </div>
+
+            {/* Newsletter */}
+            <h4 className="font-bold text-white mb-3 text-sm">{t("footer_newsletter_title")}</h4>
+            <form onSubmit={(e) => { e.preventDefault(); setEmail(""); }} className="flex gap-2">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder={t("footer_newsletter_placeholder")}
+                className="flex-1 bg-white/10 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-primary min-h-[44px]"
+              />
+              <button type="submit" className="bg-primary text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-primary-dark transition-colors min-h-[44px]">
+                {t("footer_newsletter_btn")}
+              </button>
+            </form>
           </div>
         </div>
         <div className="border-t border-white/10 mt-10 pt-6 text-center text-sm text-[hsl(210,15%,55%)]">
-          {t("footer_rights")}
+          © {new Date().getFullYear()} Ostazze. {t("footer_rights").replace(/© \d{4} Ostazze\. ?/, "")}
         </div>
       </div>
     </footer>

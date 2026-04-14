@@ -26,7 +26,6 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
-  // Keyboard: Escape to close dropdown
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -48,7 +47,6 @@ const Navbar = () => {
   const dashboardPath = "/dashboard";
   const showBackButton = location.pathname !== "/";
 
-  // Smart back: if there's history go back, otherwise go home
   const handleBack = useCallback(() => {
     if (window.history.length > 2) {
       navigate(-1);
@@ -64,7 +62,7 @@ const Navbar = () => {
           {showBackButton && (
             <button
               onClick={handleBack}
-              className="w-8 h-8 rounded-full flex items-center justify-center text-foreground/50 hover:text-foreground hover:bg-secondary transition-colors"
+              className="w-9 h-9 rounded-full flex items-center justify-center text-foreground/50 hover:text-foreground hover:bg-secondary transition-colors"
               aria-label={lang === "ar" ? "رجوع" : "Go back"}
             >
               <ArrowRight size={18} />
@@ -80,9 +78,9 @@ const Navbar = () => {
             <Link
               key={l.path}
               to={l.path}
-              className={`text-sm font-medium transition-colors duration-200 ${
+              className={`text-base font-medium transition-colors duration-200 relative pb-1 ${
                 location.pathname === l.path
-                  ? "text-primary font-bold"
+                  ? "text-primary font-bold after:absolute after:bottom-0 after:inset-x-0 after:h-0.5 after:bg-primary after:rounded-full"
                   : "text-foreground/70 hover:text-foreground"
               }`}
             >
@@ -181,28 +179,28 @@ const Navbar = () => {
             <div className="p-4 flex flex-col gap-1">
               {navLinks.map((l) => (
                 <Link key={l.path} to={l.path} onClick={() => setMobileOpen(false)}
-                  className={`px-4 py-3 rounded-xl text-sm font-medium transition-all ${location.pathname === l.path ? "bg-primary text-primary-foreground font-bold" : "text-foreground/70 hover:bg-secondary"}`}
+                  className={`px-4 py-3 rounded-xl text-sm font-medium transition-all min-h-[44px] flex items-center ${location.pathname === l.path ? "bg-primary text-primary-foreground font-bold" : "text-foreground/70 hover:bg-secondary"}`}
                 >{l.label}</Link>
               ))}
               <div className="border-t my-2" />
               {isLoggedIn ? (
                 <>
-                  <Link to={dashboardPath} onClick={() => setMobileOpen(false)} className="px-4 py-3 rounded-xl text-sm font-medium hover:bg-secondary flex items-center gap-2">
+                  <Link to={dashboardPath} onClick={() => setMobileOpen(false)} className="px-4 py-3 rounded-xl text-sm font-medium hover:bg-secondary flex items-center gap-2 min-h-[44px]">
                     <LayoutDashboard size={16} /> {t("nav_dashboard")}
                   </Link>
                   {user?.role === "admin" && (
-                    <Link to="/admin" onClick={() => setMobileOpen(false)} className="px-4 py-3 rounded-xl text-sm font-medium hover:bg-secondary flex items-center gap-2">
+                    <Link to="/admin" onClick={() => setMobileOpen(false)} className="px-4 py-3 rounded-xl text-sm font-medium hover:bg-secondary flex items-center gap-2 min-h-[44px]">
                       <Shield size={16} className="text-primary" /> {t("admin_title")}
                     </Link>
                   )}
-                  <button onClick={() => { logout(); setMobileOpen(false); }} className="text-destructive text-sm font-medium py-2.5 flex items-center justify-center gap-2">
+                  <button onClick={() => { logout(); setMobileOpen(false); }} className="text-destructive text-sm font-medium py-2.5 flex items-center justify-center gap-2 min-h-[44px]">
                     <LogOut size={15} />{t("nav_logout")}
                   </button>
                 </>
               ) : (
                 <>
-                  <Link to="/login" onClick={() => setMobileOpen(false)} className="text-center text-sm font-medium py-3 text-foreground/70">{t("nav_login")}</Link>
-                  <Link to="/register" onClick={() => setMobileOpen(false)} className="btn-primary text-center text-sm">{t("nav_register")}</Link>
+                  <Link to="/login" onClick={() => setMobileOpen(false)} className="text-center text-sm font-medium py-3 text-foreground/70 min-h-[44px] flex items-center justify-center">{t("nav_login")}</Link>
+                  <Link to="/register" onClick={() => setMobileOpen(false)} className="btn-primary text-center text-sm min-h-[44px] flex items-center justify-center">{t("nav_register")}</Link>
                 </>
               )}
             </div>

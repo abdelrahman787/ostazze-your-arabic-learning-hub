@@ -1,17 +1,19 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import TeacherCard from "@/components/TeacherCard";
 import type { TeacherData } from "@/components/TeacherCard";
 import { mockTestimonials } from "@/data/mockData";
 import {
   Star, ArrowLeft, Sparkles, GraduationCap, CalendarCheck, Video,
-  Users, TrendingUp
+  Users, TrendingUp, Search, Calculator, Atom, FlaskConical, Languages,
+  BookOpen, BarChart3, Code, Microscope
 } from "lucide-react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
 import CountUpNumber from "@/components/CountUpNumber";
 import PageHelmet from "@/components/PageHelmet";
+import { Helmet } from "react-helmet-async";
 
 const heroImage = "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80";
 
@@ -25,8 +27,10 @@ const item = {
 };
 
 const HomePage = () => {
-  const { t, d } = useLanguage();
+  const { t, d, lang } = useLanguage();
+  const navigate = useNavigate();
   const [featuredTeachers, setFeaturedTeachers] = useState<TeacherData[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const statsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -63,13 +67,61 @@ const HomePage = () => {
     fetchTeachers();
   }, []);
 
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/teachers?q=${encodeURIComponent(searchQuery.trim())}`);
+    }
+  };
+
+  const popularSubjects = [
+    { key: "subj_math", icon: Calculator, color: "bg-blue-500/10 text-blue-600 dark:text-blue-400" },
+    { key: "subj_physics", icon: Atom, color: "bg-purple-500/10 text-purple-600 dark:text-purple-400" },
+    { key: "subj_chemistry", icon: FlaskConical, color: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400" },
+    { key: "subj_english", icon: Languages, color: "bg-amber-500/10 text-amber-600 dark:text-amber-400" },
+    { key: "subj_accounting", icon: BookOpen, color: "bg-rose-500/10 text-rose-600 dark:text-rose-400" },
+    { key: "subj_statistics", icon: BarChart3, color: "bg-cyan-500/10 text-cyan-600 dark:text-cyan-400" },
+    { key: "subj_programming", icon: Code, color: "bg-indigo-500/10 text-indigo-600 dark:text-indigo-400" },
+    { key: "subj_biology", icon: Microscope, color: "bg-green-500/10 text-green-600 dark:text-green-400" },
+  ] as const;
+
+  const howSteps = [
+    { key: "1", icon: Search, titleKey: "how_step1_title", descKey: "how_step1_desc" },
+    { key: "2", icon: CalendarCheck, titleKey: "how_step2_title", descKey: "how_step2_desc" },
+    { key: "3", icon: Video, titleKey: "how_step3_title", descKey: "how_step3_desc" },
+  ] as const;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    name: "Ostazze",
+    url: "https://ostaze.com",
+    description: lang === "ar"
+      ? "منصة تعليمية تربطك بأفضل المدرسين الخصوصيين لجلسات مباشرة عبر الإنترنت"
+      : "An educational platform connecting you with the best private tutors for live online sessions",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Riyadh",
+      addressCountry: "SA",
+    },
+  };
+
   return (
     <div>
-      <PageHelmet title={t("hero_badge")} description={t("hero_subtitle")} />
+      <Helmet>
+        <title>{lang === "ar" ? "أستازي - منصة تعليمية | احجز جلسات خصوصية مع أفضل المعلمين" : "Ostazze - Educational Platform | Book Private Sessions"}</title>
+        <meta name="description" content={lang === "ar" ? "منصة أستازي التعليمية تربطك بأفضل المدرسين الخصوصيين لجلسات مباشرة عبر الإنترنت في الرياضيات والفيزياء والكيمياء والإنجليزي" : "Ostazze connects you with top private tutors for live online sessions in math, physics, chemistry, and English"} />
+        <meta name="keywords" content={lang === "ar" ? "معلم خصوصي، دروس خصوصية، منصة تعليمية، تعلم عن بعد" : "private tutor, online tutoring, educational platform, remote learning"} />
+        <meta property="og:title" content="Ostazze - منصة تعليمية متميزة" />
+        <meta property="og:description" content="احجز جلسات خصوصية مع أفضل المعلمين" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://ostaze.com" />
+        <link rel="canonical" href="https://ostaze.com" />
+        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+      </Helmet>
 
       {/* Hero */}
       <section className="hero-gradient min-h-[85vh] flex items-center overflow-hidden relative">
-        {/* Static decorative shapes instead of animated ones */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute w-[200px] h-[200px] rounded-full bg-primary/5 top-[10%] left-[5%]" />
           <div className="absolute w-[120px] h-[120px] rounded-full bg-primary/3 top-[40%] right-[10%]" />
@@ -89,18 +141,38 @@ const HomePage = () => {
                 <span className="text-primary">{t("hero_title_2")}</span>
               </motion.h1>
 
-              <motion.p variants={item} className="text-muted-foreground text-lg leading-relaxed mb-8 max-w-md">
+              <motion.p variants={item} className="text-foreground/80 font-medium text-lg leading-relaxed mb-6 max-w-md">
                 {t("hero_subtitle")}
               </motion.p>
 
-              <motion.div variants={item} className="flex flex-wrap gap-3 mb-10">
-                <Link to="/teachers" className="btn-primary text-base !px-8 flex items-center gap-2">
+              {/* Search Bar */}
+              <motion.form variants={item} onSubmit={handleSearch} className="flex gap-2 mb-4 max-w-lg">
+                <div className="flex-1 relative">
+                  <Search size={18} className="absolute top-1/2 -translate-y-1/2 start-4 text-muted-foreground" />
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder={t("hero_search_placeholder")}
+                    className="w-full ps-11 pe-4 py-3.5 rounded-xl border bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all min-h-[48px]"
+                  />
+                </div>
+                <button type="submit" className="btn-primary !px-6 min-h-[48px]">
                   {t("hero_cta")}
-                  <ArrowLeft size={16} />
-                </Link>
-                <Link to="/teachers" className="border-2 border-border text-foreground px-8 py-3 rounded-xl font-bold hover:border-primary/50 transition-all">
-                  {t("hero_browse")}
-                </Link>
+                </button>
+              </motion.form>
+
+              {/* Quick subject chips */}
+              <motion.div variants={item} className="flex flex-wrap gap-2 mb-8">
+                {(["subj_math", "subj_physics", "subj_chemistry", "subj_english"] as const).map((key) => (
+                  <Link
+                    key={key}
+                    to="/subjects"
+                    className="tag-outline hover:border-primary hover:text-primary transition-colors min-h-[32px] flex items-center"
+                  >
+                    {t(key)}
+                  </Link>
+                ))}
               </motion.div>
 
               <motion.div variants={item} className="flex gap-10">
@@ -123,7 +195,7 @@ const HomePage = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.7, ease: "easeOut" }}
               >
-                <img src={heroImage} alt="Students learning together" className="rounded-3xl w-full object-cover h-[440px] opacity-90" loading="lazy" />
+                <img src={heroImage} alt={lang === "ar" ? "طلاب يتعلمون معاً" : "Students learning together"} className="rounded-3xl w-full object-cover h-[440px] opacity-90" loading="lazy" />
               </motion.div>
 
               <motion.div
@@ -182,6 +254,55 @@ const HomePage = () => {
                 </div>
                 <h3 className={`font-bold text-lg mb-2 ${i === 0 ? "text-primary" : ""}`}>{step.title}</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">{step.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="py-16">
+        <div className="container">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
+            <h2 className="text-3xl font-extrabold mb-2">{t("how_title")}</h2>
+            <p className="text-muted-foreground">{t("how_subtitle")}</p>
+          </motion.div>
+          <div className="grid md:grid-cols-3 gap-8 relative">
+            {/* Connecting line */}
+            <div className="hidden md:block absolute top-12 inset-x-[15%] h-0.5 bg-border" />
+            {howSteps.map((step, i) => (
+              <motion.div key={step.key} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.15 }}
+                className="text-center relative">
+                <div className="w-24 h-24 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-5 relative z-10">
+                  <step.icon size={32} className="text-primary" />
+                  <span className="absolute -top-1 -end-1 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-sm font-black">
+                    {step.key}
+                  </span>
+                </div>
+                <h3 className="font-bold text-lg mb-2">{t(step.titleKey)}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed max-w-xs mx-auto">{t(step.descKey)}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Popular Subjects */}
+      <section className="py-16 bg-section-alt">
+        <div className="container">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
+            <h2 className="text-3xl font-extrabold mb-2">{t("popular_title")}</h2>
+            <p className="text-muted-foreground">{t("popular_subtitle")}</p>
+          </motion.div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {popularSubjects.map((subj, i) => (
+              <motion.div key={subj.key} initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.3, delay: i * 0.05 }}>
+                <Link to="/subjects" className="card-base p-5 text-center hover:-translate-y-1 hover:shadow-lg transition-all duration-300 block group">
+                  <div className={`w-14 h-14 rounded-2xl ${subj.color} flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform`}>
+                    <subj.icon size={24} />
+                  </div>
+                  <span className="font-bold text-sm">{t(subj.key)}</span>
+                </Link>
               </motion.div>
             ))}
           </div>
@@ -273,7 +394,7 @@ const HomePage = () => {
             <p className="text-[hsl(210,15%,65%)] mb-8 max-w-lg mx-auto">{t("cta_subtitle")}</p>
             <div className="flex justify-center gap-4 flex-wrap">
               <Link to="/register" className="btn-primary text-base !px-8">{t("cta_register")}</Link>
-              <Link to="/teachers" className="border-2 border-white/20 text-white px-8 py-3 rounded-xl font-bold hover:bg-white/5 transition-all">
+              <Link to="/teachers" className="border-2 border-white/20 text-white px-8 py-3 rounded-xl font-bold hover:bg-white/5 transition-all min-h-[44px] flex items-center">
                 {t("hero_browse")}
               </Link>
             </div>
