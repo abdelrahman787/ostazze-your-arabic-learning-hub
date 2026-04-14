@@ -426,6 +426,36 @@ const translations = {
   // WhatsApp
   whatsapp_msg: { ar: "مرحباً، أريد الاستفسار عن خدمات أسطازي", en: "Hello, I'd like to inquire about Ostazze services" },
 
+  // How It Works
+  how_title: { ar: "كيف يعمل؟", en: "How It Works?" },
+  how_subtitle: { ar: "ثلاث خطوات بسيطة لبدء رحلة التعلم", en: "Three simple steps to start your learning journey" },
+  how_step1_title: { ar: "ابحث عن معلم", en: "Find a Teacher" },
+  how_step1_desc: { ar: "تصفح قائمة المعلمين المعتمدين واختر المناسب لك حسب المادة والتقييم", en: "Browse our certified teachers and choose the right one by subject and rating" },
+  how_step2_title: { ar: "احجز جلستك", en: "Book Your Session" },
+  how_step2_desc: { ar: "اختر الموعد المناسب واحجز جلسة خصوصية مع المعلم مباشرة", en: "Pick a convenient time and book a private session directly with the teacher" },
+  how_step3_title: { ar: "ابدأ التعلم", en: "Start Learning" },
+  how_step3_desc: { ar: "انضم إلى الجلسة المباشرة عبر Zoom وابدأ التعلم مع أفضل المعلمين", en: "Join the live session via Zoom and start learning with the best teachers" },
+
+  // Popular Subjects
+  popular_title: { ar: "المواد الأكثر طلباً", en: "Most Popular Subjects" },
+  popular_subtitle: { ar: "اكتشف المواد التي يدرسها آلاف الطلاب على منصتنا", en: "Discover subjects studied by thousands of students on our platform" },
+  subj_math: { ar: "رياضيات", en: "Mathematics" },
+  subj_physics: { ar: "فيزياء", en: "Physics" },
+  subj_chemistry: { ar: "كيمياء", en: "Chemistry" },
+  subj_english: { ar: "إنجليزي", en: "English" },
+  subj_accounting: { ar: "محاسبة", en: "Accounting" },
+  subj_statistics: { ar: "إحصاء", en: "Statistics" },
+  subj_programming: { ar: "برمجة", en: "Programming" },
+  subj_biology: { ar: "أحياء", en: "Biology" },
+
+  // Hero search
+  hero_search_placeholder: { ar: "ابحث عن مادة أو معلم...", en: "Search for a subject or teacher..." },
+
+  // Footer newsletter
+  footer_newsletter_title: { ar: "اشترك في النشرة البريدية", en: "Subscribe to Newsletter" },
+  footer_newsletter_placeholder: { ar: "بريدك الإلكتروني", en: "Your email" },
+  footer_newsletter_btn: { ar: "اشترك", en: "Subscribe" },
+
   // LectureView
   lecture_not_found: { ar: "المحاضرة غير موجودة", en: "Lecture not found" },
   lecture_access_denied: { ar: "ليس لديك صلاحية لعرض هذه المحاضرة", en: "You do not have permission to view this lecture" },

@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-const WHATSAPP_NUMBER = "966500000000"; // placeholder number
+const WHATSAPP_NUMBER = "966559003498";
 
 const FloatingWhatsApp = () => {
   const { t } = useLanguage();
@@ -24,6 +24,10 @@ const FloatingWhatsApp = () => {
     >
       <MessageCircle size={26} fill="white" />
     </motion.a>
+  );
+};
+
+export default FloatingWhatsApp;
   );
 };
 
