@@ -56,7 +56,7 @@ const Navbar = () => {
   }, [navigate]);
 
   return (
-    <nav className="sticky top-0 z-50 bg-card/90 backdrop-blur-md border-b h-16 flex items-center">
+    <nav className="sticky top-0 z-50 bg-card/80 backdrop-blur-xl border-b shadow-sm h-16 flex items-center">
       <div className="container flex items-center justify-between">
         <div className="flex items-center gap-3">
           {showBackButton && (

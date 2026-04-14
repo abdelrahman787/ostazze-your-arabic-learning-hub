@@ -8,7 +8,9 @@ const Footer = () => {
   const [email, setEmail] = useState("");
 
   return (
-    <footer className="bg-[hsl(215,28%,14%)] text-[hsl(210,20%,78%)]">
+    <footer className="bg-gradient-to-b from-[hsl(220,45%,15%)] to-[hsl(222,47%,9%)] text-[hsl(210,20%,78%)] relative overflow-hidden">
+      {/* Subtle pattern overlay */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '40px 40px' }} />
       <div className="container py-14">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           <div>
