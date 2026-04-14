@@ -154,7 +154,7 @@
     @apply border-2 border-primary text-primary px-6 py-3 rounded-xl font-bold transition-all duration-200 hover:bg-primary hover:text-primary-foreground;
   }
   .btn-dark {
-    @apply bg-foreground/80 text-background px-6 py-3 rounded-xl font-semibold transition-all duration-200 hover:bg-foreground/90 text-sm;
+    @apply bg-primary text-primary-foreground px-6 py-3 rounded-xl font-semibold transition-all duration-200 hover:bg-primary/90 text-sm;
   }
   .tag-outline {
     @apply border rounded-lg px-3 py-1 text-xs font-medium text-muted-foreground;
