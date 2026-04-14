@@ -118,9 +118,9 @@ const UniversityDetails = ({ university }: Props) => {
           { label: lang === "ar" ? "قسم" : "Depts", value: totalDepts },
           { label: lang === "ar" ? "مادة" : "Courses", value: totalCourses },
         ].map((s) => (
-          <div key={s.label} className="text-center p-2.5 bg-secondary/60 rounded-xl">
-            <p className="font-black text-lg text-primary">{s.value}</p>
-            <p className="text-[0.65rem] text-muted-foreground font-medium">{s.label}</p>
+          <div key={s.label} className="text-center p-3 bg-primary/5 dark:bg-primary/10 border border-primary/10 dark:border-primary/20 rounded-xl">
+            <p className="font-black text-xl text-primary">{s.value}</p>
+            <p className="text-xs text-foreground/70 font-medium">{s.label}</p>
           </div>
         ))}
       </div>
