@@ -515,6 +515,101 @@ const translations = {
 
   // MediaRecorder
   mic_not_supported: { ar: "التسجيل الصوتي غير مدعوم في هذا المتصفح", en: "Voice recording is not supported in this browser" },
+
+  // About page
+  about_title: { ar: "من نحن", en: "About Us" },
+  about_subtitle: { ar: "تعرف على منصة أسطازي ورسالتنا التعليمية", en: "Learn about Ostazze and our educational mission" },
+  about_mission_title: { ar: "رسالتنا", en: "Our Mission" },
+  about_mission_desc: { ar: "نسعى لتوفير تعليم خصوصي عالي الجودة ومتاح للجميع، من خلال ربط الطلاب بأفضل المعلمين المعتمدين في مختلف التخصصات الأكاديمية عبر جلسات مباشرة عبر الإنترنت.", en: "We strive to provide high-quality, accessible private education by connecting students with the best certified teachers across various academic disciplines through live online sessions." },
+  about_vision_title: { ar: "رؤيتنا", en: "Our Vision" },
+  about_vision_desc: { ar: "أن نكون المنصة التعليمية الأولى في الشرق الأوسط التي تمكّن كل طالب من الوصول إلى تعليم متميز بغض النظر عن موقعه الجغرافي.", en: "To be the leading educational platform in the Middle East that empowers every student to access excellent education regardless of their location." },
+  about_story_title: { ar: "قصتنا", en: "Our Story" },
+  about_story_desc: { ar: "بدأت أسطازي كفكرة بسيطة: ماذا لو استطاع كل طالب جامعي الوصول إلى أفضل المعلمين في تخصصه؟ من هنا انطلقنا لبناء منصة تجمع بين التكنولوجيا الحديثة والخبرة الأكاديمية، لنقدم تجربة تعليمية فريدة تتجاوز حدود الجغرافيا والزمان.", en: "Ostazze started with a simple idea: what if every university student could access the best teachers in their field? From there, we set out to build a platform that combines modern technology with academic expertise, delivering a unique educational experience beyond the boundaries of geography and time." },
+  about_values_title: { ar: "قيمنا", en: "Our Values" },
+  about_value1_title: { ar: "الجودة", en: "Quality" },
+  about_value1_desc: { ar: "نختار معلمينا بعناية لضمان أعلى مستوى من التعليم", en: "We carefully select our teachers to ensure the highest level of education" },
+  about_value2_title: { ar: "الشغف", en: "Passion" },
+  about_value2_desc: { ar: "نؤمن أن التعليم الحقيقي يبدأ من الشغف بالمعرفة", en: "We believe that true education starts from a passion for knowledge" },
+  about_value3_title: { ar: "الوصول", en: "Accessibility" },
+  about_value3_desc: { ar: "نجعل التعليم المتميز متاحاً للجميع من أي مكان", en: "We make excellent education accessible to everyone from anywhere" },
+  about_value4_title: { ar: "الابتكار", en: "Innovation" },
+  about_value4_desc: { ar: "نستخدم أحدث التقنيات لتقديم تجربة تعليمية متطورة", en: "We use the latest technologies to deliver an advanced learning experience" },
+  about_stat_teachers: { ar: "معلم معتمد", en: "Certified Teachers" },
+  about_stat_students: { ar: "طالب نشط", en: "Active Students" },
+  about_stat_sessions: { ar: "جلسة مكتملة", en: "Completed Sessions" },
+  about_stat_rating: { ar: "متوسط التقييم", en: "Average Rating" },
+
+  // Contact page
+  contact_title: { ar: "تواصل معنا", en: "Contact Us" },
+  contact_subtitle: { ar: "نحن هنا لمساعدتك. تواصل معنا بأي طريقة تناسبك", en: "We're here to help. Reach out to us in any way that suits you" },
+  contact_form_title: { ar: "أرسل لنا رسالة", en: "Send us a message" },
+  contact_name: { ar: "الاسم", en: "Name" },
+  contact_email: { ar: "البريد الإلكتروني", en: "Email" },
+  contact_message: { ar: "الرسالة", en: "Message" },
+  contact_send: { ar: "إرسال", en: "Send" },
+  contact_success: { ar: "تم إرسال رسالتك بنجاح! سنتواصل معك قريباً ✅", en: "Your message has been sent successfully! We'll contact you soon ✅" },
+  contact_email_label: { ar: "البريد الإلكتروني", en: "Email" },
+  contact_phone_label: { ar: "الهاتف", en: "Phone" },
+  contact_location_label: { ar: "الموقع", en: "Location" },
+  contact_whatsapp_label: { ar: "واتساب", en: "WhatsApp" },
+  contact_whatsapp_value: { ar: "تواصل عبر واتساب", en: "Chat on WhatsApp" },
+
+  // Terms page
+  terms_title: { ar: "الشروط والأحكام", en: "Terms & Conditions" },
+  terms_subtitle: { ar: "يرجى قراءة الشروط والأحكام بعناية قبل استخدام المنصة", en: "Please read the terms and conditions carefully before using the platform" },
+  terms_last_updated: { ar: "آخر تحديث: أبريل 2026", en: "Last updated: April 2026" },
+  terms_section1_title: { ar: "قبول الشروط", en: "Acceptance of Terms" },
+  terms_section1_content: { ar: "باستخدامك لمنصة أسطازي، فإنك توافق على الالتزام بهذه الشروط والأحكام. إذا كنت لا توافق على أي من هذه الشروط، يرجى عدم استخدام المنصة.", en: "By using the Ostazze platform, you agree to be bound by these terms and conditions. If you do not agree to any of these terms, please do not use the platform." },
+  terms_section2_title: { ar: "الحسابات والتسجيل", en: "Accounts & Registration" },
+  terms_section2_content: { ar: "يجب عليك تقديم معلومات دقيقة وكاملة عند إنشاء حسابك. أنت مسؤول عن الحفاظ على سرية معلومات حسابك وعن جميع الأنشطة التي تتم تحت حسابك.", en: "You must provide accurate and complete information when creating your account. You are responsible for maintaining the confidentiality of your account information and for all activities that occur under your account." },
+  terms_section3_title: { ar: "الجلسات والحجوزات", en: "Sessions & Bookings" },
+  terms_section3_content: { ar: "يتم حجز الجلسات من خلال المنصة حسب المواعيد المتاحة. يمكن إلغاء الجلسة قبل 24 ساعة من موعدها دون رسوم. الإلغاء بعد هذه المدة قد يترتب عليه رسوم.", en: "Sessions are booked through the platform based on available times. Sessions can be cancelled up to 24 hours before the scheduled time without fees. Cancellation after this period may incur charges." },
+  terms_section4_title: { ar: "المدفوعات والاسترجاع", en: "Payments & Refunds" },
+  terms_section4_content: { ar: "يتم الدفع مقدماً عند حجز الجلسة. في حال عدم حضور المعلم أو حدوث مشكلة تقنية من جانب المنصة، يحق لك استرجاع كامل المبلغ. طلبات الاسترجاع تتم خلال 7 أيام عمل.", en: "Payment is made upfront when booking a session. If the teacher does not attend or there is a technical issue from the platform's side, you are entitled to a full refund. Refund requests are processed within 7 business days." },
+  terms_section5_title: { ar: "حقوق الملكية الفكرية", en: "Intellectual Property" },
+  terms_section5_content: { ar: "جميع المحتويات المتاحة على المنصة، بما في ذلك النصوص والرسومات والشعارات، هي ملكية لأسطازي ومحمية بموجب قوانين حقوق الملكية الفكرية.", en: "All content available on the platform, including text, graphics, and logos, is the property of Ostazze and is protected by intellectual property laws." },
+  terms_section6_title: { ar: "تعديل الشروط", en: "Modification of Terms" },
+  terms_section6_content: { ar: "نحتفظ بالحق في تعديل هذه الشروط في أي وقت. سيتم إخطارك بأي تغييرات جوهرية عبر البريد الإلكتروني أو من خلال إشعار على المنصة.", en: "We reserve the right to modify these terms at any time. You will be notified of any material changes via email or through a notice on the platform." },
+
+  // Privacy page
+  privacy_title: { ar: "سياسة الخصوصية", en: "Privacy Policy" },
+  privacy_subtitle: { ar: "كيف نجمع ونستخدم ونحمي معلوماتك الشخصية", en: "How we collect, use, and protect your personal information" },
+  privacy_badge: { ar: "بياناتك محمية", en: "Your Data is Protected" },
+  privacy_last_updated: { ar: "آخر تحديث: أبريل 2026", en: "Last updated: April 2026" },
+  privacy_section1_title: { ar: "المعلومات التي نجمعها", en: "Information We Collect" },
+  privacy_section1_content: { ar: "نجمع المعلومات التي تقدمها مباشرة عند التسجيل مثل الاسم والبريد الإلكتروني ورقم الهاتف والمنطقة الزمنية. كما نجمع معلومات الاستخدام تلقائياً مثل عنوان IP ونوع المتصفح وصفحات الموقع التي تزورها.", en: "We collect information you provide directly during registration such as name, email, phone number, and timezone. We also automatically collect usage information such as IP address, browser type, and pages you visit." },
+  privacy_section2_title: { ar: "كيف نستخدم معلوماتك", en: "How We Use Your Information" },
+  privacy_section2_content: { ar: "نستخدم معلوماتك لتقديم خدماتنا وتحسينها، والتواصل معك بشأن حسابك وجلساتك، وإرسال إشعارات مهمة، وتخصيص تجربتك على المنصة.", en: "We use your information to provide and improve our services, communicate with you about your account and sessions, send important notifications, and personalize your experience on the platform." },
+  privacy_section3_title: { ar: "مشاركة المعلومات", en: "Information Sharing" },
+  privacy_section3_content: { ar: "لا نبيع أو نؤجر معلوماتك الشخصية لأطراف ثالثة. قد نشارك معلوماتك مع مقدمي الخدمات الذين يساعدوننا في تشغيل المنصة، وذلك بموجب اتفاقيات سرية صارمة.", en: "We do not sell or rent your personal information to third parties. We may share your information with service providers who help us operate the platform, subject to strict confidentiality agreements." },
+  privacy_section4_title: { ar: "ملفات تعريف الارتباط (Cookies)", en: "Cookies" },
+  privacy_section4_content: { ar: "نستخدم ملفات تعريف الارتباط لتحسين تجربة المستخدم وتذكر تفضيلاتك. يمكنك التحكم في إعدادات الكوكيز من خلال متصفحك.", en: "We use cookies to improve user experience and remember your preferences. You can control cookie settings through your browser." },
+  privacy_section5_title: { ar: "حقوقك", en: "Your Rights" },
+  privacy_section5_content: { ar: "لديك الحق في الوصول إلى معلوماتك الشخصية وتصحيحها أو حذفها. يمكنك أيضاً طلب نسخة من بياناتك أو الاعتراض على معالجتها. للممارسة أي من هذه الحقوق، تواصل معنا عبر info@ostazze.com.", en: "You have the right to access, correct, or delete your personal information. You can also request a copy of your data or object to its processing. To exercise any of these rights, contact us at info@ostazze.com." },
+
+  // Teachers empty state
+  teachers_empty_title: { ar: "لا يوجد معلمون حالياً", en: "No Teachers Available" },
+  teachers_empty_desc: { ar: "نعمل على إضافة أفضل المعلمين المعتمدين. تابعنا للحصول على آخر التحديثات!", en: "We're working on adding the best certified teachers. Follow us for the latest updates!" },
+  teachers_loading_timeout: { ar: "يبدو أن التحميل يستغرق وقتاً. حاول تحديث الصفحة.", en: "Loading seems to be taking a while. Try refreshing the page." },
+
+  // 404 improvements
+  not_found_search_placeholder: { ar: "ابحث عن ما تريد...", en: "Search for what you need..." },
+  not_found_quick_links: { ar: "أو جرب هذه الروابط:", en: "Or try these links:" },
+  not_found_suggestion: { ar: "ممكن تكون بتدور على:", en: "You might be looking for:" },
+
+  // Login improvements
+  login_welcome_back: { ar: "مرحباً بعودتك! 👋", en: "Welcome back! 👋" },
+
+  // Register improvements
+  register_terms_agree: { ar: "أوافق على", en: "I agree to the" },
+  register_and: { ar: "و", en: "and" },
+  register_password_weak: { ar: "ضعيفة", en: "Weak" },
+  register_password_medium: { ar: "متوسطة", en: "Medium" },
+  register_password_strong: { ar: "قوية", en: "Strong" },
+
+  // Breadcrumbs
+  breadcrumb_home: { ar: "الرئيسية", en: "Home" },
+  breadcrumb_countries: { ar: "الدول", en: "Countries" },
 } as const;
 
 type TranslationKey = keyof typeof translations;

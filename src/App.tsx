@@ -25,6 +25,10 @@ import ForgotPassword from "./pages/ForgotPassword";
 import SmartDashboard from "./pages/SmartDashboard";
 import Admin from "./pages/Admin";
 import LectureView from "./pages/LectureView";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient({
@@ -89,6 +93,10 @@ const App = () => (
                       <Route path="/dashboard/teacher" element={<ProtectedRoute><SmartDashboard /></ProtectedRoute>} />
                       <Route path="/lectures/:id" element={<ProtectedRoute><LectureView /></ProtectedRoute>} />
                       <Route path="/admin" element={<ProtectedRoute adminOnly><Admin /></ProtectedRoute>} />
+                      <Route path="/about" element={<About />} />
+                      <Route path="/contact" element={<Contact />} />
+                      <Route path="/terms" element={<Terms />} />
+                      <Route path="/privacy" element={<Privacy />} />
                       <Route path="*" element={<NotFound />} />
                     </Routes>
                   </Layout>

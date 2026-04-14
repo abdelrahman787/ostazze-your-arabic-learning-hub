@@ -49,9 +49,10 @@ const Footer = () => {
           <div>
             <h4 className="font-bold text-white mb-5 text-sm">{t("footer_about")}</h4>
             <div className="flex flex-col gap-3 text-sm">
-              {[t("footer_about"), t("footer_contact"), t("footer_terms"), t("footer_privacy")].map((txt) => (
-                <a key={txt} href="#" className="text-[hsl(210,15%,65%)] hover:text-primary transition-all">{txt}</a>
-              ))}
+              <Link to="/about" className="text-[hsl(210,15%,65%)] hover:text-primary transition-all">{t("footer_about")}</Link>
+              <Link to="/contact" className="text-[hsl(210,15%,65%)] hover:text-primary transition-all">{t("footer_contact")}</Link>
+              <Link to="/terms" className="text-[hsl(210,15%,65%)] hover:text-primary transition-all">{t("footer_terms")}</Link>
+              <Link to="/privacy" className="text-[hsl(210,15%,65%)] hover:text-primary transition-all">{t("footer_privacy")}</Link>
             </div>
           </div>
           <div>

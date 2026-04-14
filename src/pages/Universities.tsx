@@ -1,8 +1,9 @@
 import { useState, useMemo } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   GraduationCap, Building2, ChevronLeft, Globe, Calendar,
-  BookOpen, ChevronDown, ExternalLink, Layers, Search, Hash
+  BookOpen, ChevronDown, ExternalLink, Layers, Search, Hash, ChevronRight
 } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -222,6 +223,29 @@ const Universities = () => {
       </PageHeader>
 
       <div className="container py-8">
+        {/* Breadcrumbs */}
+        <div className="flex items-center gap-1.5 text-sm text-muted-foreground mb-6">
+          <Link to="/" className="hover:text-primary transition-colors">{lang === "ar" ? "الرئيسية" : "Home"}</Link>
+          <ChevronRight size={12} />
+          {view === "countries" && <span className="text-foreground font-medium">{t("universities_title")}</span>}
+          {view === "universities" && selectedCountry && (
+            <>
+              <button onClick={() => { setView("countries"); setSelectedCountry(null); }} className="hover:text-primary transition-colors">{t("universities_title")}</button>
+              <ChevronRight size={12} />
+              <span className="text-foreground font-medium">{lang === "ar" ? selectedCountry.name_ar : selectedCountry.name_en}</span>
+            </>
+          )}
+          {view === "university" && selectedCountry && selectedUni && (
+            <>
+              <button onClick={() => { setView("countries"); setSelectedCountry(null); }} className="hover:text-primary transition-colors">{t("universities_title")}</button>
+              <ChevronRight size={12} />
+              <button onClick={() => { setView("universities"); setSelectedUni(null); }} className="hover:text-primary transition-colors">{lang === "ar" ? selectedCountry.name_ar : selectedCountry.name_en}</button>
+              <ChevronRight size={12} />
+              <span className="text-foreground font-medium truncate max-w-[200px]">{lang === "ar" ? selectedUni.name_ar : selectedUni.name_en}</span>
+            </>
+          )}
+        </div>
+
         {view !== "countries" && (
           <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="flex items-center justify-between mb-6 gap-4">
             <button onClick={goBack} className="flex items-center gap-2 text-sm text-primary hover:underline font-medium shrink-0">
@@ -236,6 +260,17 @@ const Universities = () => {
                 placeholder={lang === "ar" ? "بحث..." : "Search..."} className="ps-9 h-9 text-sm" />
             </div>
           </motion.div>
+        )}
+
+        {/* Search for countries view */}
+        {view === "countries" && (
+          <div className="max-w-sm mx-auto mb-8">
+            <div className="relative">
+              <Search size={14} className="absolute start-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+              <Input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder={lang === "ar" ? "ابحث عن دولة..." : "Search for a country..."} className="ps-9 h-10 text-sm" />
+            </div>
+          </div>
         )}
 
         <AnimatePresence mode="wait">
