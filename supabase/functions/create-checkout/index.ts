@@ -22,6 +22,7 @@ serve(async (req) => {
     }
 
     const env = (environment || "sandbox") as StripeEnv;
+    console.log("Creating checkout session, env:", env, "amount:", amountInCents);
     const stripe = createStripeClient(env);
 
     const productName = `Tutoring Session${subject ? ` - ${subject}` : ""}`;
@@ -47,6 +48,8 @@ serve(async (req) => {
       ...(customerEmail && { customer_email: customerEmail }),
       ...(userId && { metadata: { userId } }),
     });
+
+    console.log("Session created, id:", session.id, "has client_secret:", !!session.client_secret);
 
     return new Response(JSON.stringify({ clientSecret: session.client_secret }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
