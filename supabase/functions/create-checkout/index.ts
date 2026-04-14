@@ -49,7 +49,7 @@ serve(async (req) => {
       ...(userId && { metadata: { userId } }),
     });
 
-    console.log("Session created, id:", session.id, "has client_secret:", !!session.client_secret);
+    console.log("Session response:", JSON.stringify(session));
 
     return new Response(JSON.stringify({ clientSecret: session.client_secret }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
