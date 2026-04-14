@@ -1,20 +1,36 @@
 import { mockSubjects, mockCategories } from "@/data/mockData";
-import { BookOpen, Users, ArrowUpLeft, Search, Filter, X, ArrowRight, ArrowLeft } from "lucide-react";
+import { BookOpen, Users, ArrowUpLeft, Search, Filter, X, ArrowRight, ArrowLeft, ChevronRight } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useMemo, useState } from "react";
 import { allUniversities } from "@/data/universitiesData";
 import PageHeader from "@/components/PageHeader";
+import PageHelmet from "@/components/PageHelmet";
 
 const categoryEnToAr = new Map<string, string>();
 mockCategories.forEach(c => categoryEnToAr.set(c.name.en, c.name.ar));
+
+const ITEMS_PER_PAGE = 18;
+
+// Color palette for category icons
+const iconColors = [
+  "text-primary bg-primary/10",
+  "text-emerald-500 bg-emerald-500/10",
+  "text-blue-500 bg-blue-500/10",
+  "text-amber-500 bg-amber-500/10",
+  "text-rose-500 bg-rose-500/10",
+  "text-violet-500 bg-violet-500/10",
+  "text-cyan-500 bg-cyan-500/10",
+  "text-fuchsia-500 bg-fuchsia-500/10",
+];
 
 const Subjects = () => {
   const { t, d, lang } = useLanguage();
   const [searchParams, setSearchParams] = useSearchParams();
   const categoryParam = searchParams.get("category") || "";
   const [search, setSearch] = useState("");
+  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
 
   const categoryAr = categoryEnToAr.get(categoryParam) || "";
   const categoryDisplay = categoryParam ? (lang === "ar" ? categoryAr : categoryParam) : "";
@@ -32,6 +48,9 @@ const Subjects = () => {
     }
     return subjects;
   }, [categoryAr, search]);
+
+  const visibleSubjects = filteredSubjects.slice(0, visibleCount);
+  const hasMore = visibleCount < filteredSubjects.length;
 
   const getCoursesForSubject = (subjectNameEn: string) => {
     let count = 0;
@@ -68,6 +87,7 @@ const Subjects = () => {
 
   return (
     <div>
+      <PageHelmet title={categoryDisplay || t("subjects_title")} description={t("subjects_subtitle")} />
       <PageHeader
         variant="subjects"
         title={categoryDisplay || t("subjects_title")}
@@ -77,8 +97,41 @@ const Subjects = () => {
       />
 
       <div className="container py-10">
+        {/* Breadcrumbs */}
+        <div className="flex items-center gap-1.5 text-sm text-muted-foreground mb-6">
+          <Link to="/" className="hover:text-primary transition-colors">{t("breadcrumb_home")}</Link>
+          <ChevronRight size={12} />
+          <Link to="/categories" className="hover:text-primary transition-colors">{t("nav_categories")}</Link>
+          {categoryParam && (
+            <>
+              <ChevronRight size={12} />
+              <span className="text-foreground font-medium">{categoryDisplay}</span>
+            </>
+          )}
+          {!categoryParam && (
+            <>
+              <ChevronRight size={12} />
+              <span className="text-foreground font-medium">{t("subjects_title")}</span>
+            </>
+          )}
+        </div>
+
+        {/* Search - centered & bigger */}
+        <div className="max-w-md mx-auto mb-8">
+          <div className="relative">
+            <Search size={18} className="absolute top-1/2 -translate-y-1/2 start-4 text-muted-foreground" />
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder={lang === "ar" ? "ابحث في المواد الدراسية..." : "Search subjects..."}
+              className="w-full ps-11 pe-4 py-3 rounded-xl border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+            />
+          </div>
+        </div>
+
         {/* Toolbar */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
+        <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3 flex-wrap">
             <Link to="/categories" className="flex items-center gap-1.5 text-sm text-primary hover:underline font-medium">
               <BackIcon size={14} />
@@ -92,36 +145,25 @@ const Subjects = () => {
               </button>
             )}
           </div>
-
-          <div className="relative w-full sm:w-64">
-            <Search size={14} className="absolute top-1/2 -translate-y-1/2 start-3 text-muted-foreground" />
-            <input
-              type="text"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder={lang === "ar" ? "ابحث في المواد..." : "Search subjects..."}
-              className="w-full ps-9 pe-4 py-2 rounded-xl border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
-            />
-          </div>
+          <p className="text-sm text-muted-foreground font-medium">
+            {lang === "ar"
+              ? `${filteredSubjects.length} قسم أكاديمي`
+              : `${filteredSubjects.length} academic departments`}
+          </p>
         </div>
 
-        <p className="text-sm text-muted-foreground mb-5">
-          {lang === "ar"
-            ? `${filteredSubjects.length} قسم أكاديمي`
-            : `${filteredSubjects.length} academic departments`}
-        </p>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {filteredSubjects.map((s, i) => {
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 pb-8">
+          {visibleSubjects.map((s, i) => {
             const coursesCount = getCoursesForSubject(s.name.en);
             const universities = getUniversitiesForSubject(s.name.en);
+            const colorClass = iconColors[i % iconColors.length];
             return (
-              <motion.div key={s.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.03 }}
+              <motion.div key={s.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: Math.min(i * 0.03, 0.5) }}
                 className="h-full">
-                <div className={`card-base p-6 hover:border-primary/30 hover:shadow-lg transition-all h-full flex flex-col ${i === 0 && !categoryParam ? "card-active" : ""}`}>
+                <div className={`card-base p-6 hover:border-primary/30 hover:shadow-lg transition-all h-full flex flex-col feature-card ${i === 0 && !categoryParam ? "card-active" : ""}`}>
                   <div className="flex items-start gap-4 flex-1">
-                    <div className="icon-box-lg bg-primary/10 shrink-0">
-                      <BookOpen size={20} className="text-primary" />
+                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 ${colorClass}`}>
+                      <BookOpen size={20} />
                     </div>
                     <div className="min-w-0 flex-1">
                       <h3 className="font-bold text-base mb-1">{d(s.name)}</h3>
@@ -162,6 +204,15 @@ const Subjects = () => {
             );
           })}
         </div>
+
+        {/* Load More */}
+        {hasMore && (
+          <div className="text-center py-6">
+            <button onClick={() => setVisibleCount(c => c + ITEMS_PER_PAGE)} className="btn-outline px-8">
+              {lang === "ar" ? `عرض المزيد (${filteredSubjects.length - visibleCount} متبقي)` : `Show More (${filteredSubjects.length - visibleCount} remaining)`}
+            </button>
+          </div>
+        )}
 
         {filteredSubjects.length === 0 && (
           <div className="text-center py-16">
