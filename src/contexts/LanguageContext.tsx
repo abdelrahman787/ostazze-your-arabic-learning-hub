@@ -610,6 +610,15 @@ const translations = {
   // Breadcrumbs
   breadcrumb_home: { ar: "الرئيسية", en: "Home" },
   breadcrumb_countries: { ar: "الدول", en: "Countries" },
+
+  // Payments
+  payment_success_title: { ar: "تم الدفع بنجاح! ✅", en: "Payment Successful!" },
+  payment_success_msg: { ar: "تم تأكيد جلستك. ستصلك إشعار بالتفاصيل.", en: "Your session has been confirmed. You'll receive a notification with the details." },
+  payment_error_title: { ar: "حدث خطأ", en: "Something went wrong" },
+  payment_error_msg: { ar: "لم يتم العثور على معلومات الجلسة.", en: "No session information found." },
+  go_to_dashboard: { ar: "الذهاب للوحة التحكم", en: "Go to Dashboard" },
+  proceed_to_payment: { ar: "المتابعة للدفع", en: "Proceed to Payment" },
+  session_price_label: { ar: "سعر الجلسة", en: "Session Price" },
 } as const;
 
 type TranslationKey = keyof typeof translations;
