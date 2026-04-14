@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { X, Loader2, Calendar, Clock, BookOpen } from "lucide-react";
+import { X, Loader2, Calendar, Clock, BookOpen, CreditCard } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
+import { StripeEmbeddedCheckout } from "@/components/StripeEmbeddedCheckout";
 
 interface Props {
   open: boolean;
@@ -12,17 +13,23 @@ interface Props {
   teacherId: string;
   teacherName: string;
   subjects: string[];
+  price?: number;
 }
 
-const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects }: Props) => {
+const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects, price }: Props) => {
   const { user } = useAuth();
   const { t } = useLanguage();
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({ subject: subjects[0] || "", date: "", time: "", notes: "" });
+  const [showCheckout, setShowCheckout] = useState(false);
+  const [sessionRequestId, setSessionRequestId] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!open) return;
-    setForm({ subject: subjects[0] || "", date: "", time: "", notes: "" });
+    if (!open) {
+      setForm({ subject: subjects[0] || "", date: "", time: "", notes: "" });
+      setShowCheckout(false);
+      setSessionRequestId(null);
+    }
   }, [open]);
 
   const handleSubmit = async () => {
@@ -31,25 +38,32 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects }: P
 
     setSubmitting(true);
     try {
-      const { error } = await supabase.from("session_requests").insert({
+      const { data, error } = await supabase.from("session_requests").insert({
         student_id: user.id,
         teacher_id: teacherId,
         subject: form.subject || null,
         preferred_date: form.date,
         preferred_time: form.time,
         notes: form.notes || null,
-        status: "pending",
-      });
+        status: price ? "pending_payment" : "pending",
+      }).select("id").single();
 
       if (error) throw error;
 
-      toast.success(t("booking_success"));
-      onClose();
+      if (price && price > 0) {
+        setSessionRequestId(data.id);
+        setShowCheckout(true);
+      } else {
+        toast.success(t("booking_success"));
+        onClose();
+      }
     } catch (e: any) {
       toast.error("Error: " + e.message);
     }
     setSubmitting(false);
   };
+
+  const amountInCents = price ? Math.round(price * 100) : 0;
 
   return (
     <AnimatePresence>
@@ -66,45 +80,63 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects }: P
               </button>
             </div>
 
-            <div className="space-y-4">
-              <div className="bg-accent/50 border border-accent rounded-xl p-3">
-                <p className="text-xs text-muted-foreground">
-                  💡 {t("custom_note")}
-                </p>
-              </div>
-
-              {subjects.length > 0 && (
-                <div>
-                  <label className="block text-sm font-bold mb-1.5 flex items-center gap-1"><BookOpen size={14} /> {t("the_subject")}</label>
-                  <select value={form.subject} onChange={(e) => setForm((f) => ({ ...f, subject: e.target.value }))} className="input-base">
-                    {subjects.map((s, i) => <option key={i} value={s}>{s}</option>)}
-                  </select>
+            {showCheckout ? (
+              <StripeEmbeddedCheckout
+                amountInCents={amountInCents}
+                teacherName={teacherName}
+                subject={form.subject}
+                customerEmail={user?.email || undefined}
+                userId={user?.id}
+                returnUrl={`${window.location.origin}/checkout/return?session_id={CHECKOUT_SESSION_ID}`}
+              />
+            ) : (
+              <div className="space-y-4">
+                <div className="bg-accent/50 border border-accent rounded-xl p-3">
+                  <p className="text-xs text-muted-foreground">
+                    💡 {t("custom_note")}
+                  </p>
                 </div>
-              )}
 
-              <div>
-                <label className="block text-sm font-bold mb-1.5 flex items-center gap-1"><Calendar size={14} /> {t("the_date")}</label>
-                <input type="date" value={form.date} min={new Date().toISOString().split("T")[0]}
-                  onChange={(e) => setForm((f) => ({ ...f, date: e.target.value }))} className="input-base" />
-              </div>
-              <div>
-                <label className="block text-sm font-bold mb-1.5 flex items-center gap-1"><Clock size={14} /> {t("the_time")}</label>
-                <input type="time" value={form.time} onChange={(e) => setForm((f) => ({ ...f, time: e.target.value }))} className="input-base" />
-              </div>
+                {price && price > 0 && (
+                  <div className="flex items-center gap-2 bg-primary/10 text-primary rounded-xl p-3">
+                    <CreditCard size={16} />
+                    <span className="text-sm font-bold">{t("session_price_label")}: ${price}</span>
+                  </div>
+                )}
 
-              <div>
-                <label className="block text-sm font-bold mb-1.5">{t("notes_optional")}</label>
-                <textarea value={form.notes} onChange={(e) => setForm((f) => ({ ...f, notes: e.target.value }))}
-                  rows={2} className="input-base resize-none" />
-              </div>
+                {subjects.length > 0 && (
+                  <div>
+                    <label className="block text-sm font-bold mb-1.5 flex items-center gap-1"><BookOpen size={14} /> {t("the_subject")}</label>
+                    <select value={form.subject} onChange={(e) => setForm((f) => ({ ...f, subject: e.target.value }))} className="input-base">
+                      {subjects.map((s, i) => <option key={i} value={s}>{s}</option>)}
+                    </select>
+                  </div>
+                )}
 
-              <motion.button whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }} onClick={handleSubmit}
-                disabled={submitting || !form.date || !form.time}
-                className="btn-primary w-full text-lg flex items-center justify-center gap-2 disabled:opacity-50">
-                {submitting ? <Loader2 size={18} className="animate-spin" /> : null}
-                {submitting ? t("sending") : t("confirm_booking_btn")}
-              </motion.button>
-            </div>
+                <div>
+                  <label className="block text-sm font-bold mb-1.5 flex items-center gap-1"><Calendar size={14} /> {t("the_date")}</label>
+                  <input type="date" value={form.date} min={new Date().toISOString().split("T")[0]}
+                    onChange={(e) => setForm((f) => ({ ...f, date: e.target.value }))} className="input-base" />
+                </div>
+                <div>
+                  <label className="block text-sm font-bold mb-1.5 flex items-center gap-1"><Clock size={14} /> {t("the_time")}</label>
+                  <input type="time" value={form.time} onChange={(e) => setForm((f) => ({ ...f, time: e.target.value }))} className="input-base" />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-bold mb-1.5">{t("notes_optional")}</label>
+                  <textarea value={form.notes} onChange={(e) => setForm((f) => ({ ...f, notes: e.target.value }))}
+                    rows={2} className="input-base resize-none" />
+                </div>
+
+                <motion.button whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }} onClick={handleSubmit}
+                  disabled={submitting || !form.date || !form.time}
+                  className="btn-primary w-full text-lg flex items-center justify-center gap-2 disabled:opacity-50">
+                  {submitting ? <Loader2 size={18} className="animate-spin" /> : null}
+                  {submitting ? t("sending") : (price ? t("proceed_to_payment") : t("confirm_booking_btn"))}
+                </motion.button>
+              </div>
+            )}
           </motion.div>
         </motion.div>
       )}

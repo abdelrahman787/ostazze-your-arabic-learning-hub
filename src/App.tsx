@@ -30,6 +30,7 @@ import Contact from "./pages/Contact";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
+import CheckoutReturn from "./pages/CheckoutReturn";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -97,6 +98,7 @@ const App = () => (
                       <Route path="/contact" element={<Contact />} />
                       <Route path="/terms" element={<Terms />} />
                       <Route path="/privacy" element={<Privacy />} />
+                      <Route path="/checkout/return" element={<CheckoutReturn />} />
                       <Route path="*" element={<NotFound />} />
                     </Routes>
                   </Layout>
