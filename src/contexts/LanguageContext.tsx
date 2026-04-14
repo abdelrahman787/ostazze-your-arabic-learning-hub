@@ -618,7 +618,6 @@ const translations = {
   payment_error_msg: { ar: "لم يتم العثور على معلومات الجلسة.", en: "No session information found." },
   go_to_dashboard: { ar: "الذهاب للوحة التحكم", en: "Go to Dashboard" },
   proceed_to_payment: { ar: "المتابعة للدفع", en: "Proceed to Payment" },
-  session_price_label: { ar: "سعر الجلسة", en: "Session Price" },
 } as const;
 
 type TranslationKey = keyof typeof translations;
