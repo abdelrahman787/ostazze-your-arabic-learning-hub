@@ -15,14 +15,14 @@ const ITEMS_PER_PAGE = 18;
 
 // Color palette for category icons
 const iconColors = [
-  "text-primary bg-primary/10",
-  "text-emerald-500 bg-emerald-500/10",
-  "text-blue-500 bg-blue-500/10",
-  "text-amber-500 bg-amber-500/10",
-  "text-rose-500 bg-rose-500/10",
-  "text-violet-500 bg-violet-500/10",
-  "text-cyan-500 bg-cyan-500/10",
-  "text-fuchsia-500 bg-fuchsia-500/10",
+  "text-primary bg-primary/15",
+  "text-emerald-600 bg-emerald-500/15",
+  "text-blue-600 bg-blue-500/15",
+  "text-amber-600 bg-amber-500/15",
+  "text-rose-600 bg-rose-500/15",
+  "text-violet-600 bg-violet-500/15",
+  "text-cyan-600 bg-cyan-500/15",
+  "text-fuchsia-600 bg-fuchsia-500/15",
 ];
 
 const Subjects = () => {
