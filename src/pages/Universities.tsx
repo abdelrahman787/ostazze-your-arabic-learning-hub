@@ -61,9 +61,9 @@ const DepartmentItem = ({ dept, lang, index }: { dept: College["departments"][0]
     >
       <button
         onClick={() => setShowCourses(!showCourses)}
-        className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-secondary/50 transition-colors text-start"
+        className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-primary/5 dark:hover:bg-primary/10 transition-colors text-start"
       >
-        <div className="w-8 h-8 rounded-lg bg-primary/8 text-primary flex items-center justify-center shrink-0 text-xs font-black">
+        <div className="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0 text-xs font-black">
           {index + 1}
         </div>
         <div className="min-w-0 flex-1">
@@ -81,7 +81,7 @@ const DepartmentItem = ({ dept, lang, index }: { dept: College["departments"][0]
             {dept.courses.length} {lang === "ar" ? "مادة" : "courses"}
           </span>
           <motion.div animate={{ rotate: showCourses ? 180 : 0 }} transition={{ duration: 0.2 }}>
-            <ChevronDown size={14} className="text-muted-foreground" />
+            <ChevronDown size={14} className="text-primary/80" />
           </motion.div>
         </div>
       </button>
@@ -96,10 +96,10 @@ const DepartmentItem = ({ dept, lang, index }: { dept: College["departments"][0]
           >
             <div className="ms-11 me-3 mb-3 grid grid-cols-1 sm:grid-cols-2 gap-1">
               {dept.courses.map((course) => (
-                <div key={course.code} className="flex items-center gap-2 py-1.5 px-2.5 rounded-md bg-secondary/30 text-xs">
+                <div key={course.code} className="flex items-center gap-2 py-1.5 px-2.5 rounded-md bg-primary/5 dark:bg-primary/10 border border-primary/10 dark:border-primary/20 text-xs">
                   <Hash size={10} className="text-primary shrink-0" />
-                  <span className="font-mono text-primary/80 font-bold shrink-0">{course.code}</span>
-                  <span className="text-foreground/70">{lang === "ar" ? course.name_ar : course.name_en}</span>
+                  <span className="font-mono text-primary font-bold shrink-0">{course.code}</span>
+                  <span className="text-foreground/80">{lang === "ar" ? course.name_ar : course.name_en}</span>
                   <span className="text-muted-foreground shrink-0 ms-auto text-[0.6rem]">{course.credits}h</span>
                 </div>
               ))}
@@ -128,7 +128,7 @@ const CollegeCard = ({ college, lang, index }: { college: College; lang: "ar" | 
       <div className="h-1 bg-gradient-to-r from-primary/60 to-primary/20" />
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between p-5 hover:bg-secondary/20 transition-colors text-start"
+        className="w-full flex items-center justify-between p-5 hover:bg-primary/5 dark:hover:bg-primary/10 transition-colors text-start"
       >
         <div className="flex items-center gap-4 min-w-0 flex-1">
           <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 text-primary flex items-center justify-center shrink-0 shadow-sm">
@@ -151,9 +151,9 @@ const CollegeCard = ({ college, lang, index }: { college: College; lang: "ar" | 
         <motion.div
           animate={{ rotate: open ? 180 : 0 }}
           transition={{ duration: 0.25 }}
-          className="w-8 h-8 rounded-full bg-secondary/60 flex items-center justify-center shrink-0"
+          className="w-8 h-8 rounded-full bg-primary/10 dark:bg-primary/20 border border-primary/10 dark:border-primary/20 flex items-center justify-center shrink-0"
         >
-          <ChevronDown size={16} className="text-muted-foreground" />
+          <ChevronDown size={16} className="text-primary/80" />
         </motion.div>
       </button>
       <AnimatePresence>
@@ -415,10 +415,10 @@ const Universities = () => {
                     { icon: Layers, label: lang === "ar" ? "قسم" : "Departments", value: selectedUni.colleges.reduce((s, c) => s + c.departments.length, 0) },
                     { icon: BookOpen, label: lang === "ar" ? "مادة" : "Courses", value: selectedUni.colleges.reduce((s, c) => s + c.departments.reduce((s2, d) => s2 + d.courses.length, 0), 0) },
                   ].map((s) => (
-                    <div key={s.label} className="text-center p-4 bg-secondary/50 rounded-xl border border-border/30">
-                      <s.icon size={16} className="text-primary mx-auto mb-1" />
+                    <div key={s.label} className="text-center p-4 bg-primary/5 dark:bg-primary/10 rounded-xl border border-primary/10 dark:border-primary/20">
+                      <s.icon size={16} className="text-primary mx-auto mb-1.5" />
                       <p className="font-black text-xl text-primary">{s.value}</p>
-                      <p className="text-xs text-muted-foreground font-medium">{s.label}</p>
+                      <p className="text-xs text-foreground/70 font-medium">{s.label}</p>
                     </div>
                   ))}
                 </div>
@@ -437,7 +437,7 @@ const Universities = () => {
                   </div>
                   {lang === "ar" ? "الكليات والأقسام" : "Colleges & Departments"}
                 </h3>
-                <span className="text-xs text-muted-foreground bg-secondary/60 px-3 py-1 rounded-full">
+                <span className="text-xs bg-primary/10 dark:bg-primary/20 text-primary px-3 py-1 rounded-full border border-primary/10 dark:border-primary/20">
                   {filteredColleges.length} {lang === "ar" ? "كلية" : "colleges"}
                 </span>
               </div>
