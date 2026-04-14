@@ -248,7 +248,7 @@ const HomePage = () => {
               { icon: Video, title: t("why_remote"), desc: t("why_remote_desc"), active: false },
             ].map((step, i) => (
               <motion.div key={step.title} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.1 }}
-                className={`card-base p-7 text-center hover:-translate-y-1 hover:shadow-lg transition-all duration-300 ${i === 0 ? "card-active" : ""}`}>
+                className={`feature-card ${i === 0 ? "card-active" : ""}`}>
                 <div className="icon-box-lg bg-primary/10 text-primary mx-auto mb-4">
                   <step.icon size={24} />
                 </div>
@@ -346,7 +346,7 @@ const HomePage = () => {
                 <div className="inline-block mb-2 opacity-90">
                   <s.icon size={22} />
                 </div>
-                <div className="text-3xl md:text-4xl font-black">
+                <div className="text-3xl md:text-4xl font-black gradient-text">
                   <CountUpNumber target={s.num} />
                 </div>
                 <div className="opacity-85 mt-1 text-sm">{s.label}</div>
@@ -387,7 +387,8 @@ const HomePage = () => {
       </section>
 
       {/* CTA */}
-      <section className="bg-[hsl(215,28%,14%)] py-16">
+      <section className="cta-gradient py-16 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '40px 40px' }} />
         <div className="container text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <h2 className="text-3xl font-black text-white mb-3">{t("cta_title")}</h2>
