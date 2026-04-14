@@ -182,12 +182,12 @@ const Subjects = () => {
                       {universities.length > 0 && (
                         <div className="flex flex-wrap gap-1">
                           {universities.slice(0, 2).map((uni, j) => (
-                            <span key={j} className="text-[0.6rem] bg-secondary text-muted-foreground px-2 py-0.5 rounded-full">
+                            <span key={j} className="text-[0.6rem] bg-primary/10 text-primary font-semibold px-2 py-0.5 rounded-full">
                               {uni}
                             </span>
                           ))}
                           {universities.length > 2 && (
-                            <span className="text-[0.6rem] bg-secondary text-muted-foreground px-2 py-0.5 rounded-full">
+                            <span className="text-[0.6rem] bg-primary/10 text-primary font-semibold px-2 py-0.5 rounded-full">
                               +{universities.length - 2}
                             </span>
                           )}
