@@ -21,11 +21,11 @@ const SUBJECTS: Subject[] = [
   { key: "subj_programming", icon: Code },
 ];
 
-// Distribute 5 subjects across 2 orbits: 2 inner, 3 outer
-// All orbits rotate in the same direction at the same speed
+// Distribute 5 subjects across 2 orbits with custom angle offsets for balanced look
+// Inner orbit: 2 icons placed left & right; Outer orbit: 3 icons in a balanced triangle
 const ORBITS = [
-  { radius: 200, duration: 40, count: 2, reverse: false },
-  { radius: 360, duration: 40, count: 3, reverse: false },
+  { radius: 200, duration: 40, count: 2, reverse: false, offset: 0 },    // inner: 0°, 180° (left & right)
+  { radius: 360, duration: 40, count: 3, reverse: false, offset: 90 },   // outer: 90°, 210°, 330° (triangle)
 ];
 
 const OrbitSubjects = () => {
@@ -51,7 +51,7 @@ const OrbitSubjects = () => {
     const items = [];
     for (let i = 0; i < orbit.count; i++) {
       const subj = SUBJECTS[subjectIdx++];
-      const angle = (360 / orbit.count) * i;
+      const angle = (360 / orbit.count) * i + (orbit.offset ?? 0);
       items.push({ ...subj, angle });
     }
     return { ...orbit, items };
