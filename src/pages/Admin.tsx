@@ -83,7 +83,7 @@ const ModalWrapper = ({ children, onClose }: { children: React.ReactNode; onClos
 // --- Main Component ---
 const Admin = () => {
   const { user, loading: authLoading, logout, changePassword } = useAuth();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const navigate = useNavigate();
 
   const [activeTab, setActiveTab] = useState("sales");
