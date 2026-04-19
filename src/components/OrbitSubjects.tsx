@@ -26,9 +26,9 @@ const SUBJECTS: Subject[] = [
 
 // Distribute 8 subjects across 3 orbits: 2 inner, 3 middle, 3 outer
 const ORBITS = [
-  { radius: 150, duration: 28, count: 2, reverse: false },
-  { radius: 245, duration: 42, count: 3, reverse: true },
-  { radius: 340, duration: 58, count: 3, reverse: false },
+  { radius: 180, duration: 28, count: 2, reverse: false },
+  { radius: 290, duration: 42, count: 3, reverse: true },
+  { radius: 400, duration: 58, count: 3, reverse: false },
 ];
 
 const OrbitSubjects = () => {
