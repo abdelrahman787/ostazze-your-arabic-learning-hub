@@ -130,17 +130,24 @@ const AIChatWidget = () => {
       <AnimatePresence>
         {!isOpen && (
           <motion.button
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            exit={{ scale: 0 }}
-            transition={{ type: "spring", stiffness: 200 }}
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            transition={{ type: "spring", stiffness: 200, damping: 15 }}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => setIsOpen(true)}
-            className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow"
+            className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full bg-gradient-to-br from-primary to-primary-dark text-primary-foreground flex items-center justify-center shadow-[0_8px_30px_hsl(14_91%_50%/0.5)] hover:shadow-[0_12px_40px_hsl(14_91%_50%/0.7)] transition-shadow"
             title={lang === "ar" ? "مساعد أستازي" : "Ostazze Assistant"}
+            aria-label={lang === "ar" ? "افتح مساعد أستازي" : "Open Ostazze Assistant"}
           >
-            <Bot size={26} />
+            {/* Pulsing rings */}
+            <span className="absolute inset-0 rounded-full bg-primary/40 animate-ping" />
+            <span className="absolute inset-0 rounded-full bg-primary/20 animate-pulse" />
+            {/* Icon */}
+            <Bot size={28} className="relative z-10 drop-shadow-md" />
+            {/* Online dot */}
+            <span className="absolute top-1 right-1 w-3 h-3 rounded-full bg-[hsl(142_76%_45%)] border-2 border-background z-10" />
           </motion.button>
         )}
       </AnimatePresence>
