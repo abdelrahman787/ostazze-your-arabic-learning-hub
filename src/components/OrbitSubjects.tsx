@@ -2,10 +2,11 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
   Calculator, Atom, FlaskConical, Languages,
-  BookOpen, BarChart3, Code, Microscope, GraduationCap
+  BookOpen, BarChart3, Code, Microscope
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useEffect, useState } from "react";
+import gradCap from "@/assets/grad-cap-3d.png";
 
 type Subject = {
   key: string;
