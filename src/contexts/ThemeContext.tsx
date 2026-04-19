@@ -14,7 +14,7 @@ export const useTheme = () => useContext(ThemeContext);
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState<Theme>(() => {
     const saved = localStorage.getItem("ostazze_theme");
-    return (saved as Theme) || "dark";
+    return saved === "light" || saved === "dark" ? (saved as Theme) : "dark";
   });
 
   useEffect(() => {

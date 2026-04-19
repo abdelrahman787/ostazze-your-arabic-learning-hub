@@ -13,6 +13,7 @@ import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import AIChatWidget from "@/components/AIChatWidget";
 import ProtectedRoute from "@/components/ProtectedRoute";
+import ScrollToTop from "@/components/ScrollToTop";
 import Index from "./pages/Index";
 import Teachers from "./pages/Teachers";
 import TeacherProfile from "./pages/TeacherProfile";
@@ -80,6 +81,7 @@ const App = () => (
                 <Toaster />
                 <Sonner />
                 <BrowserRouter>
+                  <ScrollToTop />
                   <Layout>
                     <Routes>
                       <Route path="/" element={<Index />} />
