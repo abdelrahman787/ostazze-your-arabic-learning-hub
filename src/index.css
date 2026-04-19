@@ -430,19 +430,19 @@
       inset 0 1px 0 hsl(30 30% 96% / 0.06);
   }
 
-  /* 3D glassmorphic stat tile */
+  /* 3D glassmorphic stat tile — calm tone */
   .stats-tile-glass {
     position: relative;
     background:
-      linear-gradient(160deg, hsl(0 0% 100% / 0.22) 0%, hsl(0 0% 100% / 0.08) 50%, hsl(0 0% 100% / 0.03) 100%);
-    backdrop-filter: blur(18px) saturate(180%);
-    -webkit-backdrop-filter: blur(18px) saturate(180%);
-    border: 1px solid hsl(0 0% 100% / 0.25);
+      linear-gradient(160deg, hsl(0 0% 100% / 0.12) 0%, hsl(0 0% 100% / 0.05) 50%, hsl(0 0% 100% / 0.02) 100%);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid hsl(0 0% 100% / 0.15);
     border-radius: 1.25rem;
     box-shadow:
-      0 8px 24px hsl(0 80% 30% / 0.25),
-      inset 0 1px 0 hsl(0 0% 100% / 0.35),
-      inset 0 -1px 0 hsl(0 0% 100% / 0.05);
+      0 8px 28px hsl(228 50% 5% / 0.35),
+      inset 0 1px 0 hsl(0 0% 100% / 0.2),
+      inset 0 -1px 0 hsl(0 0% 100% / 0.04);
     transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
   }
@@ -453,18 +453,19 @@
     left: 0;
     right: 0;
     height: 50%;
-    background: linear-gradient(180deg, hsl(0 0% 100% / 0.18) 0%, transparent 100%);
+    background: linear-gradient(180deg, hsl(0 0% 100% / 0.1) 0%, transparent 100%);
     pointer-events: none;
     border-radius: inherit;
   }
   .stats-tile-glass:hover {
     background:
-      linear-gradient(160deg, hsl(0 0% 100% / 0.3) 0%, hsl(0 0% 100% / 0.12) 50%, hsl(0 0% 100% / 0.05) 100%);
+      linear-gradient(160deg, hsl(0 0% 100% / 0.18) 0%, hsl(0 0% 100% / 0.08) 50%, hsl(0 0% 100% / 0.03) 100%);
     transform: translateY(-4px) scale(1.02);
-    border-color: hsl(0 0% 100% / 0.4);
+    border-color: hsl(14 91% 60% / 0.4);
     box-shadow:
-      0 16px 40px hsl(0 80% 25% / 0.35),
-      inset 0 1px 0 hsl(0 0% 100% / 0.45);
+      0 16px 44px hsl(228 50% 5% / 0.45),
+      0 0 24px hsl(14 91% 50% / 0.15),
+      inset 0 1px 0 hsl(0 0% 100% / 0.28);
   }
   .stats-tile-glass > * {
     position: relative;
