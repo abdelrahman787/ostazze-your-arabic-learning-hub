@@ -136,14 +136,13 @@ const OrbitSubjects = () => {
               />
             ))}
 
-            {/* Central 3D Logo (counter-tilted to face camera) */}
+            {/* Central 3D Logo */}
             <motion.div
               initial={{ scale: 0, rotate: -180 }}
               whileInView={{ scale: 1, rotate: 0 }}
               viewport={{ once: true }}
               transition={{ type: "spring", stiffness: 80, damping: 14 }}
               className="absolute z-20"
-              style={{ transform: "rotateX(-58deg)" }}
             >
               <div className="relative">
                 {/* Glow halo */}
