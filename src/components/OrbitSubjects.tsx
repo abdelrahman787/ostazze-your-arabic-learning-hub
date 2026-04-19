@@ -117,16 +117,11 @@ const OrbitSubjects = () => {
             width: 900 * scale,
             height: 720 * scale,
             maxWidth: "100%",
-            perspective: "1400px",
           }}
         >
           <div
             className="absolute inset-0 flex items-center justify-center"
-            style={{
-              transform: `scale(${scale}) rotateX(58deg)`,
-              transformOrigin: "center",
-              transformStyle: "preserve-3d",
-            }}
+            style={{ transform: `scale(${scale})`, transformOrigin: "center" }}
           >
             {/* Orbit rings (tilted ellipses) */}
             {ORBITS.map((orbit, idx) => (
