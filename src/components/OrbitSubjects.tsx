@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useEffect, useState } from "react";
-import gradCap from "@/assets/grad-cap-3d.png";
+import gradCap from "@/assets/hero-3d-cap.png";
 
 type Subject = {
   key: string;
