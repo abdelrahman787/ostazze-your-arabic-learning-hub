@@ -147,7 +147,7 @@ const AIChatWidget = () => {
             {/* Icon */}
             <Bot size={28} className="relative z-10 drop-shadow-md" />
             {/* Online dot */}
-            <span className="absolute top-1 right-1 w-3 h-3 rounded-full bg-green-500 border-2 border-background z-10" />
+            <span className="absolute top-1 right-1 w-3 h-3 rounded-full bg-[hsl(142_76%_45%)] border-2 border-background z-10" />
           </motion.button>
         )}
       </AnimatePresence>
