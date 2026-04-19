@@ -70,7 +70,7 @@ const HomePage = () => {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      navigate(`/teachers?q=${encodeURIComponent(searchQuery.trim())}`);
+      navigate(`/courses?q=${encodeURIComponent(searchQuery.trim())}`);
     }
   };
 
