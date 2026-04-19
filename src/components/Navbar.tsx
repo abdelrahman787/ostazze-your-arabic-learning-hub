@@ -38,9 +38,9 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
+    { label: t("nav_courses"), path: "/courses" },
     { label: t("nav_universities"), path: "/universities" },
     { label: t("nav_subjects"), path: "/subjects" },
-    { label: t("nav_categories"), path: "/categories" },
     { label: t("nav_teachers"), path: "/teachers" },
   ];
 
@@ -146,6 +146,9 @@ const Navbar = () => {
                       <div className="p-1.5">
                         <Link to={dashboardPath} onClick={() => setProfileOpen(false)} className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm hover:bg-secondary transition-colors" role="menuitem">
                           <LayoutDashboard size={15} className="text-muted-foreground" /> {t("nav_dashboard")}
+                        </Link>
+                        <Link to="/my-courses" onClick={() => setProfileOpen(false)} className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm hover:bg-secondary transition-colors" role="menuitem">
+                          <GraduationCap size={15} className="text-muted-foreground" /> {t("nav_my_courses")}
                         </Link>
                         {user?.role === "admin" && (
                           <Link to="/admin" onClick={() => setProfileOpen(false)} className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm hover:bg-secondary transition-colors" role="menuitem">

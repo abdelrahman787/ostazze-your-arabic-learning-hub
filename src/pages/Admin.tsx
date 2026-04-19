@@ -14,6 +14,7 @@ import {
 import { motion } from "framer-motion";
 import SalesHub from "@/components/SalesHub";
 import NotificationBell from "@/components/NotificationBell";
+import AdminCourses from "@/components/AdminCourses";
 
 // --- Types ---
 interface TeacherRow {
@@ -83,7 +84,7 @@ const ModalWrapper = ({ children, onClose }: { children: React.ReactNode; onClos
 // --- Main Component ---
 const Admin = () => {
   const { user, loading: authLoading, logout, changePassword } = useAuth();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const navigate = useNavigate();
 
   const [activeTab, setActiveTab] = useState("sales");
@@ -485,8 +486,9 @@ const Admin = () => {
   const sidebarLinks = [
     { section: t("section_main"), items: [
       { icon: ShoppingBag, label: t("sales_hub"), tab: "sales" },
+      { icon: BookOpen, label: lang === "ar" ? "الكورسات" : "Courses", tab: "courses" },
       { icon: GraduationCap, label: t("admin_teachers"), tab: "teachers" },
-      { icon: BookOpen, label: "المحاضرات", tab: "lectures" },
+      { icon: Video, label: "المحاضرات", tab: "lectures" },
       { icon: Clock, label: t("sidebar_available_times"), tab: "availability" },
     ]},
     { section: t("section_account"), items: [
@@ -662,6 +664,13 @@ const Admin = () => {
                   )}
                 </div>
               )}
+            </div>
+          )}
+
+          {/* Courses Tab */}
+          {activeTab === "courses" && (
+            <div className="animate-fade-in">
+              <AdminCourses />
             </div>
           )}
 

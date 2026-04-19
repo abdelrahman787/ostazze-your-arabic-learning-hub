@@ -32,6 +32,9 @@ import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
 import CheckoutReturn from "./pages/CheckoutReturn";
+import Courses from "./pages/Courses";
+import CourseDetail from "./pages/CourseDetail";
+import MyCourses from "./pages/MyCourses";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -85,6 +88,9 @@ const App = () => (
                   <Layout>
                     <Routes>
                       <Route path="/" element={<Index />} />
+                      <Route path="/courses" element={<Courses />} />
+                      <Route path="/courses/:id" element={<CourseDetail />} />
+                      <Route path="/my-courses" element={<ProtectedRoute><MyCourses /></ProtectedRoute>} />
                       <Route path="/teachers" element={<Teachers />} />
                       <Route path="/teachers/:id" element={<TeacherProfile />} />
                       <Route path="/subjects" element={<Subjects />} />
