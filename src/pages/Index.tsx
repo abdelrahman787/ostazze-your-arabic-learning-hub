@@ -235,30 +235,95 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* How It Works */}
-      <section className="py-16">
+      {/* How It Works — creative pop-up sequence */}
+      <section className="py-20 overflow-hidden">
         <div className="container">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
             <h2 className="text-3xl font-extrabold mb-2">{t("how_title")}</h2>
             <p className="text-muted-foreground">{t("how_subtitle")}</p>
           </motion.div>
-          <div className="grid md:grid-cols-3 gap-8 relative">
-            {/* Connecting line */}
-            <div className="hidden md:block absolute top-12 inset-x-[15%] h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.45, delayChildren: 0.2 } } }}
+            className="grid md:grid-cols-3 gap-10 md:gap-6 relative max-w-5xl mx-auto"
+          >
+            {/* Animated dashed connector */}
+            <motion.div
+              initial={{ scaleX: 0, opacity: 0 }}
+              whileInView={{ scaleX: 1, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.5, delay: 0.6, ease: "easeOut" }}
+              className="hidden md:block absolute top-12 inset-x-[16%] h-0.5 origin-left"
+              style={{
+                background: "repeating-linear-gradient(90deg, hsl(14 91% 49% / 0.5) 0 8px, transparent 8px 16px)",
+              }}
+            />
             {howSteps.map((step, i) => (
-              <motion.div key={step.key} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.15 }}
-                className="text-center relative">
-                <div className="step-circle-glow w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-5 relative z-10">
-                  <step.icon size={32} className="text-primary" />
-                  <span className="absolute -top-1 -end-1 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-sm font-black shadow-[0_4px_12px_hsl(14_91%_49%/0.5)]">
+              <motion.div
+                key={step.key}
+                variants={{
+                  hidden: { opacity: 0, y: 60, scale: 0.6, rotate: -8 },
+                  show: {
+                    opacity: 1, y: 0, scale: 1, rotate: 0,
+                    transition: { type: "spring", stiffness: 180, damping: 14, mass: 0.8 },
+                  },
+                }}
+                className="text-center relative group"
+              >
+                {/* Glow halo on hover */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-32 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-2xl pointer-events-none"
+                  style={{ background: "radial-gradient(circle, hsl(14 91% 50% / 0.4), transparent 70%)" }}
+                />
+                <motion.div
+                  whileHover={{ y: -6, rotate: [0, -4, 4, 0] }}
+                  transition={{ rotate: { duration: 0.5 } }}
+                  className="step-circle-glow w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-5 relative z-10"
+                >
+                  <motion.div
+                    animate={{ y: [0, -3, 0] }}
+                    transition={{ duration: 2.5, repeat: Infinity, delay: i * 0.4, ease: "easeInOut" }}
+                  >
+                    <step.icon size={32} className="text-primary" />
+                  </motion.div>
+                  {/* Number badge with bounce-in */}
+                  <motion.span
+                    initial={{ scale: 0, rotate: -180 }}
+                    whileInView={{ scale: 1, rotate: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ type: "spring", stiffness: 260, damping: 12, delay: 0.6 + i * 0.45 }}
+                    className="absolute -top-1 -end-1 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-sm font-black shadow-[0_4px_12px_hsl(14_91%_49%/0.5)]"
+                  >
                     {step.key}
-                  </span>
-                </div>
-                <h3 className="font-bold text-lg mb-2">{t(step.titleKey)}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed max-w-xs mx-auto">{t(step.descKey)}</p>
+                  </motion.span>
+                  {/* Pulsing ring */}
+                  <span
+                    className="absolute inset-0 rounded-full border-2 border-primary/40 animate-ping pointer-events-none"
+                    style={{ animationDelay: `${i * 0.5}s`, animationDuration: "2.5s" }}
+                  />
+                </motion.div>
+                <motion.h3
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.8 + i * 0.45, duration: 0.4 }}
+                  className="font-bold text-lg mb-2"
+                >
+                  {t(step.titleKey)}
+                </motion.h3>
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 1 + i * 0.45, duration: 0.5 }}
+                  className="text-muted-foreground text-sm leading-relaxed max-w-xs mx-auto"
+                >
+                  {t(step.descKey)}
+                </motion.p>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -321,13 +386,13 @@ const HomePage = () => {
                   transition={{ delay: i * 0.1 }}
                   className="stats-tile-glass p-5 md:p-6"
                 >
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-white/20 mb-3 text-white shadow-[inset_0_1px_0_hsl(0_0%_100%_/_0.3),0_4px_12px_hsl(0_0%_0%_/_0.15)] backdrop-blur-sm">
-                    <s.icon size={20} strokeWidth={2.5} />
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-white/10 mb-3 text-white/90 border border-white/15 backdrop-blur-sm">
+                    <s.icon size={20} strokeWidth={2.2} />
                   </div>
-                  <div className="text-3xl md:text-5xl font-black text-white leading-none drop-shadow-[0_2px_8px_hsl(0_0%_0%_/_0.25)]">
+                  <div className="text-3xl md:text-5xl font-black text-white leading-none drop-shadow-[0_2px_8px_hsl(228_50%_0%_/_0.4)]">
                     <CountUpNumber target={s.num} />
                   </div>
-                  <div className="text-white/85 mt-2 text-xs md:text-sm font-medium">{s.label}</div>
+                  <div className="text-white/75 mt-2 text-xs md:text-sm font-medium">{s.label}</div>
                 </motion.div>
               ))}
             </div>
