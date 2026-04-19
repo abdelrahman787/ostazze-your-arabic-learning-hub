@@ -3,7 +3,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Moon, Sun, Menu, X, LogOut, Globe, User, ChevronDown, Shield, LayoutDashboard, ArrowRight } from "lucide-react";
+import { Moon, Sun, Menu, X, LogOut, Globe, User, ChevronDown, Shield, LayoutDashboard, ArrowRight, GraduationCap } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
 const Navbar = () => {
@@ -56,116 +56,127 @@ const Navbar = () => {
   }, [navigate]);
 
   return (
-    <nav className="sticky top-0 z-50 bg-card/80 backdrop-blur-xl border-b shadow-sm h-16 flex items-center">
-      <div className="container flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          {showBackButton && (
-            <button
-              onClick={handleBack}
-              className="w-9 h-9 rounded-full flex items-center justify-center text-foreground/50 hover:text-foreground hover:bg-secondary transition-colors"
-              aria-label={lang === "ar" ? "رجوع" : "Go back"}
-            >
-              <ArrowRight size={18} />
-            </button>
-          )}
-          <Link to="/" className="text-2xl font-black text-primary tracking-tight">
-            OSTAZZE
-          </Link>
-        </div>
-
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((l) => (
-            <Link
-              key={l.path}
-              to={l.path}
-              className={`text-base font-medium transition-colors duration-200 relative pb-1 ${
-                location.pathname === l.path
-                  ? "text-primary font-bold after:absolute after:bottom-0 after:inset-x-0 after:h-0.5 after:bg-primary after:rounded-full"
-                  : "text-foreground/70 hover:text-foreground"
-              }`}
-            >
-              {l.label}
-            </Link>
-          ))}
-        </div>
-
-        <div className="flex items-center gap-3">
-          <button
-            onClick={toggleTheme}
-            className="w-9 h-9 rounded-full flex items-center justify-center text-foreground/50 hover:text-foreground hover:bg-secondary transition-colors"
-            aria-label={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
-          >
-            {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
-          </button>
-          <button
-            onClick={toggleLang}
-            className="w-9 h-9 rounded-full flex items-center justify-center text-foreground/50 hover:text-foreground hover:bg-secondary transition-colors"
-            aria-label={lang === "ar" ? "Switch to English" : "التبديل للعربية"}
-          >
-            <Globe size={18} />
-          </button>
-
-          {isLoggedIn ? (
-            <div className="hidden md:block relative" ref={dropdownRef}>
+    <header className="sticky top-0 z-50 px-4 pt-4">
+      <nav className="nav-pill mx-auto max-w-5xl h-14 flex items-center px-3 sm:px-5">
+        <div className="flex-1 flex items-center justify-between gap-3">
+          {/* Logo */}
+          <div className="flex items-center gap-2">
+            {showBackButton && (
               <button
-                onClick={() => setProfileOpen(!profileOpen)}
-                className="flex items-center gap-2 text-sm font-medium text-foreground/70 hover:text-foreground transition-colors"
-                aria-expanded={profileOpen}
-                aria-haspopup="true"
+                onClick={handleBack}
+                className="w-8 h-8 rounded-full flex items-center justify-center text-foreground/60 hover:text-foreground hover:bg-foreground/10 transition-colors"
+                aria-label={lang === "ar" ? "رجوع" : "Go back"}
               >
-                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                  <User size={16} className="text-primary" />
-                </div>
-                <span>{user?.name?.split(" ")[0]}...</span>
-                <ChevronDown size={14} className={`transition-transform ${profileOpen ? "rotate-180" : ""}`} />
+                <ArrowRight size={16} />
               </button>
+            )}
+            <Link to="/" className="flex items-center gap-1.5 shrink-0">
+              <span className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center shadow-[0_0_18px_hsl(14_91%_50%/0.5)]">
+                <GraduationCap size={18} className="text-white" />
+              </span>
+              <span className="text-lg font-black text-primary tracking-tight hidden sm:inline">OSTAZZE</span>
+            </Link>
+          </div>
 
-              <AnimatePresence>
-                {profileOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -8, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -8, scale: 0.95 }}
-                    transition={{ duration: 0.15 }}
-                    className="absolute left-0 top-full mt-2 w-56 bg-card rounded-xl border shadow-lg overflow-hidden z-50"
-                    role="menu"
-                  >
-                    <div className="p-3 border-b">
-                      <div className="font-bold text-sm">{user?.name}</div>
-                      <div className="text-muted-foreground text-xs">{user?.email}</div>
-                      {user?.role === "admin" && (
-                        <span className="text-[0.6rem] bg-primary/10 text-primary px-2 py-0.5 rounded-full font-semibold mt-1 inline-block">{t("admin_title")}</span>
-                      )}
-                    </div>
-                    <div className="p-1.5">
-                      <Link to={dashboardPath} onClick={() => setProfileOpen(false)} className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm hover:bg-secondary transition-colors" role="menuitem">
-                        <LayoutDashboard size={15} className="text-muted-foreground" /> {t("nav_dashboard")}
-                      </Link>
-                      {user?.role === "admin" && (
-                        <Link to="/admin" onClick={() => setProfileOpen(false)} className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm hover:bg-secondary transition-colors" role="menuitem">
-                          <Shield size={15} className="text-primary" /> {t("admin_title")}
+          {/* Center nav */}
+          <div className="hidden md:flex items-center gap-6 absolute left-1/2 -translate-x-1/2">
+            {navLinks.map((l) => (
+              <Link
+                key={l.path}
+                to={l.path}
+                className={`text-sm font-medium transition-colors duration-200 ${
+                  location.pathname === l.path
+                    ? "text-primary font-bold"
+                    : "text-foreground/70 hover:text-foreground"
+                }`}
+              >
+                {l.label}
+              </Link>
+            ))}
+          </div>
+
+          {/* Right actions */}
+          <div className="flex items-center gap-1.5">
+            <button
+              onClick={toggleTheme}
+              className="w-8 h-8 rounded-full flex items-center justify-center text-foreground/60 hover:text-foreground hover:bg-foreground/10 transition-colors"
+              aria-label={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
+            >
+              {theme === "light" ? <Moon size={16} /> : <Sun size={16} />}
+            </button>
+            <button
+              onClick={toggleLang}
+              className="w-8 h-8 rounded-full flex items-center justify-center text-foreground/60 hover:text-foreground hover:bg-foreground/10 transition-colors"
+              aria-label={lang === "ar" ? "Switch to English" : "التبديل للعربية"}
+            >
+              <Globe size={16} />
+            </button>
+
+            {isLoggedIn ? (
+              <div className="hidden md:block relative" ref={dropdownRef}>
+                <button
+                  onClick={() => setProfileOpen(!profileOpen)}
+                  className="flex items-center gap-1.5 px-2 py-1 rounded-full text-sm font-medium text-foreground/80 hover:bg-foreground/10 transition-colors"
+                  aria-expanded={profileOpen}
+                  aria-haspopup="true"
+                >
+                  <div className="w-7 h-7 rounded-full bg-primary/20 flex items-center justify-center">
+                    <User size={14} className="text-primary" />
+                  </div>
+                  <ChevronDown size={12} className={`transition-transform ${profileOpen ? "rotate-180" : ""}`} />
+                </button>
+
+                <AnimatePresence>
+                  {profileOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -8, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: -8, scale: 0.95 }}
+                      transition={{ duration: 0.15 }}
+                      className="absolute end-0 top-full mt-2 w-56 bg-card rounded-2xl border shadow-2xl overflow-hidden z-50"
+                      role="menu"
+                    >
+                      <div className="p-3 border-b">
+                        <div className="font-bold text-sm">{user?.name}</div>
+                        <div className="text-muted-foreground text-xs">{user?.email}</div>
+                        {user?.role === "admin" && (
+                          <span className="text-[0.6rem] bg-primary/20 text-primary px-2 py-0.5 rounded-full font-semibold mt-1 inline-block">{t("admin_title")}</span>
+                        )}
+                      </div>
+                      <div className="p-1.5">
+                        <Link to={dashboardPath} onClick={() => setProfileOpen(false)} className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm hover:bg-secondary transition-colors" role="menuitem">
+                          <LayoutDashboard size={15} className="text-muted-foreground" /> {t("nav_dashboard")}
                         </Link>
-                      )}
-                      <button onClick={() => { logout(); setProfileOpen(false); }} className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-destructive hover:bg-destructive/10 transition-colors" role="menuitem">
-                        <LogOut size={15} /> {t("nav_logout")}
-                      </button>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          ) : (
-            <div className="hidden md:flex items-center gap-3">
-              <Link to="/login" className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors">{t("nav_login")}</Link>
-              <Link to="/register" className="btn-primary text-sm !py-2 !px-5">{t("nav_register")}</Link>
-            </div>
-          )}
+                        {user?.role === "admin" && (
+                          <Link to="/admin" onClick={() => setProfileOpen(false)} className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm hover:bg-secondary transition-colors" role="menuitem">
+                            <Shield size={15} className="text-primary" /> {t("admin_title")}
+                          </Link>
+                        )}
+                        <button onClick={() => { logout(); setProfileOpen(false); }} className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-destructive hover:bg-destructive/10 transition-colors" role="menuitem">
+                          <LogOut size={15} /> {t("nav_logout")}
+                        </button>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ) : (
+              <div className="hidden md:flex items-center gap-2">
+                <Link
+                  to="/login"
+                  className="px-4 py-1.5 rounded-full text-sm font-semibold bg-primary text-primary-foreground hover:bg-primary-dark transition-colors shadow-[0_4px_14px_hsl(14_91%_50%/0.35)]"
+                >
+                  {t("nav_login")}
+                </Link>
+              </div>
+            )}
 
-          <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden w-9 h-9 rounded-full flex items-center justify-center hover:bg-secondary" aria-label="Menu">
-            {mobileOpen ? <X size={18} /> : <Menu size={18} />}
-          </button>
+            <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden w-8 h-8 rounded-full flex items-center justify-center hover:bg-foreground/10" aria-label="Menu">
+              {mobileOpen ? <X size={16} /> : <Menu size={16} />}
+            </button>
+          </div>
         </div>
-      </div>
+      </nav>
 
       <AnimatePresence>
         {mobileOpen && (
@@ -174,22 +185,22 @@ const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="absolute top-16 inset-x-0 bg-card border-b shadow-lg md:hidden"
+            className="md:hidden mx-auto max-w-5xl mt-2 nav-pill !rounded-3xl p-3"
           >
-            <div className="p-4 flex flex-col gap-1">
+            <div className="flex flex-col gap-1">
               {navLinks.map((l) => (
                 <Link key={l.path} to={l.path} onClick={() => setMobileOpen(false)}
-                  className={`px-4 py-3 rounded-xl text-sm font-medium transition-all min-h-[44px] flex items-center ${location.pathname === l.path ? "bg-primary text-primary-foreground font-bold" : "text-foreground/70 hover:bg-secondary"}`}
+                  className={`px-4 py-3 rounded-xl text-sm font-medium transition-all min-h-[44px] flex items-center ${location.pathname === l.path ? "bg-primary/20 text-primary font-bold" : "text-foreground/80 hover:bg-foreground/10"}`}
                 >{l.label}</Link>
               ))}
-              <div className="border-t my-2" />
+              <div className="border-t border-foreground/10 my-2" />
               {isLoggedIn ? (
                 <>
-                  <Link to={dashboardPath} onClick={() => setMobileOpen(false)} className="px-4 py-3 rounded-xl text-sm font-medium hover:bg-secondary flex items-center gap-2 min-h-[44px]">
+                  <Link to={dashboardPath} onClick={() => setMobileOpen(false)} className="px-4 py-3 rounded-xl text-sm font-medium hover:bg-foreground/10 flex items-center gap-2 min-h-[44px]">
                     <LayoutDashboard size={16} /> {t("nav_dashboard")}
                   </Link>
                   {user?.role === "admin" && (
-                    <Link to="/admin" onClick={() => setMobileOpen(false)} className="px-4 py-3 rounded-xl text-sm font-medium hover:bg-secondary flex items-center gap-2 min-h-[44px]">
+                    <Link to="/admin" onClick={() => setMobileOpen(false)} className="px-4 py-3 rounded-xl text-sm font-medium hover:bg-foreground/10 flex items-center gap-2 min-h-[44px]">
                       <Shield size={16} className="text-primary" /> {t("admin_title")}
                     </Link>
                   )}
@@ -200,14 +211,14 @@ const Navbar = () => {
               ) : (
                 <>
                   <Link to="/login" onClick={() => setMobileOpen(false)} className="text-center text-sm font-medium py-3 text-foreground/70 min-h-[44px] flex items-center justify-center">{t("nav_login")}</Link>
-                  <Link to="/register" onClick={() => setMobileOpen(false)} className="btn-primary text-center text-sm min-h-[44px] flex items-center justify-center">{t("nav_register")}</Link>
+                  <Link to="/register" onClick={() => setMobileOpen(false)} className="bg-primary text-primary-foreground rounded-full text-center text-sm min-h-[44px] flex items-center justify-center font-bold">{t("nav_register")}</Link>
                 </>
               )}
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </header>
   );
 };
 
