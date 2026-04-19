@@ -269,15 +269,24 @@ const PageHeader = ({ title, subtitle, children, variant = "default" }: PageHead
   const Illustration = illustrationMap[variant] || illustrationMap.default;
 
   return (
-    <section className="py-10 bg-section-alt relative overflow-hidden">
+    <section className="relative overflow-hidden pt-32 pb-12 bg-section-alt">
+      {/* Card-Y style radial glow background */}
+      <div
+        className="absolute inset-0 -z-0 dark:opacity-100 opacity-0 transition-opacity"
+        style={{
+          background:
+            "radial-gradient(ellipse 70% 50% at 50% 0%, hsl(14 91% 50% / 0.20) 0%, transparent 65%)",
+        }}
+        aria-hidden="true"
+      />
       <Illustration />
       <div className="container text-center relative z-10">
         {children}
-        <motion.h1 initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="text-2xl md:text-3xl font-extrabold mb-2">
+        <motion.h1 initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="text-3xl md:text-5xl font-black mb-3 tracking-tight">
           {title}
         </motion.h1>
         {subtitle && (
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="text-muted-foreground text-sm">
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="text-muted-foreground text-base max-w-xl mx-auto">
             {subtitle}
           </motion.p>
         )}

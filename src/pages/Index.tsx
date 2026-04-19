@@ -5,7 +5,7 @@ import { mockTestimonials } from "@/data/mockData";
 import {
   Star, ArrowLeft, Sparkles, GraduationCap, CalendarCheck, Video,
   Users, TrendingUp, Search, Calculator, Atom, FlaskConical, Languages,
-  BookOpen, BarChart3, Code, Microscope
+  BookOpen, BarChart3, Code, Microscope, ArrowRight
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
@@ -14,8 +14,7 @@ import { supabase } from "@/integrations/supabase/client";
 import CountUpNumber from "@/components/CountUpNumber";
 import PageHelmet from "@/components/PageHelmet";
 import { Helmet } from "react-helmet-async";
-
-const heroImage = "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80";
+import hero3DCap from "@/assets/hero-3d-cap.png";
 
 const container = {
   hidden: {},
@@ -120,117 +119,93 @@ const HomePage = () => {
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
 
-      {/* Hero */}
-      <section className="hero-gradient min-h-[85vh] flex items-center overflow-hidden relative">
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute w-[200px] h-[200px] rounded-full bg-primary/5 top-[10%] left-[5%]" />
-          <div className="absolute w-[120px] h-[120px] rounded-full bg-primary/3 top-[40%] right-[10%]" />
-          <div className="absolute w-[160px] h-[160px] rounded-full bg-primary/4 bottom-[15%] left-[20%]" />
-        </div>
-
+      {/* Hero — Card-Y inspired centered, dark, glowing */}
+      <section className="hero-gradient min-h-[100vh] flex items-center justify-center overflow-hidden relative pt-32 pb-16">
         <div className="container relative z-10">
-          <div className="grid lg:grid-cols-2 gap-8 items-center">
-            <motion.div variants={container} initial="hidden" animate="show">
-              <motion.div variants={item} className="badge-brand inline-flex items-center gap-2 mb-6">
-                <Sparkles size={14} />
-                <span>{t("hero_badge")}</span>
-              </motion.div>
-
-              <motion.h1 variants={item} className="text-4xl md:text-[3.2rem] font-black leading-[1.15] mb-4">
-                {t("hero_title_1")}{" "}
-                <span className="text-primary">{t("hero_title_2")}</span>
-              </motion.h1>
-
-              <motion.p variants={item} className="text-foreground/80 font-medium text-lg leading-relaxed mb-6 max-w-md">
-                {t("hero_subtitle")}
-              </motion.p>
-
-              {/* Search Bar */}
-              <motion.form variants={item} onSubmit={handleSearch} className="flex gap-2 mb-4 max-w-lg">
-                <div className="flex-1 relative">
-                  <Search size={18} className="absolute top-1/2 -translate-y-1/2 start-4 text-muted-foreground" />
-                  <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder={t("hero_search_placeholder")}
-                    className="w-full ps-11 pe-4 py-3.5 rounded-xl border bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all min-h-[48px]"
-                  />
-                </div>
-                <button type="submit" className="btn-primary !px-6 min-h-[48px]">
-                  {t("hero_cta")}
-                </button>
-              </motion.form>
-
-              {/* Quick subject chips */}
-              <motion.div variants={item} className="flex flex-wrap gap-2 mb-8">
-                {(["subj_math", "subj_physics", "subj_chemistry", "subj_english"] as const).map((key) => (
-                  <Link
-                    key={key}
-                    to="/subjects"
-                    className="tag-outline hover:border-primary hover:text-primary transition-colors min-h-[32px] flex items-center"
-                  >
-                    {t(key)}
-                  </Link>
-                ))}
-              </motion.div>
-
-              <motion.div variants={item} className="flex gap-10">
-                {[
-                  { num: "+500", label: t("hero_stat_teachers") },
-                  { num: "+10K", label: t("hero_stat_students") },
-                  { num: "4.9", label: t("hero_stat_rating") },
-                ].map((s) => (
-                  <div key={s.label}>
-                    <div className="text-2xl md:text-3xl font-black text-foreground">{s.num}</div>
-                    <div className="text-muted-foreground text-sm">{s.label}</div>
-                  </div>
-                ))}
-              </motion.div>
+          <motion.div
+            variants={container}
+            initial="hidden"
+            animate="show"
+            className="flex flex-col items-center text-center max-w-3xl mx-auto"
+          >
+            {/* Pill badge */}
+            <motion.div variants={item} className="badge-pill mb-7">
+              <span className="badge-pill-tag">{lang === "ar" ? "جديد" : "New"}</span>
+              <span className="text-foreground/85">{t("hero_badge")}</span>
             </motion.div>
 
-            <div className="relative hidden lg:block">
-              <motion.div
-                initial={{ opacity: 0, x: 40 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.7, ease: "easeOut" }}
-              >
-                <img src={heroImage} alt={lang === "ar" ? "طلاب يتعلمون معاً" : "Students learning together"} className="rounded-3xl w-full object-cover h-[440px] opacity-90" loading="lazy" />
-              </motion.div>
+            {/* Massive two-line title */}
+            <motion.h1 variants={item} className="text-[3rem] sm:text-6xl md:text-7xl font-black leading-[1.05] tracking-tight mb-2">
+              <span className="block text-foreground">{t("hero_title_1")}</span>
+              <span className="block text-gradient-soft">{t("hero_title_2")}</span>
+            </motion.h1>
 
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.6, type: "spring" }}
-                className="absolute top-6 -left-4 bg-card rounded-2xl border p-3.5 flex items-center gap-3 shadow-lg"
-              >
-                <div className="icon-box bg-primary/10">
-                  <GraduationCap size={20} className="text-primary" />
-                </div>
-                <div>
-                  <div className="font-bold text-sm">{t("hero_certified")}</div>
-                  <div className="text-muted-foreground text-xs">{t("hero_certified_sub")}</div>
-                </div>
-                <div className="w-2.5 h-2.5 bg-success rounded-full mr-2 animate-pulse" />
-              </motion.div>
+            {/* 3D hero element with glow */}
+            <motion.div variants={item} className="relative my-8 sm:my-10">
+              <div
+                className="absolute inset-0 rounded-full blur-3xl glow-pulse"
+                style={{ background: "radial-gradient(circle, hsl(14 91% 50% / 0.55), transparent 65%)" }}
+                aria-hidden="true"
+              />
+              <img
+                src={hero3DCap}
+                alt={lang === "ar" ? "قبعة التخرج ثلاثية الأبعاد" : "3D graduation cap"}
+                className="relative w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 object-contain hero-3d-glow float-y mx-auto"
+                width={320}
+                height={320}
+              />
+            </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.8, type: "spring" }}
-                className="absolute bottom-6 right-4 bg-card rounded-2xl border p-3.5 flex items-center gap-3 shadow-lg"
-              >
-                <div>
-                  <div className="font-bold text-sm">{t("hero_live")}</div>
-                  <div className="text-muted-foreground text-xs">{t("hero_live_sub")}</div>
+            {/* Subtitle */}
+            <motion.p variants={item} className="text-foreground/75 text-base md:text-lg leading-relaxed max-w-xl mb-8">
+              {t("hero_subtitle")}
+            </motion.p>
+
+            {/* CTA + Search */}
+            <motion.form variants={item} onSubmit={handleSearch} className="w-full max-w-xl flex gap-2 mb-5">
+              <div className="flex-1 relative">
+                <Search size={18} className="absolute top-1/2 -translate-y-1/2 start-4 text-muted-foreground" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder={t("hero_search_placeholder")}
+                  className="w-full ps-11 pe-4 py-3.5 rounded-full border border-foreground/15 bg-card/40 backdrop-blur-md text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all min-h-[52px]"
+                />
+              </div>
+              <button type="submit" className="btn-cta-light min-h-[52px] !px-7">
+                {t("hero_cta")}
+                <ArrowRight size={16} />
+              </button>
+            </motion.form>
+
+            {/* Quick subject chips */}
+            <motion.div variants={item} className="flex flex-wrap justify-center gap-2 mb-10">
+              {(["subj_math", "subj_physics", "subj_chemistry", "subj_english"] as const).map((key) => (
+                <Link
+                  key={key}
+                  to="/subjects"
+                  className="px-3.5 py-1.5 rounded-full text-xs font-medium border border-foreground/15 text-foreground/70 hover:border-primary hover:text-primary hover:bg-primary/5 transition-colors"
+                >
+                  {t(key)}
+                </Link>
+              ))}
+            </motion.div>
+
+            {/* Stats row */}
+            <motion.div variants={item} className="flex justify-center gap-10 md:gap-16">
+              {[
+                { num: "+500", label: t("hero_stat_teachers") },
+                { num: "+10K", label: t("hero_stat_students") },
+                { num: "4.9", label: t("hero_stat_rating") },
+              ].map((s) => (
+                <div key={s.label} className="text-center">
+                  <div className="text-2xl md:text-3xl font-black text-foreground">{s.num}</div>
+                  <div className="text-muted-foreground text-xs md:text-sm">{s.label}</div>
                 </div>
-                <div className="icon-box bg-success/10">
-                  <Video size={20} className="text-success" />
-                </div>
-                <div className="w-2.5 h-2.5 bg-success rounded-full animate-pulse" />
-              </motion.div>
-            </div>
-          </div>
+              ))}
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
