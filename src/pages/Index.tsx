@@ -15,6 +15,7 @@ import CountUpNumber from "@/components/CountUpNumber";
 import PageHelmet from "@/components/PageHelmet";
 import { Helmet } from "react-helmet-async";
 import hero3DCap from "@/assets/hero-3d-cap.png";
+import OrbitSubjects from "@/components/OrbitSubjects";
 
 const container = {
   hidden: {},
@@ -327,27 +328,8 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Popular Subjects */}
-      <section className="py-16 bg-section-alt">
-        <div className="container">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-            <h2 className="text-3xl font-extrabold mb-2">{t("popular_title")}</h2>
-            <p className="text-muted-foreground">{t("popular_subtitle")}</p>
-          </motion.div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {popularSubjects.map((subj, i) => (
-              <motion.div key={subj.key} initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.3, delay: i * 0.05 }}>
-                <Link to="/subjects" className="card-base p-5 text-center hover:-translate-y-1 hover:shadow-lg transition-all duration-300 block group">
-                  <div className={`w-14 h-14 rounded-2xl ${subj.color} flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform`}>
-                    <subj.icon size={24} />
-                  </div>
-                  <span className="font-bold text-sm">{t(subj.key)}</span>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Popular Subjects - Orbit Universe */}
+      <OrbitSubjects />
 
       {/* Featured Teachers */}
       <section className="py-16">
