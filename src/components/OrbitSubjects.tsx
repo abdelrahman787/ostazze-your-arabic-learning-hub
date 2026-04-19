@@ -193,15 +193,8 @@ const OrbitSubjects = () => {
                   const x = Math.cos(rad) * orbit.radius;
                   const y = Math.sin(rad) * orbit.radius;
                   return (
-                    <motion.div
+                    <div
                       key={subj.key}
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{
-                        delay: 0.3 + oIdx * 0.15 + i * 0.1,
-                        duration: 0.5,
-                        ease: "easeOut",
-                      }}
                       className="absolute"
                       style={{
                         top: "50%",
@@ -223,33 +216,43 @@ const OrbitSubjects = () => {
                           ease: "linear",
                         }}
                       >
-                        <Link
-                          to="/subjects"
-                          className="group flex flex-col items-center gap-2"
-                          aria-label={t(subj.key)}
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{
+                            delay: 0.3 + oIdx * 0.15 + i * 0.1,
+                            duration: 0.5,
+                            ease: "easeOut",
+                          }}
                         >
-                          <motion.div
-                            whileHover={{ scale: 1.15 }}
-                            className="w-[88px] h-[88px] rounded-full flex items-center justify-center backdrop-blur-md transition-all"
-                            style={{
-                              background:
-                                "linear-gradient(135deg, hsl(265 40% 25% / 0.7), hsl(280 40% 15% / 0.7))",
-                              border: "1px solid hsl(22 80% 60% / 0.35)",
-                              boxShadow:
-                                "0 8px 24px hsl(0 0% 0% / 0.5), inset 0 1px 0 hsl(0 0% 100% / 0.18), 0 0 28px hsl(22 90% 55% / 0.3)",
-                            }}
+                          <Link
+                            to="/subjects"
+                            className="group flex flex-col items-center gap-2"
+                            aria-label={t(subj.key)}
                           >
-                            <Icon
-                              className="text-orange-300 group-hover:text-orange-200 transition-colors"
-                              size={32}
-                            />
-                          </motion.div>
-                          <span className="text-xs md:text-sm font-semibold text-white/90 group-hover:text-white whitespace-nowrap drop-shadow-md">
-                            {t(subj.key)}
-                          </span>
-                        </Link>
+                            <motion.div
+                              whileHover={{ scale: 1.15 }}
+                              className="w-[88px] h-[88px] rounded-full flex items-center justify-center backdrop-blur-md transition-all"
+                              style={{
+                                background:
+                                  "linear-gradient(135deg, hsl(265 40% 25% / 0.7), hsl(280 40% 15% / 0.7))",
+                                border: "1px solid hsl(22 80% 60% / 0.35)",
+                                boxShadow:
+                                  "0 8px 24px hsl(0 0% 0% / 0.5), inset 0 1px 0 hsl(0 0% 100% / 0.18), 0 0 28px hsl(22 90% 55% / 0.3)",
+                              }}
+                            >
+                              <Icon
+                                className="text-orange-300 group-hover:text-orange-200 transition-colors"
+                                size={32}
+                              />
+                            </motion.div>
+                            <span className="text-xs md:text-sm font-semibold text-white/90 group-hover:text-white whitespace-nowrap drop-shadow-md">
+                              {t(subj.key)}
+                            </span>
+                          </Link>
+                        </motion.div>
                       </motion.div>
-                    </motion.div>
+                    </div>
                   );
                 })}
               </motion.div>
