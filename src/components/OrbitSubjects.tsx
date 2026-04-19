@@ -154,20 +154,14 @@ const OrbitSubjects = () => {
                   }}
                 />
                 <motion.div
-                  animate={{ y: [0, -8, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="relative w-32 h-32 md:w-40 md:h-40 rounded-3xl flex items-center justify-center"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, hsl(22 95% 65%), hsl(18 90% 50%))",
-                    boxShadow:
-                      "0 20px 60px hsl(22 95% 50% / 0.5), inset 0 2px 0 hsl(0 0% 100% / 0.4), inset 0 -8px 16px hsl(18 90% 30% / 0.4)",
-                  }}
+                  animate={{ y: [0, -10, 0], rotate: [0, 2, 0, -2, 0] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                  className="relative w-40 h-40 md:w-52 md:h-52 flex items-center justify-center"
                 >
-                  <GraduationCap
-                    className="text-white drop-shadow-lg"
-                    size={64}
-                    strokeWidth={2}
+                  <img
+                    src={gradCap}
+                    alt="OSTAZZE 3D Logo"
+                    className="w-full h-full object-contain drop-shadow-[0_20px_40px_hsl(22_95%_50%/0.6)]"
                   />
                 </motion.div>
               </div>
