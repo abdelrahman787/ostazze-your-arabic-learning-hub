@@ -137,7 +137,7 @@ const AIChatWidget = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => setIsOpen(true)}
-            className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full bg-gradient-to-br from-primary to-primary-dark text-primary-foreground flex items-center justify-center shadow-[0_8px_30px_hsl(14_91%_50%/0.5)] hover:shadow-[0_12px_40px_hsl(14_91%_50%/0.7)] transition-shadow"
+            className="fixed bottom-24 left-6 z-50 w-16 h-16 rounded-full bg-gradient-to-br from-primary to-primary-dark text-primary-foreground flex items-center justify-center shadow-[0_8px_30px_hsl(14_91%_50%/0.5)] hover:shadow-[0_12px_40px_hsl(14_91%_50%/0.7)] transition-shadow"
             title={lang === "ar" ? "مساعد أستازي" : "Ostaze Assistant"}
             aria-label={lang === "ar" ? "افتح مساعد أستازي" : "Open Ostaze Assistant"}
           >
@@ -160,7 +160,7 @@ const AIChatWidget = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-4 right-4 z-50 w-[380px] max-w-[calc(100vw-2rem)] h-[560px] max-h-[calc(100vh-2rem)] rounded-2xl shadow-2xl border border-border bg-background flex flex-col overflow-hidden"
+            className="fixed bottom-4 left-4 z-50 w-[380px] max-w-[calc(100vw-2rem)] h-[560px] max-h-[calc(100vh-2rem)] rounded-2xl shadow-2xl border border-border bg-background flex flex-col overflow-hidden"
             dir={isRtl ? "rtl" : "ltr"}
           >
             {/* Header */}
