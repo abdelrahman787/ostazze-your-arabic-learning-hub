@@ -97,23 +97,30 @@ const HomePage = () => {
     name: "Ostaze",
     url: "https://ostaze.com",
     description: lang === "ar"
-      ? "منصة تعليمية تربطك بأفضل المدرسين الخصوصيين لجلسات مباشرة عبر الإنترنت"
-      : "An educational platform connecting you with the best private tutors for live online sessions",
+      ? "منصة كورسات تعليمية رقمية: كورسات مسجلة وحية بوصول مدى الحياة في مختلف التخصصات الأكاديمية والمهنية"
+      : "A digital online learning platform offering recorded and live courses with lifetime access across academic and professional subjects",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Riyadh",
       addressCountry: "SA",
+    },
+    sameAs: ["https://ostaze.com"],
+    offers: {
+      "@type": "AggregateOffer",
+      priceCurrency: "USD",
+      lowPrice: "19",
+      highPrice: "299",
     },
   };
 
   return (
     <div>
       <Helmet>
-        <title>{lang === "ar" ? "أستازي - منصة تعليمية | احجز جلسات خصوصية مع أفضل المعلمين" : "Ostaze - Educational Platform | Book Private Sessions"}</title>
-        <meta name="description" content={lang === "ar" ? "منصة أستازي التعليمية تربطك بأفضل المدرسين الخصوصيين لجلسات مباشرة عبر الإنترنت في الرياضيات والفيزياء والكيمياء والإنجليزي" : "Ostaze connects you with top private tutors for live online sessions in math, physics, chemistry, and English"} />
-        <meta name="keywords" content={lang === "ar" ? "معلم خصوصي، دروس خصوصية، منصة تعليمية، تعلم عن بعد" : "private tutor, online tutoring, educational platform, remote learning"} />
-        <meta property="og:title" content="Ostaze - منصة تعليمية متميزة" />
-        <meta property="og:description" content="احجز جلسات خصوصية مع أفضل المعلمين" />
+        <title>{lang === "ar" ? "OSTAZE - منصة كورسات تعليمية أونلاين | تعلم بسرعتك" : "Ostaze - Online Course Platform | Learn at Your Pace"}</title>
+        <meta name="description" content={lang === "ar" ? "منصة OSTAZE للكورسات التعليمية الرقمية: كورسات مسجلة وحية في البرمجة والرياضيات والعلوم واللغات. وصول مدى الحياة، شهادات إتمام، وأسعار مدروسة." : "Ostaze online course platform: recorded and live courses in programming, math, sciences, and languages. Lifetime access, completion certificates, and fair pricing."} />
+        <meta name="keywords" content={lang === "ar" ? "كورسات أونلاين، كورسات مسجلة، تعليم رقمي، منصة تعليمية، دورات تدريبية" : "online courses, recorded courses, digital learning, course platform, e-learning"} />
+        <meta property="og:title" content="Ostaze - Online Course Platform" />
+        <meta property="og:description" content="Recorded and live courses with lifetime access" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://ostaze.com" />
         <link rel="canonical" href="https://ostaze.com" />
