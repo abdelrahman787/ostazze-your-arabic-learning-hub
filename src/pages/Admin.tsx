@@ -485,8 +485,9 @@ const Admin = () => {
   const sidebarLinks = [
     { section: t("section_main"), items: [
       { icon: ShoppingBag, label: t("sales_hub"), tab: "sales" },
+      { icon: BookOpen, label: lang === "ar" ? "الكورسات" : "Courses", tab: "courses" },
       { icon: GraduationCap, label: t("admin_teachers"), tab: "teachers" },
-      { icon: BookOpen, label: "المحاضرات", tab: "lectures" },
+      { icon: Video, label: "المحاضرات", tab: "lectures" },
       { icon: Clock, label: t("sidebar_available_times"), tab: "availability" },
     ]},
     { section: t("section_account"), items: [
