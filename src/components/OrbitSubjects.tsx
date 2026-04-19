@@ -132,6 +132,50 @@ const OrbitSubjects = () => {
               />
             ))}
 
+            {/* Glowing dots traveling along each orbit */}
+            {ORBITS.map((orbit, idx) => {
+              // 2 dots per orbit, opposite sides; each orbit slightly different speed for variety
+              const dotCount = 2;
+              const duration = 14 + idx * 6;
+              return Array.from({ length: dotCount }).map((_, dIdx) => (
+                <motion.div
+                  key={`dot-orbit-${idx}-${dIdx}`}
+                  className="absolute"
+                  style={{
+                    width: orbit.radius * 2,
+                    height: orbit.radius * 2,
+                    top: "50%",
+                    left: "50%",
+                    marginLeft: -orbit.radius,
+                    marginTop: -orbit.radius,
+                  }}
+                  animate={{ rotate: 360 }}
+                  transition={{
+                    duration,
+                    repeat: Infinity,
+                    ease: "linear",
+                    delay: dIdx * (duration / dotCount),
+                  }}
+                >
+                  <div
+                    className="absolute rounded-full"
+                    style={{
+                      top: "50%",
+                      left: "100%",
+                      width: 8,
+                      height: 8,
+                      marginTop: -4,
+                      marginLeft: -4,
+                      background:
+                        "radial-gradient(circle, hsl(22 100% 70%) 0%, hsl(22 95% 55%) 50%, transparent 100%)",
+                      boxShadow:
+                        "0 0 12px hsl(22 95% 60% / 0.9), 0 0 24px hsl(22 95% 55% / 0.6)",
+                    }}
+                  />
+                </motion.div>
+              ));
+            })}
+
             {/* Central 3D Logo */}
             <motion.div
               initial={{ scale: 0, rotate: -180 }}
