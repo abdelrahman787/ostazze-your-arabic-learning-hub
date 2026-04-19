@@ -2,10 +2,11 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
   Calculator, Atom, FlaskConical, Languages,
-  BookOpen, BarChart3, Code, Microscope, GraduationCap
+  BookOpen, BarChart3, Code, Microscope
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useEffect, useState } from "react";
+import gradCap from "@/assets/grad-cap-3d.png";
 
 type Subject = {
   key: string;
@@ -60,13 +61,13 @@ const OrbitSubjects = () => {
   });
 
   return (
-    <section className="relative overflow-hidden py-20 bg-[hsl(228_38%_8%)]">
-      {/* Deep radial glow background */}
+    <section className="relative overflow-hidden py-20 bg-[hsl(265_45%_8%)]">
+      {/* Deep radial glow background - purple + orange accents */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 60% 50% at 50% 50%, hsl(22 90% 55% / 0.18), transparent 60%), radial-gradient(ellipse 80% 60% at 50% 50%, hsl(228 50% 18% / 0.6), transparent 70%)",
+            "radial-gradient(ellipse 60% 50% at 50% 50%, hsl(22 90% 55% / 0.18), transparent 60%), radial-gradient(ellipse 80% 60% at 50% 50%, hsl(265 60% 18% / 0.7), transparent 70%), radial-gradient(ellipse 100% 80% at 50% 100%, hsl(280 70% 25% / 0.4), transparent 70%)",
         }}
       />
 
@@ -153,20 +154,14 @@ const OrbitSubjects = () => {
                   }}
                 />
                 <motion.div
-                  animate={{ y: [0, -8, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="relative w-32 h-32 md:w-40 md:h-40 rounded-3xl flex items-center justify-center"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, hsl(22 95% 65%), hsl(18 90% 50%))",
-                    boxShadow:
-                      "0 20px 60px hsl(22 95% 50% / 0.5), inset 0 2px 0 hsl(0 0% 100% / 0.4), inset 0 -8px 16px hsl(18 90% 30% / 0.4)",
-                  }}
+                  animate={{ y: [0, -10, 0], rotate: [0, 2, 0, -2, 0] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                  className="relative w-40 h-40 md:w-52 md:h-52 flex items-center justify-center"
                 >
-                  <GraduationCap
-                    className="text-white drop-shadow-lg"
-                    size={64}
-                    strokeWidth={2}
+                  <img
+                    src={gradCap}
+                    alt="OSTAZZE 3D Logo"
+                    className="w-full h-full object-contain drop-shadow-[0_20px_40px_hsl(22_95%_50%/0.6)]"
                   />
                 </motion.div>
               </div>
@@ -228,10 +223,10 @@ const OrbitSubjects = () => {
                             className="w-[88px] h-[88px] rounded-full flex items-center justify-center backdrop-blur-md transition-all"
                             style={{
                               background:
-                                "linear-gradient(135deg, hsl(228 30% 25% / 0.7), hsl(228 30% 15% / 0.7))",
-                              border: "1px solid hsl(22 80% 60% / 0.3)",
+                                "linear-gradient(135deg, hsl(265 40% 25% / 0.7), hsl(280 40% 15% / 0.7))",
+                              border: "1px solid hsl(22 80% 60% / 0.35)",
                               boxShadow:
-                                "0 8px 24px hsl(0 0% 0% / 0.5), inset 0 1px 0 hsl(0 0% 100% / 0.15), 0 0 24px hsl(22 90% 55% / 0.25)",
+                                "0 8px 24px hsl(0 0% 0% / 0.5), inset 0 1px 0 hsl(0 0% 100% / 0.18), 0 0 28px hsl(22 90% 55% / 0.3)",
                             }}
                           >
                             <Icon
