@@ -61,13 +61,13 @@ const OrbitSubjects = () => {
   });
 
   return (
-    <section className="relative overflow-hidden py-20 bg-[hsl(228_38%_8%)]">
-      {/* Deep radial glow background */}
+    <section className="relative overflow-hidden py-20 bg-[hsl(265_45%_8%)]">
+      {/* Deep radial glow background - purple + orange accents */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 60% 50% at 50% 50%, hsl(22 90% 55% / 0.18), transparent 60%), radial-gradient(ellipse 80% 60% at 50% 50%, hsl(228 50% 18% / 0.6), transparent 70%)",
+            "radial-gradient(ellipse 60% 50% at 50% 50%, hsl(22 90% 55% / 0.18), transparent 60%), radial-gradient(ellipse 80% 60% at 50% 50%, hsl(265 60% 18% / 0.7), transparent 70%), radial-gradient(ellipse 100% 80% at 50% 100%, hsl(280 70% 25% / 0.4), transparent 70%)",
         }}
       />
 
