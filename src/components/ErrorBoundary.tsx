@@ -20,7 +20,7 @@ class ErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error("[OSTAZZE] Error Boundary caught:", error, errorInfo);
+    console.error("[OSTAZE] Error Boundary caught:", error, errorInfo);
   }
 
   render() {

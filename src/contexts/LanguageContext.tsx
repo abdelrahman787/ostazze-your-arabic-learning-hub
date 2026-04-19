@@ -68,7 +68,7 @@ const translations = {
 
   // CTA
   cta_title: { ar: "ابدأ رحلتك التعليمية اليوم", en: "Start Your Learning Journey Today" },
-  cta_subtitle: { ar: "انضم إلى آلاف الطلاب الذين يتعلمون مع أفضل المعلمين في Ostazze", en: "Join thousands of students learning with the best teachers at Ostazze" },
+  cta_subtitle: { ar: "انضم إلى آلاف الطلاب الذين يتعلمون مع أفضل المعلمين في Ostaze", en: "Join thousands of students learning with the best teachers at Ostaze" },
   cta_register: { ar: "أنشئ حسابك مجاناً", en: "Create Free Account" },
 
   // Universities
@@ -151,7 +151,7 @@ const translations = {
   dash_upcoming: { ar: "الجلسات القادمة", en: "Upcoming Sessions" },
   dash_total_payments: { ar: "إجمالي المدفوعات", en: "Total Payments" },
   dash_given_rating: { ar: "التقييم المُعطى", en: "Given Rating" },
-  dash_welcome: { ar: "مرحباً بك في Ostazze!", en: "Welcome to Ostazze!" },
+  dash_welcome: { ar: "مرحباً بك في Ostaze!", en: "Welcome to Ostaze!" },
   dash_welcome_sub: { ar: "ابدأ رحلتك التعليمية واحجز أول جلسة مع أفضل المعلمين", en: "Start your learning journey and book your first session with the best teachers" },
   dash_quick_actions: { ar: "إجراءات سريعة", en: "Quick Actions" },
   dash_recent_sessions: { ar: "آخر الجلسات", en: "Recent Sessions" },
@@ -324,7 +324,7 @@ const translations = {
   footer_terms: { ar: "الشروط والأحكام", en: "Terms & Conditions" },
   footer_privacy: { ar: "سياسة الخصوصية", en: "Privacy Policy" },
   footer_contact_us: { ar: "تواصل معنا", en: "Contact Us" },
-  footer_rights: { ar: "© 2026 Ostazze. جميع الحقوق محفوظة", en: "© 2026 Ostazze. All rights reserved" },
+  footer_rights: { ar: "© 2026 Ostaze. جميع الحقوق محفوظة", en: "© 2026 Ostaze. All rights reserved" },
   footer_location: { ar: "الرياض، المملكة العربية السعودية", en: "Riyadh, Saudi Arabia" },
 
   // Common
@@ -424,7 +424,7 @@ const translations = {
   lesson_time: { ar: "الوقت", en: "Time" },
 
   // WhatsApp
-  whatsapp_msg: { ar: "مرحباً، أريد الاستفسار عن خدمات أسطازي", en: "Hello, I'd like to inquire about Ostazze services" },
+  whatsapp_msg: { ar: "مرحباً، أريد الاستفسار عن خدمات أسطازي", en: "Hello, I'd like to inquire about Ostaze services" },
 
   // How It Works
   how_title: { ar: "كيف يعمل؟", en: "How It Works?" },
@@ -518,13 +518,13 @@ const translations = {
 
   // About page
   about_title: { ar: "من نحن", en: "About Us" },
-  about_subtitle: { ar: "تعرف على منصة أسطازي ورسالتنا التعليمية", en: "Learn about Ostazze and our educational mission" },
+  about_subtitle: { ar: "تعرف على منصة أسطازي ورسالتنا التعليمية", en: "Learn about Ostaze and our educational mission" },
   about_mission_title: { ar: "رسالتنا", en: "Our Mission" },
   about_mission_desc: { ar: "نسعى لتوفير تعليم خصوصي عالي الجودة ومتاح للجميع، من خلال ربط الطلاب بأفضل المعلمين المعتمدين في مختلف التخصصات الأكاديمية عبر جلسات مباشرة عبر الإنترنت.", en: "We strive to provide high-quality, accessible private education by connecting students with the best certified teachers across various academic disciplines through live online sessions." },
   about_vision_title: { ar: "رؤيتنا", en: "Our Vision" },
   about_vision_desc: { ar: "أن نكون المنصة التعليمية الأولى في الشرق الأوسط التي تمكّن كل طالب من الوصول إلى تعليم متميز بغض النظر عن موقعه الجغرافي.", en: "To be the leading educational platform in the Middle East that empowers every student to access excellent education regardless of their location." },
   about_story_title: { ar: "قصتنا", en: "Our Story" },
-  about_story_desc: { ar: "بدأت أسطازي كفكرة بسيطة: ماذا لو استطاع كل طالب جامعي الوصول إلى أفضل المعلمين في تخصصه؟ من هنا انطلقنا لبناء منصة تجمع بين التكنولوجيا الحديثة والخبرة الأكاديمية، لنقدم تجربة تعليمية فريدة تتجاوز حدود الجغرافيا والزمان.", en: "Ostazze started with a simple idea: what if every university student could access the best teachers in their field? From there, we set out to build a platform that combines modern technology with academic expertise, delivering a unique educational experience beyond the boundaries of geography and time." },
+  about_story_desc: { ar: "بدأت أسطازي كفكرة بسيطة: ماذا لو استطاع كل طالب جامعي الوصول إلى أفضل المعلمين في تخصصه؟ من هنا انطلقنا لبناء منصة تجمع بين التكنولوجيا الحديثة والخبرة الأكاديمية، لنقدم تجربة تعليمية فريدة تتجاوز حدود الجغرافيا والزمان.", en: "Ostaze started with a simple idea: what if every university student could access the best teachers in their field? From there, we set out to build a platform that combines modern technology with academic expertise, delivering a unique educational experience beyond the boundaries of geography and time." },
   about_values_title: { ar: "قيمنا", en: "Our Values" },
   about_value1_title: { ar: "الجودة", en: "Quality" },
   about_value1_desc: { ar: "نختار معلمينا بعناية لضمان أعلى مستوى من التعليم", en: "We carefully select our teachers to ensure the highest level of education" },
@@ -559,7 +559,7 @@ const translations = {
   terms_subtitle: { ar: "يرجى قراءة الشروط والأحكام بعناية قبل استخدام المنصة", en: "Please read the terms and conditions carefully before using the platform" },
   terms_last_updated: { ar: "آخر تحديث: أبريل 2026", en: "Last updated: April 2026" },
   terms_section1_title: { ar: "قبول الشروط", en: "Acceptance of Terms" },
-  terms_section1_content: { ar: "باستخدامك لمنصة أسطازي، فإنك توافق على الالتزام بهذه الشروط والأحكام. إذا كنت لا توافق على أي من هذه الشروط، يرجى عدم استخدام المنصة.", en: "By using the Ostazze platform, you agree to be bound by these terms and conditions. If you do not agree to any of these terms, please do not use the platform." },
+  terms_section1_content: { ar: "باستخدامك لمنصة أسطازي، فإنك توافق على الالتزام بهذه الشروط والأحكام. إذا كنت لا توافق على أي من هذه الشروط، يرجى عدم استخدام المنصة.", en: "By using the Ostaze platform, you agree to be bound by these terms and conditions. If you do not agree to any of these terms, please do not use the platform." },
   terms_section2_title: { ar: "الحسابات والتسجيل", en: "Accounts & Registration" },
   terms_section2_content: { ar: "يجب عليك تقديم معلومات دقيقة وكاملة عند إنشاء حسابك. أنت مسؤول عن الحفاظ على سرية معلومات حسابك وعن جميع الأنشطة التي تتم تحت حسابك.", en: "You must provide accurate and complete information when creating your account. You are responsible for maintaining the confidentiality of your account information and for all activities that occur under your account." },
   terms_section3_title: { ar: "الجلسات والحجوزات", en: "Sessions & Bookings" },
@@ -567,7 +567,7 @@ const translations = {
   terms_section4_title: { ar: "المدفوعات والاسترجاع", en: "Payments & Refunds" },
   terms_section4_content: { ar: "يتم الدفع مقدماً عند حجز الجلسة. في حال عدم حضور المعلم أو حدوث مشكلة تقنية من جانب المنصة، يحق لك استرجاع كامل المبلغ. طلبات الاسترجاع تتم خلال 7 أيام عمل.", en: "Payment is made upfront when booking a session. If the teacher does not attend or there is a technical issue from the platform's side, you are entitled to a full refund. Refund requests are processed within 7 business days." },
   terms_section5_title: { ar: "حقوق الملكية الفكرية", en: "Intellectual Property" },
-  terms_section5_content: { ar: "جميع المحتويات المتاحة على المنصة، بما في ذلك النصوص والرسومات والشعارات، هي ملكية لأسطازي ومحمية بموجب قوانين حقوق الملكية الفكرية.", en: "All content available on the platform, including text, graphics, and logos, is the property of Ostazze and is protected by intellectual property laws." },
+  terms_section5_content: { ar: "جميع المحتويات المتاحة على المنصة، بما في ذلك النصوص والرسومات والشعارات، هي ملكية لأسطازي ومحمية بموجب قوانين حقوق الملكية الفكرية.", en: "All content available on the platform, including text, graphics, and logos, is the property of Ostaze and is protected by intellectual property laws." },
   terms_section6_title: { ar: "تعديل الشروط", en: "Modification of Terms" },
   terms_section6_content: { ar: "نحتفظ بالحق في تعديل هذه الشروط في أي وقت. سيتم إخطارك بأي تغييرات جوهرية عبر البريد الإلكتروني أو من خلال إشعار على المنصة.", en: "We reserve the right to modify these terms at any time. You will be notified of any material changes via email or through a notice on the platform." },
 
@@ -585,7 +585,7 @@ const translations = {
   privacy_section4_title: { ar: "ملفات تعريف الارتباط (Cookies)", en: "Cookies" },
   privacy_section4_content: { ar: "نستخدم ملفات تعريف الارتباط لتحسين تجربة المستخدم وتذكر تفضيلاتك. يمكنك التحكم في إعدادات الكوكيز من خلال متصفحك.", en: "We use cookies to improve user experience and remember your preferences. You can control cookie settings through your browser." },
   privacy_section5_title: { ar: "حقوقك", en: "Your Rights" },
-  privacy_section5_content: { ar: "لديك الحق في الوصول إلى معلوماتك الشخصية وتصحيحها أو حذفها. يمكنك أيضاً طلب نسخة من بياناتك أو الاعتراض على معالجتها. للممارسة أي من هذه الحقوق، تواصل معنا عبر info@ostazze.com.", en: "You have the right to access, correct, or delete your personal information. You can also request a copy of your data or object to its processing. To exercise any of these rights, contact us at info@ostazze.com." },
+  privacy_section5_content: { ar: "لديك الحق في الوصول إلى معلوماتك الشخصية وتصحيحها أو حذفها. يمكنك أيضاً طلب نسخة من بياناتك أو الاعتراض على معالجتها. للممارسة أي من هذه الحقوق، تواصل معنا عبر info@ostaze.com.", en: "You have the right to access, correct, or delete your personal information. You can also request a copy of your data or object to its processing. To exercise any of these rights, contact us at info@ostaze.com." },
 
   // Teachers empty state
   teachers_empty_title: { ar: "لا يوجد معلمون حالياً", en: "No Teachers Available" },

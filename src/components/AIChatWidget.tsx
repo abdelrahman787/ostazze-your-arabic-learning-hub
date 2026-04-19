@@ -138,8 +138,8 @@ const AIChatWidget = () => {
             whileTap={{ scale: 0.9 }}
             onClick={() => setIsOpen(true)}
             className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full bg-gradient-to-br from-primary to-primary-dark text-primary-foreground flex items-center justify-center shadow-[0_8px_30px_hsl(14_91%_50%/0.5)] hover:shadow-[0_12px_40px_hsl(14_91%_50%/0.7)] transition-shadow"
-            title={lang === "ar" ? "مساعد أستازي" : "Ostazze Assistant"}
-            aria-label={lang === "ar" ? "افتح مساعد أستازي" : "Open Ostazze Assistant"}
+            title={lang === "ar" ? "مساعد أستازي" : "Ostaze Assistant"}
+            aria-label={lang === "ar" ? "افتح مساعد أستازي" : "Open Ostaze Assistant"}
           >
             {/* Pulsing rings */}
             <span className="absolute inset-0 rounded-full bg-primary/40 animate-ping" />
@@ -169,7 +169,7 @@ const AIChatWidget = () => {
                 <Bot size={22} />
                 <div>
                   <h3 className="font-bold text-sm leading-tight">
-                    {lang === "ar" ? "مساعد أستازي" : "Ostazze Assistant"}
+                    {lang === "ar" ? "مساعد أستازي" : "Ostaze Assistant"}
                   </h3>
                   <p className="text-[11px] opacity-80">
                     {lang === "ar" ? "متاح دائماً لمساعدتك" : "Always here to help"}
@@ -197,7 +197,7 @@ const AIChatWidget = () => {
                   </div>
                   <div>
                     <h4 className="font-bold text-foreground">
-                      {lang === "ar" ? "أهلاً! أنا أستازي 👋" : "Hi! I'm Ostazze 👋"}
+                      {lang === "ar" ? "أهلاً! أنا أستازي 👋" : "Hi! I'm Ostaze 👋"}
                     </h4>
                     <p className="text-sm text-muted-foreground mt-1">
                       {lang === "ar"

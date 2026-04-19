@@ -203,7 +203,7 @@ const Dashboard = () => {
       >
         <div className="p-5 border-b">
           <Link to="/" className="text-xl font-black text-primary tracking-tight">
-            OSTAZZE
+            OSTAZE
           </Link>
           <p className="text-xs text-muted-foreground mt-0.5">
             {t("sidebar_student_dashboard")}

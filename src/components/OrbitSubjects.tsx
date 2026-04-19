@@ -201,7 +201,7 @@ const OrbitSubjects = () => {
                 >
                   <img
                     src={gradCap}
-                    alt="OSTAZZE 3D Logo"
+                    alt="OSTAZE 3D Logo"
                     className="w-full h-full object-contain drop-shadow-[0_20px_40px_hsl(22_95%_50%/0.6)]"
                   />
                 </motion.div>

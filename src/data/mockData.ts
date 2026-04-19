@@ -161,7 +161,7 @@ export const mockReviews: Review[] = [
 ];
 
 export const mockTestimonials = [
-  { name: { ar: "عبدالله المالكي", en: "Abdullah Al-Malki" }, university: { ar: "جامعة الكويت", en: "Kuwait University" }, quote: { ar: "بفضل Ostazze، تمكنت من رفع معدلي في مادة التفاضل والتكامل من C إلى A+.", en: "Thanks to Ostazze, I was able to raise my Calculus grade from C to A+." } },
+  { name: { ar: "عبدالله المالكي", en: "Abdullah Al-Malki" }, university: { ar: "جامعة الكويت", en: "Kuwait University" }, quote: { ar: "بفضل Ostaze، تمكنت من رفع معدلي في مادة التفاضل والتكامل من C إلى A+.", en: "Thanks to Ostaze, I was able to raise my Calculus grade from C to A+." } },
   { name: { ar: "نورا الشمري", en: "Noura Al-Shammari" }, university: { ar: "جامعة قطر", en: "Qatar University" }, quote: { ar: "أفضل منصة تعليمية استخدمتها! حجز الجلسات سهل والمعلمون متميزون.", en: "Best learning platform I've used! Booking sessions is easy and the teachers are outstanding." } },
   { name: { ar: "فيصل الدوسري", en: "Faisal Al-Dosari" }, university: { ar: "جامعة الخليج للعلوم والتكنولوجيا", en: "GUST" }, quote: { ar: "ساعدتني المنصة في التغلب على صعوبات مادة الفيزياء.", en: "The platform helped me overcome difficulties in Physics." } },
 ];

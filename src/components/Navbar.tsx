@@ -74,7 +74,7 @@ const Navbar = () => {
               <span className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center shadow-[0_0_18px_hsl(14_91%_50%/0.5)]">
                 <GraduationCap size={18} className="text-white" />
               </span>
-              <span className="text-lg font-black text-primary tracking-tight hidden sm:inline">OSTAZZE</span>
+              <span className="text-lg font-black text-primary tracking-tight hidden sm:inline">OSTAZE</span>
             </Link>
           </div>
 
