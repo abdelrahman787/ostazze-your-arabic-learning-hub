@@ -25,10 +25,11 @@ const SUBJECTS: Subject[] = [
 ];
 
 // Distribute 8 subjects across 3 orbits: 2 inner, 3 middle, 3 outer
+// All orbits rotate in the same direction at the same speed
 const ORBITS = [
-  { radius: 180, duration: 28, count: 2, reverse: false },
-  { radius: 290, duration: 42, count: 3, reverse: true },
-  { radius: 400, duration: 58, count: 3, reverse: false },
+  { radius: 180, duration: 40, count: 2, reverse: false },
+  { radius: 290, duration: 40, count: 3, reverse: false },
+  { radius: 400, duration: 40, count: 3, reverse: false },
 ];
 
 const OrbitSubjects = () => {
@@ -116,16 +117,11 @@ const OrbitSubjects = () => {
             width: 900 * scale,
             height: 720 * scale,
             maxWidth: "100%",
-            perspective: "1400px",
           }}
         >
           <div
             className="absolute inset-0 flex items-center justify-center"
-            style={{
-              transform: `scale(${scale}) rotateX(58deg)`,
-              transformOrigin: "center",
-              transformStyle: "preserve-3d",
-            }}
+            style={{ transform: `scale(${scale})`, transformOrigin: "center" }}
           >
             {/* Orbit rings (tilted ellipses) */}
             {ORBITS.map((orbit, idx) => (
@@ -140,14 +136,13 @@ const OrbitSubjects = () => {
               />
             ))}
 
-            {/* Central 3D Logo (counter-tilted to face camera) */}
+            {/* Central 3D Logo */}
             <motion.div
               initial={{ scale: 0, rotate: -180 }}
               whileInView={{ scale: 1, rotate: 0 }}
               viewport={{ once: true }}
               transition={{ type: "spring", stiffness: 80, damping: 14 }}
               className="absolute z-20"
-              style={{ transform: "rotateX(-58deg)" }}
             >
               <div className="relative">
                 {/* Glow halo */}
@@ -210,21 +205,18 @@ const OrbitSubjects = () => {
                         marginLeft: -44,
                         marginTop: -44,
                         transform: `translate(${x}px, ${y}px)`,
-                        transformStyle: "preserve-3d",
                       }}
                     >
-                      {/* Counter-rotate Z (orbit) and counter-tilt X (perspective) so cards face camera upright */}
+                      {/* Counter-rotate Z so cards stay upright while orbiting */}
                       <motion.div
                         className="w-full h-full flex items-center justify-center"
-                        style={{ transformStyle: "preserve-3d" }}
-                        animate={{ rotate: orbit.reverse ? 360 : -360 }}
+                        animate={{ rotate: -360 }}
                         transition={{
                           duration: orbit.duration,
                           repeat: Infinity,
                           ease: "linear",
                         }}
                       >
-                        <div style={{ transform: "rotateX(-58deg)" }}>
                         <motion.div
                           initial={{ opacity: 0, scale: 0 }}
                           animate={{ opacity: 1, scale: 1 }}
@@ -260,7 +252,6 @@ const OrbitSubjects = () => {
                             </span>
                           </Link>
                         </motion.div>
-                        </div>
                       </motion.div>
                     </div>
                   );
