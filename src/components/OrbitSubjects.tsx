@@ -205,21 +205,18 @@ const OrbitSubjects = () => {
                         marginLeft: -44,
                         marginTop: -44,
                         transform: `translate(${x}px, ${y}px)`,
-                        transformStyle: "preserve-3d",
                       }}
                     >
-                      {/* Counter-rotate Z (orbit) and counter-tilt X (perspective) so cards face camera upright */}
+                      {/* Counter-rotate Z so cards stay upright while orbiting */}
                       <motion.div
                         className="w-full h-full flex items-center justify-center"
-                        style={{ transformStyle: "preserve-3d" }}
-                        animate={{ rotate: orbit.reverse ? 360 : -360 }}
+                        animate={{ rotate: -360 }}
                         transition={{
                           duration: orbit.duration,
                           repeat: Infinity,
                           ease: "linear",
                         }}
                       >
-                        <div style={{ transform: "rotateX(-58deg)" }}>
                         <motion.div
                           initial={{ opacity: 0, scale: 0 }}
                           animate={{ opacity: 1, scale: 1 }}
