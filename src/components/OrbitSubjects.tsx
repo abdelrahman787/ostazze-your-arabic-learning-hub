@@ -25,10 +25,11 @@ const SUBJECTS: Subject[] = [
 ];
 
 // Distribute 8 subjects across 3 orbits: 2 inner, 3 middle, 3 outer
+// All orbits rotate in the same direction at the same speed
 const ORBITS = [
-  { radius: 180, duration: 28, count: 2, reverse: false },
-  { radius: 290, duration: 42, count: 3, reverse: true },
-  { radius: 400, duration: 58, count: 3, reverse: false },
+  { radius: 180, duration: 40, count: 2, reverse: false },
+  { radius: 290, duration: 40, count: 3, reverse: false },
+  { radius: 400, duration: 40, count: 3, reverse: false },
 ];
 
 const OrbitSubjects = () => {
