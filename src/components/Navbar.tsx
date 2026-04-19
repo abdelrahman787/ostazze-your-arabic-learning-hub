@@ -38,9 +38,9 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
+    { label: t("nav_courses"), path: "/courses" },
     { label: t("nav_universities"), path: "/universities" },
     { label: t("nav_subjects"), path: "/subjects" },
-    { label: t("nav_categories"), path: "/categories" },
     { label: t("nav_teachers"), path: "/teachers" },
   ];
 

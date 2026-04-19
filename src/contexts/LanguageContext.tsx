@@ -9,6 +9,8 @@ const translations = {
   nav_categories: { ar: "التصنيفات", en: "Categories" },
   nav_subjects: { ar: "المواد", en: "Subjects" },
   nav_universities: { ar: "الجامعات", en: "Universities" },
+  nav_courses: { ar: "الكورسات", en: "Courses" },
+  nav_my_courses: { ar: "كورساتي", en: "My Courses" },
   nav_login: { ar: "تسجيل الدخول", en: "Login" },
   nav_register: { ar: "إنشاء حساب", en: "Register" },
   nav_dashboard: { ar: "لوحة التحكم", en: "Dashboard" },
