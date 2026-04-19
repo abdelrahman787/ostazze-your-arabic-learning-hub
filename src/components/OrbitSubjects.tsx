@@ -267,9 +267,7 @@ const OrbitSubjects = () => {
               boxShadow: "0 10px 30px hsl(22 95% 45% / 0.4)",
             }}
           >
-            {t("explore_all_subjects") !== "explore_all_subjects"
-              ? t("explore_all_subjects")
-              : t("popular_title")}
+            {t("view_all")}
           </Link>
         </motion.div>
       </div>
