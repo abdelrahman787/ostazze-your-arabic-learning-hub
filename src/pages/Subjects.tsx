@@ -160,7 +160,7 @@ const Subjects = () => {
             return (
               <motion.div key={s.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: Math.min(i * 0.03, 0.5) }}
                 className="h-full">
-                <div className={`card-base p-6 hover:border-primary/30 hover:shadow-lg transition-all h-full flex flex-col feature-card ${i === 0 && !categoryParam ? "card-active" : ""}`}>
+                <div className={`card-base p-6 h-full flex flex-col feature-card ${i === 0 && !categoryParam ? "card-active" : ""}`}>
                   <div className="flex items-start gap-4 flex-1">
                     <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 ${colorClass}`}>
                       <BookOpen size={20} />
