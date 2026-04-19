@@ -178,12 +178,24 @@
   .card-base {
     @apply bg-card rounded-2xl border transition-all duration-300 relative overflow-hidden;
   }
+  /* Light mode: subtle glass + lift */
+  .card-base {
+    background: linear-gradient(160deg, hsl(0 0% 100%) 0%, hsl(30 40% 98%) 100%);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 2px 8px hsl(230 25% 15% / 0.04), 0 8px 24px hsl(230 25% 15% / 0.04);
+  }
   .dark .card-base {
-    background: linear-gradient(160deg, hsl(230 30% 13% / 0.85), hsl(230 35% 8% / 0.6));
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    background:
+      radial-gradient(ellipse 90% 60% at 50% 0%, hsl(14 91% 50% / 0.06) 0%, transparent 60%),
+      linear-gradient(160deg, hsl(230 30% 13% / 0.88) 0%, hsl(230 35% 8% / 0.65) 100%);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
     border-color: hsl(30 30% 96% / 0.08);
-    box-shadow: 0 4px 20px hsl(230 35% 0% / 0.3), inset 0 1px 0 hsl(30 30% 96% / 0.04);
+    box-shadow:
+      0 4px 20px hsl(230 35% 0% / 0.35),
+      0 1px 0 hsl(30 30% 96% / 0.06) inset,
+      0 -1px 0 hsl(230 35% 0% / 0.4) inset;
   }
   /* Subtle orange glow on top edge for dark cards */
   .dark .card-base::before {
