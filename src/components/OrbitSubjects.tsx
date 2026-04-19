@@ -18,18 +18,14 @@ const SUBJECTS: Subject[] = [
   { key: "subj_physics", icon: Atom },
   { key: "subj_chemistry", icon: FlaskConical },
   { key: "subj_english", icon: Languages },
-  { key: "subj_accounting", icon: BookOpen },
-  { key: "subj_statistics", icon: BarChart3 },
   { key: "subj_programming", icon: Code },
-  { key: "subj_biology", icon: Microscope },
 ];
 
-// Distribute 8 subjects across 3 orbits: 2 inner, 3 middle, 3 outer
+// Distribute 5 subjects across 2 orbits: 2 inner, 3 outer
 // All orbits rotate in the same direction at the same speed
 const ORBITS = [
-  { radius: 180, duration: 40, count: 2, reverse: false },
-  { radius: 290, duration: 40, count: 3, reverse: false },
-  { radius: 400, duration: 40, count: 3, reverse: false },
+  { radius: 200, duration: 40, count: 2, reverse: false },
+  { radius: 360, duration: 40, count: 3, reverse: false },
 ];
 
 const OrbitSubjects = () => {
