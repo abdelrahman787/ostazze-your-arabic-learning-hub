@@ -523,7 +523,7 @@ const Admin = () => {
       {/* Sidebar */}
       <aside className={`fixed lg:static inset-y-0 right-0 z-40 w-[260px] bg-card border-l flex flex-col transition-transform duration-300 ${sidebarOpen ? "translate-x-0" : "translate-x-full lg:translate-x-0"}`}>
         <div className="p-5 border-b">
-          <Link to="/" className="text-xl font-black text-primary tracking-tight">OSTAZZE</Link>
+          <Link to="/" className="text-xl font-black text-primary tracking-tight">OSTAZE</Link>
           <p className="text-xs text-muted-foreground mt-0.5">{t("admin_title")}</p>
         </div>
         <nav className="flex-1 overflow-y-auto p-4 space-y-6">

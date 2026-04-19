@@ -94,7 +94,7 @@ const HomePage = () => {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "EducationalOrganization",
-    name: "Ostazze",
+    name: "Ostaze",
     url: "https://ostaze.com",
     description: lang === "ar"
       ? "منصة تعليمية تربطك بأفضل المدرسين الخصوصيين لجلسات مباشرة عبر الإنترنت"
@@ -109,10 +109,10 @@ const HomePage = () => {
   return (
     <div>
       <Helmet>
-        <title>{lang === "ar" ? "أستازي - منصة تعليمية | احجز جلسات خصوصية مع أفضل المعلمين" : "Ostazze - Educational Platform | Book Private Sessions"}</title>
-        <meta name="description" content={lang === "ar" ? "منصة أستازي التعليمية تربطك بأفضل المدرسين الخصوصيين لجلسات مباشرة عبر الإنترنت في الرياضيات والفيزياء والكيمياء والإنجليزي" : "Ostazze connects you with top private tutors for live online sessions in math, physics, chemistry, and English"} />
+        <title>{lang === "ar" ? "أستازي - منصة تعليمية | احجز جلسات خصوصية مع أفضل المعلمين" : "Ostaze - Educational Platform | Book Private Sessions"}</title>
+        <meta name="description" content={lang === "ar" ? "منصة أستازي التعليمية تربطك بأفضل المدرسين الخصوصيين لجلسات مباشرة عبر الإنترنت في الرياضيات والفيزياء والكيمياء والإنجليزي" : "Ostaze connects you with top private tutors for live online sessions in math, physics, chemistry, and English"} />
         <meta name="keywords" content={lang === "ar" ? "معلم خصوصي، دروس خصوصية، منصة تعليمية، تعلم عن بعد" : "private tutor, online tutoring, educational platform, remote learning"} />
-        <meta property="og:title" content="Ostazze - منصة تعليمية متميزة" />
+        <meta property="og:title" content="Ostaze - منصة تعليمية متميزة" />
         <meta property="og:description" content="احجز جلسات خصوصية مع أفضل المعلمين" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://ostaze.com" />

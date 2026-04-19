@@ -7,7 +7,7 @@ interface PageHelmetProps {
 
 const PageHelmet = ({ title, description }: PageHelmetProps) => (
   <Helmet>
-    <title>{title} | OSTAZZE</title>
+    <title>{title} | OSTAZE</title>
     {description && <meta name="description" content={description} />}
   </Helmet>
 );

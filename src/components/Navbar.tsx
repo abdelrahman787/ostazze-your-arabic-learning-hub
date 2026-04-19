@@ -74,7 +74,7 @@ const Navbar = () => {
               <span className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center shadow-[0_0_18px_hsl(14_91%_50%/0.5)]">
                 <GraduationCap size={18} className="text-white" />
               </span>
-              <span className="text-lg font-black text-primary tracking-tight hidden sm:inline">OSTAZZE</span>
+              <span className="text-lg font-black text-primary tracking-tight hidden sm:inline">OSTAZE</span>
             </Link>
           </div>
 
@@ -188,12 +188,6 @@ const Navbar = () => {
             className="md:hidden mx-auto max-w-5xl mt-2 nav-pill !rounded-3xl p-3"
           >
             <div className="flex flex-col gap-1">
-              {navLinks.map((l) => (
-                <Link key={l.path} to={l.path} onClick={() => setMobileOpen(false)}
-                  className={`px-4 py-3 rounded-xl text-sm font-medium transition-all min-h-[44px] flex items-center ${location.pathname === l.path ? "bg-primary/20 text-primary font-bold" : "text-foreground/80 hover:bg-foreground/10"}`}
-                >{l.label}</Link>
-              ))}
-              <div className="border-t border-foreground/10 my-2" />
               {isLoggedIn ? (
                 <>
                   <Link to={dashboardPath} onClick={() => setMobileOpen(false)} className="px-4 py-3 rounded-xl text-sm font-medium hover:bg-foreground/10 flex items-center gap-2 min-h-[44px]">
