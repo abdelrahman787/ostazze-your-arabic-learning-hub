@@ -175,6 +175,10 @@ const OrbitSubjects = () => {
                 style={{
                   width: orbit.radius * 2,
                   height: orbit.radius * 2,
+                  top: "50%",
+                  left: "50%",
+                  marginLeft: -orbit.radius,
+                  marginTop: -orbit.radius,
                 }}
                 animate={{ rotate: orbit.reverse ? -360 : 360 }}
                 transition={{
@@ -185,27 +189,33 @@ const OrbitSubjects = () => {
               >
                 {orbit.items.map((subj, i) => {
                   const Icon = subj.icon;
+                  const rad = (subj.angle * Math.PI) / 180;
+                  const x = Math.cos(rad) * orbit.radius;
+                  const y = Math.sin(rad) * orbit.radius;
                   return (
                     <motion.div
                       key={subj.key}
                       initial={{ opacity: 0, scale: 0 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
+                      animate={{ opacity: 1, scale: 1 }}
                       transition={{
                         delay: 0.3 + oIdx * 0.15 + i * 0.1,
-                        type: "spring",
-                        stiffness: 120,
-                        damping: 12,
+                        duration: 0.5,
+                        ease: "easeOut",
                       }}
-                      className="absolute top-1/2 left-1/2"
+                      className="absolute"
                       style={{
-                        transform: `rotate(${subj.angle}deg) translateX(${orbit.radius}px) rotate(-${subj.angle}deg)`,
+                        top: "50%",
+                        left: "50%",
+                        width: 88,
+                        height: 88,
                         marginLeft: -44,
                         marginTop: -44,
+                        transform: `translate(${x}px, ${y}px)`,
                       }}
                     >
                       {/* Counter-rotate so cards stay upright */}
                       <motion.div
+                        className="w-full h-full flex items-center justify-center"
                         animate={{ rotate: orbit.reverse ? 360 : -360 }}
                         transition={{
                           duration: orbit.duration,
@@ -246,6 +256,7 @@ const OrbitSubjects = () => {
             ))}
           </div>
         </div>
+
 
         {/* CTA below */}
         <motion.div
