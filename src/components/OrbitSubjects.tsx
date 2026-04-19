@@ -223,10 +223,10 @@ const OrbitSubjects = () => {
                             className="w-[88px] h-[88px] rounded-full flex items-center justify-center backdrop-blur-md transition-all"
                             style={{
                               background:
-                                "linear-gradient(135deg, hsl(228 30% 25% / 0.7), hsl(228 30% 15% / 0.7))",
-                              border: "1px solid hsl(22 80% 60% / 0.3)",
+                                "linear-gradient(135deg, hsl(265 40% 25% / 0.7), hsl(280 40% 15% / 0.7))",
+                              border: "1px solid hsl(22 80% 60% / 0.35)",
                               boxShadow:
-                                "0 8px 24px hsl(0 0% 0% / 0.5), inset 0 1px 0 hsl(0 0% 100% / 0.15), 0 0 24px hsl(22 90% 55% / 0.25)",
+                                "0 8px 24px hsl(0 0% 0% / 0.5), inset 0 1px 0 hsl(0 0% 100% / 0.18), 0 0 28px hsl(22 90% 55% / 0.3)",
                             }}
                           >
                             <Icon
