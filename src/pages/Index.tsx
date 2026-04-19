@@ -244,13 +244,13 @@ const HomePage = () => {
           </motion.div>
           <div className="grid md:grid-cols-3 gap-8 relative">
             {/* Connecting line */}
-            <div className="hidden md:block absolute top-12 inset-x-[15%] h-0.5 bg-border" />
+            <div className="hidden md:block absolute top-12 inset-x-[15%] h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
             {howSteps.map((step, i) => (
               <motion.div key={step.key} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.15 }}
                 className="text-center relative">
-                <div className="w-24 h-24 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-5 relative z-10">
+                <div className="step-circle-glow w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-5 relative z-10">
                   <step.icon size={32} className="text-primary" />
-                  <span className="absolute -top-1 -end-1 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-sm font-black">
+                  <span className="absolute -top-1 -end-1 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-sm font-black shadow-[0_4px_12px_hsl(14_91%_49%/0.5)]">
                     {step.key}
                   </span>
                 </div>
