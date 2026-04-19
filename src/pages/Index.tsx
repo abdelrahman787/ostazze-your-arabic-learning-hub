@@ -365,20 +365,21 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="cta-gradient py-16 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '40px 40px' }} />
-        <div className="container text-center">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <h2 className="text-3xl font-black text-white mb-3">{t("cta_title")}</h2>
-            <p className="text-[hsl(210,15%,65%)] mb-8 max-w-lg mx-auto">{t("cta_subtitle")}</p>
-            <div className="flex justify-center gap-4 flex-wrap">
-              <Link to="/register" className="btn-primary text-base !px-8">{t("cta_register")}</Link>
-              <Link to="/teachers" className="border-2 border-white/20 text-white px-8 py-3 rounded-xl font-bold hover:bg-white/5 transition-all min-h-[44px] flex items-center">
-                {t("hero_browse")}
-              </Link>
-            </div>
-          </motion.div>
+      {/* CTA — Card-Y dark glow gradient style */}
+      <section className="py-16 px-4 lg:px-8">
+        <div className="stats-card-darkglow relative overflow-hidden rounded-[2rem] py-14 px-6 md:px-12">
+          <div className="container text-center relative z-10">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+              <h2 className="text-3xl md:text-4xl font-black text-white mb-3 drop-shadow-[0_2px_8px_hsl(0_0%_0%_/_0.25)]">{t("cta_title")}</h2>
+              <p className="text-white/85 mb-8 max-w-lg mx-auto text-sm md:text-base">{t("cta_subtitle")}</p>
+              <div className="flex justify-center gap-3 flex-wrap">
+                <Link to="/register" className="btn-cta-light text-base">{t("cta_register")}</Link>
+                <Link to="/teachers" className="inline-flex items-center justify-center px-7 py-3.5 rounded-full font-bold border-2 border-white/30 text-white hover:bg-white/10 transition-all backdrop-blur-sm">
+                  {t("hero_browse")}
+                </Link>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
     </div>
