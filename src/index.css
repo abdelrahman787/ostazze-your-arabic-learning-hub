@@ -268,6 +268,10 @@
   .tag-outline {
     @apply border border-border rounded-lg px-3 py-1 text-xs font-medium text-foreground/70;
   }
+  .dark .tag-outline {
+    border-color: hsl(30 30% 96% / 0.12);
+    background: hsl(230 25% 14% / 0.5);
+  }
   .bg-section-alt {
     @apply bg-secondary/5;
   }
