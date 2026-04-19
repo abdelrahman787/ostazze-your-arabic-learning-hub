@@ -147,6 +147,9 @@ const Navbar = () => {
                         <Link to={dashboardPath} onClick={() => setProfileOpen(false)} className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm hover:bg-secondary transition-colors" role="menuitem">
                           <LayoutDashboard size={15} className="text-muted-foreground" /> {t("nav_dashboard")}
                         </Link>
+                        <Link to="/my-courses" onClick={() => setProfileOpen(false)} className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm hover:bg-secondary transition-colors" role="menuitem">
+                          <GraduationCap size={15} className="text-muted-foreground" /> {t("nav_my_courses")}
+                        </Link>
                         {user?.role === "admin" && (
                           <Link to="/admin" onClick={() => setProfileOpen(false)} className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm hover:bg-secondary transition-colors" role="menuitem">
                             <Shield size={15} className="text-primary" /> {t("admin_title")}

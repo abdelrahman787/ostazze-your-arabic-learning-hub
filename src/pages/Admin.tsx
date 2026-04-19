@@ -14,6 +14,7 @@ import {
 import { motion } from "framer-motion";
 import SalesHub from "@/components/SalesHub";
 import NotificationBell from "@/components/NotificationBell";
+import AdminCourses from "@/components/AdminCourses";
 
 // --- Types ---
 interface TeacherRow {
@@ -663,6 +664,13 @@ const Admin = () => {
                   )}
                 </div>
               )}
+            </div>
+          )}
+
+          {/* Courses Tab */}
+          {activeTab === "courses" && (
+            <div className="animate-fade-in">
+              <AdminCourses />
             </div>
           )}
 
