@@ -302,31 +302,35 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Stats */}
-      <section ref={statsRef} className="py-16 mx-4 lg:mx-8 rounded-3xl relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(21,90%,48%)] via-[hsl(24,94%,50%)] to-[hsl(30,95%,55%)] rounded-3xl" />
-        <div className="absolute top-[-40px] right-[-40px] w-[200px] h-[200px] rounded-full bg-white/10" />
-        <div className="absolute bottom-[-30px] left-[10%] w-[150px] h-[150px] rounded-full bg-white/5" />
-
-        <div className="container relative z-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-5 text-center text-white">
-            {[
-              { num: "+500", label: t("stats_teachers"), icon: Users },
-              { num: "+10,000", label: t("stats_students"), icon: TrendingUp },
-              { num: "+25,000", label: t("stats_sessions"), icon: CalendarCheck },
-              { num: "4.9/5", label: t("stats_rating"), icon: Star },
-            ].map((s, i) => (
-              <motion.div key={s.label} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                className="rounded-2xl p-5 backdrop-blur-[10px] bg-white/10 border border-white/20">
-                <div className="inline-block mb-2 opacity-90">
-                  <s.icon size={22} />
-                </div>
-                <div className="text-3xl md:text-4xl font-black gradient-text">
-                  <CountUpNumber target={s.num} />
-                </div>
-                <div className="opacity-85 mt-1 text-sm">{s.label}</div>
-              </motion.div>
-            ))}
+      {/* Stats — Card-Y dark glow style */}
+      <section ref={statsRef} className="py-16 px-4 lg:px-8">
+        <div className="stats-card-darkglow relative overflow-hidden rounded-[2rem] p-8 md:p-12">
+          <div className="container relative z-10">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 text-center">
+              {[
+                { num: "+500", label: t("stats_teachers"), icon: Users },
+                { num: "+10,000", label: t("stats_students"), icon: TrendingUp },
+                { num: "+25,000", label: t("stats_sessions"), icon: CalendarCheck },
+                { num: "4.9/5", label: t("stats_rating"), icon: Star },
+              ].map((s, i) => (
+                <motion.div
+                  key={s.label}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="stats-tile-glass rounded-2xl p-5 md:p-6"
+                >
+                  <div className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-white/15 mb-3 text-white">
+                    <s.icon size={20} />
+                  </div>
+                  <div className="text-2xl md:text-4xl font-black text-white leading-none">
+                    <CountUpNumber target={s.num} />
+                  </div>
+                  <div className="text-white/80 mt-2 text-xs md:text-sm font-medium">{s.label}</div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
