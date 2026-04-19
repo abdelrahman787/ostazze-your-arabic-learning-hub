@@ -30,6 +30,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
+import Refund from "./pages/Refund";
 import NotFound from "./pages/NotFound";
 import CheckoutReturn from "./pages/CheckoutReturn";
 import Courses from "./pages/Courses";
@@ -107,6 +108,7 @@ const App = () => (
                       <Route path="/contact" element={<Contact />} />
                       <Route path="/terms" element={<Terms />} />
                       <Route path="/privacy" element={<Privacy />} />
+                      <Route path="/refund" element={<Refund />} />
                       <Route path="/checkout/return" element={<CheckoutReturn />} />
                       <Route path="*" element={<NotFound />} />
                     </Routes>
