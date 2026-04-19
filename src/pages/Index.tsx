@@ -319,15 +319,15 @@ const HomePage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="stats-tile-glass rounded-2xl p-5 md:p-6"
+                  className="stats-tile-glass p-5 md:p-6"
                 >
-                  <div className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-white/15 mb-3 text-white">
-                    <s.icon size={20} />
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-white/20 mb-3 text-white shadow-[inset_0_1px_0_hsl(0_0%_100%_/_0.3),0_4px_12px_hsl(0_0%_0%_/_0.15)] backdrop-blur-sm">
+                    <s.icon size={20} strokeWidth={2.5} />
                   </div>
-                  <div className="text-2xl md:text-4xl font-black text-white leading-none">
+                  <div className="text-3xl md:text-5xl font-black text-white leading-none drop-shadow-[0_2px_8px_hsl(0_0%_0%_/_0.25)]">
                     <CountUpNumber target={s.num} />
                   </div>
-                  <div className="text-white/80 mt-2 text-xs md:text-sm font-medium">{s.label}</div>
+                  <div className="text-white/85 mt-2 text-xs md:text-sm font-medium">{s.label}</div>
                 </motion.div>
               ))}
             </div>
