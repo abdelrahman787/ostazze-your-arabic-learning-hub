@@ -122,7 +122,7 @@ const CollegeCard = ({ college, lang, index }: { college: College; lang: "ar" | 
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.05 }}
-      className="rounded-2xl border border-border/40 bg-card overflow-hidden shadow-sm hover:shadow-lg transition-shadow"
+      className="card-base overflow-hidden"
     >
       {/* College header with colored top bar */}
       <div className="h-1 bg-gradient-to-r from-primary/60 to-primary/20" />

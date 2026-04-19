@@ -33,11 +33,11 @@ const TeacherCard = ({ teacher, index = 0 }: { teacher: TeacherData; index?: num
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.4, delay: index * 0.08 }}
-      className="card-base flex flex-col hover:border-primary/30 hover:shadow-lg transition-all duration-200"
+      className="card-base flex flex-col group"
     >
       <div className="p-5 pb-3 flex gap-3">
         <div className="relative shrink-0">
-          <div className="icon-box-lg bg-primary/10 text-primary">
+          <div className="icon-box-lg bg-gradient-to-br from-primary/30 to-primary/10 text-primary border border-primary/20 dark:border-primary/30 group-hover:shadow-[0_0_24px_hsl(14_91%_55%/0.5)] transition-shadow">
             <User size={22} />
           </div>
           {teacher.verified && (
