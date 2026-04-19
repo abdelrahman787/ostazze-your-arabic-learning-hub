@@ -252,7 +252,6 @@ const OrbitSubjects = () => {
                             </span>
                           </Link>
                         </motion.div>
-                        </div>
                       </motion.div>
                     </div>
                   );
