@@ -143,6 +143,8 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects, pri
       )}
     </AnimatePresence>
   );
+
+  return createPortal(modalContent, document.body);
 };
 
 export default BookSessionModal;
