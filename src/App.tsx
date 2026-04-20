@@ -3,6 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import PageTransition from "@/components/PageTransition";
 import { HelmetProvider } from "react-helmet-async";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { AuthProvider } from "@/contexts/AuthContext";
@@ -87,31 +88,33 @@ const App = () => (
                 <BrowserRouter>
                   <ScrollToTop />
                   <Layout>
-                    <Routes>
-                      <Route path="/" element={<Index />} />
-                      <Route path="/courses" element={<Courses />} />
-                      <Route path="/courses/:id" element={<CourseDetail />} />
-                      <Route path="/my-courses" element={<ProtectedRoute><MyCourses /></ProtectedRoute>} />
-                      <Route path="/teachers" element={<Teachers />} />
-                      <Route path="/teachers/:id" element={<TeacherProfile />} />
-                      <Route path="/subjects" element={<Subjects />} />
-                      <Route path="/universities" element={<Universities />} />
-                      <Route path="/categories" element={<Categories />} />
-                      <Route path="/login" element={<Login />} />
-                      <Route path="/register" element={<Register />} />
-                      <Route path="/forgot-password" element={<ForgotPassword />} />
-                      <Route path="/dashboard" element={<ProtectedRoute><SmartDashboard /></ProtectedRoute>} />
-                      <Route path="/dashboard/teacher" element={<ProtectedRoute><SmartDashboard /></ProtectedRoute>} />
-                      <Route path="/lectures/:id" element={<ProtectedRoute><LectureView /></ProtectedRoute>} />
-                      <Route path="/admin" element={<ProtectedRoute adminOnly><Admin /></ProtectedRoute>} />
-                      <Route path="/about" element={<About />} />
-                      <Route path="/contact" element={<Contact />} />
-                      <Route path="/terms" element={<Terms />} />
-                      <Route path="/privacy" element={<Privacy />} />
-                      <Route path="/refund" element={<Refund />} />
-                      <Route path="/checkout/return" element={<CheckoutReturn />} />
-                      <Route path="*" element={<NotFound />} />
-                    </Routes>
+                    <PageTransition>
+                      <Routes>
+                        <Route path="/" element={<Index />} />
+                        <Route path="/courses" element={<Courses />} />
+                        <Route path="/courses/:id" element={<CourseDetail />} />
+                        <Route path="/my-courses" element={<ProtectedRoute><MyCourses /></ProtectedRoute>} />
+                        <Route path="/teachers" element={<Teachers />} />
+                        <Route path="/teachers/:id" element={<TeacherProfile />} />
+                        <Route path="/subjects" element={<Subjects />} />
+                        <Route path="/universities" element={<Universities />} />
+                        <Route path="/categories" element={<Categories />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/register" element={<Register />} />
+                        <Route path="/forgot-password" element={<ForgotPassword />} />
+                        <Route path="/dashboard" element={<ProtectedRoute><SmartDashboard /></ProtectedRoute>} />
+                        <Route path="/dashboard/teacher" element={<ProtectedRoute><SmartDashboard /></ProtectedRoute>} />
+                        <Route path="/lectures/:id" element={<ProtectedRoute><LectureView /></ProtectedRoute>} />
+                        <Route path="/admin" element={<ProtectedRoute adminOnly><Admin /></ProtectedRoute>} />
+                        <Route path="/about" element={<About />} />
+                        <Route path="/contact" element={<Contact />} />
+                        <Route path="/terms" element={<Terms />} />
+                        <Route path="/privacy" element={<Privacy />} />
+                        <Route path="/refund" element={<Refund />} />
+                        <Route path="/checkout/return" element={<CheckoutReturn />} />
+                        <Route path="*" element={<NotFound />} />
+                      </Routes>
+                    </PageTransition>
                   </Layout>
                 </BrowserRouter>
               </TooltipProvider>
