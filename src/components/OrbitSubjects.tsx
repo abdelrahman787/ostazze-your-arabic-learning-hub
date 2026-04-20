@@ -302,16 +302,16 @@ const OrbitSubjects = () => {
         </div>
 
 
-        {/* CTA below */}
+        {/* CTA below — extra spacing so it doesn't overlap the orbit rings */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mt-8"
+          className="text-center mt-20 md:mt-28"
         >
           <Link
             to="/subjects"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold text-white transition-all hover:scale-105"
+            className="inline-flex items-center gap-2 px-12 py-4 rounded-full font-bold text-white text-base md:text-lg transition-all hover:scale-105"
             style={{
               background: "linear-gradient(135deg, hsl(22 95% 55%), hsl(18 90% 45%))",
               boxShadow: "0 10px 30px hsl(22 95% 45% / 0.4)",
