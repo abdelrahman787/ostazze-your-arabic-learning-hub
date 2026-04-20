@@ -75,8 +75,8 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects, pri
             className="bg-card border border-border rounded-2xl p-6 w-full max-w-lg shadow-2xl max-h-[90vh] overflow-y-auto my-auto relative" onClick={(e) => e.stopPropagation()}>
             
             <div className="flex items-center justify-between mb-5">
-              <h2 className="text-lg font-extrabold">{t("book_with")} {teacherName}</h2>
-              <button onClick={onClose} className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center hover:bg-destructive hover:text-destructive-foreground transition-colors">
+              <h2 className="text-lg font-extrabold text-foreground">{t("book_with")} {teacherName}</h2>
+              <button onClick={onClose} className="w-8 h-8 rounded-full bg-secondary text-secondary-foreground flex items-center justify-center hover:bg-destructive hover:text-destructive-foreground transition-colors">
                 <X size={16} />
               </button>
             </div>
@@ -92,22 +92,22 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects, pri
               />
             ) : (
               <div className="space-y-4">
-                <div className="bg-accent/50 border border-accent rounded-xl p-3">
-                  <p className="text-xs text-muted-foreground">
+                <div className="bg-secondary border border-border rounded-xl p-3">
+                  <p className="text-xs text-foreground/80 leading-relaxed">
                     💡 {t("custom_note")}
                   </p>
                 </div>
 
                 {price && price > 0 && (
-                  <div className="flex items-center gap-2 bg-primary/10 text-primary rounded-xl p-3">
-                    <CreditCard size={16} />
-                    <span className="text-sm font-bold">{t("session_price_label")}: ${price}</span>
+                  <div className="flex items-center gap-2 bg-primary text-primary-foreground rounded-xl p-3 shadow-md">
+                    <CreditCard size={18} />
+                    <span className="text-sm font-extrabold">{t("session_price_label")}: ${price}</span>
                   </div>
                 )}
 
                 {subjects.length > 0 && (
                   <div>
-                    <label className="block text-sm font-bold mb-1.5 flex items-center gap-1"><BookOpen size={14} /> {t("the_subject")}</label>
+                    <label className="text-sm font-bold mb-1.5 flex items-center gap-1.5 text-foreground"><BookOpen size={14} className="text-primary" /> {t("the_subject")}</label>
                     <select value={form.subject} onChange={(e) => setForm((f) => ({ ...f, subject: e.target.value }))} className="input-base">
                       {subjects.map((s, i) => <option key={i} value={s}>{s}</option>)}
                     </select>
@@ -115,24 +115,24 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects, pri
                 )}
 
                 <div>
-                  <label className="block text-sm font-bold mb-1.5 flex items-center gap-1"><Calendar size={14} /> {t("the_date")}</label>
+                  <label className="text-sm font-bold mb-1.5 flex items-center gap-1.5 text-foreground"><Calendar size={14} className="text-primary" /> {t("the_date")}</label>
                   <input type="date" value={form.date} min={new Date().toISOString().split("T")[0]}
                     onChange={(e) => setForm((f) => ({ ...f, date: e.target.value }))} className="input-base" />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold mb-1.5 flex items-center gap-1"><Clock size={14} /> {t("the_time")}</label>
+                  <label className="text-sm font-bold mb-1.5 flex items-center gap-1.5 text-foreground"><Clock size={14} className="text-primary" /> {t("the_time")}</label>
                   <input type="time" value={form.time} onChange={(e) => setForm((f) => ({ ...f, time: e.target.value }))} className="input-base" />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-bold mb-1.5">{t("notes_optional")}</label>
+                  <label className="block text-sm font-bold mb-1.5 text-foreground">{t("notes_optional")}</label>
                   <textarea value={form.notes} onChange={(e) => setForm((f) => ({ ...f, notes: e.target.value }))}
                     rows={2} className="input-base resize-none" />
                 </div>
 
                 <motion.button whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }} onClick={handleSubmit}
                   disabled={submitting || !form.date || !form.time}
-                  className="btn-primary w-full text-lg flex items-center justify-center gap-2 disabled:opacity-50">
+                  className="w-full text-base font-extrabold bg-primary text-primary-foreground px-6 py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 hover:bg-primary-dark hover:shadow-[0_8px_24px_hsl(14_91%_49%/0.4)] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:shadow-none">
                   {submitting ? <Loader2 size={18} className="animate-spin" /> : null}
                   {submitting ? t("sending") : (price ? t("proceed_to_payment") : t("confirm_booking_btn"))}
                 </motion.button>
