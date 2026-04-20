@@ -282,6 +282,20 @@
     border-color: hsl(14 91% 55% / 0.6);
     box-shadow: 0 0 0 3px hsl(14 91% 55% / 0.15);
   }
+  /* Make native date/time picker icons visible in dark mode */
+  .dark input[type="date"]::-webkit-calendar-picker-indicator,
+  .dark input[type="time"]::-webkit-calendar-picker-indicator,
+  .dark input[type="datetime-local"]::-webkit-calendar-picker-indicator,
+  .dark input[type="month"]::-webkit-calendar-picker-indicator,
+  .dark input[type="week"]::-webkit-calendar-picker-indicator {
+    filter: invert(1) brightness(1.5);
+    opacity: 0.85;
+    cursor: pointer;
+  }
+  .dark input[type="date"]::-webkit-calendar-picker-indicator:hover,
+  .dark input[type="time"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+  }
   .btn-primary {
     @apply bg-primary text-primary-foreground px-6 py-3 rounded-xl font-bold transition-all duration-200 hover:bg-primary-dark hover:shadow-[0_8px_24px_hsl(14_91%_49%/0.35)];
   }
