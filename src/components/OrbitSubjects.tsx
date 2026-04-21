@@ -155,11 +155,13 @@ const OrbitSubjects = () => {
                     marginTop: -orbit.radius,
                     willChange: "transform",
                   }}
-                  animate={reducedMotion ? undefined : { rotate: 360 }}
+                  initial={{ rotate: 0 }}
+                  animate={reducedMotion ? { rotate: 0 } : { rotate: 360 }}
                   transition={{
                     duration,
                     repeat: Infinity,
                     ease: "linear",
+                    repeatType: "loop",
                   }}
                 >
                   <div
@@ -228,11 +230,13 @@ const OrbitSubjects = () => {
                   marginTop: -orbit.radius,
                   willChange: "transform",
                 }}
-                animate={reducedMotion ? undefined : { rotate: orbit.reverse ? -360 : 360 }}
+                initial={{ rotate: 0 }}
+                animate={reducedMotion ? { rotate: 0 } : { rotate: orbit.reverse ? -360 : 360 }}
                 transition={{
                   duration: orbit.duration,
                   repeat: Infinity,
                   ease: "linear",
+                  repeatType: "loop",
                 }}
               >
                 {orbit.items.map((subj, i) => {
@@ -257,11 +261,13 @@ const OrbitSubjects = () => {
                       {/* Counter-rotate so cards stay upright */}
                       <motion.div
                         className="w-full h-full flex items-center justify-center"
-                        animate={reducedMotion ? undefined : { rotate: orbit.reverse ? 360 : -360 }}
+                        initial={{ rotate: 0 }}
+                        animate={reducedMotion ? { rotate: 0 } : { rotate: orbit.reverse ? 360 : -360 }}
                         transition={{
                           duration: orbit.duration,
                           repeat: Infinity,
                           ease: "linear",
+                          repeatType: "loop",
                         }}
                         style={{ willChange: "transform" }}
                       >
