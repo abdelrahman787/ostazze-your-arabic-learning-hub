@@ -190,19 +190,20 @@ const OrbitSubjects = () => {
               className="absolute z-20"
             >
               <div className="relative">
-                {/* Glow halo */}
+                {/* Glow halo (lighter blur for perf) */}
                 <div
-                  className="absolute inset-0 rounded-full blur-3xl"
+                  className="absolute inset-0 rounded-full blur-2xl"
                   style={{
                     background:
-                      "radial-gradient(circle, hsl(22 95% 60% / 0.6), transparent 70%)",
-                    transform: "scale(2)",
+                      "radial-gradient(circle, hsl(22 95% 60% / 0.5), transparent 70%)",
+                    transform: "scale(1.8)",
                   }}
                 />
                 <motion.div
-                  animate={{ y: [0, -10, 0], rotate: [0, 2, 0, -2, 0] }}
+                  animate={reducedMotion ? undefined : { y: [0, -10, 0] }}
                   transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
                   className="relative w-40 h-40 md:w-52 md:h-52 flex items-center justify-center"
+                  style={{ willChange: "transform" }}
                 >
                   <img
                     src={gradCap}
@@ -225,8 +226,9 @@ const OrbitSubjects = () => {
                   left: "50%",
                   marginLeft: -orbit.radius,
                   marginTop: -orbit.radius,
+                  willChange: "transform",
                 }}
-                animate={{ rotate: orbit.reverse ? -360 : 360 }}
+                animate={reducedMotion ? undefined : { rotate: orbit.reverse ? -360 : 360 }}
                 transition={{
                   duration: orbit.duration,
                   repeat: Infinity,
@@ -252,51 +254,41 @@ const OrbitSubjects = () => {
                         transform: `translate(${x}px, ${y}px)`,
                       }}
                     >
-                      {/* Counter-rotate Z so cards stay upright while orbiting */}
+                      {/* Counter-rotate so cards stay upright */}
                       <motion.div
                         className="w-full h-full flex items-center justify-center"
-                        animate={{ rotate: -360 }}
+                        animate={reducedMotion ? undefined : { rotate: orbit.reverse ? 360 : -360 }}
                         transition={{
                           duration: orbit.duration,
                           repeat: Infinity,
                           ease: "linear",
                         }}
+                        style={{ willChange: "transform" }}
                       >
-                        <motion.div
-                          initial={{ opacity: 0, scale: 0 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{
-                            delay: 0.3 + oIdx * 0.15 + i * 0.1,
-                            duration: 0.5,
-                            ease: "easeOut",
-                          }}
+                        <Link
+                          to="/subjects"
+                          className="group flex flex-col items-center gap-2"
+                          aria-label={t(subj.key)}
                         >
-                          <Link
-                            to="/subjects"
-                            className="group flex flex-col items-center gap-2"
-                            aria-label={t(subj.key)}
+                          <div
+                            className="w-[88px] h-[88px] rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
+                            style={{
+                              background:
+                                "linear-gradient(135deg, hsl(265 40% 25% / 0.85), hsl(280 40% 15% / 0.85))",
+                              border: "1px solid hsl(22 80% 60% / 0.35)",
+                              boxShadow:
+                                "0 8px 20px hsl(0 0% 0% / 0.45), inset 0 1px 0 hsl(0 0% 100% / 0.15)",
+                            }}
                           >
-                            <motion.div
-                              whileHover={{ scale: 1.15 }}
-                              className="w-[88px] h-[88px] rounded-full flex items-center justify-center backdrop-blur-md transition-all"
-                              style={{
-                                background:
-                                  "linear-gradient(135deg, hsl(265 40% 25% / 0.7), hsl(280 40% 15% / 0.7))",
-                                border: "1px solid hsl(22 80% 60% / 0.35)",
-                                boxShadow:
-                                  "0 8px 24px hsl(0 0% 0% / 0.5), inset 0 1px 0 hsl(0 0% 100% / 0.18), 0 0 28px hsl(22 90% 55% / 0.3)",
-                              }}
-                            >
-                              <Icon
-                                className="text-orange-300 group-hover:text-orange-200 transition-colors"
-                                size={32}
-                              />
-                            </motion.div>
-                            <span className="text-xs md:text-sm font-semibold text-white/90 group-hover:text-white whitespace-nowrap drop-shadow-md">
-                              {t(subj.key)}
-                            </span>
-                          </Link>
-                        </motion.div>
+                            <Icon
+                              className="text-orange-300 group-hover:text-orange-200 transition-colors"
+                              size={32}
+                            />
+                          </div>
+                          <span className="text-xs md:text-sm font-semibold text-white/90 group-hover:text-white whitespace-nowrap drop-shadow-md">
+                            {t(subj.key)}
+                          </span>
+                        </Link>
                       </motion.div>
                     </div>
                   );
