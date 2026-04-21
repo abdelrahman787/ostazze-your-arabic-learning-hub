@@ -31,6 +31,7 @@ const ORBITS = [
 const OrbitSubjects = () => {
   const { t } = useLanguage();
   const [scale, setScale] = useState(1);
+  const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
     const updateScale = () => {
@@ -42,7 +43,16 @@ const OrbitSubjects = () => {
     };
     updateScale();
     window.addEventListener("resize", updateScale);
-    return () => window.removeEventListener("resize", updateScale);
+
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReducedMotion(mq.matches);
+    const onChange = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
+    mq.addEventListener?.("change", onChange);
+
+    return () => {
+      window.removeEventListener("resize", updateScale);
+      mq.removeEventListener?.("change", onChange);
+    };
   }, []);
 
   // Build subject placements per orbit
@@ -68,25 +78,22 @@ const OrbitSubjects = () => {
         }}
       />
 
-      {/* Starfield */}
-      <div className="absolute inset-0 pointer-events-none opacity-60">
-        {Array.from({ length: 60 }).map((_, i) => {
+      {/* Starfield (static, lighter for performance) */}
+      <div className="absolute inset-0 pointer-events-none opacity-50">
+        {Array.from({ length: 24 }).map((_, i) => {
           const top = (i * 37) % 100;
           const left = (i * 53) % 100;
           const size = (i % 3) + 1;
-          const delay = (i % 8) * 0.4;
           return (
             <span
               key={i}
-              className="absolute rounded-full bg-white animate-pulse"
+              className="absolute rounded-full bg-white"
               style={{
                 top: `${top}%`,
                 left: `${left}%`,
                 width: `${size}px`,
                 height: `${size}px`,
-                opacity: 0.2 + (i % 5) * 0.12,
-                animationDelay: `${delay}s`,
-                animationDuration: `${3 + (i % 4)}s`,
+                opacity: 0.25 + (i % 5) * 0.1,
               }}
             />
           );
@@ -132,14 +139,12 @@ const OrbitSubjects = () => {
               />
             ))}
 
-            {/* Glowing dots traveling along each orbit */}
+            {/* Glowing dots traveling along each orbit (one per orbit for perf) */}
             {ORBITS.map((orbit, idx) => {
-              // 2 dots per orbit, opposite sides; each orbit slightly different speed for variety
-              const dotCount = 2;
               const duration = 14 + idx * 6;
-              return Array.from({ length: dotCount }).map((_, dIdx) => (
+              return (
                 <motion.div
-                  key={`dot-orbit-${idx}-${dIdx}`}
+                  key={`dot-orbit-${idx}`}
                   className="absolute"
                   style={{
                     width: orbit.radius * 2,
@@ -148,13 +153,13 @@ const OrbitSubjects = () => {
                     left: "50%",
                     marginLeft: -orbit.radius,
                     marginTop: -orbit.radius,
+                    willChange: "transform",
                   }}
-                  animate={{ rotate: 360 }}
+                  animate={reducedMotion ? undefined : { rotate: 360 }}
                   transition={{
                     duration,
                     repeat: Infinity,
                     ease: "linear",
-                    delay: dIdx * (duration / dotCount),
                   }}
                 >
                   <div
@@ -169,11 +174,11 @@ const OrbitSubjects = () => {
                       background:
                         "radial-gradient(circle, hsl(22 100% 70%) 0%, hsl(22 95% 55%) 50%, transparent 100%)",
                       boxShadow:
-                        "0 0 12px hsl(22 95% 60% / 0.9), 0 0 24px hsl(22 95% 55% / 0.6)",
+                        "0 0 10px hsl(22 95% 60% / 0.8)",
                     }}
                   />
                 </motion.div>
-              ));
+              );
             })}
 
             {/* Central 3D Logo */}
@@ -185,19 +190,20 @@ const OrbitSubjects = () => {
               className="absolute z-20"
             >
               <div className="relative">
-                {/* Glow halo */}
+                {/* Glow halo (lighter blur for perf) */}
                 <div
-                  className="absolute inset-0 rounded-full blur-3xl"
+                  className="absolute inset-0 rounded-full blur-2xl"
                   style={{
                     background:
-                      "radial-gradient(circle, hsl(22 95% 60% / 0.6), transparent 70%)",
-                    transform: "scale(2)",
+                      "radial-gradient(circle, hsl(22 95% 60% / 0.5), transparent 70%)",
+                    transform: "scale(1.8)",
                   }}
                 />
                 <motion.div
-                  animate={{ y: [0, -10, 0], rotate: [0, 2, 0, -2, 0] }}
+                  animate={reducedMotion ? undefined : { y: [0, -10, 0] }}
                   transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
                   className="relative w-40 h-40 md:w-52 md:h-52 flex items-center justify-center"
+                  style={{ willChange: "transform" }}
                 >
                   <img
                     src={gradCap}
@@ -220,8 +226,9 @@ const OrbitSubjects = () => {
                   left: "50%",
                   marginLeft: -orbit.radius,
                   marginTop: -orbit.radius,
+                  willChange: "transform",
                 }}
-                animate={{ rotate: orbit.reverse ? -360 : 360 }}
+                animate={reducedMotion ? undefined : { rotate: orbit.reverse ? -360 : 360 }}
                 transition={{
                   duration: orbit.duration,
                   repeat: Infinity,
@@ -247,51 +254,41 @@ const OrbitSubjects = () => {
                         transform: `translate(${x}px, ${y}px)`,
                       }}
                     >
-                      {/* Counter-rotate Z so cards stay upright while orbiting */}
+                      {/* Counter-rotate so cards stay upright */}
                       <motion.div
                         className="w-full h-full flex items-center justify-center"
-                        animate={{ rotate: -360 }}
+                        animate={reducedMotion ? undefined : { rotate: orbit.reverse ? 360 : -360 }}
                         transition={{
                           duration: orbit.duration,
                           repeat: Infinity,
                           ease: "linear",
                         }}
+                        style={{ willChange: "transform" }}
                       >
-                        <motion.div
-                          initial={{ opacity: 0, scale: 0 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{
-                            delay: 0.3 + oIdx * 0.15 + i * 0.1,
-                            duration: 0.5,
-                            ease: "easeOut",
-                          }}
+                        <Link
+                          to="/subjects"
+                          className="group flex flex-col items-center gap-2"
+                          aria-label={t(subj.key)}
                         >
-                          <Link
-                            to="/subjects"
-                            className="group flex flex-col items-center gap-2"
-                            aria-label={t(subj.key)}
+                          <div
+                            className="w-[88px] h-[88px] rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
+                            style={{
+                              background:
+                                "linear-gradient(135deg, hsl(265 40% 25% / 0.85), hsl(280 40% 15% / 0.85))",
+                              border: "1px solid hsl(22 80% 60% / 0.35)",
+                              boxShadow:
+                                "0 8px 20px hsl(0 0% 0% / 0.45), inset 0 1px 0 hsl(0 0% 100% / 0.15)",
+                            }}
                           >
-                            <motion.div
-                              whileHover={{ scale: 1.15 }}
-                              className="w-[88px] h-[88px] rounded-full flex items-center justify-center backdrop-blur-md transition-all"
-                              style={{
-                                background:
-                                  "linear-gradient(135deg, hsl(265 40% 25% / 0.7), hsl(280 40% 15% / 0.7))",
-                                border: "1px solid hsl(22 80% 60% / 0.35)",
-                                boxShadow:
-                                  "0 8px 24px hsl(0 0% 0% / 0.5), inset 0 1px 0 hsl(0 0% 100% / 0.18), 0 0 28px hsl(22 90% 55% / 0.3)",
-                              }}
-                            >
-                              <Icon
-                                className="text-orange-300 group-hover:text-orange-200 transition-colors"
-                                size={32}
-                              />
-                            </motion.div>
-                            <span className="text-xs md:text-sm font-semibold text-white/90 group-hover:text-white whitespace-nowrap drop-shadow-md">
-                              {t(subj.key)}
-                            </span>
-                          </Link>
-                        </motion.div>
+                            <Icon
+                              className="text-orange-300 group-hover:text-orange-200 transition-colors"
+                              size={32}
+                            />
+                          </div>
+                          <span className="text-xs md:text-sm font-semibold text-white/90 group-hover:text-white whitespace-nowrap drop-shadow-md">
+                            {t(subj.key)}
+                          </span>
+                        </Link>
                       </motion.div>
                     </div>
                   );
