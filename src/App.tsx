@@ -13,7 +13,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import AIChatWidget from "@/components/AIChatWidget";
-import WelcomeGuideModal from "@/components/WelcomeGuideModal";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import ScrollToTop from "@/components/ScrollToTop";
 import Index from "./pages/Index";
@@ -72,7 +71,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       {!hideFooter && <Footer />}
       <FloatingWhatsApp />
       <AIChatWidget />
-      <WelcomeGuideModal />
     </div>
   );
 };
