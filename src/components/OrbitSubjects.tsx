@@ -31,6 +31,7 @@ const ORBITS = [
 const OrbitSubjects = () => {
   const { t } = useLanguage();
   const [scale, setScale] = useState(1);
+  const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
     const updateScale = () => {
@@ -42,7 +43,16 @@ const OrbitSubjects = () => {
     };
     updateScale();
     window.addEventListener("resize", updateScale);
-    return () => window.removeEventListener("resize", updateScale);
+
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReducedMotion(mq.matches);
+    const onChange = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
+    mq.addEventListener?.("change", onChange);
+
+    return () => {
+      window.removeEventListener("resize", updateScale);
+      mq.removeEventListener?.("change", onChange);
+    };
   }, []);
 
   // Build subject placements per orbit
