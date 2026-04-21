@@ -139,14 +139,12 @@ const OrbitSubjects = () => {
               />
             ))}
 
-            {/* Glowing dots traveling along each orbit */}
+            {/* Glowing dots traveling along each orbit (one per orbit for perf) */}
             {ORBITS.map((orbit, idx) => {
-              // 2 dots per orbit, opposite sides; each orbit slightly different speed for variety
-              const dotCount = 2;
               const duration = 14 + idx * 6;
-              return Array.from({ length: dotCount }).map((_, dIdx) => (
+              return (
                 <motion.div
-                  key={`dot-orbit-${idx}-${dIdx}`}
+                  key={`dot-orbit-${idx}`}
                   className="absolute"
                   style={{
                     width: orbit.radius * 2,
@@ -155,13 +153,13 @@ const OrbitSubjects = () => {
                     left: "50%",
                     marginLeft: -orbit.radius,
                     marginTop: -orbit.radius,
+                    willChange: "transform",
                   }}
-                  animate={{ rotate: 360 }}
+                  animate={reducedMotion ? undefined : { rotate: 360 }}
                   transition={{
                     duration,
                     repeat: Infinity,
                     ease: "linear",
-                    delay: dIdx * (duration / dotCount),
                   }}
                 >
                   <div
@@ -176,11 +174,11 @@ const OrbitSubjects = () => {
                       background:
                         "radial-gradient(circle, hsl(22 100% 70%) 0%, hsl(22 95% 55%) 50%, transparent 100%)",
                       boxShadow:
-                        "0 0 12px hsl(22 95% 60% / 0.9), 0 0 24px hsl(22 95% 55% / 0.6)",
+                        "0 0 10px hsl(22 95% 60% / 0.8)",
                     }}
                   />
                 </motion.div>
-              ));
+              );
             })}
 
             {/* Central 3D Logo */}
