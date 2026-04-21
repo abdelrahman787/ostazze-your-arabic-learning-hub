@@ -192,8 +192,8 @@
     background:
       radial-gradient(ellipse 90% 60% at 50% 0%, hsl(14 91% 50% / 0.06) 0%, transparent 60%),
       linear-gradient(160deg, hsl(230 30% 13% / 0.88) 0%, hsl(230 35% 8% / 0.65) 100%);
-    backdrop-filter: blur(16px) saturate(160%);
-    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    backdrop-filter: blur(10px) saturate(130%);
+    -webkit-backdrop-filter: blur(10px) saturate(130%);
     border-color: hsl(30 30% 96% / 0.08);
     box-shadow:
       0 4px 20px hsl(230 35% 0% / 0.35),
