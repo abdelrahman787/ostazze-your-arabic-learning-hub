@@ -72,6 +72,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       {!hideFooter && <Footer />}
       <FloatingWhatsApp />
       <AIChatWidget />
+      <WelcomeGuideModal />
     </div>
   );
 };
