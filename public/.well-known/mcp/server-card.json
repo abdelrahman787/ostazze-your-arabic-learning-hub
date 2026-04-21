@@ -1,0 +1,18 @@
+{
+  "serverInfo": {
+    "name": "ostazze",
+    "version": "1.0.0",
+    "description": "OSTAZZE — Educational marketplace for live online tutoring sessions"
+  },
+  "transport": {
+    "type": "none",
+    "endpoint": null
+  },
+  "capabilities": {
+    "tools": [],
+    "resources": [],
+    "prompts": []
+  },
+  "homepage": "https://ostaze.com/",
+  "documentation": "https://ostaze.com/about"
+}

@@ -1,0 +1,13 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://ostaze.com/",
+      "service-doc": [
+        { "href": "https://ostaze.com/about", "type": "text/html" }
+      ],
+      "status": [
+        { "href": "https://ostaze.com/", "type": "text/html" }
+      ]
+    }
+  ]
+}
