@@ -78,25 +78,22 @@ const OrbitSubjects = () => {
         }}
       />
 
-      {/* Starfield */}
-      <div className="absolute inset-0 pointer-events-none opacity-60">
-        {Array.from({ length: 60 }).map((_, i) => {
+      {/* Starfield (static, lighter for performance) */}
+      <div className="absolute inset-0 pointer-events-none opacity-50">
+        {Array.from({ length: 24 }).map((_, i) => {
           const top = (i * 37) % 100;
           const left = (i * 53) % 100;
           const size = (i % 3) + 1;
-          const delay = (i % 8) * 0.4;
           return (
             <span
               key={i}
-              className="absolute rounded-full bg-white animate-pulse"
+              className="absolute rounded-full bg-white"
               style={{
                 top: `${top}%`,
                 left: `${left}%`,
                 width: `${size}px`,
                 height: `${size}px`,
-                opacity: 0.2 + (i % 5) * 0.12,
-                animationDelay: `${delay}s`,
-                animationDuration: `${3 + (i % 4)}s`,
+                opacity: 0.25 + (i % 5) * 0.1,
               }}
             />
           );
