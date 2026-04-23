@@ -186,8 +186,7 @@ const OrbitSubjects = () => {
             {/* Central 3D Logo */}
             <motion.div
               initial={{ scale: 0, rotate: -180 }}
-              whileInView={{ scale: 1, rotate: 0 }}
-              viewport={{ once: true }}
+              animate={{ scale: 1, rotate: 0 }}
               transition={{ type: "spring", stiffness: 80, damping: 14 }}
               className="absolute z-20"
             >
