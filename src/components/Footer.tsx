@@ -55,10 +55,10 @@ const Footer = () => {
             <h4 className="font-bold text-white mb-5 text-sm">{t("footer_quick_links")}</h4>
             <div className="flex flex-col gap-3 text-sm">
               {[
-                { label: t("nav_courses"), path: "/courses" },
                 { label: t("nav_subjects"), path: "/subjects" },
                 { label: t("nav_teachers"), path: "/teachers" },
                 { label: t("nav_universities"), path: "/universities" },
+                { label: t("nav_categories"), path: "/categories" },
               ].map((l) => (
                 <Link key={l.path} to={l.path} className="text-white/60 hover:text-primary transition-colors">{l.label}</Link>
               ))}
