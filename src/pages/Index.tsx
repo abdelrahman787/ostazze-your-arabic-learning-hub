@@ -14,7 +14,7 @@ import { supabase } from "@/integrations/supabase/client";
 import CountUpNumber from "@/components/CountUpNumber";
 import PageHelmet from "@/components/PageHelmet";
 import { Helmet } from "react-helmet-async";
-import hero3DCap from "@/assets/hero-3d-cap.png";
+import hero3DCap from "@/assets/hero-3d-cap.webp";
 import OrbitSubjects from "@/components/OrbitSubjects";
 
 const container = {
@@ -151,7 +151,7 @@ const HomePage = () => {
             {/* 3D hero element with glow */}
             <motion.div variants={item} className="relative my-8 sm:my-10">
               <div
-                className="absolute inset-0 rounded-full blur-3xl glow-pulse"
+                className="absolute inset-0 rounded-full hero-glow glow-pulse"
                 style={{ background: "radial-gradient(circle, hsl(14 91% 50% / 0.55), transparent 65%)" }}
                 aria-hidden="true"
               />
@@ -178,7 +178,7 @@ const HomePage = () => {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder={t("hero_search_placeholder")}
-                  className="w-full ps-11 pe-4 py-3.5 rounded-full border border-foreground/15 bg-card/40 backdrop-blur-md text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all min-h-[52px]"
+                  className="w-full ps-11 pe-4 py-3.5 rounded-full border border-foreground/15 bg-card/85 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all min-h-[52px]"
                 />
               </div>
               <button type="submit" className="btn-cta-light min-h-[52px] !px-7">

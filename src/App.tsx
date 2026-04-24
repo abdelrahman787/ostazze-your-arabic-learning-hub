@@ -3,6 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { Suspense, lazy } from "react";
 import PageTransition from "@/components/PageTransition";
 import { HelmetProvider } from "react-helmet-async";
 import { ThemeProvider } from "@/contexts/ThemeContext";
@@ -16,24 +17,25 @@ import AIChatWidget from "@/components/AIChatWidget";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import ScrollToTop from "@/components/ScrollToTop";
 import Index from "./pages/Index";
-import Teachers from "./pages/Teachers";
-import TeacherProfile from "./pages/TeacherProfile";
-import Subjects from "./pages/Subjects";
-import Universities from "./pages/Universities";
-import Categories from "./pages/Categories";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import ForgotPassword from "./pages/ForgotPassword";
-import SmartDashboard from "./pages/SmartDashboard";
-import Admin from "./pages/Admin";
-import LectureView from "./pages/LectureView";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import Terms from "./pages/Terms";
-import Privacy from "./pages/Privacy";
-import Refund from "./pages/Refund";
-import NotFound from "./pages/NotFound";
-import CheckoutReturn from "./pages/CheckoutReturn";
+
+const Teachers = lazy(() => import("./pages/Teachers"));
+const TeacherProfile = lazy(() => import("./pages/TeacherProfile"));
+const Subjects = lazy(() => import("./pages/Subjects"));
+const Universities = lazy(() => import("./pages/Universities"));
+const Categories = lazy(() => import("./pages/Categories"));
+const Login = lazy(() => import("./pages/Login"));
+const Register = lazy(() => import("./pages/Register"));
+const ForgotPassword = lazy(() => import("./pages/ForgotPassword"));
+const SmartDashboard = lazy(() => import("./pages/SmartDashboard"));
+const Admin = lazy(() => import("./pages/Admin"));
+const LectureView = lazy(() => import("./pages/LectureView"));
+const About = lazy(() => import("./pages/About"));
+const Contact = lazy(() => import("./pages/Contact"));
+const Terms = lazy(() => import("./pages/Terms"));
+const Privacy = lazy(() => import("./pages/Privacy"));
+const Refund = lazy(() => import("./pages/Refund"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const CheckoutReturn = lazy(() => import("./pages/CheckoutReturn"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -43,6 +45,8 @@ const queryClient = new QueryClient({
     },
   },
 });
+
+const RouteFallback = () => <div className="min-h-[40vh]" aria-hidden="true" />;
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
@@ -86,28 +90,30 @@ const App = () => (
                   <ScrollToTop />
                   <Layout>
                     <PageTransition>
-                      <Routes>
-                        <Route path="/" element={<Index />} />
-                        <Route path="/teachers" element={<Teachers />} />
-                        <Route path="/teachers/:id" element={<TeacherProfile />} />
-                        <Route path="/subjects" element={<Subjects />} />
-                        <Route path="/universities" element={<Universities />} />
-                        <Route path="/categories" element={<Categories />} />
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/register" element={<Register />} />
-                        <Route path="/forgot-password" element={<ForgotPassword />} />
-                        <Route path="/dashboard" element={<ProtectedRoute><SmartDashboard /></ProtectedRoute>} />
-                        <Route path="/dashboard/teacher" element={<ProtectedRoute><SmartDashboard /></ProtectedRoute>} />
-                        <Route path="/lectures/:id" element={<ProtectedRoute><LectureView /></ProtectedRoute>} />
-                        <Route path="/admin" element={<ProtectedRoute adminOnly><Admin /></ProtectedRoute>} />
-                        <Route path="/about" element={<About />} />
-                        <Route path="/contact" element={<Contact />} />
-                        <Route path="/terms" element={<Terms />} />
-                        <Route path="/privacy" element={<Privacy />} />
-                        <Route path="/refund" element={<Refund />} />
-                        <Route path="/checkout/return" element={<CheckoutReturn />} />
-                        <Route path="*" element={<NotFound />} />
-                      </Routes>
+                      <Suspense fallback={<RouteFallback />}>
+                        <Routes>
+                          <Route path="/" element={<Index />} />
+                          <Route path="/teachers" element={<Teachers />} />
+                          <Route path="/teachers/:id" element={<TeacherProfile />} />
+                          <Route path="/subjects" element={<Subjects />} />
+                          <Route path="/universities" element={<Universities />} />
+                          <Route path="/categories" element={<Categories />} />
+                          <Route path="/login" element={<Login />} />
+                          <Route path="/register" element={<Register />} />
+                          <Route path="/forgot-password" element={<ForgotPassword />} />
+                          <Route path="/dashboard" element={<ProtectedRoute><SmartDashboard /></ProtectedRoute>} />
+                          <Route path="/dashboard/teacher" element={<ProtectedRoute><SmartDashboard /></ProtectedRoute>} />
+                          <Route path="/lectures/:id" element={<ProtectedRoute><LectureView /></ProtectedRoute>} />
+                          <Route path="/admin" element={<ProtectedRoute adminOnly><Admin /></ProtectedRoute>} />
+                          <Route path="/about" element={<About />} />
+                          <Route path="/contact" element={<Contact />} />
+                          <Route path="/terms" element={<Terms />} />
+                          <Route path="/privacy" element={<Privacy />} />
+                          <Route path="/refund" element={<Refund />} />
+                          <Route path="/checkout/return" element={<CheckoutReturn />} />
+                          <Route path="*" element={<NotFound />} />
+                        </Routes>
+                      </Suspense>
                     </PageTransition>
                   </Layout>
                 </BrowserRouter>

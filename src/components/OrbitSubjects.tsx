@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useEffect, useState } from "react";
-import gradCap from "@/assets/hero-3d-cap.png";
+import gradCap from "@/assets/hero-3d-cap.webp";
 
 type Subject = {
   key: string;
@@ -24,8 +24,8 @@ const SUBJECTS: Subject[] = [
 // Distribute 5 subjects across 2 orbits with custom angle offsets for balanced look
 // Inner orbit: 2 icons placed left & right; Outer orbit: 3 icons in a balanced triangle
 const ORBITS = [
-  { radius: 200, duration: 40, count: 2, reverse: false, offset: 0 },    // inner: 0°, 180° (left & right)
-  { radius: 360, duration: 40, count: 3, reverse: false, offset: 90 },   // outer: 90°, 210°, 330° (triangle)
+  { radius: 200, duration: 52, count: 2, reverse: false, offset: 0 },
+  { radius: 360, duration: 64, count: 3, reverse: false, offset: 90 },
 ];
 
 const OrbitSubjects = () => {
@@ -193,7 +193,7 @@ const OrbitSubjects = () => {
               <div className="relative">
                 {/* Glow halo (lighter blur for perf) */}
                 <div
-                  className="absolute inset-0 rounded-full blur-2xl"
+                  className="absolute inset-0 rounded-full orbit-center-glow"
                   style={{
                     background:
                       "radial-gradient(circle, hsl(22 95% 60% / 0.5), transparent 70%)",
