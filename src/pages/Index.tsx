@@ -253,16 +253,16 @@ const HomePage = () => {
           <motion.div
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, margin: "-80px" }}
-            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.45, delayChildren: 0.2 } } }}
+            viewport={{ once: true, amount: 0.2 }}
+            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.6, delayChildren: 0.3 } } }}
             className="grid md:grid-cols-3 gap-10 md:gap-6 relative max-w-5xl mx-auto"
           >
             {/* Animated dashed connector */}
             <motion.div
-              initial={{ scaleX: 0, opacity: 0 }}
-              whileInView={{ scaleX: 1, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.5, delay: 0.6, ease: "easeOut" }}
+              variants={{
+                hidden: { scaleX: 0, opacity: 0 },
+                show: { scaleX: 1, opacity: 1, transition: { duration: 1.2, ease: "easeOut" } },
+              }}
               className="hidden md:block absolute top-12 inset-x-[16%] h-0.5 origin-left"
               style={{
                 background: "repeating-linear-gradient(90deg, hsl(14 91% 49% / 0.5) 0 8px, transparent 8px 16px)",
@@ -272,11 +272,8 @@ const HomePage = () => {
               <motion.div
                 key={step.key}
                 variants={{
-                  hidden: { opacity: 0, y: 60, scale: 0.6, rotate: -8 },
-                  show: {
-                    opacity: 1, y: 0, scale: 1, rotate: 0,
-                    transition: { type: "spring", stiffness: 180, damping: 14, mass: 0.8 },
-                  },
+                  hidden: {},
+                  show: { transition: { staggerChildren: 0.15, delayChildren: 0.05 } },
                 }}
                 className="text-center relative group"
               >
@@ -285,8 +282,14 @@ const HomePage = () => {
                   style={{ background: "radial-gradient(circle, hsl(14 91% 50% / 0.4), transparent 70%)" }}
                 />
                 <motion.div
+                  variants={{
+                    hidden: { opacity: 0, y: 60, scale: 0.6, rotate: -8 },
+                    show: {
+                      opacity: 1, y: 0, scale: 1, rotate: 0,
+                      transition: { type: "spring", stiffness: 180, damping: 14, mass: 0.8 },
+                    },
+                  }}
                   whileHover={{ y: -6, rotate: [0, -4, 4, 0] }}
-                  transition={{ rotate: { duration: 0.5 } }}
                   className="step-circle-glow w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-5 relative z-10"
                 >
                   <motion.div
@@ -297,10 +300,10 @@ const HomePage = () => {
                   </motion.div>
                   {/* Number badge with bounce-in */}
                   <motion.span
-                    initial={{ scale: 0, rotate: -180 }}
-                    whileInView={{ scale: 1, rotate: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ type: "spring", stiffness: 260, damping: 12, delay: 0.6 + i * 0.45 }}
+                    variants={{
+                      hidden: { scale: 0, rotate: -180 },
+                      show: { scale: 1, rotate: 0, transition: { type: "spring", stiffness: 260, damping: 12 } },
+                    }}
                     className="absolute -top-1 -end-1 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-sm font-black shadow-[0_4px_12px_hsl(14_91%_49%/0.5)]"
                   >
                     {step.key}
@@ -312,19 +315,19 @@ const HomePage = () => {
                   />
                 </motion.div>
                 <motion.h3
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.8 + i * 0.45, duration: 0.4 }}
+                  variants={{
+                    hidden: { opacity: 0, y: 10 },
+                    show: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+                  }}
                   className="font-bold text-lg mb-2"
                 >
                   {t(step.titleKey)}
                 </motion.h3>
                 <motion.p
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 1 + i * 0.45, duration: 0.5 }}
+                  variants={{
+                    hidden: { opacity: 0 },
+                    show: { opacity: 1, transition: { duration: 0.5 } },
+                  }}
                   className="text-muted-foreground text-sm leading-relaxed max-w-xs mx-auto"
                 >
                   {t(step.descKey)}
