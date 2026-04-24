@@ -17,11 +17,11 @@ const translations = {
   nav_logout: { ar: "تسجيل الخروج", en: "Logout" },
 
   // Hero
-  hero_badge: { ar: "منصة كورسات تعليمية رقمية", en: "Online Course Platform" },
-  hero_title_1: { ar: "كورسات تفتح", en: "Courses That Open" },
-  hero_title_2: { ar: "آفاقك التعليمية", en: "Your Future" },
-  hero_subtitle: { ar: "كورسات مسجلة وحية بوصول مدى الحياة في البرمجة، الرياضيات، العلوم، اللغات، والمزيد. تعلّم بسرعتك من أي مكان.", en: "Recorded and live courses with lifetime access in programming, math, sciences, languages, and more. Learn at your own pace from anywhere." },
-  hero_cta: { ar: "تصفّح الكورسات", en: "Browse Courses" },
+  hero_badge: { ar: "منصة تعليمية متميزة", en: "Premium Learning Platform" },
+  hero_title_1: { ar: "تعلّم مع", en: "Learn with the" },
+  hero_title_2: { ar: "أفضل المعلمين", en: "Best Teachers" },
+  hero_subtitle: { ar: "منصة تعليمية تربطك بأفضل المعلمين الخصوصيين لجلسات حية أونلاين", en: "An educational platform connecting you with the best private tutors for live online sessions" },
+  hero_cta: { ar: "ابدأ الآن", en: "Get Started" },
   hero_browse: { ar: "تصفح المعلمين", en: "Browse Teachers" },
   hero_stat_teachers: { ar: "معلم", en: "Teachers" },
   hero_stat_students: { ar: "طالب", en: "Students" },
