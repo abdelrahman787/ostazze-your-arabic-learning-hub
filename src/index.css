@@ -151,6 +151,20 @@
     pointer-events: none;
   }
 
+  .hero-glow {
+    filter: blur(28px);
+    opacity: 0.9;
+    will-change: transform, opacity;
+    transform: translateZ(0);
+  }
+
+  .orbit-center-glow {
+    filter: blur(18px);
+    opacity: 0.8;
+    will-change: transform, opacity;
+    transform: translateZ(0);
+  }
+
   /* Section background with subtle glow for dark mode */
   .glow-section {
     position: relative;
@@ -337,8 +351,8 @@
   /* Floating navbar pill (Card-Y style) */
   .nav-pill {
     background: hsl(var(--nav-bg));
-    backdrop-filter: blur(14px) saturate(140%);
-    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    backdrop-filter: blur(8px) saturate(120%);
+    -webkit-backdrop-filter: blur(8px) saturate(120%);
     border: 1px solid hsl(var(--nav-border));
     border-radius: 9999px;
     box-shadow: 0 8px 32px hsl(230 35% 6% / 0.2);
@@ -542,10 +556,12 @@
 .float-y {
   animation: float-y 5s ease-in-out infinite;
   will-change: transform;
+  transform: translateZ(0);
 }
 .glow-pulse {
   animation: glow-pulse 4s ease-in-out infinite;
   will-change: opacity, transform;
+  transform: translateZ(0);
 }
 
 /* Respect user preference — disable continuous animations only */
