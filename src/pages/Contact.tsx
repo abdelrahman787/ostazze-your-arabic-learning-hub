@@ -34,11 +34,6 @@ const Contact = () => {
     { icon: MessageCircle, label: t("contact_whatsapp_label"), value: t("contact_whatsapp_value"), href: `https://wa.me/966559003498?text=${encodeURIComponent(lang === "ar" ? "مرحباً، أريد الاستفسار عن خدمات أسطازي" : "Hello, I'd like to inquire about Ostaze services")}` },
   ];
 
-  return (
-    <div>
-      <PageHelmet title={t("contact_title")} description={t("contact_subtitle")} />
-      <PageHeader title={t("contact_title")} subtitle={t("contact_subtitle")} variant="teachers" />
-
   const contactFaq = [
     { q: t("faq_q_book"), a: t("faq_a_book") },
     { q: t("faq_q_pay"), a: t("faq_a_pay") },
