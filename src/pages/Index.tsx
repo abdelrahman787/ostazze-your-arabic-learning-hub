@@ -193,7 +193,36 @@ const HomePage = () => {
   };
 
   return (
-    <div>
+    <div className="relative">
+      {/* Ambient animated background — orange & violet glow drifts (GPU-friendly) */}
+      <div
+        aria-hidden="true"
+        className="fixed inset-0 -z-10 pointer-events-none overflow-hidden"
+      >
+        <div
+          className="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full blur-[140px] glow-drift-a"
+          style={{
+            background:
+              "radial-gradient(circle, hsl(var(--primary) / 0.5) 0%, transparent 70%)",
+          }}
+        />
+        <div
+          className="absolute top-1/3 -right-40 w-[700px] h-[700px] rounded-full blur-[160px] glow-drift-b"
+          style={{
+            background:
+              "radial-gradient(circle, hsl(270 70% 55% / 0.45) 0%, transparent 70%)",
+          }}
+        />
+        <div
+          className="absolute bottom-0 left-1/3 w-[500px] h-[500px] rounded-full blur-[140px] glow-drift-a"
+          style={{
+            animationDelay: "-7s",
+            background:
+              "radial-gradient(circle, hsl(14 91% 60% / 0.35) 0%, transparent 70%)",
+          }}
+        />
+      </div>
+
       <Helmet>
         <title>{lang === "ar" ? "OSTAZE - منصة كورسات تعليمية أونلاين | تعلم بسرعتك" : "Ostaze - Online Course Platform | Learn at Your Pace"}</title>
         <meta name="description" content={lang === "ar" ? "منصة OSTAZE للكورسات التعليمية الرقمية: كورسات مسجلة وحية في البرمجة والرياضيات والعلوم واللغات. وصول مدى الحياة، شهادات إتمام، وأسعار مدروسة." : "Ostaze online course platform: recorded and live courses in programming, math, sciences, and languages. Lifetime access, completion certificates, and fair pricing."} />

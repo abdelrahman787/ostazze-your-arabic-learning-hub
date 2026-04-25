@@ -601,3 +601,32 @@
   outline-offset: 2px;
   border-radius: 4px;
 }
+
+/* Ambient glow drift — GPU-friendly (transform + opacity only) */
+@keyframes glow-drift-a {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.18; }
+  50% { transform: translate3d(40px, -30px, 0) scale(1.15); opacity: 0.28; }
+}
+@keyframes glow-drift-b {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.18; }
+  50% { transform: translate3d(-50px, 25px, 0) scale(1.1); opacity: 0.3; }
+}
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.08); }
+}
+.glow-drift-a {
+  animation: glow-drift-a 14s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+.glow-drift-b {
+  animation: glow-drift-b 18s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+.glow-pulse-soft {
+  animation: glow-pulse 6s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+@media (prefers-reduced-motion: reduce) {
+  .glow-drift-a, .glow-drift-b, .glow-pulse-soft { animation: none; }
+}
