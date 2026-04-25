@@ -67,7 +67,7 @@ const StarRating = ({ value, onChange, readonly = false }: { value: number; onCh
 
 const TeacherProfile = () => {
   const { id } = useParams();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const { b, bArr } = useBilingual();
   const { user } = useAuth();
   const [teacher, setTeacher] = useState<TeacherFull | null>(null);
