@@ -340,7 +340,7 @@ const HomePage = () => {
             <motion.div
               variants={{
                 hidden: { scaleX: 0, opacity: 0 },
-                show: { scaleX: 1, opacity: 1, transition: { duration: 0.6, ease: "easeOut" } },
+                show: { scaleX: 1, opacity: 1, transition: { duration: 0.9, ease: "easeOut" } },
               }}
               className="hidden md:block absolute top-12 inset-x-[16%] h-0.5 origin-left"
               style={{
