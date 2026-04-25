@@ -243,6 +243,25 @@ const TeacherProfile = () => {
 
   return (
     <div>
+      <PageHelmet
+        title={displayName}
+        description={(displayBio || `${displayName} — ${displayUni || ""}`).slice(0, 160)}
+        ogType="profile"
+        jsonLd={[
+          personJsonLd({
+            id: teacher.user_id,
+            name: displayName,
+            jobTitle: lang === "ar" ? "معلم" : "Tutor",
+            university: displayUni,
+            subjects: displaySubjects,
+          }),
+          breadcrumbJsonLd([
+            { name: lang === "ar" ? "الرئيسية" : "Home", path: "/" },
+            { name: t("nav_teachers"), path: "/teachers" },
+            { name: displayName, path: `/teachers/${teacher.user_id}` },
+          ]),
+        ]}
+      />
       <section className="hero-gradient py-8">
         <div className="container">
           <p className="text-muted-foreground text-sm">
