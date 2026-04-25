@@ -7,7 +7,7 @@ import {
   Users, TrendingUp, Search, Calculator, Atom, FlaskConical, Languages,
   BookOpen, BarChart3, Code, Microscope, ArrowRight
 } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
@@ -32,6 +32,9 @@ const HomePage = () => {
   const [featuredTeachers, setFeaturedTeachers] = useState<TeacherData[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const statsRef = useRef<HTMLDivElement>(null);
+  const howStepsRef = useRef<HTMLDivElement>(null);
+  const howStepsInView = useInView(howStepsRef, { once: true, amount: 0.2 });
+  const [playHowSteps, setPlayHowSteps] = useState(false);
 
   useEffect(() => {
     const fetchTeachers = async () => {
@@ -66,6 +69,42 @@ const HomePage = () => {
     };
     fetchTeachers();
   }, []);
+
+  useEffect(() => {
+    if (howStepsInView) {
+      const frame = requestAnimationFrame(() => setPlayHowSteps(true));
+      return () => cancelAnimationFrame(frame);
+    }
+  }, [howStepsInView]);
+
+  useEffect(() => {
+    if (playHowSteps) return;
+
+    const checkHowStepsVisibility = () => {
+      const element = howStepsRef.current;
+      if (!element) return;
+
+      const rect = element.getBoundingClientRect();
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+      const isVisible = rect.top < viewportHeight * 0.82 && rect.bottom > viewportHeight * 0.18;
+
+      if (isVisible) setPlayHowSteps(true);
+    };
+
+    const frame = requestAnimationFrame(checkHowStepsVisibility);
+    const timeout = window.setTimeout(checkHowStepsVisibility, 700);
+    window.addEventListener("load", checkHowStepsVisibility, { once: true });
+    window.addEventListener("scroll", checkHowStepsVisibility, { passive: true });
+    window.addEventListener("resize", checkHowStepsVisibility);
+
+    return () => {
+      cancelAnimationFrame(frame);
+      window.clearTimeout(timeout);
+      window.removeEventListener("load", checkHowStepsVisibility);
+      window.removeEventListener("scroll", checkHowStepsVisibility);
+      window.removeEventListener("resize", checkHowStepsVisibility);
+    };
+  }, [playHowSteps]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -251,9 +290,9 @@ const HomePage = () => {
             <p className="text-muted-foreground">{t("how_subtitle")}</p>
           </motion.div>
           <motion.div
+            ref={howStepsRef}
             initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
+            animate={playHowSteps ? "show" : "hidden"}
             variants={{ hidden: {}, show: { transition: { staggerChildren: 0.6, delayChildren: 0.3 } } }}
             className="grid md:grid-cols-3 gap-10 md:gap-6 relative max-w-5xl mx-auto"
           >
