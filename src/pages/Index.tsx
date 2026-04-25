@@ -16,7 +16,6 @@ import PageHelmet from "@/components/PageHelmet";
 import { Helmet } from "react-helmet-async";
 import hero3DCap from "@/assets/hero-3d-cap.webp";
 import OrbitSubjects from "@/components/OrbitSubjects";
-import StatsBar from "@/components/StatsBar";
 import UniversityLogosStrip from "@/components/UniversityLogosStrip";
 
 const container = {
@@ -472,8 +471,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Stats + Universities trust strip */}
-      <StatsBar />
+      {/* Universities trust strip */}
       <UniversityLogosStrip />
 
       {/* Testimonials */}
