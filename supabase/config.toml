@@ -9,6 +9,9 @@ verify_jwt = false
 [functions.seed-test-users]
 verify_jwt = false
 
+[functions.seed-real-users]
+verify_jwt = false
+
 [functions.zoom-get-token]
 verify_jwt = false
 
