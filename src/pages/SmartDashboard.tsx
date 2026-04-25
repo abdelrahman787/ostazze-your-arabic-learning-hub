@@ -31,10 +31,10 @@ const SmartDashboard = () => {
   }
 
   if (user.role === "teacher") {
-    return <TeacherDashboard />;
+    return <><NoIndex title="Teacher Dashboard" /><TeacherDashboard /></>;
   }
 
-  return <Dashboard />;
+  return <><NoIndex title="Dashboard" /><Dashboard /></>;
 };
 
 export default SmartDashboard;

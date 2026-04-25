@@ -15,6 +15,7 @@ import { motion } from "framer-motion";
 import SalesHub from "@/components/SalesHub";
 import NotificationBell from "@/components/NotificationBell";
 import AdminCourses from "@/components/AdminCourses";
+import NoIndex from "@/components/NoIndex";
 
 // --- Types ---
 interface TeacherRow {
