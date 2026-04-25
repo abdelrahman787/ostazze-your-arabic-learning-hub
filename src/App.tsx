@@ -40,6 +40,7 @@ const Privacy = lazy(() => import("./pages/Privacy"));
 const Refund = lazy(() => import("./pages/Refund"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const CheckoutReturn = lazy(() => import("./pages/CheckoutReturn"));
+const FAQ = lazy(() => import("./pages/FAQ"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -119,6 +120,7 @@ const App = () => (
                           <Route path="/privacy" element={<Privacy />} />
                           <Route path="/refund" element={<Refund />} />
                           <Route path="/checkout/return" element={<CheckoutReturn />} />
+                          <Route path="/faq" element={<FAQ />} />
                           <Route path="*" element={<NotFound />} />
                         </Routes>
                       </Suspense>
