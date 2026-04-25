@@ -704,6 +704,9 @@ const translations = {
   home_verified_subtitle: { ar: "نخبة من المعلمين تم التحقق من بياناتهم وخبراتهم", en: "Hand-picked tutors with verified credentials" },
   home_verified_cta: { ar: "عرض كل المعلمين", en: "View all tutors" },
   home_logos_title: { ar: "نخدم طلاب من أهم الجامعات", en: "Serving students from leading universities" },
+  home_logos_badge: { ar: "موثوق من الأفضل", en: "Trusted by the best" },
+  home_logos_subtitle: { ar: "نخبة من جامعات الكويت وقطر يثقون بمنصتنا لتعليم أبنائهم", en: "Top universities in Kuwait and Qatar trust our platform" },
+  home_logos_cta: { ar: "استعرض كل الجامعات", en: "Browse all universities" },
   home_trust_badge: { ar: "موثّق من Ostaze", en: "Ostaze Verified" },
   home_view_profile: { ar: "عرض الملف", en: "View profile" },
 
