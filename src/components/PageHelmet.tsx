@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 interface PageHelmetProps {
   title: string;
   description?: string;
+  keywords?: string;
   canonical?: string;
   ogImage?: string;
   ogType?: "website" | "article" | "profile";
