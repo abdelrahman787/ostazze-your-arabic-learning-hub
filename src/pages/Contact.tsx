@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import PageHelmet from "@/components/PageHelmet";
 import PageHeader from "@/components/PageHeader";
-import { Mail, Phone, MapPin, Send, MessageCircle, Loader2 } from "lucide-react";
+import FaqAccordion from "@/components/FaqAccordion";
+import { Mail, Phone, MapPin, Send, MessageCircle, Loader2, Building2, Clock, Timer, ShieldCheck } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 
 const Contact = () => {
   const { t, lang } = useLanguage();
@@ -34,6 +37,29 @@ const Contact = () => {
   return (
     <div>
       <PageHelmet title={t("contact_title")} description={t("contact_subtitle")} />
+      <PageHeader title={t("contact_title")} subtitle={t("contact_subtitle")} variant="teachers" />
+
+  const contactFaq = [
+    { q: t("faq_q_book"), a: t("faq_a_book") },
+    { q: t("faq_q_pay"), a: t("faq_a_pay") },
+    { q: t("faq_q_refund"), a: t("faq_a_refund") },
+    { q: t("faq_q_cancel"), a: t("faq_a_cancel") },
+  ];
+
+  return (
+    <div>
+      <PageHelmet
+        title={t("contact_title")}
+        description={t("contact_subtitle")}
+        keywords={lang === "ar" ? "تواصل, دعم, ostaze, خدمة العملاء" : "contact, support, ostaze, customer service"}
+        jsonLd={[
+          faqJsonLd(contactFaq),
+          breadcrumbJsonLd([
+            { name: lang === "ar" ? "الرئيسية" : "Home", path: "/" },
+            { name: t("contact_title"), path: "/contact" },
+          ]),
+        ]}
+      />
       <PageHeader title={t("contact_title")} subtitle={t("contact_subtitle")} variant="teachers" />
 
       <div className="container py-12">
