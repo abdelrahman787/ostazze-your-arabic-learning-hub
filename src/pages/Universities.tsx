@@ -6,6 +6,9 @@ import {
   BookOpen, ChevronDown, ExternalLink, Layers, Search, Hash, ChevronRight
 } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
+import PageHelmet from "@/components/PageHelmet";
+import FaqAccordion from "@/components/FaqAccordion";
+import { breadcrumbJsonLd, collectionPageJsonLd, faqJsonLd } from "@/lib/seo";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { allUniversities, University, College } from "@/data/universitiesData";
 import { Input } from "@/components/ui/input";
@@ -212,8 +215,34 @@ const Universities = () => {
     );
   }, [selectedUni, searchQuery]);
 
+  const uniFaq = [
+    { q: lang === "ar" ? "كيف أجد معلماً من جامعتي؟" : "How do I find a tutor from my university?", a: lang === "ar" ? "اختر دولتك ثم جامعتك ثم تصفّح المواد للوصول إلى المعلمين المتخصصين بها." : "Pick your country, your university, then browse subjects to reach specialized tutors." },
+    { q: lang === "ar" ? "هل تغطون كل الجامعات؟" : "Do you cover all universities?", a: lang === "ar" ? "نضيف جامعات وكليات بشكل مستمر بناءً على الطلب — تواصل معنا لاقتراح إضافة جامعتك." : "We continuously add universities and colleges based on demand — contact us to suggest yours." },
+    { q: lang === "ar" ? "هل تختلف الأسعار حسب الجامعة؟" : "Do prices vary by university?", a: lang === "ar" ? "السعر يحدده كل معلم بشكل مستقل ويظهر بوضوح في ملفه قبل الحجز." : "Each tutor sets their own rate which is clearly displayed on their profile before booking." },
+  ];
+
   return (
     <div className="min-h-screen">
+      <PageHelmet
+        title={lang === "ar" ? "الجامعات في الكويت وقطر" : "Universities in Kuwait & Qatar"}
+        description={lang === "ar"
+          ? "تصفّح جامعات الكويت وقطر وكلياتها وموادها، وابحث عن معلم متخصص في تخصصك."
+          : "Browse universities in Kuwait and Qatar with their colleges and subjects, and find tutors specialized in your major."}
+        keywords={lang === "ar" ? "جامعات الكويت, جامعات قطر, كليات, معلمون" : "Kuwait universities, Qatar universities, colleges, tutors"}
+        jsonLd={[
+          collectionPageJsonLd({
+            name: lang === "ar" ? "جامعات الكويت وقطر" : "Universities of Kuwait & Qatar",
+            description: lang === "ar" ? "دليل الجامعات والكليات والمواد" : "Directory of universities, colleges and subjects",
+            path: "/universities",
+            lang,
+          }),
+          breadcrumbJsonLd([
+            { name: lang === "ar" ? "الرئيسية" : "Home", path: "/" },
+            { name: lang === "ar" ? "الجامعات" : "Universities", path: "/universities" },
+          ]),
+          faqJsonLd(uniFaq),
+        ]}
+      />
       {/* Header */}
       <PageHeader title={t("universities_title")} subtitle={t("universities_subtitle")} variant="university">
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-bold mb-4">
