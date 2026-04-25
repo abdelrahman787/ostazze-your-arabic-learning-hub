@@ -333,14 +333,14 @@ const HomePage = () => {
             ref={howStepsRef}
             initial="hidden"
             animate={playHowSteps ? "show" : "hidden"}
-            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.6, delayChildren: 0.3 } } }}
+            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.18, delayChildren: 0.05 } } }}
             className="grid md:grid-cols-3 gap-10 md:gap-6 relative max-w-5xl mx-auto"
           >
             {/* Animated dashed connector */}
             <motion.div
               variants={{
                 hidden: { scaleX: 0, opacity: 0 },
-                show: { scaleX: 1, opacity: 1, transition: { duration: 1.2, ease: "easeOut" } },
+                show: { scaleX: 1, opacity: 1, transition: { duration: 0.6, ease: "easeOut" } },
               }}
               className="hidden md:block absolute top-12 inset-x-[16%] h-0.5 origin-left"
               style={{
@@ -352,7 +352,7 @@ const HomePage = () => {
                 key={step.key}
                 variants={{
                   hidden: {},
-                  show: { transition: { staggerChildren: 0.15, delayChildren: 0.05 } },
+                  show: { transition: { staggerChildren: 0.08, delayChildren: 0.02 } },
                 }}
                 className="text-center relative group"
               >
@@ -362,10 +362,10 @@ const HomePage = () => {
                 />
                 <motion.div
                   variants={{
-                    hidden: { opacity: 0, y: 60, scale: 0.6, rotate: -8 },
+                    hidden: { opacity: 0, y: 30, scale: 0.7, rotate: -6 },
                     show: {
                       opacity: 1, y: 0, scale: 1, rotate: 0,
-                      transition: { type: "spring", stiffness: 180, damping: 14, mass: 0.8 },
+                      transition: { type: "spring", stiffness: 260, damping: 18, mass: 0.6 },
                     },
                   }}
                   whileHover={{ y: -6, rotate: [0, -4, 4, 0] }}
