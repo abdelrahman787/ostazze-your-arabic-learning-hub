@@ -1,46 +1,16 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { GraduationCap, Sparkles } from "lucide-react";
+import { GraduationCap, ShieldCheck, ArrowLeft } from "lucide-react";
 import { allUniversities } from "@/data/universitiesData";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-const palette = [
-  {
-    bg: "from-orange-500/15 via-orange-500/5 to-transparent",
-    ring: "hover:ring-orange-500/40 hover:shadow-orange-500/20",
-    badge: "bg-orange-500/15 text-orange-400 border-orange-500/30",
-    glow: "bg-orange-500/20",
-  },
-  {
-    bg: "from-blue-500/15 via-blue-500/5 to-transparent",
-    ring: "hover:ring-blue-500/40 hover:shadow-blue-500/20",
-    badge: "bg-blue-500/15 text-blue-400 border-blue-500/30",
-    glow: "bg-blue-500/20",
-  },
-  {
-    bg: "from-emerald-500/15 via-emerald-500/5 to-transparent",
-    ring: "hover:ring-emerald-500/40 hover:shadow-emerald-500/20",
-    badge: "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
-    glow: "bg-emerald-500/20",
-  },
-  {
-    bg: "from-purple-500/15 via-purple-500/5 to-transparent",
-    ring: "hover:ring-purple-500/40 hover:shadow-purple-500/20",
-    badge: "bg-purple-500/15 text-purple-400 border-purple-500/30",
-    glow: "bg-purple-500/20",
-  },
-  {
-    bg: "from-amber-500/15 via-amber-500/5 to-transparent",
-    ring: "hover:ring-amber-500/40 hover:shadow-amber-500/20",
-    badge: "bg-amber-500/15 text-amber-400 border-amber-500/30",
-    glow: "bg-amber-500/20",
-  },
-  {
-    bg: "from-rose-500/15 via-rose-500/5 to-transparent",
-    ring: "hover:ring-rose-500/40 hover:shadow-rose-500/20",
-    badge: "bg-rose-500/15 text-rose-400 border-rose-500/30",
-    glow: "bg-rose-500/20",
-  },
+const accents = [
+  { dot: "bg-orange-400", text: "text-orange-300", glow: "shadow-orange-500/10" },
+  { dot: "bg-sky-400", text: "text-sky-300", glow: "shadow-sky-500/10" },
+  { dot: "bg-emerald-400", text: "text-emerald-300", glow: "shadow-emerald-500/10" },
+  { dot: "bg-violet-400", text: "text-violet-300", glow: "shadow-violet-500/10" },
+  { dot: "bg-amber-400", text: "text-amber-300", glow: "shadow-amber-500/10" },
+  { dot: "bg-rose-400", text: "text-rose-300", glow: "shadow-rose-500/10" },
 ];
 
 const initials = (name: string) =>
@@ -57,86 +27,125 @@ const UniversityLogosStrip = () => {
   const list = allUniversities.slice(0, 12);
 
   return (
-    <section className="container py-10 md:py-12 relative">
-      {/* Ambient background glow */}
-      <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[240px] bg-primary/5 blur-3xl rounded-full" />
+    <section className="relative py-16 md:py-20 overflow-hidden">
+      {/* Editorial backdrop */}
+      <div className="absolute inset-0 -z-10 pointer-events-none">
+        <div
+          className="absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(to bottom, hsl(var(--foreground)) 1px, transparent 1px)",
+            backgroundSize: "48px 48px",
+            maskImage:
+              "radial-gradient(ellipse at center, black 30%, transparent 75%)",
+            WebkitMaskImage:
+              "radial-gradient(ellipse at center, black 30%, transparent 75%)",
+          }}
+        />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[300px] bg-primary/[0.06] blur-3xl rounded-full" />
       </div>
 
-      {/* Header */}
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="text-center mb-7"
-      >
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[11px] font-bold mb-3">
-          <Sparkles className="w-3 h-3" />
-          <span>{t("home_logos_badge")}</span>
-        </div>
-        <h3 className="text-xl md:text-2xl font-extrabold mb-1.5 bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
-          {t("home_logos_title")}
-        </h3>
-        <p className="text-xs md:text-sm text-muted-foreground max-w-md mx-auto">
-          {t("home_logos_subtitle")}
-        </p>
-      </motion.div>
-
-      {/* Logos grid — tighter, more balanced */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2.5 md:gap-3 max-w-6xl mx-auto">
-        {list.map((u, i) => {
-          const color = palette[i % palette.length];
-          const name = lang === "ar" ? u.name_ar : u.name_en;
-          return (
-            <motion.div
-              key={u.id}
-              initial={{ opacity: 0, y: 16, scale: 0.94 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: i * 0.03, duration: 0.35, ease: "easeOut" }}
-              whileHover={{ y: -3 }}
-            >
-              <Link
-                to={`/teachers?university=${encodeURIComponent(name)}`}
-                title={name}
-                className={`group relative flex items-center gap-2.5 rounded-xl bg-gradient-to-br ${color.bg} border border-border/50 backdrop-blur-sm px-3 py-2.5 ring-1 ring-transparent ${color.ring} hover:shadow-lg transition-all duration-300 overflow-hidden h-full min-h-[58px]`}
-              >
-                {/* Hover glow */}
-                <div className={`absolute -top-6 -right-6 w-16 h-16 ${color.glow} rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-
-                {/* Badge */}
-                <div className={`relative shrink-0 w-9 h-9 rounded-lg ${color.badge} border flex items-center justify-center font-extrabold text-[11px] shadow-inner`}>
-                  <GraduationCap className="absolute inset-0 m-auto w-3.5 h-3.5 opacity-20" />
-                  <span className="relative">{initials(name)}</span>
-                </div>
-
-                {/* Name */}
-                <span className="relative text-[10.5px] md:text-[11px] font-bold leading-tight line-clamp-2 text-foreground/90 group-hover:text-foreground transition-colors flex-1">
-                  {name}
-                </span>
-              </Link>
-            </motion.div>
-          );
-        })}
-      </div>
-
-      {/* Footer link */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.3 }}
-        className="text-center mt-6"
-      >
-        <Link
-          to="/universities"
-          className="inline-flex items-center gap-1.5 text-xs md:text-sm font-bold text-primary hover:text-primary/80 transition-colors group"
+      <div className="container max-w-6xl">
+        {/* Editorial header */}
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-10 md:mb-12"
         >
-          <span>{t("home_logos_cta")}</span>
-          <span className="group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform">←</span>
-        </Link>
-      </motion.div>
+          <div className="flex items-center justify-center gap-3 mb-5">
+            <span className="h-px w-10 bg-border" />
+            <div className="inline-flex items-center gap-1.5 text-[10px] font-bold tracking-[0.2em] uppercase text-primary">
+              <ShieldCheck className="w-3 h-3" />
+              <span>{t("home_logos_badge")}</span>
+            </div>
+            <span className="h-px w-10 bg-border" />
+          </div>
+
+          <h3 className="text-2xl md:text-[28px] font-extrabold mb-2 tracking-tight">
+            {t("home_logos_title")}
+          </h3>
+          <p className="text-sm text-muted-foreground max-w-md mx-auto leading-relaxed">
+            {t("home_logos_subtitle")}
+          </p>
+        </motion.div>
+
+        {/* Premium card-grid with hairline dividers */}
+        <div className="relative rounded-2xl border border-border/60 bg-card/30 backdrop-blur-sm overflow-hidden shadow-[0_8px_40px_-12px_hsl(var(--background)/0.8)]">
+          {/* Subtle inner glow */}
+          <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-foreground/[0.02] to-transparent" />
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 divide-x divide-y divide-border/50 [&>*]:border-border/50">
+            {list.map((u, i) => {
+              const accent = accents[i % accents.length];
+              const name = lang === "ar" ? u.name_ar : u.name_en;
+              return (
+                <motion.div
+                  key={u.id}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ delay: i * 0.025, duration: 0.4 }}
+                >
+                  <Link
+                    to={`/teachers?university=${encodeURIComponent(name)}`}
+                    title={name}
+                    className="group relative flex items-center gap-3 px-4 py-4 h-full transition-all duration-300 hover:bg-foreground/[0.03]"
+                  >
+                    {/* Top accent line on hover */}
+                    <span
+                      className={`absolute top-0 left-0 right-0 h-[2px] ${accent.dot} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+                    />
+
+                    {/* Monogram */}
+                    <div className="relative shrink-0">
+                      <div className="w-11 h-11 rounded-lg bg-background border border-border/80 flex items-center justify-center font-black text-[12px] tracking-tight text-foreground shadow-sm group-hover:shadow-md group-hover:-translate-y-0.5 transition-all duration-300">
+                        <GraduationCap className="absolute inset-0 m-auto w-4 h-4 text-foreground/[0.06]" />
+                        <span className={`relative ${accent.text}`}>
+                          {initials(name)}
+                        </span>
+                      </div>
+                      {/* Status dot */}
+                      <span className={`absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full ${accent.dot} ring-2 ring-card`} />
+                    </div>
+
+                    {/* Name + meta */}
+                    <div className="flex-1 min-w-0">
+                      <div className="text-[11.5px] font-bold leading-tight line-clamp-2 text-foreground/90 group-hover:text-foreground transition-colors">
+                        {name}
+                      </div>
+                      <div className="text-[9.5px] uppercase tracking-wider text-muted-foreground/60 mt-1 font-semibold">
+                        {String(i + 1).padStart(2, "0")}
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Footer meta — magazine style */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className="flex items-center justify-between mt-6 px-1"
+        >
+          <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground/70 font-semibold">
+            {lang === "ar" ? "الكويت · قطر" : "Kuwait · Qatar"}
+          </div>
+          <Link
+            to="/universities"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-foreground hover:text-primary transition-colors group"
+          >
+            <span>{t("home_logos_cta")}</span>
+            <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 rtl:group-hover:translate-x-1 rtl:rotate-180 transition-transform" />
+          </Link>
+        </motion.div>
+      </div>
     </section>
   );
 };
