@@ -653,6 +653,71 @@ const translations = {
   contact_trust_sla_label: { ar: "وقت الاستجابة", en: "Response Time" },
   contact_trust_sla_value: { ar: "نرد على جميع الرسائل خلال 24 ساعة عمل", en: "We respond to all messages within 24 business hours" },
   contact_trust_quick_help: { ar: "روابط مساعدة سريعة", en: "Quick Help Links" },
+
+  // ===== FAQ =====
+  faq_title: { ar: "الأسئلة الشائعة", en: "Frequently Asked Questions" },
+  faq_subtitle: { ar: "إجابات سريعة عن الحجز، الدفع، الاسترداد، والجلسات المباشرة", en: "Quick answers about booking, payments, refunds, and live sessions" },
+  faq_q_book: { ar: "كيف أحجز جلسة مع معلم؟", en: "How do I book a session with a tutor?" },
+  faq_a_book: { ar: "تصفّح المعلمين، اختر المعلم المناسب، حدّد الموعد والمدة من ملفه ثم أكمل الدفع. سيصلك تأكيد الجلسة فوراً عبر البريد ولوحة التحكم.", en: "Browse tutors, pick the one you like, choose a slot and duration on their profile, then pay. You'll get immediate confirmation by email and in your dashboard." },
+  faq_q_pay: { ar: "ما طرق الدفع المتاحة؟", en: "What payment methods are available?" },
+  faq_a_pay: { ar: "ندعم بطاقات Mada وVisa وMastercard عبر بوابة دفع آمنة (Stripe). يتم تشفير بيانات البطاقة بالكامل ولا تُخزَّن لدينا.", en: "We support Mada, Visa, and Mastercard through a secure gateway (Stripe). Card data is fully encrypted and never stored on our servers." },
+  faq_q_refund: { ar: "ما سياسة الاسترداد؟", en: "What is the refund policy?" },
+  faq_a_refund: { ar: "يمكنك طلب استرداد كامل خلال 14 يوماً من الشراء بشرط عدم استهلاك أكثر من 25% من المحتوى أو حضور أكثر من جلسة مباشرة واحدة. للتفاصيل راجع صفحة الاسترداد.", en: "You may request a full refund within 14 days of purchase, provided you haven't consumed more than 25% of content or attended more than one live session. See our refund page for details." },
+  faq_q_cancel: { ar: "كيف ألغي أو أعيد جدولة جلسة؟", en: "How do I cancel or reschedule a session?" },
+  faq_a_cancel: { ar: "يمكنك الإلغاء أو إعادة الجدولة قبل 12 ساعة من موعد الجلسة من لوحة التحكم > دروسي بدون أي رسوم.", en: "You can cancel or reschedule up to 12 hours before the session from Dashboard > My Lessons at no cost." },
+  faq_q_live: { ar: "كيف تتم الجلسات المباشرة؟", en: "How do live sessions work?" },
+  faq_a_live: { ar: "تُعقد الجلسات عبر رابط فيديو آمن (Zoom/Meet) يصل إليك قبل الموعد بساعة. يكفي متصفح حديث ومايك وكاميرا يعملان.", en: "Live sessions run on a secure video link (Zoom/Meet) sent an hour before the session. You only need a modern browser, working mic and camera." },
+  faq_q_tech: { ar: "ما المتطلبات التقنية؟", en: "What are the technical requirements?" },
+  faq_a_tech: { ar: "اتصال إنترنت 5 ميجا فأعلى، متصفح حديث (Chrome/Edge/Safari)، مايك وكاميرا، وسماعة لتجربة أوضح.", en: "5 Mbps+ internet, a modern browser (Chrome/Edge/Safari), mic and camera, and headphones for clearer audio." },
+  faq_q_become_tutor: { ar: "كيف أصبح معلماً على المنصة؟", en: "How do I become a tutor on Ostaze?" },
+  faq_a_become_tutor: { ar: "سجّل حساب معلم وأكمل ملفك (الجامعة، المواد، السعر، السيرة الذاتية). سيراجع فريق التحقق ملفك خلال 48 ساعة عمل قبل التفعيل.", en: "Register as a tutor and complete your profile (university, subjects, price, bio). Our verification team reviews within 48 business hours before activation." },
+  faq_more: { ar: "هل لديك سؤال آخر؟", en: "Have another question?" },
+  faq_contact_cta: { ar: "تواصل معنا", en: "Contact us" },
+
+  // ===== Footer link =====
+  footer_faq: { ar: "الأسئلة الشائعة", en: "FAQ" },
+
+  // ===== Refund note =====
+  refund_note_title: { ar: "ضمان استرداد 14 يوماً", en: "14-Day Refund Guarantee" },
+  refund_note_body: { ar: "استرداد كامل خلال 14 يوماً وفق الشروط.", en: "Full refund within 14 days under our terms." },
+  refund_note_link: { ar: "تفاصيل سياسة الاسترداد", en: "View refund policy" },
+  checkout_terms_agree: { ar: "بإتمام الدفع فأنت توافق على", en: "By completing payment you agree to our" },
+  checkout_terms_link: { ar: "الشروط والأحكام", en: "Terms" },
+  checkout_refund_link: { ar: "سياسة الاسترداد", en: "Refund Policy" },
+
+  // ===== Password checklist =====
+  pwd_req_title: { ar: "متطلبات كلمة المرور", en: "Password requirements" },
+  pwd_req_len: { ar: "8 أحرف على الأقل", en: "At least 8 characters" },
+  pwd_req_upper: { ar: "حرف كبير واحد على الأقل (A-Z)", en: "At least one uppercase letter (A-Z)" },
+  pwd_req_num: { ar: "رقم واحد على الأقل (0-9)", en: "At least one number (0-9)" },
+  pwd_req_sym: { ar: "رمز خاص واحد على الأقل (!@#$...)", en: "At least one special character (!@#$...)" },
+  login_security_note: { ar: "حماية تلقائية ضد محاولات الدخول المتكررة، وجلسة مشفرة بـ JWT.", en: "Automatic protection against repeated login attempts; sessions are JWT-secured." },
+
+  // ===== Stats bar =====
+  stats_tutors: { ar: "معلم موثّق", en: "Verified tutors" },
+  stats_subjects: { ar: "مادة دراسية", en: "Subjects" },
+  stats_sessions: { ar: "جلسة منعقدة", en: "Sessions held" },
+  stats_universities: { ar: "جامعة مدعومة", en: "Universities supported" },
+
+  // ===== Verified strip & home extras =====
+  home_verified_title: { ar: "معلمون موثّقون", en: "Verified Tutors" },
+  home_verified_subtitle: { ar: "نخبة من المعلمين تم التحقق من بياناتهم وخبراتهم", en: "Hand-picked tutors with verified credentials" },
+  home_verified_cta: { ar: "عرض كل المعلمين", en: "View all tutors" },
+  home_logos_title: { ar: "نخدم طلاب من أهم الجامعات", en: "Serving students from leading universities" },
+  home_trust_badge: { ar: "موثّق من Ostaze", en: "Ostaze Verified" },
+  home_view_profile: { ar: "عرض الملف", en: "View profile" },
+
+  // ===== Universities intro =====
+  uni_intro_title: { ar: "جامعات الكويت وقطر", en: "Universities of Kuwait & Qatar" },
+  uni_intro_p1: { ar: "نوفّر تغطية شاملة لأبرز الجامعات في الكويت وقطر مع كليات ومواد محدّثة، لمساعدتك في إيجاد معلم متخصص في تخصصك بدقّة.", en: "Comprehensive coverage of leading universities across Kuwait and Qatar with up-to-date colleges and subjects, helping you find a tutor specialized in your exact major." },
+  uni_intro_p2: { ar: "استكشف الجامعات حسب الدولة، تصفّح كلياتها، ثم انتقل مباشرة إلى المواد والمعلمين المتاحين.", en: "Explore universities by country, browse their colleges, then jump directly to available subjects and tutors." },
+  uni_colleges_count: { ar: "كلية", en: "colleges" },
+  uni_view_subjects: { ar: "تصفّح المواد", en: "Browse subjects" },
+
+  // ===== Subjects/Categories intro =====
+  subjects_intro: { ar: "اختر مادتك الدراسية لتصل مباشرة لمعلمين متخصصين بأسعار وتقييمات واضحة.", en: "Pick your subject and instantly reach specialized tutors with transparent pricing and reviews." },
+  categories_intro: { ar: "تصفّح التصنيفات الرئيسية للوصول السريع إلى المواد والمعلمين.", en: "Browse top categories for quick access to subjects and tutors." },
+  related_links: { ar: "روابط ذات صلة", en: "Related links" },
 } as const;
 
 type TranslationKey = keyof typeof translations;
