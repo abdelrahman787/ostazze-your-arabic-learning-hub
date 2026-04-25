@@ -333,7 +333,7 @@ const HomePage = () => {
             ref={howStepsRef}
             initial="hidden"
             animate={playHowSteps ? "show" : "hidden"}
-            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.18, delayChildren: 0.05 } } }}
+            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.32, delayChildren: 0.1 } } }}
             className="grid md:grid-cols-3 gap-10 md:gap-6 relative max-w-5xl mx-auto"
           >
             {/* Animated dashed connector */}
