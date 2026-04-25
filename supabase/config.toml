@@ -8,3 +8,9 @@ verify_jwt = false
 
 [functions.seed-test-users]
 verify_jwt = false
+
+[functions.zoom-get-token]
+verify_jwt = false
+
+[functions.zoom-create-meeting]
+verify_jwt = false
