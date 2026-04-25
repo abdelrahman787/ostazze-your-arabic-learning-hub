@@ -60,8 +60,9 @@ const UniversityCard = ({
 
         {/* Ambient glow */}
         <div
-          className="absolute -top-10 -right-10 w-32 h-32 rounded-full blur-2xl opacity-40 group-hover:opacity-70 transition-opacity duration-500"
+          className="absolute -top-10 -right-10 w-32 h-32 rounded-full blur-2xl opacity-40 group-hover:opacity-70 transition-opacity duration-500 glow-pulse-soft"
           style={{
+            animationDelay: `${(index % 6) * -1.2}s`,
             background:
               index % 2 === 0
                 ? "radial-gradient(circle, hsl(var(--primary) / 0.5) 0%, transparent 70%)"
