@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import TeacherCard from "@/components/TeacherCard";
 import type { TeacherData } from "@/components/TeacherCard";
 import { Search, SlidersHorizontal, UserX, RefreshCw } from "lucide-react";
@@ -28,8 +29,10 @@ const TeacherCardSkeleton = () => (
 
 const Teachers = () => {
   const { t, lang } = useLanguage();
-  const [search, setSearch] = useState("");
-  const [showFilters, setShowFilters] = useState(false);
+  const [searchParams] = useSearchParams();
+  const initialSubject = searchParams.get("subject") || "";
+  const [search, setSearch] = useState(initialSubject);
+  const [showFilters, setShowFilters] = useState(!!initialSubject);
   const [sortBy, setSortBy] = useState("");
   const [filterUniversity, setFilterUniversity] = useState("");
   const [filterSubject, setFilterSubject] = useState("");

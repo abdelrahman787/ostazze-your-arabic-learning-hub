@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   GraduationCap, Building2, ChevronLeft, Globe, Calendar,
-  BookOpen, ChevronDown, ExternalLink, Layers, Search, Hash, ChevronRight
+  BookOpen, ChevronDown, ExternalLink, Layers, Search, Hash, ChevronRight, CalendarPlus
 } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import PageHelmet from "@/components/PageHelmet";
@@ -98,14 +98,27 @@ const DepartmentItem = ({ dept, lang, index }: { dept: College["departments"][0]
             className="overflow-hidden"
           >
             <div className="ms-11 me-3 mb-3 grid grid-cols-1 sm:grid-cols-2 gap-1">
-              {dept.courses.map((course) => (
-                <div key={course.code} className="flex items-center gap-2 py-1.5 px-2.5 rounded-md bg-primary/5 dark:bg-primary/10 border border-primary/10 dark:border-primary/20 text-xs">
-                  <Hash size={10} className="text-primary shrink-0" />
-                  <span className="font-mono text-primary font-bold shrink-0">{course.code}</span>
-                  <span className="text-foreground/80">{lang === "ar" ? course.name_ar : course.name_en}</span>
-                  <span className="text-muted-foreground shrink-0 ms-auto text-[0.6rem]">{course.credits}h</span>
-                </div>
-              ))}
+              {dept.courses.map((course) => {
+                const courseName = lang === "ar" ? course.name_ar : course.name_en;
+                const requestLabel = lang === "ar" ? "طلب حصة" : "Request a session";
+                return (
+                  <div key={course.code} className="flex items-center gap-2 py-1.5 px-2.5 rounded-md bg-primary/5 dark:bg-primary/10 border border-primary/10 dark:border-primary/20 text-xs">
+                    <Hash size={10} className="text-primary shrink-0" />
+                    <span className="font-mono text-primary font-bold shrink-0">{course.code}</span>
+                    <span className="text-foreground/80 truncate">{courseName}</span>
+                    <span className="text-muted-foreground shrink-0 ms-auto text-[0.6rem]">{course.credits}h</span>
+                    <Link
+                      to={`/teachers?subject=${encodeURIComponent(courseName)}`}
+                      title={requestLabel}
+                      aria-label={`${requestLabel}: ${courseName}`}
+                      onClick={(e) => e.stopPropagation()}
+                      className="shrink-0 w-6 h-6 rounded-md bg-primary/15 hover:bg-primary hover:text-primary-foreground text-primary flex items-center justify-center transition-colors"
+                    >
+                      <CalendarPlus size={12} />
+                    </Link>
+                  </div>
+                );
+              })}
             </div>
           </motion.div>
         )}
