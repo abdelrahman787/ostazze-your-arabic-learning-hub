@@ -333,14 +333,14 @@ const HomePage = () => {
             ref={howStepsRef}
             initial="hidden"
             animate={playHowSteps ? "show" : "hidden"}
-            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.18, delayChildren: 0.05 } } }}
+            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.32, delayChildren: 0.1 } } }}
             className="grid md:grid-cols-3 gap-10 md:gap-6 relative max-w-5xl mx-auto"
           >
             {/* Animated dashed connector */}
             <motion.div
               variants={{
                 hidden: { scaleX: 0, opacity: 0 },
-                show: { scaleX: 1, opacity: 1, transition: { duration: 0.6, ease: "easeOut" } },
+                show: { scaleX: 1, opacity: 1, transition: { duration: 0.9, ease: "easeOut" } },
               }}
               className="hidden md:block absolute top-12 inset-x-[16%] h-0.5 origin-left"
               style={{
@@ -362,10 +362,10 @@ const HomePage = () => {
                 />
                 <motion.div
                   variants={{
-                    hidden: { opacity: 0, y: 30, scale: 0.7, rotate: -6 },
+                    hidden: { opacity: 0, y: 40, scale: 0.7, rotate: -6 },
                     show: {
                       opacity: 1, y: 0, scale: 1, rotate: 0,
-                      transition: { type: "spring", stiffness: 260, damping: 18, mass: 0.6 },
+                      transition: { type: "spring", stiffness: 200, damping: 16, mass: 0.7 },
                     },
                   }}
                   whileHover={{ y: -6, rotate: [0, -4, 4, 0] }}
