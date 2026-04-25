@@ -488,6 +488,33 @@ const Universities = () => {
             </motion.div>
           )}
         </AnimatePresence>
+
+        {/* SEO intro + FAQ — visible only on countries view */}
+        {view === "countries" && (
+          <section className="mt-12 max-w-3xl mx-auto space-y-6">
+            <div className="card-base p-6">
+              <h2 className="text-xl font-extrabold mb-3">{t("uni_intro_title")}</h2>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-2">{t("uni_intro_p1")}</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">{t("uni_intro_p2")}</p>
+              <div className="mt-4 flex flex-wrap gap-2 text-xs">
+                <span className="px-3 py-1 rounded-full bg-primary/10 text-primary font-bold">
+                  {allUniversities.length} {lang === "ar" ? "جامعة" : "universities"}
+                </span>
+                <Link to="/subjects" className="px-3 py-1 rounded-full bg-foreground/5 hover:bg-primary/10 hover:text-primary transition-colors font-bold">
+                  {t("uni_view_subjects")}
+                </Link>
+                <Link to="/teachers" className="px-3 py-1 rounded-full bg-foreground/5 hover:bg-primary/10 hover:text-primary transition-colors font-bold">
+                  {lang === "ar" ? "تصفّح المعلمين" : "Browse tutors"}
+                </Link>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-extrabold mb-3">{t("faq_title")}</h3>
+              <FaqAccordion items={uniFaq} defaultOpen={0} />
+            </div>
+          </section>
+        )}
       </div>
     </div>
   );
