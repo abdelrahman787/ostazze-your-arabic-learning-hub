@@ -695,8 +695,8 @@ const translations = {
 
   // ===== Stats bar =====
   stats_tutors: { ar: "معلم موثّق", en: "Verified tutors" },
-  stats_subjects: { ar: "مادة دراسية", en: "Subjects" },
-  stats_sessions: { ar: "جلسة منعقدة", en: "Sessions held" },
+  stats_subjects_held: { ar: "مادة دراسية", en: "Subjects" },
+  stats_sessions_held: { ar: "جلسة منعقدة", en: "Sessions held" },
   stats_universities: { ar: "جامعة مدعومة", en: "Universities supported" },
 
   // ===== Verified strip & home extras =====
