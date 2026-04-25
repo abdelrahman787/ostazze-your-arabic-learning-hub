@@ -594,3 +594,10 @@
 .flag-wave-container {
   perspective: 500px;
 }
+
+/* Global focus-visible ring for accessibility (keyboard nav) */
+*:focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+  border-radius: 4px;
+}

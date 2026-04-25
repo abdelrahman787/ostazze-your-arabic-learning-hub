@@ -13,6 +13,10 @@ const Privacy = () => {
     { title: t("privacy_section3_title"), content: t("privacy_section3_content") },
     { title: t("privacy_section4_title"), content: t("privacy_section4_content") },
     { title: t("privacy_section5_title"), content: t("privacy_section5_content") },
+    { title: t("privacy_section6_title"), content: t("privacy_section6_content") },
+    { title: t("privacy_section7_title"), content: t("privacy_section7_content") },
+    { title: t("privacy_section8_title"), content: t("privacy_section8_content") },
+    { title: t("privacy_section9_title"), content: t("privacy_section9_content") },
   ];
 
   return (

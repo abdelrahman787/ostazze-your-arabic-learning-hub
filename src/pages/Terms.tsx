@@ -13,6 +13,9 @@ const Terms = () => {
     { title: t("terms_section4_title"), content: t("terms_section4_content") },
     { title: t("terms_section5_title"), content: t("terms_section5_content") },
     { title: t("terms_section6_title"), content: t("terms_section6_content") },
+    { title: t("terms_section7_title"), content: t("terms_section7_content") },
+    { title: t("terms_section8_title"), content: t("terms_section8_content") },
+    { title: t("terms_section9_title"), content: t("terms_section9_content") },
   ];
 
   return (
