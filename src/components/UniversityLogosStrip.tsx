@@ -108,112 +108,91 @@ const UniversityLogosStrip = () => {
               </motion.p>
             </div>
 
-            {/* ============ BRAND-COLORED 3D GLASS TILES ============ */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
+            {/* ============ VIBRANT GRADIENT CARDS (like reference) ============ */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-5">
               {list.map((u, i) => {
                 const name = lang === "ar" ? u.name_ar : u.name_en;
                 return (
                   <motion.div
                     key={u.id}
-                    initial={{ opacity: 0, y: 20, rotateX: -10 }}
-                    whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                    initial={{ opacity: 0, y: 24, scale: 0.94 }}
+                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
                     viewport={{ once: true, margin: "-30px" }}
-                    transition={{ delay: i * 0.04, duration: 0.5, ease: "easeOut" }}
-                    style={{ transformStyle: "preserve-3d", perspective: 800 }}
+                    transition={{ delay: i * 0.05, duration: 0.55, ease: "easeOut" }}
+                    className="relative"
                   >
+                    {/* Outer ambient glow halo (visible behind card) */}
+                    <div
+                      className="absolute -inset-2 rounded-[1.5rem] opacity-40 group-hover:opacity-70 transition-opacity duration-500 blur-2xl pointer-events-none"
+                      style={{
+                        background:
+                          "radial-gradient(ellipse at 30% 30%, hsl(14 91% 55% / 0.6), transparent 70%)",
+                      }}
+                    />
+
                     <Link
                       to={`/teachers?university=${encodeURIComponent(name)}`}
                       title={name}
-                      className="group relative block rounded-2xl border border-white/10 px-3.5 py-3.5 h-full min-h-[88px] overflow-hidden transition-all duration-500 hover:-translate-y-1.5 hover:border-primary/40"
+                      className="group relative block rounded-2xl border border-white/15 px-4 py-5 h-full min-h-[150px] overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:border-white/30"
                       style={{
                         background:
-                          "linear-gradient(135deg, hsl(230 30% 12% / 0.95) 0%, hsl(230 35% 8% / 0.95) 60%, hsl(14 91% 35% / 0.35) 100%)",
+                          "linear-gradient(135deg, hsl(14 91% 65%) 0%, hsl(14 91% 50%) 35%, hsl(14 88% 35%) 70%, hsl(14 80% 22%) 100%)",
                         boxShadow:
-                          "inset 0 1px 0 0 rgba(255,255,255,0.1), inset 0 -1px 0 0 rgba(0,0,0,0.3), 0 8px 24px -8px rgba(0,0,0,0.5)",
+                          "inset 0 1px 0 0 rgba(255,255,255,0.35), inset 0 -2px 8px 0 rgba(0,0,0,0.3), 0 12px 40px -8px hsl(14 91% 50% / 0.55), 0 4px 12px -4px rgba(0,0,0,0.4)",
                       }}
                     >
-                      {/* Bottom-right brand glow corner (like Card-Y reference) */}
+                      {/* Top-left bright highlight (the signature glow from reference) */}
                       <div
-                        className="absolute -bottom-12 -right-12 w-32 h-32 rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                        className="absolute -top-16 -left-16 w-44 h-44 rounded-full pointer-events-none opacity-90"
                         style={{
                           background:
-                            "radial-gradient(circle, hsl(14 91% 55% / 0.5) 0%, transparent 70%)",
+                            "radial-gradient(circle, hsl(28 100% 75% / 0.7) 0%, transparent 60%)",
+                          filter: "blur(8px)",
+                        }}
+                      />
+
+                      {/* Bottom-right deep shadow */}
+                      <div
+                        className="absolute -bottom-12 -right-12 w-36 h-36 rounded-full pointer-events-none opacity-70"
+                        style={{
+                          background:
+                            "radial-gradient(circle, rgba(0,0,0,0.5) 0%, transparent 70%)",
                           filter: "blur(20px)",
                         }}
                       />
 
-                      {/* Top-left subtle warm highlight */}
+                      {/* Diagonal sheen */}
                       <div
-                        className="absolute -top-8 -left-8 w-24 h-24 rounded-full opacity-30 pointer-events-none"
+                        className="absolute inset-0 opacity-30 group-hover:opacity-60 transition-opacity duration-700 pointer-events-none"
                         style={{
                           background:
-                            "radial-gradient(circle, hsl(38 92% 60% / 0.3) 0%, transparent 70%)",
-                          filter: "blur(20px)",
+                            "linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%)",
                         }}
                       />
 
-                      {/* Inner glass top sheen */}
-                      <div className="absolute top-0 inset-x-0 h-1/2 bg-gradient-to-b from-white/[0.06] to-transparent pointer-events-none rounded-t-2xl" />
+                      {/* Top sheen edge */}
+                      <div className="absolute top-0 inset-x-0 h-1/3 bg-gradient-to-b from-white/20 to-transparent pointer-events-none rounded-t-2xl" />
 
-                      {/* Hover ring */}
-                      <div className="absolute inset-0 rounded-2xl ring-1 ring-primary/0 group-hover:ring-primary/30 transition-all duration-500 pointer-events-none" />
+                      {/* Content */}
+                      <div className="relative flex flex-col items-center justify-center text-center h-full gap-3 min-h-[120px]">
+                        {/* Big bold initials */}
+                        <span
+                          className="font-black text-3xl md:text-4xl tracking-tight text-white leading-none"
+                          style={{
+                            textShadow:
+                              "0 2px 8px rgba(0,0,0,0.35), 0 0 20px rgba(255,255,255,0.2)",
+                          }}
+                        >
+                          {initials(name)}
+                        </span>
 
-                      <div className="relative flex items-center gap-3 h-full">
-                        {/* Modern Monogram — minimal liquid-glass */}
-                        <div className="relative shrink-0 w-11 h-11 group/mono">
-                          {/* Soft brand glow halo behind */}
-                          <div
-                            className="absolute -inset-1 rounded-2xl opacity-50 group-hover:opacity-90 transition-opacity duration-500 blur-md"
-                            style={{
-                              background:
-                                "radial-gradient(circle at 30% 30%, hsl(14 91% 55% / 0.7), transparent 70%)",
-                            }}
-                          />
-
-                          {/* Main glass plate */}
-                          <div
-                            className="relative w-full h-full rounded-2xl flex items-center justify-center overflow-hidden"
-                            style={{
-                              background:
-                                "linear-gradient(145deg, hsl(14 91% 60% / 0.95), hsl(14 91% 45% / 0.85))",
-                              boxShadow:
-                                "0 1px 0 0 rgba(255,255,255,0.35) inset, 0 -8px 16px -4px rgba(0,0,0,0.25) inset, 0 8px 24px -6px hsl(14 91% 55% / 0.55)",
-                            }}
-                          >
-                            {/* Diagonal liquid sheen */}
-                            <div
-                              className="absolute inset-0 opacity-60 group-hover:opacity-90 transition-opacity duration-500"
-                              style={{
-                                background:
-                                  "linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.3) 45%, rgba(255,255,255,0.05) 55%, transparent 70%)",
-                              }}
-                            />
-
-                            {/* Curved bottom shadow for depth */}
-                            <div
-                              className="absolute -bottom-2 inset-x-0 h-4 rounded-full blur-md opacity-60"
-                              style={{ background: "rgba(0,0,0,0.4)" }}
-                            />
-
-                            {/* Letters — clean modern */}
-                            <span
-                              className="relative font-extrabold text-[13px] tracking-tight text-white leading-none"
-                              style={{
-                                textShadow:
-                                  "0 1px 2px rgba(0,0,0,0.35), 0 0 12px rgba(255,255,255,0.15)",
-                                fontFeatureSettings: '"ss01"',
-                              }}
-                            >
-                              {initials(name)}
-                            </span>
-                          </div>
-
-                          {/* Tiny status pulse dot */}
-                          <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-amber-300 ring-2 ring-[hsl(230_35%_8%)] shadow-[0_0_8px_hsl(38_92%_55%/0.8)]" />
-                        </div>
-
-                        {/* Name */}
-                        <span className="relative text-[10.5px] md:text-[11.5px] font-bold leading-tight line-clamp-2 text-white/90 group-hover:text-white transition-colors drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] flex-1">
+                        {/* University name */}
+                        <span
+                          className="text-[11px] md:text-[12px] font-bold leading-snug line-clamp-2 text-white/95 px-1"
+                          style={{
+                            textShadow: "0 1px 3px rgba(0,0,0,0.4)",
+                          }}
+                        >
                           {name}
                         </span>
                       </div>
