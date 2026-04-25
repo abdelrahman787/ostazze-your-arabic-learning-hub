@@ -108,7 +108,7 @@ const Register = () => {
   if (success) {
     return (
       <div className="hero-gradient min-h-screen flex items-center justify-center p-4">
-        <PageHelmet title={t("register_success_title")} />
+        <PageHelmet title={t("register_success_title")} noindex />
         <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="card-base p-10 w-full max-w-md text-center">
           <div className="w-16 h-16 rounded-2xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center mx-auto mb-4">
             <Mail size={28} />
@@ -123,7 +123,7 @@ const Register = () => {
 
   return (
     <div className="hero-gradient min-h-screen flex items-center justify-center p-4">
-      <PageHelmet title={t("register_title")} description={t("register_subtitle")} />
+      <PageHelmet title={t("register_title")} description={t("register_subtitle")} noindex />
       <div className="w-full max-w-4xl flex flex-col lg:flex-row gap-0">
         {/* Left side - Illustration */}
         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
