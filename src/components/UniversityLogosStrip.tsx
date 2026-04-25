@@ -57,62 +57,62 @@ const UniversityLogosStrip = () => {
   const list = allUniversities.slice(0, 12);
 
   return (
-    <section className="container py-16 relative">
+    <section className="container py-10 md:py-12 relative">
       {/* Ambient background glow */}
       <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-primary/5 blur-3xl rounded-full" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[240px] bg-primary/5 blur-3xl rounded-full" />
       </div>
 
       {/* Header */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="text-center mb-10"
+        className="text-center mb-7"
       >
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold mb-4">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>{t("home_logos_badge") || "موثوق من الأفضل"}</span>
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[11px] font-bold mb-3">
+          <Sparkles className="w-3 h-3" />
+          <span>{t("home_logos_badge")}</span>
         </div>
-        <h3 className="text-2xl md:text-3xl font-extrabold mb-2 bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
+        <h3 className="text-xl md:text-2xl font-extrabold mb-1.5 bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
           {t("home_logos_title")}
         </h3>
-        <p className="text-sm text-muted-foreground max-w-md mx-auto">
-          {t("home_logos_subtitle") || "نخدم طلاب أبرز الجامعات في الكويت وقطر"}
+        <p className="text-xs md:text-sm text-muted-foreground max-w-md mx-auto">
+          {t("home_logos_subtitle")}
         </p>
       </motion.div>
 
-      {/* Logos grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
+      {/* Logos grid — tighter, more balanced */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2.5 md:gap-3 max-w-6xl mx-auto">
         {list.map((u, i) => {
           const color = palette[i % palette.length];
           const name = lang === "ar" ? u.name_ar : u.name_en;
           return (
             <motion.div
               key={u.id}
-              initial={{ opacity: 0, y: 20, scale: 0.9 }}
+              initial={{ opacity: 0, y: 16, scale: 0.94 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: i * 0.04, duration: 0.4, ease: "easeOut" }}
-              whileHover={{ y: -4 }}
+              transition={{ delay: i * 0.03, duration: 0.35, ease: "easeOut" }}
+              whileHover={{ y: -3 }}
             >
               <Link
                 to={`/teachers?university=${encodeURIComponent(name)}`}
                 title={name}
-                className={`group relative flex items-center gap-3 rounded-2xl bg-gradient-to-br ${color.bg} border border-border/50 backdrop-blur-sm px-3.5 py-3 ring-1 ring-transparent ${color.ring} hover:shadow-lg transition-all duration-300 overflow-hidden h-full`}
+                className={`group relative flex items-center gap-2.5 rounded-xl bg-gradient-to-br ${color.bg} border border-border/50 backdrop-blur-sm px-3 py-2.5 ring-1 ring-transparent ${color.ring} hover:shadow-lg transition-all duration-300 overflow-hidden h-full min-h-[58px]`}
               >
                 {/* Hover glow */}
-                <div className={`absolute -top-8 -right-8 w-20 h-20 ${color.glow} rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                <div className={`absolute -top-6 -right-6 w-16 h-16 ${color.glow} rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
 
                 {/* Badge */}
-                <div className={`relative shrink-0 w-10 h-10 rounded-xl ${color.badge} border flex items-center justify-center font-extrabold text-xs shadow-inner`}>
-                  <GraduationCap className="absolute inset-0 m-auto w-4 h-4 opacity-20" />
+                <div className={`relative shrink-0 w-9 h-9 rounded-lg ${color.badge} border flex items-center justify-center font-extrabold text-[11px] shadow-inner`}>
+                  <GraduationCap className="absolute inset-0 m-auto w-3.5 h-3.5 opacity-20" />
                   <span className="relative">{initials(name)}</span>
                 </div>
 
                 {/* Name */}
-                <span className="relative text-[11px] md:text-xs font-bold leading-tight line-clamp-2 text-foreground/90 group-hover:text-foreground transition-colors">
+                <span className="relative text-[10.5px] md:text-[11px] font-bold leading-tight line-clamp-2 text-foreground/90 group-hover:text-foreground transition-colors flex-1">
                   {name}
                 </span>
               </Link>
@@ -126,14 +126,14 @@ const UniversityLogosStrip = () => {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        transition={{ delay: 0.4 }}
-        className="text-center mt-8"
+        transition={{ delay: 0.3 }}
+        className="text-center mt-6"
       >
         <Link
           to="/universities"
-          className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-primary/80 transition-colors group"
+          className="inline-flex items-center gap-1.5 text-xs md:text-sm font-bold text-primary hover:text-primary/80 transition-colors group"
         >
-          <span>{t("home_logos_cta") || "استعرض كل الجامعات"}</span>
+          <span>{t("home_logos_cta")}</span>
           <span className="group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform">←</span>
         </Link>
       </motion.div>
