@@ -7,18 +7,34 @@
     <link rel="apple-touch-icon" href="/favicon.png" />
     <title>OSTAZE - منصة كورسات تعليمية أونلاين | تعلم بسرعتك</title>
     <meta name="description" content="منصة OSTAZE للكورسات التعليمية الرقمية: كورسات مسجلة وحية في البرمجة، الرياضيات، الفيزياء، الإنجليزي والمزيد. وصول مدى الحياة بأسعار مدروسة.">
-    
-    
+
+    <!-- Security headers (meta-equivalent). Note: HSTS, X-Frame-Options, COOP,
+         CORP must be set as HTTP response headers at the hosting edge — they
+         are intentionally NOT here because <meta http-equiv> is ignored for
+         them by browsers. CSP frame-ancestors below covers clickjacking on
+         all modern browsers. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob: https://*.supabase.co https://storage.googleapis.com https://*.googleusercontent.com https://lh3.googleusercontent.com https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.stripe.com https://*.lovable.app https://*.lovable.dev; media-src 'self' blob: https://*.supabase.co; frame-src 'self' https://js.stripe.com https://hooks.stripe.com https://docs.google.com https://www.youtube.com https://www.youtube-nocookie.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(self), geolocation=(), payment=(self), interest-cohort=(), browsing-topics=()" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0F172A" />
+    <meta name="format-detection" content="telephone=no" />
+
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="OSTAZE" />
+    <meta property="og:locale" content="ar_SA" />
+    <meta property="og:locale:alternate" content="en_US" />
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
     <meta property="og:title" content="OSTAZE - منصة كورسات تعليمية أونلاين">
-  <meta name="twitter:title" content="OSTAZE - منصة كورسات تعليمية أونلاين">
-  <meta property="og:description" content="كورسات رقمية مسجلة وحية بوصول مدى الحياة في مختلف التخصصات">
-  <meta name="twitter:description" content="كورسات رقمية مسجلة وحية بوصول مدى الحياة في مختلف التخصصات">
-  <meta property="og:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/Z79KI50YEuSGVGIjgK4BMa4CRzy2/social-images/social-1774873100528-edu-ostazze.webp">
-  <meta name="twitter:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/Z79KI50YEuSGVGIjgK4BMa4CRzy2/social-images/social-1774873100528-edu-ostazze.webp">
-  <meta name="twitter:card" content="summary_large_image">
-</head>
+    <meta name="twitter:title" content="OSTAZE - منصة كورسات تعليمية أونلاين">
+    <meta property="og:description" content="كورسات رقمية مسجلة وحية بوصول مدى الحياة في مختلف التخصصات">
+    <meta name="twitter:description" content="كورسات رقمية مسجلة وحية بوصول مدى الحياة في مختلف التخصصات">
+    <meta property="og:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/Z79KI50YEuSGVGIjgK4BMa4CRzy2/social-images/social-1774873100528-edu-ostazze.webp">
+    <meta name="twitter:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/Z79KI50YEuSGVGIjgK4BMa4CRzy2/social-images/social-1774873100528-edu-ostazze.webp">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://ostaze.com/" />
+  </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
