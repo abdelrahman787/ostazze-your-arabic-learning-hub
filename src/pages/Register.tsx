@@ -221,6 +221,25 @@ const Register = () => {
                   </p>
                 </div>
               )}
+
+              {/* Password requirements checklist */}
+              {password.length > 0 && (
+                <ul className="mt-2 space-y-0.5 text-[11px]">
+                  {[
+                    { ok: password.length >= 8, label: t("pwd_req_len") },
+                    { ok: /[A-Z]/.test(password), label: t("pwd_req_upper") },
+                    { ok: /[0-9]/.test(password), label: t("pwd_req_num") },
+                    { ok: /[^A-Za-z0-9]/.test(password), label: t("pwd_req_sym") },
+                  ].map((r, i) => (
+                    <li key={i} className={`flex items-center gap-1.5 ${r.ok ? "text-emerald-600 dark:text-emerald-400" : "text-muted-foreground"}`}>
+                      <span className="w-3.5 h-3.5 rounded-full border-2 flex items-center justify-center text-[8px] font-bold" style={{ borderColor: "currentColor" }}>
+                        {r.ok ? "✓" : ""}
+                      </span>
+                      {r.label}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
 
             <div>
