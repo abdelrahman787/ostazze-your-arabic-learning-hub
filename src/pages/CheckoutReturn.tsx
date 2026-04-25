@@ -2,6 +2,7 @@ import { useSearchParams, Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { CheckCircle } from "lucide-react";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
+import NoIndex from "@/components/NoIndex";
 
 export default function CheckoutReturn() {
   const [searchParams] = useSearchParams();
@@ -10,6 +11,7 @@ export default function CheckoutReturn() {
 
   return (
     <>
+      <NoIndex title="Checkout" />
       <PaymentTestModeBanner />
       <div className="min-h-screen flex items-center justify-center p-6">
         <div className="card-base p-8 max-w-md text-center space-y-4">
