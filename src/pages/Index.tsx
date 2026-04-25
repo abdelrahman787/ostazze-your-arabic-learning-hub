@@ -352,7 +352,7 @@ const HomePage = () => {
                 key={step.key}
                 variants={{
                   hidden: {},
-                  show: { transition: { staggerChildren: 0.15, delayChildren: 0.05 } },
+                  show: { transition: { staggerChildren: 0.08, delayChildren: 0.02 } },
                 }}
                 className="text-center relative group"
               >
