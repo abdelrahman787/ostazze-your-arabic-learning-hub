@@ -635,6 +635,24 @@ const translations = {
   payment_error_msg: { ar: "لم يتم العثور على معلومات الجلسة.", en: "No session information found." },
   go_to_dashboard: { ar: "الذهاب للوحة التحكم", en: "Go to Dashboard" },
   proceed_to_payment: { ar: "المتابعة للدفع", en: "Proceed to Payment" },
+
+  // Trust badges (homepage)
+  trust_verified: { ar: "معلمون موثقون", en: "Verified Tutors" },
+  trust_pay_per_session: { ar: "دفع لكل جلسة", en: "Pay Per Session" },
+  trust_cancel_anytime: { ar: "إلغاء قبل 24 ساعة", en: "Cancel 24h Ahead" },
+
+  // Teachers empty CTA
+  teachers_empty_register_cta: { ar: "سجّل كمعلم", en: "Register as a Tutor" },
+  teachers_empty_contact_cta: { ar: "تواصل معنا", en: "Contact Us" },
+
+  // Contact trust block
+  contact_trust_entity_label: { ar: "الكيان القانوني", en: "Legal Entity" },
+  contact_trust_entity_value: { ar: "OSTAZE Educational Services (TODO: تأكيد الاسم المسجل)", en: "OSTAZE Educational Services (TODO: confirm registered name)" },
+  contact_trust_hours_label: { ar: "ساعات العمل", en: "Working Hours" },
+  contact_trust_hours_value: { ar: "الأحد – الخميس، 9 صباحاً – 6 مساءً (بتوقيت السعودية)", en: "Sun–Thu, 9 AM – 6 PM (AST)" },
+  contact_trust_sla_label: { ar: "وقت الاستجابة", en: "Response Time" },
+  contact_trust_sla_value: { ar: "نرد على جميع الرسائل خلال 24 ساعة عمل", en: "We respond to all messages within 24 business hours" },
+  contact_trust_quick_help: { ar: "روابط مساعدة سريعة", en: "Quick Help Links" },
 } as const;
 
 type TranslationKey = keyof typeof translations;
