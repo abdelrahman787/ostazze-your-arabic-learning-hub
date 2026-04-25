@@ -253,6 +253,19 @@ const Subjects = () => {
             )}
           </div>
         )}
+
+        <section className="mt-14 max-w-3xl mx-auto space-y-6">
+          <p className="text-sm text-muted-foreground leading-relaxed text-center">{t("subjects_intro")}</p>
+          <div className="flex flex-wrap justify-center gap-2 text-xs">
+            <Link to="/categories" className="px-3 py-1 rounded-full bg-foreground/5 hover:bg-primary/10 hover:text-primary font-bold transition-colors">{lang === "ar" ? "التصنيفات" : "Categories"}</Link>
+            <Link to="/universities" className="px-3 py-1 rounded-full bg-foreground/5 hover:bg-primary/10 hover:text-primary font-bold transition-colors">{lang === "ar" ? "الجامعات" : "Universities"}</Link>
+            <Link to="/teachers" className="px-3 py-1 rounded-full bg-primary/10 text-primary font-bold hover:bg-primary/20 transition-colors">{lang === "ar" ? "المعلمون" : "Tutors"}</Link>
+          </div>
+          <div>
+            <h3 className="text-lg font-extrabold mb-3 text-center">{t("faq_title")}</h3>
+            <FaqAccordion items={subjFaq} defaultOpen={0} />
+          </div>
+        </section>
       </div>
     </div>
   );
