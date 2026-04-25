@@ -17,6 +17,8 @@ const Login = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
+  const [attempts, setAttempts] = useState(0);
+  const [cooldownUntil, setCooldownUntil] = useState(0);
 
   useEffect(() => {
     if (isLoggedIn && user && user.roleResolved) {
@@ -28,11 +30,26 @@ const Login = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (Date.now() < cooldownUntil) {
+      const secs = Math.ceil((cooldownUntil - Date.now()) / 1000);
+      setError(lang === "ar"
+        ? `تم تعطيل تسجيل الدخول مؤقتاً. حاول مجدداً بعد ${secs} ثانية.`
+        : `Login temporarily disabled. Try again in ${secs}s.`);
+      return;
+    }
     setLoading(true);
     setError("");
     const result = await login(email, password);
     if (result.error) {
+      const next = attempts + 1;
+      setAttempts(next);
+      if (next >= 5) {
+        setCooldownUntil(Date.now() + 60_000);
+        setAttempts(0);
+      }
       setError(result.error);
+    } else {
+      setAttempts(0);
     }
     setLoading(false);
   };
@@ -53,7 +70,7 @@ const Login = () => {
 
   return (
     <div className="hero-gradient min-h-screen flex items-center justify-center p-4">
-      <PageHelmet title={t("login_title")} description={t("login_subtitle")} />
+      <PageHelmet title={t("login_title")} description={t("login_subtitle")} noindex />
       <div className="w-full max-w-4xl flex flex-col lg:flex-row gap-0 lg:gap-0">
         {/* Left side - Illustration */}
         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
@@ -133,7 +150,7 @@ const Login = () => {
               </div>
             </div>
 
-            {error && <div className="bg-destructive/10 border border-destructive/30 rounded-xl p-3 text-destructive text-sm">{error}</div>}
+            {error && <div role="alert" aria-live="assertive" className="bg-destructive/10 border border-destructive/30 rounded-xl p-3 text-destructive text-sm">{error}</div>}
 
             <motion.button whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }} type="submit" disabled={loading} className="btn-primary w-full flex items-center justify-center gap-2">
               {loading && <span className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />}
