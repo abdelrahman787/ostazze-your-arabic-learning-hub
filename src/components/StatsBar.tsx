@@ -13,16 +13,20 @@ const StatsBar = () => {
     let mounted = true;
     (async () => {
       try {
-        const [t1, t2, t3] = await Promise.all([
+        const [tutors, sessions, tProfiles] = await Promise.all([
           supabase.from("teacher_profiles").select("id", { count: "exact", head: true }),
-          supabase.from("subjects").select("id", { count: "exact", head: true }),
           supabase.from("session_requests").select("id", { count: "exact", head: true }).eq("status", "completed"),
+          supabase.from("teacher_profiles").select("subjects"),
         ]);
         if (!mounted) return;
+        const uniqueSubjects = new Set<string>();
+        (tProfiles.data || []).forEach((row: any) => {
+          (row?.subjects || []).forEach((s: string) => s && uniqueSubjects.add(s.trim()));
+        });
         setStats({
-          tutors: t1.count ?? 0,
-          subjects: t2.count ?? 0,
-          sessions: t3.count ?? 0,
+          tutors: tutors.count ?? 0,
+          subjects: uniqueSubjects.size,
+          sessions: sessions.count ?? 0,
         });
       } catch {
         /* silent */
