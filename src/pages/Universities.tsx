@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   GraduationCap, Building2, ChevronLeft, Globe, Calendar,
-  BookOpen, ChevronDown, ExternalLink, Layers, Search, Hash, ChevronRight
+  BookOpen, ChevronDown, ExternalLink, Layers, Search, Hash, ChevronRight, CalendarPlus
 } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import PageHelmet from "@/components/PageHelmet";
