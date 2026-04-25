@@ -6,6 +6,9 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import BookSessionModal from "@/components/BookSessionModal";
+import RefundNote from "@/components/RefundNote";
+import PageHelmet from "@/components/PageHelmet";
+import { personJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import UniversityDetails from "@/components/UniversityDetails";
@@ -275,6 +278,8 @@ const TeacherProfile = () => {
               <div className="flex flex-wrap gap-2 mb-6">
                 {displaySubjects.map((s, i) => <span key={i} className="badge-brand">{s}</span>)}
               </div>
+
+              <RefundNote className="mb-4" />
 
               <div className="flex gap-4 items-center flex-wrap">
                 <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} onClick={() => setShowBooking(true)} className="btn-primary flex-1 text-center text-lg">
