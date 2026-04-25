@@ -362,10 +362,10 @@ const HomePage = () => {
                 />
                 <motion.div
                   variants={{
-                    hidden: { opacity: 0, y: 40, scale: 0.7, rotate: -6 },
+                    hidden: { opacity: 0, y: 50, scale: 0.65, rotate: -8 },
                     show: {
                       opacity: 1, y: 0, scale: 1, rotate: 0,
-                      transition: { type: "spring", stiffness: 200, damping: 16, mass: 0.7 },
+                      transition: { type: "spring", stiffness: 140, damping: 16, mass: 0.9 },
                     },
                   }}
                   whileHover={{ y: -6, rotate: [0, -4, 4, 0] }}
