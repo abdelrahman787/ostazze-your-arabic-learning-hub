@@ -10,6 +10,9 @@ import { Link } from "react-router-dom";
 import { allUniversities } from "@/data/universitiesData";
 import { useState, useMemo } from "react";
 import PageHeader from "@/components/PageHeader";
+import PageHelmet from "@/components/PageHelmet";
+import FaqAccordion from "@/components/FaqAccordion";
+import { breadcrumbJsonLd, collectionPageJsonLd, faqJsonLd } from "@/lib/seo";
 
 const categoryIcons: Record<string, React.ElementType> = {
   "الهندسة والبترول": Cog, "Engineering & Petroleum": Cog,
@@ -47,8 +50,32 @@ const Categories = () => {
     );
   }, [search]);
 
+  const catFaq = [
+    { q: lang === "ar" ? "كيف أختار التصنيف الأنسب؟" : "How do I pick the right category?", a: lang === "ar" ? "اختر التصنيف الأقرب لتخصصك ثم تابع للمواد، وستظهر لك قائمة المعلمين المتخصصين." : "Pick the category closest to your major, then drill down to subjects to see specialized tutors." },
+    { q: lang === "ar" ? "ماذا لو لم أجد تصنيفي؟" : "What if my category isn't listed?", a: lang === "ar" ? "تواصل معنا وسنضيف التصنيف خلال 48 ساعة عمل إن وُجد طلب كافٍ." : "Contact us and we'll add it within 48 business hours if there's enough demand." },
+    { q: lang === "ar" ? "هل التصنيفات مرتبطة بجامعة معينة؟" : "Are categories tied to a university?", a: lang === "ar" ? "لا، التصنيفات عامة لكنها ترتبط داخلياً بكليات وأقسام جامعات الكويت وقطر." : "No, categories are general but mapped internally to colleges and departments in Kuwait & Qatar universities." },
+  ];
+
   return (
     <div>
+      <PageHelmet
+        title={t("categories_title")}
+        description={t("categories_subtitle") + " — " + t("categories_intro")}
+        keywords={lang === "ar" ? "تصنيفات, مواد, جامعات الكويت, جامعات قطر" : "categories, subjects, Kuwait, Qatar universities"}
+        jsonLd={[
+          collectionPageJsonLd({
+            name: t("categories_title"),
+            description: t("categories_intro"),
+            path: "/categories",
+            lang,
+          }),
+          breadcrumbJsonLd([
+            { name: lang === "ar" ? "الرئيسية" : "Home", path: "/" },
+            { name: t("categories_title"), path: "/categories" },
+          ]),
+          faqJsonLd(catFaq),
+        ]}
+      />
       <PageHeader title={t("categories_title")} subtitle={t("categories_subtitle")} variant="categories" />
 
       {/* Stats Bar */}
@@ -113,6 +140,19 @@ const Categories = () => {
             {lang === "ar" ? "لا توجد تصنيفات مطابقة" : "No matching categories"}
           </div>
         )}
+
+        <section className="mt-14 max-w-3xl mx-auto space-y-6">
+          <p className="text-sm text-muted-foreground leading-relaxed text-center">{t("categories_intro")}</p>
+          <div className="flex flex-wrap justify-center gap-2 text-xs">
+            <Link to="/subjects" className="px-3 py-1 rounded-full bg-primary/10 text-primary font-bold hover:bg-primary/20 transition-colors">{lang === "ar" ? "كل المواد" : "All subjects"}</Link>
+            <Link to="/universities" className="px-3 py-1 rounded-full bg-foreground/5 hover:bg-primary/10 hover:text-primary font-bold transition-colors">{lang === "ar" ? "الجامعات" : "Universities"}</Link>
+            <Link to="/teachers" className="px-3 py-1 rounded-full bg-foreground/5 hover:bg-primary/10 hover:text-primary font-bold transition-colors">{lang === "ar" ? "المعلمون" : "Tutors"}</Link>
+          </div>
+          <div>
+            <h3 className="text-lg font-extrabold mb-3 text-center">{t("faq_title")}</h3>
+            <FaqAccordion items={catFaq} defaultOpen={0} />
+          </div>
+        </section>
       </div>
     </div>
   );

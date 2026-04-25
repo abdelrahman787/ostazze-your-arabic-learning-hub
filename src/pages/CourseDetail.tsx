@@ -7,6 +7,7 @@ import { useBilingual } from "@/hooks/useBilingual";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import PageHelmet from "@/components/PageHelmet";
+import RefundNote from "@/components/RefundNote";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
 
@@ -326,6 +327,8 @@ const CourseDetail = () => {
                   {enrolling ? "..." : (course.price === 0 ? (lang === "ar" ? "اشترك مجاناً" : "Enroll for free") : (lang === "ar" ? "اشترك في الكورس" : "Enroll Now"))}
                 </button>
               )}
+
+              {course.price > 0 && <div className="mt-4"><RefundNote /></div>}
 
               <div className="mt-6 space-y-3 text-sm">
                 {[

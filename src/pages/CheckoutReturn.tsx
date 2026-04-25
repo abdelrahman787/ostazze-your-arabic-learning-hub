@@ -30,6 +30,12 @@ export default function CheckoutReturn() {
           <Link to="/dashboard" className="btn-primary inline-block mt-4">
             {t("go_to_dashboard") || "Go to Dashboard"}
           </Link>
+          <p className="text-[11px] text-muted-foreground mt-4 leading-relaxed">
+            {t("checkout_terms_agree")}{" "}
+            <Link to="/terms" className="text-primary hover:underline">{t("checkout_terms_link")}</Link>
+            {" · "}
+            <Link to="/refund" className="text-primary hover:underline">{t("checkout_refund_link")}</Link>
+          </p>
         </div>
       </div>
     </>

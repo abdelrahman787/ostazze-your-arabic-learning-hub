@@ -87,12 +87,14 @@ export const courseJsonLd = (course: {
   instructor?: string | null;
   price?: number;
   image?: string | null;
+  lang?: "ar" | "en";
 }) => ({
   "@context": "https://schema.org",
   "@type": "Course",
   name: course.title,
   description: course.description || course.title,
   provider: { "@id": `${SITE_URL}/#organization` },
+  inLanguage: course.lang === "en" ? "en" : "ar",
   url: `${SITE_URL}/courses/${course.id}`,
   ...(course.image ? { image: course.image } : {}),
   ...(course.instructor
@@ -106,7 +108,57 @@ export const courseJsonLd = (course: {
           priceCurrency: "SAR",
           availability: "https://schema.org/InStock",
           url: `${SITE_URL}/courses/${course.id}`,
+          category: "OnlineCourse",
         },
       }
     : {}),
+});
+
+export const personJsonLd = (p: {
+  id: string;
+  name: string;
+  jobTitle?: string;
+  university?: string | null;
+  subjects?: string[];
+  image?: string | null;
+}) => ({
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": `${SITE_URL}/teachers/${p.id}#person`,
+  name: p.name,
+  jobTitle: p.jobTitle || "Tutor",
+  ...(p.image ? { image: p.image } : {}),
+  ...(p.university
+    ? { alumniOf: { "@type": "CollegeOrUniversity", name: p.university } }
+    : {}),
+  ...(p.subjects && p.subjects.length ? { knowsAbout: p.subjects } : {}),
+  worksFor: { "@id": `${SITE_URL}/#organization` },
+  url: `${SITE_URL}/teachers/${p.id}`,
+});
+
+export const faqJsonLd = (
+  items: Array<{ q: string; a: string }>
+) => ({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: items.map((it) => ({
+    "@type": "Question",
+    name: it.q,
+    acceptedAnswer: { "@type": "Answer", text: it.a },
+  })),
+});
+
+export const collectionPageJsonLd = (p: {
+  name: string;
+  description: string;
+  path: string;
+  lang?: "ar" | "en";
+}) => ({
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: p.name,
+  description: p.description,
+  url: `${SITE_URL}${p.path}`,
+  inLanguage: p.lang === "en" ? "en" : "ar",
+  isPartOf: { "@id": `${SITE_URL}/#website` },
 });

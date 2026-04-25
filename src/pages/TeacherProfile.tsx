@@ -6,6 +6,9 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import BookSessionModal from "@/components/BookSessionModal";
+import RefundNote from "@/components/RefundNote";
+import PageHelmet from "@/components/PageHelmet";
+import { personJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import UniversityDetails from "@/components/UniversityDetails";
@@ -64,7 +67,7 @@ const StarRating = ({ value, onChange, readonly = false }: { value: number; onCh
 
 const TeacherProfile = () => {
   const { id } = useParams();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const { b, bArr } = useBilingual();
   const { user } = useAuth();
   const [teacher, setTeacher] = useState<TeacherFull | null>(null);
@@ -240,6 +243,25 @@ const TeacherProfile = () => {
 
   return (
     <div>
+      <PageHelmet
+        title={displayName}
+        description={(displayBio || `${displayName} — ${displayUni || ""}`).slice(0, 160)}
+        ogType="profile"
+        jsonLd={[
+          personJsonLd({
+            id: teacher.user_id,
+            name: displayName,
+            jobTitle: lang === "ar" ? "معلم" : "Tutor",
+            university: displayUni,
+            subjects: displaySubjects,
+          }),
+          breadcrumbJsonLd([
+            { name: lang === "ar" ? "الرئيسية" : "Home", path: "/" },
+            { name: t("nav_teachers"), path: "/teachers" },
+            { name: displayName, path: `/teachers/${teacher.user_id}` },
+          ]),
+        ]}
+      />
       <section className="hero-gradient py-8">
         <div className="container">
           <p className="text-muted-foreground text-sm">
@@ -275,6 +297,8 @@ const TeacherProfile = () => {
               <div className="flex flex-wrap gap-2 mb-6">
                 {displaySubjects.map((s, i) => <span key={i} className="badge-brand">{s}</span>)}
               </div>
+
+              <RefundNote className="mb-4" />
 
               <div className="flex gap-4 items-center flex-wrap">
                 <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} onClick={() => setShowBooking(true)} className="btn-primary flex-1 text-center text-lg">

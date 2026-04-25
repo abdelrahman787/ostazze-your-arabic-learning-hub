@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import PageHelmet from "@/components/PageHelmet";
 import PageHeader from "@/components/PageHeader";
-import { Mail, Phone, MapPin, Send, MessageCircle, Loader2 } from "lucide-react";
+import FaqAccordion from "@/components/FaqAccordion";
+import { Mail, Phone, MapPin, Send, MessageCircle, Loader2, Building2, Clock, Timer, ShieldCheck } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 
 const Contact = () => {
   const { t, lang } = useLanguage();
@@ -31,9 +34,27 @@ const Contact = () => {
     { icon: MessageCircle, label: t("contact_whatsapp_label"), value: t("contact_whatsapp_value"), href: `https://wa.me/966559003498?text=${encodeURIComponent(lang === "ar" ? "مرحباً، أريد الاستفسار عن خدمات أسطازي" : "Hello, I'd like to inquire about Ostaze services")}` },
   ];
 
+  const contactFaq = [
+    { q: t("faq_q_book"), a: t("faq_a_book") },
+    { q: t("faq_q_pay"), a: t("faq_a_pay") },
+    { q: t("faq_q_refund"), a: t("faq_a_refund") },
+    { q: t("faq_q_cancel"), a: t("faq_a_cancel") },
+  ];
+
   return (
     <div>
-      <PageHelmet title={t("contact_title")} description={t("contact_subtitle")} />
+      <PageHelmet
+        title={t("contact_title")}
+        description={t("contact_subtitle")}
+        keywords={lang === "ar" ? "تواصل, دعم, ostaze, خدمة العملاء" : "contact, support, ostaze, customer service"}
+        jsonLd={[
+          faqJsonLd(contactFaq),
+          breadcrumbJsonLd([
+            { name: lang === "ar" ? "الرئيسية" : "Home", path: "/" },
+            { name: t("contact_title"), path: "/contact" },
+          ]),
+        ]}
+      />
       <PageHeader title={t("contact_title")} subtitle={t("contact_subtitle")} variant="teachers" />
 
       <div className="container py-12">
@@ -81,6 +102,60 @@ const Contact = () => {
             </div>
           </motion.div>
         </div>
+
+        {/* Trust block */}
+        <div className="mt-12 max-w-5xl mx-auto card-base p-6">
+          <h2 className="text-lg font-extrabold mb-4 flex items-center gap-2">
+            <ShieldCheck size={18} className="text-primary" />
+            {lang === "ar" ? "بيانات الجهة" : "Business Information"}
+          </h2>
+          <div className="grid sm:grid-cols-2 gap-4 text-sm">
+            <div className="flex items-start gap-3">
+              <Building2 size={16} className="text-primary mt-1 shrink-0" />
+              <div>
+                <p className="font-bold">{t("contact_trust_entity_label")}</p>
+                <p className="text-muted-foreground">{t("contact_trust_entity_value")}</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <Clock size={16} className="text-primary mt-1 shrink-0" />
+              <div>
+                <p className="font-bold">{t("contact_trust_hours_label")}</p>
+                <p className="text-muted-foreground">{t("contact_trust_hours_value")}</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <Timer size={16} className="text-primary mt-1 shrink-0" />
+              <div>
+                <p className="font-bold">{t("contact_trust_sla_label")}</p>
+                <p className="text-muted-foreground">{t("contact_trust_sla_value")}</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <ShieldCheck size={16} className="text-primary mt-1 shrink-0" />
+              <div>
+                <p className="font-bold">{t("contact_trust_quick_help")}</p>
+                <div className="flex flex-wrap gap-2 mt-1">
+                  <Link to="/privacy" className="text-primary hover:underline">{t("footer_privacy")}</Link>
+                  <Link to="/terms" className="text-primary hover:underline">{t("footer_terms")}</Link>
+                  <Link to="/refund" className="text-primary hover:underline">{t("footer_refund")}</Link>
+                  <Link to="/faq" className="text-primary hover:underline">{t("footer_faq")}</Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Mini FAQ */}
+        <section className="mt-10 max-w-3xl mx-auto">
+          <h3 className="text-lg font-extrabold mb-3">{t("faq_title")}</h3>
+          <FaqAccordion items={contactFaq} defaultOpen={0} />
+          <div className="text-center mt-4">
+            <Link to="/faq" className="text-primary text-sm font-bold hover:underline">
+              {lang === "ar" ? "عرض كل الأسئلة الشائعة ←" : "View all FAQs →"}
+            </Link>
+          </div>
+        </section>
       </div>
     </div>
   );

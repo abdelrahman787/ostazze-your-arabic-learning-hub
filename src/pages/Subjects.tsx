@@ -7,6 +7,8 @@ import { useMemo, useState } from "react";
 import { allUniversities } from "@/data/universitiesData";
 import PageHeader from "@/components/PageHeader";
 import PageHelmet from "@/components/PageHelmet";
+import FaqAccordion from "@/components/FaqAccordion";
+import { breadcrumbJsonLd, collectionPageJsonLd, faqJsonLd } from "@/lib/seo";
 
 const categoryEnToAr = new Map<string, string>();
 mockCategories.forEach(c => categoryEnToAr.set(c.name.en, c.name.ar));
@@ -85,9 +87,33 @@ const Subjects = () => {
 
   const BackIcon = lang === "ar" ? ArrowRight : ArrowLeft;
 
+  const subjFaq = [
+    { q: lang === "ar" ? "كيف أحجز معلماً للمادة؟" : "How do I book a tutor for a subject?", a: lang === "ar" ? "اضغط على المادة لعرض المعلمين المتاحين، ثم اختر معلماً وابدأ الحجز من ملفه." : "Click a subject to view available tutors, then pick one and book from their profile." },
+    { q: lang === "ar" ? "هل المواد متاحة لكل الجامعات؟" : "Are subjects available across all universities?", a: lang === "ar" ? "تختلف التغطية حسب توافر المعلمين، لكن أغلب المواد الأساسية مدعومة لجامعات الكويت وقطر." : "Coverage depends on tutor availability, but most core subjects are supported across Kuwait & Qatar universities." },
+    { q: lang === "ar" ? "هل يمكنني طلب مادة جديدة؟" : "Can I request a new subject?", a: lang === "ar" ? "نعم، تواصل معنا وسنحاول إيجاد معلم متخصص خلال 48 ساعة." : "Yes — contact us and we'll try to source a specialized tutor within 48 hours." },
+  ];
+
   return (
     <div>
-      <PageHelmet title={categoryDisplay || t("subjects_title")} description={t("subjects_subtitle")} />
+      <PageHelmet
+        title={categoryDisplay || t("subjects_title")}
+        description={t("subjects_subtitle") + " — " + t("subjects_intro")}
+        keywords={lang === "ar" ? "مواد دراسية, دروس خصوصية, جامعات الكويت, جامعات قطر" : "subjects, tutoring, Kuwait universities, Qatar universities"}
+        jsonLd={[
+          collectionPageJsonLd({
+            name: categoryDisplay || t("subjects_title"),
+            description: t("subjects_intro"),
+            path: "/subjects",
+            lang,
+          }),
+          breadcrumbJsonLd([
+            { name: lang === "ar" ? "الرئيسية" : "Home", path: "/" },
+            { name: t("subjects_title"), path: "/subjects" },
+            ...(categoryDisplay ? [{ name: categoryDisplay, path: `/subjects?category=${encodeURIComponent(categoryDisplay)}` }] : []),
+          ]),
+          faqJsonLd(subjFaq),
+        ]}
+      />
       <PageHeader
         variant="subjects"
         title={categoryDisplay || t("subjects_title")}
@@ -227,6 +253,19 @@ const Subjects = () => {
             )}
           </div>
         )}
+
+        <section className="mt-14 max-w-3xl mx-auto space-y-6">
+          <p className="text-sm text-muted-foreground leading-relaxed text-center">{t("subjects_intro")}</p>
+          <div className="flex flex-wrap justify-center gap-2 text-xs">
+            <Link to="/categories" className="px-3 py-1 rounded-full bg-foreground/5 hover:bg-primary/10 hover:text-primary font-bold transition-colors">{lang === "ar" ? "التصنيفات" : "Categories"}</Link>
+            <Link to="/universities" className="px-3 py-1 rounded-full bg-foreground/5 hover:bg-primary/10 hover:text-primary font-bold transition-colors">{lang === "ar" ? "الجامعات" : "Universities"}</Link>
+            <Link to="/teachers" className="px-3 py-1 rounded-full bg-primary/10 text-primary font-bold hover:bg-primary/20 transition-colors">{lang === "ar" ? "المعلمون" : "Tutors"}</Link>
+          </div>
+          <div>
+            <h3 className="text-lg font-extrabold mb-3 text-center">{t("faq_title")}</h3>
+            <FaqAccordion items={subjFaq} defaultOpen={0} />
+          </div>
+        </section>
       </div>
     </div>
   );
