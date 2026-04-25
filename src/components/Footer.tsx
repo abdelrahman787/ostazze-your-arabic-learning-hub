@@ -32,7 +32,7 @@ const Footer = () => {
               </span>
               <span className="text-2xl font-black text-primary tracking-tight">OSTAZE</span>
             </Link>
-            <p className="text-sm leading-relaxed text-white/60 mb-5">{t("footer_desc")}</p>
+            <p className="text-sm leading-relaxed text-white/75 mb-5">{t("footer_desc")}</p>
             <div className="flex gap-2">
               {[
                 { Icon: Facebook, label: "Facebook", href: "#" },
