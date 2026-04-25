@@ -54,13 +54,26 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [timezone, setTimezone] = useState("Asia/Riyadh");
   const [agreedTerms, setAgreedTerms] = useState(false);
+  // Honeypot — bots fill this; real users never see it.
+  const [website, setWebsite] = useState("");
 
   const pwStrength = useMemo(() => getPasswordStrength(password), [password]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (website) {
+      // Silent reject for bots
+      setSuccess(true);
+      return;
+    }
     if (password !== confirmPassword) {
       setError(t("password_mismatch"));
+      return;
+    }
+    if (pwStrength.level < 2) {
+      setError(lang === "ar"
+        ? "كلمة المرور ضعيفة. استخدم 8+ أحرف مع أرقام وحروف كبيرة."
+        : "Password too weak. Use 8+ chars with numbers and uppercase letters.");
       return;
     }
     if (!agreedTerms) {
