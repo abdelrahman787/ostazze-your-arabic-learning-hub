@@ -71,38 +71,77 @@ const HomePage = () => {
   }, []);
 
   useEffect(() => {
+    console.log("[HowSteps] 🔎 useInView changed →", howStepsInView, {
+      refAttached: !!howStepsRef.current,
+      refRect: howStepsRef.current?.getBoundingClientRect?.(),
+    });
     if (howStepsInView) {
+      console.log("[HowSteps] ✅ Triggering animation via useInView");
       const frame = requestAnimationFrame(() => setPlayHowSteps(true));
       return () => cancelAnimationFrame(frame);
     }
   }, [howStepsInView]);
 
   useEffect(() => {
-    if (playHowSteps) return;
+    console.log("[HowSteps] 🟡 Mount/state effect — playHowSteps =", playHowSteps);
+    if (playHowSteps) {
+      console.log("[HowSteps] ⏭️ Already playing, skipping fallback observers");
+      return;
+    }
 
-    const checkHowStepsVisibility = () => {
+    if (!howStepsRef.current) {
+      console.warn("[HowSteps] ⚠️ Ref NOT attached yet on effect mount");
+    }
+
+    const checkHowStepsVisibility = (source: string) => {
       const element = howStepsRef.current;
-      if (!element) return;
+      if (!element) {
+        console.warn(`[HowSteps] ❌ Ref missing during check (source=${source})`);
+        return;
+      }
 
       const rect = element.getBoundingClientRect();
       const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
       const isVisible = rect.top < viewportHeight * 0.82 && rect.bottom > viewportHeight * 0.18;
 
-      if (isVisible) setPlayHowSteps(true);
+      console.log(`[HowSteps] 👁️ Visibility check (${source})`, {
+        top: Math.round(rect.top),
+        bottom: Math.round(rect.bottom),
+        viewportHeight,
+        isVisible,
+        documentReady: document.readyState,
+      });
+
+      if (isVisible) {
+        console.log(`[HowSteps] ✅ Visible — triggering animation (source=${source})`);
+        setPlayHowSteps(true);
+      }
     };
 
-    const frame = requestAnimationFrame(checkHowStepsVisibility);
-    const timeout = window.setTimeout(checkHowStepsVisibility, 700);
-    window.addEventListener("load", checkHowStepsVisibility, { once: true });
-    window.addEventListener("scroll", checkHowStepsVisibility, { passive: true });
-    window.addEventListener("resize", checkHowStepsVisibility);
+    const onRaf = () => checkHowStepsVisibility("rAF");
+    const onTimeout = () => checkHowStepsVisibility("timeout-700ms");
+    const onLoad = () => checkHowStepsVisibility("window-load");
+    const onScroll = () => checkHowStepsVisibility("scroll");
+    const onResize = () => checkHowStepsVisibility("resize");
+
+    let frame: number | null = null;
+    let timeout: number | null = null;
+    try {
+      frame = requestAnimationFrame(onRaf);
+      timeout = window.setTimeout(onTimeout, 700);
+      window.addEventListener("load", onLoad, { once: true });
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", onResize);
+    } catch (err) {
+      console.error("[HowSteps] 💥 Failed to register visibility listeners", err);
+    }
 
     return () => {
-      cancelAnimationFrame(frame);
-      window.clearTimeout(timeout);
-      window.removeEventListener("load", checkHowStepsVisibility);
-      window.removeEventListener("scroll", checkHowStepsVisibility);
-      window.removeEventListener("resize", checkHowStepsVisibility);
+      if (frame !== null) cancelAnimationFrame(frame);
+      if (timeout !== null) window.clearTimeout(timeout);
+      window.removeEventListener("load", onLoad);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
     };
   }, [playHowSteps]);
 
