@@ -119,22 +119,7 @@ const UniversityLogosStrip = () => {
   const list = allUniversities.slice(0, 12);
 
   return (
-    <section className="relative py-16 md:py-20 bg-background overflow-hidden">
-      {/* Ambient background orbs */}
-      <div
-        className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full blur-[120px] opacity-20 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(circle, hsl(var(--primary)) 0%, transparent 70%)",
-        }}
-      />
-      <div
-        className="absolute bottom-0 right-1/4 w-[500px] h-[500px] rounded-full blur-[120px] opacity-20 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(circle, hsl(270 70% 55%) 0%, transparent 70%)",
-        }}
-      />
+    <section className="relative py-16 md:py-20 overflow-hidden">
 
       <div className="container max-w-6xl relative z-10">
         {/* Header */}
