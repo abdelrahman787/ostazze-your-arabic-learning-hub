@@ -573,6 +573,12 @@ const translations = {
   terms_section5_content: { ar: "جميع المحتويات المتاحة على المنصة، بما في ذلك النصوص والرسومات والشعارات، هي ملكية لأسطازي ومحمية بموجب قوانين حقوق الملكية الفكرية.", en: "All content available on the platform, including text, graphics, and logos, is the property of Ostaze and is protected by intellectual property laws." },
   terms_section6_title: { ar: "تعديل الشروط", en: "Modification of Terms" },
   terms_section6_content: { ar: "نحتفظ بالحق في تعديل هذه الشروط في أي وقت. سيتم إخطارك بأي تغييرات جوهرية عبر البريد الإلكتروني أو من خلال إشعار على المنصة.", en: "We reserve the right to modify these terms at any time. You will be notified of any material changes via email or through a notice on the platform." },
+  terms_section7_title: { ar: "مسؤوليات الطالب والمعلم", en: "Student & Tutor Responsibilities" },
+  terms_section7_content: { ar: "يلتزم الطلاب باحترام أوقات الجلسات والحضور في الموعد. يلتزم المعلمون بتقديم محتوى احترافي ومناسب للمستوى المُعلن، والاستجابة لرسائل الطلاب خلال 24 ساعة عمل. في حال عدم الحضور (No-Show) من الطالب دون إلغاء قبل ساعتين، تُعتبر الجلسة قد قُدمت ولا تُسترد. في حال عدم حضور المعلم، يُسترد المبلغ كاملاً للطالب أو يُعاد جدولة الجلسة.", en: "Students must respect session times and attend on schedule. Tutors must deliver professional content appropriate to the advertised level and respond to student messages within 24 business hours. If a student no-shows without cancelling 2+ hours in advance, the session is considered delivered and non-refundable. If a tutor no-shows, the student receives a full refund or rescheduled session." },
+  terms_section8_title: { ar: "تسجيل الجلسات والخصوصية", en: "Session Recordings & Privacy" },
+  terms_section8_content: { ar: "قد تُسجَّل بعض الجلسات الحية لأغراض الجودة أو لإتاحتها للطالب لاحقاً، ويتم إخطار جميع الأطراف قبل بدء التسجيل. لا يُسمح للطلاب أو المعلمين بإعادة نشر التسجيلات أو مشاركتها خارج المنصة. الرسائل النصية والملفات داخل المحاضرات مشفرة أثناء النقل.", en: "Some live sessions may be recorded for quality assurance or later access by the student. All parties are notified before recording starts. Students and tutors may not redistribute recordings or share them outside the platform. Chat messages and files within lectures are encrypted in transit." },
+  terms_section9_title: { ar: "حدود المسؤولية والقانون الحاكم", en: "Liability Limits & Governing Law" },
+  terms_section9_content: { ar: "تُقدَّم الخدمة \"كما هي\" دون ضمانات صريحة أو ضمنية تتجاوز ما يفرضه القانون. لا تتحمل OSTAZE المسؤولية عن أي أضرار غير مباشرة أو تبعية. يُحكم هذه الشروط بموجب أنظمة المملكة العربية السعودية، وتختص المحاكم المختصة بمدينة الرياض بأي نزاع. يجوز للأطراف اللجوء أولاً إلى التسوية الودية عبر بريد disputes@ostaze.com.", en: "The service is provided \"as is\" without warranties beyond what the law mandates. OSTAZE is not liable for indirect or consequential damages. These terms are governed by the laws of the Kingdom of Saudi Arabia, and the competent courts in Riyadh have jurisdiction over any dispute. Parties are encouraged to first attempt amicable resolution via disputes@ostaze.com." },
 
   // Privacy page
   privacy_title: { ar: "سياسة الخصوصية", en: "Privacy Policy" },
@@ -580,15 +586,23 @@ const translations = {
   privacy_badge: { ar: "بياناتك محمية", en: "Your Data is Protected" },
   privacy_last_updated: { ar: "آخر تحديث: أبريل 2026", en: "Last updated: April 2026" },
   privacy_section1_title: { ar: "المعلومات التي نجمعها", en: "Information We Collect" },
-  privacy_section1_content: { ar: "نجمع المعلومات التي تقدمها مباشرة عند التسجيل مثل الاسم والبريد الإلكتروني ورقم الهاتف والمنطقة الزمنية. كما نجمع معلومات الاستخدام تلقائياً مثل عنوان IP ونوع المتصفح وصفحات الموقع التي تزورها.", en: "We collect information you provide directly during registration such as name, email, phone number, and timezone. We also automatically collect usage information such as IP address, browser type, and pages you visit." },
+  privacy_section1_content: { ar: "نجمع المعلومات التي تقدمها مباشرة عند التسجيل: الاسم، البريد الإلكتروني، رقم الهاتف، المنطقة الزمنية، والصورة الشخصية إن وُجدت. كما نجمع معلومات الاستخدام تلقائياً مثل عنوان IP ونوع المتصفح وصفحات الموقع التي تزورها. عند الدفع، تتم معالجة بيانات بطاقتك مباشرة عبر مزود الدفع (Stripe) ولا نحتفظ بأي أرقام بطاقات على خوادمنا.", en: "We collect information you provide directly during registration: name, email, phone, timezone, and avatar if any. We also automatically collect usage information such as IP address, browser type, and pages you visit. Payments are processed directly by our payment provider (Stripe); we never store card numbers on our servers." },
   privacy_section2_title: { ar: "كيف نستخدم معلوماتك", en: "How We Use Your Information" },
-  privacy_section2_content: { ar: "نستخدم معلوماتك لتقديم خدماتنا وتحسينها، والتواصل معك بشأن حسابك وجلساتك، وإرسال إشعارات مهمة، وتخصيص تجربتك على المنصة.", en: "We use your information to provide and improve our services, communicate with you about your account and sessions, send important notifications, and personalize your experience on the platform." },
-  privacy_section3_title: { ar: "مشاركة المعلومات", en: "Information Sharing" },
-  privacy_section3_content: { ar: "لا نبيع أو نؤجر معلوماتك الشخصية لأطراف ثالثة. قد نشارك معلوماتك مع مقدمي الخدمات الذين يساعدوننا في تشغيل المنصة، وذلك بموجب اتفاقيات سرية صارمة.", en: "We do not sell or rent your personal information to third parties. We may share your information with service providers who help us operate the platform, subject to strict confidentiality agreements." },
-  privacy_section4_title: { ar: "ملفات تعريف الارتباط (Cookies)", en: "Cookies" },
-  privacy_section4_content: { ar: "نستخدم ملفات تعريف الارتباط لتحسين تجربة المستخدم وتذكر تفضيلاتك. يمكنك التحكم في إعدادات الكوكيز من خلال متصفحك.", en: "We use cookies to improve user experience and remember your preferences. You can control cookie settings through your browser." },
+  privacy_section2_content: { ar: "نستخدم معلوماتك لتقديم خدماتنا وتحسينها، تأكيد الحجوزات، تسهيل الجلسات الحية، إرسال إشعارات عن المحاضرات الجديدة والرسائل، معالجة المدفوعات، الرد على استفساراتك، والامتثال لمتطلبات قانونية. الأساس القانوني للمعالجة: تنفيذ العقد بينك وبيننا، موافقتك (للإشعارات)، ومصلحتنا المشروعة في حماية المنصة من الإساءة.", en: "We use your information to provide and improve our services, confirm bookings, facilitate live sessions, send notifications about new lectures and messages, process payments, respond to your inquiries, and comply with legal requirements. Lawful bases for processing: performance of our contract with you, your consent (for notifications), and our legitimate interest in protecting the platform from abuse." },
+  privacy_section3_title: { ar: "مشاركة المعلومات والمعالجون", en: "Information Sharing & Processors" },
+  privacy_section3_content: { ar: "لا نبيع أو نؤجر معلوماتك. نشاركها فقط مع مقدمي الخدمات الذين يساعدوننا في تشغيل المنصة، بموجب اتفاقيات معالجة بيانات صارمة: Supabase (قاعدة البيانات والتخزين)، Stripe (المدفوعات)، Zoom/Daily (الجلسات الحية)، Lovable AI / Google Gemini (المساعد الذكي)، WhatsApp Business (الدعم). قد نشارك المعلومات إذا طُلب منا قانونياً أو لحماية حقوقنا أو سلامة المستخدمين.", en: "We do not sell or rent your information. We share it only with service providers that help us operate the platform under strict data processing agreements: Supabase (database & storage), Stripe (payments), Zoom/Daily (live sessions), Lovable AI / Google Gemini (AI assistant), WhatsApp Business (support). We may share information when legally required or to protect our rights or user safety." },
+  privacy_section4_title: { ar: "ملفات تعريف الارتباط والتخزين المحلي", en: "Cookies & Local Storage" },
+  privacy_section4_content: { ar: "نستخدم تخزيناً محلياً ضرورياً (localStorage) لحفظ جلسة تسجيل دخولك وتفضيل اللغة فقط. لا نستخدم أي أدوات تتبع إعلانية أو تحليلات طرف ثالث افتراضياً. إذا أُضيفت لاحقاً، فستحتاج موافقتك الصريحة عبر شريط التفضيلات.", en: "We use only essential local storage (localStorage) to keep you logged in and remember your language preference. We do not use any advertising trackers or third-party analytics by default. If added later, your explicit consent will be requested via the preferences banner." },
   privacy_section5_title: { ar: "حقوقك", en: "Your Rights" },
-  privacy_section5_content: { ar: "لديك الحق في الوصول إلى معلوماتك الشخصية وتصحيحها أو حذفها. يمكنك أيضاً طلب نسخة من بياناتك أو الاعتراض على معالجتها. للممارسة أي من هذه الحقوق، تواصل معنا عبر info@ostaze.com.", en: "You have the right to access, correct, or delete your personal information. You can also request a copy of your data or object to its processing. To exercise any of these rights, contact us at info@ostaze.com." },
+  privacy_section5_content: { ar: "لديك الحق في: الوصول إلى بياناتك، تصحيحها، حذفها (الحق في النسيان)، نقلها إلى مزود آخر، الاعتراض على المعالجة، وسحب موافقتك في أي وقت. لممارسة أي حق، أرسل طلبك إلى privacy@ostaze.com وسنرد خلال 30 يوماً.", en: "You have the right to: access your data, rectify it, erase it (right to be forgotten), port it to another provider, object to processing, and withdraw consent at any time. To exercise any right, email privacy@ostaze.com and we will respond within 30 days." },
+  privacy_section6_title: { ar: "مدد الاحتفاظ بالبيانات", en: "Data Retention" },
+  privacy_section6_content: { ar: "نحتفظ ببيانات الحساب طوال فترة نشاطه ولمدة 5 سنوات بعد آخر نشاط للأغراض المحاسبية والقانونية. تُحفظ تسجيلات الجلسات لمدة 90 يوماً ثم تُحذف تلقائياً. تُحفظ سجلات الدعم لمدة سنتين. يمكنك طلب حذف فوري في أي وقت ما لم يُلزمنا القانون بالاحتفاظ.", en: "We retain account data while the account is active and for 5 years after last activity for accounting and legal purposes. Session recordings are kept for 90 days then auto-deleted. Support logs are kept for 2 years. You can request immediate deletion at any time unless legally required to retain." },
+  privacy_section7_title: { ar: "الأطفال والقاصرون", en: "Children & Minors" },
+  privacy_section7_content: { ar: "المنصة غير مخصصة للأطفال دون سن 13 عاماً، ولا نقبل تسجيلهم. للمستخدمين بين 13 و 18 سنة، يجب الحصول على موافقة ولي الأمر، ويحق لولي الأمر طلب حذف الحساب في أي وقت.", en: "The platform is not intended for children under 13, and we do not accept their registrations. Users aged 13–18 must have parental consent; a parent or guardian may request account deletion at any time." },
+  privacy_section8_title: { ar: "نقل البيانات الدولي", en: "International Data Transfers" },
+  privacy_section8_content: { ar: "تُستضاف خوادمنا بشكل أساسي في مراكز بيانات تابعة لمزودي الخدمة المعتمدين، وقد تنقل البيانات إلى دول خارج بلدك مع تطبيق ضمانات تعاقدية معيارية (SCCs) لحماية بياناتك بمستوى مماثل لحماية القانون المحلي.", en: "Our servers are primarily hosted by approved providers and data may be transferred to countries outside yours, with Standard Contractual Clauses (SCCs) in place to protect your data at a level equivalent to local law." },
+  privacy_section9_title: { ar: "تواصل بشأن الخصوصية", en: "Privacy Contact" },
+  privacy_section9_content: { ar: "لأي استفسار عن خصوصيتك أو لطلب ممارسة حقوقك: privacy@ostaze.com — أو عبر صفحة التواصل. نلتزم بالرد خلال 30 يوماً كحد أقصى.", en: "For any privacy inquiry or to exercise your rights: privacy@ostaze.com — or via our Contact page. We commit to responding within a maximum of 30 days." },
 
   // Teachers empty state
   teachers_empty_title: { ar: "لا يوجد معلمون حالياً", en: "No Teachers Available" },
@@ -621,6 +635,24 @@ const translations = {
   payment_error_msg: { ar: "لم يتم العثور على معلومات الجلسة.", en: "No session information found." },
   go_to_dashboard: { ar: "الذهاب للوحة التحكم", en: "Go to Dashboard" },
   proceed_to_payment: { ar: "المتابعة للدفع", en: "Proceed to Payment" },
+
+  // Trust badges (homepage)
+  trust_verified: { ar: "معلمون موثقون", en: "Verified Tutors" },
+  trust_pay_per_session: { ar: "دفع لكل جلسة", en: "Pay Per Session" },
+  trust_cancel_anytime: { ar: "إلغاء قبل 24 ساعة", en: "Cancel 24h Ahead" },
+
+  // Teachers empty CTA
+  teachers_empty_register_cta: { ar: "سجّل كمعلم", en: "Register as a Tutor" },
+  teachers_empty_contact_cta: { ar: "تواصل معنا", en: "Contact Us" },
+
+  // Contact trust block
+  contact_trust_entity_label: { ar: "الكيان القانوني", en: "Legal Entity" },
+  contact_trust_entity_value: { ar: "OSTAZE Educational Services (TODO: تأكيد الاسم المسجل)", en: "OSTAZE Educational Services (TODO: confirm registered name)" },
+  contact_trust_hours_label: { ar: "ساعات العمل", en: "Working Hours" },
+  contact_trust_hours_value: { ar: "الأحد – الخميس، 9 صباحاً – 6 مساءً (بتوقيت السعودية)", en: "Sun–Thu, 9 AM – 6 PM (AST)" },
+  contact_trust_sla_label: { ar: "وقت الاستجابة", en: "Response Time" },
+  contact_trust_sla_value: { ar: "نرد على جميع الرسائل خلال 24 ساعة عمل", en: "We respond to all messages within 24 business hours" },
+  contact_trust_quick_help: { ar: "روابط مساعدة سريعة", en: "Quick Help Links" },
 } as const;
 
 type TranslationKey = keyof typeof translations;

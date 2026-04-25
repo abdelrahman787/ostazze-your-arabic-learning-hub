@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
 import { AlertTriangle, Search, GraduationCap, Users, BookOpen, Layers } from "lucide-react";
+import NoIndex from "@/components/NoIndex";
 
 const NotFound = () => {
   const location = useLocation();
@@ -22,6 +23,7 @@ const NotFound = () => {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-muted p-4">
+      <NoIndex title="404" />
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center max-w-lg w-full">
         <motion.div whileHover={{ scale: 1.1, rotate: 10 }} className="inline-block mb-4">
           <div className="w-20 h-20 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mx-auto">

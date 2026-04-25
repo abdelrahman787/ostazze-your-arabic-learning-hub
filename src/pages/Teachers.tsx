@@ -199,15 +199,20 @@ const Teachers = () => {
                 {sorted.map((tc, i) => <TeacherCard key={tc.user_id} teacher={tc} index={i} />)}
               </div>
             ) : (
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center py-16">
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center py-16 max-w-xl mx-auto">
                 <div className="w-20 h-20 rounded-2xl bg-muted flex items-center justify-center mx-auto mb-5">
                   <UserX size={36} className="text-muted-foreground/50" />
                 </div>
                 <h3 className="text-xl font-extrabold mb-2">{t("teachers_empty_title")}</h3>
-                <p className="text-muted-foreground max-w-md mx-auto mb-6">{t("teachers_empty_desc")}</p>
-                <a href="https://wa.me/966559003498" target="_blank" rel="noopener noreferrer" className="btn-primary inline-flex items-center gap-2">
-                  {lang === "ar" ? "تواصل معنا" : "Contact Us"}
-                </a>
+                <p className="text-muted-foreground mx-auto mb-6">{t("teachers_empty_desc")}</p>
+                <div className="flex flex-wrap items-center justify-center gap-3">
+                  <a href="/register" className="btn-primary inline-flex items-center gap-2">
+                    {t("teachers_empty_register_cta")}
+                  </a>
+                  <a href="https://wa.me/966559003498" target="_blank" rel="noopener noreferrer" className="btn-outline inline-flex items-center gap-2">
+                    {t("teachers_empty_contact_cta")}
+                  </a>
+                </div>
               </motion.div>
             )}
           </>

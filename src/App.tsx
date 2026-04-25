@@ -16,6 +16,8 @@ import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import AIChatWidget from "@/components/AIChatWidget";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import ScrollToTop from "@/components/ScrollToTop";
+import GlobalSeo from "@/components/GlobalSeo";
+import CookieConsent from "@/components/CookieConsent";
 import Index from "./pages/Index";
 
 const Teachers = lazy(() => import("./pages/Teachers"));
@@ -23,6 +25,8 @@ const TeacherProfile = lazy(() => import("./pages/TeacherProfile"));
 const Subjects = lazy(() => import("./pages/Subjects"));
 const Universities = lazy(() => import("./pages/Universities"));
 const Categories = lazy(() => import("./pages/Categories"));
+const Courses = lazy(() => import("./pages/Courses"));
+const CourseDetail = lazy(() => import("./pages/CourseDetail"));
 const Login = lazy(() => import("./pages/Login"));
 const Register = lazy(() => import("./pages/Register"));
 const ForgotPassword = lazy(() => import("./pages/ForgotPassword"));
@@ -72,6 +76,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       {!hideFooter && <Footer />}
       <FloatingWhatsApp />
       <AIChatWidget />
+      <CookieConsent />
     </div>
   );
 };
@@ -88,6 +93,7 @@ const App = () => (
                 <Sonner />
                 <BrowserRouter>
                   <ScrollToTop />
+                  <GlobalSeo />
                   <Layout>
                     <PageTransition>
                       <Suspense fallback={<RouteFallback />}>
@@ -98,6 +104,8 @@ const App = () => (
                           <Route path="/subjects" element={<Subjects />} />
                           <Route path="/universities" element={<Universities />} />
                           <Route path="/categories" element={<Categories />} />
+                          <Route path="/courses" element={<Courses />} />
+                          <Route path="/courses/:id" element={<CourseDetail />} />
                           <Route path="/login" element={<Login />} />
                           <Route path="/register" element={<Register />} />
                           <Route path="/forgot-password" element={<ForgotPassword />} />

@@ -10,6 +10,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 import AudioRecorder from "@/components/AudioRecorder";
 import AudioPlayer from "@/components/AudioPlayer";
+import NoIndex from "@/components/NoIndex";
 
 interface Lecture {
   id: string;
@@ -160,6 +161,7 @@ const LectureView = () => {
 
   return (
     <div className="min-h-[calc(100vh-64px)] bg-background flex flex-col">
+      <NoIndex title="Lecture" />
       {/* Sub-header */}
       <div className="bg-card border-b px-4 py-2 flex items-center justify-between">
         <div className="flex items-center gap-3">

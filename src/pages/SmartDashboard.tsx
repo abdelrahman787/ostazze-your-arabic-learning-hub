@@ -3,6 +3,7 @@ import { Loader2 } from "lucide-react";
 import { Navigate } from "react-router-dom";
 import Dashboard from "./Dashboard";
 import TeacherDashboard from "./TeacherDashboard";
+import NoIndex from "@/components/NoIndex";
 
 const SmartDashboard = () => {
   const { user, loading } = useAuth();
@@ -30,10 +31,10 @@ const SmartDashboard = () => {
   }
 
   if (user.role === "teacher") {
-    return <TeacherDashboard />;
+    return <><NoIndex title="Teacher Dashboard" /><TeacherDashboard /></>;
   }
 
-  return <Dashboard />;
+  return <><NoIndex title="Dashboard" /><Dashboard /></>;
 };
 
 export default SmartDashboard;

@@ -4,6 +4,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { KeyRound, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
+import NoIndex from "@/components/NoIndex";
 
 const ForgotPassword = () => {
   const { t } = useLanguage();
@@ -23,6 +24,7 @@ const ForgotPassword = () => {
 
   return (
     <div className="hero-gradient min-h-screen flex items-center justify-center p-4">
+      <NoIndex title="Forgot Password" />
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="card-base p-10 w-full max-w-md text-center">
         <motion.div whileHover={{ scale: 1.1, rotate: 15 }} className="w-16 h-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mx-auto mb-4">
           <KeyRound size={28} />

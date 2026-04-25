@@ -80,19 +80,21 @@ const Navbar = () => {
 
           {/* Center nav */}
           <div className="hidden md:flex items-center gap-6 absolute left-1/2 -translate-x-1/2">
-            {navLinks.map((l) => (
-              <Link
-                key={l.path}
-                to={l.path}
-                className={`text-sm font-medium transition-colors duration-200 ${
-                  location.pathname === l.path
-                    ? "text-primary font-bold"
-                    : "text-foreground/70 hover:text-foreground"
-                }`}
-              >
-                {l.label}
-              </Link>
-            ))}
+            {navLinks.map((l) => {
+              const isActive = location.pathname === l.path;
+              return (
+                <Link
+                  key={l.path}
+                  to={l.path}
+                  aria-current={isActive ? "page" : undefined}
+                  className={`text-sm font-medium transition-colors duration-200 ${
+                    isActive ? "text-primary font-bold" : "text-foreground/70 hover:text-foreground"
+                  }`}
+                >
+                  {l.label}
+                </Link>
+              );
+            })}
           </div>
 
           {/* Right actions */}

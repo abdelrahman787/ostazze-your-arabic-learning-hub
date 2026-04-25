@@ -54,13 +54,26 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [timezone, setTimezone] = useState("Asia/Riyadh");
   const [agreedTerms, setAgreedTerms] = useState(false);
+  // Honeypot — bots fill this; real users never see it.
+  const [website, setWebsite] = useState("");
 
   const pwStrength = useMemo(() => getPasswordStrength(password), [password]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (website) {
+      // Silent reject for bots
+      setSuccess(true);
+      return;
+    }
     if (password !== confirmPassword) {
       setError(t("password_mismatch"));
+      return;
+    }
+    if (pwStrength.level < 2) {
+      setError(lang === "ar"
+        ? "كلمة المرور ضعيفة. استخدم 8+ أحرف مع أرقام وحروف كبيرة."
+        : "Password too weak. Use 8+ chars with numbers and uppercase letters.");
       return;
     }
     if (!agreedTerms) {
@@ -95,7 +108,7 @@ const Register = () => {
   if (success) {
     return (
       <div className="hero-gradient min-h-screen flex items-center justify-center p-4">
-        <PageHelmet title={t("register_success_title")} />
+        <PageHelmet title={t("register_success_title")} noindex />
         <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="card-base p-10 w-full max-w-md text-center">
           <div className="w-16 h-16 rounded-2xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center mx-auto mb-4">
             <Mail size={28} />
@@ -110,7 +123,7 @@ const Register = () => {
 
   return (
     <div className="hero-gradient min-h-screen flex items-center justify-center p-4">
-      <PageHelmet title={t("register_title")} description={t("register_subtitle")} />
+      <PageHelmet title={t("register_title")} description={t("register_subtitle")} noindex />
       <div className="w-full max-w-4xl flex flex-col lg:flex-row gap-0">
         {/* Left side - Illustration */}
         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
@@ -168,7 +181,18 @@ const Register = () => {
             <div className="flex-1 h-px bg-border" />
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+            {/* Honeypot field — hidden from real users, bots will fill it */}
+            <input
+              type="text"
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
+              aria-hidden="true"
+              className="absolute opacity-0 pointer-events-none h-0 w-0 overflow-hidden"
+            />
             <div>
               <label className="block text-sm font-bold mb-1.5">{t("register_name")}</label>
               <div className="relative"><User size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" /><input type="text" value={fullName} onChange={(e) => setFullName(e.target.value)} placeholder={t("register_name")} className="input-base !pr-10" required maxLength={100} /></div>
@@ -230,7 +254,7 @@ const Register = () => {
               </span>
             </label>
 
-            {error && <div className="bg-destructive/10 border border-destructive/30 rounded-xl p-3 text-destructive text-sm">{error}</div>}
+            {error && <div role="alert" aria-live="assertive" className="bg-destructive/10 border border-destructive/30 rounded-xl p-3 text-destructive text-sm">{error}</div>}
 
             <button type="submit" disabled={loading || !agreedTerms} className="btn-primary w-full flex items-center justify-center gap-2">
               {loading && <span className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />}
