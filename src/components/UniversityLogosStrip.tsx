@@ -27,7 +27,6 @@ const UniversityItem = ({
   index: number;
 }) => {
   const Icon = ICONS[index % ICONS.length];
-  const isOrange = index % 2 === 0;
 
   return (
     <motion.div
@@ -43,26 +42,10 @@ const UniversityItem = ({
         className="group relative flex flex-col items-center justify-start gap-2.5 h-full min-h-[150px] px-4 py-5 transition-all duration-300 hover:-translate-y-0.5"
       >
         {/* Icon */}
-        <div
-          className="relative flex items-center justify-center w-12 h-12 rounded-xl transition-transform duration-300 group-hover:scale-110"
-          style={{
-            background: isOrange
-              ? "linear-gradient(135deg, hsl(var(--primary) / 0.22), hsl(var(--primary) / 0.06))"
-              : "linear-gradient(135deg, hsl(270 70% 55% / 0.22), hsl(270 70% 55% / 0.06))",
-            border: isOrange
-              ? "1px solid hsl(var(--primary) / 0.3)"
-              : "1px solid hsl(270 70% 55% / 0.3)",
-            boxShadow: "inset 0 1px 0 hsl(0 0% 100% / 0.18)",
-          }}
-        >
-          <Icon
-            className="w-6 h-6"
-            strokeWidth={1.5}
-            style={{
-              color: isOrange ? "hsl(var(--primary))" : "hsl(270 70% 65%)",
-            }}
-          />
-        </div>
+        <Icon
+          className="w-7 h-7 text-primary transition-transform duration-300 group-hover:scale-110"
+          strokeWidth={2}
+        />
 
         {/* Initials chip */}
         <div
