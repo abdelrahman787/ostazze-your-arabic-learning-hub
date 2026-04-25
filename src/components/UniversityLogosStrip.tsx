@@ -158,22 +158,58 @@ const UniversityLogosStrip = () => {
                       {/* Hover ring */}
                       <div className="absolute inset-0 rounded-2xl ring-1 ring-primary/0 group-hover:ring-primary/30 transition-all duration-500 pointer-events-none" />
 
-                      <div className="relative flex items-center gap-2.5 h-full">
-                        {/* 3D Brand Monogram */}
-                        <div
-                          className="relative shrink-0 w-11 h-11 rounded-xl flex items-center justify-center font-black text-[12px] text-white border border-primary/40"
-                          style={{
-                            background:
-                              "linear-gradient(135deg, hsl(14 91% 60%) 0%, hsl(14 91% 45%) 50%, hsl(28 95% 50%) 100%)",
-                            boxShadow:
-                              "inset 0 1px 0 0 rgba(255,255,255,0.4), inset 0 -2px 4px 0 rgba(0,0,0,0.25), 0 4px 14px -2px hsl(14 91% 55% / 0.5)",
-                          }}
-                        >
-                          <span className="drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">
-                            {initials(name)}
-                          </span>
-                          {/* Glass highlight */}
-                          <span className="absolute top-0.5 left-0.5 right-0.5 h-1/3 rounded-t-lg bg-white/35 blur-[1px]" />
+                      <div className="relative flex items-center gap-3 h-full">
+                        {/* Modern Monogram — minimal liquid-glass */}
+                        <div className="relative shrink-0 w-11 h-11 group/mono">
+                          {/* Soft brand glow halo behind */}
+                          <div
+                            className="absolute -inset-1 rounded-2xl opacity-50 group-hover:opacity-90 transition-opacity duration-500 blur-md"
+                            style={{
+                              background:
+                                "radial-gradient(circle at 30% 30%, hsl(14 91% 55% / 0.7), transparent 70%)",
+                            }}
+                          />
+
+                          {/* Main glass plate */}
+                          <div
+                            className="relative w-full h-full rounded-2xl flex items-center justify-center overflow-hidden"
+                            style={{
+                              background:
+                                "linear-gradient(145deg, hsl(14 91% 60% / 0.95), hsl(14 91% 45% / 0.85))",
+                              boxShadow:
+                                "0 1px 0 0 rgba(255,255,255,0.35) inset, 0 -8px 16px -4px rgba(0,0,0,0.25) inset, 0 8px 24px -6px hsl(14 91% 55% / 0.55)",
+                            }}
+                          >
+                            {/* Diagonal liquid sheen */}
+                            <div
+                              className="absolute inset-0 opacity-60 group-hover:opacity-90 transition-opacity duration-500"
+                              style={{
+                                background:
+                                  "linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.3) 45%, rgba(255,255,255,0.05) 55%, transparent 70%)",
+                              }}
+                            />
+
+                            {/* Curved bottom shadow for depth */}
+                            <div
+                              className="absolute -bottom-2 inset-x-0 h-4 rounded-full blur-md opacity-60"
+                              style={{ background: "rgba(0,0,0,0.4)" }}
+                            />
+
+                            {/* Letters — clean modern */}
+                            <span
+                              className="relative font-extrabold text-[13px] tracking-tight text-white leading-none"
+                              style={{
+                                textShadow:
+                                  "0 1px 2px rgba(0,0,0,0.35), 0 0 12px rgba(255,255,255,0.15)",
+                                fontFeatureSettings: '"ss01"',
+                              }}
+                            >
+                              {initials(name)}
+                            </span>
+                          </div>
+
+                          {/* Tiny status pulse dot */}
+                          <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-amber-300 ring-2 ring-[hsl(230_35%_8%)] shadow-[0_0_8px_hsl(38_92%_55%/0.8)]" />
                         </div>
 
                         {/* Name */}
