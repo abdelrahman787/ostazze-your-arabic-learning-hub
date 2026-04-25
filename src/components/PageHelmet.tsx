@@ -18,6 +18,7 @@ const DEFAULT_OG = "https://storage.googleapis.com/gpt-engineer-file-uploads/Z79
 const PageHelmet = ({
   title,
   description,
+  keywords,
   canonical,
   ogImage = DEFAULT_OG,
   ogType = "website",
@@ -33,6 +34,7 @@ const PageHelmet = ({
     <Helmet>
       <title>{fullTitle}</title>
       {description && <meta name="description" content={description} />}
+      {keywords && <meta name="keywords" content={keywords} />}
       <link rel="canonical" href={url} />
       {noindex && <meta name="robots" content="noindex,nofollow" />}
 
