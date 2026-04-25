@@ -472,8 +472,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Stats + Universities trust strip */}
-      <StatsBar />
+      {/* Universities trust strip */}
       <UniversityLogosStrip />
 
       {/* Testimonials */}
