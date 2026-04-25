@@ -161,6 +161,10 @@ const Login = () => {
           <p className="text-center text-sm mt-6 text-muted-foreground">
             {t("login_no_account")} <Link to="/register" className="text-primary font-semibold hover:underline">{t("login_register_now")}</Link>
           </p>
+
+          <p className="text-center text-[11px] mt-3 text-muted-foreground/80 leading-relaxed">
+            🔒 {t("login_security_note")}
+          </p>
         </motion.div>
       </div>
     </div>
