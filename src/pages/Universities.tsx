@@ -421,7 +421,7 @@ const Universities = () => {
                 <img
                   src={flagImages[selectedCountry.code]}
                   alt={selectedCountry.code}
-                  className="h-9 w-auto rounded shadow ring-1 ring-foreground/10"
+                  className="h-9 w-auto shadow ring-1 ring-foreground/10"
                   style={{ aspectRatio: `${FLAG_RATIOS[selectedCountry.code] ?? 1.5}`, objectFit: "contain" }}
                 />
                 <div>
