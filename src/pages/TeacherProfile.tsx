@@ -98,11 +98,8 @@ const TeacherProfile = () => {
 
       if (!tp) { setLoading(false); return; }
 
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select("full_name, full_name_en, bio, bio_en, avatar_url")
-        .eq("user_id", id)
-        .single();
+      const { data: profileRows } = await supabase.rpc("get_public_profile", { _user_id: id });
+      const profile = (profileRows as any[])?.[0] || null;
 
       setTeacher({
         user_id: tp.user_id,
@@ -145,10 +142,8 @@ const TeacherProfile = () => {
 
       if (data && (data as any[]).length > 0) {
         const studentIds = [...new Set((data as any[]).map((r: any) => r.student_id))];
-        const { data: profiles } = await supabase
-          .from("profiles")
-          .select("user_id, full_name")
-          .in("user_id", studentIds);
+        const { data: profiles } = await supabase.rpc("get_public_profiles", { _user_ids: studentIds });
+        const pMap = new Map((profiles || []).map((p: any) => [p.user_id, p.full_name]));
         const pMap = new Map(profiles?.map((p) => [p.user_id, p.full_name]) || []);
         setReviews((data as any[]).map((r: any) => ({ ...r, student_name: pMap.get(r.student_id) || "—" })));
       } else {
