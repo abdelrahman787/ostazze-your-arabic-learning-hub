@@ -1,9 +1,9 @@
-import { useState, useMemo, useEffect, createContext, useContext, useCallback } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   GraduationCap, Building2, ChevronLeft, Globe, Calendar,
-  BookOpen, ChevronDown, ExternalLink, Layers, Search, Hash, ChevronRight, CalendarPlus, Loader2
+  BookOpen, ExternalLink, Layers, Search, ChevronRight,
 } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import PageHelmet from "@/components/PageHelmet";
@@ -11,19 +11,9 @@ import FaqAccordion from "@/components/FaqAccordion";
 import { breadcrumbJsonLd, collectionPageJsonLd, faqJsonLd } from "@/lib/seo";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { allUniversities, University, College } from "@/data/universitiesData";
-import { resolveCourseSubject } from "@/lib/courseSubjectMap";
 import { Input } from "@/components/ui/input";
 import flagKW from "@/assets/flag-kw.svg";
 import flagQA from "@/assets/flag-qa.svg";
-import { supabase } from "@/integrations/supabase/client";
-import BookingFlowModal from "@/components/BookingFlowModal";
-import type { TeacherData } from "@/components/TeacherCard";
-
-// Context to allow nested DepartmentItem to open the booking modal
-const BookingTriggerContext = createContext<
-  ((subject: string, courseLabel: string) => void) | null
->(null);
-const useBookingTrigger = () => useContext(BookingTriggerContext);
 
 // Group universities by country
 const getCountries = () => {
