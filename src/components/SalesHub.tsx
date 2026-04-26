@@ -1,8 +1,8 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Loader2, ShoppingBag, Clock, CheckCircle, Users, UserCheck, Video } from "lucide-react";
+import { Loader2, ShoppingBag, Clock, CheckCircle, Users, UserCheck, Video, CreditCard, XCircle, Search, RefreshCw } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface SessionRequest {
@@ -30,16 +30,24 @@ const SalesHub = () => {
   const [requests, setRequests] = useState<SessionRequest[]>([]);
   const [loading, setLoading] = useState(true);
   const [teachers, setTeachers] = useState<TeacherOption[]>([]);
+  const [statusFilter, setStatusFilter] = useState<string>("all");
+  const [searchQ, setSearchQ] = useState("");
 
   // Assignment modal
   const [assigningId, setAssigningId] = useState<string | null>(null);
   const [assignTeacherId, setAssignTeacherId] = useState("");
   const [assignZoom, setAssignZoom] = useState("");
   const [assigning, setAssigning] = useState(false);
+  const [updatingId, setUpdatingId] = useState<string | null>(null);
 
   const fetchRequests = useCallback(async () => {
     setLoading(true);
-    const { data } = await supabase.from("session_requests").select("*").order("created_at", { ascending: false });
+    const { data, error } = await supabase.from("session_requests").select("*").order("created_at", { ascending: false });
+    if (error) {
+      toast.error("Error loading requests: " + error.message);
+      setLoading(false);
+      return;
+    }
     if (data && data.length > 0) {
       const allIds = [...new Set((data as any[]).flatMap((r: any) => [r.student_id, r.teacher_id].filter(Boolean)))];
       const { data: profiles } = await supabase.from("profiles").select("user_id, full_name").in("user_id", allIds);
@@ -87,8 +95,22 @@ const SalesHub = () => {
     setAssigning(false);
   };
 
+  const handleStatusChange = async (id: string, newStatus: string) => {
+    setUpdatingId(id);
+    try {
+      const { error } = await supabase.from("session_requests").update({ status: newStatus }).eq("id", id);
+      if (error) throw error;
+      toast.success("تم التحديث");
+      fetchRequests();
+    } catch (err: any) {
+      toast.error("Error: " + err.message);
+    }
+    setUpdatingId(null);
+  };
+
   const statusColor: Record<string, string> = {
     pending: "bg-warning/10 text-warning",
+    pending_payment: "bg-warning/10 text-warning",
     assigned: "bg-primary/10 text-primary",
     confirmed: "bg-success/10 text-success",
     rejected: "bg-destructive/10 text-destructive",
@@ -96,12 +118,38 @@ const SalesHub = () => {
     completed: "bg-success/10 text-success",
   };
 
+  const statusLabel: Record<string, string> = {
+    pending: "قيد الانتظار",
+    pending_payment: "بانتظار الدفع",
+    assigned: "تم التعيين",
+    confirmed: "مؤكد",
+    rejected: "مرفوض",
+    cancelled: "ملغي",
+    completed: "مكتمل",
+  };
+
+  const filteredRequests = useMemo(() => {
+    return requests.filter((r) => {
+      if (statusFilter !== "all" && r.status !== statusFilter) return false;
+      if (searchQ) {
+        const q = searchQ.toLowerCase();
+        return (
+          r.student_name?.toLowerCase().includes(q) ||
+          r.teacher_name?.toLowerCase().includes(q) ||
+          r.subject?.toLowerCase().includes(q)
+        );
+      }
+      return true;
+    });
+  }, [requests, statusFilter, searchQ]);
+
   const stats = {
     total: requests.length,
-    pending: requests.filter((r) => r.status === "pending").length,
-    assigned: requests.filter((r) => r.status === "assigned").length,
+    pending: requests.filter((r) => r.status === "pending" || r.status === "pending_payment").length,
+    assigned: requests.filter((r) => r.status === "assigned" || r.status === "confirmed").length,
     completed: requests.filter((r) => r.status === "completed").length,
   };
+
 
   return (
     <div className="space-y-6 animate-fade-in">
@@ -122,12 +170,41 @@ const SalesHub = () => {
         ))}
       </div>
 
+      {/* Filters & Search */}
+      <div className="card-base p-4 flex flex-wrap items-center gap-3">
+        <div className="relative flex-1 min-w-[200px]">
+          <Search size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+          <input
+            value={searchQ}
+            onChange={(e) => setSearchQ(e.target.value)}
+            placeholder="ابحث باسم الطالب، المعلم، أو المادة..."
+            className="input-base !pr-10 !py-2.5 text-sm"
+          />
+        </div>
+        <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="input-base !py-2.5 text-sm !w-auto min-w-[160px]">
+          <option value="all">كل الحالات</option>
+          <option value="pending">قيد الانتظار</option>
+          <option value="pending_payment">بانتظار الدفع</option>
+          <option value="assigned">تم التعيين</option>
+          <option value="confirmed">مؤكد</option>
+          <option value="completed">مكتمل</option>
+          <option value="rejected">مرفوض</option>
+          <option value="cancelled">ملغي</option>
+        </select>
+        <button onClick={fetchRequests} className="btn-outline !py-2.5 text-sm flex items-center gap-2" title="تحديث">
+          <RefreshCw size={14} /> تحديث
+        </button>
+      </div>
+
       {/* Requests table */}
       <div className="card-base p-6">
-        <h3 className="font-extrabold text-lg mb-4">{t("sales_requests")}</h3>
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="font-extrabold text-lg">{t("sales_requests")}</h3>
+          <span className="text-xs text-muted-foreground">{filteredRequests.length} / {requests.length}</span>
+        </div>
         {loading ? (
           <div className="flex justify-center py-8"><Loader2 className="animate-spin text-primary" size={24} /></div>
-        ) : requests.length === 0 ? (
+        ) : filteredRequests.length === 0 ? (
           <p className="text-muted-foreground text-sm text-center py-6">{t("sales_no_requests")}</p>
         ) : (
           <div className="overflow-x-auto">
@@ -143,29 +220,55 @@ const SalesHub = () => {
                 </tr>
               </thead>
               <tbody>
-                {requests.map((r) => (
+                {filteredRequests.map((r) => (
                   <tr key={r.id} className="border-b last:border-0 hover:bg-secondary/50">
                     <td className="py-3 px-2 font-medium">{r.student_name}</td>
                     <td className="py-3 px-2">{r.subject || "—"}</td>
-                    <td className="py-3 px-2">{r.preferred_date || "—"} {r.preferred_time?.slice(0, 5)}</td>
+                    <td className="py-3 px-2 whitespace-nowrap">{r.preferred_date || "—"} {r.preferred_time?.slice(0, 5)}</td>
                     <td className="py-3 px-2">{r.teacher_name || "—"}</td>
                     <td className="py-3 px-2">
-                      <span className={`px-2 py-1 rounded-full text-xs font-bold ${statusColor[r.status] || "bg-muted text-muted-foreground"}`}>
-                        {t((`bstatus_${r.status}` as any)) || r.status}
+                      <span className={`px-2 py-1 rounded-full text-xs font-bold whitespace-nowrap ${statusColor[r.status] || "bg-muted text-muted-foreground"}`}>
+                        {statusLabel[r.status] || r.status}
                       </span>
                     </td>
                     <td className="py-3 px-2">
-                      {r.status === "pending" && (
-                        <button onClick={() => { setAssigningId(r.id); setAssignTeacherId(""); setAssignZoom(""); }}
-                          className="text-xs font-bold text-primary hover:underline flex items-center gap-1">
-                          <Users size={12} /> {t("sales_assign")}
-                        </button>
-                      )}
-                      {r.zoom_url && (
-                        <a href={r.zoom_url} target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:underline flex items-center gap-1">
-                          <Video size={12} /> Zoom
-                        </a>
-                      )}
+                      <div className="flex items-center gap-2 flex-wrap">
+                        {(r.status === "pending" || r.status === "pending_payment") && (
+                          <button onClick={() => { setAssigningId(r.id); setAssignTeacherId(r.teacher_id || ""); setAssignZoom(r.zoom_url || ""); }}
+                            className="text-xs font-bold text-primary hover:underline flex items-center gap-1">
+                            <Users size={12} /> {r.teacher_id ? "تعديل" : t("sales_assign")}
+                          </button>
+                        )}
+                        {r.status === "assigned" && (
+                          <button
+                            disabled={updatingId === r.id}
+                            onClick={() => handleStatusChange(r.id, "confirmed")}
+                            className="text-xs font-bold text-success hover:underline flex items-center gap-1 disabled:opacity-50">
+                            <CheckCircle size={12} /> تأكيد
+                          </button>
+                        )}
+                        {(r.status === "assigned" || r.status === "confirmed") && (
+                          <button
+                            disabled={updatingId === r.id}
+                            onClick={() => handleStatusChange(r.id, "completed")}
+                            className="text-xs font-bold text-success hover:underline flex items-center gap-1 disabled:opacity-50">
+                            <CheckCircle size={12} /> إنهاء
+                          </button>
+                        )}
+                        {r.status !== "cancelled" && r.status !== "completed" && r.status !== "rejected" && (
+                          <button
+                            disabled={updatingId === r.id}
+                            onClick={() => { if (confirm("هل تريد إلغاء الطلب؟")) handleStatusChange(r.id, "cancelled"); }}
+                            className="text-xs font-bold text-destructive hover:underline flex items-center gap-1 disabled:opacity-50">
+                            <XCircle size={12} /> إلغاء
+                          </button>
+                        )}
+                        {r.zoom_url && (
+                          <a href={r.zoom_url} target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:underline flex items-center gap-1">
+                            <Video size={12} /> Zoom
+                          </a>
+                        )}
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -174,6 +277,7 @@ const SalesHub = () => {
           </div>
         )}
       </div>
+
 
       {/* Assignment modal */}
       {assigningId && (
