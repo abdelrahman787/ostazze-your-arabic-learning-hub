@@ -671,30 +671,42 @@
 .university-cell {
   position: relative;
 }
+.university-cell::before {
+  content: "";
+  position: absolute;
+  top: 12%;
+  bottom: 12%;
+  inset-inline-end: 0;
+  width: 1px;
+  background: hsl(var(--foreground) / 0.08);
+  pointer-events: none;
+}
 .university-cell::after {
   content: "";
   position: absolute;
-  inset: 0;
+  inset-inline: 12%;
+  bottom: 0;
+  height: 1px;
+  background: hsl(var(--foreground) / 0.08);
   pointer-events: none;
-  border-right: 1px solid hsl(var(--foreground) / 0.07);
-  border-bottom: 1px solid hsl(var(--foreground) / 0.07);
 }
-/* Remove right border on last column per breakpoint */
+/* Remove right divider on last column per breakpoint */
 @media (max-width: 639px) {
-  .university-cell:nth-child(2n)::after { border-right: 0; }
+  .university-cell:nth-child(2n)::before { display: none; }
   .university-cell:nth-last-child(-n+2):nth-child(2n+1)::after,
-  .university-cell:last-child::after { border-bottom: 0; }
-  .university-cell:nth-last-child(2):nth-child(odd)::after { border-bottom: 0; }
+  .university-cell:last-child::after { display: none; }
+  .university-cell:nth-last-child(2):nth-child(odd)::after { display: none; }
 }
 @media (min-width: 640px) and (max-width: 767px) {
-  .university-cell:nth-child(3n)::after { border-right: 0; }
-  .university-cell:nth-last-child(-n+3)::after { border-bottom: 0; }
+  .university-cell:nth-child(3n)::before { display: none; }
+  .university-cell:nth-last-child(-n+3)::after { display: none; }
 }
 @media (min-width: 768px) and (max-width: 1023px) {
-  .university-cell:nth-child(4n)::after { border-right: 0; }
-  .university-cell:nth-last-child(-n+4)::after { border-bottom: 0; }
+  .university-cell:nth-child(4n)::before { display: none; }
+  .university-cell:nth-last-child(-n+4)::after { display: none; }
 }
 @media (min-width: 1024px) {
-  .university-cell:nth-child(6n)::after { border-right: 0; }
-  .university-cell:nth-last-child(-n+6)::after { border-bottom: 0; }
+  .university-cell:nth-child(6n)::before { display: none; }
+  .university-cell:nth-last-child(-n+6)::after { display: none; }
 }
+
