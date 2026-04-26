@@ -35,30 +35,51 @@ const countryColors: Record<string, { from: string; to: string; accent: string }
   QA: { from: "from-red-600/20", to: "to-red-400/10", accent: "text-red-600 dark:text-red-400" },
 };
 
+// Official flag aspect ratios (width / height)
+const FLAG_RATIOS: Record<string, number> = {
+  KW: 2,        // Kuwait — 2:1
+  QA: 28 / 11,  // Qatar  — 28:11 (~2.545)
+};
+
 // ===== Static high-quality flag with subtle ambient glow =====
-const AnimatedFlag = ({ code, size = 120 }: { code: string; size?: number }) => (
-  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
+const AnimatedFlag = ({ code, size = 120 }: { code: string; size?: number }) => {
+  const ratio = FLAG_RATIOS[code] ?? 1.5;
+  // Fit the flag inside a square box of `size` while preserving its true ratio.
+  const flagWidth = size;
+  const flagHeight = Math.round(size / ratio);
+  return (
     <div
-      className="absolute inset-2 rounded-2xl blur-2xl opacity-30 pointer-events-none"
-      style={{
-        background:
-          code === "KW"
-            ? "radial-gradient(circle, #007A3D 0%, #CE1126 70%, transparent 100%)"
-            : "radial-gradient(circle, #8A1538 0%, #5B0E26 70%, transparent 100%)",
-      }}
-    />
-    <img
-      src={flagImages[code]}
-      alt={code === "KW" ? "Kuwait" : "Qatar"}
-      width={size}
-      height={Math.round(size * 0.62)}
-      loading="eager"
-      decoding="async"
-      className="relative z-10 object-cover rounded-md shadow-[0_8px_24px_-6px_rgba(0,0,0,0.45)] ring-1 ring-foreground/10"
-      style={{ width: size, height: Math.round(size * 0.62) }}
-    />
-  </div>
-);
+      className="relative flex items-center justify-center"
+      style={{ width: size, height: size }}
+    >
+      <div
+        className="absolute inset-2 rounded-2xl blur-2xl opacity-30 pointer-events-none"
+        style={{
+          background:
+            code === "KW"
+              ? "radial-gradient(circle, #007A3D 0%, #CE1126 70%, transparent 100%)"
+              : "radial-gradient(circle, #8A1538 0%, #5B0E26 70%, transparent 100%)",
+        }}
+      />
+      <img
+        src={flagImages[code]}
+        alt={code === "KW" ? "Kuwait" : "Qatar"}
+        width={flagWidth}
+        height={flagHeight}
+        loading="eager"
+        decoding="async"
+        className="relative z-10 rounded-md shadow-[0_8px_24px_-6px_rgba(0,0,0,0.45)] ring-1 ring-foreground/10"
+        style={{
+          width: flagWidth,
+          height: flagHeight,
+          aspectRatio: `${ratio}`,
+          objectFit: "contain",
+        }}
+      />
+    </div>
+  );
+};
+
 
 
 // ===== Department Item =====
@@ -396,7 +417,12 @@ const Universities = () => {
           {view === "universities" && selectedCountry && (
             <motion.div key="universities" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
               <div className="flex items-center gap-4 mb-8">
-                <img src={flagImages[selectedCountry.code]} alt={selectedCountry.code} className="w-14 h-9 object-cover rounded shadow ring-1 ring-foreground/10" />
+                <img
+                  src={flagImages[selectedCountry.code]}
+                  alt={selectedCountry.code}
+                  className="h-9 w-auto rounded shadow ring-1 ring-foreground/10"
+                  style={{ aspectRatio: `${FLAG_RATIOS[selectedCountry.code] ?? 1.5}`, objectFit: "contain" }}
+                />
                 <div>
                   <h2 className="text-2xl font-black">{lang === "ar" ? selectedCountry.name_ar : selectedCountry.name_en}</h2>
                   <p className="text-sm text-muted-foreground mt-0.5">
