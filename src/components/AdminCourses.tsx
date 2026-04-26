@@ -265,8 +265,8 @@ const AdminCourses = () => {
         const path = `${expandedCourse}/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
         const { error: upErr } = await supabase.storage.from("course-videos").upload(path, lessonVideoFile);
         if (upErr) throw upErr;
-        const { data: urlData } = supabase.storage.from("course-videos").getPublicUrl(path);
-        video_url = urlData.publicUrl;
+        // Store storage path; lesson player generates a signed URL on demand
+        video_url = path;
       }
 
       const payload = {
