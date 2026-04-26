@@ -162,7 +162,6 @@ const Universities = () => {
   ];
 
   return (
-    <BookingTriggerContext.Provider value={handleBookingTrigger}>
     <div className="min-h-screen">
       <PageHelmet
         title={lang === "ar" ? "الجامعات في الكويت وقطر" : "Universities in Kuwait & Qatar"}
