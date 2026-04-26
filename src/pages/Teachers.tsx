@@ -171,8 +171,8 @@ const Teachers = () => {
                 </h3>
                 <p className="text-xs text-muted-foreground mt-1">
                   {lang === "ar"
-                    ? "اختر مدرس بنفسك، أو دعنا نخصص لك أنسب مدرس متاح"
-                    : "Pick a tutor yourself, or let us assign the best one for you"}
+                    ? "اضغط حجز حصة لتختار المدرس المناسب وتتابع للدفع"
+                    : "Click Book a session to pick your tutor and proceed to payment"}
                 </p>
               </div>
             </div>
@@ -180,8 +180,8 @@ const Teachers = () => {
               onClick={() => setAssignModalOpen(true)}
               className="btn-primary inline-flex items-center justify-center gap-2 shrink-0"
             >
-              <Sparkles size={16} />
-              {lang === "ar" ? "اختر لي مدرس مناسب" : "Pick a tutor for me"}
+              <Calendar size={16} />
+              {lang === "ar" ? "حجز حصة" : "Book a session"}
             </button>
           </motion.div>
         )}
