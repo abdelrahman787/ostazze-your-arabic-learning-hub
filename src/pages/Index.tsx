@@ -17,6 +17,7 @@ import { Helmet } from "react-helmet-async";
 import hero3DCap from "@/assets/hero-3d-cap.webp";
 import OrbitSubjects from "@/components/OrbitSubjects";
 import UniversityLogosStrip from "@/components/UniversityLogosStrip";
+import AnimationDebugOverlay from "@/components/AnimationDebugOverlay";
 
 const container = {
   hidden: {},
