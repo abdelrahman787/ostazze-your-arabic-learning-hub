@@ -42,6 +42,7 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const CheckoutReturn = lazy(() => import("./pages/CheckoutReturn"));
 const FAQ = lazy(() => import("./pages/FAQ"));
 const ZoomTestPage = lazy(() => import("./pages/ZoomTestPage"));
+const MyBookings = lazy(() => import("./pages/MyBookings"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
