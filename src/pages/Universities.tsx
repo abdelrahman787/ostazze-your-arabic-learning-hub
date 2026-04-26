@@ -456,27 +456,7 @@ const Universities = () => {
           </section>
         )}
       </div>
-
-      {/* Booking modal — opens directly when "Request a session" is clicked */}
-      <BookingFlowModal
-        open={bookingOpen}
-        onClose={() => setBookingOpen(false)}
-        subject={bookingSubject}
-        courseLabel={bookingCourseLabel}
-        teachers={bookingTeachers}
-      />
-
-      {/* Tiny loading hint while teachers load on first trigger */}
-      {bookingOpen && teachersLoading && (
-        <div className="fixed bottom-6 inset-x-0 z-[60] flex justify-center pointer-events-none">
-          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-foreground/80 text-background text-xs font-medium shadow-lg">
-            <Loader2 size={14} className="animate-spin" />
-            {lang === "ar" ? "جاري تحميل المعلمين..." : "Loading tutors..."}
-          </div>
-        </div>
-      )}
     </div>
-    </BookingTriggerContext.Provider>
   );
 };
 
