@@ -729,6 +729,10 @@ export type Database = {
         Args: { _bucket: string; _name: string }
         Returns: boolean
       }
+      user_can_access_realtime_topic: {
+        Args: { _topic: string }
+        Returns: boolean
+      }
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
