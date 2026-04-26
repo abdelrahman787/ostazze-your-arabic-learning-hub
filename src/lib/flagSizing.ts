@@ -1,10 +1,10 @@
 // Shared sizing logic for country flags.
-// Keeps the same HEIGHT across countries (visual balance) while letting
-// each flag's WIDTH follow its true official aspect ratio.
+// The flag artwork is normalized to a 2:1 canvas so Kuwait and Qatar render
+// with identical visual width/height and never depend on SVG intrinsic quirks.
 
 export const FLAG_RATIOS: Record<string, number> = {
   KW: 2, // Kuwait — official 2:1
-  QA: 28 / 11, // Qatar — official 28:11 (~2.545)
+  QA: 2, // Qatar — normalized UI asset ratio for parity with Kuwait
 };
 
 // Largest official ratio across all supported flags. Used to cap the
@@ -30,7 +30,7 @@ export function getFlagRatio(code: string): number {
  * Compute a flag's rendered pixel dimensions inside a square container.
  *
  * - height is identical across all countries (so KW and QA align visually)
- * - width follows the official aspect ratio (no cropping, no distortion)
+ * - width follows the normalized asset ratio (no cropping, no distortion)
  * - both width and height always fit inside the container at every size
  */
 export function getFlagDimensions(code: string, containerSize: number): FlagDimensions {
