@@ -74,6 +74,17 @@ const SalesHub = () => {
 
   useEffect(() => { fetchRequests(); fetchTeachers(); }, [fetchRequests, fetchTeachers]);
 
+  // Realtime: refresh on any change to session_requests
+  useEffect(() => {
+    const channel = supabase
+      .channel("admin-session-requests")
+      .on("postgres_changes", { event: "*", schema: "public", table: "session_requests" }, () => {
+        fetchRequests();
+      })
+      .subscribe();
+    return () => { supabase.removeChannel(channel); };
+  }, [fetchRequests]);
+
   const handleAssign = async () => {
     if (!assigningId || !assignTeacherId) return;
     setAssigning(true);
