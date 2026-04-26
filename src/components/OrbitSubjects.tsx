@@ -1,11 +1,10 @@
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
   Calculator, Atom, FlaskConical, Languages,
-  BookOpen, BarChart3, Code, Microscope
+  Code
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import gradCap from "@/assets/hero-3d-cap.webp";
 
 type Subject = {
@@ -31,7 +30,7 @@ const ORBITS = [
 const OrbitSubjects = () => {
   const { t } = useLanguage();
   const [scale, setScale] = useState(1);
-  const [reducedMotion, setReducedMotion] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const updateScale = () => {
@@ -44,15 +43,28 @@ const OrbitSubjects = () => {
     updateScale();
     window.addEventListener("resize", updateScale);
 
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReducedMotion(mq.matches);
-    const onChange = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
-    mq.addEventListener?.("change", onChange);
-
     return () => {
       window.removeEventListener("resize", updateScale);
-      mq.removeEventListener?.("change", onChange);
     };
+  }, []);
+
+  useEffect(() => {
+    let frame = 0;
+
+    const tick = (now: number) => {
+      const nodes = sectionRef.current?.querySelectorAll<HTMLElement>("[data-orbit-raf]") ?? [];
+      nodes.forEach((node) => {
+        const duration = Number(node.dataset.orbitDuration || 60);
+        const direction = Number(node.dataset.orbitDirection || 1);
+        const angle = (((now / 1000) % duration) / duration) * 360 * direction;
+        node.style.setProperty("--orbit-angle", `${angle}deg`);
+      });
+
+      frame = window.requestAnimationFrame(tick);
+    };
+
+    frame = window.requestAnimationFrame(tick);
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   // Build subject placements per orbit
@@ -68,7 +80,7 @@ const OrbitSubjects = () => {
   });
 
   return (
-    <section className="relative overflow-hidden py-20 bg-[hsl(265_45%_8%)]">
+    <section ref={sectionRef} className="relative overflow-hidden py-20 bg-[hsl(265_45%_8%)]">
       {/* Deep radial glow background - purple + orange accents */}
       <div
         className="absolute inset-0 pointer-events-none"
