@@ -35,20 +35,12 @@ const countryColors: Record<string, { from: string; to: string; accent: string }
   QA: { from: "from-red-600/20", to: "to-red-400/10", accent: "text-red-600 dark:text-red-400" },
 };
 
-// Official flag aspect ratios (width / height)
-const FLAG_RATIOS: Record<string, number> = {
-  KW: 2,        // Kuwait — 2:1
-  QA: 28 / 11,  // Qatar  — 28:11 (~2.545)
-};
+// Official flag aspect ratios + sizing helper (shared, tested in flagSizing.test.ts)
+import { FLAG_RATIOS, getFlagDimensions } from "@/lib/flagSizing";
 
 // ===== Static high-quality flag with subtle ambient glow =====
 const AnimatedFlag = ({ code, size = 120 }: { code: string; size?: number }) => {
-  const ratio = FLAG_RATIOS[code] ?? 1.5;
-  // Use a uniform flag HEIGHT across all countries so every flag feels
-  // visually balanced inside the same square hero box. The width then
-  // follows each flag's true official ratio.
-  const flagHeight = Math.round(size * 0.55);
-  const flagWidth = Math.round(flagHeight * ratio);
+  const { width: flagWidth, height: flagHeight, ratio } = getFlagDimensions(code, size);
   return (
     <div
       className="relative flex items-center justify-center"
