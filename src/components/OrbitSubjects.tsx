@@ -207,11 +207,11 @@ const OrbitSubjects = () => {
               </div>
             </motion.div>
 
-            {/* Orbiting subjects */}
+            {/* Orbiting subjects — pure CSS rotation for stability */}
             {orbitItems.map((orbit, oIdx) => (
-              <motion.div
+              <div
                 key={`orbit-${oIdx}`}
-                className="absolute"
+                className={`absolute ${orbit.reverse ? "orbit-spin-reverse" : "orbit-spin"}`}
                 style={{
                   width: orbit.radius * 2,
                   height: orbit.radius * 2,
@@ -219,18 +219,10 @@ const OrbitSubjects = () => {
                   left: "50%",
                   marginLeft: -orbit.radius,
                   marginTop: -orbit.radius,
-                  willChange: "transform",
-                }}
-                initial={{ rotate: 0 }}
-                animate={reducedMotion ? { rotate: 0 } : { rotate: orbit.reverse ? -360 : 360 }}
-                transition={{
-                  duration: orbit.duration,
-                  repeat: Infinity,
-                  ease: "linear",
-                  repeatType: "loop",
+                  animationDuration: `${orbit.duration}s`,
                 }}
               >
-                {orbit.items.map((subj, i) => {
+                {orbit.items.map((subj) => {
                   const Icon = subj.icon;
                   const rad = (subj.angle * Math.PI) / 180;
                   const x = Math.cos(rad) * orbit.radius;
@@ -249,18 +241,10 @@ const OrbitSubjects = () => {
                         transform: `translate(${x}px, ${y}px)`,
                       }}
                     >
-                      {/* Counter-rotate so cards stay upright */}
-                      <motion.div
-                        className="w-full h-full flex items-center justify-center"
-                        initial={{ rotate: 0 }}
-                        animate={reducedMotion ? { rotate: 0 } : { rotate: orbit.reverse ? 360 : -360 }}
-                        transition={{
-                          duration: orbit.duration,
-                          repeat: Infinity,
-                          ease: "linear",
-                          repeatType: "loop",
-                        }}
-                        style={{ willChange: "transform" }}
+                      {/* Counter-rotate so cards stay upright (same duration, opposite direction) */}
+                      <div
+                        className={`w-full h-full flex items-center justify-center ${orbit.reverse ? "orbit-spin" : "orbit-spin-reverse"}`}
+                        style={{ animationDuration: `${orbit.duration}s` }}
                       >
                         <Link
                           to="/subjects"
@@ -286,11 +270,11 @@ const OrbitSubjects = () => {
                             {t(subj.key)}
                           </span>
                         </Link>
-                      </motion.div>
+                      </div>
                     </div>
                   );
                 })}
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
