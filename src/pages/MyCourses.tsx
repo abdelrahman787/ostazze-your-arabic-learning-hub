@@ -60,11 +60,21 @@ const MyCourses = () => {
       }
 
       const courseIds = enrollments.map(e => e.course_id);
-      const [{ data: courses }, { data: lessonCounts }, { data: sessions }] = await Promise.all([
+      const [{ data: courses }, { data: lessonCounts }] = await Promise.all([
         supabase.from("courses").select("id, title, title_en, cover_image_url, course_type, total_hours, category, category_en, instructor_name, instructor_name_en").in("id", courseIds),
         supabase.from("course_lessons").select("course_id, id").in("course_id", courseIds),
-        supabase.from("course_live_sessions").select("course_id, title, title_en, scheduled_date, scheduled_time, zoom_url, is_completed").in("course_id", courseIds).eq("is_completed", false).order("scheduled_date").order("scheduled_time"),
       ]);
+
+      // Fetch enrolled-only sessions (with zoom_url) per course via SECURITY DEFINER RPC
+      const sessionResults = await Promise.all(
+        courseIds.map(cid => supabase.rpc("get_course_live_sessions_enrolled", { _course_id: cid }))
+      );
+      const sessions = sessionResults.flatMap((r, i) =>
+        (r.data || []).map((s: any) => ({ ...s, course_id: courseIds[i] }))
+      ).filter(s => !s.is_completed)
+        .sort((a, b) =>
+          (a.scheduled_date + a.scheduled_time).localeCompare(b.scheduled_date + b.scheduled_time)
+        );
 
       const courseMap = new Map(courses?.map(c => [c.id, c]) || []);
       const lessonsMap = new Map<string, number>();
