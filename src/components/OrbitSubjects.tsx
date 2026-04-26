@@ -200,51 +200,28 @@ const OrbitSubjects = () => {
               </div>
             </div>
 
-            {/* Orbiting subjects — pure CSS rotation for stability */}
+            {/* Orbiting subjects — direct per-item rAF positions for stability */}
             {orbitItems.map((orbit, oIdx) => (
-              <div
-                key={`orbit-${oIdx}`}
-                className="absolute orbit-raf"
-                data-orbit-raf="true"
-                data-orbit-duration={orbit.duration}
-                data-orbit-direction={orbit.reverse ? -1 : 1}
-                style={{
-                  width: orbit.radius * 2,
-                  height: orbit.radius * 2,
-                  top: "50%",
-                  left: "50%",
-                  marginLeft: -orbit.radius,
-                  marginTop: -orbit.radius,
-                  transform: "rotate(var(--orbit-angle, 0deg))",
-                }}
-              >
+              <div key={`orbit-${oIdx}`} className="absolute inset-0">
                 {orbit.items.map((subj) => {
                   const Icon = subj.icon;
-                  const rad = (subj.angle * Math.PI) / 180;
-                  const x = Math.cos(rad) * orbit.radius;
-                  const y = Math.sin(rad) * orbit.radius;
                   return (
                     <div
                       key={subj.key}
-                      className="absolute"
+                      className="absolute orbit-traveler"
+                      data-orbit-traveler="true"
+                      data-orbit-radius={orbit.radius}
+                      data-orbit-base-angle={subj.angle}
+                      data-orbit-duration={orbit.duration}
+                      data-orbit-direction={orbit.reverse ? -1 : 1}
                       style={{
                         top: "50%",
                         left: "50%",
                         width: 88,
                         height: 88,
-                        marginLeft: -44,
-                        marginTop: -44,
-                        transform: `translate(${x}px, ${y}px)`,
                       }}
                     >
-                      {/* Counter-rotate so cards stay upright (same duration, opposite direction) */}
-                      <div
-                        className="w-full h-full flex items-center justify-center orbit-raf"
-                        data-orbit-raf="true"
-                        data-orbit-duration={orbit.duration}
-                        data-orbit-direction={orbit.reverse ? 1 : -1}
-                        style={{ transform: "rotate(var(--orbit-angle, 0deg))" }}
-                      >
+                      <div className="w-full h-full flex items-center justify-center">
                         <Link
                           to="/subjects"
                           className="group flex flex-col items-center gap-2"
