@@ -670,6 +670,13 @@ const Admin = () => {
             </div>
           )}
 
+          {/* Invoices & Reports Tab */}
+          {activeTab === "invoices" && (
+            <div className="animate-fade-in">
+              <AdminInvoices />
+            </div>
+          )}
+
           {/* Courses Tab */}
           {activeTab === "courses" && (
             <div className="animate-fade-in">
