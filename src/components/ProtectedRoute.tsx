@@ -3,6 +3,8 @@ import { Navigate, useLocation } from "react-router-dom";
 import { Loader2, ShieldAlert } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useEffect } from "react";
+import { logAccessDenied } from "@/lib/accessLog";
 
 interface Props {
   children: React.ReactNode;
@@ -44,39 +46,61 @@ const ProtectedRoute = ({ children, adminOnly = false, teacherOnly = false }: Pr
   if (denied) {
     // Show explicit 403 instead of silent fallback to homepage
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background px-6">
-        <div className="max-w-md w-full text-center bg-card border border-border rounded-2xl p-8 shadow-lg">
-          <div className="mx-auto w-16 h-16 rounded-full bg-destructive/10 flex items-center justify-center mb-4">
-            <ShieldAlert className="text-destructive" size={32} />
-          </div>
-          <h1 className="text-2xl font-extrabold mb-2">
-            {ar ? "غير مصرّح بالوصول" : "Access Denied"}
-          </h1>
-          <p className="text-muted-foreground mb-6">
-            {ar
-              ? "هذه الصفحة محجوزة لدور محدد لا تملكه. تواصل مع المدير إذا كنت تظن أن هذا خطأ."
-              : "This page is restricted to a specific role you don't have. Contact an admin if you believe this is a mistake."}
-          </p>
-          <div className="flex gap-3 justify-center flex-wrap">
-            <Link
-              to="/dashboard"
-              className="px-5 py-2.5 rounded-lg bg-primary text-primary-foreground font-bold hover:opacity-90 transition"
-            >
-              {ar ? "لوحتي" : "My Dashboard"}
-            </Link>
-            <Link
-              to="/"
-              className="px-5 py-2.5 rounded-lg bg-secondary text-secondary-foreground font-bold hover:opacity-90 transition"
-            >
-              {ar ? "الرئيسية" : "Home"}
-            </Link>
-          </div>
-        </div>
-      </div>
+      <DeniedScreen
+        ar={ar}
+        required={adminOnly ? "admin" : "teacher"}
+        actual={user.role}
+        path={location.pathname}
+      />
     );
   }
 
   return <>{children}</>;
+};
+
+interface DeniedProps {
+  ar: boolean;
+  required: string;
+  actual: string;
+  path: string;
+}
+
+const DeniedScreen = ({ ar, required, actual, path }: DeniedProps) => {
+  useEffect(() => {
+    logAccessDenied("ProtectedRoute", required, actual, path);
+  }, [required, actual, path]);
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-background px-6">
+      <div className="max-w-md w-full text-center bg-card border border-border rounded-2xl p-8 shadow-lg">
+        <div className="mx-auto w-16 h-16 rounded-full bg-destructive/10 flex items-center justify-center mb-4">
+          <ShieldAlert className="text-destructive" size={32} />
+        </div>
+        <h1 className="text-2xl font-extrabold mb-2">
+          {ar ? "غير مصرّح بالوصول" : "Access Denied"}
+        </h1>
+        <p className="text-muted-foreground mb-6">
+          {ar
+            ? "هذه الصفحة محجوزة لدور محدد لا تملكه. تواصل مع المدير إذا كنت تظن أن هذا خطأ."
+            : "This page is restricted to a specific role you don't have. Contact an admin if you believe this is a mistake."}
+        </p>
+        <div className="flex gap-3 justify-center flex-wrap">
+          <Link
+            to="/dashboard"
+            className="px-5 py-2.5 rounded-lg bg-primary text-primary-foreground font-bold hover:opacity-90 transition"
+          >
+            {ar ? "لوحتي" : "My Dashboard"}
+          </Link>
+          <Link
+            to="/"
+            className="px-5 py-2.5 rounded-lg bg-secondary text-secondary-foreground font-bold hover:opacity-90 transition"
+          >
+            {ar ? "الرئيسية" : "Home"}
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default ProtectedRoute;
