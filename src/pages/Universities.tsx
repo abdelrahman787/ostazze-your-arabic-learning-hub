@@ -587,7 +587,7 @@ const Universities = () => {
                <div className="columns-1 lg:columns-2 gap-4 space-y-4">
                 {filteredColleges.map((college, i) => (
                   <div key={college.id} className="break-inside-avoid">
-                    <CollegeCard college={college} lang={lang} index={i} />
+                    <CollegeCard college={college} uniId={selectedUni.id} lang={lang} index={i} />
                   </div>
                 ))}
               </div>
