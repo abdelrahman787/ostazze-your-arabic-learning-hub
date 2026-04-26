@@ -9,7 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Skeleton } from "@/components/ui/skeleton";
 import PageHelmet from "@/components/PageHelmet";
 import PageHeader from "@/components/PageHeader";
-import AssignTeacherModal from "@/components/AssignTeacherModal";
+import BookingFlowModal from "@/components/BookingFlowModal";
 
 const TeacherCardSkeleton = () => (
   <div className="card-base flex flex-col p-5 gap-3">
