@@ -146,6 +146,46 @@ const Teachers = () => {
       <PageHeader title={t("teachers_title")} subtitle={t("teachers_choose")} variant="teachers" />
 
       <div className="container py-8">
+        {/* Subject context banner — appears when arriving from a course request */}
+        {initialSubject && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-6 rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent p-5 flex flex-col sm:flex-row sm:items-center gap-4"
+          >
+            <div className="flex items-start gap-3 flex-1 min-w-0">
+              <div className="w-11 h-11 rounded-xl bg-primary/15 text-primary flex items-center justify-center shrink-0">
+                <Users size={20} />
+              </div>
+              <div className="min-w-0">
+                <p className="text-xs text-muted-foreground font-medium">
+                  {lang === "ar" ? "تتصفح مدرسي" : "Browsing tutors for"}
+                </p>
+                <h3 className="font-extrabold text-base sm:text-lg text-foreground truncate">
+                  {initialSubject}
+                  {courseLabel && courseLabel !== initialSubject && (
+                    <span className="text-sm text-muted-foreground font-medium block sm:inline sm:ms-2">
+                      ({courseLabel})
+                    </span>
+                  )}
+                </h3>
+                <p className="text-xs text-muted-foreground mt-1">
+                  {lang === "ar"
+                    ? "اختر مدرس بنفسك، أو دعنا نخصص لك أنسب مدرس متاح"
+                    : "Pick a tutor yourself, or let us assign the best one for you"}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={() => setAssignModalOpen(true)}
+              className="btn-primary inline-flex items-center justify-center gap-2 shrink-0"
+            >
+              <Sparkles size={16} />
+              {lang === "ar" ? "اختر لي مدرس مناسب" : "Pick a tutor for me"}
+            </button>
+          </motion.div>
+        )}
+
         <div className="card-base p-6 mb-8">
           <div className="flex gap-3">
             <div className="flex-1 relative">
