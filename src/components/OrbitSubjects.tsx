@@ -27,6 +27,13 @@ const ORBITS = [
   { radius: 360, duration: 64, count: 3, reverse: false, offset: 90 },
 ];
 
+const getOrbitTransform = (radius: number, angleDeg: number) => {
+  const angle = angleDeg * (Math.PI / 180);
+  const x = Math.cos(angle) * radius;
+  const y = Math.sin(angle) * radius;
+  return `translate(-50%, -50%) translate3d(${x}px, ${y}px, 0)`;
+};
+
 const OrbitSubjects = () => {
   const { t } = useLanguage();
   const [scale, setScale] = useState(1);
@@ -167,6 +174,8 @@ const OrbitSubjects = () => {
                     left: "50%",
                     width: 8,
                     height: 8,
+                    zIndex: 15,
+                    transform: getOrbitTransform(orbit.radius, 0),
                     background:
                       "radial-gradient(circle, hsl(22 100% 70%) 0%, hsl(22 95% 55%) 50%, transparent 100%)",
                     boxShadow: "0 0 10px hsl(22 95% 60% / 0.8)",
@@ -219,6 +228,8 @@ const OrbitSubjects = () => {
                         left: "50%",
                         width: 88,
                         height: 88,
+                        zIndex: 30,
+                        transform: getOrbitTransform(orbit.radius, subj.angle),
                       }}
                     >
                       <div className="w-full h-full flex items-center justify-center">
