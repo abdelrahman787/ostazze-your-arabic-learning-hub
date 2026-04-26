@@ -184,8 +184,15 @@
     will-change: transform;
     transform: translateZ(0);
   }
+  .orbit-raf {
+    will-change: transform;
+    transform: rotate(var(--orbit-angle, 0deg)) translateZ(0);
+    backface-visibility: hidden;
+    contain: layout paint style;
+  }
   @media (prefers-reduced-motion: reduce) {
     .orbit-spin, .orbit-spin-reverse { animation: none !important; }
+    .orbit-raf { transform: rotate(0deg) translateZ(0) !important; }
   }
 
   /* Section background with subtle glow for dark mode */
