@@ -1,11 +1,10 @@
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
   Calculator, Atom, FlaskConical, Languages,
-  BookOpen, BarChart3, Code, Microscope
+  Code
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import gradCap from "@/assets/hero-3d-cap.webp";
 
 type Subject = {
@@ -31,7 +30,7 @@ const ORBITS = [
 const OrbitSubjects = () => {
   const { t } = useLanguage();
   const [scale, setScale] = useState(1);
-  const [reducedMotion, setReducedMotion] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const updateScale = () => {
@@ -44,15 +43,28 @@ const OrbitSubjects = () => {
     updateScale();
     window.addEventListener("resize", updateScale);
 
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReducedMotion(mq.matches);
-    const onChange = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
-    mq.addEventListener?.("change", onChange);
-
     return () => {
       window.removeEventListener("resize", updateScale);
-      mq.removeEventListener?.("change", onChange);
     };
+  }, []);
+
+  useEffect(() => {
+    let frame = 0;
+
+    const tick = (now: number) => {
+      const nodes = sectionRef.current?.querySelectorAll<HTMLElement>("[data-orbit-raf]") ?? [];
+      nodes.forEach((node) => {
+        const duration = Number(node.dataset.orbitDuration || 60);
+        const direction = Number(node.dataset.orbitDirection || 1);
+        const angle = (((now / 1000) % duration) / duration) * 360 * direction;
+        node.style.setProperty("--orbit-angle", `${angle}deg`);
+      });
+
+      frame = window.requestAnimationFrame(tick);
+    };
+
+    frame = window.requestAnimationFrame(tick);
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   // Build subject placements per orbit
@@ -68,7 +80,7 @@ const OrbitSubjects = () => {
   });
 
   return (
-    <section className="relative overflow-hidden py-20 bg-[hsl(265_45%_8%)]">
+    <section ref={sectionRef} className="relative overflow-hidden py-20 bg-[hsl(265_45%_8%)]">
       {/* Deep radial glow background - purple + orange accents */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -101,17 +113,12 @@ const OrbitSubjects = () => {
       </div>
 
       <div className="container relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-10"
-        >
+        <div className="text-center mb-10 animate-fade-in">
           <h2 className="text-3xl md:text-4xl font-extrabold mb-3 text-white">
             {t("popular_title")}
           </h2>
           <p className="text-white/60 max-w-xl mx-auto">{t("popular_subtitle")}</p>
-        </motion.div>
+        </div>
 
         {/* Orbit Stage */}
         <div
@@ -145,7 +152,10 @@ const OrbitSubjects = () => {
               return (
                 <div
                   key={`dot-orbit-${idx}`}
-                  className="absolute orbit-spin"
+                  className="absolute orbit-raf"
+                  data-orbit-raf="true"
+                  data-orbit-duration={duration}
+                  data-orbit-direction="1"
                   style={{
                     width: orbit.radius * 2,
                     height: orbit.radius * 2,
@@ -153,7 +163,7 @@ const OrbitSubjects = () => {
                     left: "50%",
                     marginLeft: -orbit.radius,
                     marginTop: -orbit.radius,
-                    animationDuration: `${duration}s`,
+                    transform: "rotate(var(--orbit-angle, 0deg))",
                   }}
                 >
                   <div
@@ -176,12 +186,7 @@ const OrbitSubjects = () => {
             })}
 
             {/* Central 3D Logo */}
-            <motion.div
-              initial={{ scale: 0, rotate: -180 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{ type: "spring", stiffness: 80, damping: 14 }}
-              className="absolute z-20"
-            >
+            <div className="absolute z-20 animate-scale-in">
               <div className="relative">
                 {/* Glow halo (lighter blur for perf) */}
                 <div
@@ -192,10 +197,8 @@ const OrbitSubjects = () => {
                     transform: "scale(1.8)",
                   }}
                 />
-                <motion.div
-                  animate={reducedMotion ? undefined : { y: [0, -10, 0] }}
-                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                  className="relative w-40 h-40 md:w-52 md:h-52 flex items-center justify-center"
+                <div
+                  className="relative w-40 h-40 md:w-52 md:h-52 flex items-center justify-center float-y"
                   style={{ willChange: "transform" }}
                 >
                   <img
@@ -203,15 +206,18 @@ const OrbitSubjects = () => {
                     alt="OSTAZE 3D Logo"
                     className="w-full h-full object-contain drop-shadow-[0_20px_40px_hsl(22_95%_50%/0.6)]"
                   />
-                </motion.div>
+                </div>
               </div>
-            </motion.div>
+            </div>
 
             {/* Orbiting subjects — pure CSS rotation for stability */}
             {orbitItems.map((orbit, oIdx) => (
               <div
                 key={`orbit-${oIdx}`}
-                className={`absolute ${orbit.reverse ? "orbit-spin-reverse" : "orbit-spin"}`}
+                className="absolute orbit-raf"
+                data-orbit-raf="true"
+                data-orbit-duration={orbit.duration}
+                data-orbit-direction={orbit.reverse ? -1 : 1}
                 style={{
                   width: orbit.radius * 2,
                   height: orbit.radius * 2,
@@ -219,7 +225,7 @@ const OrbitSubjects = () => {
                   left: "50%",
                   marginLeft: -orbit.radius,
                   marginTop: -orbit.radius,
-                  animationDuration: `${orbit.duration}s`,
+                  transform: "rotate(var(--orbit-angle, 0deg))",
                 }}
               >
                 {orbit.items.map((subj) => {
@@ -243,8 +249,11 @@ const OrbitSubjects = () => {
                     >
                       {/* Counter-rotate so cards stay upright (same duration, opposite direction) */}
                       <div
-                        className={`w-full h-full flex items-center justify-center ${orbit.reverse ? "orbit-spin" : "orbit-spin-reverse"}`}
-                        style={{ animationDuration: `${orbit.duration}s` }}
+                        className="w-full h-full flex items-center justify-center orbit-raf"
+                        data-orbit-raf="true"
+                        data-orbit-duration={orbit.duration}
+                        data-orbit-direction={orbit.reverse ? 1 : -1}
+                        style={{ transform: "rotate(var(--orbit-angle, 0deg))" }}
                       >
                         <Link
                           to="/subjects"
@@ -281,12 +290,7 @@ const OrbitSubjects = () => {
 
 
         {/* CTA below — extra spacing so it doesn't overlap the orbit rings */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mt-20 md:mt-28"
-        >
+        <div className="text-center mt-20 md:mt-28 animate-fade-in">
           <Link
             to="/subjects"
             className="inline-flex items-center gap-2 px-12 py-4 rounded-full font-bold text-white text-base md:text-lg transition-all hover:scale-105"
@@ -297,7 +301,7 @@ const OrbitSubjects = () => {
           >
             {t("view_all")}
           </Link>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
