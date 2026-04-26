@@ -404,14 +404,42 @@ serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
 
   try {
-    const { messages, conversation_id, student_id, student_name } = await req.json();
+    const body = await req.json();
+    const { messages, conversation_id } = body;
 
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
 
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+    const anonKey = Deno.env.get("SUPABASE_ANON_KEY")!;
     const supabaseAdmin = createClient(supabaseUrl, serviceRoleKey);
+
+    // ─── Auth: derive student_id from JWT, ignore client-supplied identity ───
+    let student_id: string | null = null;
+    let student_name: string | null = null;
+    const authHeader = req.headers.get("Authorization") || req.headers.get("authorization");
+    if (authHeader && authHeader.startsWith("Bearer ")) {
+      const token = authHeader.slice(7);
+      try {
+        const userClient = createClient(supabaseUrl, anonKey, {
+          global: { headers: { Authorization: `Bearer ${token}` } },
+        });
+        const { data: userData } = await userClient.auth.getUser(token);
+        if (userData?.user) {
+          student_id = userData.user.id;
+          // Look up display name from profiles (server-side, trusted)
+          const { data: prof } = await supabaseAdmin
+            .from("profiles")
+            .select("full_name, full_name_en")
+            .eq("user_id", student_id)
+            .maybeSingle();
+          student_name = prof?.full_name || prof?.full_name_en || null;
+        }
+      } catch (_e) {
+        // invalid token → treat as anonymous
+      }
+    }
 
     // Build system prompt with student context
     let systemPrompt = SYSTEM_PROMPT;
