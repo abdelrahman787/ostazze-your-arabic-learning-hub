@@ -1,8 +1,8 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Loader2, ShoppingBag, Clock, CheckCircle, Users, UserCheck, Video } from "lucide-react";
+import { Loader2, ShoppingBag, Clock, CheckCircle, Users, UserCheck, Video, CreditCard, XCircle, Search, RefreshCw } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface SessionRequest {
