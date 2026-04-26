@@ -149,10 +149,7 @@ const MyBookings = () => {
       const teacherIds = [...new Set(rows.map((r) => r.teacher_id).filter(Boolean) as string[])];
       let profileMap = new Map<string, { full_name: string | null; avatar_url: string | null }>();
       if (teacherIds.length > 0) {
-        const { data: profiles } = await supabase
-          .from("profiles")
-          .select("user_id, full_name, full_name_en, avatar_url")
-          .in("user_id", teacherIds);
+        const { data: profiles } = await supabase.rpc("get_public_profiles", { _user_ids: teacherIds });
         profileMap = new Map(
           (profiles || []).map((p: any) => [
             p.user_id,

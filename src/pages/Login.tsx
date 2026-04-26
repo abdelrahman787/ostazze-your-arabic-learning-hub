@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Eye, EyeOff, Mail, Lock, Sparkles, Loader2, GraduationCap, BookOpen, Users } from "lucide-react";
@@ -11,6 +11,8 @@ const Login = () => {
   const { login, isLoggedIn, user } = useAuth();
   const { t, lang } = useLanguage();
   const navigate = useNavigate();
+  const location = useLocation();
+  const fromPath = (location.state as { from?: string } | null)?.from;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPass, setShowPass] = useState(false);
@@ -22,11 +24,16 @@ const Login = () => {
 
   useEffect(() => {
     if (isLoggedIn && user && user.roleResolved) {
-      if (user.role === "admin") navigate("/admin");
-      else if (user.role === "teacher") navigate("/dashboard/teacher");
-      else navigate("/dashboard");
+      // If user came from a protected route, send them back there
+      if (fromPath && fromPath !== "/login" && fromPath !== "/register") {
+        navigate(fromPath, { replace: true });
+        return;
+      }
+      if (user.role === "admin") navigate("/admin", { replace: true });
+      else if (user.role === "teacher") navigate("/dashboard/teacher", { replace: true });
+      else navigate("/dashboard", { replace: true });
     }
-  }, [isLoggedIn, user, navigate]);
+  }, [isLoggedIn, user, navigate, fromPath]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

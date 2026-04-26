@@ -55,8 +55,8 @@ const BookingManager = ({ role }: Props) => {
     const { data } = await query;
     if (data && data.length > 0) {
       const otherIds = [...new Set(data.map((b: any) => b[otherCol]))];
-      const { data: profiles } = await supabase.from("profiles").select("user_id, full_name").in("user_id", otherIds);
-      const pMap = new Map(profiles?.map((p) => [p.user_id, p.full_name]) || []);
+      const { data: profiles } = await supabase.rpc("get_public_profiles", { _user_ids: otherIds });
+      const pMap = new Map((profiles || []).map((p: any) => [p.user_id, p.full_name]));
       setBookings(data.map((b: any) => ({ ...b, other_name: pMap.get(b[otherCol]) || "—" })));
     } else {
       setBookings([]);

@@ -663,6 +663,30 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_public_profile: {
+        Args: { _user_id: string }
+        Returns: {
+          account_type: string
+          avatar_url: string
+          bio: string
+          bio_en: string
+          full_name: string
+          full_name_en: string
+          user_id: string
+        }[]
+      }
+      get_public_profiles: {
+        Args: { _user_ids: string[] }
+        Returns: {
+          account_type: string
+          avatar_url: string
+          bio: string
+          bio_en: string
+          full_name: string
+          full_name_en: string
+          user_id: string
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
