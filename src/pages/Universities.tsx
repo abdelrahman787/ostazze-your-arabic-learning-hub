@@ -68,8 +68,15 @@ const AnimatedFlag = ({ code, size = 120 }: { code: string; size?: number }) => 
         height={flagHeight}
         loading="eager"
         decoding="async"
-        className="relative z-10 rounded-md shadow-[0_8px_24px_-6px_rgba(0,0,0,0.45)] ring-1 ring-foreground/10"
+        className="relative z-10 shadow-[0_8px_24px_-6px_rgba(0,0,0,0.45)] ring-1 ring-foreground/10"
         style={{
+          width: flagWidth,
+          height: flagHeight,
+          aspectRatio: `${ratio}`,
+          objectFit: "contain",
+          borderRadius: 0,
+        }}
+      />
           width: flagWidth,
           height: flagHeight,
           aspectRatio: `${ratio}`,
