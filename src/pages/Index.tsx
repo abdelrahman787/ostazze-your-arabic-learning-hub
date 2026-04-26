@@ -551,6 +551,7 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+      <AnimationDebugOverlay />
     </div>
   );
 };
