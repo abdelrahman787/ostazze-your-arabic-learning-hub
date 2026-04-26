@@ -663,6 +663,31 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_course_live_sessions_enrolled: {
+        Args: { _course_id: string }
+        Returns: {
+          duration_minutes: number
+          id: string
+          is_completed: boolean
+          scheduled_date: string
+          scheduled_time: string
+          title: string
+          title_en: string
+          zoom_url: string
+        }[]
+      }
+      get_course_live_sessions_public: {
+        Args: { _course_id: string }
+        Returns: {
+          duration_minutes: number
+          id: string
+          is_completed: boolean
+          scheduled_date: string
+          scheduled_time: string
+          title: string
+          title_en: string
+        }[]
+      }
       get_public_profile: {
         Args: { _user_id: string }
         Returns: {
@@ -696,6 +721,10 @@ export type Database = {
       }
       is_enrolled_in_course: {
         Args: { _course_id: string; _user_id: string }
+        Returns: boolean
+      }
+      user_can_access_lecture_file: {
+        Args: { _bucket: string; _name: string }
         Returns: boolean
       }
     }
