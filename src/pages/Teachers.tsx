@@ -290,11 +290,12 @@ const Teachers = () => {
         )}
       </div>
 
-      <AssignTeacherModal
+      <BookingFlowModal
         open={assignModalOpen}
         onClose={() => setAssignModalOpen(false)}
         subject={initialSubject}
         courseLabel={courseLabel || undefined}
+        teachers={sorted}
       />
     </div>
   );
