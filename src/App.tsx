@@ -65,8 +65,13 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       "/forgot-password",
       "/dashboard",
       "/dashboard/teacher",
+      "/admin",
     ].includes(location.pathname) ||
     location.pathname.startsWith("/lectures/");
+
+  // Pages that have their own full-page chrome (sidebar + header) should not show
+  // the floating global navbar — it overlaps their layout.
+  const hideNavbar = location.pathname === "/admin";
 
   return (
     <div className="relative min-h-screen flex flex-col">
@@ -74,9 +79,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:bg-primary focus:text-primary-foreground focus:px-4 focus:py-2 focus:rounded-lg focus:font-bold">
         Skip to content
       </a>
-      <Navbar />
-      {/* Pull content under the floating navbar */}
-      <main id="main-content" className="-mt-[72px] flex-1">{children}</main>
+      {!hideNavbar && <Navbar />}
+      {/* Pull content under the floating navbar (skip when navbar is hidden) */}
+      <main id="main-content" className={`${hideNavbar ? "" : "-mt-[72px]"} flex-1`}>{children}</main>
       {!hideFooter && <Footer />}
       <FloatingWhatsApp />
       <AIChatWidget />
