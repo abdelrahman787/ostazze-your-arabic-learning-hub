@@ -69,18 +69,20 @@ const AIChatWidget = () => {
 
     try {
       const convId = await ensureConversation();
+      const { data: sessionData } = await supabase.auth.getSession();
+      const accessToken = sessionData?.session?.access_token;
 
       const resp = await fetch(CHAT_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+          // Use the user's session token when logged in so the function can derive student_id from JWT
+          Authorization: `Bearer ${accessToken || import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+          apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
         },
         body: JSON.stringify({
           messages: newMessages.map((m) => ({ role: m.role, content: m.content })),
           conversation_id: convId,
-          student_id: user?.id || null,
-          student_name: user?.name || null,
         }),
       });
 
@@ -228,17 +230,18 @@ const AIChatWidget = () => {
                           (async () => {
                             try {
                               const convId = await ensureConversation();
+                              const { data: sessionData } = await supabase.auth.getSession();
+                              const accessToken = sessionData?.session?.access_token;
                               const resp = await fetch(CHAT_URL, {
                                 method: "POST",
                                 headers: {
                                   "Content-Type": "application/json",
-                                  Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+                                  Authorization: `Bearer ${accessToken || import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+                                  apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
                                 },
                                 body: JSON.stringify({
                                   messages: [{ role: "user", content: q }],
                                   conversation_id: convId,
-                                  student_id: user?.id || null,
-                                  student_name: user?.name || null,
                                 }),
                               });
                               const data = await resp.json();
