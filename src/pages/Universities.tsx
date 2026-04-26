@@ -77,12 +77,6 @@ const AnimatedFlag = ({ code, size = 120 }: { code: string; size?: number }) => 
           borderRadius: 0,
         }}
       />
-          width: flagWidth,
-          height: flagHeight,
-          aspectRatio: `${ratio}`,
-          objectFit: "contain",
-        }}
-      />
     </div>
   );
 };
