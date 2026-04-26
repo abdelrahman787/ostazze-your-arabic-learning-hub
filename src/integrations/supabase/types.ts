@@ -660,60 +660,33 @@ export type Database = {
       }
     }
     Views: {
-      profiles_public: {
-        Row: {
-          account_type: string | null
-          avatar_url: string | null
-          bio: string | null
-          bio_en: string | null
-          created_at: string | null
-          full_name: string | null
-          full_name_en: string | null
-          user_id: string | null
-        }
-        Insert: {
-          account_type?: string | null
-          avatar_url?: string | null
-          bio?: string | null
-          bio_en?: string | null
-          created_at?: string | null
-          full_name?: string | null
-          full_name_en?: string | null
-          user_id?: string | null
-        }
-        Update: {
-          account_type?: string | null
-          avatar_url?: string | null
-          bio?: string | null
-          bio_en?: string | null
-          created_at?: string | null
-          full_name?: string | null
-          full_name_en?: string | null
-          user_id?: string | null
-        }
-        Relationships: []
-      }
-      teacher_profiles_public: {
-        Row: {
-          avatar_url: string | null
-          bio: string | null
-          bio_en: string | null
-          created_at: string | null
-          full_name: string | null
-          full_name_en: string | null
-          id: string | null
-          price: number | null
-          subjects: string[] | null
-          subjects_en: string[] | null
-          university: string | null
-          university_en: string | null
-          user_id: string | null
-          verified: boolean | null
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Functions: {
+      get_public_profile: {
+        Args: { _user_id: string }
+        Returns: {
+          account_type: string
+          avatar_url: string
+          bio: string
+          bio_en: string
+          full_name: string
+          full_name_en: string
+          user_id: string
+        }[]
+      }
+      get_public_profiles: {
+        Args: { _user_ids: string[] }
+        Returns: {
+          account_type: string
+          avatar_url: string
+          bio: string
+          bio_en: string
+          full_name: string
+          full_name_en: string
+          user_id: string
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
