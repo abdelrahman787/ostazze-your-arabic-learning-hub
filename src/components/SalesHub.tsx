@@ -30,16 +30,24 @@ const SalesHub = () => {
   const [requests, setRequests] = useState<SessionRequest[]>([]);
   const [loading, setLoading] = useState(true);
   const [teachers, setTeachers] = useState<TeacherOption[]>([]);
+  const [statusFilter, setStatusFilter] = useState<string>("all");
+  const [searchQ, setSearchQ] = useState("");
 
   // Assignment modal
   const [assigningId, setAssigningId] = useState<string | null>(null);
   const [assignTeacherId, setAssignTeacherId] = useState("");
   const [assignZoom, setAssignZoom] = useState("");
   const [assigning, setAssigning] = useState(false);
+  const [updatingId, setUpdatingId] = useState<string | null>(null);
 
   const fetchRequests = useCallback(async () => {
     setLoading(true);
-    const { data } = await supabase.from("session_requests").select("*").order("created_at", { ascending: false });
+    const { data, error } = await supabase.from("session_requests").select("*").order("created_at", { ascending: false });
+    if (error) {
+      toast.error("Error loading requests: " + error.message);
+      setLoading(false);
+      return;
+    }
     if (data && data.length > 0) {
       const allIds = [...new Set((data as any[]).flatMap((r: any) => [r.student_id, r.teacher_id].filter(Boolean)))];
       const { data: profiles } = await supabase.from("profiles").select("user_id, full_name").in("user_id", allIds);
@@ -87,8 +95,22 @@ const SalesHub = () => {
     setAssigning(false);
   };
 
+  const handleStatusChange = async (id: string, newStatus: string) => {
+    setUpdatingId(id);
+    try {
+      const { error } = await supabase.from("session_requests").update({ status: newStatus }).eq("id", id);
+      if (error) throw error;
+      toast.success("تم التحديث");
+      fetchRequests();
+    } catch (err: any) {
+      toast.error("Error: " + err.message);
+    }
+    setUpdatingId(null);
+  };
+
   const statusColor: Record<string, string> = {
     pending: "bg-warning/10 text-warning",
+    pending_payment: "bg-warning/10 text-warning",
     assigned: "bg-primary/10 text-primary",
     confirmed: "bg-success/10 text-success",
     rejected: "bg-destructive/10 text-destructive",
@@ -96,12 +118,38 @@ const SalesHub = () => {
     completed: "bg-success/10 text-success",
   };
 
+  const statusLabel: Record<string, string> = {
+    pending: "قيد الانتظار",
+    pending_payment: "بانتظار الدفع",
+    assigned: "تم التعيين",
+    confirmed: "مؤكد",
+    rejected: "مرفوض",
+    cancelled: "ملغي",
+    completed: "مكتمل",
+  };
+
+  const filteredRequests = useMemo(() => {
+    return requests.filter((r) => {
+      if (statusFilter !== "all" && r.status !== statusFilter) return false;
+      if (searchQ) {
+        const q = searchQ.toLowerCase();
+        return (
+          r.student_name?.toLowerCase().includes(q) ||
+          r.teacher_name?.toLowerCase().includes(q) ||
+          r.subject?.toLowerCase().includes(q)
+        );
+      }
+      return true;
+    });
+  }, [requests, statusFilter, searchQ]);
+
   const stats = {
     total: requests.length,
-    pending: requests.filter((r) => r.status === "pending").length,
-    assigned: requests.filter((r) => r.status === "assigned").length,
+    pending: requests.filter((r) => r.status === "pending" || r.status === "pending_payment").length,
+    assigned: requests.filter((r) => r.status === "assigned" || r.status === "confirmed").length,
     completed: requests.filter((r) => r.status === "completed").length,
   };
+
 
   return (
     <div className="space-y-6 animate-fade-in">
