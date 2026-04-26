@@ -17,40 +17,61 @@ serve(async (req) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     );
 
-    const adminEmail = "admin@ostazze.com";
-    const adminPassword = "Admin@123456";
+    const adminsToCreate = [
+      { email: "admin1@ostaze.com", password: "Admin@123456", name: "Admin One" },
+      { email: "admin2@ostaze.com", password: "Admin@123456", name: "Admin Two" },
+    ];
 
-    // Check if admin already exists
     const { data: existingUsers } = await supabaseAdmin.auth.admin.listUsers();
-    const adminExists = existingUsers?.users?.some((u) => u.email === adminEmail);
+    const results: Array<{ email: string; status: string; error?: string }> = [];
 
-    if (adminExists) {
-      return new Response(JSON.stringify({ message: "Admin already exists" }), {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
+    for (const admin of adminsToCreate) {
+      const existing = existingUsers?.users?.find((u) => u.email === admin.email);
+
+      let userId: string | undefined;
+
+      if (existing) {
+        userId = existing.id;
+        results.push({ email: admin.email, status: "already exists" });
+      } else {
+        const { data: newUser, error: createError } = await supabaseAdmin.auth.admin.createUser({
+          email: admin.email,
+          password: admin.password,
+          email_confirm: true,
+          user_metadata: { full_name: admin.name, account_type: "student" },
+        });
+
+        if (createError) {
+          results.push({ email: admin.email, status: "failed", error: createError.message });
+          continue;
+        }
+        userId = newUser.user.id;
+        results.push({ email: admin.email, status: "created" });
+      }
+
+      if (userId) {
+        // Ensure admin role assigned (idempotent)
+        const { data: existingRole } = await supabaseAdmin
+          .from("user_roles")
+          .select("id")
+          .eq("user_id", userId)
+          .eq("role", "admin")
+          .maybeSingle();
+
+        if (!existingRole) {
+          const { error: roleError } = await supabaseAdmin
+            .from("user_roles")
+            .insert({ user_id: userId, role: "admin" });
+          if (roleError) {
+            results.push({ email: admin.email, status: "role_failed", error: roleError.message });
+          }
+        }
+      }
     }
 
-    // Create admin user
-    const { data: newUser, error: createError } = await supabaseAdmin.auth.admin.createUser({
-      email: adminEmail,
-      password: adminPassword,
-      email_confirm: true,
-      user_metadata: { full_name: "Admin", account_type: "student" },
+    return new Response(JSON.stringify({ results }), {
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
-
-    if (createError) throw createError;
-
-    // Assign admin role
-    const { error: roleError } = await supabaseAdmin
-      .from("user_roles")
-      .insert({ user_id: newUser.user.id, role: "admin" });
-
-    if (roleError) throw roleError;
-
-    return new Response(
-      JSON.stringify({ message: "Admin created successfully", email: adminEmail }),
-      { headers: { ...corsHeaders, "Content-Type": "application/json" } }
-    );
   } catch (error: unknown) {
     const msg = error instanceof Error ? error.message : String(error);
     return new Response(JSON.stringify({ error: msg }), {
