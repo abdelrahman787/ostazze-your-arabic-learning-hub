@@ -32,6 +32,7 @@ const Teachers = () => {
   const { t, lang } = useLanguage();
   const [searchParams] = useSearchParams();
   const initialSubject = searchParams.get("subject") || "";
+  const courseLabel = searchParams.get("course") || "";
   const [search, setSearch] = useState(initialSubject);
   const [showFilters, setShowFilters] = useState(!!initialSubject);
   const [sortBy, setSortBy] = useState("");
@@ -41,6 +42,7 @@ const Teachers = () => {
   const [teachers, setTeachers] = useState<TeacherData[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadingTimeout, setLoadingTimeout] = useState(false);
+  const [assignModalOpen, setAssignModalOpen] = useState(false);
 
   const universities = [...new Set(teachers.map((tc) => tc.university).filter(Boolean))] as string[];
   const subjects = [...new Set(teachers.flatMap((tc) => tc.subjects))] as string[];
