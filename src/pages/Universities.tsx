@@ -13,8 +13,8 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { allUniversities, University, College } from "@/data/universitiesData";
 import { resolveCourseSubject } from "@/lib/courseSubjectMap";
 import { Input } from "@/components/ui/input";
-import flagKW from "@/assets/flag-kw-wave.gif";
-import flagQA from "@/assets/flag-qa-wave.gif";
+import flagKW from "@/assets/flag-kw.svg";
+import flagQA from "@/assets/flag-qa.svg";
 
 // Group universities by country
 const getCountries = () => {
@@ -35,23 +35,31 @@ const countryColors: Record<string, { from: string; to: string; accent: string }
   QA: { from: "from-red-600/20", to: "to-red-400/10", accent: "text-red-600 dark:text-red-400" },
 };
 
-// ===== Animated Flag using real waving GIFs =====
+// ===== Static high-quality flag with subtle ambient glow =====
 const AnimatedFlag = ({ code, size = 120 }: { code: string; size?: number }) => (
   <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
-    <motion.div
-      className="absolute inset-0 rounded-full blur-2xl opacity-25"
-      style={{ background: code === "KW" ? "radial-gradient(circle, #007A3D 0%, #CE1126 100%)" : "radial-gradient(circle, #8A1538 0%, #FFFFFF 100%)" }}
-      animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.3, 0.15] }}
-      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+    <div
+      className="absolute inset-2 rounded-2xl blur-2xl opacity-30 pointer-events-none"
+      style={{
+        background:
+          code === "KW"
+            ? "radial-gradient(circle, #007A3D 0%, #CE1126 70%, transparent 100%)"
+            : "radial-gradient(circle, #8A1538 0%, #5B0E26 70%, transparent 100%)",
+      }}
     />
     <img
       src={flagImages[code]}
-      alt={code}
-      className="relative z-10 object-contain drop-shadow-xl"
-      style={{ width: size, height: size }}
+      alt={code === "KW" ? "Kuwait" : "Qatar"}
+      width={size}
+      height={Math.round(size * 0.62)}
+      loading="eager"
+      decoding="async"
+      className="relative z-10 object-cover rounded-md shadow-[0_8px_24px_-6px_rgba(0,0,0,0.45)] ring-1 ring-foreground/10"
+      style={{ width: size, height: Math.round(size * 0.62) }}
     />
   </div>
 );
+
 
 // ===== Department Item =====
 const DepartmentItem = ({ dept, lang, index }: { dept: College["departments"][0]; lang: "ar" | "en"; index: number }) => {
