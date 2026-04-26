@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import TeacherCard from "@/components/TeacherCard";
 import type { TeacherData } from "@/components/TeacherCard";
-import { Search, SlidersHorizontal, UserX, RefreshCw } from "lucide-react";
+import { Search, SlidersHorizontal, UserX, RefreshCw, Sparkles, Users } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import { Skeleton } from "@/components/ui/skeleton";
 import PageHelmet from "@/components/PageHelmet";
 import PageHeader from "@/components/PageHeader";
+import AssignTeacherModal from "@/components/AssignTeacherModal";
 
 const TeacherCardSkeleton = () => (
   <div className="card-base flex flex-col p-5 gap-3">
