@@ -204,7 +204,7 @@ const LectureView = () => {
             </a>
           )}
           {/* PDF — visible to both teacher and student */}
-          {lecture.pdf_url && (
+          {signedPdfUrl && (
             <button
               onClick={() => setPdfOpen(!pdfOpen)}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
@@ -235,7 +235,7 @@ const LectureView = () => {
       <div className="flex-1 flex h-[calc(100vh-64px-45px)] overflow-hidden">
         {/* PDF panel — RIGHT in RTL */}
         <AnimatePresence>
-          {pdfOpen && lecture.pdf_url && (
+          {pdfOpen && signedPdfUrl && (
             <motion.div
               initial={{ width: 0, opacity: 0 }}
               animate={{ width: 380, opacity: 1 }}
@@ -258,7 +258,7 @@ const LectureView = () => {
               <div className="flex-1">
                 <iframe
                   src={`https://docs.google.com/gview?url=${encodeURIComponent(
-                    lecture.pdf_url
+                    signedPdfUrl
                   )}&embedded=true`}
                   className="w-full h-full"
                   title="PDF Viewer"
@@ -271,11 +271,11 @@ const LectureView = () => {
         {/* Video — CENTER */}
         <div className="flex-1 flex flex-col overflow-hidden">
           <div className="flex-1 flex items-center justify-center p-4">
-            {lecture.video_url ? (
+            {signedVideoUrl ? (
               <div className="w-full max-w-5xl">
                 <div className="aspect-video bg-foreground/5 rounded-2xl overflow-hidden">
                   <video
-                    src={lecture.video_url}
+                    src={signedVideoUrl}
                     controls
                     className="w-full h-full object-contain"
                     controlsList="nodownload"
@@ -291,7 +291,7 @@ const LectureView = () => {
           </div>
 
           {/* PDF panel — mobile, below video */}
-          {pdfOpen && lecture.pdf_url && (
+          {pdfOpen && signedPdfUrl && (
             <div className="lg:hidden border-t bg-card flex flex-col h-[50vh]">
               <div className="p-2 border-b flex items-center justify-between">
                 <span className="text-xs font-bold flex items-center gap-1.5">
@@ -308,7 +308,7 @@ const LectureView = () => {
               <div className="flex-1">
                 <iframe
                   src={`https://docs.google.com/gview?url=${encodeURIComponent(
-                    lecture.pdf_url
+                    signedPdfUrl
                   )}&embedded=true`}
                   className="w-full h-full"
                   title="PDF Viewer"
