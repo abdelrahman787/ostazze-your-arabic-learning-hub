@@ -73,6 +73,7 @@ const AnimatedFlag = ({ code, size = 120 }: { code: string; size?: number }) => 
 // ===== Department Item =====
 const DepartmentItem = ({ dept, lang, index }: { dept: College["departments"][0]; lang: "ar" | "en"; index: number }) => {
   const [showCourses, setShowCourses] = useState(false);
+  const triggerBooking = useBookingTrigger();
   return (
     <motion.div
       initial={{ opacity: 0, x: -8 }}
