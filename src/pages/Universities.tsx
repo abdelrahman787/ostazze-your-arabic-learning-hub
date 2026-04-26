@@ -44,9 +44,11 @@ const FLAG_RATIOS: Record<string, number> = {
 // ===== Static high-quality flag with subtle ambient glow =====
 const AnimatedFlag = ({ code, size = 120 }: { code: string; size?: number }) => {
   const ratio = FLAG_RATIOS[code] ?? 1.5;
-  // Fit the flag inside a square box of `size` while preserving its true ratio.
-  const flagWidth = size;
-  const flagHeight = Math.round(size / ratio);
+  // Use a uniform flag HEIGHT across all countries so every flag feels
+  // visually balanced inside the same square hero box. The width then
+  // follows each flag's true official ratio.
+  const flagHeight = Math.round(size * 0.55);
+  const flagWidth = Math.round(flagHeight * ratio);
   return (
     <div
       className="relative flex items-center justify-center"
@@ -73,8 +75,9 @@ const AnimatedFlag = ({ code, size = 120 }: { code: string; size?: number }) => 
           width: flagWidth,
           height: flagHeight,
           aspectRatio: `${ratio}`,
-          objectFit: "contain",
+          objectFit: "fill",
           borderRadius: 0,
+          display: "block",
         }}
       />
     </div>
