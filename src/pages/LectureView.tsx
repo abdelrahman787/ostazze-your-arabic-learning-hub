@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
+import { getSignedFileUrl } from "@/lib/storageUrls";
 import {
   FileText, Send, Loader2, MessageSquare, Video, X, ArrowRight, ExternalLink,
 } from "lucide-react";
@@ -37,6 +38,8 @@ const LectureView = () => {
   const { t } = useLanguage();
   const navigate = useNavigate();
   const [lecture, setLecture] = useState<Lecture | null>(null);
+  const [signedVideoUrl, setSignedVideoUrl] = useState<string | null>(null);
+  const [signedPdfUrl, setSignedPdfUrl] = useState<string | null>(null);
   const [messages, setMessages] = useState<ChatMsg[]>([]);
   const [newMsg, setNewMsg] = useState("");
   const [loading, setLoading] = useState(true);
@@ -69,6 +72,15 @@ const LectureView = () => {
     }
 
     setLecture(data as Lecture);
+
+    // Generate signed URLs for private files (1h expiry)
+    const [vUrl, pUrl] = await Promise.all([
+      data.video_url ? getSignedFileUrl("lecture-videos", data.video_url, 3600) : Promise.resolve(null),
+      data.pdf_url ? getSignedFileUrl("lecture-pdfs", data.pdf_url, 3600) : Promise.resolve(null),
+    ]);
+    setSignedVideoUrl(vUrl);
+    setSignedPdfUrl(pUrl);
+
     setLoading(false);
   }, [id, user, navigate, t]);
 
