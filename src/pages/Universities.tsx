@@ -126,7 +126,7 @@ const DepartmentItem = ({ dept, lang, index }: { dept: College["departments"][0]
                       {course.credits}h
                     </span>
                     <Link
-                      to={`/teachers?subject=${encodeURIComponent(parentSubject)}`}
+                      to={`/teachers?subject=${encodeURIComponent(parentSubject)}&course=${encodeURIComponent(courseName)}`}
                       title={`${requestLabel} • ${parentSubject}`}
                       aria-label={`${requestLabel}: ${courseName} (${parentSubject})`}
                       onClick={(e) => e.stopPropagation()}
