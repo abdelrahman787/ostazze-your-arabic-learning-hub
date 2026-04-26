@@ -1,9 +1,9 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, createContext, useContext, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   GraduationCap, Building2, ChevronLeft, Globe, Calendar,
-  BookOpen, ChevronDown, ExternalLink, Layers, Search, Hash, ChevronRight, CalendarPlus
+  BookOpen, ChevronDown, ExternalLink, Layers, Search, Hash, ChevronRight, CalendarPlus, Loader2
 } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import PageHelmet from "@/components/PageHelmet";
@@ -15,6 +15,15 @@ import { resolveCourseSubject } from "@/lib/courseSubjectMap";
 import { Input } from "@/components/ui/input";
 import flagKW from "@/assets/flag-kw.svg";
 import flagQA from "@/assets/flag-qa.svg";
+import { supabase } from "@/integrations/supabase/client";
+import BookingFlowModal from "@/components/BookingFlowModal";
+import type { TeacherData } from "@/components/TeacherCard";
+
+// Context to allow nested DepartmentItem to open the booking modal
+const BookingTriggerContext = createContext<
+  ((subject: string, courseLabel: string) => void) | null
+>(null);
+const useBookingTrigger = () => useContext(BookingTriggerContext);
 
 // Group universities by country
 const getCountries = () => {
@@ -64,6 +73,7 @@ const AnimatedFlag = ({ code, size = 120 }: { code: string; size?: number }) => 
 // ===== Department Item =====
 const DepartmentItem = ({ dept, lang, index }: { dept: College["departments"][0]; lang: "ar" | "en"; index: number }) => {
   const [showCourses, setShowCourses] = useState(false);
+  const triggerBooking = useBookingTrigger();
   return (
     <motion.div
       initial={{ opacity: 0, x: -8 }}
@@ -133,16 +143,19 @@ const DepartmentItem = ({ dept, lang, index }: { dept: College["departments"][0]
                     <span className="text-[0.65rem] text-muted-foreground shrink-0 hidden sm:inline">
                       {course.credits}h
                     </span>
-                    <Link
-                      to={`/teachers?subject=${encodeURIComponent(parentSubject)}&course=${encodeURIComponent(courseName)}`}
+                    <button
+                      type="button"
                       title={`${requestLabel} • ${parentSubject}`}
                       aria-label={`${requestLabel}: ${courseName} (${parentSubject})`}
-                      onClick={(e) => e.stopPropagation()}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        triggerBooking?.(parentSubject, courseName);
+                      }}
                       className="shrink-0 inline-flex items-center gap-1.5 h-8 px-2.5 rounded-lg bg-primary/10 hover:bg-primary hover:text-primary-foreground text-primary text-xs font-bold transition-colors"
                     >
                       <CalendarPlus size={13} />
                       <span className="hidden sm:inline">{requestLabel}</span>
-                    </Link>
+                    </button>
                   </div>
                 );
               })}
@@ -232,6 +245,71 @@ const Universities = () => {
   const [selectedUni, setSelectedUni] = useState<University | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
 
+  // ===== Booking modal state =====
+  const [bookingOpen, setBookingOpen] = useState(false);
+  const [bookingSubject, setBookingSubject] = useState("");
+  const [bookingCourseLabel, setBookingCourseLabel] = useState("");
+  const [allTeachers, setAllTeachers] = useState<TeacherData[]>([]);
+  const [teachersLoading, setTeachersLoading] = useState(false);
+  const [teachersFetched, setTeachersFetched] = useState(false);
+
+  const fetchTeachers = useCallback(async () => {
+    if (teachersFetched || teachersLoading) return;
+    setTeachersLoading(true);
+    const { data: tps } = await supabase
+      .from("teacher_profiles")
+      .select("user_id, subjects, subjects_en, university, university_en, price, verified");
+    if (!tps || tps.length === 0) {
+      setAllTeachers([]);
+      setTeachersFetched(true);
+      setTeachersLoading(false);
+      return;
+    }
+    const userIds = tps.map((tp) => tp.user_id);
+    const { data: profiles } = await supabase
+      .from("profiles")
+      .select("user_id, full_name, full_name_en, bio, bio_en, avatar_url")
+      .in("user_id", userIds);
+    const profileMap = new Map((profiles || []).map((p) => [p.user_id, p]));
+    const merged: TeacherData[] = tps.map((tp) => {
+      const profile = profileMap.get(tp.user_id);
+      return {
+        user_id: tp.user_id,
+        full_name: profile?.full_name || (lang === "ar" ? "المعلم" : "Tutor"),
+        full_name_en: profile?.full_name_en || null,
+        bio: profile?.bio || null,
+        bio_en: profile?.bio_en || null,
+        avatar_url: profile?.avatar_url || null,
+        subjects: tp.subjects || [],
+        subjects_en: (tp as any).subjects_en || [],
+        university: tp.university || null,
+        university_en: (tp as any).university_en || null,
+        price: tp.price || 0,
+        verified: tp.verified || false,
+      };
+    });
+    setAllTeachers(merged);
+    setTeachersFetched(true);
+    setTeachersLoading(false);
+  }, [teachersFetched, teachersLoading, lang]);
+
+  const handleBookingTrigger = useCallback((subject: string, courseLabel: string) => {
+    setBookingSubject(subject);
+    setBookingCourseLabel(courseLabel);
+    setBookingOpen(true);
+    fetchTeachers();
+  }, [fetchTeachers]);
+
+  // Filter teachers by chosen subject (Arabic or English fuzzy match)
+  const bookingTeachers = useMemo(() => {
+    if (!bookingSubject) return [] as TeacherData[];
+    const q = bookingSubject.toLowerCase().trim();
+    return allTeachers.filter((tc) => {
+      const all = [...(tc.subjects || []), ...(tc.subjects_en || [])].map((s) => s.toLowerCase());
+      return all.some((s) => s.includes(q) || q.includes(s));
+    });
+  }, [allTeachers, bookingSubject]);
+
   const goToCountry = (c: typeof countries[0]) => { setSelectedCountry(c); setView("universities"); setSearchQuery(""); };
   const goToUni = (u: University) => { setSelectedUni(u); setView("university"); setSearchQuery(""); };
   const goBack = () => {
@@ -262,6 +340,7 @@ const Universities = () => {
   ];
 
   return (
+    <BookingTriggerContext.Provider value={handleBookingTrigger}>
     <div className="min-h-screen">
       <PageHelmet
         title={lang === "ar" ? "الجامعات في الكويت وقطر" : "Universities in Kuwait & Qatar"}
@@ -556,7 +635,27 @@ const Universities = () => {
           </section>
         )}
       </div>
+
+      {/* Booking modal — opens directly when "Request a session" is clicked */}
+      <BookingFlowModal
+        open={bookingOpen}
+        onClose={() => setBookingOpen(false)}
+        subject={bookingSubject}
+        courseLabel={bookingCourseLabel}
+        teachers={bookingTeachers}
+      />
+
+      {/* Tiny loading hint while teachers load on first trigger */}
+      {bookingOpen && teachersLoading && (
+        <div className="fixed bottom-6 inset-x-0 z-[60] flex justify-center pointer-events-none">
+          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-foreground/80 text-background text-xs font-medium shadow-lg">
+            <Loader2 size={14} className="animate-spin" />
+            {lang === "ar" ? "جاري تحميل المعلمين..." : "Loading tutors..."}
+          </div>
+        </div>
+      )}
     </div>
+    </BookingTriggerContext.Provider>
   );
 };
 
