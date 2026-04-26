@@ -62,17 +62,14 @@ const TeacherDashboard = () => {
       const lectureIds = data.map((l) => l.id);
 
       const [profilesResult, convResult] = await Promise.all([
-        supabase
-          .from("profiles")
-          .select("user_id, full_name, full_name_en")
-          .in("user_id", studentIds),
+        supabase.rpc("get_public_profiles", { _user_ids: studentIds }),
         supabase
           .from("chat_messages")
           .select("lecture_id")
           .in("lecture_id", lectureIds),
       ]);
 
-      const pMap = new Map(profilesResult.data?.map((p) => [p.user_id, p.full_name]) || []);
+      const pMap = new Map((profilesResult.data || []).map((p: any) => [p.user_id, p.full_name]));
       const convLectureIds = new Set(convResult.data?.map((m) => m.lecture_id) || []);
       const conversations = convLectureIds.size;
 

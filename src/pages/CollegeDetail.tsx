@@ -157,11 +157,8 @@ const CollegeDetail = () => {
       return;
     }
     const userIds = tps.map((tp) => tp.user_id);
-    const { data: profiles } = await supabase
-      .from("profiles")
-      .select("user_id, full_name, full_name_en, bio, bio_en, avatar_url")
-      .in("user_id", userIds);
-    const profileMap = new Map((profiles || []).map((p) => [p.user_id, p]));
+    const { data: profiles } = await supabase.rpc("get_public_profiles", { _user_ids: userIds });
+    const profileMap = new Map((profiles || []).map((p: any) => [p.user_id, p]));
     const merged: TeacherData[] = tps.map((tp) => {
       const profile = profileMap.get(tp.user_id);
       return {
