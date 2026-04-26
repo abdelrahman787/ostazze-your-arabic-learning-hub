@@ -36,8 +36,8 @@ const MyLessons = ({ role }: { role: "student" | "teacher" }) => {
     if (data && data.length > 0) {
       const otherCol = role === "teacher" ? "student_id" : "teacher_id";
       const ids = [...new Set((data as any[]).map((d: any) => d[otherCol]).filter(Boolean))];
-      const { data: profiles } = await supabase.from("profiles").select("user_id, full_name").in("user_id", ids);
-      const pMap = new Map(profiles?.map((p) => [p.user_id, p.full_name]) || []);
+      const { data: profiles } = await supabase.rpc("get_public_profiles", { _user_ids: ids });
+      const pMap = new Map((profiles || []).map((p: any) => [p.user_id, p.full_name]));
       setLessons((data as any[]).map((r: any) => ({
         ...r,
         teacher_name: role === "student" ? pMap.get(r.teacher_id) || "—" : undefined,
