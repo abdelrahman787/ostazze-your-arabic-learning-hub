@@ -8,15 +8,16 @@
     <title>OSTAZE - منصة كورسات تعليمية أونلاين | تعلم بسرعتك</title>
     <meta name="description" content="منصة OSTAZE للكورسات التعليمية الرقمية: كورسات مسجلة وحية في البرمجة، الرياضيات، الفيزياء، الإنجليزي والمزيد. وصول مدى الحياة بأسعار مدروسة.">
 
-    <!-- Security headers (meta-equivalent). Note: HSTS, X-Frame-Options, COOP,
-         CORP, frame-ancestors must be set as HTTP response headers at the
-         hosting edge — they are intentionally NOT here because <meta http-equiv>
-         is ignored for them by browsers. Lovable hosting provides default
-         clickjacking protection at the edge. -->
+    <!-- Security headers: authoritative copies live in `public/_headers` and are
+         served as real HTTP response headers (CSP, frame-ancestors,
+         X-Frame-Options, HSTS, COOP, CORP, Permissions-Policy, Referrer-Policy).
+         The CSP <meta> below is a defense-in-depth fallback for environments
+         where edge headers are unavailable. Note: X-Frame-Options, HSTS,
+         frame-ancestors, COOP, CORP, and Permissions-Policy are intentionally
+         NOT here — browsers ignore them as <meta>. -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob: https://*.supabase.co https://storage.googleapis.com https://*.googleusercontent.com https://lh3.googleusercontent.com https://fonts.gstatic.com https://images.unsplash.com https://plus.unsplash.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.stripe.com https://*.lovable.app https://*.lovable.dev; media-src 'self' blob: https://*.supabase.co; frame-src 'self' https://js.stripe.com https://hooks.stripe.com https://docs.google.com https://www.youtube.com https://www.youtube-nocookie.com; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests" />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(self), geolocation=(), payment=(self), interest-cohort=(), browsing-topics=()" />
     <meta name="color-scheme" content="dark light" />
     <meta name="theme-color" content="#0F172A" />
     <meta name="format-detection" content="telephone=no" />
