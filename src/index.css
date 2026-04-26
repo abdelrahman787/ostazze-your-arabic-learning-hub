@@ -165,6 +165,29 @@
     transform: translateZ(0);
   }
 
+  /* Continuous orbit rotation — pure CSS so it never stalls on re-renders */
+  @keyframes orbit-spin-cw {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  @keyframes orbit-spin-ccw {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(-360deg); }
+  }
+  .orbit-spin {
+    animation: orbit-spin-cw linear infinite;
+    will-change: transform;
+    transform: translateZ(0);
+  }
+  .orbit-spin-reverse {
+    animation: orbit-spin-ccw linear infinite;
+    will-change: transform;
+    transform: translateZ(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .orbit-spin, .orbit-spin-reverse { animation: none !important; }
+  }
+
   /* Section background with subtle glow for dark mode */
   .glow-section {
     position: relative;
