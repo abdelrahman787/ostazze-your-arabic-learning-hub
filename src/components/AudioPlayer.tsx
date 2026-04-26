@@ -1,5 +1,6 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Play, Pause } from "lucide-react";
+import { getSignedFileUrl } from "@/lib/storageUrls";
 
 interface AudioPlayerProps {
   src: string;
@@ -10,7 +11,18 @@ const AudioPlayer = ({ src, isMe }: AudioPlayerProps) => {
   const [playing, setPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [resolvedSrc, setResolvedSrc] = useState<string | null>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
+
+  // Resolve a signed URL for the chat-audio bucket (or use src as-is if it's already a full URL)
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const url = await getSignedFileUrl("chat-audio", src, 3600);
+      if (!cancelled) setResolvedSrc(url || src);
+    })();
+    return () => { cancelled = true; };
+  }, [src]);
 
   const toggle = () => {
     if (!audioRef.current) return;
@@ -29,19 +41,22 @@ const AudioPlayer = ({ src, isMe }: AudioPlayerProps) => {
 
   return (
     <div className="flex items-center gap-2 min-w-[140px]">
-      <audio
-        ref={audioRef}
-        src={src}
-        preload="metadata"
-        onLoadedMetadata={() => setDuration(audioRef.current?.duration || 0)}
-        onTimeUpdate={() => {
-          const a = audioRef.current;
-          if (a && a.duration) setProgress((a.currentTime / a.duration) * 100);
-        }}
-        onEnded={() => { setPlaying(false); setProgress(0); }}
-      />
+      {resolvedSrc && (
+        <audio
+          ref={audioRef}
+          src={resolvedSrc}
+          preload="metadata"
+          onLoadedMetadata={() => setDuration(audioRef.current?.duration || 0)}
+          onTimeUpdate={() => {
+            const a = audioRef.current;
+            if (a && a.duration) setProgress((a.currentTime / a.duration) * 100);
+          }}
+          onEnded={() => { setPlaying(false); setProgress(0); }}
+        />
+      )}
       <button
         onClick={toggle}
+        disabled={!resolvedSrc}
         className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 ${
           isMe ? "bg-primary-foreground/20 text-primary-foreground" : "bg-foreground/10 text-foreground"
         }`}
