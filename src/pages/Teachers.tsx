@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import TeacherCard from "@/components/TeacherCard";
 import type { TeacherData } from "@/components/TeacherCard";
-import { Search, SlidersHorizontal, UserX, RefreshCw } from "lucide-react";
+import { Search, SlidersHorizontal, UserX, RefreshCw, Sparkles, Users } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import { Skeleton } from "@/components/ui/skeleton";
 import PageHelmet from "@/components/PageHelmet";
 import PageHeader from "@/components/PageHeader";
+import AssignTeacherModal from "@/components/AssignTeacherModal";
 
 const TeacherCardSkeleton = () => (
   <div className="card-base flex flex-col p-5 gap-3">
@@ -31,6 +32,7 @@ const Teachers = () => {
   const { t, lang } = useLanguage();
   const [searchParams] = useSearchParams();
   const initialSubject = searchParams.get("subject") || "";
+  const courseLabel = searchParams.get("course") || "";
   const [search, setSearch] = useState(initialSubject);
   const [showFilters, setShowFilters] = useState(!!initialSubject);
   const [sortBy, setSortBy] = useState("");
@@ -40,6 +42,7 @@ const Teachers = () => {
   const [teachers, setTeachers] = useState<TeacherData[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadingTimeout, setLoadingTimeout] = useState(false);
+  const [assignModalOpen, setAssignModalOpen] = useState(false);
 
   const universities = [...new Set(teachers.map((tc) => tc.university).filter(Boolean))] as string[];
   const subjects = [...new Set(teachers.flatMap((tc) => tc.subjects))] as string[];
@@ -143,6 +146,46 @@ const Teachers = () => {
       <PageHeader title={t("teachers_title")} subtitle={t("teachers_choose")} variant="teachers" />
 
       <div className="container py-8">
+        {/* Subject context banner — appears when arriving from a course request */}
+        {initialSubject && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-6 rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent p-5 flex flex-col sm:flex-row sm:items-center gap-4"
+          >
+            <div className="flex items-start gap-3 flex-1 min-w-0">
+              <div className="w-11 h-11 rounded-xl bg-primary/15 text-primary flex items-center justify-center shrink-0">
+                <Users size={20} />
+              </div>
+              <div className="min-w-0">
+                <p className="text-xs text-muted-foreground font-medium">
+                  {lang === "ar" ? "تتصفح مدرسي" : "Browsing tutors for"}
+                </p>
+                <h3 className="font-extrabold text-base sm:text-lg text-foreground truncate">
+                  {initialSubject}
+                  {courseLabel && courseLabel !== initialSubject && (
+                    <span className="text-sm text-muted-foreground font-medium block sm:inline sm:ms-2">
+                      ({courseLabel})
+                    </span>
+                  )}
+                </h3>
+                <p className="text-xs text-muted-foreground mt-1">
+                  {lang === "ar"
+                    ? "اختر مدرس بنفسك، أو دعنا نخصص لك أنسب مدرس متاح"
+                    : "Pick a tutor yourself, or let us assign the best one for you"}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={() => setAssignModalOpen(true)}
+              className="btn-primary inline-flex items-center justify-center gap-2 shrink-0"
+            >
+              <Sparkles size={16} />
+              {lang === "ar" ? "اختر لي مدرس مناسب" : "Pick a tutor for me"}
+            </button>
+          </motion.div>
+        )}
+
         <div className="card-base p-6 mb-8">
           <div className="flex gap-3">
             <div className="flex-1 relative">
@@ -217,9 +260,24 @@ const Teachers = () => {
                   <UserX size={36} className="text-muted-foreground/50" />
                 </div>
                 <h3 className="text-xl font-extrabold mb-2">{t("teachers_empty_title")}</h3>
-                <p className="text-muted-foreground mx-auto mb-6">{t("teachers_empty_desc")}</p>
+                <p className="text-muted-foreground mx-auto mb-6">
+                  {initialSubject
+                    ? lang === "ar"
+                      ? `لم نجد مدرسين متاحين حالياً في "${initialSubject}". اطلب وسنجد لك مدرس مناسب.`
+                      : `No tutors available right now for "${initialSubject}". Request one and we'll find you a match.`
+                    : t("teachers_empty_desc")}
+                </p>
                 <div className="flex flex-wrap items-center justify-center gap-3">
-                  <a href="/register" className="btn-primary inline-flex items-center gap-2">
+                  {initialSubject && (
+                    <button
+                      onClick={() => setAssignModalOpen(true)}
+                      className="btn-primary inline-flex items-center gap-2"
+                    >
+                      <Sparkles size={16} />
+                      {lang === "ar" ? "اطلب مدرس مناسب" : "Request a tutor"}
+                    </button>
+                  )}
+                  <a href="/register" className="btn-outline inline-flex items-center gap-2">
                     {t("teachers_empty_register_cta")}
                   </a>
                   <a href="https://wa.me/966559003498" target="_blank" rel="noopener noreferrer" className="btn-outline inline-flex items-center gap-2">
@@ -231,6 +289,13 @@ const Teachers = () => {
           </>
         )}
       </div>
+
+      <AssignTeacherModal
+        open={assignModalOpen}
+        onClose={() => setAssignModalOpen(false)}
+        subject={initialSubject}
+        courseLabel={courseLabel || undefined}
+      />
     </div>
   );
 };
