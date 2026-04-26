@@ -97,24 +97,33 @@ const DepartmentItem = ({ dept, lang, index }: { dept: College["departments"][0]
             transition={{ duration: 0.2 }}
             className="overflow-hidden"
           >
-            <div className="ms-11 me-3 mb-3 grid grid-cols-1 sm:grid-cols-2 gap-1">
+            <div className="ms-11 me-3 mb-4 mt-1 flex flex-col gap-2">
               {dept.courses.map((course) => {
                 const courseName = lang === "ar" ? course.name_ar : course.name_en;
                 const requestLabel = lang === "ar" ? "طلب حصة" : "Request a session";
                 return (
-                  <div key={course.code} className="flex items-center gap-2 py-1.5 px-2.5 rounded-md bg-primary/5 dark:bg-primary/10 border border-primary/10 dark:border-primary/20 text-xs">
-                    <Hash size={10} className="text-primary shrink-0" />
-                    <span className="font-mono text-primary font-bold shrink-0">{course.code}</span>
-                    <span className="text-foreground/80 truncate">{courseName}</span>
-                    <span className="text-muted-foreground shrink-0 ms-auto text-[0.6rem]">{course.credits}h</span>
+                  <div
+                    key={course.code}
+                    className="flex items-center gap-3 py-2.5 px-3 rounded-lg bg-card hover:bg-primary/5 dark:hover:bg-primary/10 border border-border/40 hover:border-primary/30 transition-colors"
+                  >
+                    <span className="font-mono text-[0.7rem] font-bold text-primary bg-primary/10 px-2 py-1 rounded shrink-0 tracking-wide">
+                      {course.code}
+                    </span>
+                    <span className="text-sm text-foreground/90 truncate flex-1 font-medium">
+                      {courseName}
+                    </span>
+                    <span className="text-[0.65rem] text-muted-foreground shrink-0 hidden sm:inline">
+                      {course.credits}h
+                    </span>
                     <Link
                       to={`/teachers?subject=${encodeURIComponent(courseName)}`}
                       title={requestLabel}
                       aria-label={`${requestLabel}: ${courseName}`}
                       onClick={(e) => e.stopPropagation()}
-                      className="shrink-0 w-6 h-6 rounded-md bg-primary/15 hover:bg-primary hover:text-primary-foreground text-primary flex items-center justify-center transition-colors"
+                      className="shrink-0 inline-flex items-center gap-1.5 h-8 px-2.5 rounded-lg bg-primary/10 hover:bg-primary hover:text-primary-foreground text-primary text-xs font-bold transition-colors"
                     >
-                      <CalendarPlus size={12} />
+                      <CalendarPlus size={13} />
+                      <span className="hidden sm:inline">{requestLabel}</span>
                     </Link>
                   </div>
                 );
