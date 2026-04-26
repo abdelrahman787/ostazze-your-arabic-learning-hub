@@ -1,4 +1,5 @@
 import { supabase } from "@/integrations/supabase/client";
+import { logSignedUrlFailure } from "@/lib/accessLog";
 
 /**
  * Extract the storage object path from a stored value that may be either:
@@ -41,11 +42,14 @@ export async function getSignedFileUrl(
   expiresIn = 3600
 ): Promise<string | null> {
   const path = extractStoragePath(storedValue, bucket);
-  if (!path) return null;
+  if (!path) {
+    logSignedUrlFailure(bucket, null);
+    return null;
+  }
 
   const { data, error } = await supabase.storage.from(bucket).createSignedUrl(path, expiresIn);
   if (error || !data?.signedUrl) {
-    console.error(`[storage] Failed to sign ${bucket}/${path}:`, error);
+    logSignedUrlFailure(bucket, path, error);
     return null;
   }
   return data.signedUrl;
