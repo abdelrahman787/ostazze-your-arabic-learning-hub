@@ -150,42 +150,28 @@ const OrbitSubjects = () => {
               />
             ))}
 
-            {/* Glowing dots traveling along each orbit (pure CSS spin — never stalls) */}
+            {/* Glowing dots traveling along each orbit */}
             {ORBITS.map((orbit, idx) => {
               const duration = 14 + idx * 6;
               return (
                 <div
                   key={`dot-orbit-${idx}`}
-                  className="absolute orbit-raf"
-                  data-orbit-raf="true"
+                  className="absolute rounded-full orbit-traveler"
+                  data-orbit-traveler="true"
+                  data-orbit-radius={orbit.radius}
+                  data-orbit-base-angle="0"
                   data-orbit-duration={duration}
                   data-orbit-direction="1"
                   style={{
-                    width: orbit.radius * 2,
-                    height: orbit.radius * 2,
                     top: "50%",
                     left: "50%",
-                    marginLeft: -orbit.radius,
-                    marginTop: -orbit.radius,
-                    transform: "rotate(var(--orbit-angle, 0deg))",
+                    width: 8,
+                    height: 8,
+                    background:
+                      "radial-gradient(circle, hsl(22 100% 70%) 0%, hsl(22 95% 55%) 50%, transparent 100%)",
+                    boxShadow: "0 0 10px hsl(22 95% 60% / 0.8)",
                   }}
-                >
-                  <div
-                    className="absolute rounded-full"
-                    style={{
-                      top: "50%",
-                      left: "100%",
-                      width: 8,
-                      height: 8,
-                      marginTop: -4,
-                      marginLeft: -4,
-                      background:
-                        "radial-gradient(circle, hsl(22 100% 70%) 0%, hsl(22 95% 55%) 50%, transparent 100%)",
-                      boxShadow:
-                        "0 0 10px hsl(22 95% 60% / 0.8)",
-                    }}
-                  />
-                </div>
+                />
               );
             })}
 
