@@ -12,8 +12,8 @@ import { useEffect, useRef, useState } from "react";
  *  - Long frames (> 50ms) counter
  *  - document.visibilityState (tab background = browser may pause rAF/CSS)
  *  - prefers-reduced-motion (kills all our infinite animations)
- *  - getAnimations() count for the orbit container (proves CSS anims are alive)
- *  - Live computed `transform` of the first orbit ring (proves it's advancing)
+ *  - Live orbit nodes count (proves the rAF-driven orbit layer exists)
+ *  - Live computed `transform` of the first orbit node (proves it's advancing)
  *  - DOM node count under the orbit section
  *  - Number of running framer-motion elements (heuristic: data-projection-id)
  */
@@ -81,7 +81,7 @@ const AnimationDebugOverlay = () => {
 
       // Probe the orbit DOM
       const orbitRoot = document.querySelector<HTMLElement>(
-        ".orbit-spin, .orbit-spin-reverse"
+        ".orbit-raf, .orbit-spin, .orbit-spin-reverse"
       );
       let orbitAnims = 0;
       let orbitTransform = "—";
