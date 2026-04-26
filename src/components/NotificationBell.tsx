@@ -85,6 +85,10 @@ const NotificationBell = () => {
         const event = new CustomEvent("switch-dashboard-tab", { detail: "mylessons" });
         window.dispatchEvent(event);
       }, 100);
+    } else if (n.type === "admin_new_request" || n.type === "admin_cancellation") {
+      navigate("/admin");
+    } else if (n.type === "admin_new_payment") {
+      navigate("/admin");
     }
   };
 
