@@ -2,14 +2,14 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import TeacherCard from "@/components/TeacherCard";
 import type { TeacherData } from "@/components/TeacherCard";
-import { Search, SlidersHorizontal, UserX, RefreshCw, Sparkles, Users } from "lucide-react";
+import { Search, SlidersHorizontal, UserX, RefreshCw, Sparkles, Users, Calendar } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import { Skeleton } from "@/components/ui/skeleton";
 import PageHelmet from "@/components/PageHelmet";
 import PageHeader from "@/components/PageHeader";
-import AssignTeacherModal from "@/components/AssignTeacherModal";
+import BookingFlowModal from "@/components/BookingFlowModal";
 
 const TeacherCardSkeleton = () => (
   <div className="card-base flex flex-col p-5 gap-3">
@@ -171,8 +171,8 @@ const Teachers = () => {
                 </h3>
                 <p className="text-xs text-muted-foreground mt-1">
                   {lang === "ar"
-                    ? "اختر مدرس بنفسك، أو دعنا نخصص لك أنسب مدرس متاح"
-                    : "Pick a tutor yourself, or let us assign the best one for you"}
+                    ? "اضغط حجز حصة لتختار المدرس المناسب وتتابع للدفع"
+                    : "Click Book a session to pick your tutor and proceed to payment"}
                 </p>
               </div>
             </div>
@@ -180,8 +180,8 @@ const Teachers = () => {
               onClick={() => setAssignModalOpen(true)}
               className="btn-primary inline-flex items-center justify-center gap-2 shrink-0"
             >
-              <Sparkles size={16} />
-              {lang === "ar" ? "اختر لي مدرس مناسب" : "Pick a tutor for me"}
+              <Calendar size={16} />
+              {lang === "ar" ? "حجز حصة" : "Book a session"}
             </button>
           </motion.div>
         )}
@@ -290,11 +290,12 @@ const Teachers = () => {
         )}
       </div>
 
-      <AssignTeacherModal
+      <BookingFlowModal
         open={assignModalOpen}
         onClose={() => setAssignModalOpen(false)}
         subject={initialSubject}
         courseLabel={courseLabel || undefined}
+        teachers={sorted}
       />
     </div>
   );
