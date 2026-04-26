@@ -139,13 +139,13 @@ const OrbitSubjects = () => {
               />
             ))}
 
-            {/* Glowing dots traveling along each orbit (one per orbit for perf) */}
+            {/* Glowing dots traveling along each orbit (pure CSS spin — never stalls) */}
             {ORBITS.map((orbit, idx) => {
               const duration = 14 + idx * 6;
               return (
-                <motion.div
+                <div
                   key={`dot-orbit-${idx}`}
-                  className="absolute"
+                  className="absolute orbit-spin"
                   style={{
                     width: orbit.radius * 2,
                     height: orbit.radius * 2,
@@ -153,15 +153,7 @@ const OrbitSubjects = () => {
                     left: "50%",
                     marginLeft: -orbit.radius,
                     marginTop: -orbit.radius,
-                    willChange: "transform",
-                  }}
-                  initial={{ rotate: 0 }}
-                  animate={reducedMotion ? { rotate: 0 } : { rotate: 360 }}
-                  transition={{
-                    duration,
-                    repeat: Infinity,
-                    ease: "linear",
-                    repeatType: "loop",
+                    animationDuration: `${duration}s`,
                   }}
                 >
                   <div
@@ -179,7 +171,7 @@ const OrbitSubjects = () => {
                         "0 0 10px hsl(22 95% 60% / 0.8)",
                     }}
                   />
-                </motion.div>
+                </div>
               );
             })}
 
