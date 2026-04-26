@@ -52,12 +52,16 @@ const OrbitSubjects = () => {
     let frame = 0;
 
     const tick = (now: number) => {
-      const nodes = sectionRef.current?.querySelectorAll<HTMLElement>("[data-orbit-raf]") ?? [];
+      const nodes = sectionRef.current?.querySelectorAll<HTMLElement>("[data-orbit-traveler]") ?? [];
       nodes.forEach((node) => {
+        const radius = Number(node.dataset.orbitRadius || 0);
+        const baseAngle = Number(node.dataset.orbitBaseAngle || 0);
         const duration = Number(node.dataset.orbitDuration || 60);
         const direction = Number(node.dataset.orbitDirection || 1);
-        const angle = (((now / 1000) % duration) / duration) * 360 * direction;
-        node.style.setProperty("--orbit-angle", `${angle}deg`);
+        const angle = (baseAngle + (((now / 1000) % duration) / duration) * 360 * direction) * (Math.PI / 180);
+        const x = Math.cos(angle) * radius;
+        const y = Math.sin(angle) * radius;
+        node.style.transform = `translate(-50%, -50%) translate3d(${x}px, ${y}px, 0)`;
       });
 
       frame = window.requestAnimationFrame(tick);
