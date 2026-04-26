@@ -8,7 +8,7 @@ const CONTAINER_SIZES = [80, 96, 120, 160, 200, 240];
 describe("flagSizing — Kuwait & Qatar parity", () => {
   it("declares the official aspect ratios", () => {
     expect(FLAG_RATIOS.KW).toBeCloseTo(2, 5); // 2:1
-    expect(FLAG_RATIOS.QA).toBeCloseTo(28 / 11, 5); // 28:11
+    expect(FLAG_RATIOS.QA).toBeCloseTo(2, 5); // normalized 2:1 UI asset
     expect(getFlagRatio("UNKNOWN")).toBe(1.5); // safe fallback
   });
 
@@ -21,12 +21,12 @@ describe("flagSizing — Kuwait & Qatar parity", () => {
       // ✅ Same height across both flags at every screen size.
       expect(qa.height).toBe(kw.height);
 
-      // ✅ Each flag's width matches its OWN official ratio (no cropping).
+      // ✅ Each flag's width matches its normalized 2:1 asset ratio (no cropping).
       expect(kw.width / kw.height).toBeCloseTo(FLAG_RATIOS.KW, 1);
       expect(qa.width / qa.height).toBeCloseTo(FLAG_RATIOS.QA, 1);
 
-      // ✅ Qatar is wider than Kuwait at the same height (28:11 > 2:1).
-      expect(qa.width).toBeGreaterThan(kw.width);
+      // ✅ Qatar and Kuwait occupy the exact same box.
+      expect(qa.width).toBe(kw.width);
 
       // ✅ Both fit inside the square container — no overflow / clipping.
       expect(kw.width).toBeLessThanOrEqual(size);

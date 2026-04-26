@@ -35,7 +35,7 @@ const countryColors: Record<string, { from: string; to: string; accent: string }
   QA: { from: "from-red-600/20", to: "to-red-400/10", accent: "text-red-600 dark:text-red-400" },
 };
 
-// Official flag aspect ratios + sizing helper (shared, tested in flagSizing.test.ts)
+// Normalized flag aspect ratios + sizing helper (shared, tested in flagSizing.test.ts)
 import { FLAG_RATIOS, getFlagDimensions } from "@/lib/flagSizing";
 
 // ===== Static high-quality flag with subtle ambient glow =====
