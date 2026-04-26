@@ -719,10 +719,12 @@ export type Database = {
         }
         Returns: boolean
       }
+      is_course_cover_path: { Args: { _name: string }; Returns: boolean }
       is_enrolled_in_course: {
         Args: { _course_id: string; _user_id: string }
         Returns: boolean
       }
+      user_can_access_chat_audio: { Args: { _name: string }; Returns: boolean }
       user_can_access_lecture_file: {
         Args: { _bucket: string; _name: string }
         Returns: boolean
