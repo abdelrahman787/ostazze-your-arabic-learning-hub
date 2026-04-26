@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
+import { getSignedFileUrl } from "@/lib/storageUrls";
 import {
   FileText, Send, Loader2, MessageSquare, Video, X, ArrowRight, ExternalLink,
 } from "lucide-react";
@@ -37,6 +38,8 @@ const LectureView = () => {
   const { t } = useLanguage();
   const navigate = useNavigate();
   const [lecture, setLecture] = useState<Lecture | null>(null);
+  const [signedVideoUrl, setSignedVideoUrl] = useState<string | null>(null);
+  const [signedPdfUrl, setSignedPdfUrl] = useState<string | null>(null);
   const [messages, setMessages] = useState<ChatMsg[]>([]);
   const [newMsg, setNewMsg] = useState("");
   const [loading, setLoading] = useState(true);
@@ -69,6 +72,15 @@ const LectureView = () => {
     }
 
     setLecture(data as Lecture);
+
+    // Generate signed URLs for private files (1h expiry)
+    const [vUrl, pUrl] = await Promise.all([
+      data.video_url ? getSignedFileUrl("lecture-videos", data.video_url, 3600) : Promise.resolve(null),
+      data.pdf_url ? getSignedFileUrl("lecture-pdfs", data.pdf_url, 3600) : Promise.resolve(null),
+    ]);
+    setSignedVideoUrl(vUrl);
+    setSignedPdfUrl(pUrl);
+
     setLoading(false);
   }, [id, user, navigate, t]);
 
@@ -192,7 +204,7 @@ const LectureView = () => {
             </a>
           )}
           {/* PDF — visible to both teacher and student */}
-          {lecture.pdf_url && (
+          {signedPdfUrl && (
             <button
               onClick={() => setPdfOpen(!pdfOpen)}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
@@ -223,7 +235,7 @@ const LectureView = () => {
       <div className="flex-1 flex h-[calc(100vh-64px-45px)] overflow-hidden">
         {/* PDF panel — RIGHT in RTL */}
         <AnimatePresence>
-          {pdfOpen && lecture.pdf_url && (
+          {pdfOpen && signedPdfUrl && (
             <motion.div
               initial={{ width: 0, opacity: 0 }}
               animate={{ width: 380, opacity: 1 }}
@@ -246,7 +258,7 @@ const LectureView = () => {
               <div className="flex-1">
                 <iframe
                   src={`https://docs.google.com/gview?url=${encodeURIComponent(
-                    lecture.pdf_url
+                    signedPdfUrl
                   )}&embedded=true`}
                   className="w-full h-full"
                   title="PDF Viewer"
@@ -259,11 +271,11 @@ const LectureView = () => {
         {/* Video — CENTER */}
         <div className="flex-1 flex flex-col overflow-hidden">
           <div className="flex-1 flex items-center justify-center p-4">
-            {lecture.video_url ? (
+            {signedVideoUrl ? (
               <div className="w-full max-w-5xl">
                 <div className="aspect-video bg-foreground/5 rounded-2xl overflow-hidden">
                   <video
-                    src={lecture.video_url}
+                    src={signedVideoUrl}
                     controls
                     className="w-full h-full object-contain"
                     controlsList="nodownload"
@@ -279,7 +291,7 @@ const LectureView = () => {
           </div>
 
           {/* PDF panel — mobile, below video */}
-          {pdfOpen && lecture.pdf_url && (
+          {pdfOpen && signedPdfUrl && (
             <div className="lg:hidden border-t bg-card flex flex-col h-[50vh]">
               <div className="p-2 border-b flex items-center justify-between">
                 <span className="text-xs font-bold flex items-center gap-1.5">
@@ -296,7 +308,7 @@ const LectureView = () => {
               <div className="flex-1">
                 <iframe
                   src={`https://docs.google.com/gview?url=${encodeURIComponent(
-                    lecture.pdf_url
+                    signedPdfUrl
                   )}&embedded=true`}
                   className="w-full h-full"
                   title="PDF Viewer"

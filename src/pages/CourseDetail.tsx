@@ -77,7 +77,8 @@ const CourseDetail = () => {
       const [{ data: c }, { data: l }, { data: s }] = await Promise.all([
         supabase.from("courses").select("*").eq("id", id).maybeSingle(),
         supabase.from("course_lessons").select("id, title, title_en, duration_minutes, order_index, is_free_preview, video_url").eq("course_id", id).order("order_index"),
-        supabase.from("course_live_sessions").select("id, title, title_en, scheduled_date, scheduled_time, duration_minutes").eq("course_id", id).order("scheduled_date").order("scheduled_time"),
+        // Public-safe schedule (no zoom_url) via SECURITY DEFINER function
+        supabase.rpc("get_course_live_sessions_public", { _course_id: id }),
       ]);
       setCourse((c as Course) || null);
       setLessons((l as Lesson[]) || []);

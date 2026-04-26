@@ -293,8 +293,8 @@ const Admin = () => {
         const { error } = await supabase.storage.from("lecture-videos").upload(path, videoFile);
         if (error) throw error;
         uploadedVideoPaths.push(path);
-        const { data: urlData } = supabase.storage.from("lecture-videos").getPublicUrl(path);
-        video_url = urlData.publicUrl;
+        // Store storage path; signed URL is generated on demand by LectureView
+        video_url = path;
       }
       if (pdfFile) {
         const ext = pdfFile.name.split(".").pop();
@@ -302,8 +302,7 @@ const Admin = () => {
         const { error } = await supabase.storage.from("lecture-pdfs").upload(path, pdfFile);
         if (error) throw error;
         uploadedPdfPaths.push(path);
-        const { data: urlData } = supabase.storage.from("lecture-pdfs").getPublicUrl(path);
-        pdf_url = urlData.publicUrl;
+        pdf_url = path;
       }
 
       const { error } = await supabase.from("lectures").insert({
@@ -345,16 +344,14 @@ const Admin = () => {
         const path = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
         const { error } = await supabase.storage.from("lecture-videos").upload(path, editVideoFile);
         if (error) throw error;
-        const { data: urlData } = supabase.storage.from("lecture-videos").getPublicUrl(path);
-        video_url = urlData.publicUrl;
+        video_url = path;
       }
       if (editPdfFile) {
         const ext = editPdfFile.name.split(".").pop();
         const path = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
         const { error } = await supabase.storage.from("lecture-pdfs").upload(path, editPdfFile);
         if (error) throw error;
-        const { data: urlData } = supabase.storage.from("lecture-pdfs").getPublicUrl(path);
-        pdf_url = urlData.publicUrl;
+        pdf_url = path;
       }
 
       const { error } = await supabase.from("lectures").update({ video_url, pdf_url }).eq("id", editLecture.id);

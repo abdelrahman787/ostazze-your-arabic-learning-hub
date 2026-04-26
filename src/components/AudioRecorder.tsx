@@ -53,8 +53,8 @@ const AudioRecorder = ({ onRecorded, disabled, userId, lectureId }: AudioRecorde
         const { error } = await supabase.storage.from("chat-audio").upload(fileName, blob);
 
         if (!error) {
-          const { data: urlData } = supabase.storage.from("chat-audio").getPublicUrl(fileName);
-          onRecorded(urlData.publicUrl);
+          // Store storage path; AudioPlayer signs on demand
+          onRecorded(fileName);
         }
         setUploading(false);
       };
