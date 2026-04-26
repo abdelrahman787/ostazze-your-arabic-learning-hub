@@ -3,7 +3,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Moon, Sun, Menu, X, LogOut, Globe, User, ChevronDown, Shield, LayoutDashboard, ArrowRight, GraduationCap } from "lucide-react";
+import { Moon, Sun, Menu, X, LogOut, Globe, User, ChevronDown, Shield, LayoutDashboard, ArrowRight, GraduationCap, Calendar } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
 const Navbar = () => {
