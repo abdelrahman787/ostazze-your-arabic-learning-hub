@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
-import { Bell, BookOpen, MessageSquare, Check, X, Loader2, CalendarCheck, CheckCircle } from "lucide-react";
+import { Bell, BookOpen, MessageSquare, Check, X, Loader2, CalendarCheck, CheckCircle, ShoppingBag, AlertTriangle, DollarSign } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface NotificationItem {
@@ -85,6 +85,10 @@ const NotificationBell = () => {
         const event = new CustomEvent("switch-dashboard-tab", { detail: "mylessons" });
         window.dispatchEvent(event);
       }, 100);
+    } else if (n.type === "admin_new_request" || n.type === "admin_cancellation") {
+      navigate("/admin");
+    } else if (n.type === "admin_new_payment") {
+      navigate("/admin");
     }
   };
 
@@ -95,6 +99,9 @@ const NotificationBell = () => {
       case "booking_confirmed": return <CheckCircle size={14} className="text-success" />;
       case "booking_rejected": return <X size={14} className="text-destructive" />;
       case "new_booking": return <CalendarCheck size={14} className="text-primary" />;
+      case "admin_new_request": return <ShoppingBag size={14} className="text-primary" />;
+      case "admin_cancellation": return <AlertTriangle size={14} className="text-destructive" />;
+      case "admin_new_payment": return <DollarSign size={14} className="text-success" />;
       default: return <Bell size={14} className="text-muted-foreground" />;
     }
   };
@@ -106,6 +113,9 @@ const NotificationBell = () => {
       case "booking_confirmed": return "bg-success/10";
       case "booking_rejected": return "bg-destructive/10";
       case "new_booking": return "bg-primary/10";
+      case "admin_new_request": return "bg-primary/10";
+      case "admin_cancellation": return "bg-destructive/10";
+      case "admin_new_payment": return "bg-success/10";
       default: return "bg-muted";
     }
   };

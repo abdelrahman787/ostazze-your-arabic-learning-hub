@@ -9,12 +9,13 @@ import {
   GraduationCap, Users, Search, Plus,
   Shield, Video, BookOpen, Loader2, Upload, X, FileText, UserPlus, Home, ShoppingBag,
   ChevronLeft, ChevronRight, Clock, Menu, LogOut, LayoutDashboard, User, Lock,
-  Calendar
+  Calendar, CreditCard
 } from "lucide-react";
 import { motion } from "framer-motion";
 import SalesHub from "@/components/SalesHub";
 import NotificationBell from "@/components/NotificationBell";
 import AdminCourses from "@/components/AdminCourses";
+import AdminInvoices from "@/components/AdminInvoices";
 import NoIndex from "@/components/NoIndex";
 
 // --- Types ---
@@ -487,6 +488,7 @@ const Admin = () => {
   const sidebarLinks = [
     { section: t("section_main"), items: [
       { icon: ShoppingBag, label: t("sales_hub"), tab: "sales" },
+      { icon: CreditCard, label: "الفواتير والتقارير", tab: "invoices" },
       { icon: GraduationCap, label: t("admin_teachers"), tab: "teachers" },
       { icon: Video, label: "المحاضرات", tab: "lectures" },
       { icon: Clock, label: t("sidebar_available_times"), tab: "availability" },
@@ -665,6 +667,13 @@ const Admin = () => {
                   )}
                 </div>
               )}
+            </div>
+          )}
+
+          {/* Invoices & Reports Tab */}
+          {activeTab === "invoices" && (
+            <div className="animate-fade-in">
+              <AdminInvoices />
             </div>
           )}
 
