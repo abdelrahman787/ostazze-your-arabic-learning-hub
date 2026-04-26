@@ -143,16 +143,19 @@ const DepartmentItem = ({ dept, lang, index }: { dept: College["departments"][0]
                     <span className="text-[0.65rem] text-muted-foreground shrink-0 hidden sm:inline">
                       {course.credits}h
                     </span>
-                    <Link
-                      to={`/teachers?subject=${encodeURIComponent(parentSubject)}&course=${encodeURIComponent(courseName)}`}
+                    <button
+                      type="button"
                       title={`${requestLabel} • ${parentSubject}`}
                       aria-label={`${requestLabel}: ${courseName} (${parentSubject})`}
-                      onClick={(e) => e.stopPropagation()}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        triggerBooking?.(parentSubject, courseName);
+                      }}
                       className="shrink-0 inline-flex items-center gap-1.5 h-8 px-2.5 rounded-lg bg-primary/10 hover:bg-primary hover:text-primary-foreground text-primary text-xs font-bold transition-colors"
                     >
                       <CalendarPlus size={13} />
                       <span className="hidden sm:inline">{requestLabel}</span>
-                    </Link>
+                    </button>
                   </div>
                 );
               })}
