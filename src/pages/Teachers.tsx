@@ -94,6 +94,7 @@ const Teachers = () => {
   }, [t]);
 
   const q = search.toLowerCase();
+  const filterSubjectLower = filterSubject.toLowerCase().trim();
   const filtered = teachers.filter((tc) => {
     if (search && !(
       tc.full_name.toLowerCase().includes(q) ||
@@ -101,7 +102,16 @@ const Teachers = () => {
       (tc.university && tc.university.toLowerCase().includes(q))
     )) return false;
     if (filterUniversity && tc.university !== filterUniversity) return false;
-    if (filterSubject && !tc.subjects.includes(filterSubject)) return false;
+    if (filterSubjectLower) {
+      // Match if any of teacher's subjects (Arabic or English) contains
+      // the requested subject — or vice versa — for fuzzy linking from courses.
+      const allSubjects = [...(tc.subjects || []), ...((tc as any).subjects_en || [])];
+      const matched = allSubjects.some((s) => {
+        const lower = String(s).toLowerCase();
+        return lower.includes(filterSubjectLower) || filterSubjectLower.includes(lower);
+      });
+      if (!matched) return false;
+    }
     if (filterVerified === "verified" && !tc.verified) return false;
     if (filterVerified === "unverified" && tc.verified) return false;
     return true;
