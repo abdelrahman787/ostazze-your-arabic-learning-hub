@@ -81,7 +81,7 @@ const AnimationDebugOverlay = () => {
 
       // Probe the orbit DOM
       const orbitRoot = document.querySelector<HTMLElement>(
-        ".orbit-raf, .orbit-spin, .orbit-spin-reverse"
+        ".orbit-traveler, .orbit-raf, .orbit-spin, .orbit-spin-reverse"
       );
       let orbitAnims = 0;
       let orbitTransform = "—";
@@ -89,7 +89,7 @@ const AnimationDebugOverlay = () => {
       if (orbitRoot) {
         try {
           // @ts-ignore - getAnimations is widely supported
-          orbitAnims = (orbitRoot.getAnimations?.() ?? []).length;
+          orbitAnims = document.querySelectorAll(".orbit-traveler").length || (orbitRoot.getAnimations?.() ?? []).length;
         } catch {
           orbitAnims = -1;
         }
