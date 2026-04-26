@@ -124,6 +124,7 @@ const App = () => (
                           <Route path="/checkout/return" element={<CheckoutReturn />} />
                           <Route path="/faq" element={<FAQ />} />
                           <Route path="/zoom-test" element={<ProtectedRoute><ZoomTestPage /></ProtectedRoute>} />
+                          <Route path="/my-bookings" element={<ProtectedRoute><MyBookings /></ProtectedRoute>} />
                           <Route path="*" element={<NotFound />} />
                         </Routes>
                       </Suspense>
