@@ -190,9 +190,16 @@
     backface-visibility: hidden;
     contain: layout paint style;
   }
+  .orbit-traveler {
+    will-change: transform;
+    transform: translate(-50%, -50%) translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+  }
   @media (prefers-reduced-motion: reduce) {
     .orbit-spin, .orbit-spin-reverse { animation: none !important; }
     .orbit-raf { transform: rotate(0deg) translateZ(0) !important; }
+    .orbit-traveler { transform: translate(-50%, -50%) translate3d(0, 0, 0) !important; }
   }
 
   /* Section background with subtle glow for dark mode */
