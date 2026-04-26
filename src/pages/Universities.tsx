@@ -11,6 +11,7 @@ import FaqAccordion from "@/components/FaqAccordion";
 import { breadcrumbJsonLd, collectionPageJsonLd, faqJsonLd } from "@/lib/seo";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { allUniversities, University, College } from "@/data/universitiesData";
+import { resolveCourseSubject } from "@/lib/courseSubjectMap";
 import { Input } from "@/components/ui/input";
 import flagKW from "@/assets/flag-kw-wave.gif";
 import flagQA from "@/assets/flag-qa-wave.gif";
