@@ -3,6 +3,8 @@ import { Navigate, useLocation } from "react-router-dom";
 import { Loader2, ShieldAlert } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useEffect } from "react";
+import { logAccessDenied } from "@/lib/accessLog";
 
 interface Props {
   children: React.ReactNode;
