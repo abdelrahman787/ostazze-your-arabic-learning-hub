@@ -102,6 +102,15 @@ const DepartmentItem = ({ dept, lang, index }: { dept: College["departments"][0]
               {dept.courses.map((course) => {
                 const courseName = lang === "ar" ? course.name_ar : course.name_en;
                 const requestLabel = lang === "ar" ? "طلب حصة" : "Request a session";
+                // Map course -> parent subject so the teachers filter actually matches
+                const parentSubject = resolveCourseSubject(
+                  course.code,
+                  {
+                    ar: dept.name_ar.replace(/^قسم\s+/, ""),
+                    en: dept.name_en.replace(/^Department of\s+/i, ""),
+                  },
+                  lang
+                );
                 return (
                   <div
                     key={course.code}
@@ -117,9 +126,9 @@ const DepartmentItem = ({ dept, lang, index }: { dept: College["departments"][0]
                       {course.credits}h
                     </span>
                     <Link
-                      to={`/teachers?subject=${encodeURIComponent(courseName)}`}
-                      title={requestLabel}
-                      aria-label={`${requestLabel}: ${courseName}`}
+                      to={`/teachers?subject=${encodeURIComponent(parentSubject)}`}
+                      title={`${requestLabel} • ${parentSubject}`}
+                      aria-label={`${requestLabel}: ${courseName} (${parentSubject})`}
                       onClick={(e) => e.stopPropagation()}
                       className="shrink-0 inline-flex items-center gap-1.5 h-8 px-2.5 rounded-lg bg-primary/10 hover:bg-primary hover:text-primary-foreground text-primary text-xs font-bold transition-colors"
                     >
