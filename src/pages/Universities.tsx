@@ -167,70 +167,64 @@ const DepartmentItem = ({ dept, lang, index }: { dept: College["departments"][0]
   );
 };
 
-// ===== College Card =====
-const CollegeCard = ({ college, lang, index }: { college: College; lang: "ar" | "en"; index: number }) => {
-  const [open, setOpen] = useState(false);
+// ===== College Card (links to dedicated page) =====
+const CollegeCard = ({
+  college,
+  uniId,
+  lang,
+  index,
+}: {
+  college: College;
+  uniId: string;
+  lang: "ar" | "en";
+  index: number;
+}) => {
   const name = lang === "ar" ? college.name_ar : college.name_en;
-  const totalCourses = college.departments.reduce((s, d) => s + d.courses.length, 0);
+  const totalCourses = college.departments.reduce(
+    (s, d) => s + d.courses.length,
+    0
+  );
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.05 }}
-      className="card-base overflow-hidden"
+      className="card-base overflow-hidden group hover:border-primary/40 hover:shadow-xl transition-all"
     >
-      {/* College header with colored top bar */}
       <div className="h-1 bg-gradient-to-r from-primary/60 to-primary/20" />
-      <button
-        onClick={() => setOpen(!open)}
+      <Link
+        to={`/universities/${uniId}/colleges/${college.id}`}
         className="w-full flex items-center justify-between p-5 hover:bg-primary/5 dark:hover:bg-primary/10 transition-colors text-start"
       >
         <div className="flex items-center gap-4 min-w-0 flex-1">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 text-primary flex items-center justify-center shrink-0 shadow-sm">
+          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 text-primary flex items-center justify-center shrink-0 shadow-sm group-hover:scale-105 transition-transform">
             <Building2 size={20} />
           </div>
           <div className="min-w-0">
-            <p className="font-bold text-base leading-tight">{name}</p>
+            <p className="font-bold text-base leading-tight group-hover:text-primary transition-colors">
+              {name}
+            </p>
             <div className="flex items-center gap-4 mt-1.5 text-xs text-muted-foreground">
               <span className="flex items-center gap-1">
                 <Layers size={11} />
-                <strong className="text-foreground/70">{college.departments.length}</strong> {lang === "ar" ? "قسم" : "departments"}
+                <strong className="text-foreground/70">
+                  {college.departments.length}
+                </strong>{" "}
+                {lang === "ar" ? "قسم" : "departments"}
               </span>
               <span className="flex items-center gap-1">
                 <BookOpen size={11} />
-                <strong className="text-foreground/70">{totalCourses}</strong> {lang === "ar" ? "مادة" : "courses"}
+                <strong className="text-foreground/70">{totalCourses}</strong>{" "}
+                {lang === "ar" ? "مادة" : "courses"}
               </span>
             </div>
           </div>
         </div>
-        <motion.div
-          animate={{ rotate: open ? 180 : 0 }}
-          transition={{ duration: 0.25 }}
-          className="w-8 h-8 rounded-full bg-primary/10 dark:bg-primary/20 border border-primary/10 dark:border-primary/20 flex items-center justify-center shrink-0"
-        >
-          <ChevronDown size={16} className="text-primary/80" />
-        </motion.div>
-      </button>
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="overflow-hidden"
-          >
-            <div className="px-5 pb-5 border-t border-border/30 pt-3">
-              <div className="divide-y divide-border/20">
-                {college.departments.map((dept, di) => (
-                  <DepartmentItem key={dept.id} dept={dept} lang={lang} index={di} />
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+        <div className="w-8 h-8 rounded-full bg-primary/10 dark:bg-primary/20 border border-primary/10 dark:border-primary/20 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+          <ChevronLeft size={16} className="rtl:rotate-180" />
+        </div>
+      </Link>
     </motion.div>
   );
 };
