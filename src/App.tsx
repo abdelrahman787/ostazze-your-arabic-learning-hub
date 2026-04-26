@@ -42,6 +42,7 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const CheckoutReturn = lazy(() => import("./pages/CheckoutReturn"));
 const FAQ = lazy(() => import("./pages/FAQ"));
 const ZoomTestPage = lazy(() => import("./pages/ZoomTestPage"));
+const MyBookings = lazy(() => import("./pages/MyBookings"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -123,6 +124,7 @@ const App = () => (
                           <Route path="/checkout/return" element={<CheckoutReturn />} />
                           <Route path="/faq" element={<FAQ />} />
                           <Route path="/zoom-test" element={<ProtectedRoute><ZoomTestPage /></ProtectedRoute>} />
+                          <Route path="/my-bookings" element={<ProtectedRoute><MyBookings /></ProtectedRoute>} />
                           <Route path="*" element={<NotFound />} />
                         </Routes>
                       </Suspense>
