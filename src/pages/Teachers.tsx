@@ -260,9 +260,24 @@ const Teachers = () => {
                   <UserX size={36} className="text-muted-foreground/50" />
                 </div>
                 <h3 className="text-xl font-extrabold mb-2">{t("teachers_empty_title")}</h3>
-                <p className="text-muted-foreground mx-auto mb-6">{t("teachers_empty_desc")}</p>
+                <p className="text-muted-foreground mx-auto mb-6">
+                  {initialSubject
+                    ? lang === "ar"
+                      ? `لم نجد مدرسين متاحين حالياً في "${initialSubject}". اطلب وسنجد لك مدرس مناسب.`
+                      : `No tutors available right now for "${initialSubject}". Request one and we'll find you a match.`
+                    : t("teachers_empty_desc")}
+                </p>
                 <div className="flex flex-wrap items-center justify-center gap-3">
-                  <a href="/register" className="btn-primary inline-flex items-center gap-2">
+                  {initialSubject && (
+                    <button
+                      onClick={() => setAssignModalOpen(true)}
+                      className="btn-primary inline-flex items-center gap-2"
+                    >
+                      <Sparkles size={16} />
+                      {lang === "ar" ? "اطلب مدرس مناسب" : "Request a tutor"}
+                    </button>
+                  )}
+                  <a href="/register" className="btn-outline inline-flex items-center gap-2">
                     {t("teachers_empty_register_cta")}
                   </a>
                   <a href="https://wa.me/966559003498" target="_blank" rel="noopener noreferrer" className="btn-outline inline-flex items-center gap-2">
@@ -274,6 +289,13 @@ const Teachers = () => {
           </>
         )}
       </div>
+
+      <AssignTeacherModal
+        open={assignModalOpen}
+        onClose={() => setAssignModalOpen(false)}
+        subject={initialSubject}
+        courseLabel={courseLabel || undefined}
+      />
     </div>
   );
 };
