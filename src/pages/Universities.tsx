@@ -1,9 +1,9 @@
-import { useState, useMemo, useEffect, createContext, useContext, useCallback } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   GraduationCap, Building2, ChevronLeft, Globe, Calendar,
-  BookOpen, ChevronDown, ExternalLink, Layers, Search, Hash, ChevronRight, CalendarPlus, Loader2
+  BookOpen, ExternalLink, Layers, Search, ChevronRight,
 } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import PageHelmet from "@/components/PageHelmet";
@@ -11,19 +11,9 @@ import FaqAccordion from "@/components/FaqAccordion";
 import { breadcrumbJsonLd, collectionPageJsonLd, faqJsonLd } from "@/lib/seo";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { allUniversities, University, College } from "@/data/universitiesData";
-import { resolveCourseSubject } from "@/lib/courseSubjectMap";
 import { Input } from "@/components/ui/input";
 import flagKW from "@/assets/flag-kw.svg";
 import flagQA from "@/assets/flag-qa.svg";
-import { supabase } from "@/integrations/supabase/client";
-import BookingFlowModal from "@/components/BookingFlowModal";
-import type { TeacherData } from "@/components/TeacherCard";
-
-// Context to allow nested DepartmentItem to open the booking modal
-const BookingTriggerContext = createContext<
-  ((subject: string, courseLabel: string) => void) | null
->(null);
-const useBookingTrigger = () => useContext(BookingTriggerContext);
 
 // Group universities by country
 const getCountries = () => {
@@ -70,167 +60,64 @@ const AnimatedFlag = ({ code, size = 120 }: { code: string; size?: number }) => 
 );
 
 
-// ===== Department Item =====
-const DepartmentItem = ({ dept, lang, index }: { dept: College["departments"][0]; lang: "ar" | "en"; index: number }) => {
-  const [showCourses, setShowCourses] = useState(false);
-  const triggerBooking = useBookingTrigger();
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: -8 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ delay: index * 0.03 }}
-      className="group"
-    >
-      <button
-        onClick={() => setShowCourses(!showCourses)}
-        className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-primary/5 dark:hover:bg-primary/10 transition-colors text-start"
-      >
-        <div className="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0 text-xs font-black">
-          {index + 1}
-        </div>
-        <div className="min-w-0 flex-1">
-          <p className="text-sm font-semibold leading-tight">{lang === "ar" ? dept.name_ar : dept.name_en}</p>
-          <div className="flex items-center gap-1.5 mt-1 flex-wrap">
-            {dept.degrees.map((d) => (
-              <span key={d} className="text-[0.55rem] bg-primary/10 text-primary px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">
-                {d}
-              </span>
-            ))}
-          </div>
-        </div>
-        <div className="flex items-center gap-2 shrink-0">
-          <span className="text-[0.65rem] text-muted-foreground font-medium">
-            {dept.courses.length} {lang === "ar" ? "مادة" : "courses"}
-          </span>
-          <motion.div animate={{ rotate: showCourses ? 180 : 0 }} transition={{ duration: 0.2 }}>
-            <ChevronDown size={14} className="text-primary/80" />
-          </motion.div>
-        </div>
-      </button>
-      <AnimatePresence>
-        {showCourses && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="overflow-hidden"
-          >
-            <div className="ms-11 me-3 mb-4 mt-1 flex flex-col gap-2">
-              {dept.courses.map((course) => {
-                const courseName = lang === "ar" ? course.name_ar : course.name_en;
-                const requestLabel = lang === "ar" ? "طلب حصة" : "Request a session";
-                // Map course -> parent subject so the teachers filter actually matches
-                const parentSubject = resolveCourseSubject(
-                  course.code,
-                  {
-                    ar: dept.name_ar.replace(/^قسم\s+/, ""),
-                    en: dept.name_en.replace(/^Department of\s+/i, ""),
-                  },
-                  lang
-                );
-                return (
-                  <div
-                    key={course.code}
-                    className="flex items-center gap-3 py-2.5 px-3 rounded-lg bg-card hover:bg-primary/5 dark:hover:bg-primary/10 border border-border/40 hover:border-primary/30 transition-colors"
-                  >
-                    <span className="font-mono text-[0.7rem] font-bold text-primary bg-primary/10 px-2 py-1 rounded shrink-0 tracking-wide">
-                      {course.code}
-                    </span>
-                    <span className="text-sm text-foreground/90 truncate flex-1 font-medium">
-                      {courseName}
-                    </span>
-                    <span className="text-[0.65rem] text-muted-foreground shrink-0 hidden sm:inline">
-                      {course.credits}h
-                    </span>
-                    <button
-                      type="button"
-                      title={`${requestLabel} • ${parentSubject}`}
-                      aria-label={`${requestLabel}: ${courseName} (${parentSubject})`}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        triggerBooking?.(parentSubject, courseName);
-                      }}
-                      className="shrink-0 inline-flex items-center gap-1.5 h-8 px-2.5 rounded-lg bg-primary/10 hover:bg-primary hover:text-primary-foreground text-primary text-xs font-bold transition-colors"
-                    >
-                      <CalendarPlus size={13} />
-                      <span className="hidden sm:inline">{requestLabel}</span>
-                    </button>
-                  </div>
-                );
-              })}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  );
-};
-
-// ===== College Card =====
-const CollegeCard = ({ college, lang, index }: { college: College; lang: "ar" | "en"; index: number }) => {
-  const [open, setOpen] = useState(false);
+// ===== College Card (links to dedicated page) =====
+const CollegeCard = ({
+  college,
+  uniId,
+  lang,
+  index,
+}: {
+  college: College;
+  uniId: string;
+  lang: "ar" | "en";
+  index: number;
+}) => {
   const name = lang === "ar" ? college.name_ar : college.name_en;
-  const totalCourses = college.departments.reduce((s, d) => s + d.courses.length, 0);
+  const totalCourses = college.departments.reduce(
+    (s, d) => s + d.courses.length,
+    0
+  );
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.05 }}
-      className="card-base overflow-hidden"
+      className="card-base overflow-hidden group hover:border-primary/40 hover:shadow-xl transition-all"
     >
-      {/* College header with colored top bar */}
       <div className="h-1 bg-gradient-to-r from-primary/60 to-primary/20" />
-      <button
-        onClick={() => setOpen(!open)}
+      <Link
+        to={`/universities/${uniId}/colleges/${college.id}`}
         className="w-full flex items-center justify-between p-5 hover:bg-primary/5 dark:hover:bg-primary/10 transition-colors text-start"
       >
         <div className="flex items-center gap-4 min-w-0 flex-1">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 text-primary flex items-center justify-center shrink-0 shadow-sm">
+          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 text-primary flex items-center justify-center shrink-0 shadow-sm group-hover:scale-105 transition-transform">
             <Building2 size={20} />
           </div>
           <div className="min-w-0">
-            <p className="font-bold text-base leading-tight">{name}</p>
+            <p className="font-bold text-base leading-tight group-hover:text-primary transition-colors">
+              {name}
+            </p>
             <div className="flex items-center gap-4 mt-1.5 text-xs text-muted-foreground">
               <span className="flex items-center gap-1">
                 <Layers size={11} />
-                <strong className="text-foreground/70">{college.departments.length}</strong> {lang === "ar" ? "قسم" : "departments"}
+                <strong className="text-foreground/70">
+                  {college.departments.length}
+                </strong>{" "}
+                {lang === "ar" ? "قسم" : "departments"}
               </span>
               <span className="flex items-center gap-1">
                 <BookOpen size={11} />
-                <strong className="text-foreground/70">{totalCourses}</strong> {lang === "ar" ? "مادة" : "courses"}
+                <strong className="text-foreground/70">{totalCourses}</strong>{" "}
+                {lang === "ar" ? "مادة" : "courses"}
               </span>
             </div>
           </div>
         </div>
-        <motion.div
-          animate={{ rotate: open ? 180 : 0 }}
-          transition={{ duration: 0.25 }}
-          className="w-8 h-8 rounded-full bg-primary/10 dark:bg-primary/20 border border-primary/10 dark:border-primary/20 flex items-center justify-center shrink-0"
-        >
-          <ChevronDown size={16} className="text-primary/80" />
-        </motion.div>
-      </button>
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="overflow-hidden"
-          >
-            <div className="px-5 pb-5 border-t border-border/30 pt-3">
-              <div className="divide-y divide-border/20">
-                {college.departments.map((dept, di) => (
-                  <DepartmentItem key={dept.id} dept={dept} lang={lang} index={di} />
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+        <div className="w-8 h-8 rounded-full bg-primary/10 dark:bg-primary/20 border border-primary/10 dark:border-primary/20 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+          <ChevronLeft size={16} className="rtl:rotate-180" />
+        </div>
+      </Link>
     </motion.div>
   );
 };
@@ -244,71 +131,6 @@ const Universities = () => {
   const [selectedCountry, setSelectedCountry] = useState<typeof countries[0] | null>(null);
   const [selectedUni, setSelectedUni] = useState<University | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
-
-  // ===== Booking modal state =====
-  const [bookingOpen, setBookingOpen] = useState(false);
-  const [bookingSubject, setBookingSubject] = useState("");
-  const [bookingCourseLabel, setBookingCourseLabel] = useState("");
-  const [allTeachers, setAllTeachers] = useState<TeacherData[]>([]);
-  const [teachersLoading, setTeachersLoading] = useState(false);
-  const [teachersFetched, setTeachersFetched] = useState(false);
-
-  const fetchTeachers = useCallback(async () => {
-    if (teachersFetched || teachersLoading) return;
-    setTeachersLoading(true);
-    const { data: tps } = await supabase
-      .from("teacher_profiles")
-      .select("user_id, subjects, subjects_en, university, university_en, price, verified");
-    if (!tps || tps.length === 0) {
-      setAllTeachers([]);
-      setTeachersFetched(true);
-      setTeachersLoading(false);
-      return;
-    }
-    const userIds = tps.map((tp) => tp.user_id);
-    const { data: profiles } = await supabase
-      .from("profiles")
-      .select("user_id, full_name, full_name_en, bio, bio_en, avatar_url")
-      .in("user_id", userIds);
-    const profileMap = new Map((profiles || []).map((p) => [p.user_id, p]));
-    const merged: TeacherData[] = tps.map((tp) => {
-      const profile = profileMap.get(tp.user_id);
-      return {
-        user_id: tp.user_id,
-        full_name: profile?.full_name || (lang === "ar" ? "المعلم" : "Tutor"),
-        full_name_en: profile?.full_name_en || null,
-        bio: profile?.bio || null,
-        bio_en: profile?.bio_en || null,
-        avatar_url: profile?.avatar_url || null,
-        subjects: tp.subjects || [],
-        subjects_en: (tp as any).subjects_en || [],
-        university: tp.university || null,
-        university_en: (tp as any).university_en || null,
-        price: tp.price || 0,
-        verified: tp.verified || false,
-      };
-    });
-    setAllTeachers(merged);
-    setTeachersFetched(true);
-    setTeachersLoading(false);
-  }, [teachersFetched, teachersLoading, lang]);
-
-  const handleBookingTrigger = useCallback((subject: string, courseLabel: string) => {
-    setBookingSubject(subject);
-    setBookingCourseLabel(courseLabel);
-    setBookingOpen(true);
-    fetchTeachers();
-  }, [fetchTeachers]);
-
-  // Filter teachers by chosen subject (Arabic or English fuzzy match)
-  const bookingTeachers = useMemo(() => {
-    if (!bookingSubject) return [] as TeacherData[];
-    const q = bookingSubject.toLowerCase().trim();
-    return allTeachers.filter((tc) => {
-      const all = [...(tc.subjects || []), ...(tc.subjects_en || [])].map((s) => s.toLowerCase());
-      return all.some((s) => s.includes(q) || q.includes(s));
-    });
-  }, [allTeachers, bookingSubject]);
 
   const goToCountry = (c: typeof countries[0]) => { setSelectedCountry(c); setView("universities"); setSearchQuery(""); };
   const goToUni = (u: University) => { setSelectedUni(u); setView("university"); setSearchQuery(""); };
@@ -340,7 +162,6 @@ const Universities = () => {
   ];
 
   return (
-    <BookingTriggerContext.Provider value={handleBookingTrigger}>
     <div className="min-h-screen">
       <PageHelmet
         title={lang === "ar" ? "الجامعات في الكويت وقطر" : "Universities in Kuwait & Qatar"}
@@ -593,7 +414,7 @@ const Universities = () => {
                <div className="columns-1 lg:columns-2 gap-4 space-y-4">
                 {filteredColleges.map((college, i) => (
                   <div key={college.id} className="break-inside-avoid">
-                    <CollegeCard college={college} lang={lang} index={i} />
+                    <CollegeCard college={college} uniId={selectedUni.id} lang={lang} index={i} />
                   </div>
                 ))}
               </div>
@@ -635,27 +456,7 @@ const Universities = () => {
           </section>
         )}
       </div>
-
-      {/* Booking modal — opens directly when "Request a session" is clicked */}
-      <BookingFlowModal
-        open={bookingOpen}
-        onClose={() => setBookingOpen(false)}
-        subject={bookingSubject}
-        courseLabel={bookingCourseLabel}
-        teachers={bookingTeachers}
-      />
-
-      {/* Tiny loading hint while teachers load on first trigger */}
-      {bookingOpen && teachersLoading && (
-        <div className="fixed bottom-6 inset-x-0 z-[60] flex justify-center pointer-events-none">
-          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-foreground/80 text-background text-xs font-medium shadow-lg">
-            <Loader2 size={14} className="animate-spin" />
-            {lang === "ar" ? "جاري تحميل المعلمين..." : "Loading tutors..."}
-          </div>
-        </div>
-      )}
     </div>
-    </BookingTriggerContext.Provider>
   );
 };
 

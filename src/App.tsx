@@ -24,6 +24,7 @@ const Teachers = lazy(() => import("./pages/Teachers"));
 const TeacherProfile = lazy(() => import("./pages/TeacherProfile"));
 const Subjects = lazy(() => import("./pages/Subjects"));
 const Universities = lazy(() => import("./pages/Universities"));
+const CollegeDetail = lazy(() => import("./pages/CollegeDetail"));
 const Categories = lazy(() => import("./pages/Categories"));
 const Courses = lazy(() => import("./pages/Courses"));
 const CourseDetail = lazy(() => import("./pages/CourseDetail"));
@@ -106,6 +107,7 @@ const App = () => (
                           <Route path="/teachers/:id" element={<TeacherProfile />} />
                           <Route path="/subjects" element={<Subjects />} />
                           <Route path="/universities" element={<Universities />} />
+                          <Route path="/universities/:uniId/colleges/:collegeId" element={<CollegeDetail />} />
                           <Route path="/categories" element={<Categories />} />
                           <Route path="/courses" element={<Courses />} />
                           <Route path="/courses/:id" element={<CourseDetail />} />
