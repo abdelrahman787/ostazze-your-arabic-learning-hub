@@ -211,6 +211,9 @@ const Navbar = () => {
                   <Link to={dashboardPath} onClick={() => setMobileOpen(false)} className="px-4 py-3 rounded-xl text-sm font-medium hover:bg-foreground/10 flex items-center gap-2 min-h-[44px]">
                     <LayoutDashboard size={16} /> {t("nav_dashboard")}
                   </Link>
+                  <Link to="/my-bookings" onClick={() => setMobileOpen(false)} className="px-4 py-3 rounded-xl text-sm font-medium hover:bg-foreground/10 flex items-center gap-2 min-h-[44px]">
+                    <Calendar size={16} /> {lang === "ar" ? "حجوزاتي" : "My Bookings"}
+                  </Link>
                   {user?.role === "admin" && (
                     <Link to="/admin" onClick={() => setMobileOpen(false)} className="px-4 py-3 rounded-xl text-sm font-medium hover:bg-foreground/10 flex items-center gap-2 min-h-[44px]">
                       <Shield size={16} className="text-primary" /> {t("admin_title")}
