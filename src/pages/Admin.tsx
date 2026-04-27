@@ -17,6 +17,7 @@ import NotificationBell from "@/components/NotificationBell";
 import AdminCourses from "@/components/AdminCourses";
 import AdminInvoices from "@/components/AdminInvoices";
 import NoIndex from "@/components/NoIndex";
+import { uploadVideoToBunny } from "@/lib/bunnyVideo";
 
 // --- Types ---
 interface TeacherRow {
@@ -36,6 +37,7 @@ interface LectureRow {
   student_id: string;
   video_url: string | null;
   pdf_url: string | null;
+  bunny_video_id: string | null;
   created_at: string;
   teacher_name?: string;
   student_name?: string;
@@ -106,6 +108,7 @@ const Admin = () => {
   const [videoFile, setVideoFile] = useState<File | null>(null);
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
   const [allProfiles, setAllProfiles] = useState<ProfileOption[]>([]);
   const videoRef = useRef<HTMLInputElement>(null);
   const pdfRef = useRef<HTMLInputElement>(null);
@@ -115,6 +118,7 @@ const Admin = () => {
   const [editVideoFile, setEditVideoFile] = useState<File | null>(null);
   const [editPdfFile, setEditPdfFile] = useState<File | null>(null);
   const [editUploading, setEditUploading] = useState(false);
+  const [editUploadProgress, setEditUploadProgress] = useState(0);
   const editVideoRef = useRef<HTMLInputElement>(null);
   const editPdfRef = useRef<HTMLInputElement>(null);
 
@@ -281,20 +285,19 @@ const Admin = () => {
       return;
     }
     setUploading(true);
-    let video_url: string | null = null;
+    setUploadProgress(0);
     let pdf_url: string | null = null;
-    let uploadedVideoPaths: string[] = [];
+    let bunny_video_id: string | null = null;
     let uploadedPdfPaths: string[] = [];
 
     try {
+      // Upload video to Bunny.net Stream (encrypted + watermarked playback)
       if (videoFile) {
-        const ext = videoFile.name.split(".").pop();
-        const path = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
-        const { error } = await supabase.storage.from("lecture-videos").upload(path, videoFile);
-        if (error) throw error;
-        uploadedVideoPaths.push(path);
-        // Store storage path; signed URL is generated on demand by LectureView
-        video_url = path;
+        bunny_video_id = await uploadVideoToBunny(
+          videoFile,
+          lectureForm.title,
+          (pct) => setUploadProgress(pct)
+        );
       }
       if (pdfFile) {
         const ext = pdfFile.name.split(".").pop();
@@ -310,11 +313,11 @@ const Admin = () => {
         subject: lectureForm.subject || null,
         teacher_id: lectureForm.teacher_id,
         student_id: lectureForm.student_id,
-        video_url,
+        video_url: null,
+        bunny_video_id,
         pdf_url,
       });
       if (error) {
-        if (uploadedVideoPaths.length > 0) await supabase.storage.from("lecture-videos").remove(uploadedVideoPaths);
         if (uploadedPdfPaths.length > 0) await supabase.storage.from("lecture-pdfs").remove(uploadedPdfPaths);
         throw error;
       }
@@ -330,21 +333,26 @@ const Admin = () => {
       toast.error(err.message);
     }
     setUploading(false);
+    setUploadProgress(0);
   };
 
   const handleEditLecture = async () => {
     if (!editLecture) return;
     setEditUploading(true);
+    setEditUploadProgress(0);
     try {
       let video_url = editLecture.video_url;
       let pdf_url = editLecture.pdf_url;
+      let bunny_video_id = editLecture.bunny_video_id;
 
+      // Replacing the video → upload new one to Bunny and clear old supabase video_url
       if (editVideoFile) {
-        const ext = editVideoFile.name.split(".").pop();
-        const path = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
-        const { error } = await supabase.storage.from("lecture-videos").upload(path, editVideoFile);
-        if (error) throw error;
-        video_url = path;
+        bunny_video_id = await uploadVideoToBunny(
+          editVideoFile,
+          editLecture.title,
+          (pct) => setEditUploadProgress(pct)
+        );
+        video_url = null;
       }
       if (editPdfFile) {
         const ext = editPdfFile.name.split(".").pop();
@@ -354,7 +362,10 @@ const Admin = () => {
         pdf_url = path;
       }
 
-      const { error } = await supabase.from("lectures").update({ video_url, pdf_url }).eq("id", editLecture.id);
+      const { error } = await supabase
+        .from("lectures")
+        .update({ video_url, pdf_url, bunny_video_id })
+        .eq("id", editLecture.id);
       if (error) throw error;
 
       toast.success(t("lecture_updated"));
@@ -366,6 +377,7 @@ const Admin = () => {
       toast.error(err.message);
     }
     setEditUploading(false);
+    setEditUploadProgress(0);
   };
 
   const handleDeleteLecture = async (id: string) => {
