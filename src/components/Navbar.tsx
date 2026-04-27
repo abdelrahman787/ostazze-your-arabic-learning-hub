@@ -15,6 +15,26 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
+
+  // Publish actual navbar height as a CSS variable so other pages
+  // can offset their layout without hardcoded magic numbers.
+  useEffect(() => {
+    const el = headerRef.current;
+    if (!el) return;
+    const apply = () => {
+      const h = el.getBoundingClientRect().height;
+      document.documentElement.style.setProperty("--navbar-h", `${Math.ceil(h)}px`);
+    };
+    apply();
+    const ro = new ResizeObserver(apply);
+    ro.observe(el);
+    window.addEventListener("resize", apply);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", apply);
+    };
+  }, []);
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
@@ -56,7 +76,7 @@ const Navbar = () => {
   }, [navigate]);
 
   return (
-    <header className="sticky top-0 z-50 px-4 pt-4">
+    <header ref={headerRef} className="sticky top-0 z-50 px-4 pt-4">
       <nav className="nav-pill mx-auto max-w-5xl h-14 flex items-center px-3 sm:px-5">
         <div className="flex-1 flex items-center justify-between gap-3">
           {/* Logo */}
