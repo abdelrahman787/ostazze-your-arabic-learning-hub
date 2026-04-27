@@ -289,7 +289,23 @@ const LectureView = () => {
         {/* Video — CENTER */}
         <div className="flex-1 flex flex-col overflow-hidden">
           <div className="flex-1 flex items-center justify-center p-4">
-            {signedVideoUrl ? (
+            {bunnyEmbedUrl ? (
+              <div className="w-full max-w-5xl">
+                <div className="aspect-video bg-foreground/5 rounded-2xl overflow-hidden relative">
+                  <iframe
+                    src={bunnyEmbedUrl}
+                    loading="lazy"
+                    className="w-full h-full border-0"
+                    allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;"
+                    allowFullScreen
+                    title={lecture.title}
+                  />
+                </div>
+                <p className="text-[0.65rem] text-muted-foreground/70 text-center mt-2">
+                  🔒 محمي بتشفير. التسجيل أو إعادة التوزيع مخالف لشروط الاستخدام.
+                </p>
+              </div>
+            ) : signedVideoUrl ? (
               <div className="w-full max-w-5xl">
                 <div className="aspect-video bg-foreground/5 rounded-2xl overflow-hidden">
                   <video
@@ -299,6 +315,11 @@ const LectureView = () => {
                     controlsList="nodownload"
                   />
                 </div>
+              </div>
+            ) : lecture.bunny_video_id ? (
+              <div className="text-center">
+                <Loader2 size={32} className="mx-auto animate-spin text-primary mb-3" />
+                <p className="text-muted-foreground text-sm">جاري تجهيز الفيديو المشفّر...</p>
               </div>
             ) : (
               <div className="text-center">
