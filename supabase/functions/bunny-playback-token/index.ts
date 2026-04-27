@@ -181,6 +181,22 @@ Deno.serve(async (req) => {
     }
 
     const videoId = lecture.bunny_video_id;
+
+    // Make sure the caller's origin is whitelisted on the library, otherwise
+    // Bunny shows "This content is blocked".
+    const origin = req.headers.get("origin") || req.headers.get("referer") || "";
+    let originHost = "";
+    try {
+      if (origin) originHost = new URL(origin).hostname;
+    } catch (_) {
+      originHost = "";
+    }
+    const accountApiKey = Deno.env.get("BUNNY_ACCOUNT_API_KEY") ||
+      Deno.env.get("BUNNY_STREAM_API_KEY");
+    if (originHost) {
+      await ensureAllowedReferrer(libraryId, accountApiKey, originHost);
+    }
+
     // Token valid for 2 hours
     const expires = Math.floor(Date.now() / 1000) + 60 * 60 * 2;
     const signature = await sha256Hex(`${tokenKey}${videoId}${expires}`);
