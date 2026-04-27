@@ -955,7 +955,9 @@ const Admin = () => {
               </div>
             </div>
             <button onClick={handleEditLecture} disabled={editUploading || (!editVideoFile && !editPdfFile)} className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50">
-              {editUploading ? <><Loader2 size={16} className="animate-spin" /> جاري الرفع...</> : <><Upload size={16} /> حفظ التعديلات</>}
+              {editUploading ? (
+                <><Loader2 size={16} className="animate-spin" /> {editVideoFile && editUploadProgress > 0 ? `رفع الفيديو ${editUploadProgress}%` : "جاري الرفع..."}</>
+              ) : <><Upload size={16} /> حفظ التعديلات</>}
             </button>
           </div>
         </ModalWrapper>
