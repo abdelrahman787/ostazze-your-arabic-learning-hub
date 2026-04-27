@@ -9,6 +9,53 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type",
 };
 
+const referrerHostsFromRequest = (req: Request) => {
+  const originHost = (() => {
+    try {
+      const origin = req.headers.get("Origin");
+      return origin ? new URL(origin).hostname : null;
+    } catch {
+      return null;
+    }
+  })();
+
+  return Array.from(
+    new Set(
+      [
+        originHost,
+        "id-preview--dc7db421-26c3-4945-8236-93600ec382aa.lovable.app",
+        "dc7db421-26c3-4945-8236-93600ec382aa.lovableproject.com",
+        "ostazze-learn-hub.lovable.app",
+        "ostaze.com",
+      ].filter(Boolean) as string[]
+    )
+  );
+};
+
+const ensureAllowedReferrers = async (libraryId: string, apiKey: string, req: Request) => {
+  await Promise.all(
+    referrerHostsFromRequest(req).map(async (hostname) => {
+      const res = await fetch(
+        `https://api.bunny.net/videolibrary/${libraryId}/addAllowedReferrer`,
+        {
+          method: "POST",
+          headers: {
+            AccessKey: apiKey,
+            "Content-Type": "application/json",
+            accept: "application/json",
+          },
+          body: JSON.stringify({ Hostname: hostname }),
+        }
+      );
+
+      if (!res.ok && res.status !== 400 && res.status !== 409) {
+        const txt = await res.text();
+        console.warn("Bunny allowed referrer update failed:", hostname, res.status, txt);
+      }
+    })
+  );
+};
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -74,6 +121,10 @@ Deno.serve(async (req) => {
         }
       );
     }
+
+    // Bunny TUS browser uploads are blocked at the network layer unless the
+    // current site is registered as an allowed/trusted referrer for the library.
+    await ensureAllowedReferrers(libraryId, apiKey, req);
 
     const bunnyRes = await fetch(
       `https://video.bunnycdn.com/library/${libraryId}/videos`,
