@@ -117,6 +117,51 @@ const LectureView = () => {
     fetchMessages();
   }, [fetchLecture, fetchMessages]);
 
+  // Auto-refresh Bunny token every 8 minutes (token expires after 10)
+  useEffect(() => {
+    if (!lecture?.bunny_video_id) return;
+    const interval = setInterval(async () => {
+      try {
+        const url = await getBunnyEmbedUrl(lecture.id);
+        setBunnyEmbedUrl(url);
+      } catch (e) {
+        console.error("Bunny token refresh failed:", e);
+      }
+    }, 8 * 60 * 1000);
+    return () => clearInterval(interval);
+  }, [lecture?.id, lecture?.bunny_video_id]);
+
+  // Anti-piracy: block right-click, common shortcuts (PrintScreen, Ctrl+S/P, F12, DevTools)
+  useEffect(() => {
+    if (!bunnyEmbedUrl) return;
+    const blockContextMenu = (e: MouseEvent) => e.preventDefault();
+    const blockKeys = (e: KeyboardEvent) => {
+      const k = e.key.toLowerCase();
+      // PrintScreen
+      if (e.key === "PrintScreen") {
+        navigator.clipboard?.writeText("").catch(() => {});
+        toast.warning("التقاط الشاشة ممنوع");
+        e.preventDefault();
+        return;
+      }
+      // F12 / DevTools
+      if (e.key === "F12") { e.preventDefault(); return; }
+      // Ctrl/Cmd + S, P, U, Shift+I, Shift+J, Shift+C
+      if ((e.ctrlKey || e.metaKey) && ["s", "p", "u"].includes(k)) {
+        e.preventDefault();
+      }
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && ["i", "j", "c"].includes(k)) {
+        e.preventDefault();
+      }
+    };
+    document.addEventListener("contextmenu", blockContextMenu);
+    document.addEventListener("keydown", blockKeys);
+    return () => {
+      document.removeEventListener("contextmenu", blockContextMenu);
+      document.removeEventListener("keydown", blockKeys);
+    };
+  }, [bunnyEmbedUrl]);
+
   // Real-time chat subscription
   useEffect(() => {
     if (!id) return;
@@ -300,9 +345,27 @@ const LectureView = () => {
                     allowFullScreen
                     title={lecture.title}
                   />
+                  {/* Floating watermark overlay — visible in any screen recording */}
+                  <div
+                    className="pointer-events-none absolute inset-0 overflow-hidden select-none"
+                    aria-hidden="true"
+                  >
+                    <div
+                      className="absolute text-white/30 text-xs font-bold whitespace-nowrap drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] watermark-float"
+                      style={{ top: "10%", left: "5%" }}
+                    >
+                      {user?.email} • OSTAZZE
+                    </div>
+                    <div
+                      className="absolute text-white/25 text-[0.65rem] font-bold whitespace-nowrap drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] watermark-float-2"
+                      style={{ bottom: "15%", right: "5%" }}
+                    >
+                      {user?.email}
+                    </div>
+                  </div>
                 </div>
                 <p className="text-[0.65rem] text-muted-foreground/70 text-center mt-2">
-                  🔒 محمي بتشفير. التسجيل أو إعادة التوزيع مخالف لشروط الاستخدام.
+                  🔒 محمي بتشفير. أي محاولة تسجيل/توزيع تحمل بصمة حسابك ({user?.email}) ومخالفة لشروط الاستخدام.
                 </p>
               </div>
             ) : signedVideoUrl ? (

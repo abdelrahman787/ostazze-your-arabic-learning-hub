@@ -197,15 +197,14 @@ Deno.serve(async (req) => {
       console.warn("BUNNY_ACCOUNT_API_KEY is not configured; allowed referrers were not updated");
     }
 
-    // Token valid for 2 hours
-    const expires = Math.floor(Date.now() / 1000) + 60 * 60 * 2;
+    // Token valid for 10 minutes only — client will auto-refresh
+    const expires = Math.floor(Date.now() / 1000) + 60 * 10;
     const signature = await sha256Hex(`${tokenKey}${videoId}${expires}`);
 
-    // Watermark text: student name + masked email + timestamp
-    const maskedEmail = userEmail
-      ? userEmail.replace(/(.{2}).+(@.+)/, "$1***$2")
-      : "";
-    const watermarkText = `${viewerName} • ${maskedEmail}`;
+    // Watermark text: full name + full email + timestamp (deters distribution)
+    const now = new Date();
+    const dateStr = now.toISOString().slice(0, 16).replace("T", " ");
+    const watermarkText = `${viewerName} | ${userEmail} | ${dateStr}`;
 
     const params = new URLSearchParams({
       token: signature,

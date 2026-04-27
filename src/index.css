@@ -711,3 +711,26 @@
   .university-cell:nth-last-child(-n+6)::after { display: none; }
 }
 
+
+/* ============================================
+   Video watermark anti-piracy floating overlay
+   ============================================ */
+@keyframes watermarkFloat {
+  0%   { transform: translate(0, 0); opacity: 0.3; }
+  25%  { transform: translate(60vw, 10vh); opacity: 0.4; }
+  50%  { transform: translate(40vw, 50vh); opacity: 0.25; }
+  75%  { transform: translate(5vw, 30vh); opacity: 0.35; }
+  100% { transform: translate(0, 0); opacity: 0.3; }
+}
+@keyframes watermarkFloat2 {
+  0%   { transform: translate(0, 0); opacity: 0.25; }
+  33%  { transform: translate(-50vw, -30vh); opacity: 0.35; }
+  66%  { transform: translate(-20vw, -15vh); opacity: 0.2; }
+  100% { transform: translate(0, 0); opacity: 0.25; }
+}
+.watermark-float {
+  animation: watermarkFloat 22s linear infinite;
+}
+.watermark-float-2 {
+  animation: watermarkFloat2 28s linear infinite;
+}
