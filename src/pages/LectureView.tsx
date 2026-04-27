@@ -193,7 +193,7 @@ const LectureView = () => {
     <div className="min-h-[calc(100vh-var(--navbar-h))] bg-background flex flex-col">
       <NoIndex title="Lecture" />
       {/* Sub-header */}
-      <div className="bg-card border-b px-4 py-2 flex items-center justify-between">
+      <div className="sticky bg-card border-b px-4 py-2 flex items-center justify-between z-40 shadow-sm" style={{ top: "var(--navbar-h)" }}>
         <div className="flex items-center gap-3">
           <button
             onClick={() => navigate(-1)}
