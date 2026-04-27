@@ -4,6 +4,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
 import { getSignedFileUrl } from "@/lib/storageUrls";
+import { getBunnyEmbedUrl } from "@/lib/bunnyVideo";
 import {
   FileText, Send, Loader2, MessageSquare, Video, X, ArrowRight, ExternalLink,
 } from "lucide-react";
@@ -22,6 +23,7 @@ interface Lecture {
   video_url: string | null;
   pdf_url: string | null;
   zoom_url: string | null;
+  bunny_video_id: string | null;
 }
 
 interface ChatMsg {
@@ -39,6 +41,7 @@ const LectureView = () => {
   const navigate = useNavigate();
   const [lecture, setLecture] = useState<Lecture | null>(null);
   const [signedVideoUrl, setSignedVideoUrl] = useState<string | null>(null);
+  const [bunnyEmbedUrl, setBunnyEmbedUrl] = useState<string | null>(null);
   const [signedPdfUrl, setSignedPdfUrl] = useState<string | null>(null);
   const [messages, setMessages] = useState<ChatMsg[]>([]);
   const [newMsg, setNewMsg] = useState("");
@@ -73,13 +76,28 @@ const LectureView = () => {
 
     setLecture(data as Lecture);
 
-    // Generate signed URLs for private files (1h expiry)
-    const [vUrl, pUrl] = await Promise.all([
-      data.video_url ? getSignedFileUrl("lecture-videos", data.video_url, 3600) : Promise.resolve(null),
-      data.pdf_url ? getSignedFileUrl("lecture-pdfs", data.pdf_url, 3600) : Promise.resolve(null),
-    ]);
-    setSignedVideoUrl(vUrl);
-    setSignedPdfUrl(pUrl);
+    // Bunny.net Stream takes priority — short-lived signed embed URL with watermark
+    if (data.bunny_video_id) {
+      try {
+        const url = await getBunnyEmbedUrl(data.id);
+        setBunnyEmbedUrl(url);
+      } catch (e) {
+        console.error("Bunny token failed:", e);
+      }
+      // PDF still uses Supabase signed URL
+      if (data.pdf_url) {
+        const pUrl = await getSignedFileUrl("lecture-pdfs", data.pdf_url, 3600);
+        setSignedPdfUrl(pUrl);
+      }
+    } else {
+      // Legacy: Supabase Storage signed URLs (1h expiry)
+      const [vUrl, pUrl] = await Promise.all([
+        data.video_url ? getSignedFileUrl("lecture-videos", data.video_url, 3600) : Promise.resolve(null),
+        data.pdf_url ? getSignedFileUrl("lecture-pdfs", data.pdf_url, 3600) : Promise.resolve(null),
+      ]);
+      setSignedVideoUrl(vUrl);
+      setSignedPdfUrl(pUrl);
+    }
 
     setLoading(false);
   }, [id, user, navigate, t]);
