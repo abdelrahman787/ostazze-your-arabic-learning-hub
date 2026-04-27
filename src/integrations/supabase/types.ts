@@ -373,6 +373,7 @@ export type Database = {
       }
       lectures: {
         Row: {
+          bunny_video_id: string | null
           created_at: string
           id: string
           pdf_url: string | null
@@ -385,6 +386,7 @@ export type Database = {
           zoom_url: string | null
         }
         Insert: {
+          bunny_video_id?: string | null
           created_at?: string
           id?: string
           pdf_url?: string | null
@@ -397,6 +399,7 @@ export type Database = {
           zoom_url?: string | null
         }
         Update: {
+          bunny_video_id?: string | null
           created_at?: string
           id?: string
           pdf_url?: string | null

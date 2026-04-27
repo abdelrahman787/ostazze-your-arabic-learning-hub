@@ -1,0 +1,1 @@
+ALTER TABLE public.lectures ADD COLUMN IF NOT EXISTS bunny_video_id text;
