@@ -1,74 +1,44 @@
 import { supabase } from "@/integrations/supabase/client";
-import * as tus from "tus-js-client";
 
 /**
- * Uploads a video to Bunny.net Stream using the TUS resumable protocol.
- * TUS is officially CORS-enabled by Bunny, unlike the direct PUT endpoint.
- *
- * Steps:
- *  1. Edge function `bunny-create-video` creates the video entry and returns
- *     a signed authorization for TUS.
- *  2. Browser uploads the file in chunks to https://video.bunnycdn.com/tusupload
- *     using the tus-js-client library.
+ * Uploads a video through private app storage first, then lets a backend
+ * function send it to Bunny.net Stream server-to-server.
+ * This avoids browser → Bunny TUS network/CORS failures.
  */
 export async function uploadVideoToBunny(
   file: File,
   title: string,
   onProgress?: (pct: number) => void
 ): Promise<string> {
-  // Step 1 — create video entry + get TUS signature
-  const { data, error } = await supabase.functions.invoke("bunny-create-video", {
-    body: { title },
+  onProgress?.(5);
+  const ext = file.name.split(".").pop()?.replace(/[^a-zA-Z0-9]/g, "") || "mp4";
+  const storagePath = `bunny-temp/${Date.now()}-${crypto.randomUUID()}.${ext}`;
+
+  const { error: uploadError } = await supabase.storage
+    .from("lecture-videos")
+    .upload(storagePath, file, {
+      contentType: file.type || "video/mp4",
+      upsert: false,
+    });
+
+  if (uploadError) throw uploadError;
+  onProgress?.(45);
+
+  const { data, error } = await supabase.functions.invoke("bunny-import-video", {
+    body: {
+      storagePath,
+      title: title || file.name,
+      contentType: file.type || "video/mp4",
+    },
   });
-  if (error) throw new Error(error.message || "Failed to create Bunny video");
-  const {
-    videoId,
-    libraryId,
-    authorizationSignature,
-    authorizationExpire,
-    tusEndpoint,
-  } = data as {
-    videoId: string;
-    libraryId: string;
-    authorizationSignature: string;
-    authorizationExpire: number;
-    tusEndpoint: string;
-  };
-  if (!videoId || !authorizationSignature) {
-    throw new Error("Bunny did not return upload info");
+  if (error) {
+    await supabase.storage.from("lecture-videos").remove([storagePath]);
+    throw new Error(error.message || "Failed to import video to Bunny");
   }
 
-  // Step 2 — TUS resumable upload (CORS supported)
-  await new Promise<void>((resolve, reject) => {
-    const upload = new tus.Upload(file, {
-      endpoint: tusEndpoint,
-      retryDelays: [0, 3000, 5000, 10000, 20000],
-      // Bunny requires chunked uploads — 50MB chunks work well for large videos
-      chunkSize: 50 * 1024 * 1024,
-      // Disable URL storage so previous failed attempts don't break new uploads
-      removeFingerprintOnSuccess: true,
-      headers: {
-        AuthorizationSignature: authorizationSignature,
-        AuthorizationExpire: String(authorizationExpire),
-        VideoId: videoId,
-        LibraryId: libraryId,
-      },
-      metadata: {
-        filetype: file.type || "video/mp4",
-        title: title || file.name,
-      },
-      onError: (err) => {
-        console.error("[Bunny TUS] upload error:", err);
-        reject(err instanceof Error ? err : new Error(String(err)));
-      },
-      onProgress: (sent, total) => {
-        if (onProgress) onProgress(Math.round((sent / total) * 100));
-      },
-      onSuccess: () => resolve(),
-    });
-    upload.start();
-  });
-
+  const { videoId } = data as { videoId: string };
+  if (!videoId) throw new Error("Bunny did not return a video id");
+  onProgress?.(100);
   return videoId;
 }
 

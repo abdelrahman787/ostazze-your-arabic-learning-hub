@@ -732,9 +732,9 @@ const Admin = () => {
                             <td className="p-4 text-sm">{l.student_name}</td>
                             <td className="p-4">
                               <div className="flex gap-2">
-                                {l.video_url && <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full font-semibold flex items-center gap-1"><Video size={10} /> فيديو</span>}
+                                {(l.video_url || l.bunny_video_id) && <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full font-semibold flex items-center gap-1"><Video size={10} /> فيديو</span>}
                                 {l.pdf_url && <span className="text-xs bg-destructive/10 text-destructive px-2 py-1 rounded-full font-semibold flex items-center gap-1"><FileText size={10} /> PDF</span>}
-                                {!l.video_url && !l.pdf_url && <span className="text-muted-foreground text-xs">—</span>}
+                                {!l.video_url && !l.bunny_video_id && !l.pdf_url && <span className="text-muted-foreground text-xs">—</span>}
                               </div>
                             </td>
                             <td className="p-4">
@@ -938,11 +938,11 @@ const Admin = () => {
             </div>
             <div className="border-t pt-4 space-y-3">
               <div>
-                <label className="block text-sm font-bold mb-1.5">فيديو المحاضرة {editLecture.video_url && <span className="text-success text-xs font-normal">(يوجد فيديو حالياً)</span>}</label>
+                <label className="block text-sm font-bold mb-1.5">فيديو المحاضرة {(editLecture.video_url || editLecture.bunny_video_id) && <span className="text-success text-xs font-normal">(يوجد فيديو حالياً)</span>}</label>
                 <input ref={editVideoRef} type="file" accept="video/*" className="hidden" onChange={(e) => setEditVideoFile(e.target.files?.[0] || null)} />
                 <button onClick={() => editVideoRef.current?.click()} className="w-full flex items-center justify-center gap-2 p-3 border-2 border-dashed rounded-xl text-sm text-muted-foreground hover:border-primary hover:text-primary transition-colors">
                   <Upload size={16} />
-                  {editVideoFile ? editVideoFile.name.slice(0, 30) : editLecture.video_url ? "استبدال الفيديو" : "رفع فيديو"}
+                  {editVideoFile ? editVideoFile.name.slice(0, 30) : (editLecture.video_url || editLecture.bunny_video_id) ? "استبدال الفيديو" : "رفع فيديو"}
                 </button>
               </div>
               <div>
