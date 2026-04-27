@@ -910,7 +910,16 @@ const Admin = () => {
               </div>
             </div>
             <button onClick={handleAddLecture} disabled={uploading} className="btn-primary w-full flex items-center justify-center gap-2">
-              {uploading ? <><Loader2 size={16} className="animate-spin" /> جاري الرفع...</> : <><Plus size={16} /> إضافة المحاضرة</>}
+              {uploading ? (
+                <><Loader2 size={16} className="animate-spin" /> {videoFile && uploadProgress > 0 ? `رفع الفيديو ${uploadProgress}%` : "جاري الرفع..."}</>
+              ) : <><Plus size={16} /> إضافة المحاضرة</>}
+            </button>
+            {videoFile && (
+              <p className="text-xs text-muted-foreground text-center">
+                🔒 الفيديو سيتم تشفيره تلقائياً ورفعه على Bunny.net Stream مع حماية ضد التحميل وعلامة مائية لكل طالب
+              </p>
+            )}
+            <button className="hidden" disabled aria-hidden>
             </button>
           </div>
         </ModalWrapper>
