@@ -24,6 +24,57 @@ async function sha256Hex(input: string): Promise<string> {
     .join("");
 }
 
+/**
+ * Ensures the given hostname is registered as an Allowed Referrer on the
+ * Bunny Stream Library. Without this, the embed shows
+ * "This content is blocked. Contact the site owner to fix the issue."
+ */
+async function ensureAllowedReferrer(
+  libraryId: string,
+  accountApiKey: string | undefined,
+  hostname: string,
+) {
+  if (!accountApiKey || !hostname) return;
+  try {
+    // Read current library settings
+    const getRes = await fetch(
+      `https://api.bunny.net/videolibrary/${libraryId}`,
+      {
+        headers: { AccessKey: accountApiKey, accept: "application/json" },
+      },
+    );
+    if (!getRes.ok) {
+      console.warn("Could not read library settings:", getRes.status);
+      return;
+    }
+    const lib = await getRes.json();
+    const current: string[] = Array.isArray(lib?.AllowedReferrers)
+      ? lib.AllowedReferrers
+      : [];
+    if (current.includes(hostname)) return;
+
+    const updated = [...current, hostname];
+    const updRes = await fetch(
+      `https://api.bunny.net/videolibrary/${libraryId}`,
+      {
+        method: "POST",
+        headers: {
+          AccessKey: accountApiKey,
+          accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ AllowedReferrers: updated }),
+      },
+    );
+    if (!updRes.ok) {
+      const txt = await updRes.text();
+      console.warn("Could not update AllowedReferrers:", updRes.status, txt);
+    }
+  } catch (e) {
+    console.warn("ensureAllowedReferrer failed:", e);
+  }
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
