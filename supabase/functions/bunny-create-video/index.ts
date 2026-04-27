@@ -103,15 +103,25 @@ Deno.serve(async (req) => {
     const video = await bunnyRes.json();
     const guid: string = video.guid;
 
-    // Direct upload URL — admin frontend will PUT the file to this endpoint
-    const uploadUrl = `https://video.bunnycdn.com/library/${libraryId}/videos/${guid}`;
+    // Build TUS upload signature for browser-based resumable uploads (CORS-enabled)
+    // Signature = SHA256(LibraryId + APIKey + ExpirationTime + VideoId)
+    const expirationTime = Math.floor(Date.now() / 1000) + 60 * 60 * 24; // 24h
+    const sigInput = `${libraryId}${apiKey}${expirationTime}${guid}`;
+    const sigBuf = await crypto.subtle.digest(
+      "SHA-256",
+      new TextEncoder().encode(sigInput)
+    );
+    const authorizationSignature = Array.from(new Uint8Array(sigBuf))
+      .map((b) => b.toString(16).padStart(2, "0"))
+      .join("");
 
     return new Response(
       JSON.stringify({
         videoId: guid,
-        uploadUrl,
-        // Bunny upload requires the same AccessKey header
-        uploadHeaders: { AccessKey: apiKey },
+        libraryId,
+        authorizationSignature,
+        authorizationExpire: expirationTime,
+        tusEndpoint: "https://video.bunnycdn.com/tusupload",
       }),
       {
         status: 200,
