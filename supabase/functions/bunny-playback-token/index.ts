@@ -24,55 +24,61 @@ async function sha256Hex(input: string): Promise<string> {
     .join("");
 }
 
-/**
- * Ensures the given hostname is registered as an Allowed Referrer on the
- * Bunny Stream Library. Without this, the embed shows
- * "This content is blocked. Contact the site owner to fix the issue."
- */
-async function ensureAllowedReferrer(
-  libraryId: string,
-  accountApiKey: string | undefined,
-  hostname: string,
-) {
-  if (!accountApiKey || !hostname) return;
-  try {
-    // Read current library settings
-    const getRes = await fetch(
-      `https://api.bunny.net/videolibrary/${libraryId}`,
-      {
-        headers: { AccessKey: accountApiKey, accept: "application/json" },
-      },
-    );
-    if (!getRes.ok) {
-      console.warn("Could not read library settings:", getRes.status);
-      return;
+const referrerHostsFromRequest = (req: Request) => {
+  const parseHost = (value: string | null) => {
+    try {
+      return value ? new URL(value).hostname : null;
+    } catch {
+      return null;
     }
-    const lib = await getRes.json();
-    const current: string[] = Array.isArray(lib?.AllowedReferrers)
-      ? lib.AllowedReferrers
-      : [];
-    if (current.includes(hostname)) return;
+  };
 
-    const updated = [...current, hostname];
-    const updRes = await fetch(
-      `https://api.bunny.net/videolibrary/${libraryId}`,
-      {
-        method: "POST",
-        headers: {
-          AccessKey: accountApiKey,
-          accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ AllowedReferrers: updated }),
-      },
-    );
-    if (!updRes.ok) {
-      const txt = await updRes.text();
-      console.warn("Could not update AllowedReferrers:", updRes.status, txt);
-    }
-  } catch (e) {
-    console.warn("ensureAllowedReferrer failed:", e);
-  }
+  return Array.from(
+    new Set(
+      [
+        parseHost(req.headers.get("Origin")),
+        parseHost(req.headers.get("Referer")),
+        "id-preview--dc7db421-26c3-4945-8236-93600ec382aa.lovable.app",
+        "dc7db421-26c3-4945-8236-93600ec382aa.lovableproject.com",
+        "ostazze-learn-hub.lovable.app",
+        "ostaze.com",
+        "www.ostaze.com",
+      ].filter(Boolean) as string[],
+    ),
+  );
+};
+
+/**
+ * Registers the app domains as Bunny Stream allowed referrers. This endpoint
+ * accepts the Stream library API key; reading full library settings needs a
+ * different account key and was returning 401.
+ */
+async function ensureAllowedReferrers(libraryId: string, apiKey: string, req: Request) {
+  await Promise.all(
+    referrerHostsFromRequest(req).map(async (hostname) => {
+      try {
+        const res = await fetch(
+          `https://api.bunny.net/videolibrary/${libraryId}/addAllowedReferrer`,
+          {
+            method: "POST",
+            headers: {
+              AccessKey: apiKey,
+              "Content-Type": "application/json",
+              accept: "application/json",
+            },
+            body: JSON.stringify({ Hostname: hostname }),
+          },
+        );
+
+        if (!res.ok && res.status !== 400 && res.status !== 409) {
+          const txt = await res.text();
+          console.warn("Bunny allowed referrer update failed:", hostname, res.status, txt);
+        }
+      } catch (e) {
+        console.warn("Bunny allowed referrer update failed:", hostname, e);
+      }
+    }),
+  );
 }
 
 Deno.serve(async (req) => {
@@ -182,20 +188,10 @@ Deno.serve(async (req) => {
 
     const videoId = lecture.bunny_video_id;
 
-    // Make sure the caller's origin is whitelisted on the library, otherwise
-    // Bunny shows "This content is blocked".
-    const origin = req.headers.get("origin") || req.headers.get("referer") || "";
-    let originHost = "";
-    try {
-      if (origin) originHost = new URL(origin).hostname;
-    } catch (_) {
-      originHost = "";
-    }
-    const accountApiKey = Deno.env.get("BUNNY_ACCOUNT_API_KEY") ||
-      Deno.env.get("BUNNY_STREAM_API_KEY");
-    if (originHost) {
-      await ensureAllowedReferrer(libraryId, accountApiKey, originHost);
-    }
+    // Make sure the app domains are whitelisted on the library, otherwise
+    // Bunny shows "This content is blocked" inside the iframe.
+    const apiKey = Deno.env.get("BUNNY_STREAM_API_KEY");
+    if (apiKey) await ensureAllowedReferrers(libraryId, apiKey, req);
 
     // Token valid for 2 hours
     const expires = Math.floor(Date.now() / 1000) + 60 * 60 * 2;
