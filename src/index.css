@@ -4,6 +4,7 @@
 
 @layer base {
   :root {
+    --navbar-h: 80px;
     --background: 30 40% 97%;
     --foreground: 230 25% 15%;
     --card: 0 0% 100%;

@@ -190,10 +190,10 @@ const LectureView = () => {
   }
 
   return (
-    <div className="min-h-[calc(100vh-80px)] bg-background flex flex-col">
+    <div className="min-h-[calc(100vh-var(--navbar-h))] bg-background flex flex-col">
       <NoIndex title="Lecture" />
       {/* Sub-header */}
-      <div className="bg-card border-b px-4 py-2 mt-2 flex items-center justify-between">
+      <div className="bg-card border-b px-4 py-2 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <button
             onClick={() => navigate(-1)}
@@ -250,7 +250,7 @@ const LectureView = () => {
       </div>
 
       {/* Main layout: PDF | Video | Chat */}
-      <div className="flex-1 flex min-h-[calc(100vh-80px-60px)] overflow-hidden">
+      <div className="flex-1 flex h-[calc(100vh-var(--navbar-h)-49px)] overflow-hidden">
         {/* PDF panel — RIGHT in RTL */}
         <AnimatePresence>
           {pdfOpen && signedPdfUrl && (
