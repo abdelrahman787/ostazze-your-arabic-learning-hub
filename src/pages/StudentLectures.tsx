@@ -12,6 +12,7 @@ interface LectureItem {
   subject: string | null;
   teacher_id: string;
   video_url: string | null;
+  bunny_video_id: string | null;
   pdf_url: string | null;
   created_at: string;
   teacher_name?: string;
@@ -28,7 +29,7 @@ const StudentLectures = () => {
     const fetchData = async () => {
       const { data } = await supabase
         .from("lectures")
-        .select("id, title, subject, teacher_id, video_url, pdf_url, created_at")
+        .select("id, title, subject, teacher_id, video_url, bunny_video_id, pdf_url, created_at")
         .eq("student_id", user.id)
         .order("created_at", { ascending: false });
 
@@ -96,8 +97,9 @@ const StudentLectures = () => {
 
               <div className="flex items-center gap-4 text-xs text-muted-foreground">
                 <span className="flex items-center gap-1">
-                  <Video size={12} className={lec.video_url ? "text-success" : ""} />
-                  {lec.video_url ? t("video_available") : t("no_video")}
+                  <Video size={12} className={(lec.video_url || lec.bunny_video_id) ? "text-success" : ""} />
+                  {(lec.video_url || lec.bunny_video_id) ? t("video_available") : t("no_video")}
+                  {lec.bunny_video_id && <span className="text-[0.6rem] bg-success/10 text-success px-1.5 py-0.5 rounded-full ms-1">🔒</span>}
                 </span>
                 <span className="flex items-center gap-1">
                   <FileText size={12} className={lec.pdf_url ? "text-destructive" : ""} />
