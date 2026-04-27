@@ -919,8 +919,6 @@ const Admin = () => {
                 🔒 الفيديو سيتم تشفيره تلقائياً ورفعه على Bunny.net Stream مع حماية ضد التحميل وعلامة مائية لكل طالب
               </p>
             )}
-            <button className="hidden" disabled aria-hidden>
-            </button>
           </div>
         </ModalWrapper>
       )}
