@@ -43,6 +43,10 @@ export async function uploadVideoToBunny(
     const upload = new tus.Upload(file, {
       endpoint: tusEndpoint,
       retryDelays: [0, 3000, 5000, 10000, 20000],
+      // Bunny requires chunked uploads — 50MB chunks work well for large videos
+      chunkSize: 50 * 1024 * 1024,
+      // Disable URL storage so previous failed attempts don't break new uploads
+      removeFingerprintOnSuccess: true,
       headers: {
         AuthorizationSignature: authorizationSignature,
         AuthorizationExpire: String(authorizationExpire),
@@ -50,10 +54,13 @@ export async function uploadVideoToBunny(
         LibraryId: libraryId,
       },
       metadata: {
-        filetype: file.type,
-        title,
+        filetype: file.type || "video/mp4",
+        title: title || file.name,
       },
-      onError: (err) => reject(err),
+      onError: (err) => {
+        console.error("[Bunny TUS] upload error:", err);
+        reject(err instanceof Error ? err : new Error(String(err)));
+      },
       onProgress: (sent, total) => {
         if (onProgress) onProgress(Math.round((sent / total) * 100));
       },
