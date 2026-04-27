@@ -190,8 +190,12 @@ Deno.serve(async (req) => {
 
     // Make sure the app domains are whitelisted on the library, otherwise
     // Bunny shows "This content is blocked" inside the iframe.
-    const apiKey = Deno.env.get("BUNNY_STREAM_API_KEY");
-    if (apiKey) await ensureAllowedReferrers(libraryId, apiKey, req);
+    const accountApiKey = Deno.env.get("BUNNY_ACCOUNT_API_KEY");
+    if (accountApiKey) {
+      await ensureAllowedReferrers(libraryId, accountApiKey, req);
+    } else {
+      console.warn("BUNNY_ACCOUNT_API_KEY is not configured; allowed referrers were not updated");
+    }
 
     // Token valid for 2 hours
     const expires = Math.floor(Date.now() / 1000) + 60 * 60 * 2;
