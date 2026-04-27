@@ -345,9 +345,27 @@ const LectureView = () => {
                     allowFullScreen
                     title={lecture.title}
                   />
+                  {/* Floating watermark overlay — visible in any screen recording */}
+                  <div
+                    className="pointer-events-none absolute inset-0 overflow-hidden select-none"
+                    aria-hidden="true"
+                  >
+                    <div
+                      className="absolute text-white/30 text-xs font-bold whitespace-nowrap drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] watermark-float"
+                      style={{ top: "10%", left: "5%" }}
+                    >
+                      {user?.email} • OSTAZZE
+                    </div>
+                    <div
+                      className="absolute text-white/25 text-[0.65rem] font-bold whitespace-nowrap drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] watermark-float-2"
+                      style={{ bottom: "15%", right: "5%" }}
+                    >
+                      {user?.email}
+                    </div>
+                  </div>
                 </div>
                 <p className="text-[0.65rem] text-muted-foreground/70 text-center mt-2">
-                  🔒 محمي بتشفير. التسجيل أو إعادة التوزيع مخالف لشروط الاستخدام.
+                  🔒 محمي بتشفير. أي محاولة تسجيل/توزيع تحمل بصمة حسابك ({user?.email}) ومخالفة لشروط الاستخدام.
                 </p>
               </div>
             ) : signedVideoUrl ? (
