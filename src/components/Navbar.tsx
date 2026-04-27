@@ -76,8 +76,8 @@ const Navbar = () => {
   }, [navigate]);
 
   return (
-    <header ref={headerRef} className="sticky top-0 z-50 px-4 pt-4">
-      <nav className="nav-pill mx-auto max-w-5xl h-14 flex items-center px-3 sm:px-5">
+    <header ref={headerRef} className="sticky top-0 z-50 px-4 pt-4 pointer-events-none">
+      <nav className="nav-pill mx-auto max-w-5xl h-14 flex items-center px-3 sm:px-5 pointer-events-auto">
         <div className="flex-1 flex items-center justify-between gap-3">
           {/* Logo */}
           <div className="flex items-center gap-2">
