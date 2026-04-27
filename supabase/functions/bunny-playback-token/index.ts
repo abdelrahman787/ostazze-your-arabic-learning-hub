@@ -50,8 +50,8 @@ const referrerHostsFromRequest = (req: Request) => {
 
 /**
  * Registers the app domains as Bunny Stream allowed referrers. This endpoint
- * accepts the Stream library API key; reading full library settings needs a
- * different account key and was returning 401.
+ * is on Bunny's account API, so it needs the account API key rather than the
+ * per-library Stream API key used for video upload calls.
  */
 async function ensureAllowedReferrers(libraryId: string, apiKey: string, req: Request) {
   await Promise.all(
@@ -190,11 +190,11 @@ Deno.serve(async (req) => {
 
     // Make sure the app domains are whitelisted on the library, otherwise
     // Bunny shows "This content is blocked" inside the iframe.
-    const streamApiKey = Deno.env.get("BUNNY_STREAM_API_KEY") || Deno.env.get("BUNNY_ACCOUNT_API_KEY");
-    if (streamApiKey) {
-      await ensureAllowedReferrers(libraryId, streamApiKey, req);
+    const accountApiKey = Deno.env.get("BUNNY_ACCOUNT_API_KEY") || Deno.env.get("BUNNY_STREAM_API_KEY");
+    if (accountApiKey) {
+      await ensureAllowedReferrers(libraryId, accountApiKey, req);
     } else {
-      console.warn("BUNNY_STREAM_API_KEY is not configured; allowed referrers were not updated");
+      console.warn("BUNNY_ACCOUNT_API_KEY is not configured; allowed referrers were not updated");
     }
 
     // Token valid for 2 hours
