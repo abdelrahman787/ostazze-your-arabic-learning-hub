@@ -195,9 +195,10 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen" style={{ paddingTop: "var(--navbar-h, 0px)" }}>
       <aside
-        className={`fixed lg:static inset-y-0 right-0 z-40 w-[260px] bg-card border-l flex flex-col transition-transform duration-300 ${
+        style={{ top: "var(--navbar-h, 0px)" }}
+        className={`fixed lg:sticky bottom-0 right-0 z-40 w-[260px] h-[calc(100vh-var(--navbar-h,0px))] bg-card border-l flex flex-col transition-transform duration-300 ${
           sidebarOpen ? "translate-x-0" : "translate-x-full lg:translate-x-0"
         }`}
       >
@@ -256,7 +257,7 @@ const Dashboard = () => {
       )}
 
       <main className="flex-1 min-w-0">
-        <header className="bg-card border-b px-6 py-4 flex items-center justify-between sticky top-0 z-20">
+        <header style={{ top: "var(--navbar-h, 0px)" }} className="bg-card border-b px-6 py-4 flex items-center justify-between sticky z-20">
           <div className="flex items-center gap-3">
             <button onClick={() => setSidebarOpen(true)} className="lg:hidden">
               <Menu size={20} />

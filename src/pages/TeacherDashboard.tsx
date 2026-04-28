@@ -158,8 +158,8 @@ const TeacherDashboard = () => {
   ];
 
   return (
-    <div className="flex min-h-screen">
-      <aside className={`fixed lg:static inset-y-0 right-0 z-40 w-[260px] bg-card border-l flex flex-col transition-transform duration-300 ${sidebarOpen ? "translate-x-0" : "translate-x-full lg:translate-x-0"}`}>
+    <div className="flex min-h-screen" style={{ paddingTop: "var(--navbar-h, 0px)" }}>
+      <aside style={{ top: "var(--navbar-h, 0px)" }} className={`fixed lg:sticky bottom-0 right-0 z-40 w-[260px] h-[calc(100vh-var(--navbar-h,0px))] bg-card border-l flex flex-col transition-transform duration-300 ${sidebarOpen ? "translate-x-0" : "translate-x-full lg:translate-x-0"}`}>
         <div className="p-5 border-b">
           <Link to="/" className="text-xl font-black text-primary tracking-tight">OSTAZE</Link>
           <p className="text-xs text-muted-foreground mt-0.5">{t("sidebar_teacher_dashboard")}</p>
@@ -188,7 +188,7 @@ const TeacherDashboard = () => {
       {sidebarOpen && <div className="fixed inset-0 z-30 bg-foreground/30 lg:hidden" onClick={() => setSidebarOpen(false)} />}
 
       <main className="flex-1 min-w-0">
-        <header className="bg-card border-b px-6 py-4 flex items-center justify-between sticky top-0 z-20">
+        <header style={{ top: "var(--navbar-h, 0px)" }} className="bg-card border-b px-6 py-4 flex items-center justify-between sticky z-20">
           <div className="flex items-center gap-3">
             <button onClick={() => setSidebarOpen(true)} className="lg:hidden"><Menu size={20} /></button>
             <h2 className="font-bold">
