@@ -122,6 +122,7 @@ const SalesHub = () => {
   const statusColor: Record<string, string> = {
     pending: "bg-warning/10 text-warning",
     pending_payment: "bg-warning/10 text-warning",
+    paid_awaiting_assignment: "bg-orange-500/15 text-orange-600 dark:text-orange-400",
     assigned: "bg-primary/10 text-primary",
     confirmed: "bg-success/10 text-success",
     rejected: "bg-destructive/10 text-destructive",
@@ -132,6 +133,7 @@ const SalesHub = () => {
   const statusLabel: Record<string, string> = {
     pending: "قيد الانتظار",
     pending_payment: "بانتظار الدفع",
+    paid_awaiting_assignment: "💰 مدفوع — بانتظار تعيين مدرس",
     assigned: "تم التعيين",
     confirmed: "مؤكد",
     rejected: "مرفوض",
