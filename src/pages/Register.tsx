@@ -122,7 +122,7 @@ const Register = () => {
   }
 
   return (
-    <div className="hero-gradient min-h-screen flex items-center justify-center p-4 pt-28 pb-10">
+    <div className="hero-gradient min-h-screen flex items-center justify-center p-4 pt-page pb-10">
       <PageHelmet title={t("register_title")} description={t("register_subtitle")} noindex />
       <div className="w-full max-w-4xl flex flex-col lg:flex-row gap-0">
         {/* Left side - Illustration */}

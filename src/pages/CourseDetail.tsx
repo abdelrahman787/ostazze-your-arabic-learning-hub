@@ -131,7 +131,7 @@ const CourseDetail = () => {
 
   if (loading) {
     return (
-      <div className="container pt-32 pb-12">
+      <div className="container pt-page pb-12">
         <Skeleton className="h-8 w-64 mb-6 bg-muted-foreground/15" />
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-4">
@@ -147,7 +147,7 @@ const CourseDetail = () => {
 
   if (!course) {
     return (
-      <div className="container pt-32 pb-12 text-center">
+      <div className="container pt-page pb-12 text-center">
         <h1 className="text-2xl font-extrabold mb-3">{lang === "ar" ? "الكورس غير موجود" : "Course not found"}</h1>
         <Link to="/courses" className="btn-primary inline-flex items-center gap-2">
           <ArrowLeft size={16} /> {lang === "ar" ? "عودة للكورسات" : "Back to courses"}
@@ -169,7 +169,7 @@ const CourseDetail = () => {
       <PageHelmet title={title} description={b(course.short_description, course.short_description_en) || desc.slice(0, 160)} />
 
       {/* Hero header with cover */}
-      <section className="relative pt-28 pb-10 bg-section-alt overflow-hidden">
+      <section className="relative pt-page-lg pb-10 bg-section-alt overflow-hidden">
         <div
           className="absolute inset-0 -z-0"
           style={{ background: "radial-gradient(ellipse 70% 50% at 50% 0%, hsl(14 91% 50% / 0.18) 0%, transparent 65%)" }}

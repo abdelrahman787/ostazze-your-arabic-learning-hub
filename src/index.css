@@ -107,6 +107,19 @@
 }
 
 @layer utilities {
+  /* Unified page top spacing — accounts for the floating sticky navbar.
+     Use on the first section of any page that does NOT have a hero extending
+     behind the navbar. Adds the navbar height plus a small breathing gap. */
+  .pt-page {
+    padding-top: calc(var(--navbar-h, 80px) + 1.5rem);
+  }
+  .pt-page-lg {
+    padding-top: calc(var(--navbar-h, 80px) + 3rem);
+  }
+  .min-h-page {
+    min-height: calc(100vh - var(--navbar-h, 80px));
+  }
+
   /* Card-Y inspired hero background: deep dark + radial orange/warm glow + grid */
   .hero-gradient {
     background: linear-gradient(160deg, hsl(30 60% 97%) 0%, hsl(25 50% 96%) 30%, hsl(var(--background)) 100%);
