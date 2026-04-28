@@ -247,7 +247,7 @@ const SalesHub = () => {
                     </td>
                     <td className="py-3 px-2">
                       <div className="flex items-center gap-2 flex-wrap">
-                        {(r.status === "pending" || r.status === "pending_payment") && (
+                        {(r.status === "pending" || r.status === "pending_payment" || r.status === "paid_awaiting_assignment") && (
                           <button onClick={() => { setAssigningId(r.id); setAssignTeacherId(r.teacher_id || ""); setAssignZoom(r.zoom_url || ""); }}
                             className="text-xs font-bold text-primary hover:underline flex items-center gap-1">
                             <Users size={12} /> {r.teacher_id ? "تعديل" : t("sales_assign")}
