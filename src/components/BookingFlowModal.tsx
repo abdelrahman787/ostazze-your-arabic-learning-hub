@@ -182,7 +182,45 @@ const BookingFlowModal = ({ open, onClose, subject, courseLabel, teachers }: Pro
               </button>
             </div>
 
-            {showCheckout && sessionRequestId ? (
+            {showSuccess ? (
+              <div className="py-6 text-center space-y-4">
+                <motion.div
+                  initial={{ scale: 0, rotate: -180 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                  className="mx-auto w-20 h-20 rounded-full bg-success/15 flex items-center justify-center"
+                >
+                  <CheckCircle2 size={44} className="text-success" />
+                </motion.div>
+                <div>
+                  <h3 className="text-xl font-black text-foreground mb-2">
+                    {lang === "ar" ? "تم حجز المحاضرة بنجاح ✅" : "Lecture booked successfully ✅"}
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed px-2">
+                    {lang === "ar"
+                      ? "تم حجز المحاضرة وستصلك رسالة بالتفاصيل ورابط المحاضرة فور تأكيد الإدارة وتعيين المدرس المناسب."
+                      : "Your lecture is booked. You'll receive an email with the details and the meeting link as soon as the admin confirms and assigns a tutor."}
+                  </p>
+                </div>
+                <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground bg-secondary/60 rounded-xl py-2.5 px-3">
+                  <Mail size={14} className="text-primary" />
+                  {lang === "ar"
+                    ? "راجع بريدك الإلكتروني خلال الساعات القادمة"
+                    : "Check your email in the next few hours"}
+                </div>
+                <div className="flex gap-3 pt-2">
+                  <button
+                    onClick={() => { onClose(); navigate("/my-bookings"); }}
+                    className="btn-primary flex-1 text-sm"
+                  >
+                    {lang === "ar" ? "حجوزاتي" : "My bookings"}
+                  </button>
+                  <button onClick={onClose} className="btn-outline flex-1 text-sm">
+                    {lang === "ar" ? "إغلاق" : "Close"}
+                  </button>
+                </div>
+              </div>
+            ) : showCheckout && sessionRequestId ? (
               <StripeEmbeddedCheckout
                 amountInCents={amountInCents}
                 teacherName={headerTeacherName}
