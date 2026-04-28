@@ -222,11 +222,11 @@ const HomePage = () => {
       </div>
 
       <Helmet>
-        <title>{lang === "ar" ? "OSTAZE - منصة كورسات تعليمية أونلاين | تعلم بسرعتك" : "Ostaze - Online Course Platform | Learn at Your Pace"}</title>
-        <meta name="description" content={lang === "ar" ? "منصة OSTAZE للكورسات التعليمية الرقمية: كورسات مسجلة وحية في البرمجة والرياضيات والعلوم واللغات. وصول مدى الحياة، شهادات إتمام، وأسعار مدروسة." : "Ostaze online course platform: recorded and live courses in programming, math, sciences, and languages. Lifetime access, completion certificates, and fair pricing."} />
-        <meta name="keywords" content={lang === "ar" ? "كورسات أونلاين، كورسات مسجلة، تعليم رقمي، منصة تعليمية، دورات تدريبية" : "online courses, recorded courses, digital learning, course platform, e-learning"} />
-        <meta property="og:title" content="Ostaze - Online Course Platform" />
-        <meta property="og:description" content="Recorded and live courses with lifetime access" />
+        <title>{lang === "ar" ? "OSTAZE | منصة أستازي - دروس خصوصية ولايف أونلاين مع أفضل المعلمين" : "OSTAZE | Ostaze - Online Private & Live Tutoring Platform"}</title>
+        <meta name="description" content={lang === "ar" ? "OSTAZE (أستازي / استاذي): منصة دروس خصوصية ولايف أونلاين تربط الطلاب بأفضل المعلمين الجامعيين في الكويت وقطر — حصص مباشرة بالزووم، كورسات مسجلة، وأسعار مدروسة." : "OSTAZE (Ostaze): online private & live tutoring platform connecting students with top university tutors in Kuwait & Qatar via Zoom and recorded courses."} />
+        <meta name="keywords" content={lang === "ar" ? "منصة استاذي، موقع استاذي، استاذي، أستاذي، أستازي، استازي، اوستاز، OSTAZE، Ostaze، منصة دروس لايف، منصة دروس أونلاين، موقع تعليم خصوصي، دروس خصوصية اونلاين، حصص أونلاين مباشرة، حصص لايف زووم، تعليم عن بعد، كورسات أونلاين، كورسات مسجلة، منصة تعليمية، حجز معلم خصوصي، معلم رياضيات خصوصي، معلم فيزياء خصوصي، معلم انجليزي خصوصي، معلم برمجة خصوصي، مدرس خصوصي اونلاين، دروس جامعية، جامعة الكويت، جامعة قطر، تدريس جامعي خصوصي" : "ostaze, ostaze platform, online tutoring platform, private online tutors, live online lessons, zoom tutoring, university tutors Kuwait, university tutors Qatar, math tutor online, physics tutor online, english tutor online, programming tutor online, private lessons online, remote learning platform, online courses Arabic"} />
+        <meta property="og:title" content={lang === "ar" ? "OSTAZE | منصة أستازي - دروس خصوصية ولايف أونلاين" : "OSTAZE | Ostaze - Online Private & Live Tutoring"} />
+        <meta property="og:description" content={lang === "ar" ? "احجز حصصك الخاصة لايف بالزووم مع أفضل المعلمين الجامعيين" : "Book live private lessons via Zoom with top university tutors"} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://ostaze.com" />
         <link rel="canonical" href="https://ostaze.com" />
@@ -548,6 +548,37 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+
+      {/* SEO-only contextual paragraph — readable to crawlers, hidden visually.
+          Naturally references brand variants and high-intent search phrases
+          students commonly type to find the platform. */}
+      <section aria-hidden="true" className="sr-only">
+        <h2>منصة OSTAZE (أستازي / استاذي / أستاذي) — دروس خصوصية ولايف أونلاين</h2>
+        <p>
+          منصة <strong>أستازي</strong> (وتُكتب أيضاً: استاذي، أستاذي، استازي،
+          OSTAZE، Ostaze) هي منصة دروس خصوصية ولايف أونلاين تجمع طلاب
+          الجامعات في الكويت وقطر بأفضل المعلمين الجامعيين عبر حصص مباشرة
+          بالزووم، إضافة إلى كورسات مسجلة وكورسات لايف. ابحث عن
+          <em>منصة استاذي</em>، <em>موقع استاذي</em>، <em>منصة دروس لايف</em>،
+          <em>موقع تعليم خصوصي</em>، أو <em>منصة دروس أونلاين</em> — كلها
+          تقودك إلى OSTAZE.
+        </p>
+        <p>
+          نوفّر <strong>معلمين خصوصي أونلاين</strong> في الرياضيات، الفيزياء،
+          الكيمياء، البرمجة، اللغة الإنجليزية، المحاسبة، الإدارة، والقانون.
+          يمكنك <strong>حجز معلم خصوصي</strong> بسرعة، اختيار التوقيت المناسب،
+          والانضمام لحصة <strong>زووم لايف</strong> فوراً. ندعم طلاب
+          <strong>جامعة الكويت</strong>، <strong>جامعة قطر</strong>، الجامعة
+          الأمريكية، الخليج للعلوم والتكنولوجيا، وكافة الجامعات الإقليمية.
+        </p>
+        <p>
+          OSTAZE / Ostaze / Ostazze — the leading online private &amp; live
+          tutoring platform for university students in Kuwait and Qatar.
+          Search terms: ostaze platform, online tutoring, zoom tutoring,
+          private lessons, live online lessons.
+        </p>
+      </section>
+
       <AnimationDebugOverlay />
     </div>
   );
