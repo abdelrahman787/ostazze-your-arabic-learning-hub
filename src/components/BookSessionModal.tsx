@@ -39,25 +39,20 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects, pri
 
     setSubmitting(true);
     try {
-      const { data, error } = await supabase.from("session_requests").insert({
+      const { error } = await supabase.from("session_requests").insert({
         student_id: user.id,
         teacher_id: teacherId,
         subject: form.subject || null,
         preferred_date: form.date,
         preferred_time: form.time,
         notes: form.notes || null,
-        status: price ? "pending_payment" : "pending",
+        status: "pending", // 💡 Payment temporarily disabled for testing
       }).select("id").single();
 
       if (error) throw error;
 
-      if (price && price > 0) {
-        setSessionRequestId(data.id);
-        setShowCheckout(true);
-      } else {
-        toast.success(t("booking_success"));
-        onClose();
-      }
+      toast.success(t("booking_success"));
+      onClose();
     } catch (e: any) {
       toast.error("Error: " + e.message);
     }
