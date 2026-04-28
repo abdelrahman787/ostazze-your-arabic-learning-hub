@@ -68,28 +68,47 @@ const NotificationBell = () => {
     setNotifications((prev) => prev.map((n) => ({ ...n, is_read: true })));
   };
 
+  const switchTab = (tab: string) => {
+    // Dispatch immediately and after a short delay (in case the dashboard mounts after navigation)
+    const fire = () => window.dispatchEvent(new CustomEvent("switch-dashboard-tab", { detail: tab }));
+    fire();
+    setTimeout(fire, 150);
+    setTimeout(fire, 400);
+  };
+
   const handleNotificationClick = (n: NotificationItem) => {
     markAsRead(n.id);
     setOpen(false);
 
+    const role = user?.role;
+
     // Navigate based on notification type
-    if (n.type === "new_lecture" && n.lecture_id) {
+    if ((n.type === "new_lecture" || n.type === "new_message") && n.lecture_id) {
       navigate(`/lectures/${n.lecture_id}`);
-    } else if (n.type === "new_message" && n.lecture_id) {
-      navigate(`/lectures/${n.lecture_id}`);
-    } else if (n.type === "booking_confirmed" || n.type === "booking_rejected" || n.type === "booking_cancelled" || n.type === "new_booking") {
-      // Navigate to My Lessons tab in dashboard
-      navigate("/dashboard");
-      // Set a small delay to switch to mylessons tab
-      setTimeout(() => {
-        const event = new CustomEvent("switch-dashboard-tab", { detail: "mylessons" });
-        window.dispatchEvent(event);
-      }, 100);
-    } else if (n.type === "admin_new_request" || n.type === "admin_cancellation") {
-      navigate("/admin");
-    } else if (n.type === "admin_new_payment") {
-      navigate("/admin");
+      return;
     }
+
+    if (n.type === "booking_confirmed" || n.type === "booking_rejected" || n.type === "booking_cancelled" || n.type === "new_booking") {
+      // Route to the appropriate dashboard based on role; SmartDashboard handles /dashboard for both
+      navigate("/dashboard");
+      switchTab("mylessons");
+      return;
+    }
+
+    if (n.type === "admin_new_request" || n.type === "admin_cancellation") {
+      navigate("/admin");
+      switchTab("sales");
+      return;
+    }
+
+    if (n.type === "admin_new_payment") {
+      navigate("/admin");
+      switchTab("invoices");
+      return;
+    }
+
+    // Fallback: go to dashboard
+    navigate(role === "admin" ? "/admin" : "/dashboard");
   };
 
   const getNotificationIcon = (type: string) => {
