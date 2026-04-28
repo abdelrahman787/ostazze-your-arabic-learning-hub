@@ -92,6 +92,16 @@ const Admin = () => {
   const navigate = useNavigate();
 
   const [activeTab, setActiveTab] = useState("sales");
+
+  // Listen for notification-driven tab switch
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent).detail;
+      if (detail) setActiveTab(detail);
+    };
+    window.addEventListener("switch-dashboard-tab", handler);
+    return () => window.removeEventListener("switch-dashboard-tab", handler);
+  }, []);
   const [searchQuery, setSearchQuery] = useState("");
   const [teachers, setTeachers] = useState<TeacherRow[]>([]);
   const [loading, setLoading] = useState(true);
