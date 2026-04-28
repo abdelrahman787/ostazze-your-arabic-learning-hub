@@ -39,6 +39,7 @@ const BookingFlowModal = ({ open, onClose, subject, courseLabel, teachers }: Pro
   const [form, setForm] = useState({ date: "", time: "", notes: "" });
   const [submitting, setSubmitting] = useState(false);
   const [showCheckout, setShowCheckout] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
   const [sessionRequestId, setSessionRequestId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -46,6 +47,7 @@ const BookingFlowModal = ({ open, onClose, subject, courseLabel, teachers }: Pro
       setSelectedTeacherId(AUTO_VALUE);
       setForm({ date: "", time: "", notes: "" });
       setShowCheckout(false);
+      setShowSuccess(false);
       setSessionRequestId(null);
     }
   }, [open]);
