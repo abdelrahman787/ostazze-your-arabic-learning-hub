@@ -48,6 +48,16 @@ const TeacherDashboard = () => {
   // Conversations view
   const [showConversations, setShowConversations] = useState(false);
 
+  // Listen for notification-driven tab switch
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent).detail;
+      if (detail) { setTab(detail); setShowConversations(false); }
+    };
+    window.addEventListener("switch-dashboard-tab", handler);
+    return () => window.removeEventListener("switch-dashboard-tab", handler);
+  }, []);
+
   const fetchLectures = useCallback(async () => {
     if (!user) return;
     setLecturesLoading(true);
