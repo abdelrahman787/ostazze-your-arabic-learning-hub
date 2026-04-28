@@ -1,6 +1,6 @@
 import { useSearchParams, Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, Mail } from "lucide-react";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 import NoIndex from "@/components/NoIndex";
 
