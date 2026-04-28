@@ -6,7 +6,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
   X, Loader2, Sparkles, Calendar, Clock, BookOpen, MessageSquare,
-  GraduationCap, BadgeCheck, CreditCard,
+  GraduationCap, BadgeCheck, CreditCard, CheckCircle2, Mail,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
