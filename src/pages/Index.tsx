@@ -336,7 +336,7 @@ const HomePage = () => {
               { icon: CalendarCheck, title: t("why_schedule"), desc: t("why_schedule_desc"), active: false },
               { icon: Video, title: t("why_remote"), desc: t("why_remote_desc"), active: false },
             ].map((step, i) => (
-              <motion.div key={step.title} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.1 }}
+              <motion.div key={step.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.6, delay: i * 0.25, ease: [0.22, 1, 0.36, 1] }}
                 className={`feature-card ${i === 0 ? "card-active" : ""}`}>
                 <div className="icon-box-lg bg-primary/10 text-primary mx-auto mb-4">
                   <step.icon size={24} />
@@ -360,7 +360,7 @@ const HomePage = () => {
             ref={howStepsRef}
             initial="hidden"
             animate={playHowSteps ? "show" : "hidden"}
-            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.5, delayChildren: 0.15 } } }}
+            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.2, delayChildren: 0.05 } } }}
             className="grid md:grid-cols-3 gap-10 md:gap-6 relative max-w-5xl mx-auto"
           >
             {/* Animated dashed connector */}
@@ -478,10 +478,10 @@ const HomePage = () => {
               ].map((s, i) => (
                 <motion.div
                   key={s.label}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
+                  initial={{ opacity: 0, y: 24, scale: 0.95 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.5, delay: i * 0.18, ease: [0.22, 1, 0.36, 1] }}
                   className="stats-tile-glass p-5 md:p-6"
                 >
                   <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-white/10 mb-3 text-white/90 border border-white/15 backdrop-blur-sm">
@@ -510,7 +510,7 @@ const HomePage = () => {
           </motion.div>
           <div className="grid md:grid-cols-3 gap-5">
             {mockTestimonials.map((tst, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
+              <motion.div key={i} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.5, delay: i * 0.18, ease: [0.22, 1, 0.36, 1] }}
                 className="card-base p-6 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
                 <div className="flex gap-0.5 mb-3">
                   {[1, 2, 3, 4, 5].map((n) => (
