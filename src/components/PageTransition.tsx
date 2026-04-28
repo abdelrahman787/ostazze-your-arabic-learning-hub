@@ -15,22 +15,11 @@ interface Props {
 const PageTransition = ({ children }: Props) => {
   const location = useLocation();
 
-  const prefersReducedMotion =
-    typeof window !== "undefined" &&
-    window.matchMedia &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  const variants = prefersReducedMotion
-    ? {
-        initial: { opacity: 0 },
-        animate: { opacity: 1 },
-        exit: { opacity: 0 },
-      }
-    : {
-        initial: { opacity: 0, y: 12 },
-        animate: { opacity: 1, y: 0 },
-        exit: { opacity: 0, y: -8 },
-      };
+  const variants = {
+    initial: { opacity: 0, y: 12 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -8 },
+  };
 
   return (
     <AnimatePresence mode="wait" initial={false}>
