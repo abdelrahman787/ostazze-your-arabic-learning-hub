@@ -5,6 +5,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Moon, Sun, Menu, X, LogOut, Globe, User, ChevronDown, Shield, LayoutDashboard, ArrowRight, GraduationCap, Calendar } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
+import NotificationBell from "@/components/NotificationBell";
 
 const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
@@ -133,6 +134,8 @@ const Navbar = () => {
             >
               <Globe size={16} />
             </button>
+
+            {isLoggedIn && <NotificationBell />}
 
             {isLoggedIn ? (
               <div className="hidden md:block relative" ref={dropdownRef}>
