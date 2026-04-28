@@ -4,6 +4,44 @@
 export const SITE_URL = "https://ostaze.com";
 export const SITE_NAME = "OSTAZE";
 
+/**
+ * Brand name variants — students search for the platform with many spellings
+ * (Arabic transliterations, common typos, dialect variants). Centralize them
+ * so meta keywords + JSON-LD alternateName stay in sync.
+ */
+export const BRAND_VARIANTS_AR = [
+  "أستازي", "استازي", "أُسطازي", "استاذي", "أستاذي",
+  "اوستاز", "أوستاز", "اوستازي", "OSTAZE", "OSTAZZE", "Ostaze",
+];
+
+export const BRAND_VARIANTS_EN = [
+  "Ostaze", "OSTAZE", "Ostazze", "Ostazi", "Ostazee",
+];
+
+/** Search-intent phrases students use when looking for tutors / lessons. */
+export const SEARCH_PHRASES_AR = [
+  "منصة استاذي", "موقع استاذي", "منصة أستاذي", "موقع أستازي", "منصة أستازي",
+  "منصة دروس لايف", "منصة دروس أونلاين", "موقع تعليم خصوصي", "موقع دروس خصوصية",
+  "معلمين خصوصي أونلاين", "دروس خصوصية اونلاين", "حصص أونلاين مباشرة",
+  "حصص لايف زووم", "تعليم عن بعد", "كورسات أونلاين", "كورسات مسجلة",
+  "كورسات لايف", "منصة تعليمية", "أفضل منصة دروس خصوصية", "حجز معلم خصوصي",
+  "معلم رياضيات خصوصي", "معلم فيزياء خصوصي", "معلم كيمياء خصوصي",
+  "معلم انجليزي خصوصي", "معلم برمجة خصوصي", "مدرس خصوصي اونلاين",
+  "دروس جامعية", "شرح مواد جامعية", "جامعة الكويت", "جامعة قطر",
+  "تدريس جامعي خصوصي",
+];
+
+export const SEARCH_PHRASES_EN = [
+  "ostaze platform", "online tutoring platform", "private online tutors",
+  "live online lessons", "zoom tutoring", "university tutors Kuwait",
+  "university tutors Qatar", "math tutor online", "physics tutor online",
+  "english tutor online", "programming tutor online", "private lessons online",
+  "remote learning platform", "online courses Arabic",
+];
+
+export const ALL_KEYWORDS_AR = [...BRAND_VARIANTS_AR, ...SEARCH_PHRASES_AR].join("، ");
+export const ALL_KEYWORDS_EN = [...BRAND_VARIANTS_EN, ...SEARCH_PHRASES_EN].join(", ");
+
 export const organizationJsonLd = (lang: "ar" | "en" = "ar") => ({
   "@context": "https://schema.org",
   "@type": "EducationalOrganization",
