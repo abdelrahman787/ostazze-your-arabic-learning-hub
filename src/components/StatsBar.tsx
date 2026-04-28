@@ -67,7 +67,7 @@ const StatsBar = () => {
             <div className="text-xs text-muted-foreground mt-1">{it.label}</div>
           </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 };
