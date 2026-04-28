@@ -7,7 +7,7 @@ import NoIndex from "@/components/NoIndex";
 export default function CheckoutReturn() {
   const [searchParams] = useSearchParams();
   const sessionId = searchParams.get("session_id");
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
 
   return (
     <>
