@@ -139,15 +139,29 @@ const NotificationBell = () => {
     }
   };
 
+  const arPlural = (n: number, one: string, two: string, few: string, many: string) => {
+    if (n === 1) return one;
+    if (n === 2) return two;
+    if (n >= 3 && n <= 10) return `${n} ${few}`;
+    return `${n} ${many}`;
+  };
+
   const timeAgo = (date: string) => {
     const diff = Date.now() - new Date(date).getTime();
+    if (diff < 0) return "الآن";
     const mins = Math.floor(diff / 60000);
     if (mins < 1) return "الآن";
-    if (mins < 60) return `منذ ${mins} دقيقة`;
+    if (mins < 60) return `منذ ${arPlural(mins, "دقيقة", "دقيقتين", "دقائق", "دقيقة")}`;
     const hours = Math.floor(mins / 60);
-    if (hours < 24) return `منذ ${hours} ساعة`;
+    if (hours < 24) return `منذ ${arPlural(hours, "ساعة", "ساعتين", "ساعات", "ساعة")}`;
     const days = Math.floor(hours / 24);
-    return `منذ ${days} يوم`;
+    if (days < 7) return `منذ ${arPlural(days, "يوم", "يومين", "أيام", "يوم")}`;
+    const weeks = Math.floor(days / 7);
+    if (weeks < 5) return `منذ ${arPlural(weeks, "أسبوع", "أسبوعين", "أسابيع", "أسبوع")}`;
+    const months = Math.floor(days / 30);
+    if (months < 12) return `منذ ${arPlural(months, "شهر", "شهرين", "أشهر", "شهر")}`;
+    const years = Math.floor(days / 365);
+    return `منذ ${arPlural(years, "سنة", "سنتين", "سنوات", "سنة")}`;
   };
 
   return (
