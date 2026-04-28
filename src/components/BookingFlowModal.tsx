@@ -122,12 +122,9 @@ const BookingFlowModal = ({ open, onClose, subject, courseLabel, teachers }: Pro
         setSessionRequestId(data.id);
         setShowCheckout(true);
       } else {
-        toast.success(
-          lang === "ar"
-            ? "تم إرسال طلبك ✅"
-            : "Request submitted ✅"
-        );
-        onClose();
+        // Free flow: show the same success screen the paid flow shows after payment
+        setSessionRequestId(data.id);
+        setShowSuccess(true);
       }
     } catch (e: any) {
       toast.error((lang === "ar" ? "خطأ: " : "Error: ") + e.message);
