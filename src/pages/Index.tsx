@@ -478,10 +478,10 @@ const HomePage = () => {
               ].map((s, i) => (
                 <motion.div
                   key={s.label}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
+                  initial={{ opacity: 0, y: 24, scale: 0.95 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.5, delay: i * 0.18, ease: [0.22, 1, 0.36, 1] }}
                   className="stats-tile-glass p-5 md:p-6"
                 >
                   <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-white/10 mb-3 text-white/90 border border-white/15 backdrop-blur-sm">
