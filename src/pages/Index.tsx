@@ -336,7 +336,7 @@ const HomePage = () => {
               { icon: CalendarCheck, title: t("why_schedule"), desc: t("why_schedule_desc"), active: false },
               { icon: Video, title: t("why_remote"), desc: t("why_remote_desc"), active: false },
             ].map((step, i) => (
-              <motion.div key={step.title} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.1 }}
+              <motion.div key={step.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.6, delay: i * 0.25, ease: [0.22, 1, 0.36, 1] }}
                 className={`feature-card ${i === 0 ? "card-active" : ""}`}>
                 <div className="icon-box-lg bg-primary/10 text-primary mx-auto mb-4">
                   <step.icon size={24} />
