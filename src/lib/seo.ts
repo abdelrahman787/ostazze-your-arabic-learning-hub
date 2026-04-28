@@ -47,13 +47,14 @@ export const organizationJsonLd = (lang: "ar" | "en" = "ar") => ({
   "@type": "EducationalOrganization",
   "@id": `${SITE_URL}/#organization`,
   name: SITE_NAME,
-  alternateName: lang === "ar" ? "أُسطازي" : "Ostaze",
+  alternateName: lang === "ar" ? BRAND_VARIANTS_AR : BRAND_VARIANTS_EN,
   url: SITE_URL,
   logo: `${SITE_URL}/favicon.png`,
   description:
     lang === "ar"
-      ? "منصة كورسات تعليمية رقمية تقدم كورسات مسجلة وحية في مختلف التخصصات الأكاديمية والمهنية"
-      : "A digital online learning platform offering recorded and live courses across academic and professional subjects",
+      ? "منصة OSTAZE (أستازي / استاذي) — منصة دروس خصوصية ولايف أونلاين تجمع الطلاب بأفضل المعلمين الجامعيين في الكويت وقطر، عبر حصص مباشرة بالزووم وكورسات مسجلة."
+      : "OSTAZE (Ostaze) is an online private tutoring and live-lesson platform connecting students with top university tutors in Kuwait & Qatar via Zoom and recorded courses.",
+  keywords: lang === "ar" ? ALL_KEYWORDS_AR : ALL_KEYWORDS_EN,
   email: "info@ostaze.com",
   telephone: "+966559003498",
   address: {
