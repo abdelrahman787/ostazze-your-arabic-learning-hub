@@ -44,14 +44,20 @@ const StatsBar = () => {
 
   return (
     <section className="container py-10">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <motion.div
+        className="grid grid-cols-2 md:grid-cols-4 gap-4"
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.15 }}
+        variants={{ hidden: {}, show: { transition: { staggerChildren: 0.2, delayChildren: 0.1 } } }}
+      >
         {items.map((it, i) => (
           <motion.div
             key={i}
-            initial={{ opacity: 0, y: 24, scale: 0.95 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.5, delay: i * 0.18, ease: [0.22, 1, 0.36, 1] }}
+            variants={{
+              hidden: { opacity: 0, y: 28, scale: 0.92 },
+              show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+            }}
             className="card-base p-5 text-center"
           >
             <div className="w-11 h-11 rounded-xl bg-primary/10 text-primary flex items-center justify-center mx-auto mb-2">

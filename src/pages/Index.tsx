@@ -330,14 +330,26 @@ const HomePage = () => {
             <h2 className="text-3xl font-extrabold mb-2">{t("why_title")}</h2>
             <p className="text-muted-foreground">{t("why_subtitle")}</p>
           </motion.div>
-          <div className="grid md:grid-cols-3 gap-5">
+          <motion.div
+            className="grid md:grid-cols-3 gap-5"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.15 }}
+            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.22, delayChildren: 0.1 } } }}
+          >
             {[
               { icon: GraduationCap, title: t("why_teachers"), desc: t("why_teachers_desc"), active: true },
               { icon: CalendarCheck, title: t("why_schedule"), desc: t("why_schedule_desc"), active: false },
               { icon: Video, title: t("why_remote"), desc: t("why_remote_desc"), active: false },
             ].map((step, i) => (
-              <motion.div key={step.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.6, delay: i * 0.25, ease: [0.22, 1, 0.36, 1] }}
-                className={`feature-card ${i === 0 ? "card-active" : ""}`}>
+              <motion.div
+                key={step.title}
+                variants={{
+                  hidden: { opacity: 0, y: 40, scale: 0.92 },
+                  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+                }}
+                className={`feature-card ${i === 0 ? "card-active" : ""}`}
+              >
                 <div className="icon-box-lg bg-primary/10 text-primary mx-auto mb-4">
                   <step.icon size={24} />
                 </div>
@@ -345,7 +357,7 @@ const HomePage = () => {
                 <p className="text-muted-foreground text-sm leading-relaxed">{step.desc}</p>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -469,7 +481,13 @@ const HomePage = () => {
       <section ref={statsRef} className="py-16 px-4 lg:px-8">
         <div className="stats-card-darkglow relative overflow-hidden rounded-[2rem] p-8 md:p-12">
           <div className="container relative z-10">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 text-center">
+            <motion.div
+              className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 text-center"
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.15 }}
+              variants={{ hidden: {}, show: { transition: { staggerChildren: 0.2, delayChildren: 0.1 } } }}
+            >
               {[
                 { num: "+500", label: t("stats_teachers"), icon: Users },
                 { num: "+10,000", label: t("stats_students"), icon: TrendingUp },
@@ -478,10 +496,10 @@ const HomePage = () => {
               ].map((s, i) => (
                 <motion.div
                   key={s.label}
-                  initial={{ opacity: 0, y: 24, scale: 0.95 }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.5, delay: i * 0.18, ease: [0.22, 1, 0.36, 1] }}
+                  variants={{
+                    hidden: { opacity: 0, y: 28, scale: 0.92 },
+                    show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+                  }}
                   className="stats-tile-glass p-5 md:p-6"
                 >
                   <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-white/10 mb-3 text-white/90 border border-white/15 backdrop-blur-sm">
@@ -493,7 +511,7 @@ const HomePage = () => {
                   <div className="text-white/75 mt-2 text-xs md:text-sm font-medium">{s.label}</div>
                 </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -508,10 +526,22 @@ const HomePage = () => {
             <h2 className="text-3xl font-extrabold mb-2">{t("testimonials_title")}</h2>
             <p className="text-muted-foreground">{t("testimonials_subtitle")}</p>
           </motion.div>
-          <div className="grid md:grid-cols-3 gap-5">
+          <motion.div
+            className="grid md:grid-cols-3 gap-5"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.15 }}
+            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.22, delayChildren: 0.1 } } }}
+          >
             {mockTestimonials.map((tst, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.5, delay: i * 0.18, ease: [0.22, 1, 0.36, 1] }}
-                className="card-base p-6 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+              <motion.div
+                key={i}
+                variants={{
+                  hidden: { opacity: 0, y: 30, scale: 0.95 },
+                  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+                }}
+                className="card-base p-6 hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
+              >
                 <div className="flex gap-0.5 mb-3">
                   {[1, 2, 3, 4, 5].map((n) => (
                     <Star key={n} size={14} className="fill-warning text-warning" />
@@ -527,7 +557,7 @@ const HomePage = () => {
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
