@@ -30,7 +30,7 @@ const PageTransition = ({ children }: Props) => {
         exit="exit"
         variants={variants}
         transition={{
-          duration: prefersReducedMotion ? 0.15 : 0.35,
+          duration: 0.35,
           ease: [0.22, 1, 0.36, 1],
         }}
         className="min-h-screen"
