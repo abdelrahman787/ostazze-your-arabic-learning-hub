@@ -17,9 +17,19 @@ export default function CheckoutReturn() {
         <div className="card-base p-8 max-w-md text-center space-y-4">
           {sessionId ? (
             <>
-              <CheckCircle className="mx-auto text-success" size={48} />
-              <h1 className="text-2xl font-extrabold">{t("payment_success_title") || "Payment Successful!"}</h1>
-              <p className="text-muted-foreground">{t("payment_success_msg") || "Your session has been confirmed. You'll receive a notification with the details."}</p>
+              <CheckCircle className="mx-auto text-success" size={56} />
+              <h1 className="text-2xl font-extrabold">
+                {lang === "ar" ? "تم حجز المحاضرة بنجاح ✅" : "Lecture booked successfully ✅"}
+              </h1>
+              <p className="text-muted-foreground leading-relaxed">
+                {lang === "ar"
+                  ? "تم استلام الدفع وحجز المحاضرة. ستصلك رسالة على بريدك الإلكتروني بالتفاصيل ورابط المحاضرة فور تأكيد الإدارة وتعيين المدرس المناسب."
+                  : "Payment received and your lecture is booked. You'll get an email with the details and meeting link as soon as the admin confirms and assigns a tutor."}
+              </p>
+              <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground bg-secondary/60 rounded-xl py-2.5 px-3">
+                <Mail size={14} className="text-primary" />
+                {lang === "ar" ? "راجع بريدك الإلكتروني خلال الساعات القادمة" : "Check your email in the next few hours"}
+              </div>
             </>
           ) : (
             <>
@@ -27,8 +37,8 @@ export default function CheckoutReturn() {
               <p className="text-muted-foreground">{t("payment_error_msg") || "No session information found."}</p>
             </>
           )}
-          <Link to="/dashboard" className="btn-primary inline-block mt-4">
-            {t("go_to_dashboard") || "Go to Dashboard"}
+          <Link to="/my-bookings" className="btn-primary inline-block mt-4">
+            {lang === "ar" ? "حجوزاتي" : "My bookings"}
           </Link>
           <p className="text-[11px] text-muted-foreground mt-4 leading-relaxed">
             {t("checkout_terms_agree")}{" "}
