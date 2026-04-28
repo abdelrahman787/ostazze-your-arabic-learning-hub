@@ -122,6 +122,7 @@ const SalesHub = () => {
   const statusColor: Record<string, string> = {
     pending: "bg-warning/10 text-warning",
     pending_payment: "bg-warning/10 text-warning",
+    paid_awaiting_assignment: "bg-orange-500/15 text-orange-600 dark:text-orange-400",
     assigned: "bg-primary/10 text-primary",
     confirmed: "bg-success/10 text-success",
     rejected: "bg-destructive/10 text-destructive",
@@ -132,6 +133,7 @@ const SalesHub = () => {
   const statusLabel: Record<string, string> = {
     pending: "قيد الانتظار",
     pending_payment: "بانتظار الدفع",
+    paid_awaiting_assignment: "💰 مدفوع — بانتظار تعيين مدرس",
     assigned: "تم التعيين",
     confirmed: "مؤكد",
     rejected: "مرفوض",
@@ -156,7 +158,7 @@ const SalesHub = () => {
 
   const stats = {
     total: requests.length,
-    pending: requests.filter((r) => r.status === "pending" || r.status === "pending_payment").length,
+    pending: requests.filter((r) => r.status === "pending" || r.status === "pending_payment" || r.status === "paid_awaiting_assignment").length,
     assigned: requests.filter((r) => r.status === "assigned" || r.status === "confirmed").length,
     completed: requests.filter((r) => r.status === "completed").length,
   };
@@ -196,6 +198,7 @@ const SalesHub = () => {
           <option value="all">كل الحالات</option>
           <option value="pending">قيد الانتظار</option>
           <option value="pending_payment">بانتظار الدفع</option>
+          <option value="paid_awaiting_assignment">مدفوع — بانتظار تعيين</option>
           <option value="assigned">تم التعيين</option>
           <option value="confirmed">مؤكد</option>
           <option value="completed">مكتمل</option>
@@ -244,7 +247,7 @@ const SalesHub = () => {
                     </td>
                     <td className="py-3 px-2">
                       <div className="flex items-center gap-2 flex-wrap">
-                        {(r.status === "pending" || r.status === "pending_payment") && (
+                        {(r.status === "pending" || r.status === "pending_payment" || r.status === "paid_awaiting_assignment") && (
                           <button onClick={() => { setAssigningId(r.id); setAssignTeacherId(r.teacher_id || ""); setAssignZoom(r.zoom_url || ""); }}
                             className="text-xs font-bold text-primary hover:underline flex items-center gap-1">
                             <Users size={12} /> {r.teacher_id ? "تعديل" : t("sales_assign")}

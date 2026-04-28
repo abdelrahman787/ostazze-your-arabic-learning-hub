@@ -56,10 +56,12 @@ async function handleCheckoutCompleted(session: any) {
     .single();
 
   if (request) {
+    // ⚠️ Do NOT auto-confirm. Mark as paid and waiting for admin
+    // to assign a teacher + Zoom link before final confirmation.
     await supabase
       .from("session_requests")
-      .update({ status: "confirmed" })
+      .update({ status: "paid_awaiting_assignment" })
       .eq("id", request.id);
-    console.log("Session request confirmed:", request.id);
+    console.log("Session request marked paid, awaiting admin assignment:", request.id);
   }
 }

@@ -6,7 +6,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
   X, Loader2, Sparkles, Calendar, Clock, BookOpen, MessageSquare,
-  GraduationCap, BadgeCheck, CreditCard,
+  GraduationCap, BadgeCheck, CreditCard, CheckCircle2, Mail,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
@@ -39,6 +39,7 @@ const BookingFlowModal = ({ open, onClose, subject, courseLabel, teachers }: Pro
   const [form, setForm] = useState({ date: "", time: "", notes: "" });
   const [submitting, setSubmitting] = useState(false);
   const [showCheckout, setShowCheckout] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
   const [sessionRequestId, setSessionRequestId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -46,6 +47,7 @@ const BookingFlowModal = ({ open, onClose, subject, courseLabel, teachers }: Pro
       setSelectedTeacherId(AUTO_VALUE);
       setForm({ date: "", time: "", notes: "" });
       setShowCheckout(false);
+      setShowSuccess(false);
       setSessionRequestId(null);
     }
   }, [open]);
@@ -120,12 +122,9 @@ const BookingFlowModal = ({ open, onClose, subject, courseLabel, teachers }: Pro
         setSessionRequestId(data.id);
         setShowCheckout(true);
       } else {
-        toast.success(
-          lang === "ar"
-            ? "تم إرسال طلبك ✅"
-            : "Request submitted ✅"
-        );
-        onClose();
+        // Free flow: show the same success screen the paid flow shows after payment
+        setSessionRequestId(data.id);
+        setShowSuccess(true);
       }
     } catch (e: any) {
       toast.error((lang === "ar" ? "خطأ: " : "Error: ") + e.message);
@@ -183,7 +182,45 @@ const BookingFlowModal = ({ open, onClose, subject, courseLabel, teachers }: Pro
               </button>
             </div>
 
-            {showCheckout && sessionRequestId ? (
+            {showSuccess ? (
+              <div className="py-6 text-center space-y-4">
+                <motion.div
+                  initial={{ scale: 0, rotate: -180 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                  className="mx-auto w-20 h-20 rounded-full bg-success/15 flex items-center justify-center"
+                >
+                  <CheckCircle2 size={44} className="text-success" />
+                </motion.div>
+                <div>
+                  <h3 className="text-xl font-black text-foreground mb-2">
+                    {lang === "ar" ? "تم حجز المحاضرة بنجاح ✅" : "Lecture booked successfully ✅"}
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed px-2">
+                    {lang === "ar"
+                      ? "تم حجز المحاضرة وستصلك رسالة بالتفاصيل ورابط المحاضرة فور تأكيد الإدارة وتعيين المدرس المناسب."
+                      : "Your lecture is booked. You'll receive an email with the details and the meeting link as soon as the admin confirms and assigns a tutor."}
+                  </p>
+                </div>
+                <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground bg-secondary/60 rounded-xl py-2.5 px-3">
+                  <Mail size={14} className="text-primary" />
+                  {lang === "ar"
+                    ? "راجع بريدك الإلكتروني خلال الساعات القادمة"
+                    : "Check your email in the next few hours"}
+                </div>
+                <div className="flex gap-3 pt-2">
+                  <button
+                    onClick={() => { onClose(); navigate("/my-bookings"); }}
+                    className="btn-primary flex-1 text-sm"
+                  >
+                    {lang === "ar" ? "حجوزاتي" : "My bookings"}
+                  </button>
+                  <button onClick={onClose} className="btn-outline flex-1 text-sm">
+                    {lang === "ar" ? "إغلاق" : "Close"}
+                  </button>
+                </div>
+              </div>
+            ) : showCheckout && sessionRequestId ? (
               <StripeEmbeddedCheckout
                 amountInCents={amountInCents}
                 teacherName={headerTeacherName}
