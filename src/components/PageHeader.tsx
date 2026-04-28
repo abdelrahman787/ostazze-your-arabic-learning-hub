@@ -269,7 +269,7 @@ const PageHeader = ({ title, subtitle, children, variant = "default" }: PageHead
   const Illustration = illustrationMap[variant] || illustrationMap.default;
 
   return (
-    <section className="relative overflow-hidden pt-32 pb-12 bg-section-alt">
+    <section className="relative overflow-hidden pt-page-lg pb-12 bg-section-alt">
       {/* Card-Y style radial glow background */}
       <div
         className="absolute inset-0 -z-0 dark:opacity-100 opacity-0 transition-opacity"

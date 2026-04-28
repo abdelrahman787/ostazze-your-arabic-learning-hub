@@ -76,7 +76,7 @@ const Login = () => {
   };
 
   return (
-    <div className="hero-gradient min-h-screen flex items-center justify-center p-4 pt-28 pb-10">
+    <div className="hero-gradient min-h-screen flex items-center justify-center p-4 pt-page pb-10">
       <PageHelmet title={t("login_title")} description={t("login_subtitle")} noindex />
       <div className="w-full max-w-4xl flex flex-col lg:flex-row gap-0 lg:gap-0">
         {/* Left side - Illustration */}

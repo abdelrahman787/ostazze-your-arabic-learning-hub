@@ -234,7 +234,7 @@ const HomePage = () => {
       </Helmet>
 
       {/* Hero — Card-Y inspired centered, dark, glowing */}
-      <section className="hero-gradient min-h-[100vh] flex items-center justify-center overflow-hidden relative pt-32 pb-16">
+      <section className="hero-gradient min-h-[100vh] flex items-center justify-center overflow-hidden relative pt-page-lg pb-16">
         <div className="container relative z-10">
           <motion.div
             variants={container}
