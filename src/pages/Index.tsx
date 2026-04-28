@@ -510,7 +510,7 @@ const HomePage = () => {
           </motion.div>
           <div className="grid md:grid-cols-3 gap-5">
             {mockTestimonials.map((tst, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
+              <motion.div key={i} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.5, delay: i * 0.18, ease: [0.22, 1, 0.36, 1] }}
                 className="card-base p-6 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
                 <div className="flex gap-0.5 mb-3">
                   {[1, 2, 3, 4, 5].map((n) => (
