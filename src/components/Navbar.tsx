@@ -213,7 +213,7 @@ const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden mx-auto max-w-5xl mt-2 nav-pill !rounded-3xl p-3"
+            className="md:hidden mx-auto max-w-5xl mt-2 nav-pill !rounded-3xl p-3 pointer-events-auto"
           >
             <div className="flex flex-col gap-1">
               {navLinks.map((l) => (
