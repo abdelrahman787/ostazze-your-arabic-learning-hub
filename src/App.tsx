@@ -101,6 +101,7 @@ const App = () => (
           <LanguageProvider>
             <AuthProvider>
               <TooltipProvider>
+                <MotionConfig reducedMotion="never">
                 <Toaster />
                 <Sonner />
                 <BrowserRouter>
@@ -141,6 +142,7 @@ const App = () => (
                     </PageTransition>
                   </Layout>
                 </BrowserRouter>
+                </MotionConfig>
               </TooltipProvider>
             </AuthProvider>
           </LanguageProvider>
