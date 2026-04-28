@@ -158,7 +158,7 @@ const SalesHub = () => {
 
   const stats = {
     total: requests.length,
-    pending: requests.filter((r) => r.status === "pending" || r.status === "pending_payment").length,
+    pending: requests.filter((r) => r.status === "pending" || r.status === "pending_payment" || r.status === "paid_awaiting_assignment").length,
     assigned: requests.filter((r) => r.status === "assigned" || r.status === "confirmed").length,
     completed: requests.filter((r) => r.status === "completed").length,
   };
