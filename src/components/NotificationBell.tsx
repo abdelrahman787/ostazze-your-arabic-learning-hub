@@ -155,9 +155,10 @@ const NotificationBell = () => {
       <motion.button
         whileTap={{ scale: 0.9 }}
         onClick={() => setOpen(!open)}
-        className="relative w-9 h-9 rounded-xl bg-secondary flex items-center justify-center hover:bg-secondary/80 transition-colors"
+        aria-label="Notifications"
+        className="relative w-8 h-8 rounded-full flex items-center justify-center text-foreground/60 hover:text-foreground hover:bg-foreground/10 transition-colors"
       >
-        <Bell size={18} className="text-muted-foreground" />
+        <Bell size={16} />
         {unreadCount > 0 && (
           <motion.span
             initial={{ scale: 0 }}
