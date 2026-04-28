@@ -198,6 +198,7 @@ const SalesHub = () => {
           <option value="all">كل الحالات</option>
           <option value="pending">قيد الانتظار</option>
           <option value="pending_payment">بانتظار الدفع</option>
+          <option value="paid_awaiting_assignment">مدفوع — بانتظار تعيين</option>
           <option value="assigned">تم التعيين</option>
           <option value="confirmed">مؤكد</option>
           <option value="completed">مكتمل</option>
