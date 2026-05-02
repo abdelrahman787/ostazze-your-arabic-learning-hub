@@ -139,7 +139,15 @@ const Teachers = () => {
 
   return (
     <div>
-      <PageHelmet title={t("teachers_title")} description={t("teachers_choose")} />
+      <PageHelmet
+        title={lang === "ar"
+          ? "المعلمون - أفضل المعلمين الجامعيين - أستازي OSTAZE"
+          : "Tutors - Top University Tutors - OSTAZE"}
+        description={lang === "ar"
+          ? "تصفح أفضل المعلمين الجامعيين على منصة أستازي — معلمون متخصصون بتقييمات حقيقية من الطلاب. احجز حصتك الخصوصية الآن."
+          : "Browse top university tutors on OSTAZE — verified specialists with real student ratings. Book your private session now."}
+        canonical="https://ostaze.com/teachers"
+      />
       <PageHeader title={t("teachers_title")} subtitle={t("teachers_choose")} variant="teachers" />
 
       <div className="container py-8">

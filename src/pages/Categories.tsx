@@ -59,8 +59,13 @@ const Categories = () => {
   return (
     <div>
       <PageHelmet
-        title={t("categories_title")}
-        description={t("categories_subtitle") + " — " + t("categories_intro")}
+        title={lang === "ar"
+          ? "أقسام المواد - أستازي OSTAZE"
+          : "Subject Categories - OSTAZE"}
+        description={lang === "ar"
+          ? "تصفح أقسام المواد الدراسية المتاحة على منصة أستازي — قسم الهندسة، الحاسب، اللغات والمزيد."
+          : "Browse subject categories on OSTAZE — engineering, computing, languages and more."}
+        canonical="https://ostaze.com/categories"
         keywords={lang === "ar" ? "تصنيفات, مواد, جامعات الكويت, جامعات قطر" : "categories, subjects, Kuwait, Qatar universities"}
         jsonLd={[
           collectionPageJsonLd({

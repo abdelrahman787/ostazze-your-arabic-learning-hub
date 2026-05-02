@@ -96,8 +96,13 @@ const Subjects = () => {
   return (
     <div>
       <PageHelmet
-        title={categoryDisplay || t("subjects_title")}
-        description={t("subjects_subtitle") + " — " + t("subjects_intro")}
+        title={categoryDisplay
+          ? `${categoryDisplay} - ${lang === "ar" ? "المواد الدراسية - أستازي OSTAZE" : "Subjects - OSTAZE"}`
+          : (lang === "ar" ? "المواد الدراسية - أستازي OSTAZE" : "Subjects - OSTAZE")}
+        description={lang === "ar"
+          ? "اختر مادتك الدراسية على منصة أستازي — رياضيات، فيزياء، برمجة، لغة إنجليزية، هندسة والمزيد. معلمون متخصصون بتقييمات وأسعار واضحة."
+          : "Pick your subject on OSTAZE — math, physics, programming, English, engineering and more. Specialized tutors with clear ratings and pricing."}
+        canonical="https://ostaze.com/subjects"
         keywords={lang === "ar" ? "مواد دراسية, دروس خصوصية, جامعات الكويت, جامعات قطر" : "subjects, tutoring, Kuwait universities, Qatar universities"}
         jsonLd={[
           collectionPageJsonLd({

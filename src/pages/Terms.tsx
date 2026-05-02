@@ -20,7 +20,13 @@ const Terms = () => {
 
   return (
     <div>
-      <PageHelmet title={t("terms_title")} description={t("terms_subtitle")} />
+      <PageHelmet
+        title={lang === "ar" ? "الشروط والأحكام - أستازي OSTAZE" : "Terms & Conditions - OSTAZE"}
+        description={lang === "ar"
+          ? "اقرأ الشروط والأحكام الخاصة باستخدام منصة أستازي للدروس الخصوصية الأونلاين."
+          : "Read the terms and conditions for using OSTAZE online tutoring platform."}
+        canonical="https://ostaze.com/terms"
+      />
       <PageHeader title={t("terms_title")} subtitle={t("terms_subtitle")} variant="subjects" />
 
       <div className="container py-12 max-w-3xl mx-auto">

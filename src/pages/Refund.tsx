@@ -68,7 +68,13 @@ const Refund = () => {
 
   return (
     <div>
-      <PageHelmet title={title} description={subtitle} />
+      <PageHelmet
+        title={lang === "ar" ? "سياسة الاسترجاع - أستازي OSTAZE" : "Refund Policy - OSTAZE"}
+        description={lang === "ar"
+          ? "تعرف على سياسة استرجاع الأموال في منصة أستازي — شروط الاسترجاع والإلغاء."
+          : "Learn about OSTAZE refund policy — refund and cancellation terms."}
+        canonical="https://ostaze.com/refund"
+      />
       <PageHeader title={title} subtitle={subtitle} variant="subjects" />
 
       <div className="container py-12 max-w-3xl mx-auto">

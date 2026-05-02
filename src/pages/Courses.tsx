@@ -102,8 +102,13 @@ const Courses = () => {
   return (
     <div>
       <PageHelmet
-        title={lang === "ar" ? "كورساتنا التعليمية" : "Our Courses"}
-        description={lang === "ar" ? "تصفح كورسات OSTAZE التعليمية المسجلة واللايف في مختلف التخصصات" : "Browse OSTAZE recorded and live courses across various subjects"}
+        title={lang === "ar"
+          ? "الكورسات المسجلة - أستازي OSTAZE"
+          : "Recorded Courses - OSTAZE"}
+        description={lang === "ar"
+          ? "تصفح الكورسات المسجلة على منصة أستازي — دروس جامعية مسجلة بجودة عالية في الرياضيات، الفيزياء، البرمجة، اللغة الإنجليزية وغيرها."
+          : "Browse OSTAZE recorded courses — high-quality university lessons in math, physics, programming, English and more."}
+        canonical="https://ostaze.com/courses"
       />
       <PageHeader
         title={lang === "ar" ? "الكورسات" : "Courses"}
