@@ -221,17 +221,19 @@ const HomePage = () => {
         />
       </div>
 
-      <Helmet>
-        <title>{lang === "ar" ? "OSTAZE | منصة أستازي - دروس خصوصية ولايف أونلاين مع أفضل المعلمين" : "OSTAZE | Ostaze - Online Private & Live Tutoring Platform"}</title>
-        <meta name="description" content={lang === "ar" ? "OSTAZE (أستازي / استاذي): منصة دروس خصوصية ولايف أونلاين تربط الطلاب بأفضل المعلمين الجامعيين في الكويت وقطر — حصص مباشرة بالزووم، كورسات مسجلة، وأسعار مدروسة." : "OSTAZE (Ostaze): online private & live tutoring platform connecting students with top university tutors in Kuwait & Qatar via Zoom and recorded courses."} />
-        <meta name="keywords" content={lang === "ar" ? "منصة استاذي، موقع استاذي، استاذي، أستاذي، أستازي، استازي، اوستاز، OSTAZE، Ostaze، منصة دروس لايف، منصة دروس أونلاين، موقع تعليم خصوصي، دروس خصوصية اونلاين، حصص أونلاين مباشرة، حصص لايف زووم، تعليم عن بعد، كورسات أونلاين، كورسات مسجلة، منصة تعليمية، حجز معلم خصوصي، معلم رياضيات خصوصي، معلم فيزياء خصوصي، معلم انجليزي خصوصي، معلم برمجة خصوصي، مدرس خصوصي اونلاين، دروس جامعية، جامعة الكويت، جامعة قطر، تدريس جامعي خصوصي" : "ostaze, ostaze platform, online tutoring platform, private online tutors, live online lessons, zoom tutoring, university tutors Kuwait, university tutors Qatar, math tutor online, physics tutor online, english tutor online, programming tutor online, private lessons online, remote learning platform, online courses Arabic"} />
-        <meta property="og:title" content={lang === "ar" ? "OSTAZE | منصة أستازي - دروس خصوصية ولايف أونلاين" : "OSTAZE | Ostaze - Online Private & Live Tutoring"} />
-        <meta property="og:description" content={lang === "ar" ? "احجز حصصك الخاصة لايف بالزووم مع أفضل المعلمين الجامعيين" : "Book live private lessons via Zoom with top university tutors"} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://ostaze.com" />
-        <link rel="canonical" href="https://ostaze.com" />
-        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
-      </Helmet>
+      <PageHelmet
+        title={lang === "ar"
+          ? "OSTAZE | منصة أستازي - دروس خصوصية ولايف أونلاين مع أفضل المعلمين"
+          : "OSTAZE | Ostaze - Online Private & Live Tutoring Platform"}
+        description={lang === "ar"
+          ? "OSTAZE (أستازي) منصة دروس خصوصية ولايف أونلاين تربط الطلاب بأفضل المعلمين الجامعيين في الكويت وقطر — حصص مباشرة بالزووم، كورسات مسجلة، وأسعار مدروسة."
+          : "OSTAZE (Ostaze) connects students with top university tutors in Kuwait & Qatar via Zoom live lessons and recorded courses at fair prices."}
+        canonical="https://ostaze.com/"
+        keywords={lang === "ar"
+          ? "منصة استاذي، موقع استاذي، أستازي، استازي، OSTAZE، Ostaze، منصة دروس لايف، دروس خصوصية اونلاين، حصص لايف زووم، كورسات مسجلة، حجز معلم خصوصي، جامعة الكويت، جامعة قطر"
+          : "ostaze, ostaze platform, online tutoring platform, private online tutors, live online lessons, zoom tutoring, university tutors Kuwait, university tutors Qatar"}
+        jsonLd={jsonLd}
+      />
 
       {/* Hero — Card-Y inspired centered, dark, glowing */}
       <section className="hero-gradient min-h-[100vh] flex items-center justify-center overflow-hidden relative pt-page-lg pb-16">
