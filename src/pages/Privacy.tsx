@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Shield } from "lucide-react";
 
 const Privacy = () => {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
 
   const sections = [
     { title: t("privacy_section1_title"), content: t("privacy_section1_content") },
