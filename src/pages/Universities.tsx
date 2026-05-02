@@ -164,10 +164,13 @@ const Universities = () => {
   return (
     <div className="min-h-screen">
       <PageHelmet
-        title={lang === "ar" ? "الجامعات في الكويت وقطر" : "Universities in Kuwait & Qatar"}
+        title={lang === "ar"
+          ? "الجامعات المدعومة - أستازي OSTAZE"
+          : "Supported Universities - OSTAZE"}
         description={lang === "ar"
-          ? "تصفّح جامعات الكويت وقطر وكلياتها وموادها، وابحث عن معلم متخصص في تخصصك."
-          : "Browse universities in Kuwait and Qatar with their colleges and subjects, and find tutors specialized in your major."}
+          ? "اكتشف الجامعات المدعومة على منصة أستازي — جامعة الكويت، جامعة قطر، والمزيد. معلمون متخصصون لكل جامعة ومنهج."
+          : "Discover universities supported by OSTAZE — Kuwait University, Qatar University and more. Specialized tutors for every program."}
+        canonical="https://ostaze.com/universities"
         keywords={lang === "ar" ? "جامعات الكويت, جامعات قطر, كليات, معلمون" : "Kuwait universities, Qatar universities, colleges, tutors"}
         jsonLd={[
           collectionPageJsonLd({

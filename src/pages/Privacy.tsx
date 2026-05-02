@@ -21,7 +21,13 @@ const Privacy = () => {
 
   return (
     <div>
-      <PageHelmet title={t("privacy_title")} description={t("privacy_subtitle")} />
+      <PageHelmet
+        title={lang === "ar" ? "سياسة الخصوصية - أستازي OSTAZE" : "Privacy Policy - OSTAZE"}
+        description={lang === "ar"
+          ? "سياسة الخصوصية لمنصة أستازي — كيف نحمي بياناتك الشخصية ونستخدمها."
+          : "OSTAZE privacy policy — how we protect and use your personal data."}
+        canonical="https://ostaze.com/privacy"
+      />
       <PageHeader title={t("privacy_title")} subtitle={t("privacy_subtitle")} variant="university">
         <div className="inline-flex items-center gap-2 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-4 py-1.5 rounded-full text-sm font-bold mb-4">
           <Shield size={16} />

@@ -23,7 +23,15 @@ const About = () => {
 
   return (
     <div>
-      <PageHelmet title={t("about_title")} description={t("about_subtitle")} />
+      <PageHelmet
+        title={lang === "ar"
+          ? "من نحن - تعرف على منصة أستازي OSTAZE"
+          : "About Us - OSTAZE"}
+        description={lang === "ar"
+          ? "تعرف على منصة أستازي (OSTAZE)، رؤيتنا ومهمتنا في تقديم أفضل تجربة تعليمية أونلاين تربط الطلاب بالمعلمين الجامعيين المتميزين في الكويت وقطر."
+          : "Learn about OSTAZE — our vision and mission to deliver the best online learning experience connecting students with top university tutors in Kuwait & Qatar."}
+        canonical="https://ostaze.com/about"
+      />
       <PageHeader title={t("about_title")} subtitle={t("about_subtitle")} variant="university" />
 
       <div className="container py-12">
