@@ -7,9 +7,9 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png?v=3" />
     <link rel="shortcut icon" href="/favicon-32.png?v=3" type="image/png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=3" />
+    <!-- Default fallback title; React Helmet sets the per-route title at runtime.
+         Keep this minimal so it doesn't conflict with PageHelmet's canonical/title. -->
     <title>OSTAZE | منصة أستازي - دروس خصوصية ولايف أونلاين مع أفضل المعلمين</title>
-    <meta name="description" content="OSTAZE (أستازي / استاذي) منصة دروس خصوصية ولايف أونلاين تربط الطلاب بأفضل المعلمين الجامعيين في الكويت وقطر — حصص مباشرة بالزووم، كورسات مسجلة، وأسعار مدروسة.">
-    <meta name="keywords" content="منصة استاذي، موقع استاذي، استاذي، أستاذي، أستازي، استازي، اوستاز، OSTAZE، Ostaze، منصة دروس لايف، منصة دروس أونلاين، موقع تعليم خصوصي، دروس خصوصية اونلاين، حصص أونلاين مباشرة، حصص لايف زووم، تعليم عن بعد، كورسات أونلاين، كورسات مسجلة، منصة تعليمية، حجز معلم خصوصي، معلم رياضيات خصوصي، معلم فيزياء خصوصي، معلم انجليزي خصوصي، معلم برمجة خصوصي، مدرس خصوصي اونلاين، دروس جامعية، جامعة الكويت، جامعة قطر، تدريس جامعي خصوصي">
     <meta name="author" content="OSTAZE - أستازي">
     <meta name="application-name" content="OSTAZE | أستازي">
     <meta name="apple-mobile-web-app-title" content="OSTAZE | أستازي">
@@ -28,19 +28,11 @@
     <meta name="theme-color" content="#0F172A" />
     <meta name="format-detection" content="telephone=no" />
 
-    <meta property="og:type" content="website" />
+    <!-- Static OG defaults; per-route title/description/canonical/og:url/og:image
+         are set by react-helmet-async via <PageHelmet /> on each page. -->
     <meta property="og:site_name" content="OSTAZE" />
     <meta property="og:locale" content="ar_SA" />
     <meta property="og:locale:alternate" content="en_US" />
-    
-    <meta property="og:title" content="OSTAZE | منصة أستازي - دروس خصوصية ولايف أونلاين">
-    <meta name="twitter:title" content="OSTAZE | منصة أستازي - دروس خصوصية ولايف أونلاين">
-    <meta property="og:description" content="منصة أستازي (OSTAZE): دروس خصوصية لايف أونلاين بالزووم وكورسات مسجلة مع أفضل المعلمين الجامعيين في الكويت وقطر.">
-    <meta name="twitter:description" content="منصة أستازي (OSTAZE): دروس خصوصية لايف أونلاين بالزووم وكورسات مسجلة مع أفضل المعلمين الجامعيين في الكويت وقطر.">
-    <meta property="og:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/Z79KI50YEuSGVGIjgK4BMa4CRzy2/social-images/social-1774873100528-edu-ostazze.webp">
-    <meta name="twitter:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/Z79KI50YEuSGVGIjgK4BMa4CRzy2/social-images/social-1774873100528-edu-ostazze.webp">
-    <meta name="twitter:card" content="summary_large_image">
-    <link rel="canonical" href="https://ostaze.com/" />
   </head>
   <body>
     <div id="root"></div>
