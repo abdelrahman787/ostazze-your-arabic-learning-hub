@@ -112,7 +112,7 @@ export default function Checkout() {
                 <div className="rounded-2xl border-2 border-dashed border-border p-6 text-center bg-secondary/40">
                   <p className="text-sm text-muted-foreground leading-relaxed mb-3">
                     {lang === "ar"
-                      ? "بوابة الدفع قيد التجهيز. يمكنك المتابعة عبر Stripe التجريبي حالياً، وسيتم استبداله بالبوابة النهائية لاحقاً."
+                      ? "بوابة الدفع قيد التجهيز. "
                       : "Payment gateway is being set up. You can proceed with the Stripe test integration for now — it will be replaced with the final gateway later."}
                   </p>
                   <button
@@ -125,8 +125,8 @@ export default function Checkout() {
                   </button>
                 </div>
 
-                <div className="text-[12px] text-muted-foreground text-center">
-                  🔒 {lang === "ar" ? "دفع آمن ومشفّر" : "Secure & encrypted payment"}
+                <div className="text-[12px] text-muted-foreground text-center whitespace-pre-line">
+                  {lang === "ar" ? "\n" : "🔒 Secure & encrypted payment"}
                 </div>
               </div>
             ) : (
