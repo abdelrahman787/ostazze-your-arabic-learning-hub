@@ -12,7 +12,7 @@ serve(async (req) => {
   }
 
   try {
-    const { amountInCents, teacherName, subject, customerEmail, userId, returnUrl, environment } = await req.json();
+    const { amountInCents, currency, teacherName, subject, customerEmail, userId, returnUrl, environment } = await req.json();
 
     if (!amountInCents || typeof amountInCents !== "number" || amountInCents < 50) {
       return new Response(JSON.stringify({ error: "Invalid amount" }), {
@@ -22,7 +22,8 @@ serve(async (req) => {
     }
 
     const env = (environment || "sandbox") as StripeEnv;
-    console.log("Creating checkout session, env:", env, "amount:", amountInCents);
+    const cur = (typeof currency === "string" && currency.length === 3 ? currency : "egp").toLowerCase();
+    console.log("Creating checkout session, env:", env, "amount:", amountInCents, "currency:", cur);
     const stripe = createStripeClient(env);
 
     const productName = `Tutoring Session${subject ? ` - ${subject}` : ""}`;
@@ -32,7 +33,7 @@ serve(async (req) => {
       line_items: [
         {
           price_data: {
-            currency: "usd",
+            currency: cur,
             product_data: {
               name: productName,
               ...(description && { description }),
