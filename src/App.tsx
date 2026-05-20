@@ -43,6 +43,7 @@ const Privacy = lazy(() => import("./pages/Privacy"));
 const Refund = lazy(() => import("./pages/Refund"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const CheckoutReturn = lazy(() => import("./pages/CheckoutReturn"));
+const Checkout = lazy(() => import("./pages/Checkout"));
 const FAQ = lazy(() => import("./pages/FAQ"));
 const ZoomTestPage = lazy(() => import("./pages/ZoomTestPage"));
 const MyBookings = lazy(() => import("./pages/MyBookings"));
@@ -134,6 +135,7 @@ const App = () => (
                           <Route path="/terms" element={<Terms />} />
                           <Route path="/privacy" element={<Privacy />} />
                           <Route path="/refund" element={<Refund />} />
+                          <Route path="/checkout" element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
                           <Route path="/checkout/return" element={<CheckoutReturn />} />
                           <Route path="/faq" element={<FAQ />} />
                           <Route path="/zoom-test" element={<ProtectedRoute><ZoomTestPage /></ProtectedRoute>} />
