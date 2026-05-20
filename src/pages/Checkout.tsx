@@ -170,24 +170,18 @@ export default function Checkout() {
                   {lang === "ar" ? "سعر الجلسة" : "Session price"}
                 </span>
                 <span className="font-bold">
-                  {formatPrice(country, lang as "ar" | "en")}
+                  {egpAmount.toFixed(2)} {lang === "ar" ? "ج.م" : "EGP"}
                 </span>
               </div>
-
-              {country && country !== "EG" && (
-                <div className="flex items-center justify-between text-[12px] text-muted-foreground">
-                  <span>{lang === "ar" ? "بالعملة المحلية للدفع" : "Charged in local currency"}</span>
-                  <span>≈ {egpAmount.toFixed(2)} {lang === "ar" ? "ج.م" : "EGP"}</span>
-                </div>
-              )}
 
               <div className="flex items-center justify-between pt-3 mt-3 border-t border-border">
                 <span className="font-extrabold">{lang === "ar" ? "الإجمالي" : "Total"}</span>
                 <span className="text-xl font-extrabold text-primary">
-                  {formatPrice(country, lang as "ar" | "en")}
+                  {egpAmount.toFixed(2)} {lang === "ar" ? "ج.م" : "EGP"}
                 </span>
               </div>
             </div>
+
 
             <p className="text-[11px] text-muted-foreground mt-5 leading-relaxed">
               {t("checkout_terms_agree")}{" "}
