@@ -6,6 +6,9 @@ import { Eye, EyeOff, User, Mail, Lock, GraduationCap, Loader2, Globe, BookOpen,
 import { motion } from "framer-motion";
 import { lovable } from "@/integrations/lovable/index";
 import PageHelmet from "@/components/PageHelmet";
+import CountrySelector from "@/components/CountrySelector";
+import { supabase } from "@/integrations/supabase/client";
+import type { Country } from "@/lib/pricing";
 
 const TIMEZONES = [
   { value: "Asia/Riyadh", label: { ar: "الرياض (UTC+3)", en: "Riyadh (UTC+3)" } },
@@ -53,6 +56,7 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [timezone, setTimezone] = useState("Asia/Riyadh");
+  const [country, setCountry] = useState<Country | "">("");
   const [agreedTerms, setAgreedTerms] = useState(false);
   // Honeypot — bots fill this; real users never see it.
   const [website, setWebsite] = useState("");
@@ -80,12 +84,22 @@ const Register = () => {
       setError(lang === "ar" ? "يجب الموافقة على الشروط والأحكام" : "You must agree to the terms and conditions");
       return;
     }
+    if (!country) {
+      setError(lang === "ar" ? "اختر دولتك من فضلك" : "Please select your country");
+      return;
+    }
     setLoading(true);
     setError("");
     const result = await register(email, password, fullName, "student", timezone);
     if (result.error) {
       setError(result.error);
     } else {
+      // Persist country on profile (best-effort; CountryGate will catch if it fails)
+      const { data: sess } = await supabase.auth.getSession();
+      const uid = sess.session?.user?.id;
+      if (uid) {
+        await supabase.from("profiles").update({ country }).eq("user_id", uid);
+      }
       setSuccess(true);
     }
     setLoading(false);
@@ -260,6 +274,14 @@ const Register = () => {
                 ))}
               </select>
             </div>
+
+            <div>
+              <label className="block text-sm font-bold mb-1.5 flex items-center gap-1.5">
+                <Globe size={14} /> {lang === "ar" ? "الدولة *" : "Country *"}
+              </label>
+              <CountrySelector value={country} onChange={setCountry} required />
+            </div>
+
 
             {/* Terms checkbox */}
             <label className="flex items-start gap-2.5 cursor-pointer">
