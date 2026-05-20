@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
+import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -21,6 +22,7 @@ interface Props {
 const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects, price }: Props) => {
   const { user } = useAuth();
   const { t, lang } = useLanguage();
+  const navigate = useNavigate();
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({ subject: subjects[0] || "", date: "", time: "", notes: "" });
   const [showCheckout, setShowCheckout] = useState(false);
