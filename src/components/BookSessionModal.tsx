@@ -7,6 +7,7 @@ import { X, Loader2, Calendar, Clock, BookOpen, CreditCard } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 import { StripeEmbeddedCheckout } from "@/components/StripeEmbeddedCheckout";
+import { getDisplayPrice, getCheckoutAmountEGP, formatPrice, type Country } from "@/lib/pricing";
 
 interface Props {
   open: boolean;
@@ -19,19 +20,30 @@ interface Props {
 
 const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects, price }: Props) => {
   const { user } = useAuth();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({ subject: subjects[0] || "", date: "", time: "", notes: "" });
   const [showCheckout, setShowCheckout] = useState(false);
   const [sessionRequestId, setSessionRequestId] = useState<string | null>(null);
+  const [country, setCountry] = useState<Country | null>(null);
 
   useEffect(() => {
     if (!open) {
       setForm({ subject: subjects[0] || "", date: "", time: "", notes: "" });
       setShowCheckout(false);
       setSessionRequestId(null);
+      return;
     }
-  }, [open]);
+    // Load user's country to display correct currency
+    if (user) {
+      supabase
+        .from("profiles")
+        .select("country")
+        .eq("user_id", user.id)
+        .maybeSingle()
+        .then(({ data }) => setCountry((data?.country as Country) ?? "EG"));
+    }
+  }, [open, user?.id]);
 
   const handleSubmit = async () => {
     if (!user) { toast.error(t("login_required")); return; }
