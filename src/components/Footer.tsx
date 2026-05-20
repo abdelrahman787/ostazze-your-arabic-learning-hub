@@ -81,7 +81,7 @@ const Footer = () => {
             <h4 className="font-bold text-white mb-5 text-sm">{t("footer_contact_us")}</h4>
             <div className="flex flex-col gap-3 text-sm mb-6">
               <div className="flex items-center gap-2.5 text-white/60"><Mail size={14} /><span>info@ostaze.com</span></div>
-              <div className="flex items-center gap-2.5 text-white/60"><Phone size={14} /><span dir="ltr">+966 55 900 3498</span></div>
+              <div className="flex items-center gap-2.5 text-white/60"><Phone size={14} /><span dir="ltr">+201130382206</span></div>
               <div className="flex items-center gap-2.5 text-white/60"><MapPin size={14} /><span>{t("footer_location")}</span></div>
             </div>
 

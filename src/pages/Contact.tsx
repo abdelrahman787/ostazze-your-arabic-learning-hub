@@ -29,9 +29,9 @@ const Contact = () => {
 
   const contactInfo = [
     { icon: Mail, label: t("contact_email_label"), value: "info@ostaze.com", href: "mailto:info@ostaze.com" },
-    { icon: Phone, label: t("contact_phone_label"), value: "+966 55 900 3498", href: "tel:+966559003498" },
+    { icon: Phone, label: t("contact_phone_label"), value: "+201130382206", href: "tel:+201130382206" },
     { icon: MapPin, label: t("contact_location_label"), value: t("footer_location"), href: "#" },
-    { icon: MessageCircle, label: t("contact_whatsapp_label"), value: t("contact_whatsapp_value"), href: `https://wa.me/966559003498?text=${encodeURIComponent(lang === "ar" ? "مرحباً، أريد الاستفسار عن خدمات أسطازي" : "Hello, I'd like to inquire about Ostaze services")}` },
+    { icon: MessageCircle, label: t("contact_whatsapp_label"), value: t("contact_whatsapp_value"), href: `https://wa.me/201130382206?text=${encodeURIComponent(lang === "ar" ? "مرحباً، أريد الاستفسار عن خدمات أسطازي" : "Hello, I'd like to inquire about Ostaze services")}` },
   ];
 
   const contactFaq = [
