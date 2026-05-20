@@ -328,7 +328,7 @@ const translations = {
   footer_refund: { ar: "سياسة الاسترداد", en: "Refund Policy" },
   footer_contact_us: { ar: "تواصل معنا", en: "Contact Us" },
   footer_rights: { ar: "© 2026 Ostaze. جميع الحقوق محفوظة", en: "© 2026 Ostaze. All rights reserved" },
-  footer_location: { ar: "الرياض، المملكة العربية السعودية", en: "Riyadh, Saudi Arabia" },
+  footer_location: { ar: "القاهرة - مصر", en: "Cairo - Egypt" },
 
   // Common
   coming_soon: { ar: "قريباً", en: "Coming Soon" },
