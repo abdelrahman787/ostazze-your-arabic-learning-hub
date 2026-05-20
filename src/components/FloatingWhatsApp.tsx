@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-const WHATSAPP_NUMBER = "966559003498";
+const WHATSAPP_NUMBER = "201130382206";
 
 const FloatingWhatsApp = () => {
   const { t } = useLanguage();
