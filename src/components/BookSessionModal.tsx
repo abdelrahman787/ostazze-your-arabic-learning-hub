@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
+import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -21,6 +22,7 @@ interface Props {
 const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects, price }: Props) => {
   const { user } = useAuth();
   const { t, lang } = useLanguage();
+  const navigate = useNavigate();
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({ subject: subjects[0] || "", date: "", time: "", notes: "" });
   const [showCheckout, setShowCheckout] = useState(false);
@@ -49,67 +51,18 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects, pri
     if (!user) { toast.error(t("login_required")); return; }
     if (!form.date || !form.time) { toast.error(t("select_date_time")); return; }
 
-    setSubmitting(true);
-    try {
-      // 1) Create the session request as confirmed (payment temporarily disabled)
-      const { data: sr, error } = await supabase.from("session_requests").insert({
-        student_id: user.id,
-        teacher_id: teacherId,
-        subject: form.subject || null,
-        preferred_date: form.date,
-        preferred_time: form.time,
-        notes: form.notes || null,
-        status: "confirmed", // 💡 Auto-confirmed (payment temporarily disabled for testing)
-      }).select("id").single();
-
-      if (error) throw error;
-
-      // 2) Create Zoom meeting automatically
-      try {
-        const startISO = new Date(`${form.date}T${form.time}:00`).toISOString();
-        const { data: zoomRes, error: zoomErr } = await supabase.functions.invoke("zoom-create-meeting", {
-          body: {
-            topic: `OSTAZE • ${form.subject || "Session"} — ${teacherName}`,
-            duration: 60,
-            start_time: startISO,
-          },
-        });
-
-        if (zoomErr) throw zoomErr;
-        const joinUrl = zoomRes?.meeting?.join_url;
-        if (joinUrl && sr?.id) {
-          await supabase
-            .from("session_requests")
-            .update({ zoom_url: joinUrl })
-            .eq("id", sr.id);
-
-          // Notify both student and teacher with the Zoom link
-          await supabase.from("notifications").insert([
-            {
-              user_id: user.id,
-              type: "booking_confirmed",
-              title: "✅ تم تأكيد الجلسة — رابط Zoom جاهز",
-              body: `جلستك مع ${teacherName} بتاريخ ${form.date} ${form.time}. الرابط: ${joinUrl}`,
-            },
-            {
-              user_id: teacherId,
-              type: "new_booking",
-              title: "📅 جلسة جديدة مؤكدة — رابط Zoom جاهز",
-              body: `جلسة جديدة بتاريخ ${form.date} ${form.time}. الرابط: ${joinUrl}`,
-            },
-          ]);
-        }
-      } catch (zErr: any) {
-        console.error("Zoom meeting creation failed:", zErr);
-        toast.warning("تم الحجز لكن فشل إنشاء رابط Zoom تلقائياً. سيقوم الإدارة بإضافته.");
-      }
-
-      toast.success(t("booking_success"));
-      onClose();
-    } catch (e: any) {
-      toast.error("Error: " + e.message);
-    }
-    setSubmitting(false);
+    // Navigate to dedicated checkout page; booking is created after payment success.
+    onClose();
+    navigate("/checkout", {
+      state: {
+        teacherId,
+        teacherName,
+        subject: form.subject,
+        date: form.date,
+        time: form.time,
+        notes: form.notes,
+      },
+    });
   };
 
 
