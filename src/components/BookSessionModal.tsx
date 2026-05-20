@@ -113,7 +113,10 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects, pri
   };
 
 
-  const amountInCents = price ? Math.round(price * 100) : 0;
+  // Country-based pricing → display in local currency, charge in EGP
+  const display = getDisplayPrice(country);
+  const egpAmount = getCheckoutAmountEGP(country);
+  const amountInCents = Math.round(egpAmount * 100); // EGP smallest unit (piastres)
 
   const modalContent = (
     <AnimatePresence>
@@ -133,6 +136,7 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects, pri
             {showCheckout ? (
               <StripeEmbeddedCheckout
                 amountInCents={amountInCents}
+                currency="egp"
                 teacherName={teacherName}
                 subject={form.subject}
                 customerEmail={user?.email || undefined}
@@ -147,12 +151,20 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects, pri
                   </p>
                 </div>
 
-                {price && price > 0 && (
-                  <div className="flex items-center gap-2 bg-primary text-primary-foreground rounded-xl p-3 shadow-md">
+                <div className="flex items-center justify-between gap-2 bg-primary text-primary-foreground rounded-xl p-3 shadow-md">
+                  <div className="flex items-center gap-2">
                     <CreditCard size={18} />
-                    <span className="text-sm font-extrabold">{t("session_price_label")}: ${price}</span>
+                    <span className="text-sm font-extrabold">
+                      {t("session_price_label")}: {formatPrice(country, lang as "ar" | "en")}
+                    </span>
                   </div>
-                )}
+                  {country && country !== "EG" && (
+                    <span className="text-[11px] opacity-90">
+                      ≈ {egpAmount.toFixed(2)} {lang === "ar" ? "ج.م" : "EGP"}
+                    </span>
+                  )}
+                </div>
+
 
                 {subjects.length > 0 && (
                   <div>
