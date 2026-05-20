@@ -19,6 +19,7 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 import ScrollToTop from "@/components/ScrollToTop";
 import GlobalSeo from "@/components/GlobalSeo";
 import CookieConsent from "@/components/CookieConsent";
+import CountryGate from "@/components/CountryGate";
 import Index from "./pages/Index";
 
 const Teachers = lazy(() => import("./pages/Teachers"));
@@ -89,6 +90,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <FloatingWhatsApp />
       <AIChatWidget />
       <CookieConsent />
+      <CountryGate>{null}</CountryGate>
     </div>
   );
 };

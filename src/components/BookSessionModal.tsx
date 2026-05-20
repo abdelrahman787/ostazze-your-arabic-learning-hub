@@ -7,6 +7,7 @@ import { X, Loader2, Calendar, Clock, BookOpen, CreditCard } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 import { StripeEmbeddedCheckout } from "@/components/StripeEmbeddedCheckout";
+import { getDisplayPrice, getCheckoutAmountEGP, formatPrice, type Country } from "@/lib/pricing";
 
 interface Props {
   open: boolean;
@@ -19,19 +20,30 @@ interface Props {
 
 const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects, price }: Props) => {
   const { user } = useAuth();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({ subject: subjects[0] || "", date: "", time: "", notes: "" });
   const [showCheckout, setShowCheckout] = useState(false);
   const [sessionRequestId, setSessionRequestId] = useState<string | null>(null);
+  const [country, setCountry] = useState<Country | null>(null);
 
   useEffect(() => {
     if (!open) {
       setForm({ subject: subjects[0] || "", date: "", time: "", notes: "" });
       setShowCheckout(false);
       setSessionRequestId(null);
+      return;
     }
-  }, [open]);
+    // Load user's country to display correct currency
+    if (user) {
+      supabase
+        .from("profiles")
+        .select("country")
+        .eq("user_id", user.id)
+        .maybeSingle()
+        .then(({ data }) => setCountry((data?.country as Country) ?? "EG"));
+    }
+  }, [open, user?.id]);
 
   const handleSubmit = async () => {
     if (!user) { toast.error(t("login_required")); return; }
@@ -101,7 +113,10 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects, pri
   };
 
 
-  const amountInCents = price ? Math.round(price * 100) : 0;
+  // Country-based pricing → display in local currency, charge in EGP
+  const display = getDisplayPrice(country);
+  const egpAmount = getCheckoutAmountEGP(country);
+  const amountInCents = Math.round(egpAmount * 100); // EGP smallest unit (piastres)
 
   const modalContent = (
     <AnimatePresence>
@@ -121,6 +136,7 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects, pri
             {showCheckout ? (
               <StripeEmbeddedCheckout
                 amountInCents={amountInCents}
+                currency="egp"
                 teacherName={teacherName}
                 subject={form.subject}
                 customerEmail={user?.email || undefined}
@@ -135,12 +151,20 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects, pri
                   </p>
                 </div>
 
-                {price && price > 0 && (
-                  <div className="flex items-center gap-2 bg-primary text-primary-foreground rounded-xl p-3 shadow-md">
+                <div className="flex items-center justify-between gap-2 bg-primary text-primary-foreground rounded-xl p-3 shadow-md">
+                  <div className="flex items-center gap-2">
                     <CreditCard size={18} />
-                    <span className="text-sm font-extrabold">{t("session_price_label")}: ${price}</span>
+                    <span className="text-sm font-extrabold">
+                      {t("session_price_label")}: {formatPrice(country, lang as "ar" | "en")}
+                    </span>
                   </div>
-                )}
+                  {country && country !== "EG" && (
+                    <span className="text-[11px] opacity-90">
+                      ≈ {egpAmount.toFixed(2)} {lang === "ar" ? "ج.م" : "EGP"}
+                    </span>
+                  )}
+                </div>
+
 
                 {subjects.length > 0 && (
                   <div>
