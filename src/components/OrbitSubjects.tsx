@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import {
   Calculator, Atom, FlaskConical, Languages,
-  Code
+  Code, Zap, PenTool
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useEffect, useRef, useState } from "react";
@@ -18,13 +18,15 @@ const SUBJECTS: Subject[] = [
   { key: "subj_chemistry", icon: FlaskConical },
   { key: "subj_english", icon: Languages },
   { key: "subj_programming", icon: Code },
+  { key: "subj_dynamics", icon: Zap },
+  { key: "subj_drawing", icon: PenTool },
 ];
 
-// Distribute 5 subjects across 2 orbits with custom angle offsets for balanced look
-// Inner orbit: 2 icons placed left & right; Outer orbit: 3 icons in a balanced triangle
+// Distribute 7 subjects across 2 orbits with custom angle offsets for balanced look
+// Inner orbit: 3 icons; Outer orbit: 4 icons
 const ORBITS = [
-  { radius: 200, duration: 52, count: 2, reverse: false, offset: 0 },
-  { radius: 360, duration: 64, count: 3, reverse: false, offset: 90 },
+  { radius: 200, duration: 52, count: 3, reverse: false, offset: 0 },
+  { radius: 360, duration: 64, count: 4, reverse: false, offset: 45 },
 ];
 
 const getOrbitTransform = (radius: number, angleDeg: number) => {

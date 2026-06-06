@@ -5,7 +5,7 @@ import { mockTestimonials } from "@/data/mockData";
 import {
   Star, ArrowLeft, Sparkles, GraduationCap, CalendarCheck, Video,
   Users, TrendingUp, Search, Calculator, Atom, FlaskConical, Languages,
-  BookOpen, BarChart3, Code, Microscope, ArrowRight
+  BookOpen, BarChart3, Code, Microscope, ArrowRight, Zap, PenTool
 } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
@@ -160,6 +160,8 @@ const HomePage = () => {
     { key: "subj_statistics", icon: BarChart3, color: "bg-cyan-500/10 text-cyan-600 dark:text-cyan-400" },
     { key: "subj_programming", icon: Code, color: "bg-indigo-500/10 text-indigo-600 dark:text-indigo-400" },
     { key: "subj_biology", icon: Microscope, color: "bg-green-500/10 text-green-600 dark:text-green-400" },
+    { key: "subj_dynamics", icon: Zap, color: "bg-orange-500/10 text-orange-600 dark:text-orange-400" },
+    { key: "subj_drawing", icon: PenTool, color: "bg-teal-500/10 text-teal-600 dark:text-teal-400" },
   ] as const;
 
   const howSteps = [
