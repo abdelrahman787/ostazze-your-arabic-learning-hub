@@ -17,7 +17,7 @@ const translations = {
   nav_logout: { ar: "تسجيل الخروج", en: "Logout" },
 
   // Hero
-  hero_badge: { ar: "منصة تعليمية متميزة", en: "Premium Learning Platform" },
+  hero_badge: { ar: "منصة تعليمية للطلبة الجامعيين", en: "Educational Platform for University Students" },
   hero_title_1: { ar: "تعلّم مع", en: "Learn with the" },
   hero_title_2: { ar: "أفضل المعلمين", en: "Best Teachers" },
   hero_subtitle: { ar: "منصة تعليمية تربطك بأفضل المعلمين الخصوصيين لجلسات حية أونلاين", en: "An educational platform connecting you with the best private tutors for live online sessions" },
