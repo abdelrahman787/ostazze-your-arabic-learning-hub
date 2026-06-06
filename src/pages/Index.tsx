@@ -253,7 +253,7 @@ const HomePage = () => {
             </motion.div>
 
             {/* Massive two-line title */}
-            <motion.h1 variants={item} className="text-[3rem] sm:text-6xl md:text-7xl font-black leading-[1.05] tracking-tight mb-2">
+            <motion.h1 dir="rtl" variants={item} className="text-[3rem] sm:text-6xl md:text-7xl font-black leading-[1.05] tracking-tight mb-2 text-center">
               <span className="block text-foreground">{"تعلم مع أفضل الدكاترة الجامعيين"}</span>
             </motion.h1>
 
