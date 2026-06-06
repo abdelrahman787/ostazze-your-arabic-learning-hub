@@ -49,7 +49,7 @@ const AudioRecorder = ({ onRecorded, disabled, userId, lectureId }: AudioRecorde
         if (blob.size === 0) return;
 
         setUploading(true);
-        const fileName = `${userId}/${lectureId}_${Date.now()}.${ext}`;
+        const fileName = `${userId}/${lectureId}/${Date.now()}.${ext}`;
         const { error } = await supabase.storage.from("chat-audio").upload(fileName, blob);
 
         if (!error) {
