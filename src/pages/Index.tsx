@@ -276,7 +276,7 @@ const HomePage = () => {
 
             {/* Subtitle */}
             <motion.p variants={item} className="text-foreground/75 text-base md:text-lg leading-relaxed max-w-xl mb-8">
-              {t("hero_subtitle")}
+              {"منصة تعليمية تربطك بأفضل الأساتذة الجامعيين في تخصصك عن طريق جلسات online"}
             </motion.p>
 
             {/* CTA + Search */}
