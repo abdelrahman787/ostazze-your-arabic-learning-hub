@@ -430,14 +430,14 @@ const translations = {
   whatsapp_msg: { ar: "مرحباً، أريد الاستفسار عن خدمات أسطازي", en: "Hello, I'd like to inquire about Ostaze services" },
 
   // How It Works
-  how_title: { ar: "كيف يعمل؟", en: "How It Works?" },
+  how_title: { ar: "كيف تعمل ostazze؟", en: "How Ostazze Works?" },
   how_subtitle: { ar: "ثلاث خطوات بسيطة لبدء رحلة التعلم", en: "Three simple steps to start your learning journey" },
-  how_step1_title: { ar: "ابحث عن معلم", en: "Find a Teacher" },
-  how_step1_desc: { ar: "تصفح قائمة المعلمين المعتمدين واختر المناسب لك حسب المادة والتقييم", en: "Browse our certified teachers and choose the right one by subject and rating" },
-  how_step2_title: { ar: "احجز جلستك", en: "Book Your Session" },
-  how_step2_desc: { ar: "اختر الموعد المناسب واحجز جلسة خصوصية مع المعلم مباشرة", en: "Pick a convenient time and book a private session directly with the teacher" },
-  how_step3_title: { ar: "ابدأ التعلم", en: "Start Learning" },
-  how_step3_desc: { ar: "انضم إلى الجلسة المباشرة عبر Zoom وابدأ التعلم مع أفضل المعلمين", en: "Join the live session via Zoom and start learning with the best teachers" },
+  how_step1_title: { ar: "اختر دولتك", en: "Choose Your Country" },
+  how_step1_desc: { ar: "حدد دولتك لعرض الجامعات والأسعار بالعملة المناسبة لك", en: "Select your country to see universities and prices in your local currency" },
+  how_step2_title: { ar: "اختر جامعتك", en: "Choose Your University" },
+  how_step2_desc: { ar: "تصفّح الجامعات والكليات والمواد ثم اختر الأنسب لتخصصك", en: "Browse universities, colleges, and subjects to match your major" },
+  how_step3_title: { ar: "احجز جلستك الخاصة", en: "Book Your Private Classes" },
+  how_step3_desc: { ar: "اختر الموعد المناسب واحجز جلسة Online مباشرة مع الدكتور", en: "Pick a time that fits you and book a live online class with your tutor" },
 
   // Popular Subjects
   popular_title: { ar: "المواد الأكثر طلباً", en: "Most Popular Subjects" },

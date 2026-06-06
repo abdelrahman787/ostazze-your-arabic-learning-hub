@@ -5,7 +5,7 @@ import { mockTestimonials } from "@/data/mockData";
 import {
   Star, ArrowLeft, Sparkles, GraduationCap, CalendarCheck, Video,
   Users, TrendingUp, Search, Calculator, Atom, FlaskConical, Languages,
-  BookOpen, BarChart3, Code, Microscope, ArrowRight, Zap, PenTool
+  BookOpen, BarChart3, Code, Microscope, ArrowRight, Zap, PenTool, Globe
 } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
@@ -165,9 +165,9 @@ const HomePage = () => {
   ] as const;
 
   const howSteps = [
-    { key: "1", icon: Search, titleKey: "how_step1_title", descKey: "how_step1_desc" },
-    { key: "2", icon: CalendarCheck, titleKey: "how_step2_title", descKey: "how_step2_desc" },
-    { key: "3", icon: Video, titleKey: "how_step3_title", descKey: "how_step3_desc" },
+    { key: "1", icon: Globe, titleKey: "how_step1_title", descKey: "how_step1_desc" },
+    { key: "2", icon: GraduationCap, titleKey: "how_step2_title", descKey: "how_step2_desc" },
+    { key: "3", icon: CalendarCheck, titleKey: "how_step3_title", descKey: "how_step3_desc" },
   ] as const;
 
   const jsonLd = {
@@ -326,8 +326,103 @@ const HomePage = () => {
         </div>
       </section>
 
+      {/* How It Works — creative pop-up sequence */}
+      <section className="py-20 overflow-hidden bg-section-alt">
+        <div className="container">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
+            <h2 className="text-3xl font-extrabold mb-2">{t("how_title")}</h2>
+            <p className="text-muted-foreground">{t("how_subtitle")}</p>
+          </motion.div>
+          <motion.div
+            ref={howStepsRef}
+            initial="hidden"
+            animate={playHowSteps ? "show" : "hidden"}
+            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.2, delayChildren: 0.05 } } }}
+            className="grid md:grid-cols-3 gap-10 md:gap-6 relative max-w-5xl mx-auto"
+          >
+            {/* Animated dashed connector */}
+            <motion.div
+              variants={{
+                hidden: { scaleX: 0, opacity: 0 },
+                show: { scaleX: 1, opacity: 1, transition: { duration: 1.4, ease: "easeOut" } },
+              }}
+              className="hidden md:block absolute top-12 inset-x-[16%] h-0.5 origin-left"
+              style={{
+                background: "repeating-linear-gradient(90deg, hsl(var(--primary) / 0.5) 0 8px, transparent 8px 16px)",
+              }}
+            />
+            {howSteps.map((step, i) => (
+              <motion.div
+                key={step.key}
+                variants={{
+                  hidden: {},
+                  show: { transition: { staggerChildren: 0.08, delayChildren: 0.02 } },
+                }}
+                className="text-center relative group"
+              >
+                {/* Glow halo on hover */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-32 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-2xl pointer-events-none"
+                  style={{ background: "radial-gradient(circle, hsl(var(--primary) / 0.4), transparent 70%)" }}
+                />
+                <motion.div
+                  variants={{
+                    hidden: { opacity: 0, y: 50, scale: 0.65, rotate: -8 },
+                    show: {
+                      opacity: 1, y: 0, scale: 1, rotate: 0,
+                      transition: { type: "spring", stiffness: 140, damping: 16, mass: 0.9 },
+                    },
+                  }}
+                  whileHover={{ y: -6, rotate: [0, -4, 4, 0] }}
+                  className="step-circle-glow w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-5 relative z-10"
+                >
+                  <motion.div
+                    animate={{ y: [0, -3, 0] }}
+                    transition={{ duration: 2.5, repeat: Infinity, delay: i * 0.4, ease: "easeInOut" }}
+                  >
+                    <step.icon size={32} className="text-primary" />
+                  </motion.div>
+                  {/* Number badge with bounce-in */}
+                  <motion.span
+                    variants={{
+                      hidden: { scale: 0, rotate: -180 },
+                      show: { scale: 1, rotate: 0, transition: { type: "spring", stiffness: 260, damping: 12 } },
+                    }}
+                    className="absolute -top-1 -end-1 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-sm font-black shadow-[0_4px_12px_hsl(var(--primary)/0.5)]"
+                  >
+                    {step.key}
+                  </motion.span>
+                  {/* Pulsing ring */}
+                  <span
+                    className="absolute inset-0 rounded-full border-2 border-primary/40 animate-ping pointer-events-none"
+                    style={{ animationDelay: `${i * 0.5}s`, animationDuration: "2.5s" }}
+                  />
+                </motion.div>
+                <motion.h3
+                  variants={{
+                    hidden: { opacity: 0, y: 10 },
+                    show: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+                  }}
+                  className="font-bold text-lg mb-2"
+                >
+                  {t(step.titleKey)}
+                </motion.h3>
+                <motion.p
+                  variants={{
+                    hidden: { opacity: 0 },
+                    show: { opacity: 1, transition: { duration: 0.5 } },
+                  }}
+                  className="text-muted-foreground text-sm leading-relaxed max-w-xs mx-auto"
+                >
+                  {t(step.descKey)}
+                </motion.p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
       {/* Why Choose Us */}
-      <section className="py-16 bg-section-alt">
+      <section className="py-16">
         <div className="container">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
             <h2 className="text-3xl font-extrabold mb-2">{t("why_title")}</h2>
@@ -358,101 +453,6 @@ const HomePage = () => {
                 </div>
                 <h3 className={`font-bold text-lg mb-2 ${i === 0 ? "text-primary" : ""}`}>{step.title}</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">{step.desc}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* How It Works — creative pop-up sequence */}
-      <section className="py-20 overflow-hidden">
-        <div className="container">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
-            <h2 className="text-3xl font-extrabold mb-2">{t("how_title")}</h2>
-            <p className="text-muted-foreground">{t("how_subtitle")}</p>
-          </motion.div>
-          <motion.div
-            ref={howStepsRef}
-            initial="hidden"
-            animate={playHowSteps ? "show" : "hidden"}
-            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.2, delayChildren: 0.05 } } }}
-            className="grid md:grid-cols-3 gap-10 md:gap-6 relative max-w-5xl mx-auto"
-          >
-            {/* Animated dashed connector */}
-            <motion.div
-              variants={{
-                hidden: { scaleX: 0, opacity: 0 },
-                show: { scaleX: 1, opacity: 1, transition: { duration: 1.4, ease: "easeOut" } },
-              }}
-              className="hidden md:block absolute top-12 inset-x-[16%] h-0.5 origin-left"
-              style={{
-                background: "repeating-linear-gradient(90deg, hsl(14 91% 49% / 0.5) 0 8px, transparent 8px 16px)",
-              }}
-            />
-            {howSteps.map((step, i) => (
-              <motion.div
-                key={step.key}
-                variants={{
-                  hidden: {},
-                  show: { transition: { staggerChildren: 0.08, delayChildren: 0.02 } },
-                }}
-                className="text-center relative group"
-              >
-                {/* Glow halo on hover */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-32 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-2xl pointer-events-none"
-                  style={{ background: "radial-gradient(circle, hsl(14 91% 50% / 0.4), transparent 70%)" }}
-                />
-                <motion.div
-                  variants={{
-                    hidden: { opacity: 0, y: 50, scale: 0.65, rotate: -8 },
-                    show: {
-                      opacity: 1, y: 0, scale: 1, rotate: 0,
-                      transition: { type: "spring", stiffness: 140, damping: 16, mass: 0.9 },
-                    },
-                  }}
-                  whileHover={{ y: -6, rotate: [0, -4, 4, 0] }}
-                  className="step-circle-glow w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-5 relative z-10"
-                >
-                  <motion.div
-                    animate={{ y: [0, -3, 0] }}
-                    transition={{ duration: 2.5, repeat: Infinity, delay: i * 0.4, ease: "easeInOut" }}
-                  >
-                    <step.icon size={32} className="text-primary" />
-                  </motion.div>
-                  {/* Number badge with bounce-in */}
-                  <motion.span
-                    variants={{
-                      hidden: { scale: 0, rotate: -180 },
-                      show: { scale: 1, rotate: 0, transition: { type: "spring", stiffness: 260, damping: 12 } },
-                    }}
-                    className="absolute -top-1 -end-1 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-sm font-black shadow-[0_4px_12px_hsl(14_91%_49%/0.5)]"
-                  >
-                    {step.key}
-                  </motion.span>
-                  {/* Pulsing ring */}
-                  <span
-                    className="absolute inset-0 rounded-full border-2 border-primary/40 animate-ping pointer-events-none"
-                    style={{ animationDelay: `${i * 0.5}s`, animationDuration: "2.5s" }}
-                  />
-                </motion.div>
-                <motion.h3
-                  variants={{
-                    hidden: { opacity: 0, y: 10 },
-                    show: { opacity: 1, y: 0, transition: { duration: 0.4 } },
-                  }}
-                  className="font-bold text-lg mb-2"
-                >
-                  {t(step.titleKey)}
-                </motion.h3>
-                <motion.p
-                  variants={{
-                    hidden: { opacity: 0 },
-                    show: { opacity: 1, transition: { duration: 0.5 } },
-                  }}
-                  className="text-muted-foreground text-sm leading-relaxed max-w-xs mx-auto"
-                >
-                  {t(step.descKey)}
-                </motion.p>
               </motion.div>
             ))}
           </motion.div>
