@@ -95,7 +95,7 @@
     background-color: hsl(var(--background));
   }
   body {
-    @apply bg-background text-foreground font-tajawal antialiased;
+    @apply bg-background text-foreground font-cairo antialiased;
   }
   a, button, [role="button"],
   input, select, textarea,
