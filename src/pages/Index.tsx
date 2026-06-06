@@ -253,7 +253,7 @@ const HomePage = () => {
             </motion.div>
 
             {/* Massive two-line title */}
-            <motion.h1 variants={item} className="text-[3rem] sm:text-6xl md:text-7xl font-black leading-[1.05] tracking-tight mb-2">
+            <motion.h1 dir="rtl" variants={item} className="text-[3rem] sm:text-6xl md:text-7xl font-black leading-[1.05] tracking-tight mb-2 text-center">
               <span className="block text-foreground">{"تعلم مع أفضل الدكاترة الجامعيين"}</span>
             </motion.h1>
 
@@ -274,7 +274,7 @@ const HomePage = () => {
             </motion.div>
 
             {/* Subtitle */}
-            <motion.p variants={item} className="text-foreground/75 text-base md:text-lg leading-relaxed max-w-xl mb-8">
+            <motion.p dir="rtl" variants={item} className="text-foreground/75 text-base md:text-lg leading-relaxed max-w-xl mb-8 text-center">
               {"منصة تعليمية تربطك بأفضل الأساتذة الجامعيين في تخصصك عن طريق جلسات online"}
             </motion.p>
 
