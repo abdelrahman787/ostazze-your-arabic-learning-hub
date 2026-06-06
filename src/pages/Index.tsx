@@ -17,6 +17,9 @@ import { Helmet } from "react-helmet-async";
 import hero3DCap from "@/assets/hero-3d-cap.webp";
 import OrbitSubjects from "@/components/OrbitSubjects";
 import UniversityLogosStrip from "@/components/UniversityLogosStrip";
+import howStep1Img from "@/assets/how-step-1.png";
+import howStep2Img from "@/assets/how-step-2.png";
+import howStep3Img from "@/assets/how-step-3.png";
 
 
 const container = {
