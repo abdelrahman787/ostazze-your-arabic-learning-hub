@@ -313,8 +313,9 @@
   .badge-pill {
     @apply inline-flex items-center gap-2 rounded-full text-sm font-medium;
     padding: 4px 14px 4px 4px;
-    background: hsl(230 25% 14% / 0.6);
-    border: 1px solid hsl(30 30% 96% / 0.1);
+    background: hsl(var(--card) / 0.7);
+    border: 1px solid hsl(var(--border) / 0.6);
+    color: hsl(var(--foreground) / 0.85);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
   }
