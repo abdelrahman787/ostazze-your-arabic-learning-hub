@@ -17,6 +17,9 @@ import { Helmet } from "react-helmet-async";
 import hero3DCap from "@/assets/hero-3d-cap.webp";
 import OrbitSubjects from "@/components/OrbitSubjects";
 import UniversityLogosStrip from "@/components/UniversityLogosStrip";
+import howStep1Img from "@/assets/how-step-1.png";
+import howStep2Img from "@/assets/how-step-2.png";
+import howStep3Img from "@/assets/how-step-3.png";
 
 
 const container = {
@@ -165,9 +168,9 @@ const HomePage = () => {
   ] as const;
 
   const howSteps = [
-    { key: "1", icon: Globe, titleKey: "how_step1_title", descKey: "how_step1_desc" },
-    { key: "2", icon: GraduationCap, titleKey: "how_step2_title", descKey: "how_step2_desc" },
-    { key: "3", icon: CalendarCheck, titleKey: "how_step3_title", descKey: "how_step3_desc" },
+    { key: "1", image: howStep1Img, titleKey: "how_step1_title", descKey: "how_step1_desc" },
+    { key: "2", image: howStep2Img, titleKey: "how_step2_title", descKey: "how_step2_desc" },
+    { key: "3", image: howStep3Img, titleKey: "how_step3_title", descKey: "how_step3_desc" },
   ] as const;
 
   const jsonLd = {
@@ -346,7 +349,7 @@ const HomePage = () => {
                 hidden: { scaleX: 0, opacity: 0 },
                 show: { scaleX: 1, opacity: 1, transition: { duration: 1.4, ease: "easeOut" } },
               }}
-              className="hidden md:block absolute top-12 inset-x-[16%] h-0.5 origin-left"
+              className="hidden md:block absolute top-10 inset-x-[16%] h-0.5 origin-left"
               style={{
                 background: "repeating-linear-gradient(90deg, hsl(var(--primary) / 0.5) 0 8px, transparent 8px 16px)",
               }}
@@ -360,58 +363,65 @@ const HomePage = () => {
                 }}
                 className="text-center relative group"
               >
-                {/* Glow halo on hover */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-32 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-2xl pointer-events-none"
-                  style={{ background: "radial-gradient(circle, hsl(var(--primary) / 0.4), transparent 70%)" }}
-                />
+                {/* Big orange number */}
                 <motion.div
                   variants={{
-                    hidden: { opacity: 0, y: 50, scale: 0.65, rotate: -8 },
-                    show: {
-                      opacity: 1, y: 0, scale: 1, rotate: 0,
-                      transition: { type: "spring", stiffness: 140, damping: 16, mass: 0.9 },
-                    },
+                    hidden: { opacity: 0, y: -20, scale: 0.5 },
+                    show: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 220, damping: 14 } },
                   }}
-                  whileHover={{ y: -6, rotate: [0, -4, 4, 0] }}
-                  className="step-circle-glow w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-5 relative z-10"
+                  className="text-6xl md:text-7xl font-black text-primary leading-none mb-3 relative z-10"
+                  style={{ textShadow: "0 6px 20px hsl(var(--primary) / 0.25)" }}
                 >
-                  <motion.div
-                    animate={{ y: [0, -3, 0] }}
-                    transition={{ duration: 2.5, repeat: Infinity, delay: i * 0.4, ease: "easeInOut" }}
-                  >
-                    <step.icon size={32} className="text-primary" />
-                  </motion.div>
-                  {/* Number badge with bounce-in */}
-                  <motion.span
-                    variants={{
-                      hidden: { scale: 0, rotate: -180 },
-                      show: { scale: 1, rotate: 0, transition: { type: "spring", stiffness: 260, damping: 12 } },
-                    }}
-                    className="absolute -top-1 -end-1 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-sm font-black shadow-[0_4px_12px_hsl(var(--primary)/0.5)]"
-                  >
-                    {step.key}
-                  </motion.span>
-                  {/* Pulsing ring */}
-                  <span
-                    className="absolute inset-0 rounded-full border-2 border-primary/40 animate-ping pointer-events-none"
-                    style={{ animationDelay: `${i * 0.5}s`, animationDuration: "2.5s" }}
-                  />
+                  {step.key}
                 </motion.div>
+
+                {/* Title */}
                 <motion.h3
                   variants={{
                     hidden: { opacity: 0, y: 10 },
                     show: { opacity: 1, y: 0, transition: { duration: 0.4 } },
                   }}
-                  className="font-bold text-lg mb-2"
+                  className="font-extrabold text-xl md:text-2xl mb-6 text-foreground"
                 >
                   {t(step.titleKey)}
                 </motion.h3>
+
+                {/* Illustration with beige blob background */}
+                <motion.div
+                  variants={{
+                    hidden: { opacity: 0, y: 40, scale: 0.9 },
+                    show: {
+                      opacity: 1, y: 0, scale: 1,
+                      transition: { type: "spring", stiffness: 140, damping: 18 },
+                    },
+                  }}
+                  whileHover={{ y: -6 }}
+                  className="relative mx-auto w-full max-w-[260px] aspect-square flex items-center justify-center"
+                >
+                  {/* Soft beige blob behind illustration — adapts to theme */}
+                  <div
+                    className="absolute inset-4 rounded-[45%_55%_60%_40%/50%_45%_55%_50%] bg-[hsl(28_60%_88%)] dark:bg-[hsl(28_25%_22%)] opacity-90 blur-[1px]"
+                    aria-hidden="true"
+                  />
+                  <motion.img
+                    src={step.image}
+                    alt=""
+                    loading="lazy"
+                    width={520}
+                    height={520}
+                    animate={{ y: [0, -6, 0] }}
+                    transition={{ duration: 3.5, repeat: Infinity, delay: i * 0.4, ease: "easeInOut" }}
+                    className="relative z-10 w-full h-full object-contain drop-shadow-[0_10px_25px_hsl(var(--primary)/0.15)]"
+                  />
+                </motion.div>
+
+                {/* Description */}
                 <motion.p
                   variants={{
                     hidden: { opacity: 0 },
                     show: { opacity: 1, transition: { duration: 0.5 } },
                   }}
-                  className="text-muted-foreground text-sm leading-relaxed max-w-xs mx-auto"
+                  className="text-muted-foreground text-sm leading-relaxed max-w-xs mx-auto mt-4"
                 >
                   {t(step.descKey)}
                 </motion.p>
