@@ -319,7 +319,7 @@ const translations = {
   save_schedule: { ar: "حفظ الجدول", en: "Save Schedule" },
 
   // Footer
-  footer_desc: { ar: "منصة تعليمية متميزة تربطك بأفضل المدرسين الخصوصيين لجلسات مباشرة عبر الإنترنت.", en: "A premium educational platform connecting you with the best private tutors for live online sessions." },
+  footer_desc: { ar: "منصة تعليمية للطلبة الجامعيين تربطك بأفضل المدرسين الخصوصيين لجلسات مباشرة عبر الإنترنت.", en: "An educational platform for university students connecting you with the best private tutors for live online sessions." },
   footer_quick_links: { ar: "روابط سريعة", en: "Quick Links" },
   footer_about: { ar: "من نحن", en: "About Us" },
   footer_contact: { ar: "تواصل معنا", en: "Contact Us" },
