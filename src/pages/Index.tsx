@@ -168,9 +168,9 @@ const HomePage = () => {
   ] as const;
 
   const howSteps = [
-    { key: "1", icon: Globe, titleKey: "how_step1_title", descKey: "how_step1_desc" },
-    { key: "2", icon: GraduationCap, titleKey: "how_step2_title", descKey: "how_step2_desc" },
-    { key: "3", icon: CalendarCheck, titleKey: "how_step3_title", descKey: "how_step3_desc" },
+    { key: "1", image: howStep1Img, titleKey: "how_step1_title", descKey: "how_step1_desc" },
+    { key: "2", image: howStep2Img, titleKey: "how_step2_title", descKey: "how_step2_desc" },
+    { key: "3", image: howStep3Img, titleKey: "how_step3_title", descKey: "how_step3_desc" },
   ] as const;
 
   const jsonLd = {
