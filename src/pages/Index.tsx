@@ -5,7 +5,7 @@ import { mockTestimonials } from "@/data/mockData";
 import {
   Star, ArrowLeft, Sparkles, GraduationCap, CalendarCheck, Video,
   Users, TrendingUp, Search, Calculator, Atom, FlaskConical, Languages,
-  BookOpen, BarChart3, Code, Microscope, ArrowRight, Zap, PenTool
+  BookOpen, BarChart3, Code, Microscope, ArrowRight, Zap, PenTool, Globe
 } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
