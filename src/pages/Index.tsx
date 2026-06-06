@@ -254,8 +254,8 @@ const HomePage = () => {
 
             {/* Massive two-line title */}
             <motion.h1 variants={item} className="text-[3rem] sm:text-6xl md:text-7xl font-black leading-[1.05] tracking-tight mb-2">
-              <span className="block text-foreground">{t("hero_title_1")}</span>
-              <span className="block text-gradient-soft">{t("hero_title_2")}</span>
+              <span className="block text-foreground">{"تعلم مع أفضل الدكاترة الجامعيين"}</span>
+              <span className="block text-gradient-soft">{"منصة تعليمية للطلبة الجامعيين"}</span>
             </motion.h1>
 
             {/* 3D hero element with glow */}
