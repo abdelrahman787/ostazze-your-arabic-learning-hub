@@ -558,36 +558,9 @@ const HomePage = () => {
               style={{ background: "radial-gradient(circle, hsl(38 92% 55% / 0.45) 0%, transparent 70%)" }}
             />
 
-            {/* Trust stats inline */}
+            {/* University logos grid image with overlaid trust stats on the empty orange area */}
             <div
-              className="relative grid grid-cols-3 gap-2 md:gap-4 mt-6 pt-4"
-              style={{ borderTop: "1px solid hsl(var(--primary) / 0.2)" }}
-            >
-              {[
-                { v: "73+", l: lang === "ar" ? "جامعة" : "Universities" },
-                { v: "12k+", l: lang === "ar" ? "طالب نشط" : "Active Students" },
-                { v: "98%", l: lang === "ar" ? "رضا الطلاب" : "Satisfaction" },
-              ].map((s, i) => (
-                <div key={i} className="text-center">
-                  <div
-                    className="text-2xl md:text-3xl font-black bg-clip-text text-transparent"
-                    style={{
-                      backgroundImage:
-                        "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(38 92% 60%) 100%)",
-                    }}
-                  >
-                    {s.v}
-                  </div>
-                  <div className="text-[11px] md:text-xs font-medium mt-1 tracking-wide text-muted-foreground">
-                    {s.l}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* University logos grid image */}
-            <div
-              className="relative mt-6 rounded-2xl overflow-hidden"
+              className="relative mt-2 rounded-2xl overflow-hidden"
               style={{ background: "hsl(var(--primary))" }}
             >
               <img
@@ -597,6 +570,34 @@ const HomePage = () => {
                 className="w-full h-auto block"
                 style={{ filter: "hue-rotate(-8deg) saturate(1.05)" }}
               />
+
+              {/* Stats overlay — sits over the empty orange band on the left (or right in RTL) */}
+              <div
+                className={`absolute inset-y-0 ${lang === "ar" ? "right-0" : "left-0"} w-[28%] flex flex-col justify-center items-center gap-4 md:gap-6 px-3 md:px-6`}
+              >
+                {[
+                  { v: "73+", l: lang === "ar" ? "جامعة" : "Universities" },
+                  { v: "12k+", l: lang === "ar" ? "طالب نشط" : "Active Students" },
+                  { v: "98%", l: lang === "ar" ? "رضا الطلاب" : "Satisfaction" },
+                ].map((s, i) => (
+                  <div
+                    key={i}
+                    className="text-center w-full rounded-full px-2 py-2 md:py-3 backdrop-blur-sm"
+                    style={{
+                      background: "hsl(0 0% 100% / 0.14)",
+                      border: "1px solid hsl(0 0% 100% / 0.45)",
+                      boxShadow: "inset 0 1px 0 hsl(0 0% 100% / 0.25)",
+                    }}
+                  >
+                    <div className="text-xl md:text-3xl font-black leading-none text-white drop-shadow-[0_2px_4px_hsl(0_0%_0%_/_0.25)]">
+                      {s.v}
+                    </div>
+                    <div className="text-[9px] md:text-xs font-semibold mt-1 tracking-wide text-white/90">
+                      {s.l}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </motion.div>
 
