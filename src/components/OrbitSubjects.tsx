@@ -93,7 +93,7 @@ const OrbitSubjects = () => {
   });
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden py-20 bg-[hsl(265_45%_8%)]">
+    <section ref={sectionRef} className="relative overflow-hidden py-12 bg-[hsl(265_45%_8%)]">
       {/* Deep radial glow background - purple + orange accents */}
       <div
         className="absolute inset-0 pointer-events-none"
