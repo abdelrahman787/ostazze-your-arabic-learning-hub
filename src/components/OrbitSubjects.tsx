@@ -25,8 +25,8 @@ const SUBJECTS: Subject[] = [
 // Distribute 7 subjects across 2 orbits with custom angle offsets for balanced look
 // Inner orbit: 3 icons; Outer orbit: 4 icons
 const ORBITS = [
-  { radius: 200, duration: 52, count: 3, reverse: false, offset: 0 },
-  { radius: 360, duration: 64, count: 4, reverse: false, offset: 45 },
+  { radius: 140, duration: 52, count: 3, reverse: false, offset: 0 },
+  { radius: 260, duration: 64, count: 4, reverse: false, offset: 45 },
 ];
 
 const getOrbitTransform = (radius: number, angleDeg: number) => {
@@ -93,7 +93,7 @@ const OrbitSubjects = () => {
   });
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden py-20 bg-[hsl(265_45%_8%)]">
+    <section ref={sectionRef} className="relative overflow-hidden py-12 bg-[hsl(265_45%_8%)]">
       {/* Deep radial glow background - purple + orange accents */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -126,19 +126,19 @@ const OrbitSubjects = () => {
       </div>
 
       <div className="container relative z-10">
-        <div className="text-center mb-10 animate-fade-in">
-          <h2 className="text-3xl md:text-4xl font-extrabold mb-3 text-white">
+        <div className="text-center mb-6 animate-fade-in">
+          <h2 className="text-2xl md:text-3xl font-extrabold mb-2 text-white">
             {t("popular_title")}
           </h2>
-          <p className="text-white/60 max-w-xl mx-auto">{t("popular_subtitle")}</p>
+          <p className="text-sm text-white/60 max-w-xl mx-auto">{t("popular_subtitle")}</p>
         </div>
 
         {/* Orbit Stage */}
         <div
           className="relative mx-auto"
           style={{
-            width: 900 * scale,
-            height: 720 * scale,
+            width: 640 * scale,
+            height: 520 * scale,
             maxWidth: "100%",
           }}
         >
@@ -199,13 +199,13 @@ const OrbitSubjects = () => {
                   }}
                 />
                 <div
-                  className="relative w-40 h-40 md:w-52 md:h-52 flex items-center justify-center float-y"
+                  className="relative w-28 h-28 md:w-36 md:h-36 flex items-center justify-center float-y"
                   style={{ willChange: "transform" }}
                 >
                   <img
                     src={gradCap}
                     alt="OSTAZE 3D Logo"
-                    className="w-full h-full object-contain drop-shadow-[0_20px_40px_hsl(22_95%_50%/0.6)]"
+                    className="w-full h-full object-contain drop-shadow-[0_12px_24px_hsl(22_95%_50%/0.6)]"
                   />
                 </div>
               </div>
@@ -228,8 +228,8 @@ const OrbitSubjects = () => {
                       style={{
                         top: "50%",
                         left: "50%",
-                        width: 88,
-                        height: 88,
+                        width: 64,
+                        height: 64,
                         zIndex: 30,
                         transform: getOrbitTransform(orbit.radius, subj.angle),
                       }}
@@ -237,25 +237,25 @@ const OrbitSubjects = () => {
                       <div className="w-full h-full flex items-center justify-center">
                         <Link
                           to="/subjects"
-                          className="group flex flex-col items-center gap-2"
+                          className="group flex flex-col items-center gap-1.5"
                           aria-label={t(subj.key)}
                         >
                           <div
-                            className="w-[88px] h-[88px] rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
+                            className="w-[64px] h-[64px] rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
                             style={{
                               background:
                                 "linear-gradient(135deg, hsl(265 40% 25% / 0.85), hsl(280 40% 15% / 0.85))",
                               border: "1px solid hsl(22 80% 60% / 0.35)",
                               boxShadow:
-                                "0 8px 20px hsl(0 0% 0% / 0.45), inset 0 1px 0 hsl(0 0% 100% / 0.15)",
+                                "0 6px 14px hsl(0 0% 0% / 0.45), inset 0 1px 0 hsl(0 0% 100% / 0.15)",
                             }}
                           >
                             <Icon
                               className="text-orange-300 group-hover:text-orange-200 transition-colors"
-                              size={32}
+                              size={24}
                             />
                           </div>
-                          <span className="text-xs md:text-sm font-semibold text-white/90 group-hover:text-white whitespace-nowrap drop-shadow-md">
+                          <span className="text-[11px] md:text-xs font-semibold text-white/90 group-hover:text-white whitespace-nowrap drop-shadow-md">
                             {t(subj.key)}
                           </span>
                         </Link>
@@ -270,13 +270,13 @@ const OrbitSubjects = () => {
 
 
         {/* CTA below — extra spacing so it doesn't overlap the orbit rings */}
-        <div className="text-center mt-20 md:mt-28 animate-fade-in">
+        <div className="text-center mt-10 md:mt-14 animate-fade-in">
           <Link
             to="/subjects"
-            className="inline-flex items-center gap-2 px-12 py-4 rounded-full font-bold text-white text-base md:text-lg transition-all hover:scale-105"
+            className="inline-flex items-center gap-2 px-8 py-3 rounded-full font-bold text-white text-sm md:text-base transition-all hover:scale-105"
             style={{
               background: "linear-gradient(135deg, hsl(22 95% 55%), hsl(18 90% 45%))",
-              boxShadow: "0 10px 30px hsl(22 95% 45% / 0.4)",
+              boxShadow: "0 8px 20px hsl(22 95% 45% / 0.4)",
             }}
           >
             {t("view_all")}
