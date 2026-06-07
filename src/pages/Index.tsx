@@ -12,6 +12,7 @@ import PageHelmet from "@/components/PageHelmet";
 import { Helmet } from "react-helmet-async";
 import hero3DCap from "@/assets/hero-3d-cap.webp";
 import OrbitSubjects from "@/components/OrbitSubjects";
+import HeroOrbit from "@/components/HeroOrbit";
 import OurTeam from "@/components/OurTeam";
 
 import howStep1Img from "@/assets/how-step-1.png";
@@ -269,14 +270,8 @@ const HomePage = () => {
                 {/* Glow */}
                 <div className="absolute inset-0 rounded-full blur-[80px]" style={{ background: "radial-gradient(circle, hsl(14 91% 50% / 0.35), transparent 65%)" }} aria-hidden="true" />
 
-                {/* Cap image */}
-                <img
-                  src={hero3DCap}
-                  alt={lang === "ar" ? "قبعة التخرج ثلاثية الأبعاد" : "3D graduation cap"}
-                  className="relative z-10 w-full h-full object-contain hero-3d-glow float-y"
-                  width={480}
-                  height={480}
-                />
+                {/* Orbit visual */}
+                <HeroOrbit />
 
                 {/* Floating glass card — top */}
                 <motion.div
