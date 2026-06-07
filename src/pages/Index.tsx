@@ -197,8 +197,8 @@ const HomePage = () => {
           ? "OSTAZE | منصة أستازي - دروس خصوصية ولايف أونلاين مع أفضل المعلمين"
           : "OSTAZE | Ostaze - Online Private & Live Tutoring Platform"}
         description={lang === "ar"
-          ? "OSTAZE (أستازي) منصة دروس خصوصية ولايف أونلاين تربط الطلاب بأفضل المعلمين الجامعيين في الكويت وقطر — حصص مباشرة بالزووم، كورسات مسجلة، وأسعار مدروسة."
-          : "OSTAZE (Ostaze) connects students with top university tutors in Kuwait & Qatar via Zoom live lessons and recorded courses at fair prices."}
+          ? "OSTAZE (أستازي) منصة دروس خصوصية ولايف أونلاين تربط الطلاب بأفضل المعلمين الجامعيين في السعودية، الإمارات، الكويت وقطر — حصص مباشرة بالزووم، كورسات مسجلة، وأسعار مدروسة."
+          : "OSTAZE (Ostaze) connects students with top university tutors in KSA, UAE, Kuwait & Qatar via Zoom live lessons and recorded courses at fair prices."}
         canonical="https://ostaze.com/"
         keywords={lang === "ar"
           ? "منصة استاذي، موقع استاذي، أستازي، استازي، OSTAZE، Ostaze، منصة دروس لايف، دروس خصوصية اونلاين، حصص لايف زووم، كورسات مسجلة، حجز معلم خصوصي، جامعة الكويت، جامعة قطر"
@@ -542,8 +542,8 @@ const HomePage = () => {
               </h2>
               <p className="mt-4 text-muted-foreground max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
                 {lang === "ar"
-                  ? "آلاف الطلاب من أبرز الجامعات في الكويت وقطر يثقون بـ OSTAZE لرحلتهم الدراسية."
-                  : "Thousands of students from leading universities across Kuwait & Qatar trust OSTAZE for their academic journey."}
+                  ? "آلاف الطلاب من أبرز الجامعات في السعودية، الإمارات، الكويت وقطر يثقون بـ OSTAZE لرحلتهم الدراسية."
+                  : "Thousands of students from leading universities across KSA, UAE, Kuwait & Qatar trust OSTAZE for their academic journey."}
               </p>
             </div>
 
