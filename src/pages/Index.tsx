@@ -633,8 +633,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Our Team */}
-      <OurTeam />
 
 
 
@@ -697,6 +695,9 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+
+      {/* Our Team */}
+      <OurTeam />
 
       {/* SEO-only contextual paragraph — readable to crawlers, hidden visually.
           Naturally references brand variants and high-intent search phrases
