@@ -199,13 +199,13 @@ const OrbitSubjects = () => {
                   }}
                 />
                 <div
-                  className="relative w-40 h-40 md:w-52 md:h-52 flex items-center justify-center float-y"
+                  className="relative w-28 h-28 md:w-36 md:h-36 flex items-center justify-center float-y"
                   style={{ willChange: "transform" }}
                 >
                   <img
                     src={gradCap}
                     alt="OSTAZE 3D Logo"
-                    className="w-full h-full object-contain drop-shadow-[0_20px_40px_hsl(22_95%_50%/0.6)]"
+                    className="w-full h-full object-contain drop-shadow-[0_12px_24px_hsl(22_95%_50%/0.6)]"
                   />
                 </div>
               </div>
