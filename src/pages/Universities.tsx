@@ -248,17 +248,6 @@ const Universities = () => {
           </motion.div>
         )}
 
-        {/* Search for countries view */}
-        {view === "countries" && (
-          <div className="max-w-sm mx-auto mb-8">
-            <div className="relative">
-              <Search size={14} className="absolute start-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-              <Input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder={lang === "ar" ? "ابحث عن دولة..." : "Search for a country..."} className="ps-9 h-10 text-sm" />
-            </div>
-          </div>
-        )}
-
         <AnimatePresence mode="wait">
           {/* === COUNTRIES === */}
           {view === "countries" && (
