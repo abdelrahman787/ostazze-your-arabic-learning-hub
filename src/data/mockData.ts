@@ -155,7 +155,7 @@ export const mockUniversities: University[] = allUniversities.map(u => ({
 export const mockReviews: Review[] = [
   { id: "1", studentName: { ar: "عبدالله السالم", en: "Abdullah Al-Salem" }, rating: 5, comment: { ar: "معلم ممتاز جداً، يشرح بطريقة مبسطة وسهلة الفهم.", en: "Excellent teacher, explains in a simple and easy-to-understand way." }, date: { ar: "قبل 3 أيام", en: "3 days ago" }, university: { ar: "جامعة الكويت", en: "Kuwait University" } },
   { id: "2", studentName: { ar: "مريم الحسن", en: "Maryam Al-Hassan" }, rating: 5, comment: { ar: "أفضل معلم رياضيات! ساعدني في رفع درجاتي بشكل ملحوظ.", en: "Best math teacher! Helped me significantly improve my grades." }, date: { ar: "قبل أسبوع", en: "1 week ago" }, university: { ar: "جامعة قطر", en: "Qatar University" } },
-  { id: "3", studentName: { ar: "فهد العتيبي", en: "Fahd Al-Otaibi" }, rating: 4, comment: { ar: "شرح واضح ومنظم. أنصح به بشدة.", en: "Clear and organized explanation. I highly recommend." }, date: { ar: "قبل أسبوعين", en: "2 weeks ago" }, university: { ar: "جامعة الخليج للعلوم والتكنولوجيا", en: "GUST" } },
+  { id: "3", studentName: { ar: "فهد العتيبي", en: "Fahd Al-Otaibi" }, rating: 4, comment: { ar: "شرح واضح ومنظم. أنصح به بشدة.", en: "Clear and organized explanation. I highly recommend." }, date: { ar: "قبل أسبوعين", en: "2 weeks ago" }, university: { ar: "الأكاديمية العربية للعلوم والتكنولوجيا والنقل البحري", en: "AAST" } },
   { id: "4", studentName: { ar: "لينا محمد", en: "Lina Mohammed" }, rating: 5, comment: { ar: "تجربة تعليمية رائعة! المعلم صبور ومتفهم.", en: "Wonderful learning experience! The teacher is patient and understanding." }, date: { ar: "قبل 3 أسابيع", en: "3 weeks ago" }, university: { ar: "الجامعة الأمريكية في الكويت", en: "American University of Kuwait" } },
   { id: "5", studentName: { ar: "أحمد الغامدي", en: "Ahmed Al-Ghamdi" }, rating: 5, comment: { ar: "جلسات احترافية جداً، استخدام ممتاز للوسائل التعليمية.", en: "Very professional sessions, excellent use of teaching tools." }, date: { ar: "قبل شهر", en: "1 month ago" }, university: { ar: "جامعة قطر", en: "Qatar University" } },
 ];
@@ -163,7 +163,7 @@ export const mockReviews: Review[] = [
 export const mockTestimonials = [
   { name: { ar: "عبدالله المالكي", en: "Abdullah Al-Malki" }, university: { ar: "جامعة الكويت", en: "Kuwait University" }, quote: { ar: "بفضل Ostaze، تمكنت من رفع معدلي في مادة التفاضل والتكامل من C إلى A+.", en: "Thanks to Ostaze, I was able to raise my Calculus grade from C to A+." }, avatar: "/__l5e/assets-v1/65a4dec8-a28e-4e6b-94d9-fd81a043941f/abdullah-al-malki.png" },
   { name: { ar: "نورا الشمري", en: "Noura Al-Shammari" }, university: { ar: "جامعة قطر", en: "Qatar University" }, quote: { ar: "أفضل منصة تعليمية استخدمتها! حجز الجلسات سهل والمعلمون متميزون.", en: "Best learning platform I've used! Booking sessions is easy and the teachers are outstanding." }, avatar: "/__l5e/assets-v1/191d2b13-b086-4aa6-97aa-33908812c022/noura-al-shammari.png" },
-  { name: { ar: "فيصل الدوسري", en: "Faisal Al-Dosari" }, university: { ar: "جامعة الخليج للعلوم والتكنولوجيا", en: "GUST" }, quote: { ar: "ساعدتني المنصة في التغلب على صعوبات مادة الفيزياء.", en: "The platform helped me overcome difficulties in Physics." } },
+  { name: { ar: "فيصل الدوسري", en: "Faisal Al-Dosari" }, university: { ar: "الأكاديمية العربية للعلوم والتكنولوجيا والنقل البحري", en: "AAST" }, quote: { ar: "ساعدتني المنصة في التغلب على صعوبات مادة الفيزياء.", en: "The platform helped me overcome difficulties in Physics." } },
 ];
 
 export const mockSessions = [

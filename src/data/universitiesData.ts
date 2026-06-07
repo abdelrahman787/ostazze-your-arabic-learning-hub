@@ -188,34 +188,34 @@ export const allUniversities: University[] = [
       },
     ],
   },
-  // GUST
+  // AAST
   {
-    id: "KW-GUST",
-    name_ar: "جامعة الخليج للعلوم والتكنولوجيا",
-    name_en: "Gulf University for Science and Technology",
-    website: "https://www.gust.edu.kw",
+    id: "KW-AAST",
+    name_ar: "الأكاديمية العربية للعلوم والتكنولوجيا والنقل البحري",
+    name_en: "Arab Academy for Science, Technology and Maritime Transport (AAST)",
+    website: "https://www.aast.edu",
     type: "private",
-    founded: 2002,
+    founded: 1972,
     country_code: "KW",
     country_ar: "الكويت",
     country_en: "Kuwait",
     colleges: [
       {
-        id: "KW-GUST-BUS",
+        id: "KW-AAST-BUS",
         name_ar: "كلية إدارة الأعمال",
         name_en: "College of Business Administration",
         departments: [
-          { id: "KW-GUST-BUS-ACC", name_ar: "قسم المحاسبة", name_en: "Department of Accounting", degrees: ["BSc"], courses: [{ code: "GACC101", name_en: "Financial Accounting I", name_ar: "المحاسبة المالية ١", credits: 3 }, { code: "GACC201", name_en: "Managerial Accounting", name_ar: "المحاسبة الإدارية", credits: 3 }, { code: "GACC301", name_en: "Auditing", name_ar: "المراجعة والتدقيق", credits: 3 }, { code: "GACC401", name_en: "Accounting Information Systems", name_ar: "نظم المعلومات المحاسبية", credits: 3 }] },
-          { id: "KW-GUST-BUS-FIN", name_ar: "قسم التمويل والاقتصاد", name_en: "Department of Finance and Economics", degrees: ["BSc"], courses: [{ code: "GFIN101", name_en: "Principles of Economics", name_ar: "مبادئ الاقتصاد", credits: 3 }, { code: "GFIN201", name_en: "Corporate Finance", name_ar: "تمويل الشركات", credits: 3 }, { code: "GFIN301", name_en: "Financial Markets and Institutions", name_ar: "الأسواق والمؤسسات المالية", credits: 3 }, { code: "GFIN401", name_en: "International Financial Management", name_ar: "الإدارة المالية الدولية", credits: 3 }] },
-          { id: "KW-GUST-BUS-MKT", name_ar: "قسم التسويق وإدارة الأعمال", name_en: "Department of Marketing and Management", degrees: ["BSc", "MBA"], courses: [{ code: "GMKT201", name_en: "Marketing Management", name_ar: "إدارة التسويق", credits: 3 }, { code: "GMKT202", name_en: "Consumer Behavior", name_ar: "سلوك المستهلك", credits: 3 }, { code: "GMKT301", name_en: "Digital Marketing", name_ar: "التسويق الرقمي", credits: 3 }, { code: "GMKT401", name_en: "Strategic Marketing", name_ar: "التسويق الاستراتيجي", credits: 3 }] },
+          { id: "KW-AAST-BUS-ACC", name_ar: "قسم المحاسبة", name_en: "Department of Accounting", degrees: ["BSc"], courses: [{ code: "ACC101", name_en: "Financial Accounting I", name_ar: "المحاسبة المالية ١", credits: 3 }, { code: "ACC201", name_en: "Managerial Accounting", name_ar: "المحاسبة الإدارية", credits: 3 }, { code: "ACC301", name_en: "Auditing", name_ar: "المراجعة والتدقيق", credits: 3 }, { code: "ACC401", name_en: "Accounting Information Systems", name_ar: "نظم المعلومات المحاسبية", credits: 3 }] },
+          { id: "KW-AAST-BUS-FIN", name_ar: "قسم التمويل والاقتصاد", name_en: "Department of Finance and Economics", degrees: ["BSc"], courses: [{ code: "FIN101", name_en: "Principles of Economics", name_ar: "مبادئ الاقتصاد", credits: 3 }, { code: "FIN201", name_en: "Corporate Finance", name_ar: "تمويل الشركات", credits: 3 }, { code: "FIN301", name_en: "Financial Markets and Institutions", name_ar: "الأسواق والمؤسسات المالية", credits: 3 }, { code: "FIN401", name_en: "International Financial Management", name_ar: "الإدارة المالية الدولية", credits: 3 }] },
+          { id: "KW-AAST-BUS-MKT", name_ar: "قسم التسويق وإدارة الأعمال", name_en: "Department of Marketing and Management", degrees: ["BSc", "MBA"], courses: [{ code: "MKT201", name_en: "Marketing Management", name_ar: "إدارة التسويق", credits: 3 }, { code: "MKT202", name_en: "Consumer Behavior", name_ar: "سلوك المستهلك", credits: 3 }, { code: "MKT301", name_en: "Digital Marketing", name_ar: "التسويق الرقمي", credits: 3 }, { code: "MKT401", name_en: "Strategic Marketing", name_ar: "التسويق الاستراتيجي", credits: 3 }] },
         ],
       },
       {
-        id: "KW-GUST-ARTS",
+        id: "KW-AAST-ARTS",
         name_ar: "كلية الآداب والعلوم",
         name_en: "College of Arts and Sciences",
         departments: [
-          { id: "KW-GUST-ARTS-MATH", name_ar: "قسم الرياضيات وعلوم الحاسب", name_en: "Department of Mathematics and Computer Science", degrees: ["BSc"], courses: [{ code: "GMAT101", name_en: "Calculus I", name_ar: "التفاضل والتكامل ١", credits: 3 }, { code: "GMAT201", name_en: "Discrete Mathematics", name_ar: "الرياضيات المتقطعة", credits: 3 }, { code: "GCS101", name_en: "Programming Fundamentals", name_ar: "أساسيات البرمجة", credits: 3 }, { code: "GCS201", name_en: "Data Structures", name_ar: "هياكل البيانات", credits: 3 }, { code: "GCS301", name_en: "Artificial Intelligence", name_ar: "الذكاء الاصطناعي", credits: 3 }] },
+          { id: "KW-AAST-ARTS-MATH", name_ar: "قسم الرياضيات وعلوم الحاسب", name_en: "Department of Mathematics and Computer Science", degrees: ["BSc"], courses: [{ code: "MAT101", name_en: "Calculus I", name_ar: "التفاضل والتكامل ١", credits: 3 }, { code: "MAT201", name_en: "Discrete Mathematics", name_ar: "الرياضيات المتقطعة", credits: 3 }, { code: "CS101", name_en: "Programming Fundamentals", name_ar: "أساسيات البرمجة", credits: 3 }, { code: "CS201", name_en: "Data Structures", name_ar: "هياكل البيانات", credits: 3 }, { code: "CS301", name_en: "Artificial Intelligence", name_ar: "الذكاء الاصطناعي", credits: 3 }] },
         ],
       },
     ],
