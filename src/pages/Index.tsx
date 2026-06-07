@@ -300,19 +300,6 @@ const HomePage = () => {
             </motion.form>
 
 
-            {/* Stats row */}
-            <motion.div variants={item} className="flex justify-center gap-10 md:gap-16">
-              {[
-                { num: "+500", label: t("hero_stat_teachers") },
-                { num: "+10K", label: t("hero_stat_students") },
-                { num: "4.9", label: t("hero_stat_rating") },
-              ].map((s) => (
-                <div key={s.label} className="text-center">
-                  <div className="text-2xl md:text-3xl font-black text-foreground">{s.num}</div>
-                  <div className="text-muted-foreground text-xs md:text-sm">{s.label}</div>
-                </div>
-              ))}
-            </motion.div>
           </motion.div>
         </div>
       </section>
