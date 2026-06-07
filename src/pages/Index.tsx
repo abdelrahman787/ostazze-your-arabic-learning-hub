@@ -233,7 +233,7 @@ const HomePage = () => {
                 <span className="text-foreground">
                   {lang === "ar" ? "تعلم مع أفضل " : "Learn with the best "}
                 </span>
-                <span className="text-transparent bg-clip-text" style={{ backgroundImage: "linear-gradient(to left, hsl(14 91% 50%), hsl(20 95% 64%))" }}>
+                <span className="text-transparent bg-clip-text text-4xl md:text-5xl lg:text-6xl" style={{ backgroundImage: "linear-gradient(to left, hsl(14 91% 50%), hsl(20 95% 64%))" }}>
                   {lang === "ar" ? "الدكاترة الجامعيين" : "university professors"}
                 </span>
               </motion.h1>
