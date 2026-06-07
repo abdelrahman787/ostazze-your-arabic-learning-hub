@@ -1,17 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
-import TeacherCard from "@/components/TeacherCard";
-import type { TeacherData } from "@/components/TeacherCard";
 import { mockTestimonials } from "@/data/mockData";
 import {
   Star, ArrowLeft, Sparkles, GraduationCap, CalendarCheck, Video,
-  Users, TrendingUp, Search, Calculator, Atom, FlaskConical, Languages,
+  Search, Calculator, Atom, FlaskConical, Languages,
   BookOpen, BarChart3, Code, Microscope, ArrowRight, Zap, PenTool, Globe
 } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { supabase } from "@/integrations/supabase/client";
-import CountUpNumber from "@/components/CountUpNumber";
 import PageHelmet from "@/components/PageHelmet";
 import { Helmet } from "react-helmet-async";
 import hero3DCap from "@/assets/hero-3d-cap.webp";
@@ -35,43 +31,10 @@ const item = {
 const HomePage = () => {
   const { t, d, lang } = useLanguage();
   const navigate = useNavigate();
-  const [featuredTeachers, setFeaturedTeachers] = useState<TeacherData[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const statsRef = useRef<HTMLDivElement>(null);
   const howStepsRef = useRef<HTMLDivElement>(null);
   const howStepsInView = useInView(howStepsRef, { once: true, amount: 0.2 });
   const [playHowSteps, setPlayHowSteps] = useState(false);
-
-  useEffect(() => {
-    const fetchTeachers = async () => {
-      const { data: tps } = await supabase
-        .from("teacher_profiles")
-        .select("user_id, subjects, subjects_en, university, university_en, price, verified")
-        .limit(3);
-      if (!tps || tps.length === 0) return;
-      const userIds = tps.map((tp) => tp.user_id);
-      const { data: profiles } = await supabase.rpc("get_public_profiles", { _user_ids: userIds });
-      const profileMap = new Map((profiles || []).map((p: any) => [p.user_id, p]));
-      setFeaturedTeachers(tps.map((tp) => {
-        const profile = profileMap.get(tp.user_id);
-        return {
-          user_id: tp.user_id,
-          full_name: profile?.full_name || t("the_teacher"),
-          full_name_en: profile?.full_name_en || null,
-          bio: profile?.bio || null,
-          bio_en: profile?.bio_en || null,
-          avatar_url: profile?.avatar_url || null,
-          subjects: tp.subjects || [],
-          subjects_en: (tp as any).subjects_en || [],
-          university: tp.university || null,
-          university_en: (tp as any).university_en || null,
-          price: tp.price || 0,
-          verified: tp.verified || false,
-        };
-      }));
-    };
-    fetchTeachers();
-  }, []);
 
   useEffect(() => {
     console.log("[HowSteps] 🔎 useInView changed →", howStepsInView, {
@@ -436,63 +399,6 @@ const HomePage = () => {
 
       {/* Popular Subjects - Orbit Universe */}
       <OrbitSubjects />
-
-      {/* Featured Teachers */}
-      <section className="py-16">
-        <div className="container">
-          <div className="flex items-end justify-between mb-8">
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <h2 className="text-3xl font-extrabold mb-2">{t("teachers_title")}</h2>
-              <p className="text-muted-foreground">{t("teachers_subtitle")}</p>
-            </motion.div>
-            <Link to="/teachers" className="text-sm font-medium text-foreground/70 hover:text-primary transition-colors flex items-center gap-1">
-              {t("teachers_view_all")} <ArrowLeft size={14} />
-            </Link>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {featuredTeachers.map((tc, i) => <TeacherCard key={tc.user_id} teacher={tc} index={i} />)}
-          </div>
-        </div>
-      </section>
-
-      {/* Stats — Card-Y dark glow style */}
-      <section ref={statsRef} className="py-16 px-4 lg:px-8">
-        <div className="stats-card-darkglow relative overflow-hidden rounded-[2rem] p-8 md:p-12">
-          <div className="container relative z-10">
-            <motion.div
-              className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 text-center"
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.15 }}
-              variants={{ hidden: {}, show: { transition: { staggerChildren: 0.2, delayChildren: 0.1 } } }}
-            >
-              {[
-                { num: "+500", label: t("stats_teachers"), icon: Users },
-                { num: "+10,000", label: t("stats_students"), icon: TrendingUp },
-                { num: "+25,000", label: t("stats_sessions"), icon: CalendarCheck },
-                { num: "4.9/5", label: t("stats_rating"), icon: Star },
-              ].map((s, i) => (
-                <motion.div
-                  key={s.label}
-                  variants={{
-                    hidden: { opacity: 0, y: 28, scale: 0.92 },
-                    show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
-                  }}
-                  className="stats-tile-glass p-5 md:p-6"
-                >
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-white/10 mb-3 text-white/90 border border-white/15 backdrop-blur-sm">
-                    <s.icon size={20} strokeWidth={2.2} />
-                  </div>
-                  <div className="text-3xl md:text-5xl font-black text-white leading-none drop-shadow-[0_2px_8px_hsl(228_50%_0%_/_0.4)]">
-                    <CountUpNumber target={s.num} />
-                  </div>
-                  <div className="text-white/75 mt-2 text-xs md:text-sm font-medium">{s.label}</div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-        </div>
-      </section>
 
       {/* Students Enrolled At banner */}
       <section className="py-16 md:py-20">
