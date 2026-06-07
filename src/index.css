@@ -401,15 +401,29 @@
     border-color: hsl(30 30% 96% / 0.12);
     background: hsl(230 25% 14% / 0.5);
   }
+  /* Warm alt surface — matches homepage's warm-neutral family.
+     Light: warm sand (--muted #F4EFE9). Dark: warm espresso (--muted #2C2520)
+     with a subtle primary radial glow echoing the hero. */
   .bg-section-alt {
-    @apply bg-secondary/5;
     position: relative;
+    background:
+      radial-gradient(ellipse 70% 40% at 50% 0%, hsl(14 91% 49% / 0.04) 0%, transparent 70%),
+      hsl(var(--muted));
   }
   .dark .bg-section-alt {
     background:
-      radial-gradient(ellipse 60% 40% at 50% 0%, hsl(14 91% 50% / 0.06) 0%, transparent 70%),
-      hsl(230 30% 8%);
-    position: relative;
+      radial-gradient(ellipse 70% 40% at 50% 0%, hsl(14 91% 55% / 0.07) 0%, transparent 70%),
+      hsl(var(--muted));
+  }
+
+  /* Shared dot-grid texture — same pattern used in the footer, lifted as a
+     reusable utility for hero / CTA bands. Direction-agnostic (RTL safe). */
+  .bg-dot-grid {
+    background-image: radial-gradient(circle at 1px 1px, hsl(var(--foreground) / 0.06) 1px, transparent 0);
+    background-size: 40px 40px;
+  }
+  .dark .bg-dot-grid {
+    background-image: radial-gradient(circle at 1px 1px, hsl(var(--foreground) / 0.05) 1px, transparent 0);
   }
 
   /* Floating navbar pill (Card-Y style) */
