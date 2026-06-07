@@ -567,7 +567,7 @@ const HomePage = () => {
 
               {/* Stats overlay — sits over the empty orange band on the left (or right in RTL) */}
               <div
-                className={`absolute inset-y-0 ${lang === "ar" ? "right-0" : "left-0"} w-[28%] flex flex-col justify-center items-center gap-4 md:gap-6 px-3 md:px-6`}
+                className={`absolute inset-y-0 ${lang === "ar" ? "right-0" : "left-0"} w-[22%] flex flex-col justify-center items-center gap-2 md:gap-3 px-2 md:px-4`}
               >
                 {[
                   { v: "73+", l: lang === "ar" ? "جامعة" : "Universities" },
@@ -576,17 +576,17 @@ const HomePage = () => {
                 ].map((s, i) => (
                   <div
                     key={i}
-                    className="text-center w-full rounded-full px-2 py-2 md:py-3 backdrop-blur-sm"
+                    className="text-center w-full rounded-full px-2 py-1.5 md:py-2 backdrop-blur-sm"
                     style={{
                       background: "hsl(0 0% 100% / 0.14)",
                       border: "1px solid hsl(0 0% 100% / 0.45)",
                       boxShadow: "inset 0 1px 0 hsl(0 0% 100% / 0.25)",
                     }}
                   >
-                    <div className="text-xl md:text-3xl font-black leading-none text-white drop-shadow-[0_2px_4px_hsl(0_0%_0%_/_0.25)]">
+                    <div className="text-sm md:text-xl font-black leading-none text-white drop-shadow-[0_2px_4px_hsl(0_0%_0%_/_0.25)]">
                       {s.v}
                     </div>
-                    <div className="text-[9px] md:text-xs font-semibold mt-1 tracking-wide text-white/90">
+                    <div className="text-[8px] md:text-[10px] font-semibold mt-0.5 tracking-wide text-white/90">
                       {s.l}
                     </div>
                   </div>
