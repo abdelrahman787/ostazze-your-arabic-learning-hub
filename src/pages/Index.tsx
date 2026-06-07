@@ -230,11 +230,11 @@ const HomePage = () => {
               </motion.div>
 
               <motion.h1 dir={lang === "ar" ? "rtl" : "ltr"} variants={item} className="text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight mb-6">
-                <span className="text-foreground">
-                  {lang === "ar" ? "تعلم مع أفضل " : "Learn with the best "}
+                <span className="text-foreground whitespace-pre-line">
+                  {lang === "ar" ? "تعلم مع أفضل " : "Learn With\nThe Best \n"}
                 </span>
                 <span className="text-transparent bg-clip-text text-4xl md:text-5xl lg:text-6xl" style={{ backgroundImage: "linear-gradient(to left, hsl(14 91% 50%), hsl(20 95% 64%))" }}>
-                  {lang === "ar" ? "الدكاترة الجامعيين" : "university professors"}
+                  {lang === "ar" ? "الدكاترة الجامعيين" : "University Professors"}
                 </span>
               </motion.h1>
 
