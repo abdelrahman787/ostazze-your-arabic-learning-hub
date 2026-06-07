@@ -630,57 +630,53 @@ const HomePage = () => {
               <ArrowLeft className="w-4 h-4 rtl:rotate-180 transition-transform group-hover:-translate-x-0.5 rtl:group-hover:translate-x-0.5" />
             </Link>
           </div>
-        </div>
-      </section>
 
-
-
-
-      {/* Testimonials */}
-      <section className="py-20 md:py-24">
-        <div className="container">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-            <h2 className="text-3xl font-extrabold mb-2">{t("testimonials_title")}</h2>
-            <p className="text-muted-foreground">{t("testimonials_subtitle")}</p>
-          </motion.div>
-          <motion.div
-            className="grid md:grid-cols-3 gap-5"
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.15 }}
-            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.22, delayChildren: 0.1 } } }}
-          >
-            {mockTestimonials.map((tst, i) => (
-              <motion.div
-                key={i}
-                variants={{
-                  hidden: { opacity: 0, y: 30, scale: 0.95 },
-                  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
-                }}
-                className="card-base p-6 hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
-              >
-                <div className="flex gap-0.5 mb-3">
-                  {[1, 2, 3, 4, 5].map((n) => (
-                    <Star key={n} size={14} className="fill-warning text-warning" />
-                  ))}
-                </div>
-                <p className="text-muted-foreground text-sm leading-relaxed mb-4">"{d(tst.quote)}"</p>
-                <div className="flex items-center gap-3">
-                  {(tst as any).avatar ? (
-                    <img src={(tst as any).avatar} alt={d(tst.name)} loading="lazy" className="w-10 h-10 rounded-full object-cover" />
-                  ) : (
-                    <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold">{d(tst.name).charAt(0)}</div>
-                  )}
-                  <div>
-                    <div className="font-bold text-sm">{d(tst.name)}</div>
-                    <div className="text-muted-foreground text-xs">{d(tst.university)}</div>
+          {/* Testimonials — merged into the same section */}
+          <div className="mt-20 md:mt-24">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
+              <h2 className="text-3xl font-extrabold mb-2">{t("testimonials_title")}</h2>
+              <p className="text-muted-foreground">{t("testimonials_subtitle")}</p>
+            </motion.div>
+            <motion.div
+              className="grid md:grid-cols-3 gap-5"
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.15 }}
+              variants={{ hidden: {}, show: { transition: { staggerChildren: 0.22, delayChildren: 0.1 } } }}
+            >
+              {mockTestimonials.map((tst, i) => (
+                <motion.div
+                  key={i}
+                  variants={{
+                    hidden: { opacity: 0, y: 30, scale: 0.95 },
+                    show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+                  }}
+                  className="card-base p-6 hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
+                >
+                  <div className="flex gap-0.5 mb-3">
+                    {[1, 2, 3, 4, 5].map((n) => (
+                      <Star key={n} size={14} className="fill-warning text-warning" />
+                    ))}
                   </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-4">"{d(tst.quote)}"</p>
+                  <div className="flex items-center gap-3">
+                    {(tst as any).avatar ? (
+                      <img src={(tst as any).avatar} alt={d(tst.name)} loading="lazy" className="w-10 h-10 rounded-full object-cover" />
+                    ) : (
+                      <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold">{d(tst.name).charAt(0)}</div>
+                    )}
+                    <div>
+                      <div className="font-bold text-sm">{d(tst.name)}</div>
+                      <div className="text-muted-foreground text-xs">{d(tst.university)}</div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
         </div>
       </section>
+
 
       {/* CTA — Card-Y dark glow gradient style */}
       <section className="py-20 md:py-24 px-4 lg:px-8 bg-section-alt">
