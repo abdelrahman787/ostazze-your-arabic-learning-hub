@@ -137,8 +137,8 @@ const OrbitSubjects = () => {
         <div
           className="relative mx-auto"
           style={{
-            width: 900 * scale,
-            height: 720 * scale,
+            width: 640 * scale,
+            height: 520 * scale,
             maxWidth: "100%",
           }}
         >
