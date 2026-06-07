@@ -597,7 +597,7 @@ const HomePage = () => {
               style={{ borderTop: "1px solid hsl(var(--primary) / 0.2)" }}
             >
               {[
-                { v: "12+", l: lang === "ar" ? "جامعة" : "Universities" },
+                { v: "29+", l: lang === "ar" ? "جامعة" : "Universities" },
                 { v: "5K+", l: lang === "ar" ? "طالب نشط" : "Active Students" },
                 { v: "98%", l: lang === "ar" ? "رضا الطلاب" : "Satisfaction" },
               ].map((s, i) => (
