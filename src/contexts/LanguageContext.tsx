@@ -34,8 +34,8 @@ const translations = {
   // Why Choose Us
   why_title: { ar: "لماذا تختارنا؟", en: "Why Choose Us?" },
   why_subtitle: { ar: "تجربة تعليمية فريدة مع أفضل المعلمين وأدوات تفاعلية", en: "Experience unique learning with the best teachers and interactive tools" },
-  why_teachers: { ar: "معلمون متميزون", en: "Quality Teachers" },
-  why_teachers_desc: { ar: "معلمون معتمدون من أفضل الجامعات", en: "Certified teachers from top universities" },
+  why_teachers: { ar: "معلمون متميزون", en: "Quality Tutors" },
+  why_teachers_desc: { ar: "معلمون معتمدون من أفضل الجامعات", en: "Certified Professors from top universities" },
   why_schedule: { ar: "مواعيد مرنة", en: "Flexible Schedule" },
   why_schedule_desc: { ar: "احجز جلستك في الوقت المناسب لك", en: "Book your session at your convenience" },
   why_remote: { ar: "تعلم عن بعد", en: "Learn Remotely" },
