@@ -20,7 +20,7 @@ const translations = {
   hero_badge: { ar: "منصة تعليمية للطلبة الجامعيين", en: "Educational Platform for University Students" },
   hero_title_1: { ar: "تعلّم مع", en: "Learn with the" },
   hero_title_2: { ar: "أفضل المعلمين", en: "Best Teachers" },
-  hero_subtitle: { ar: "منصة تعليمية تربطك بأفضل المعلمين الخصوصيين لجلسات حية أونلاين", en: "An educational platform connecting you with the best private tutors for live online sessions" },
+  hero_subtitle: { ar: "منصة تعليمية تربطك بأفضل الأساتذة الجامعيين في تخصصك عن طريق جلسات اونلاين", en: "An educational platform connecting you with the best private tutors for live online sessions" },
   hero_cta: { ar: "ابدأ الآن", en: "Get Started" },
   hero_browse: { ar: "تصفح المعلمين", en: "Browse Teachers" },
   hero_stat_teachers: { ar: "معلم", en: "Teachers" },
