@@ -430,11 +430,11 @@ const translations = {
   whatsapp_msg: { ar: "مرحباً، أريد الاستفسار عن خدمات أسطازي", en: "Hello, I'd like to inquire about Ostaze services" },
 
   // How It Works
-  how_title: { ar: "كيف تعمل OSTAZE؟", en: "How OSTAZE Works?" },
+  how_title: { ar: "كيف تعمل Ostaze؟", en: "How Ostaze Works?" },
   how_subtitle: { ar: "ثلاث خطوات بسيطة لبدء رحلة التعلم", en: "Three simple steps to start your learning journey" },
-  how_step1_title: { ar: "اختر دولتك", en: "Choose Your Country" },
+  how_step1_title: { ar: "اختر دولتك", en: "Select Your Country\nTo See Universities" },
   how_step1_desc: { ar: "حدد دولتك لعرض الجامعات والأسعار بالعملة المناسبة لك", en: "Select your country to see universities and prices in your local currency" },
-  how_step2_title: { ar: "اختر جامعتك", en: "Choose Your University" },
+  how_step2_title: { ar: "اختر جامعتك", en: "Pick Your University, Major\nThen Pick The Courses" },
   how_step2_desc: { ar: "تصفّح الجامعات والكليات والمواد ثم اختر الأنسب لتخصصك", en: "Browse universities, colleges, and subjects to match your major" },
   how_step3_title: { ar: "احجز جلستك الخاصة", en: "Book Your Private Classes" },
   how_step3_desc: { ar: "اختر الموعد المناسب واحجز جلسة Online مباشرة مع الدكتور", en: "Pick a time that fits you and book a live online class with your tutor" },
