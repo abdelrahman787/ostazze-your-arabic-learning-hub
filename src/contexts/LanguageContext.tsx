@@ -74,7 +74,7 @@ const translations = {
   cta_register: { ar: "أنشئ حسابك مجاناً", en: "Create Free Account" },
 
   // Universities
-  universities_title: { ar: "اختر دولتك", en: "Choose Your Country" },
+  universities_title: { ar: "الدولة", en: "Country" },
   universities_subtitle: { ar: "اختر جامعتك للعثور على معلمين متخصصين", en: "Choose your university to find specialized teachers" },
   universities_view_subjects: { ar: "عرض المواد", en: "View Subjects" },
 
