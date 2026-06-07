@@ -14,6 +14,8 @@ import { allUniversities, University, College } from "@/data/universitiesData";
 import { Input } from "@/components/ui/input";
 import flagKW from "@/assets/flag-kw.svg";
 import flagQA from "@/assets/flag-qa.svg";
+import flagSA from "@/assets/flag-sa.svg";
+import flagAE from "@/assets/flag-ae.svg";
 
 // Group universities by country
 const getCountries = () => {
@@ -27,11 +29,32 @@ const getCountries = () => {
   return Array.from(map.values());
 };
 
-const flagImages: Record<string, string> = { KW: flagKW, QA: flagQA };
+const flagImages: Record<string, string> = { KW: flagKW, QA: flagQA, SA: flagSA, AE: flagAE };
+
+const countryNames: Record<string, { ar: string; en: string }> = {
+  KW: { ar: "الكويت", en: "Kuwait" },
+  QA: { ar: "قطر", en: "Qatar" },
+  SA: { ar: "السعودية", en: "Saudi Arabia" },
+  AE: { ar: "الإمارات", en: "UAE" },
+};
+
+const comingSoonCountries = [
+  { code: "SA", name_ar: countryNames.SA.ar, name_en: countryNames.SA.en, universities: [] as University[] },
+  { code: "AE", name_ar: countryNames.AE.ar, name_en: countryNames.AE.en, universities: [] as University[] },
+];
 
 const countryColors: Record<string, { from: string; to: string; accent: string }> = {
   KW: { from: "from-green-500/20", to: "to-red-500/10", accent: "text-green-600 dark:text-green-400" },
   QA: { from: "from-red-600/20", to: "to-red-400/10", accent: "text-red-600 dark:text-red-400" },
+  SA: { from: "from-green-700/20", to: "to-green-500/10", accent: "text-green-700 dark:text-green-400" },
+  AE: { from: "from-red-600/20", to: "to-green-600/10", accent: "text-emerald-600 dark:text-emerald-400" },
+};
+
+const flagGlow: Record<string, string> = {
+  KW: "radial-gradient(circle, #007A3D 0%, #CE1126 70%, transparent 100%)",
+  QA: "radial-gradient(circle, #8A1538 0%, #5B0E26 70%, transparent 100%)",
+  SA: "radial-gradient(circle, #006C35 0%, #004d26 70%, transparent 100%)",
+  AE: "radial-gradient(circle, #00732F 0%, #FF0000 70%, transparent 100%)",
 };
 
 // ===== Static high-quality flag with subtle ambient glow =====
@@ -39,16 +62,11 @@ const AnimatedFlag = ({ code, size = 120 }: { code: string; size?: number }) => 
   <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
     <div
       className="absolute inset-2 rounded-2xl blur-2xl opacity-30 pointer-events-none"
-      style={{
-        background:
-          code === "KW"
-            ? "radial-gradient(circle, #007A3D 0%, #CE1126 70%, transparent 100%)"
-            : "radial-gradient(circle, #8A1538 0%, #5B0E26 70%, transparent 100%)",
-      }}
+      style={{ background: flagGlow[code] || flagGlow.KW }}
     />
     <img
       src={flagImages[code]}
-      alt={code === "KW" ? "Kuwait" : "Qatar"}
+      alt={countryNames[code]?.en || code}
       width={size}
       height={Math.round(size * 0.62)}
       loading="eager"
@@ -58,6 +76,7 @@ const AnimatedFlag = ({ code, size = 120 }: { code: string; size?: number }) => 
     />
   </div>
 );
+
 
 
 // ===== College Card (links to dedicated page) =====
@@ -292,6 +311,34 @@ const Universities = () => {
                   </motion.button>
                 );
               })}
+
+              {comingSoonCountries.map((c, i) => {
+                const colors = countryColors[c.code] || { from: "from-primary/20", to: "to-accent/10", accent: "text-primary" };
+                return (
+                  <motion.div
+                    key={c.code}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: (countries.length + i) * 0.15 }}
+                    className="card-base p-8 flex flex-col items-center gap-5 relative overflow-hidden opacity-80"
+                  >
+                    <div className={`absolute inset-0 bg-gradient-to-br ${colors.from} ${colors.to} opacity-30`} />
+                    <span className="absolute top-3 end-3 z-20 text-[0.6rem] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider bg-primary/15 text-primary">
+                      {lang === "ar" ? "قريباً" : "Coming Soon"}
+                    </span>
+                    <div className="relative z-10">
+                      <AnimatedFlag code={c.code} size={160} />
+                    </div>
+                    <div className="text-center relative z-10">
+                      <h3 className="font-black text-2xl mb-1">{lang === "ar" ? c.name_ar : c.name_en}</h3>
+                      <p className="text-sm text-muted-foreground mt-3">
+                        {lang === "ar" ? "سيتم إضافة الجامعات قريباً" : "Universities coming soon"}
+                      </p>
+                    </div>
+                  </motion.div>
+                );
+              })}
+
             </motion.div>
           )}
 
