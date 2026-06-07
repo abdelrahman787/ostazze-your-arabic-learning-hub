@@ -299,18 +299,6 @@ const HomePage = () => {
               </button>
             </motion.form>
 
-            {/* Quick subject chips */}
-            <motion.div variants={item} className="flex flex-wrap justify-center gap-2 mb-10">
-              {(["subj_math", "subj_physics", "subj_chemistry", "subj_english"] as const).map((key) => (
-                <Link
-                  key={key}
-                  to="/subjects"
-                  className="px-3.5 py-1.5 rounded-full text-xs font-medium border border-foreground/15 text-foreground/70 hover:border-primary hover:text-primary hover:bg-primary/5 transition-colors"
-                >
-                  {t(key)}
-                </Link>
-              ))}
-            </motion.div>
 
             {/* Stats row */}
             <motion.div variants={item} className="flex justify-center gap-10 md:gap-16">
