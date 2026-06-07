@@ -4,8 +4,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   GraduationCap, Building2, ChevronLeft, Globe, Calendar,
   BookOpen, ExternalLink, Layers, Search, ChevronRight,
+import {
+  GraduationCap, Building2, ChevronLeft, Globe, Calendar,
+  BookOpen, ExternalLink, Layers, Search, ChevronRight,
 } from "lucide-react";
-import PageHeader from "@/components/PageHeader";
 import PageHelmet from "@/components/PageHelmet";
 import { breadcrumbJsonLd, collectionPageJsonLd, faqJsonLd } from "@/lib/seo";
 import { useLanguage } from "@/contexts/LanguageContext";
