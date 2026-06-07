@@ -179,8 +179,8 @@ const OrbitSubjects = () => {
                     zIndex: 15,
                     transform: getOrbitTransform(orbit.radius, 0),
                     background:
-                      "radial-gradient(circle, hsl(22 100% 70%) 0%, hsl(22 95% 55%) 50%, transparent 100%)",
-                    boxShadow: "0 0 10px hsl(22 95% 60% / 0.8)",
+                      "radial-gradient(circle, hsl(var(--primary)) 0%, hsl(var(--primary-dark)) 50%, transparent 100%)",
+                    boxShadow: "0 0 10px hsl(var(--primary) / 0.8)",
                   }}
                 />
               );
