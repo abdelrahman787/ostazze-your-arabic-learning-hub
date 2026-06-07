@@ -437,45 +437,6 @@ const HomePage = () => {
       {/* Popular Subjects - Orbit Universe */}
       <OrbitSubjects />
 
-      {/* Stats — Card-Y dark glow style */}
-      <section ref={statsRef} className="py-16 px-4 lg:px-8">
-        <div className="stats-card-darkglow relative overflow-hidden rounded-[2rem] p-8 md:p-12">
-          <div className="container relative z-10">
-            <motion.div
-              className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 text-center"
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.15 }}
-              variants={{ hidden: {}, show: { transition: { staggerChildren: 0.2, delayChildren: 0.1 } } }}
-            >
-              {[
-                { num: "+500", label: t("stats_teachers"), icon: Users },
-                { num: "+10,000", label: t("stats_students"), icon: TrendingUp },
-                { num: "+25,000", label: t("stats_sessions"), icon: CalendarCheck },
-                { num: "4.9/5", label: t("stats_rating"), icon: Star },
-              ].map((s, i) => (
-                <motion.div
-                  key={s.label}
-                  variants={{
-                    hidden: { opacity: 0, y: 28, scale: 0.92 },
-                    show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
-                  }}
-                  className="stats-tile-glass p-5 md:p-6"
-                >
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-white/10 mb-3 text-white/90 border border-white/15 backdrop-blur-sm">
-                    <s.icon size={20} strokeWidth={2.2} />
-                  </div>
-                  <div className="text-3xl md:text-5xl font-black text-white leading-none drop-shadow-[0_2px_8px_hsl(228_50%_0%_/_0.4)]">
-                    <CountUpNumber target={s.num} />
-                  </div>
-                  <div className="text-white/75 mt-2 text-xs md:text-sm font-medium">{s.label}</div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
       {/* Students Enrolled At banner */}
       <section className="py-16 md:py-20">
         <div className="container max-w-6xl">
