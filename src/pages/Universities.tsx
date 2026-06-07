@@ -210,7 +210,7 @@ const Universities = () => {
           {lang === "ar" ? "الدليل الأكاديمي" : "Academic Directory"}
         </motion.div>
         <h1 className="text-3xl md:text-5xl font-black tracking-tight">{t("universities_title")}</h1>
-        <p className="text-muted-foreground text-base max-w-xl mt-2">{t("universities_subtitle")}</p>
+        
       </div>
 
       <div className="container py-8">
