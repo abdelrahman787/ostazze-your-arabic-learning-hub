@@ -93,13 +93,13 @@ const OrbitSubjects = () => {
   });
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden py-12 bg-background">
-      {/* Warm radial glow — ties to site theme */}
+    <section ref={sectionRef} className="relative overflow-hidden py-12 bg-[hsl(265_45%_8%)]">
+      {/* Deep radial glow background - purple + orange accents */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 60% 50% at 50% 50%, hsl(var(--primary) / 0.10), transparent 60%), radial-gradient(ellipse 80% 60% at 50% 50%, hsl(var(--muted) / 0.45), transparent 70%), radial-gradient(ellipse 100% 80% at 50% 100%, hsl(var(--accent) / 0.20), transparent 70%)",
+            "radial-gradient(ellipse 60% 50% at 50% 50%, hsl(22 90% 55% / 0.18), transparent 60%), radial-gradient(ellipse 80% 60% at 50% 50%, hsl(265 60% 18% / 0.7), transparent 70%), radial-gradient(ellipse 100% 80% at 50% 100%, hsl(280 70% 25% / 0.4), transparent 70%)",
         }}
       />
 
@@ -112,13 +112,13 @@ const OrbitSubjects = () => {
           return (
             <span
               key={i}
-              className="absolute rounded-full bg-foreground"
+              className="absolute rounded-full bg-white"
               style={{
                 top: `${top}%`,
                 left: `${left}%`,
                 width: `${size}px`,
                 height: `${size}px`,
-                opacity: 0.15 + (i % 5) * 0.06,
+                opacity: 0.25 + (i % 5) * 0.1,
               }}
             />
           );
@@ -127,10 +127,10 @@ const OrbitSubjects = () => {
 
       <div className="container relative z-10">
         <div className="text-center mb-6 animate-fade-in">
-          <h2 className="text-2xl md:text-3xl font-extrabold mb-2 text-foreground">
+          <h2 className="text-2xl md:text-3xl font-extrabold mb-2 text-white">
             {t("popular_title")}
           </h2>
-          <p className="text-sm text-muted-foreground max-w-xl mx-auto">{t("popular_subtitle")}</p>
+          <p className="text-sm text-white/60 max-w-xl mx-auto">{t("popular_subtitle")}</p>
         </div>
 
         {/* Orbit Stage */}
@@ -154,7 +154,7 @@ const OrbitSubjects = () => {
                 style={{
                   width: orbit.radius * 2,
                   height: orbit.radius * 2,
-                  borderColor: `hsl(var(--muted-foreground) / ${0.28 - idx * 0.05})`,
+                  borderColor: `hsl(265 60% 75% / ${0.28 - idx * 0.05})`,
                 }}
               />
             ))}
@@ -179,8 +179,8 @@ const OrbitSubjects = () => {
                     zIndex: 15,
                     transform: getOrbitTransform(orbit.radius, 0),
                     background:
-                      "radial-gradient(circle, hsl(var(--primary)) 0%, hsl(var(--primary-dark)) 50%, transparent 100%)",
-                    boxShadow: "0 0 10px hsl(var(--primary) / 0.8)",
+                      "radial-gradient(circle, hsl(22 100% 70%) 0%, hsl(22 95% 55%) 50%, transparent 100%)",
+                    boxShadow: "0 0 10px hsl(22 95% 60% / 0.8)",
                   }}
                 />
               );
@@ -194,7 +194,7 @@ const OrbitSubjects = () => {
                   className="absolute inset-0 rounded-full orbit-center-glow"
                   style={{
                     background:
-                      "radial-gradient(circle, hsl(var(--primary) / 0.5), transparent 70%)",
+                      "radial-gradient(circle, hsl(22 95% 60% / 0.5), transparent 70%)",
                     transform: "scale(1.8)",
                   }}
                 />
@@ -205,7 +205,7 @@ const OrbitSubjects = () => {
                   <img
                     src={gradCap}
                     alt="OSTAZE 3D Logo"
-                    className="w-full h-full object-contain drop-shadow-[0_12px_24px_hsl(var(--primary)/0.6)]"
+                    className="w-full h-full object-contain drop-shadow-[0_12px_24px_hsl(22_95%_50%/0.6)]"
                   />
                 </div>
               </div>
@@ -244,18 +244,18 @@ const OrbitSubjects = () => {
                             className="w-[64px] h-[64px] rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
                             style={{
                               background:
-                                "linear-gradient(135deg, hsl(var(--card) / 0.85), hsl(var(--muted) / 0.85))",
-                              border: "1px solid hsl(var(--primary) / 0.35)",
+                                "linear-gradient(135deg, hsl(265 40% 25% / 0.85), hsl(280 40% 15% / 0.85))",
+                              border: "1px solid hsl(22 80% 60% / 0.35)",
                               boxShadow:
-                                "0 6px 14px hsl(var(--foreground) / 0.08), inset 0 1px 0 hsl(var(--background) / 0.15)",
+                                "0 6px 14px hsl(0 0% 0% / 0.45), inset 0 1px 0 hsl(0 0% 100% / 0.15)",
                             }}
                           >
                             <Icon
-                              className="text-primary group-hover:text-primary/80 transition-colors"
+                              className="text-orange-300 group-hover:text-orange-200 transition-colors"
                               size={24}
                             />
                           </div>
-                          <span className="text-[11px] md:text-xs font-semibold text-foreground/90 group-hover:text-foreground whitespace-nowrap drop-shadow-md">
+                          <span className="text-[11px] md:text-xs font-semibold text-white/90 group-hover:text-white whitespace-nowrap drop-shadow-md">
                             {t(subj.key)}
                           </span>
                         </Link>
@@ -273,10 +273,10 @@ const OrbitSubjects = () => {
         <div className="text-center mt-10 md:mt-14 animate-fade-in">
           <Link
             to="/subjects"
-            className="inline-flex items-center gap-2 px-8 py-3 rounded-full font-bold text-primary-foreground text-sm md:text-base transition-all hover:scale-105"
+            className="inline-flex items-center gap-2 px-8 py-3 rounded-full font-bold text-white text-sm md:text-base transition-all hover:scale-105"
             style={{
-              background: "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-dark)))",
-              boxShadow: "0 8px 20px hsl(var(--primary) / 0.4)",
+              background: "linear-gradient(135deg, hsl(22 95% 55%), hsl(18 90% 45%))",
+              boxShadow: "0 8px 20px hsl(22 95% 45% / 0.4)",
             }}
           >
             {t("view_all")}
