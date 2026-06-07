@@ -487,6 +487,7 @@ const HomePage = () => {
             <div
               className="absolute -bottom-16 -right-16 w-[260px] h-[260px] rounded-full blur-[90px] opacity-30 pointer-events-none"
               style={{ background: "radial-gradient(circle, hsl(38 92% 55% / 0.45) 0%, transparent 70%)" }}
+            />
 
             {/* Trust stats inline */}
             <div
