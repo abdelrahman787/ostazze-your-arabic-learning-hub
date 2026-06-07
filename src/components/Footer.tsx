@@ -9,19 +9,20 @@ const Footer = () => {
 
   return (
     <footer className="relative overflow-hidden text-foreground/75 mt-16">
-      {/* Deep dark background with orange radial glow */}
+      {/* Sun mood — warm sunset gradient with golden glow */}
       <div
         className="absolute inset-0 -z-10"
         style={{
           background:
-            "radial-gradient(ellipse 60% 40% at 50% 0%, hsl(14 91% 50% / 0.18) 0%, transparent 65%), linear-gradient(180deg, hsl(230 35% 8%), hsl(230 35% 4%))",
+            "radial-gradient(ellipse 70% 50% at 50% 0%, hsl(45 100% 65% / 0.45) 0%, transparent 60%), radial-gradient(ellipse 50% 40% at 80% 100%, hsl(14 91% 55% / 0.35) 0%, transparent 65%), linear-gradient(180deg, hsl(20 75% 18%) 0%, hsl(18 70% 12%) 60%, hsl(20 60% 8%) 100%)",
         }}
       />
-      {/* Subtle dot grid */}
+      {/* Warm sun rays / dot grid */}
       <div
-        className="absolute inset-0 opacity-[0.06] pointer-events-none -z-10"
-        style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "40px 40px" }}
+        className="absolute inset-0 opacity-[0.08] pointer-events-none -z-10"
+        style={{ backgroundImage: "radial-gradient(circle at 1px 1px, hsl(45 100% 80%) 1px, transparent 0)", backgroundSize: "40px 40px" }}
       />
+
 
       <div className="container py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
