@@ -282,7 +282,7 @@ const HomePage = () => {
       </section>
 
       {/* How It Works + WhatsApp CTA — combined section */}
-      <section className="py-20 overflow-hidden bg-section-alt">
+      <section className="py-20 md:py-24 overflow-hidden bg-section-alt">
         <div className="container">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
             <h2 className="text-3xl font-extrabold mb-2">{t("how_title")}</h2>
@@ -426,7 +426,8 @@ const HomePage = () => {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-16">
+      <section className="py-20 md:py-24">
+
         <div className="container">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
             <h2 className="text-3xl font-extrabold mb-2">{t("why_title")}</h2>
@@ -467,7 +468,7 @@ const HomePage = () => {
       <OrbitSubjects />
 
       {/* Students Enrolled At — refined trust banner */}
-      <section className="relative py-16 md:py-24 overflow-hidden">
+      <section className="relative py-20 md:py-24 overflow-hidden bg-section-alt">
         {/* Ambient backdrop tied to site theme */}
         <div
           className="absolute inset-0 pointer-events-none -z-10"
@@ -618,7 +619,7 @@ const HomePage = () => {
 
 
       {/* Testimonials */}
-      <section className="py-16">
+      <section className="py-20 md:py-24">
         <div className="container">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
             <h2 className="text-3xl font-extrabold mb-2">{t("testimonials_title")}</h2>
@@ -660,7 +661,7 @@ const HomePage = () => {
       </section>
 
       {/* CTA — Card-Y dark glow gradient style */}
-      <section className="py-16 px-4 lg:px-8">
+      <section className="py-20 md:py-24 px-4 lg:px-8 bg-section-alt">
         <div className="stats-card-darkglow relative overflow-hidden rounded-[2rem] py-14 px-6 md:px-12">
           <div className="container text-center relative z-10">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
