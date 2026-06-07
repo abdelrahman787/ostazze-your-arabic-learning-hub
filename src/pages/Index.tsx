@@ -466,7 +466,7 @@ const HomePage = () => {
       <OrbitSubjects />
 
       {/* Students Enrolled At — refined trust banner */}
-      <section className="relative py-16 md:py-24 overflow-hidden">
+      <section className="relative py-16 overflow-hidden">
         {/* Ambient backdrop tied to site theme */}
         <div
           className="absolute inset-0 pointer-events-none -z-10"
