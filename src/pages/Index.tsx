@@ -204,67 +204,128 @@ const HomePage = () => {
         jsonLd={jsonLd}
       />
 
-      {/* Hero — Card-Y inspired centered, dark, glowing */}
-      <section className="hero-gradient min-h-[100vh] flex items-center justify-center overflow-hidden relative pt-page-lg pb-16">
+      {/* Hero — Split perspective with floating glass cards */}
+      <section className="hero-gradient min-h-[100vh] flex items-center overflow-hidden relative pt-page-lg pb-16">
+        {/* Ambient background */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+          <div className="absolute top-1/2 -start-20 w-[600px] h-[600px] rounded-full blur-[140px]" style={{ background: "hsl(14 91% 50% / 0.12)" }} />
+          <div className="absolute -top-40 -end-20 w-[500px] h-[500px] rounded-full blur-[120px]" style={{ background: "hsl(14 91% 30% / 0.08)" }} />
+          <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(hsl(var(--foreground)) 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
+        </div>
+
         <div className="container relative z-10">
-          <motion.div
-            variants={container}
-            initial="hidden"
-            animate="show"
-            className="flex flex-col items-center text-center max-w-3xl mx-auto"
-          >
-            {/* Pill badge */}
-            <motion.div variants={item} className="badge-pill mb-7">
-              <span className="badge-pill-tag">{lang === "ar" ? "جديد" : "New"}</span>
-              <span className="text-foreground/85">{t("hero_badge")}</span>
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            {/* Text Content */}
+            <motion.div
+              variants={container}
+              initial="hidden"
+              animate="show"
+              className="flex flex-col items-start text-start"
+            >
+              <motion.div variants={item} className="badge-pill mb-7">
+                <span className="badge-pill-tag">{lang === "ar" ? "جديد" : "New"}</span>
+                <span className="text-foreground/85">{t("hero_badge")}</span>
+              </motion.div>
+
+              <motion.h1 dir={lang === "ar" ? "rtl" : "ltr"} variants={item} className="text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight mb-6">
+                <span className="text-foreground">
+                  {lang === "ar" ? "تعلم مع أفضل " : "Learn with the best "}
+                </span>
+                <span className="text-transparent bg-clip-text" style={{ backgroundImage: "linear-gradient(to left, hsl(14 91% 50%), hsl(20 95% 64%))" }}>
+                  {lang === "ar" ? "الدكاترة الجامعيين" : "university professors"}
+                </span>
+              </motion.h1>
+
+              <motion.p dir={lang === "ar" ? "rtl" : "ltr"} variants={item} className="text-foreground/70 text-base md:text-lg leading-relaxed max-w-xl mb-8">
+                {lang === "ar" ? "منصة تعليمية تربطك بأفضل الأساتذة الجامعيين في تخصصك عن طريق جلسات اونلاين" : "An educational platform that connects you with the best university professors in your field through online sessions"}
+              </motion.p>
+
+              <motion.form variants={item} onSubmit={handleSearch} className="w-full max-w-xl flex gap-2 mb-6">
+                <div className="flex-1 relative">
+                  <Search size={18} className="absolute top-1/2 -translate-y-1/2 start-4 text-muted-foreground" />
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder={t("hero_search_placeholder")}
+                    className="w-full ps-11 pe-4 py-3.5 rounded-full border border-foreground/15 bg-card/85 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all min-h-[52px]"
+                  />
+                </div>
+                <button type="submit" className="btn-cta-light min-h-[52px] !px-7">
+                  {t("hero_cta")}
+                  <ArrowRight size={16} />
+                </button>
+              </motion.form>
             </motion.div>
 
-            {/* Massive two-line title */}
-            <motion.h1 dir={lang === "ar" ? "rtl" : "ltr"} variants={item} className="text-[3rem] sm:text-6xl md:text-7xl font-black leading-[1.05] tracking-tight mb-2 text-center">
-              <span className="block text-foreground">{lang === "ar" ? "تعلم مع أفضل الدكاترة الجامعيين" : "Learn with the best university professors"}</span>
-            </motion.h1>
+            {/* Visual Element with floating glass cards */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="relative flex justify-center lg:justify-end order-first lg:order-last"
+            >
+              <div className="relative w-full max-w-[480px] aspect-square flex items-center justify-center">
+                {/* Glow */}
+                <div className="absolute inset-0 rounded-full blur-[80px]" style={{ background: "radial-gradient(circle, hsl(14 91% 50% / 0.35), transparent 65%)" }} aria-hidden="true" />
 
-            {/* 3D hero element with glow */}
-            <motion.div variants={item} className="relative my-8 sm:my-10">
-              <div
-                className="absolute inset-0 rounded-full hero-glow glow-pulse"
-                style={{ background: "radial-gradient(circle, hsl(14 91% 50% / 0.55), transparent 65%)" }}
-                aria-hidden="true"
-              />
-              <img
-                src={hero3DCap}
-                alt={lang === "ar" ? "قبعة التخرج ثلاثية الأبعاد" : "3D graduation cap"}
-                className="relative w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 object-contain hero-3d-glow float-y mx-auto"
-                width={320}
-                height={320}
-              />
-            </motion.div>
-
-            {/* Subtitle */}
-            <motion.p dir={lang === "ar" ? "rtl" : "ltr"} variants={item} className="text-foreground/75 text-base md:text-lg leading-relaxed max-w-xl mb-8 text-center">
-              {lang === "ar" ? "منصة تعليمية تربطك بأفضل الأساتذة الجامعيين في تخصصك عن طريق جلسات online" : "An educational platform that connects you with the best university professors in your field through online sessions"}
-            </motion.p>
-
-            {/* CTA + Search */}
-            <motion.form variants={item} onSubmit={handleSearch} className="w-full max-w-xl flex gap-2 mb-5">
-              <div className="flex-1 relative">
-                <Search size={18} className="absolute top-1/2 -translate-y-1/2 start-4 text-muted-foreground" />
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder={t("hero_search_placeholder")}
-                  className="w-full ps-11 pe-4 py-3.5 rounded-full border border-foreground/15 bg-card/85 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all min-h-[52px]"
+                {/* Cap image */}
+                <img
+                  src={hero3DCap}
+                  alt={lang === "ar" ? "قبعة التخرج ثلاثية الأبعاد" : "3D graduation cap"}
+                  className="relative z-10 w-full h-full object-contain hero-3d-glow float-y"
+                  width={480}
+                  height={480}
                 />
+
+                {/* Floating glass card — top */}
+                <motion.div
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6, duration: 0.5 }}
+                  className="absolute top-6 end-0 z-20 p-4 rounded-2xl border border-foreground/10 shadow-2xl backdrop-blur-xl hidden sm:flex items-center gap-3"
+                  style={{ background: "hsl(var(--card) / 0.6)" }}
+                >
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center text-lg" style={{ background: "hsl(14 91% 50% / 0.15)" }}>
+                    🎓
+                  </div>
+                  <div>
+                    <div className="text-base font-extrabold text-foreground leading-none">+5,000</div>
+                    <div className="text-xs text-muted-foreground mt-1">{lang === "ar" ? "طالب نشط" : "Active students"}</div>
+                  </div>
+                </motion.div>
+
+                {/* Floating glass card — bottom */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8, duration: 0.5 }}
+                  className="absolute bottom-8 start-0 z-20 p-4 rounded-2xl border border-foreground/10 shadow-2xl backdrop-blur-xl hidden sm:flex items-center gap-3"
+                  style={{ background: "hsl(var(--card) / 0.6)" }}
+                >
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center text-sm text-white shadow-lg" style={{ background: "hsl(14 91% 50%)", boxShadow: "0 8px 24px hsl(14 91% 50% / 0.4)" }}>
+                    ⭐
+                  </div>
+                  <div>
+                    <div className="text-base font-extrabold text-foreground leading-none">4.9/5</div>
+                    <div className="text-xs text-muted-foreground mt-1">{lang === "ar" ? "تقييم الطلاب" : "Student rating"}</div>
+                  </div>
+                </motion.div>
+
+                {/* Floating glass card — middle accent */}
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 1, duration: 0.5 }}
+                  className="absolute top-1/2 -translate-y-1/2 -start-2 sm:start-4 z-20 px-3 py-2 rounded-xl border border-foreground/10 shadow-xl backdrop-blur-xl hidden md:flex items-center gap-2"
+                  style={{ background: "hsl(var(--card) / 0.6)" }}
+                >
+                  <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                  <span className="text-xs font-semibold text-foreground">{lang === "ar" ? "جلسات مباشرة" : "Live now"}</span>
+                </motion.div>
               </div>
-              <button type="submit" className="btn-cta-light min-h-[52px] !px-7">
-                {t("hero_cta")}
-                <ArrowRight size={16} />
-              </button>
-            </motion.form>
-
-
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
