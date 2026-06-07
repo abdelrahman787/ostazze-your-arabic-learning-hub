@@ -256,8 +256,8 @@ const HomePage = () => {
             </motion.div>
 
             {/* Massive two-line title */}
-            <motion.h1 dir="rtl" variants={item} className="text-[3rem] sm:text-6xl md:text-7xl font-black leading-[1.05] tracking-tight mb-2 text-center">
-              <span className="block text-foreground">{"تعلم مع أفضل الدكاترة الجامعيين"}</span>
+            <motion.h1 dir={lang === "ar" ? "rtl" : "ltr"} variants={item} className="text-[3rem] sm:text-6xl md:text-7xl font-black leading-[1.05] tracking-tight mb-2 text-center">
+              <span className="block text-foreground">{lang === "ar" ? "تعلم مع أفضل الدكاترة الجامعيين" : "Learn with the best university professors"}</span>
             </motion.h1>
 
             {/* 3D hero element with glow */}
