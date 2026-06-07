@@ -17,6 +17,7 @@ import { Helmet } from "react-helmet-async";
 import hero3DCap from "@/assets/hero-3d-cap.webp";
 import OrbitSubjects from "@/components/OrbitSubjects";
 import UniversityLogosStrip from "@/components/UniversityLogosStrip";
+import OurTeam from "@/components/OurTeam";
 import studentsEnrolledAt from "@/assets/students-enrolled-at.png.asset.json";
 import howStep1Img from "@/assets/how-step-1.png";
 import howStep2Img from "@/assets/how-step-2.png";
@@ -508,6 +509,11 @@ const HomePage = () => {
           />
         </div>
       </section>
+
+      {/* Our Team */}
+      <OurTeam />
+
+
 
       {/* Testimonials */}
       <section className="py-16">
