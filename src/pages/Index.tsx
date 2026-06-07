@@ -1,17 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
-import TeacherCard from "@/components/TeacherCard";
-import type { TeacherData } from "@/components/TeacherCard";
 import { mockTestimonials } from "@/data/mockData";
 import {
   Star, ArrowLeft, Sparkles, GraduationCap, CalendarCheck, Video,
-  Users, TrendingUp, Search, Calculator, Atom, FlaskConical, Languages,
+  Search, Calculator, Atom, FlaskConical, Languages,
   BookOpen, BarChart3, Code, Microscope, ArrowRight, Zap, PenTool, Globe
 } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { supabase } from "@/integrations/supabase/client";
-import CountUpNumber from "@/components/CountUpNumber";
 import PageHelmet from "@/components/PageHelmet";
 import { Helmet } from "react-helmet-async";
 import hero3DCap from "@/assets/hero-3d-cap.webp";
