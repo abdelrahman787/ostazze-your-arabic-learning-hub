@@ -274,17 +274,6 @@ const HomePage = () => {
                 <HeroOrbit />
 
 
-                {/* Floating glass card — middle accent */}
-                <motion.div
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 1, duration: 0.5 }}
-                  className="absolute top-1/2 -translate-y-1/2 -start-2 sm:start-4 z-20 px-3 py-2 rounded-xl border border-foreground/10 shadow-xl backdrop-blur-xl hidden md:flex items-center gap-2"
-                  style={{ background: "hsl(var(--card) / 0.6)" }}
-                >
-                  <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                  <span className="text-xs font-semibold text-foreground">{lang === "ar" ? "جلسات مباشرة" : "Live now"}</span>
-                </motion.div>
               </div>
             </motion.div>
           </div>
