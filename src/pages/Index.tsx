@@ -522,21 +522,21 @@ const HomePage = () => {
             className="relative rounded-3xl overflow-hidden p-2 md:p-3"
             style={{
               background:
-                "linear-gradient(135deg, hsl(var(--primary) / 0.10) 0%, hsl(290 70% 50% / 0.08) 50%, hsl(270 70% 55% / 0.10) 100%)",
+                "linear-gradient(135deg, hsl(var(--primary) / 0.12) 0%, hsl(24 95% 55% / 0.10) 50%, hsl(38 92% 55% / 0.10) 100%)",
               backdropFilter: "blur(20px)",
               WebkitBackdropFilter: "blur(20px)",
-              border: "1px solid hsl(var(--foreground) / 0.08)",
+              border: "1px solid hsl(var(--primary) / 0.18)",
               boxShadow:
-                "inset 0 1px 0 hsl(0 0% 100% / 0.08), 0 10px 40px -15px hsl(var(--primary) / 0.15), 0 10px 40px -15px hsl(270 70% 55% / 0.15)",
+                "inset 0 1px 0 hsl(0 0% 100% / 0.08), 0 10px 40px -15px hsl(var(--primary) / 0.25)",
             }}
           >
             <div
-              className="absolute -top-20 -left-20 w-[280px] h-[280px] rounded-full blur-[80px] opacity-50 pointer-events-none"
-              style={{ background: "radial-gradient(circle, hsl(var(--primary) / 0.35) 0%, transparent 70%)" }}
+              className="absolute -top-20 -left-20 w-[280px] h-[280px] rounded-full blur-[80px] opacity-60 pointer-events-none"
+              style={{ background: "radial-gradient(circle, hsl(var(--primary) / 0.45) 0%, transparent 70%)" }}
             />
             <div
               className="absolute -bottom-20 -right-20 w-[320px] h-[320px] rounded-full blur-[90px] opacity-50 pointer-events-none"
-              style={{ background: "radial-gradient(circle, hsl(270 70% 55% / 0.35) 0%, transparent 70%)" }}
+              style={{ background: "radial-gradient(circle, hsl(24 95% 55% / 0.35) 0%, transparent 70%)" }}
             />
             <img
               src={studentsEnrolledAt.url}
@@ -545,6 +545,25 @@ const HomePage = () => {
               loading="lazy"
             />
           </div>
+
+          {/* Browse all universities CTA */}
+          <div className="flex justify-center mt-8">
+            <Link
+              to="/universities"
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-semibold text-primary transition-all duration-300 hover:-translate-y-0.5"
+              style={{
+                background: "hsl(var(--primary) / 0.08)",
+                backdropFilter: "blur(12px)",
+                WebkitBackdropFilter: "blur(12px)",
+                border: "1px solid hsl(var(--primary) / 0.3)",
+                boxShadow: "inset 0 1px 0 hsl(var(--primary) / 0.15)",
+              }}
+            >
+              <span>{lang === "ar" ? "تصفح كل الجامعات" : "Browse all universities"}</span>
+              <ArrowLeft className="w-4 h-4 rtl:rotate-180" />
+            </Link>
+          </div>
+
         </div>
       </section>
 
