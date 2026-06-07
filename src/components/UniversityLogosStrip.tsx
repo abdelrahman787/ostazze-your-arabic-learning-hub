@@ -149,23 +149,6 @@ const UniversityLogosStrip = () => {
           </div>
         </div>
 
-        {/* Footer CTA */}
-        <div className="flex justify-center mt-10">
-          <Link
-            to="/universities"
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-semibold text-primary transition-all duration-300 hover:-translate-y-0.5"
-            style={{
-              background: "hsl(var(--primary) / 0.08)",
-              backdropFilter: "blur(12px)",
-              WebkitBackdropFilter: "blur(12px)",
-              border: "1px solid hsl(var(--primary) / 0.3)",
-              boxShadow: "inset 0 1px 0 hsl(var(--primary) / 0.15)",
-            }}
-          >
-            <span>{t("home_logos_cta")}</span>
-            <ArrowLeft className="w-4 h-4 rtl:rotate-180" />
-          </Link>
-        </div>
       </div>
     </section>
   );
