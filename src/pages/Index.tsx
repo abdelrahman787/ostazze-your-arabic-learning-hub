@@ -451,7 +451,7 @@ const HomePage = () => {
             </p>
           </motion.div>
 
-          {/* Logos showcase card */}
+          {/* Logos showcase card — night mood */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -460,51 +460,73 @@ const HomePage = () => {
             className="relative rounded-[2rem] overflow-hidden p-4 md:p-8"
             style={{
               background:
-                "linear-gradient(140deg, hsl(var(--card)) 0%, hsl(var(--primary) / 0.04) 50%, hsl(38 92% 55% / 0.05) 100%)",
-              border: "1px solid hsl(var(--primary) / 0.18)",
+                "linear-gradient(140deg, hsl(222 47% 8%) 0%, hsl(222 47% 11%) 50%, hsl(20 60% 12%) 100%)",
+              border: "1px solid hsl(var(--primary) / 0.28)",
               boxShadow:
-                "inset 0 1px 0 hsl(0 0% 100% / 0.06), 0 24px 60px -28px hsl(var(--primary) / 0.35)",
+                "inset 0 1px 0 hsl(0 0% 100% / 0.06), 0 30px 80px -30px hsl(var(--primary) / 0.45), 0 0 0 1px hsl(0 0% 100% / 0.02)",
             }}
           >
             {/* Subtle dot grid texture */}
             <div
-              className="absolute inset-0 opacity-[0.18] pointer-events-none"
+              className="absolute inset-0 opacity-[0.22] pointer-events-none"
               style={{
                 backgroundImage:
-                  "radial-gradient(hsl(var(--primary) / 0.35) 1px, transparent 1px)",
+                  "radial-gradient(hsl(var(--primary) / 0.55) 1px, transparent 1px)",
                 backgroundSize: "22px 22px",
                 maskImage:
-                  "radial-gradient(ellipse at center, black 40%, transparent 80%)",
+                  "radial-gradient(ellipse at center, black 35%, transparent 80%)",
                 WebkitMaskImage:
-                  "radial-gradient(ellipse at center, black 40%, transparent 80%)",
+                  "radial-gradient(ellipse at center, black 35%, transparent 80%)",
+              }}
+            />
+            {/* Starry shimmer overlay */}
+            <div
+              className="absolute inset-0 opacity-30 pointer-events-none"
+              style={{
+                background:
+                  "radial-gradient(1px 1px at 20% 30%, hsl(0 0% 100% / 0.8), transparent 60%), radial-gradient(1px 1px at 70% 20%, hsl(0 0% 100% / 0.6), transparent 60%), radial-gradient(1px 1px at 40% 80%, hsl(0 0% 100% / 0.7), transparent 60%), radial-gradient(1px 1px at 85% 65%, hsl(0 0% 100% / 0.5), transparent 60%), radial-gradient(1px 1px at 15% 60%, hsl(0 0% 100% / 0.6), transparent 60%)",
               }}
             />
             {/* Warm glows */}
             <div
-              className="absolute -top-24 -left-24 w-[320px] h-[320px] rounded-full blur-[90px] opacity-50 pointer-events-none"
-              style={{ background: "radial-gradient(circle, hsl(var(--primary) / 0.5) 0%, transparent 70%)" }}
+              className="absolute -top-24 -left-24 w-[340px] h-[340px] rounded-full blur-[100px] opacity-50 pointer-events-none"
+              style={{ background: "radial-gradient(circle, hsl(var(--primary) / 0.6) 0%, transparent 70%)" }}
             />
             <div
-              className="absolute -bottom-24 -right-24 w-[360px] h-[360px] rounded-full blur-[100px] opacity-40 pointer-events-none"
-              style={{ background: "radial-gradient(circle, hsl(38 92% 55% / 0.45) 0%, transparent 70%)" }}
+              className="absolute -bottom-24 -right-24 w-[380px] h-[380px] rounded-full blur-[110px] opacity-40 pointer-events-none"
+              style={{ background: "radial-gradient(circle, hsl(38 92% 55% / 0.5) 0%, transparent 70%)" }}
             />
 
-            {/* Logos image (resized & framed) */}
+            {/* Logos image — bright frosted plate for legibility on dark */}
             <div className="relative">
-              <img
-                src={studentsEnrolledAt.url}
-                alt={lang === "ar" ? "طلابنا ملتحقون بهذه الجامعات" : "Our students study at these universities"}
-                className="relative w-full max-w-4xl mx-auto h-auto block"
+              <div
+                className="relative rounded-2xl p-4 md:p-6 backdrop-blur-sm"
                 style={{
-                  mixBlendMode: "multiply",
-                  filter: "saturate(0.95) contrast(1.02)",
+                  background:
+                    "linear-gradient(180deg, hsl(0 0% 100% / 0.96) 0%, hsl(40 30% 97% / 0.96) 100%)",
+                  border: "1px solid hsl(0 0% 100% / 0.5)",
+                  boxShadow:
+                    "inset 0 1px 0 hsl(0 0% 100% / 0.8), 0 20px 50px -20px hsl(222 47% 4% / 0.6)",
                 }}
-                loading="lazy"
-              />
+              >
+                <img
+                  src={studentsEnrolledAt.url}
+                  alt={lang === "ar" ? "طلابنا ملتحقون بهذه الجامعات" : "Our students study at these universities"}
+                  className="relative w-full max-w-4xl mx-auto h-auto block"
+                  style={{
+                    mixBlendMode: "multiply",
+                    filter: "saturate(1) contrast(1.02)",
+                  }}
+                  loading="lazy"
+                />
+              </div>
             </div>
 
             {/* Trust stats inline */}
-            <div className="relative grid grid-cols-3 gap-3 md:gap-6 mt-6 md:mt-8 pt-6 border-t border-primary/15">
+            <div
+              className="relative grid grid-cols-3 gap-3 md:gap-6 mt-6 md:mt-8 pt-6"
+              style={{ borderTop: "1px solid hsl(var(--primary) / 0.22)" }}
+            >
               {[
                 { v: "12+", l: lang === "ar" ? "جامعة" : "Universities" },
                 { v: "5K+", l: lang === "ar" ? "طالب نشط" : "Active Students" },
@@ -515,12 +537,15 @@ const HomePage = () => {
                     className="text-2xl md:text-3xl font-black bg-clip-text text-transparent"
                     style={{
                       backgroundImage:
-                        "linear-gradient(135deg, hsl(var(--primary)), hsl(38 92% 55%))",
+                        "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(38 92% 60%) 100%)",
                     }}
                   >
                     {s.v}
                   </div>
-                  <div className="text-[11px] md:text-xs font-medium text-muted-foreground mt-1 tracking-wide">
+                  <div
+                    className="text-[11px] md:text-xs font-medium mt-1 tracking-wide"
+                    style={{ color: "hsl(0 0% 100% / 0.65)" }}
+                  >
                     {s.l}
                   </div>
                 </div>
