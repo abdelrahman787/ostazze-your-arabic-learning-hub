@@ -285,7 +285,7 @@ const HomePage = () => {
       <section className="py-20 overflow-hidden bg-section-alt">
         <div className="container">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
-            <h2 className="text-2xl font-extrabold mb-2">{t("how_title")}</h2>
+            <h2 className="text-3xl font-extrabold mb-2">{t("how_title")}</h2>
             <p className="text-muted-foreground">{t("how_subtitle")}</p>
           </motion.div>
           <motion.div
