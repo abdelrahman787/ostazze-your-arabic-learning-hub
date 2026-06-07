@@ -567,7 +567,7 @@ const HomePage = () => {
 
               {/* Stats overlay — sits over the empty orange band on the left (or right in RTL) */}
               <div
-                className={`absolute inset-y-0 ${lang === "ar" ? "right-0 mr-1 md:mr-2" : "left-0 ml-1 md:ml-2"} w-[18%] flex flex-col justify-center items-center gap-1.5 md:gap-2 px-1.5 md:px-3`}
+                className={`absolute inset-y-0 ${lang === "ar" ? "right-0 mr-3 md:mr-6" : "left-0 ml-3 md:ml-6"} w-[18%] flex flex-col justify-center items-center gap-1.5 md:gap-2 px-1.5 md:px-3`}
               >
                 {[
                   { v: "73+", l: lang === "ar" ? "جامعة" : "Universities" },
