@@ -18,6 +18,7 @@ import OurTeam from "@/components/OurTeam";
 import howStep1Img from "@/assets/how-step-1.png";
 import howStep2Img from "@/assets/how-step-2.png";
 import howStep3Img from "@/assets/how-step-3.png";
+import logosGridImg from "@/assets/university-logos-grid.png.asset.json";
 
 
 const container = {
@@ -582,6 +583,20 @@ const HomePage = () => {
                   </div>
                 </div>
               ))}
+            </div>
+
+            {/* University logos grid image */}
+            <div
+              className="relative mt-6 rounded-2xl overflow-hidden"
+              style={{ background: "hsl(var(--primary))" }}
+            >
+              <img
+                src={logosGridImg.url}
+                alt={lang === "ar" ? "شعارات الجامعات" : "University logos"}
+                loading="lazy"
+                className="w-full h-auto block"
+                style={{ filter: "hue-rotate(-8deg) saturate(1.05)" }}
+              />
             </div>
           </motion.div>
 
