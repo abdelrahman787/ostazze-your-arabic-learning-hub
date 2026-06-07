@@ -428,9 +428,6 @@ const translations = {
 
   // WhatsApp
   whatsapp_msg: { ar: "مرحباً، أريد الاستفسار عن خدمات أسطازي", en: "Hello, I'd like to inquire about Ostaze services" },
-  whatsapp_cta_title: { ar: "احجز جلستك الآن", en: "Book Your Session Now" },
-  whatsapp_cta_subtitle: { ar: "اطلب جلستك الخاصة مباشرة عبر واتساب", en: "Request your private session instantly via WhatsApp" },
-  whatsapp_cta_button: { ar: "اطلب جلسة عبر واتساب", en: "Request a Session via WhatsApp" },
 
   // How It Works
   how_title: { ar: "كيف تعمل Ostaze؟", en: "How Ostaze Works?" },
