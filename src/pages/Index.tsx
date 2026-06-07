@@ -424,12 +424,13 @@ const HomePage = () => {
 
 
       {/* Why Choose Us */}
-      <section className="py-16">
+      <section className="py-16 bg-section-alt">
         <div className="container">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-            <h2 className="text-3xl font-extrabold mb-2">{t("why_title")}</h2>
+            <h2 className="text-3xl md:text-4xl font-black mb-2 tracking-tight">{t("why_title")}</h2>
             <p className="text-muted-foreground">{t("why_subtitle")}</p>
           </motion.div>
+
           <motion.div
             className="grid md:grid-cols-3 gap-5"
             initial="hidden"
