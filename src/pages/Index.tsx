@@ -517,7 +517,7 @@ const HomePage = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="relative rounded-[2rem] overflow-hidden p-5 md:p-10 border transition-colors"
+            className="relative rounded-[2rem] overflow-hidden p-4 md:p-6 border transition-colors"
             style={{
               background:
                 "linear-gradient(140deg, hsl(var(--card)) 0%, hsl(var(--background)) 60%, hsl(var(--primary) / 0.06) 100%)",
@@ -541,16 +541,16 @@ const HomePage = () => {
             />
             {/* Warm glows */}
             <div
-              className="absolute -top-24 -left-24 w-[340px] h-[340px] rounded-full blur-[100px] opacity-40 pointer-events-none"
+              className="absolute -top-16 -left-16 w-[240px] h-[240px] rounded-full blur-[80px] opacity-40 pointer-events-none"
               style={{ background: "radial-gradient(circle, hsl(var(--primary) / 0.55) 0%, transparent 70%)" }}
             />
             <div
-              className="absolute -bottom-24 -right-24 w-[380px] h-[380px] rounded-full blur-[110px] opacity-30 pointer-events-none"
+              className="absolute -bottom-16 -right-16 w-[260px] h-[260px] rounded-full blur-[90px] opacity-30 pointer-events-none"
               style={{ background: "radial-gradient(circle, hsl(38 92% 55% / 0.45) 0%, transparent 70%)" }}
             />
 
             {/* Logos grid */}
-            <div className="relative grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4">
+            <div className="relative grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-2 md:gap-3">
               {uniLogos.map((u, i) => {
                 const name = lang === "ar" ? u.ar : u.en;
                 return (
@@ -562,7 +562,7 @@ const HomePage = () => {
                     transition={{ duration: 0.45, delay: Math.min(i, 14) * 0.03, ease: [0.22, 1, 0.36, 1] }}
                     whileHover={{ y: -4, scale: 1.03 }}
                     title={name}
-                    className="group rounded-2xl flex flex-col items-center justify-between p-3 md:p-4 transition-all duration-300"
+                    className="group rounded-xl flex flex-col items-center justify-between p-2 md:p-3 transition-all duration-300"
                     style={{
                       background:
                         "linear-gradient(180deg, hsl(0 0% 100% / 0.98) 0%, hsl(40 30% 97% / 0.98) 100%)",
@@ -571,18 +571,17 @@ const HomePage = () => {
                         "0 8px 24px -10px hsl(222 47% 4% / 0.25), inset 0 1px 0 hsl(0 0% 100% / 0.8)",
                     }}
                   >
-                    <div className="flex-1 w-full flex items-center justify-center min-h-[72px] md:min-h-[88px]">
+                    <div className="flex-1 w-full flex items-center justify-center min-h-[48px] md:min-h-[60px]">
                       <img
                         src={u.logo.url}
                         alt={name}
                         className="max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-110"
-                        style={{ maxHeight: "84px" }}
+                        style={{ maxHeight: "56px" }}
                         loading="lazy"
                       />
                     </div>
                     <div
-                      className="mt-2 text-[10px] md:text-[11px] font-semibold text-center leading-tight line-clamp-2 text-foreground/80"
-                      style={{ minHeight: "26px" }}
+                      className="mt-1 text-[9px] md:text-[10px] font-semibold text-center leading-tight line-clamp-2 text-foreground/80"
                     >
                       {name}
                     </div>
@@ -593,7 +592,7 @@ const HomePage = () => {
 
             {/* Trust stats inline */}
             <div
-              className="relative grid grid-cols-3 gap-3 md:gap-6 mt-8 pt-6"
+              className="relative grid grid-cols-3 gap-2 md:gap-4 mt-6 pt-4"
               style={{ borderTop: "1px solid hsl(var(--primary) / 0.2)" }}
             >
               {[
