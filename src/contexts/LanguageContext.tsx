@@ -455,6 +455,7 @@ const translations = {
   subj_biology: { ar: "أحياء", en: "Biology" },
   subj_dynamics: { ar: "ديناميكا", en: "Dynamics" },
   subj_drawing: { ar: "رسم هندسي", en: "Engineering Drawing" },
+  subj_anatomy: { ar: "تشريح", en: "Anatomy" },
 
   // Hero search
   hero_search_placeholder: { ar: "ابحث عن مادة أو معلم...", en: "Search for a subject or teacher..." },

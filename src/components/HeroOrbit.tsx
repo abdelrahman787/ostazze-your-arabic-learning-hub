@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { Calculator, Atom, FlaskConical, Languages, Code, Zap, PenTool } from "lucide-react";
+import { Calculator, Atom, FlaskConical, Languages, Code, Zap, PenTool, HeartPulse } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import gradCap from "@/assets/hero-3d-cap.webp";
 
@@ -11,11 +11,12 @@ const SUBJECTS = [
   { key: "subj_programming", icon: Code },
   { key: "subj_dynamics", icon: Zap },
   { key: "subj_drawing", icon: PenTool },
+  { key: "subj_anatomy", icon: HeartPulse },
 ];
 
 const ORBITS = [
   { radius: 110, duration: 52, count: 3, offset: 0 },
-  { radius: 190, duration: 64, count: 4, offset: 45 },
+  { radius: 190, duration: 64, count: 5, offset: 45 },
 ];
 
 const tx = (r: number, deg: number) => {
