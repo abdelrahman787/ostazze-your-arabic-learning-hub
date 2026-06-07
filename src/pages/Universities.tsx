@@ -311,6 +311,34 @@ const Universities = () => {
                   </motion.button>
                 );
               })}
+
+              {comingSoonCountries.map((c, i) => {
+                const colors = countryColors[c.code] || { from: "from-primary/20", to: "to-accent/10", accent: "text-primary" };
+                return (
+                  <motion.div
+                    key={c.code}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: (countries.length + i) * 0.15 }}
+                    className="card-base p-8 flex flex-col items-center gap-5 relative overflow-hidden opacity-80"
+                  >
+                    <div className={`absolute inset-0 bg-gradient-to-br ${colors.from} ${colors.to} opacity-30`} />
+                    <span className="absolute top-3 end-3 z-20 text-[0.6rem] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider bg-primary/15 text-primary">
+                      {lang === "ar" ? "قريباً" : "Coming Soon"}
+                    </span>
+                    <div className="relative z-10">
+                      <AnimatedFlag code={c.code} size={160} />
+                    </div>
+                    <div className="text-center relative z-10">
+                      <h3 className="font-black text-2xl mb-1">{lang === "ar" ? c.name_ar : c.name_en}</h3>
+                      <p className="text-sm text-muted-foreground mt-3">
+                        {lang === "ar" ? "سيتم إضافة الجامعات قريباً" : "Universities coming soon"}
+                      </p>
+                    </div>
+                  </motion.div>
+                );
+              })}
+
             </motion.div>
           )}
 
