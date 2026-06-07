@@ -249,19 +249,8 @@ const HomePage = () => {
             animate="show"
             className="flex flex-col items-center text-center max-w-3xl mx-auto"
           >
-            {/* Pill badge */}
-            <motion.div variants={item} className="badge-pill mb-7">
-              <span className="badge-pill-tag">{lang === "ar" ? "جديد" : "New"}</span>
-              <span className="text-foreground/85">{t("hero_badge")}</span>
-            </motion.div>
-
-            {/* Massive two-line title */}
-            <motion.h1 dir="rtl" variants={item} className="text-[3rem] sm:text-6xl md:text-7xl font-black leading-[1.05] tracking-tight mb-2 text-center">
-              <span className="block text-foreground">{"تعلم مع أفضل الدكاترة الجامعيين"}</span>
-            </motion.h1>
-
-            {/* 3D hero element with glow */}
-            <motion.div variants={item} className="relative my-8 sm:my-10">
+            {/* 3D hero element with glow — focal point on top */}
+            <motion.div variants={item} className="relative mb-6">
               <div
                 className="absolute inset-0 rounded-full hero-glow glow-pulse"
                 style={{ background: "radial-gradient(circle, hsl(14 91% 50% / 0.55), transparent 65%)" }}
@@ -270,11 +259,22 @@ const HomePage = () => {
               <img
                 src={hero3DCap}
                 alt={lang === "ar" ? "قبعة التخرج ثلاثية الأبعاد" : "3D graduation cap"}
-                className="relative w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 object-contain hero-3d-glow float-y mx-auto"
-                width={320}
-                height={320}
+                className="relative w-44 h-44 sm:w-56 sm:h-56 md:w-64 md:h-64 object-contain hero-3d-glow float-y mx-auto"
+                width={256}
+                height={256}
               />
             </motion.div>
+
+            {/* Pill badge */}
+            <motion.div variants={item} className="badge-pill mb-5">
+              <span className="badge-pill-tag">{lang === "ar" ? "جديد" : "New"}</span>
+              <span className="text-foreground/85">{t("hero_badge")}</span>
+            </motion.div>
+
+            {/* Massive title */}
+            <motion.h1 dir="rtl" variants={item} className="text-[2.75rem] sm:text-6xl md:text-7xl font-black leading-[1.05] tracking-tight mb-5 text-center">
+              <span className="block text-foreground">{"تعلم مع أفضل الدكاترة الجامعيين"}</span>
+            </motion.h1>
 
             {/* Subtitle */}
             <motion.p dir="rtl" variants={item} className="text-foreground/75 text-base md:text-lg leading-relaxed max-w-xl mb-8 text-center">
@@ -282,7 +282,7 @@ const HomePage = () => {
             </motion.p>
 
             {/* CTA + Search */}
-            <motion.form variants={item} onSubmit={handleSearch} className="w-full max-w-xl flex gap-2 mb-5">
+            <motion.form variants={item} onSubmit={handleSearch} className="w-full max-w-xl flex gap-2">
               <div className="flex-1 relative">
                 <Search size={18} className="absolute top-1/2 -translate-y-1/2 start-4 text-muted-foreground" />
                 <input
@@ -298,9 +298,8 @@ const HomePage = () => {
                 <ArrowRight size={16} />
               </button>
             </motion.form>
-
-
           </motion.div>
+
         </div>
       </section>
 
