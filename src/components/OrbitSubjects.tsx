@@ -154,7 +154,7 @@ const OrbitSubjects = () => {
                 style={{
                   width: orbit.radius * 2,
                   height: orbit.radius * 2,
-                  borderColor: `hsl(265 60% 75% / ${0.28 - idx * 0.05})`,
+                  borderColor: `hsl(var(--muted-foreground) / ${0.28 - idx * 0.05})`,
                 }}
               />
             ))}
