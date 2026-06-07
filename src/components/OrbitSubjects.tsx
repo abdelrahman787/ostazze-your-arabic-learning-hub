@@ -194,7 +194,7 @@ const OrbitSubjects = () => {
                   className="absolute inset-0 rounded-full orbit-center-glow"
                   style={{
                     background:
-                      "radial-gradient(circle, hsl(22 95% 60% / 0.5), transparent 70%)",
+                      "radial-gradient(circle, hsl(var(--primary) / 0.5), transparent 70%)",
                     transform: "scale(1.8)",
                   }}
                 />
@@ -205,7 +205,7 @@ const OrbitSubjects = () => {
                   <img
                     src={gradCap}
                     alt="OSTAZE 3D Logo"
-                    className="w-full h-full object-contain drop-shadow-[0_12px_24px_hsl(22_95%_50%/0.6)]"
+                    className="w-full h-full object-contain drop-shadow-[0_12px_24px_hsl(var(--primary)/0.6)]"
                   />
                 </div>
               </div>
