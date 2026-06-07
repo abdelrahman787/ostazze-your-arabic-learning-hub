@@ -13,18 +13,7 @@ import { Helmet } from "react-helmet-async";
 import hero3DCap from "@/assets/hero-3d-cap.webp";
 import OrbitSubjects from "@/components/OrbitSubjects";
 import OurTeam from "@/components/OurTeam";
-import univ1 from "@/assets/universities/univ-1.webp.asset.json";
-import univ2 from "@/assets/universities/univ-2.webp.asset.json";
-import univ3 from "@/assets/universities/univ-3.webp.asset.json";
-import univ4 from "@/assets/universities/univ-4.webp.asset.json";
-import univ5 from "@/assets/universities/univ-5.webp.asset.json";
-import univ6 from "@/assets/universities/univ-6.webp.asset.json";
-import univ7 from "@/assets/universities/univ-7.webp.asset.json";
-import univ8 from "@/assets/universities/univ-8.webp.asset.json";
-import univ9 from "@/assets/universities/univ-9.webp.asset.json";
-import univ10 from "@/assets/universities/univ-10.webp.asset.json";
-import univ11 from "@/assets/universities/univ-11.webp.asset.json";
-import univ12 from "@/assets/universities/univ-12.webp.asset.json";
+import studentsEnrolledAt from "@/assets/students-enrolled-at.png.asset.json";
 import howStep1Img from "@/assets/how-step-1.png";
 import howStep2Img from "@/assets/how-step-2.png";
 import howStep3Img from "@/assets/how-step-3.png";
@@ -462,61 +451,80 @@ const HomePage = () => {
             </p>
           </motion.div>
 
-          {/* Logos grid — adapts beautifully to light & dark */}
+          {/* Logos showcase card — night mood */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="relative rounded-[2rem] overflow-hidden p-5 md:p-10 univ-showcase-card"
+            className="relative rounded-[2rem] overflow-hidden p-4 md:p-8"
+            style={{
+              background:
+                "linear-gradient(140deg, hsl(222 47% 8%) 0%, hsl(222 47% 11%) 50%, hsl(20 60% 12%) 100%)",
+              border: "1px solid hsl(var(--primary) / 0.28)",
+              boxShadow:
+                "inset 0 1px 0 hsl(0 0% 100% / 0.06), 0 30px 80px -30px hsl(var(--primary) / 0.45), 0 0 0 1px hsl(0 0% 100% / 0.02)",
+            }}
           >
-            {/* Dot grid texture */}
+            {/* Subtle dot grid texture */}
             <div
-              className="absolute inset-0 opacity-[0.18] pointer-events-none"
+              className="absolute inset-0 opacity-[0.22] pointer-events-none"
               style={{
                 backgroundImage:
                   "radial-gradient(hsl(var(--primary) / 0.55) 1px, transparent 1px)",
                 backgroundSize: "22px 22px",
                 maskImage:
-                  "radial-gradient(ellipse at center, black 30%, transparent 80%)",
+                  "radial-gradient(ellipse at center, black 35%, transparent 80%)",
                 WebkitMaskImage:
-                  "radial-gradient(ellipse at center, black 30%, transparent 80%)",
+                  "radial-gradient(ellipse at center, black 35%, transparent 80%)",
+              }}
+            />
+            {/* Starry shimmer overlay */}
+            <div
+              className="absolute inset-0 opacity-30 pointer-events-none"
+              style={{
+                background:
+                  "radial-gradient(1px 1px at 20% 30%, hsl(0 0% 100% / 0.8), transparent 60%), radial-gradient(1px 1px at 70% 20%, hsl(0 0% 100% / 0.6), transparent 60%), radial-gradient(1px 1px at 40% 80%, hsl(0 0% 100% / 0.7), transparent 60%), radial-gradient(1px 1px at 85% 65%, hsl(0 0% 100% / 0.5), transparent 60%), radial-gradient(1px 1px at 15% 60%, hsl(0 0% 100% / 0.6), transparent 60%)",
               }}
             />
             {/* Warm glows */}
             <div
-              className="absolute -top-24 -left-24 w-[340px] h-[340px] rounded-full blur-[100px] opacity-40 pointer-events-none"
-              style={{ background: "radial-gradient(circle, hsl(var(--primary) / 0.55) 0%, transparent 70%)" }}
+              className="absolute -top-24 -left-24 w-[340px] h-[340px] rounded-full blur-[100px] opacity-50 pointer-events-none"
+              style={{ background: "radial-gradient(circle, hsl(var(--primary) / 0.6) 0%, transparent 70%)" }}
             />
             <div
-              className="absolute -bottom-24 -right-24 w-[380px] h-[380px] rounded-full blur-[110px] opacity-35 pointer-events-none"
+              className="absolute -bottom-24 -right-24 w-[380px] h-[380px] rounded-full blur-[110px] opacity-40 pointer-events-none"
               style={{ background: "radial-gradient(circle, hsl(38 92% 55% / 0.5) 0%, transparent 70%)" }}
             />
 
-            {/* Grid of logo plates */}
-            <div className="relative grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
-              {[univ1, univ2, univ3, univ4, univ5, univ6, univ7, univ8, univ9, univ10, univ11, univ12].map((logo, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ delay: i * 0.04, duration: 0.45, ease: "easeOut" }}
-                  className="univ-logo-plate group relative aspect-[4/3] rounded-2xl flex items-center justify-center p-3 md:p-4 transition-all duration-300 hover:-translate-y-1"
-                >
-                  <img
-                    src={logo.url}
-                    alt={lang === "ar" ? "شعار جامعة" : "University logo"}
-                    className="relative max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                </motion.div>
-              ))}
+            {/* Logos image — bright frosted plate for legibility on dark */}
+            <div className="relative">
+              <div
+                className="relative rounded-2xl p-4 md:p-6 backdrop-blur-sm"
+                style={{
+                  background:
+                    "linear-gradient(180deg, hsl(0 0% 100% / 0.96) 0%, hsl(40 30% 97% / 0.96) 100%)",
+                  border: "1px solid hsl(0 0% 100% / 0.5)",
+                  boxShadow:
+                    "inset 0 1px 0 hsl(0 0% 100% / 0.8), 0 20px 50px -20px hsl(222 47% 4% / 0.6)",
+                }}
+              >
+                <img
+                  src={studentsEnrolledAt.url}
+                  alt={lang === "ar" ? "طلابنا ملتحقون بهذه الجامعات" : "Our students study at these universities"}
+                  className="relative w-full max-w-4xl mx-auto h-auto block"
+                  style={{
+                    mixBlendMode: "multiply",
+                    filter: "saturate(1) contrast(1.02)",
+                  }}
+                  loading="lazy"
+                />
+              </div>
             </div>
 
             {/* Trust stats inline */}
             <div
-              className="relative grid grid-cols-3 gap-3 md:gap-6 mt-8 md:mt-10 pt-6"
+              className="relative grid grid-cols-3 gap-3 md:gap-6 mt-6 md:mt-8 pt-6"
               style={{ borderTop: "1px solid hsl(var(--primary) / 0.22)" }}
             >
               {[
@@ -534,7 +542,10 @@ const HomePage = () => {
                   >
                     {s.v}
                   </div>
-                  <div className="text-[11px] md:text-xs font-medium mt-1 tracking-wide text-muted-foreground">
+                  <div
+                    className="text-[11px] md:text-xs font-medium mt-1 tracking-wide"
+                    style={{ color: "hsl(0 0% 100% / 0.65)" }}
+                  >
                     {s.l}
                   </div>
                 </div>
