@@ -228,7 +228,7 @@ const HomePage = () => {
                 <span className="text-foreground/85">{t("hero_badge")}</span>
               </motion.div>
 
-              <motion.h1 dir={lang === "ar" ? "rtl" : "ltr"} variants={item} className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tight mb-6 max-w-2xl">
+              <motion.h1 dir={lang === "ar" ? "rtl" : "ltr"} variants={item} className="text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight mb-6">
                 <span className="text-foreground">
                   {lang === "ar" ? "تعلم مع أفضل " : "Learn with the best "}
                 </span>
@@ -237,7 +237,7 @@ const HomePage = () => {
                 </span>
               </motion.h1>
 
-              <motion.p dir={lang === "ar" ? "rtl" : "ltr"} variants={item} className="text-foreground/70 text-lg md:text-xl leading-relaxed max-w-xl mb-8">
+              <motion.p dir={lang === "ar" ? "rtl" : "ltr"} variants={item} className="text-foreground/70 text-base md:text-lg leading-relaxed max-w-xl mb-8">
                 {lang === "ar" ? "منصة تعليمية تربطك بأفضل الأساتذة الجامعيين في تخصصك عن طريق جلسات اونلاين" : "An educational platform that connects you with the best university professors in your field through online sessions"}
               </motion.p>
 
