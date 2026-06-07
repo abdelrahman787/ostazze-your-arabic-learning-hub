@@ -66,7 +66,7 @@ const translations = {
 
   // Testimonials
   testimonials_title: { ar: "ماذا يقول طلابنا", en: "What Our Students Say" },
-  testimonials_subtitle: { ar: "آراء الطلاب حول تجربتهم في المنصة", en: "Student feedback about their platform experience" },
+  testimonials_subtitle: { ar: "آراء الطلاب حول تجربتهم في المنصة", en: "Student feedback about our platform experience" },
 
   // CTA
   cta_title: { ar: "ابدأ رحلتك التعليمية اليوم", en: "Start Your Learning Journey Today" },
