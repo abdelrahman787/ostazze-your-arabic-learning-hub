@@ -14,37 +14,6 @@ import hero3DCap from "@/assets/hero-3d-cap.webp";
 import OrbitSubjects from "@/components/OrbitSubjects";
 import OurTeam from "@/components/OurTeam";
 
-const uniLogos: { logo: { url: string }; en: string; ar: string }[] = [
-  { logo: uniCarnegieMellon, en: "Carnegie Mellon University in Qatar", ar: "كارنيجي ميلون في قطر" },
-  { logo: uniWeillCornell, en: "Weill Cornell Medicine – Qatar", ar: "وايل كورنيل للطب – قطر" },
-  { logo: uniGeorgetown, en: "Georgetown University in Qatar", ar: "جورج تاون في قطر" },
-  { logo: uniVcuArts, en: "VCUarts Qatar", ar: "فرجينيا كومنولث للفنون – قطر" },
-  { logo: uniUdst, en: "University of Doha for Science & Technology", ar: "جامعة الدوحة للعلوم والتكنولوجيا" },
-  { logo: uniUaeu, en: "United Arab Emirates University", ar: "جامعة الإمارات العربية المتحدة" },
-  { logo: uniZayed, en: "Zayed University", ar: "جامعة زايد" },
-  { logo: uniKhalifa, en: "Khalifa University", ar: "جامعة خليفة" },
-  { logo: uniAbuDhabi, en: "Abu Dhabi University", ar: "جامعة أبوظبي" },
-  { logo: uniSharjah, en: "University of Sharjah", ar: "جامعة الشارقة" },
-  { logo: uniKaust, en: "KAUST", ar: "كاوست" },
-  { logo: uniKingAbdulaziz, en: "King Abdulaziz University", ar: "جامعة الملك عبدالعزيز" },
-  { logo: uniKfupm, en: "KFUPM", ar: "جامعة الملك فهد للبترول والمعادن" },
-  { logo: uniKingKhalid, en: "King Khalid University", ar: "جامعة الملك خالد" },
-  { logo: uniUmmAlQura, en: "Umm Al-Qura University", ar: "جامعة أم القرى" },
-  { logo: uniImamAbdulrahman, en: "Imam Abdulrahman Bin Faisal University", ar: "جامعة الإمام عبدالرحمن بن فيصل" },
-  { logo: uniPrincessNourah, en: "Princess Nourah University", ar: "جامعة الأميرة نورة" },
-  { logo: uniAlfaisal, en: "Alfaisal University", ar: "جامعة الفيصل" },
-  { logo: uniAck, en: "Australian University (ACK)", ar: "الجامعة الأسترالية (ACK)" },
-  { logo: uniCairo, en: "Cairo University", ar: "جامعة القاهرة" },
-  { logo: uniAlexandria, en: "Alexandria University", ar: "جامعة الإسكندرية" },
-  { logo: uniMansoura, en: "Mansoura University", ar: "جامعة المنصورة" },
-  { logo: uniGuc, en: "German University in Cairo", ar: "الجامعة الألمانية بالقاهرة" },
-  { logo: uniEjust, en: "Egypt-Japan University (E-JUST)", ar: "الجامعة المصرية اليابانية" },
-  { logo: uniMsa, en: "MSA University", ar: "جامعة أكتوبر للعلوم الحديثة" },
-  { logo: uniPharos, en: "Pharos University in Alexandria", ar: "جامعة فاروس بالإسكندرية" },
-  { logo: uniDundee, en: "University of Dundee", ar: "جامعة دندي" },
-  { logo: uniSwansea, en: "Swansea University", ar: "جامعة سوانزي" },
-  { logo: uniNewcastle, en: "Newcastle University", ar: "جامعة نيوكاسل" },
-];
 import howStep1Img from "@/assets/how-step-1.png";
 import howStep2Img from "@/assets/how-step-2.png";
 import howStep3Img from "@/assets/how-step-3.png";
