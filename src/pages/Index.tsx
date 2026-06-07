@@ -13,35 +13,6 @@ import { Helmet } from "react-helmet-async";
 import hero3DCap from "@/assets/hero-3d-cap.webp";
 import OrbitSubjects from "@/components/OrbitSubjects";
 import OurTeam from "@/components/OurTeam";
-import uniCarnegieMellon from "@/assets/unis/carnegie-mellon-qatar.png.asset.json";
-import uniPrincessNourah from "@/assets/unis/princess-nourah.jpg.asset.json";
-import uniUaeu from "@/assets/unis/uaeu.jpeg.asset.json";
-import uniUdst from "@/assets/unis/udst.jpg.asset.json";
-import uniUmmAlQura from "@/assets/unis/umm-al-qura.png.asset.json";
-import uniSwansea from "@/assets/unis/swansea.webp.asset.json";
-import uniDundee from "@/assets/unis/dundee.webp.asset.json";
-import uniAlfaisal from "@/assets/unis/alfaisal.jpg.asset.json";
-import uniVcuArts from "@/assets/unis/vcuarts-qatar.jpeg.asset.json";
-import uniWeillCornell from "@/assets/unis/weill-cornell-qatar.jpg.asset.json";
-import uniZayed from "@/assets/unis/zayed.png.asset.json";
-import uniAck from "@/assets/unis/ack.webp.asset.json";
-import uniCairo from "@/assets/unis/cairo.jpg.asset.json";
-import uniKfupm from "@/assets/unis/kfupm.png.asset.json";
-import uniMansoura from "@/assets/unis/mansoura.png.asset.json";
-import uniSharjah from "@/assets/unis/sharjah.png.asset.json";
-import uniAbuDhabi from "@/assets/unis/abu-dhabi-university.png.asset.json";
-import uniEjust from "@/assets/unis/ejust.png.asset.json";
-import uniGuc from "@/assets/unis/guc.jpg.asset.json";
-import uniImamAbdulrahman from "@/assets/unis/imam-abdulrahman.png.asset.json";
-import uniKaust from "@/assets/unis/kaust.webp.asset.json";
-import uniKhalifa from "@/assets/unis/khalifa.png.asset.json";
-import uniKingAbdulaziz from "@/assets/unis/king-abdulaziz.png.asset.json";
-import uniKingKhalid from "@/assets/unis/king-khalid.png.asset.json";
-import uniMsa from "@/assets/unis/msa.png.asset.json";
-import uniNewcastle from "@/assets/unis/newcastle.png.asset.json";
-import uniPharos from "@/assets/unis/pharos.jpg.asset.json";
-import uniGeorgetown from "@/assets/unis/georgetown-qatar.png.asset.json";
-import uniAlexandria from "@/assets/unis/alexandria.jpg.asset.json";
 
 const uniLogos: { logo: { url: string }; en: string; ar: string }[] = [
   { logo: uniCarnegieMellon, en: "Carnegie Mellon University in Qatar", ar: "كارنيجي ميلون في قطر" },
