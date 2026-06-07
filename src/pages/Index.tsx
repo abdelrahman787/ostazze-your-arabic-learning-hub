@@ -541,7 +541,7 @@ const HomePage = () => {
             />
             {/* Warm glows */}
             <div
-              className="absolute -top-24 -left-24 w-[340px] h-[340px] rounded-full blur-[100px] opacity-40 pointer-events-none"
+              className="absolute -top-16 -left-16 w-[240px] h-[240px] rounded-full blur-[80px] opacity-40 pointer-events-none"
               style={{ background: "radial-gradient(circle, hsl(var(--primary) / 0.55) 0%, transparent 70%)" }}
             />
             <div
