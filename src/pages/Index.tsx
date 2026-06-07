@@ -437,24 +437,6 @@ const HomePage = () => {
       {/* Popular Subjects - Orbit Universe */}
       <OrbitSubjects />
 
-      {/* Featured Teachers */}
-      <section className="py-16">
-        <div className="container">
-          <div className="flex items-end justify-between mb-8">
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <h2 className="text-3xl font-extrabold mb-2">{t("teachers_title")}</h2>
-              <p className="text-muted-foreground">{t("teachers_subtitle")}</p>
-            </motion.div>
-            <Link to="/teachers" className="text-sm font-medium text-foreground/70 hover:text-primary transition-colors flex items-center gap-1">
-              {t("teachers_view_all")} <ArrowLeft size={14} />
-            </Link>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {featuredTeachers.map((tc, i) => <TeacherCard key={tc.user_id} teacher={tc} index={i} />)}
-          </div>
-        </div>
-      </section>
-
       {/* Stats — Card-Y dark glow style */}
       <section ref={statsRef} className="py-16 px-4 lg:px-8">
         <div className="stats-card-darkglow relative overflow-hidden rounded-[2rem] p-8 md:p-12">
