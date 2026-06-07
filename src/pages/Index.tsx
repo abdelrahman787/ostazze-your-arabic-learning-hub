@@ -228,7 +228,7 @@ const HomePage = () => {
                 <span className="text-foreground/85">{t("hero_badge")}</span>
               </motion.div>
 
-              <motion.h1 dir={lang === "ar" ? "rtl" : "ltr"} variants={item} className="text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight mb-6">
+              <motion.h1 dir={lang === "ar" ? "rtl" : "ltr"} variants={item} className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tight mb-6 max-w-2xl">
                 <span className="text-foreground">
                   {lang === "ar" ? "تعلم مع أفضل " : "Learn with the best "}
                 </span>
