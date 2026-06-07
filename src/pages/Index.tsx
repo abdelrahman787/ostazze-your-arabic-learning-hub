@@ -224,7 +224,7 @@ const HomePage = () => {
               animate="show"
               className="flex flex-col items-start text-start"
             >
-              <motion.div variants={item} className="badge-pill mb-7">
+              <motion.div variants={item} className="badge-pill mb-7 -mt-2">
                 <span className="badge-pill-tag">{lang === "ar" ? "جديد" : "New"}</span>
                 <span className="text-foreground/85">{t("hero_badge")}</span>
               </motion.div>
