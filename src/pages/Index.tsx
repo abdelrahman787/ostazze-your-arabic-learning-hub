@@ -33,6 +33,8 @@ const HomePage = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const howStepsRef = useRef<HTMLDivElement>(null);
+  const howStepsInView = useInView(howStepsRef, { once: true, amount: 0.2 });
+  const [playHowSteps, setPlayHowSteps] = useState(false);
 
   useEffect(() => {
     console.log("[HowSteps] 🔎 useInView changed →", howStepsInView, {
