@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import {
   Calculator, Atom, FlaskConical, Languages,
-  Code, Zap, PenTool
+  Code, Zap, PenTool, HeartPulse, Dna
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useEffect, useRef, useState } from "react";
