@@ -666,7 +666,11 @@ const HomePage = () => {
                 </div>
                 <p className="text-muted-foreground text-sm leading-relaxed mb-4">"{d(tst.quote)}"</p>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold">{d(tst.name).charAt(0)}</div>
+                  {(tst as any).avatar ? (
+                    <img src={(tst as any).avatar} alt={d(tst.name)} loading="lazy" className="w-10 h-10 rounded-full object-cover" />
+                  ) : (
+                    <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold">{d(tst.name).charAt(0)}</div>
+                  )}
                   <div>
                     <div className="font-bold text-sm">{d(tst.name)}</div>
                     <div className="text-muted-foreground text-xs">{d(tst.university)}</div>
