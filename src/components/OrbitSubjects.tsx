@@ -25,8 +25,8 @@ const SUBJECTS: Subject[] = [
 // Distribute 7 subjects across 2 orbits with custom angle offsets for balanced look
 // Inner orbit: 3 icons; Outer orbit: 4 icons
 const ORBITS = [
-  { radius: 200, duration: 52, count: 3, reverse: false, offset: 0 },
-  { radius: 360, duration: 64, count: 4, reverse: false, offset: 45 },
+  { radius: 140, duration: 52, count: 3, reverse: false, offset: 0 },
+  { radius: 260, duration: 64, count: 4, reverse: false, offset: 45 },
 ];
 
 const getOrbitTransform = (radius: number, angleDeg: number) => {
