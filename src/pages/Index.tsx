@@ -269,12 +269,13 @@ const HomePage = () => {
       </section>
 
       {/* How It Works — creative pop-up sequence */}
-      <section className="py-20 overflow-hidden bg-section-alt">
+      <section className="py-16 overflow-hidden bg-section-alt">
         <div className="container">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
-            <h2 className="text-3xl font-extrabold mb-2">{t("how_title")}</h2>
+            <h2 className="text-3xl md:text-4xl font-black mb-2 tracking-tight">{t("how_title")}</h2>
             <p className="text-muted-foreground">{t("how_subtitle")}</p>
           </motion.div>
+
           <motion.div
             ref={howStepsRef}
             initial="hidden"
@@ -360,8 +361,8 @@ const HomePage = () => {
       </section>
 
       {/* Quick WhatsApp Session Request */}
-      <section className="py-12">
-        <div className="container">
+      <section className="py-16">
+        <div className="container max-w-6xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -388,22 +389,28 @@ const HomePage = () => {
                   "radial-gradient(ellipse at center, black 35%, transparent 80%)",
               }}
             />
-            {/* Warm glow */}
+            {/* Warm glows — matching site palette */}
             <div
-              className="absolute -top-20 -right-20 w-[280px] h-[280px] rounded-full blur-[90px] opacity-30 pointer-events-none"
+              className="absolute -top-20 -left-20 w-[280px] h-[280px] rounded-full blur-[90px] opacity-40 pointer-events-none"
+              style={{ background: "radial-gradient(circle, hsl(var(--primary) / 0.55) 0%, transparent 70%)" }}
+            />
+            <div
+              className="absolute -bottom-20 -right-20 w-[280px] h-[280px] rounded-full blur-[90px] opacity-30 pointer-events-none"
               style={{ background: "radial-gradient(circle, hsl(38 92% 55% / 0.45) 0%, transparent 70%)" }}
             />
             <div className="relative z-10">
-              <h2 className="text-2xl md:text-3xl font-extrabold mb-3">{t("whatsapp_cta_title")}</h2>
+              <h2 className="text-3xl md:text-4xl font-black mb-3 tracking-tight">{t("whatsapp_cta_title")}</h2>
               <p className="text-muted-foreground mb-6 max-w-md mx-auto">{t("whatsapp_cta_subtitle")}</p>
               <a
                 href={`https://wa.me/201130382206?text=${encodeURIComponent(t("whatsapp_msg"))}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-sm font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
+                className="group inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-sm font-bold text-primary-foreground transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
                 style={{
-                  background: "linear-gradient(135deg, #25D366 0%, #128C7E 100%)",
-                  boxShadow: "0 10px 30px -10px rgba(37,211,102,0.55), inset 0 1px 0 rgba(255,255,255,0.25)",
+                  background:
+                    "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(24 95% 55%) 100%)",
+                  boxShadow:
+                    "0 10px 30px -10px hsl(var(--primary) / 0.55), inset 0 1px 0 hsl(0 0% 100% / 0.25)",
                 }}
               >
                 <MessageCircle className="w-5 h-5" />
@@ -415,13 +422,15 @@ const HomePage = () => {
         </div>
       </section>
 
+
       {/* Why Choose Us */}
-      <section className="py-16">
+      <section className="py-16 bg-section-alt">
         <div className="container">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-            <h2 className="text-3xl font-extrabold mb-2">{t("why_title")}</h2>
+            <h2 className="text-3xl md:text-4xl font-black mb-2 tracking-tight">{t("why_title")}</h2>
             <p className="text-muted-foreground">{t("why_subtitle")}</p>
           </motion.div>
+
           <motion.div
             className="grid md:grid-cols-3 gap-5"
             initial="hidden"
@@ -457,7 +466,7 @@ const HomePage = () => {
       <OrbitSubjects />
 
       {/* Students Enrolled At — refined trust banner */}
-      <section className="relative py-16 md:py-24 overflow-hidden">
+      <section className="relative py-16 overflow-hidden">
         {/* Ambient backdrop tied to site theme */}
         <div
           className="absolute inset-0 pointer-events-none -z-10"
@@ -488,7 +497,7 @@ const HomePage = () => {
               <Sparkles className="w-3.5 h-3.5" />
               {lang === "ar" ? "ثقة الطلاب" : "Trusted by Students"}
             </span>
-            <h2 className="text-3xl md:text-5xl font-black tracking-tight text-foreground leading-tight">
+            <h2 className="text-3xl md:text-4xl font-black tracking-tight text-foreground leading-tight">
               {lang === "ar" ? "طلابنا ملتحقون بـ" : "Our Students Study At"}
               <span
                 className="block mt-1 bg-clip-text text-transparent"
@@ -599,10 +608,11 @@ const HomePage = () => {
 
 
       {/* Testimonials */}
-      <section className="py-16">
+      <section className="py-16 bg-section-alt">
         <div className="container">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-            <h2 className="text-3xl font-extrabold mb-2">{t("testimonials_title")}</h2>
+            <h2 className="text-3xl md:text-4xl font-black mb-2 tracking-tight">{t("testimonials_title")}</h2>
+
             <p className="text-muted-foreground">{t("testimonials_subtitle")}</p>
           </motion.div>
           <motion.div
