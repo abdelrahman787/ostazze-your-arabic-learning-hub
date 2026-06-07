@@ -269,14 +269,8 @@ const HomePage = () => {
                 {/* Glow */}
                 <div className="absolute inset-0 rounded-full blur-[80px]" style={{ background: "radial-gradient(circle, hsl(14 91% 50% / 0.35), transparent 65%)" }} aria-hidden="true" />
 
-                {/* Cap image */}
-                <img
-                  src={hero3DCap}
-                  alt={lang === "ar" ? "قبعة التخرج ثلاثية الأبعاد" : "3D graduation cap"}
-                  className="relative z-10 w-full h-full object-contain hero-3d-glow float-y"
-                  width={480}
-                  height={480}
-                />
+                {/* Orbit visual */}
+                <HeroOrbit />
 
                 {/* Floating glass card — top */}
                 <motion.div
