@@ -343,17 +343,6 @@ const HomePage = () => {
             variants={{ hidden: {}, show: { transition: { staggerChildren: 0.2, delayChildren: 0.05 } } }}
             className="grid md:grid-cols-3 gap-10 md:gap-6 relative max-w-5xl mx-auto"
           >
-            {/* Animated dashed connector */}
-            <motion.div
-              variants={{
-                hidden: { scaleX: 0, opacity: 0 },
-                show: { scaleX: 1, opacity: 1, transition: { duration: 1.4, ease: "easeOut" } },
-              }}
-              className="hidden md:block absolute top-10 inset-x-[16%] h-0.5 origin-left"
-              style={{
-                background: "repeating-linear-gradient(90deg, hsl(var(--primary) / 0.5) 0 8px, transparent 8px 16px)",
-              }}
-            />
             {howSteps.map((step, i) => (
               <motion.div
                 key={step.key}
