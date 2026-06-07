@@ -13,19 +13,67 @@ import { Helmet } from "react-helmet-async";
 import hero3DCap from "@/assets/hero-3d-cap.webp";
 import OrbitSubjects from "@/components/OrbitSubjects";
 import OurTeam from "@/components/OurTeam";
-import uni1 from "@/assets/unis/uni-1.webp.asset.json";
-import uni2 from "@/assets/unis/uni-2.webp.asset.json";
-import uni3 from "@/assets/unis/uni-3.webp.asset.json";
-import uni4 from "@/assets/unis/uni-4.webp.asset.json";
-import uni5 from "@/assets/unis/uni-5.webp.asset.json";
-import uni6 from "@/assets/unis/uni-6.webp.asset.json";
-import uni7 from "@/assets/unis/uni-7.webp.asset.json";
-import uni8 from "@/assets/unis/uni-8.webp.asset.json";
-import uni9 from "@/assets/unis/uni-9.webp.asset.json";
-import uni10 from "@/assets/unis/uni-10.webp.asset.json";
-import uni11 from "@/assets/unis/uni-11.webp.asset.json";
-import uni12 from "@/assets/unis/uni-12.webp.asset.json";
-const uniLogos = [uni1, uni2, uni3, uni4, uni5, uni6, uni7, uni8, uni9, uni10, uni11, uni12];
+import uniCarnegieMellon from "@/assets/unis/carnegie-mellon-qatar.png.asset.json";
+import uniPrincessNourah from "@/assets/unis/princess-nourah.jpg.asset.json";
+import uniUaeu from "@/assets/unis/uaeu.jpeg.asset.json";
+import uniUdst from "@/assets/unis/udst.jpg.asset.json";
+import uniUmmAlQura from "@/assets/unis/umm-al-qura.png.asset.json";
+import uniSwansea from "@/assets/unis/swansea.webp.asset.json";
+import uniDundee from "@/assets/unis/dundee.webp.asset.json";
+import uniAlfaisal from "@/assets/unis/alfaisal.jpg.asset.json";
+import uniVcuArts from "@/assets/unis/vcuarts-qatar.jpeg.asset.json";
+import uniWeillCornell from "@/assets/unis/weill-cornell-qatar.jpg.asset.json";
+import uniZayed from "@/assets/unis/zayed.png.asset.json";
+import uniAck from "@/assets/unis/ack.webp.asset.json";
+import uniCairo from "@/assets/unis/cairo.jpg.asset.json";
+import uniKfupm from "@/assets/unis/kfupm.png.asset.json";
+import uniMansoura from "@/assets/unis/mansoura.png.asset.json";
+import uniSharjah from "@/assets/unis/sharjah.png.asset.json";
+import uniAbuDhabi from "@/assets/unis/abu-dhabi-university.png.asset.json";
+import uniEjust from "@/assets/unis/ejust.png.asset.json";
+import uniGuc from "@/assets/unis/guc.jpg.asset.json";
+import uniImamAbdulrahman from "@/assets/unis/imam-abdulrahman.png.asset.json";
+import uniKaust from "@/assets/unis/kaust.webp.asset.json";
+import uniKhalifa from "@/assets/unis/khalifa.png.asset.json";
+import uniKingAbdulaziz from "@/assets/unis/king-abdulaziz.png.asset.json";
+import uniKingKhalid from "@/assets/unis/king-khalid.png.asset.json";
+import uniMsa from "@/assets/unis/msa.png.asset.json";
+import uniNewcastle from "@/assets/unis/newcastle.png.asset.json";
+import uniPharos from "@/assets/unis/pharos.jpg.asset.json";
+import uniGeorgetown from "@/assets/unis/georgetown-qatar.png.asset.json";
+import uniAlexandria from "@/assets/unis/alexandria.jpg.asset.json";
+
+const uniLogos: { logo: { url: string }; en: string; ar: string }[] = [
+  { logo: uniCarnegieMellon, en: "Carnegie Mellon University in Qatar", ar: "كارنيجي ميلون في قطر" },
+  { logo: uniWeillCornell, en: "Weill Cornell Medicine – Qatar", ar: "وايل كورنيل للطب – قطر" },
+  { logo: uniGeorgetown, en: "Georgetown University in Qatar", ar: "جورج تاون في قطر" },
+  { logo: uniVcuArts, en: "VCUarts Qatar", ar: "فرجينيا كومنولث للفنون – قطر" },
+  { logo: uniUdst, en: "University of Doha for Science & Technology", ar: "جامعة الدوحة للعلوم والتكنولوجيا" },
+  { logo: uniUaeu, en: "United Arab Emirates University", ar: "جامعة الإمارات العربية المتحدة" },
+  { logo: uniZayed, en: "Zayed University", ar: "جامعة زايد" },
+  { logo: uniKhalifa, en: "Khalifa University", ar: "جامعة خليفة" },
+  { logo: uniAbuDhabi, en: "Abu Dhabi University", ar: "جامعة أبوظبي" },
+  { logo: uniSharjah, en: "University of Sharjah", ar: "جامعة الشارقة" },
+  { logo: uniKaust, en: "KAUST", ar: "كاوست" },
+  { logo: uniKingAbdulaziz, en: "King Abdulaziz University", ar: "جامعة الملك عبدالعزيز" },
+  { logo: uniKfupm, en: "KFUPM", ar: "جامعة الملك فهد للبترول والمعادن" },
+  { logo: uniKingKhalid, en: "King Khalid University", ar: "جامعة الملك خالد" },
+  { logo: uniUmmAlQura, en: "Umm Al-Qura University", ar: "جامعة أم القرى" },
+  { logo: uniImamAbdulrahman, en: "Imam Abdulrahman Bin Faisal University", ar: "جامعة الإمام عبدالرحمن بن فيصل" },
+  { logo: uniPrincessNourah, en: "Princess Nourah University", ar: "جامعة الأميرة نورة" },
+  { logo: uniAlfaisal, en: "Alfaisal University", ar: "جامعة الفيصل" },
+  { logo: uniAck, en: "Australian University (ACK)", ar: "الجامعة الأسترالية (ACK)" },
+  { logo: uniCairo, en: "Cairo University", ar: "جامعة القاهرة" },
+  { logo: uniAlexandria, en: "Alexandria University", ar: "جامعة الإسكندرية" },
+  { logo: uniMansoura, en: "Mansoura University", ar: "جامعة المنصورة" },
+  { logo: uniGuc, en: "German University in Cairo", ar: "الجامعة الألمانية بالقاهرة" },
+  { logo: uniEjust, en: "Egypt-Japan University (E-JUST)", ar: "الجامعة المصرية اليابانية" },
+  { logo: uniMsa, en: "MSA University", ar: "جامعة أكتوبر للعلوم الحديثة" },
+  { logo: uniPharos, en: "Pharos University in Alexandria", ar: "جامعة فاروس بالإسكندرية" },
+  { logo: uniDundee, en: "University of Dundee", ar: "جامعة دندي" },
+  { logo: uniSwansea, en: "Swansea University", ar: "جامعة سوانزي" },
+  { logo: uniNewcastle, en: "Newcastle University", ar: "جامعة نيوكاسل" },
+];
 import howStep1Img from "@/assets/how-step-1.png";
 import howStep2Img from "@/assets/how-step-2.png";
 import howStep3Img from "@/assets/how-step-3.png";
@@ -502,32 +550,45 @@ const HomePage = () => {
             />
 
             {/* Logos grid */}
-            <div className="relative grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
-              {uniLogos.map((logo, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.5, delay: i * 0.04, ease: [0.22, 1, 0.36, 1] }}
-                  whileHover={{ y: -4, scale: 1.03 }}
-                  className="group aspect-square rounded-2xl flex items-center justify-center p-3 md:p-4 transition-all duration-300"
-                  style={{
-                    background:
-                      "linear-gradient(180deg, hsl(0 0% 100% / 0.98) 0%, hsl(40 30% 97% / 0.98) 100%)",
-                    border: "1px solid hsl(var(--primary) / 0.18)",
-                    boxShadow:
-                      "0 8px 24px -10px hsl(222 47% 4% / 0.25), inset 0 1px 0 hsl(0 0% 100% / 0.8)",
-                  }}
-                >
-                  <img
-                    src={logo.url}
-                    alt={lang === "ar" ? `جامعة ${i + 1}` : `University ${i + 1}`}
-                    className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110"
-                    loading="lazy"
-                  />
-                </motion.div>
-              ))}
+            <div className="relative grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4">
+              {uniLogos.map((u, i) => {
+                const name = lang === "ar" ? u.ar : u.en;
+                return (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-40px" }}
+                    transition={{ duration: 0.45, delay: Math.min(i, 14) * 0.03, ease: [0.22, 1, 0.36, 1] }}
+                    whileHover={{ y: -4, scale: 1.03 }}
+                    title={name}
+                    className="group rounded-2xl flex flex-col items-center justify-between p-3 md:p-4 transition-all duration-300"
+                    style={{
+                      background:
+                        "linear-gradient(180deg, hsl(0 0% 100% / 0.98) 0%, hsl(40 30% 97% / 0.98) 100%)",
+                      border: "1px solid hsl(var(--primary) / 0.18)",
+                      boxShadow:
+                        "0 8px 24px -10px hsl(222 47% 4% / 0.25), inset 0 1px 0 hsl(0 0% 100% / 0.8)",
+                    }}
+                  >
+                    <div className="flex-1 w-full flex items-center justify-center min-h-[72px] md:min-h-[88px]">
+                      <img
+                        src={u.logo.url}
+                        alt={name}
+                        className="max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-110"
+                        style={{ maxHeight: "84px" }}
+                        loading="lazy"
+                      />
+                    </div>
+                    <div
+                      className="mt-2 text-[10px] md:text-[11px] font-semibold text-center leading-tight line-clamp-2 text-foreground/80"
+                      style={{ minHeight: "26px" }}
+                    >
+                      {name}
+                    </div>
+                  </motion.div>
+                );
+              })}
             </div>
 
             {/* Trust stats inline */}
@@ -536,7 +597,7 @@ const HomePage = () => {
               style={{ borderTop: "1px solid hsl(var(--primary) / 0.2)" }}
             >
               {[
-                { v: "12+", l: lang === "ar" ? "جامعة" : "Universities" },
+                { v: "29+", l: lang === "ar" ? "جامعة" : "Universities" },
                 { v: "5K+", l: lang === "ar" ? "طالب نشط" : "Active Students" },
                 { v: "98%", l: lang === "ar" ? "رضا الطلاب" : "Satisfaction" },
               ].map((s, i) => (
