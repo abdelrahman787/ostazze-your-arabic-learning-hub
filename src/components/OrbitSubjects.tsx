@@ -273,10 +273,10 @@ const OrbitSubjects = () => {
         <div className="text-center mt-10 md:mt-14 animate-fade-in">
           <Link
             to="/subjects"
-            className="inline-flex items-center gap-2 px-8 py-3 rounded-full font-bold text-white text-sm md:text-base transition-all hover:scale-105"
+            className="inline-flex items-center gap-2 px-8 py-3 rounded-full font-bold text-primary-foreground text-sm md:text-base transition-all hover:scale-105"
             style={{
-              background: "linear-gradient(135deg, hsl(22 95% 55%), hsl(18 90% 45%))",
-              boxShadow: "0 8px 20px hsl(22 95% 45% / 0.4)",
+              background: "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-dark)))",
+              boxShadow: "0 8px 20px hsl(var(--primary) / 0.4)",
             }}
           >
             {t("view_all")}
