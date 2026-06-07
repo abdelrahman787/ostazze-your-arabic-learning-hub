@@ -241,7 +241,7 @@ const HomePage = () => {
                 {lang === "ar" ? "منصة تعليمية تربطك بأفضل الأساتذة الجامعيين في تخصصك عن طريق جلسات اونلاين" : "An educational platform that connects you with the best university professors in your field through online sessions"}
               </motion.p>
 
-              <motion.form variants={item} onSubmit={handleSearch} className="w-full max-w-xl flex gap-2 mb-6">
+              <motion.form variants={item} onSubmit={handleSearch} className="w-full max-w-xl flex gap-2 mb-6 hidden">
                 <div className="flex-1 relative">
                   <Search size={18} className="absolute top-1/2 -translate-y-1/2 start-4 text-muted-foreground" />
                   <input
