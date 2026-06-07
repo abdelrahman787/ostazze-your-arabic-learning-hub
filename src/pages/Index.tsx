@@ -309,7 +309,7 @@ const HomePage = () => {
                     hidden: { opacity: 0, y: 10 },
                     show: { opacity: 1, y: 0, transition: { duration: 0.4 } },
                   }}
-                  className="font-extrabold text-xl md:text-2xl mb-6 text-foreground"
+                  className="font-extrabold text-xl md:text-2xl mb-6 text-foreground whitespace-pre-line"
                 >
                   {t(step.titleKey)}
                 </motion.h3>
@@ -495,8 +495,8 @@ const HomePage = () => {
               style={{ borderTop: "1px solid hsl(var(--primary) / 0.2)" }}
             >
               {[
-                { v: "29+", l: lang === "ar" ? "جامعة" : "Universities" },
-                { v: "5K+", l: lang === "ar" ? "طالب نشط" : "Active Students" },
+                { v: "73+", l: lang === "ar" ? "جامعة" : "Universities" },
+                { v: "12k+", l: lang === "ar" ? "طالب نشط" : "Active Students" },
                 { v: "98%", l: lang === "ar" ? "رضا الطلاب" : "Satisfaction" },
               ].map((s, i) => (
                 <div key={i} className="text-center">
