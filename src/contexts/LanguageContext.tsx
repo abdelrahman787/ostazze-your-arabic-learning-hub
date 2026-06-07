@@ -432,7 +432,7 @@ const translations = {
   // How It Works
   how_title: { ar: "كيف تعمل Ostaze؟", en: "How Ostaze Works?" },
   how_subtitle: { ar: "ثلاث خطوات بسيطة لبدء رحلة التعلم", en: "Three simple steps to start your learning journey" },
-  how_step1_title: { ar: "اختر دولتك", en: "Select Your Country\nTo See Universities" },
+  how_step1_title: { ar: "اختر دولتك", en: "Select Your Country" },
   how_step1_desc: { ar: "حدد دولتك لعرض الجامعات والأسعار بالعملة المناسبة لك", en: "Select your country to see universities and prices in your local currency" },
   how_step2_title: { ar: "اختر جامعتك", en: "Pick Your University" },
   how_step2_desc: { ar: "تصفّح الجامعات والكليات والمواد ثم اختر الأنسب لتخصصك", en: "Browse universities, colleges, and subjects to match your major" },
