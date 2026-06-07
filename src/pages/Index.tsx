@@ -256,8 +256,8 @@ const HomePage = () => {
             </motion.div>
 
             {/* Massive two-line title */}
-            <motion.h1 dir="rtl" variants={item} className="text-[3rem] sm:text-6xl md:text-7xl font-black leading-[1.05] tracking-tight mb-2 text-center">
-              <span className="block text-foreground">{"تعلم مع أفضل الدكاترة الجامعيين"}</span>
+            <motion.h1 dir={lang === "ar" ? "rtl" : "ltr"} variants={item} className="text-[3rem] sm:text-6xl md:text-7xl font-black leading-[1.05] tracking-tight mb-2 text-center">
+              <span className="block text-foreground">{lang === "ar" ? "تعلم مع أفضل الدكاترة الجامعيين" : "Learn with the best university professors"}</span>
             </motion.h1>
 
             {/* 3D hero element with glow */}
@@ -277,8 +277,8 @@ const HomePage = () => {
             </motion.div>
 
             {/* Subtitle */}
-            <motion.p dir="rtl" variants={item} className="text-foreground/75 text-base md:text-lg leading-relaxed max-w-xl mb-8 text-center">
-              {"منصة تعليمية تربطك بأفضل الأساتذة الجامعيين في تخصصك عن طريق جلسات online"}
+            <motion.p dir={lang === "ar" ? "rtl" : "ltr"} variants={item} className="text-foreground/75 text-base md:text-lg leading-relaxed max-w-xl mb-8 text-center">
+              {lang === "ar" ? "منصة تعليمية تربطك بأفضل الأساتذة الجامعيين في تخصصك عن طريق جلسات online" : "An educational platform that connects you with the best university professors in your field through online sessions"}
             </motion.p>
 
             {/* CTA + Search */}
