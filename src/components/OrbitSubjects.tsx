@@ -244,18 +244,18 @@ const OrbitSubjects = () => {
                             className="w-[64px] h-[64px] rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
                             style={{
                               background:
-                                "linear-gradient(135deg, hsl(265 40% 25% / 0.85), hsl(280 40% 15% / 0.85))",
-                              border: "1px solid hsl(22 80% 60% / 0.35)",
+                                "linear-gradient(135deg, hsl(var(--card) / 0.85), hsl(var(--muted) / 0.85))",
+                              border: "1px solid hsl(var(--primary) / 0.35)",
                               boxShadow:
-                                "0 6px 14px hsl(0 0% 0% / 0.45), inset 0 1px 0 hsl(0 0% 100% / 0.15)",
+                                "0 6px 14px hsl(var(--foreground) / 0.08), inset 0 1px 0 hsl(var(--background) / 0.15)",
                             }}
                           >
                             <Icon
-                              className="text-orange-300 group-hover:text-orange-200 transition-colors"
+                              className="text-primary group-hover:text-primary/80 transition-colors"
                               size={24}
                             />
                           </div>
-                          <span className="text-[11px] md:text-xs font-semibold text-white/90 group-hover:text-white whitespace-nowrap drop-shadow-md">
+                          <span className="text-[11px] md:text-xs font-semibold text-foreground/90 group-hover:text-foreground whitespace-nowrap drop-shadow-md">
                             {t(subj.key)}
                           </span>
                         </Link>
