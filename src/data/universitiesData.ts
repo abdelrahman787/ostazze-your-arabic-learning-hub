@@ -211,11 +211,11 @@ export const allUniversities: University[] = [
         ],
       },
       {
-        id: "KW-GUST-ARTS",
+        id: "KW-AAST-ARTS",
         name_ar: "كلية الآداب والعلوم",
         name_en: "College of Arts and Sciences",
         departments: [
-          { id: "KW-GUST-ARTS-MATH", name_ar: "قسم الرياضيات وعلوم الحاسب", name_en: "Department of Mathematics and Computer Science", degrees: ["BSc"], courses: [{ code: "GMAT101", name_en: "Calculus I", name_ar: "التفاضل والتكامل ١", credits: 3 }, { code: "GMAT201", name_en: "Discrete Mathematics", name_ar: "الرياضيات المتقطعة", credits: 3 }, { code: "GCS101", name_en: "Programming Fundamentals", name_ar: "أساسيات البرمجة", credits: 3 }, { code: "GCS201", name_en: "Data Structures", name_ar: "هياكل البيانات", credits: 3 }, { code: "GCS301", name_en: "Artificial Intelligence", name_ar: "الذكاء الاصطناعي", credits: 3 }] },
+          { id: "KW-AAST-ARTS-MATH", name_ar: "قسم الرياضيات وعلوم الحاسب", name_en: "Department of Mathematics and Computer Science", degrees: ["BSc"], courses: [{ code: "MAT101", name_en: "Calculus I", name_ar: "التفاضل والتكامل ١", credits: 3 }, { code: "MAT201", name_en: "Discrete Mathematics", name_ar: "الرياضيات المتقطعة", credits: 3 }, { code: "CS101", name_en: "Programming Fundamentals", name_ar: "أساسيات البرمجة", credits: 3 }, { code: "CS201", name_en: "Data Structures", name_ar: "هياكل البيانات", credits: 3 }, { code: "CS301", name_en: "Artificial Intelligence", name_ar: "الذكاء الاصطناعي", credits: 3 }] },
         ],
       },
     ],
