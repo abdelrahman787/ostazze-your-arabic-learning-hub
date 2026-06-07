@@ -579,7 +579,7 @@ const HomePage = () => {
           الأمريكية، الخليج للعلوم والتكنولوجيا، وكافة الجامعات الإقليمية.
         </p>
         <p>
-          OSTAZE / Ostaze / Ostazze — the leading online private &amp; live
+          OSTAZE / Ostaze — the leading online private &amp; live
           tutoring platform for university students in Kuwait and Qatar.
           Search terms: ostaze platform, online tutoring, zoom tutoring,
           private lessons, live online lessons.

@@ -430,7 +430,7 @@ const translations = {
   whatsapp_msg: { ar: "مرحباً، أريد الاستفسار عن خدمات أسطازي", en: "Hello, I'd like to inquire about Ostaze services" },
 
   // How It Works
-  how_title: { ar: "كيف تعمل ostazze؟", en: "How Ostazze Works?" },
+  how_title: { ar: "كيف تعمل OSTAZE؟", en: "How OSTAZE Works?" },
   how_subtitle: { ar: "ثلاث خطوات بسيطة لبدء رحلة التعلم", en: "Three simple steps to start your learning journey" },
   how_step1_title: { ar: "اختر دولتك", en: "Choose Your Country" },
   how_step1_desc: { ar: "حدد دولتك لعرض الجامعات والأسعار بالعملة المناسبة لك", en: "Select your country to see universities and prices in your local currency" },
