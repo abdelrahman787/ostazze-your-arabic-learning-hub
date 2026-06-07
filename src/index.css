@@ -95,7 +95,20 @@
     background-color: hsl(var(--background));
   }
   body {
-    @apply bg-background text-foreground font-cairo antialiased;
+    @apply bg-background text-foreground antialiased;
+    font-family: "DM Sans", "Cairo", system-ui, sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6, .font-display {
+    font-family: "Space Grotesk", "Cairo", system-ui, sans-serif;
+    letter-spacing: -0.01em;
+  }
+  :lang(ar) body,
+  [dir="rtl"] body {
+    font-family: "Cairo", "DM Sans", system-ui, sans-serif;
+  }
+  :lang(ar) h1, :lang(ar) h2, :lang(ar) h3, :lang(ar) h4, :lang(ar) h5, :lang(ar) h6,
+  [dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3, [dir="rtl"] h4, [dir="rtl"] h5, [dir="rtl"] h6 {
+    font-family: "Cairo", "Space Grotesk", system-ui, sans-serif;
   }
   a, button, [role="button"],
   input, select, textarea,
