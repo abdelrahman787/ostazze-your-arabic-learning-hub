@@ -517,7 +517,7 @@ const HomePage = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="relative rounded-[2rem] overflow-hidden p-5 md:p-10 border transition-colors"
+            className="relative rounded-[2rem] overflow-hidden p-4 md:p-6 border transition-colors"
             style={{
               background:
                 "linear-gradient(140deg, hsl(var(--card)) 0%, hsl(var(--background)) 60%, hsl(var(--primary) / 0.06) 100%)",
