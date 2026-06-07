@@ -487,48 +487,6 @@ const HomePage = () => {
             <div
               className="absolute -bottom-16 -right-16 w-[260px] h-[260px] rounded-full blur-[90px] opacity-30 pointer-events-none"
               style={{ background: "radial-gradient(circle, hsl(38 92% 55% / 0.45) 0%, transparent 70%)" }}
-            />
-
-            {/* Logos grid */}
-            <div className="relative grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-2 md:gap-3">
-              {uniLogos.map((u, i) => {
-                const name = lang === "ar" ? u.ar : u.en;
-                return (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, y: 12 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-40px" }}
-                    transition={{ duration: 0.45, delay: Math.min(i, 14) * 0.03, ease: [0.22, 1, 0.36, 1] }}
-                    whileHover={{ y: -4, scale: 1.03 }}
-                    title={name}
-                    className="group rounded-xl flex flex-col items-center justify-between p-2 md:p-3 transition-all duration-300"
-                    style={{
-                      background:
-                        "linear-gradient(180deg, hsl(0 0% 100% / 0.98) 0%, hsl(40 30% 97% / 0.98) 100%)",
-                      border: "1px solid hsl(var(--primary) / 0.18)",
-                      boxShadow:
-                        "0 8px 24px -10px hsl(222 47% 4% / 0.25), inset 0 1px 0 hsl(0 0% 100% / 0.8)",
-                    }}
-                  >
-                    <div className="flex-1 w-full flex items-center justify-center min-h-[48px] md:min-h-[60px]">
-                      <img
-                        src={u.logo.url}
-                        alt={name}
-                        className="max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-110"
-                        style={{ maxHeight: "56px" }}
-                        loading="lazy"
-                      />
-                    </div>
-                    <div
-                      className="mt-1 text-[9px] md:text-[10px] font-semibold text-center leading-tight line-clamp-2 text-foreground/80"
-                    >
-                      {name}
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </div>
 
             {/* Trust stats inline */}
             <div
