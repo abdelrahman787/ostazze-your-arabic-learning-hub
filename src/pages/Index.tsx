@@ -469,12 +469,6 @@ const HomePage = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="relative rounded-[2rem] overflow-hidden p-4 md:p-8"
-            style={{
-              background:
-                "linear-gradient(140deg, hsl(222 47% 8%) 0%, hsl(222 47% 11%) 50%, hsl(20 60% 12%) 100%)",
-              border: "1px solid hsl(var(--primary) / 0.28)",
-              boxShadow:
             className="relative rounded-[2rem] overflow-hidden p-5 md:p-10 border transition-colors"
             style={{
               background:
