@@ -497,7 +497,7 @@ const HomePage = () => {
               <Sparkles className="w-3.5 h-3.5" />
               {lang === "ar" ? "ثقة الطلاب" : "Trusted by Students"}
             </span>
-            <h2 className="text-3xl md:text-5xl font-black tracking-tight text-foreground leading-tight">
+            <h2 className="text-3xl md:text-4xl font-black tracking-tight text-foreground leading-tight">
               {lang === "ar" ? "طلابنا ملتحقون بـ" : "Our Students Study At"}
               <span
                 className="block mt-1 bg-clip-text text-transparent"
