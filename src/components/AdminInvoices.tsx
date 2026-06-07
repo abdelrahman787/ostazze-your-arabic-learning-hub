@@ -158,7 +158,7 @@ const AdminInvoices = () => {
     try {
       const doc = new jsPDF();
       doc.setFontSize(18);
-      doc.text("OSTAZZE - Invoices Report", 14, 18);
+      doc.text("OSTAZE - Invoices Report", 14, 18);
       doc.setFontSize(10);
       doc.setTextColor(120);
       doc.text(`Generated: ${new Date().toLocaleString("en-US")}`, 14, 25);
@@ -181,7 +181,7 @@ const AdminInvoices = () => {
         alternateRowStyles: { fillColor: [250, 250, 250] },
       });
 
-      doc.save(`ostazze-invoices-${Date.now()}.pdf`);
+      doc.save(`ostaze-invoices-${Date.now()}.pdf`);
       toast.success("تم تنزيل التقرير ✓");
     } catch (err: any) {
       toast.error("خطأ: " + err.message);
@@ -194,7 +194,7 @@ const AdminInvoices = () => {
     try {
       const doc = new jsPDF();
       doc.setFontSize(18);
-      doc.text("OSTAZZE - Sales Report", 14, 18);
+      doc.text("OSTAZE - Sales Report", 14, 18);
       doc.setFontSize(10);
       doc.setTextColor(120);
       doc.text(`Generated: ${new Date().toLocaleString("en-US")}`, 14, 25);
@@ -232,7 +232,7 @@ const AdminInvoices = () => {
         alternateRowStyles: { fillColor: [250, 250, 250] },
       });
 
-      doc.save(`ostazze-sales-${Date.now()}.pdf`);
+      doc.save(`ostaze-sales-${Date.now()}.pdf`);
       toast.success("تم تنزيل التقرير ✓");
     } catch (err: any) {
       toast.error("خطأ: " + err.message);

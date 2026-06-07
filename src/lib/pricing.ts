@@ -1,4 +1,4 @@
-// OSTAZZE pricing & currency conversion
+// OSTAZE pricing & currency conversion
 // Fixed per-country session price. At checkout we always charge in EGP.
 
 export type Country = "EG" | "QA" | "KW";
