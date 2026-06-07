@@ -245,11 +245,6 @@ const Universities = () => {
                 ? lang === "ar" ? "العودة للدول" : "Back to Countries"
                 : lang === "ar" ? "العودة للجامعات" : "Back to Universities"}
             </button>
-            <div className="relative max-w-xs w-full">
-              <Search size={14} className="absolute start-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-              <Input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder={lang === "ar" ? "بحث..." : "Search..."} className="ps-9 h-9 text-sm" />
-            </div>
           </motion.div>
         )}
 
