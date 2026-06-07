@@ -370,6 +370,27 @@ const HomePage = () => {
             ))}
           </motion.div>
 
+          {/* Get Started CTA — orange to match the step numbers */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex justify-center mt-12"
+          >
+            <Link
+              to="/teachers"
+              className="inline-flex items-center gap-2 px-9 py-3.5 rounded-full text-sm md:text-base font-bold text-primary-foreground transition-all duration-300 hover:-translate-y-0.5"
+              style={{
+                background: "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-dark)) 100%)",
+                boxShadow: "0 12px 30px -10px hsl(var(--primary) / 0.55), inset 0 1px 0 hsl(0 0% 100% / 0.25)",
+              }}
+            >
+              <span>{lang === "ar" ? "ابدأ الآن" : "Get Started"}</span>
+              <ArrowLeft className="w-4 h-4 rtl:rotate-180" />
+            </Link>
+          </motion.div>
+
+
           {/* Quick WhatsApp Session Request */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
