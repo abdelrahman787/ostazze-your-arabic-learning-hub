@@ -85,7 +85,7 @@ const CollegeCard = ({
       transition={{ delay: index * 0.05 }}
       className="card-base overflow-hidden group hover:border-primary/40 hover:shadow-xl transition-all"
     >
-      <div className="h-1 bg-gradient-to-r from-primary/60 to-primary/20" />
+      <div className="h-1 bg-gradient-to-r rtl:bg-gradient-to-l from-primary/60 to-primary/20" />
       <Link
         to={`/universities/${uniId}/colleges/${college.id}`}
         className="w-full flex items-center justify-between p-5 hover:bg-primary/5 dark:hover:bg-primary/10 transition-colors text-start"
@@ -363,7 +363,7 @@ const Universities = () => {
             <motion.div key="university" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
               {/* Header Card */}
               <div className="card-base p-6 md:p-8 mb-8 relative overflow-hidden">
-                <div className="absolute top-0 end-0 w-40 h-40 bg-gradient-to-bl from-primary/10 to-transparent ltr:rounded-bl-full rtl:rounded-br-full" />
+                <div className="absolute top-0 end-0 w-40 h-40 bg-gradient-to-bl rtl:bg-gradient-to-br from-primary/10 to-transparent ltr:rounded-bl-full rtl:rounded-br-full" />
                 <div className="flex items-start gap-5 relative z-10">
                   <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/10 flex items-center justify-center shrink-0 shadow-lg">
                     <GraduationCap size={30} className="text-primary" />
