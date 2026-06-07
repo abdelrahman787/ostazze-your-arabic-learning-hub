@@ -545,7 +545,7 @@ const HomePage = () => {
               style={{ background: "radial-gradient(circle, hsl(var(--primary) / 0.55) 0%, transparent 70%)" }}
             />
             <div
-              className="absolute -bottom-24 -right-24 w-[380px] h-[380px] rounded-full blur-[110px] opacity-30 pointer-events-none"
+              className="absolute -bottom-16 -right-16 w-[260px] h-[260px] rounded-full blur-[90px] opacity-30 pointer-events-none"
               style={{ background: "radial-gradient(circle, hsl(38 92% 55% / 0.45) 0%, transparent 70%)" }}
             />
 
@@ -592,7 +592,7 @@ const HomePage = () => {
 
             {/* Trust stats inline */}
             <div
-              className="relative grid grid-cols-3 gap-3 md:gap-6 mt-8 pt-6"
+              className="relative grid grid-cols-3 gap-2 md:gap-4 mt-6 pt-4"
               style={{ borderTop: "1px solid hsl(var(--primary) / 0.2)" }}
             >
               {[
