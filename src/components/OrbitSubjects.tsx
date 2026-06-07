@@ -112,13 +112,13 @@ const OrbitSubjects = () => {
           return (
             <span
               key={i}
-              className="absolute rounded-full bg-white"
+              className="absolute rounded-full bg-foreground"
               style={{
                 top: `${top}%`,
                 left: `${left}%`,
                 width: `${size}px`,
                 height: `${size}px`,
-                opacity: 0.25 + (i % 5) * 0.1,
+                opacity: 0.15 + (i % 5) * 0.06,
               }}
             />
           );
