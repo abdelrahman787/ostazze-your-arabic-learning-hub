@@ -550,32 +550,45 @@ const HomePage = () => {
             />
 
             {/* Logos grid */}
-            <div className="relative grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
-              {uniLogos.map((logo, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.5, delay: i * 0.04, ease: [0.22, 1, 0.36, 1] }}
-                  whileHover={{ y: -4, scale: 1.03 }}
-                  className="group aspect-square rounded-2xl flex items-center justify-center p-3 md:p-4 transition-all duration-300"
-                  style={{
-                    background:
-                      "linear-gradient(180deg, hsl(0 0% 100% / 0.98) 0%, hsl(40 30% 97% / 0.98) 100%)",
-                    border: "1px solid hsl(var(--primary) / 0.18)",
-                    boxShadow:
-                      "0 8px 24px -10px hsl(222 47% 4% / 0.25), inset 0 1px 0 hsl(0 0% 100% / 0.8)",
-                  }}
-                >
-                  <img
-                    src={logo.url}
-                    alt={lang === "ar" ? `جامعة ${i + 1}` : `University ${i + 1}`}
-                    className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110"
-                    loading="lazy"
-                  />
-                </motion.div>
-              ))}
+            <div className="relative grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4">
+              {uniLogos.map((u, i) => {
+                const name = lang === "ar" ? u.ar : u.en;
+                return (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-40px" }}
+                    transition={{ duration: 0.45, delay: Math.min(i, 14) * 0.03, ease: [0.22, 1, 0.36, 1] }}
+                    whileHover={{ y: -4, scale: 1.03 }}
+                    title={name}
+                    className="group rounded-2xl flex flex-col items-center justify-between p-3 md:p-4 transition-all duration-300"
+                    style={{
+                      background:
+                        "linear-gradient(180deg, hsl(0 0% 100% / 0.98) 0%, hsl(40 30% 97% / 0.98) 100%)",
+                      border: "1px solid hsl(var(--primary) / 0.18)",
+                      boxShadow:
+                        "0 8px 24px -10px hsl(222 47% 4% / 0.25), inset 0 1px 0 hsl(0 0% 100% / 0.8)",
+                    }}
+                  >
+                    <div className="flex-1 w-full flex items-center justify-center min-h-[72px] md:min-h-[88px]">
+                      <img
+                        src={u.logo.url}
+                        alt={name}
+                        className="max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-110"
+                        style={{ maxHeight: "84px" }}
+                        loading="lazy"
+                      />
+                    </div>
+                    <div
+                      className="mt-2 text-[10px] md:text-[11px] font-semibold text-center leading-tight line-clamp-2 text-foreground/80"
+                      style={{ minHeight: "26px" }}
+                    >
+                      {name}
+                    </div>
+                  </motion.div>
+                );
+              })}
             </div>
 
             {/* Trust stats inline */}
