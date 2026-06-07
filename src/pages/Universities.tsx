@@ -205,12 +205,14 @@ const Universities = () => {
         ]}
       />
       {/* Header */}
-      <PageHeader title={t("universities_title")} subtitle={t("universities_subtitle")} variant="university">
+      <div className="container pt-page-lg pb-4">
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-bold mb-4">
           <GraduationCap size={16} />
           {lang === "ar" ? "الدليل الأكاديمي" : "Academic Directory"}
         </motion.div>
-      </PageHeader>
+        <h1 className="text-3xl md:text-5xl font-black tracking-tight">{t("universities_title")}</h1>
+        <p className="text-muted-foreground text-base max-w-xl mt-2">{t("universities_subtitle")}</p>
+      </div>
 
       <div className="container py-8">
         {/* Breadcrumbs */}
