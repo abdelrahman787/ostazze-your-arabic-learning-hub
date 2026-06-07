@@ -4,9 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   GraduationCap, Building2, ChevronLeft, Globe, Calendar,
   BookOpen, ExternalLink, Layers, Search, ChevronRight,
-import {
-  GraduationCap, Building2, ChevronLeft, Globe, Calendar,
-  BookOpen, ExternalLink, Layers, Search, ChevronRight,
 } from "lucide-react";
 import PageHelmet from "@/components/PageHelmet";
 import { breadcrumbJsonLd, collectionPageJsonLd, faqJsonLd } from "@/lib/seo";
