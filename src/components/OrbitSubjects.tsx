@@ -127,10 +127,10 @@ const OrbitSubjects = () => {
 
       <div className="container relative z-10">
         <div className="text-center mb-6 animate-fade-in">
-          <h2 className="text-2xl md:text-3xl font-extrabold mb-2 text-white">
+          <h2 className="text-2xl md:text-3xl font-extrabold mb-2 text-foreground">
             {t("popular_title")}
           </h2>
-          <p className="text-sm text-white/60 max-w-xl mx-auto">{t("popular_subtitle")}</p>
+          <p className="text-sm text-muted-foreground max-w-xl mx-auto">{t("popular_subtitle")}</p>
         </div>
 
         {/* Orbit Stage */}
