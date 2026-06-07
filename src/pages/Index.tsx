@@ -18,6 +18,7 @@ import OurTeam from "@/components/OurTeam";
 import howStep1Img from "@/assets/how-step-1.png";
 import howStep2Img from "@/assets/how-step-2.png";
 import howStep3Img from "@/assets/how-step-3.png";
+import logosGridImg from "@/assets/university-logos-grid.png.asset.json";
 
 
 const container = {
