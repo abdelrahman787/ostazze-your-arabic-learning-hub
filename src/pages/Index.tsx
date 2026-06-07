@@ -237,7 +237,7 @@ const HomePage = () => {
                 </span>
               </motion.h1>
 
-              <motion.p dir={lang === "ar" ? "rtl" : "ltr"} variants={item} className="text-foreground/70 text-base md:text-lg leading-relaxed max-w-xl mb-8">
+              <motion.p dir={lang === "ar" ? "rtl" : "ltr"} variants={item} className="text-foreground/70 text-lg md:text-xl leading-relaxed max-w-xl mb-8">
                 {lang === "ar" ? "منصة تعليمية تربطك بأفضل الأساتذة الجامعيين في تخصصك عن طريق جلسات اونلاين" : "An educational platform that connects you with the best university professors in your field through online sessions"}
               </motion.p>
 
