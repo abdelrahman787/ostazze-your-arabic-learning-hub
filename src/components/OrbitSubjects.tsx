@@ -228,8 +228,8 @@ const OrbitSubjects = () => {
                       style={{
                         top: "50%",
                         left: "50%",
-                        width: 88,
-                        height: 88,
+                        width: 64,
+                        height: 64,
                         zIndex: 30,
                         transform: getOrbitTransform(orbit.radius, subj.angle),
                       }}
@@ -237,25 +237,25 @@ const OrbitSubjects = () => {
                       <div className="w-full h-full flex items-center justify-center">
                         <Link
                           to="/subjects"
-                          className="group flex flex-col items-center gap-2"
+                          className="group flex flex-col items-center gap-1.5"
                           aria-label={t(subj.key)}
                         >
                           <div
-                            className="w-[88px] h-[88px] rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
+                            className="w-[64px] h-[64px] rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
                             style={{
                               background:
                                 "linear-gradient(135deg, hsl(265 40% 25% / 0.85), hsl(280 40% 15% / 0.85))",
                               border: "1px solid hsl(22 80% 60% / 0.35)",
                               boxShadow:
-                                "0 8px 20px hsl(0 0% 0% / 0.45), inset 0 1px 0 hsl(0 0% 100% / 0.15)",
+                                "0 6px 14px hsl(0 0% 0% / 0.45), inset 0 1px 0 hsl(0 0% 100% / 0.15)",
                             }}
                           >
                             <Icon
                               className="text-orange-300 group-hover:text-orange-200 transition-colors"
-                              size={32}
+                              size={24}
                             />
                           </div>
-                          <span className="text-xs md:text-sm font-semibold text-white/90 group-hover:text-white whitespace-nowrap drop-shadow-md">
+                          <span className="text-[11px] md:text-xs font-semibold text-white/90 group-hover:text-white whitespace-nowrap drop-shadow-md">
                             {t(subj.key)}
                           </span>
                         </Link>
