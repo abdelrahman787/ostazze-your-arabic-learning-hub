@@ -214,7 +214,7 @@ const MyBookings = () => {
   return (
     <div>
       <PageHelmet
-        title={lang === "ar" ? "حجوزاتي | OSTAZZE" : "My Bookings | OSTAZZE"}
+        title={lang === "ar" ? "حجوزاتي | OSTAZE" : "My Bookings | OSTAZE"}
         description={lang === "ar" ? "تتبع حالة طلبات حصصك" : "Track your session request status"}
       />
       <PageHeader

@@ -354,7 +354,7 @@ const LectureView = () => {
                       className="absolute text-white/30 text-xs font-bold whitespace-nowrap drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] watermark-float"
                       style={{ top: "10%", left: "5%" }}
                     >
-                      {user?.email} • OSTAZZE
+                      {user?.email} • OSTAZE
                     </div>
                     <div
                       className="absolute text-white/25 text-[0.65rem] font-bold whitespace-nowrap drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] watermark-float-2"

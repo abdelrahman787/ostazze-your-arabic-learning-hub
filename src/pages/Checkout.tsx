@@ -71,7 +71,7 @@ export default function Checkout() {
   return (
     <div className="min-h-screen pt-page pb-12 bg-gradient-to-b from-background to-secondary/30">
       <PageHelmet
-        title={lang === "ar" ? "إتمام الدفع — أستازي" : "Checkout — OSTAZZE"}
+        title={lang === "ar" ? "إتمام الدفع — أستازي" : "Checkout — OSTAZE"}
         description={lang === "ar" ? "إتمام دفع الجلسة" : "Complete your session payment"}
         noindex
       />

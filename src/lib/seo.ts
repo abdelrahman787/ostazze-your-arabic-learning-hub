@@ -11,11 +11,11 @@ export const SITE_NAME = "OSTAZE";
  */
 export const BRAND_VARIANTS_AR = [
   "أستازي", "استازي", "أُسطازي", "استاذي", "أستاذي",
-  "اوستاز", "أوستاز", "اوستازي", "OSTAZE", "OSTAZZE", "Ostaze",
+  "اوستاز", "أوستاز", "اوستازي", "OSTAZE", "Ostaze",
 ];
 
 export const BRAND_VARIANTS_EN = [
-  "Ostaze", "OSTAZE", "Ostazze", "Ostazi", "Ostazee",
+  "Ostaze", "OSTAZE", "Ostazi", "Ostazee",
 ];
 
 /** Search-intent phrases students use when looking for tutors / lessons. */
