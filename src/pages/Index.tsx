@@ -359,62 +359,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Quick WhatsApp Session Request */}
-      <section className="py-12">
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="relative rounded-[2rem] overflow-hidden p-8 md:p-12 text-center border"
-            style={{
-              background:
-                "linear-gradient(140deg, hsl(var(--card)) 0%, hsl(var(--background)) 60%, hsl(var(--primary) / 0.06) 100%)",
-              borderColor: "hsl(var(--primary) / 0.2)",
-              boxShadow:
-                "0 30px 80px -30px hsl(var(--primary) / 0.35), inset 0 1px 0 hsl(0 0% 100% / 0.06)",
-            }}
-          >
-            {/* Dot grid texture */}
-            <div
-              className="absolute inset-0 opacity-[0.18] pointer-events-none"
-              style={{
-                backgroundImage:
-                  "radial-gradient(hsl(var(--primary) / 0.5) 1px, transparent 1px)",
-                backgroundSize: "22px 22px",
-                maskImage:
-                  "radial-gradient(ellipse at center, black 35%, transparent 80%)",
-                WebkitMaskImage:
-                  "radial-gradient(ellipse at center, black 35%, transparent 80%)",
-              }}
-            />
-            {/* Warm glow */}
-            <div
-              className="absolute -top-20 -right-20 w-[280px] h-[280px] rounded-full blur-[90px] opacity-30 pointer-events-none"
-              style={{ background: "radial-gradient(circle, hsl(38 92% 55% / 0.45) 0%, transparent 70%)" }}
-            />
-            <div className="relative z-10">
-              <h2 className="text-2xl md:text-3xl font-extrabold mb-3">{t("whatsapp_cta_title")}</h2>
-              <p className="text-muted-foreground mb-6 max-w-md mx-auto">{t("whatsapp_cta_subtitle")}</p>
-              <a
-                href={`https://wa.me/201130382206?text=${encodeURIComponent(t("whatsapp_msg"))}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-sm font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
-                style={{
-                  background: "linear-gradient(135deg, #25D366 0%, #128C7E 100%)",
-                  boxShadow: "0 10px 30px -10px rgba(37,211,102,0.55), inset 0 1px 0 rgba(255,255,255,0.25)",
-                }}
-              >
-                <MessageCircle className="w-5 h-5" />
-                <span>{t("whatsapp_cta_button")}</span>
-                <ArrowLeft className="w-4 h-4 rtl:rotate-180 transition-transform group-hover:-translate-x-0.5 rtl:group-hover:translate-x-0.5" />
-              </a>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
       {/* Why Choose Us */}
       <section className="py-16">
         <div className="container">
