@@ -46,44 +46,44 @@
   }
 
   .dark {
-    /* Card-Y inspired deep dark */
-    --background: 230 35% 6%;
-    --foreground: 30 30% 96%;
-    --card: 230 30% 10%;
-    --card-foreground: 30 30% 96%;
-    --popover: 230 30% 10%;
-    --popover-foreground: 30 30% 96%;
+    /* Warm & Friendly dark — soft cocoa instead of cool navy */
+    --background: 24 18% 7%;
+    --foreground: 30 35% 96%;
+    --card: 24 16% 11%;
+    --card-foreground: 30 35% 96%;
+    --popover: 24 16% 11%;
+    --popover-foreground: 30 35% 96%;
     --primary: 14 91% 55%;
     --primary-foreground: 0 0% 100%;
     --primary-dark: 14 88% 45%;
     --primary-light: 30 100% 94%;
-    --secondary: 230 25% 14%;
-    --secondary-foreground: 30 30% 96%;
-    --muted: 230 25% 14%;
-    --muted-foreground: 30 15% 78%;
+    --secondary: 24 14% 15%;
+    --secondary-foreground: 30 35% 96%;
+    --muted: 24 14% 15%;
+    --muted-foreground: 30 18% 80%;
     --accent: 14 91% 55%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 70% 55%;
     --destructive-foreground: 0 0% 100%;
-    --success: 160 84% 45%;
+    --success: 160 70% 48%;
     --success-foreground: 0 0% 100%;
     --warning: 38 92% 55%;
     --warning-foreground: 0 0% 100%;
-    --border: 230 25% 18%;
-    --input: 230 25% 16%;
+    --border: 24 14% 19%;
+    --input: 24 14% 17%;
     --ring: 14 91% 55%;
-    --sidebar-background: 230 35% 6%;
-    --sidebar-foreground: 30 30% 96%;
+    --sidebar-background: 24 18% 7%;
+    --sidebar-foreground: 30 35% 96%;
     --sidebar-primary: 14 91% 55%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 230 25% 14%;
-    --sidebar-accent-foreground: 30 30% 96%;
-    --sidebar-border: 230 25% 18%;
+    --sidebar-accent: 24 14% 15%;
+    --sidebar-accent-foreground: 30 35% 96%;
+    --sidebar-border: 24 14% 19%;
     --sidebar-ring: 14 91% 55%;
-    --glass-bg: 230 30% 10% / 0.55;
-    --glass-border: 30 30% 96% / 0.08;
-    --nav-bg: 230 35% 8% / 0.7;
-    --nav-border: 30 30% 96% / 0.08;
+    --glass-bg: 24 16% 11% / 0.6;
+    --glass-border: 30 35% 96% / 0.08;
+    --nav-bg: 24 18% 9% / 0.72;
+    --nav-border: 30 35% 96% / 0.09;
   }
 }
 
@@ -95,7 +95,20 @@
     background-color: hsl(var(--background));
   }
   body {
-    @apply bg-background text-foreground font-cairo antialiased;
+    @apply bg-background text-foreground antialiased;
+    font-family: "DM Sans", "Cairo", system-ui, sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6, .font-display {
+    font-family: "Space Grotesk", "Cairo", system-ui, sans-serif;
+    letter-spacing: -0.01em;
+  }
+  :lang(ar) body,
+  [dir="rtl"] body {
+    font-family: "Cairo", "DM Sans", system-ui, sans-serif;
+  }
+  :lang(ar) h1, :lang(ar) h2, :lang(ar) h3, :lang(ar) h4, :lang(ar) h5, :lang(ar) h6,
+  [dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3, [dir="rtl"] h4, [dir="rtl"] h5, [dir="rtl"] h6 {
+    font-family: "Cairo", "Space Grotesk", system-ui, sans-serif;
   }
   a, button, [role="button"],
   input, select, textarea,

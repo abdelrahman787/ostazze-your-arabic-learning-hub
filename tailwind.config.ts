@@ -15,6 +15,8 @@ export default {
     extend: {
       fontFamily: {
         cairo: ["Cairo", "sans-serif"],
+        sans: ['"DM Sans"', "Cairo", "system-ui", "sans-serif"],
+        display: ['"Space Grotesk"', "Cairo", "system-ui", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
