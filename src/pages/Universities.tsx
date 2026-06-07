@@ -85,7 +85,7 @@ const CollegeCard = ({
       transition={{ delay: index * 0.05 }}
       className="card-base overflow-hidden group hover:border-primary/40 hover:shadow-xl transition-all"
     >
-      <div className="h-1 bg-gradient-to-r from-primary/60 to-primary/20" />
+      <div className="h-1 bg-gradient-to-r rtl:bg-gradient-to-l from-primary/60 to-primary/20" />
       <Link
         to={`/universities/${uniId}/colleges/${college.id}`}
         className="w-full flex items-center justify-between p-5 hover:bg-primary/5 dark:hover:bg-primary/10 transition-colors text-start"
