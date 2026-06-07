@@ -273,39 +273,6 @@ const HomePage = () => {
                 {/* Orbit visual */}
                 <HeroOrbit />
 
-                {/* Floating glass card — top */}
-                <motion.div
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6, duration: 0.5 }}
-                  className="absolute top-6 end-0 z-20 p-4 rounded-2xl border border-foreground/10 shadow-2xl backdrop-blur-xl hidden sm:flex items-center gap-3"
-                  style={{ background: "hsl(var(--card) / 0.6)" }}
-                >
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center text-lg" style={{ background: "hsl(14 91% 50% / 0.15)" }}>
-                    🎓
-                  </div>
-                  <div>
-                    <div className="text-base font-extrabold text-foreground leading-none">+5,000</div>
-                    <div className="text-xs text-muted-foreground mt-1">{lang === "ar" ? "طالب نشط" : "Active students"}</div>
-                  </div>
-                </motion.div>
-
-                {/* Floating glass card — bottom */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.8, duration: 0.5 }}
-                  className="absolute bottom-8 start-0 z-20 p-4 rounded-2xl border border-foreground/10 shadow-2xl backdrop-blur-xl hidden sm:flex items-center gap-3"
-                  style={{ background: "hsl(var(--card) / 0.6)" }}
-                >
-                  <div className="w-10 h-10 rounded-full flex items-center justify-center text-sm text-white shadow-lg" style={{ background: "hsl(14 91% 50%)", boxShadow: "0 8px 24px hsl(14 91% 50% / 0.4)" }}>
-                    ⭐
-                  </div>
-                  <div>
-                    <div className="text-base font-extrabold text-foreground leading-none">4.9/5</div>
-                    <div className="text-xs text-muted-foreground mt-1">{lang === "ar" ? "تقييم الطلاب" : "Student rating"}</div>
-                  </div>
-                </motion.div>
 
                 {/* Floating glass card — middle accent */}
                 <motion.div
