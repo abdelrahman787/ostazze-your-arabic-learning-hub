@@ -481,46 +481,7 @@ const HomePage = () => {
         />
 
         <div className="container max-w-6xl">
-          {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="text-center mb-10 md:mb-12"
-          >
-            <span
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-bold tracking-[0.18em] uppercase mb-4"
-              style={{
-                background:
-                  "linear-gradient(135deg, hsl(var(--primary) / 0.12), hsl(38 92% 55% / 0.10))",
-                color: "hsl(var(--primary))",
-                border: "1px solid hsl(var(--primary) / 0.22)",
-              }}
-            >
-              <Sparkles className="w-3.5 h-3.5" />
-              {lang === "ar" ? "ثقة الطلاب" : "Trusted by Students"}
-            </span>
-            <h2 className="text-3xl md:text-5xl font-black tracking-tight text-foreground leading-tight">
-              {lang === "ar" ? "طلابنا ملتحقون بـ" : "Our Students Study At"}
-              <span
-                className="block mt-1 bg-clip-text text-transparent"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(90deg, hsl(var(--primary)), hsl(38 92% 55%))",
-                }}
-              >
-                {lang === "ar" ? "أعرق الجامعات" : "Top-Tier Universities"}
-              </span>
-            </h2>
-            <p className="mt-4 text-muted-foreground max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
-              {lang === "ar"
-                ? "آلاف الطلاب من أبرز الجامعات في الكويت وقطر يثقون بـ OSTAZE لرحلتهم الدراسية."
-                : "Thousands of students from leading universities across Kuwait & Qatar trust OSTAZE for their academic journey."}
-            </p>
-          </motion.div>
-
-          {/* Logos showcase card — night mood */}
+          {/* Unified showcase card — header + logos + stats together */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -535,6 +496,39 @@ const HomePage = () => {
                 "0 30px 80px -30px hsl(var(--primary) / 0.35), inset 0 1px 0 hsl(0 0% 100% / 0.06)",
             }}
           >
+            {/* Header inside the card */}
+            <div className="relative text-center pt-4 md:pt-6 pb-6 md:pb-8 px-3">
+              <span
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-bold tracking-[0.18em] uppercase mb-4"
+                style={{
+                  background:
+                    "linear-gradient(135deg, hsl(var(--primary) / 0.12), hsl(38 92% 55% / 0.10))",
+                  color: "hsl(var(--primary))",
+                  border: "1px solid hsl(var(--primary) / 0.22)",
+                }}
+              >
+                <Sparkles className="w-3.5 h-3.5" />
+                {lang === "ar" ? "ثقة الطلاب" : "Trusted by Students"}
+              </span>
+              <h2 className="text-3xl md:text-5xl font-black tracking-tight text-foreground leading-tight">
+                {lang === "ar" ? "طلابنا ملتحقون بـ" : "Our Students Study At"}
+                <span
+                  className="block mt-1 bg-clip-text text-transparent"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(90deg, hsl(var(--primary)), hsl(38 92% 55%))",
+                  }}
+                >
+                  {lang === "ar" ? "أعرق الجامعات" : "Top-Tier Universities"}
+                </span>
+              </h2>
+              <p className="mt-4 text-muted-foreground max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
+                {lang === "ar"
+                  ? "آلاف الطلاب من أبرز الجامعات في الكويت وقطر يثقون بـ OSTAZE لرحلتهم الدراسية."
+                  : "Thousands of students from leading universities across Kuwait & Qatar trust OSTAZE for their academic journey."}
+              </p>
+            </div>
+
             {/* Dot grid texture */}
             <div
               className="absolute inset-0 opacity-[0.18] pointer-events-none"
