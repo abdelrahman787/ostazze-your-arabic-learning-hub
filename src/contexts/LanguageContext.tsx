@@ -433,7 +433,7 @@ const translations = {
   whatsapp_cta_button: { ar: "اطلب جلسة عبر واتساب", en: "Request a Session via WhatsApp" },
 
   // How It Works
-  how_title: { ar: "كيف تعمل Ostaze؟", en: "How Ostaze Works?" },
+  how_title: { ar: "كيف يعمل استاذي؟", en: "How Ostaze Works?" },
   how_subtitle: { ar: "ثلاث خطوات بسيطة لبدء رحلة التعلم", en: "Three simple steps to start your learning journey" },
   how_step1_title: { ar: "اختر دولتك", en: "Select Your Country" },
   how_step1_desc: { ar: "حدد دولتك لعرض الجامعات والأسعار بالعملة المناسبة لك", en: "\n" },
