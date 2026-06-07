@@ -499,14 +499,52 @@ const HomePage = () => {
       <UniversityLogosStrip />
 
       {/* Students Enrolled At banner */}
-      <section className="py-12">
-        <div className="container max-w-7xl">
-          <img
-            src={studentsEnrolledAt.url}
-            alt={lang === "ar" ? "طلابنا ملتحقون بهذه الجامعات" : "Our Students Enrolled At these universities"}
-            className="w-full h-auto rounded-2xl shadow-lg"
-            loading="lazy"
-          />
+      <section className="py-16 md:py-20">
+        <div className="container max-w-6xl">
+          <div className="text-center mb-8">
+            <span
+              className="inline-block px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-4"
+              style={{ background: "hsl(var(--primary) / 0.12)", color: "hsl(var(--primary))" }}
+            >
+              {lang === "ar" ? "ثقة الطلاب" : "Trusted by Students"}
+            </span>
+            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-foreground">
+              {lang === "ar" ? "طلابنا ملتحقون بـ" : "Our Students Enrolled At"}
+            </h2>
+            <p className="mt-3 text-muted-foreground max-w-xl mx-auto text-sm md:text-base">
+              {lang === "ar"
+                ? "آلاف الطلاب من أعرق الجامعات يثقون بـ OSTAZE لرحلتهم الدراسية."
+                : "Thousands of students from leading universities trust OSTAZE for their academic journey."}
+            </p>
+          </div>
+
+          <div
+            className="relative rounded-3xl overflow-hidden p-2 md:p-3"
+            style={{
+              background:
+                "linear-gradient(135deg, hsl(var(--primary) / 0.10) 0%, hsl(290 70% 50% / 0.08) 50%, hsl(270 70% 55% / 0.10) 100%)",
+              backdropFilter: "blur(20px)",
+              WebkitBackdropFilter: "blur(20px)",
+              border: "1px solid hsl(var(--foreground) / 0.08)",
+              boxShadow:
+                "inset 0 1px 0 hsl(0 0% 100% / 0.08), 0 10px 40px -15px hsl(var(--primary) / 0.15), 0 10px 40px -15px hsl(270 70% 55% / 0.15)",
+            }}
+          >
+            <div
+              className="absolute -top-20 -left-20 w-[280px] h-[280px] rounded-full blur-[80px] opacity-50 pointer-events-none"
+              style={{ background: "radial-gradient(circle, hsl(var(--primary) / 0.35) 0%, transparent 70%)" }}
+            />
+            <div
+              className="absolute -bottom-20 -right-20 w-[320px] h-[320px] rounded-full blur-[90px] opacity-50 pointer-events-none"
+              style={{ background: "radial-gradient(circle, hsl(270 70% 55% / 0.35) 0%, transparent 70%)" }}
+            />
+            <img
+              src={studentsEnrolledAt.url}
+              alt={lang === "ar" ? "طلابنا ملتحقون بهذه الجامعات" : "Our Students Enrolled At these universities"}
+              className="relative w-full h-auto rounded-2xl"
+              loading="lazy"
+            />
+          </div>
         </div>
       </section>
 
