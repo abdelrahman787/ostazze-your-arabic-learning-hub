@@ -263,7 +263,7 @@ const Universities = () => {
           {/* === COUNTRIES === */}
           {view === "countries" && (
             <motion.div key="countries" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}
-              className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-3xl mx-auto"
+              className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-6xl mx-auto"
             >
               {countries.map((c, i) => {
                 const colors = countryColors[c.code] || { from: "from-primary/20", to: "to-accent/10", accent: "text-primary" };
