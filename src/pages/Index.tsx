@@ -281,7 +281,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* How It Works — creative pop-up sequence */}
+      {/* How It Works + WhatsApp CTA — combined section */}
       <section className="py-20 overflow-hidden bg-section-alt">
         <div className="container">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
@@ -369,17 +369,13 @@ const HomePage = () => {
               </motion.div>
             ))}
           </motion.div>
-        </div>
-      </section>
 
-      {/* Quick WhatsApp Session Request */}
-      <section className="py-12">
-        <div className="container">
+          {/* Quick WhatsApp Session Request */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative rounded-[2rem] overflow-hidden p-8 md:p-12 text-center border"
+            className="relative rounded-[2rem] overflow-hidden p-8 md:p-12 text-center border mt-16"
             style={{
               background:
                 "linear-gradient(140deg, hsl(var(--card)) 0%, hsl(var(--background)) 60%, hsl(var(--primary) / 0.06) 100%)",
