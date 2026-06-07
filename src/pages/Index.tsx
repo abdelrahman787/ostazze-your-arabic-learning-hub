@@ -400,72 +400,151 @@ const HomePage = () => {
       {/* Popular Subjects - Orbit Universe */}
       <OrbitSubjects />
 
-      {/* Students Enrolled At banner */}
-      <section className="py-16 md:py-20">
+      {/* Students Enrolled At — refined trust banner */}
+      <section className="relative py-16 md:py-24 overflow-hidden">
+        {/* Ambient backdrop tied to site theme */}
+        <div
+          className="absolute inset-0 pointer-events-none -z-10"
+          style={{
+            background:
+              "radial-gradient(60% 60% at 50% 0%, hsl(var(--primary) / 0.08) 0%, transparent 70%), radial-gradient(50% 50% at 90% 100%, hsl(38 92% 55% / 0.07) 0%, transparent 70%)",
+          }}
+        />
+
         <div className="container max-w-6xl">
-          <div className="text-center mb-8">
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="text-center mb-10 md:mb-12"
+          >
             <span
-              className="inline-block px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-4"
-              style={{ background: "hsl(var(--primary) / 0.12)", color: "hsl(var(--primary))" }}
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-bold tracking-[0.18em] uppercase mb-4"
+              style={{
+                background:
+                  "linear-gradient(135deg, hsl(var(--primary) / 0.12), hsl(38 92% 55% / 0.10))",
+                color: "hsl(var(--primary))",
+                border: "1px solid hsl(var(--primary) / 0.22)",
+              }}
             >
+              <Sparkles className="w-3.5 h-3.5" />
               {lang === "ar" ? "ثقة الطلاب" : "Trusted by Students"}
             </span>
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-foreground">
-              {lang === "ar" ? "طلابنا ملتحقون بـ" : "Our Students Enrolled At"}
+            <h2 className="text-3xl md:text-5xl font-black tracking-tight text-foreground leading-tight">
+              {lang === "ar" ? "طلابنا ملتحقون بـ" : "Our Students Study At"}
+              <span
+                className="block mt-1 bg-clip-text text-transparent"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(90deg, hsl(var(--primary)), hsl(38 92% 55%))",
+                }}
+              >
+                {lang === "ar" ? "أعرق الجامعات" : "Top-Tier Universities"}
+              </span>
             </h2>
-            <p className="mt-3 text-muted-foreground max-w-xl mx-auto text-sm md:text-base">
+            <p className="mt-4 text-muted-foreground max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
               {lang === "ar"
-                ? "آلاف الطلاب من أعرق الجامعات يثقون بـ OSTAZE لرحلتهم الدراسية."
-                : "Thousands of students from leading universities trust OSTAZE for their academic journey."}
+                ? "آلاف الطلاب من أبرز الجامعات في الكويت وقطر يثقون بـ OSTAZE لرحلتهم الدراسية."
+                : "Thousands of students from leading universities across Kuwait & Qatar trust OSTAZE for their academic journey."}
             </p>
-          </div>
+          </motion.div>
 
-          <div
-            className="relative rounded-3xl overflow-hidden p-2 md:p-3"
+          {/* Logos showcase card */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="relative rounded-[2rem] overflow-hidden p-4 md:p-8"
             style={{
               background:
-                "linear-gradient(135deg, hsl(var(--primary) / 0.12) 0%, hsl(24 95% 55% / 0.10) 50%, hsl(38 92% 55% / 0.10) 100%)",
-              backdropFilter: "blur(20px)",
-              WebkitBackdropFilter: "blur(20px)",
+                "linear-gradient(140deg, hsl(var(--card)) 0%, hsl(var(--primary) / 0.04) 50%, hsl(38 92% 55% / 0.05) 100%)",
               border: "1px solid hsl(var(--primary) / 0.18)",
               boxShadow:
-                "inset 0 1px 0 hsl(0 0% 100% / 0.08), 0 10px 40px -15px hsl(var(--primary) / 0.25)",
+                "inset 0 1px 0 hsl(0 0% 100% / 0.06), 0 24px 60px -28px hsl(var(--primary) / 0.35)",
             }}
           >
+            {/* Subtle dot grid texture */}
             <div
-              className="absolute -top-20 -left-20 w-[280px] h-[280px] rounded-full blur-[80px] opacity-60 pointer-events-none"
-              style={{ background: "radial-gradient(circle, hsl(var(--primary) / 0.45) 0%, transparent 70%)" }}
+              className="absolute inset-0 opacity-[0.18] pointer-events-none"
+              style={{
+                backgroundImage:
+                  "radial-gradient(hsl(var(--primary) / 0.35) 1px, transparent 1px)",
+                backgroundSize: "22px 22px",
+                maskImage:
+                  "radial-gradient(ellipse at center, black 40%, transparent 80%)",
+                WebkitMaskImage:
+                  "radial-gradient(ellipse at center, black 40%, transparent 80%)",
+              }}
+            />
+            {/* Warm glows */}
+            <div
+              className="absolute -top-24 -left-24 w-[320px] h-[320px] rounded-full blur-[90px] opacity-50 pointer-events-none"
+              style={{ background: "radial-gradient(circle, hsl(var(--primary) / 0.5) 0%, transparent 70%)" }}
             />
             <div
-              className="absolute -bottom-20 -right-20 w-[320px] h-[320px] rounded-full blur-[90px] opacity-50 pointer-events-none"
-              style={{ background: "radial-gradient(circle, hsl(24 95% 55% / 0.35) 0%, transparent 70%)" }}
+              className="absolute -bottom-24 -right-24 w-[360px] h-[360px] rounded-full blur-[100px] opacity-40 pointer-events-none"
+              style={{ background: "radial-gradient(circle, hsl(38 92% 55% / 0.45) 0%, transparent 70%)" }}
             />
-            <img
-              src={studentsEnrolledAt.url}
-              alt={lang === "ar" ? "طلابنا ملتحقون بهذه الجامعات" : "Our Students Enrolled At these universities"}
-              className="relative w-full h-auto rounded-2xl"
-              loading="lazy"
-            />
-          </div>
+
+            {/* Logos image (resized & framed) */}
+            <div className="relative">
+              <img
+                src={studentsEnrolledAt.url}
+                alt={lang === "ar" ? "طلابنا ملتحقون بهذه الجامعات" : "Our students study at these universities"}
+                className="relative w-full max-w-4xl mx-auto h-auto block"
+                style={{
+                  mixBlendMode: "multiply",
+                  filter: "saturate(0.95) contrast(1.02)",
+                }}
+                loading="lazy"
+              />
+            </div>
+
+            {/* Trust stats inline */}
+            <div className="relative grid grid-cols-3 gap-3 md:gap-6 mt-6 md:mt-8 pt-6 border-t border-primary/15">
+              {[
+                { v: "12+", l: lang === "ar" ? "جامعة" : "Universities" },
+                { v: "5K+", l: lang === "ar" ? "طالب نشط" : "Active Students" },
+                { v: "98%", l: lang === "ar" ? "رضا الطلاب" : "Satisfaction" },
+              ].map((s, i) => (
+                <div key={i} className="text-center">
+                  <div
+                    className="text-2xl md:text-3xl font-black bg-clip-text text-transparent"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(135deg, hsl(var(--primary)), hsl(38 92% 55%))",
+                    }}
+                  >
+                    {s.v}
+                  </div>
+                  <div className="text-[11px] md:text-xs font-medium text-muted-foreground mt-1 tracking-wide">
+                    {s.l}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
 
           {/* Browse all universities CTA */}
           <div className="flex justify-center mt-8">
             <Link
               to="/universities"
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-semibold text-primary transition-all duration-300 hover:-translate-y-0.5"
+              className="group inline-flex items-center gap-2 px-7 py-3 rounded-full text-sm font-bold text-primary-foreground transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
               style={{
-                background: "hsl(var(--primary) / 0.08)",
-                backdropFilter: "blur(12px)",
-                WebkitBackdropFilter: "blur(12px)",
-                border: "1px solid hsl(var(--primary) / 0.3)",
-                boxShadow: "inset 0 1px 0 hsl(var(--primary) / 0.15)",
+                background:
+                  "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(24 95% 55%) 100%)",
+                boxShadow:
+                  "0 10px 30px -10px hsl(var(--primary) / 0.55), inset 0 1px 0 hsl(0 0% 100% / 0.25)",
               }}
             >
+              <GraduationCap className="w-4 h-4" />
               <span>{lang === "ar" ? "تصفح كل الجامعات" : "Browse all universities"}</span>
-              <ArrowLeft className="w-4 h-4 rtl:rotate-180" />
+              <ArrowLeft className="w-4 h-4 rtl:rotate-180 transition-transform group-hover:-translate-x-0.5 rtl:group-hover:translate-x-0.5" />
             </Link>
           </div>
-
         </div>
       </section>
 
