@@ -386,7 +386,6 @@ const HomePage = () => {
               }}
             >
               <span>{lang === "ar" ? "ابدأ الآن" : "Get Started"}</span>
-              <ArrowLeft className="w-4 h-4 rtl:rotate-180" />
             </Link>
           </motion.div>
 
