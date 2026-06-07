@@ -33,7 +33,7 @@ const Footer = () => {
               </span>
               <span className="text-2xl font-black text-primary tracking-tight">OSTAZE</span>
             </Link>
-            <p className="text-sm leading-relaxed text-white/75 mb-5">{t("footer_desc")}</p>
+            <p className="text-sm leading-relaxed text-black/75 mb-5">{t("footer_desc")}</p>
             <div className="flex gap-2">
               {[
                 { Icon: Facebook, label: "Facebook", href: "#" },
@@ -44,7 +44,7 @@ const Footer = () => {
                   key={label}
                   href={href}
                   aria-label={label}
-                  className="w-9 h-9 rounded-full bg-white/5 border border-white/10 text-white/70 hover:bg-primary hover:border-primary hover:text-white flex items-center justify-center transition-all"
+                  className="w-9 h-9 rounded-full bg-black/5 border border-black/10 text-black/70 hover:bg-primary hover:border-primary hover:text-white flex items-center justify-center transition-all"
                 >
                   <Icon size={15} />
                 </a>
@@ -53,7 +53,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-bold text-white mb-5 text-sm">{t("footer_quick_links")}</h4>
+            <h4 className="font-bold text-black mb-5 text-sm">{t("footer_quick_links")}</h4>
             <div className="flex flex-col gap-3 text-sm">
               {[
                 { label: t("nav_subjects"), path: "/subjects" },
@@ -61,40 +61,40 @@ const Footer = () => {
                 { label: t("nav_universities"), path: "/universities" },
                 { label: t("nav_categories"), path: "/categories" },
               ].map((l) => (
-                <Link key={l.path} to={l.path} className="text-white/60 hover:text-primary transition-colors">{l.label}</Link>
+                <Link key={l.path} to={l.path} className="text-black/60 hover:text-primary transition-colors">{l.label}</Link>
               ))}
             </div>
           </div>
 
           <div>
-            <h4 className="font-bold text-white mb-5 text-sm">{t("footer_about")}</h4>
+            <h4 className="font-bold text-black mb-5 text-sm">{t("footer_about")}</h4>
             <div className="flex flex-col gap-3 text-sm">
-              <Link to="/about" className="text-white/60 hover:text-primary transition-colors">{t("footer_about")}</Link>
-              <Link to="/contact" className="text-white/60 hover:text-primary transition-colors">{t("footer_contact")}</Link>
-              <Link to="/terms" className="text-white/60 hover:text-primary transition-colors">{t("footer_terms")}</Link>
-              <Link to="/privacy" className="text-white/60 hover:text-primary transition-colors">{t("footer_privacy")}</Link>
-              <Link to="/refund" className="text-white/60 hover:text-primary transition-colors">{t("footer_refund")}</Link>
-              <Link to="/faq" className="text-white/60 hover:text-primary transition-colors">{t("footer_faq")}</Link>
+              <Link to="/about" className="text-black/60 hover:text-primary transition-colors">{t("footer_about")}</Link>
+              <Link to="/contact" className="text-black/60 hover:text-primary transition-colors">{t("footer_contact")}</Link>
+              <Link to="/terms" className="text-black/60 hover:text-primary transition-colors">{t("footer_terms")}</Link>
+              <Link to="/privacy" className="text-black/60 hover:text-primary transition-colors">{t("footer_privacy")}</Link>
+              <Link to="/refund" className="text-black/60 hover:text-primary transition-colors">{t("footer_refund")}</Link>
+              <Link to="/faq" className="text-black/60 hover:text-primary transition-colors">{t("footer_faq")}</Link>
             </div>
           </div>
 
           <div>
-            <h4 className="font-bold text-white mb-5 text-sm">{t("footer_contact_us")}</h4>
+            <h4 className="font-bold text-black mb-5 text-sm">{t("footer_contact_us")}</h4>
             <div className="flex flex-col gap-3 text-sm mb-6">
-              <div className="flex items-center gap-2.5 text-white/60"><Mail size={14} /><span>info@ostaze.com</span></div>
-              <div className="flex items-center gap-2.5 text-white/60"><Phone size={14} /><span dir="ltr">+201130382206</span></div>
-              <div className="flex items-center gap-2.5 text-white/60"><MapPin size={14} /><span>{t("footer_location")}</span></div>
+              <div className="flex items-center gap-2.5 text-black/60"><Mail size={14} /><span>info@ostaze.com</span></div>
+              <div className="flex items-center gap-2.5 text-black/60"><Phone size={14} /><span dir="ltr">+201130382206</span></div>
+              <div className="flex items-center gap-2.5 text-black/60"><MapPin size={14} /><span>{t("footer_location")}</span></div>
             </div>
 
             {/* Newsletter */}
-            <h4 className="font-bold text-white mb-3 text-sm">{t("footer_newsletter_title")}</h4>
+            <h4 className="font-bold text-black mb-3 text-sm">{t("footer_newsletter_title")}</h4>
             <form onSubmit={(e) => { e.preventDefault(); setEmail(""); }} className="flex gap-2">
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder={t("footer_newsletter_placeholder")}
-                className="flex-1 bg-white/5 border border-white/10 rounded-full px-4 py-2 text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-primary min-h-[40px]"
+                className="flex-1 bg-black/5 border border-black/10 rounded-full px-4 py-2 text-sm text-black placeholder:text-black/40 focus:outline-none focus:border-primary min-h-[40px]"
               />
               <button type="submit" className="bg-primary text-white px-4 py-2 rounded-full text-sm font-bold hover:bg-primary-dark transition-colors min-h-[40px] shadow-[0_4px_14px_hsl(14_91%_50%/0.35)]">
                 {t("footer_newsletter_btn")}
@@ -103,7 +103,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-white/10 mt-12 pt-6 text-center text-sm text-white/40">
+        <div className="border-t border-black/10 mt-12 pt-6 text-center text-sm text-black/40">
           © {new Date().getFullYear()} Ostaze. {t("footer_rights").replace(/© \d{4} Ostaze\. ?/, "")}
         </div>
       </div>
