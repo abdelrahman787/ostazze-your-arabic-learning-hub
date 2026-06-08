@@ -470,6 +470,7 @@ export const allUniversities: University[] = [
     name_ar: "جامعة حمد بن خليفة",
     name_en: "Hamad Bin Khalifa University",
     website: "https://www.hbku.edu.qa",
+    logo: "https://www.google.com/s2/favicons?domain=hbku.edu.qa&sz=128",
     type: "public",
     founded: 2010,
     country_code: "QA",
