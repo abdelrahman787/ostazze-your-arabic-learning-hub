@@ -365,8 +365,8 @@ const Universities = () => {
                         {lang === "ar" ? u.name_ar : u.name_en}
                       </h3>
                       <div className="flex items-center gap-2 text-xs text-muted-foreground mb-4">
-                        <Calendar size={11} />
-                        <span>{lang === "ar" ? `تأسست ${u.founded}` : `Est. ${u.founded}`}</span>
+                        <MapPin size={11} />
+                        <span>{lang === "ar" ? selectedUni.country_ar : selectedUni.country_en}</span>
                       </div>
                       <div className="grid grid-cols-3 gap-2 pt-3 border-t border-border/50">
                         {[
