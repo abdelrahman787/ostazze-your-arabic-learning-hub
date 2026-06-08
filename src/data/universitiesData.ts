@@ -421,6 +421,24 @@ export const allUniversities: University[] = [
           { id: "QA-QU-SHARIA-FIQH", name_ar: "قسم الفقه وأصوله", name_en: "Department of Islamic Jurisprudence", degrees: ["BA","MA"], courses: [{ code: "ISLM100", name_en: "Introduction to Islamic Law", name_ar: "مقدمة في الشريعة الإسلامية", credits: 3 }, { code: "ISLM201", name_en: "Principles of Islamic Jurisprudence", name_ar: "أصول الفقه الإسلامي", credits: 3 }, { code: "ISLM301", name_en: "Comparative Islamic Law", name_ar: "القانون الإسلامي المقارن", credits: 3 }] },
         ],
       },
+      {
+        id: "QA-QU-DENT",
+        name_ar: "كلية طب الأسنان",
+        name_en: "College of Dental Medicine",
+        departments: [],
+      },
+      {
+        id: "QA-QU-NURS",
+        name_ar: "كلية التمريض",
+        name_en: "College of Nursing",
+        departments: [],
+      },
+      {
+        id: "QA-QU-SPORT",
+        name_ar: "كلية العلوم الرياضية",
+        name_en: "College of Sport Sciences",
+        departments: [],
+      },
     ],
   },
   {
