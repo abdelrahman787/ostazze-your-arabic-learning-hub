@@ -585,7 +585,7 @@ const HomePage = () => {
 
               {/* Stats overlay — sits over the empty orange band on the left (or right in RTL) */}
               <div
-                className={`absolute inset-y-0 ${lang === "ar" ? "right-0 mr-3 md:mr-6" : "left-0 ml-3 md:ml-6"} w-[18%] flex flex-col justify-center items-center gap-1.5 md:gap-2 px-1.5 md:px-3`}
+                className={`absolute inset-y-0 ${lang === "ar" ? "right-0 mr-3 md:mr-6" : "left-0 ml-3 md:ml-6"} w-[18%] flex flex-col justify-center items-start gap-1.5 md:gap-2 px-1.5 md:px-3`}
               >
                 {[
                   { v: "73+", l: lang === "ar" ? "جامعة" : "Universities" },
@@ -594,7 +594,7 @@ const HomePage = () => {
                 ].map((s, i) => (
                   <div
                     key={i}
-                    className="text-center w-full rounded-full px-2 py-1 md:py-1.5 backdrop-blur-sm"
+                    className="text-start w-full rounded-full px-2 py-1 md:py-1.5 backdrop-blur-sm"
                     style={{
                       background: "hsl(0 0% 100% / 0.14)",
                       border: "1px solid hsl(0 0% 100% / 0.45)",
