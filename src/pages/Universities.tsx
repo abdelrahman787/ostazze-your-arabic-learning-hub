@@ -95,6 +95,7 @@ const CollegeCard = ({
     (s, d) => s + d.courses.length,
     0
   );
+  const CollegeIcon = getCollegeIcon(college.name_ar, college.name_en);
 
   return (
     <motion.div
@@ -110,7 +111,7 @@ const CollegeCard = ({
       >
         <div className="flex items-center gap-4 min-w-0 flex-1">
           <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 text-primary flex items-center justify-center shrink-0 shadow-sm group-hover:scale-105 transition-transform">
-            <Building2 size={20} />
+            <CollegeIcon size={20} />
           </div>
           <div className="min-w-0">
             <p className="font-bold text-base leading-tight group-hover:text-primary transition-colors">
