@@ -521,6 +521,7 @@ export const allUniversities: University[] = [
     name_ar: "جامعة لوسيل",
     name_en: "Lusail University",
     website: "https://www.lu.edu.qa",
+    logo: "https://www.google.com/s2/favicons?domain=lu.edu.qa&sz=128",
     type: "private",
     founded: 2019,
     country_code: "QA",
