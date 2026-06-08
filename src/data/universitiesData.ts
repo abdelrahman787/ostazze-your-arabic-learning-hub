@@ -726,6 +726,7 @@ export const allUniversities: University[] = [
     name_ar: "كلية وايل كورنيل للطب في قطر",
     name_en: "Weill Cornell Medicine-Qatar",
     website: "https://qatar-weill.cornell.edu",
+    logo: "https://www.google.com/s2/favicons?domain=qatar-weill.cornell.edu&sz=128",
     type: "private",
     founded: 2001,
     country_code: "QA",
