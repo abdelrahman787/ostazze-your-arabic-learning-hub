@@ -400,8 +400,12 @@ const Universities = () => {
               <div className="card-base p-6 md:p-8 mb-8 relative overflow-hidden">
                 <div className="absolute top-0 end-0 w-40 h-40 bg-gradient-to-bl rtl:bg-gradient-to-br from-primary/10 to-transparent ltr:rounded-bl-full rtl:rounded-br-full" />
                 <div className="flex items-start gap-5 relative z-10">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/10 flex items-center justify-center shrink-0 shadow-lg">
-                    <GraduationCap size={30} className="text-primary" />
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/10 flex items-center justify-center shrink-0 shadow-lg overflow-hidden">
+                    {selectedUni.logo ? (
+                      <img src={selectedUni.logo} alt={lang === "ar" ? selectedUni.name_ar : selectedUni.name_en} className="w-11 h-11 object-contain" loading="lazy" onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }} />
+                    ) : (
+                      <GraduationCap size={30} className="text-primary" />
+                    )}
                   </div>
                   <div className="flex-1 min-w-0">
                     <h2 className="font-black text-2xl md:text-3xl leading-tight">{lang === "ar" ? selectedUni.name_ar : selectedUni.name_en}</h2>
