@@ -417,6 +417,7 @@ export const allUniversities: University[] = [
     name_ar: "جامعة الدوحة للعلوم والتكنولوجيا",
     name_en: "University of Doha for Science and Technology",
     website: "https://www.udst.edu.qa",
+    logo: "https://www.google.com/s2/favicons?domain=udst.edu.qa&sz=128",
     type: "public",
     founded: 2022,
     country_code: "QA",
