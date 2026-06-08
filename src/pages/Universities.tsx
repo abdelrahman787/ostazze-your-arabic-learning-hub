@@ -182,8 +182,8 @@ const Universities = () => {
     <div className="min-h-screen">
       <PageHelmet
         title={lang === "ar"
-          ? "الدولة - أستازي OSTAZE"
-          : "Country - OSTAZE"}
+          ? "الجامعات - أستازي OSTAZE"
+          : "Universities - OSTAZE"}
         description={lang === "ar"
           ? "اكتشف الجامعات المدعومة على منصة أستازي — جامعة الكويت، جامعة قطر، والمزيد. معلمون متخصصون لكل جامعة ومنهج."
           : "Discover universities supported by OSTAZE — Kuwait University, Qatar University and more. Specialized tutors for every program."}
@@ -198,7 +198,7 @@ const Universities = () => {
           }),
           breadcrumbJsonLd([
             { name: lang === "ar" ? "الرئيسية" : "Home", path: "/" },
-            { name: lang === "ar" ? "الدولة" : "Country", path: "/universities" },
+            { name: lang === "ar" ? "الجامعات" : "Universities", path: "/universities" },
           ]),
           faqJsonLd(uniFaq),
         ]}
