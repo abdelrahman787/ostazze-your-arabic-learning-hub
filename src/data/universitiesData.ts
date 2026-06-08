@@ -645,6 +645,7 @@ export const allUniversities: University[] = [
     name_ar: "جامعة جورجتاون في قطر",
     name_en: "Georgetown University in Qatar",
     website: "https://guq.qatar.georgetown.edu",
+    logo: "https://www.google.com/s2/favicons?domain=guq.qatar.georgetown.edu&sz=128",
     type: "private",
     founded: 2005,
     country_code: "QA",
