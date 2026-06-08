@@ -236,6 +236,7 @@ const CollegeDetail = () => {
 
   const collegeName = lang === "ar" ? college.name_ar : college.name_en;
   const uniName = lang === "ar" ? university.name_ar : university.name_en;
+  const CollegeIcon = getCollegeIcon(college.name_ar, college.name_en);
   const totalCourses = college.departments.reduce(
     (s, d) => s + d.courses.length,
     0
