@@ -348,8 +348,12 @@ const Universities = () => {
                       className="card-base p-6 text-start hover:border-primary/30 hover:shadow-xl transition-all cursor-pointer group"
                     >
                       <div className="flex items-start justify-between mb-4">
-                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center group-hover:scale-110 transition-transform">
-                          <GraduationCap size={22} className="text-primary" />
+                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center group-hover:scale-110 transition-transform overflow-hidden">
+                          {u.logo ? (
+                            <img src={u.logo} alt={lang === "ar" ? u.name_ar : u.name_en} className="w-8 h-8 object-contain" loading="lazy" onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }} />
+                          ) : (
+                            <GraduationCap size={22} className="text-primary" />
+                          )}
                         </div>
                         <span className={`text-[0.6rem] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider ${
                           u.type === "public" ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400" : "bg-amber-500/10 text-amber-600 dark:text-amber-400"
