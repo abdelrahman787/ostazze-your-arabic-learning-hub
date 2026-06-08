@@ -700,6 +700,7 @@ export const allUniversities: University[] = [
     name_ar: "جامعة فيرجينيا كومنولث للفنون في قطر",
     name_en: "VCUarts Qatar",
     website: "https://qatar.vcu.edu",
+    logo: "https://www.google.com/s2/favicons?domain=qatar.vcu.edu&sz=128",
     type: "private",
     founded: 1998,
     country_code: "QA",
