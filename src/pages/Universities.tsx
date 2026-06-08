@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  GraduationCap, Building2, ChevronLeft, Globe, Calendar,
+  GraduationCap, Building2, ChevronLeft, Globe,
   BookOpen, ExternalLink, Layers, Search, ChevronRight,
 } from "lucide-react";
 import PageHelmet from "@/components/PageHelmet";
@@ -365,8 +365,8 @@ const Universities = () => {
                         {lang === "ar" ? u.name_ar : u.name_en}
                       </h3>
                       <div className="flex items-center gap-2 text-xs text-muted-foreground mb-4">
-                        <Calendar size={11} />
-                        <span>{lang === "ar" ? `تأسست ${u.founded}` : `Est. ${u.founded}`}</span>
+                        <Globe size={11} />
+                        <span>{lang === "ar" ? u.country_ar : u.country_en}</span>
                       </div>
                       <div className="grid grid-cols-3 gap-2 pt-3 border-t border-border/50">
                         {[
@@ -411,7 +411,6 @@ const Universities = () => {
                     <h2 className="font-black text-2xl md:text-3xl leading-tight">{lang === "ar" ? selectedUni.name_ar : selectedUni.name_en}</h2>
                     <div className="flex items-center gap-4 mt-2 flex-wrap">
                       <span className="text-sm text-muted-foreground flex items-center gap-1.5"><Globe size={13} /> {lang === "ar" ? selectedUni.country_ar : selectedUni.country_en}</span>
-                      <span className="text-sm text-muted-foreground flex items-center gap-1.5"><Calendar size={13} /> {selectedUni.founded}</span>
                       <span className={`text-xs font-bold px-3 py-1 rounded-full ${
                         selectedUni.type === "public" ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400" : "bg-amber-500/10 text-amber-600 dark:text-amber-400"
                       }`}>
