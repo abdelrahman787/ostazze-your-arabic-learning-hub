@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect, useCallback } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Building2, ChevronLeft, ChevronRight, ChevronDown,
+  ChevronLeft, ChevronRight, ChevronDown,
   BookOpen, Layers, GraduationCap, CalendarPlus, Loader2, Search,
 } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
@@ -10,6 +10,7 @@ import PageHelmet from "@/components/PageHelmet";
 import { breadcrumbJsonLd, collectionPageJsonLd } from "@/lib/seo";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { allUniversities, College, Department } from "@/data/universitiesData";
+import { getCollegeIcon } from "@/lib/collegeIconMap";
 import { resolveCourseSubject } from "@/lib/courseSubjectMap";
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
@@ -235,6 +236,7 @@ const CollegeDetail = () => {
 
   const collegeName = lang === "ar" ? college.name_ar : college.name_en;
   const uniName = lang === "ar" ? university.name_ar : university.name_en;
+  const CollegeIcon = getCollegeIcon(college.name_ar, college.name_en);
   const totalCourses = college.departments.reduce(
     (s, d) => s + d.courses.length,
     0
@@ -277,7 +279,7 @@ const CollegeDetail = () => {
           animate={{ opacity: 1, scale: 1 }}
           className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-bold mb-4"
         >
-          <Building2 size={16} />
+          <CollegeIcon size={16} />
           {lang === "ar" ? "كلية" : "College"}
         </motion.div>
       </PageHeader>
@@ -332,7 +334,7 @@ const CollegeDetail = () => {
           <div className="absolute top-0 end-0 w-40 h-40 bg-gradient-to-bl rtl:bg-gradient-to-br from-primary/10 to-transparent ltr:rounded-bl-full rtl:rounded-br-full" />
           <div className="flex items-start gap-5 relative z-10">
             <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/10 flex items-center justify-center shrink-0 shadow-lg">
-              <Building2 size={28} className="text-primary" />
+              <CollegeIcon size={28} className="text-primary" />
             </div>
             <div className="flex-1 min-w-0">
               <h1 className="font-black text-2xl md:text-3xl leading-tight">
