@@ -317,6 +317,7 @@ export const allUniversities: University[] = [
     name_ar: "جامعة قطر",
     name_en: "Qatar University",
     website: "https://www.qu.edu.qa",
+    logo: "https://www.google.com/s2/favicons?domain=qu.edu.qa&sz=128",
     type: "public",
     founded: 1977,
     country_code: "QA",
