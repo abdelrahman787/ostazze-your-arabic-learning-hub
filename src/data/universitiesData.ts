@@ -336,6 +336,50 @@ export const allUniversities: University[] = [
     country_en: "Qatar",
     colleges: [
       {
+        id: "QA-QU-ENG",
+        name_ar: "كلية الهندسة",
+        name_en: "College of Engineering",
+        departments: [
+          { id: "QA-QU-ENG-CIVIL", name_ar: "قسم الهندسة المدنية", name_en: "Department of Civil and Architectural Engineering", degrees: ["BSc","MSc","PhD"], courses: [{ code: "CVLE200", name_en: "Engineering Mechanics", name_ar: "الميكانيكا الهندسية", credits: 3 }, { code: "CVLE301", name_en: "Structural Analysis", name_ar: "التحليل الإنشائي", credits: 3 }, { code: "CVLE302", name_en: "Geotechnical Engineering", name_ar: "الهندسة الجيوتقنية", credits: 3 }, { code: "CVLE303", name_en: "Fluid Mechanics", name_ar: "ميكانيكا الموائع", credits: 3 }, { code: "CVLE401", name_en: "Construction Management", name_ar: "إدارة البناء", credits: 3 }] },
+          { id: "QA-QU-ENG-ELEC", name_ar: "قسم الهندسة الكهربائية", name_en: "Department of Electrical Engineering", degrees: ["BSc","MSc","PhD"], courses: [{ code: "ELEE201", name_en: "Circuit Analysis", name_ar: "تحليل الدوائر", credits: 3 }, { code: "ELEE301", name_en: "Electronics", name_ar: "الإلكترونيات", credits: 3 }, { code: "ELEE302", name_en: "Signals and Systems", name_ar: "الإشارات والأنظمة", credits: 3 }, { code: "ELEE401", name_en: "Power Systems", name_ar: "أنظمة القوى الكهربائية", credits: 3 }, { code: "ELEE402", name_en: "Wireless Communications", name_ar: "الاتصالات اللاسلكية", credits: 3 }] },
+          { id: "QA-QU-ENG-MECH", name_ar: "قسم الهندسة الميكانيكية والصناعية", name_en: "Department of Mechanical and Industrial Engineering", degrees: ["BSc","MSc","PhD"], courses: [{ code: "MECH201", name_en: "Thermodynamics", name_ar: "الديناميكا الحرارية", credits: 3 }, { code: "MECH202", name_en: "Engineering Mechanics", name_ar: "الميكانيكا الهندسية", credits: 3 }, { code: "MECH301", name_en: "Heat Transfer", name_ar: "انتقال الحرارة", credits: 3 }, { code: "MECH302", name_en: "Machine Design", name_ar: "تصميم الآلات", credits: 3 }, { code: "INDE301", name_en: "Industrial Engineering", name_ar: "الهندسة الصناعية", credits: 3 }] },
+          { id: "QA-QU-ENG-CHEM", name_ar: "قسم الهندسة الكيميائية", name_en: "Department of Chemical Engineering", degrees: ["BSc","MSc","PhD"], courses: [{ code: "CHEN201", name_en: "Material and Energy Balances", name_ar: "موازين المادة والطاقة", credits: 3 }, { code: "CHEN301", name_en: "Transport Phenomena", name_ar: "ظواهر الانتقال", credits: 3 }, { code: "CHEN302", name_en: "Reaction Engineering", name_ar: "هندسة التفاعلات", credits: 3 }, { code: "CHEN401", name_en: "Process Control", name_ar: "التحكم في العمليات", credits: 3 }, { code: "CHEN402", name_en: "Petroleum Processes", name_ar: "عمليات البترول", credits: 3 }] },
+          { id: "QA-QU-ENG-CS", name_ar: "قسم الهندسة الحاسوبية", name_en: "Department of Computer Science and Engineering", degrees: ["BSc","MSc","PhD"], courses: [{ code: "CMPE201", name_en: "Programming Fundamentals", name_ar: "أساسيات البرمجة", credits: 3 }, { code: "CMPE202", name_en: "Data Structures", name_ar: "هياكل البيانات", credits: 3 }, { code: "CMPE301", name_en: "Algorithms", name_ar: "الخوارزميات", credits: 3 }, { code: "CMPE302", name_en: "Operating Systems", name_ar: "أنظمة التشغيل", credits: 3 }, { code: "CMPE401", name_en: "Machine Learning", name_ar: "التعلم الآلي", credits: 3 }, { code: "CMPE402", name_en: "Cybersecurity", name_ar: "الأمن السيبراني", credits: 3 }] },
+        ],
+      },
+      {
+        id: "QA-QU-MED",
+        name_ar: "كلية الطب",
+        name_en: "College of Medicine",
+        departments: [
+          { id: "QA-QU-MED-BASIC", name_ar: "العلوم الطبية الأساسية", name_en: "Basic Medical Sciences", degrees: ["MD"], courses: [{ code: "MEDS101", name_en: "Human Anatomy", name_ar: "التشريح البشري", credits: 4 }, { code: "MEDS102", name_en: "Physiology", name_ar: "الفسيولوجيا", credits: 4 }, { code: "MEDS201", name_en: "Pathology", name_ar: "علم الأمراض", credits: 4 }, { code: "MEDS202", name_en: "Pharmacology", name_ar: "علم الأدوية", credits: 3 }] },
+        ],
+      },
+      {
+        id: "QA-QU-LAW",
+        name_ar: "كلية القانون",
+        name_en: "College of Law",
+        departments: [
+          { id: "QA-QU-LAW-PUB", name_ar: "القانون العام والخاص", name_en: "Department of Public and Private Law", degrees: ["LLB","LLM"], courses: [{ code: "LAW100", name_en: "Introduction to Law", name_ar: "مقدمة في القانون", credits: 3 }, { code: "LAW201", name_en: "Constitutional Law", name_ar: "القانون الدستوري", credits: 3 }, { code: "LAW202", name_en: "Civil Law", name_ar: "القانون المدني", credits: 3 }, { code: "LAW301", name_en: "Commercial Law", name_ar: "القانون التجاري", credits: 3 }, { code: "LAW401", name_en: "International Law", name_ar: "القانون الدولي", credits: 3 }] },
+        ],
+      },
+      {
+        id: "QA-QU-PHARM",
+        name_ar: "كلية الصيدلة",
+        name_en: "College of Pharmacy",
+        departments: [
+          { id: "QA-QU-PHARM-PHARM", name_ar: "قسم الصيدلة الإكلينيكية", name_en: "Department of Clinical Pharmacy and Practice", degrees: ["PharmD","MSc"], courses: [{ code: "PHRM201", name_en: "Pharmacology I", name_ar: "علم الأدوية ١", credits: 3 }, { code: "PHRM202", name_en: "Pharmaceutics", name_ar: "علم الصيدلانيات", credits: 3 }, { code: "PHRM301", name_en: "Pharmacokinetics", name_ar: "حركية الدواء", credits: 3 }, { code: "PHRM401", name_en: "Clinical Pharmacy Practice", name_ar: "ممارسة الصيدلة السريرية", credits: 4 }] },
+        ],
+      },
+      {
+        id: "QA-QU-SHARIA",
+        name_ar: "كلية الشريعة والدراسات الإسلامية",
+        name_en: "College of Sharia and Islamic Studies",
+        departments: [
+          { id: "QA-QU-SHARIA-FIQH", name_ar: "قسم الفقه وأصوله", name_en: "Department of Islamic Jurisprudence", degrees: ["BA","MA"], courses: [{ code: "ISLM100", name_en: "Introduction to Islamic Law", name_ar: "مقدمة في الشريعة الإسلامية", credits: 3 }, { code: "ISLM201", name_en: "Principles of Islamic Jurisprudence", name_ar: "أصول الفقه الإسلامي", credits: 3 }, { code: "ISLM301", name_en: "Comparative Islamic Law", name_ar: "القانون الإسلامي المقارن", credits: 3 }] },
+        ],
+      },
+      {
         id: "QA-QU-ARTS",
         name_ar: "كلية الآداب والعلوم",
         name_en: "College of Arts and Sciences",
@@ -360,43 +404,6 @@ export const allUniversities: University[] = [
         ],
       },
       {
-        id: "QA-QU-ENG",
-        name_ar: "كلية الهندسة",
-        name_en: "College of Engineering",
-        departments: [
-          { id: "QA-QU-ENG-CIVIL", name_ar: "قسم الهندسة المدنية", name_en: "Department of Civil and Architectural Engineering", degrees: ["BSc","MSc","PhD"], courses: [{ code: "CVLE200", name_en: "Engineering Mechanics", name_ar: "الميكانيكا الهندسية", credits: 3 }, { code: "CVLE301", name_en: "Structural Analysis", name_ar: "التحليل الإنشائي", credits: 3 }, { code: "CVLE302", name_en: "Geotechnical Engineering", name_ar: "الهندسة الجيوتقنية", credits: 3 }, { code: "CVLE303", name_en: "Fluid Mechanics", name_ar: "ميكانيكا الموائع", credits: 3 }, { code: "CVLE401", name_en: "Construction Management", name_ar: "إدارة البناء", credits: 3 }] },
-          { id: "QA-QU-ENG-ELEC", name_ar: "قسم الهندسة الكهربائية", name_en: "Department of Electrical Engineering", degrees: ["BSc","MSc","PhD"], courses: [{ code: "ELEE201", name_en: "Circuit Analysis", name_ar: "تحليل الدوائر", credits: 3 }, { code: "ELEE301", name_en: "Electronics", name_ar: "الإلكترونيات", credits: 3 }, { code: "ELEE302", name_en: "Signals and Systems", name_ar: "الإشارات والأنظمة", credits: 3 }, { code: "ELEE401", name_en: "Power Systems", name_ar: "أنظمة القوى الكهربائية", credits: 3 }, { code: "ELEE402", name_en: "Wireless Communications", name_ar: "الاتصالات اللاسلكية", credits: 3 }] },
-          { id: "QA-QU-ENG-MECH", name_ar: "قسم الهندسة الميكانيكية والصناعية", name_en: "Department of Mechanical and Industrial Engineering", degrees: ["BSc","MSc","PhD"], courses: [{ code: "MECH201", name_en: "Thermodynamics", name_ar: "الديناميكا الحرارية", credits: 3 }, { code: "MECH202", name_en: "Engineering Mechanics", name_ar: "الميكانيكا الهندسية", credits: 3 }, { code: "MECH301", name_en: "Heat Transfer", name_ar: "انتقال الحرارة", credits: 3 }, { code: "MECH302", name_en: "Machine Design", name_ar: "تصميم الآلات", credits: 3 }, { code: "INDE301", name_en: "Industrial Engineering", name_ar: "الهندسة الصناعية", credits: 3 }] },
-          { id: "QA-QU-ENG-CHEM", name_ar: "قسم الهندسة الكيميائية", name_en: "Department of Chemical Engineering", degrees: ["BSc","MSc","PhD"], courses: [{ code: "CHEN201", name_en: "Material and Energy Balances", name_ar: "موازين المادة والطاقة", credits: 3 }, { code: "CHEN301", name_en: "Transport Phenomena", name_ar: "ظواهر الانتقال", credits: 3 }, { code: "CHEN302", name_en: "Reaction Engineering", name_ar: "هندسة التفاعلات", credits: 3 }, { code: "CHEN401", name_en: "Process Control", name_ar: "التحكم في العمليات", credits: 3 }, { code: "CHEN402", name_en: "Petroleum Processes", name_ar: "عمليات البترول", credits: 3 }] },
-          { id: "QA-QU-ENG-CS", name_ar: "قسم الهندسة الحاسوبية", name_en: "Department of Computer Science and Engineering", degrees: ["BSc","MSc","PhD"], courses: [{ code: "CMPE201", name_en: "Programming Fundamentals", name_ar: "أساسيات البرمجة", credits: 3 }, { code: "CMPE202", name_en: "Data Structures", name_ar: "هياكل البيانات", credits: 3 }, { code: "CMPE301", name_en: "Algorithms", name_ar: "الخوارزميات", credits: 3 }, { code: "CMPE302", name_en: "Operating Systems", name_ar: "أنظمة التشغيل", credits: 3 }, { code: "CMPE401", name_en: "Machine Learning", name_ar: "التعلم الآلي", credits: 3 }, { code: "CMPE402", name_en: "Cybersecurity", name_ar: "الأمن السيبراني", credits: 3 }] },
-        ],
-      },
-      {
-        id: "QA-QU-LAW",
-        name_ar: "كلية القانون",
-        name_en: "College of Law",
-        departments: [
-          { id: "QA-QU-LAW-PUB", name_ar: "القانون العام والخاص", name_en: "Department of Public and Private Law", degrees: ["LLB","LLM"], courses: [{ code: "LAW100", name_en: "Introduction to Law", name_ar: "مقدمة في القانون", credits: 3 }, { code: "LAW201", name_en: "Constitutional Law", name_ar: "القانون الدستوري", credits: 3 }, { code: "LAW202", name_en: "Civil Law", name_ar: "القانون المدني", credits: 3 }, { code: "LAW301", name_en: "Commercial Law", name_ar: "القانون التجاري", credits: 3 }, { code: "LAW401", name_en: "International Law", name_ar: "القانون الدولي", credits: 3 }] },
-        ],
-      },
-      {
-        id: "QA-QU-HLTH",
-        name_ar: "كلية العلوم الصحية",
-        name_en: "College of Health Sciences",
-        departments: [
-          { id: "QA-QU-HLTH-PHN", name_ar: "قسم الصحة العامة", name_en: "Department of Public Health", degrees: ["BSc","MPH"], courses: [{ code: "PBHL201", name_en: "Introduction to Public Health", name_ar: "مقدمة في الصحة العامة", credits: 3 }, { code: "PBHL202", name_en: "Epidemiology", name_ar: "علم الوبائيات", credits: 3 }, { code: "PBHL301", name_en: "Health Promotion", name_ar: "تعزيز الصحة", credits: 3 }, { code: "PBHL401", name_en: "Health Policy", name_ar: "السياسة الصحية", credits: 3 }] },
-          { id: "QA-QU-HLTH-BIOMD", name_ar: "قسم العلوم الطبية الحيوية", name_en: "Department of Biomedical Science", degrees: ["BSc","MSc"], courses: [{ code: "BIOM201", name_en: "Anatomy and Physiology", name_ar: "التشريح والفسيولوجيا", credits: 3 }, { code: "BIOM202", name_en: "Pathophysiology", name_ar: "الفسيولوجيا المرضية", credits: 3 }, { code: "BIOM301", name_en: "Immunology", name_ar: "علم المناعة", credits: 3 }, { code: "BIOM401", name_en: "Clinical Biochemistry", name_ar: "الكيمياء الحيوية السريرية", credits: 3 }] },
-        ],
-      },
-      {
-        id: "QA-QU-PHARM",
-        name_ar: "كلية الصيدلة",
-        name_en: "College of Pharmacy",
-        departments: [
-          { id: "QA-QU-PHARM-PHARM", name_ar: "قسم الصيدلة الإكلينيكية", name_en: "Department of Clinical Pharmacy and Practice", degrees: ["PharmD","MSc"], courses: [{ code: "PHRM201", name_en: "Pharmacology I", name_ar: "علم الأدوية ١", credits: 3 }, { code: "PHRM202", name_en: "Pharmaceutics", name_ar: "علم الصيدلانيات", credits: 3 }, { code: "PHRM301", name_en: "Pharmacokinetics", name_ar: "حركية الدواء", credits: 3 }, { code: "PHRM401", name_en: "Clinical Pharmacy Practice", name_ar: "ممارسة الصيدلة السريرية", credits: 4 }] },
-        ],
-      },
-      {
         id: "QA-QU-EDU",
         name_ar: "كلية التربية",
         name_en: "College of Education",
@@ -406,19 +413,12 @@ export const allUniversities: University[] = [
         ],
       },
       {
-        id: "QA-QU-MED",
-        name_ar: "كلية الطب",
-        name_en: "College of Medicine",
+        id: "QA-QU-HLTH",
+        name_ar: "كلية العلوم الصحية",
+        name_en: "College of Health Sciences",
         departments: [
-          { id: "QA-QU-MED-BASIC", name_ar: "العلوم الطبية الأساسية", name_en: "Basic Medical Sciences", degrees: ["MD"], courses: [{ code: "MEDS101", name_en: "Human Anatomy", name_ar: "التشريح البشري", credits: 4 }, { code: "MEDS102", name_en: "Physiology", name_ar: "الفسيولوجيا", credits: 4 }, { code: "MEDS201", name_en: "Pathology", name_ar: "علم الأمراض", credits: 4 }, { code: "MEDS202", name_en: "Pharmacology", name_ar: "علم الأدوية", credits: 3 }] },
-        ],
-      },
-      {
-        id: "QA-QU-SHARIA",
-        name_ar: "كلية الشريعة والدراسات الإسلامية",
-        name_en: "College of Sharia and Islamic Studies",
-        departments: [
-          { id: "QA-QU-SHARIA-FIQH", name_ar: "قسم الفقه وأصوله", name_en: "Department of Islamic Jurisprudence", degrees: ["BA","MA"], courses: [{ code: "ISLM100", name_en: "Introduction to Islamic Law", name_ar: "مقدمة في الشريعة الإسلامية", credits: 3 }, { code: "ISLM201", name_en: "Principles of Islamic Jurisprudence", name_ar: "أصول الفقه الإسلامي", credits: 3 }, { code: "ISLM301", name_en: "Comparative Islamic Law", name_ar: "القانون الإسلامي المقارن", credits: 3 }] },
+          { id: "QA-QU-HLTH-PHN", name_ar: "قسم الصحة العامة", name_en: "Department of Public Health", degrees: ["BSc","MPH"], courses: [{ code: "PBHL201", name_en: "Introduction to Public Health", name_ar: "مقدمة في الصحة العامة", credits: 3 }, { code: "PBHL202", name_en: "Epidemiology", name_ar: "علم الوبائيات", credits: 3 }, { code: "PBHL301", name_en: "Health Promotion", name_ar: "تعزيز الصحة", credits: 3 }, { code: "PBHL401", name_en: "Health Policy", name_ar: "السياسة الصحية", credits: 3 }] },
+          { id: "QA-QU-HLTH-BIOMD", name_ar: "قسم العلوم الطبية الحيوية", name_en: "Department of Biomedical Science", degrees: ["BSc","MSc"], courses: [{ code: "BIOM201", name_en: "Anatomy and Physiology", name_ar: "التشريح والفسيولوجيا", credits: 3 }, { code: "BIOM202", name_en: "Pathophysiology", name_ar: "الفسيولوجيا المرضية", credits: 3 }, { code: "BIOM301", name_en: "Immunology", name_ar: "علم المناعة", credits: 3 }, { code: "BIOM401", name_en: "Clinical Biochemistry", name_ar: "الكيمياء الحيوية السريرية", credits: 3 }] },
         ],
       },
       {
