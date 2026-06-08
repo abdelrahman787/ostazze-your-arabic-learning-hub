@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { GraduationCap, Building2, ChevronDown, Globe, Calendar, BookOpen } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { University, College } from "@/data/universitiesData";
+import { getCollegeIcon } from "@/lib/collegeIconMap";
 
 interface Props {
   university: University;
