@@ -14,6 +14,18 @@ export interface Course {
   name_en: string;
   name_ar: string;
   credits: number;
+  year?: number;
+  semester?: number;
+  term?: string;
+  type?: "Required" | "Elective" | string;
+  program_ids?: string[];
+}
+
+export interface Program {
+  id: string;
+  name_en: string;
+  name_ar: string;
+  degree: string;
 }
 
 export interface Department {
@@ -21,6 +33,7 @@ export interface Department {
   name_ar: string;
   name_en: string;
   degrees: string[];
+  programs?: Program[];
   courses: Course[];
 }
 
