@@ -213,6 +213,17 @@ export function getCollegeIcon(nameAr: string, nameEn: string): LucideIcon {
     return BookOpen;
   }
 
+  // Sport Sciences / Physical Education
+  if (
+    text.includes("sport") ||
+    text.includes("physical education") ||
+    text.includes("رياضية") ||
+    text.includes("رياضة") ||
+    text.includes("رياضي")
+  ) {
+    return Activity;
+  }
+
   // Default fallback
   return Building2;
 }
