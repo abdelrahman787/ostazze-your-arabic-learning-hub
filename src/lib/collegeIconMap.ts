@@ -25,15 +25,18 @@ export function getCollegeIcon(nameAr: string, nameEn: string): LucideIcon {
 
   const text = ar + " " + en;
 
-  // Medicine / Health
+  // Medicine / Health / Dental / Nursing
   if (
     text.includes("medicine") ||
     text.includes("medical") ||
+    text.includes("dental") ||
+    text.includes("dentistry") ||
     text.includes("طب") ||
     text.includes("صحة") ||
     text.includes("health") ||
-    text.includes(" Nursing ") ||
-    text.includes("تمريض")
+    text.includes("nursing") ||
+    text.includes("تمريض") ||
+    text.includes("أسنان")
   ) {
     return Stethoscope;
   }
