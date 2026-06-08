@@ -10,6 +10,7 @@ import PageHelmet from "@/components/PageHelmet";
 import { breadcrumbJsonLd, collectionPageJsonLd } from "@/lib/seo";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { allUniversities, College, Department } from "@/data/universitiesData";
+import { getCollegeIcon } from "@/lib/collegeIconMap";
 import { resolveCourseSubject } from "@/lib/courseSubjectMap";
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
