@@ -277,7 +277,7 @@ const Register = () => {
 
             <div>
               <label className="block text-sm font-bold mb-1.5 flex items-center gap-1.5">
-                <Globe size={14} /> {lang === "ar" ? "الدولة *" : "Country *"}
+                <Globe size={14} /> {lang === "ar" ? "الجامعات *" : "Universities *"}
               </label>
               <CountrySelector value={country} onChange={setCountry} required />
             </div>
