@@ -15,6 +15,7 @@ import {
   Wrench,
   HardHat,
   Building2,
+  Activity,
   type LucideIcon,
 } from "lucide-react";
 
