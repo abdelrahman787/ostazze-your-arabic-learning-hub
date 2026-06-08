@@ -1,3 +1,14 @@
+import logoQU from "@/assets/unis/qatar-university.png.asset.json";
+import logoUDST from "@/assets/unis/udst-new.jpg.asset.json";
+import logoHBKU from "@/assets/unis/hbku.png.asset.json";
+import logoLU from "@/assets/unis/lusail.webp.asset.json";
+import logoCCQ from "@/assets/unis/ccq.jpg.asset.json";
+import logoCMUQ from "@/assets/unis/cmu-qatar.png.asset.json";
+import logoGUQ from "@/assets/unis/georgetown-qatar-new.png.asset.json";
+import logoNUQ from "@/assets/unis/northwestern-qatar.png.asset.json";
+import logoVCUQ from "@/assets/unis/vcuarts-qatar-new.jpeg.asset.json";
+import logoWCMQ from "@/assets/unis/weill-cornell-qatar-new.jpg.asset.json";
+
 export interface Course {
   code: string;
   name_en: string;
@@ -314,6 +325,7 @@ export const allUniversities: University[] = [
   // ===== QATAR =====
   {
     id: "QA-QU",
+    logo: logoQU.url,
     name_ar: "جامعة قطر",
     name_en: "Qatar University",
     website: "https://www.qu.edu.qa",
@@ -413,6 +425,7 @@ export const allUniversities: University[] = [
   },
   {
     id: "QA-UDST",
+    logo: logoUDST.url,
     name_ar: "جامعة الدوحة للعلوم والتكنولوجيا",
     name_en: "University of Doha for Science and Technology",
     website: "https://www.udst.edu.qa",
@@ -465,6 +478,7 @@ export const allUniversities: University[] = [
   },
   {
     id: "QA-HBKU",
+    logo: logoHBKU.url,
     name_ar: "جامعة حمد بن خليفة",
     name_en: "Hamad Bin Khalifa University",
     website: "https://www.hbku.edu.qa",
@@ -515,6 +529,7 @@ export const allUniversities: University[] = [
   },
   {
     id: "QA-LU",
+    logo: logoLU.url,
     name_ar: "جامعة لوسيل",
     name_en: "Lusail University",
     website: "https://www.lu.edu.qa",
@@ -560,6 +575,7 @@ export const allUniversities: University[] = [
   },
   {
     id: "QA-CCQ",
+    logo: logoCCQ.url,
     name_ar: "كلية قطر المجتمعية",
     name_en: "Community College of Qatar",
     website: "https://www.community.edu.qa",
@@ -590,6 +606,7 @@ export const allUniversities: University[] = [
   },
   {
     id: "QA-CMUQ",
+    logo: logoCMUQ.url,
     name_ar: "جامعة كارنيغي ميلون في قطر",
     name_en: "Carnegie Mellon University in Qatar",
     website: "https://www.qatar.cmu.edu",
@@ -636,6 +653,7 @@ export const allUniversities: University[] = [
   },
   {
     id: "QA-GUQ",
+    logo: logoGUQ.url,
     name_ar: "جامعة جورجتاون في قطر",
     name_en: "Georgetown University in Qatar",
     website: "https://guq.qatar.georgetown.edu",
@@ -660,6 +678,7 @@ export const allUniversities: University[] = [
   },
   {
     id: "QA-NUQ",
+    logo: logoNUQ.url,
     name_ar: "جامعة نورث وسترن في قطر",
     name_en: "Northwestern University in Qatar",
     website: "https://www.qatar.northwestern.edu",
@@ -689,6 +708,7 @@ export const allUniversities: University[] = [
   },
   {
     id: "QA-VCUQ",
+    logo: logoVCUQ.url,
     name_ar: "جامعة فيرجينيا كومنولث للفنون في قطر",
     name_en: "VCUarts Qatar",
     website: "https://qatar.vcu.edu",
@@ -714,6 +734,7 @@ export const allUniversities: University[] = [
   },
   {
     id: "QA-WCMQ",
+    logo: logoWCMQ.url,
     name_ar: "كلية وايل كورنيل للطب في قطر",
     name_en: "Weill Cornell Medicine-Qatar",
     website: "https://qatar-weill.cornell.edu",

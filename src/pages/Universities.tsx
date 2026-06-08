@@ -348,8 +348,12 @@ const Universities = () => {
                       className="card-base p-6 text-start hover:border-primary/30 hover:shadow-xl transition-all cursor-pointer group"
                     >
                       <div className="flex items-start justify-between mb-4">
-                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center group-hover:scale-110 transition-transform">
-                          <GraduationCap size={22} className="text-primary" />
+                        <div className="w-14 h-14 rounded-2xl bg-white dark:bg-white/95 ring-1 ring-border/60 flex items-center justify-center overflow-hidden group-hover:scale-110 transition-transform shadow-sm">
+                          {u.logo ? (
+                            <img src={u.logo} alt={lang === "ar" ? u.name_ar : u.name_en} loading="lazy" className="w-full h-full object-contain p-1.5" />
+                          ) : (
+                            <GraduationCap size={22} className="text-primary" />
+                          )}
                         </div>
                         <span className={`text-[0.6rem] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider ${
                           u.type === "public" ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400" : "bg-amber-500/10 text-amber-600 dark:text-amber-400"
@@ -396,8 +400,12 @@ const Universities = () => {
               <div className="card-base p-6 md:p-8 mb-8 relative overflow-hidden">
                 <div className="absolute top-0 end-0 w-40 h-40 bg-gradient-to-bl rtl:bg-gradient-to-br from-primary/10 to-transparent ltr:rounded-bl-full rtl:rounded-br-full" />
                 <div className="flex items-start gap-5 relative z-10">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/10 flex items-center justify-center shrink-0 shadow-lg">
-                    <GraduationCap size={30} className="text-primary" />
+                  <div className="w-20 h-20 rounded-2xl bg-white dark:bg-white/95 ring-1 ring-border/60 flex items-center justify-center shrink-0 shadow-lg overflow-hidden">
+                    {selectedUni.logo ? (
+                      <img src={selectedUni.logo} alt={lang === "ar" ? selectedUni.name_ar : selectedUni.name_en} className="w-full h-full object-contain p-2" />
+                    ) : (
+                      <GraduationCap size={30} className="text-primary" />
+                    )}
                   </div>
                   <div className="flex-1 min-w-0">
                     <h2 className="font-black text-2xl md:text-3xl leading-tight">{lang === "ar" ? selectedUni.name_ar : selectedUni.name_en}</h2>
