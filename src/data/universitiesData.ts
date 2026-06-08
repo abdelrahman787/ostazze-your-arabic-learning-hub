@@ -567,6 +567,7 @@ export const allUniversities: University[] = [
     name_ar: "كلية قطر المجتمعية",
     name_en: "Community College of Qatar",
     website: "https://www.community.edu.qa",
+    logo: "https://www.google.com/s2/favicons?domain=community.edu.qa&sz=128",
     type: "public",
     founded: 2010,
     country_code: "QA",
