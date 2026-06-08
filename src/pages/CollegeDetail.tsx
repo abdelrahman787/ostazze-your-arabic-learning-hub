@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect, useCallback } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Building2, ChevronLeft, ChevronRight, ChevronDown,
+  ChevronLeft, ChevronRight, ChevronDown,
   BookOpen, Layers, GraduationCap, CalendarPlus, Loader2, Search,
 } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
