@@ -670,6 +670,7 @@ export const allUniversities: University[] = [
     name_ar: "جامعة نورث وسترن في قطر",
     name_en: "Northwestern University in Qatar",
     website: "https://www.qatar.northwestern.edu",
+    logo: "https://www.google.com/s2/favicons?domain=qatar.northwestern.edu&sz=128",
     type: "private",
     founded: 2008,
     country_code: "QA",
