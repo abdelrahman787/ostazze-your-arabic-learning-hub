@@ -13,6 +13,7 @@ const CollegeAccordion = ({ college, lang }: { college: College; lang: "ar" | "e
   const [open, setOpen] = useState(false);
   const name = lang === "ar" ? college.name_ar : college.name_en;
   const totalDepts = college.departments.length;
+  const CollegeIcon = getCollegeIcon(college.name_ar, college.name_en);
 
   return (
     <div className="border border-border/50 rounded-xl overflow-hidden">
@@ -22,7 +23,7 @@ const CollegeAccordion = ({ college, lang }: { college: College; lang: "ar" | "e
       >
         <div className="flex items-center gap-2.5 min-w-0">
           <div className="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0">
-            <Building2 size={14} />
+            <CollegeIcon size={14} />
           </div>
           <div className="min-w-0">
             <p className="font-semibold text-sm truncate">{name}</p>
