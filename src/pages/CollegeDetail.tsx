@@ -279,7 +279,7 @@ const CollegeDetail = () => {
           animate={{ opacity: 1, scale: 1 }}
           className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-bold mb-4"
         >
-          <Building2 size={16} />
+          <CollegeIcon size={16} />
           {lang === "ar" ? "كلية" : "College"}
         </motion.div>
       </PageHeader>
