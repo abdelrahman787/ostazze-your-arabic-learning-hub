@@ -598,6 +598,7 @@ export const allUniversities: University[] = [
     name_ar: "جامعة كارنيغي ميلون في قطر",
     name_en: "Carnegie Mellon University in Qatar",
     website: "https://www.qatar.cmu.edu",
+    logo: "https://www.google.com/s2/favicons?domain=qatar.cmu.edu&sz=128",
     type: "private",
     founded: 2004,
     country_code: "QA",
