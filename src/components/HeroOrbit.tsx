@@ -56,7 +56,7 @@ const HeroOrbit = () => {
   });
 
   return (
-    <div ref={ref} className="relative w-full h-full flex items-center justify-center">
+    <div ref={ref} className="relative w-full h-full flex items-center justify-center scale-[0.72] md:scale-100">
       {/* Orbit rings */}
       {ORBITS.map((o, i) => (
         <div
