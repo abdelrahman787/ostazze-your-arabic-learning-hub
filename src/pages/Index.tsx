@@ -378,7 +378,7 @@ const HomePage = () => {
             className="flex justify-center mt-12"
           >
             <Link
-              to="/teachers"
+              to="/universities"
               className="inline-flex items-center gap-2 px-9 py-3.5 rounded-full text-sm md:text-base font-bold text-primary-foreground transition-all duration-300 hover:-translate-y-0.5"
               style={{
                 background: "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-dark)) 100%)",
