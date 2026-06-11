@@ -594,7 +594,7 @@ const HomePage = () => {
                 ].map((s, i) => (
                   <div
                     key={i}
-                    className="text-start w-full rounded-full px-2 py-1 md:py-1.5 backdrop-blur-sm"
+                    className="text-center w-full rounded-full px-2 py-1 md:py-1.5 backdrop-blur-sm"
                     style={{
                       background: "hsl(0 0% 100% / 0.14)",
                       border: "1px solid hsl(0 0% 100% / 0.45)",
