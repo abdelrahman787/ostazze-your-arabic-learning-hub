@@ -388,16 +388,41 @@ const CollegeDetail = () => {
           </span>
         </div>
 
-        <div className="flex flex-col gap-4">
-          {filteredDepts.map((dept, i) => (
-            <DepartmentBlock
-              key={dept.id}
-              dept={dept}
-              lang={lang}
-              index={i}
-              onRequest={handleBookingTrigger}
-            />
-          ))}
+        <div className="space-y-8">
+          {groupByField(filteredDepts, (d) => ({ ar: d.name_ar, en: d.name_en })).map(
+            ({ field, items }) => {
+              const FieldIcon = field.icon;
+              return (
+                <section key={field.id}>
+                  <div className="flex items-center gap-2.5 mb-3">
+                    <div
+                      className={`w-8 h-8 rounded-lg bg-background ring-1 ${field.ring} ${field.accent} flex items-center justify-center shadow-sm`}
+                    >
+                      <FieldIcon size={15} />
+                    </div>
+                    <h3 className={`font-black text-sm ${field.accent}`}>
+                      {lang === "ar" ? field.label_ar : field.label_en}
+                    </h3>
+                    <span className="text-[0.65rem] font-bold px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
+                      {items.length}
+                    </span>
+                    <div className="flex-1 h-px bg-border/60" />
+                  </div>
+                  <div className="flex flex-col gap-3">
+                    {items.map((dept, i) => (
+                      <DepartmentBlock
+                        key={dept.id}
+                        dept={dept}
+                        lang={lang}
+                        index={i}
+                        onRequest={handleBookingTrigger}
+                      />
+                    ))}
+                  </div>
+                </section>
+              );
+            }
+          )}
         </div>
 
         {filteredDepts.length === 0 && (
