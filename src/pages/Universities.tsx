@@ -79,17 +79,21 @@ const AnimatedFlag = ({ code, size = 120 }: { code: string; size?: number }) => 
 
 
 
-// ===== College Card (links to dedicated page) =====
+// ===== Compact grid-style College Card =====
 const CollegeCard = ({
   college,
   uniId,
   lang,
   index,
+  gradient,
+  accent,
 }: {
   college: College;
   uniId: string;
   lang: "ar" | "en";
   index: number;
+  gradient: string;
+  accent: string;
 }) => {
   const name = lang === "ar" ? college.name_ar : college.name_en;
   const totalCourses = college.departments.reduce(
@@ -100,42 +104,41 @@ const CollegeCard = ({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 16 }}
+      initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.05 }}
-      className="card-base overflow-hidden group hover:border-primary/40 hover:shadow-xl transition-all"
+      transition={{ delay: index * 0.03 }}
     >
-      <div className="h-1 bg-gradient-to-r rtl:bg-gradient-to-l from-primary/60 to-primary/20" />
       <Link
         to={`/universities/${uniId}/colleges/${college.id}`}
-        className="w-full flex items-center justify-between p-5 hover:bg-primary/5 dark:hover:bg-primary/10 transition-colors text-start"
+        className={`group relative h-full flex flex-col gap-3 p-4 rounded-2xl border border-border/50 bg-gradient-to-br ${gradient} hover:border-primary/50 hover:shadow-lg hover:-translate-y-0.5 transition-all overflow-hidden`}
       >
-        <div className="flex items-center gap-4 min-w-0 flex-1">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 text-primary flex items-center justify-center shrink-0 shadow-sm group-hover:scale-105 transition-transform">
+        <div className="flex items-start justify-between gap-2">
+          <div
+            className={`w-11 h-11 rounded-xl bg-background/80 backdrop-blur ${accent} flex items-center justify-center shrink-0 shadow-sm ring-1 ring-border/40 group-hover:scale-110 transition-transform`}
+          >
             <CollegeIcon size={20} />
           </div>
-          <div className="min-w-0">
-            <p className="font-bold text-base leading-tight group-hover:text-primary transition-colors">
-              {name}
-            </p>
-            <div className="flex items-center gap-4 mt-1.5 text-xs text-muted-foreground">
-              <span className="flex items-center gap-1">
-                <Layers size={11} />
-                <strong className="text-foreground/70">
-                  {college.departments.length}
-                </strong>{" "}
-                {lang === "ar" ? "قسم" : "departments"}
-              </span>
-              <span className="flex items-center gap-1">
-                <BookOpen size={11} />
-                <strong className="text-foreground/70">{totalCourses}</strong>{" "}
-                {lang === "ar" ? "مادة" : "courses"}
-              </span>
-            </div>
-          </div>
+          <ChevronLeft
+            size={16}
+            className={`${accent} rtl:rotate-180 opacity-40 group-hover:opacity-100 transition-opacity`}
+          />
         </div>
-        <div className="w-8 h-8 rounded-full bg-primary/10 dark:bg-primary/20 border border-primary/10 dark:border-primary/20 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-          <ChevronLeft size={16} className="rtl:rotate-180" />
+        <p className="font-bold text-sm leading-snug line-clamp-2 group-hover:text-primary transition-colors">
+          {name}
+        </p>
+        <div className="flex items-center gap-3 text-[0.7rem] text-muted-foreground mt-auto pt-2 border-t border-border/40">
+          <span className="flex items-center gap-1">
+            <Layers size={10} />
+            <strong className="text-foreground/80">
+              {college.departments.length}
+            </strong>
+            {lang === "ar" ? "قسم" : "dept"}
+          </span>
+          <span className="flex items-center gap-1">
+            <BookOpen size={10} />
+            <strong className="text-foreground/80">{totalCourses}</strong>
+            {lang === "ar" ? "مادة" : "courses"}
+          </span>
         </div>
       </Link>
     </motion.div>
