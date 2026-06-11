@@ -458,12 +458,43 @@ const Universities = () => {
                 </span>
               </div>
 
-               <div className="columns-1 lg:columns-2 gap-4 space-y-4">
-                {filteredColleges.map((college, i) => (
-                  <div key={college.id} className="break-inside-avoid">
-                    <CollegeCard college={college} uniId={selectedUni.id} lang={lang} index={i} />
-                  </div>
-                ))}
+              <div className="space-y-8">
+                {groupByField(filteredColleges, (c) => ({ ar: c.name_ar, en: c.name_en })).map(
+                  ({ field, items }) => {
+                    const FieldIcon = field.icon;
+                    return (
+                      <section key={field.id}>
+                        <div className="flex items-center gap-2.5 mb-3">
+                          <div
+                            className={`w-8 h-8 rounded-lg bg-background ring-1 ${field.ring} ${field.accent} flex items-center justify-center shadow-sm`}
+                          >
+                            <FieldIcon size={15} />
+                          </div>
+                          <h4 className={`font-black text-sm ${field.accent}`}>
+                            {lang === "ar" ? field.label_ar : field.label_en}
+                          </h4>
+                          <span className="text-[0.65rem] font-bold px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
+                            {items.length}
+                          </span>
+                          <div className="flex-1 h-px bg-border/60" />
+                        </div>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+                          {items.map((college, i) => (
+                            <CollegeCard
+                              key={college.id}
+                              college={college}
+                              uniId={selectedUni.id}
+                              lang={lang}
+                              index={i}
+                              gradient={field.gradient}
+                              accent={field.accent}
+                            />
+                          ))}
+                        </div>
+                      </section>
+                    );
+                  }
+                )}
               </div>
 
               {filteredColleges.length === 0 && (
