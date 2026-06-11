@@ -208,7 +208,7 @@ const HomePage = () => {
 
         <div className="container relative z-10">
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-            {/* Text Content Top */}
+            {/* Text Content */}
             <motion.div
               variants={container}
               initial="hidden"
@@ -232,18 +232,12 @@ const HomePage = () => {
               <motion.p dir={lang === "ar" ? "rtl" : "ltr"} variants={item} className="text-foreground/70 text-base md:text-lg leading-relaxed max-w-xl mb-8">
                 {lang === "ar" ? "منصة تعليمية تربطك بأفضل الأساتذة الجامعيين في تخصصك عن طريق جلسات اونلاين" : "An educational platform that connects you with the best university professors in your field through online sessions"}
               </motion.p>
-            </motion.div>
 
-            {/* CTA Button */}
-            <motion.div
-              variants={item}
-              initial="hidden"
-              animate="show"
-              className="w-full max-w-xl order-2 lg:order-none lg:col-start-1 lg:row-start-2"
-            >
-              <Link to="/universities" className="btn-cta-light min-h-[52px] !px-7 inline-flex items-center justify-center">
-                {t("hero_cta")}
-              </Link>
+              <motion.div variants={item} className="w-full max-w-xl mb-6">
+                <Link to="/universities" className="btn-cta-light min-h-[52px] !px-7 inline-flex items-center justify-center">
+                  {t("hero_cta")}
+                </Link>
+              </motion.div>
             </motion.div>
 
             {/* Visual Element with floating glass cards */}
@@ -251,7 +245,7 @@ const HomePage = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className="relative flex justify-center lg:justify-end order-3 lg:order-none lg:col-start-2 lg:row-start-1"
+              className="relative flex justify-center lg:justify-end"
             >
               <div className="relative w-full max-w-[480px] aspect-square flex items-center justify-center">
                 {/* Glow */}
