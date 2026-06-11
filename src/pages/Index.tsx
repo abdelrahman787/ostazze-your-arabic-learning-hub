@@ -208,7 +208,7 @@ const HomePage = () => {
 
         <div className="container relative z-10">
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-            {/* Text Content */}
+            {/* Text Content Top */}
             <motion.div
               variants={container}
               initial="hidden"
@@ -232,12 +232,6 @@ const HomePage = () => {
               <motion.p dir={lang === "ar" ? "rtl" : "ltr"} variants={item} className="text-foreground/70 text-base md:text-lg leading-relaxed max-w-xl mb-8">
                 {lang === "ar" ? "منصة تعليمية تربطك بأفضل الأساتذة الجامعيين في تخصصك عن طريق جلسات اونلاين" : "An educational platform that connects you with the best university professors in your field through online sessions"}
               </motion.p>
-
-              <motion.div variants={item} className="w-full max-w-xl mb-6">
-                <Link to="/universities" className="btn-cta-light min-h-[52px] !px-7 inline-flex items-center justify-center">
-                  {t("hero_cta")}
-                </Link>
-              </motion.div>
             </motion.div>
 
             {/* Visual Element with floating glass cards */}
@@ -256,6 +250,18 @@ const HomePage = () => {
 
 
               </div>
+            </motion.div>
+
+            {/* CTA Button */}
+            <motion.div
+              variants={item}
+              initial="hidden"
+              animate="show"
+              className="w-full max-w-xl"
+            >
+              <Link to="/universities" className="btn-cta-light min-h-[52px] !px-7 inline-flex items-center justify-center">
+                {t("hero_cta")}
+              </Link>
             </motion.div>
           </div>
         </div>
