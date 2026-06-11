@@ -1,9 +1,9 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { mockTestimonials } from "@/data/mockData";
 import {
   Star, ArrowLeft, Sparkles, GraduationCap, CalendarCheck, Video,
-  Search, Calculator, Atom, FlaskConical, Languages,
-  BookOpen, BarChart3, Code, Microscope, ArrowRight, Zap, PenTool, Globe
+  Calculator, Atom, FlaskConical, Languages,
+  BookOpen, BarChart3, Code, Microscope, Zap, PenTool, Globe
 } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
@@ -32,8 +32,6 @@ const item = {
 
 const HomePage = () => {
   const { t, d, lang } = useLanguage();
-  const navigate = useNavigate();
-  const [searchQuery, setSearchQuery] = useState("");
   const howStepsRef = useRef<HTMLDivElement>(null);
   const howStepsInView = useInView(howStepsRef, { once: true, amount: 0.2 });
   const [playHowSteps, setPlayHowSteps] = useState(false);
@@ -112,13 +110,6 @@ const HomePage = () => {
       window.removeEventListener("resize", onResize);
     };
   }, [playHowSteps]);
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      navigate(`/teachers?q=${encodeURIComponent(searchQuery.trim())}`);
-    }
-  };
 
   const popularSubjects = [
     { key: "subj_math", icon: Calculator, color: "bg-blue-500/10 text-blue-600 dark:text-blue-400" },
@@ -242,22 +233,11 @@ const HomePage = () => {
                 {lang === "ar" ? "منصة تعليمية تربطك بأفضل الأساتذة الجامعيين في تخصصك عن طريق جلسات اونلاين" : "An educational platform that connects you with the best university professors in your field through online sessions"}
               </motion.p>
 
-              <motion.form variants={item} onSubmit={handleSearch} className="w-full max-w-xl flex gap-2 mb-6">
-                <div className="flex-1 relative">
-                  <Search size={18} className="absolute top-1/2 -translate-y-1/2 start-4 text-muted-foreground" />
-                  <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder={t("hero_search_placeholder")}
-                    className="w-full ps-11 pe-4 py-3.5 rounded-full border border-foreground/15 bg-card/85 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all min-h-[52px]"
-                  />
-                </div>
-                <button type="submit" className="btn-cta-light min-h-[52px] !px-7">
+              <motion.div variants={item} className="w-full max-w-xl mb-6">
+                <Link to="/universities" className="btn-cta-light min-h-[52px] !px-7 inline-flex items-center justify-center">
                   {t("hero_cta")}
-                  <ArrowRight size={16} />
-                </button>
-              </motion.form>
+                </Link>
+              </motion.div>
             </motion.div>
 
             {/* Visual Element with floating glass cards */}
