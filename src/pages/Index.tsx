@@ -32,8 +32,6 @@ const item = {
 
 const HomePage = () => {
   const { t, d, lang } = useLanguage();
-  const navigate = useNavigate();
-  const [searchQuery, setSearchQuery] = useState("");
   const howStepsRef = useRef<HTMLDivElement>(null);
   const howStepsInView = useInView(howStepsRef, { once: true, amount: 0.2 });
   const [playHowSteps, setPlayHowSteps] = useState(false);
@@ -112,13 +110,6 @@ const HomePage = () => {
       window.removeEventListener("resize", onResize);
     };
   }, [playHowSteps]);
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      navigate(`/teachers?q=${encodeURIComponent(searchQuery.trim())}`);
-    }
-  };
 
   const popularSubjects = [
     { key: "subj_math", icon: Calculator, color: "bg-blue-500/10 text-blue-600 dark:text-blue-400" },
