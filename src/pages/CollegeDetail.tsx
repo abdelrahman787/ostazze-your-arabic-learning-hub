@@ -73,46 +73,143 @@ const DepartmentBlock = ({ dept, lang, index, onRequest }: DeptProps) => {
             transition={{ duration: 0.25 }}
             className="overflow-hidden border-t border-border/30"
           >
-            <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-2">
-              {dept.courses.map((course) => {
-                const courseName = lang === "ar" ? course.name_ar : course.name_en;
-                const requestLabel =
-                  lang === "ar" ? "طلب حصة" : "Request a session";
-                const parentSubject = resolveCourseSubject(
-                  course.code,
-                  {
-                    ar: dept.name_ar.replace(/^قسم\s+/, ""),
-                    en: dept.name_en.replace(/^Department of\s+/i, ""),
-                  },
-                  lang
-                );
-                return (
-                  <div
-                    key={course.code}
-                    className="flex items-center gap-3 py-2.5 px-3 rounded-lg bg-card hover:bg-primary/5 dark:hover:bg-primary/10 border border-border/40 hover:border-primary/30 transition-colors"
-                  >
-                    <span className="font-mono text-[0.7rem] font-bold text-primary bg-primary/10 px-2 py-1 rounded shrink-0 tracking-wide">
-                      {course.code}
-                    </span>
-                    <span className="text-sm text-foreground/90 truncate flex-1 font-medium">
-                      {courseName}
-                    </span>
-                    <span className="text-[0.65rem] text-muted-foreground shrink-0 hidden sm:inline">
-                      {course.credits}h
-                    </span>
-                    <button
-                      type="button"
-                      title={`${requestLabel} • ${parentSubject}`}
-                      aria-label={`${requestLabel}: ${courseName} (${parentSubject})`}
-                      onClick={() => onRequest(parentSubject, courseName)}
-                      className="shrink-0 inline-flex items-center gap-1.5 h-8 px-2.5 rounded-lg bg-primary/10 hover:bg-primary hover:text-primary-foreground text-primary text-xs font-bold transition-colors"
-                    >
-                      <CalendarPlus size={13} />
-                      <span className="hidden sm:inline">{requestLabel}</span>
-                    </button>
-                  </div>
-                );
-              })}
+            <div className="p-4 space-y-5">
+              {(() => {
+                // Group courses by year → term
+                const requestLabel = lang === "ar" ? "طلب حصة" : "Request a session";
+                const termLabel = (term?: string) => {
+                  if (!term) return lang === "ar" ? "غير محدد" : "Unscheduled";
+                  const map: Record<string, { ar: string; en: string }> = {
+                    Fall: { ar: "الخريف", en: "Fall" },
+                    Spring: { ar: "الربيع", en: "Spring" },
+                    Summer: { ar: "الصيف", en: "Summer" },
+                    Winter: { ar: "الشتاء", en: "Winter" },
+                  };
+                  const m = map[term];
+                  return m ? (lang === "ar" ? m.ar : m.en) : term;
+                };
+                const yearLabel = (y?: number) => {
+                  if (!y) return lang === "ar" ? "بدون سنة" : "No Year";
+                  const ords = lang === "ar"
+                    ? ["", "الأولى", "الثانية", "الثالثة", "الرابعة", "الخامسة", "السادسة"]
+                    : ["", "First", "Second", "Third", "Fourth", "Fifth", "Sixth"];
+                  return lang === "ar"
+                    ? `السنة ${ords[y] || y}`
+                    : `Year ${y} (${ords[y] || y})`;
+                };
+
+                // Group
+                const yearMap = new Map<number, Map<string, typeof dept.courses>>();
+                dept.courses.forEach((c) => {
+                  const y = c.year ?? 0;
+                  const t = c.term ?? "";
+                  if (!yearMap.has(y)) yearMap.set(y, new Map());
+                  const tm = yearMap.get(y)!;
+                  if (!tm.has(t)) tm.set(t, [] as any);
+                  (tm.get(t) as any).push(c);
+                });
+
+                const termOrder: Record<string, number> = { Fall: 1, Spring: 2, Summer: 3, Winter: 4, "": 99 };
+                const years = [...yearMap.keys()].sort((a, b) => (a || 99) - (b || 99));
+                const hasGrouping = dept.courses.some((c) => c.year || c.term);
+
+                if (!hasGrouping) {
+                  // Fallback: flat grid
+                  return (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                      {dept.courses.map((course) => {
+                        const courseName = lang === "ar" ? course.name_ar : course.name_en;
+                        const parentSubject = resolveCourseSubject(
+                          course.code,
+                          {
+                            ar: dept.name_ar.replace(/^قسم\s+/, ""),
+                            en: dept.name_en.replace(/^Department of\s+/i, ""),
+                          },
+                          lang
+                        );
+                        return (
+                          <div key={course.code} className="flex items-center gap-3 py-2.5 px-3 rounded-lg bg-card hover:bg-primary/5 dark:hover:bg-primary/10 border border-border/40 hover:border-primary/30 transition-colors">
+                            <span className="font-mono text-[0.7rem] font-bold text-primary bg-primary/10 px-2 py-1 rounded shrink-0 tracking-wide">{course.code}</span>
+                            <span className="text-sm text-foreground/90 truncate flex-1 font-medium">{courseName}</span>
+                            <span className="text-[0.65rem] text-muted-foreground shrink-0 hidden sm:inline">{course.credits}h</span>
+                            <button type="button" onClick={() => onRequest(parentSubject, courseName)} className="shrink-0 inline-flex items-center gap-1.5 h-8 px-2.5 rounded-lg bg-primary/10 hover:bg-primary hover:text-primary-foreground text-primary text-xs font-bold transition-colors">
+                              <CalendarPlus size={13} />
+                              <span className="hidden sm:inline">{requestLabel}</span>
+                            </button>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  );
+                }
+
+                return years.map((y) => {
+                  const terms = [...yearMap.get(y)!.entries()].sort(
+                    (a, b) => (termOrder[a[0]] ?? 50) - (termOrder[b[0]] ?? 50)
+                  );
+                  const yearTotal = terms.reduce((s, [, cs]) => s + cs.length, 0);
+                  return (
+                    <div key={y} className="rounded-xl border border-primary/15 bg-primary/[0.03] overflow-hidden">
+                      <div className="flex items-center gap-2 px-4 py-2.5 bg-primary/10 border-b border-primary/15">
+                        <GraduationCap size={14} className="text-primary" />
+                        <h4 className="font-black text-sm text-primary">{yearLabel(y || undefined)}</h4>
+                        <span className="text-[0.65rem] font-bold px-2 py-0.5 rounded-full bg-background/80 text-primary ms-auto">
+                          {yearTotal} {lang === "ar" ? "مادة" : "courses"}
+                        </span>
+                      </div>
+                      <div className="p-3 space-y-4">
+                        {terms.map(([term, courses]) => (
+                          <div key={term}>
+                            <div className="flex items-center gap-2 mb-2">
+                              <span className="text-xs font-bold text-foreground/80 uppercase tracking-wide">
+                                {termLabel(term || undefined)}
+                              </span>
+                              <span className="text-[0.6rem] text-muted-foreground">• {courses.length}</span>
+                              <div className="flex-1 h-px bg-border/50" />
+                            </div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                              {courses.map((course) => {
+                                const courseName = lang === "ar" ? course.name_ar : course.name_en;
+                                const parentSubject = resolveCourseSubject(
+                                  course.code,
+                                  {
+                                    ar: dept.name_ar.replace(/^قسم\s+/, ""),
+                                    en: dept.name_en.replace(/^Department of\s+/i, ""),
+                                  },
+                                  lang
+                                );
+                                const isElective = course.type?.toLowerCase().includes("elective");
+                                return (
+                                  <div key={course.code} className="flex items-center gap-2.5 py-2 px-2.5 rounded-lg bg-card hover:bg-primary/5 dark:hover:bg-primary/10 border border-border/40 hover:border-primary/30 transition-colors">
+                                    <span className="font-mono text-[0.65rem] font-bold text-primary bg-primary/10 px-1.5 py-1 rounded shrink-0 tracking-wide">
+                                      {course.code}
+                                    </span>
+                                    <div className="min-w-0 flex-1">
+                                      <p className="text-sm text-foreground/90 truncate font-medium">{courseName}</p>
+                                      <div className="flex items-center gap-2 mt-0.5">
+                                        <span className="text-[0.6rem] text-muted-foreground">{course.credits}h</span>
+                                        {course.type && (
+                                          <span className={`text-[0.6rem] px-1.5 py-0.5 rounded font-bold ${isElective ? "bg-accent/15 text-accent-foreground" : "bg-muted text-muted-foreground"}`}>
+                                            {isElective ? (lang === "ar" ? "اختياري" : "Elective") : (lang === "ar" ? "إجباري" : "Required")}
+                                          </span>
+                                        )}
+                                      </div>
+                                    </div>
+                                    <button type="button" title={`${requestLabel} • ${parentSubject}`} aria-label={`${requestLabel}: ${courseName}`} onClick={() => onRequest(parentSubject, courseName)} className="shrink-0 inline-flex items-center gap-1.5 h-8 px-2 rounded-lg bg-primary/10 hover:bg-primary hover:text-primary-foreground text-primary text-xs font-bold transition-colors">
+                                      <CalendarPlus size={13} />
+                                      <span className="hidden lg:inline">{requestLabel}</span>
+                                    </button>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                });
+              })()}
             </div>
           </motion.div>
         )}
