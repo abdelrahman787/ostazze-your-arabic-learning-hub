@@ -265,7 +265,7 @@ const HomePage = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className="relative flex justify-center lg:justify-end order-first lg:order-last"
+              className="relative flex justify-center lg:justify-end"
             >
               <div className="relative w-full max-w-[480px] aspect-square flex items-center justify-center">
                 {/* Glow */}
