@@ -1,8 +1,8 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { mockTestimonials } from "@/data/mockData";
 import {
   Star, ArrowLeft, Sparkles, GraduationCap, CalendarCheck, Video,
-  Search, Calculator, Atom, FlaskConical, Languages,
+  Calculator, Atom, FlaskConical, Languages,
   BookOpen, BarChart3, Code, Microscope, ArrowRight, Zap, PenTool, Globe
 } from "lucide-react";
 import { motion, useInView } from "framer-motion";
@@ -32,93 +32,9 @@ const item = {
 
 const HomePage = () => {
   const { t, d, lang } = useLanguage();
-  const navigate = useNavigate();
-  const [searchQuery, setSearchQuery] = useState("");
   const howStepsRef = useRef<HTMLDivElement>(null);
   const howStepsInView = useInView(howStepsRef, { once: true, amount: 0.2 });
   const [playHowSteps, setPlayHowSteps] = useState(false);
-
-  useEffect(() => {
-    console.log("[HowSteps] 🔎 useInView changed →", howStepsInView, {
-      refAttached: !!howStepsRef.current,
-      refRect: howStepsRef.current?.getBoundingClientRect?.(),
-    });
-    if (howStepsInView) {
-      console.log("[HowSteps] ✅ Triggering animation via useInView");
-      const frame = requestAnimationFrame(() => setPlayHowSteps(true));
-      return () => cancelAnimationFrame(frame);
-    }
-  }, [howStepsInView]);
-
-  useEffect(() => {
-    console.log("[HowSteps] 🟡 Mount/state effect — playHowSteps =", playHowSteps);
-    if (playHowSteps) {
-      console.log("[HowSteps] ⏭️ Already playing, skipping fallback observers");
-      return;
-    }
-
-    if (!howStepsRef.current) {
-      console.warn("[HowSteps] ⚠️ Ref NOT attached yet on effect mount");
-    }
-
-    const checkHowStepsVisibility = (source: string) => {
-      const element = howStepsRef.current;
-      if (!element) {
-        console.warn(`[HowSteps] ❌ Ref missing during check (source=${source})`);
-        return;
-      }
-
-      const rect = element.getBoundingClientRect();
-      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-      const isVisible = rect.top < viewportHeight * 0.82 && rect.bottom > viewportHeight * 0.18;
-
-      console.log(`[HowSteps] 👁️ Visibility check (${source})`, {
-        top: Math.round(rect.top),
-        bottom: Math.round(rect.bottom),
-        viewportHeight,
-        isVisible,
-        documentReady: document.readyState,
-      });
-
-      if (isVisible) {
-        console.log(`[HowSteps] ✅ Visible — triggering animation (source=${source})`);
-        setPlayHowSteps(true);
-      }
-    };
-
-    const onRaf = () => checkHowStepsVisibility("rAF");
-    const onTimeout = () => checkHowStepsVisibility("timeout-700ms");
-    const onLoad = () => checkHowStepsVisibility("window-load");
-    const onScroll = () => checkHowStepsVisibility("scroll");
-    const onResize = () => checkHowStepsVisibility("resize");
-
-    let frame: number | null = null;
-    let timeout: number | null = null;
-    try {
-      frame = requestAnimationFrame(onRaf);
-      timeout = window.setTimeout(onTimeout, 700);
-      window.addEventListener("load", onLoad, { once: true });
-      window.addEventListener("scroll", onScroll, { passive: true });
-      window.addEventListener("resize", onResize);
-    } catch (err) {
-      console.error("[HowSteps] 💥 Failed to register visibility listeners", err);
-    }
-
-    return () => {
-      if (frame !== null) cancelAnimationFrame(frame);
-      if (timeout !== null) window.clearTimeout(timeout);
-      window.removeEventListener("load", onLoad);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onResize);
-    };
-  }, [playHowSteps]);
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      navigate(`/teachers?q=${encodeURIComponent(searchQuery.trim())}`);
-    }
-  };
 
   const popularSubjects = [
     { key: "subj_math", icon: Calculator, color: "bg-blue-500/10 text-blue-600 dark:text-blue-400" },
@@ -242,22 +158,6 @@ const HomePage = () => {
                 {lang === "ar" ? "منصة تعليمية تربطك بأفضل الأساتذة الجامعيين في تخصصك عن طريق جلسات اونلاين" : "An educational platform that connects you with the best university professors in your field through online sessions"}
               </motion.p>
 
-              <motion.form variants={item} onSubmit={handleSearch} className="w-full max-w-xl flex gap-2 mb-6">
-                <div className="flex-1 relative">
-                  <Search size={18} className="absolute top-1/2 -translate-y-1/2 start-4 text-muted-foreground" />
-                  <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder={t("hero_search_placeholder")}
-                    className="w-full ps-11 pe-4 py-3.5 rounded-full border border-foreground/15 bg-card/85 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all min-h-[52px]"
-                  />
-                </div>
-                <button type="submit" className="btn-cta-light min-h-[52px] !px-7">
-                  {t("hero_cta")}
-                  <ArrowRight size={16} />
-                </button>
-              </motion.form>
             </motion.div>
 
             {/* Visual Element with floating glass cards */}
