@@ -276,77 +276,78 @@ const HomePage = () => {
             className="grid md:grid-cols-3 gap-10 md:gap-6 relative max-w-5xl mx-auto"
           >
             {howSteps.map((step, i) => (
-              <motion.div
-                key={step.key}
-                variants={{
-                  hidden: {},
-                  show: { transition: { staggerChildren: 0.08, delayChildren: 0.02 } },
-                }}
-                className="text-center relative group"
-              >
-                {/* Big orange number */}
+              <Link to="/universities" key={step.key} className="block group">
                 <motion.div
                   variants={{
-                    hidden: { opacity: 0, y: -20, scale: 0.5 },
-                    show: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 220, damping: 14 } },
+                    hidden: {},
+                    show: { transition: { staggerChildren: 0.08, delayChildren: 0.02 } },
                   }}
-                  className="text-6xl md:text-7xl font-black text-primary leading-none mb-3 relative z-10"
-                  style={{ textShadow: "0 6px 20px hsl(var(--primary) / 0.25)" }}
+                  className="text-center relative"
                 >
-                  {step.key}
+                  {/* Big orange number */}
+                  <motion.div
+                    variants={{
+                      hidden: { opacity: 0, y: -20, scale: 0.5 },
+                      show: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 220, damping: 14 } },
+                    }}
+                    className="text-6xl md:text-7xl font-black text-primary leading-none mb-3 relative z-10"
+                    style={{ textShadow: "0 6px 20px hsl(var(--primary) / 0.25)" }}
+                  >
+                    {step.key}
+                  </motion.div>
+
+                  {/* Title */}
+                  <motion.h3
+                    variants={{
+                      hidden: { opacity: 0, y: 10 },
+                      show: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+                    }}
+                    className="font-extrabold text-xl md:text-2xl mb-6 text-foreground whitespace-pre-line"
+                  >
+                    {t(step.titleKey)}
+                  </motion.h3>
+
+                  {/* Illustration with beige blob background */}
+                  <motion.div
+                    variants={{
+                      hidden: { opacity: 0, y: 40, scale: 0.9 },
+                      show: {
+                        opacity: 1, y: 0, scale: 1,
+                        transition: { type: "spring", stiffness: 140, damping: 18 },
+                      },
+                    }}
+                    whileHover={{ y: -6 }}
+                    className="relative mx-auto w-full max-w-[260px] aspect-square flex items-center justify-center"
+                  >
+                    {/* Soft beige blob behind illustration — adapts to theme */}
+                    <div
+                      className="absolute inset-4 rounded-[45%_55%_60%_40%/50%_45%_55%_50%] bg-[hsl(28_60%_88%)] dark:bg-[hsl(28_25%_22%)] opacity-90 blur-[1px]"
+                      aria-hidden="true"
+                    />
+                    <motion.img
+                      src={step.image}
+                      alt=""
+                      loading="lazy"
+                      width={520}
+                      height={520}
+                      animate={{ y: [0, -6, 0] }}
+                      transition={{ duration: 3.5, repeat: Infinity, delay: i * 0.4, ease: "easeInOut" }}
+                      className="relative z-10 w-full h-full object-contain drop-shadow-[0_10px_25px_hsl(var(--primary)/0.15)]"
+                    />
+                  </motion.div>
+
+                  {/* Description */}
+                  <motion.p
+                    variants={{
+                      hidden: { opacity: 0 },
+                      show: { opacity: 1, transition: { duration: 0.5 } },
+                    }}
+                    className="text-muted-foreground text-sm leading-relaxed max-w-xs mx-auto mt-4"
+                  >
+                    {t(step.descKey)}
+                  </motion.p>
                 </motion.div>
-
-                {/* Title */}
-                <motion.h3
-                  variants={{
-                    hidden: { opacity: 0, y: 10 },
-                    show: { opacity: 1, y: 0, transition: { duration: 0.4 } },
-                  }}
-                  className="font-extrabold text-xl md:text-2xl mb-6 text-foreground whitespace-pre-line"
-                >
-                  {t(step.titleKey)}
-                </motion.h3>
-
-                {/* Illustration with beige blob background */}
-                <motion.div
-                  variants={{
-                    hidden: { opacity: 0, y: 40, scale: 0.9 },
-                    show: {
-                      opacity: 1, y: 0, scale: 1,
-                      transition: { type: "spring", stiffness: 140, damping: 18 },
-                    },
-                  }}
-                  whileHover={{ y: -6 }}
-                  className="relative mx-auto w-full max-w-[260px] aspect-square flex items-center justify-center"
-                >
-                  {/* Soft beige blob behind illustration — adapts to theme */}
-                  <div
-                    className="absolute inset-4 rounded-[45%_55%_60%_40%/50%_45%_55%_50%] bg-[hsl(28_60%_88%)] dark:bg-[hsl(28_25%_22%)] opacity-90 blur-[1px]"
-                    aria-hidden="true"
-                  />
-                  <motion.img
-                    src={step.image}
-                    alt=""
-                    loading="lazy"
-                    width={520}
-                    height={520}
-                    animate={{ y: [0, -6, 0] }}
-                    transition={{ duration: 3.5, repeat: Infinity, delay: i * 0.4, ease: "easeInOut" }}
-                    className="relative z-10 w-full h-full object-contain drop-shadow-[0_10px_25px_hsl(var(--primary)/0.15)]"
-                  />
-                </motion.div>
-
-                {/* Description */}
-                <motion.p
-                  variants={{
-                    hidden: { opacity: 0 },
-                    show: { opacity: 1, transition: { duration: 0.5 } },
-                  }}
-                  className="text-muted-foreground text-sm leading-relaxed max-w-xs mx-auto mt-4"
-                >
-                  {t(step.descKey)}
-                </motion.p>
-              </motion.div>
+              </Link>
             ))}
           </motion.div>
 
