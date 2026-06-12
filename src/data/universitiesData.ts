@@ -4567,6 +4567,32 @@ export const allUniversities: University[] = [
           },
         ],
       },
+      {
+        id: "QA-HBKU-ISLM",
+        name_ar: "كلية الدراسات الإسلامية",
+        name_en: "College of Islamic Studies",
+        departments: [
+          { id: "QA-HBKU-ISLM-FINANCE", name_ar: "قسم التمويل الإسلامي", name_en: "Department of Islamic Finance", degrees: ["MA","PhD"], courses: [{ code: "ISFI201", name_en: "Foundations of Islamic Finance", name_ar: "أسس التمويل الإسلامي", credits: 3 }, { code: "ISFI301", name_en: "Islamic Banking", name_ar: "المصرفية الإسلامية", credits: 3 }, { code: "ISFI302", name_en: "Sukuk and Islamic Capital Markets", name_ar: "الصكوك وأسواق المال الإسلامية", credits: 3 }, { code: "ISFI401", name_en: "Islamic Microfinance", name_ar: "التمويل الإسلامي المتناهي الصغر", credits: 3 }] },
+          { id: "QA-HBKU-ISLM-ETH", name_ar: "قسم الأخلاق والقيم الإسلامية", name_en: "Department of Islamic Ethics", degrees: ["MA","PhD"], courses: [{ code: "ISET201", name_en: "Islamic Ethics and Civilization", name_ar: "الأخلاق الإسلامية والحضارة", credits: 3 }, { code: "ISET301", name_en: "Bioethics in Islam", name_ar: "أخلاقيات الطب في الإسلام", credits: 3 }, { code: "ISET401", name_en: "Environmental Ethics in Islam", name_ar: "أخلاقيات البيئة في الإسلام", credits: 3 }] },
+        ],
+      },
+      {
+        id: "QA-HBKU-HSS",
+        name_ar: "كلية العلوم الإنسانية والاجتماعية",
+        name_en: "College of Humanities and Social Sciences",
+        departments: [
+          { id: "QA-HBKU-HSS-MEDIA", name_ar: "قسم الإعلام والاتصال", name_en: "Department of Media and Communication", degrees: ["MA","PhD"], courses: [{ code: "HMCD201", name_en: "Media Studies", name_ar: "دراسات إعلامية", credits: 3 }, { code: "HMCD301", name_en: "Digital Journalism", name_ar: "الصحافة الرقمية", credits: 3 }, { code: "HMCD302", name_en: "Communication Research Methods", name_ar: "مناهج بحث الاتصال", credits: 3 }, { code: "HMCD401", name_en: "Media Policy", name_ar: "سياسة الإعلام", credits: 3 }] },
+          { id: "QA-HBKU-HSS-TRANS", name_ar: "قسم الترجمة والدراسات اللغوية", name_en: "Department of Translation and Language Studies", degrees: ["MA"], courses: [{ code: "HTLS201", name_en: "Translation Theory", name_ar: "نظرية الترجمة", credits: 3 }, { code: "HTLS202", name_en: "Arabic-English Translation", name_ar: "الترجمة العربية الإنجليزية", credits: 3 }, { code: "HTLS301", name_en: "Simultaneous Interpretation", name_ar: "الترجمة الفورية", credits: 3 }, { code: "HTLS401", name_en: "Localization and Technology", name_ar: "التوطين والتقنية", credits: 3 }] },
+        ],
+      },
+      {
+        id: "QA-HBKU-PP",
+        name_ar: "كلية السياسات العامة",
+        name_en: "College of Public Policy",
+        departments: [
+          { id: "QA-HBKU-PP-POLICY", name_ar: "قسم السياسات العامة", name_en: "Department of Public Policy", degrees: ["MPP","PhD"], courses: [{ code: "HPPL201", name_en: "Introduction to Public Policy", name_ar: "مقدمة في السياسة العامة", credits: 3 }, { code: "HPPL301", name_en: "Policy Analysis", name_ar: "تحليل السياسات", credits: 3 }, { code: "HPPL302", name_en: "Governance and Institutions", name_ar: "الحوكمة والمؤسسات", credits: 3 }, { code: "HPPL401", name_en: "Global Public Policy", name_ar: "السياسة العامة العالمية", credits: 3 }] },
+        ],
+      },
     ],
   },
   {
