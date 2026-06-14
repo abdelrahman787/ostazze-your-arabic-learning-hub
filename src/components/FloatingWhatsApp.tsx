@@ -31,10 +31,14 @@ const FloatingWhatsApp = () => {
       transition={{ delay: 1, type: "spring", stiffness: 200 }}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
-      className="fixed bottom-6 left-6 z-50 w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow"
+      className="fixed bottom-24 left-6 z-50 w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow relative"
       title="WhatsApp"
       aria-label="تواصل معنا عبر واتساب"
     >
+      {/* Pulsing rings */}
+      <span className="absolute inset-0 rounded-full bg-[#25D366]/40 animate-ping" />
+      <span className="absolute inset-0 rounded-full bg-[#25D366]/20 animate-pulse" />
+      {/* Icon */}
       <WhatsAppLogo />
     </motion.a>
   );
