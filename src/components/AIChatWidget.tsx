@@ -271,9 +271,10 @@ const AIChatWidget = () => {
                                 }),
                               });
                               const data = await resp.json();
-                              setMessages((prev) => [...prev, { role: "assistant", content: data.content || data.error || "Error" }]);
+                              const content = data.content || data.error || "Error";
+                              setMessages((prev) => [...prev, { role: "assistant", content, showWhatsApp: isUnansweredResponse(content) || !!data.error }]);
                             } catch {
-                              setMessages((prev) => [...prev, { role: "assistant", content: lang === "ar" ? "عذراً، حصلت مشكلة." : "Sorry, an error occurred." }]);
+                              setMessages((prev) => [...prev, { role: "assistant", content: lang === "ar" ? "عذراً، حصلت مشكلة." : "Sorry, an error occurred.", showWhatsApp: true }]);
                             } finally {
                               setIsLoading(false);
                             }
