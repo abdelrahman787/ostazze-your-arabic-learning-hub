@@ -11,7 +11,25 @@ import { toast } from "@/hooks/use-toast";
 interface ChatMessage {
   role: "user" | "assistant";
   content: string;
+  showWhatsApp?: boolean;
 }
+
+const WHATSAPP_NUMBER = "201130382206";
+
+// Heuristic to detect "I don't know" style responses where we should offer WhatsApp fallback
+const isUnansweredResponse = (text: string): boolean => {
+  if (!text) return true;
+  const t = text.toLowerCase();
+  const patterns = [
+    "i don't know", "i do not know", "i'm not sure", "i am not sure",
+    "i can't help", "i cannot help", "i'm unable", "i am unable",
+    "sorry, i don't", "sorry, i can't", "i don't have", "no information",
+    "لا أعرف", "لا اعرف", "مش عارف", "مش متأكد", "لست متأكد",
+    "ماعنديش", "ما عنديش", "معنديش", "مش قادر", "لا أستطيع",
+    "مفيش معلومات", "ما عندي معلومات", "للأسف", "للاسف",
+  ];
+  return patterns.some((p) => t.includes(p));
+};
 
 const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/ostazze-chat`;
 
