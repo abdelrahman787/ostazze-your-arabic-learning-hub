@@ -6890,19 +6890,31 @@ export const allUniversities: University[] = [
     country_en: "Qatar",
     colleges: [
       {
-        id: "QA-NUQ-MEDILL",
-        name_ar: "مدرسة ميديل للصحافة",
-        name_en: "Medill School of Journalism",
-        departments: [
-          { id: "QA-NUQ-MEDILL-JOUR", name_ar: "قسم الصحافة", name_en: "Department of Journalism", degrees: ["BSJ"], courses: [{ code: "JOUR101", name_en: "Introduction to Journalism", name_ar: "مقدمة في الصحافة", credits: 4 }, { code: "JOUR201", name_en: "Reporting and Writing", name_ar: "التقارير والكتابة", credits: 4 }, { code: "JOUR202", name_en: "Multimedia Storytelling", name_ar: "السرد متعدد الوسائط", credits: 4 }, { code: "JOUR301", name_en: "Investigative Journalism", name_ar: "الصحافة الاستقصائية", credits: 4 }, { code: "JOUR401", name_en: "Data Journalism", name_ar: "صحافة البيانات", credits: 4 }] },
-        ],
-      },
-      {
-        id: "QA-NUQ-COMM",
+        id: "QA-NUQ-SCHOOL-OF-COMMUNICAT",
         name_ar: "مدرسة الاتصال",
         name_en: "School of Communication",
         departments: [
-          { id: "QA-NUQ-COMM-COMMST", name_ar: "قسم الاتصال", name_en: "Department of Communication Studies", degrees: ["BSC"], courses: [{ code: "COMM101", name_en: "Introduction to Communication", name_ar: "مقدمة في الاتصال", credits: 4 }, { code: "COMM201", name_en: "Media and Society", name_ar: "الإعلام والمجتمع", credits: 4 }, { code: "COMM202", name_en: "Digital Media Production", name_ar: "إنتاج الإعلام الرقمي", credits: 4 }, { code: "COMM301", name_en: "Strategic Communication", name_ar: "الاتصال الاستراتيجي", credits: 4 }] },
+          { id: "QA-NUQ-SCHOOL-OF-COMMUNICAT-MEDIA-INDUSTRIES-TEC", name_ar: "الصناعات الإعلامية والتكنولوجيا", name_en: "Media Industries & Technology", degrees: ["BS"], courses: [{ code: "MIT 220", name_en: "Analyzing Media Texts", name_ar: "", credits: 1 }, { code: "MIT 190", name_en: "Media Construction", name_ar: "", credits: 1 }, { code: "—", name_en: "MIT elective (any level)", name_ar: "", credits: 1 }, { code: "—", name_en: "MIT elective (300 level)", name_ar: "", credits: 1 }] },
+          { id: "QA-NUQ-SCHOOL-OF-COMMUNICAT-WRITING-PROGRAM", name_ar: "برنامج الكتابة", name_en: "Writing Program", degrees: ["BS"], courses: [{ code: "ENGL 103-1", name_en: "First-Year Writing", name_ar: "", credits: 1 }, { code: "ENGL 103-2", name_en: "First-Year Writing", name_ar: "", credits: 1 }] },
+          { id: "QA-NUQ-SCHOOL-OF-COMMUNICAT-JOURNALISM", name_ar: "الصحافة", name_en: "Journalism", degrees: ["BS"], courses: [{ code: "JOUR 202", name_en: "Journalism in the Digital World", name_ar: "", credits: 1 }, { code: "JOUR 370", name_en: "Media Law and Ethics", name_ar: "", credits: 1 }] },
+          { id: "QA-NUQ-SCHOOL-OF-COMMUNICAT-DISTRIBUTION-OUTSIDE", name_ar: "متطلبات توزيعية (خارج التخصص)", name_en: "Distribution (outside major)", degrees: ["BS"], courses: [{ code: "—", name_en: "Out-of-major course (any level)", name_ar: "", credits: 1 }, { code: "—", name_en: "Out-of-major course (300 level)", name_ar: "", credits: 1 }] },
+          { id: "QA-NUQ-SCHOOL-OF-COMMUNICAT-LIBERAL-ARTS-INTERDI", name_ar: "الآداب الحرة (متعدد التخصصات)", name_en: "Liberal Arts (Interdisciplinary)", degrees: ["BS"], courses: [{ code: "INTERDIS 201", name_en: "Media and Society", name_ar: "", credits: 1 }, { code: "INTERDIS 203", name_en: "Ways of Knowing", name_ar: "", credits: 1 }] },
+          { id: "QA-NUQ-SCHOOL-OF-COMMUNICAT-DISTRIBUTION-STEM", name_ar: "متطلبات توزيعية — العلوم والتقنية", name_en: "Distribution — STEM", degrees: ["BS"], courses: [{ code: "—", name_en: "STEM course (Science / Technology / Engineering / Math)", name_ar: "", credits: 1 }] },
+          { id: "QA-NUQ-SCHOOL-OF-COMMUNICAT-FREE-ELECTIVES", name_ar: "Free Electives", name_en: "Free Electives", degrees: ["BS"], courses: [{ code: "—", name_en: "Free elective", name_ar: "", credits: 1 }] },
+          { id: "QA-NUQ-SCHOOL-OF-COMMUNICAT-COMMUNICATION-STUDIE", name_ar: "دراسات الاتصال", name_en: "Communication Studies", degrees: ["BS"], courses: [{ code: "GEN_CMN 201", name_en: "Research Methods in Communication Studies", name_ar: "", credits: 1 }] },
+        ],
+      },
+      {
+        id: "QA-NUQ-MEDILL-SCHOOL-OF-JOU",
+        name_ar: "مدرسة ميديل للصحافة والإعلام والاتصالات التسويقية المتكاملة",
+        name_en: "Medill School of Journalism, Media, Integrated Marketing Communications",
+        departments: [
+          { id: "QA-NUQ-MEDILL-SCHOOL-OF-JOU-JOURNALISM", name_ar: "الصحافة", name_en: "Journalism", degrees: ["BS"], courses: [{ code: "JOUR 202", name_en: "Journalism in the Digital World", name_ar: "", credits: 1 }, { code: "JOUR 201", name_en: "Journalistic Storytelling Across Media", name_ar: "", credits: 1 }, { code: "JOUR 301-1", name_en: "News Gathering and Assessment", name_ar: "", credits: 1 }, { code: "JOUR 205", name_en: "Research for Reporting", name_ar: "", credits: 1 }, { code: "JOUR 370", name_en: "Media Law and Ethics", name_ar: "", credits: 1 }, { code: "—", name_en: "Journalism core course — 6th (confirm in catalog)", name_ar: "", credits: 1 }, { code: "—", name_en: "Journalism Residency — pre-residency coursework", name_ar: "", credits: 2 }, { code: "—", name_en: "Journalism Residency — 10-week media internship", name_ar: "", credits: 2 }, { code: "—", name_en: "Journalism major requirement — additional units (confirm in catalog)", name_ar: "", credits: 2 }] },
+          { id: "QA-NUQ-MEDILL-SCHOOL-OF-JOU-WRITING-PROGRAM", name_ar: "برنامج الكتابة", name_en: "Writing Program", degrees: ["BS"], courses: [{ code: "ENGL 103-1", name_en: "First-Year Writing", name_ar: "", credits: 1 }, { code: "ENGL 103-2", name_en: "First-Year Writing", name_ar: "", credits: 1 }] },
+          { id: "QA-NUQ-MEDILL-SCHOOL-OF-JOU-LIBERAL-ARTS-INTERDI", name_ar: "الآداب الحرة (متعدد التخصصات)", name_en: "Liberal Arts (Interdisciplinary)", degrees: ["BS"], courses: [{ code: "INTERDIS 201", name_en: "Media and Society", name_ar: "", credits: 1 }] },
+          { id: "QA-NUQ-MEDILL-SCHOOL-OF-JOU-MEDIA-INDUSTRIES-TEC", name_ar: "الصناعات الإعلامية والتكنولوجيا", name_en: "Media Industries & Technology", degrees: ["BS"], courses: [{ code: "MIT 190", name_en: "Media Construction", name_ar: "", credits: 1 }, { code: "MIT 220", name_en: "Analyzing Media Texts", name_ar: "", credits: 1 }] },
+          { id: "QA-NUQ-MEDILL-SCHOOL-OF-JOU-DISTRIBUTION-OUTSIDE", name_ar: "متطلبات توزيعية (خارج التخصص)", name_en: "Distribution (outside major)", degrees: ["BS"], courses: [{ code: "—", name_en: "Distribution — additional courses outside journalism", name_ar: "", credits: 7 }] },
+          { id: "QA-NUQ-MEDILL-SCHOOL-OF-JOU-FREE-ELECTIVES", name_ar: "Free Electives", name_en: "Free Electives", degrees: ["BS"], courses: [{ code: "—", name_en: "Free elective", name_ar: "", credits: 8 }] },
         ],
       },
     ],
