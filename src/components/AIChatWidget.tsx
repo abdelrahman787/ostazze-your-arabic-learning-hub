@@ -118,12 +118,20 @@ const AIChatWidget = () => {
       const data = await resp.json();
       if (data.error) throw new Error(data.error);
 
-      setMessages((prev) => [...prev, { role: "assistant", content: data.content }]);
+      const content = data.content || "";
+      setMessages((prev) => [
+        ...prev,
+        { role: "assistant", content, showWhatsApp: isUnansweredResponse(content) },
+      ]);
     } catch (e: any) {
       console.error("Chat error:", e);
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: lang === "ar" ? "عذراً، حصلت مشكلة تقنية. حاول مرة تانية 🙏" : "Sorry, something went wrong. Please try again 🙏" },
+        {
+          role: "assistant",
+          content: lang === "ar" ? "عذراً، حصلت مشكلة تقنية. حاول مرة تانية 🙏" : "Sorry, something went wrong. Please try again 🙏",
+          showWhatsApp: true,
+        },
       ]);
     } finally {
       setIsLoading(false);
