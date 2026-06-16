@@ -2,8 +2,6 @@ import { Link } from "react-router-dom";
 import { mockTestimonials } from "@/data/mockData";
 import {
   Star, ArrowLeft, Sparkles, GraduationCap, CalendarCheck, Video,
-  Calculator, Atom, FlaskConical, Languages,
-  BookOpen, BarChart3, Code, Microscope, Zap, PenTool, Globe
 } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
