@@ -2,8 +2,6 @@ import { Link } from "react-router-dom";
 import { mockTestimonials } from "@/data/mockData";
 import {
   Star, ArrowLeft, Sparkles, GraduationCap, CalendarCheck, Video,
-  Calculator, Atom, FlaskConical, Languages,
-  BookOpen, BarChart3, Code, Microscope, Zap, PenTool, Globe
 } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
@@ -11,7 +9,6 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import PageHelmet from "@/components/PageHelmet";
 import { Helmet } from "react-helmet-async";
 import hero3DCap from "@/assets/hero-3d-cap.webp";
-import OrbitSubjects from "@/components/OrbitSubjects";
 import HeroOrbit from "@/components/HeroOrbit";
 import OurTeam from "@/components/OurTeam";
 
@@ -111,18 +108,6 @@ const HomePage = () => {
     };
   }, [playHowSteps]);
 
-  const popularSubjects = [
-    { key: "subj_math", icon: Calculator, color: "bg-blue-500/10 text-blue-600 dark:text-blue-400" },
-    { key: "subj_physics", icon: Atom, color: "bg-purple-500/10 text-purple-600 dark:text-purple-400" },
-    { key: "subj_chemistry", icon: FlaskConical, color: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400" },
-    { key: "subj_english", icon: Languages, color: "bg-amber-500/10 text-amber-600 dark:text-amber-400" },
-    { key: "subj_accounting", icon: BookOpen, color: "bg-rose-500/10 text-rose-600 dark:text-rose-400" },
-    { key: "subj_statistics", icon: BarChart3, color: "bg-cyan-500/10 text-cyan-600 dark:text-cyan-400" },
-    { key: "subj_programming", icon: Code, color: "bg-indigo-500/10 text-indigo-600 dark:text-indigo-400" },
-    { key: "subj_biology", icon: Microscope, color: "bg-green-500/10 text-green-600 dark:text-green-400" },
-    { key: "subj_dynamics", icon: Zap, color: "bg-orange-500/10 text-orange-600 dark:text-orange-400" },
-    { key: "subj_drawing", icon: PenTool, color: "bg-teal-500/10 text-teal-600 dark:text-teal-400" },
-  ] as const;
 
   const howSteps = [
     { key: "1", image: howStep1Img, titleKey: "how_step1_title", descKey: "how_step1_desc" },
@@ -465,8 +450,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Popular Subjects - Orbit Universe */}
-      <OrbitSubjects />
 
       {/* Students Enrolled At — refined trust banner */}
       <section className="relative py-20 md:py-24 overflow-hidden bg-section-alt">
