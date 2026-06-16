@@ -452,8 +452,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Popular Subjects - Orbit Universe */}
-      <OrbitSubjects />
 
       {/* Students Enrolled At — refined trust banner */}
       <section className="relative py-20 md:py-24 overflow-hidden bg-section-alt">
