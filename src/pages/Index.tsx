@@ -11,7 +11,6 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import PageHelmet from "@/components/PageHelmet";
 import { Helmet } from "react-helmet-async";
 import hero3DCap from "@/assets/hero-3d-cap.webp";
-import OrbitSubjects from "@/components/OrbitSubjects";
 import HeroOrbit from "@/components/HeroOrbit";
 import OurTeam from "@/components/OurTeam";
 
