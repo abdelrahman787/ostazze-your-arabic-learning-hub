@@ -547,32 +547,55 @@ const HomePage = () => {
                 style={{ filter: "hue-rotate(-8deg) saturate(1.05)" }}
               />
 
-              {/* Stats overlay — sits over the empty orange band on the left (or right in RTL) */}
+              {/* Stats overlay — sits over the empty orange band on the left */}
               <div
-                className="absolute inset-y-0 left-0 ml-3 md:ml-6 w-[18%] flex flex-col justify-center items-center gap-1.5 md:gap-2 px-1.5 md:px-3"
+                className="absolute inset-y-0 left-0 w-[20%] sm:w-[18%] md:w-[16%] flex flex-col justify-center items-center gap-3 sm:gap-4 md:gap-6 px-1 sm:px-2 md:px-3"
               >
-                {[
-                  { v: "73+", l: lang === "ar" ? "جامعة" : "Universities" },
-                  { v: "12k+", l: lang === "ar" ? "طالب نشط" : "Active Students" },
-                  { v: "98%", l: lang === "ar" ? "رضا الطلاب" : "Satisfaction" },
-                ].map((s, i) => (
+                {/* Top stat */}
+                <div className="flex flex-col items-center text-center">
                   <div
-                    key={i}
-                    className="text-center w-full rounded-full px-2 py-1 md:py-1.5 backdrop-blur-sm"
+                    className="text-white font-black leading-none drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)]"
+                    style={{ fontSize: "clamp(0.9rem, 2.8vw, 2.4rem)" }}
+                  >
+                    +12k
+                  </div>
+                  <div
+                    className="text-white font-bold leading-tight mt-0.5 md:mt-1"
+                    style={{ fontSize: "clamp(0.45rem, 1.1vw, 0.85rem)" }}
+                  >
+                    {lang === "ar" ? "طلّاب" : "Students"}
+                  </div>
+                  <div
+                    className="text-white font-bold leading-tight"
+                    style={{ fontSize: "clamp(0.45rem, 1.1vw, 0.85rem)" }}
+                  >
+                    {lang === "ar" ? "نشط" : "Active"}
+                  </div>
+                </div>
+
+                {/* Bottom stat — 98% with subtle ring */}
+                <div className="flex flex-col items-center text-center">
+                  <div
+                    className="flex items-center justify-center rounded-full border-2 border-white/50"
                     style={{
-                      background: "hsl(0 0% 100% / 0.14)",
-                      border: "1px solid hsl(0 0% 100% / 0.45)",
-                      boxShadow: "inset 0 1px 0 hsl(0 0% 100% / 0.25)",
+                      width: "clamp(2rem, 5.5vw, 4.5rem)",
+                      height: "clamp(2rem, 5.5vw, 4.5rem)",
                     }}
                   >
-                    <div className="text-xs md:text-lg font-black leading-none text-white drop-shadow-[0_2px_4px_hsl(0_0%_0%_/_0.25)]">
-                      {s.v}
-                    </div>
-                    <div className="text-[7px] md:text-[9px] font-semibold mt-0.5 tracking-wide text-white/90">
-                      {s.l}
-                    </div>
+                    <span
+                      className="text-white font-black leading-none drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]"
+                      style={{ fontSize: "clamp(0.7rem, 2vw, 1.6rem)" }}
+                    >
+                      98%
+                    </span>
                   </div>
-                ))}
+                  <div
+                    className="text-white font-semibold leading-tight mt-1"
+                    style={{ fontSize: "clamp(0.4rem, 0.9vw, 0.7rem)" }}
+                  >
+                    {lang === "ar" ? "رضا" : "Satisfaction"}
+                  </div>
+                </div>
               </div>
             </div>
           </motion.div>
