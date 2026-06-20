@@ -183,7 +183,7 @@ const HomePage = () => {
       />
 
       {/* Hero — Split perspective with floating glass cards */}
-      <section className="hero-gradient lg:min-h-[100vh] flex items-center overflow-hidden relative pt-page-lg pb-16">
+      <section className="hero-gradient min-h-[100dvh] lg:min-h-[100vh] flex items-center overflow-hidden relative pt-page-lg pb-20 sm:pb-16">
         {/* Ambient background */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
           <div className="absolute top-1/2 -start-20 w-[600px] h-[600px] rounded-full blur-[140px]" style={{ background: "hsl(14 91% 50% / 0.12)" }} />
@@ -232,7 +232,7 @@ const HomePage = () => {
               transition={{ duration: 0.7, delay: 0.2 }}
               className="relative flex justify-center lg:justify-end"
             >
-              <div className="relative w-full max-w-[480px] aspect-square flex items-center justify-center">
+              <div className="relative w-full max-w-[480px] aspect-[1/1.05] sm:aspect-square flex items-center justify-center">
                 {/* Glow */}
                 <div className="absolute inset-0 rounded-full blur-[80px]" style={{ background: "radial-gradient(circle, hsl(14 91% 50% / 0.35), transparent 65%)" }} aria-hidden="true" />
 
