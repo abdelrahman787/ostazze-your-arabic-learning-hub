@@ -183,7 +183,7 @@ const HomePage = () => {
       />
 
       {/* Hero — Split perspective with floating glass cards */}
-      <section className="hero-gradient lg:min-h-[100vh] flex items-center overflow-hidden relative pt-page-lg pb-16">
+      <section className="hero-gradient min-h-[100dvh] lg:min-h-[100vh] flex items-center overflow-hidden relative pt-page-lg pb-20 sm:pb-16">
         {/* Ambient background */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
           <div className="absolute top-1/2 -start-20 w-[600px] h-[600px] rounded-full blur-[140px]" style={{ background: "hsl(14 91% 50% / 0.12)" }} />
