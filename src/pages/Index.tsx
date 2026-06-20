@@ -549,25 +549,25 @@ const HomePage = () => {
 
               {/* Stats overlay — sits over the empty orange band on the left */}
               <div
-                className="absolute inset-y-0 left-0 w-[22%] sm:w-[19%] md:w-[17%] flex flex-col justify-center items-center gap-2 sm:gap-4 md:gap-6 px-1 sm:px-2 md:px-3"
+                className="absolute inset-y-0 left-0 w-[28%] sm:w-[22%] md:w-[17%] flex flex-col justify-center items-center gap-3 sm:gap-4 md:gap-6 px-1 sm:px-2 md:px-3"
               >
                 {/* Top stat */}
                 <div className="flex flex-col items-center text-center">
                   <div
                     className="text-white font-black leading-none drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)]"
-                    style={{ fontSize: "clamp(1.15rem, 2.8vw, 2.6rem)" }}
+                    style={{ fontSize: "clamp(1.4rem, 5.5vw, 2.6rem)" }}
                   >
                     +12k
                   </div>
                   <div
-                    className="text-white font-bold leading-tight mt-0.5 md:mt-1"
-                    style={{ fontSize: "clamp(0.65rem, 1.1vw, 0.9rem)" }}
+                    className="text-white font-bold leading-tight mt-1"
+                    style={{ fontSize: "clamp(0.75rem, 2.4vw, 0.9rem)" }}
                   >
                     {lang === "ar" ? "طلّاب" : "Students"}
                   </div>
                   <div
                     className="text-white font-bold leading-tight"
-                    style={{ fontSize: "clamp(0.65rem, 1.1vw, 0.9rem)" }}
+                    style={{ fontSize: "clamp(0.75rem, 2.4vw, 0.9rem)" }}
                   >
                     {lang === "ar" ? "نشط" : "Active"}
                   </div>
@@ -578,20 +578,20 @@ const HomePage = () => {
                   <div
                     className="flex items-center justify-center rounded-full border-2 border-white/50"
                     style={{
-                      width: "clamp(2.2rem, 5.5vw, 4.5rem)",
-                      height: "clamp(2.2rem, 5.5vw, 4.5rem)",
+                      width: "clamp(2.8rem, 11vw, 4.5rem)",
+                      height: "clamp(2.8rem, 11vw, 4.5rem)",
                     }}
                   >
                     <span
                       className="text-white font-black leading-none drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]"
-                      style={{ fontSize: "clamp(0.85rem, 2vw, 1.6rem)" }}
+                      style={{ fontSize: "clamp(0.95rem, 3.6vw, 1.6rem)" }}
                     >
                       98%
                     </span>
                   </div>
                   <div
-                    className="text-white font-semibold leading-tight mt-1"
-                    style={{ fontSize: "clamp(0.55rem, 0.9vw, 0.75rem)" }}
+                    className="text-white font-semibold leading-tight mt-1.5"
+                    style={{ fontSize: "clamp(0.65rem, 2vw, 0.75rem)" }}
                   >
                     {lang === "ar" ? "رضا" : "Satisfaction"}
                   </div>
