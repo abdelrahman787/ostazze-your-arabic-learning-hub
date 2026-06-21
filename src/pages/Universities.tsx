@@ -38,10 +38,7 @@ const countryNames: Record<string, { ar: string; en: string }> = {
   AE: { ar: "مصر", en: "Egypt" },
 };
 
-const comingSoonCountries = [
-  { code: "SA", name_ar: countryNames.SA.ar, name_en: countryNames.SA.en, universities: [] as University[] },
-  { code: "AE", name_ar: countryNames.AE.ar, name_en: countryNames.AE.en, universities: [] as University[] },
-];
+const comingSoonCountries: { code: string; name_ar: string; name_en: string; universities: University[] }[] = [];
 
 const countryColors: Record<string, { from: string; to: string; accent: string }> = {
   KW: { from: "from-green-500/20", to: "to-red-500/10", accent: "text-green-600 dark:text-green-400" },
