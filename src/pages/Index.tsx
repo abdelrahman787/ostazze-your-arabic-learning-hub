@@ -257,7 +257,7 @@ const HomePage = () => {
             initial="hidden"
             animate={playHowSteps ? "show" : "hidden"}
             variants={{ hidden: {}, show: { transition: { staggerChildren: 0.2, delayChildren: 0.05 } } }}
-            className="grid md:grid-cols-3 gap-10 md:gap-6 relative max-w-5xl mx-auto"
+            className="grid md:grid-cols-2 gap-10 md:gap-6 relative max-w-3xl mx-auto"
           >
             {howSteps.map((step, i) => (
               <Link to="/universities" key={step.key} className="block group">
