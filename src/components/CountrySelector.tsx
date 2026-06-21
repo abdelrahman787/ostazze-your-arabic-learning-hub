@@ -12,7 +12,7 @@ export default function CountrySelector({ value, onChange, required }: Props) {
   const codes: Country[] = ["EG"];
 
   return (
-    <div className="grid grid-cols-3 gap-2">
+    <div className="grid grid-cols-1 gap-2">
       {codes.map((c) => {
         const meta = COUNTRY_LABELS[c];
         const price = SESSION_PRICE[c];
