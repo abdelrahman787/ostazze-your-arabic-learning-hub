@@ -32,10 +32,10 @@ const getCountries = () => {
 const flagImages: Record<string, string> = { KW: flagKW, QA: flagQA, SA: flagSA, AE: flagAE };
 
 const countryNames: Record<string, { ar: string; en: string }> = {
-  KW: { ar: "الكويت", en: "Kuwait" },
-  QA: { ar: "قطر", en: "Qatar" },
-  SA: { ar: "السعودية", en: "Saudi Arabia" },
-  AE: { ar: "الإمارات", en: "UAE" },
+  KW: { ar: "مصر", en: "Egypt" },
+  QA: { ar: "مصر", en: "Egypt" },
+  SA: { ar: "مصر", en: "Egypt" },
+  AE: { ar: "مصر", en: "Egypt" },
 };
 
 const comingSoonCountries = [
