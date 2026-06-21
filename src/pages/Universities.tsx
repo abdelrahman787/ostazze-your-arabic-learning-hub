@@ -22,7 +22,7 @@ const getCountries = () => {
   const map = new Map<string, { code: string; name_ar: string; name_en: string; universities: University[] }>();
   allUniversities.forEach((u) => {
     if (!map.has(u.country_code)) {
-      map.set(u.country_code, { code: u.country_code, name_ar: u.country_ar, name_en: u.country_en, universities: [] });
+      map.set(u.country_code, { code: u.country_code, name_ar: "مصر", name_en: "Egypt", universities: [] });
     }
     map.get(u.country_code)!.universities.push(u);
   });
