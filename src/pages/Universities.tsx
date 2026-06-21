@@ -191,13 +191,13 @@ const Universities = () => {
           ? "الجامعات - أستازي OSTAZE"
           : "Universities - OSTAZE"}
         description={lang === "ar"
-          ? "اكتشف الجامعات المدعومة على منصة أستازي — جامعة الكويت، جامعة قطر، والمزيد. معلمون متخصصون لكل جامعة ومنهج."
-          : "Discover universities supported by OSTAZE — Kuwait University, Qatar University and more. Specialized tutors for every program."}
+          ? "اكتشف الجامعات المدعومة على منصة أستازي — جامعة القاهرة، جامعة عين شمس، والمزيد. معلمون متخصصون لكل جامعة ومنهج."
+          : "Discover universities supported by OSTAZE — Cairo University, Ain Shams University and more. Specialized tutors for every program."}
         canonical="https://ostaze.com/universities"
-        keywords={lang === "ar" ? "جامعات الكويت, جامعات قطر, كليات, معلمون" : "Kuwait universities, Qatar universities, colleges, tutors"}
+        keywords={lang === "ar" ? "جامعات مصر, كليات, معلمون" : "Egypt universities, colleges, tutors"}
         jsonLd={[
           collectionPageJsonLd({
-            name: lang === "ar" ? "جامعات الكويت وقطر" : "Universities of Kuwait & Qatar",
+            name: lang === "ar" ? "جامعات مصر" : "Universities of Egypt",
             description: lang === "ar" ? "دليل الجامعات والكليات والمواد" : "Directory of universities, colleges and subjects",
             path: "/universities",
             lang,
