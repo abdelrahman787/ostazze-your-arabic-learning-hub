@@ -56,7 +56,7 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [timezone, setTimezone] = useState("Asia/Riyadh");
-  const [country, setCountry] = useState<Country | "">("");
+  const [country, setCountry] = useState<Country | "">("EG");
   const [agreedTerms, setAgreedTerms] = useState(false);
   // Honeypot — bots fill this; real users never see it.
   const [website, setWebsite] = useState("");
@@ -275,12 +275,6 @@ const Register = () => {
               </select>
             </div>
 
-            <div>
-              <label className="block text-sm font-bold mb-1.5 flex items-center gap-1.5">
-                <Globe size={14} /> {lang === "ar" ? "الجامعات *" : "Universities *"}
-              </label>
-              <CountrySelector value={country} onChange={setCountry} required />
-            </div>
 
 
             {/* Terms checkbox */}
