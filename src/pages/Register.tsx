@@ -56,7 +56,7 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [timezone, setTimezone] = useState("Asia/Riyadh");
-  const [country, setCountry] = useState<Country | "">("");
+  const [country, setCountry] = useState<Country | "">("EG");
   const [agreedTerms, setAgreedTerms] = useState(false);
   // Honeypot — bots fill this; real users never see it.
   const [website, setWebsite] = useState("");
