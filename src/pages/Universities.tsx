@@ -62,18 +62,15 @@ const AnimatedFlag = ({ code, size = 120 }: { code: string; size?: number }) => 
   <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
     <div
       className="absolute inset-2 rounded-2xl blur-2xl opacity-30 pointer-events-none"
-      style={{ background: flagGlow[code] || flagGlow.KW }}
+      style={{ background: "radial-gradient(circle, #CE1126 0%, #000 70%, transparent 100%)" }}
     />
-    <img
-      src={flagImages[code]}
-      alt={countryNames[code]?.en || code}
-      width={size}
-      height={Math.round(size * 0.62)}
-      loading="eager"
-      decoding="async"
-      className="relative z-10 object-cover rounded-md shadow-[0_8px_24px_-6px_rgba(0,0,0,0.45)] ring-1 ring-foreground/10"
-      style={{ width: size, height: Math.round(size * 0.62) }}
-    />
+    <div
+      className="relative z-10 flex items-center justify-center rounded-md shadow-[0_8px_24px_-6px_rgba(0,0,0,0.45)] ring-1 ring-foreground/10 bg-background"
+      style={{ width: size, height: Math.round(size * 0.62), fontSize: Math.round(size * 0.45) }}
+      aria-label="Egypt"
+    >
+      🇪🇬
+    </div>
   </div>
 );
 
