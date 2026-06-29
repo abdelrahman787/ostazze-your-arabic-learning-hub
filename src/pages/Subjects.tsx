@@ -89,7 +89,7 @@ const Subjects = () => {
 
   const subjFaq = [
     { q: lang === "ar" ? "كيف أحجز معلماً للمادة؟" : "How do I book a tutor for a subject?", a: lang === "ar" ? "اضغط على المادة لعرض المعلمين المتاحين، ثم اختر معلماً وابدأ الحجز من ملفه." : "Click a subject to view available tutors, then pick one and book from their profile." },
-    { q: lang === "ar" ? "هل المواد متاحة لكل الجامعات؟" : "Are subjects available across all universities?", a: lang === "ar" ? "تختلف التغطية حسب توافر المعلمين، لكن أغلب المواد الأساسية مدعومة لجامعات مصر." : "Coverage depends on tutor availability, but most core subjects are supported across Egypt universities." },
+    { q: lang === "ar" ? "هل المواد متاحة لكل الجامعات؟" : "Are subjects available across all universities?", a: lang === "ar" ? "تختلف التغطية حسب توافر المعلمين، لكن أغلب المواد الأساسية مدعومة لجامعات الكويت وقطر." : "Coverage depends on tutor availability, but most core subjects are supported across Kuwait & Qatar universities." },
     { q: lang === "ar" ? "هل يمكنني طلب مادة جديدة؟" : "Can I request a new subject?", a: lang === "ar" ? "نعم، تواصل معنا وسنحاول إيجاد معلم متخصص خلال 48 ساعة." : "Yes — contact us and we'll try to source a specialized tutor within 48 hours." },
   ];
 
@@ -103,7 +103,7 @@ const Subjects = () => {
           ? "اختر مادتك الدراسية على منصة أستازي — رياضيات، فيزياء، برمجة، لغة إنجليزية، هندسة والمزيد. معلمون متخصصون بتقييمات وأسعار واضحة."
           : "Pick your subject on OSTAZE — math, physics, programming, English, engineering and more. Specialized tutors with clear ratings and pricing."}
         canonical="https://ostaze.com/subjects"
-        keywords={lang === "ar" ? "مواد دراسية, دروس خصوصية, جامعات مصر" : "subjects, tutoring, Egypt universities"}
+        keywords={lang === "ar" ? "مواد دراسية, دروس خصوصية, جامعات الكويت, جامعات قطر" : "subjects, tutoring, Kuwait universities, Qatar universities"}
         jsonLd={[
           collectionPageJsonLd({
             name: categoryDisplay || t("subjects_title"),

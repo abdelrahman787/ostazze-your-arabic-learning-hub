@@ -27,14 +27,14 @@ export const SEARCH_PHRASES_AR = [
   "كورسات لايف", "منصة تعليمية", "أفضل منصة دروس خصوصية", "حجز معلم خصوصي",
   "معلم رياضيات خصوصي", "معلم فيزياء خصوصي", "معلم كيمياء خصوصي",
   "معلم انجليزي خصوصي", "معلم برمجة خصوصي", "مدرس خصوصي اونلاين",
-  "دروس جامعية", "شرح مواد جامعية", "جامعة القاهرة", "جامعة عين شمس",
+  "دروس جامعية", "شرح مواد جامعية", "جامعة الكويت", "جامعة قطر",
   "تدريس جامعي خصوصي",
 ];
 
 export const SEARCH_PHRASES_EN = [
   "ostaze platform", "online tutoring platform", "private online tutors",
-  "live online lessons", "zoom tutoring", "university tutors Egypt",
-  "", "math tutor online", "physics tutor online",
+  "live online lessons", "zoom tutoring", "university tutors Kuwait",
+  "university tutors Qatar", "math tutor online", "physics tutor online",
   "english tutor online", "programming tutor online", "private lessons online",
   "remote learning platform", "online courses Arabic",
 ];
@@ -52,8 +52,8 @@ export const organizationJsonLd = (lang: "ar" | "en" = "ar") => ({
   logo: `${SITE_URL}/favicon.png`,
   description:
     lang === "ar"
-      ? "منصة OSTAZE (أستازي / استاذي) — منصة دروس خصوصية ولايف أونلاين تجمع الطلاب بأفضل المعلمين الجامعيين في مصر، عبر حصص مباشرة بالزووم وكورسات مسجلة."
-      : "OSTAZE (Ostaze) is an online private tutoring and live-lesson platform connecting students with top university tutors in Egypt via Zoom and recorded courses.",
+      ? "منصة OSTAZE (أستازي / استاذي) — منصة دروس خصوصية ولايف أونلاين تجمع الطلاب بأفضل المعلمين الجامعيين في الكويت وقطر، عبر حصص مباشرة بالزووم وكورسات مسجلة."
+      : "OSTAZE (Ostaze) is an online private tutoring and live-lesson platform connecting students with top university tutors in Kuwait & Qatar via Zoom and recorded courses.",
   keywords: lang === "ar" ? ALL_KEYWORDS_AR : ALL_KEYWORDS_EN,
   email: "info@ostaze.com",
   telephone: "+966559003498",

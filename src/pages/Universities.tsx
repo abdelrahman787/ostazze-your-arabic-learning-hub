@@ -22,7 +22,7 @@ const getCountries = () => {
   const map = new Map<string, { code: string; name_ar: string; name_en: string; universities: University[] }>();
   allUniversities.forEach((u) => {
     if (!map.has(u.country_code)) {
-      map.set(u.country_code, { code: u.country_code, name_ar: "مصر", name_en: "Egypt", universities: [] });
+      map.set(u.country_code, { code: u.country_code, name_ar: u.country_ar, name_en: u.country_en, universities: [] });
     }
     map.get(u.country_code)!.universities.push(u);
   });
@@ -32,13 +32,16 @@ const getCountries = () => {
 const flagImages: Record<string, string> = { KW: flagKW, QA: flagQA, SA: flagSA, AE: flagAE };
 
 const countryNames: Record<string, { ar: string; en: string }> = {
-  KW: { ar: "مصر", en: "Egypt" },
-  QA: { ar: "مصر", en: "Egypt" },
-  SA: { ar: "مصر", en: "Egypt" },
-  AE: { ar: "مصر", en: "Egypt" },
+  KW: { ar: "الكويت", en: "Kuwait" },
+  QA: { ar: "قطر", en: "Qatar" },
+  SA: { ar: "السعودية", en: "Saudi Arabia" },
+  AE: { ar: "الإمارات", en: "UAE" },
 };
 
-const comingSoonCountries: { code: string; name_ar: string; name_en: string; universities: University[] }[] = [];
+const comingSoonCountries = [
+  { code: "SA", name_ar: countryNames.SA.ar, name_en: countryNames.SA.en, universities: [] as University[] },
+  { code: "AE", name_ar: countryNames.AE.ar, name_en: countryNames.AE.en, universities: [] as University[] },
+];
 
 const countryColors: Record<string, { from: string; to: string; accent: string }> = {
   KW: { from: "from-green-500/20", to: "to-red-500/10", accent: "text-green-600 dark:text-green-400" },
@@ -59,15 +62,18 @@ const AnimatedFlag = ({ code, size = 120 }: { code: string; size?: number }) => 
   <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
     <div
       className="absolute inset-2 rounded-2xl blur-2xl opacity-30 pointer-events-none"
-      style={{ background: "radial-gradient(circle, #CE1126 0%, #000 70%, transparent 100%)" }}
+      style={{ background: flagGlow[code] || flagGlow.KW }}
     />
-    <div
-      className="relative z-10 flex items-center justify-center rounded-md shadow-[0_8px_24px_-6px_rgba(0,0,0,0.45)] ring-1 ring-foreground/10 bg-background"
-      style={{ width: size, height: Math.round(size * 0.62), fontSize: Math.round(size * 0.45) }}
-      aria-label="Egypt"
-    >
-      🇪🇬
-    </div>
+    <img
+      src={flagImages[code]}
+      alt={countryNames[code]?.en || code}
+      width={size}
+      height={Math.round(size * 0.62)}
+      loading="eager"
+      decoding="async"
+      className="relative z-10 object-cover rounded-md shadow-[0_8px_24px_-6px_rgba(0,0,0,0.45)] ring-1 ring-foreground/10"
+      style={{ width: size, height: Math.round(size * 0.62) }}
+    />
   </div>
 );
 
@@ -185,13 +191,13 @@ const Universities = () => {
           ? "الجامعات - أستازي OSTAZE"
           : "Universities - OSTAZE"}
         description={lang === "ar"
-          ? "اكتشف الجامعات المدعومة على منصة أستازي — جامعة القاهرة، جامعة عين شمس، والمزيد. معلمون متخصصون لكل جامعة ومنهج."
-          : "Discover universities supported by OSTAZE — Cairo University, Ain Shams University and more. Specialized tutors for every program."}
+          ? "اكتشف الجامعات المدعومة على منصة أستازي — جامعة الكويت، جامعة قطر، والمزيد. معلمون متخصصون لكل جامعة ومنهج."
+          : "Discover universities supported by OSTAZE — Kuwait University, Qatar University and more. Specialized tutors for every program."}
         canonical="https://ostaze.com/universities"
-        keywords={lang === "ar" ? "جامعات مصر, كليات, معلمون" : "Egypt universities, colleges, tutors"}
+        keywords={lang === "ar" ? "جامعات الكويت, جامعات قطر, كليات, معلمون" : "Kuwait universities, Qatar universities, colleges, tutors"}
         jsonLd={[
           collectionPageJsonLd({
-            name: lang === "ar" ? "جامعات مصر" : "Universities of Egypt",
+            name: lang === "ar" ? "جامعات الكويت وقطر" : "Universities of Kuwait & Qatar",
             description: lang === "ar" ? "دليل الجامعات والكليات والمواد" : "Directory of universities, colleges and subjects",
             path: "/universities",
             lang,

@@ -53,7 +53,7 @@ const Categories = () => {
   const catFaq = [
     { q: lang === "ar" ? "كيف أختار التصنيف الأنسب؟" : "How do I pick the right category?", a: lang === "ar" ? "اختر التصنيف الأقرب لتخصصك ثم تابع للمواد، وستظهر لك قائمة المعلمين المتخصصين." : "Pick the category closest to your major, then drill down to subjects to see specialized tutors." },
     { q: lang === "ar" ? "ماذا لو لم أجد تصنيفي؟" : "What if my category isn't listed?", a: lang === "ar" ? "تواصل معنا وسنضيف التصنيف خلال 48 ساعة عمل إن وُجد طلب كافٍ." : "Contact us and we'll add it within 48 business hours if there's enough demand." },
-    { q: lang === "ar" ? "هل التصنيفات مرتبطة بجامعة معينة؟" : "Are categories tied to a university?", a: lang === "ar" ? "لا، التصنيفات عامة لكنها ترتبط داخلياً بكليات وأقسام جامعات مصر." : "No, categories are general but mapped internally to colleges and departments in Egypt universities." },
+    { q: lang === "ar" ? "هل التصنيفات مرتبطة بجامعة معينة؟" : "Are categories tied to a university?", a: lang === "ar" ? "لا، التصنيفات عامة لكنها ترتبط داخلياً بكليات وأقسام جامعات الكويت وقطر." : "No, categories are general but mapped internally to colleges and departments in Kuwait & Qatar universities." },
   ];
 
   return (
@@ -66,7 +66,7 @@ const Categories = () => {
           ? "تصفح أقسام المواد الدراسية المتاحة على منصة أستازي — قسم الهندسة، الحاسب، اللغات والمزيد."
           : "Browse subject categories on OSTAZE — engineering, computing, languages and more."}
         canonical="https://ostaze.com/categories"
-        keywords={lang === "ar" ? "تصنيفات, مواد, جامعات مصر" : "categories, subjects, Egypt universities"}
+        keywords={lang === "ar" ? "تصنيفات, مواد, جامعات الكويت, جامعات قطر" : "categories, subjects, Kuwait, Qatar universities"}
         jsonLd={[
           collectionPageJsonLd({
             name: t("categories_title"),

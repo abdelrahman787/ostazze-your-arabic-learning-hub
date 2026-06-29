@@ -711,14 +711,14 @@ const translations = {
   home_verified_cta: { ar: "عرض كل المعلمين", en: "View all tutors" },
   home_logos_title: { ar: "نخدم طلاب من أهم الجامعات", en: "Serving students from leading universities" },
   home_logos_badge: { ar: "موثوق من الأفضل", en: "Trusted by the best" },
-  home_logos_subtitle: { ar: "نخبة من جامعات مصر يثقون بمنصتنا لتعليم أبنائهم", en: "Top universities in Egypt trust our platform" },
+  home_logos_subtitle: { ar: "نخبة من جامعات الكويت وقطر يثقون بمنصتنا لتعليم أبنائهم", en: "Top universities in Kuwait and Qatar trust our platform" },
   home_logos_cta: { ar: "استعرض كل الجامعات", en: "Browse all universities" },
   home_trust_badge: { ar: "موثّق من Ostaze", en: "Ostaze Verified" },
   home_view_profile: { ar: "عرض الملف", en: "View profile" },
 
   // ===== Universities intro =====
-  uni_intro_title: { ar: "جامعات مصر", en: "Universities of Egypt" },
-  uni_intro_p1: { ar: "نوفّر تغطية شاملة لأبرز الجامعات في مصر مع كليات ومواد محدّثة، لمساعدتك في إيجاد معلم متخصص في تخصصك بدقّة.", en: "Comprehensive coverage of leading universities across Egypt with up-to-date colleges and subjects, helping you find a tutor specialized in your exact major." },
+  uni_intro_title: { ar: "جامعات الكويت وقطر", en: "Universities of Kuwait & Qatar" },
+  uni_intro_p1: { ar: "نوفّر تغطية شاملة لأبرز الجامعات في الكويت وقطر مع كليات ومواد محدّثة، لمساعدتك في إيجاد معلم متخصص في تخصصك بدقّة.", en: "Comprehensive coverage of leading universities across Kuwait and Qatar with up-to-date colleges and subjects, helping you find a tutor specialized in your exact major." },
   uni_intro_p2: { ar: "استكشف الجامعات حسب الدولة، تصفّح كلياتها، ثم انتقل مباشرة إلى المواد والمعلمين المتاحين.", en: "Explore universities by country, browse their colleges, then jump directly to available subjects and tutors." },
   uni_colleges_count: { ar: "كلية", en: "colleges" },
   uni_view_subjects: { ar: "تصفّح المواد", en: "Browse subjects" },

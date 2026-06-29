@@ -29,15 +29,7 @@ export default function CountryGate({ children }: { children: React.ReactNode })
         .select("country")
         .eq("user_id", user.id)
         .maybeSingle();
-      if (cancelled) return;
-      const existing = (data?.country as Country) ?? null;
-      if (existing) {
-        setCountry(existing);
-      } else {
-        // Temporary: auto-assign Egypt so the country picker never shows.
-        await supabase.from("profiles").update({ country: "EG" }).eq("user_id", user.id);
-        if (!cancelled) setCountry("EG");
-      }
+      if (!cancelled) setCountry((data?.country as Country) ?? null);
     })();
     return () => { cancelled = true; };
   }, [isLoggedIn, user?.id]);

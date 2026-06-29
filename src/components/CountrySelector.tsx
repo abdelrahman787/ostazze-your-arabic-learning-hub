@@ -9,10 +9,10 @@ interface Props {
 
 export default function CountrySelector({ value, onChange, required }: Props) {
   const { lang } = useLanguage();
-  const codes: Country[] = ["EG"];
+  const codes: Country[] = ["EG", "QA", "KW"];
 
   return (
-    <div className="grid grid-cols-1 gap-2">
+    <div className="grid grid-cols-3 gap-2">
       {codes.map((c) => {
         const meta = COUNTRY_LABELS[c];
         const price = SESSION_PRICE[c];
