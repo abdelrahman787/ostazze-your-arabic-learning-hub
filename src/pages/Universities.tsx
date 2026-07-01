@@ -16,6 +16,7 @@ import flagKW from "@/assets/flag-kw.svg";
 import flagQA from "@/assets/flag-qa.svg";
 import flagSA from "@/assets/flag-sa.svg";
 import flagAE from "@/assets/flag-ae.svg";
+import flagEG from "@/assets/flag-eg.svg";
 
 // Group universities by country
 const getCountries = () => {
@@ -29,17 +30,18 @@ const getCountries = () => {
   return Array.from(map.values());
 };
 
-const flagImages: Record<string, string> = { KW: flagKW, QA: flagQA, SA: flagSA, AE: flagAE };
+const flagImages: Record<string, string> = { KW: flagKW, QA: flagQA, SA: flagSA, AE: flagAE, EG: flagEG };
 
 const countryNames: Record<string, { ar: string; en: string }> = {
   KW: { ar: "الكويت", en: "Kuwait" },
   QA: { ar: "قطر", en: "Qatar" },
   SA: { ar: "السعودية", en: "Saudi Arabia" },
   AE: { ar: "الإمارات", en: "UAE" },
+  EG: { ar: "مصر", en: "Egypt" },
 };
 
 const comingSoonCountries = [
-  { code: "SA", name_ar: countryNames.SA.ar, name_en: countryNames.SA.en, universities: [] as University[] },
+  { code: "EG", name_ar: countryNames.EG.ar, name_en: countryNames.EG.en, universities: [] as University[] },
   { code: "AE", name_ar: countryNames.AE.ar, name_en: countryNames.AE.en, universities: [] as University[] },
 ];
 
