@@ -16,7 +16,6 @@ import flagKW from "@/assets/flag-kw.svg";
 import flagQA from "@/assets/flag-qa.svg";
 import flagSA from "@/assets/flag-sa.svg";
 import flagAE from "@/assets/flag-ae.svg";
-import flagAE from "@/assets/flag-ae.svg";
 
 // Group universities by country
 const getCountries = () => {
