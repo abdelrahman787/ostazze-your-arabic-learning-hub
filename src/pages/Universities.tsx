@@ -41,7 +41,6 @@ const countryNames: Record<string, { ar: string; en: string }> = {
 };
 
 const comingSoonCountries = [
-  { code: "EG", name_ar: countryNames.EG.ar, name_en: countryNames.EG.en, universities: [] as University[] },
   { code: "AE", name_ar: countryNames.AE.ar, name_en: countryNames.AE.en, universities: [] as University[] },
 ];
 
