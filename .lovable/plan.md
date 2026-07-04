@@ -1,37 +1,37 @@
 ## Goal
+Generate one Excel file containing every course/material (physics, math, etc.) from every university across all countries in the site, and deliver it as a downloadable artifact.
 
-Produce full-page screenshots of OSTAZZE's key pages at both desktop and mobile widths, saved to `/mnt/documents/` so you can download them. Then (optionally) do a quick on-page audit using the rendered DOM I can capture myself from the live preview — no need for you to paste outerHTML.
+## Source
+`src/data/universitiesData.ts` — the `allUniversities` array (Kuwait, Qatar, KSA, and any others). Each university → colleges → departments → courses.
 
-## Pages to capture
+## Output
+`/mnt/documents/ostazze_all_materials.xlsx`
 
-1. Home — `/`
-2. Teacher listing — `/teachers`
-3. A teacher profile — first teacher from `/teachers` (I'll click through to get a real ID)
-4. Sign-up — `/register`
-5. Pricing — there is no dedicated `/pricing` route. Closest equivalents: `/subjects` (shows session pricing per country) or `/checkout`. **I will use `/subjects`** unless you tell me otherwise, since `/checkout` requires an authenticated session + a selected teacher.
+### Sheet 1 — "All Courses" (flat, one row per course)
+Columns:
+- Country (EN) | Country (AR)
+- University (EN) | University (AR)
+- College (EN) | College (AR)
+- Department (EN) | Department (AR)
+- Subject Group (e.g. Physics, Mathematics — derived via `src/lib/courseSubjectMap.ts` `resolveCourseSubject`)
+- Course Code
+- Course Name (EN) | Course Name (AR)
+- Credits
+- Type (Required/Elective, when present)
 
-## Viewports
+Frozen header row, bold header, autosized columns, autofilter enabled.
 
-- Desktop: 1440 × 900
-- Mobile: 390 × 844 (iPhone 14 class)
+### Sheet 2 — "By Subject"
+Pivot-style summary: Subject Group → count of courses, list of countries offering it. Helps the user see all "Physics" or "Math" materials at a glance.
 
-Each page captured with `full_page: true` so the entire scroll length is included. Output: 10 PNGs in `/mnt/documents/screenshots/`, named e.g. `home-desktop.png`, `home-mobile.png`, etc., plus one `<presentation-artifact>` per file.
+### Sheet 3 — "Universities Summary"
+Country | University | # Colleges | # Departments | # Courses.
 
-## On-page audit (in place of you pasting outerHTML)
+## Approach
+1. Parse `universitiesData.ts` in a Node script (import the module directly with `tsx`) to guarantee identical data to the site — no re-parsing risks.
+2. Walk the tree, deduplicate exact `(university, code, name_en)` duplicates.
+3. Use `exceljs` (or `xlsx`) to build the workbook with formatting.
+4. Save to `/mnt/documents/`, then present with `<presentation-artifact>`.
 
-For each page I'll also pull the rendered HTML via the browser tool and check:
-- Heading order (single H1, logical H2/H3 nesting)
-- `alt` text presence on `<img>`
-- ARIA landmarks and labels on interactive controls
-- Obvious low-contrast text (computed colors vs background)
-
-Delivered as a short Markdown report at `/mnt/documents/screenshots/audit.md`.
-
-## What I can't do
-
-- **Lighthouse**: not available inside this sandbox. I can run a lightweight perf snapshot via `browser--performance_profile` (FCP, LCP, CLS, INP, JS heap, DOM size, largest/blocking resources) for the home page and include those numbers in the audit. If you want full Lighthouse scores, you'll need to run DevTools → Lighthouse locally and share the JSON.
-
-## Confirm before I start
-
-- OK to use `/subjects` as the "pricing" page? (Alternative: capture `/checkout` while logged-out — it'll redirect to login.)
-- Include the perf snapshot + audit report, or screenshots only?
+## Deliverable
+A single `.xlsx` the user can download, then a short confirmation message.
