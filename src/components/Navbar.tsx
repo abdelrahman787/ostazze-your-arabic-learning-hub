@@ -95,7 +95,7 @@ const Navbar = () => {
               <span className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center shadow-[0_0_18px_hsl(14_91%_50%/0.5)]">
                 <GraduationCap size={18} className="text-white" />
               </span>
-              <span className="text-lg font-black text-primary tracking-tight hidden sm:inline">OSTAZE</span>
+              <span className="text-lg font-black text-primary tracking-tight">OSTAZE</span>
             </Link>
           </div>
 
@@ -129,10 +129,13 @@ const Navbar = () => {
             </button>
             <button
               onClick={toggleLang}
-              className="w-8 h-8 rounded-full flex items-center justify-center text-foreground/60 hover:text-foreground hover:bg-foreground/10 transition-colors"
+              className="h-8 min-w-[36px] px-2 rounded-full flex items-center justify-center gap-1 text-[11px] font-black tracking-wider text-foreground/70 hover:text-primary hover:bg-primary/10 border border-foreground/15 hover:border-primary/40 transition-colors"
               aria-label={lang === "ar" ? "Switch to English" : "التبديل للعربية"}
+              title={lang === "ar" ? "English" : "العربية"}
             >
-              <Globe size={16} />
+              <span className={lang === "ar" ? "opacity-100 text-primary" : "opacity-40"}>ع</span>
+              <span className="opacity-30">/</span>
+              <span className={lang === "en" ? "opacity-100 text-primary" : "opacity-40"}>EN</span>
             </button>
 
             {isLoggedIn && <NotificationBell />}

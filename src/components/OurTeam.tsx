@@ -6,7 +6,7 @@ import loay from "@/assets/team-loay.webp.asset.json";
 import khaled from "@/assets/team-khaled.webp.asset.json";
 
 const team = [
-  { img: naga.url, name: { ar: "محمد ناجا", en: "Mohamed Naga" }, role: { ar: "الرئيس التنفيذي", en: "Chief Executive Officer" } },
+  { img: naga.url, name: { ar: "محمد نجا", en: "Mohamed Naga" }, role: { ar: "الرئيس التنفيذي", en: "Chief Executive Officer" } },
   { img: safi.url, name: { ar: "أحمد صافي", en: "Ahmed Safi" }, role: { ar: "المدير المالي", en: "Chief Financial Manager" } },
   { img: loay.url, name: { ar: "لؤي محمد", en: "Loay Mohamed" }, role: { ar: "مدير العمليات", en: "Chief Operational Officer" } },
   { img: khaled.url, name: { ar: "خالد جلال", en: "Khaled Galal" }, role: { ar: "المدير التقني", en: "Chief Technical Officer" } },
