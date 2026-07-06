@@ -730,6 +730,10 @@ export type Database = {
         Args: { _course_id: string; _user_id: string }
         Returns: boolean
       }
+      teacher_has_student_relationship: {
+        Args: { _student_id: string; _teacher_id: string }
+        Returns: boolean
+      }
       user_can_access_chat_audio: { Args: { _name: string }; Returns: boolean }
       user_can_access_lecture_file: {
         Args: { _bucket: string; _name: string }
