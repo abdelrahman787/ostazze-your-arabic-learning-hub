@@ -89,10 +89,12 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         {children}
       </main>
       {!hideFooter && <Footer />}
-      <FloatingWhatsApp />
-      <AIChatWidget />
-      <CookieConsent />
-      <CountryGate>{null}</CountryGate>
+      <Suspense fallback={null}>
+        <FloatingWhatsApp />
+        <AIChatWidget />
+        <CookieConsent />
+        <CountryGate>{null}</CountryGate>
+      </Suspense>
     </div>
   );
 };
