@@ -775,3 +775,22 @@
 .watermark-float-2 {
   animation: watermarkFloat2 28s linear infinite;
 }
+
+@keyframes page-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-page-in { animation: page-in 250ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+@media (prefers-reduced-motion: reduce) {
+  .animate-page-in { animation: none; }
+}
+
+/* Navbar dropdown / mobile-menu enter animation (replaces framer-motion) */
+@keyframes nav-drop-in {
+  from { opacity: 0; transform: translateY(-6px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.animate-nav-drop { animation: nav-drop-in 150ms ease-out both; transform-origin: top center; }
+@media (prefers-reduced-motion: reduce) {
+  .animate-nav-drop { animation: none; }
+}
