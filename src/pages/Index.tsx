@@ -13,7 +13,7 @@ const IndexBelowFold = lazy(() => import("@/components/home/IndexBelowFold"));
 
 const HomePage = () => {
   const { t, lang } = useLanguage();
-  const [belowFoldRef, belowFoldReady] = useInViewOnce<HTMLDivElement>("0px 0px");
+  const [belowFoldRef, belowFoldReady] = useInViewOnce<HTMLDivElement>("-100px 0px");
 
   const jsonLd = {
     "@context": "https://schema.org",
