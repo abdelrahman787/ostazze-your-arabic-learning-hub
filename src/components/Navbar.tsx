@@ -2,10 +2,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useState, useRef, useEffect, useCallback } from "react";
-import { Moon, Sun, Menu, X, LogOut, Globe, User, ChevronDown, Shield, LayoutDashboard, ArrowRight, GraduationCap, Calendar } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
-import NotificationBell from "@/components/NotificationBell";
+import { useState, useRef, useEffect, useCallback, lazy, Suspense } from "react";
+import { Moon, Sun, Menu, X, LogOut, User, ChevronDown, Shield, LayoutDashboard, ArrowRight, GraduationCap, Calendar } from "lucide-react";
+
+const NotificationBell = lazy(() => import("@/components/NotificationBell"));
+
 
 const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
