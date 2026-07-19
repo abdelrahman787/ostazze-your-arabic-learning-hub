@@ -18,11 +18,21 @@ import GlobalSeo from "@/components/GlobalSeo";
 const Toaster = lazy(() => import("@/components/ui/toaster").then(m => ({ default: m.Toaster })));
 const Sonner = lazy(() => import("@/components/ui/sonner").then(m => ({ default: m.Toaster })));
 
-const Index = lazy(() => import("./pages/Index"));
+// Kick off the Index chunk immediately (parallel with entry parse) to
+// eliminate the entry→Index waterfall. React.lazy dedupes the promise.
+const indexImport = () => import("./pages/Index");
+if (typeof window !== "undefined" && window.location.pathname === "/") {
+  // Fire-and-forget; result is cached by the module system.
+  indexImport();
+}
+const Index = lazy(indexImport);
+
 const FloatingWhatsApp = lazy(() => import("@/components/FloatingWhatsApp"));
 const AIChatWidget = lazy(() => import("@/components/AIChatWidget"));
 const CookieConsent = lazy(() => import("@/components/CookieConsent"));
 const CountryGate = lazy(() => import("@/components/CountryGate"));
+
+
 
 const Teachers = lazy(() => import("./pages/Teachers"));
 const TeacherProfile = lazy(() => import("./pages/TeacherProfile"));
