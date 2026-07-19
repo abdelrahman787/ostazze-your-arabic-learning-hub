@@ -159,42 +159,36 @@ const Navbar = () => {
                   <ChevronDown size={12} className={`transition-transform ${profileOpen ? "rotate-180" : ""}`} />
                 </button>
 
-                <AnimatePresence>
-                  {profileOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -8, scale: 0.95 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: -8, scale: 0.95 }}
-                      transition={{ duration: 0.15 }}
-                      className="absolute end-0 top-full mt-2 w-56 bg-card rounded-2xl border shadow-2xl overflow-hidden z-50"
-                      role="menu"
-                    >
-                      <div className="p-3 border-b">
-                        <div className="font-bold text-sm">{user?.name}</div>
-                        <div className="text-muted-foreground text-xs">{user?.email}</div>
-                        {user?.role === "admin" && (
-                          <span className="text-[0.6rem] bg-primary/20 text-primary px-2 py-0.5 rounded-full font-semibold mt-1 inline-block">{t("admin_title")}</span>
-                        )}
-                      </div>
-                      <div className="p-1.5">
-                        <Link to={dashboardPath} onClick={() => setProfileOpen(false)} className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm hover:bg-secondary transition-colors" role="menuitem">
-                          <LayoutDashboard size={15} className="text-muted-foreground" /> {t("nav_dashboard")}
+                {profileOpen && (
+                  <div
+                    className="absolute end-0 top-full mt-2 w-56 bg-card rounded-2xl border shadow-2xl overflow-hidden z-50 animate-nav-drop"
+                    role="menu"
+                  >
+                    <div className="p-3 border-b">
+                      <div className="font-bold text-sm">{user?.name}</div>
+                      <div className="text-muted-foreground text-xs">{user?.email}</div>
+                      {user?.role === "admin" && (
+                        <span className="text-[0.6rem] bg-primary/20 text-primary px-2 py-0.5 rounded-full font-semibold mt-1 inline-block">{t("admin_title")}</span>
+                      )}
+                    </div>
+                    <div className="p-1.5">
+                      <Link to={dashboardPath} onClick={() => setProfileOpen(false)} className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm hover:bg-secondary transition-colors" role="menuitem">
+                        <LayoutDashboard size={15} className="text-muted-foreground" /> {t("nav_dashboard")}
+                      </Link>
+                      <Link to="/my-bookings" onClick={() => setProfileOpen(false)} className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm hover:bg-secondary transition-colors" role="menuitem">
+                        <Calendar size={15} className="text-muted-foreground" /> {lang === "ar" ? "حجوزاتي" : "My Bookings"}
+                      </Link>
+                      {user?.role === "admin" && (
+                        <Link to="/admin" onClick={() => setProfileOpen(false)} className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm hover:bg-secondary transition-colors" role="menuitem">
+                          <Shield size={15} className="text-primary" /> {t("admin_title")}
                         </Link>
-                        <Link to="/my-bookings" onClick={() => setProfileOpen(false)} className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm hover:bg-secondary transition-colors" role="menuitem">
-                          <Calendar size={15} className="text-muted-foreground" /> {lang === "ar" ? "حجوزاتي" : "My Bookings"}
-                        </Link>
-                        {user?.role === "admin" && (
-                          <Link to="/admin" onClick={() => setProfileOpen(false)} className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm hover:bg-secondary transition-colors" role="menuitem">
-                            <Shield size={15} className="text-primary" /> {t("admin_title")}
-                          </Link>
-                        )}
-                        <button onClick={() => { logout(); setProfileOpen(false); }} className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-destructive hover:bg-destructive/10 transition-colors" role="menuitem">
-                          <LogOut size={15} /> {t("nav_logout")}
-                        </button>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                      )}
+                      <button onClick={() => { logout(); setProfileOpen(false); }} className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-destructive hover:bg-destructive/10 transition-colors" role="menuitem">
+                        <LogOut size={15} /> {t("nav_logout")}
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             ) : (
               <div className="hidden md:flex items-center gap-2">
