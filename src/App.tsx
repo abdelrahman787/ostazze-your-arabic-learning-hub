@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { Suspense, lazy } from "react";
+import { useDeferredMount } from "@/hooks/useDeferredMount";
 import { MotionConfig } from "framer-motion";
 import PageTransition from "@/components/PageTransition";
 import { HelmetProvider } from "react-helmet-async";
@@ -60,6 +61,19 @@ const queryClient = new QueryClient({
 
 const RouteFallback = () => <div className="min-h-[40vh]" aria-hidden="true" />;
 
+const DeferredWidgets = () => {
+  const ready = useDeferredMount();
+  if (!ready) return null;
+  return (
+    <Suspense fallback={null}>
+      <FloatingWhatsApp />
+      <AIChatWidget />
+      <CookieConsent />
+      <CountryGate>{null}</CountryGate>
+    </Suspense>
+  );
+};
+
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
   const hideFooter =
@@ -89,12 +103,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         {children}
       </main>
       {!hideFooter && <Footer />}
-      <Suspense fallback={null}>
-        <FloatingWhatsApp />
-        <AIChatWidget />
-        <CookieConsent />
-        <CountryGate>{null}</CountryGate>
-      </Suspense>
+      <DeferredWidgets />
     </div>
   );
 };
