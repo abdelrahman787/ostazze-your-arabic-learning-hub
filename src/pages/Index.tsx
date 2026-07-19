@@ -128,8 +128,8 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Below-the-fold sections, code-split */}
-      {/* Below-the-fold sections, code-split + idle-deferred */}
+      {/* Sentinel — kicks off IndexBelowFold fetch as user approaches fold */}
+      <div ref={belowFoldRef} aria-hidden="true" />
       {belowFoldReady && (
         <Suspense fallback={<div className="min-h-[40vh]" aria-hidden="true" />}>
           <IndexBelowFold />
