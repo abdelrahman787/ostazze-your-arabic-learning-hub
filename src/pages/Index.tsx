@@ -128,9 +128,12 @@ const HomePage = () => {
       </section>
 
       {/* Below-the-fold sections, code-split */}
-      <Suspense fallback={<div className="min-h-[40vh]" aria-hidden="true" />}>
-        <IndexBelowFold />
-      </Suspense>
+      {/* Below-the-fold sections, code-split + idle-deferred */}
+      {belowFoldReady && (
+        <Suspense fallback={<div className="min-h-[40vh]" aria-hidden="true" />}>
+          <IndexBelowFold />
+        </Suspense>
+      )}
 
       {/* SEO-only contextual paragraph */}
       <section aria-hidden="true" className="sr-only">
