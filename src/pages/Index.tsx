@@ -2,11 +2,12 @@ import { Link } from "react-router-dom";
 import { GraduationCap } from "lucide-react";
 import { lazy, Suspense } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useDeferredMount } from "@/hooks/useDeferredMount";
 import PageHelmet from "@/components/PageHelmet";
 import HeroOrbit from "@/components/HeroOrbit";
 
-// Below-the-fold sections carry framer-motion (~40 KB gz). Lazy-load them so
-// the initial critical bundle stays lean; the hero animates via pure CSS.
+// Below-the-fold sections carry framer-motion (~40 KB gz). Lazy + idle-defer
+// so the initial critical bundle stays lean; the hero animates via pure CSS.
 const IndexBelowFold = lazy(() => import("@/components/home/IndexBelowFold"));
 
 const HomePage = () => {
