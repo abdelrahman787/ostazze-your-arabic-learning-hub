@@ -76,6 +76,8 @@ const DeferredWidgets = () => {
   if (!ready) return null;
   return (
     <Suspense fallback={null}>
+      <Toaster />
+      <Sonner />
       <FloatingWhatsApp />
       <AIChatWidget />
       <CookieConsent />
@@ -126,10 +128,7 @@ const App = () => (
           <LanguageProvider>
             <AuthProvider>
               <TooltipProvider>
-                <Suspense fallback={null}>
-                  <Toaster />
-                  <Sonner />
-                </Suspense>
+                {/* Toaster/Sonner are rendered inside DeferredWidgets (idle-mounted) */}
                 <BrowserRouter>
                   <ScrollToTop />
                   <GlobalSeo />
