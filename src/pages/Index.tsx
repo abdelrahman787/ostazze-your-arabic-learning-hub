@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { mockTestimonials } from "@/data/mockData";
+import { mockTestimonials } from "@/data/testimonials";
 import {
   Star, ArrowLeft, Sparkles, GraduationCap, CalendarCheck, Video,
 } from "lucide-react";
