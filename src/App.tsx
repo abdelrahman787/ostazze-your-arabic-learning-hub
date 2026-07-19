@@ -159,7 +159,7 @@ const App = () => (
                     </PageTransition>
                   </Layout>
                 </BrowserRouter>
-                </MotionConfig>
+                
               </TooltipProvider>
             </AuthProvider>
           </LanguageProvider>
