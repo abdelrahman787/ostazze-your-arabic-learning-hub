@@ -2,6 +2,8 @@ import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
+import { visualizer } from "rollup-plugin-visualizer";
+
 
 const FALLBACK_SUPABASE_URL = "https://dqqfzpghixfvhhpxfgwv.supabase.co";
 const FALLBACK_SUPABASE_PUBLISHABLE_KEY =
@@ -19,7 +21,11 @@ export default defineConfig(({ mode }) => {
         overlay: false,
       },
     },
-    plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
+    plugins: [
+      react(),
+      mode === "development" && componentTagger(),
+      process.env.ANALYZE ? visualizer({ filename: "dist/stats.html", template: "treemap", gzipSize: true, brotliSize: true }) : null,
+    ].filter(Boolean) as any,
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "./src"),

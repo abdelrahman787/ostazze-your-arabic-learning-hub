@@ -2,10 +2,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useState, useRef, useEffect, useCallback } from "react";
-import { Moon, Sun, Menu, X, LogOut, Globe, User, ChevronDown, Shield, LayoutDashboard, ArrowRight, GraduationCap, Calendar } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
-import NotificationBell from "@/components/NotificationBell";
+import { useState, useRef, useEffect, useCallback, lazy, Suspense } from "react";
+import { Moon, Sun, Menu, X, LogOut, User, ChevronDown, Shield, LayoutDashboard, ArrowRight, GraduationCap, Calendar } from "lucide-react";
+
+const NotificationBell = lazy(() => import("@/components/NotificationBell"));
+
 
 const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
@@ -138,7 +139,11 @@ const Navbar = () => {
               <span className={lang === "en" ? "opacity-100 text-primary" : "opacity-40"}>EN</span>
             </button>
 
-            {isLoggedIn && <NotificationBell />}
+            {isLoggedIn && (
+              <Suspense fallback={null}>
+                <NotificationBell />
+              </Suspense>
+            )}
 
             {isLoggedIn ? (
               <div className="hidden md:block relative" ref={dropdownRef}>
@@ -154,42 +159,36 @@ const Navbar = () => {
                   <ChevronDown size={12} className={`transition-transform ${profileOpen ? "rotate-180" : ""}`} />
                 </button>
 
-                <AnimatePresence>
-                  {profileOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -8, scale: 0.95 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: -8, scale: 0.95 }}
-                      transition={{ duration: 0.15 }}
-                      className="absolute end-0 top-full mt-2 w-56 bg-card rounded-2xl border shadow-2xl overflow-hidden z-50"
-                      role="menu"
-                    >
-                      <div className="p-3 border-b">
-                        <div className="font-bold text-sm">{user?.name}</div>
-                        <div className="text-muted-foreground text-xs">{user?.email}</div>
-                        {user?.role === "admin" && (
-                          <span className="text-[0.6rem] bg-primary/20 text-primary px-2 py-0.5 rounded-full font-semibold mt-1 inline-block">{t("admin_title")}</span>
-                        )}
-                      </div>
-                      <div className="p-1.5">
-                        <Link to={dashboardPath} onClick={() => setProfileOpen(false)} className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm hover:bg-secondary transition-colors" role="menuitem">
-                          <LayoutDashboard size={15} className="text-muted-foreground" /> {t("nav_dashboard")}
+                {profileOpen && (
+                  <div
+                    className="absolute end-0 top-full mt-2 w-56 bg-card rounded-2xl border shadow-2xl overflow-hidden z-50 animate-nav-drop"
+                    role="menu"
+                  >
+                    <div className="p-3 border-b">
+                      <div className="font-bold text-sm">{user?.name}</div>
+                      <div className="text-muted-foreground text-xs">{user?.email}</div>
+                      {user?.role === "admin" && (
+                        <span className="text-[0.6rem] bg-primary/20 text-primary px-2 py-0.5 rounded-full font-semibold mt-1 inline-block">{t("admin_title")}</span>
+                      )}
+                    </div>
+                    <div className="p-1.5">
+                      <Link to={dashboardPath} onClick={() => setProfileOpen(false)} className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm hover:bg-secondary transition-colors" role="menuitem">
+                        <LayoutDashboard size={15} className="text-muted-foreground" /> {t("nav_dashboard")}
+                      </Link>
+                      <Link to="/my-bookings" onClick={() => setProfileOpen(false)} className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm hover:bg-secondary transition-colors" role="menuitem">
+                        <Calendar size={15} className="text-muted-foreground" /> {lang === "ar" ? "حجوزاتي" : "My Bookings"}
+                      </Link>
+                      {user?.role === "admin" && (
+                        <Link to="/admin" onClick={() => setProfileOpen(false)} className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm hover:bg-secondary transition-colors" role="menuitem">
+                          <Shield size={15} className="text-primary" /> {t("admin_title")}
                         </Link>
-                        <Link to="/my-bookings" onClick={() => setProfileOpen(false)} className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm hover:bg-secondary transition-colors" role="menuitem">
-                          <Calendar size={15} className="text-muted-foreground" /> {lang === "ar" ? "حجوزاتي" : "My Bookings"}
-                        </Link>
-                        {user?.role === "admin" && (
-                          <Link to="/admin" onClick={() => setProfileOpen(false)} className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm hover:bg-secondary transition-colors" role="menuitem">
-                            <Shield size={15} className="text-primary" /> {t("admin_title")}
-                          </Link>
-                        )}
-                        <button onClick={() => { logout(); setProfileOpen(false); }} className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-destructive hover:bg-destructive/10 transition-colors" role="menuitem">
-                          <LogOut size={15} /> {t("nav_logout")}
-                        </button>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                      )}
+                      <button onClick={() => { logout(); setProfileOpen(false); }} className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-destructive hover:bg-destructive/10 transition-colors" role="menuitem">
+                        <LogOut size={15} /> {t("nav_logout")}
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             ) : (
               <div className="hidden md:flex items-center gap-2">
@@ -220,56 +219,48 @@ const Navbar = () => {
         </div>
       </nav>
 
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2 }}
-            className="md:hidden mx-auto max-w-5xl mt-2 nav-pill !rounded-3xl p-3 pointer-events-auto"
-          >
-            <div className="flex flex-col gap-1">
-              {navLinks.map((l) => (
-                <Link
-                  key={l.path}
-                  to={l.path}
-                  onClick={() => setMobileOpen(false)}
-                  className={`px-4 py-3 rounded-xl text-sm font-medium hover:bg-foreground/10 min-h-[44px] flex items-center ${
-                    location.pathname === l.path ? "text-primary font-bold bg-primary/10" : "text-foreground/80"
-                  }`}
-                >
-                  {l.label}
+      {mobileOpen && (
+        <div className="md:hidden mx-auto max-w-5xl mt-2 nav-pill !rounded-3xl p-3 pointer-events-auto animate-nav-drop">
+          <div className="flex flex-col gap-1">
+            {navLinks.map((l) => (
+              <Link
+                key={l.path}
+                to={l.path}
+                onClick={() => setMobileOpen(false)}
+                className={`px-4 py-3 rounded-xl text-sm font-medium hover:bg-foreground/10 min-h-[44px] flex items-center ${
+                  location.pathname === l.path ? "text-primary font-bold bg-primary/10" : "text-foreground/80"
+                }`}
+              >
+                {l.label}
+              </Link>
+            ))}
+            <div className="h-px bg-foreground/10 my-1" />
+            {isLoggedIn ? (
+              <>
+                <Link to={dashboardPath} onClick={() => setMobileOpen(false)} className="px-4 py-3 rounded-xl text-sm font-medium hover:bg-foreground/10 flex items-center gap-2 min-h-[44px]">
+                  <LayoutDashboard size={16} /> {t("nav_dashboard")}
                 </Link>
-              ))}
-              <div className="h-px bg-foreground/10 my-1" />
-              {isLoggedIn ? (
-                <>
-                  <Link to={dashboardPath} onClick={() => setMobileOpen(false)} className="px-4 py-3 rounded-xl text-sm font-medium hover:bg-foreground/10 flex items-center gap-2 min-h-[44px]">
-                    <LayoutDashboard size={16} /> {t("nav_dashboard")}
+                <Link to="/my-bookings" onClick={() => setMobileOpen(false)} className="px-4 py-3 rounded-xl text-sm font-medium hover:bg-foreground/10 flex items-center gap-2 min-h-[44px]">
+                  <Calendar size={16} /> {lang === "ar" ? "حجوزاتي" : "My Bookings"}
+                </Link>
+                {user?.role === "admin" && (
+                  <Link to="/admin" onClick={() => setMobileOpen(false)} className="px-4 py-3 rounded-xl text-sm font-medium hover:bg-foreground/10 flex items-center gap-2 min-h-[44px]">
+                    <Shield size={16} className="text-primary" /> {t("admin_title")}
                   </Link>
-                  <Link to="/my-bookings" onClick={() => setMobileOpen(false)} className="px-4 py-3 rounded-xl text-sm font-medium hover:bg-foreground/10 flex items-center gap-2 min-h-[44px]">
-                    <Calendar size={16} /> {lang === "ar" ? "حجوزاتي" : "My Bookings"}
-                  </Link>
-                  {user?.role === "admin" && (
-                    <Link to="/admin" onClick={() => setMobileOpen(false)} className="px-4 py-3 rounded-xl text-sm font-medium hover:bg-foreground/10 flex items-center gap-2 min-h-[44px]">
-                      <Shield size={16} className="text-primary" /> {t("admin_title")}
-                    </Link>
-                  )}
-                  <button onClick={() => { logout(); setMobileOpen(false); }} className="text-destructive text-sm font-medium py-2.5 flex items-center justify-center gap-2 min-h-[44px]">
-                    <LogOut size={15} />{t("nav_logout")}
-                  </button>
-                </>
-              ) : (
-                <>
-                  <Link to="/login" onClick={() => setMobileOpen(false)} className="text-center text-sm font-medium py-3 text-foreground/70 min-h-[44px] flex items-center justify-center">{t("nav_login")}</Link>
-                  <Link to="/register" onClick={() => setMobileOpen(false)} className="bg-primary text-primary-foreground rounded-full text-center text-sm min-h-[44px] flex items-center justify-center font-bold">{t("nav_register")}</Link>
-                </>
-              )}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                )}
+                <button onClick={() => { logout(); setMobileOpen(false); }} className="text-destructive text-sm font-medium py-2.5 flex items-center justify-center gap-2 min-h-[44px]">
+                  <LogOut size={15} />{t("nav_logout")}
+                </button>
+              </>
+            ) : (
+              <>
+                <Link to="/login" onClick={() => setMobileOpen(false)} className="text-center text-sm font-medium py-3 text-foreground/70 min-h-[44px] flex items-center justify-center">{t("nav_login")}</Link>
+                <Link to="/register" onClick={() => setMobileOpen(false)} className="bg-primary text-primary-foreground rounded-full text-center text-sm min-h-[44px] flex items-center justify-center font-bold">{t("nav_register")}</Link>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </header>
   );
 };
