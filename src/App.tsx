@@ -1,11 +1,8 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import { useDeferredMount } from "@/hooks/useDeferredMount";
-import { MotionConfig } from "framer-motion";
 import PageTransition from "@/components/PageTransition";
 import { HelmetProvider } from "react-helmet-async";
 import { ThemeProvider } from "@/contexts/ThemeContext";
@@ -17,8 +14,11 @@ import Footer from "@/components/Footer";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import ScrollToTop from "@/components/ScrollToTop";
 import GlobalSeo from "@/components/GlobalSeo";
-import Index from "./pages/Index";
 
+const Toaster = lazy(() => import("@/components/ui/toaster").then(m => ({ default: m.Toaster })));
+const Sonner = lazy(() => import("@/components/ui/sonner").then(m => ({ default: m.Toaster })));
+
+const Index = lazy(() => import("./pages/Index"));
 const FloatingWhatsApp = lazy(() => import("@/components/FloatingWhatsApp"));
 const AIChatWidget = lazy(() => import("@/components/AIChatWidget"));
 const CookieConsent = lazy(() => import("@/components/CookieConsent"));
