@@ -139,7 +139,11 @@ const Navbar = () => {
               <span className={lang === "en" ? "opacity-100 text-primary" : "opacity-40"}>EN</span>
             </button>
 
-            {isLoggedIn && <NotificationBell />}
+            {isLoggedIn && (
+              <Suspense fallback={null}>
+                <NotificationBell />
+              </Suspense>
+            )}
 
             {isLoggedIn ? (
               <div className="hidden md:block relative" ref={dropdownRef}>
