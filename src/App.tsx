@@ -128,10 +128,7 @@ const App = () => (
           <LanguageProvider>
             <AuthProvider>
               <TooltipProvider>
-                <Suspense fallback={null}>
-                  <Toaster />
-                  <Sonner />
-                </Suspense>
+                {/* Toaster/Sonner are rendered inside DeferredWidgets (idle-mounted) */}
                 <BrowserRouter>
                   <ScrollToTop />
                   <GlobalSeo />
