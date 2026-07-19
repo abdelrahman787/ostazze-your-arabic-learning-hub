@@ -24,8 +24,8 @@ export default defineConfig(({ mode }) => {
     plugins: [
       react(),
       mode === "development" && componentTagger(),
-      process.env.ANALYZE && visualizer({ filename: "dist/stats.html", template: "treemap", gzipSize: true, brotliSize: true }),
-    ].filter(Boolean),
+      process.env.ANALYZE ? visualizer({ filename: "dist/stats.html", template: "treemap", gzipSize: true, brotliSize: true }) : null,
+    ].filter(Boolean) as any,
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "./src"),
