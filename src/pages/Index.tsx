@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { mockTestimonials } from "@/data/mockData";
+import { mockTestimonials } from "@/data/testimonials";
 import {
   Star, ArrowLeft, Sparkles, GraduationCap, CalendarCheck, Video,
 } from "lucide-react";
@@ -12,9 +12,12 @@ import hero3DCap from "@/assets/hero-3d-cap.webp";
 import HeroOrbit from "@/components/HeroOrbit";
 import OurTeam from "@/components/OurTeam";
 
-import howStep1Img from "@/assets/how-step-1.png";
-import howStep2Img from "@/assets/how-step-2.png";
-import howStep3Img from "@/assets/how-step-3.png";
+import howStep1Asset from "@/assets/how-step-1.webp.asset.json";
+import howStep2Asset from "@/assets/how-step-2.webp.asset.json";
+import howStep3Asset from "@/assets/how-step-3.webp.asset.json";
+const howStep1Img = howStep1Asset.url;
+const howStep2Img = howStep2Asset.url;
+const howStep3Img = howStep3Asset.url;
 import logosGridImg from "@/assets/university-logos-grid.png.asset.json";
 
 

@@ -8,7 +8,8 @@ import logoGUQ from "@/assets/unis/georgetown-qatar-new.png.asset.json";
 import logoNUQ from "@/assets/unis/northwestern-qatar.png.asset.json";
 import logoVCUQ from "@/assets/unis/vcuarts-qatar-new.jpeg.asset.json";
 import logoWCMQ from "@/assets/unis/weill-cornell-qatar-new.jpg.asset.json";
-import logoKSU from "@/assets/unis/king-saud.png";
+import logoKSUAsset from "@/assets/unis/king-saud.webp.asset.json";
+const logoKSU = logoKSUAsset.url;
 import logoTAMUQ from "@/assets/unis/tamu-qatar.png.asset.json";
 
 export interface Course {

@@ -13,14 +13,15 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import FloatingWhatsApp from "@/components/FloatingWhatsApp";
-import AIChatWidget from "@/components/AIChatWidget";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import ScrollToTop from "@/components/ScrollToTop";
 import GlobalSeo from "@/components/GlobalSeo";
-import CookieConsent from "@/components/CookieConsent";
-import CountryGate from "@/components/CountryGate";
 import Index from "./pages/Index";
+
+const FloatingWhatsApp = lazy(() => import("@/components/FloatingWhatsApp"));
+const AIChatWidget = lazy(() => import("@/components/AIChatWidget"));
+const CookieConsent = lazy(() => import("@/components/CookieConsent"));
+const CountryGate = lazy(() => import("@/components/CountryGate"));
 
 const Teachers = lazy(() => import("./pages/Teachers"));
 const TeacherProfile = lazy(() => import("./pages/TeacherProfile"));
@@ -88,10 +89,12 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         {children}
       </main>
       {!hideFooter && <Footer />}
-      <FloatingWhatsApp />
-      <AIChatWidget />
-      <CookieConsent />
-      <CountryGate>{null}</CountryGate>
+      <Suspense fallback={null}>
+        <FloatingWhatsApp />
+        <AIChatWidget />
+        <CookieConsent />
+        <CountryGate>{null}</CountryGate>
+      </Suspense>
     </div>
   );
 };
