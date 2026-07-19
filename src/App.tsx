@@ -116,9 +116,10 @@ const App = () => (
           <LanguageProvider>
             <AuthProvider>
               <TooltipProvider>
-                <MotionConfig reducedMotion="never">
-                <Toaster />
-                <Sonner />
+                <Suspense fallback={null}>
+                  <Toaster />
+                  <Sonner />
+                </Suspense>
                 <BrowserRouter>
                   <ScrollToTop />
                   <GlobalSeo />
