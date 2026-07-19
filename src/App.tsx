@@ -14,15 +14,17 @@ import Footer from "@/components/Footer";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import ScrollToTop from "@/components/ScrollToTop";
 import GlobalSeo from "@/components/GlobalSeo";
+// Homepage is eager to avoid an entry→Index chunk waterfall (LCP-critical route).
+import Index from "./pages/Index";
 
 const Toaster = lazy(() => import("@/components/ui/toaster").then(m => ({ default: m.Toaster })));
 const Sonner = lazy(() => import("@/components/ui/sonner").then(m => ({ default: m.Toaster })));
 
-const Index = lazy(() => import("./pages/Index"));
 const FloatingWhatsApp = lazy(() => import("@/components/FloatingWhatsApp"));
 const AIChatWidget = lazy(() => import("@/components/AIChatWidget"));
 const CookieConsent = lazy(() => import("@/components/CookieConsent"));
 const CountryGate = lazy(() => import("@/components/CountryGate"));
+
 
 const Teachers = lazy(() => import("./pages/Teachers"));
 const TeacherProfile = lazy(() => import("./pages/TeacherProfile"));
