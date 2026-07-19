@@ -12,6 +12,7 @@ const IndexBelowFold = lazy(() => import("@/components/home/IndexBelowFold"));
 
 const HomePage = () => {
   const { t, lang } = useLanguage();
+  const belowFoldReady = useDeferredMount();
 
   const jsonLd = {
     "@context": "https://schema.org",
