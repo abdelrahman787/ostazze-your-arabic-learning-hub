@@ -76,6 +76,8 @@ const DeferredWidgets = () => {
   if (!ready) return null;
   return (
     <Suspense fallback={null}>
+      <Toaster />
+      <Sonner />
       <FloatingWhatsApp />
       <AIChatWidget />
       <CookieConsent />
