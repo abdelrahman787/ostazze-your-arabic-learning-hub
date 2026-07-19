@@ -776,36 +776,101 @@
   animation: watermarkFloat2 28s linear infinite;
 }
 
+/* ============================================================
+   P2.5 — Motion polish tokens & utilities
+   Transform + opacity only. No animation library on critical path.
+   ============================================================ */
+:root {
+  --motion-fast: 140ms;
+  --motion-standard: 220ms;
+  --motion-slow: 320ms;
+  --motion-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --motion-ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Route entry — 200ms opacity + translateY(6px) */
 @keyframes page-in {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translate3d(0, 6px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
 }
-.animate-page-in { animation: page-in 250ms cubic-bezier(0.22, 1, 0.36, 1) both; }
-@media (prefers-reduced-motion: reduce) {
-  .animate-page-in { animation: none; }
-}
+.animate-page-in { animation: page-in 200ms var(--motion-ease-standard) both; }
 
-/* Navbar dropdown / mobile-menu enter animation (replaces framer-motion) */
+/* Nav dropdown / mobile menu — 180ms */
 @keyframes nav-drop-in {
-  from { opacity: 0; transform: translateY(-6px) scale(0.97); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from { opacity: 0; transform: translate3d(0, -6px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
 }
-.animate-nav-drop { animation: nav-drop-in 150ms ease-out both; transform-origin: top center; }
-@media (prefers-reduced-motion: reduce) {
-  .animate-nav-drop { animation: none; }
+.animate-nav-drop {
+  animation: nav-drop-in 180ms var(--motion-ease-standard) both;
+  transform-origin: top center;
 }
 
-/* Homepage hero entry animations (CSS-only, replaces framer-motion on the critical path) */
+/* Homepage hero — kept longer intentionally for LCP polish */
 @keyframes hero-fade-in {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translate3d(0, 20px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 @keyframes hero-scale-in {
   from { opacity: 0; transform: scale(0.92); }
-  to { opacity: 1; transform: scale(1); }
+  to   { opacity: 1; transform: scale(1); }
 }
-.hero-fade-in { animation: hero-fade-in 500ms cubic-bezier(0.22, 1, 0.36, 1) both; }
-.hero-scale-in { animation: hero-scale-in 700ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.hero-fade-in  { animation: hero-fade-in 500ms var(--motion-ease-emphasized) both; }
+.hero-scale-in { animation: hero-scale-in 700ms var(--motion-ease-emphasized) both; }
+
+/* Reveal-on-scroll — one-time. Gated by IntersectionObserver in JS. */
+@keyframes reveal-up {
+  from { opacity: 0; transform: translate3d(0, 12px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+.reveal { opacity: 0; transform: translate3d(0, 12px, 0); }
+.reveal.is-visible { animation: reveal-up 340ms var(--motion-ease-emphasized) both; }
+
+/* Card stagger — cap at 40ms/item, 200ms total */
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 40ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 80ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 120ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 160ms; }
+.stagger-children > *:nth-child(n+6) { animation-delay: 200ms; }
+
+/* Interactive lifts — transform only; will-change scoped to hover */
+.hover-lift-sm { transition: transform var(--motion-fast) var(--motion-ease-standard); }
+.hover-lift-sm:hover, .hover-lift-sm:focus-visible {
+  transform: translateY(-1px); will-change: transform;
+}
+.hover-lift-md { transition: transform 180ms var(--motion-ease-standard); }
+.hover-lift-md:hover, .hover-lift-md:focus-visible {
+  transform: translateY(-2px); will-change: transform;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .hero-fade-in, .hero-scale-in { animation: none; }
+  .animate-page-in,
+  .animate-nav-drop,
+  .hero-fade-in,
+  .hero-scale-in,
+  .reveal,
+  .reveal.is-visible {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .hover-lift-sm, .hover-lift-md { transition: none !important; }
+}
+
+/* Tab-hidden pause — toggled by src/lib/motionVisibility.ts */
+html[data-motion-paused="1"] *,
+html[data-motion-paused="1"] *::before,
+html[data-motion-paused="1"] *::after {
+  animation-play-state: paused !important;
+}
+
+/* Mobile — silence continuous decorative loops (battery + TBT) */
+@media (max-width: 640px) {
+  .orbit-spin, .orbit-spin-reverse,
+  .float-y, .glow-pulse-slow,
+  .glow-drift-a, .glow-drift-b, .glow-pulse-soft,
+  .watermark-float, .watermark-float-2,
+  .fab-pulse-ring {
+    animation: none !important;
+  }
 }

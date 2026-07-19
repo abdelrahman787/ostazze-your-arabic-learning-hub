@@ -1,70 +1,123 @@
 # OSTAZE Performance — Staged Execution Plan
 
-This is a large multi-phase effort. To stay safe (no regressions in booking, auth, pricing, i18n, SEO) I will execute one phase per turn, publish, cold-cache-measure production at https://ostaze.com/, and stop if any guardrail trips. Below is what I will do in each turn so you can approve or redirect.
+## ✅ P2 — Bundle Optimization (CLOSED, pragmatic exception)
 
-## Phase 1 — Finish & validate P2 (this turn if approved)
+**Shipped:**
+- Removed `framer-motion` from the critical path (Navbar, PageTransition, hero, Footer, GlobalSeo, NotificationBell).
+- Route-level lazy loading; `Toaster`/`Sonner` deferred via `useDeferredMount`.
+- `Index` route parallel-preload; below-fold sections gated behind `useInViewOnce`.
+- Icon chunk consolidation via Vite `manualChunks`.
+- Widget deferral (WhatsApp, AIChat, CookieConsent, CountryGate) idle+interaction gated.
 
-Actions:
-1. Re-run production build with `ANALYZE=1`, dump top modules in the entry chunk from `dist/stats.html`.
-2. Confirm framer-motion is fully out of the critical path:
-   - Already replaced in `PageTransition` + `Navbar`.
-   - Audit remaining `framer-motion` imports reachable from `App.tsx` synchronously (Footer, GlobalSeo, NotificationBell, PageHelmet). Any critical-path importer gets CSS-only replacement or lazy boundary.
-3. Fix the risky lazy `Index` route:
-   - Inspect network waterfall. If entry→Index chunk is sequential, revert to eager `Index` import (keep other routes lazy) OR use `<link rel="modulepreload">` for the Index chunk to parallelize.
-   - Prefer splitting below-the-fold Index sections (`OurTeam`, `StatsBar`, `UniversityLogosStrip`, testimonials) via `React.lazy` + `IntersectionObserver` wrapper with reserved height (no CLS).
-4. Keep Toasters lazy (already done).
-5. Verify no duplicate React/vendor across chunks via visualizer; add `manualChunks` for `react`, `react-dom`, `react-router-dom`, `@supabase/*` if duplication seen.
-6. Ensure route chunks for checkout/admin/lecture/booking are not referenced by shared layout — grep for imports from `Navbar`, `Footer`, `App`, `Layout`.
+**Production baseline (3 cold-cache mobile Lighthouse runs, median):**
 
-Targets: initial JS < 180 KB gz, mobile TBT < 200ms, no FCP/LCP regression.
+| Metric | Before P2 | After P2 | Change |
+|---|---|---|---|
+| Performance | 61 | **68** | +7 |
+| FCP | 3677 ms | **3472 ms** | -205 |
+| LCP | 4736 ms | **3515 ms** | -1221 |
+| TBT | 548 ms | **598 ms** | +50 |
+| CLS | 0 | **0** | flat |
+| Initial JS requests | 26 | **5** | -21 |
+| Initial JS transfer | ~260 KB | **185.1 KB gz** | -75 KB |
 
-Validation: production build succeeds, no chunk duplication warnings, manual homepage + `/teachers` + Arabic mode + direct nav check, then publish + 3 cold Lighthouse runs.
+### Accepted technical debt (deferred; do not re-enter without approval)
 
-## Phase 2 — P4 fonts (next turn)
+| # | Debt | Value | Target | Reason not to fix now |
+|---|---|---|---|---|
+| 1 | Initial JS over budget | 185 KB gz | 180 KB gz | Only 5 KB over; further cuts touch SEO/auth/data-fetching. |
+| 2 | Median TBT above interim target | 598 ms | ≤ 300 ms | Only entry-chunk splits could move it; each carries risk. |
+| 3 | Entry bootup | ~498 ms | — | Dominated by React + Supabase auth + react-query init. |
+| 4 | Hosting serves gzip, not Brotli | gzip | brotli | Hosting-level; tracked under Phase 7. |
+
+**Do NOT do at this stage:**
+- Replace `react-helmet-async` (SEO metadata risk).
+- Defer `react-query` (hydration + data-fetching risk).
+- Split Supabase auth out of entry (auth boot-path risk).
+
+## 🎨 P2.5 — Motion polish (current)
+
+**Goal:** restore smooth transitions removed during P2 without returning any animation library to the critical path or increasing startup cost.
+
+**Shipped:**
+- Motion tokens in `src/index.css` (`--motion-fast`, `--motion-standard`, `--motion-slow`, `--motion-ease-standard`, `--motion-ease-emphasized`).
+- Route entry (`.animate-page-in`): opacity + translateY(6px), 200ms, standard easing.
+- Nav dropdown / mobile menu (`.animate-nav-drop`): 180ms.
+- `.hover-lift-sm` / `.hover-lift-md` — transform-only, 140–180ms, `will-change` scoped to `:hover/:focus-visible`.
+- `.reveal` + `.is-visible` scroll-reveal utility, driven by `src/components/Reveal.tsx` (one-shot IntersectionObserver, 340ms translateY(12px) + opacity).
+- `.stagger-children` — 40ms/item cap, 200ms total.
+- Global `prefers-reduced-motion` guard neutralises every P2.5 animation.
+- Tab-hidden pause via `src/lib/motionVisibility.ts` toggling `data-motion-paused` on `<html>` (CSS pauses all `animation-play-state`).
+- Mobile guard silences continuous decorative loops (`.orbit-spin*`, `.float-y`, `.glow-*`, `.watermark-float*`, `.fab-pulse-ring`) under `(max-width: 640px)`.
+
+**Guardrails:**
+- Transform + opacity only. Never `transition: all`. Never animate width/height/margin/padding/top/left.
+- Hero + LCP element render immediately (no gating).
+- Navigation is not delayed by exit animations (route changes swap immediately, entry animation plays over the new tree).
+- Below-fold motion stays behind `useInViewOnce` / `IntersectionObserver`.
+- Framer-motion remains only inside the lazy below-fold chunk; not in the initial dependency graph.
+
+**Performance budget for P2.5:**
+- Initial JS increase ≤ 5 KB gz.
+- No additional initial JS requests.
+- FCP/LCP regression ≤ 100 ms.
+- TBT regression ≤ 50 ms.
+- CLS ≤ 0.1.
+
+**Validation checklist (pre-publish):**
+- [ ] Arabic + English render correctly (RTL preserved).
+- [ ] Mobile + desktop nav open/close smoothly.
+- [ ] Back/forward navigation — no white flash.
+- [ ] Rapid route changes — no stuck overlays.
+- [ ] Keyboard focus visible; focus lift matches hover lift.
+- [ ] `prefers-reduced-motion: reduce` disables all P2.5 animations.
+- [ ] No framer-motion in initial graph (verify via network waterfall).
+- [ ] CLS ≤ 0.1 on home, teachers, subjects.
+
+**Publish P2.5 separately, then run three cold-cache mobile Lighthouse tests before starting Phase 2 (fonts).**
+
+## Phase 2 — P4 fonts (next after P2.5 sign-off)
 
 - Drop `fonts.googleapis.com` / `gstatic` `<link>` from `index.html`.
-- Self-host WOFF2 files under `public/fonts/`:
+- Self-host WOFF2 under `public/fonts/`:
   - IBM Plex Sans Arabic 400 + 700 (Arabic subset).
-  - Inter 400 + 600 (Latin subset) only if used on non-Arabic routes.
-- `@font-face` with `font-display: swap`, `unicode-range`, and `size-adjust`/`ascent-override` for metric-compatible fallbacks.
-- `<link rel="preload" as="font" type="font/woff2" crossorigin>` for the single above-the-fold hero font only (language-conditional via inline script or duplicate preloads acceptable).
-- Verify CLS < 0.1 and no FOIT.
+  - Inter 400 + 600 (Latin subset).
+- `@font-face` with `font-display: swap`, `unicode-range`, and `size-adjust` / `ascent-override` metric-compatible fallbacks.
+- `<link rel="preload" as="font" type="font/woff2" crossorigin>` for the single above-the-fold hero font only (language-conditional).
+- Verify CLS < 0.1, no FOIT.
 
 ## Phase 3 — P1 build-time prerendering
 
-- Add `vite-plugin-prerender` or `react-snap`/`vite-plugin-ssg` (choice made after checking compatibility with `HelmetProvider`, `BrowserRouter`, `AuthProvider`, `LanguageProvider`).
-- Approach: use `vite-plugin-prerender-spa` running headless Chromium at build against `/`, `/teachers`, `/universities`, `/subjects`, `/about`, `/contact`, `/privacy`, `/terms`.
-- Gate personalization: `AuthContext`, `CountryGate`, pricing, and Supabase reads must render neutral fallback during prerender (detect `navigator.userAgent === 'ReactSnap'` or use a `PRERENDER` flag) — no user prices or country-dependent copy in HTML.
-- Ensure `react-helmet-async` output is serialized per route (title, description, canonical, og, `<html lang dir>`).
-- Verify hydration is warning-free; add `<div id="root" style="min-height:100vh">` to reserve space.
-- Skip dynamic detail routes for this pass.
+- `vite-plugin-prerender-spa` (or `react-snap`) at build against `/`, `/teachers`, `/universities`, `/subjects`, `/about`, `/contact`, `/privacy`, `/terms`.
+- Gate personalization (`AuthContext`, `CountryGate`, pricing, Supabase reads) with a `PRERENDER` flag — no user-specific prices/copy in HTML.
+- Serialize `react-helmet-async` per route.
+- Verify hydration is warning-free; reserve root height to avoid CLS.
 
-Risk callout: prerendering an SPA with heavy providers is delicate. If hydration mismatch or Auth loop appears in preview, I stop and report before publishing.
+Risk: highest-risk phase. Stops before publish if any hydration mismatch appears.
 
 ## Phase 4 — P6 remaining images
 
-- Convert `noura-al-shammari.png`, `abdullah-al-malki.png`, `faisal-al-dosari.png`, `university-logos-grid.png` to AVIF + WebP responsive variants via `sharp` script, upload via lovable-assets, use `<picture>` with `srcset`/`sizes`, explicit width/height, `loading="lazy" decoding="async"` (LCP image excepted).
+- Convert `noura-al-shammari.png`, `abdullah-al-malki.png`, `faisal-al-dosari.png`, `university-logos-grid.png` to AVIF + WebP responsive variants (`sharp`), use `<picture>` with `srcset`/`sizes`, explicit width/height, `loading="lazy" decoding="async"`.
 
-## Phase 5 — P7 CSS/DOM/animation cleanup
+## Phase 5 — P7 CSS/DOM cleanup
 
-- Audit for duplicated mobile/desktop trees in `Navbar`, home sections.
-- Ensure modals (`BookSessionModal`, `BookingFlowModal`) mount only when open.
+- Audit duplicated mobile/desktop trees (Navbar, home).
+- Ensure modals mount only when open.
 - Sweep `useEffect` for missing cleanup on timers/observers/listeners.
-- Add `@media (prefers-reduced-motion: reduce)` guards to decorative CSS animations; disable orbit animation on `(max-width: 640px)`.
-- Verify Tailwind `content` globs are tight in `tailwind.config.ts`.
+- Tighten Tailwind `content` globs.
 
-## Phase 6 — Performance budgets (CI-friendly script)
+## Phase 6 — Performance budgets
 
-- Add `scripts/perf-budget.mjs`: builds, reads `dist/` sizes per entry, runs Lighthouse against a preview URL, fails on budget breach. Documented in README (not wired into CI unless requested — Lovable has no CI).
+- `scripts/perf-budget.mjs`: build, read `dist/` sizes, run Lighthouse against preview, fail on budget breach.
 
 ## Phase 7 — P5 hosting recommendation
 
-- Deliver `docs/HOSTING_RECOMMENDATIONS.md` with the exact caching / TTFB asks for Lovable support. No code.
+- `docs/HOSTING_RECOMMENDATIONS.md` with the exact Brotli + caching asks for Lovable support (no code).
+
+## Security scan status
+
+Last scan (P2 close): 19 `warn` findings, all pre-existing categories (`SUPA_*_security_definer_function_executable`). **Not auto-fixed.** Preserved for later triage — do not ignore or modify the `SECURITY DEFINER` findings until reviewed one-by-one.
 
 ## Reporting cadence
 
-After each phase I publish, run 3 cold-cache mobile Lighthouse runs against https://ostaze.com/, and report medians for score, FCP, LCP, TBT, CLS, initial JS, total transfer, request count, plus a diff of modified files. If any guardrail (worse FCP/LCP, waterfall, blank content, hydration mismatch, country/price/consent/auth/booking regression) trips, I stop before publishing and report.
-
-## Approval needed
-
-Reply "go" to start Phase 1 now. If you want a different order (e.g., fonts first, or prerendering first), say which. Prerendering (Phase 3) is the highest-risk step for this SPA — I recommend keeping it after P2/P4 land cleanly, as planned.
+After each phase: publish, run 3 cold-cache mobile Lighthouse runs against https://ostaze.com/, report medians for score, FCP, LCP, TBT, CLS, initial JS, total transfer, request count, plus a diff of modified files. Stop before publish if any guardrail (worse FCP/LCP, waterfall regression, blank content, hydration mismatch, country/price/consent/auth/booking regression) trips.
