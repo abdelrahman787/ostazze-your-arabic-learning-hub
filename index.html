@@ -3,9 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600;700&family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- Self-hosted fonts (Phase 2). LCP heading uses IBM Plex Sans Arabic 700
+         in Arabic mode (site default). Preload ONLY that single file; the 400
+         regular and Inter latin subset are declared in CSS and fetched on demand. -->
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/ibm-plex-sans-arabic-700.woff2" crossorigin>
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=3" />
     <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png?v=3" />
     <link rel="shortcut icon" href="/favicon-32.png?v=3" type="image/png" />
