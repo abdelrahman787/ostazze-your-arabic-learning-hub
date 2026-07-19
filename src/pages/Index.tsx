@@ -2,17 +2,18 @@ import { Link } from "react-router-dom";
 import { GraduationCap } from "lucide-react";
 import { lazy, Suspense } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useDeferredMount } from "@/hooks/useDeferredMount";
+import { useInViewOnce } from "@/hooks/useInViewOnce";
 import PageHelmet from "@/components/PageHelmet";
 import HeroOrbit from "@/components/HeroOrbit";
 
-// Below-the-fold sections carry framer-motion (~40 KB gz). Lazy + idle-defer
-// so the initial critical bundle stays lean; the hero animates via pure CSS.
+// Below-the-fold sections carry framer-motion (~40 KB gz) + subject icons
+// (~50 KB gz). Load on scroll approach, not idle, to keep them out of the
+// initial cold-load JS budget entirely.
 const IndexBelowFold = lazy(() => import("@/components/home/IndexBelowFold"));
 
 const HomePage = () => {
   const { t, lang } = useLanguage();
-  const belowFoldReady = useDeferredMount();
+  const [belowFoldRef, belowFoldReady] = useInViewOnce<HTMLDivElement>("-100px 0px");
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -127,8 +128,8 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Below-the-fold sections, code-split */}
-      {/* Below-the-fold sections, code-split + idle-deferred */}
+      {/* Sentinel — kicks off IndexBelowFold fetch as user approaches fold */}
+      <div ref={belowFoldRef} aria-hidden="true" />
       {belowFoldReady && (
         <Suspense fallback={<div className="min-h-[40vh]" aria-hidden="true" />}>
           <IndexBelowFold />

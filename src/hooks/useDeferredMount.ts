@@ -6,12 +6,13 @@ import { useEffect, useState } from "react";
  * first. Used to defer non-critical widgets so they don't inflate TBT
  * or contend for the main thread during the initial render.
  */
-export function useDeferredMount(options?: { timeout?: number }): boolean {
+export function useDeferredMount(options?: { timeout?: number; skipIdle?: boolean }): boolean {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
     if (ready) return;
     const timeout = options?.timeout ?? 3500;
+    const skipIdle = options?.skipIdle ?? false;
 
     let done = false;
     const arm = () => {
@@ -36,7 +37,7 @@ export function useDeferredMount(options?: { timeout?: number }): boolean {
     let toId: number | undefined;
     const ric = (window as unknown as { requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number }).requestIdleCallback;
     const cic = (window as unknown as { cancelIdleCallback?: (id: number) => void }).cancelIdleCallback;
-    if (typeof ric === "function") {
+    if (!skipIdle && typeof ric === "function") {
       ricId = ric(arm, { timeout });
     } else {
       toId = window.setTimeout(arm, timeout);
@@ -49,7 +50,7 @@ export function useDeferredMount(options?: { timeout?: number }): boolean {
     }
 
     return cleanup;
-  }, [ready, options?.timeout]);
+  }, [ready, options?.timeout, options?.skipIdle]);
 
   return ready;
 }
