@@ -42,5 +42,16 @@ export default defineConfig(({ mode }) => {
         env.VITE_SUPABASE_PROJECT_ID || FALLBACK_SUPABASE_PROJECT_ID
       ),
     },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            // Consolidate all lucide-react icon imports into a single chunk
+            // so we don't ship 6+ tiny per-icon requests on the initial load.
+            if (id.includes("node_modules/lucide-react/")) return "icons";
+          },
+        },
+      },
+    },
   };
 });
