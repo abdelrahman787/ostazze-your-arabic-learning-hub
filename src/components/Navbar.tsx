@@ -219,56 +219,48 @@ const Navbar = () => {
         </div>
       </nav>
 
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2 }}
-            className="md:hidden mx-auto max-w-5xl mt-2 nav-pill !rounded-3xl p-3 pointer-events-auto"
-          >
-            <div className="flex flex-col gap-1">
-              {navLinks.map((l) => (
-                <Link
-                  key={l.path}
-                  to={l.path}
-                  onClick={() => setMobileOpen(false)}
-                  className={`px-4 py-3 rounded-xl text-sm font-medium hover:bg-foreground/10 min-h-[44px] flex items-center ${
-                    location.pathname === l.path ? "text-primary font-bold bg-primary/10" : "text-foreground/80"
-                  }`}
-                >
-                  {l.label}
+      {mobileOpen && (
+        <div className="md:hidden mx-auto max-w-5xl mt-2 nav-pill !rounded-3xl p-3 pointer-events-auto animate-nav-drop">
+          <div className="flex flex-col gap-1">
+            {navLinks.map((l) => (
+              <Link
+                key={l.path}
+                to={l.path}
+                onClick={() => setMobileOpen(false)}
+                className={`px-4 py-3 rounded-xl text-sm font-medium hover:bg-foreground/10 min-h-[44px] flex items-center ${
+                  location.pathname === l.path ? "text-primary font-bold bg-primary/10" : "text-foreground/80"
+                }`}
+              >
+                {l.label}
+              </Link>
+            ))}
+            <div className="h-px bg-foreground/10 my-1" />
+            {isLoggedIn ? (
+              <>
+                <Link to={dashboardPath} onClick={() => setMobileOpen(false)} className="px-4 py-3 rounded-xl text-sm font-medium hover:bg-foreground/10 flex items-center gap-2 min-h-[44px]">
+                  <LayoutDashboard size={16} /> {t("nav_dashboard")}
                 </Link>
-              ))}
-              <div className="h-px bg-foreground/10 my-1" />
-              {isLoggedIn ? (
-                <>
-                  <Link to={dashboardPath} onClick={() => setMobileOpen(false)} className="px-4 py-3 rounded-xl text-sm font-medium hover:bg-foreground/10 flex items-center gap-2 min-h-[44px]">
-                    <LayoutDashboard size={16} /> {t("nav_dashboard")}
+                <Link to="/my-bookings" onClick={() => setMobileOpen(false)} className="px-4 py-3 rounded-xl text-sm font-medium hover:bg-foreground/10 flex items-center gap-2 min-h-[44px]">
+                  <Calendar size={16} /> {lang === "ar" ? "حجوزاتي" : "My Bookings"}
+                </Link>
+                {user?.role === "admin" && (
+                  <Link to="/admin" onClick={() => setMobileOpen(false)} className="px-4 py-3 rounded-xl text-sm font-medium hover:bg-foreground/10 flex items-center gap-2 min-h-[44px]">
+                    <Shield size={16} className="text-primary" /> {t("admin_title")}
                   </Link>
-                  <Link to="/my-bookings" onClick={() => setMobileOpen(false)} className="px-4 py-3 rounded-xl text-sm font-medium hover:bg-foreground/10 flex items-center gap-2 min-h-[44px]">
-                    <Calendar size={16} /> {lang === "ar" ? "حجوزاتي" : "My Bookings"}
-                  </Link>
-                  {user?.role === "admin" && (
-                    <Link to="/admin" onClick={() => setMobileOpen(false)} className="px-4 py-3 rounded-xl text-sm font-medium hover:bg-foreground/10 flex items-center gap-2 min-h-[44px]">
-                      <Shield size={16} className="text-primary" /> {t("admin_title")}
-                    </Link>
-                  )}
-                  <button onClick={() => { logout(); setMobileOpen(false); }} className="text-destructive text-sm font-medium py-2.5 flex items-center justify-center gap-2 min-h-[44px]">
-                    <LogOut size={15} />{t("nav_logout")}
-                  </button>
-                </>
-              ) : (
-                <>
-                  <Link to="/login" onClick={() => setMobileOpen(false)} className="text-center text-sm font-medium py-3 text-foreground/70 min-h-[44px] flex items-center justify-center">{t("nav_login")}</Link>
-                  <Link to="/register" onClick={() => setMobileOpen(false)} className="bg-primary text-primary-foreground rounded-full text-center text-sm min-h-[44px] flex items-center justify-center font-bold">{t("nav_register")}</Link>
-                </>
-              )}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                )}
+                <button onClick={() => { logout(); setMobileOpen(false); }} className="text-destructive text-sm font-medium py-2.5 flex items-center justify-center gap-2 min-h-[44px]">
+                  <LogOut size={15} />{t("nav_logout")}
+                </button>
+              </>
+            ) : (
+              <>
+                <Link to="/login" onClick={() => setMobileOpen(false)} className="text-center text-sm font-medium py-3 text-foreground/70 min-h-[44px] flex items-center justify-center">{t("nav_login")}</Link>
+                <Link to="/register" onClick={() => setMobileOpen(false)} className="bg-primary text-primary-foreground rounded-full text-center text-sm min-h-[44px] flex items-center justify-center font-bold">{t("nav_register")}</Link>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </header>
   );
 };
