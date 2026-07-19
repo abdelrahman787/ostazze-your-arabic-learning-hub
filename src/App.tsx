@@ -72,7 +72,10 @@ const queryClient = new QueryClient({
 const RouteFallback = () => <div className="min-h-[40vh]" aria-hidden="true" />;
 
 const DeferredWidgets = () => {
-  const ready = useDeferredMount();
+  // skipIdle + long timeout keeps widget chunks out of the cold-load JS
+  // budget. They mount on first user interaction (scroll/pointer/key) or
+  // after 8s, whichever comes first.
+  const ready = useDeferredMount({ timeout: 8000, skipIdle: true });
   if (!ready) return null;
   return (
     <Suspense fallback={null}>
