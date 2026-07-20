@@ -66,19 +66,6 @@ const Subjects = () => {
     return count;
   };
 
-  const getUniversitiesForSubject = (subjectNameEn: string) => {
-    const unis: string[] = [];
-    allUniversities.forEach(u => {
-      u.colleges.forEach(c => {
-        c.departments.forEach(dept => {
-          if (dept.name_en === subjectNameEn && !unis.includes(lang === "ar" ? u.name_ar : u.name_en)) {
-            unis.push(lang === "ar" ? u.name_ar : u.name_en);
-          }
-        });
-      });
-    });
-    return unis;
-  };
 
   const clearCategory = () => {
     searchParams.delete("category");
