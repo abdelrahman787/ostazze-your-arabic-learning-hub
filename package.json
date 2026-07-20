@@ -10,7 +10,9 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "perf:budget": "node scripts/perf-budget.mjs",
+    "build:check": "vite build && node scripts/perf-budget.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
