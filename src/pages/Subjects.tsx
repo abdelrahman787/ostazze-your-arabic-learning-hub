@@ -210,20 +210,6 @@ const Subjects = () => {
                           </span>
                         )}
                       </div>
-                      {universities.length > 0 && (
-                        <div className="flex flex-wrap gap-1">
-                          {universities.slice(0, 2).map((uni, j) => (
-                            <span key={j} className="text-[0.6rem] bg-primary/15 text-primary dark:bg-primary/20 dark:text-orange-300 font-semibold px-2 py-0.5 rounded-full">
-                              {uni}
-                            </span>
-                          ))}
-                          {universities.length > 2 && (
-                            <span className="text-[0.6rem] bg-primary/15 text-primary dark:bg-primary/20 dark:text-orange-300 font-semibold px-2 py-0.5 rounded-full">
-                              +{universities.length - 2}
-                            </span>
-                          )}
-                        </div>
-                      )}
                     </div>
                   </div>
                   <Link to="/teachers" className="btn-dark flex items-center justify-center gap-2 w-full mt-4 text-sm">
