@@ -34,6 +34,23 @@ const tx = (r: number, deg: number) => {
 const HeroOrbit = () => {
   const { t } = useLanguage();
   const ref = useRef<HTMLDivElement>(null);
+  const [lite, setLite] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mqMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const mqMobile = window.matchMedia("(max-width: 767px)");
+    const sync = () => setLite(mqMotion.matches || mqMobile.matches);
+    sync();
+    mqMotion.addEventListener?.("change", sync);
+    mqMobile.addEventListener?.("change", sync);
+    return () => {
+      mqMotion.removeEventListener?.("change", sync);
+      mqMobile.removeEventListener?.("change", sync);
+    };
+  }, []);
+
+  const ORBITS = lite ? ORBITS_LITE : ORBITS_FULL;
 
   useEffect(() => {
     const reduce =
@@ -60,7 +77,7 @@ const HeroOrbit = () => {
     };
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, []);
+  }, [lite]);
 
   let idx = 0;
   const items = ORBITS.map((o) => {
