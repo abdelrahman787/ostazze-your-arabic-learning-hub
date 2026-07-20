@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Star, GraduationCap, ArrowUpLeft, BadgeCheck, BookOpen } from "lucide-react";
+import { GraduationCap, ArrowUpLeft, BadgeCheck } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useBilingual } from "@/hooks/useBilingual";
@@ -42,14 +42,13 @@ const transliterate = (name: string) => {
 
 const TeacherCard = ({ teacher, index = 0 }: { teacher: TeacherData; index?: number }) => {
   const { t, lang } = useLanguage();
-  const { b, bArr } = useBilingual();
+  const { b } = useBilingual();
 
   const rawName = b(teacher.full_name, teacher.full_name_en, t("the_teacher"));
   const displayName =
     lang === "en" && !teacher.full_name_en && /[\u0600-\u06FF]/.test(rawName)
       ? transliterate(rawName)
       : rawName;
-  const displaySubjects = bArr(teacher.subjects, teacher.subjects_en);
   const initials = displayName
     .split(/\s+/)
     .slice(0, 2)
@@ -92,48 +91,14 @@ const TeacherCard = ({ teacher, index = 0 }: { teacher: TeacherData; index?: num
             </div>
           )}
         </div>
-        <div className="flex items-center gap-1 pb-1.5">
-          <Star size={14} className="fill-warning text-warning" />
-          <span className="font-bold text-sm">—</span>
-        </div>
       </div>
 
       {/* Body */}
-      <div className="px-5 pt-3 pb-5 flex-1 flex flex-col">
-        <h3 className="font-extrabold text-base leading-tight mb-3 line-clamp-1">
+      <div className="px-5 pt-4 pb-5 flex-1 flex flex-col">
+        <h3 className="font-extrabold text-base leading-tight mb-4 line-clamp-1">
           {displayName}
         </h3>
 
-        {displaySubjects.length > 0 && (
-          <div className="mb-4">
-            <div className="flex items-center gap-1.5 mb-2">
-              <BookOpen size={13} className="text-primary" />
-              <span className="text-[11px] font-bold uppercase tracking-wide text-muted-foreground">
-                {lang === "ar" ? "التخصص الرئيسي" : "Main major"}
-              </span>
-            </div>
-            <p className="font-bold text-sm text-foreground mb-2 line-clamp-1">
-              {displaySubjects[0]}
-            </p>
-            {displaySubjects.length > 1 && (
-              <div className="flex flex-wrap gap-1.5">
-                {displaySubjects.slice(1, 4).map((s, i) => (
-                  <span
-                    key={i}
-                    className="rounded-lg bg-muted text-foreground/70 text-[11px] font-semibold px-2 py-0.5"
-                  >
-                    {s}
-                  </span>
-                ))}
-                {displaySubjects.length > 4 && (
-                  <span className="text-[11px] font-semibold text-muted-foreground px-1 py-0.5">
-                    +{displaySubjects.length - 4}
-                  </span>
-                )}
-              </div>
-            )}
-          </div>
-        )}
 
         <div className="mt-auto">
           <Link
