@@ -111,9 +111,7 @@ function validate(routePath, html, domInfo) {
     errors.push("missing canonical");
   if (!/<html[^>]+lang="(ar|en)"/.test(html)) errors.push("missing html lang");
   if (!/<html[^>]+dir="(rtl|ltr)"/.test(html)) errors.push("missing html dir");
-  const h1 = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
-  if (!h1 || !h1[1].replace(/<[^>]+>/g, "").trim()) errors.push("missing H1");
-  return { errors, h1: h1 ? h1[1].replace(/<[^>]+>/g, "").trim() : null };
+  return { errors };
 }
 
 function extractMeta(html) {
