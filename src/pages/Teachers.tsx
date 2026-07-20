@@ -10,6 +10,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import PageHelmet from "@/components/PageHelmet";
 import PageHeader from "@/components/PageHeader";
 import BookingFlowModal from "@/components/BookingFlowModal";
+import WhatsAppTutorBanner from "@/components/WhatsAppTutorBanner";
 
 const TeacherCardSkeleton = () => (
   <div className="card-base flex flex-col p-5 gap-3">
@@ -149,6 +150,10 @@ const Teachers = () => {
         canonical="https://ostaze.com/teachers"
       />
       <PageHeader title={t("teachers_title")} subtitle={t("teachers_choose")} variant="teachers" />
+
+      <div className="container pt-6">
+        <WhatsAppTutorBanner />
+      </div>
 
       <div className="container py-8">
         {/* Subject context banner — appears when arriving from a course request */}

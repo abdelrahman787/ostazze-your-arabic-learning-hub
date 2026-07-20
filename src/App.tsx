@@ -11,7 +11,7 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import WhatsAppTutorBanner from "@/components/WhatsAppTutorBanner";
+
 import ProtectedRoute from "@/components/ProtectedRoute";
 import ScrollToTop from "@/components/ScrollToTop";
 import GlobalSeo from "@/components/GlobalSeo";
@@ -142,12 +142,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       >
         {children}
       </main>
-      {!hideFooter && (
-        <>
-          <WhatsAppTutorBanner />
-          <Footer />
-        </>
-      )}
+      {!hideFooter && <Footer />}
       <DeferredWidgets />
     </div>
   );
