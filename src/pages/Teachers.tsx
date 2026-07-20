@@ -197,21 +197,14 @@ const Teachers = () => {
         )}
 
         <div className="card-base p-6 mb-8">
-          <div className="flex gap-3">
-            <div className="flex-1 relative">
-              <Search size={18} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-              <input value={search} onChange={(e) => setSearch(e.target.value)}
-                placeholder={lang === "ar" ? "ابحث بالاسم أو المادة..." : "Search by name or subject..."}
-                className="input-base !pr-10" />
-            </div>
-            <button onClick={() => setShowFilters(!showFilters)} className="btn-outline !py-2 flex items-center gap-2">
-              <SlidersHorizontal size={16} />
-              {t("filter_btn")}
-              {hasActiveFilters && <span className="w-2 h-2 rounded-full bg-primary" />}
-            </button>
-          </div>
+          <button onClick={() => setShowFilters(!showFilters)} className="btn-outline !py-2 flex items-center gap-2">
+            <SlidersHorizontal size={16} />
+            {t("filter_btn")}
+            {hasActiveFilters && <span className="w-2 h-2 rounded-full bg-primary" />}
+          </button>
 
           {showFilters && (
+
             <div className="mt-4 animate-fade-in space-y-3">
               <div className="flex flex-wrap gap-3">
                 <select className="input-base !w-auto" value={filterSubject} onChange={(e) => setFilterSubject(e.target.value)}>
