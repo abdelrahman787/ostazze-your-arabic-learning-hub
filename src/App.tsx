@@ -14,6 +14,7 @@ import Footer from "@/components/Footer";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import ScrollToTop from "@/components/ScrollToTop";
 import GlobalSeo from "@/components/GlobalSeo";
+import RouteSkeleton from "@/components/RouteSkeleton";
 
 
 const Toaster = lazy(() => import("@/components/ui/toaster").then(m => ({ default: m.Toaster })));
