@@ -14,8 +14,12 @@ import howStep3Asset from "@/assets/how-step-3.webp.asset.json";
 const howStep1Img = howStep1Asset.url;
 const howStep2Img = howStep2Asset.url;
 const howStep3Img = howStep3Asset.url;
-import logosGridImg from "@/assets/university-logos-grid.webp.asset.json";
-import logosGridImg960 from "@/assets/university-logos-grid-960.webp.asset.json";
+import uniKsu from "@/assets/unis/king-saud.webp.asset.json";
+import uniKfupm from "@/assets/unis/kfupm.png.asset.json";
+import uniQatar from "@/assets/unis/qatar-university.png.asset.json";
+import uniKhalifa from "@/assets/unis/khalifa.png.asset.json";
+import uniZayed from "@/assets/unis/zayed.png.asset.json";
+import uniHbku from "@/assets/unis/hbku.png.asset.json";
 
 /**
  * Below-the-fold home page sections. Split out of Index.tsx so that
