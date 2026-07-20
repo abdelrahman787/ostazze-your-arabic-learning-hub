@@ -164,17 +164,32 @@ async function main() {
       await page.waitForFunction(() => window.__PRERENDER_READY__ === true, {
         timeout: READY_TIMEOUT_MS,
       });
-      // Stamp root as prerendered so client hydrates instead of createRoot.
-      await page.evaluate(() => {
+      // Stamp root as prerendered so client hydrates instead of createRoot,
+      // and gather DOM-truthful facts while we still have a live page.
+      const domInfo = await page.evaluate(() => {
         const r = document.getElementById("root");
         if (r) r.setAttribute("data-prerendered", "1");
+        const childCount = r ? r.childElementCount : 0;
+        const onlyFallback =
+          !!r &&
+          childCount === 1 &&
+          r.firstElementChild instanceof HTMLDivElement &&
+          r.firstElementChild.className.includes("min-h-[40vh]") &&
+          r.firstElementChild.childElementCount === 0;
+        const h1El = r ? r.querySelector("h1") : null;
+        return {
+          rootHasChildren: childCount > 0,
+          rootIsOnlyFallback: onlyFallback,
+          h1Text: h1El ? h1El.textContent.trim() : null,
+        };
       });
       let html = "<!doctype html>\n" + (await page.content());
       html = stripMarker(html);
 
-      const { errors, h1 } = validate(routePath, html);
+      const { errors } = validate(routePath, html, domInfo);
       const meta = extractMeta(html);
-      routeResult.h1 = h1;
+      routeResult.h1 = domInfo.h1Text;
+      if (!domInfo.h1Text) errors.push("missing H1");
       routeResult.meta = meta;
       routeResult.errors = errors;
       routeResult.consoleTail = consoleMsgs.slice(-20);
