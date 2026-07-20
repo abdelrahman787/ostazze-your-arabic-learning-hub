@@ -61,25 +61,55 @@ const HeroOrbit = () => {
     // keeps the hero from looking broken.
     const speedScale = reduce ? 3 : 1;
 
+    // Cache node metadata once instead of querying + parsing datasets every
+    // frame. This removes ~40 DOM reads/frame on mobile.
+    const rawNodes = ref.current?.querySelectorAll<HTMLElement>("[data-orbit-traveler]");
+    if (!rawNodes || rawNodes.length === 0) return;
+    const nodes = Array.from(rawNodes).map((node) => ({
+      node,
+      r: Number(node.dataset.orbitRadius || 0),
+      base: Number(node.dataset.orbitBaseAngle || 0),
+      dur: Number(node.dataset.orbitDuration || 60) * speedScale,
+    }));
+
+    // Pause when the hero is off-screen (user scrolled past it) — no point
+    // burning CPU/GPU animating what nobody sees.
+    let visible = true;
+    const io = ref.current
+      ? new IntersectionObserver(
+          ([entry]) => {
+            visible = entry.isIntersecting;
+          },
+          { threshold: 0.01 }
+        )
+      : null;
+    if (io && ref.current) io.observe(ref.current);
+
+    // Throttle to ~30fps on lite (mobile / reduced motion) devices — halves
+    // paint work while still looking smooth for slow rotation.
+    const minDelta = lite ? 1000 / 30 : 0;
+    let last = 0;
     let frame = 0;
+
     const tick = (now: number) => {
-      if (typeof document !== "undefined" && document.hidden) {
-        frame = requestAnimationFrame(tick);
-        return;
-      }
-      const nodes = ref.current?.querySelectorAll<HTMLElement>("[data-orbit-traveler]") ?? [];
-      nodes.forEach((node) => {
-        const r = Number(node.dataset.orbitRadius || 0);
-        const base = Number(node.dataset.orbitBaseAngle || 0);
-        const dur = Number(node.dataset.orbitDuration || 60) * speedScale;
-        const angle = base + (((now / 1000) % dur) / dur) * 360;
-        const a = Math.round(angle * 10) / 10;
-        node.style.transform = tx(r, a);
-      });
       frame = requestAnimationFrame(tick);
+      if (!visible) return;
+      if (typeof document !== "undefined" && document.hidden) return;
+      if (minDelta && now - last < minDelta) return;
+      last = now;
+      const t = now / 1000;
+      for (let i = 0; i < nodes.length; i++) {
+        const n = nodes[i];
+        const angle = n.base + ((t % n.dur) / n.dur) * 360;
+        const a = Math.round(angle * 10) / 10;
+        n.node.style.transform = tx(n.r, a);
+      }
     };
     frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
+    return () => {
+      cancelAnimationFrame(frame);
+      io?.disconnect();
+    };
   }, [lite]);
 
   let idx = 0;
