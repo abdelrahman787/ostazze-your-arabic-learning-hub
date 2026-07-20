@@ -7,10 +7,10 @@ interface Props {
 interface State {
   hasError: boolean;
   error: Error | null;
-  didAutoReload: boolean;
 }
 
-const RELOAD_KEY = "ostaze:chunk-reload";
+const RELOAD_KEY = "ostaze:chunk-reload-at";
+const RELOAD_THROTTLE_MS = 10_000;
 
 const isChunkLoadError = (err: unknown): boolean => {
   if (!err) return false;
@@ -20,17 +20,28 @@ const isChunkLoadError = (err: unknown): boolean => {
 };
 
 class ErrorBoundary extends Component<Props, State> {
+  private reloadForFreshVersion = () => {
+    if (typeof window === "undefined") return;
+
+    const lastReload = Number(sessionStorage.getItem(RELOAD_KEY) || 0);
+    const now = Date.now();
+
+    // Prevent reload loops if the device is fully offline or the request keeps failing.
+    if (now - lastReload < RELOAD_THROTTLE_MS) return;
+
+    sessionStorage.setItem(RELOAD_KEY, String(now));
+    const url = new URL(window.location.href);
+    url.searchParams.set("_r", String(now));
+    window.location.replace(url.toString());
+  };
+
   constructor(props: Props) {
     super(props);
-    const didAutoReload =
-      typeof window !== "undefined" && sessionStorage.getItem(RELOAD_KEY) === "1";
-    this.state = { hasError: false, error: null, didAutoReload };
+    this.state = { hasError: false, error: null };
   }
 
   componentDidMount() {
-    // Successful mount → clear the "we already tried reloading" flag so a
-    // future stale-chunk error can auto-recover again.
-    if (typeof window !== "undefined" && sessionStorage.getItem(RELOAD_KEY)) {
+    if (typeof window !== "undefined") {
       sessionStorage.removeItem(RELOAD_KEY);
     }
   }
@@ -42,16 +53,10 @@ class ErrorBoundary extends Component<Props, State> {
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error("[OSTAZE] Error Boundary caught:", error, errorInfo);
 
-    // Auto-recover from stale chunk errors after a deploy: hard-reload ONCE.
-    // If the reload already happened and the error persists, fall through to
-    // the retry UI below instead of showing a stuck "updating" screen.
-    if (
-      isChunkLoadError(error) &&
-      typeof window !== "undefined" &&
-      !this.state.didAutoReload
-    ) {
-      sessionStorage.setItem(RELOAD_KEY, "1");
-      window.location.reload();
+    // Auto-recover from stale chunk errors after a deploy without showing an
+    // intermediate error screen on mobile browsers with aggressive caching.
+    if (isChunkLoadError(error)) {
+      this.reloadForFreshVersion();
     }
   }
 
@@ -60,28 +65,17 @@ class ErrorBoundary extends Component<Props, State> {
   };
 
   handleHardReload = () => {
-    // Cache-bust query so mobile Safari re-fetches the HTML.
-    const url = new URL(window.location.href);
-    url.searchParams.set("_r", Date.now().toString());
-    window.location.replace(url.toString());
+    this.reloadForFreshVersion();
   };
 
   render() {
     if (this.state.hasError) {
       const chunk = isChunkLoadError(this.state.error);
-      const stuck = chunk && this.state.didAutoReload;
 
-      const title = stuck
-        ? "تعذّر تحميل جزء من الصفحة"
-        : chunk
-          ? "جاري تحديث النسخة…"
-          : "حدث خطأ غير متوقع";
-
-      const body = stuck
-        ? "من فضلك تحقق من اتصال الإنترنت ثم أعد تحميل الصفحة."
-        : chunk
-          ? "تم إصدار تحديث جديد. سيتم تحميل أحدث نسخة الآن."
-          : "نعتذر عن هذا الخطأ. يرجى المحاولة مرة أخرى.";
+      if (chunk) {
+        this.reloadForFreshVersion();
+        return <div className="min-h-screen bg-background" aria-hidden="true" />;
+      }
 
       return (
         <div className="min-h-screen flex items-center justify-center bg-background p-6">
@@ -89,8 +83,8 @@ class ErrorBoundary extends Component<Props, State> {
             <div className="w-16 h-16 rounded-2xl bg-destructive/10 text-destructive flex items-center justify-center mx-auto mb-4 text-2xl">
               ⚠️
             </div>
-            <h1 className="text-2xl font-extrabold text-foreground mb-2">{title}</h1>
-            <p className="text-muted-foreground mb-6 text-sm">{body}</p>
+            <h1 className="text-2xl font-extrabold text-foreground mb-2">حدث خطأ غير متوقع</h1>
+            <p className="text-muted-foreground mb-6 text-sm">نعتذر عن هذا الخطأ. يرجى المحاولة مرة أخرى.</p>
             <div className="flex items-center justify-center gap-3">
               <button
                 onClick={this.handleReset}
