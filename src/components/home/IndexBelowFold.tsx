@@ -14,7 +14,8 @@ import howStep3Asset from "@/assets/how-step-3.webp.asset.json";
 const howStep1Img = howStep1Asset.url;
 const howStep2Img = howStep2Asset.url;
 const howStep3Img = howStep3Asset.url;
-import logosGridImg from "@/assets/university-logos-grid.png.asset.json";
+import logosGridImg from "@/assets/university-logos-grid.webp.asset.json";
+import logosGridImg960 from "@/assets/university-logos-grid-960.webp.asset.json";
 
 /**
  * Below-the-fold home page sections. Split out of Index.tsx so that
@@ -302,8 +303,13 @@ const IndexBelowFold = () => {
             <div className="relative mt-2 rounded-2xl overflow-hidden" style={{ background: "hsl(var(--primary))" }}>
               <img
                 src={logosGridImg.url}
+                srcSet={`${logosGridImg960.url} 960w, ${logosGridImg.url} 1920w`}
+                sizes="(max-width: 768px) 100vw, 1024px"
+                width={1920}
+                height={516}
                 alt={lang === "ar" ? "شعارات الجامعات" : "University logos"}
                 loading="lazy"
+                decoding="async"
                 className="w-full h-auto block"
                 style={{ filter: "hue-rotate(-8deg) saturate(1.05)" }}
               />
@@ -371,7 +377,7 @@ const IndexBelowFold = () => {
                   <p className="text-muted-foreground text-sm leading-relaxed mb-4">"{d(tst.quote)}"</p>
                   <div className="flex items-center gap-3">
                     {(tst as any).avatar ? (
-                      <img src={(tst as any).avatar} alt={d(tst.name)} loading="lazy" className="w-10 h-10 rounded-full object-cover" />
+                      <img src={(tst as any).avatar} alt={d(tst.name)} loading="lazy" decoding="async" width={40} height={40} className="w-10 h-10 rounded-full object-cover" />
                     ) : (
                       <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold">{d(tst.name).charAt(0)}</div>
                     )}
