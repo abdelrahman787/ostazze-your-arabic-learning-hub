@@ -311,8 +311,8 @@ const TeacherProfile = () => {
                 teacherId={teacher.user_id}
                 teacherName={displayName}
                 subjects={displaySubjects}
-                price={teacher.price || undefined}
               />
+
             </div>
 
             {availability.length > 0 && (
