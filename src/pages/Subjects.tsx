@@ -66,19 +66,6 @@ const Subjects = () => {
     return count;
   };
 
-  const getUniversitiesForSubject = (subjectNameEn: string) => {
-    const unis: string[] = [];
-    allUniversities.forEach(u => {
-      u.colleges.forEach(c => {
-        c.departments.forEach(dept => {
-          if (dept.name_en === subjectNameEn && !unis.includes(lang === "ar" ? u.name_ar : u.name_en)) {
-            unis.push(lang === "ar" ? u.name_ar : u.name_en);
-          }
-        });
-      });
-    });
-    return unis;
-  };
 
   const clearCategory = () => {
     searchParams.delete("category");
@@ -186,7 +173,6 @@ const Subjects = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 pb-8">
           {visibleSubjects.map((s, i) => {
             const coursesCount = getCoursesForSubject(s.name.en);
-            const universities = getUniversitiesForSubject(s.name.en);
             const colorClass = iconColors[i % iconColors.length];
             return (
               <motion.div key={s.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: Math.min(i * 0.03, 0.5) }}
@@ -210,20 +196,6 @@ const Subjects = () => {
                           </span>
                         )}
                       </div>
-                      {universities.length > 0 && (
-                        <div className="flex flex-wrap gap-1">
-                          {universities.slice(0, 2).map((uni, j) => (
-                            <span key={j} className="text-[0.6rem] bg-primary/15 text-primary dark:bg-primary/20 dark:text-orange-300 font-semibold px-2 py-0.5 rounded-full">
-                              {uni}
-                            </span>
-                          ))}
-                          {universities.length > 2 && (
-                            <span className="text-[0.6rem] bg-primary/15 text-primary dark:bg-primary/20 dark:text-orange-300 font-semibold px-2 py-0.5 rounded-full">
-                              +{universities.length - 2}
-                            </span>
-                          )}
-                        </div>
-                      )}
                     </div>
                   </div>
                   <Link to="/teachers" className="btn-dark flex items-center justify-center gap-2 w-full mt-4 text-sm">
