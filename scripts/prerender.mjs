@@ -100,15 +100,10 @@ function stripMarker(html) {
     .replace(/\?'/g, "'");
 }
 
-function validate(routePath, html) {
+function validate(routePath, html, domInfo) {
   const errors = [];
-  // Match #root robustly: allow arbitrary attributes.
-  const rootMatch = html.match(/<div[^>]*id="root"[^>]*>([\s\S]*?)<\/div>\s*<script/i);
-  const rootInner = rootMatch ? rootMatch[1] : "";
-  if (!rootInner.trim()) errors.push("empty #root");
-  if (/^\s*<div class="min-h-\[40vh\]"[^>]*><\/div>\s*$/.test(rootInner)) {
-    errors.push("root is only Suspense fallback");
-  }
+  if (!domInfo.rootHasChildren) errors.push("empty #root");
+  if (domInfo.rootIsOnlyFallback) errors.push("root is only Suspense fallback");
   if (!/<title>[^<]+<\/title>/.test(html)) errors.push("missing <title>");
   if (!/<meta[^>]+name="description"[^>]+content="[^"]+"/i.test(html))
     errors.push("missing meta description");
