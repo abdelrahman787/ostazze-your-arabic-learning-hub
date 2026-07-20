@@ -55,6 +55,14 @@ const Teachers = () => {
   }, [loading]);
 
   useEffect(() => {
+    // Prerender guardrail: emit a deterministic empty shell (H1 + filters +
+    // SEO metadata already rendered in JSX). Live teacher data fetches only
+    // after hydration, so the snapshot makes zero Supabase requests and the
+    // client makes exactly one round-trip after mount.
+    if (IS_PRERENDER) {
+      setLoading(false);
+      return;
+    }
     const fetchTeachers = async () => {
       setLoading(true);
       setLoadingTimeout(false);
