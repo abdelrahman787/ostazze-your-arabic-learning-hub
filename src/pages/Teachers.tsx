@@ -35,12 +35,6 @@ const Teachers = () => {
   const [searchParams] = useSearchParams();
   const initialSubject = searchParams.get("subject") || "";
   const courseLabel = searchParams.get("course") || "";
-  const [showFilters, setShowFilters] = useState(!!initialSubject);
-
-  const [sortBy, setSortBy] = useState("");
-  const [filterUniversity] = useState("");
-  const [filterSubject, setFilterSubject] = useState("");
-  const [filterVerified, setFilterVerified] = useState("");
   const [teachers, setTeachers] = useState<TeacherData[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadingTimeout, setLoadingTimeout] = useState(false);
