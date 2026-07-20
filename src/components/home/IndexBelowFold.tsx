@@ -14,7 +14,8 @@ import howStep3Asset from "@/assets/how-step-3.webp.asset.json";
 const howStep1Img = howStep1Asset.url;
 const howStep2Img = howStep2Asset.url;
 const howStep3Img = howStep3Asset.url;
-import logosGridImg from "@/assets/university-logos-grid.png.asset.json";
+import logosGridImg from "@/assets/university-logos-grid.webp.asset.json";
+import logosGridImg960 from "@/assets/university-logos-grid-960.webp.asset.json";
 
 /**
  * Below-the-fold home page sections. Split out of Index.tsx so that
