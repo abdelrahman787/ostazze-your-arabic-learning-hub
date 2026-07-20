@@ -237,12 +237,13 @@ const IndexBelowFold = () => {
         </div>
       </section>
 
-      {/* Trust banner */}
+      {/* Trust banner — Academic editorial (dark stats + light logos) */}
       <section className="relative py-20 md:py-24 overflow-hidden bg-section-alt">
         <div
           className="absolute inset-0 pointer-events-none -z-10"
           style={{
-            background: "radial-gradient(60% 60% at 50% 0%, hsl(var(--primary) / 0.08) 0%, transparent 70%), radial-gradient(50% 50% at 90% 100%, hsl(38 92% 55% / 0.07) 0%, transparent 70%)",
+            background:
+              "radial-gradient(60% 60% at 50% 0%, hsl(var(--primary) / 0.08) 0%, transparent 70%), radial-gradient(50% 50% at 90% 100%, hsl(38 92% 55% / 0.06) 0%, transparent 70%)",
           }}
         />
         <div className="container max-w-6xl">
@@ -251,107 +252,167 @@ const IndexBelowFold = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="relative rounded-[2rem] overflow-hidden p-4 md:p-6 border transition-colors"
+            className="relative rounded-[2.5rem] overflow-hidden border shadow-2xl"
             style={{
-              background: "linear-gradient(140deg, hsl(var(--card)) 0%, hsl(var(--background)) 60%, hsl(var(--primary) / 0.06) 100%)",
-              borderColor: "hsl(var(--primary) / 0.2)",
-              boxShadow: "0 30px 80px -30px hsl(var(--primary) / 0.35), inset 0 1px 0 hsl(0 0% 100% / 0.06)",
+              borderColor: "hsl(var(--border))",
+              background: "hsl(var(--card))",
             }}
           >
-            <div className="relative text-center pt-4 md:pt-6 pb-6 md:pb-8 px-3">
-              <span
-                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-bold tracking-[0.18em] uppercase mb-4"
+            <div className="grid lg:grid-cols-12">
+              {/* Left: Dark stats panel */}
+              <div
+                className="lg:col-span-5 relative overflow-hidden p-8 lg:p-14 flex flex-col justify-center text-white"
                 style={{
-                  background: "linear-gradient(135deg, hsl(var(--primary) / 0.12), hsl(38 92% 55% / 0.10))",
-                  color: "hsl(var(--primary))",
-                  border: "1px solid hsl(var(--primary) / 0.22)",
+                  background:
+                    "linear-gradient(160deg, hsl(222 47% 11%) 0%, hsl(222 47% 8%) 100%)",
                 }}
               >
-                <Sparkles className="w-3.5 h-3.5" />
-                {lang === "ar" ? "ثقة الطلاب" : "Trusted by Students"}
-              </span>
-              <h2 className="text-3xl md:text-5xl font-black tracking-tight text-foreground leading-tight">
-                {lang === "ar" ? "طلابنا ملتحقون بـ" : "Our Students Study At"}
-                <span
-                  className="block mt-1 bg-clip-text text-transparent"
-                  style={{ backgroundImage: "linear-gradient(90deg, hsl(var(--primary)), hsl(38 92% 55%))" }}
-                >
-                  {lang === "ar" ? "أعرق الجامعات" : "Top-Tier Universities"}
-                </span>
-              </h2>
-              <p className="mt-4 text-muted-foreground max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
-                {lang === "ar"
-                  ? "آلاف الطلاب من أبرز الجامعات في السعودية، الإمارات، الكويت وقطر يثقون بـ OSTAZE لرحلتهم الدراسية."
-                  : "Thousands of students from leading universities across KSA, UAE, Kuwait & Qatar trust OSTAZE for their academic journey."}
-              </p>
-            </div>
+                <div
+                  className="absolute top-0 end-0 w-56 h-56 rounded-full blur-3xl pointer-events-none"
+                  style={{ background: "hsl(14 91% 50% / 0.18)", transform: "translate(30%, -30%)" }}
+                  aria-hidden="true"
+                />
+                <div
+                  className="absolute bottom-0 start-0 w-48 h-48 rounded-full blur-3xl pointer-events-none"
+                  style={{ background: "hsl(38 92% 55% / 0.10)", transform: "translate(-30%, 30%)" }}
+                  aria-hidden="true"
+                />
 
-            <div
-              className="absolute inset-0 opacity-[0.18] pointer-events-none"
-              style={{
-                backgroundImage: "radial-gradient(hsl(var(--primary) / 0.5) 1px, transparent 1px)",
-                backgroundSize: "22px 22px",
-                maskImage: "radial-gradient(ellipse at center, black 35%, transparent 80%)",
-                WebkitMaskImage: "radial-gradient(ellipse at center, black 35%, transparent 80%)",
-              }}
-            />
-            <div
-              className="absolute -top-16 -left-16 w-[240px] h-[240px] rounded-full blur-[80px] opacity-40 pointer-events-none"
-              style={{ background: "radial-gradient(circle, hsl(var(--primary) / 0.55) 0%, transparent 70%)" }}
-            />
-            <div
-              className="absolute -bottom-16 -right-16 w-[260px] h-[260px] rounded-full blur-[90px] opacity-30 pointer-events-none"
-              style={{ background: "radial-gradient(circle, hsl(38 92% 55% / 0.45) 0%, transparent 70%)" }}
-            />
+                <div className="relative z-10">
+                  <span className="inline-block px-4 py-1.5 rounded-full border border-white/15 text-white/70 text-[11px] font-semibold mb-8 uppercase tracking-[0.2em]">
+                    {lang === "ar" ? "تميّز أكاديمي" : "Education Excellence"}
+                  </span>
 
-            <div className="relative mt-2 rounded-2xl overflow-hidden" style={{ background: "hsl(var(--primary))" }}>
-              <img
-                src={logosGridImg.url}
-                srcSet={`${logosGridImg960.url} 960w, ${logosGridImg.url} 1920w`}
-                sizes="(max-width: 768px) 100vw, 1024px"
-                width={1920}
-                height={516}
-                alt={lang === "ar" ? "شعارات الجامعات" : "University logos"}
-                loading="lazy"
-                decoding="async"
-                className="w-full h-auto block"
-                style={{ filter: "hue-rotate(-8deg) saturate(1.05)" }}
-              />
-              <div className="absolute inset-y-0 left-0 w-[28%] sm:w-[22%] md:w-[17%] flex flex-col justify-center items-center gap-3 sm:gap-4 md:gap-6 px-1 sm:px-2 md:px-3">
-                <div className="flex flex-col items-center text-center">
-                  <div className="text-white font-black leading-none drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)]" style={{ fontSize: "clamp(1.4rem, 5.5vw, 2.6rem)" }}>+12k</div>
-                  <div className="text-white font-bold leading-tight mt-1" style={{ fontSize: "clamp(0.75rem, 2.4vw, 0.9rem)" }}>{lang === "ar" ? "طلّاب" : "Students"}</div>
-                  <div className="text-white font-bold leading-tight" style={{ fontSize: "clamp(0.75rem, 2.4vw, 0.9rem)" }}>{lang === "ar" ? "نشط" : "Active"}</div>
-                </div>
-                <div className="flex flex-col items-center text-center">
-                  <div
-                    className="flex items-center justify-center rounded-full border-2 border-white/50"
-                    style={{ width: "clamp(2.8rem, 11vw, 4.5rem)", height: "clamp(2.8rem, 11vw, 4.5rem)" }}
-                  >
-                    <span className="text-white font-black leading-none drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]" style={{ fontSize: "clamp(0.95rem, 3.6vw, 1.6rem)" }}>98%</span>
+                  <div className="space-y-7">
+                    <div className="flex items-start gap-5 group">
+                      <div
+                        className="text-5xl font-black leading-none transition-transform group-hover:scale-110 duration-300"
+                        style={{ color: "hsl(14 91% 55%)" }}
+                      >
+                        12k+
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-bold mb-1">
+                          {lang === "ar" ? "طالب نشط" : "Active students"}
+                        </h4>
+                        <p className="text-white/55 text-sm leading-relaxed">
+                          {lang === "ar"
+                            ? "طلاب من الخليج يبنون مستقبلهم معنا"
+                            : "GCC students building their future with us"}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="h-px bg-white/10 w-full" />
+
+                    <div className="flex items-start gap-5 group">
+                      <div
+                        className="text-5xl font-black leading-none transition-transform group-hover:scale-110 duration-300"
+                        style={{ color: "hsl(14 91% 55%)" }}
+                      >
+                        98%
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-bold mb-1">
+                          {lang === "ar" ? "نسبة الرضا" : "Satisfaction rate"}
+                        </h4>
+                        <p className="text-white/55 text-sm leading-relaxed">
+                          {lang === "ar"
+                            ? "أعلى معدل نجاح ورضا للطلاب"
+                            : "Highest satisfaction rate in student success"}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <div className="text-white font-semibold leading-tight mt-1.5" style={{ fontSize: "clamp(0.65rem, 2vw, 0.75rem)" }}>{lang === "ar" ? "رضا" : "Satisfaction"}</div>
+
+                  <div className="mt-10 flex items-center gap-3 text-sm text-white/60">
+                    <div className="flex -space-x-2 rtl:space-x-reverse">
+                      <div className="w-8 h-8 rounded-full border-2 border-slate-900 bg-slate-600" />
+                      <div className="w-8 h-8 rounded-full border-2 border-slate-900 bg-slate-500" />
+                      <div className="w-8 h-8 rounded-full border-2 border-slate-900 bg-slate-400" />
+                    </div>
+                    <span>
+                      {lang === "ar"
+                        ? "انضم إلى آلاف الطلاب المتميزين اليوم"
+                        : "Join thousands of top students today"}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right: Headline + logos */}
+              <div className="lg:col-span-7 p-8 lg:p-14 flex flex-col justify-center">
+                <div className="mb-10">
+                  <h2 className="text-3xl lg:text-4xl font-black text-foreground leading-tight mb-4">
+                    {lang === "ar" ? "طلابنا ملتحقون " : "Our students study at "}
+                    <span
+                      className="bg-clip-text text-transparent"
+                      style={{
+                        backgroundImage:
+                          "linear-gradient(90deg, hsl(var(--primary)), hsl(38 92% 55%))",
+                      }}
+                    >
+                      {lang === "ar" ? "بأعرق الجامعات" : "top-tier universities"}
+                    </span>
+                  </h2>
+                  <p className="text-muted-foreground max-w-xl leading-relaxed text-sm md:text-base">
+                    {lang === "ar"
+                      ? "طلابنا مقبولون في أعرق المؤسسات الأكاديمية في السعودية، الإمارات، الكويت وقطر."
+                      : "Our students are accepted at the most prestigious academic institutions across KSA, UAE, Kuwait and Qatar."}
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-3 gap-4 md:gap-6">
+                  {[
+                    { src: uniKsu.url, alt: "King Saud University" },
+                    { src: uniKfupm.url, alt: "KFUPM" },
+                    { src: uniKhalifa.url, alt: "Khalifa University" },
+                    { src: uniZayed.url, alt: "Zayed University" },
+                    { src: uniQatar.url, alt: "Qatar University" },
+                    { src: uniHbku.url, alt: "HBKU" },
+                  ].map((u) => (
+                    <div
+                      key={u.alt}
+                      className="h-16 md:h-20 rounded-xl border border-border/60 bg-background/60 flex items-center justify-center p-3 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-all duration-500"
+                    >
+                      <img
+                        src={u.src}
+                        alt={u.alt}
+                        loading="lazy"
+                        decoding="async"
+                        className="max-h-full max-w-full object-contain"
+                      />
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-10 pt-6 border-t border-border/60 flex items-center justify-between gap-4">
+                  <p className="text-sm text-muted-foreground">
+                    {lang === "ar"
+                      ? "مستقبلك الأكاديمي يبدأ من هنا"
+                      : "Your academic future starts here"}
+                  </p>
+                  <Link
+                    to="/universities"
+                    className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold text-primary-foreground transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
+                    style={{
+                      background:
+                        "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(24 95% 55%) 100%)",
+                      boxShadow:
+                        "0 10px 30px -10px hsl(var(--primary) / 0.55), inset 0 1px 0 hsl(0 0% 100% / 0.25)",
+                    }}
+                  >
+                    <GraduationCap className="w-4 h-4" />
+                    <span>
+                      {lang === "ar" ? "تصفح كل الجامعات" : "Browse all universities"}
+                    </span>
+                    <ArrowLeft className="w-4 h-4 rtl:rotate-180 transition-transform group-hover:-translate-x-0.5 rtl:group-hover:translate-x-0.5" />
+                  </Link>
                 </div>
               </div>
             </div>
           </motion.div>
 
-          <div className="flex justify-center mt-8">
-            <Link
-              to="/universities"
-              className="group inline-flex items-center gap-2 px-7 py-3 rounded-full text-sm font-bold text-primary-foreground transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
-              style={{
-                background: "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(24 95% 55%) 100%)",
-                boxShadow: "0 10px 30px -10px hsl(var(--primary) / 0.55), inset 0 1px 0 hsl(0 0% 100% / 0.25)",
-              }}
-            >
-              <GraduationCap className="w-4 h-4" />
-              <span>{lang === "ar" ? "تصفح كل الجامعات" : "Browse all universities"}</span>
-              <ArrowLeft className="w-4 h-4 rtl:rotate-180 transition-transform group-hover:-translate-x-0.5 rtl:group-hover:translate-x-0.5" />
-            </Link>
-          </div>
-
-          {/* Testimonials */}
           <div className="mt-20 md:mt-24">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
               <h2 className="text-3xl font-extrabold mb-2">{t("testimonials_title")}</h2>
