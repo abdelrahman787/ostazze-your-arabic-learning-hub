@@ -22,7 +22,7 @@ serve(async (req) => {
         email: "teacher.test@ostazze.com",
         password: "Teacher@123456",
         full_name: "أحمد المعلم",
-        full_name_en: "Ahmed Teacher",
+        full_name_en: "Ahmed",
         account_type: "teacher",
         teacher: {
           university: "جامعة الكويت",

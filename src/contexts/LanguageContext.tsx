@@ -42,10 +42,10 @@ const translations = {
   why_remote_desc: { ar: "جلسات مباشرة عبر Zoom من أي مكان", en: "Live sessions via Zoom from anywhere" },
 
   // Teachers Section
-  teachers_title: { ar: "المعلمون", en: "Teachers" },
+  teachers_title: { ar: "نخبة المعلمين", en: "Top Tutors" },
   teachers_subtitle: { ar: "تعرف على نخبة من أفضل المعلمين", en: "Meet our top teachers" },
   teachers_view_all: { ar: "عرض الكل", en: "View All" },
-  teachers_choose: { ar: "اختر معلمك المفضل وابدأ التعلم", en: "Choose your favorite teacher and start learning" },
+  teachers_choose: { ar: "اختر معلمك المفضل وابدأ التعلم", en: "\n" },
   teacher_view_profile: { ar: "عرض الملف الشخصي", en: "View Profile" },
   teacher_per_session: { ar: "لكل جلسة", en: "per session" },
   teacher_verified: { ar: "موثق", en: "Verified" },

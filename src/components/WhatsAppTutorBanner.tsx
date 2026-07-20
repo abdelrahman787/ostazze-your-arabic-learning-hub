@@ -30,7 +30,7 @@ const WhatsAppTutorBanner = () => {
             </div>
             <div>
               <h3 className="font-black text-base md:text-lg text-foreground leading-tight">
-                {t("whatsapp_tutor_title")}
+                {lang === "ar" ? "هل تبحث عن معلم؟" : "Looking for a Tutor?\u00A0"}
               </h3>
               <p className="text-sm text-muted-foreground mt-0.5">
                 {t("whatsapp_tutor_desc")}
