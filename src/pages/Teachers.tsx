@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import TeacherCard from "@/components/TeacherCard";
 import type { TeacherData } from "@/components/TeacherCard";
-import { SlidersHorizontal, UserX, RefreshCw, Sparkles, Users, Calendar } from "lucide-react";
+import { UserX, RefreshCw, Sparkles, Users, Calendar } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
