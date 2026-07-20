@@ -31,7 +31,7 @@ const Footer = () => {
               <span className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center shadow-[0_0_20px_hsl(14_91%_50%/0.5)]">
                 <GraduationCap size={18} className="text-white" />
               </span>
-              <span className="text-2xl font-black text-primary tracking-tight">OSTAZE</span>
+              <span className="text-2xl font-black text-primary tracking-tight">Ostaze</span>
             </Link>
             <p className="text-sm leading-relaxed text-black/75 dark:text-white/75 mb-5">{t("footer_desc")}</p>
             <div className="flex gap-2">

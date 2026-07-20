@@ -35,8 +35,8 @@ const OurTeam = () => {
           </h2>
           <p className="mt-3 text-muted-foreground max-w-xl mx-auto">
             {isAr
-              ? "العقول التي تقف خلف OSTAZE — شغف، خبرة، والتزام بنجاحك."
-              : "The minds behind OSTAZE — passion, expertise, and a commitment to your success."}
+              ? "العقول التي تقف خلف استاذي — شغف، خبرة، والتزام."
+              : "The minds behind Ostaze — passion, expertise, and commitment."}
           </p>
         </motion.div>
 

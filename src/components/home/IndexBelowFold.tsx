@@ -61,9 +61,9 @@ const IndexBelowFold = () => {
   }, [playHowSteps]);
 
   const howSteps = [
-    { key: "1", image: howStep1Img, titleKey: "how_step1_title", descKey: "how_step1_desc" },
-    { key: "2", image: howStep2Img, titleKey: "how_step2_title", descKey: "how_step2_desc" },
-    { key: "3", image: howStep3Img, titleKey: "how_step3_title", descKey: "how_step3_desc" },
+    { key: "١", image: howStep1Img, titleKey: "how_step1_title", descKey: "how_step1_desc" },
+    { key: "٢", image: howStep2Img, titleKey: "how_step2_title", descKey: "how_step2_desc" },
+    { key: "٣", image: howStep3Img, titleKey: "how_step3_title", descKey: "how_step3_desc" },
   ] as const;
 
   return (
@@ -333,7 +333,7 @@ const IndexBelowFold = () => {
                     </div>
                     <span>
                       {lang === "ar"
-                        ? "انضم إلى آلاف الطلاب المتميزين اليوم"
+                        ? "انضم إلى آلاف الطلاب الذين يتعلمون مع أفضل المعلمين في استاذي"
                         : "Join thousands of top students today"}
                     </span>
                   </div>

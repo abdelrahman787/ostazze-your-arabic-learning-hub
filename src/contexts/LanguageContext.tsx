@@ -70,7 +70,7 @@ const translations = {
 
   // CTA
   cta_title: { ar: "ابدأ رحلتك التعليمية اليوم", en: "Start Your Learning Journey Today" },
-  cta_subtitle: { ar: "انضم إلى آلاف الطلاب الذين يتعلمون مع أفضل المعلمين في Ostaze", en: "Join thousands of students learning with the best teachers at Ostaze" },
+  cta_subtitle: { ar: "انضم إلى آلاف الطلاب الذين يتعلمون مع أفضل المعلمين في استاذي", en: "Join thousands of students learning with the best teachers at Ostaze" },
   cta_register: { ar: "أنشئ حسابك مجاناً", en: "Create Free Account" },
 
   // Universities
