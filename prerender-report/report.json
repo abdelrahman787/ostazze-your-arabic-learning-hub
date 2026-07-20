@@ -1,0 +1,187 @@
+{
+  "routes": [
+    {
+      "route": "/",
+      "url": "http://127.0.0.1:5199/?__prerender=1",
+      "h1": "تعلم مع أفضل الدكاترة الجامعيين",
+      "meta": {
+        "title": "OSTAZE | منصة أستازي - دروس خصوصية ولايف أونلاين مع أفضل المعلمين",
+        "description": "OSTAZE (أستازي) منصة دروس خصوصية ولايف أونلاين تربط الطلاب بأفضل المعلمين الجامعيين في السعودية، الإمارات، الكويت وقطر — حصص مباشرة بالزووم، كورسات مسجلة، وأسعار مدروسة.",
+        "canonical": "https://ostaze.com/",
+        "lang": "ar",
+        "dir": "rtl"
+      },
+      "errors": [
+        "empty #root"
+      ],
+      "consoleTail": [
+        "[log] [OSTAZE] main.tsx loaded",
+        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold CLS: 0.006",
+        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold LCP: 312ms  ✓"
+      ],
+      "supabaseRequestCount": 0
+    },
+    {
+      "route": "/teachers",
+      "url": "http://127.0.0.1:5199/teachers?__prerender=1",
+      "h1": "المعلمون",
+      "meta": {
+        "title": "المعلمون - أفضل المعلمين الجامعيين - أستازي OSTAZE",
+        "description": "تصفح أفضل المعلمين الجامعيين على منصة أستازي — معلمون متخصصون بتقييمات حقيقية من الطلاب. احجز حصتك الخصوصية الآن.",
+        "canonical": "https://ostaze.com/teachers",
+        "lang": "ar",
+        "dir": "rtl"
+      },
+      "errors": [
+        "empty #root"
+      ],
+      "consoleTail": [
+        "[log] [OSTAZE] main.tsx loaded",
+        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold CLS: 0.006",
+        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold LCP: 260ms  ✓"
+      ],
+      "supabaseRequestCount": 2
+    },
+    {
+      "route": "/subjects",
+      "url": "http://127.0.0.1:5199/subjects?__prerender=1",
+      "h1": null,
+      "meta": {
+        "title": "OSTAZE | منصة أستازي - دروس خصوصية ولايف أونلاين مع أفضل المعلمين",
+        "description": null,
+        "canonical": null,
+        "lang": "ar",
+        "dir": "rtl"
+      },
+      "errors": [
+        "empty #root",
+        "missing meta description",
+        "missing canonical",
+        "missing H1"
+      ],
+      "consoleTail": [
+        "[log] [OSTAZE] main.tsx loaded",
+        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold CLS: 0.006",
+        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold LCP: 424ms  ✓"
+      ],
+      "supabaseRequestCount": 0
+    },
+    {
+      "route": "/universities",
+      "url": "http://127.0.0.1:5199/universities?__prerender=1",
+      "h1": null,
+      "meta": {
+        "title": "OSTAZE | منصة أستازي - دروس خصوصية ولايف أونلاين مع أفضل المعلمين",
+        "description": null,
+        "canonical": null,
+        "lang": "ar",
+        "dir": "rtl"
+      },
+      "errors": [
+        "empty #root",
+        "missing meta description",
+        "missing canonical",
+        "missing H1"
+      ],
+      "consoleTail": [
+        "[log] [OSTAZE] main.tsx loaded",
+        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold CLS: 0.006",
+        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold LCP: 232ms  ✓"
+      ],
+      "supabaseRequestCount": 0
+    },
+    {
+      "route": "/categories",
+      "url": "http://127.0.0.1:5199/categories?__prerender=1",
+      "h1": null,
+      "meta": {
+        "title": "OSTAZE | منصة أستازي - دروس خصوصية ولايف أونلاين مع أفضل المعلمين",
+        "description": null,
+        "canonical": null,
+        "lang": "ar",
+        "dir": "rtl"
+      },
+      "errors": [
+        "empty #root",
+        "missing meta description",
+        "missing canonical",
+        "missing H1"
+      ],
+      "consoleTail": [
+        "[log] [OSTAZE] main.tsx loaded",
+        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold CLS: 0.006",
+        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold LCP: 240ms  ✓"
+      ],
+      "supabaseRequestCount": 0
+    },
+    {
+      "route": "/about",
+      "url": "http://127.0.0.1:5199/about?__prerender=1",
+      "h1": "من نحن",
+      "meta": {
+        "title": "من نحن - تعرف على منصة أستازي OSTAZE",
+        "description": "تعرف على منصة أستازي (OSTAZE)، رؤيتنا ومهمتنا في تقديم أفضل تجربة تعليمية أونلاين تربط الطلاب بالمعلمين الجامعيين المتميزين في الكويت وقطر.",
+        "canonical": "https://ostaze.com/about",
+        "lang": "ar",
+        "dir": "rtl"
+      },
+      "errors": [
+        "empty #root"
+      ],
+      "consoleTail": [
+        "[log] [OSTAZE] main.tsx loaded",
+        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold CLS: 0.006",
+        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold LCP: 236ms  ✓"
+      ],
+      "supabaseRequestCount": 0
+    },
+    {
+      "route": "/contact",
+      "url": "http://127.0.0.1:5199/contact?__prerender=1",
+      "h1": "تواصل معنا",
+      "meta": {
+        "title": "تواصل معنا | OSTAZE",
+        "description": "نحن هنا لمساعدتك. تواصل معنا بأي طريقة تناسبك",
+        "canonical": "https://ostaze.com/contact",
+        "lang": "ar",
+        "dir": "rtl"
+      },
+      "errors": [
+        "empty #root"
+      ],
+      "consoleTail": [
+        "[log] [OSTAZE] main.tsx loaded",
+        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold CLS: 0.006",
+        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold LCP: 312ms  ✓"
+      ],
+      "supabaseRequestCount": 0
+    },
+    {
+      "route": "/faq",
+      "url": "http://127.0.0.1:5199/faq?__prerender=1",
+      "h1": "الأسئلة الشائعة",
+      "meta": {
+        "title": "الأسئلة الشائعة | OSTAZE",
+        "description": "إجابات سريعة عن الحجز، الدفع، الاسترداد، والجلسات المباشرة",
+        "canonical": "https://ostaze.com/faq",
+        "lang": "ar",
+        "dir": "rtl"
+      },
+      "errors": [
+        "empty #root"
+      ],
+      "consoleTail": [
+        "[log] [OSTAZE] main.tsx loaded",
+        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold CLS: 0.006",
+        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold LCP: 292ms  ✓"
+      ],
+      "supabaseRequestCount": 0
+    }
+  ],
+  "summary": {
+    "total": 8,
+    "failed": 8,
+    "passed": 0,
+    "canonicalOrigin": "https://ostaze.com"
+  }
+}
