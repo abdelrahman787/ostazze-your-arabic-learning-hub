@@ -40,8 +40,6 @@ const Teachers = () => {
   const [loadingTimeout, setLoadingTimeout] = useState(false);
   const [assignModalOpen, setAssignModalOpen] = useState(false);
 
-  const universities = [...new Set(teachers.map((tc) => tc.university).filter(Boolean))] as string[];
-  const subjects = [...new Set(teachers.flatMap((tc) => tc.subjects))] as string[];
 
   useEffect(() => {
     const timer = setTimeout(() => {
