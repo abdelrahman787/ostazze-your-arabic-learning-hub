@@ -303,8 +303,13 @@ const IndexBelowFold = () => {
             <div className="relative mt-2 rounded-2xl overflow-hidden" style={{ background: "hsl(var(--primary))" }}>
               <img
                 src={logosGridImg.url}
+                srcSet={`${logosGridImg960.url} 960w, ${logosGridImg.url} 1920w`}
+                sizes="(max-width: 768px) 100vw, 1024px"
+                width={1920}
+                height={516}
                 alt={lang === "ar" ? "شعارات الجامعات" : "University logos"}
                 loading="lazy"
+                decoding="async"
                 className="w-full h-auto block"
                 style={{ filter: "hue-rotate(-8deg) saturate(1.05)" }}
               />
