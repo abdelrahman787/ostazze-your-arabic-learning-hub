@@ -45,7 +45,7 @@ const translations = {
   teachers_title: { ar: "نخبة المعلمين", en: "Top Tutors" },
   teachers_subtitle: { ar: "تعرف على نخبة من أفضل المعلمين", en: "Meet our top teachers" },
   teachers_view_all: { ar: "عرض الكل", en: "View All" },
-  teachers_choose: { ar: "اختر معلمك المفضل وابدأ التعلم", en: "\n" },
+  teachers_choose: { ar: "اختر معلمك وابدأ التعلم", en: "Choose your tutor and start learning" },
   teacher_view_profile: { ar: "عرض الملف الشخصي", en: "View Profile" },
   teacher_per_session: { ar: "لكل جلسة", en: "per session" },
   teacher_verified: { ar: "موثق", en: "Verified" },
