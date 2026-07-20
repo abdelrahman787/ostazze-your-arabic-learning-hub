@@ -150,41 +150,6 @@ const Teachers = () => {
           </motion.div>
         )}
 
-        <div className="card-base p-6 mb-8">
-          <button onClick={() => setShowFilters(!showFilters)} className="btn-outline !py-2 flex items-center gap-2">
-            <SlidersHorizontal size={16} />
-            {t("filter_btn")}
-            {hasActiveFilters && <span className="w-2 h-2 rounded-full bg-primary" />}
-          </button>
-
-          {showFilters && (
-
-            <div className="mt-4 animate-fade-in space-y-3">
-              <div className="flex flex-wrap gap-3">
-                <select className="input-base !w-auto" value={filterSubject} onChange={(e) => setFilterSubject(e.target.value)}>
-                  <option value="">{t("th_subject")} - {allLabel}</option>
-                  {subjects.map((s) => <option key={s} value={s}>{s}</option>)}
-                </select>
-                <select className="input-base !w-auto" value={filterVerified} onChange={(e) => setFilterVerified(e.target.value)}>
-                  <option value="">{t("th_status")} - {allLabel}</option>
-                  <option value="verified">{t("teacher_verified")}</option>
-                  <option value="unverified">{t("admin_under_review")}</option>
-                </select>
-                <select className="input-base !w-auto" value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
-                  <option value="">{t("filter_sort")}</option>
-                  <option value="name-asc">{nameAsc}</option>
-                  <option value="name-desc">{nameDesc}</option>
-                </select>
-              </div>
-              {hasActiveFilters && (
-                <button onClick={clearFilters} className="text-xs text-destructive font-bold hover:underline">
-                  {clearLabel}
-                </button>
-              )}
-            </div>
-          )}
-        </div>
-
         {loading ? (
           <div>
             {loadingTimeout && (
