@@ -121,3 +121,26 @@ Last scan (P2 close): 19 `warn` findings, all pre-existing categories (`SUPA_*_s
 ## Reporting cadence
 
 After each phase: publish, run 3 cold-cache mobile Lighthouse runs against https://ostaze.com/, report medians for score, FCP, LCP, TBT, CLS, initial JS, total transfer, request count, plus a diff of modified files. Stop before publish if any guardrail (worse FCP/LCP, waterfall regression, blank content, hydration mismatch, country/price/consent/auth/booking regression) trips.
+
+## Phase 3 — Prerender (PARKED)
+
+**Status:** Local feasibility passed, deployment blocked, code removed.
+
+**Result:** Custom Playwright post-build renderer (`scripts/prerender.mjs`) snapshotted 8 public routes with clean hydration, zero React warnings, valid UTF-8 Arabic, `<meta charset>` in every file, deterministic Arabic default, neutral auth state, zero Supabase requests during snapshot.
+
+**Blocker (not failure):** Chromium is provided by nix in the agent sandbox (`/bin/chromium`) but is **not guaranteed** in Lovable's production build image. Puppeteer's bundled Chromium download is not wired into `npm ci`. Wiring `build → prerender` would either crash every deploy or silently ship empty SPA HTML. Neither is acceptable.
+
+**Decision:** Chose Option C — keep Phase 2 baseline (Perf 93 / LCP 2.21s / TBT 226ms / CLS 0). Do not migrate to Vike or vite-plugin-ssr. Revisit only if Lovable ships an officially supported build-time prerender/SSR capability or guarantees Chromium in the deploy build.
+
+**Removed on park:**
+- `scripts/prerender.mjs`, `src/lib/prerender.ts`, `src/components/PrerenderReadySignal.tsx`
+- `PrerenderReadySignal` mount in `App.tsx`
+- Conditional `hydrateRoot` in `src/main.tsx` (back to `createRoot` only)
+- `IS_PRERENDER` / `__PRERENDER__` branches in `AuthContext`, `CountryGate`, `LanguageContext`, `Teachers.tsx`
+- Deps: `@prerenderer/rollup-plugin`, `@prerenderer/renderer-puppeteer`, `puppeteer`
+- `prerender-report/`
+
+**Preserved for a future retry — approved public-route manifest:**
+`/`, `/teachers`, `/universities`, `/subjects`, `/about`, `/contact`, `/privacy`, `/terms` (plus optional `/categories`, `/faq` — public, no auth).
+
+**Preserved untouched:** P2 bundle work, P2.5 motion polish, deferred widgets, self-hosted fonts, routing/auth/language/country/pricing/SEO behavior, `SECURITY DEFINER` findings.
