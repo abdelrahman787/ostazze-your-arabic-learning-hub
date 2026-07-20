@@ -89,44 +89,8 @@ const Teachers = () => {
     fetchTeachers();
   }, [t]);
 
-  const filterSubjectLower = filterSubject.toLowerCase().trim();
-  const filtered = teachers.filter((tc) => {
-    if (filterUniversity && tc.university !== filterUniversity) return false;
+  const sorted = teachers;
 
-    if (filterSubjectLower) {
-      // Match if any of teacher's subjects (Arabic or English) contains
-      // the requested subject — or vice versa — for fuzzy linking from courses.
-      const allSubjects = [...(tc.subjects || []), ...((tc as any).subjects_en || [])];
-      const matched = allSubjects.some((s) => {
-        const lower = String(s).toLowerCase();
-        return lower.includes(filterSubjectLower) || filterSubjectLower.includes(lower);
-      });
-      if (!matched) return false;
-    }
-    if (filterVerified === "verified" && !tc.verified) return false;
-    if (filterVerified === "unverified" && tc.verified) return false;
-    return true;
-  });
-
-  const sorted = [...filtered].sort((a, b) => {
-    if (sortBy === "name-asc") return (a.full_name || "").localeCompare(b.full_name || "");
-    if (sortBy === "name-desc") return (b.full_name || "").localeCompare(a.full_name || "");
-    return 0;
-  });
-
-  const clearFilters = () => {
-    
-    setFilterSubject("");
-    setFilterVerified("");
-    setSortBy("");
-  };
-
-  const hasActiveFilters = filterUniversity || filterSubject || filterVerified || sortBy;
-
-  const allLabel = lang === "ar" ? "الكل" : "All";
-  const nameAsc = lang === "ar" ? "الاسم (أ-ي)" : "Name (A-Z)";
-  const nameDesc = lang === "ar" ? "الاسم (ي-أ)" : "Name (Z-A)";
-  const clearLabel = lang === "ar" ? "مسح الفلاتر" : "Clear Filters";
 
   return (
     <div>
