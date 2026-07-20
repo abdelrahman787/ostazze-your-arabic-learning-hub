@@ -56,7 +56,10 @@ const HeroOrbit = () => {
     const reduce =
       typeof window !== "undefined" &&
       window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) return;
+    // Under reduced-motion we don't stop entirely — a slow, uniform rotation
+    // is well within the reduced-motion spec (no parallax, no flashing) and
+    // keeps the hero from looking broken.
+    const speedScale = reduce ? 3 : 1;
 
     let frame = 0;
     const tick = (now: number) => {
@@ -68,7 +71,7 @@ const HeroOrbit = () => {
       nodes.forEach((node) => {
         const r = Number(node.dataset.orbitRadius || 0);
         const base = Number(node.dataset.orbitBaseAngle || 0);
-        const dur = Number(node.dataset.orbitDuration || 60);
+        const dur = Number(node.dataset.orbitDuration || 60) * speedScale;
         const angle = base + (((now / 1000) % dur) / dur) * 360;
         const a = Math.round(angle * 10) / 10;
         node.style.transform = tx(r, a);
