@@ -6,13 +6,14 @@ import { useEffect, useState } from "react";
  * first. Used to defer non-critical widgets so they don't inflate TBT
  * or contend for the main thread during the initial render.
  */
-export function useDeferredMount(options?: { timeout?: number; skipIdle?: boolean }): boolean {
+export function useDeferredMount(options?: { timeout?: number; skipIdle?: boolean; onInteraction?: boolean }): boolean {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
     if (ready) return;
     const timeout = options?.timeout ?? 3500;
     const skipIdle = options?.skipIdle ?? false;
+    const onInteraction = options?.onInteraction ?? true;
 
     let done = false;
     const arm = () => {
@@ -29,9 +30,11 @@ export function useDeferredMount(options?: { timeout?: number; skipIdle?: boolea
       "scroll",
       "wheel",
     ];
-    events.forEach((ev) =>
-      window.addEventListener(ev, arm, { once: true, passive: true } as AddEventListenerOptions),
-    );
+    if (onInteraction) {
+      events.forEach((ev) =>
+        window.addEventListener(ev, arm, { once: true, passive: true } as AddEventListenerOptions),
+      );
+    }
 
     let ricId: number | undefined;
     let toId: number | undefined;
@@ -44,13 +47,15 @@ export function useDeferredMount(options?: { timeout?: number; skipIdle?: boolea
     }
 
     function cleanup() {
-      events.forEach((ev) => window.removeEventListener(ev, arm));
+      if (onInteraction) {
+        events.forEach((ev) => window.removeEventListener(ev, arm));
+      }
       if (ricId !== undefined && typeof cic === "function") cic(ricId);
       if (toId !== undefined) window.clearTimeout(toId);
     }
 
     return cleanup;
-  }, [ready, options?.timeout, options?.skipIdle]);
+  }, [ready, options?.timeout, options?.skipIdle, options?.onInteraction]);
 
   return ready;
 }

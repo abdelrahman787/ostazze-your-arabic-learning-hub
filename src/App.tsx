@@ -1,7 +1,7 @@
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { Suspense, lazy } from "react";
+import { Component, ErrorInfo, ReactNode, Suspense, lazy } from "react";
 import { useDeferredMount } from "@/hooks/useDeferredMount";
 import PageTransition from "@/components/PageTransition";
 import { HelmetProvider } from "react-helmet-async";
@@ -72,21 +72,42 @@ const queryClient = new QueryClient({
 
 const RouteFallback = () => <div className="min-h-[40vh]" aria-hidden="true" />;
 
+class NonCriticalBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
+  constructor(props: { children: ReactNode }) {
+    super(props);
+    this.state = { failed: false };
+  }
+
+  static getDerivedStateFromError(): { failed: boolean } {
+    return { failed: true };
+  }
+
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.warn("[OSTAZE] Deferred widget skipped:", error, errorInfo);
+  }
+
+  render() {
+    if (this.state.failed) return null;
+    return this.props.children;
+  }
+}
+
 const DeferredWidgets = () => {
-  // skipIdle + long timeout keeps widget chunks out of the cold-load JS
-  // budget. They mount on first user interaction (scroll/pointer/key) or
-  // after 8s, whichever comes first.
-  const ready = useDeferredMount({ timeout: 8000, skipIdle: true });
+  // Keep non-critical widgets out of the cold-load path and don't trigger
+  // chunk fetches on first tap/scroll, which can cause stale mobile caches to reload.
+  const ready = useDeferredMount({ timeout: 8000, skipIdle: true, onInteraction: false });
   if (!ready) return null;
   return (
-    <Suspense fallback={null}>
-      <Toaster />
-      <Sonner />
-      <FloatingWhatsApp />
-      <AIChatWidget />
-      <CookieConsent />
-      <CountryGate>{null}</CountryGate>
-    </Suspense>
+    <NonCriticalBoundary>
+      <Suspense fallback={null}>
+        <Toaster />
+        <Sonner />
+        <FloatingWhatsApp />
+        <AIChatWidget />
+        <CookieConsent />
+        <CountryGate>{null}</CountryGate>
+      </Suspense>
+    </NonCriticalBoundary>
   );
 };
 
