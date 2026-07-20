@@ -105,20 +105,32 @@ const TeacherCard = ({ teacher, index = 0 }: { teacher: TeacherData; index?: num
         </h3>
 
         {displaySubjects.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 mb-4">
-            {displaySubjects.slice(0, 3).map((s, i) => (
-              <span
-                key={i}
-                className="inline-flex items-center gap-1 rounded-lg bg-muted text-foreground/80 text-[11px] font-semibold px-2 py-1"
-              >
-                <BookOpen size={10} />
-                {s}
+          <div className="mb-4">
+            <div className="flex items-center gap-1.5 mb-2">
+              <BookOpen size={13} className="text-primary" />
+              <span className="text-[11px] font-bold uppercase tracking-wide text-muted-foreground">
+                {lang === "ar" ? "التخصص الرئيسي" : "Main major"}
               </span>
-            ))}
-            {displaySubjects.length > 3 && (
-              <span className="text-[11px] font-semibold text-muted-foreground px-1 py-1">
-                +{displaySubjects.length - 3}
-              </span>
+            </div>
+            <p className="font-bold text-sm text-foreground mb-2 line-clamp-1">
+              {displaySubjects[0]}
+            </p>
+            {displaySubjects.length > 1 && (
+              <div className="flex flex-wrap gap-1.5">
+                {displaySubjects.slice(1, 4).map((s, i) => (
+                  <span
+                    key={i}
+                    className="rounded-lg bg-muted text-foreground/70 text-[11px] font-semibold px-2 py-0.5"
+                  >
+                    {s}
+                  </span>
+                ))}
+                {displaySubjects.length > 4 && (
+                  <span className="text-[11px] font-semibold text-muted-foreground px-1 py-0.5">
+                    +{displaySubjects.length - 4}
+                  </span>
+                )}
+              </div>
             )}
           </div>
         )}
