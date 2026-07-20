@@ -6,6 +6,7 @@ import { Search, SlidersHorizontal, UserX, RefreshCw, Sparkles, Users, Calendar 
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
+import { IS_PRERENDER } from "@/lib/prerender";
 import { Skeleton } from "@/components/ui/skeleton";
 import PageHelmet from "@/components/PageHelmet";
 import PageHeader from "@/components/PageHeader";
