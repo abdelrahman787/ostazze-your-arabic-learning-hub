@@ -18,12 +18,12 @@ const SUBJECTS = [
 // (mobile or prefers-reduced-motion) — fewer travelers → fewer nodes
 // composited per frame on weak devices.
 const ORBITS_FULL = [
-  { radius: 110, duration: 52, count: 3, offset: 0 },
-  { radius: 190, duration: 64, count: 5, offset: 45 },
+  { radius: 110, duration: 38, count: 3, offset: 0 },
+  { radius: 190, duration: 48, count: 5, offset: 45 },
 ];
 const ORBITS_LITE = [
-  { radius: 110, duration: 52, count: 2, offset: 0 },
-  { radius: 190, duration: 64, count: 3, offset: 45 },
+  { radius: 110, duration: 38, count: 2, offset: 0 },
+  { radius: 190, duration: 48, count: 3, offset: 45 },
 ];
 
 const tx = (r: number, deg: number) => {
