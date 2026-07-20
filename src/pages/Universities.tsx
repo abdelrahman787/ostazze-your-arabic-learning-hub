@@ -16,6 +16,7 @@ import flagKW from "@/assets/flag-kw.svg";
 import flagQA from "@/assets/flag-qa.svg";
 import flagSA from "@/assets/flag-sa.svg";
 import flagAE from "@/assets/flag-ae.svg";
+import WhatsAppQuickBook from "@/components/WhatsAppQuickBook";
 
 // Group universities by country
 const getCountries = () => {
@@ -433,6 +434,11 @@ const Universities = () => {
                   {lang === "ar" ? "زيارة موقع الجامعة" : "Visit University Website"}
                 </a>
               </div>
+
+              <WhatsAppQuickBook
+                context={lang === "ar" ? selectedUni.name_ar : selectedUni.name_en}
+                className="mb-8"
+              />
 
               {/* Colleges */}
               <div className="flex items-center justify-between mb-6">

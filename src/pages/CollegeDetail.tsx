@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
 import BookingFlowModal from "@/components/BookingFlowModal";
 import type { TeacherData } from "@/components/TeacherCard";
+import WhatsAppQuickBook from "@/components/WhatsAppQuickBook";
 
 interface DeptProps {
   dept: Department;
@@ -471,6 +472,11 @@ const CollegeDetail = () => {
             ))}
           </div>
         </div>
+
+        <WhatsAppQuickBook
+          context={`${collegeName} — ${uniName}`}
+          className="mb-8"
+        />
 
         {/* Departments */}
         <div className="flex items-center justify-between mb-5">
