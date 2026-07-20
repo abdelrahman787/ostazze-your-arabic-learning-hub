@@ -13,6 +13,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 
 import { getTeacherMajor } from "@/lib/teacherMajors";
+import { getTeacherAvatar } from "@/lib/teacherAvatars";
 
 interface TeacherFull {
   user_id: string;
@@ -268,9 +269,15 @@ const TeacherProfile = () => {
           <div className="lg:col-span-2 space-y-6">
             <div className="card-base p-6">
               <div className="flex gap-5 mb-6">
-                <motion.div whileHover={{ scale: 1.08, rotate: 5 }} className="w-20 h-20 rounded-2xl stats-gradient text-primary-foreground flex items-center justify-center text-2xl font-black shrink-0">
-                  {initials}
-                </motion.div>
+                <motion.img
+                  whileHover={{ scale: 1.05 }}
+                  src={teacher.avatar_url || getTeacherAvatar(teacher.user_id, teacher.full_name)}
+                  alt={displayName}
+                  className="w-20 h-20 rounded-2xl object-cover shadow-md shrink-0"
+                  loading="lazy"
+                  width={80}
+                  height={80}
+                />
                 <div>
                   <div className="flex items-center gap-2 flex-wrap mb-1">
                     <h1 className="text-xl font-black">{displayName}</h1>

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useBilingual } from "@/hooks/useBilingual";
 import { getTeacherMajor } from "@/lib/teacherMajors";
+import { getTeacherAvatar } from "@/lib/teacherAvatars";
 
 export interface TeacherData {
   user_id: string;
@@ -79,19 +80,16 @@ const TeacherCard = ({ teacher, index = 0 }: { teacher: TeacherData; index?: num
       {/* Avatar (overlaps header) */}
       <div className="px-5 -mt-10 flex items-end gap-3">
         <div className="relative shrink-0">
-          {teacher.avatar_url ? (
-            <img
-              src={teacher.avatar_url}
-              alt={displayName}
-              className="w-20 h-20 rounded-2xl object-cover border-4 border-card shadow-md"
-              loading="lazy"
-            />
-          ) : (
-            <div className="w-20 h-20 rounded-2xl border-4 border-card shadow-md bg-gradient-to-br from-primary to-primary/70 text-primary-foreground flex items-center justify-center font-extrabold text-xl">
-              {initials || <GraduationCap size={26} />}
-            </div>
-          )}
+          <img
+            src={teacher.avatar_url || getTeacherAvatar(teacher.user_id, teacher.full_name)}
+            alt={displayName}
+            className="w-20 h-20 rounded-2xl object-cover border-4 border-card shadow-md"
+            loading="lazy"
+            width={80}
+            height={80}
+          />
         </div>
+
       </div>
 
       {/* Body */}
