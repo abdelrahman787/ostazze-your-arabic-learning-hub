@@ -90,16 +90,9 @@ async function buildAppUser(supaUser: SupabaseUser): Promise<AppUser> {
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<AppUser | null>(null);
-  // Neutral prerender/first-render state: not loading, no user.
-  // Real auth discovery begins in an effect after hydration.
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Skip auth entirely during prerender pass — snapshot must be neutral.
-    if (typeof window !== "undefined" && ((window as any).__PRERENDER__ === true ||
-        new URLSearchParams(window.location.search).get("__prerender") === "1")) {
-      return;
-    }
     setLoading(true);
     const {
       data: { subscription },
