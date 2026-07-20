@@ -17,7 +17,7 @@
       "consoleTail": [
         "[log] [OSTAZE] main.tsx loaded",
         "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold CLS: 0.006",
-        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold LCP: 312ms  ✓"
+        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold LCP: 284ms  ✓"
       ],
       "supabaseRequestCount": 0
     },
@@ -38,7 +38,7 @@
       "consoleTail": [
         "[log] [OSTAZE] main.tsx loaded",
         "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold CLS: 0.006",
-        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold LCP: 260ms  ✓"
+        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold LCP: 228ms  ✓"
       ],
       "supabaseRequestCount": 2
     },
@@ -62,7 +62,7 @@
       "consoleTail": [
         "[log] [OSTAZE] main.tsx loaded",
         "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold CLS: 0.006",
-        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold LCP: 424ms  ✓"
+        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold LCP: 452ms  ✓"
       ],
       "supabaseRequestCount": 0
     },
@@ -86,31 +86,28 @@
       "consoleTail": [
         "[log] [OSTAZE] main.tsx loaded",
         "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold CLS: 0.006",
-        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold LCP: 232ms  ✓"
+        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold LCP: 420ms  ✓"
       ],
       "supabaseRequestCount": 0
     },
     {
       "route": "/categories",
       "url": "http://127.0.0.1:5199/categories?__prerender=1",
-      "h1": null,
+      "h1": "التصنيفات الدراسية",
       "meta": {
-        "title": "OSTAZE | منصة أستازي - دروس خصوصية ولايف أونلاين مع أفضل المعلمين",
-        "description": null,
-        "canonical": null,
+        "title": "أقسام المواد - أستازي OSTAZE",
+        "description": "تصفح أقسام المواد الدراسية المتاحة على منصة أستازي — قسم الهندسة، الحاسب، اللغات والمزيد.",
+        "canonical": "https://ostaze.com/categories",
         "lang": "ar",
         "dir": "rtl"
       },
       "errors": [
-        "empty #root",
-        "missing meta description",
-        "missing canonical",
-        "missing H1"
+        "empty #root"
       ],
       "consoleTail": [
         "[log] [OSTAZE] main.tsx loaded",
         "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold CLS: 0.006",
-        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold LCP: 240ms  ✓"
+        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold LCP: 408ms  ✓"
       ],
       "supabaseRequestCount": 0
     },
@@ -131,7 +128,7 @@
       "consoleTail": [
         "[log] [OSTAZE] main.tsx loaded",
         "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold CLS: 0.006",
-        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold LCP: 236ms  ✓"
+        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold LCP: 220ms  ✓"
       ],
       "supabaseRequestCount": 0
     },
@@ -152,7 +149,7 @@
       "consoleTail": [
         "[log] [OSTAZE] main.tsx loaded",
         "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold CLS: 0.006",
-        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold LCP: 312ms  ✓"
+        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold LCP: 232ms  ✓"
       ],
       "supabaseRequestCount": 0
     },
@@ -173,7 +170,7 @@
       "consoleTail": [
         "[log] [OSTAZE] main.tsx loaded",
         "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold CLS: 0.006",
-        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold LCP: 292ms  ✓"
+        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold LCP: 396ms  ✓"
       ],
       "supabaseRequestCount": 0
     }

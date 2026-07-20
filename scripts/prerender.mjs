@@ -102,10 +102,10 @@ function stripMarker(html) {
 
 function validate(routePath, html) {
   const errors = [];
-  const rootMatch = html.match(/<div id="root"[^>]*>([\s\S]*?)<\/div>\s*<script/);
+  // Match #root robustly: allow arbitrary attributes.
+  const rootMatch = html.match(/<div[^>]*id="root"[^>]*>([\s\S]*?)<\/div>\s*<script/i);
   const rootInner = rootMatch ? rootMatch[1] : "";
   if (!rootInner.trim()) errors.push("empty #root");
-  // Detect Suspense fallback only (our RouteFallback is a lone div.min-h-[40vh])
   if (/^\s*<div class="min-h-\[40vh\]"[^>]*><\/div>\s*$/.test(rootInner)) {
     errors.push("root is only Suspense fallback");
   }
