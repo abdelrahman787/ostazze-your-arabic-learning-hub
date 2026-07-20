@@ -71,7 +71,7 @@ const queryClient = new QueryClient({
   },
 });
 
-const RouteFallback = () => <div className="min-h-[40vh]" aria-hidden="true" />;
+const RouteFallback = () => <RouteSkeleton />;
 
 class NonCriticalBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
   constructor(props: { children: ReactNode }) {
