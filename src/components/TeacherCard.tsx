@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Star, GraduationCap, ArrowUpLeft, BadgeCheck, BookOpen } from "lucide-react";
+import { GraduationCap, ArrowUpLeft, BadgeCheck } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useBilingual } from "@/hooks/useBilingual";
@@ -42,14 +42,13 @@ const transliterate = (name: string) => {
 
 const TeacherCard = ({ teacher, index = 0 }: { teacher: TeacherData; index?: number }) => {
   const { t, lang } = useLanguage();
-  const { b, bArr } = useBilingual();
+  const { b } = useBilingual();
 
   const rawName = b(teacher.full_name, teacher.full_name_en, t("the_teacher"));
   const displayName =
     lang === "en" && !teacher.full_name_en && /[\u0600-\u06FF]/.test(rawName)
       ? transliterate(rawName)
       : rawName;
-  const displaySubjects = bArr(teacher.subjects, teacher.subjects_en);
   const initials = displayName
     .split(/\s+/)
     .slice(0, 2)
