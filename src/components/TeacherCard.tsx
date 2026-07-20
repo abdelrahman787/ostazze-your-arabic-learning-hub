@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
-import { GraduationCap, ArrowUpLeft, BadgeCheck } from "lucide-react";
+import { GraduationCap, ArrowUpLeft, BadgeCheck, BookOpen } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useBilingual } from "@/hooks/useBilingual";
+import { getTeacherMajor } from "@/lib/teacherMajors";
 
 export interface TeacherData {
   user_id: string;
@@ -95,9 +96,16 @@ const TeacherCard = ({ teacher, index = 0 }: { teacher: TeacherData; index?: num
 
       {/* Body */}
       <div className="px-5 pt-4 pb-5 flex-1 flex flex-col">
-        <h3 className="font-extrabold text-base leading-tight mb-4 line-clamp-1">
+        <h3 className="font-extrabold text-base leading-tight mb-1 line-clamp-1">
           {displayName}
         </h3>
+        <div className="flex items-center gap-1.5 mb-4 text-primary">
+          <BookOpen size={13} />
+          <span className="text-xs font-semibold">
+            {getTeacherMajor(teacher.user_id, lang === "en" ? "en" : "ar")}
+          </span>
+        </div>
+
 
 
         <div className="mt-auto">
