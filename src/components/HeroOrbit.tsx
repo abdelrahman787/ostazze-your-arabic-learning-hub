@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Calculator, Atom, FlaskConical, Languages, Code, Zap, PenTool, HeartPulse } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import gradCap from "@/assets/hero-3d-cap.webp";
@@ -14,9 +14,16 @@ const SUBJECTS = [
   { key: "subj_anatomy", icon: HeartPulse },
 ];
 
-const ORBITS = [
+// Two orbit configurations: full (desktop, motion OK) and lite
+// (mobile or prefers-reduced-motion) — fewer travelers → fewer nodes
+// composited per frame on weak devices.
+const ORBITS_FULL = [
   { radius: 110, duration: 52, count: 3, offset: 0 },
   { radius: 190, duration: 64, count: 5, offset: 45 },
+];
+const ORBITS_LITE = [
+  { radius: 110, duration: 52, count: 2, offset: 0 },
+  { radius: 190, duration: 64, count: 3, offset: 45 },
 ];
 
 const tx = (r: number, deg: number) => {
@@ -27,6 +34,23 @@ const tx = (r: number, deg: number) => {
 const HeroOrbit = () => {
   const { t } = useLanguage();
   const ref = useRef<HTMLDivElement>(null);
+  const [lite, setLite] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mqMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const mqMobile = window.matchMedia("(max-width: 767px)");
+    const sync = () => setLite(mqMotion.matches || mqMobile.matches);
+    sync();
+    mqMotion.addEventListener?.("change", sync);
+    mqMobile.addEventListener?.("change", sync);
+    return () => {
+      mqMotion.removeEventListener?.("change", sync);
+      mqMobile.removeEventListener?.("change", sync);
+    };
+  }, []);
+
+  const ORBITS = lite ? ORBITS_LITE : ORBITS_FULL;
 
   useEffect(() => {
     const reduce =
@@ -53,7 +77,7 @@ const HeroOrbit = () => {
     };
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, []);
+  }, [lite]);
 
   let idx = 0;
   const items = ORBITS.map((o) => {
