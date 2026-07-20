@@ -270,6 +270,22 @@ const translations = {
   slot_taken: { ar: "هذا الموعد محجوز بالفعل! اختر وقتاً آخر ⚠️", en: "This slot is already booked! Choose another time ⚠️" },
   custom_tag: { ar: "[موعد مخصص]", en: "[Custom appointment]" },
 
+  preferred_time_title: { ar: "متى تفضل أوقات حصصك؟", en: "When do you prefer your session times?" },
+  preferred_time_subtitle: { ar: "حدّد كل الأوقات المناسبة لك. كل ما اخترت أوقات مناسبة أكثر، ساعدتنا نلاقي لك المعلم المناسب بشكل أسرع! (اختياري)", en: "Select all times that work for you. The more times you select, the faster we can find the right teacher for you! (optional)" },
+  preferred_morning: { ar: "فترة الصباح", en: "Morning" },
+  preferred_afternoon: { ar: "فترة الظهيرة", en: "Afternoon" },
+  preferred_evening: { ar: "فترة المساء", en: "Evening" },
+  preferred_morning_time: { ar: "٩ ص-١٢ ظ", en: "9AM-12PM" },
+  preferred_afternoon_time: { ar: "١٢ ظ-٥ م", en: "12PM-5PM" },
+  preferred_evening_time: { ar: "٥ م-٩ م", en: "5PM-9PM" },
+  preferred_slots_label: { ar: "الأوقات المفضلة", en: "Preferred times" },
+  no_preferred_time_selected: { ar: "حدّد يوماً ووقتاً على الأقل", en: "Pick at least one day and time" },
+  request_success_title: { ar: "تم إرسال الطلب بنجاح! ✅", en: "Request sent successfully! ✅" },
+  request_success_message: { ar: "سنتواصل معك قريباً لتأكيد الموعد وتعيين المعلم المناسب.", en: "We'll contact you soon to confirm the appointment and assign the right teacher." },
+  close_btn: { ar: "إغلاق", en: "Close" },
+  my_bookings: { ar: "حجوزاتي", en: "My bookings" },
+
+
   // Booking manager
   no_bookings: { ar: "لا توجد طلبات", en: "No requests" },
   accept_btn: { ar: "قبول", en: "Accept" },
