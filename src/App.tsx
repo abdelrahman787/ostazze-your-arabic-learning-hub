@@ -136,7 +136,6 @@ const App = () => (
                 <BrowserRouter>
                   <ScrollToTop />
                   <GlobalSeo />
-                  <PrerenderReadySignal />
                   <Layout>
                     <PageTransition>
                       <Suspense fallback={<RouteFallback />}>
