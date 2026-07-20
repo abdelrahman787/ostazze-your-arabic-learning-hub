@@ -752,18 +752,28 @@ const LanguageContext = createContext<LanguageContextType>({
 export const useLanguage = () => useContext(LanguageContext);
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [lang, setLang] = useState<Lang>(() => {
-    const saved = localStorage.getItem("ostazze_lang");
-    return (saved as Lang) || "ar";
-  });
+  // Deterministic initial state (Arabic) so prerender + first client render
+  // produce identical HTML. Persisted preference is applied post-hydration.
+  const [lang, setLang] = useState<Lang>("ar");
+  const [hydrated, setHydrated] = useState(false);
 
   const dir = lang === "ar" ? "rtl" : "ltr";
 
   useEffect(() => {
-    localStorage.setItem("ostazze_lang", lang);
+    if (!hydrated) {
+      try {
+        const saved = typeof localStorage !== "undefined" ? localStorage.getItem("ostazze_lang") : null;
+        if (saved === "en" || saved === "ar") {
+          if (saved !== lang) setLang(saved);
+        }
+      } catch { /* ignore */ }
+      setHydrated(true);
+      return;
+    }
+    try { localStorage.setItem("ostazze_lang", lang); } catch { /* ignore */ }
     document.documentElement.setAttribute("dir", dir);
     document.documentElement.setAttribute("lang", lang);
-  }, [lang, dir]);
+  }, [lang, dir, hydrated]);
 
   const toggleLang = useCallback(() => setLang((l) => (l === "ar" ? "en" : "ar")), []);
 

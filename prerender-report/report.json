@@ -1,0 +1,171 @@
+{
+  "routes": [
+    {
+      "route": "/",
+      "url": "http://127.0.0.1:5199/?__prerender=1",
+      "h1": "تعلم مع أفضل الدكاترة الجامعيين",
+      "meta": {
+        "title": "OSTAZE | منصة أستازي - دروس خصوصية ولايف أونلاين مع أفضل المعلمين",
+        "description": "OSTAZE (أستازي) منصة دروس خصوصية ولايف أونلاين تربط الطلاب بأفضل المعلمين الجامعيين في السعودية، الإمارات، الكويت وقطر — حصص مباشرة بالزووم، كورسات مسجلة، وأسعار مدروسة.",
+        "canonical": "https://ostaze.com/",
+        "lang": "ar",
+        "dir": "rtl"
+      },
+      "errors": [],
+      "consoleTail": [
+        "[log] [OSTAZE] main.tsx loaded",
+        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold CLS: 0.006",
+        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold LCP: 328ms  ✓"
+      ],
+      "supabaseRequestCount": 0,
+      "output": "dist/index.html"
+    },
+    {
+      "route": "/teachers",
+      "url": "http://127.0.0.1:5199/teachers?__prerender=1",
+      "h1": "المعلمون",
+      "meta": {
+        "title": "المعلمون - أفضل المعلمين الجامعيين - أستازي OSTAZE",
+        "description": "تصفح أفضل المعلمين الجامعيين على منصة أستازي — معلمون متخصصون بتقييمات حقيقية من الطلاب. احجز حصتك الخصوصية الآن.",
+        "canonical": "https://ostaze.com/teachers",
+        "lang": "ar",
+        "dir": "rtl"
+      },
+      "errors": [],
+      "consoleTail": [
+        "[log] [OSTAZE] main.tsx loaded",
+        "[warn] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold Animation jank likely: 2 long tasks consumed 257ms in the last 3000ms. Consider deferring heavy work, lazy-loading routes, or reducing CSS filters/blurs.",
+        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold LCP: 584ms  ✓"
+      ],
+      "supabaseRequestCount": 2,
+      "output": "dist/teachers/index.html"
+    },
+    {
+      "route": "/subjects",
+      "url": "http://127.0.0.1:5199/subjects?__prerender=1",
+      "h1": "المواد الدراسية",
+      "meta": {
+        "title": "المواد الدراسية - أستازي OSTAZE",
+        "description": "اختر مادتك الدراسية على منصة أستازي — رياضيات، فيزياء، برمجة، لغة إنجليزية، هندسة والمزيد. معلمون متخصصون بتقييمات وأسعار واضحة.",
+        "canonical": "https://ostaze.com/subjects",
+        "lang": "ar",
+        "dir": "rtl"
+      },
+      "errors": [],
+      "consoleTail": [
+        "[log] [OSTAZE] main.tsx loaded",
+        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold CLS: 0.000",
+        "[warn] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold Animation jank likely: 2 long tasks consumed 237ms in the last 3000ms. Consider deferring heavy work, lazy-loading routes, or reducing CSS filters/blurs."
+      ],
+      "supabaseRequestCount": 0,
+      "output": "dist/subjects/index.html"
+    },
+    {
+      "route": "/universities",
+      "url": "http://127.0.0.1:5199/universities?__prerender=1",
+      "h1": "الجامعات",
+      "meta": {
+        "title": "الجامعات - أستازي OSTAZE",
+        "description": "اكتشف الجامعات المدعومة على منصة أستازي — جامعة الكويت، جامعة قطر، والمزيد. معلمون متخصصون لكل جامعة ومنهج.",
+        "canonical": "https://ostaze.com/universities",
+        "lang": "ar",
+        "dir": "rtl"
+      },
+      "errors": [],
+      "consoleTail": [
+        "[log] [OSTAZE] main.tsx loaded",
+        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold CLS: 0.000",
+        "[warn] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold Animation jank likely: 3 long tasks consumed 281ms in the last 3000ms. Consider deferring heavy work, lazy-loading routes, or reducing CSS filters/blurs."
+      ],
+      "supabaseRequestCount": 0,
+      "output": "dist/universities/index.html"
+    },
+    {
+      "route": "/categories",
+      "url": "http://127.0.0.1:5199/categories?__prerender=1",
+      "h1": "التصنيفات الدراسية",
+      "meta": {
+        "title": "أقسام المواد - أستازي OSTAZE",
+        "description": "تصفح أقسام المواد الدراسية المتاحة على منصة أستازي — قسم الهندسة، الحاسب، اللغات والمزيد.",
+        "canonical": "https://ostaze.com/categories",
+        "lang": "ar",
+        "dir": "rtl"
+      },
+      "errors": [],
+      "consoleTail": [
+        "[log] [OSTAZE] main.tsx loaded",
+        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold CLS: 0.000",
+        "[warn] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold Animation jank likely: 3 long tasks consumed 279ms in the last 3000ms. Consider deferring heavy work, lazy-loading routes, or reducing CSS filters/blurs.",
+        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold LCP: 944ms  ✓"
+      ],
+      "supabaseRequestCount": 0,
+      "output": "dist/categories/index.html"
+    },
+    {
+      "route": "/about",
+      "url": "http://127.0.0.1:5199/about?__prerender=1",
+      "h1": "من نحن",
+      "meta": {
+        "title": "من نحن - تعرف على منصة أستازي OSTAZE",
+        "description": "تعرف على منصة أستازي (OSTAZE)، رؤيتنا ومهمتنا في تقديم أفضل تجربة تعليمية أونلاين تربط الطلاب بالمعلمين الجامعيين المتميزين في الكويت وقطر.",
+        "canonical": "https://ostaze.com/about",
+        "lang": "ar",
+        "dir": "rtl"
+      },
+      "errors": [],
+      "consoleTail": [
+        "[log] [OSTAZE] main.tsx loaded",
+        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold CLS: 0.000",
+        "[warn] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold Animation jank likely: 3 long tasks consumed 265ms in the last 3000ms. Consider deferring heavy work, lazy-loading routes, or reducing CSS filters/blurs."
+      ],
+      "supabaseRequestCount": 0,
+      "output": "dist/about/index.html"
+    },
+    {
+      "route": "/contact",
+      "url": "http://127.0.0.1:5199/contact?__prerender=1",
+      "h1": "تواصل معنا",
+      "meta": {
+        "title": "تواصل معنا | OSTAZE",
+        "description": "نحن هنا لمساعدتك. تواصل معنا بأي طريقة تناسبك",
+        "canonical": "https://ostaze.com/contact",
+        "lang": "ar",
+        "dir": "rtl"
+      },
+      "errors": [],
+      "consoleTail": [
+        "[log] [OSTAZE] main.tsx loaded",
+        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold CLS: 0.000",
+        "[warn] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold Animation jank likely: 3 long tasks consumed 252ms in the last 3000ms. Consider deferring heavy work, lazy-loading routes, or reducing CSS filters/blurs."
+      ],
+      "supabaseRequestCount": 0,
+      "output": "dist/contact/index.html"
+    },
+    {
+      "route": "/faq",
+      "url": "http://127.0.0.1:5199/faq?__prerender=1",
+      "h1": "الأسئلة الشائعة",
+      "meta": {
+        "title": "الأسئلة الشائعة | OSTAZE",
+        "description": "إجابات سريعة عن الحجز، الدفع، الاسترداد، والجلسات المباشرة",
+        "canonical": "https://ostaze.com/faq",
+        "lang": "ar",
+        "dir": "rtl"
+      },
+      "errors": [],
+      "consoleTail": [
+        "[log] [OSTAZE] main.tsx loaded",
+        "[warn] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold Animation jank likely: 2 long tasks consumed 246ms in the last 3000ms. Consider deferring heavy work, lazy-loading routes, or reducing CSS filters/blurs.",
+        "[log] %c[OSTAZE/perf] background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold LCP: 584ms  ✓"
+      ],
+      "supabaseRequestCount": 0,
+      "output": "dist/faq/index.html"
+    }
+  ],
+  "summary": {
+    "total": 8,
+    "failed": 0,
+    "passed": 8,
+    "canonicalOrigin": "https://ostaze.com"
+  }
+}
