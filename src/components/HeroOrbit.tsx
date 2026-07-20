@@ -29,15 +29,25 @@ const HeroOrbit = () => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const reduce =
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
+
     let frame = 0;
     const tick = (now: number) => {
+      if (typeof document !== "undefined" && document.hidden) {
+        frame = requestAnimationFrame(tick);
+        return;
+      }
       const nodes = ref.current?.querySelectorAll<HTMLElement>("[data-orbit-traveler]") ?? [];
       nodes.forEach((node) => {
         const r = Number(node.dataset.orbitRadius || 0);
         const base = Number(node.dataset.orbitBaseAngle || 0);
         const dur = Number(node.dataset.orbitDuration || 60);
         const angle = base + (((now / 1000) % dur) / dur) * 360;
-        node.style.transform = tx(r, angle);
+        const a = Math.round(angle * 10) / 10;
+        node.style.transform = tx(r, a);
       });
       frame = requestAnimationFrame(tick);
     };
@@ -82,7 +92,7 @@ const HeroOrbit = () => {
           width={320}
           height={320}
           decoding="async"
-          fetchPriority="high"
+          {...({ fetchpriority: "high" } as any)}
           className="relative w-full h-full object-contain drop-shadow-[0_12px_24px_hsl(14_91%_45%/0.55)]"
         />
       </div>
@@ -107,6 +117,8 @@ const HeroOrbit = () => {
                   height: 56,
                   zIndex: 30,
                   transform: tx(orbit.radius, s.angle),
+                  willChange: "transform",
+                  backfaceVisibility: "hidden",
                 }}
               >
                 <div className="flex flex-col items-center gap-1">
