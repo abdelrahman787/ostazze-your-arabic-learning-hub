@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
+
 import { useSearchParams } from "react-router-dom";
 import TeacherCard from "@/components/TeacherCard";
 import type { TeacherData } from "@/components/TeacherCard";
-import { Search, SlidersHorizontal, UserX, RefreshCw, Sparkles, Users, Calendar } from "lucide-react";
+import { SlidersHorizontal, UserX, RefreshCw, Sparkles, Users, Calendar } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
@@ -34,8 +35,8 @@ const Teachers = () => {
   const [searchParams] = useSearchParams();
   const initialSubject = searchParams.get("subject") || "";
   const courseLabel = searchParams.get("course") || "";
-  const [search, setSearch] = useState(initialSubject);
   const [showFilters, setShowFilters] = useState(!!initialSubject);
+
   const [sortBy, setSortBy] = useState("");
   const [filterUniversity] = useState("");
   const [filterSubject, setFilterSubject] = useState("");
@@ -94,15 +95,10 @@ const Teachers = () => {
     fetchTeachers();
   }, [t]);
 
-  const q = search.toLowerCase();
   const filterSubjectLower = filterSubject.toLowerCase().trim();
   const filtered = teachers.filter((tc) => {
-    if (search && !(
-      tc.full_name.toLowerCase().includes(q) ||
-      tc.subjects.some((s) => s.toLowerCase().includes(q)) ||
-      (tc.university && tc.university.toLowerCase().includes(q))
-    )) return false;
     if (filterUniversity && tc.university !== filterUniversity) return false;
+
     if (filterSubjectLower) {
       // Match if any of teacher's subjects (Arabic or English) contains
       // the requested subject — or vice versa — for fuzzy linking from courses.
