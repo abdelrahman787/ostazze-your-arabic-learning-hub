@@ -14,6 +14,7 @@ import Footer from "@/components/Footer";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import ScrollToTop from "@/components/ScrollToTop";
 import GlobalSeo from "@/components/GlobalSeo";
+import RouteSkeleton from "@/components/RouteSkeleton";
 
 
 const Toaster = lazy(() => import("@/components/ui/toaster").then(m => ({ default: m.Toaster })));
@@ -70,7 +71,7 @@ const queryClient = new QueryClient({
   },
 });
 
-const RouteFallback = () => <div className="min-h-[40vh]" aria-hidden="true" />;
+const RouteFallback = () => <RouteSkeleton />;
 
 class NonCriticalBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
   constructor(props: { children: ReactNode }) {
