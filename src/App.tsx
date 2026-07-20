@@ -63,6 +63,7 @@ const Checkout = lazy(() => import("./pages/Checkout"));
 const FAQ = lazy(() => import("./pages/FAQ"));
 const ZoomTestPage = lazy(() => import("./pages/ZoomTestPage"));
 const MyBookings = lazy(() => import("./pages/MyBookings"));
+const JoinAsTutor = lazy(() => import("./pages/JoinAsTutor"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -195,6 +196,7 @@ const App = () => (
                           <Route path="/faq" element={<FAQ />} />
                           <Route path="/zoom-test" element={<ProtectedRoute><ZoomTestPage /></ProtectedRoute>} />
                           <Route path="/my-bookings" element={<ProtectedRoute><MyBookings /></ProtectedRoute>} />
+                          <Route path="/join-as-tutor" element={<JoinAsTutor />} />
                           <Route path="*" element={<NotFound />} />
                         </Routes>
                       </Suspense>

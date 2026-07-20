@@ -64,6 +64,7 @@ const Navbar = () => {
     { label: t("nav_subjects"), path: "/subjects" },
     { label: t("nav_categories"), path: "/categories" },
     { label: t("nav_teachers"), path: "/teachers" },
+    { label: t("nav_join_tutor"), path: "/join-as-tutor" },
   ];
 
   const dashboardPath = "/dashboard";
