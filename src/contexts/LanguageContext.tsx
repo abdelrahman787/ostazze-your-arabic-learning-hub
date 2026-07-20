@@ -752,8 +752,8 @@ const LanguageContext = createContext<LanguageContextType>({
 export const useLanguage = () => useContext(LanguageContext);
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  // Deterministic initial state (Arabic) so prerender + first client render
-  // produce identical HTML. Persisted preference is applied post-hydration.
+  // Default to Arabic; persisted preference is applied post-hydration to
+  // avoid touching localStorage during initial render.
   const [lang, setLang] = useState<Lang>("ar");
   const [hydrated, setHydrated] = useState(false);
 
