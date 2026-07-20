@@ -125,7 +125,7 @@ const Teachers = () => {
   });
 
   const clearFilters = () => {
-    setFilterUniversity("");
+    
     setFilterSubject("");
     setFilterVerified("");
     setSortBy("");
