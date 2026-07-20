@@ -14,8 +14,8 @@ interface Props {
   teacherId: string;
   teacherName: string;
   subjects: string[];
-  price?: number;
 }
+
 
 type DaySlot = { day: number; slot: "morning" | "afternoon" | "evening" };
 
