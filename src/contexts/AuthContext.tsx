@@ -90,17 +90,22 @@ async function buildAppUser(supaUser: SupabaseUser): Promise<AppUser> {
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<AppUser | null>(null);
-  const [loading, setLoading] = useState(true);
+  // Neutral prerender/first-render state: not loading, no user.
+  // Real auth discovery begins in an effect after hydration.
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // onAuthStateChange fires INITIAL_SESSION immediately on subscribe,
-    // so getSession() is redundant and only causes duplicate DB queries + race conditions.
+    // Skip auth entirely during prerender pass — snapshot must be neutral.
+    if (typeof window !== "undefined" && ((window as any).__PRERENDER__ === true ||
+        new URLSearchParams(window.location.search).get("__prerender") === "1")) {
+      return;
+    }
+    setLoading(true);
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       if (session?.user) {
         const su = session.user;
-        // Set a lightweight user immediately so UI can render without waiting for DB
         setUser({
           id: su.id,
           name: su.user_metadata?.full_name || "",
@@ -108,7 +113,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           role: "student",
           emailVerified: !!su.email_confirmed_at,
         });
-        // Fetch role + profile in background (no await — avoids Supabase deadlocks)
         buildAppUser(su).then((appUser) => setUser(appUser));
       } else {
         setUser(null);

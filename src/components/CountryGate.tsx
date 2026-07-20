@@ -18,6 +18,11 @@ export default function CountryGate({ children }: { children: React.ReactNode })
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
+    // No-op during prerender — snapshot must not depend on personalized state.
+    if (typeof window !== "undefined" && ((window as any).__PRERENDER__ === true ||
+        new URLSearchParams(window.location.search).get("__prerender") === "1")) {
+      return;
+    }
     let cancelled = false;
     if (!isLoggedIn || !user) {
       setCountry(null);
