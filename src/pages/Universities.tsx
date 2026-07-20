@@ -360,11 +360,6 @@ const Universities = () => {
                             <GraduationCap size={22} className="text-primary" />
                           )}
                         </div>
-                        <span className={`text-[0.6rem] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider ${
-                          u.type === "public" ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400" : "bg-amber-500/10 text-amber-600 dark:text-amber-400"
-                        }`}>
-                          {u.type === "public" ? (lang === "ar" ? "حكومية" : "Public") : (lang === "ar" ? "خاصة" : "Private")}
-                        </span>
                       </div>
                       <h3 className="font-bold text-base mb-2 leading-tight group-hover:text-primary transition-colors">
                         {lang === "ar" ? u.name_ar : u.name_en}
@@ -416,11 +411,6 @@ const Universities = () => {
                     <h2 className="font-black text-2xl md:text-3xl leading-tight">{lang === "ar" ? selectedUni.name_ar : selectedUni.name_en}</h2>
                     <div className="flex items-center gap-4 mt-2 flex-wrap">
                       <span className="text-sm text-muted-foreground flex items-center gap-1.5"><Globe size={13} /> {lang === "ar" ? selectedUni.country_ar : selectedUni.country_en}</span>
-                      <span className={`text-xs font-bold px-3 py-1 rounded-full ${
-                        selectedUni.type === "public" ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400" : "bg-amber-500/10 text-amber-600 dark:text-amber-400"
-                      }`}>
-                        {selectedUni.type === "public" ? (lang === "ar" ? "حكومية" : "Public") : (lang === "ar" ? "خاصة" : "Private")}
-                      </span>
                     </div>
                   </div>
                 </div>

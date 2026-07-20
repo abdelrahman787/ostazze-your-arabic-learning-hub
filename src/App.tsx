@@ -11,10 +11,12 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import WhatsAppTutorBanner from "@/components/WhatsAppTutorBanner";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import ScrollToTop from "@/components/ScrollToTop";
 import GlobalSeo from "@/components/GlobalSeo";
 import RouteSkeleton from "@/components/RouteSkeleton";
+
 
 
 const Toaster = lazy(() => import("@/components/ui/toaster").then(m => ({ default: m.Toaster })));
@@ -140,7 +142,12 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       >
         {children}
       </main>
-      {!hideFooter && <Footer />}
+      {!hideFooter && (
+        <>
+          <WhatsAppTutorBanner />
+          <Footer />
+        </>
+      )}
       <DeferredWidgets />
     </div>
   );
