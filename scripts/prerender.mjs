@@ -30,14 +30,19 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DIST = path.resolve(__dirname, "..", "dist");
 const OUT_LOG = path.resolve(__dirname, "..", "prerender-report");
 
+// Canonical public-route manifest — approved list + valid extras.
+// Approved: /, /teachers, /universities, /subjects, /about, /contact, /privacy, /terms
+// Extras (public, safe, no auth): /categories, /faq
 const ROUTES = [
   "/",
   "/teachers",
-  "/subjects",
   "/universities",
-  "/categories",
+  "/subjects",
   "/about",
   "/contact",
+  "/privacy",
+  "/terms",
+  "/categories",
   "/faq",
 ];
 

@@ -6,6 +6,7 @@ import { Search, SlidersHorizontal, UserX, RefreshCw, Sparkles, Users, Calendar 
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
+import { IS_PRERENDER } from "@/lib/prerender";
 import { Skeleton } from "@/components/ui/skeleton";
 import PageHelmet from "@/components/PageHelmet";
 import PageHeader from "@/components/PageHeader";
@@ -55,6 +56,14 @@ const Teachers = () => {
   }, [loading]);
 
   useEffect(() => {
+    // Prerender guardrail: emit a deterministic empty shell (H1 + filters +
+    // SEO metadata already rendered in JSX). Live teacher data fetches only
+    // after hydration, so the snapshot makes zero Supabase requests and the
+    // client makes exactly one round-trip after mount.
+    if (IS_PRERENDER) {
+      setLoading(false);
+      return;
+    }
     const fetchTeachers = async () => {
       setLoading(true);
       setLoadingTimeout(false);
