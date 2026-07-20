@@ -24,7 +24,7 @@ import { promises as fs } from "node:fs";
 import path from "node:path";
 import http from "node:http";
 import { fileURLToPath } from "node:url";
-import { chromium } from "playwright";
+import puppeteer from "puppeteer";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DIST = path.resolve(__dirname, "..", "dist");
@@ -138,25 +138,26 @@ async function main() {
   const server = await serveDist(port);
   console.log(`[prerender] serving dist on http://127.0.0.1:${port}`);
 
-  const browser = await chromium.launch({ headless: true });
-  const context = await browser.newContext({ viewport: { width: 1280, height: 900 } });
+  const browser = await puppeteer.launch({
+    headless: true,
+    executablePath: "/bin/chromium",
+    args: ["--no-sandbox", "--disable-dev-shm-usage"],
+  });
 
   const report = { routes: [], summary: {} };
   let failed = 0;
 
   for (const routePath of ROUTES) {
-    const page = await context.newPage();
+    const page = await browser.newPage();
+    await page.setViewport({ width: 1280, height: 900 });
     const consoleMsgs = [];
     const supabaseReqs = [];
-    let authSubscribeCount = 0;
     page.on("console", (m) => consoleMsgs.push(`[${m.type()}] ${m.text()}`));
     page.on("request", (r) => {
       if (r.url().includes("supabase.co")) supabaseReqs.push(r.url());
     });
-    // Inject a hook to detect auth.onAuthStateChange subscriptions.
-    await page.addInitScript(() => {
+    await page.evaluateOnNewDocument(() => {
       window.__PRERENDER__ = true;
-      window.__AUTH_SUBSCRIBE_COUNT__ = 0;
     });
 
     const url = `http://127.0.0.1:${port}${routePath}?__prerender=1`;
