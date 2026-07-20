@@ -11,7 +11,7 @@ import PageHelmet from "@/components/PageHelmet";
 import { personJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
-import UniversityDetails from "@/components/UniversityDetails";
+
 import { getTeacherMajor } from "@/lib/teacherMajors";
 
 interface TeacherFull {
