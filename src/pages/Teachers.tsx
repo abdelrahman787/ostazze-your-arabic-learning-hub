@@ -37,7 +37,7 @@ const Teachers = () => {
   const [search, setSearch] = useState(initialSubject);
   const [showFilters, setShowFilters] = useState(!!initialSubject);
   const [sortBy, setSortBy] = useState("");
-  const [filterUniversity, setFilterUniversity] = useState("");
+  const [filterUniversity] = useState("");
   const [filterSubject, setFilterSubject] = useState("");
   const [filterVerified, setFilterVerified] = useState("");
   const [teachers, setTeachers] = useState<TeacherData[]>([]);
@@ -125,7 +125,7 @@ const Teachers = () => {
   });
 
   const clearFilters = () => {
-    setFilterUniversity("");
+    
     setFilterSubject("");
     setFilterVerified("");
     setSortBy("");
@@ -201,7 +201,7 @@ const Teachers = () => {
             <div className="flex-1 relative">
               <Search size={18} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
               <input value={search} onChange={(e) => setSearch(e.target.value)}
-                placeholder={lang === "ar" ? "ابحث بالاسم، المادة، أو الجامعة..." : "Search by name, subject, or university..."}
+                placeholder={lang === "ar" ? "ابحث بالاسم أو المادة..." : "Search by name or subject..."}
                 className="input-base !pr-10" />
             </div>
             <button onClick={() => setShowFilters(!showFilters)} className="btn-outline !py-2 flex items-center gap-2">
@@ -214,10 +214,6 @@ const Teachers = () => {
           {showFilters && (
             <div className="mt-4 animate-fade-in space-y-3">
               <div className="flex flex-wrap gap-3">
-                <select className="input-base !w-auto" value={filterUniversity} onChange={(e) => setFilterUniversity(e.target.value)}>
-                  <option value="">{t("th_university")} - {allLabel}</option>
-                  {universities.map((u) => <option key={u} value={u}>{u}</option>)}
-                </select>
                 <select className="input-base !w-auto" value={filterSubject} onChange={(e) => setFilterSubject(e.target.value)}>
                   <option value="">{t("th_subject")} - {allLabel}</option>
                   {subjects.map((s) => <option key={s} value={s}>{s}</option>)}

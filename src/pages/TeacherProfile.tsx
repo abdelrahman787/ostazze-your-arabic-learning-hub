@@ -11,8 +11,8 @@ import PageHelmet from "@/components/PageHelmet";
 import { personJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
-import UniversityDetails from "@/components/UniversityDetails";
-import { findUniversityByName } from "@/data/universitiesData";
+
+import { getTeacherMajor } from "@/lib/teacherMajors";
 
 interface TeacherFull {
   user_id: string;
@@ -229,24 +229,23 @@ const TeacherProfile = () => {
   }
 
   const displayName = b(teacher.full_name, teacher.full_name_en, t("the_teacher"));
-  const displayUni = b(teacher.university, teacher.university_en);
   const displayBio = b(teacher.bio, teacher.bio_en);
   const displaySubjects = bArr(teacher.subjects, teacher.subjects_en);
   const initials = displayName.split(" ").map((w) => w[0]).join("").slice(0, 2);
-  const universityData = findUniversityByName(teacher.university) || findUniversityByName(teacher.university_en);
+  const displayMajor = getTeacherMajor(teacher.user_id, lang === "en" ? "en" : "ar");
 
   return (
     <div>
       <PageHelmet
         title={displayName}
-        description={(displayBio || `${displayName} — ${displayUni || ""}`).slice(0, 160)}
+        description={(displayBio || `${displayName} — ${displayMajor}`).slice(0, 160)}
         ogType="profile"
         jsonLd={[
           personJsonLd({
             id: teacher.user_id,
             name: displayName,
             jobTitle: lang === "ar" ? "معلم" : "Tutor",
-            university: displayUni,
+            university: undefined,
             subjects: displaySubjects,
           }),
           breadcrumbJsonLd([
@@ -277,14 +276,13 @@ const TeacherProfile = () => {
                     <h1 className="text-xl font-black">{displayName}</h1>
                     {teacher.verified && <span className="text-xs bg-success/10 text-success px-2.5 py-1 rounded-full font-semibold">{t("teacher_verified")}</span>}
                   </div>
-                  {displayUni && (
-                    <div className="inline-flex items-center gap-1.5 mt-2 text-xs bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 px-3 py-1 rounded-full">
-                      <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}><BookOpen size={12} /></motion.div>
-                      {displayUni}
-                    </div>
-                  )}
+                  <div className="inline-flex items-center gap-1.5 mt-2 text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">
+                    <BookOpen size={12} />
+                    {displayMajor}
+                  </div>
                 </div>
               </div>
+
 
               {displayBio && <p className="text-muted-foreground leading-relaxed mb-6">{displayBio}</p>}
 
@@ -329,7 +327,7 @@ const TeacherProfile = () => {
           </div>
 
           <div className="space-y-6">
-            {universityData && <UniversityDetails university={universityData} />}
+
             <div className="card-base p-6">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="font-extrabold text-lg">{t("teacher_reviews")}</h3>
