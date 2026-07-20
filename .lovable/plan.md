@@ -144,3 +144,19 @@ After each phase: publish, run 3 cold-cache mobile Lighthouse runs against https
 `/`, `/teachers`, `/universities`, `/subjects`, `/about`, `/contact`, `/privacy`, `/terms` (plus optional `/categories`, `/faq` — public, no auth).
 
 **Preserved untouched:** P2 bundle work, P2.5 motion polish, deferred widgets, self-hosted fonts, routing/auth/language/country/pricing/SEO behavior, `SECURITY DEFINER` findings.
+
+## Phase 4/5/6/7 — Final performance batch (COMPLETED)
+
+**Shipped in one final pass:**
+
+- **P4 Images:** Converted 4 remaining large PNGs to WebP with transparency preserved.
+  - `noura-al-shammari.png` 376 KB → WebP 37.7 KB
+  - `abdullah-al-malki.png` 179 KB → WebP 11.7 KB
+  - `faisal-al-dosari.png` 100 KB → WebP 6.6 KB
+  - `university-logos-grid.png` 263 KB → WebP 58.2 KB (+ 960w variant 21 KB) with `<picture>` responsive `srcset`, explicit `width`/`height`, `loading="lazy"`, `decoding="async"`.
+  - Obsolete PNG asset pointers deleted via `lovable-assets delete`.
+- **P6 Budgets:** Added `scripts/perf-budget.mjs` and `npm run perf:budget` / `build:check`. Enforces initial JS ≤ 195 KB gz, CSS ≤ 25 KB gz, fonts ≤ 100 KB / ≤ 2 requests, total ≤ 400 KB, no Google Fonts, `framer-motion` not in initial graph. Lighthouse remains a documented manual step (Chromium not guaranteed by hosting).
+- **P5 Hosting:** `docs/HOSTING_RECOMMENDATIONS.md` documents Lovable gzip-only, `_headers` inert-for-fonts, no HTML edge cache control, prerender infeasibility, and formal asks (Brotli, immutable hashed-asset caching, safe public-HTML caching + deploy purge, TTFB targets).
+- **Security:** `docs/SECURITY_FINDINGS_REPORT.md` enumerates the 19 pre-existing SECURITY DEFINER / search-path findings with the standard `SET search_path = public, pg_temp` + minimum-grants remediation template. No DB changes; approval-gated follow-up.
+
+**Untouched:** auth, Supabase init, React Query, Helmet, checkout, booking, payments, RLS/grants, SECURITY DEFINER behavior, prices, country logic, motion polish, self-hosted fonts.
