@@ -74,7 +74,7 @@ serve(async (req) => {
         email: "dr.layla.abdullah@ostazze.com",
         password: "Teacher@2025",
         full_name: "د. ليلى عبدالله الكندري",
-        full_name_en: "Dr. Layla Abdullah Al-Kandari",
+        full_name_en: "Dr. Abdullah Al-Kandari",
         bio: "دكتوراه في الأدب الإنجليزي، متخصصة في تدريس اللغة والكتابة الأكاديمية",
         bio_en: "PhD in English Literature, specialized in language and academic writing",
         university: "جامعة الكويت",
