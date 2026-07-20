@@ -13,7 +13,8 @@ const translations = {
   nav_my_courses: { ar: "كورساتي", en: "My Courses" },
   nav_login: { ar: "تسجيل الدخول", en: "Login" },
   nav_register: { ar: "إنشاء حساب", en: "Register" },
-  nav_dashboard: { ar: "لوحة التحكم", en: "Dashboard" },
+ nav_dashboard: { ar: "لوحة التحكم", en: "Dashboard" },
+ nav_join_tutor: { ar: "انضم كمعلم", en: "Join as Tutor" },
   nav_logout: { ar: "تسجيل الخروج", en: "Logout" },
 
   // Hero
