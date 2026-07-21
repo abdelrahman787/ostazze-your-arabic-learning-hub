@@ -66,7 +66,6 @@ export default function Checkout() {
 
   const display = getDisplayPrice(country);
   const egpAmount = getCheckoutAmountEGP(country);
-  const amountInCents = Math.round(egpAmount * 100);
 
   return (
     <div className="min-h-screen pt-page pb-12 bg-gradient-to-b from-background to-secondary/30">
@@ -131,8 +130,7 @@ export default function Checkout() {
               </div>
             ) : (
               <StripeEmbeddedCheckout
-                amountInCents={amountInCents}
-                currency="egp"
+                country={country}
                 teacherName={state.teacherName}
                 subject={state.subject}
                 customerEmail={user?.email || undefined}
