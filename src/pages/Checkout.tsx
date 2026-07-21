@@ -65,6 +65,7 @@ export default function Checkout() {
   }
 
   const display = getDisplayPrice(country);
+  const egpAmount = getCheckoutAmountEGP(country);
 
   return (
     <div className="min-h-screen pt-page pb-12 bg-gradient-to-b from-background to-secondary/30">
