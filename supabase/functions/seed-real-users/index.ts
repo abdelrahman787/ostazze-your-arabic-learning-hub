@@ -11,6 +11,16 @@ serve(async (req) => {
     return new Response("ok", { headers: corsHeaders });
   }
 
+  // Require the admin bootstrap secret so this endpoint isn't world-callable.
+  const provided = req.headers.get("x-admin-secret") ?? "";
+  const expected = Deno.env.get("ADMIN_BOOTSTRAP_SECRET") ?? "";
+  if (!expected || provided !== expected) {
+    return new Response(JSON.stringify({ error: "Unauthorized" }), {
+      status: 401,
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
+  }
+
   try {
     const supabaseAdmin = createClient(
       Deno.env.get("SUPABASE_URL")!,
