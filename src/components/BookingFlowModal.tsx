@@ -41,6 +41,17 @@ const BookingFlowModal = ({ open, onClose, subject, courseLabel, teachers }: Pro
   const [showCheckout, setShowCheckout] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [sessionRequestId, setSessionRequestId] = useState<string | null>(null);
+  const [country, setCountry] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!user) return;
+    supabase
+      .from("profiles")
+      .select("country")
+      .eq("user_id", user.id)
+      .maybeSingle()
+      .then(({ data }) => setCountry((data?.country as string) ?? "EG"));
+  }, [user]);
 
   useEffect(() => {
     if (!open) {
