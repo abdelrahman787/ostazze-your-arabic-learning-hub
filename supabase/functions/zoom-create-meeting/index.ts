@@ -78,6 +78,29 @@ serve(async (req) => {
       );
     }
 
+    // Restrict meeting creation to admins/teachers only.
+    const userId = claimsData.claims.sub as string;
+    const admin = createClient(
+      Deno.env.get("SUPABASE_URL")!,
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+    );
+    const { data: roles } = await admin
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", userId);
+    const allowed = (roles ?? []).some((r) =>
+      r.role === "admin" || r.role === "teacher"
+    );
+    if (!allowed) {
+      return new Response(
+        JSON.stringify({ success: false, error: "Forbidden" }),
+        {
+          status: 403,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        },
+      );
+    }
+
     // 2) Parse body
     let body: Record<string, unknown> = {};
     if (req.method === "POST") {
