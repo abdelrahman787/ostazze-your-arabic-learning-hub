@@ -233,7 +233,7 @@ const BookingFlowModal = ({ open, onClose, subject, courseLabel, teachers }: Pro
               </div>
             ) : showCheckout && sessionRequestId ? (
               <StripeEmbeddedCheckout
-                amountInCents={amountInCents}
+                country={country}
                 teacherName={headerTeacherName}
                 subject={subject}
                 customerEmail={user?.email || undefined}
