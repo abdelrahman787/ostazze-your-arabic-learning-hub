@@ -130,8 +130,7 @@ export default function Checkout() {
               </div>
             ) : (
               <StripeEmbeddedCheckout
-                amountInCents={amountInCents}
-                currency="egp"
+                country={country}
                 teacherName={state.teacherName}
                 subject={state.subject}
                 customerEmail={user?.email || undefined}
