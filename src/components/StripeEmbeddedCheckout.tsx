@@ -3,8 +3,7 @@ import { getStripe, getStripeEnvironment } from "@/lib/stripe";
 import { supabase } from "@/integrations/supabase/client";
 
 interface StripeEmbeddedCheckoutProps {
-  amountInCents: number;
-  currency?: string; // ISO 4217, e.g. "egp", "usd"
+  country?: string | null; // "EG" | "QA" | "KW" — server computes the amount from this
   teacherName?: string;
   subject?: string;
   customerEmail?: string;
@@ -13,8 +12,7 @@ interface StripeEmbeddedCheckoutProps {
 }
 
 export function StripeEmbeddedCheckout({
-  amountInCents,
-  currency = "egp",
+  country,
   teacherName,
   subject,
   customerEmail,
@@ -23,7 +21,7 @@ export function StripeEmbeddedCheckout({
 }: StripeEmbeddedCheckoutProps) {
   const fetchClientSecret = async (): Promise<string> => {
     const { data, error } = await supabase.functions.invoke("create-checkout", {
-      body: { amountInCents, currency, teacherName, subject, customerEmail, userId, returnUrl, environment: getStripeEnvironment() },
+      body: { country, teacherName, subject, customerEmail, userId, returnUrl, environment: getStripeEnvironment() },
     });
     if (error || !data?.clientSecret) {
       throw new Error(error?.message || "Failed to create checkout session");
