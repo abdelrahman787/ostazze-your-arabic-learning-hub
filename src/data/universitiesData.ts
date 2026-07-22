@@ -11,6 +11,12 @@ import logoWCMQ from "@/assets/unis/weill-cornell-qatar-new.jpg.asset.json";
 import logoKSUAsset from "@/assets/unis/king-saud.webp.asset.json";
 const logoKSU = logoKSUAsset.url;
 import logoTAMUQ from "@/assets/unis/tamu-qatar.png.asset.json";
+import logoKU from "@/assets/unis/ku.png.asset.json";
+import logoAUK from "@/assets/unis/auk.png.asset.json";
+import logoAU from "@/assets/unis/ack.webp.asset.json";
+import logoAOU from "@/assets/unis/aou.png.asset.json";
+import logoAUM from "@/assets/unis/aum.png.asset.json";
+import logoGUST from "@/assets/unis/gust.png.asset.json";
 
 export interface Course {
   code: string;
