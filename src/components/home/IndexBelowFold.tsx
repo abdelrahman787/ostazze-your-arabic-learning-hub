@@ -199,41 +199,65 @@ const IndexBelowFold = () => {
         </div>
       </section>
 
-      {/* Why Choose Us */}
-      <section className="py-20 md:py-24">
-        <div className="container">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-            <h2 className="text-3xl font-extrabold mb-2">{t("why_title")}</h2>
-            <p className="text-muted-foreground">{t("why_subtitle")}</p>
-          </motion.div>
-          <motion.div
-            className="grid md:grid-cols-3 gap-5"
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.15 }}
-            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.22, delayChildren: 0.1 } } }}
-          >
-            {[
-              { icon: GraduationCap, title: t("why_teachers"), desc: t("why_teachers_desc"), active: true },
-              { icon: CalendarCheck, title: t("why_schedule"), desc: t("why_schedule_desc"), active: false },
-              { icon: Video, title: t("why_remote"), desc: t("why_remote_desc"), active: false },
-            ].map((step, i) => (
-              <motion.div
-                key={step.title}
-                variants={{
-                  hidden: { opacity: 0, y: 40, scale: 0.92 },
-                  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
-                }}
-                className={`feature-card ${i === 0 ? "card-active" : ""}`}
-              >
-                <div className="icon-box-lg bg-primary/10 text-primary mx-auto mb-4">
-                  <step.icon size={24} />
-                </div>
-                <h3 className={`font-bold text-lg mb-2 ${i === 0 ? "text-primary" : ""}`}>{step.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">{step.desc}</p>
-              </motion.div>
-            ))}
-          </motion.div>
+      {/* Why Choose Us — Editorial sticky flow */}
+      <section className="py-20 md:py-28">
+        <div className="container max-w-6xl">
+          <div className="flex flex-col md:flex-row gap-10 md:gap-16 items-start">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="md:w-1/3 md:sticky md:top-28"
+            >
+              <span className="text-primary font-bold tracking-[0.25em] uppercase text-xs mb-4 block">
+                {lang === "ar" ? "المميزات" : "FEATURES"}
+              </span>
+              <h2 className="text-4xl md:text-5xl font-extrabold leading-tight text-foreground">
+                {t("why_title")}
+              </h2>
+              <p className="mt-5 text-muted-foreground leading-relaxed max-w-sm">
+                {t("why_subtitle")}
+              </p>
+            </motion.div>
+
+            <motion.div
+              className="md:w-2/3 grid grid-cols-1 gap-10 md:gap-14 md:border-s md:ps-10 md:border-border/60"
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.15 }}
+              variants={{ hidden: {}, show: { transition: { staggerChildren: 0.18, delayChildren: 0.1 } } }}
+            >
+              {[
+                { n: "01", icon: GraduationCap, title: t("why_teachers"), desc: t("why_teachers_desc") },
+                { n: "02", icon: CalendarCheck, title: t("why_schedule"), desc: t("why_schedule_desc") },
+                { n: "03", icon: Video, title: t("why_remote"), desc: t("why_remote_desc") },
+              ].map((step) => (
+                <motion.div
+                  key={step.n}
+                  variants={{
+                    hidden: { opacity: 0, y: 30 },
+                    show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+                  }}
+                  className="relative group"
+                >
+                  <span
+                    className="absolute -top-4 end-0 text-[5rem] md:text-[6rem] leading-none font-black text-primary/10 group-hover:text-primary/25 transition-colors select-none pointer-events-none"
+                    style={{ fontFamily: "Inter, sans-serif" }}
+                    aria-hidden="true"
+                  >
+                    {step.n}
+                  </span>
+                  <div className="relative">
+                    <div className="icon-box-lg bg-primary/10 text-primary mb-4">
+                      <step.icon size={22} />
+                    </div>
+                    <h3 className="text-xl md:text-2xl font-extrabold mb-3 text-foreground">{step.title}</h3>
+                    <p className="text-muted-foreground leading-relaxed max-w-md">{step.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -253,115 +277,61 @@ const IndexBelowFold = () => {
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="relative rounded-[2.5rem] overflow-hidden border shadow-2xl"
-            style={{
-              borderColor: "hsl(var(--border))",
-              background: "hsl(var(--card))",
-            }}
+            style={{ borderColor: "hsl(var(--border))", background: "hsl(var(--card))" }}
           >
             <div className="grid lg:grid-cols-12">
-              {/* Left: Dark stats panel */}
               <div
                 className="lg:col-span-5 relative overflow-hidden p-8 lg:p-14 flex flex-col justify-center text-white"
-                style={{
-                  background:
-                    "linear-gradient(160deg, hsl(222 47% 11%) 0%, hsl(222 47% 8%) 100%)",
-                }}
+                style={{ background: "linear-gradient(160deg, hsl(222 47% 11%) 0%, hsl(222 47% 8%) 100%)" }}
               >
-                <div
-                  className="absolute top-0 end-0 w-56 h-56 rounded-full blur-3xl pointer-events-none"
-                  style={{ background: "hsl(14 91% 50% / 0.18)", transform: "translate(30%, -30%)" }}
-                  aria-hidden="true"
-                />
-                <div
-                  className="absolute bottom-0 start-0 w-48 h-48 rounded-full blur-3xl pointer-events-none"
-                  style={{ background: "hsl(38 92% 55% / 0.10)", transform: "translate(-30%, 30%)" }}
-                  aria-hidden="true"
-                />
-
+                <div className="absolute top-0 end-0 w-56 h-56 rounded-full blur-3xl pointer-events-none"
+                  style={{ background: "hsl(14 91% 50% / 0.18)", transform: "translate(30%, -30%)" }} aria-hidden="true" />
+                <div className="absolute bottom-0 start-0 w-48 h-48 rounded-full blur-3xl pointer-events-none"
+                  style={{ background: "hsl(38 92% 55% / 0.10)", transform: "translate(-30%, 30%)" }} aria-hidden="true" />
                 <div className="relative z-10">
                   <span className="inline-block px-4 py-1.5 rounded-full border border-white/15 text-white/70 text-[11px] font-semibold mb-8 uppercase tracking-[0.2em]">
                     {lang === "ar" ? "تميّز أكاديمي" : "Education Excellence"}
                   </span>
-
                   <div className="space-y-7">
                     <div className="flex items-start gap-5 group">
-                      <div
-                        className="text-5xl font-black leading-none transition-transform group-hover:scale-110 duration-300"
-                        style={{ color: "hsl(14 91% 55%)" }}
-                      >
-                        12k+
-                      </div>
+                      <div className="text-5xl font-black leading-none transition-transform group-hover:scale-110 duration-300" style={{ color: "hsl(14 91% 55%)" }}>12k+</div>
                       <div>
-                        <h4 className="text-lg font-bold mb-1">
-                          {lang === "ar" ? "طالب نشط" : "Active students"}
-                        </h4>
-                        <p className="text-white/55 text-sm leading-relaxed">
-                          {lang === "ar"
-                            ? "طلاب من الخليج يبنون مستقبلهم معنا"
-                            : "GCC students building their future with us"}
-                        </p>
+                        <h4 className="text-lg font-bold mb-1">{lang === "ar" ? "طالب نشط" : "Active students"}</h4>
+                        <p className="text-white/55 text-sm leading-relaxed">{lang === "ar" ? "طلاب من الخليج يبنون مستقبلهم معنا" : "GCC students building their future with us"}</p>
                       </div>
                     </div>
-
                     <div className="h-px bg-white/10 w-full" />
-
                     <div className="flex items-start gap-5 group">
-                      <div
-                        className="text-5xl font-black leading-none transition-transform group-hover:scale-110 duration-300"
-                        style={{ color: "hsl(14 91% 55%)" }}
-                      >
-                        98%
-                      </div>
+                      <div className="text-5xl font-black leading-none transition-transform group-hover:scale-110 duration-300" style={{ color: "hsl(14 91% 55%)" }}>98%</div>
                       <div>
-                        <h4 className="text-lg font-bold mb-1">
-                          {lang === "ar" ? "نسبة الرضا" : "Satisfaction rate"}
-                        </h4>
-                        <p className="text-white/55 text-sm leading-relaxed">
-                          {lang === "ar"
-                            ? "أعلى معدل نجاح ورضا للطلاب"
-                            : "Highest satisfaction rate in student success"}
-                        </p>
+                        <h4 className="text-lg font-bold mb-1">{lang === "ar" ? "نسبة الرضا" : "Satisfaction rate"}</h4>
+                        <p className="text-white/55 text-sm leading-relaxed">{lang === "ar" ? "أعلى معدل نجاح ورضا للطلاب" : "Highest satisfaction rate in student success"}</p>
                       </div>
                     </div>
                   </div>
-
                   <div className="mt-10 flex items-center gap-3 text-sm text-white/60">
                     <div className="flex -space-x-2 rtl:space-x-reverse">
                       <div className="w-8 h-8 rounded-full border-2 border-slate-900 bg-slate-600" />
                       <div className="w-8 h-8 rounded-full border-2 border-slate-900 bg-slate-500" />
                       <div className="w-8 h-8 rounded-full border-2 border-slate-900 bg-slate-400" />
                     </div>
-                    <span>
-                      {lang === "ar"
-                        ? "انضم إلى آلاف الطلاب الذين يتعلمون مع أفضل المعلمين في استاذي"
-                        : "Join thousands of top students today"}
-                    </span>
+                    <span>{lang === "ar" ? "انضم إلى آلاف الطلاب الذين يتعلمون مع أفضل المعلمين في استاذي" : "Join thousands of top students today"}</span>
                   </div>
                 </div>
               </div>
 
-              {/* Right: Headline + logos */}
               <div className="lg:col-span-7 p-8 lg:p-14 flex flex-col justify-center">
                 <div className="mb-10">
                   <h2 className="text-3xl lg:text-4xl font-black text-foreground leading-tight mb-4">
                     {lang === "ar" ? "طلابنا ملتحقون " : "Our students study at "}
-                    <span
-                      className="bg-clip-text text-transparent"
-                      style={{
-                        backgroundImage:
-                          "linear-gradient(90deg, hsl(var(--primary)), hsl(38 92% 55%))",
-                      }}
-                    >
+                    <span className="bg-clip-text text-transparent" style={{ backgroundImage: "linear-gradient(90deg, hsl(var(--primary)), hsl(38 92% 55%))" }}>
                       {lang === "ar" ? "بأعرق الجامعات" : "top-tier universities"}
                     </span>
                   </h2>
                   <p className="text-muted-foreground max-w-xl leading-relaxed text-sm md:text-base">
-                    {lang === "ar"
-                      ? "طلابنا مقبولون في أعرق المؤسسات الأكاديمية في السعودية، الإمارات، الكويت وقطر."
-                      : "Our students are accepted at the most prestigious academic institutions across KSA, UAE, Kuwait and Qatar."}
+                    {lang === "ar" ? "طلابنا مقبولون في أعرق المؤسسات الأكاديمية في السعودية، الإمارات، الكويت وقطر." : "Our students are accepted at the most prestigious academic institutions across KSA, UAE, Kuwait and Qatar."}
                   </p>
                 </div>
-
                 <div className="grid grid-cols-3 gap-4 md:gap-6">
                   {[
                     { src: uniKsu.url, alt: "King Saud University" },
@@ -371,108 +341,124 @@ const IndexBelowFold = () => {
                     { src: uniQatar.url, alt: "Qatar University" },
                     { src: uniHbku.url, alt: "HBKU" },
                   ].map((u) => (
-                    <div
-                      key={u.alt}
-                      className="h-16 md:h-20 rounded-xl border border-border/60 bg-background/60 flex items-center justify-center p-3 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-all duration-500"
-                    >
-                      <img
-                        src={u.src}
-                        alt={u.alt}
-                        loading="lazy"
-                        decoding="async"
-                        className="max-h-full max-w-full object-contain"
-                      />
+                    <div key={u.alt} className="h-16 md:h-20 rounded-xl border border-border/60 bg-background/60 flex items-center justify-center p-3 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-all duration-500">
+                      <img src={u.src} alt={u.alt} loading="lazy" decoding="async" className="max-h-full max-w-full object-contain" />
                     </div>
                   ))}
                 </div>
-
-                <div className="mt-10 pt-6 border-t border-border/60 flex items-center justify-between gap-4">
-                  <p className="text-sm text-muted-foreground">
-                    {lang === "ar"
-                      ? "مستقبلك الأكاديمي يبدأ من هنا"
-                      : "Your academic future starts here"}
-                  </p>
+                <div className="mt-10 pt-6 border-t border-border/60 flex items-center justify-between gap-4 flex-wrap">
+                  <p className="text-sm text-muted-foreground">{lang === "ar" ? "مستقبلك الأكاديمي يبدأ من هنا" : "Your academic future starts here"}</p>
                   <Link
                     to="/universities"
                     className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold text-primary-foreground transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
                     style={{
-                      background:
-                        "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(24 95% 55%) 100%)",
-                      boxShadow:
-                        "0 10px 30px -10px hsl(var(--primary) / 0.55), inset 0 1px 0 hsl(0 0% 100% / 0.25)",
+                      background: "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(24 95% 55%) 100%)",
+                      boxShadow: "0 10px 30px -10px hsl(var(--primary) / 0.55), inset 0 1px 0 hsl(0 0% 100% / 0.25)",
                     }}
                   >
                     <GraduationCap className="w-4 h-4" />
-                    <span>
-                      {lang === "ar" ? "تصفح كل الجامعات" : "Browse all universities"}
-                    </span>
+                    <span>{lang === "ar" ? "تصفح كل الجامعات" : "Browse all universities"}</span>
                     <ArrowLeft className="w-4 h-4 rtl:rotate-180 transition-transform group-hover:-translate-x-0.5 rtl:group-hover:translate-x-0.5" />
                   </Link>
                 </div>
               </div>
             </div>
           </motion.div>
-
-          <div className="mt-20 md:mt-24">
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-              <h2 className="text-3xl font-extrabold mb-2">{t("testimonials_title")}</h2>
-              <p className="text-muted-foreground">{t("testimonials_subtitle")}</p>
-            </motion.div>
-            <motion.div
-              className="grid md:grid-cols-3 gap-5"
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.15 }}
-              variants={{ hidden: {}, show: { transition: { staggerChildren: 0.22, delayChildren: 0.1 } } }}
-            >
-              {mockTestimonials.map((tst, i) => (
-                <motion.div
-                  key={i}
-                  variants={{
-                    hidden: { opacity: 0, y: 30, scale: 0.95 },
-                    show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
-                  }}
-                  className="card-base p-6 hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
-                >
-                  <div className="flex gap-0.5 mb-3">
-                    {[1, 2, 3, 4, 5].map((n) => (
-                      <Star key={n} size={14} className="fill-warning text-warning" />
-                    ))}
-                  </div>
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-4">"{d(tst.quote)}"</p>
-                  <div className="flex items-center gap-3">
-                    {(tst as any).avatar ? (
-                      <img src={(tst as any).avatar} alt={d(tst.name)} loading="lazy" decoding="async" width={40} height={40} className="w-10 h-10 rounded-full object-cover" />
-                    ) : (
-                      <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold">{d(tst.name).charAt(0)}</div>
-                    )}
-                    <div>
-                      <div className="font-bold text-sm">{d(tst.name)}</div>
-                      <div className="text-muted-foreground text-xs">{d(tst.university)}</div>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
         </div>
       </section>
 
-      {/* Bottom CTA */}
-      <section className="py-20 md:py-24 px-4 lg:px-8 bg-section-alt">
-        <div className="stats-card-darkglow relative overflow-hidden rounded-[2rem] py-14 px-6 md:px-12">
-          <div className="container text-center relative z-10">
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+      {/* Testimonials — Editorial pull-quotes */}
+      <section className="py-20 md:py-28">
+        <div className="container max-w-6xl">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
+            <span className="text-primary font-bold tracking-[0.25em] uppercase text-xs mb-3 block">
+              {lang === "ar" ? "شهادات" : "TESTIMONIALS"}
+            </span>
+            <h2 className="text-3xl md:text-4xl font-extrabold mb-4">{t("testimonials_title")}</h2>
+            <div className="w-16 h-[3px] bg-primary mx-auto rounded-full" />
+          </motion.div>
+          <motion.div
+            className="grid md:grid-cols-3 gap-6"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.15 }}
+            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.18, delayChildren: 0.1 } } }}
+          >
+            {mockTestimonials.map((tst, i) => (
+              <motion.div
+                key={i}
+                variants={{
+                  hidden: { opacity: 0, y: 30, scale: 0.97 },
+                  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+                }}
+                className="relative p-8 rounded-2xl border border-border/60 bg-card hover:border-primary/40 hover:-translate-y-1 transition-all duration-300"
+                style={{ boxShadow: "0 4px 24px -12px hsl(var(--foreground) / 0.08)" }}
+              >
+                <div
+                  className="absolute top-4 end-6 text-6xl leading-none text-primary/25 font-serif select-none pointer-events-none"
+                  aria-hidden="true"
+                >
+                  &ldquo;
+                </div>
+                <div className="flex gap-0.5 mb-4">
+                  {[1, 2, 3, 4, 5].map((n) => (
+                    <Star key={n} size={14} className="fill-warning text-warning" />
+                  ))}
+                </div>
+                <p className="text-foreground/85 leading-relaxed mb-8 italic relative z-10">"{d(tst.quote)}"</p>
+                <div className="flex items-center gap-3 border-t border-border/60 pt-5">
+                  {(tst as any).avatar ? (
+                    <img src={(tst as any).avatar} alt={d(tst.name)} loading="lazy" decoding="async" width={44} height={44} className="w-11 h-11 rounded-full object-cover ring-2 ring-primary/40" />
+                  ) : (
+                    <div className="w-11 h-11 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold ring-2 ring-primary/40">{d(tst.name).charAt(0)}</div>
+                  )}
+                  <div>
+                    <div className="font-bold text-sm">{d(tst.name)}</div>
+                    <div className="text-primary text-xs font-semibold">{d(tst.university)}</div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Bottom CTA — Editorial pill */}
+      <section className="py-16 md:py-20 px-4 lg:px-8">
+        <div className="container max-w-5xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="relative overflow-hidden rounded-[2.5rem] p-10 md:p-14 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-start"
+            style={{
+              background: "linear-gradient(105deg, hsl(var(--primary)) 0%, hsl(14 82% 42%) 100%)",
+              boxShadow: "0 30px 70px -25px hsl(var(--primary) / 0.55)",
+            }}
+          >
+            <div
+              className="absolute -top-24 -end-24 w-72 h-72 rounded-full bg-white/10 blur-3xl pointer-events-none"
+              aria-hidden="true"
+            />
+            <div className="relative z-10">
               <h2 className="text-3xl md:text-4xl font-black text-white mb-3 drop-shadow-[0_2px_8px_hsl(0_0%_0%_/_0.25)]">{t("cta_title")}</h2>
-              <p className="text-white/85 mb-8 max-w-lg mx-auto text-sm md:text-base">{t("cta_subtitle")}</p>
-              <div className="flex justify-center gap-3 flex-wrap">
-                <Link to="/register" className="btn-cta-light text-base">{t("cta_register")}</Link>
-                <Link to="/teachers" className="inline-flex items-center justify-center px-7 py-3.5 rounded-full font-bold border-2 border-white/30 text-white hover:bg-white/10 transition-all backdrop-blur-sm">
-                  {t("hero_browse")}
-                </Link>
-              </div>
-            </motion.div>
-          </div>
+              <p className="text-white/85 max-w-lg text-sm md:text-base">{t("cta_subtitle")}</p>
+            </div>
+            <div className="relative z-10 flex gap-3 flex-wrap justify-center">
+              <Link
+                to="/register"
+                className="inline-flex items-center justify-center px-8 py-3.5 rounded-full font-bold bg-white text-primary hover:bg-foreground hover:text-white transition-all shadow-lg hover:-translate-y-0.5"
+              >
+                {t("cta_register")}
+              </Link>
+              <Link
+                to="/teachers"
+                className="inline-flex items-center justify-center px-7 py-3.5 rounded-full font-bold border-2 border-white/40 text-white hover:bg-white/10 transition-all backdrop-blur-sm"
+              >
+                {t("hero_browse")}
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
 
