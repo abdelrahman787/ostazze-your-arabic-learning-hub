@@ -69,87 +69,96 @@
 @layer base {
   :root {
     --navbar-h: 80px;
-    --background: 30 40% 97%;
-    --foreground: 230 25% 15%;
+    /* Warm Ember (light) — cream paper background, deep charcoal ink,
+       signature orange primary, warm gold as editorial accent. */
+    --background: 36 40% 97%;
+    --foreground: 24 20% 12%;
     --card: 0 0% 100%;
-    --card-foreground: 230 25% 15%;
+    --card-foreground: 24 20% 12%;
     --popover: 0 0% 100%;
-    --popover-foreground: 230 25% 15%;
+    --popover-foreground: 24 20% 12%;
     --primary: 14 91% 49%;
     --primary-foreground: 0 0% 100%;
     --primary-dark: 14 88% 40%;
     --primary-light: 30 100% 94%;
-    --secondary: 220 45% 20%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 30 20% 95%;
-    --muted-foreground: 240 10% 40%;
-    --accent: 160 84% 39%;
-    --accent-foreground: 0 0% 100%;
+    --secondary: 24 18% 14%;
+    --secondary-foreground: 42 60% 92%;
+    --muted: 36 28% 93%;
+    --muted-foreground: 24 12% 38%;
+    /* Accent = warm gold (#f0d78c) */
+    --accent: 41 74% 74%;
+    --accent-foreground: 24 30% 14%;
+    --gold: 41 74% 74%;
+    --gold-deep: 38 55% 52%;
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
-    --success: 160 84% 39%;
+    --success: 160 60% 38%;
     --success-foreground: 0 0% 100%;
     --warning: 38 92% 50%;
     --warning-foreground: 0 0% 100%;
-    --border: 30 15% 90%;
-    --input: 30 15% 90%;
+    --border: 30 18% 88%;
+    --input: 30 18% 88%;
     --ring: 14 91% 49%;
     --radius: 0.75rem;
     --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 230 25% 15%;
+    --sidebar-foreground: 24 20% 12%;
     --sidebar-primary: 14 91% 49%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 30 100% 94%;
+    --sidebar-accent: 36 30% 94%;
     --sidebar-accent-foreground: 14 88% 40%;
-    --sidebar-border: 30 15% 90%;
+    --sidebar-border: 30 18% 88%;
     --sidebar-ring: 14 91% 49%;
-    --glass-bg: 0 0% 100% / 0.7;
-    --glass-border: 0 0% 100% / 0.3;
-    --nav-bg: 0 0% 100% / 0.7;
-    --nav-border: 30 15% 90% / 0.6;
+    --glass-bg: 0 0% 100% / 0.72;
+    --glass-border: 24 20% 12% / 0.08;
+    --nav-bg: 0 0% 100% / 0.72;
+    --nav-border: 30 18% 82% / 0.6;
   }
 
   .dark {
-    /* Warm & Friendly dark — soft cocoa instead of cool navy */
-    --background: 24 18% 7%;
-    --foreground: 30 35% 96%;
-    --card: 24 16% 11%;
-    --card-foreground: 30 35% 96%;
-    --popover: 24 16% 11%;
-    --popover-foreground: 30 35% 96%;
+    /* Warm Ember (dark) — charcoal #0d0d0d / #1a1a1a base,
+       orange primary, gold accent for headings and highlights. */
+    --background: 0 0% 5%;
+    --foreground: 42 40% 96%;
+    --card: 0 0% 10%;
+    --card-foreground: 42 40% 96%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 42 40% 96%;
     --primary: 14 91% 55%;
     --primary-foreground: 0 0% 100%;
     --primary-dark: 14 88% 45%;
     --primary-light: 30 100% 94%;
-    --secondary: 24 14% 15%;
-    --secondary-foreground: 30 35% 96%;
-    --muted: 24 14% 15%;
-    --muted-foreground: 30 18% 80%;
-    --accent: 14 91% 55%;
-    --accent-foreground: 0 0% 100%;
+    --secondary: 0 0% 14%;
+    --secondary-foreground: 42 40% 96%;
+    --muted: 0 0% 14%;
+    --muted-foreground: 42 20% 78%;
+    --accent: 41 74% 68%;
+    --accent-foreground: 0 0% 8%;
+    --gold: 41 74% 74%;
+    --gold-deep: 38 65% 58%;
     --destructive: 0 70% 55%;
     --destructive-foreground: 0 0% 100%;
-    --success: 160 70% 48%;
+    --success: 160 60% 48%;
     --success-foreground: 0 0% 100%;
     --warning: 38 92% 55%;
     --warning-foreground: 0 0% 100%;
-    --border: 24 14% 19%;
-    --input: 24 14% 17%;
+    --border: 0 0% 18%;
+    --input: 0 0% 16%;
     --ring: 14 91% 55%;
-    --sidebar-background: 24 18% 7%;
-    --sidebar-foreground: 30 35% 96%;
+    --sidebar-background: 0 0% 5%;
+    --sidebar-foreground: 42 40% 96%;
     --sidebar-primary: 14 91% 55%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 24 14% 15%;
-    --sidebar-accent-foreground: 30 35% 96%;
-    --sidebar-border: 24 14% 19%;
+    --sidebar-accent: 0 0% 14%;
+    --sidebar-accent-foreground: 42 40% 96%;
+    --sidebar-border: 0 0% 18%;
     --sidebar-ring: 14 91% 55%;
-    --glass-bg: 24 16% 11% / 0.6;
-    --glass-border: 30 35% 96% / 0.08;
-    --nav-bg: 24 18% 9% / 0.72;
-    --nav-border: 30 35% 96% / 0.09;
+    --glass-bg: 0 0% 10% / 0.62;
+    --glass-border: 42 40% 96% / 0.08;
+    --nav-bg: 0 0% 7% / 0.74;
+    --nav-border: 42 40% 96% / 0.09;
   }
 }
+
 
 @layer base {
   * {
@@ -160,11 +169,12 @@
   }
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: "Inter", "Inter Fallback", "IBM Plex Sans Arabic", "IBM Plex Sans Arabic Fallback", system-ui, sans-serif;
+    font-family: "Work Sans", "Inter", "Inter Fallback", "IBM Plex Sans Arabic", "IBM Plex Sans Arabic Fallback", system-ui, sans-serif;
   }
   h1, h2, h3, h4, h5, h6, .font-display {
-    font-family: "Inter", "Inter Fallback", "IBM Plex Sans Arabic", "IBM Plex Sans Arabic Fallback", system-ui, sans-serif;
-    letter-spacing: -0.01em;
+    font-family: "Instrument Serif", "IBM Plex Sans Arabic", "IBM Plex Sans Arabic Fallback", Georgia, serif;
+    letter-spacing: -0.015em;
+    font-weight: 400;
   }
   :lang(ar) body,
   [dir="rtl"] body {
@@ -173,6 +183,8 @@
   :lang(ar) h1, :lang(ar) h2, :lang(ar) h3, :lang(ar) h4, :lang(ar) h5, :lang(ar) h6,
   [dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3, [dir="rtl"] h4, [dir="rtl"] h5, [dir="rtl"] h6 {
     font-family: "IBM Plex Sans Arabic", "IBM Plex Sans Arabic Fallback", system-ui, sans-serif;
+    letter-spacing: -0.005em;
+    font-weight: 700;
   }
   a, button, [role="button"],
   input, select, textarea,
