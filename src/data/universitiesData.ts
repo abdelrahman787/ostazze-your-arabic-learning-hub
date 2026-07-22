@@ -11,6 +11,12 @@ import logoWCMQ from "@/assets/unis/weill-cornell-qatar-new.jpg.asset.json";
 import logoKSUAsset from "@/assets/unis/king-saud.webp.asset.json";
 const logoKSU = logoKSUAsset.url;
 import logoTAMUQ from "@/assets/unis/tamu-qatar.png.asset.json";
+import logoKU from "@/assets/unis/ku.png.asset.json";
+import logoAUK from "@/assets/unis/auk.png.asset.json";
+import logoAU from "@/assets/unis/ack.webp.asset.json";
+import logoAOU from "@/assets/unis/aou.png.asset.json";
+import logoAUM from "@/assets/unis/aum.png.asset.json";
+import logoGUST from "@/assets/unis/gust.png.asset.json";
 
 export interface Course {
   code: string;
@@ -84,6 +90,7 @@ export const allUniversities: University[] = [
     type: "public",
     founded: 1966,
     country_code: "KW",
+    logo: logoKU.url,
     country_ar: "الكويت",
     country_en: "Kuwait",
     colleges: [
@@ -226,6 +233,7 @@ export const allUniversities: University[] = [
     type: "private",
     founded: 2003,
     country_code: "KW",
+    logo: logoAUK.url,
     country_ar: "الكويت",
     country_en: "Kuwait",
     colleges: [
@@ -732,6 +740,7 @@ export const allUniversities: University[] = [
     type: "private",
     founded: 2004,
     country_code: "KW",
+    logo: logoAU.url,
     country_ar: "الكويت",
     country_en: "Kuwait",
     colleges: [
@@ -1332,6 +1341,7 @@ export const allUniversities: University[] = [
     type: "private",
     founded: 2002,
     country_code: "KW",
+    logo: logoAOU.url,
     country_ar: "الكويت",
     country_en: "Kuwait",
     colleges: [
@@ -1546,6 +1556,7 @@ export const allUniversities: University[] = [
     type: "private",
     founded: 2008,
     country_code: "KW",
+    logo: logoAUM.url,
     country_ar: "الكويت",
     country_en: "Kuwait",
     colleges: [
@@ -1584,6 +1595,7 @@ export const allUniversities: University[] = [
     type: "private",
     founded: 2002,
     country_code: "KW",
+    logo: logoGUST.url,
     country_ar: "الكويت",
     country_en: "Kuwait",
     colleges: [
