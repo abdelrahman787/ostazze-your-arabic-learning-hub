@@ -233,6 +233,7 @@ export const allUniversities: University[] = [
     type: "private",
     founded: 2003,
     country_code: "KW",
+    logo: logoAUK.url,
     country_ar: "الكويت",
     country_en: "Kuwait",
     colleges: [
@@ -739,6 +740,7 @@ export const allUniversities: University[] = [
     type: "private",
     founded: 2004,
     country_code: "KW",
+    logo: logoAU.url,
     country_ar: "الكويت",
     country_en: "Kuwait",
     colleges: [
@@ -1339,6 +1341,7 @@ export const allUniversities: University[] = [
     type: "private",
     founded: 2002,
     country_code: "KW",
+    logo: logoAOU.url,
     country_ar: "الكويت",
     country_en: "Kuwait",
     colleges: [
@@ -1553,6 +1556,7 @@ export const allUniversities: University[] = [
     type: "private",
     founded: 2008,
     country_code: "KW",
+    logo: logoAUM.url,
     country_ar: "الكويت",
     country_en: "Kuwait",
     colleges: [
@@ -1591,6 +1595,7 @@ export const allUniversities: University[] = [
     type: "private",
     founded: 2002,
     country_code: "KW",
+    logo: logoGUST.url,
     country_ar: "الكويت",
     country_en: "Kuwait",
     colleges: [
