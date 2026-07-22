@@ -90,6 +90,7 @@ export const allUniversities: University[] = [
     type: "public",
     founded: 1966,
     country_code: "KW",
+    logo: logoKU.url,
     country_ar: "الكويت",
     country_en: "Kuwait",
     colleges: [
