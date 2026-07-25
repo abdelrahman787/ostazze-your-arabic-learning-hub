@@ -45,15 +45,6 @@ const TeacherProfile = () => {
   const [loading, setLoading] = useState(true);
   const [showBooking, setShowBooking] = useState(false);
 
-  // Reviews state
-  const [reviews, setReviews] = useState<Review[]>([]);
-  const [reviewsLoading, setReviewsLoading] = useState(true);
-  const [canReview, setCanReview] = useState(false);
-  const [alreadyReviewed, setAlreadyReviewed] = useState(false);
-  const [reviewRating, setReviewRating] = useState(5);
-  const [reviewComment, setReviewComment] = useState("");
-  const [submittingReview, setSubmittingReview] = useState(false);
-
   const DAYS = [t("day_sun"), t("day_mon"), t("day_tue"), t("day_wed"), t("day_thu"), t("day_fri"), t("day_sat")];
 
   useEffect(() => {
