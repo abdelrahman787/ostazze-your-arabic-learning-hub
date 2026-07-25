@@ -97,7 +97,7 @@ const IndexBelowFold = () => {
                     className="text-6xl md:text-7xl font-black text-primary leading-none mb-3 relative z-10"
                     style={{ textShadow: "0 6px 20px hsl(var(--primary) / 0.25)" }}
                   >
-                    {step.key}
+                    {lang === "ar" ? step.key : String(i + 1)}
                   </motion.div>
 
                   <motion.h3
