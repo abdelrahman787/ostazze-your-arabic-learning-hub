@@ -102,12 +102,12 @@ const Teachers = () => {
         canonical="https://ostaze.com/teachers"
       />
       <PageHeader title={t("teachers_title")} subtitle={t("teachers_choose")} variant="teachers">
-        <div className="mb-6 md:mb-0 md:absolute md:start-0 md:top-0 flex justify-center md:justify-start">
+        <div className="flex justify-center md:justify-end mb-6 md:mb-0 md:absolute md:end-4 lg:md:end-6 md:top-0">
           <Link
             to="/apply-tutor"
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-primary/30 bg-primary/10 text-primary text-sm font-bold hover:bg-primary/20 transition-colors"
+            className="btn-primary inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5"
           >
-            <GraduationCap size={16} />
+            <GraduationCap size={18} />
             {lang === "ar" ? "انضم كمعلم" : "Apply as a Tutor"}
           </Link>
         </div>
