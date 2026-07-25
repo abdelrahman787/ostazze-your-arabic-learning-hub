@@ -3,7 +3,7 @@ import { mockTestimonials } from "@/data/testimonials";
 import {
   Star, ArrowLeft, Sparkles, GraduationCap, CalendarCheck, Video,
 } from "lucide-react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import OurTeam from "@/components/OurTeam";
@@ -28,6 +28,7 @@ import uniHbku from "@/assets/unis/hbku.png.asset.json";
  */
 const IndexBelowFold = () => {
   const { t, d, lang } = useLanguage();
+  const isReduced = useReducedMotion();
   const howStepsRef = useRef<HTMLDivElement>(null);
   const howStepsInView = useInView(howStepsRef, { once: true, amount: 0.2 });
   const [playHowSteps, setPlayHowSteps] = useState(false);
@@ -200,39 +201,114 @@ const IndexBelowFold = () => {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-20 md:py-24">
-        <div className="container">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-            <h2 className="text-3xl font-extrabold mb-2">{t("why_title")}</h2>
-            <p className="text-muted-foreground">{t("why_subtitle")}</p>
-          </motion.div>
+      <section className="relative py-20 md:py-28 overflow-hidden bg-section-alt">
+        {/* Soft ambient glow */}
+        <div
+          className="absolute inset-0 pointer-events-none -z-10"
+          aria-hidden="true"
+          style={{
+            background:
+              "radial-gradient(60% 50% at 50% 0%, hsl(var(--primary) / 0.10) 0%, transparent 70%)",
+          }}
+        />
+
+        <div className="container relative z-10">
           <motion.div
-            className="grid md:grid-cols-3 gap-5"
+            initial={{ opacity: isReduced ? 1 : 0, y: isReduced ? 0 : 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{
+              duration: isReduced ? 0.1 : 0.6,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="text-center mb-14"
+          >
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold bg-primary/10 text-primary mb-4">
+              <Sparkles size={14} />
+              {lang === "ar" ? "المزايا" : "Why us"}
+            </span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3">
+              {t("why_title")}
+            </h2>
+            <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto">
+              {t("why_subtitle")}
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="grid md:grid-cols-3 gap-6"
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.15 }}
-            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.22, delayChildren: 0.1 } } }}
+            variants={{
+              hidden: {},
+              show: {
+                transition: { staggerChildren: 0.18, delayChildren: 0.1 },
+              },
+            }}
           >
             {[
-              { icon: GraduationCap, title: t("why_teachers"), desc: t("why_teachers_desc"), active: true },
-              { icon: CalendarCheck, title: t("why_schedule"), desc: t("why_schedule_desc"), active: false },
-              { icon: Video, title: t("why_remote"), desc: t("why_remote_desc"), active: false },
-            ].map((step, i) => (
-              <motion.div
-                key={step.title}
-                variants={{
-                  hidden: { opacity: 0, y: 40, scale: 0.92 },
-                  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
-                }}
-                className={`feature-card ${i === 0 ? "card-active" : ""}`}
-              >
-                <div className="icon-box-lg bg-primary/10 text-primary mx-auto mb-4">
-                  <step.icon size={24} />
-                </div>
-                <h3 className={`font-bold text-lg mb-2 ${i === 0 ? "text-primary" : ""}`}>{step.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">{step.desc}</p>
-              </motion.div>
-            ))}
+              {
+                icon: GraduationCap,
+                title: t("why_teachers"),
+                desc: t("why_teachers_desc"),
+                gradient: "from-primary to-primary-dark",
+              },
+              {
+                icon: CalendarCheck,
+                title: t("why_schedule"),
+                desc: t("why_schedule_desc"),
+                gradient: "from-primary-dark to-primary",
+              },
+              {
+                icon: Video,
+                title: t("why_remote"),
+                desc: t("why_remote_desc"),
+                gradient: "from-primary to-primary-dark",
+              },
+            ].map((item, i) => {
+              const indexLabel =
+                lang === "ar"
+                  ? ["٠١", "٠٢", "٠٣"][i]
+                  : String(i + 1).padStart(2, "0");
+              return (
+                <motion.div
+                  key={item.title}
+                  variants={{
+                    hidden: {
+                      opacity: isReduced ? 1 : 0,
+                      y: isReduced ? 0 : 40,
+                      scale: isReduced ? 1 : 0.95,
+                    },
+                    show: {
+                      opacity: 1,
+                      y: 0,
+                      scale: 1,
+                      transition: {
+                        duration: isReduced ? 0.1 : 0.6,
+                        ease: [0.22, 1, 0.36, 1],
+                      },
+                    },
+                  }}
+                  className="card-base group p-7 md:p-8 text-start"
+                >
+                  <span className="absolute top-5 end-5 text-4xl font-black text-muted-foreground/20 leading-none">
+                    {indexLabel}
+                  </span>
+                  <div
+                    className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 bg-gradient-to-br ${item.gradient} text-white shadow-lg shadow-primary/20`}
+                  >
+                    <item.icon size={28} strokeWidth={1.8} />
+                  </div>
+                  <h3 className="text-xl font-bold mb-2 text-foreground">
+                    {item.title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    {item.desc}
+                  </p>
+                </motion.div>
+              );
+            })}
           </motion.div>
         </div>
       </section>
