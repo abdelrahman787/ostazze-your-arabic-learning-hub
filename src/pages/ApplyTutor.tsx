@@ -1,91 +1,248 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { GraduationCap, Send, CheckCircle2 } from "lucide-react";
+import { Send, CheckCircle2, GraduationCap } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import PageHelmet from "@/components/PageHelmet";
-import PageHeader from "@/components/PageHeader";
 
 const WHATSAPP_NUMBER = "201130382206";
+
+const SPECIALIZATIONS = [
+  ["المحاسبة", "Accounting"],
+  ["اللغة العربية", "Arabic"],
+  ["الهندسة المعمارية", "Architecture"],
+  ["الكيمياء الحيوية", "Biochemistry"],
+  ["الأحياء", "Biology"],
+  ["الهندسة الطبية الحيوية", "Biomedical Engineering"],
+  ["الهندسة الكيميائية", "Chemical Engineering"],
+  ["الكيمياء", "Chemistry"],
+  ["الهندسة المدنية", "Civil Engineering"],
+  ["الصيدلة الإكلينيكية", "Clinical Pharmacy"],
+  ["هندسة الحاسب", "Computer Engineering"],
+  ["علوم الحاسب", "Computer Science"],
+  ["الاقتصاد", "Economics"],
+  ["الهندسة الكهربائية", "Electrical Engineering"],
+  ["اللغة الإنجليزية", "English"],
+  ["التمويل", "Finance"],
+  ["الطب البشري", "Human Medicine"],
+  ["الهندسة الصناعية", "Industrial Engineering"],
+  ["القانون", "Law"],
+  ["الإدارة", "Management"],
+  ["التسويق", "Marketing"],
+  ["الرياضيات", "Mathematics"],
+  ["الهندسة الميكانيكية", "Mechanical Engineering"],
+  ["التمريض", "Nursing"],
+  ["التغذية", "Nutrition"],
+  ["الفيزياء", "Physics"],
+  ["علم النفس", "Psychology"],
+  ["أخرى", "Other"],
+];
+
+const TOOLS = [
+  "Explain Everything",
+  "GoodNotes",
+  "Notability",
+  "PowerPoint",
+  "Canva",
+  "OBS",
+  "Zoom",
+  "iPad Screen Recording",
+  "Other",
+];
+
+const emptyForm = {
+  name: "",
+  phone: "",
+  email: "",
+  nationality: "",
+  country: "",
+  city: "",
+  specialization: "",
+  university: "",
+  degree: "",
+  experience: "",
+  teachLang: "",
+  courses: "",
+  recordedBefore: "",
+  quietPlace: "",
+  device: "",
+  microphone: "",
+  cvLink: "",
+  demoLink: "",
+};
 
 const ApplyTutor = () => {
   const { lang } = useLanguage();
   const isAr = lang === "ar";
   const [sent, setSent] = useState(false);
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    university: "",
-    subjects: "",
-    experience: "",
-    about: "",
-  });
+  const [form, setForm] = useState({ ...emptyForm });
+  const [tools, setTools] = useState<string[]>([]);
 
   const set = (k: keyof typeof form, v: string) => setForm((p) => ({ ...p, [k]: v }));
+  const toggleTool = (t: string) =>
+    setTools((p) => (p.includes(t) ? p.filter((x) => x !== t) : [...p, t]));
 
-  const L = {
-    title: isAr ? "انضم كمعلم" : "Apply as a Tutor",
-    subtitle: isAr
-      ? "شارك خبرتك مع آلاف الطلاب الجامعيين واحصل على دخل مرن"
-      : "Share your expertise with thousands of university students and earn flexibly",
-    name: isAr ? "الاسم الكامل" : "Full name",
-    email: isAr ? "البريد الإلكتروني" : "Email",
-    phone: isAr ? "رقم الواتساب" : "WhatsApp number",
-    university: isAr ? "الجامعة / الشهادة" : "University / Degree",
-    subjects: isAr ? "المواد التي تدرّسها" : "Subjects you teach",
-    experience: isAr ? "سنوات الخبرة" : "Years of experience",
-    about: isAr ? "نبذة عنك" : "About you",
-    submit: isAr ? "إرسال الطلب عبر واتساب" : "Send application via WhatsApp",
-    done: isAr ? "تم فتح واتساب لإتمام إرسال طلبك ✅" : "WhatsApp opened to complete your application ✅",
-    perks: isAr
-      ? ["جدول مرن تحدده بنفسك", "طلاب من أفضل الجامعات", "دعم كامل من فريق أستاذي"]
-      : ["Flexible schedule you control", "Students from top universities", "Full support from the Ostaze team"],
+  const T = {
+    eyebrow: isAr ? "التقديم مفتوح لعام ٢٠٢٦" : "2026 Applications Open",
+    title: isAr ? "انضم إلى فريق معلمي أستاذي" : "Become an Ostaze Teacher",
+    lede: isAr
+      ? "يرجى تعبئة النموذج التالي، وسيقوم فريقنا بمراجعة طلبك والتواصل معك في حال تم اختيارك."
+      : "Please fill in the form below. Our team will review your application and contact you if shortlisted.",
+    checklist: isAr
+      ? [
+          "جهّز السيرة الذاتية بصيغة PDF أو DOC أو DOCX.",
+          "جهّز فيديو شرح تجريبي مدته من ٥ إلى ١٠ دقائق.",
+          "استخدم رابط Google Drive أو YouTube غير معلن.",
+          "يرجى تعبئة جميع الحقول المطلوبة بدقة.",
+        ]
+      : [
+          "Prepare your CV in PDF, DOC, or DOCX format.",
+          "Prepare a 5–10 minute demo lesson video.",
+          "Use a Google Drive or Unlisted YouTube link.",
+          "Complete all required fields carefully.",
+        ],
+    s1: isAr ? "البيانات الأساسية" : "Basic Information",
+    s2: isAr ? "البيانات الأكاديمية" : "Academic Information",
+    s3: isAr ? "جاهزية التسجيل والإنتاج" : "Recording & Production Readiness",
+    s4: isAr ? "السيرة الذاتية وفيديو الشرح" : "CV & Demo Lesson",
+    select: isAr ? "اختر" : "Select",
+    submit: isAr ? "إرسال الطلب عبر واتساب" : "Submit via WhatsApp",
+    note: isAr
+      ? "بإرسال الطلب، أنت تؤكد أن المعلومات أعلاه صحيحة."
+      : "By submitting, you confirm the information above is accurate.",
+    doneTitle: isAr ? "تم استلام طلبك" : "Application received",
+    doneBody: isAr
+      ? "سيتواصل معك فريقنا في حال تم اختيارك. أكمل الإرسال في نافذة واتساب."
+      : "Our team will review it and contact you if shortlisted. Complete sending in the WhatsApp window.",
   };
+
+  const yesNo = isAr
+    ? ["نعم", "لا", "أحياناً"]
+    : ["Yes", "No", "Sometimes"];
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const msg = isAr
-      ? `طلب انضمام كمعلم في أستاذي\n\nالاسم: ${form.name}\nالبريد: ${form.email}\nواتساب: ${form.phone}\nالجامعة/الشهادة: ${form.university}\nالمواد: ${form.subjects}\nالخبرة: ${form.experience}\nنبذة: ${form.about}`
-      : `Tutor application — Ostaze\n\nName: ${form.name}\nEmail: ${form.email}\nWhatsApp: ${form.phone}\nUniversity/Degree: ${form.university}\nSubjects: ${form.subjects}\nExperience: ${form.experience}\nAbout: ${form.about}`;
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
+    const L = (ar: string, en: string) => (isAr ? ar : en);
+    const lines = [
+      L("طلب انضمام كمعلم في أستاذي", "Teacher application — Ostaze"),
+      "",
+      `${L("الاسم", "Name")}: ${form.name}`,
+      `${L("واتساب", "WhatsApp")}: ${form.phone}`,
+      `${L("البريد", "Email")}: ${form.email}`,
+      `${L("الجنسية", "Nationality")}: ${form.nationality}`,
+      `${L("الدولة", "Country")}: ${form.country}`,
+      `${L("المدينة", "City")}: ${form.city}`,
+      `${L("التخصص", "Specialization")}: ${form.specialization}`,
+      `${L("الجامعة", "University")}: ${form.university}`,
+      `${L("المؤهل", "Degree")}: ${form.degree}`,
+      `${L("سنوات الخبرة", "Experience")}: ${form.experience}`,
+      `${L("لغة التدريس", "Teaching language")}: ${form.teachLang}`,
+      `${L("المواد", "Courses")}: ${form.courses}`,
+      `${L("سبق التسجيل", "Recorded before")}: ${form.recordedBefore}`,
+      `${L("مكان هادئ", "Quiet place")}: ${form.quietPlace}`,
+      `${L("الأدوات", "Tools")}: ${tools.join(", ")}`,
+      `${L("الجهاز", "Device")}: ${form.device}`,
+      `${L("الميكروفون", "Microphone")}: ${form.microphone}`,
+      `${L("رابط السيرة الذاتية", "CV link")}: ${form.cvLink}`,
+      `${L("رابط الفيديو التجريبي", "Demo video")}: ${form.demoLink}`,
+    ];
+    window.open(
+      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`,
+      "_blank",
+      "noopener"
+    );
     setSent(true);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const field = (
-    key: keyof typeof form,
-    label: string,
-    opts: { type?: string; required?: boolean; area?: boolean } = {}
-  ) => (
-    <div className="space-y-1.5">
-      <label htmlFor={key} className="text-sm font-bold">
-        {label}
+  const Field = ({
+    k,
+    label,
+    hint,
+    type = "text",
+    required,
+    full,
+    area,
+    options,
+    placeholder,
+  }: {
+    k: keyof typeof form;
+    label: string;
+    hint?: string;
+    type?: string;
+    required?: boolean;
+    full?: boolean;
+    area?: boolean;
+    options?: string[];
+    placeholder?: string;
+  }) => (
+    <div className={`space-y-1.5 ${full ? "sm:col-span-2" : ""}`}>
+      <label htmlFor={k} className="block text-sm font-bold">
+        {label} {required && <span className="text-primary">*</span>}
       </label>
-      {opts.area ? (
+      {options ? (
+        <select
+          id={k}
+          required={required}
+          value={form[k]}
+          onChange={(e) => set(k, e.target.value)}
+          className="input-base w-full"
+        >
+          <option value="">{T.select}</option>
+          {options.map((o) => (
+            <option key={o} value={o}>
+              {o}
+            </option>
+          ))}
+        </select>
+      ) : area ? (
         <textarea
-          id={key}
-          rows={4}
-          required={opts.required}
-          value={form[key]}
-          onChange={(e) => set(key, e.target.value)}
+          id={k}
+          rows={3}
+          required={required}
+          placeholder={placeholder}
+          value={form[k]}
+          onChange={(e) => set(k, e.target.value)}
           className="input-base w-full resize-none"
         />
       ) : (
         <input
-          id={key}
-          type={opts.type || "text"}
-          required={opts.required}
-          value={form[key]}
-          onChange={(e) => set(key, e.target.value)}
+          id={k}
+          type={type}
+          required={required}
+          placeholder={placeholder}
+          value={form[k]}
+          onChange={(e) => set(k, e.target.value)}
           className="input-base w-full"
         />
       )}
+      {hint && <p className="text-xs text-muted-foreground">{hint}</p>}
     </div>
+  );
+
+  const Section = ({
+    num,
+    title,
+    children,
+  }: {
+    num: string;
+    title: string;
+    children: React.ReactNode;
+  }) => (
+    <section className="card-base p-6 md:p-8 space-y-6">
+      <div className="flex items-center gap-3 border-b border-border pb-4">
+        <span className="w-10 h-10 rounded-xl bg-primary/12 text-primary font-black flex items-center justify-center text-sm">
+          {num}
+        </span>
+        <h2 className="text-lg md:text-xl font-black">{title}</h2>
+      </div>
+      <div className="grid sm:grid-cols-2 gap-5">{children}</div>
+    </section>
   );
 
   return (
     <div>
       <PageHelmet
-        title={isAr ? "انضم كمعلم - أستاذي OSTAZE" : "Apply as a Tutor - OSTAZE"}
+        title={isAr ? "انضم كمعلم - أستاذي OSTAZE" : "Become a Tutor - OSTAZE"}
         description={
           isAr
             ? "قدّم طلبك للانضمام إلى نخبة معلمي أستاذي ودرّس طلاب الجامعات أونلاين بجدول مرن."
@@ -93,51 +250,193 @@ const ApplyTutor = () => {
         }
         canonical="https://ostaze.com/apply-tutor"
       />
-      <PageHeader title={L.title} subtitle={L.subtitle} variant="teachers" />
 
-      <div className="container py-10 grid lg:grid-cols-3 gap-8 items-start">
-        <motion.form
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          onSubmit={onSubmit}
-          className="card-base p-6 md:p-8 space-y-4 lg:col-span-2"
-        >
-          <div className="grid sm:grid-cols-2 gap-4">
-            {field("name", L.name, { required: true })}
-            {field("email", L.email, { type: "email", required: true })}
-            {field("phone", L.phone, { required: true })}
-            {field("university", L.university)}
-            {field("subjects", L.subjects, { required: true })}
-            {field("experience", L.experience)}
-          </div>
-          {field("about", L.about, { area: true })}
-
-          <button type="submit" className="btn-primary w-full flex items-center justify-center gap-2">
-            <Send size={16} />
-            {L.submit}
-          </button>
-
-          {sent && (
-            <p className="text-sm font-bold text-[#25D366] flex items-center gap-2">
-              <CheckCircle2 size={16} /> {L.done}
-            </p>
-          )}
-        </motion.form>
-
-        <aside className="card-base p-6 space-y-4">
-          <div className="w-12 h-12 rounded-2xl bg-primary/15 text-primary flex items-center justify-center">
-            <GraduationCap size={24} />
-          </div>
-          <h2 className="font-black text-lg">{isAr ? "لماذا أستاذي؟" : "Why Ostaze?"}</h2>
-          <ul className="space-y-3">
-            {L.perks.map((p) => (
-              <li key={p} className="flex items-start gap-2 text-sm text-muted-foreground">
+      {/* Hero */}
+      <header className="pt-page bg-gradient-to-b from-primary/10 via-background to-background border-b border-border">
+        <div className="container py-12 md:py-16 max-w-4xl">
+          <span className="inline-block text-xs font-bold tracking-wide uppercase px-3 py-1 rounded-full bg-primary/15 text-primary">
+            {T.eyebrow}
+          </span>
+          <h1 className="mt-4 text-3xl md:text-5xl font-black leading-tight">{T.title}</h1>
+          <p className="mt-3 text-muted-foreground max-w-2xl">{T.lede}</p>
+          <ul className="mt-6 grid sm:grid-cols-2 gap-3">
+            {T.checklist.map((c) => (
+              <li key={c} className="flex items-start gap-2 text-sm">
                 <CheckCircle2 size={16} className="text-primary shrink-0 mt-0.5" />
-                <span>{p}</span>
+                <span className="text-muted-foreground">{c}</span>
               </li>
             ))}
           </ul>
-        </aside>
+        </div>
+      </header>
+
+      <div className="container py-10 max-w-4xl">
+        {sent ? (
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="card-base p-10 text-center space-y-3"
+          >
+            <GraduationCap size={40} className="mx-auto text-primary" />
+            <h2 className="text-2xl font-black">{T.doneTitle}</h2>
+            <p className="text-muted-foreground">{T.doneBody}</p>
+          </motion.div>
+        ) : (
+          <motion.form
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            onSubmit={onSubmit}
+            className="space-y-6"
+          >
+            <Section num="01" title={T.s1}>
+              {Field({
+                k: "name",
+                label: isAr ? "الاسم الكامل" : "Full Name",
+                required: true,
+                full: true,
+                hint: isAr
+                  ? "اكتب اسمك الكامل كما هو في المستندات الرسمية."
+                  : "Write your full name as it appears in official documents.",
+              })}
+              {Field({
+                k: "phone",
+                label: isAr ? "رقم الواتساب" : "Mobile / WhatsApp",
+                type: "tel",
+                required: true,
+                placeholder: "+9665XXXXXXXX",
+                hint: isAr ? "مع مفتاح الدولة." : "Include country code.",
+              })}
+              {Field({
+                k: "email",
+                label: isAr ? "البريد الإلكتروني" : "Email",
+                type: "email",
+                placeholder: "name@example.com",
+              })}
+              {Field({ k: "nationality", label: isAr ? "الجنسية" : "Nationality" })}
+              {Field({ k: "country", label: isAr ? "الدولة" : "Country" })}
+              {Field({ k: "city", label: isAr ? "المدينة" : "City", full: true })}
+            </Section>
+
+            <Section num="02" title={T.s2}>
+              {Field({
+                k: "specialization",
+                label: isAr ? "التخصص" : "Specialization",
+                required: true,
+                full: true,
+                options: SPECIALIZATIONS.map(([ar, en]) => (isAr ? ar : en)),
+                hint: isAr
+                  ? "اختر أقرب تخصص للمواد التي تستطيع تدريسها."
+                  : "Choose the closest specialization to the courses you can teach.",
+              })}
+              {Field({ k: "university", label: isAr ? "الجامعة" : "University" })}
+              {Field({
+                k: "degree",
+                label: isAr ? "المؤهل العلمي" : "Degree",
+                placeholder: isAr ? "بكالوريوس / ماجستير / دكتوراه" : "Bachelor, Master, PhD",
+              })}
+              {Field({
+                k: "experience",
+                label: isAr ? "سنوات الخبرة في التدريس" : "Years of Teaching Experience",
+                type: "number",
+              })}
+              {Field({
+                k: "teachLang",
+                label: isAr ? "لغة التدريس" : "Teaching Language",
+                options: isAr
+                  ? ["عربي", "إنجليزي", "عربي وإنجليزي"]
+                  : ["Arabic", "English", "Arabic and English"],
+              })}
+              {Field({
+                k: "courses",
+                label: isAr ? "المواد التي تستطيع تدريسها" : "Courses You Can Teach",
+                required: true,
+                full: true,
+                area: true,
+                placeholder: isAr ? "مثال: تفاضل ١، فيزياء ١٠١" : "Example: Calculus 1, Physics 101",
+              })}
+            </Section>
+
+            <Section num="03" title={T.s3}>
+              {Field({
+                k: "recordedBefore",
+                label: isAr ? "هل سبق لك تسجيل دروس؟" : "Have you recorded lessons before?",
+                options: yesNo,
+              })}
+              {Field({
+                k: "quietPlace",
+                label: isAr ? "هل لديك مكان هادئ للتسجيل؟" : "Do you have a quiet place for recording?",
+                options: yesNo,
+              })}
+              <div className="sm:col-span-2 space-y-2">
+                <span className="block text-sm font-bold">
+                  {isAr ? "البرامج أو الأدوات المستخدمة" : "Tools / Apps Used Before"}
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  {TOOLS.map((tool) => {
+                    const active = tools.includes(tool);
+                    return (
+                      <button
+                        key={tool}
+                        type="button"
+                        aria-pressed={active}
+                        onClick={() => toggleTool(tool)}
+                        className={`px-3 py-1.5 rounded-full text-sm font-bold border transition-colors ${
+                          active
+                            ? "bg-primary text-primary-foreground border-primary"
+                            : "border-border text-muted-foreground hover:border-primary/50"
+                        }`}
+                      >
+                        {tool}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+              {Field({
+                k: "device",
+                label: isAr ? "الجهاز المستخدم للتسجيل" : "Device Used for Recording",
+                placeholder: isAr ? "آيباد، لابتوب..." : "iPad, tablet, laptop...",
+              })}
+              {Field({
+                k: "microphone",
+                label: isAr ? "الميكروفون المستخدم" : "Microphone Used",
+                placeholder: isAr ? "ميكروفون داخلي، AirPods..." : "Built-in mic, AirPods...",
+              })}
+            </Section>
+
+            <Section num="04" title={T.s4}>
+              {Field({
+                k: "cvLink",
+                label: isAr ? "رابط السيرة الذاتية" : "CV Link",
+                type: "url",
+                full: true,
+                placeholder: "https://drive.google.com/...",
+                hint: isAr
+                  ? "ارفع السيرة الذاتية (PDF/DOC) على Google Drive وضع الرابط هنا، أو أرسلها لاحقاً على واتساب."
+                  : "Upload your CV (PDF/DOC) to Google Drive and paste the link, or send it later on WhatsApp.",
+              })}
+              {Field({
+                k: "demoLink",
+                label: isAr ? "رابط فيديو الشرح التجريبي" : "Demo Lesson Video URL",
+                type: "url",
+                required: true,
+                full: true,
+                placeholder: "https://youtube.com/...",
+                hint: isAr
+                  ? "فيديو من ٥ إلى ١٠ دقائق، وتأكد أن الصلاحية «Anyone with the link can view»."
+                  : "A 5–10 minute video. Make sure sharing is set to “Anyone with the link can view”.",
+              })}
+            </Section>
+
+            <div className="card-base p-6 flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
+              <p className="text-sm text-muted-foreground">{T.note}</p>
+              <button type="submit" className="btn-primary flex items-center justify-center gap-2 shrink-0">
+                <Send size={16} />
+                {T.submit}
+              </button>
+            </div>
+          </motion.form>
+        )}
       </div>
     </div>
   );
