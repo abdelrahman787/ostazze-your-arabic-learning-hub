@@ -1,10 +1,9 @@
 import { useParams, Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useBilingual } from "@/hooks/useBilingual";
-import { Star, Clock, BookOpen, Loader2, Send } from "lucide-react";
+import { Clock, BookOpen, Loader2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { toast } from "sonner";
 import BookSessionModal from "@/components/BookSessionModal";
 import RefundNote from "@/components/RefundNote";
 import PageHelmet from "@/components/PageHelmet";
@@ -35,36 +34,6 @@ interface AvailSlot {
   start_time: string;
   end_time: string;
 }
-
-interface Review {
-  id: string;
-  student_id: string;
-  rating: number;
-  comment: string | null;
-  created_at: string;
-  student_name?: string;
-}
-
-const StarRating = ({ value, onChange, readonly = false }: { value: number; onChange?: (v: number) => void; readonly?: boolean }) => (
-  <div className="flex gap-1">
-    {[1, 2, 3, 4, 5].map((star) => (
-      <motion.button
-        key={star}
-        type="button"
-        whileHover={!readonly ? { scale: 1.2 } : undefined}
-        whileTap={!readonly ? { scale: 0.9 } : undefined}
-        onClick={() => !readonly && onChange?.(star)}
-        className={`transition-colors ${readonly ? "cursor-default" : "cursor-pointer"}`}
-        disabled={readonly}
-      >
-        <Star
-          size={readonly ? 14 : 20}
-          className={star <= value ? "text-yellow-400 fill-yellow-400" : "text-muted-foreground/30"}
-        />
-      </motion.button>
-    ))}
-  </div>
-);
 
 const TeacherProfile = () => {
   const { id } = useParams();
