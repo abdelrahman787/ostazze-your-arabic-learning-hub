@@ -25,10 +25,10 @@ const About = () => {
     <div>
       <PageHelmet
         title={lang === "ar"
-          ? "من نحن - تعرف على منصة أستازي OSTAZE"
+          ? "من نحن - تعرف على منصة أستاذي OSTAZE"
           : "About Us - OSTAZE"}
         description={lang === "ar"
-          ? "تعرف على منصة أستازي (OSTAZE)، رؤيتنا ومهمتنا في تقديم أفضل تجربة تعليمية أونلاين تربط الطلاب بالمعلمين الجامعيين المتميزين في الكويت وقطر."
+          ? "تعرف على منصة أستاذي (OSTAZE)، رؤيتنا ومهمتنا في تقديم أفضل تجربة تعليمية أونلاين تربط الطلاب بالمعلمين الجامعيين المتميزين في الكويت وقطر."
           : "Learn about OSTAZE — our vision and mission to deliver the best online learning experience connecting students with top university tutors in Kuwait & Qatar."}
         canonical="https://ostaze.com/about"
       />

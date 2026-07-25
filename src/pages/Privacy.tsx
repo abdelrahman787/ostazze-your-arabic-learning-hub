@@ -22,9 +22,9 @@ const Privacy = () => {
   return (
     <div>
       <PageHelmet
-        title={lang === "ar" ? "سياسة الخصوصية - أستازي OSTAZE" : "Privacy Policy - OSTAZE"}
+        title={lang === "ar" ? "سياسة الخصوصية - أستاذي OSTAZE" : "Privacy Policy - OSTAZE"}
         description={lang === "ar"
-          ? "سياسة الخصوصية لمنصة أستازي — كيف نحمي بياناتك الشخصية ونستخدمها."
+          ? "سياسة الخصوصية لمنصة أستاذي — كيف نحمي بياناتك الشخصية ونستخدمها."
           : "OSTAZE privacy policy — how we protect and use your personal data."}
         canonical="https://ostaze.com/privacy"
       />

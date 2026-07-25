@@ -21,9 +21,9 @@ const Terms = () => {
   return (
     <div>
       <PageHelmet
-        title={lang === "ar" ? "الشروط والأحكام - أستازي OSTAZE" : "Terms & Conditions - OSTAZE"}
+        title={lang === "ar" ? "الشروط والأحكام - أستاذي OSTAZE" : "Terms & Conditions - OSTAZE"}
         description={lang === "ar"
-          ? "اقرأ الشروط والأحكام الخاصة باستخدام منصة أستازي للدروس الخصوصية الأونلاين."
+          ? "اقرأ الشروط والأحكام الخاصة باستخدام منصة أستاذي للدروس الخصوصية الأونلاين."
           : "Read the terms and conditions for using OSTAZE online tutoring platform."}
         canonical="https://ostaze.com/terms"
       />

@@ -94,10 +94,10 @@ const Teachers = () => {
     <div>
       <PageHelmet
         title={lang === "ar"
-          ? "المعلمون - أفضل المعلمين الجامعيين - أستازي OSTAZE"
+          ? "المعلمون - أفضل المعلمين الجامعيين - أستاذي OSTAZE"
           : "Tutors - Top University Tutors - OSTAZE"}
         description={lang === "ar"
-          ? "تصفح أفضل المعلمين الجامعيين على منصة أستازي — معلمون متخصصون بتقييمات حقيقية من الطلاب. احجز حصتك الخصوصية الآن."
+          ? "تصفح أفضل المعلمين الجامعيين على منصة أستاذي — معلمون متخصصون بتقييمات حقيقية من الطلاب. احجز حصتك الخصوصية الآن."
           : "Browse top university tutors on OSTAZE — verified specialists with real student ratings. Book your private session now."}
         canonical="https://ostaze.com/teachers"
       />

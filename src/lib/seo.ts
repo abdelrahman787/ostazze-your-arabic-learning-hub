@@ -10,7 +10,7 @@ export const SITE_NAME = "OSTAZE";
  * so meta keywords + JSON-LD alternateName stay in sync.
  */
 export const BRAND_VARIANTS_AR = [
-  "أستازي", "استازي", "أُسطازي", "استاذي", "أستاذي",
+  "أستاذي", "استاذي", "أُسطازي", "استاذي", "أستاذي",
   "اوستاز", "أوستاز", "اوستازي", "OSTAZE", "Ostaze",
 ];
 
@@ -20,7 +20,7 @@ export const BRAND_VARIANTS_EN = [
 
 /** Search-intent phrases students use when looking for tutors / lessons. */
 export const SEARCH_PHRASES_AR = [
-  "منصة استاذي", "موقع استاذي", "منصة أستاذي", "موقع أستازي", "منصة أستازي",
+  "منصة استاذي", "موقع استاذي", "منصة أستاذي", "موقع أستاذي", "منصة أستاذي",
   "منصة دروس لايف", "منصة دروس أونلاين", "موقع تعليم خصوصي", "موقع دروس خصوصية",
   "معلمين خصوصي أونلاين", "دروس خصوصية اونلاين", "حصص أونلاين مباشرة",
   "حصص لايف زووم", "تعليم عن بعد", "كورسات أونلاين", "كورسات مسجلة",
@@ -52,7 +52,7 @@ export const organizationJsonLd = (lang: "ar" | "en" = "ar") => ({
   logo: `${SITE_URL}/favicon.png`,
   description:
     lang === "ar"
-      ? "منصة OSTAZE (أستازي / استاذي) — منصة دروس خصوصية ولايف أونلاين تجمع الطلاب بأفضل المعلمين الجامعيين في الكويت وقطر، عبر حصص مباشرة بالزووم وكورسات مسجلة."
+      ? "منصة OSTAZE (أستاذي / استاذي) — منصة دروس خصوصية ولايف أونلاين تجمع الطلاب بأفضل المعلمين الجامعيين في الكويت وقطر، عبر حصص مباشرة بالزووم وكورسات مسجلة."
       : "OSTAZE (Ostaze) is an online private tutoring and live-lesson platform connecting students with top university tutors in Kuwait & Qatar via Zoom and recorded courses.",
   keywords: lang === "ar" ? ALL_KEYWORDS_AR : ALL_KEYWORDS_EN,
   email: "info@ostaze.com",
