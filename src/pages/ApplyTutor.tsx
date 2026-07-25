@@ -257,7 +257,9 @@ const ApplyTutor = () => {
           <span className="inline-block text-xs font-bold tracking-wide uppercase px-3 py-1 rounded-full bg-primary/15 text-primary">
             {T.eyebrow}
           </span>
-          
+          <h1 className="mt-4 text-3xl md:text-4xl font-bold text-foreground">
+            انضم إلى فريق أستاذي
+          </h1>
           <p className="mt-3 text-muted-foreground max-w-2xl">{T.lede}</p>
           <ul className="mt-6 grid sm:grid-cols-2 gap-3">
             {T.checklist.map((c) => (
