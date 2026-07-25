@@ -464,8 +464,8 @@ const BookingFlowModal = ({ open, onClose, subject, courseLabel, teachers }: Pro
                     onChange={(e) => setNotes(e.target.value)}
                     placeholder={
                       lang === "ar"
-                        ? "اذكر مستواك أو الموضوع المحدد..."
-                        : "Mention your level or specific topic..."
+                        ? "اذكر أي ملاحظة إضافية..."
+                        : "Mention any additional notes..."
                     }
                     className="input-base w-full resize-none"
                   />
