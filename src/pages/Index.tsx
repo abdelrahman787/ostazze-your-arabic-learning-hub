@@ -52,7 +52,7 @@ const HomePage = () => {
           : "OSTAZE (Ostaze) connects students with top university tutors in KSA, UAE, Kuwait & Qatar via Zoom live lessons and recorded courses at fair prices."}
         canonical="https://ostaze.com/"
         keywords={lang === "ar"
-          ? "منصة استاذي، موقع استاذي، أستازي، استازي، OSTAZE، Ostaze، منصة دروس لايف، دروس خصوصية اونلاين، حصص لايف زووم، كورسات مسجلة، حجز معلم خصوصي، جامعة الكويت، جامعة قطر"
+          ? "منصة استاذي، موقع استاذي، أستازي، استاذي، OSTAZE، Ostaze، منصة دروس لايف، دروس خصوصية اونلاين، حصص لايف زووم، كورسات مسجلة، حجز معلم خصوصي، جامعة الكويت، جامعة قطر"
           : "ostaze, ostaze platform, online tutoring platform, private online tutors, live online lessons, zoom tutoring, university tutors Kuwait, university tutors Qatar"}
         jsonLd={jsonLd}
       />
@@ -137,7 +137,7 @@ const HomePage = () => {
       <section aria-hidden="true" className="sr-only">
         <h2>منصة OSTAZE (أستازي / استاذي / أستاذي) — دروس خصوصية ولايف أونلاين</h2>
         <p>
-          منصة <strong>أستازي</strong> (وتُكتب أيضاً: استاذي، أستاذي، استازي، OSTAZE، Ostaze) هي منصة دروس خصوصية ولايف أونلاين تجمع طلاب الجامعات في الكويت وقطر بأفضل المعلمين الجامعيين عبر حصص مباشرة بالزووم، إضافة إلى كورسات مسجلة وكورسات لايف. ابحث عن <em>منصة استاذي</em>، <em>موقع استاذي</em>، <em>منصة دروس لايف</em>، <em>موقع تعليم خصوصي</em>، أو <em>منصة دروس أونلاين</em> — كلها تقودك إلى OSTAZE.
+          منصة <strong>أستازي</strong> (وتُكتب أيضاً: استاذي، أستاذي، استاذي، OSTAZE، Ostaze) هي منصة دروس خصوصية ولايف أونلاين تجمع طلاب الجامعات في الكويت وقطر بأفضل المعلمين الجامعيين عبر حصص مباشرة بالزووم، إضافة إلى كورسات مسجلة وكورسات لايف. ابحث عن <em>منصة استاذي</em>، <em>موقع استاذي</em>، <em>منصة دروس لايف</em>، <em>موقع تعليم خصوصي</em>، أو <em>منصة دروس أونلاين</em> — كلها تقودك إلى OSTAZE.
         </p>
         <p>
           نوفّر <strong>معلمين خصوصي أونلاين</strong> في الرياضيات، الفيزياء، الكيمياء، البرمجة، اللغة الإنجليزية، المحاسبة، الإدارة، والقانون. يمكنك <strong>حجز معلم خصوصي</strong> بسرعة، اختيار التوقيت المناسب، والانضمام لحصة <strong>زووم لايف</strong> فوراً. ندعم طلاب <strong>جامعة الكويت</strong>، <strong>جامعة قطر</strong>، الجامعة الأمريكية، الخليج للعلوم والتكنولوجيا، وكافة الجامعات الإقليمية.

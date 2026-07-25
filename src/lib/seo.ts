@@ -10,7 +10,7 @@ export const SITE_NAME = "OSTAZE";
  * so meta keywords + JSON-LD alternateName stay in sync.
  */
 export const BRAND_VARIANTS_AR = [
-  "أستازي", "استازي", "أُسطازي", "استاذي", "أستاذي",
+  "أستازي", "استاذي", "أُسطازي", "استاذي", "أستاذي",
   "اوستاز", "أوستاز", "اوستازي", "OSTAZE", "Ostaze",
 ];
 
