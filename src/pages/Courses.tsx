@@ -103,10 +103,10 @@ const Courses = () => {
     <div>
       <PageHelmet
         title={lang === "ar"
-          ? "الكورسات المسجلة - أستازي OSTAZE"
+          ? "الكورسات المسجلة - أستاذي OSTAZE"
           : "Recorded Courses - OSTAZE"}
         description={lang === "ar"
-          ? "تصفح الكورسات المسجلة على منصة أستازي — دروس جامعية مسجلة بجودة عالية في الرياضيات، الفيزياء، البرمجة، اللغة الإنجليزية وغيرها."
+          ? "تصفح الكورسات المسجلة على منصة أستاذي — دروس جامعية مسجلة بجودة عالية في الرياضيات، الفيزياء، البرمجة، اللغة الإنجليزية وغيرها."
           : "Browse OSTAZE recorded courses — high-quality university lessons in math, physics, programming, English and more."}
         canonical="https://ostaze.com/courses"
       />

@@ -60,10 +60,10 @@ const Categories = () => {
     <div>
       <PageHelmet
         title={lang === "ar"
-          ? "أقسام المواد - أستازي OSTAZE"
+          ? "أقسام المواد - أستاذي OSTAZE"
           : "Subject Categories - OSTAZE"}
         description={lang === "ar"
-          ? "تصفح أقسام المواد الدراسية المتاحة على منصة أستازي — قسم الهندسة، الحاسب، اللغات والمزيد."
+          ? "تصفح أقسام المواد الدراسية المتاحة على منصة أستاذي — قسم الهندسة، الحاسب، اللغات والمزيد."
           : "Browse subject categories on OSTAZE — engineering, computing, languages and more."}
         canonical="https://ostaze.com/categories"
         keywords={lang === "ar" ? "تصنيفات, مواد, جامعات الكويت, جامعات قطر" : "categories, subjects, Kuwait, Qatar universities"}

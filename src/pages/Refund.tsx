@@ -69,9 +69,9 @@ const Refund = () => {
   return (
     <div>
       <PageHelmet
-        title={lang === "ar" ? "سياسة الاسترجاع - أستازي OSTAZE" : "Refund Policy - OSTAZE"}
+        title={lang === "ar" ? "سياسة الاسترجاع - أستاذي OSTAZE" : "Refund Policy - OSTAZE"}
         description={lang === "ar"
-          ? "تعرف على سياسة استرجاع الأموال في منصة أستازي — شروط الاسترجاع والإلغاء."
+          ? "تعرف على سياسة استرجاع الأموال في منصة أستاذي — شروط الاسترجاع والإلغاء."
           : "Learn about OSTAZE refund policy — refund and cancellation terms."}
         canonical="https://ostaze.com/refund"
       />
