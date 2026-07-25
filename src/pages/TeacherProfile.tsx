@@ -90,8 +90,6 @@ const TeacherProfile = () => {
     fetch();
   }, [id]);
 
-  // Fetch reviews
-  useEffect(() => {
   if (loading) {
     return (
       <div className="flex justify-center items-center py-32">
