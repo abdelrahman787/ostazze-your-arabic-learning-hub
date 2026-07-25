@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import TeacherCard from "@/components/TeacherCard";
 import type { TeacherData } from "@/components/TeacherCard";
-import { UserX, RefreshCw, Sparkles, Users, Calendar } from "lucide-react";
+import { UserX, RefreshCw, Sparkles, Users, Calendar, GraduationCap } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
@@ -101,7 +101,17 @@ const Teachers = () => {
           : "Browse top university tutors on OSTAZE — verified specialists with real student ratings. Book your private session now."}
         canonical="https://ostaze.com/teachers"
       />
-      <PageHeader title={t("teachers_title")} subtitle={t("teachers_choose")} variant="teachers" />
+      <PageHeader title={t("teachers_title")} subtitle={t("teachers_choose")} variant="teachers">
+        <div className="mb-6 md:mb-0 md:absolute md:start-0 md:top-0 flex justify-center md:justify-start">
+          <Link
+            to="/apply-tutor"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-primary/30 bg-primary/10 text-primary text-sm font-bold hover:bg-primary/20 transition-colors"
+          >
+            <GraduationCap size={16} />
+            {lang === "ar" ? "انضم كمعلم" : "Apply as a Tutor"}
+          </Link>
+        </div>
+      </PageHeader>
 
       <div className="container pt-6">
         <WhatsAppTutorBanner />
