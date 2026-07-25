@@ -145,144 +145,71 @@ const TeacherProfile = () => {
       </section>
 
       <div className="container py-8">
-        <div className="grid lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 space-y-6">
-            <div className="card-base p-6">
-              <div className="flex gap-5 mb-6">
-                <motion.img
-                  whileHover={{ scale: 1.05 }}
-                  src={teacher.avatar_url || getTeacherAvatar(teacher.user_id, teacher.full_name)}
-                  alt={displayName}
-                  className="w-20 h-20 rounded-2xl object-cover shadow-md shrink-0"
-                  loading="lazy"
-                  width={80}
-                  height={80}
-                />
-                <div>
-                  <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <h1 className="text-xl font-black">{displayName}</h1>
-                    {teacher.verified && <span className="text-xs bg-success/10 text-success px-2.5 py-1 rounded-full font-semibold">{t("teacher_verified")}</span>}
-                  </div>
-                  <div className="inline-flex items-center gap-1.5 mt-2 text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">
-                    <BookOpen size={12} />
-                    {displayMajor}
-                  </div>
-                </div>
-              </div>
-
-
-              {displayBio && <p className="text-muted-foreground leading-relaxed mb-6">{displayBio}</p>}
-
-              <div className="flex flex-wrap gap-2 mb-6">
-                {displaySubjects.map((s, i) => <span key={i} className="badge-brand">{s}</span>)}
-              </div>
-
-              <RefundNote className="mb-4" />
-
-              <div className="flex gap-4 items-center flex-wrap">
-                <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} onClick={() => setShowBooking(true)} className="btn-primary flex-1 text-center text-lg">
-                  {t("teacher_book")} →
-                </motion.button>
-              </div>
-
-              <BookSessionModal
-                open={showBooking}
-                onClose={() => setShowBooking(false)}
-                teacherId={teacher.user_id}
-                teacherName={displayName}
-                subjects={displaySubjects}
+        <div className="max-w-3xl mx-auto space-y-6">
+          <div className="card-base p-6">
+            <div className="flex gap-5 mb-6">
+              <motion.img
+                whileHover={{ scale: 1.05 }}
+                src={teacher.avatar_url || getTeacherAvatar(teacher.user_id, teacher.full_name)}
+                alt={displayName}
+                className="w-20 h-20 rounded-2xl object-cover shadow-md shrink-0"
+                loading="lazy"
+                width={80}
+                height={80}
               />
-
-            </div>
-
-            {availability.length > 0 && (
-              <div className="card-base p-6">
-                <h3 className="font-extrabold text-lg mb-4 flex items-center gap-2">
-                  <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}><Clock size={20} className="text-primary" /></motion.div>
-                  {t("teacher_availability")}
-                </h3>
-                <div className="space-y-3">
-                  {availability.map((a, i) => (
-                    <div key={i} className="flex items-center justify-between p-3 bg-secondary rounded-xl">
-                      <span className="font-bold text-sm">{DAYS[a.day_of_week]}</span>
-                      <span className="text-muted-foreground text-sm">{a.start_time.slice(0, 5)} - {a.end_time.slice(0, 5)}</span>
-                    </div>
-                  ))}
+              <div>
+                <div className="flex items-center gap-2 flex-wrap mb-1">
+                  <h1 className="text-xl font-black">{displayName}</h1>
+                  {teacher.verified && <span className="text-xs bg-success/10 text-success px-2.5 py-1 rounded-full font-semibold">{t("teacher_verified")}</span>}
+                </div>
+                <div className="inline-flex items-center gap-1.5 mt-2 text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">
+                  <BookOpen size={12} />
+                  {displayMajor}
                 </div>
               </div>
-            )}
+            </div>
+
+
+            {displayBio && <p className="text-muted-foreground leading-relaxed mb-6">{displayBio}</p>}
+
+            <div className="flex flex-wrap gap-2 mb-6">
+              {displaySubjects.map((s, i) => <span key={i} className="badge-brand">{s}</span>)}
+            </div>
+
+            <RefundNote className="mb-4" />
+
+            <div className="flex gap-4 items-center flex-wrap">
+              <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} onClick={() => setShowBooking(true)} className="btn-primary flex-1 text-center text-lg">
+                {t("teacher_book")} →
+              </motion.button>
+            </div>
+
+            <BookSessionModal
+              open={showBooking}
+              onClose={() => setShowBooking(false)}
+              teacherId={teacher.user_id}
+              teacherName={displayName}
+              subjects={displaySubjects}
+            />
+
           </div>
 
-          <div className="space-y-6">
-
+          {availability.length > 0 && (
             <div className="card-base p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-extrabold text-lg">{t("teacher_reviews")}</h3>
-                {reviews.length > 0 && (
-                  <div className="flex items-center gap-2">
-                    <StarRating value={Math.round(reviews.reduce((s, r) => s + r.rating, 0) / reviews.length)} readonly />
-                    <span className="text-sm font-bold">
-                      {(reviews.reduce((s, r) => s + r.rating, 0) / reviews.length).toFixed(1)}
-                    </span>
-                    <span className="text-xs text-muted-foreground">({reviews.length} {t("reviews_count_label")})</span>
+              <h3 className="font-extrabold text-lg mb-4 flex items-center gap-2">
+                <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}><Clock size={20} className="text-primary" /></motion.div>
+                {t("teacher_availability")}
+              </h3>
+              <div className="space-y-3">
+                {availability.map((a, i) => (
+                  <div key={i} className="flex items-center justify-between p-3 bg-secondary rounded-xl">
+                    <span className="font-bold text-sm">{DAYS[a.day_of_week]}</span>
+                    <span className="text-muted-foreground text-sm">{a.start_time.slice(0, 5)} - {a.end_time.slice(0, 5)}</span>
                   </div>
-                )}
+                ))}
               </div>
-
-              {reviewsLoading ? (
-                <div className="flex justify-center py-6"><Loader2 className="animate-spin text-primary" size={20} /></div>
-              ) : reviews.length === 0 ? (
-                <p className="text-center py-6 text-muted-foreground text-sm">{t("no_reviews_yet")}</p>
-              ) : (
-                <div className="space-y-3 mb-4">
-                  {reviews.map((r) => (
-                    <motion.div key={r.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="p-3 bg-secondary rounded-xl">
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="font-bold text-sm">{r.student_name}</span>
-                        <StarRating value={r.rating} readonly />
-                      </div>
-                      {r.comment && <p className="text-muted-foreground text-sm">{r.comment}</p>}
-                      <p className="text-xs text-muted-foreground mt-1">
-                        {new Date(r.created_at).toLocaleDateString()}
-                      </p>
-                    </motion.div>
-                  ))}
-                </div>
-              )}
-
-              {/* Review form */}
-              {user && user.id !== id && (
-                <div className="border-t pt-4">
-                  {alreadyReviewed ? (
-                    <p className="text-xs text-muted-foreground text-center">{t("already_reviewed")}</p>
-                  ) : canReview ? (
-                    <div className="space-y-3">
-                      <h4 className="font-bold text-sm">{t("rate_teacher")}</h4>
-                      <StarRating value={reviewRating} onChange={setReviewRating} />
-                      <textarea
-                        value={reviewComment}
-                        onChange={(e) => setReviewComment(e.target.value)}
-                        rows={2}
-                        className="input-base resize-none text-sm"
-                        placeholder={t("review_comment_placeholder")}
-                      />
-                      <motion.button
-                        whileTap={{ scale: 0.97 }}
-                        onClick={handleSubmitReview}
-                        disabled={submittingReview}
-                        className="btn-primary w-full text-sm flex items-center justify-center gap-2 disabled:opacity-50"
-                      >
-                        {submittingReview ? <Loader2 size={14} className="animate-spin" /> : <Send size={14} />}
-                        {t("submit_review")}
-                      </motion.button>
-                    </div>
-                  ) : (
-                    <p className="text-xs text-muted-foreground text-center">{t("review_booking_required")}</p>
-                  )}
-                </div>
-              )}
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>
