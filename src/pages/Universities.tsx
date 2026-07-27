@@ -43,6 +43,7 @@ const countryNames: Record<string, { ar: string; en: string }> = {
 
 const comingSoonCountries = [
   { code: "AE", name_ar: countryNames.AE.ar, name_en: countryNames.AE.en, universities: [] as University[] },
+  { code: "EG", name_ar: countryNames.EG.ar, name_en: countryNames.EG.en, universities: [] as University[] },
 ];
 
 const countryColors: Record<string, { from: string; to: string; accent: string }> = {
@@ -50,6 +51,7 @@ const countryColors: Record<string, { from: string; to: string; accent: string }
   QA: { from: "from-red-600/20", to: "to-red-400/10", accent: "text-red-600 dark:text-red-400" },
   SA: { from: "from-green-700/20", to: "to-green-500/10", accent: "text-green-700 dark:text-green-400" },
   AE: { from: "from-red-600/20", to: "to-green-600/10", accent: "text-emerald-600 dark:text-emerald-400" },
+  EG: { from: "from-red-700/20", to: "to-black/10", accent: "text-red-700 dark:text-red-500" },
 };
 
 const flagGlow: Record<string, string> = {
@@ -57,6 +59,7 @@ const flagGlow: Record<string, string> = {
   QA: "radial-gradient(circle, #8A1538 0%, #5B0E26 70%, transparent 100%)",
   SA: "radial-gradient(circle, #006C35 0%, #004d26 70%, transparent 100%)",
   AE: "radial-gradient(circle, #00732F 0%, #FF0000 70%, transparent 100%)",
+  EG: "radial-gradient(circle, #CE1126 0%, #C09300 70%, transparent 100%)",
 };
 
 // ===== Static high-quality flag with subtle ambient glow =====
