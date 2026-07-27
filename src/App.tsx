@@ -181,10 +181,14 @@ const App = () => (
           <LanguageProvider>
             <AuthProvider>
               <TooltipProvider>
+                {/* reducedMotion="user" makes every reveal/transition respect
+                    prefers-reduced-motion (content shows instantly). */}
+                <MotionConfig reducedMotion="user">
                 {/* Toaster/Sonner are rendered inside DeferredWidgets (idle-mounted) */}
                 <BrowserRouter>
                   <ScrollToTop />
                   <GlobalSeo />
+                  <IdlePrefetch />
                   <Layout>
                     <PageTransition>
                       <Suspense fallback={<RouteFallback />}>
