@@ -85,6 +85,7 @@ const TeacherCard = ({ teacher, index = 0 }: { teacher: TeacherData; index?: num
             alt={displayName}
             className="w-20 h-20 rounded-2xl object-cover border-4 border-card shadow-md"
             loading="lazy"
+            decoding="async"
             width={80}
             height={80}
           />
