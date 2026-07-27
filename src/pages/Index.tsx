@@ -121,13 +121,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Sentinel — kicks off IndexBelowFold fetch as user approaches fold */}
-      <div ref={belowFoldRef} aria-hidden="true" />
-      {belowFoldReady && (
-        <Suspense fallback={<div className="min-h-[40vh]" aria-hidden="true" />}>
-          <IndexBelowFold />
-        </Suspense>
-      )}
+      <IndexBelowFold />
 
       {/* SEO-only contextual paragraph */}
       <section aria-hidden="true" className="sr-only">
