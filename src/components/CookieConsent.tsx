@@ -42,7 +42,7 @@ const CookieConsent = () => {
       role="dialog"
       aria-live="polite"
       aria-label={lang === "ar" ? "إشعار ملفات تعريف الارتباط" : "Cookie notice"}
-      className="fixed bottom-4 inset-x-4 md:inset-x-auto md:end-6 md:bottom-6 md:max-w-md z-[60] card-base p-4 shadow-2xl border border-border/60 backdrop-blur-md bg-background/95"
+      className="fixed bottom-4 inset-x-4 md:inset-x-auto md:end-6 md:bottom-6 md:max-w-md z-[60] card-base p-4 shadow-2xl border border-border/60 bg-background"
     >
       <div className="flex items-start gap-3">
         <div className="w-9 h-9 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
