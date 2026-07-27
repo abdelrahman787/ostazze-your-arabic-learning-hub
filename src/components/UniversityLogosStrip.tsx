@@ -90,8 +90,6 @@ const UniversityLogosStrip = () => {
           style={{
             background:
               "linear-gradient(135deg, hsl(var(--primary) / 0.10) 0%, hsl(290 70% 50% / 0.08) 50%, hsl(270 70% 55% / 0.10) 100%)",
-            backdropFilter: "blur(20px)",
-            WebkitBackdropFilter: "blur(20px)",
             border: "1px solid hsl(var(--foreground) / 0.08)",
             boxShadow:
               "inset 0 1px 0 hsl(0 0% 100% / 0.08), 0 10px 40px -15px hsl(var(--primary) / 0.15), 0 10px 40px -15px hsl(270 70% 55% / 0.15)",
@@ -108,18 +106,18 @@ const UniversityLogosStrip = () => {
 
           {/* Soft inner color glows */}
           <div
-            className="absolute -top-20 -left-20 w-[280px] h-[280px] rounded-full blur-[80px] opacity-50 pointer-events-none glow-pulse-soft"
+            className="absolute -top-20 -left-20 w-[280px] h-[280px] rounded-full opacity-50 pointer-events-none glow-pulse-soft"
             style={{
               background:
-                "radial-gradient(circle, hsl(var(--primary) / 0.35) 0%, transparent 70%)",
+                "radial-gradient(50% 50% at 50% 50%, hsl(var(--primary) / 0.35) 0%, hsl(var(--primary) / 0.16) 40%, transparent 72%)",
             }}
           />
           <div
-            className="absolute -bottom-20 -right-20 w-[320px] h-[320px] rounded-full blur-[90px] opacity-50 pointer-events-none glow-pulse-soft"
+            className="absolute -bottom-20 -right-20 w-[320px] h-[320px] rounded-full opacity-50 pointer-events-none glow-pulse-soft"
             style={{
               animationDelay: "-3s",
               background:
-                "radial-gradient(circle, hsl(270 70% 55% / 0.35) 0%, transparent 70%)",
+                "radial-gradient(50% 50% at 50% 50%, hsl(270 70% 55% / 0.35) 0%, hsl(270 70% 55% / 0.16) 40%, transparent 72%)",
             }}
           />
 

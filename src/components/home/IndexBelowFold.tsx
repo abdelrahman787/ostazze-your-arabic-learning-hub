@@ -174,8 +174,8 @@ const IndexBelowFold = () => {
               }}
             />
             <div
-              className="absolute -top-20 -right-20 w-[280px] h-[280px] rounded-full blur-[90px] opacity-30 pointer-events-none"
-              style={{ background: "radial-gradient(circle, hsl(38 92% 55% / 0.45) 0%, transparent 70%)" }}
+              className="absolute -top-20 -right-20 w-[280px] h-[280px] rounded-full opacity-30 pointer-events-none"
+              style={{ background: "radial-gradient(50% 50% at 50% 50%, hsl(38 92% 55% / 0.45) 0%, hsl(38 92% 55% / 0.2) 40%, transparent 72%)" }}
             />
             <div className="relative z-10">
               <h2 className="text-2xl md:text-3xl font-extrabold mb-3">{t("whatsapp_cta_title")}</h2>
