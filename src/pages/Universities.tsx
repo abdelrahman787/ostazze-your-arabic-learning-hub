@@ -193,8 +193,8 @@ const Universities = () => {
     <div className="min-h-screen">
       <PageHelmet
         title={lang === "ar"
-          ? "الجامعات - أستاذي OSTAZE"
-          : "Universities - OSTAZE"}
+          ? "الدولة - أستاذي OSTAZE"
+          : "Countries - OSTAZE"}
         description={lang === "ar"
           ? "اكتشف الجامعات المدعومة على منصة أستاذي — جامعة الكويت، جامعة قطر، والمزيد. معلمون متخصصون لكل جامعة ومنهج."
           : "Discover universities supported by OSTAZE — Kuwait University, Qatar University and more. Specialized tutors for every program."}
@@ -209,7 +209,7 @@ const Universities = () => {
           }),
           breadcrumbJsonLd([
             { name: lang === "ar" ? "الرئيسية" : "Home", path: "/" },
-            { name: lang === "ar" ? "الجامعات" : "Universities", path: "/universities" },
+            { name: lang === "ar" ? "الدولة" : "Countries", path: "/universities" },
           ]),
           faqJsonLd(uniFaq),
         ]}
@@ -220,7 +220,7 @@ const Universities = () => {
           <GraduationCap size={16} />
           {lang === "ar" ? "الدليل الأكاديمي" : "Academic Directory"}
         </motion.div>
-        <h1 className="text-3xl md:text-5xl font-black tracking-tight">{t("universities_title")}</h1>
+        <h1 className="text-3xl md:text-5xl font-black tracking-tight">{lang === "ar" ? "الدولة" : t("universities_title")}</h1>
         
       </div>
 
@@ -229,17 +229,17 @@ const Universities = () => {
         <div className="flex items-center gap-1.5 text-sm text-muted-foreground mb-6">
           <Link to="/" className="hover:text-primary transition-colors">{lang === "ar" ? "الرئيسية" : "Home"}</Link>
           <ChevronRight size={12} />
-          {view === "countries" && <span className="text-foreground font-medium">{t("universities_title")}</span>}
+          {view === "countries" && <span className="text-foreground font-medium">{lang === "ar" ? "الدولة" : t("universities_title")}</span>}
           {view === "universities" && selectedCountry && (
             <>
-              <button onClick={() => { setView("countries"); setSelectedCountry(null); }} className="hover:text-primary transition-colors">{t("universities_title")}</button>
+              <button onClick={() => { setView("countries"); setSelectedCountry(null); }} className="hover:text-primary transition-colors">{lang === "ar" ? "الدولة" : t("universities_title")}</button>
               <ChevronRight size={12} />
               <span className="text-foreground font-medium">{lang === "ar" ? selectedCountry.name_ar : selectedCountry.name_en}</span>
             </>
           )}
           {view === "university" && selectedCountry && selectedUni && (
             <>
-              <button onClick={() => { setView("countries"); setSelectedCountry(null); }} className="hover:text-primary transition-colors">{t("universities_title")}</button>
+              <button onClick={() => { setView("countries"); setSelectedCountry(null); }} className="hover:text-primary transition-colors">{lang === "ar" ? "الدولة" : t("universities_title")}</button>
               <ChevronRight size={12} />
               <button onClick={() => { setView("universities"); setSelectedUni(null); }} className="hover:text-primary transition-colors">{lang === "ar" ? selectedCountry.name_ar : selectedCountry.name_en}</button>
               <ChevronRight size={12} />
