@@ -116,6 +116,29 @@ const DeferredWidgets = () => {
   );
 };
 
+/** Warm the most likely next route chunks once the browser is idle. */
+const IdlePrefetch = () => {
+  useEffect(() => {
+    const run = () => {
+      import("./pages/Universities");
+      import("./pages/Teachers");
+      import("./pages/Subjects");
+    };
+    const ric = (window as unknown as {
+      requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number;
+    }).requestIdleCallback;
+    if (typeof ric === "function") {
+      ric(run, { timeout: 4000 });
+    } else {
+      const id = window.setTimeout(run, 2500);
+      return () => window.clearTimeout(id);
+    }
+  }, []);
+  return null;
+};
+
+
+
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
   const hideFooter =
