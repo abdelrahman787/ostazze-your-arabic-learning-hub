@@ -220,7 +220,7 @@ const Universities = () => {
           <GraduationCap size={16} />
           {lang === "ar" ? "الدليل الأكاديمي" : "Academic Directory"}
         </motion.div>
-        <h1 className="text-3xl md:text-5xl font-black tracking-tight">{t("universities_title")}</h1>
+        <h1 className="text-3xl md:text-5xl font-black tracking-tight">{lang === "ar" ? "الدولة" : t("universities_title")}</h1>
         
       </div>
 
@@ -229,7 +229,7 @@ const Universities = () => {
         <div className="flex items-center gap-1.5 text-sm text-muted-foreground mb-6">
           <Link to="/" className="hover:text-primary transition-colors">{lang === "ar" ? "الرئيسية" : "Home"}</Link>
           <ChevronRight size={12} />
-          {view === "countries" && <span className="text-foreground font-medium">{t("universities_title")}</span>}
+          {view === "countries" && <span className="text-foreground font-medium">{lang === "ar" ? "الدولة" : t("universities_title")}</span>}
           {view === "universities" && selectedCountry && (
             <>
               <button onClick={() => { setView("countries"); setSelectedCountry(null); }} className="hover:text-primary transition-colors">{t("universities_title")}</button>
