@@ -554,7 +554,7 @@ const IndexBelowFold = () => {
               <p className="text-white/85 mb-8 max-w-lg mx-auto text-sm md:text-base">{t("cta_subtitle")}</p>
               <div className="flex justify-center gap-3 flex-wrap">
                 <Link to="/register" className="btn-cta-light text-base">{t("cta_register")}</Link>
-                <Link to="/teachers" className="inline-flex items-center justify-center px-7 py-3.5 rounded-full font-bold border-2 border-white/30 text-white hover:bg-white/10 transition-all backdrop-blur-sm">
+                <Link to="/teachers" className="inline-flex items-center justify-center px-7 py-3.5 rounded-full font-bold border-2 border-white/30 text-white bg-white/[0.06] hover:bg-white/10 transition-all">
                   {t("hero_browse")}
                 </Link>
               </div>
