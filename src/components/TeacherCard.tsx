@@ -70,7 +70,7 @@ const TeacherCard = ({ teacher, index = 0 }: { teacher: TeacherData; index?: num
       <div className="relative h-24 bg-gradient-to-br from-primary/25 via-primary/10 to-transparent">
         <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_30%_50%,hsl(var(--primary)/0.35),transparent_60%)]" />
         {teacher.verified && (
-          <span className="absolute top-3 end-3 inline-flex items-center gap-1 rounded-full bg-success/15 text-success text-[10px] font-bold px-2.5 py-1 backdrop-blur-sm">
+          <span className="absolute top-3 end-3 inline-flex items-center gap-1 rounded-full bg-success/15 text-success text-[10px] font-bold px-2.5 py-1">
             <BadgeCheck size={12} />
             {t("teacher_verified")}
           </span>

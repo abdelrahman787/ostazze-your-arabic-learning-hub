@@ -23,7 +23,7 @@ const WhatsAppTutorBanner = () => {
   return (
     <section className="w-full border-y border-border/50 bg-gradient-to-r from-[#25D366]/10 via-[#25D366]/5 to-[#25D366]/10 dark:from-[#25D366]/15 dark:via-[#25D366]/5 dark:to-[#25D366]/15" dir={isRtl ? "rtl" : "ltr"}>
       <div className="container py-6 md:py-8">
-        <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 justify-between rounded-2xl bg-background/80 backdrop-blur-sm border border-[#25D366]/20 px-5 py-5 md:px-8 md:py-6 shadow-sm">
+        <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 justify-between rounded-2xl bg-background/95 border border-[#25D366]/20 px-5 py-5 md:px-8 md:py-6 shadow-sm">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-full bg-[#25D366] text-white flex items-center justify-center shrink-0 shadow-md">
               <WhatsAppIcon />
