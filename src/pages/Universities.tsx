@@ -232,14 +232,14 @@ const Universities = () => {
           {view === "countries" && <span className="text-foreground font-medium">{lang === "ar" ? "الدولة" : t("universities_title")}</span>}
           {view === "universities" && selectedCountry && (
             <>
-              <button onClick={() => { setView("countries"); setSelectedCountry(null); }} className="hover:text-primary transition-colors">{t("universities_title")}</button>
+              <button onClick={() => { setView("countries"); setSelectedCountry(null); }} className="hover:text-primary transition-colors">{lang === "ar" ? "الدولة" : t("universities_title")}</button>
               <ChevronRight size={12} />
               <span className="text-foreground font-medium">{lang === "ar" ? selectedCountry.name_ar : selectedCountry.name_en}</span>
             </>
           )}
           {view === "university" && selectedCountry && selectedUni && (
             <>
-              <button onClick={() => { setView("countries"); setSelectedCountry(null); }} className="hover:text-primary transition-colors">{t("universities_title")}</button>
+              <button onClick={() => { setView("countries"); setSelectedCountry(null); }} className="hover:text-primary transition-colors">{lang === "ar" ? "الدولة" : t("universities_title")}</button>
               <ChevronRight size={12} />
               <button onClick={() => { setView("universities"); setSelectedUni(null); }} className="hover:text-primary transition-colors">{lang === "ar" ? selectedCountry.name_ar : selectedCountry.name_en}</button>
               <ChevronRight size={12} />
