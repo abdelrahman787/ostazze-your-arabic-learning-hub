@@ -16,6 +16,7 @@ import flagKW from "@/assets/flag-kw.svg";
 import flagQA from "@/assets/flag-qa.svg";
 import flagSA from "@/assets/flag-sa.svg";
 import flagAE from "@/assets/flag-ae.svg";
+import flagEG from "@/assets/flag-eg.svg";
 import WhatsAppQuickBook from "@/components/WhatsAppQuickBook";
 
 // Group universities by country
