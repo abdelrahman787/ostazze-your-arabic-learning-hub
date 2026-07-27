@@ -33,13 +33,14 @@ const HomePage = () => {
       {/* Ambient animated background — hidden on reduced-motion & mobile to
           cut decorative paint cost on low-end devices. */}
       <div aria-hidden="true" className="fixed inset-0 -z-10 pointer-events-none overflow-hidden motion-reduce:hidden">
+        {/* Gradient-based glows (no runtime blur() — Safari/WebKit repaints those every frame) */}
         <div
-          className="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full blur-[140px] glow-drift-a"
-          style={{ background: "radial-gradient(circle, hsl(var(--primary) / 0.5) 0%, transparent 70%)" }}
+          className="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full glow-drift-a"
+          style={{ background: "radial-gradient(50% 50% at 50% 50%, hsl(var(--primary) / 0.5) 0%, hsl(var(--primary) / 0.22) 40%, transparent 72%)" }}
         />
         <div
-          className="hidden md:block absolute top-1/3 -right-40 w-[700px] h-[700px] rounded-full blur-[160px] glow-drift-b"
-          style={{ background: "radial-gradient(circle, hsl(270 70% 55% / 0.45) 0%, transparent 70%)" }}
+          className="hidden md:block absolute top-1/3 -right-40 w-[700px] h-[700px] rounded-full glow-drift-b"
+          style={{ background: "radial-gradient(50% 50% at 50% 50%, hsl(270 70% 55% / 0.45) 0%, hsl(270 70% 55% / 0.2) 40%, transparent 72%)" }}
         />
       </div>
 
