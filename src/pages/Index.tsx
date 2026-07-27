@@ -61,8 +61,8 @@ const HomePage = () => {
       {/* Hero — CSS-only animations to keep framer-motion off the critical path */}
       <section className="hero-gradient min-h-[100dvh] lg:min-h-[100vh] flex items-center overflow-hidden relative pt-page-lg pb-20 sm:pb-16">
         <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-          <div className="absolute top-1/2 -start-20 w-[600px] h-[600px] rounded-full blur-[140px]" style={{ background: "hsl(14 91% 50% / 0.12)" }} />
-          <div className="absolute -top-40 -end-20 w-[500px] h-[500px] rounded-full blur-[120px]" style={{ background: "hsl(14 91% 30% / 0.08)" }} />
+          <div className="absolute top-1/2 -start-20 w-[600px] h-[600px] rounded-full" style={{ background: "radial-gradient(50% 50% at 50% 50%, hsl(14 91% 50% / 0.12) 0%, hsl(14 91% 50% / 0.06) 45%, transparent 72%)" }} />
+          <div className="absolute -top-40 -end-20 w-[500px] h-[500px] rounded-full" style={{ background: "radial-gradient(50% 50% at 50% 50%, hsl(14 91% 30% / 0.08) 0%, hsl(14 91% 30% / 0.04) 45%, transparent 72%)" }} />
           <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(hsl(var(--foreground)) 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
         </div>
 
