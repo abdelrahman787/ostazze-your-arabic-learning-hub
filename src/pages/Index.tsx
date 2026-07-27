@@ -33,13 +33,14 @@ const HomePage = () => {
       {/* Ambient animated background — hidden on reduced-motion & mobile to
           cut decorative paint cost on low-end devices. */}
       <div aria-hidden="true" className="fixed inset-0 -z-10 pointer-events-none overflow-hidden motion-reduce:hidden">
+        {/* Gradient-based glows (no runtime blur() — Safari/WebKit repaints those every frame) */}
         <div
-          className="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full blur-[140px] glow-drift-a"
-          style={{ background: "radial-gradient(circle, hsl(var(--primary) / 0.5) 0%, transparent 70%)" }}
+          className="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full glow-drift-a"
+          style={{ background: "radial-gradient(50% 50% at 50% 50%, hsl(var(--primary) / 0.5) 0%, hsl(var(--primary) / 0.22) 40%, transparent 72%)" }}
         />
         <div
-          className="hidden md:block absolute top-1/3 -right-40 w-[700px] h-[700px] rounded-full blur-[160px] glow-drift-b"
-          style={{ background: "radial-gradient(circle, hsl(270 70% 55% / 0.45) 0%, transparent 70%)" }}
+          className="hidden md:block absolute top-1/3 -right-40 w-[700px] h-[700px] rounded-full glow-drift-b"
+          style={{ background: "radial-gradient(50% 50% at 50% 50%, hsl(270 70% 55% / 0.45) 0%, hsl(270 70% 55% / 0.2) 40%, transparent 72%)" }}
         />
       </div>
 
@@ -60,8 +61,8 @@ const HomePage = () => {
       {/* Hero — CSS-only animations to keep framer-motion off the critical path */}
       <section className="hero-gradient min-h-[100dvh] lg:min-h-[100vh] flex items-center overflow-hidden relative pt-page-lg pb-20 sm:pb-16">
         <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-          <div className="absolute top-1/2 -start-20 w-[600px] h-[600px] rounded-full blur-[140px]" style={{ background: "hsl(14 91% 50% / 0.12)" }} />
-          <div className="absolute -top-40 -end-20 w-[500px] h-[500px] rounded-full blur-[120px]" style={{ background: "hsl(14 91% 30% / 0.08)" }} />
+          <div className="absolute top-1/2 -start-20 w-[600px] h-[600px] rounded-full" style={{ background: "radial-gradient(50% 50% at 50% 50%, hsl(14 91% 50% / 0.12) 0%, hsl(14 91% 50% / 0.06) 45%, transparent 72%)" }} />
+          <div className="absolute -top-40 -end-20 w-[500px] h-[500px] rounded-full" style={{ background: "radial-gradient(50% 50% at 50% 50%, hsl(14 91% 30% / 0.08) 0%, hsl(14 91% 30% / 0.04) 45%, transparent 72%)" }} />
           <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(hsl(var(--foreground)) 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
         </div>
 
@@ -114,8 +115,8 @@ const HomePage = () => {
             <div className="relative flex justify-center lg:justify-end hero-scale-in" style={{ animationDelay: "200ms" }}>
               <div className="relative w-full max-w-[480px] aspect-[1/1.05] sm:aspect-square flex items-center justify-center">
                 <div
-                  className="absolute inset-0 rounded-full blur-[80px]"
-                  style={{ background: "radial-gradient(circle, hsl(14 91% 50% / 0.35), transparent 65%)" }}
+                  className="absolute inset-0 rounded-full"
+                  style={{ background: "radial-gradient(50% 50% at 50% 50%, hsl(14 91% 50% / 0.35) 0%, hsl(14 91% 50% / 0.16) 40%, transparent 70%)" }}
                   aria-hidden="true"
                 />
                 <HeroOrbit />
