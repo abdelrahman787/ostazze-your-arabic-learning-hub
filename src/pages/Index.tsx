@@ -115,8 +115,8 @@ const HomePage = () => {
             <div className="relative flex justify-center lg:justify-end hero-scale-in" style={{ animationDelay: "200ms" }}>
               <div className="relative w-full max-w-[480px] aspect-[1/1.05] sm:aspect-square flex items-center justify-center">
                 <div
-                  className="absolute inset-0 rounded-full blur-[80px]"
-                  style={{ background: "radial-gradient(circle, hsl(14 91% 50% / 0.35), transparent 65%)" }}
+                  className="absolute inset-0 rounded-full"
+                  style={{ background: "radial-gradient(50% 50% at 50% 50%, hsl(14 91% 50% / 0.35) 0%, hsl(14 91% 50% / 0.16) 40%, transparent 70%)" }}
                   aria-hidden="true"
                 />
                 <HeroOrbit />
