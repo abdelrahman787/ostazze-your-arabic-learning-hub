@@ -56,6 +56,9 @@ const OurTeam = () => {
                   src={m.img}
                   alt={isAr ? m.name.ar : m.name.en}
                   loading="lazy"
+                  decoding="async"
+                  width={400}
+                  height={500}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
