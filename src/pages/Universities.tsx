@@ -209,7 +209,7 @@ const Universities = () => {
           }),
           breadcrumbJsonLd([
             { name: lang === "ar" ? "الرئيسية" : "Home", path: "/" },
-            { name: lang === "ar" ? "الجامعات" : "Universities", path: "/universities" },
+            { name: lang === "ar" ? "الدولة" : "Countries", path: "/universities" },
           ]),
           faqJsonLd(uniFaq),
         ]}
