@@ -193,8 +193,8 @@ const Universities = () => {
     <div className="min-h-screen">
       <PageHelmet
         title={lang === "ar"
-          ? "الجامعات - أستاذي OSTAZE"
-          : "Universities - OSTAZE"}
+          ? "الدولة - أستاذي OSTAZE"
+          : "Countries - OSTAZE"}
         description={lang === "ar"
           ? "اكتشف الجامعات المدعومة على منصة أستاذي — جامعة الكويت، جامعة قطر، والمزيد. معلمون متخصصون لكل جامعة ومنهج."
           : "Discover universities supported by OSTAZE — Kuwait University, Qatar University and more. Specialized tutors for every program."}
