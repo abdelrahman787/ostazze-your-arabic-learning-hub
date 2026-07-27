@@ -31,13 +31,14 @@ const getCountries = () => {
   return Array.from(map.values());
 };
 
-const flagImages: Record<string, string> = { KW: flagKW, QA: flagQA, SA: flagSA, AE: flagAE };
+const flagImages: Record<string, string> = { KW: flagKW, QA: flagQA, SA: flagSA, AE: flagAE, EG: flagEG };
 
 const countryNames: Record<string, { ar: string; en: string }> = {
   KW: { ar: "الكويت", en: "Kuwait" },
   QA: { ar: "قطر", en: "Qatar" },
   SA: { ar: "السعودية", en: "Saudi Arabia" },
   AE: { ar: "الإمارات", en: "UAE" },
+  EG: { ar: "مصر", en: "Egypt" },
 };
 
 const comingSoonCountries = [
