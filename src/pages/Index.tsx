@@ -1,19 +1,14 @@
 import { Link } from "react-router-dom";
 import { GraduationCap } from "lucide-react";
-import { lazy, Suspense } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useInViewOnce } from "@/hooks/useInViewOnce";
 import PageHelmet from "@/components/PageHelmet";
 import HeroOrbit from "@/components/HeroOrbit";
-
-// Below-the-fold sections carry framer-motion (~40 KB gz) + subject icons
-// (~50 KB gz). Load on scroll approach, not idle, to keep them out of the
-// initial cold-load JS budget entirely.
-const IndexBelowFold = lazy(() => import("@/components/home/IndexBelowFold"));
+// Rendered eagerly: lazy-mounting these caused visible pop-in and layout
+// shift on Safari/WebKit. They are part of the initial bundle now.
+import IndexBelowFold from "@/components/home/IndexBelowFold";
 
 const HomePage = () => {
   const { t, lang } = useLanguage();
-  const [belowFoldRef, belowFoldReady] = useInViewOnce<HTMLDivElement>("-100px 0px");
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -126,13 +121,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Sentinel — kicks off IndexBelowFold fetch as user approaches fold */}
-      <div ref={belowFoldRef} aria-hidden="true" />
-      {belowFoldReady && (
-        <Suspense fallback={<div className="min-h-[40vh]" aria-hidden="true" />}>
-          <IndexBelowFold />
-        </Suspense>
-      )}
+      <IndexBelowFold />
 
       {/* SEO-only contextual paragraph */}
       <section aria-hidden="true" className="sr-only">
