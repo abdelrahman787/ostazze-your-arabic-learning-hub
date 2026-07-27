@@ -336,9 +336,8 @@
   .dark .card-base {
     background:
       radial-gradient(ellipse 90% 60% at 50% 0%, hsl(14 91% 50% / 0.06) 0%, transparent 60%),
-      linear-gradient(160deg, hsl(230 30% 13% / 0.88) 0%, hsl(230 35% 8% / 0.65) 100%);
-    backdrop-filter: blur(10px) saturate(130%);
-    -webkit-backdrop-filter: blur(10px) saturate(130%);
+      linear-gradient(160deg, hsl(230 30% 13% / 0.96) 0%, hsl(230 35% 8% / 0.9) 100%);
+    /* backdrop-filter removed (WebKit scroll repaint cost) */
     border-color: hsl(30 30% 96% / 0.08);
     box-shadow:
       0 4px 20px hsl(230 35% 0% / 0.35),
@@ -519,14 +518,12 @@
   /* Glassmorphism */
   .glass {
     background: hsl(var(--glass-bg));
-    backdrop-filter: blur(16px) saturate(180%);
-    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    /* backdrop-filter removed (WebKit scroll repaint cost) */
     border: 1px solid hsl(var(--glass-border));
   }
   .glass-strong {
     background: hsl(var(--glass-bg));
-    backdrop-filter: blur(24px) saturate(200%);
-    -webkit-backdrop-filter: blur(24px) saturate(200%);
+    /* backdrop-filter removed (WebKit scroll repaint cost) */
     border: 1px solid hsl(var(--glass-border));
   }
 
@@ -558,8 +555,8 @@
       radial-gradient(ellipse 70% 70% at 100% 0%, hsl(28 80% 55% / 0.18) 0%, transparent 60%),
       radial-gradient(ellipse 60% 70% at 0% 100%, hsl(14 70% 45% / 0.15) 0%, transparent 60%),
       linear-gradient(135deg, hsl(228 35% 14%) 0%, hsl(225 38% 11%) 50%, hsl(222 40% 9%) 100%);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    /* backdrop-filter removed: extremely expensive to repaint on WebKit while scrolling.
+       The layered gradients above are already near-opaque, so the look is unchanged. */
     box-shadow:
       0 30px 80px -20px hsl(228 50% 5% / 0.6),
       0 0 0 1px hsl(30 30% 96% / 0.06),
@@ -602,9 +599,8 @@
   .stats-tile-glass {
     position: relative;
     background:
-      linear-gradient(160deg, hsl(0 0% 100% / 0.12) 0%, hsl(0 0% 100% / 0.05) 50%, hsl(0 0% 100% / 0.02) 100%);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
+      linear-gradient(160deg, hsl(0 0% 100% / 0.14) 0%, hsl(0 0% 100% / 0.07) 50%, hsl(0 0% 100% / 0.04) 100%);
+    /* backdrop-filter removed (WebKit scroll repaint cost) */
     border: 1px solid hsl(0 0% 100% / 0.15);
     border-radius: 1.25rem;
     box-shadow:

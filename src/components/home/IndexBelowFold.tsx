@@ -345,13 +345,21 @@ const IndexBelowFold = () => {
                 }}
               >
                 <div
-                  className="absolute top-0 end-0 w-56 h-56 rounded-full blur-3xl pointer-events-none"
-                  style={{ background: "hsl(14 91% 50% / 0.18)", transform: "translate(30%, -30%)" }}
+                  className="absolute top-0 end-0 w-56 h-56 rounded-full pointer-events-none"
+                  style={{
+                    background:
+                      "radial-gradient(50% 50% at 50% 50%, hsl(14 91% 50% / 0.18) 0%, hsl(14 91% 50% / 0.09) 45%, transparent 72%)",
+                    transform: "translate(30%, -30%) scale(1.6)",
+                  }}
                   aria-hidden="true"
                 />
                 <div
-                  className="absolute bottom-0 start-0 w-48 h-48 rounded-full blur-3xl pointer-events-none"
-                  style={{ background: "hsl(38 92% 55% / 0.10)", transform: "translate(-30%, 30%)" }}
+                  className="absolute bottom-0 start-0 w-48 h-48 rounded-full pointer-events-none"
+                  style={{
+                    background:
+                      "radial-gradient(50% 50% at 50% 50%, hsl(38 92% 55% / 0.10) 0%, hsl(38 92% 55% / 0.05) 45%, transparent 72%)",
+                    transform: "translate(-30%, 30%) scale(1.6)",
+                  }}
                   aria-hidden="true"
                 />
 
@@ -546,7 +554,7 @@ const IndexBelowFold = () => {
               <p className="text-white/85 mb-8 max-w-lg mx-auto text-sm md:text-base">{t("cta_subtitle")}</p>
               <div className="flex justify-center gap-3 flex-wrap">
                 <Link to="/register" className="btn-cta-light text-base">{t("cta_register")}</Link>
-                <Link to="/teachers" className="inline-flex items-center justify-center px-7 py-3.5 rounded-full font-bold border-2 border-white/30 text-white hover:bg-white/10 transition-all backdrop-blur-sm">
+                <Link to="/teachers" className="inline-flex items-center justify-center px-7 py-3.5 rounded-full font-bold border-2 border-white/30 text-white bg-white/[0.06] hover:bg-white/10 transition-all">
                   {t("hero_browse")}
                 </Link>
               </div>
