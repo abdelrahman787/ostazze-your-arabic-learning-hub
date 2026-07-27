@@ -345,13 +345,21 @@ const IndexBelowFold = () => {
                 }}
               >
                 <div
-                  className="absolute top-0 end-0 w-56 h-56 rounded-full blur-3xl pointer-events-none"
-                  style={{ background: "hsl(14 91% 50% / 0.18)", transform: "translate(30%, -30%)" }}
+                  className="absolute top-0 end-0 w-56 h-56 rounded-full pointer-events-none"
+                  style={{
+                    background:
+                      "radial-gradient(50% 50% at 50% 50%, hsl(14 91% 50% / 0.18) 0%, hsl(14 91% 50% / 0.09) 45%, transparent 72%)",
+                    transform: "translate(30%, -30%) scale(1.6)",
+                  }}
                   aria-hidden="true"
                 />
                 <div
-                  className="absolute bottom-0 start-0 w-48 h-48 rounded-full blur-3xl pointer-events-none"
-                  style={{ background: "hsl(38 92% 55% / 0.10)", transform: "translate(-30%, 30%)" }}
+                  className="absolute bottom-0 start-0 w-48 h-48 rounded-full pointer-events-none"
+                  style={{
+                    background:
+                      "radial-gradient(50% 50% at 50% 50%, hsl(38 92% 55% / 0.10) 0%, hsl(38 92% 55% / 0.05) 45%, transparent 72%)",
+                    transform: "translate(-30%, 30%) scale(1.6)",
+                  }}
                   aria-hidden="true"
                 />
 
