@@ -156,7 +156,7 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects }: P
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[9999] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto"
+          className="fixed inset-0 z-[9999] bg-black/80 flex items-center justify-center p-4 overflow-y-auto"
           onClick={onClose}
         >
           <motion.div

@@ -58,7 +58,7 @@ export default function CountryGate({ children }: { children: React.ReactNode })
   return (
     <>
       {children}
-      <div className="fixed inset-0 z-[10000] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+      <div className="fixed inset-0 z-[10000] bg-black/80 flex items-center justify-center p-4">
         <div className="bg-card border border-border rounded-2xl p-6 w-full max-w-md shadow-2xl">
           <div className="text-center mb-5">
             <div className="w-14 h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mx-auto mb-3">

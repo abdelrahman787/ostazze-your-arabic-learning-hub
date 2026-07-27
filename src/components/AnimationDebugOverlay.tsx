@@ -132,7 +132,7 @@ const AnimationDebugOverlay = () => {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="fixed bottom-4 right-4 z-[9999] rounded-full bg-black/80 text-white text-xs px-3 py-2 shadow-lg backdrop-blur border border-white/20 hover:bg-black"
+        className="fixed bottom-4 right-4 z-[9999] rounded-full bg-black/80 text-white text-xs px-3 py-2 shadow-lg border border-white/20 hover:bg-black"
         aria-label="Open animation debug overlay"
       >
         🐞 Anim
@@ -146,7 +146,7 @@ const AnimationDebugOverlay = () => {
     stats.visibility === "visible" ? "text-emerald-300" : "text-red-300";
 
   return (
-    <div className="fixed bottom-4 right-4 z-[9999] w-[320px] max-w-[92vw] rounded-xl bg-black/85 text-white text-xs font-mono shadow-2xl backdrop-blur border border-white/15">
+    <div className="fixed bottom-4 right-4 z-[9999] w-[320px] max-w-[92vw] rounded-xl bg-black/85 text-white text-xs font-mono shadow-2xl border border-white/15">
       <div className="flex items-center justify-between px-3 py-2 border-b border-white/10">
         <span className="font-semibold tracking-wide">🐞 Animation Debug</span>
         <div className="flex items-center gap-2">

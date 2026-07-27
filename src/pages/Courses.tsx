@@ -214,7 +214,7 @@ const Courses = () => {
                           <BookMarked size={48} />
                         </div>
                       )}
-                      <div className={`absolute top-3 start-3 px-2.5 py-1 rounded-full text-[0.7rem] font-bold flex items-center gap-1.5 backdrop-blur-md ${cfg.color}`}>
+                      <div className={`absolute top-3 start-3 px-2.5 py-1 rounded-full text-[0.7rem] font-bold flex items-center gap-1.5 ${cfg.color}`}>
                         <TypeIcon size={12} /> {lang === "ar" ? cfg.ar : cfg.en}
                       </div>
                     </Link>

@@ -61,8 +61,8 @@ const flagGlow: Record<string, string> = {
 const AnimatedFlag = ({ code, size = 120 }: { code: string; size?: number }) => (
   <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
     <div
-      className="absolute inset-2 rounded-2xl blur-2xl opacity-30 pointer-events-none"
-      style={{ background: flagGlow[code] || flagGlow.KW }}
+      className="absolute -inset-2 rounded-full opacity-30 pointer-events-none"
+      style={{ background: `radial-gradient(50% 50% at 50% 50%, ${flagGlow[code] || flagGlow.KW} 0%, transparent 70%)` }}
     />
     <img
       src={flagImages[code]}
@@ -114,7 +114,7 @@ const CollegeCard = ({
       >
         <div className="flex items-start justify-between gap-2">
           <div
-            className={`w-11 h-11 rounded-xl bg-background/80 backdrop-blur ${accent} flex items-center justify-center shrink-0 shadow-sm ring-1 ring-border/40 group-hover:scale-110 transition-transform`}
+            className={`w-11 h-11 rounded-xl bg-background/95 ${accent} flex items-center justify-center shrink-0 shadow-sm ring-1 ring-border/40 group-hover:scale-110 transition-transform`}
           >
             <CollegeIcon size={20} />
           </div>
