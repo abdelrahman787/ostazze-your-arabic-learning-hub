@@ -26,6 +26,7 @@ interface TutorApplication {
   cv_link: string | null;
   cv_file_path: string | null;
   demo_link: string | null;
+  demo_file_path: string | null;
   status: string;
   admin_notes: string | null;
   created_at: string;
