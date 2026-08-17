@@ -376,8 +376,6 @@ const ApplyTutor = () => {
       `${L("سبق التسجيل", "Recorded before")}: ${form.recordedBefore}`,
       `${L("مكان هادئ", "Quiet place")}: ${form.quietPlace}`,
       `${L("الأدوات", "Tools")}: ${tools.join(", ")}`,
-      `${L("الجهاز", "Device")}: ${form.device}`,
-      `${L("الميكروفون", "Microphone")}: ${form.microphone}`,
       `${L("رابط الفيديو التجريبي", "Demo video")}: ${form.demoLink || L("مرفوع/غير متوفر", "uploaded / not provided")}`,
     ];
     window.open(
