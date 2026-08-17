@@ -646,6 +646,90 @@ export type Database = {
         }
         Relationships: []
       }
+      tutor_applications: {
+        Row: {
+          admin_notes: string | null
+          city: string | null
+          country: string | null
+          courses: string | null
+          created_at: string
+          cv_link: string | null
+          degree: string | null
+          demo_link: string | null
+          device: string | null
+          email: string
+          experience: string | null
+          full_name: string
+          id: string
+          lang: string
+          microphone: string | null
+          nationality: string | null
+          phone: string
+          quiet_place: string | null
+          recorded_before: string | null
+          specialization: string | null
+          status: string
+          teach_lang: string | null
+          tools: string[]
+          university: string | null
+          updated_at: string
+        }
+        Insert: {
+          admin_notes?: string | null
+          city?: string | null
+          country?: string | null
+          courses?: string | null
+          created_at?: string
+          cv_link?: string | null
+          degree?: string | null
+          demo_link?: string | null
+          device?: string | null
+          email: string
+          experience?: string | null
+          full_name: string
+          id?: string
+          lang?: string
+          microphone?: string | null
+          nationality?: string | null
+          phone: string
+          quiet_place?: string | null
+          recorded_before?: string | null
+          specialization?: string | null
+          status?: string
+          teach_lang?: string | null
+          tools?: string[]
+          university?: string | null
+          updated_at?: string
+        }
+        Update: {
+          admin_notes?: string | null
+          city?: string | null
+          country?: string | null
+          courses?: string | null
+          created_at?: string
+          cv_link?: string | null
+          degree?: string | null
+          demo_link?: string | null
+          device?: string | null
+          email?: string
+          experience?: string | null
+          full_name?: string
+          id?: string
+          lang?: string
+          microphone?: string | null
+          nationality?: string | null
+          phone?: string
+          quiet_place?: string | null
+          recorded_before?: string | null
+          specialization?: string | null
+          status?: string
+          teach_lang?: string | null
+          tools?: string[]
+          university?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           id: string

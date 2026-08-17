@@ -5,6 +5,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import PageHelmet from "@/components/PageHelmet";
 
 import { WHATSAPP_NUMBER } from "@/lib/whatsapp";
+import { supabase } from "@/integrations/supabase/client";
 
 const SPECIALIZATIONS = [
   ["المحاسبة", "Accounting"],
@@ -119,8 +120,35 @@ const ApplyTutor = () => {
     ? ["نعم", "لا", "أحياناً"]
     : ["Yes", "No", "Sometimes"];
 
-  const onSubmit = (e: React.FormEvent) => {
+  const [saving, setSaving] = useState(false);
+
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSaving(true);
+    const { error } = await supabase.from("tutor_applications").insert({
+      full_name: form.name,
+      phone: form.phone,
+      email: form.email,
+      nationality: form.nationality || null,
+      country: form.country || null,
+      city: form.city || null,
+      specialization: form.specialization || null,
+      university: form.university || null,
+      degree: form.degree || null,
+      experience: form.experience || null,
+      teach_lang: form.teachLang || null,
+      courses: form.courses || null,
+      recorded_before: form.recordedBefore || null,
+      quiet_place: form.quietPlace || null,
+      tools,
+      device: form.device || null,
+      microphone: form.microphone || null,
+      cv_link: form.cvLink || null,
+      demo_link: form.demoLink || null,
+      lang,
+    });
+    setSaving(false);
+    if (error) console.error("tutor application save failed", error);
     const L = (ar: string, en: string) => (isAr ? ar : en);
     const lines = [
       L("طلب انضمام كمعلم في أستاذي", "Teacher application — Ostaze"),
@@ -434,7 +462,7 @@ const ApplyTutor = () => {
               <p className="text-sm text-muted-foreground">{T.note}</p>
               <button type="submit" className="btn-primary flex items-center justify-center gap-2 shrink-0">
                 <Send size={16} />
-                {T.submit}
+                {saving ? "..." : T.submit}
               </button>
             </div>
           </motion.form>
