@@ -656,6 +656,7 @@ export type Database = {
           cv_file_path: string | null
           cv_link: string | null
           degree: string | null
+          demo_file_path: string | null
           demo_link: string | null
           device: string | null
           email: string
@@ -684,6 +685,7 @@ export type Database = {
           cv_file_path?: string | null
           cv_link?: string | null
           degree?: string | null
+          demo_file_path?: string | null
           demo_link?: string | null
           device?: string | null
           email: string
@@ -712,6 +714,7 @@ export type Database = {
           cv_file_path?: string | null
           cv_link?: string | null
           degree?: string | null
+          demo_file_path?: string | null
           demo_link?: string | null
           device?: string | null
           email?: string
