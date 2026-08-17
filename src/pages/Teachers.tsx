@@ -12,6 +12,7 @@ import PageHelmet from "@/components/PageHelmet";
 import PageHeader from "@/components/PageHeader";
 import BookingFlowModal from "@/components/BookingFlowModal";
 import WhatsAppTutorBanner from "@/components/WhatsAppTutorBanner";
+import { waLink } from "@/lib/whatsapp";
 
 const TeacherCardSkeleton = () => (
   <div className="card-base flex flex-col p-5 gap-3">
