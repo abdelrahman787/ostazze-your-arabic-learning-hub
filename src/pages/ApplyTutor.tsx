@@ -171,7 +171,7 @@ const ApplyTutor = () => {
   const [form, setForm] = useState({ ...emptyForm });
   const [tools, setTools] = useState<string[]>([]);
 
-  const set = (k: keyof typeof form, v: string) => setForm((p) => ({ ...p, [k]: v }));
+  
   const toggleTool = (t: string) =>
     setTools((p) => (p.includes(t) ? p.filter((x) => x !== t) : [...p, t]));
 
