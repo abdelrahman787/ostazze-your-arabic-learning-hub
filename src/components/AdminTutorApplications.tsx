@@ -233,8 +233,13 @@ const AdminTutorApplications = () => {
                 )}
                 {selected.demo_link && (
                   <a href={selected.demo_link} target="_blank" rel="noopener noreferrer" className="btn-ghost text-sm flex items-center gap-2 px-3 py-2">
-                    <ExternalLink size={15} /> فيديو الشرح
+                    <ExternalLink size={15} /> رابط فيديو الشرح
                   </a>
+                )}
+                {selected.demo_file_path && (
+                  <button onClick={() => openCvFile(selected.demo_file_path!)} className="btn-ghost text-sm flex items-center gap-2 px-3 py-2">
+                    <FileDown size={15} /> فيديو الشرح المرفوع
+                  </button>
                 )}
               </div>
               <div className="pt-5">
