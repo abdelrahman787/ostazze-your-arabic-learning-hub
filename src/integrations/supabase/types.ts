@@ -465,6 +465,7 @@ export type Database = {
           full_name: string | null
           full_name_en: string | null
           id: string
+          onboarding_completed: boolean
           phone: string | null
           timezone: string | null
           updated_at: string
@@ -480,6 +481,7 @@ export type Database = {
           full_name?: string | null
           full_name_en?: string | null
           id?: string
+          onboarding_completed?: boolean
           phone?: string | null
           timezone?: string | null
           updated_at?: string
@@ -495,6 +497,7 @@ export type Database = {
           full_name?: string | null
           full_name_en?: string | null
           id?: string
+          onboarding_completed?: boolean
           phone?: string | null
           timezone?: string | null
           updated_at?: string
@@ -577,6 +580,48 @@ export type Database = {
           is_active?: boolean
           start_time?: string
           teacher_id?: string
+        }
+        Relationships: []
+      }
+      teacher_bank_accounts: {
+        Row: {
+          account_holder: string
+          account_number: string | null
+          balance: number
+          bank_name: string
+          country: string | null
+          created_at: string
+          iban: string | null
+          id: string
+          swift: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          account_holder: string
+          account_number?: string | null
+          balance?: number
+          bank_name: string
+          country?: string | null
+          created_at?: string
+          iban?: string | null
+          id?: string
+          swift?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          account_holder?: string
+          account_number?: string | null
+          balance?: number
+          bank_name?: string
+          country?: string | null
+          created_at?: string
+          iban?: string | null
+          id?: string
+          swift?: string | null
+          updated_at?: string
+          user_id?: string
         }
         Relationships: []
       }
