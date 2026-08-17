@@ -654,16 +654,6 @@ const ApplyTutor = () => {
                   })}
                 </div>
               </div>
-              {Field({
-                k: "device",
-                label: isAr ? "الجهاز المستخدم للتسجيل" : "Device Used for Recording",
-                placeholder: isAr ? "آيباد، لابتوب..." : "iPad, tablet, laptop...",
-              })}
-              {Field({
-                k: "microphone",
-                label: isAr ? "الميكروفون المستخدم" : "Microphone Used",
-                placeholder: isAr ? "ميكروفون داخلي، AirPods..." : "Built-in mic, AirPods...",
-              })}
             </Section>
 
             <Section num="04" title={T.s4}>
