@@ -213,6 +213,11 @@ const AdminTutorApplications = () => {
               <Row label="الجهاز" value={selected.device} />
               <Row label="الميكروفون" value={selected.microphone} />
               <div className="flex flex-wrap gap-3 pt-4">
+                {selected.cv_file_path && (
+                  <button onClick={() => openCvFile(selected.cv_file_path!)} className="btn-ghost text-sm flex items-center gap-2 px-3 py-2">
+                    <FileDown size={15} /> ملف السيرة الذاتية المرفوع
+                  </button>
+                )}
                 {selected.cv_link && (
                   <a href={selected.cv_link} target="_blank" rel="noopener noreferrer" className="btn-ghost text-sm flex items-center gap-2 px-3 py-2">
                     <ExternalLink size={15} /> السيرة الذاتية
