@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Send, CheckCircle2, GraduationCap } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
