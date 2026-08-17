@@ -215,6 +215,8 @@ const ApplyTutor = () => {
   const [saving, setSaving] = useState(false);
   const [cvFile, setCvFile] = useState<File | null>(null);
   const [cvError, setCvError] = useState("");
+  const [demoFile, setDemoFile] = useState<File | null>(null);
+  const [demoError, setDemoError] = useState("");
 
   const onPickCv = (file: File | null) => {
     setCvError("");
