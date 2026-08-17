@@ -313,9 +313,28 @@ const ApplyTutor = () => {
       demoPath = path;
     }
 
+    let photoPath: string | null = null;
+    if (photoFile) {
+      const ext = photoFile.name.split(".").pop()?.toLowerCase() || "jpg";
+      const safeName = (form.name || "applicant").replace(/[^\p{L}\p{N}]+/gu, "-").slice(0, 40);
+      const path = `${new Date().getFullYear()}/photo-${crypto.randomUUID()}-${safeName}.${ext}`;
+      const { error: upErr } = await supabase.storage
+        .from("tutor-cvs")
+        .upload(path, photoFile, { contentType: photoFile.type || undefined, upsert: false });
+      if (upErr) {
+        console.error("photo upload failed", upErr);
+        setPhotoError(isAr ? "تعذر رفع الصورة، حاول مرة أخرى." : "Photo upload failed, please try again.");
+        setSaving(false);
+        return;
+      }
+      photoPath = path;
+    }
+
     const { error } = await supabase.from("tutor_applications").insert({
       cv_file_path: cvPath,
       demo_file_path: demoPath,
+      photo_file_path: photoPath,
+      use_photo_as_avatar: photoFile ? useAvatar ?? false : null,
       full_name: form.name,
       phone: form.phone,
       email: form.email,
