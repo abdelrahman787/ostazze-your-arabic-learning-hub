@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Loader2, Search, UserPlus, Mail, Phone, ExternalLink, X, RefreshCw, Check, Copy } from "lucide-react";
+import { Loader2, Search, UserPlus, Mail, Phone, ExternalLink, X, RefreshCw, Check, Copy, FileDown } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface TutorApplication {
@@ -24,6 +24,7 @@ interface TutorApplication {
   device: string | null;
   microphone: string | null;
   cv_link: string | null;
+  cv_file_path: string | null;
   demo_link: string | null;
   status: string;
   admin_notes: string | null;
@@ -66,6 +67,12 @@ const AdminTutorApplications = () => {
       .subscribe();
     return () => { supabase.removeChannel(channel); };
   }, [fetchApps]);
+
+  const openCvFile = async (path: string) => {
+    const { data, error } = await supabase.storage.from("tutor-cvs").createSignedUrl(path, 300);
+    if (error || !data?.signedUrl) return toast.error("تعذر فتح الملف");
+    window.open(data.signedUrl, "_blank", "noopener");
+  };
 
   const setStatus = async (id: string, status: string) => {
     const { error } = await supabase.from("tutor_applications").update({ status }).eq("id", id);
@@ -213,6 +220,11 @@ const AdminTutorApplications = () => {
               <Row label="الجهاز" value={selected.device} />
               <Row label="الميكروفون" value={selected.microphone} />
               <div className="flex flex-wrap gap-3 pt-4">
+                {selected.cv_file_path && (
+                  <button onClick={() => openCvFile(selected.cv_file_path!)} className="btn-ghost text-sm flex items-center gap-2 px-3 py-2">
+                    <FileDown size={15} /> ملف السيرة الذاتية المرفوع
+                  </button>
+                )}
                 {selected.cv_link && (
                   <a href={selected.cv_link} target="_blank" rel="noopener noreferrer" className="btn-ghost text-sm flex items-center gap-2 px-3 py-2">
                     <ExternalLink size={15} /> السيرة الذاتية

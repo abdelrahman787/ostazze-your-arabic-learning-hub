@@ -1,6 +1,6 @@
 import { useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
-import { Send, CheckCircle2, GraduationCap } from "lucide-react";
+import { Send, CheckCircle2, GraduationCap, Upload, FileText, X } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import PageHelmet from "@/components/PageHelmet";
 
@@ -214,11 +214,47 @@ const ApplyTutor = () => {
     : ["Yes", "No", "Sometimes"];
 
   const [saving, setSaving] = useState(false);
+  const [cvFile, setCvFile] = useState<File | null>(null);
+  const [cvError, setCvError] = useState("");
+
+  const onPickCv = (file: File | null) => {
+    setCvError("");
+    if (!file) return setCvFile(null);
+    const okExt = /\.(pdf|doc|docx)$/i.test(file.name);
+    if (!okExt) {
+      setCvError(isAr ? "الملفات المسموحة: PDF أو DOC أو DOCX" : "Allowed files: PDF, DOC or DOCX");
+      return setCvFile(null);
+    }
+    if (file.size > 10 * 1024 * 1024) {
+      setCvError(isAr ? "الحد الأقصى لحجم الملف ١٠ ميجابايت" : "Maximum file size is 10 MB");
+      return setCvFile(null);
+    }
+    setCvFile(file);
+  };
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
+
+    let cvPath: string | null = null;
+    if (cvFile) {
+      const ext = cvFile.name.split(".").pop()?.toLowerCase() || "pdf";
+      const safeName = (form.name || "applicant").replace(/[^\p{L}\p{N}]+/gu, "-").slice(0, 40);
+      const path = `${new Date().getFullYear()}/${crypto.randomUUID()}-${safeName}.${ext}`;
+      const { error: upErr } = await supabase.storage
+        .from("tutor-cvs")
+        .upload(path, cvFile, { contentType: cvFile.type || undefined, upsert: false });
+      if (upErr) {
+        console.error("cv upload failed", upErr);
+        setCvError(isAr ? "تعذر رفع الملف، حاول مرة أخرى." : "Upload failed, please try again.");
+        setSaving(false);
+        return;
+      }
+      cvPath = path;
+    }
+
     const { error } = await supabase.from("tutor_applications").insert({
+      cv_file_path: cvPath,
       full_name: form.name,
       phone: form.phone,
       email: form.email,
@@ -470,15 +506,58 @@ const ApplyTutor = () => {
             </Section>
 
             <Section num="04" title={T.s4}>
+              <div className="sm:col-span-2 space-y-1.5">
+                <label htmlFor="cvFile" className="block text-sm font-bold">
+                  {isAr ? "رفع ملف السيرة الذاتية" : "Upload your CV file"}
+                </label>
+                <div className="flex flex-wrap items-center gap-3">
+                  <label
+                    htmlFor="cvFile"
+                    className="btn-ghost cursor-pointer text-sm flex items-center gap-2 px-4 py-2.5 border border-border rounded-xl"
+                  >
+                    <Upload size={16} />
+                    {isAr ? "اختر ملف (PDF / DOC / DOCX)" : "Choose file (PDF / DOC / DOCX)"}
+                  </label>
+                  <input
+                    id="cvFile"
+                    type="file"
+                    accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                    className="sr-only"
+                    onChange={(e) => onPickCv(e.target.files?.[0] || null)}
+                  />
+                  {cvFile && (
+                    <span className="flex items-center gap-2 text-sm font-bold text-primary">
+                      <FileText size={15} /> {cvFile.name}
+                      <button
+                        type="button"
+                        onClick={() => onPickCv(null)}
+                        className="text-muted-foreground hover:text-destructive"
+                        aria-label={isAr ? "إزالة الملف" : "Remove file"}
+                      >
+                        <X size={14} />
+                      </button>
+                    </span>
+                  )}
+                </div>
+                {cvError ? (
+                  <p className="text-xs text-destructive">{cvError}</p>
+                ) : (
+                  <p className="text-xs text-muted-foreground">
+                    {isAr
+                      ? "ارفع سيرتك الذاتية مباشرة ليراجعها فريقنا (الحد الأقصى ١٠ ميجابايت)."
+                      : "Upload your CV directly for our team to review (max 10 MB)."}
+                  </p>
+                )}
+              </div>
               {Field({
                 k: "cvLink",
-                label: isAr ? "رابط السيرة الذاتية" : "CV Link",
+                label: isAr ? "رابط السيرة الذاتية (اختياري)" : "CV Link (optional)",
                 type: "url",
                 full: true,
                 placeholder: "https://drive.google.com/...",
                 hint: isAr
-                  ? "ارفع السيرة الذاتية (PDF/DOC) على Google Drive وضع الرابط هنا، أو أرسلها لاحقاً على واتساب."
-                  : "Upload your CV (PDF/DOC) to Google Drive and paste the link, or send it later on WhatsApp.",
+                  ? "إذا فضّلت، ضع رابط Google Drive بدلاً من رفع الملف."
+                  : "Optionally paste a Google Drive link instead of uploading a file.",
               })}
               {Field({
                 k: "demoLink",

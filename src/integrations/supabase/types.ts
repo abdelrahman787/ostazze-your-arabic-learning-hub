@@ -653,6 +653,7 @@ export type Database = {
           country: string | null
           courses: string | null
           created_at: string
+          cv_file_path: string | null
           cv_link: string | null
           degree: string | null
           demo_link: string | null
@@ -680,6 +681,7 @@ export type Database = {
           country?: string | null
           courses?: string | null
           created_at?: string
+          cv_file_path?: string | null
           cv_link?: string | null
           degree?: string | null
           demo_link?: string | null
@@ -707,6 +709,7 @@ export type Database = {
           country?: string | null
           courses?: string | null
           created_at?: string
+          cv_file_path?: string | null
           cv_link?: string | null
           degree?: string | null
           demo_link?: string | null
