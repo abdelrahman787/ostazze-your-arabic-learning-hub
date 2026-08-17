@@ -214,11 +214,47 @@ const ApplyTutor = () => {
     : ["Yes", "No", "Sometimes"];
 
   const [saving, setSaving] = useState(false);
+  const [cvFile, setCvFile] = useState<File | null>(null);
+  const [cvError, setCvError] = useState("");
+
+  const onPickCv = (file: File | null) => {
+    setCvError("");
+    if (!file) return setCvFile(null);
+    const okExt = /\.(pdf|doc|docx)$/i.test(file.name);
+    if (!okExt) {
+      setCvError(isAr ? "الملفات المسموحة: PDF أو DOC أو DOCX" : "Allowed files: PDF, DOC or DOCX");
+      return setCvFile(null);
+    }
+    if (file.size > 10 * 1024 * 1024) {
+      setCvError(isAr ? "الحد الأقصى لحجم الملف ١٠ ميجابايت" : "Maximum file size is 10 MB");
+      return setCvFile(null);
+    }
+    setCvFile(file);
+  };
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
+
+    let cvPath: string | null = null;
+    if (cvFile) {
+      const ext = cvFile.name.split(".").pop()?.toLowerCase() || "pdf";
+      const safeName = (form.name || "applicant").replace(/[^\p{L}\p{N}]+/gu, "-").slice(0, 40);
+      const path = `${new Date().getFullYear()}/${crypto.randomUUID()}-${safeName}.${ext}`;
+      const { error: upErr } = await supabase.storage
+        .from("tutor-cvs")
+        .upload(path, cvFile, { contentType: cvFile.type || undefined, upsert: false });
+      if (upErr) {
+        console.error("cv upload failed", upErr);
+        setCvError(isAr ? "تعذر رفع الملف، حاول مرة أخرى." : "Upload failed, please try again.");
+        setSaving(false);
+        return;
+      }
+      cvPath = path;
+    }
+
     const { error } = await supabase.from("tutor_applications").insert({
+      cv_file_path: cvPath,
       full_name: form.name,
       phone: form.phone,
       email: form.email,
