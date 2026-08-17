@@ -8,6 +8,7 @@ import FaqAccordion from "@/components/FaqAccordion";
 import { Mail, Phone, MapPin, Send, MessageCircle, Loader2, Building2, Clock, Timer, ShieldCheck } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
+import { waLink } from "@/lib/whatsapp";
 
 const Contact = () => {
   const { t, lang } = useLanguage();
