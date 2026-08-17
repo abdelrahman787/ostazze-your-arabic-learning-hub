@@ -75,6 +75,60 @@ serve(async (req) => {
       );
     }
 
+    if (action === "approve_tutor") {
+      const { email, password, full_name, university, subjects } = body;
+      if (!email || !full_name) throw new Error("الاسم والإيميل مطلوبان");
+
+      const { data: users } = await supabaseAdmin.auth.admin.listUsers();
+      const existing = users?.users?.find((u) => u.email?.toLowerCase() === String(email).toLowerCase());
+
+      let userId: string;
+      let created = false;
+
+      if (existing) {
+        userId = existing.id;
+      } else {
+        if (!password || String(password).length < 8) throw new Error("كلمة مرور مؤقتة غير صالحة");
+        const { data: newUser, error: createError } = await supabaseAdmin.auth.admin.createUser({
+          email,
+          password,
+          email_confirm: true,
+          user_metadata: { full_name, account_type: "teacher" },
+        });
+        if (createError) throw createError;
+        userId = newUser.user.id;
+        created = true;
+      }
+
+      await supabaseAdmin
+        .from("profiles")
+        .update({ account_type: "teacher", full_name })
+        .eq("user_id", userId);
+
+      const { data: existingTP } = await supabaseAdmin
+        .from("teacher_profiles")
+        .select("id")
+        .eq("user_id", userId)
+        .maybeSingle();
+
+      if (existingTP) {
+        await supabaseAdmin
+          .from("teacher_profiles")
+          .update({ verified: true, university: university || null, subjects: subjects || [] })
+          .eq("user_id", userId);
+      } else {
+        const { error: tpError } = await supabaseAdmin
+          .from("teacher_profiles")
+          .insert({ user_id: userId, verified: true, university: university || null, subjects: subjects || [], price: 0 });
+        if (tpError) throw tpError;
+      }
+
+      return new Response(
+        JSON.stringify({ message: created ? "تم إنشاء حساب المعلم" : "تمت ترقية الحساب الحالي إلى معلم", user_id: userId, created }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
     if (action === "add_role") {
       const { email, role } = body;
       if (!email || !role) throw new Error("Email and role are required");
