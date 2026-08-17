@@ -270,8 +270,26 @@ const ApplyTutor = () => {
       cvPath = path;
     }
 
+    let demoPath: string | null = null;
+    if (demoFile) {
+      const ext = demoFile.name.split(".").pop()?.toLowerCase() || "mp4";
+      const safeName = (form.name || "applicant").replace(/[^\p{L}\p{N}]+/gu, "-").slice(0, 40);
+      const path = `${new Date().getFullYear()}/demo-${crypto.randomUUID()}-${safeName}.${ext}`;
+      const { error: upErr } = await supabase.storage
+        .from("tutor-cvs")
+        .upload(path, demoFile, { contentType: demoFile.type || undefined, upsert: false });
+      if (upErr) {
+        console.error("demo upload failed", upErr);
+        setDemoError(isAr ? "تعذر رفع الفيديو، حاول مرة أخرى." : "Video upload failed, please try again.");
+        setSaving(false);
+        return;
+      }
+      demoPath = path;
+    }
+
     const { error } = await supabase.from("tutor_applications").insert({
       cv_file_path: cvPath,
+      demo_file_path: demoPath,
       full_name: form.name,
       phone: form.phone,
       email: form.email,
