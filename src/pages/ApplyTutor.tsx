@@ -217,6 +217,32 @@ const ApplyTutor = () => {
   const [cvError, setCvError] = useState("");
   const [demoFile, setDemoFile] = useState<File | null>(null);
   const [demoError, setDemoError] = useState("");
+  const [photoFile, setPhotoFile] = useState<File | null>(null);
+  const [photoPreview, setPhotoPreview] = useState<string>("");
+  const [photoError, setPhotoError] = useState("");
+  const [useAvatar, setUseAvatar] = useState<boolean | null>(null);
+
+  const onPickPhoto = (file: File | null) => {
+    setPhotoError("");
+    setPhotoPreview((prev) => {
+      if (prev) URL.revokeObjectURL(prev);
+      return "";
+    });
+    if (!file) {
+      setUseAvatar(null);
+      return setPhotoFile(null);
+    }
+    if (!/^image\//.test(file.type)) {
+      setPhotoError(isAr ? "الرجاء اختيار صورة JPG أو PNG" : "Please choose a JPG or PNG image");
+      return setPhotoFile(null);
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      setPhotoError(isAr ? "الحد الأقصى لحجم الصورة ٥ ميجابايت" : "Maximum photo size is 5 MB");
+      return setPhotoFile(null);
+    }
+    setPhotoFile(file);
+    setPhotoPreview(URL.createObjectURL(file));
+  };
 
   const onPickCv = (file: File | null) => {
     setCvError("");
