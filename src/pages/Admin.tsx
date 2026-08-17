@@ -16,6 +16,7 @@ import SalesHub from "@/components/SalesHub";
 import NotificationBell from "@/components/NotificationBell";
 import AdminCourses from "@/components/AdminCourses";
 import AdminInvoices from "@/components/AdminInvoices";
+import AdminTutorApplications from "@/components/AdminTutorApplications";
 import NoIndex from "@/components/NoIndex";
 import { uploadVideoToBunny } from "@/lib/bunnyVideo";
 
@@ -511,6 +512,7 @@ const Admin = () => {
       { icon: GraduationCap, label: t("admin_teachers"), tab: "teachers" },
       { icon: Video, label: "المحاضرات", tab: "lectures" },
       { icon: Clock, label: t("sidebar_available_times"), tab: "availability" },
+      { icon: UserPlus, label: "طلبات الانضمام كمعلم", tab: "applications" },
     ]},
     { section: t("section_account"), items: [
       { icon: Shield, label: t("admin_admins"), tab: "admins" },
@@ -693,6 +695,12 @@ const Admin = () => {
           {activeTab === "invoices" && (
             <div className="animate-fade-in">
               <AdminInvoices />
+            </div>
+          )}
+
+          {activeTab === "applications" && (
+            <div className="animate-fade-in">
+              <AdminTutorApplications />
             </div>
           )}
 
