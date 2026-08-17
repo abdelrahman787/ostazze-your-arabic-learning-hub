@@ -55,7 +55,7 @@ const emptyForm = {
   phone: "",
   email: "",
   nationality: "",
-  city: "",
+  country: "",
   specialization: "",
   university: "",
   degree: "",
@@ -64,10 +64,9 @@ const emptyForm = {
   courses: "",
   recordedBefore: "",
   quietPlace: "",
-  device: "",
-  microphone: "",
   demoLink: "",
 };
+
 
 const FieldBase = ({
   k,
