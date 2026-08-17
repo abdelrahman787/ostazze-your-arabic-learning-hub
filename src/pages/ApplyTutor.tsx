@@ -334,8 +334,7 @@ const ApplyTutor = () => {
       `${L("الأدوات", "Tools")}: ${tools.join(", ")}`,
       `${L("الجهاز", "Device")}: ${form.device}`,
       `${L("الميكروفون", "Microphone")}: ${form.microphone}`,
-      `${L("رابط السيرة الذاتية", "CV link")}: ${form.cvLink}`,
-      `${L("رابط الفيديو التجريبي", "Demo video")}: ${form.demoLink}`,
+      `${L("رابط الفيديو التجريبي", "Demo video")}: ${form.demoLink || L("مرفوع/غير متوفر", "uploaded / not provided")}`,
     ];
     window.open(
       `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`,
