@@ -506,6 +506,49 @@ const ApplyTutor = () => {
             </Section>
 
             <Section num="04" title={T.s4}>
+              <div className="sm:col-span-2 space-y-1.5">
+                <label htmlFor="cvFile" className="block text-sm font-bold">
+                  {isAr ? "رفع ملف السيرة الذاتية" : "Upload your CV file"}
+                </label>
+                <div className="flex flex-wrap items-center gap-3">
+                  <label
+                    htmlFor="cvFile"
+                    className="btn-ghost cursor-pointer text-sm flex items-center gap-2 px-4 py-2.5 border border-border rounded-xl"
+                  >
+                    <Upload size={16} />
+                    {isAr ? "اختر ملف (PDF / DOC / DOCX)" : "Choose file (PDF / DOC / DOCX)"}
+                  </label>
+                  <input
+                    id="cvFile"
+                    type="file"
+                    accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                    className="sr-only"
+                    onChange={(e) => onPickCv(e.target.files?.[0] || null)}
+                  />
+                  {cvFile && (
+                    <span className="flex items-center gap-2 text-sm font-bold text-primary">
+                      <FileText size={15} /> {cvFile.name}
+                      <button
+                        type="button"
+                        onClick={() => onPickCv(null)}
+                        className="text-muted-foreground hover:text-destructive"
+                        aria-label={isAr ? "إزالة الملف" : "Remove file"}
+                      >
+                        <X size={14} />
+                      </button>
+                    </span>
+                  )}
+                </div>
+                {cvError ? (
+                  <p className="text-xs text-destructive">{cvError}</p>
+                ) : (
+                  <p className="text-xs text-muted-foreground">
+                    {isAr
+                      ? "ارفع سيرتك الذاتية مباشرة ليراجعها فريقنا (الحد الأقصى ١٠ ميجابايت)."
+                      : "Upload your CV directly for our team to review (max 10 MB)."}
+                  </p>
+                )}
+              </div>
               {Field({
                 k: "cvLink",
                 label: isAr ? "رابط السيرة الذاتية" : "CV Link",
