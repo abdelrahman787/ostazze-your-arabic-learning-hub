@@ -307,7 +307,7 @@ const ApplyTutor = () => {
       tools,
       device: form.device || null,
       microphone: form.microphone || null,
-      cv_link: form.cvLink || null,
+      cv_link: null,
       demo_link: form.demoLink || null,
       lang,
     });
