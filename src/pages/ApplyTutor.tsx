@@ -275,24 +275,31 @@ const ApplyTutor = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const Field = (props: {
-    k: keyof typeof form;
-    label: string;
-    hint?: string;
-    type?: string;
-    required?: boolean;
-    full?: boolean;
-    area?: boolean;
-    options?: string[];
-    placeholder?: string;
-  }) => (
-    <FieldBase
-      {...props}
-      value={form[props.k]}
-      selectLabel={T.select}
-      onChange={(v) => set(props.k, v)}
-    />
+  const stateRef = useRef({ form, selectLabel: T.select });
+  stateRef.current = { form, selectLabel: T.select };
+
+  const Field = useCallback(
+    (props: {
+      k: keyof typeof emptyForm;
+      label: string;
+      hint?: string;
+      type?: string;
+      required?: boolean;
+      full?: boolean;
+      area?: boolean;
+      options?: string[];
+      placeholder?: string;
+    }) => (
+      <FieldBase
+        {...props}
+        value={stateRef.current.form[props.k]}
+        selectLabel={stateRef.current.selectLabel}
+        onChange={(v) => setForm((p) => ({ ...p, [props.k]: v }))}
+      />
+    ),
+    []
   );
+
 
 
   return (
