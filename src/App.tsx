@@ -197,7 +197,9 @@ const App = () => (
                         <Routes>
                           <Route path="/" element={<Index />} />
                           <Route path="/teachers" element={<Teachers />} />
-                          <Route path="/apply-tutor" element={<ApplyTutor />} />
+                         <Route path="/apply-tutor" element={<ApplyTutor />} />
+                         <Route path="/teacher/onboarding" element={<ProtectedRoute><TeacherOnboarding /></ProtectedRoute>} />
+
                           <Route path="/teachers/:id" element={<TeacherProfile />} />
                           <Route path="/subjects" element={<Subjects />} />
                           <Route path="/universities" element={<Universities />} />
