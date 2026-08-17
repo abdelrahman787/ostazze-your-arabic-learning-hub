@@ -584,8 +584,11 @@ const ApplyTutor = () => {
               {Field({
                 k: "degree",
                 label: isAr ? "المؤهل العلمي" : "Degree",
-                placeholder: isAr ? "بكالوريوس / ماجستير / دكتوراه" : "Bachelor, Master, PhD",
+                options: isAr
+                  ? ["بكالوريوس", "ماجستير", "دكتوراه"]
+                  : ["Bachelor", "Master", "PhD"],
               })}
+
               {Field({
                 k: "experience",
                 label: isAr ? "سنوات الخبرة في التدريس" : "Years of Teaching Experience",
