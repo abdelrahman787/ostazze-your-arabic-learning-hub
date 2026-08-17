@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Loader2, Search, UserPlus, Mail, Phone, ExternalLink, X, RefreshCw } from "lucide-react";
+import { Loader2, Search, UserPlus, Mail, Phone, ExternalLink, X, RefreshCw, Check, Copy } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface TutorApplication {
@@ -43,6 +43,8 @@ const AdminTutorApplications = () => {
   const [q, setQ] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [selected, setSelected] = useState<TutorApplication | null>(null);
+  const [approving, setApproving] = useState(false);
+  const [tempPassword, setTempPassword] = useState<{ email: string; password: string } | null>(null);
 
   const fetchApps = useCallback(async () => {
     setLoading(true);
@@ -71,6 +73,35 @@ const AdminTutorApplications = () => {
     toast.success("تم التحديث");
     setApps((p) => p.map((a) => (a.id === id ? { ...a, status } : a)));
     setSelected((s) => (s && s.id === id ? { ...s, status } : s));
+  };
+
+  const approveAsTeacher = async (a: TutorApplication) => {
+    if (!confirm(`سيتم إنشاء حساب معلم للمتقدم ${a.full_name} (${a.email}). متابعة؟`)) return;
+    setApproving(true);
+    try {
+      const password = `Ostaze#${Math.random().toString(36).slice(2, 10)}${Math.floor(Math.random() * 90 + 10)}`;
+      const { data: { session } } = await supabase.auth.getSession();
+      const res = await supabase.functions.invoke("manage-roles", {
+        body: {
+          action: "approve_tutor",
+          email: a.email,
+          password,
+          full_name: a.full_name,
+          university: a.university || null,
+          subjects: a.specialization ? [a.specialization] : [],
+        },
+        headers: { Authorization: `Bearer ${session?.access_token}` },
+      });
+      if (res.error) throw new Error(res.error.message);
+      const result = res.data as { error?: string; created?: boolean; message?: string };
+      if (result?.error) throw new Error(result.error);
+      await setStatus(a.id, "accepted");
+      toast.success(result?.message || "تمت الإضافة كمعلم");
+      if (result?.created) setTempPassword({ email: a.email, password });
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "خطأ غير متوقع");
+    }
+    setApproving(false);
   };
 
   const filtered = useMemo(() => apps.filter((a) => {
@@ -193,6 +224,16 @@ const AdminTutorApplications = () => {
                   </a>
                 )}
               </div>
+              <div className="pt-5">
+                <button onClick={() => approveAsTeacher(selected)} disabled={approving}
+                  className="btn-primary w-full flex items-center justify-center gap-2 py-3 disabled:opacity-60">
+                  {approving ? <Loader2 size={16} className="animate-spin" /> : <Check size={16} />}
+                  قبول وإضافته كمعلم مباشرة
+                </button>
+                <p className="text-xs text-muted-foreground mt-2">
+                  ينشئ حساب معلم بنفس بريد المتقدم (أو يرقّي حسابه الحالي) ويظهر فوراً في صفحة المعلمين.
+                </p>
+              </div>
               <div className="pt-5 flex flex-wrap gap-2">
                 {Object.entries(STATUSES).map(([k, v]) => (
                   <button key={k} onClick={() => setStatus(selected.id, k)}
@@ -203,6 +244,24 @@ const AdminTutorApplications = () => {
               </div>
             </div>
           </motion.div>
+        </div>
+      )}
+
+      {tempPassword && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-foreground/50 p-4">
+          <div className="bg-card rounded-2xl shadow-xl w-full max-w-md p-6 space-y-4">
+            <h3 className="font-black text-lg">تم إنشاء حساب المعلم ✅</h3>
+            <p className="text-sm text-muted-foreground">أرسل بيانات الدخول للمعلم — لن تظهر كلمة المرور مرة أخرى.</p>
+            <div className="space-y-2 text-sm">
+              <div className="p-3 rounded-xl bg-muted break-all"><b>البريد:</b> {tempPassword.email}</div>
+              <div className="p-3 rounded-xl bg-muted break-all"><b>كلمة المرور:</b> {tempPassword.password}</div>
+            </div>
+            <div className="flex gap-2">
+              <button onClick={() => { navigator.clipboard.writeText(`Email: ${tempPassword.email}\nPassword: ${tempPassword.password}`); toast.success("تم النسخ"); }}
+                className="btn-ghost flex-1 flex items-center justify-center gap-2 py-2.5"><Copy size={15} /> نسخ</button>
+              <button onClick={() => setTempPassword(null)} className="btn-primary flex-1 py-2.5">تم</button>
+            </div>
+          </div>
         </div>
       )}
     </div>
