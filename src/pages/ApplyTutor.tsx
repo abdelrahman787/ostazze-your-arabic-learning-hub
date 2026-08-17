@@ -487,10 +487,21 @@ const ApplyTutor = () => {
                 k: "email",
                 label: isAr ? "البريد الإلكتروني" : "Email",
                 type: "email",
+                required: true,
                 placeholder: "name@example.com",
+                hint: isAr
+                  ? "سيتم إنشاء حسابك على المنصة بنفس هذا البريد عند القبول."
+                  : "If accepted, your teacher account will be created with this email.",
               })}
               {Field({ k: "nationality", label: isAr ? "الجنسية" : "Nationality" })}
-              {Field({ k: "city", label: isAr ? "المدينة" : "City" })}
+              {Field({
+                k: "country",
+                label: isAr ? "الدولة" : "Country",
+                options: isAr
+                  ? ["السعودية", "الكويت", "قطر", "الإمارات", "مصر", "أخرى"]
+                  : ["Saudi Arabia", "Kuwait", "Qatar", "UAE", "Egypt", "Other"],
+              })}
+
               <div className="sm:col-span-2 space-y-3">
                 <label htmlFor="photoFile" className="block text-sm font-bold">
                   {isAr ? "صورتك الشخصية (اختياري)" : "Your photo (optional)"}
