@@ -24,6 +24,7 @@ interface TutorApplication {
   device: string | null;
   microphone: string | null;
   cv_link: string | null;
+  cv_file_path: string | null;
   demo_link: string | null;
   status: string;
   admin_notes: string | null;
