@@ -1,6 +1,6 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 
-const WHATSAPP_NUMBER = "201130382206";
+import { WHATSAPP_NUMBER } from "@/lib/whatsapp";
 
 const WhatsAppIcon = ({ size = 18 }: { size?: number }) => (
   <svg viewBox="0 0 32 32" width={size} height={size} fill="currentColor" aria-hidden="true">

@@ -1,7 +1,7 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { MessageCircle } from "lucide-react";
 
-const WHATSAPP_NUMBER = "201130382206";
+import { WHATSAPP_NUMBER } from "@/lib/whatsapp";
 
 const WhatsAppIcon = () => (
   <svg viewBox="0 0 32 32" width="24" height="24" fill="currentColor" aria-hidden="true">

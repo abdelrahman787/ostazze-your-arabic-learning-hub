@@ -206,7 +206,7 @@ const Teachers = () => {
                   <a href="/register" className="btn-outline inline-flex items-center gap-2">
                     {t("teachers_empty_register_cta")}
                   </a>
-                  <a href="https://wa.me/201130382206" target="_blank" rel="noopener noreferrer" className="btn-outline inline-flex items-center gap-2">
+                  <a href={waLink()} target="_blank" rel="noopener noreferrer" className="btn-outline inline-flex items-center gap-2">
                     {t("teachers_empty_contact_cta")}
                   </a>
                 </div>
