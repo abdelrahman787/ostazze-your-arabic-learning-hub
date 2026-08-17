@@ -585,26 +585,60 @@ const ApplyTutor = () => {
                 )}
               </div>
               {Field({
-                k: "cvLink",
-                label: isAr ? "رابط السيرة الذاتية (اختياري)" : "CV Link (optional)",
-                type: "url",
-                full: true,
-                placeholder: "https://drive.google.com/...",
-                hint: isAr
-                  ? "إذا فضّلت، ضع رابط Google Drive بدلاً من رفع الملف."
-                  : "Optionally paste a Google Drive link instead of uploading a file.",
-              })}
-              {Field({
                 k: "demoLink",
-                label: isAr ? "رابط فيديو الشرح التجريبي" : "Demo Lesson Video URL",
+                label: isAr
+                  ? "رابط فيديو الشرح التجريبي (اختياري)"
+                  : "Demo Lesson Video Link (optional)",
                 type: "url",
-                required: true,
                 full: true,
                 placeholder: "https://youtube.com/...",
                 hint: isAr
                   ? "فيديو من ٥ إلى ١٠ دقائق، وتأكد أن الصلاحية «Anyone with the link can view»."
                   : "A 5–10 minute video. Make sure sharing is set to “Anyone with the link can view”.",
               })}
+              <div className="sm:col-span-2 space-y-1.5">
+                <label htmlFor="demoFile" className="block text-sm font-bold">
+                  {isAr ? "أو ارفع فيديو الشرح (اختياري)" : "Or upload your demo video (optional)"}
+                </label>
+                <div className="flex flex-wrap items-center gap-3">
+                  <label
+                    htmlFor="demoFile"
+                    className="btn-ghost cursor-pointer text-sm flex items-center gap-2 px-4 py-2.5 border border-border rounded-xl"
+                  >
+                    <Upload size={16} />
+                    {isAr ? "اختر فيديو (MP4 / MOV / WEBM)" : "Choose video (MP4 / MOV / WEBM)"}
+                  </label>
+                  <input
+                    id="demoFile"
+                    type="file"
+                    accept="video/mp4,video/quicktime,video/webm,.mp4,.mov,.m4v,.webm"
+                    className="sr-only"
+                    onChange={(e) => onPickDemo(e.target.files?.[0] || null)}
+                  />
+                  {demoFile && (
+                    <span className="flex items-center gap-2 text-sm font-bold text-primary">
+                      <FileText size={15} /> {demoFile.name}
+                      <button
+                        type="button"
+                        onClick={() => onPickDemo(null)}
+                        className="text-muted-foreground hover:text-destructive"
+                        aria-label={isAr ? "إزالة الفيديو" : "Remove video"}
+                      >
+                        <X size={14} />
+                      </button>
+                    </span>
+                  )}
+                </div>
+                {demoError ? (
+                  <p className="text-xs text-destructive">{demoError}</p>
+                ) : (
+                  <p className="text-xs text-muted-foreground">
+                    {isAr
+                      ? "يمكنك مشاركة رابط الفيديو أو رفعه مباشرة (الحد الأقصى ١٠٠ ميجابايت). كلاهما اختياري."
+                      : "Share a video link or upload the file directly (max 100 MB). Both are optional."}
+                  </p>
+                )}
+              </div>
             </Section>
 
             <div className="card-base p-6 flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
