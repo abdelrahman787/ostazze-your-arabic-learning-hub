@@ -67,7 +67,6 @@ const emptyForm = {
   quietPlace: "",
   device: "",
   microphone: "",
-  cvLink: "",
   demoLink: "",
 };
 
@@ -216,6 +215,8 @@ const ApplyTutor = () => {
   const [saving, setSaving] = useState(false);
   const [cvFile, setCvFile] = useState<File | null>(null);
   const [cvError, setCvError] = useState("");
+  const [demoFile, setDemoFile] = useState<File | null>(null);
+  const [demoError, setDemoError] = useState("");
 
   const onPickCv = (file: File | null) => {
     setCvError("");
@@ -231,6 +232,22 @@ const ApplyTutor = () => {
     }
     setCvFile(file);
   };
+
+  const onPickDemo = (file: File | null) => {
+    setDemoError("");
+    if (!file) return setDemoFile(null);
+    const okExt = /\.(mp4|mov|m4v|webm|avi|mkv)$/i.test(file.name);
+    if (!okExt) {
+      setDemoError(isAr ? "الصيغ المسموحة: MP4 أو MOV أو WEBM" : "Allowed formats: MP4, MOV or WEBM");
+      return setDemoFile(null);
+    }
+    if (file.size > 100 * 1024 * 1024) {
+      setDemoError(isAr ? "الحد الأقصى لحجم الفيديو ١٠٠ ميجابايت" : "Maximum video size is 100 MB");
+      return setDemoFile(null);
+    }
+    setDemoFile(file);
+  };
+
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -253,8 +270,26 @@ const ApplyTutor = () => {
       cvPath = path;
     }
 
+    let demoPath: string | null = null;
+    if (demoFile) {
+      const ext = demoFile.name.split(".").pop()?.toLowerCase() || "mp4";
+      const safeName = (form.name || "applicant").replace(/[^\p{L}\p{N}]+/gu, "-").slice(0, 40);
+      const path = `${new Date().getFullYear()}/demo-${crypto.randomUUID()}-${safeName}.${ext}`;
+      const { error: upErr } = await supabase.storage
+        .from("tutor-cvs")
+        .upload(path, demoFile, { contentType: demoFile.type || undefined, upsert: false });
+      if (upErr) {
+        console.error("demo upload failed", upErr);
+        setDemoError(isAr ? "تعذر رفع الفيديو، حاول مرة أخرى." : "Video upload failed, please try again.");
+        setSaving(false);
+        return;
+      }
+      demoPath = path;
+    }
+
     const { error } = await supabase.from("tutor_applications").insert({
       cv_file_path: cvPath,
+      demo_file_path: demoPath,
       full_name: form.name,
       phone: form.phone,
       email: form.email,
@@ -272,7 +307,7 @@ const ApplyTutor = () => {
       tools,
       device: form.device || null,
       microphone: form.microphone || null,
-      cv_link: form.cvLink || null,
+      cv_link: null,
       demo_link: form.demoLink || null,
       lang,
     });
@@ -299,8 +334,7 @@ const ApplyTutor = () => {
       `${L("الأدوات", "Tools")}: ${tools.join(", ")}`,
       `${L("الجهاز", "Device")}: ${form.device}`,
       `${L("الميكروفون", "Microphone")}: ${form.microphone}`,
-      `${L("رابط السيرة الذاتية", "CV link")}: ${form.cvLink}`,
-      `${L("رابط الفيديو التجريبي", "Demo video")}: ${form.demoLink}`,
+      `${L("رابط الفيديو التجريبي", "Demo video")}: ${form.demoLink || L("مرفوع/غير متوفر", "uploaded / not provided")}`,
     ];
     window.open(
       `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`,
@@ -550,26 +584,60 @@ const ApplyTutor = () => {
                 )}
               </div>
               {Field({
-                k: "cvLink",
-                label: isAr ? "رابط السيرة الذاتية (اختياري)" : "CV Link (optional)",
-                type: "url",
-                full: true,
-                placeholder: "https://drive.google.com/...",
-                hint: isAr
-                  ? "إذا فضّلت، ضع رابط Google Drive بدلاً من رفع الملف."
-                  : "Optionally paste a Google Drive link instead of uploading a file.",
-              })}
-              {Field({
                 k: "demoLink",
-                label: isAr ? "رابط فيديو الشرح التجريبي" : "Demo Lesson Video URL",
+                label: isAr
+                  ? "رابط فيديو الشرح التجريبي (اختياري)"
+                  : "Demo Lesson Video Link (optional)",
                 type: "url",
-                required: true,
                 full: true,
                 placeholder: "https://youtube.com/...",
                 hint: isAr
                   ? "فيديو من ٥ إلى ١٠ دقائق، وتأكد أن الصلاحية «Anyone with the link can view»."
                   : "A 5–10 minute video. Make sure sharing is set to “Anyone with the link can view”.",
               })}
+              <div className="sm:col-span-2 space-y-1.5">
+                <label htmlFor="demoFile" className="block text-sm font-bold">
+                  {isAr ? "أو ارفع فيديو الشرح (اختياري)" : "Or upload your demo video (optional)"}
+                </label>
+                <div className="flex flex-wrap items-center gap-3">
+                  <label
+                    htmlFor="demoFile"
+                    className="btn-ghost cursor-pointer text-sm flex items-center gap-2 px-4 py-2.5 border border-border rounded-xl"
+                  >
+                    <Upload size={16} />
+                    {isAr ? "اختر فيديو (MP4 / MOV / WEBM)" : "Choose video (MP4 / MOV / WEBM)"}
+                  </label>
+                  <input
+                    id="demoFile"
+                    type="file"
+                    accept="video/mp4,video/quicktime,video/webm,.mp4,.mov,.m4v,.webm"
+                    className="sr-only"
+                    onChange={(e) => onPickDemo(e.target.files?.[0] || null)}
+                  />
+                  {demoFile && (
+                    <span className="flex items-center gap-2 text-sm font-bold text-primary">
+                      <FileText size={15} /> {demoFile.name}
+                      <button
+                        type="button"
+                        onClick={() => onPickDemo(null)}
+                        className="text-muted-foreground hover:text-destructive"
+                        aria-label={isAr ? "إزالة الفيديو" : "Remove video"}
+                      >
+                        <X size={14} />
+                      </button>
+                    </span>
+                  )}
+                </div>
+                {demoError ? (
+                  <p className="text-xs text-destructive">{demoError}</p>
+                ) : (
+                  <p className="text-xs text-muted-foreground">
+                    {isAr
+                      ? "يمكنك مشاركة رابط الفيديو أو رفعه مباشرة (الحد الأقصى ١٠٠ ميجابايت). كلاهما اختياري."
+                      : "Share a video link or upload the file directly (max 100 MB). Both are optional."}
+                  </p>
+                )}
+              </div>
             </Section>
 
             <div className="card-base p-6 flex flex-col sm:flex-row sm:items-center gap-4 justify-between">

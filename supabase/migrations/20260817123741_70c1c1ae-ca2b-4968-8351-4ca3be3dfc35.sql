@@ -1,0 +1,1 @@
+ALTER TABLE public.tutor_applications ADD COLUMN IF NOT EXISTS demo_file_path TEXT;
