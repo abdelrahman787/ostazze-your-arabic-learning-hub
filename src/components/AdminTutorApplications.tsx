@@ -210,7 +210,7 @@ const AdminTutorApplications = () => {
               <Row label="واتساب" value={selected.phone} />
               <Row label="الجنسية" value={selected.nationality} />
               <Row label="الدولة" value={selected.country} />
-              <Row label="المدينة" value={selected.city} />
+              
               <Row label="التخصص" value={selected.specialization} />
               <Row label="الجامعة" value={selected.university} />
               <Row label="المؤهل" value={selected.degree} />
