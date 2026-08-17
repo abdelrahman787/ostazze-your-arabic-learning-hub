@@ -551,13 +551,13 @@ const ApplyTutor = () => {
               </div>
               {Field({
                 k: "cvLink",
-                label: isAr ? "رابط السيرة الذاتية" : "CV Link",
+                label: isAr ? "رابط السيرة الذاتية (اختياري)" : "CV Link (optional)",
                 type: "url",
                 full: true,
                 placeholder: "https://drive.google.com/...",
                 hint: isAr
-                  ? "ارفع السيرة الذاتية (PDF/DOC) على Google Drive وضع الرابط هنا، أو أرسلها لاحقاً على واتساب."
-                  : "Upload your CV (PDF/DOC) to Google Drive and paste the link, or send it later on WhatsApp.",
+                  ? "إذا فضّلت، ضع رابط Google Drive بدلاً من رفع الملف."
+                  : "Optionally paste a Google Drive link instead of uploading a file.",
               })}
               {Field({
                 k: "demoLink",
