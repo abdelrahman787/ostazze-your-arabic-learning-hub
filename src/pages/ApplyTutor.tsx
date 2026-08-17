@@ -71,6 +71,99 @@ const emptyForm = {
   demoLink: "",
 };
 
+const FieldBase = ({
+  k,
+  label,
+  hint,
+  type = "text",
+  required,
+  full,
+  area,
+  options,
+  placeholder,
+  value,
+  onChange,
+  selectLabel,
+}: {
+  k: string;
+  label: string;
+  hint?: string;
+  type?: string;
+  required?: boolean;
+  full?: boolean;
+  area?: boolean;
+  options?: string[];
+  placeholder?: string;
+  value: string;
+  onChange: (v: string) => void;
+  selectLabel: string;
+}) => (
+  <div className={`space-y-1.5 ${full ? "sm:col-span-2" : ""}`}>
+    <label htmlFor={k} className="block text-sm font-bold">
+      {label} {required && <span className="text-primary">*</span>}
+    </label>
+    {options ? (
+      <select
+        id={k}
+        required={required}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="input-base w-full"
+      >
+        <option value="">{selectLabel}</option>
+        {options.map((o) => (
+          <option key={o} value={o}>
+            {o}
+          </option>
+        ))}
+      </select>
+    ) : area ? (
+      <textarea
+        id={k}
+        rows={3}
+        required={required}
+        placeholder={placeholder}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="input-base w-full resize-none"
+      />
+    ) : (
+      <input
+        id={k}
+        type={type}
+        required={required}
+        placeholder={placeholder}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="input-base w-full"
+      />
+    )}
+    {hint && <p className="text-xs text-muted-foreground">{hint}</p>}
+  </div>
+);
+
+const Section = ({
+  num,
+  title,
+  children,
+}: {
+  num: string;
+  title: string;
+  children: React.ReactNode;
+}) => (
+  <section className="card-base p-6 md:p-8 space-y-6">
+    <div className="flex items-center gap-3 border-b border-border pb-4">
+      <span className="w-10 h-10 rounded-xl bg-primary/12 text-primary font-black flex items-center justify-center text-sm">
+        {num}
+      </span>
+      <h2 className="text-lg md:text-xl font-black">{title}</h2>
+    </div>
+    <div className="grid sm:grid-cols-2 gap-5">{children}</div>
+  </section>
+);
+
+
+
 const ApplyTutor = () => {
   const { lang } = useLanguage();
   const isAr = lang === "ar";
