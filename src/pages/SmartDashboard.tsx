@@ -5,6 +5,8 @@ import { useEffect } from "react";
 import Dashboard from "./Dashboard";
 import TeacherDashboard from "./TeacherDashboard";
 import NoIndex from "@/components/NoIndex";
+import TeacherOnboardingBanner from "@/components/TeacherOnboardingBanner";
+
 import { useLanguage } from "@/contexts/LanguageContext";
 import { logAccessDenied, logRoleRedirect } from "@/lib/accessLog";
 

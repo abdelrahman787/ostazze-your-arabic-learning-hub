@@ -102,8 +102,9 @@ serve(async (req) => {
 
       await supabaseAdmin
         .from("profiles")
-        .update({ account_type: "teacher", full_name })
+        .update({ account_type: "teacher", full_name, onboarding_completed: false })
         .eq("user_id", userId);
+
 
       const { data: existingTP } = await supabaseAdmin
         .from("teacher_profiles")
