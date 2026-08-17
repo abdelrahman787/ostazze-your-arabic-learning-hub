@@ -231,6 +231,22 @@ const ApplyTutor = () => {
     setCvFile(file);
   };
 
+  const onPickDemo = (file: File | null) => {
+    setDemoError("");
+    if (!file) return setDemoFile(null);
+    const okExt = /\.(mp4|mov|m4v|webm|avi|mkv)$/i.test(file.name);
+    if (!okExt) {
+      setDemoError(isAr ? "الصيغ المسموحة: MP4 أو MOV أو WEBM" : "Allowed formats: MP4, MOV or WEBM");
+      return setDemoFile(null);
+    }
+    if (file.size > 100 * 1024 * 1024) {
+      setDemoError(isAr ? "الحد الأقصى لحجم الفيديو ١٠٠ ميجابايت" : "Maximum video size is 100 MB");
+      return setDemoFile(null);
+    }
+    setDemoFile(file);
+  };
+
+
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
