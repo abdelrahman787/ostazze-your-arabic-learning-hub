@@ -68,6 +68,12 @@ const AdminTutorApplications = () => {
     return () => { supabase.removeChannel(channel); };
   }, [fetchApps]);
 
+  const openCvFile = async (path: string) => {
+    const { data, error } = await supabase.storage.from("tutor-cvs").createSignedUrl(path, 300);
+    if (error || !data?.signedUrl) return toast.error("تعذر فتح الملف");
+    window.open(data.signedUrl, "_blank", "noopener");
+  };
+
   const setStatus = async (id: string, status: string) => {
     const { error } = await supabase.from("tutor_applications").update({ status }).eq("id", id);
     if (error) return toast.error("خطأ: " + error.message);
