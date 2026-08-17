@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-const WHATSAPP_NUMBER = "201130382206";
+import { WHATSAPP_NUMBER } from "@/lib/whatsapp";
 
 const WhatsAppLogo = () => (
   <svg

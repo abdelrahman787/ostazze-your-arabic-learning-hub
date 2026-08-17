@@ -14,7 +14,7 @@ interface ChatMessage {
   showWhatsApp?: boolean;
 }
 
-const WHATSAPP_NUMBER = "201130382206";
+import { WHATSAPP_NUMBER } from "@/lib/whatsapp";
 
 // Heuristic to detect "I don't know" style responses where we should offer WhatsApp fallback
 const isUnansweredResponse = (text: string): boolean => {

@@ -4,7 +4,7 @@ import { Send, CheckCircle2, GraduationCap } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import PageHelmet from "@/components/PageHelmet";
 
-const WHATSAPP_NUMBER = "201130382206";
+import { WHATSAPP_NUMBER } from "@/lib/whatsapp";
 
 const SPECIALIZATIONS = [
   ["المحاسبة", "Accounting"],

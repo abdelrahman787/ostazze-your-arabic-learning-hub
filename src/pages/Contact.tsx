@@ -8,6 +8,7 @@ import FaqAccordion from "@/components/FaqAccordion";
 import { Mail, Phone, MapPin, Send, MessageCircle, Loader2, Building2, Clock, Timer, ShieldCheck } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
+import { waLink } from "@/lib/whatsapp";
 
 const Contact = () => {
   const { t, lang } = useLanguage();
@@ -31,7 +32,7 @@ const Contact = () => {
     { icon: Mail, label: t("contact_email_label"), value: "info@ostaze.com", href: "mailto:info@ostaze.com" },
     { icon: Phone, label: t("contact_phone_label"), value: "+201130382206", href: "tel:+201130382206" },
     { icon: MapPin, label: t("contact_location_label"), value: t("footer_location"), href: "#" },
-    { icon: MessageCircle, label: t("contact_whatsapp_label"), value: t("contact_whatsapp_value"), href: `https://wa.me/201130382206?text=${encodeURIComponent(lang === "ar" ? "مرحباً، أريد الاستفسار عن خدمات أسطازي" : "Hello, I'd like to inquire about Ostaze services")}` },
+    { icon: MessageCircle, label: t("contact_whatsapp_label"), value: t("contact_whatsapp_value"), href: waLink(lang === "ar" ? "مرحباً، أريد الاستفسار عن خدمات أسطازي" : "Hello, I'd like to inquire about Ostaze services") },
   ];
 
   const contactFaq = [
