@@ -220,7 +220,6 @@ const AdminTutorApplications = () => {
               <Row label="سبق التسجيل" value={selected.recorded_before} />
               <Row label="مكان هادئ" value={selected.quiet_place} />
               <Row label="الأدوات" value={selected.tools?.join(", ")} />
-              <Row label="الأدوات" value={selected.tools?.join(", ")} />
 
               <Row label="استخدام صورته كصورة ملف شخصي" value={selected.photo_file_path ? (selected.use_photo_as_avatar ? "نعم" : "لا") : null} />
               <div className="flex flex-wrap gap-3 pt-4">
