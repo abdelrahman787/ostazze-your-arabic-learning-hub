@@ -551,31 +551,21 @@ const ApplyTutor = () => {
                   </p>
                 )}
                 {photoFile && (
-                  <div className="space-y-2">
-                    <span className="block text-sm font-bold">
+                  <label className="flex items-start gap-3 cursor-pointer rounded-xl border border-border p-3">
+                    <input
+                      type="checkbox"
+                      checked={useAvatar === true}
+                      onChange={(e) => setUseAvatar(e.target.checked)}
+                      className="mt-0.5 w-4 h-4 accent-[hsl(var(--primary))]"
+                    />
+                    <span className="text-sm font-bold">
                       {isAr
-                        ? "هل توافق على استخدام صورتك كصورة للملف الشخصي؟"
-                        : "Do you want this photo used as your profile picture?"}
+                        ? "أوافق على استخدام صورتي كصورة لملفي الشخصي وظهورها للجميع على الموقع."
+                        : "I agree to use this photo as my public profile picture on the website."}
                     </span>
-                    <div className="flex flex-wrap gap-2">
-                      {[true, false].map((val) => (
-                        <button
-                          key={String(val)}
-                          type="button"
-                          aria-pressed={useAvatar === val}
-                          onClick={() => setUseAvatar(val)}
-                          className={`px-4 py-2 rounded-full text-sm font-bold border transition-colors ${
-                            useAvatar === val
-                              ? "bg-primary text-primary-foreground border-primary"
-                              : "border-border text-muted-foreground hover:border-primary/50"
-                          }`}
-                        >
-                          {val ? (isAr ? "نعم" : "Yes") : isAr ? "لا" : "No"}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
+                  </label>
                 )}
+
               </div>
             </Section>
 
