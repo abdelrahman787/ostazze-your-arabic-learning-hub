@@ -67,7 +67,6 @@ const emptyForm = {
   quietPlace: "",
   device: "",
   microphone: "",
-  cvLink: "",
   demoLink: "",
 };
 
