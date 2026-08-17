@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Send, CheckCircle2, GraduationCap } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -71,6 +71,99 @@ const emptyForm = {
   demoLink: "",
 };
 
+const FieldBase = ({
+  k,
+  label,
+  hint,
+  type = "text",
+  required,
+  full,
+  area,
+  options,
+  placeholder,
+  value,
+  onChange,
+  selectLabel,
+}: {
+  k: string;
+  label: string;
+  hint?: string;
+  type?: string;
+  required?: boolean;
+  full?: boolean;
+  area?: boolean;
+  options?: string[];
+  placeholder?: string;
+  value: string;
+  onChange: (v: string) => void;
+  selectLabel: string;
+}) => (
+  <div className={`space-y-1.5 ${full ? "sm:col-span-2" : ""}`}>
+    <label htmlFor={k} className="block text-sm font-bold">
+      {label} {required && <span className="text-primary">*</span>}
+    </label>
+    {options ? (
+      <select
+        id={k}
+        required={required}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="input-base w-full"
+      >
+        <option value="">{selectLabel}</option>
+        {options.map((o) => (
+          <option key={o} value={o}>
+            {o}
+          </option>
+        ))}
+      </select>
+    ) : area ? (
+      <textarea
+        id={k}
+        rows={3}
+        required={required}
+        placeholder={placeholder}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="input-base w-full resize-none"
+      />
+    ) : (
+      <input
+        id={k}
+        type={type}
+        required={required}
+        placeholder={placeholder}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="input-base w-full"
+      />
+    )}
+    {hint && <p className="text-xs text-muted-foreground">{hint}</p>}
+  </div>
+);
+
+const Section = ({
+  num,
+  title,
+  children,
+}: {
+  num: string;
+  title: string;
+  children: React.ReactNode;
+}) => (
+  <section className="card-base p-6 md:p-8 space-y-6">
+    <div className="flex items-center gap-3 border-b border-border pb-4">
+      <span className="w-10 h-10 rounded-xl bg-primary/12 text-primary font-black flex items-center justify-center text-sm">
+        {num}
+      </span>
+      <h2 className="text-lg md:text-xl font-black">{title}</h2>
+    </div>
+    <div className="grid sm:grid-cols-2 gap-5">{children}</div>
+  </section>
+);
+
+
+
 const ApplyTutor = () => {
   const { lang } = useLanguage();
   const isAr = lang === "ar";
@@ -78,7 +171,7 @@ const ApplyTutor = () => {
   const [form, setForm] = useState({ ...emptyForm });
   const [tools, setTools] = useState<string[]>([]);
 
-  const set = (k: keyof typeof form, v: string) => setForm((p) => ({ ...p, [k]: v }));
+  
   const toggleTool = (t: string) =>
     setTools((p) => (p.includes(t) ? p.filter((x) => x !== t) : [...p, t]));
 
@@ -182,90 +275,32 @@ const ApplyTutor = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const Field = ({
-    k,
-    label,
-    hint,
-    type = "text",
-    required,
-    full,
-    area,
-    options,
-    placeholder,
-  }: {
-    k: keyof typeof form;
-    label: string;
-    hint?: string;
-    type?: string;
-    required?: boolean;
-    full?: boolean;
-    area?: boolean;
-    options?: string[];
-    placeholder?: string;
-  }) => (
-    <div className={`space-y-1.5 ${full ? "sm:col-span-2" : ""}`}>
-      <label htmlFor={k} className="block text-sm font-bold">
-        {label} {required && <span className="text-primary">*</span>}
-      </label>
-      {options ? (
-        <select
-          id={k}
-          required={required}
-          value={form[k]}
-          onChange={(e) => set(k, e.target.value)}
-          className="input-base w-full"
-        >
-          <option value="">{T.select}</option>
-          {options.map((o) => (
-            <option key={o} value={o}>
-              {o}
-            </option>
-          ))}
-        </select>
-      ) : area ? (
-        <textarea
-          id={k}
-          rows={3}
-          required={required}
-          placeholder={placeholder}
-          value={form[k]}
-          onChange={(e) => set(k, e.target.value)}
-          className="input-base w-full resize-none"
-        />
-      ) : (
-        <input
-          id={k}
-          type={type}
-          required={required}
-          placeholder={placeholder}
-          value={form[k]}
-          onChange={(e) => set(k, e.target.value)}
-          className="input-base w-full"
-        />
-      )}
-      {hint && <p className="text-xs text-muted-foreground">{hint}</p>}
-    </div>
+  const stateRef = useRef({ form, selectLabel: T.select });
+  stateRef.current = { form, selectLabel: T.select };
+
+  const Field = useCallback(
+    (props: {
+      k: keyof typeof emptyForm;
+      label: string;
+      hint?: string;
+      type?: string;
+      required?: boolean;
+      full?: boolean;
+      area?: boolean;
+      options?: string[];
+      placeholder?: string;
+    }) => (
+      <FieldBase
+        {...props}
+        value={stateRef.current.form[props.k]}
+        selectLabel={stateRef.current.selectLabel}
+        onChange={(v) => setForm((p) => ({ ...p, [props.k]: v }))}
+      />
+    ),
+    []
   );
 
-  const Section = ({
-    num,
-    title,
-    children,
-  }: {
-    num: string;
-    title: string;
-    children: React.ReactNode;
-  }) => (
-    <section className="card-base p-6 md:p-8 space-y-6">
-      <div className="flex items-center gap-3 border-b border-border pb-4">
-        <span className="w-10 h-10 rounded-xl bg-primary/12 text-primary font-black flex items-center justify-center text-sm">
-          {num}
-        </span>
-        <h2 className="text-lg md:text-xl font-black">{title}</h2>
-      </div>
-      <div className="grid sm:grid-cols-2 gap-5">{children}</div>
-    </section>
-  );
+
 
   return (
     <div>
