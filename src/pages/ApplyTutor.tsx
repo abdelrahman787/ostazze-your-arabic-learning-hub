@@ -1,6 +1,6 @@
 import { useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
-import { Send, CheckCircle2, GraduationCap } from "lucide-react";
+import { Send, CheckCircle2, GraduationCap, Upload, FileText, X } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import PageHelmet from "@/components/PageHelmet";
 
