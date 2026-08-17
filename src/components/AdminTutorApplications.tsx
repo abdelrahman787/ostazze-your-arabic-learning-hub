@@ -27,6 +27,8 @@ interface TutorApplication {
   cv_file_path: string | null;
   demo_link: string | null;
   demo_file_path: string | null;
+  photo_file_path: string | null;
+  use_photo_as_avatar: boolean | null;
   status: string;
   admin_notes: string | null;
   created_at: string;
@@ -220,6 +222,7 @@ const AdminTutorApplications = () => {
               <Row label="الأدوات" value={selected.tools?.join(", ")} />
               <Row label="الجهاز" value={selected.device} />
               <Row label="الميكروفون" value={selected.microphone} />
+              <Row label="استخدام صورته كصورة ملف شخصي" value={selected.photo_file_path ? (selected.use_photo_as_avatar ? "نعم" : "لا") : null} />
               <div className="flex flex-wrap gap-3 pt-4">
                 {selected.cv_file_path && (
                   <button onClick={() => openCvFile(selected.cv_file_path!)} className="btn-ghost text-sm flex items-center gap-2 px-3 py-2">
@@ -235,6 +238,11 @@ const AdminTutorApplications = () => {
                   <a href={selected.demo_link} target="_blank" rel="noopener noreferrer" className="btn-ghost text-sm flex items-center gap-2 px-3 py-2">
                     <ExternalLink size={15} /> رابط فيديو الشرح
                   </a>
+                )}
+                {selected.photo_file_path && (
+                  <button onClick={() => openCvFile(selected.photo_file_path!)} className="btn-ghost text-sm flex items-center gap-2 px-3 py-2">
+                    <FileDown size={15} /> الصورة الشخصية
+                  </button>
                 )}
                 {selected.demo_file_path && (
                   <button onClick={() => openCvFile(selected.demo_file_path!)} className="btn-ghost text-sm flex items-center gap-2 px-3 py-2">

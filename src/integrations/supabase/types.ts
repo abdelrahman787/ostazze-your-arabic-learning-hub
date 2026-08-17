@@ -667,6 +667,7 @@ export type Database = {
           microphone: string | null
           nationality: string | null
           phone: string
+          photo_file_path: string | null
           quiet_place: string | null
           recorded_before: string | null
           specialization: string | null
@@ -675,6 +676,7 @@ export type Database = {
           tools: string[]
           university: string | null
           updated_at: string
+          use_photo_as_avatar: boolean | null
         }
         Insert: {
           admin_notes?: string | null
@@ -696,6 +698,7 @@ export type Database = {
           microphone?: string | null
           nationality?: string | null
           phone: string
+          photo_file_path?: string | null
           quiet_place?: string | null
           recorded_before?: string | null
           specialization?: string | null
@@ -704,6 +707,7 @@ export type Database = {
           tools?: string[]
           university?: string | null
           updated_at?: string
+          use_photo_as_avatar?: boolean | null
         }
         Update: {
           admin_notes?: string | null
@@ -725,6 +729,7 @@ export type Database = {
           microphone?: string | null
           nationality?: string | null
           phone?: string
+          photo_file_path?: string | null
           quiet_place?: string | null
           recorded_before?: string | null
           specialization?: string | null
@@ -733,6 +738,7 @@ export type Database = {
           tools?: string[]
           university?: string | null
           updated_at?: string
+          use_photo_as_avatar?: boolean | null
         }
         Relationships: []
       }

@@ -55,7 +55,6 @@ const emptyForm = {
   phone: "",
   email: "",
   nationality: "",
-  country: "",
   city: "",
   specialization: "",
   university: "",
@@ -217,6 +216,32 @@ const ApplyTutor = () => {
   const [cvError, setCvError] = useState("");
   const [demoFile, setDemoFile] = useState<File | null>(null);
   const [demoError, setDemoError] = useState("");
+  const [photoFile, setPhotoFile] = useState<File | null>(null);
+  const [photoPreview, setPhotoPreview] = useState<string>("");
+  const [photoError, setPhotoError] = useState("");
+  const [useAvatar, setUseAvatar] = useState<boolean | null>(null);
+
+  const onPickPhoto = (file: File | null) => {
+    setPhotoError("");
+    setPhotoPreview((prev) => {
+      if (prev) URL.revokeObjectURL(prev);
+      return "";
+    });
+    if (!file) {
+      setUseAvatar(null);
+      return setPhotoFile(null);
+    }
+    if (!/^image\//.test(file.type)) {
+      setPhotoError(isAr ? "الرجاء اختيار صورة JPG أو PNG" : "Please choose a JPG or PNG image");
+      return setPhotoFile(null);
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      setPhotoError(isAr ? "الحد الأقصى لحجم الصورة ٥ ميجابايت" : "Maximum photo size is 5 MB");
+      return setPhotoFile(null);
+    }
+    setPhotoFile(file);
+    setPhotoPreview(URL.createObjectURL(file));
+  };
 
   const onPickCv = (file: File | null) => {
     setCvError("");
@@ -287,14 +312,32 @@ const ApplyTutor = () => {
       demoPath = path;
     }
 
+    let photoPath: string | null = null;
+    if (photoFile) {
+      const ext = photoFile.name.split(".").pop()?.toLowerCase() || "jpg";
+      const safeName = (form.name || "applicant").replace(/[^\p{L}\p{N}]+/gu, "-").slice(0, 40);
+      const path = `${new Date().getFullYear()}/photo-${crypto.randomUUID()}-${safeName}.${ext}`;
+      const { error: upErr } = await supabase.storage
+        .from("tutor-cvs")
+        .upload(path, photoFile, { contentType: photoFile.type || undefined, upsert: false });
+      if (upErr) {
+        console.error("photo upload failed", upErr);
+        setPhotoError(isAr ? "تعذر رفع الصورة، حاول مرة أخرى." : "Photo upload failed, please try again.");
+        setSaving(false);
+        return;
+      }
+      photoPath = path;
+    }
+
     const { error } = await supabase.from("tutor_applications").insert({
       cv_file_path: cvPath,
       demo_file_path: demoPath,
+      photo_file_path: photoPath,
+      use_photo_as_avatar: photoFile ? useAvatar ?? false : null,
       full_name: form.name,
       phone: form.phone,
       email: form.email,
       nationality: form.nationality || null,
-      country: form.country || null,
       city: form.city || null,
       specialization: form.specialization || null,
       university: form.university || null,
@@ -321,8 +364,8 @@ const ApplyTutor = () => {
       `${L("واتساب", "WhatsApp")}: ${form.phone}`,
       `${L("البريد", "Email")}: ${form.email}`,
       `${L("الجنسية", "Nationality")}: ${form.nationality}`,
-      `${L("الدولة", "Country")}: ${form.country}`,
       `${L("المدينة", "City")}: ${form.city}`,
+      `${L("صورة شخصية", "Photo")}: ${photoFile ? (useAvatar ? L("مرفوعة - موافق كصورة ملف شخصي", "uploaded - approved as profile picture") : L("مرفوعة - غير موافق", "uploaded - not approved")) : L("غير مرفقة", "not provided")}`,
       `${L("التخصص", "Specialization")}: ${form.specialization}`,
       `${L("الجامعة", "University")}: ${form.university}`,
       `${L("المؤهل", "Degree")}: ${form.degree}`,
@@ -448,8 +491,82 @@ const ApplyTutor = () => {
                 placeholder: "name@example.com",
               })}
               {Field({ k: "nationality", label: isAr ? "الجنسية" : "Nationality" })}
-              {Field({ k: "country", label: isAr ? "الدولة" : "Country" })}
-              {Field({ k: "city", label: isAr ? "المدينة" : "City", full: true })}
+              {Field({ k: "city", label: isAr ? "المدينة" : "City" })}
+              <div className="sm:col-span-2 space-y-3">
+                <label htmlFor="photoFile" className="block text-sm font-bold">
+                  {isAr ? "صورتك الشخصية (اختياري)" : "Your photo (optional)"}
+                </label>
+                <div className="flex flex-wrap items-center gap-3">
+                  {photoPreview && (
+                    <img
+                      src={photoPreview}
+                      alt={isAr ? "معاينة الصورة" : "Photo preview"}
+                      width={64}
+                      height={64}
+                      className="w-16 h-16 rounded-full object-cover border border-border"
+                    />
+                  )}
+                  <label
+                    htmlFor="photoFile"
+                    className="btn-ghost cursor-pointer text-sm flex items-center gap-2 px-4 py-2.5 border border-border rounded-xl"
+                  >
+                    <Upload size={16} />
+                    {isAr ? "اختر صورة (JPG / PNG)" : "Choose photo (JPG / PNG)"}
+                  </label>
+                  <input
+                    id="photoFile"
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp"
+                    className="sr-only"
+                    onChange={(e) => onPickPhoto(e.target.files?.[0] || null)}
+                  />
+                  {photoFile && (
+                    <button
+                      type="button"
+                      onClick={() => onPickPhoto(null)}
+                      className="text-muted-foreground hover:text-destructive"
+                      aria-label={isAr ? "إزالة الصورة" : "Remove photo"}
+                    >
+                      <X size={15} />
+                    </button>
+                  )}
+                </div>
+                {photoError ? (
+                  <p className="text-xs text-destructive">{photoError}</p>
+                ) : (
+                  <p className="text-xs text-muted-foreground">
+                    {isAr
+                      ? "صورة واضحة للوجه (الحد الأقصى ٥ ميجابايت)."
+                      : "A clear face photo (max 5 MB)."}
+                  </p>
+                )}
+                {photoFile && (
+                  <div className="space-y-2">
+                    <span className="block text-sm font-bold">
+                      {isAr
+                        ? "هل توافق على استخدام صورتك كصورة للملف الشخصي؟"
+                        : "Do you want this photo used as your profile picture?"}
+                    </span>
+                    <div className="flex flex-wrap gap-2">
+                      {[true, false].map((val) => (
+                        <button
+                          key={String(val)}
+                          type="button"
+                          aria-pressed={useAvatar === val}
+                          onClick={() => setUseAvatar(val)}
+                          className={`px-4 py-2 rounded-full text-sm font-bold border transition-colors ${
+                            useAvatar === val
+                              ? "bg-primary text-primary-foreground border-primary"
+                              : "border-border text-muted-foreground hover:border-primary/50"
+                          }`}
+                        >
+                          {val ? (isAr ? "نعم" : "Yes") : isAr ? "لا" : "No"}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
             </Section>
 
             <Section num="02" title={T.s2}>
