@@ -50,8 +50,9 @@ const SmartDashboard = () => {
   }
 
   if (user.role === "teacher") {
-    return <><NoIndex title="Teacher Dashboard" /><TeacherDashboard /></>;
+    return <><NoIndex title="Teacher Dashboard" /><TeacherOnboardingBanner /><TeacherDashboard /></>;
   }
+
 
   return <><NoIndex title="Dashboard" /><Dashboard /></>;
 };
