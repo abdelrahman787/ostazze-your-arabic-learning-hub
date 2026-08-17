@@ -5,6 +5,8 @@ import { useEffect } from "react";
 import Dashboard from "./Dashboard";
 import TeacherDashboard from "./TeacherDashboard";
 import NoIndex from "@/components/NoIndex";
+import TeacherOnboardingBanner from "@/components/TeacherOnboardingBanner";
+
 import { useLanguage } from "@/contexts/LanguageContext";
 import { logAccessDenied, logRoleRedirect } from "@/lib/accessLog";
 
@@ -50,8 +52,9 @@ const SmartDashboard = () => {
   }
 
   if (user.role === "teacher") {
-    return <><NoIndex title="Teacher Dashboard" /><TeacherDashboard /></>;
+    return <><NoIndex title="Teacher Dashboard" /><TeacherOnboardingBanner /><TeacherDashboard /></>;
   }
+
 
   return <><NoIndex title="Dashboard" /><Dashboard /></>;
 };

@@ -210,7 +210,7 @@ const AdminTutorApplications = () => {
               <Row label="واتساب" value={selected.phone} />
               <Row label="الجنسية" value={selected.nationality} />
               <Row label="الدولة" value={selected.country} />
-              <Row label="المدينة" value={selected.city} />
+              
               <Row label="التخصص" value={selected.specialization} />
               <Row label="الجامعة" value={selected.university} />
               <Row label="المؤهل" value={selected.degree} />
@@ -220,8 +220,7 @@ const AdminTutorApplications = () => {
               <Row label="سبق التسجيل" value={selected.recorded_before} />
               <Row label="مكان هادئ" value={selected.quiet_place} />
               <Row label="الأدوات" value={selected.tools?.join(", ")} />
-              <Row label="الجهاز" value={selected.device} />
-              <Row label="الميكروفون" value={selected.microphone} />
+
               <Row label="استخدام صورته كصورة ملف شخصي" value={selected.photo_file_path ? (selected.use_photo_as_avatar ? "نعم" : "لا") : null} />
               <div className="flex flex-wrap gap-3 pt-4">
                 {selected.cv_file_path && (
@@ -277,14 +276,18 @@ const AdminTutorApplications = () => {
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-foreground/50 p-4">
           <div className="bg-card rounded-2xl shadow-xl w-full max-w-md p-6 space-y-4">
             <h3 className="font-black text-lg">تم إنشاء حساب المعلم ✅</h3>
-            <p className="text-sm text-muted-foreground">أرسل بيانات الدخول للمعلم — لن تظهر كلمة المرور مرة أخرى.</p>
+            <p className="text-sm text-muted-foreground">
+              أرسل بيانات الدخول للمعلم — لن تظهر كلمة المرور مرة أخرى. بعد تسجيل الدخول سيُكمل خطوات تعيين كلمة مرور جديدة، وتعديل ملفه الشخصي، وإضافة حسابه البنكي.
+            </p>
             <div className="space-y-2 text-sm">
               <div className="p-3 rounded-xl bg-muted break-all"><b>البريد:</b> {tempPassword.email}</div>
-              <div className="p-3 rounded-xl bg-muted break-all"><b>كلمة المرور:</b> {tempPassword.password}</div>
+              <div className="p-3 rounded-xl bg-muted break-all"><b>كلمة المرور المؤقتة:</b> {tempPassword.password}</div>
+              <div className="p-3 rounded-xl bg-muted break-all"><b>رابط إكمال الحساب:</b> {`${window.location.origin}/teacher/onboarding`}</div>
             </div>
             <div className="flex gap-2">
-              <button onClick={() => { navigator.clipboard.writeText(`Email: ${tempPassword.email}\nPassword: ${tempPassword.password}`); toast.success("تم النسخ"); }}
+              <button onClick={() => { navigator.clipboard.writeText(`Email: ${tempPassword.email}\nPassword: ${tempPassword.password}\nComplete your account: ${window.location.origin}/teacher/onboarding`); toast.success("تم النسخ"); }}
                 className="btn-ghost flex-1 flex items-center justify-center gap-2 py-2.5"><Copy size={15} /> نسخ</button>
+
               <button onClick={() => setTempPassword(null)} className="btn-primary flex-1 py-2.5">تم</button>
             </div>
           </div>

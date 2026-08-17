@@ -41,6 +41,8 @@ const CountryGate = lazy(() => import("@/components/CountryGate"));
 
 const Teachers = lazy(() => import("./pages/Teachers"));
 const ApplyTutor = lazy(() => import("./pages/ApplyTutor"));
+const TeacherOnboarding = lazy(() => import("./pages/TeacherOnboarding"));
+
 const TeacherProfile = lazy(() => import("./pages/TeacherProfile"));
 const Subjects = lazy(() => import("./pages/Subjects"));
 const Universities = lazy(() => import("./pages/Universities"));
@@ -195,7 +197,9 @@ const App = () => (
                         <Routes>
                           <Route path="/" element={<Index />} />
                           <Route path="/teachers" element={<Teachers />} />
-                          <Route path="/apply-tutor" element={<ApplyTutor />} />
+                         <Route path="/apply-tutor" element={<ApplyTutor />} />
+                         <Route path="/teacher/onboarding" element={<ProtectedRoute><TeacherOnboarding /></ProtectedRoute>} />
+
                           <Route path="/teachers/:id" element={<TeacherProfile />} />
                           <Route path="/subjects" element={<Subjects />} />
                           <Route path="/universities" element={<Universities />} />

@@ -55,7 +55,7 @@ const emptyForm = {
   phone: "",
   email: "",
   nationality: "",
-  city: "",
+  country: "",
   specialization: "",
   university: "",
   degree: "",
@@ -64,10 +64,9 @@ const emptyForm = {
   courses: "",
   recordedBefore: "",
   quietPlace: "",
-  device: "",
-  microphone: "",
   demoLink: "",
 };
+
 
 const FieldBase = ({
   k,
@@ -338,7 +337,8 @@ const ApplyTutor = () => {
       phone: form.phone,
       email: form.email,
       nationality: form.nationality || null,
-      city: form.city || null,
+      country: form.country || null,
+      city: null,
       specialization: form.specialization || null,
       university: form.university || null,
       degree: form.degree || null,
@@ -348,8 +348,9 @@ const ApplyTutor = () => {
       recorded_before: form.recordedBefore || null,
       quiet_place: form.quietPlace || null,
       tools,
-      device: form.device || null,
-      microphone: form.microphone || null,
+      device: null,
+      microphone: null,
+
       cv_link: null,
       demo_link: form.demoLink || null,
       lang,
@@ -364,7 +365,7 @@ const ApplyTutor = () => {
       `${L("واتساب", "WhatsApp")}: ${form.phone}`,
       `${L("البريد", "Email")}: ${form.email}`,
       `${L("الجنسية", "Nationality")}: ${form.nationality}`,
-      `${L("المدينة", "City")}: ${form.city}`,
+      `${L("الدولة", "Country")}: ${form.country}`,
       `${L("صورة شخصية", "Photo")}: ${photoFile ? (useAvatar ? L("مرفوعة - موافق كصورة ملف شخصي", "uploaded - approved as profile picture") : L("مرفوعة - غير موافق", "uploaded - not approved")) : L("غير مرفقة", "not provided")}`,
       `${L("التخصص", "Specialization")}: ${form.specialization}`,
       `${L("الجامعة", "University")}: ${form.university}`,
@@ -375,8 +376,6 @@ const ApplyTutor = () => {
       `${L("سبق التسجيل", "Recorded before")}: ${form.recordedBefore}`,
       `${L("مكان هادئ", "Quiet place")}: ${form.quietPlace}`,
       `${L("الأدوات", "Tools")}: ${tools.join(", ")}`,
-      `${L("الجهاز", "Device")}: ${form.device}`,
-      `${L("الميكروفون", "Microphone")}: ${form.microphone}`,
       `${L("رابط الفيديو التجريبي", "Demo video")}: ${form.demoLink || L("مرفوع/غير متوفر", "uploaded / not provided")}`,
     ];
     window.open(
@@ -488,10 +487,21 @@ const ApplyTutor = () => {
                 k: "email",
                 label: isAr ? "البريد الإلكتروني" : "Email",
                 type: "email",
+                required: true,
                 placeholder: "name@example.com",
+                hint: isAr
+                  ? "سيتم إنشاء حسابك على المنصة بنفس هذا البريد عند القبول."
+                  : "If accepted, your teacher account will be created with this email.",
               })}
               {Field({ k: "nationality", label: isAr ? "الجنسية" : "Nationality" })}
-              {Field({ k: "city", label: isAr ? "المدينة" : "City" })}
+              {Field({
+                k: "country",
+                label: isAr ? "الدولة" : "Country",
+                options: isAr
+                  ? ["السعودية", "الكويت", "قطر", "الإمارات", "مصر", "أخرى"]
+                  : ["Saudi Arabia", "Kuwait", "Qatar", "UAE", "Egypt", "Other"],
+              })}
+
               <div className="sm:col-span-2 space-y-3">
                 <label htmlFor="photoFile" className="block text-sm font-bold">
                   {isAr ? "صورتك الشخصية (اختياري)" : "Your photo (optional)"}
@@ -541,31 +551,21 @@ const ApplyTutor = () => {
                   </p>
                 )}
                 {photoFile && (
-                  <div className="space-y-2">
-                    <span className="block text-sm font-bold">
+                  <label className="flex items-start gap-3 cursor-pointer rounded-xl border border-border p-3">
+                    <input
+                      type="checkbox"
+                      checked={useAvatar === true}
+                      onChange={(e) => setUseAvatar(e.target.checked)}
+                      className="mt-0.5 w-4 h-4 accent-[hsl(var(--primary))]"
+                    />
+                    <span className="text-sm font-bold">
                       {isAr
-                        ? "هل توافق على استخدام صورتك كصورة للملف الشخصي؟"
-                        : "Do you want this photo used as your profile picture?"}
+                        ? "أوافق على استخدام صورتي كصورة لملفي الشخصي وظهورها للجميع على الموقع."
+                        : "I agree to use this photo as my public profile picture on the website."}
                     </span>
-                    <div className="flex flex-wrap gap-2">
-                      {[true, false].map((val) => (
-                        <button
-                          key={String(val)}
-                          type="button"
-                          aria-pressed={useAvatar === val}
-                          onClick={() => setUseAvatar(val)}
-                          className={`px-4 py-2 rounded-full text-sm font-bold border transition-colors ${
-                            useAvatar === val
-                              ? "bg-primary text-primary-foreground border-primary"
-                              : "border-border text-muted-foreground hover:border-primary/50"
-                          }`}
-                        >
-                          {val ? (isAr ? "نعم" : "Yes") : isAr ? "لا" : "No"}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
+                  </label>
                 )}
+
               </div>
             </Section>
 
@@ -584,8 +584,11 @@ const ApplyTutor = () => {
               {Field({
                 k: "degree",
                 label: isAr ? "المؤهل العلمي" : "Degree",
-                placeholder: isAr ? "بكالوريوس / ماجستير / دكتوراه" : "Bachelor, Master, PhD",
+                options: isAr
+                  ? ["بكالوريوس", "ماجستير", "دكتوراه"]
+                  : ["Bachelor", "Master", "PhD"],
               })}
+
               {Field({
                 k: "experience",
                 label: isAr ? "سنوات الخبرة في التدريس" : "Years of Teaching Experience",
@@ -644,16 +647,6 @@ const ApplyTutor = () => {
                   })}
                 </div>
               </div>
-              {Field({
-                k: "device",
-                label: isAr ? "الجهاز المستخدم للتسجيل" : "Device Used for Recording",
-                placeholder: isAr ? "آيباد، لابتوب..." : "iPad, tablet, laptop...",
-              })}
-              {Field({
-                k: "microphone",
-                label: isAr ? "الميكروفون المستخدم" : "Microphone Used",
-                placeholder: isAr ? "ميكروفون داخلي، AirPods..." : "Built-in mic, AirPods...",
-              })}
             </Section>
 
             <Section num="04" title={T.s4}>
