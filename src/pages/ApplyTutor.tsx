@@ -365,7 +365,7 @@ const ApplyTutor = () => {
       `${L("واتساب", "WhatsApp")}: ${form.phone}`,
       `${L("البريد", "Email")}: ${form.email}`,
       `${L("الجنسية", "Nationality")}: ${form.nationality}`,
-      `${L("المدينة", "City")}: ${form.city}`,
+      `${L("الدولة", "Country")}: ${form.country}`,
       `${L("صورة شخصية", "Photo")}: ${photoFile ? (useAvatar ? L("مرفوعة - موافق كصورة ملف شخصي", "uploaded - approved as profile picture") : L("مرفوعة - غير موافق", "uploaded - not approved")) : L("غير مرفقة", "not provided")}`,
       `${L("التخصص", "Specialization")}: ${form.specialization}`,
       `${L("الجامعة", "University")}: ${form.university}`,
