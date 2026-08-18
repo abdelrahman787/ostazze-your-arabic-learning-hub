@@ -55,7 +55,6 @@ const emptyForm = {
   phone: "",
   email: "",
   nationality: "",
-  country: "",
   specialization: "",
   university: "",
   degree: "",
