@@ -50,7 +50,7 @@ const AdminTutorApplications = () => {
   const [statusFilter, setStatusFilter] = useState("all");
   const [selected, setSelected] = useState<TutorApplication | null>(null);
   const [approving, setApproving] = useState(false);
-  const [teacherAccess, setTeacherAccess] = useState<{ email: string; link: string; whatsappError?: string | null } | null>(null);
+  const [teacherAccess, setTeacherAccess] = useState<{ email: string; whatsappError?: string | null } | null>(null);
 
   const fetchApps = useCallback(async () => {
     setLoading(true);
@@ -111,7 +111,6 @@ const AdminTutorApplications = () => {
         created?: boolean;
         message?: string;
         user_id?: string;
-        password_reset_link?: string;
         whatsapp_error?: string | null;
       };
       if (result?.error) throw new Error(result.error);
@@ -128,7 +127,7 @@ const AdminTutorApplications = () => {
 
       await setStatus(a.id, "accepted");
       toast.success(result?.message || "تمت الإضافة كمعلم");
-      if (result?.password_reset_link) setTeacherAccess({ email: a.email, link: result.password_reset_link, whatsappError: result.whatsapp_error });
+      setTeacherAccess({ email: a.email, whatsappError: result?.whatsapp_error ?? null });
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "خطأ غير متوقع");
     }

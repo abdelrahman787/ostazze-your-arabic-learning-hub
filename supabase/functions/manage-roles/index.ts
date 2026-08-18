@@ -157,7 +157,6 @@ serve(async (req) => {
           message: created ? "تم إنشاء حساب المعلم" : "تمت ترقية الحساب الحالي إلى معلم",
           user_id: userId,
           created,
-          password_reset_link: linkData.properties.action_link,
           whatsapp_error: whatsappError,
         }),
         { headers: { ...corsHeaders, "Content-Type": "application/json" } }
