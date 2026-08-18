@@ -492,13 +492,6 @@ const ApplyTutor = () => {
                   : "If accepted, your teacher account will be created with this email.",
               })}
               {Field({ k: "nationality", label: isAr ? "الجنسية" : "Nationality" })}
-              {Field({
-                k: "country",
-                label: isAr ? "الدولة" : "Country",
-                options: isAr
-                  ? ["السعودية", "الكويت", "قطر", "الإمارات", "مصر", "أخرى"]
-                  : ["Saudi Arabia", "Kuwait", "Qatar", "UAE", "Egypt", "Other"],
-              })}
 
               <div className="sm:col-span-2 space-y-3">
                 <label htmlFor="photoFile" className="block text-sm font-bold">
