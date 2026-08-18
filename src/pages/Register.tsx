@@ -225,33 +225,6 @@ const Register = () => {
               )}
             </div>
 
-            <div>
-              <label className="block text-sm font-bold mb-1.5">{t("register_confirm")}</label>
-              <div className="relative">
-                <Lock size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                <input type={showPass ? "text" : "password"} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder={t("register_confirm")} className="input-base !pr-10" required minLength={8} />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-bold mb-1.5 flex items-center gap-1.5">
-                <Globe size={14} /> {t("register_timezone")}
-              </label>
-              <select value={timezone} onChange={(e) => setTimezone(e.target.value)} className="input-base">
-                {TIMEZONES.map((tz) => (
-                  <option key={tz.value} value={tz.value}>{tz.label[lang]}</option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-sm font-bold mb-1.5 flex items-center gap-1.5">
-                <Globe size={14} /> {lang === "ar" ? "الجامعات *" : "Universities *"}
-              </label>
-              <CountrySelector value={country} onChange={setCountry} required />
-            </div>
-
-
             {/* Terms checkbox */}
             <label className="flex items-start gap-2.5 cursor-pointer">
               <input type="checkbox" checked={agreedTerms} onChange={e => setAgreedTerms(e.target.checked)}
