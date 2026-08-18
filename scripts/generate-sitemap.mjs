@@ -31,20 +31,23 @@ const entries = [
 // --- University / college routes, parsed from the static data module ---
 try {
   const src = readFileSync(resolve("src/data/universitiesData.ts"), "utf8");
-  const ids = [...src.matchAll(/id:\s*"([A-Z0-9-]+)"/g)].map((m) => m[1]);
-  const unis = new Set(ids.filter((id) => id.split("-").length === 2));
-  const colleges = ids.filter((id) => {
-    const parts = id.split("-");
-    return parts.length === 3 && unis.has(`${parts[0]}-${parts[1]}`);
-  });
-  for (const collegeId of [...new Set(colleges)]) {
+  const allIds = [...src.matchAll(/id:\s*"([A-Za-z0-9-]+)"/g)].map((m) => m[1]);
+  const unis = new Set(allIds.filter((id) => id.split("-").length === 2));
+  // College objects are the only ones carrying a `departments:` array.
+  const collegeIds = [...src.matchAll(/id:\s*"([A-Za-z0-9-]+)",[\s\S]{0,400}?departments:/g)]
+    .map((m) => m[1])
+    .filter((id) => !unis.has(id));
+  for (const collegeId of [...new Set(collegeIds)]) {
     const parts = collegeId.split("-");
+    const uniId = `${parts[0]}-${parts[1]}`;
+    if (!unis.has(uniId)) continue;
     entries.push({
-      path: `/universities/${parts[0]}-${parts[1]}/colleges/${collegeId}`,
+      path: `/universities/${uniId}/colleges/${collegeId}`,
       changefreq: "monthly",
       priority: "0.6",
     });
   }
+
 } catch (err) {
   console.warn("sitemap: could not parse universities data —", err.message);
 }
