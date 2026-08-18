@@ -170,7 +170,7 @@ const Admin = () => {
     setLoading(true);
     const { data: teacherProfiles } = await supabase
       .from("teacher_profiles")
-      .select("user_id, university, verified, subjects");
+      .select("user_id, university, university_en, verified, subjects, subjects_en, price");
 
     if (!teacherProfiles || teacherProfiles.length === 0) {
       setTeachers([]);
@@ -181,7 +181,7 @@ const Admin = () => {
     const userIds = teacherProfiles.map((tp) => tp.user_id);
     const { data: profiles } = await supabase
       .from("profiles")
-      .select("user_id, full_name, avatar_url")
+      .select("user_id, full_name, full_name_en, phone, bio, bio_en, avatar_url")
       .in("user_id", userIds);
 
     const profileMap = new Map(profiles?.map((p) => [p.user_id, p]) || []);
@@ -191,9 +191,16 @@ const Admin = () => {
       return {
         user_id: tp.user_id,
         full_name: profile?.full_name || null,
+        full_name_en: profile?.full_name_en || null,
+        phone: profile?.phone || null,
+        bio: profile?.bio || null,
+        bio_en: profile?.bio_en || null,
         avatar_url: profile?.avatar_url || null,
         university: tp.university,
+        university_en: tp.university_en ?? null,
+        price: tp.price ?? null,
         subjects: (tp.subjects as string[]) || [],
+        subjects_en: (tp.subjects_en as string[]) || [],
         verified: tp.verified ?? false,
       };
     });
