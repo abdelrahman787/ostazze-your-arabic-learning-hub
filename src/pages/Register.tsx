@@ -47,10 +47,6 @@ const Register = () => {
       setSuccess(true);
       return;
     }
-    if (password !== confirmPassword) {
-      setError(t("password_mismatch"));
-      return;
-    }
     if (pwStrength.level < 2) {
       setError(lang === "ar"
         ? "كلمة المرور ضعيفة. استخدم 8+ أحرف مع أرقام وحروف كبيرة."
@@ -59,10 +55,6 @@ const Register = () => {
     }
     if (!agreedTerms) {
       setError(lang === "ar" ? "يجب الموافقة على الشروط والأحكام" : "You must agree to the terms and conditions");
-      return;
-    }
-    if (!country) {
-      setError(lang === "ar" ? "اختر دولتك من فضلك" : "Please select your country");
       return;
     }
     setLoading(true);
