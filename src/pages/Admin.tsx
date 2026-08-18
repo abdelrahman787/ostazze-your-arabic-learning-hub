@@ -195,9 +195,9 @@ const Admin = () => {
       full_name_en: f.full_name_en || null,
       phone: f.phone || null,
       bio: f.bio || null,
-      avatar_url: f.avatar_url || null,
       bio_en: f.bio_en || null,
       avatar_url: f.avatar_url || null,
+
     }).eq("user_id", editTeacher.user_id);
 
     const { error: tErr } = await supabase.from("teacher_profiles").update({
