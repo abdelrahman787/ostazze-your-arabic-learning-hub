@@ -123,7 +123,13 @@ serve(async (req) => {
     }
 
     // ---- Scheduler + pending reminders ----
-    const { data: schedulerRows } = await admin.rpc("get_automation_cron_status").maybeSingle?.() ?? { data: null };
+    let schedulerRows: Record<string, unknown> | null = null;
+    try {
+      const { data } = await admin.rpc("get_automation_cron_status").maybeSingle();
+      schedulerRows = (data as Record<string, unknown>) ?? null;
+    } catch (_e) {
+      schedulerRows = null;
+    }
 
     const today = new Date().toISOString().slice(0, 10);
     const { count: upcoming } = await admin
