@@ -220,6 +220,8 @@ const Admin = () => {
       phone: f.phone || null,
       bio: f.bio || null,
       bio_en: f.bio_en || null,
+      avatar_url: f.avatar_url || null,
+
       university: f.university || null,
       university_en: f.university_en || null,
       price,
