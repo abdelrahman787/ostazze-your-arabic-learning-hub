@@ -928,21 +928,21 @@ html[data-motion-paused="1"] *::after {
 
 /* Safari/WebKit fallback for decorative motion. Static cards and orbit nodes
    preserve the layout while avoiding compositor stalls during touch scroll. */
-html[data-webkit-lite] .float-y,
-html[data-webkit-lite] .glow-drift-a,
-html[data-webkit-lite] .glow-drift-b,
-html[data-webkit-lite] .glow-pulse-soft,
-html[data-webkit-lite] .orbit-spin,
-html[data-webkit-lite] .orbit-spin-reverse {
+html[data-apple-motion-lite] .float-y,
+html[data-apple-motion-lite] .glow-drift-a,
+html[data-apple-motion-lite] .glow-drift-b,
+html[data-apple-motion-lite] .glow-pulse-soft,
+html[data-apple-motion-lite] .orbit-spin,
+html[data-apple-motion-lite] .orbit-spin-reverse {
   animation: none !important;
 }
-html[data-webkit-lite] .how-it-works-section [style*="transform"] {
+html[data-apple-motion-lite] .how-it-works-section [style*="transform"] {
   transform: none !important;
 }
-html[data-webkit-lite] .how-it-works-section [style*="opacity"] {
+html[data-apple-motion-lite] .how-it-works-section [style*="opacity"] {
   opacity: 1 !important;
 }
-html[data-webkit-lite] .how-it-works-section [class*="drop-shadow"] {
+html[data-apple-motion-lite] .how-it-works-section [class*="drop-shadow"] {
   filter: none !important;
 }
 

@@ -54,9 +54,9 @@ const HeroOrbit = () => {
 
   useEffect(() => {
     // Keep the initial orbit layout, but do not continuously mutate 5–12
-    // transforms on WebKit. This is decorative and static is preferable to
-    // blocking touch scrolling on iPhone/iPad or Safari on macOS.
-    if (typeof document !== "undefined" && document.documentElement.dataset.webkitLite === "1") {
+    // transforms on Apple devices. This is decorative and static is
+    // preferable to blocking touch scrolling or saturating the GPU.
+    if (typeof document !== "undefined" && document.documentElement.dataset.appleMotionLite === "1") {
       return;
     }
 

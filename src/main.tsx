@@ -6,14 +6,14 @@ import { initMotionVisibility } from "./lib/motionVisibility";
 
 console.log("[OSTAZE] main.tsx loaded");
 
-// Safari/WebKit is disproportionately expensive when several Framer Motion
-// transforms, filters and a requestAnimationFrame orbit run together. Keep a
-// small capability flag so decorative motion can be rendered statically there
-// without changing the experience in Chromium browsers.
+// Apple devices are disproportionately expensive when several Framer Motion
+// transforms, filters and a requestAnimationFrame orbit run together. This
+// includes Chrome on iPhone/iPad (WebKit) and Chrome on macOS (Blink), so use
+// the platform rather than the browser engine for the decorative-motion flag.
 if (typeof navigator !== "undefined" && typeof document !== "undefined") {
-  const isWebKit = /AppleWebKit/i.test(navigator.userAgent) &&
-    !/(Chrome|CriOS|FxiOS|EdgiOS|OPiOS|Android)/i.test(navigator.userAgent);
-  if (isWebKit) document.documentElement.dataset.webkitLite = "1";
+  const isApplePlatform = /Mac|iPhone|iPad|iPod/i.test(navigator.platform) ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  if (isApplePlatform) document.documentElement.dataset.appleMotionLite = "1";
 }
 
 startPerfMonitor();
