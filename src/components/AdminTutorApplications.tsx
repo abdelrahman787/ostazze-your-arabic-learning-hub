@@ -103,11 +103,23 @@ const AdminTutorApplications = () => {
         headers: { Authorization: `Bearer ${session?.access_token}` },
       });
       if (res.error) throw new Error(res.error.message);
-      const result = res.data as { error?: string; created?: boolean; message?: string };
+      const result = res.data as { error?: string; created?: boolean; message?: string; user_id?: string };
       if (result?.error) throw new Error(result.error);
+
+      // If the applicant uploaded a photo and allowed public use, set it as their avatar.
+      if (result?.user_id && a.photo_file_path && a.use_photo_as_avatar) {
+        try {
+          const url = await copyApplicantPhotoToAvatar(a.photo_file_path, result.user_id);
+          await supabase.from("profiles").update({ avatar_url: url }).eq("user_id", result.user_id);
+        } catch {
+          toast.warning("تم إنشاء الحساب لكن تعذر نقل الصورة الشخصية");
+        }
+      }
+
       await setStatus(a.id, "accepted");
       toast.success(result?.message || "تمت الإضافة كمعلم");
       if (result?.created) setTempPassword({ email: a.email, password });
+
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "خطأ غير متوقع");
     }
