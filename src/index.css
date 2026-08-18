@@ -291,7 +291,6 @@
     will-change: transform;
     transform: translate(-50%, -50%) translate3d(0, 0, 0);
     backface-visibility: hidden;
-    transform-style: preserve-3d;
   }
   @media (prefers-reduced-motion: reduce) {
     .orbit-spin, .orbit-spin-reverse { animation: none !important; }
@@ -759,6 +758,14 @@
 }
 .glow-pulse-soft {
   animation: glow-pulse 6s ease-in-out infinite;
+}
+
+/* Let the browser skip layout/paint work for the long home-page body until
+   it approaches the viewport. The intrinsic size prevents a scrollbar jump
+   while the lazy chunk is being fetched. */
+.home-below-fold {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1800px;
 }
 @media (prefers-reduced-motion: reduce) {
   .glow-drift-a, .glow-drift-b, .glow-pulse-soft { animation: none; }

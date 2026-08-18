@@ -3,12 +3,17 @@ import { GraduationCap } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import PageHelmet from "@/components/PageHelmet";
 import HeroOrbit from "@/components/HeroOrbit";
-// Rendered eagerly: lazy-mounting these caused visible pop-in and layout
-// shift on Safari/WebKit. They are part of the initial bundle now.
-import IndexBelowFold from "@/components/home/IndexBelowFold";
+import { Suspense, lazy } from "react";
+import { useInViewOnce } from "@/hooks/useInViewOnce";
+
+// Keep Framer Motion and the long home-page sections out of the critical
+// route. The observer mounts them shortly before the user can see them, so
+// Safari does not have to parse/paint the entire page while the hero loads.
+const IndexBelowFold = lazy(() => import("@/components/home/IndexBelowFold"));
 
 const HomePage = () => {
   const { t, lang } = useLanguage();
+  const [belowFoldRef, belowFoldReady] = useInViewOnce<HTMLDivElement>("1200px 0px");
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -121,7 +126,15 @@ const HomePage = () => {
         </div>
       </section>
 
-      <IndexBelowFold />
+      <div ref={belowFoldRef} className="home-below-fold">
+        {belowFoldReady ? (
+          <Suspense fallback={<div className="min-h-[1800px]" aria-hidden="true" />}>
+            <IndexBelowFold />
+          </Suspense>
+        ) : (
+          <div className="min-h-[1800px]" aria-hidden="true" />
+        )}
+      </div>
 
       {/* SEO-only contextual paragraph */}
       <section aria-hidden="true" className="sr-only">

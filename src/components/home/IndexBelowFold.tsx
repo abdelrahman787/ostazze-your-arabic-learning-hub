@@ -123,8 +123,11 @@ const IndexBelowFold = () => {
                       decoding="async"
                       width={520}
                       height={520}
-                      animate={{ y: [0, -6, 0] }}
-                      transition={{ duration: 3.5, repeat: Infinity, delay: i * 0.4, ease: "easeInOut" }}
+                      // Do not start an infinite animation before this card
+                      // enters the viewport; hidden animated images are a
+                      // frequent source of Safari scroll/compositing jank.
+                      animate={playHowSteps ? { y: [0, -6, 0] } : undefined}
+                      transition={playHowSteps ? { duration: 3.5, repeat: Infinity, delay: i * 0.4, ease: "easeInOut" } : undefined}
                       className="relative z-10 w-full h-full object-contain drop-shadow-[0_10px_25px_hsl(var(--primary)/0.15)]"
                     />
                   </motion.div>

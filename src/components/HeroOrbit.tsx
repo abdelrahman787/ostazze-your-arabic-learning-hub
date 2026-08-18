@@ -85,9 +85,9 @@ const HeroOrbit = () => {
       : null;
     if (io && ref.current) io.observe(ref.current);
 
-    // Throttle to ~30fps on lite (mobile / reduced motion) devices — halves
-    // paint work while still looking smooth for slow rotation.
-    const minDelta = lite ? 1000 / 30 : 0;
+    // The orbit is decorative; 30fps is visually sufficient and avoids
+    // saturating WebKit's main/compositor threads on iPad, iPhone and Safari.
+    const minDelta = 1000 / 30;
     let last = 0;
     let frame = 0;
 
