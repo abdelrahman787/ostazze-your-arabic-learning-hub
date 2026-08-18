@@ -609,6 +609,7 @@ const Admin = () => {
       { icon: UserPlus, label: "طلبات الانضمام كمعلم", tab: "applications" },
     ]},
     { section: t("section_account"), items: [
+      { icon: Shield, label: "فحص واتساب و Zoom", tab: "diagnostics" },
       { icon: Shield, label: t("admin_admins"), tab: "admins" },
       { icon: Lock, label: t("dash_change_password"), tab: "password" },
     ]},
