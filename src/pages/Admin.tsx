@@ -1076,7 +1076,49 @@ const Admin = () => {
             <button onClick={() => setEditTeacher(null)} className="text-muted-foreground hover:text-foreground"><X size={20} /></button>
           </div>
           <div className="p-5 space-y-4 max-h-[70vh] overflow-y-auto">
+            <div className="flex items-center gap-4 p-4 rounded-xl border-2 border-border">
+              {editTeacherForm.avatar_url ? (
+                <img src={editTeacherForm.avatar_url} alt="صورة المعلم" width={72} height={72} className="w-18 h-18 w-[72px] h-[72px] rounded-2xl object-cover border border-border" />
+              ) : (
+                <div className="w-[72px] h-[72px] rounded-2xl bg-primary/10 text-primary flex items-center justify-center font-black">؟</div>
+              )}
+              <div className="flex-1 space-y-2">
+                <label className="block text-sm font-bold">الصورة الشخصية</label>
+                <div className="flex flex-wrap items-center gap-2">
+                  <label className="btn-ghost text-sm px-3 py-2 cursor-pointer">
+                    {uploadingAvatar ? "جاري الرفع..." : "رفع صورة"}
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      disabled={uploadingAvatar}
+                      onChange={async (e) => {
+                        const file = e.target.files?.[0];
+                        e.target.value = "";
+                        if (!file || !editTeacher) return;
+                        setUploadingAvatar(true);
+                        try {
+                          const url = await uploadTeacherAvatar(file, editTeacher.user_id);
+                          setEditTeacherForm((f) => ({ ...f, avatar_url: url }));
+                          toast.success("تم رفع الصورة — لا تنسَ الحفظ");
+                        } catch (err) {
+                          toast.error(err instanceof Error ? err.message : "تعذر رفع الصورة");
+                        }
+                        setUploadingAvatar(false);
+                      }}
+                    />
+                  </label>
+                  {editTeacherForm.avatar_url && (
+                    <button type="button" onClick={() => setEditTeacherForm((f) => ({ ...f, avatar_url: "" }))} className="btn-ghost text-sm px-3 py-2 text-destructive">
+                      إزالة الصورة
+                    </button>
+                  )}
+                </div>
+                <p className="text-xs text-muted-foreground">تظهر هذه الصورة في صفحة المعلمين وملفه الشخصي.</p>
+              </div>
+            </div>
             <div className="grid sm:grid-cols-2 gap-4">
+
               <div>
                 <label className="block text-sm font-bold mb-1.5">الاسم (عربي)</label>
                 <input value={editTeacherForm.full_name} onChange={(e) => setEditTeacherForm((f) => ({ ...f, full_name: e.target.value }))} className="input-base" />
