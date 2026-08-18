@@ -18,6 +18,7 @@ import NotificationBell from "@/components/NotificationBell";
 import AdminCourses from "@/components/AdminCourses";
 import AdminInvoices from "@/components/AdminInvoices";
 import AdminTutorApplications from "@/components/AdminTutorApplications";
+import AdminAutomationDiagnostics from "@/components/AdminAutomationDiagnostics";
 import NoIndex from "@/components/NoIndex";
 import { uploadVideoToBunny } from "@/lib/bunnyVideo";
 
@@ -609,6 +610,7 @@ const Admin = () => {
       { icon: UserPlus, label: "طلبات الانضمام كمعلم", tab: "applications" },
     ]},
     { section: t("section_account"), items: [
+      { icon: Shield, label: "فحص واتساب و Zoom", tab: "diagnostics" },
       { icon: Shield, label: t("admin_admins"), tab: "admins" },
       { icon: Lock, label: t("dash_change_password"), tab: "password" },
     ]},
@@ -796,6 +798,12 @@ const Admin = () => {
           {activeTab === "applications" && (
             <div className="animate-fade-in">
               <AdminTutorApplications />
+            </div>
+          )}
+
+          {activeTab === "diagnostics" && (
+            <div className="animate-fade-in">
+              <AdminAutomationDiagnostics />
             </div>
           )}
 

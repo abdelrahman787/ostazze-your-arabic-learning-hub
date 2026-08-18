@@ -816,6 +816,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_automation_cron_status: {
+        Args: never
+        Returns: {
+          active: boolean
+          jobname: string
+          schedule: string
+        }[]
+      }
       get_course_live_sessions_enrolled: {
         Args: { _course_id: string }
         Returns: {
