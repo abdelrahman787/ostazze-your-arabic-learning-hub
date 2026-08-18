@@ -2,34 +2,11 @@ import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Eye, EyeOff, User, Mail, Lock, GraduationCap, Loader2, Globe, BookOpen, Users } from "lucide-react";
+import { Eye, EyeOff, User, Mail, Lock, GraduationCap, Loader2, BookOpen, Users } from "lucide-react";
 import { motion } from "framer-motion";
 import { lovable } from "@/integrations/lovable/index";
 import PageHelmet from "@/components/PageHelmet";
-import CountrySelector from "@/components/CountrySelector";
 import { supabase } from "@/integrations/supabase/client";
-import type { Country } from "@/lib/pricing";
-
-const TIMEZONES = [
-  { value: "Asia/Riyadh", label: { ar: "الرياض (UTC+3)", en: "Riyadh (UTC+3)" } },
-  { value: "Asia/Dubai", label: { ar: "دبي (UTC+4)", en: "Dubai (UTC+4)" } },
-  { value: "Asia/Kuwait", label: { ar: "الكويت (UTC+3)", en: "Kuwait (UTC+3)" } },
-  { value: "Africa/Cairo", label: { ar: "القاهرة (UTC+2)", en: "Cairo (UTC+2)" } },
-  { value: "Asia/Amman", label: { ar: "عمّان (UTC+3)", en: "Amman (UTC+3)" } },
-  { value: "Asia/Beirut", label: { ar: "بيروت (UTC+2)", en: "Beirut (UTC+2)" } },
-  { value: "Asia/Baghdad", label: { ar: "بغداد (UTC+3)", en: "Baghdad (UTC+3)" } },
-  { value: "Africa/Casablanca", label: { ar: "الدار البيضاء (UTC+1)", en: "Casablanca (UTC+1)" } },
-  { value: "Africa/Tunis", label: { ar: "تونس (UTC+1)", en: "Tunis (UTC+1)" } },
-  { value: "Africa/Algiers", label: { ar: "الجزائر (UTC+1)", en: "Algiers (UTC+1)" } },
-  { value: "Europe/London", label: { ar: "لندن (UTC+0)", en: "London (UTC+0)" } },
-  { value: "Europe/Paris", label: { ar: "باريس (UTC+1)", en: "Paris (UTC+1)" } },
-  { value: "America/New_York", label: { ar: "نيويورك (UTC-5)", en: "New York (UTC-5)" } },
-  { value: "America/Los_Angeles", label: { ar: "لوس أنجلوس (UTC-8)", en: "Los Angeles (UTC-8)" } },
-  { value: "Asia/Karachi", label: { ar: "كراتشي (UTC+5)", en: "Karachi (UTC+5)" } },
-  { value: "Asia/Kolkata", label: { ar: "نيودلهي (UTC+5:30)", en: "New Delhi (UTC+5:30)" } },
-  { value: "Asia/Kuala_Lumpur", label: { ar: "كوالالمبور (UTC+8)", en: "Kuala Lumpur (UTC+8)" } },
-  { value: "Asia/Istanbul", label: { ar: "إسطنبول (UTC+3)", en: "Istanbul (UTC+3)" } },
-];
 
 const getPasswordStrength = (pw: string): { level: number; label: string; color: string } => {
   if (pw.length < 6) return { level: 0, label: "", color: "" };
@@ -54,10 +31,10 @@ const Register = () => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [timezone, setTimezone] = useState("Asia/Riyadh");
-  const [country, setCountry] = useState<Country | "">("");
   const [agreedTerms, setAgreedTerms] = useState(false);
+  // Defaults removed from UI; Egypt is the default market.
+  const timezone = "Asia/Riyadh";
+  const country = "EG";
   // Honeypot — bots fill this; real users never see it.
   const [website, setWebsite] = useState("");
 
@@ -70,10 +47,6 @@ const Register = () => {
       setSuccess(true);
       return;
     }
-    if (password !== confirmPassword) {
-      setError(t("password_mismatch"));
-      return;
-    }
     if (pwStrength.level < 2) {
       setError(lang === "ar"
         ? "كلمة المرور ضعيفة. استخدم 8+ أحرف مع أرقام وحروف كبيرة."
@@ -82,10 +55,6 @@ const Register = () => {
     }
     if (!agreedTerms) {
       setError(lang === "ar" ? "يجب الموافقة على الشروط والأحكام" : "You must agree to the terms and conditions");
-      return;
-    }
-    if (!country) {
-      setError(lang === "ar" ? "اختر دولتك من فضلك" : "Please select your country");
       return;
     }
     setLoading(true);
@@ -255,33 +224,6 @@ const Register = () => {
                 </ul>
               )}
             </div>
-
-            <div>
-              <label className="block text-sm font-bold mb-1.5">{t("register_confirm")}</label>
-              <div className="relative">
-                <Lock size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                <input type={showPass ? "text" : "password"} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder={t("register_confirm")} className="input-base !pr-10" required minLength={8} />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-bold mb-1.5 flex items-center gap-1.5">
-                <Globe size={14} /> {t("register_timezone")}
-              </label>
-              <select value={timezone} onChange={(e) => setTimezone(e.target.value)} className="input-base">
-                {TIMEZONES.map((tz) => (
-                  <option key={tz.value} value={tz.value}>{tz.label[lang]}</option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-sm font-bold mb-1.5 flex items-center gap-1.5">
-                <Globe size={14} /> {lang === "ar" ? "الجامعات *" : "Universities *"}
-              </label>
-              <CountrySelector value={country} onChange={setCountry} required />
-            </div>
-
 
             {/* Terms checkbox */}
             <label className="flex items-start gap-2.5 cursor-pointer">
