@@ -24,9 +24,16 @@ import { uploadVideoToBunny } from "@/lib/bunnyVideo";
 interface TeacherRow {
   user_id: string;
   full_name: string | null;
+  full_name_en: string | null;
+  phone: string | null;
+  bio: string | null;
+  bio_en: string | null;
   avatar_url: string | null;
   university: string | null;
+  university_en: string | null;
+  price: number | null;
   subjects: string[];
+  subjects_en: string[];
   verified: boolean;
 }
 
@@ -146,6 +153,78 @@ const Admin = () => {
   const [teacherForm, setTeacherForm] = useState({ email: "", password: "", full_name: "", university: "", subjects: "" });
   const [addingTeacher, setAddingTeacher] = useState(false);
 
+  // Edit teacher modal
+  const [editTeacher, setEditTeacher] = useState<TeacherRow | null>(null);
+  const [editTeacherForm, setEditTeacherForm] = useState({
+    full_name: "", full_name_en: "", phone: "", bio: "", bio_en: "",
+    university: "", university_en: "", price: "", subjects: "", subjects_en: "", verified: false,
+  });
+  const [savingTeacher, setSavingTeacher] = useState(false);
+
+  const openEditTeacher = (tc: TeacherRow) => {
+    setEditTeacher(tc);
+    setEditTeacherForm({
+      full_name: tc.full_name || "",
+      full_name_en: tc.full_name_en || "",
+      phone: tc.phone || "",
+      bio: tc.bio || "",
+      bio_en: tc.bio_en || "",
+      university: tc.university || "",
+      university_en: tc.university_en || "",
+      price: tc.price != null ? String(tc.price) : "",
+      subjects: (tc.subjects || []).join(", "),
+      subjects_en: (tc.subjects_en || []).join(", "),
+      verified: tc.verified,
+    });
+  };
+
+  const handleSaveTeacher = async () => {
+    if (!editTeacher) return;
+    setSavingTeacher(true);
+    const f = editTeacherForm;
+    const subjects = f.subjects.split(",").map((s) => s.trim()).filter(Boolean);
+    const subjects_en = f.subjects_en.split(",").map((s) => s.trim()).filter(Boolean);
+    const price = f.price.trim() === "" ? null : Number(f.price);
+
+    const { error: pErr } = await supabase.from("profiles").update({
+      full_name: f.full_name || null,
+      full_name_en: f.full_name_en || null,
+      phone: f.phone || null,
+      bio: f.bio || null,
+      bio_en: f.bio_en || null,
+    }).eq("user_id", editTeacher.user_id);
+
+    const { error: tErr } = await supabase.from("teacher_profiles").update({
+      university: f.university || null,
+      university_en: f.university_en || null,
+      price,
+      subjects,
+      subjects_en,
+      verified: f.verified,
+    }).eq("user_id", editTeacher.user_id);
+
+    setSavingTeacher(false);
+    if (pErr || tErr) { toast.error((pErr || tErr)!.message); return; }
+
+    toast.success("تم حفظ بيانات المعلم ✓");
+    setTeachers((prev) => prev.map((tc) => tc.user_id === editTeacher.user_id ? {
+      ...tc,
+      full_name: f.full_name || null,
+      full_name_en: f.full_name_en || null,
+      phone: f.phone || null,
+      bio: f.bio || null,
+      bio_en: f.bio_en || null,
+      university: f.university || null,
+      university_en: f.university_en || null,
+      price,
+      subjects,
+      subjects_en,
+      verified: f.verified,
+    } : tc));
+    setEditTeacher(null);
+  };
+
+
   // Add admin/moderator modal
   const [showAddAdmin, setShowAddAdmin] = useState(false);
   const [addAdminEmail, setAddAdminEmail] = useState("");
@@ -163,7 +242,7 @@ const Admin = () => {
     setLoading(true);
     const { data: teacherProfiles } = await supabase
       .from("teacher_profiles")
-      .select("user_id, university, verified, subjects");
+      .select("user_id, university, university_en, verified, subjects, subjects_en, price");
 
     if (!teacherProfiles || teacherProfiles.length === 0) {
       setTeachers([]);
@@ -174,7 +253,7 @@ const Admin = () => {
     const userIds = teacherProfiles.map((tp) => tp.user_id);
     const { data: profiles } = await supabase
       .from("profiles")
-      .select("user_id, full_name, avatar_url")
+      .select("user_id, full_name, full_name_en, phone, bio, bio_en, avatar_url")
       .in("user_id", userIds);
 
     const profileMap = new Map(profiles?.map((p) => [p.user_id, p]) || []);
@@ -184,9 +263,16 @@ const Admin = () => {
       return {
         user_id: tp.user_id,
         full_name: profile?.full_name || null,
+        full_name_en: profile?.full_name_en || null,
+        phone: profile?.phone || null,
+        bio: profile?.bio || null,
+        bio_en: profile?.bio_en || null,
         avatar_url: profile?.avatar_url || null,
         university: tp.university,
+        university_en: tp.university_en ?? null,
+        price: tp.price ?? null,
         subjects: (tp.subjects as string[]) || [],
+        subjects_en: (tp.subjects_en as string[]) || [],
         verified: tp.verified ?? false,
       };
     });
@@ -660,6 +746,7 @@ const Admin = () => {
                                 {!tc.verified && (
                                   <button onClick={() => handleVerify(tc.user_id)} className="text-xs bg-success/10 text-success px-3 py-1.5 rounded-lg font-semibold hover:bg-success/20 transition-colors">{t("admin_verify")}</button>
                                 )}
+                                <button onClick={() => openEditTeacher(tc)} className="text-xs bg-primary/10 text-primary px-3 py-1.5 rounded-lg font-semibold hover:bg-primary/20 transition-colors">تعديل</button>
                                 <button onClick={() => handleDeleteTeacher(tc.user_id)} className="text-xs bg-destructive/10 text-destructive px-3 py-1.5 rounded-lg font-semibold hover:bg-destructive/20 transition-colors">{t("admin_delete")}</button>
                               </div>
                             </td>
@@ -976,6 +1063,67 @@ const Admin = () => {
               {editUploading ? (
                 <><Loader2 size={16} className="animate-spin" /> {editVideoFile && editUploadProgress > 0 ? `رفع الفيديو ${editUploadProgress}%` : "جاري الرفع..."}</>
               ) : <><Upload size={16} /> حفظ التعديلات</>}
+            </button>
+          </div>
+        </ModalWrapper>
+      )}
+
+      {/* ===== Edit Teacher Modal ===== */}
+      {editTeacher && (
+        <ModalWrapper onClose={() => setEditTeacher(null)}>
+          <div className="flex items-center justify-between p-5 border-b">
+            <h3 className="font-extrabold text-lg">تعديل بيانات المعلم</h3>
+            <button onClick={() => setEditTeacher(null)} className="text-muted-foreground hover:text-foreground"><X size={20} /></button>
+          </div>
+          <div className="p-5 space-y-4 max-h-[70vh] overflow-y-auto">
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-bold mb-1.5">الاسم (عربي)</label>
+                <input value={editTeacherForm.full_name} onChange={(e) => setEditTeacherForm((f) => ({ ...f, full_name: e.target.value }))} className="input-base" />
+              </div>
+              <div>
+                <label className="block text-sm font-bold mb-1.5">الاسم (إنجليزي)</label>
+                <input dir="ltr" value={editTeacherForm.full_name_en} onChange={(e) => setEditTeacherForm((f) => ({ ...f, full_name_en: e.target.value }))} className="input-base" />
+              </div>
+              <div>
+                <label className="block text-sm font-bold mb-1.5">رقم الهاتف</label>
+                <input dir="ltr" value={editTeacherForm.phone} onChange={(e) => setEditTeacherForm((f) => ({ ...f, phone: e.target.value }))} className="input-base" />
+              </div>
+              <div>
+                <label className="block text-sm font-bold mb-1.5">سعر الساعة</label>
+                <input dir="ltr" type="number" min="0" value={editTeacherForm.price} onChange={(e) => setEditTeacherForm((f) => ({ ...f, price: e.target.value }))} className="input-base" />
+              </div>
+              <div>
+                <label className="block text-sm font-bold mb-1.5">الجامعة (عربي)</label>
+                <input value={editTeacherForm.university} onChange={(e) => setEditTeacherForm((f) => ({ ...f, university: e.target.value }))} className="input-base" />
+              </div>
+              <div>
+                <label className="block text-sm font-bold mb-1.5">الجامعة (إنجليزي)</label>
+                <input dir="ltr" value={editTeacherForm.university_en} onChange={(e) => setEditTeacherForm((f) => ({ ...f, university_en: e.target.value }))} className="input-base" />
+              </div>
+            </div>
+            <div>
+              <label className="block text-sm font-bold mb-1.5">المواد (عربي — مفصولة بفاصلة)</label>
+              <input value={editTeacherForm.subjects} onChange={(e) => setEditTeacherForm((f) => ({ ...f, subjects: e.target.value }))} className="input-base" placeholder="رياضيات, فيزياء" />
+            </div>
+            <div>
+              <label className="block text-sm font-bold mb-1.5">المواد (إنجليزي — مفصولة بفاصلة)</label>
+              <input dir="ltr" value={editTeacherForm.subjects_en} onChange={(e) => setEditTeacherForm((f) => ({ ...f, subjects_en: e.target.value }))} className="input-base" placeholder="Math, Physics" />
+            </div>
+            <div>
+              <label className="block text-sm font-bold mb-1.5">نبذة (عربي)</label>
+              <textarea rows={3} value={editTeacherForm.bio} onChange={(e) => setEditTeacherForm((f) => ({ ...f, bio: e.target.value }))} className="input-base resize-none" />
+            </div>
+            <div>
+              <label className="block text-sm font-bold mb-1.5">نبذة (إنجليزي)</label>
+              <textarea dir="ltr" rows={3} value={editTeacherForm.bio_en} onChange={(e) => setEditTeacherForm((f) => ({ ...f, bio_en: e.target.value }))} className="input-base resize-none" />
+            </div>
+            <label className="flex items-center gap-3 p-3 rounded-xl border-2 border-border cursor-pointer">
+              <input type="checkbox" checked={editTeacherForm.verified} onChange={(e) => setEditTeacherForm((f) => ({ ...f, verified: e.target.checked }))} className="w-4 h-4 accent-primary" />
+              <span className="text-sm font-bold">معلم موثّق (يظهر للطلاب)</span>
+            </label>
+            <button onClick={handleSaveTeacher} disabled={savingTeacher} className="btn-primary w-full flex items-center justify-center gap-2">
+              {savingTeacher ? <><Loader2 size={16} className="animate-spin" /> جاري الحفظ...</> : "حفظ التعديلات"}
             </button>
           </div>
         </ModalWrapper>
