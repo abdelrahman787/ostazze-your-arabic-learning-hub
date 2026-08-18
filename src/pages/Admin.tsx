@@ -1086,7 +1086,7 @@ const Admin = () => {
           <div className="p-5 space-y-4 max-h-[70vh] overflow-y-auto">
             <div className="flex items-center gap-4 p-4 rounded-xl border-2 border-border">
               {editTeacherForm.avatar_url ? (
-                <img src={editTeacherForm.avatar_url} alt="صورة المعلم" width={72} height={72} className="w-18 h-18 w-[72px] h-[72px] rounded-2xl object-cover border border-border" />
+                <img src={editTeacherForm.avatar_url} alt="صورة المعلم" width={72} height={72} className="w-[72px] h-[72px] rounded-2xl object-cover border border-border" />
               ) : (
                 <div className="w-[72px] h-[72px] rounded-2xl bg-primary/10 text-primary flex items-center justify-center font-black">؟</div>
               )}
