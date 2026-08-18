@@ -76,11 +76,6 @@
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://ostaze.com/universities/KW-KU/colleges/KW-KU-ARTS</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://ostaze.com/universities/KW-KU/colleges/KW-KU-SCI</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -136,7 +131,67 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://ostaze.com/universities/QA-QU/colleges/QA-QU-ENG</loc>
+    <loc>https://ostaze.com/universities/KW-AUK/colleges/KW-AUK-COLLEGE-OF-BUSINESS-ECONOMICS</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/KW-AUK/colleges/KW-AUK-COLLEGE-OF-ENGINEERING-APPLIED-SCIENCES</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/KW-AUK/colleges/KW-AUK-COLLEGE-OF-ARTS-SCIENCES</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/KW-AU/colleges/KW-AU-COLLEGE-OF-ENGINEERING</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/KW-AU/colleges/KW-AU-COLLEGE-OF-BUSINESS</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/KW-AU/colleges/KW-AU-SCHOOL-OF-AVIATION</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/KW-AOU/colleges/KW-AOU-FACULTY-OF-BUSINESS-STUDIES</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/KW-AOU/colleges/KW-AOU-FACULTY-OF-COMPUTER-STUDIES</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/KW-AUM/colleges/KW-AUM-COLLEGE-OF-ENGINEERING-AND-TEC</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/KW-AUM/colleges/KW-AUM-COLLEGE-OF-BUSINESS-ADMINISTRA</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/KW-GUST/colleges/KW-GUST-COLLEGE-OF-ARTS-SCIENCES</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/KW-GUST/colleges/KW-GUST-COLLEGE-OF-ENGINEERING-ARCHITECTURE</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/KW-GUST/colleges/KW-GUST-COLLEGE-OF-BUSINESS-ADMINISTRATION</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -196,7 +251,32 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://ostaze.com/universities/QA-UDST/colleges/QA-UDST-COMPUTING-INFORMAT</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/QA-UDST/colleges/QA-UDST-HEALTH-SCIENCES</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/QA-UDST/colleges/QA-UDST-ENGINEERING-TECHNO</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://ostaze.com/universities/QA-UDST/colleges/QA-UDST-BUSINESS</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/QA-UDST/colleges/QA-UDST-GENERAL-EDUCATION</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/QA-HBKU/colleges/QA-HBKU-COLLEGE-OF-SCIENCE</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -216,17 +296,162 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://ostaze.com/universities/QA-LU/colleges/QA-LU-COLLEGE-OF-COMMERCE-BUSINESS</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/QA-LU/colleges/QA-LU-COLLEGE-OF-INFORMATION-TECHNOLOGY</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/QA-LU/colleges/QA-LU-COLLEGE-OF-LAW</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/QA-LU/colleges/QA-LU-COLLEGE-OF-EDUCATION-ARTS</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/QA-CCQ/colleges/QA-CCQ-SCIENCE-AND-TECHNOLOGY-DIVISION</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/QA-CCQ/colleges/QA-CCQ-MANAGEMENT-SCIENCES-DIVISION</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/QA-CMUQ/colleges/QA-CMUQ-TEPPER-SCHOOL-OF-BUSINESS</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/QA-CMUQ/colleges/QA-CMUQ-TEPPER-SCHOOL-OF-BUSINESS-MINOR</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/QA-CMUQ/colleges/QA-CMUQ-SCHOOL-OF-COMPUTER-SCIENCE-FREE-ELECTIVES</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/QA-CMUQ/colleges/QA-CMUQ-DIETRICH-COLLEGE-OF-HUMANITIES-SOCIAL-SC</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://ostaze.com/universities/QA-GUQ/colleges/QA-GUQ-SFS</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://ostaze.com/universities/QA-VCUQ/colleges/QA-VCUQ-ART</loc>
+    <loc>https://ostaze.com/universities/QA-NUQ/colleges/QA-NUQ-SCHOOL-OF-COMMUNICAT</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/QA-NUQ/colleges/QA-NUQ-MEDILL-SCHOOL-OF-JOU</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://ostaze.com/universities/QA-WCMQ/colleges/QA-WCMQ-MED</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/QA-TAMUQ/colleges/QA-TAMUQ-COLLEGE-OF-ENGINEERING</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/SA-KSU/colleges/SA-KSU-COLLEGE-OF-ENGINEERING</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/SA-KSU/colleges/SA-KSU-COLLEGE-OF-COMPUTER-AND-INFORMATION-SCIE</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/SA-KSU/colleges/SA-KSU-COLLEGE-OF-SCIENCE</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/SA-KSU/colleges/SA-KSU-COLLEGE-OF-BUSINESS-ADMINISTRATION</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/SA-KSU/colleges/SA-KSU-COLLEGE-OF-LAW-AND-POLITICAL-SCIENCE</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/SA-KSU/colleges/SA-KSU-COLLEGE-OF-TOURISM-AND-ARCHAEOLOGY</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/SA-KSU/colleges/SA-KSU-COLLEGE-OF-NURSING</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/SA-KSU/colleges/SA-KSU-COLLEGE-OF-APPLIED-MEDICAL-SCIENCES</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/SA-KSU/colleges/SA-KSU-COLLEGE-OF-ARCHITECTURE-AND-PLANNING</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/SA-KSU/colleges/SA-KSU-COLLEGE-OF-FOOD-AND-AGRICULTURAL-SCIENCE</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/SA-KSU/colleges/SA-KSU-COLLEGE-OF-SPORT-SCIENCES-AND-PHYSICAL-A</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/SA-KSU/colleges/SA-KSU-COLLEGE-OF-PHARMACY</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/SA-KSU/colleges/SA-KSU-COLLEGE-OF-DENTISTRY</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/SA-KSU/colleges/SA-KSU-COLLEGE-OF-MEDICINE</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/SA-KSU/colleges/SA-KSU-COLLEGE-OF-EDUCATION</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/SA-KSU/colleges/SA-KSU-COLLEGE-OF-LANGUAGES-AND-SCIENCES</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/universities/SA-KSU/colleges/SA-KSU-COLLEGE-OF-HUMANITIES-AND-SOCIAL-SCIENCE</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
