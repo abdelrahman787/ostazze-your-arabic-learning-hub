@@ -298,22 +298,24 @@ const AdminTutorApplications = () => {
           <div className="bg-card rounded-2xl shadow-xl w-full max-w-md p-6 space-y-4">
             <h3 className="font-black text-lg">تم إنشاء حساب المعلم ✅</h3>
             <p className="text-sm text-muted-foreground">
-              تم إنشاء الحساب. أرسل للمعلم رابط تعيين كلمة المرور؛ الرابط صالح للاستخدام مرة واحدة.
+              تم إرسال رابط تعيين كلمة المرور إلى المعلم عبر واتساب. الرابط صالح للاستخدام مرة واحدة.
             </p>
             <div className="space-y-2 text-sm">
               <div className="p-3 rounded-xl bg-muted break-all"><b>البريد:</b> {teacherAccess.email}</div>
-              <div className="p-3 rounded-xl bg-muted break-all"><b>رابط تعيين كلمة المرور:</b> {teacherAccess.link}</div>
-              {teacherAccess.whatsappError && <div className="text-xs text-warning">تعذر الإرسال تلقائيًا: {teacherAccess.whatsappError}</div>}
+              {teacherAccess.whatsappError
+                ? <div className="text-xs text-warning">تعذر الإرسال تلقائيًا عبر واتساب: {teacherAccess.whatsappError} — اطلب من المعلم استخدام "نسيت كلمة المرور" بنفس البريد.</div>
+                : <div className="p-3 rounded-xl bg-muted">تم الإرسال عبر واتساب بنجاح.</div>}
             </div>
             <div className="flex gap-2">
-              <button onClick={() => { navigator.clipboard.writeText(`Email: ${teacherAccess.email}\nSet your password: ${teacherAccess.link}`); toast.success("تم النسخ"); }}
-                className="btn-ghost flex-1 flex items-center justify-center gap-2 py-2.5"><Copy size={15} /> نسخ</button>
+              <button onClick={() => { navigator.clipboard.writeText(teacherAccess.email); toast.success("تم نسخ البريد"); }}
+                className="btn-ghost flex-1 flex items-center justify-center gap-2 py-2.5"><Copy size={15} /> نسخ البريد</button>
 
               <button onClick={() => setTeacherAccess(null)} className="btn-primary flex-1 py-2.5">تم</button>
             </div>
           </div>
         </div>
       )}
+
     </div>
   );
 };
