@@ -55,7 +55,6 @@ const emptyForm = {
   phone: "",
   email: "",
   nationality: "",
-  country: "",
   specialization: "",
   university: "",
   degree: "",
@@ -337,7 +336,7 @@ const ApplyTutor = () => {
       phone: form.phone,
       email: form.email,
       nationality: form.nationality || null,
-      country: form.country || null,
+      country: null,
       city: null,
       specialization: form.specialization || null,
       university: form.university || null,
@@ -365,7 +364,6 @@ const ApplyTutor = () => {
       `${L("واتساب", "WhatsApp")}: ${form.phone}`,
       `${L("البريد", "Email")}: ${form.email}`,
       `${L("الجنسية", "Nationality")}: ${form.nationality}`,
-      `${L("الدولة", "Country")}: ${form.country}`,
       `${L("صورة شخصية", "Photo")}: ${photoFile ? (useAvatar ? L("مرفوعة - موافق كصورة ملف شخصي", "uploaded - approved as profile picture") : L("مرفوعة - غير موافق", "uploaded - not approved")) : L("غير مرفقة", "not provided")}`,
       `${L("التخصص", "Specialization")}: ${form.specialization}`,
       `${L("الجامعة", "University")}: ${form.university}`,
@@ -494,13 +492,6 @@ const ApplyTutor = () => {
                   : "If accepted, your teacher account will be created with this email.",
               })}
               {Field({ k: "nationality", label: isAr ? "الجنسية" : "Nationality" })}
-              {Field({
-                k: "country",
-                label: isAr ? "الدولة" : "Country",
-                options: isAr
-                  ? ["السعودية", "الكويت", "قطر", "الإمارات", "مصر", "أخرى"]
-                  : ["Saudi Arabia", "Kuwait", "Qatar", "UAE", "Egypt", "Other"],
-              })}
 
               <div className="sm:col-span-2 space-y-3">
                 <label htmlFor="photoFile" className="block text-sm font-bold">
