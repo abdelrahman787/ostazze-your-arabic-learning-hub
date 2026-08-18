@@ -519,6 +519,8 @@ export type Database = {
           subject: string | null
           teacher_id: string | null
           updated_at: string
+          whatsapp_reminder_1h_sent_at: string | null
+          whatsapp_start_sent_at: string | null
           zoom_url: string | null
         }
         Insert: {
@@ -534,6 +536,8 @@ export type Database = {
           subject?: string | null
           teacher_id?: string | null
           updated_at?: string
+          whatsapp_reminder_1h_sent_at?: string | null
+          whatsapp_start_sent_at?: string | null
           zoom_url?: string | null
         }
         Update: {
@@ -549,6 +553,8 @@ export type Database = {
           subject?: string | null
           teacher_id?: string | null
           updated_at?: string
+          whatsapp_reminder_1h_sent_at?: string | null
+          whatsapp_start_sent_at?: string | null
           zoom_url?: string | null
         }
         Relationships: []
