@@ -163,10 +163,27 @@ const CourseDetail = () => {
   const cfg = typeConfig[course.course_type];
   const TypeIcon = cfg.icon;
   const typeLabel = lang === "ar" ? cfg.ar : cfg.en;
+  const metaDescription = b(course.short_description, course.short_description_en) || desc.slice(0, 160);
+  const courseJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name: title,
+    description: metaDescription,
+    inLanguage: lang === "ar" ? "ar" : "en",
+    url: `https://ostaze.com/courses/${course.id}`,
+    provider: {
+      "@type": "Organization",
+      name: "OSTAZE",
+      url: "https://ostaze.com",
+    },
+    ...(inst ? { instructor: { "@type": "Person", name: inst } } : {}),
+    ...(cat ? { about: cat } : {}),
+  };
 
   return (
     <div>
-      <PageHelmet title={title} description={b(course.short_description, course.short_description_en) || desc.slice(0, 160)} />
+      <PageHelmet title={title} description={metaDescription} jsonLd={courseJsonLd} />
+
 
       {/* Hero header with cover */}
       <section className="relative pt-page-lg pb-10 bg-section-alt overflow-hidden">
