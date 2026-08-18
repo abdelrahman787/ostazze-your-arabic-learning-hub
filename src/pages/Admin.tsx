@@ -1068,6 +1068,67 @@ const Admin = () => {
         </ModalWrapper>
       )}
 
+      {/* ===== Edit Teacher Modal ===== */}
+      {editTeacher && (
+        <ModalWrapper onClose={() => setEditTeacher(null)}>
+          <div className="flex items-center justify-between p-5 border-b">
+            <h3 className="font-extrabold text-lg">تعديل بيانات المعلم</h3>
+            <button onClick={() => setEditTeacher(null)} className="text-muted-foreground hover:text-foreground"><X size={20} /></button>
+          </div>
+          <div className="p-5 space-y-4 max-h-[70vh] overflow-y-auto">
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-bold mb-1.5">الاسم (عربي)</label>
+                <input value={editTeacherForm.full_name} onChange={(e) => setEditTeacherForm((f) => ({ ...f, full_name: e.target.value }))} className="input-base" />
+              </div>
+              <div>
+                <label className="block text-sm font-bold mb-1.5">الاسم (إنجليزي)</label>
+                <input dir="ltr" value={editTeacherForm.full_name_en} onChange={(e) => setEditTeacherForm((f) => ({ ...f, full_name_en: e.target.value }))} className="input-base" />
+              </div>
+              <div>
+                <label className="block text-sm font-bold mb-1.5">رقم الهاتف</label>
+                <input dir="ltr" value={editTeacherForm.phone} onChange={(e) => setEditTeacherForm((f) => ({ ...f, phone: e.target.value }))} className="input-base" />
+              </div>
+              <div>
+                <label className="block text-sm font-bold mb-1.5">سعر الساعة</label>
+                <input dir="ltr" type="number" min="0" value={editTeacherForm.price} onChange={(e) => setEditTeacherForm((f) => ({ ...f, price: e.target.value }))} className="input-base" />
+              </div>
+              <div>
+                <label className="block text-sm font-bold mb-1.5">الجامعة (عربي)</label>
+                <input value={editTeacherForm.university} onChange={(e) => setEditTeacherForm((f) => ({ ...f, university: e.target.value }))} className="input-base" />
+              </div>
+              <div>
+                <label className="block text-sm font-bold mb-1.5">الجامعة (إنجليزي)</label>
+                <input dir="ltr" value={editTeacherForm.university_en} onChange={(e) => setEditTeacherForm((f) => ({ ...f, university_en: e.target.value }))} className="input-base" />
+              </div>
+            </div>
+            <div>
+              <label className="block text-sm font-bold mb-1.5">المواد (عربي — مفصولة بفاصلة)</label>
+              <input value={editTeacherForm.subjects} onChange={(e) => setEditTeacherForm((f) => ({ ...f, subjects: e.target.value }))} className="input-base" placeholder="رياضيات, فيزياء" />
+            </div>
+            <div>
+              <label className="block text-sm font-bold mb-1.5">المواد (إنجليزي — مفصولة بفاصلة)</label>
+              <input dir="ltr" value={editTeacherForm.subjects_en} onChange={(e) => setEditTeacherForm((f) => ({ ...f, subjects_en: e.target.value }))} className="input-base" placeholder="Math, Physics" />
+            </div>
+            <div>
+              <label className="block text-sm font-bold mb-1.5">نبذة (عربي)</label>
+              <textarea rows={3} value={editTeacherForm.bio} onChange={(e) => setEditTeacherForm((f) => ({ ...f, bio: e.target.value }))} className="input-base resize-none" />
+            </div>
+            <div>
+              <label className="block text-sm font-bold mb-1.5">نبذة (إنجليزي)</label>
+              <textarea dir="ltr" rows={3} value={editTeacherForm.bio_en} onChange={(e) => setEditTeacherForm((f) => ({ ...f, bio_en: e.target.value }))} className="input-base resize-none" />
+            </div>
+            <label className="flex items-center gap-3 p-3 rounded-xl border-2 border-border cursor-pointer">
+              <input type="checkbox" checked={editTeacherForm.verified} onChange={(e) => setEditTeacherForm((f) => ({ ...f, verified: e.target.checked }))} className="w-4 h-4 accent-primary" />
+              <span className="text-sm font-bold">معلم موثّق (يظهر للطلاب)</span>
+            </label>
+            <button onClick={handleSaveTeacher} disabled={savingTeacher} className="btn-primary w-full flex items-center justify-center gap-2">
+              {savingTeacher ? <><Loader2 size={16} className="animate-spin" /> جاري الحفظ...</> : "حفظ التعديلات"}
+            </button>
+          </div>
+        </ModalWrapper>
+      )}
+
       {/* ===== Add Teacher Modal ===== */}
       {showAddTeacher && (
         <ModalWrapper onClose={() => setShowAddTeacher(false)}>
