@@ -800,6 +800,12 @@ const Admin = () => {
             </div>
           )}
 
+          {activeTab === "diagnostics" && (
+            <div className="animate-fade-in">
+              <AdminAutomationDiagnostics />
+            </div>
+          )}
+
           {/* Courses Tab */}
           {activeTab === "courses" && (
             <div className="animate-fade-in">
