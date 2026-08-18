@@ -78,10 +78,10 @@ serve(async (req) => {
           ? parsed
           : (parsed.data as Array<Record<string, unknown>>) ||
             (parsed.instances as Array<Record<string, unknown>>) || [];
-        const match = list.find(
-          (i) =>
-            String(i.instance_id ?? i.id ?? i.uuid ?? "") === String(instanceId) ||
-            String(i.name ?? "") === String(instanceId),
+        const match = list.find((i) =>
+          [i.instance_uniquename, i.instance_id, i.id, i.uuid, i.instance_name, i.name]
+            .filter(Boolean)
+            .some((v) => String(v) === String(instanceId)),
         );
         wapilot = {
           reachable: true,
@@ -91,6 +91,9 @@ serve(async (req) => {
           session_status: match?.session_status ?? null,
           is_api: match?.is_api ?? null,
           subscription_status: match?.subscription_status ?? null,
+          instance_name: match?.instance_name ?? null,
+          plan_name: (match?.subscription as Record<string, unknown> | undefined)?.plan_name ?? null,
+          plan_end_date: (match?.subscription as Record<string, unknown> | undefined)?.end_date ?? null,
         };
       } catch (error) {
         lastError = error instanceof Error ? error.message : String(error);
