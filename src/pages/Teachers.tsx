@@ -141,7 +141,7 @@ const Teachers = () => {
                       ({courseLabel})
                     </span>
                   )}
-                </h3>
+                </h2>
                 <p className="text-xs text-muted-foreground mt-1">
                   {lang === "ar"
                     ? "اضغط حجز حصة لتختار المدرس المناسب وتتابع للدفع"
