@@ -53,6 +53,13 @@ const HeroOrbit = () => {
   const ORBITS = lite ? ORBITS_LITE : ORBITS_FULL;
 
   useEffect(() => {
+    // Keep the initial orbit layout, but do not continuously mutate 5–12
+    // transforms on WebKit. This is decorative and static is preferable to
+    // blocking touch scrolling on iPhone/iPad or Safari on macOS.
+    if (typeof document !== "undefined" && document.documentElement.dataset.webkitLite === "1") {
+      return;
+    }
+
     const reduce =
       typeof window !== "undefined" &&
       window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;

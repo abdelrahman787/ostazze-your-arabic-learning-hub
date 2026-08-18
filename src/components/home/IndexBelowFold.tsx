@@ -3,7 +3,7 @@ import { mockTestimonials } from "@/data/testimonials";
 import {
   Star, ArrowLeft, Sparkles, GraduationCap, CalendarCheck, Video,
 } from "lucide-react";
-import { motion, useInView, useReducedMotion } from "framer-motion";
+import { MotionConfig, motion, useInView, useReducedMotion } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import OurTeam from "@/components/OurTeam";
@@ -29,6 +29,7 @@ import uniHbku from "@/assets/unis/hbku.png.asset.json";
 const IndexBelowFold = () => {
   const { t, d, lang } = useLanguage();
   const isReduced = useReducedMotion();
+  const webkitLite = typeof document !== "undefined" && document.documentElement.dataset.webkitLite === "1";
   const howStepsRef = useRef<HTMLDivElement>(null);
   const howStepsInView = useInView(howStepsRef, { once: true, amount: 0.2 });
   const [playHowSteps, setPlayHowSteps] = useState(false);
@@ -68,9 +69,10 @@ const IndexBelowFold = () => {
   ] as const;
 
   return (
-    <>
+    <MotionConfig reducedMotion={webkitLite ? "always" : "user"}>
+      <>
       {/* How It Works + WhatsApp CTA — combined section */}
-      <section className="py-20 md:py-24 overflow-hidden bg-section-alt">
+      <section className="how-it-works-section py-20 md:py-24 overflow-hidden bg-section-alt">
         <div className="container">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
             <h2 className="text-3xl font-extrabold mb-2">{t("how_title")}</h2>
@@ -126,8 +128,8 @@ const IndexBelowFold = () => {
                       // Do not start an infinite animation before this card
                       // enters the viewport; hidden animated images are a
                       // frequent source of Safari scroll/compositing jank.
-                      animate={playHowSteps ? { y: [0, -6, 0] } : undefined}
-                      transition={playHowSteps ? { duration: 3.5, repeat: Infinity, delay: i * 0.4, ease: "easeInOut" } : undefined}
+                      animate={playHowSteps && !webkitLite ? { y: [0, -6, 0] } : undefined}
+                      transition={playHowSteps && !webkitLite ? { duration: 3.5, repeat: Infinity, delay: i * 0.4, ease: "easeInOut" } : undefined}
                       className="relative z-10 w-full h-full object-contain drop-shadow-[0_10px_25px_hsl(var(--primary)/0.15)]"
                     />
                   </motion.div>
@@ -567,7 +569,8 @@ const IndexBelowFold = () => {
       </section>
 
       <OurTeam />
-    </>
+      </>
+    </MotionConfig>
   );
 };
 
