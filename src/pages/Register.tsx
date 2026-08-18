@@ -2,34 +2,11 @@ import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Eye, EyeOff, User, Mail, Lock, GraduationCap, Loader2, Globe, BookOpen, Users } from "lucide-react";
+import { Eye, EyeOff, User, Mail, Lock, GraduationCap, Loader2, BookOpen, Users } from "lucide-react";
 import { motion } from "framer-motion";
 import { lovable } from "@/integrations/lovable/index";
 import PageHelmet from "@/components/PageHelmet";
-import CountrySelector from "@/components/CountrySelector";
 import { supabase } from "@/integrations/supabase/client";
-import type { Country } from "@/lib/pricing";
-
-const TIMEZONES = [
-  { value: "Asia/Riyadh", label: { ar: "الرياض (UTC+3)", en: "Riyadh (UTC+3)" } },
-  { value: "Asia/Dubai", label: { ar: "دبي (UTC+4)", en: "Dubai (UTC+4)" } },
-  { value: "Asia/Kuwait", label: { ar: "الكويت (UTC+3)", en: "Kuwait (UTC+3)" } },
-  { value: "Africa/Cairo", label: { ar: "القاهرة (UTC+2)", en: "Cairo (UTC+2)" } },
-  { value: "Asia/Amman", label: { ar: "عمّان (UTC+3)", en: "Amman (UTC+3)" } },
-  { value: "Asia/Beirut", label: { ar: "بيروت (UTC+2)", en: "Beirut (UTC+2)" } },
-  { value: "Asia/Baghdad", label: { ar: "بغداد (UTC+3)", en: "Baghdad (UTC+3)" } },
-  { value: "Africa/Casablanca", label: { ar: "الدار البيضاء (UTC+1)", en: "Casablanca (UTC+1)" } },
-  { value: "Africa/Tunis", label: { ar: "تونس (UTC+1)", en: "Tunis (UTC+1)" } },
-  { value: "Africa/Algiers", label: { ar: "الجزائر (UTC+1)", en: "Algiers (UTC+1)" } },
-  { value: "Europe/London", label: { ar: "لندن (UTC+0)", en: "London (UTC+0)" } },
-  { value: "Europe/Paris", label: { ar: "باريس (UTC+1)", en: "Paris (UTC+1)" } },
-  { value: "America/New_York", label: { ar: "نيويورك (UTC-5)", en: "New York (UTC-5)" } },
-  { value: "America/Los_Angeles", label: { ar: "لوس أنجلوس (UTC-8)", en: "Los Angeles (UTC-8)" } },
-  { value: "Asia/Karachi", label: { ar: "كراتشي (UTC+5)", en: "Karachi (UTC+5)" } },
-  { value: "Asia/Kolkata", label: { ar: "نيودلهي (UTC+5:30)", en: "New Delhi (UTC+5:30)" } },
-  { value: "Asia/Kuala_Lumpur", label: { ar: "كوالالمبور (UTC+8)", en: "Kuala Lumpur (UTC+8)" } },
-  { value: "Asia/Istanbul", label: { ar: "إسطنبول (UTC+3)", en: "Istanbul (UTC+3)" } },
-];
 
 const getPasswordStrength = (pw: string): { level: number; label: string; color: string } => {
   if (pw.length < 6) return { level: 0, label: "", color: "" };
