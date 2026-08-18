@@ -945,6 +945,40 @@ html[data-apple-motion-lite] .how-it-works-section [style*="opacity"] {
 html[data-apple-motion-lite] .how-it-works-section [class*="drop-shadow"] {
   filter: none !important;
 }
+html[data-apple-motion-lite] .home-below-fold {
+  content-visibility: visible;
+  contain-intrinsic-size: none;
+}
+html[data-apple-motion-lite] .home-below-fold * {
+  animation: none !important;
+  transition: none !important;
+}
+html[data-apple-motion-lite] .home-below-fold [style*="opacity"] {
+  opacity: 1 !important;
+}
+html[data-apple-motion-lite] .home-below-fold [style*="transform"]:not(.apple-soft-float) {
+  transform: none !important;
+}
+@keyframes apple-soft-reveal {
+  from { opacity: 0; transform: translate3d(0, 12px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes apple-soft-float {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -4px, 0); }
+}
+html[data-apple-motion-lite] .how-it-works-section .apple-soft-reveal {
+  animation: apple-soft-reveal 520ms cubic-bezier(.22, 1, .36, 1) both !important;
+}
+html[data-apple-motion-lite] .how-it-works-section .apple-soft-reveal:nth-child(2) {
+  animation-delay: 90ms !important;
+}
+html[data-apple-motion-lite] .how-it-works-section .apple-soft-reveal:nth-child(3) {
+  animation-delay: 180ms !important;
+}
+html[data-apple-motion-lite] .how-it-works-section .apple-soft-float {
+  animation: apple-soft-float 5.5s ease-in-out 520ms infinite !important;
+}
 
 /* Mobile — silence continuous decorative loops (battery + TBT) */
 @media (max-width: 640px) {

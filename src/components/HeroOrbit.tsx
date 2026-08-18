@@ -53,13 +53,6 @@ const HeroOrbit = () => {
   const ORBITS = lite ? ORBITS_LITE : ORBITS_FULL;
 
   useEffect(() => {
-    // Keep the initial orbit layout, but do not continuously mutate 5–12
-    // transforms on Apple devices. This is decorative and static is
-    // preferable to blocking touch scrolling or saturating the GPU.
-    if (typeof document !== "undefined" && document.documentElement.dataset.appleMotionLite === "1") {
-      return;
-    }
-
     const reduce =
       typeof window !== "undefined" &&
       window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
@@ -92,9 +85,11 @@ const HeroOrbit = () => {
       : null;
     if (io && ref.current) io.observe(ref.current);
 
-    // The orbit is decorative; 30fps is visually sufficient and avoids
-    // saturating WebKit's main/compositor threads on iPad, iPhone and Safari.
-    const minDelta = 1000 / 30;
+    // The orbit is decorative. Keep it at 15fps on Apple devices and 30fps
+    // elsewhere; this preserves motion without saturating touch scrolling or
+    // the compositor on iPad/iPhone/Mac.
+    const appleMotionLite = typeof document !== "undefined" && document.documentElement.dataset.appleMotionLite === "1";
+    const minDelta = appleMotionLite ? 1000 / 15 : 1000 / 30;
     let last = 0;
     let frame = 0;
 

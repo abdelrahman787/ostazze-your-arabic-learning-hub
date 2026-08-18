@@ -86,7 +86,7 @@ const IndexBelowFold = () => {
             className="grid md:grid-cols-3 gap-10 md:gap-6 relative max-w-5xl mx-auto"
           >
             {howSteps.map((step, i) => (
-              <Link to="/universities" key={step.key} className="block group">
+              <Link to="/universities" key={step.key} className="apple-soft-reveal block group">
                 <motion.div
                   variants={{ hidden: {}, show: { transition: { staggerChildren: 0.08, delayChildren: 0.02 } } }}
                   className="text-center relative"
@@ -130,7 +130,7 @@ const IndexBelowFold = () => {
                       // frequent source of Safari scroll/compositing jank.
                       animate={playHowSteps && !appleMotionLite ? { y: [0, -6, 0] } : undefined}
                       transition={playHowSteps && !appleMotionLite ? { duration: 3.5, repeat: Infinity, delay: i * 0.4, ease: "easeInOut" } : undefined}
-                      className="relative z-10 w-full h-full object-contain drop-shadow-[0_10px_25px_hsl(var(--primary)/0.15)]"
+                      className="apple-soft-float relative z-10 w-full h-full object-contain drop-shadow-[0_10px_25px_hsl(var(--primary)/0.15)]"
                     />
                   </motion.div>
 
