@@ -132,7 +132,7 @@ const Categories = () => {
                     className="icon-box-lg bg-primary/10 text-primary mx-auto mb-4">
                     <Icon size={24} />
                   </motion.div>
-                  <h3 className={`font-bold text-lg mb-1 ${i === 0 ? "text-primary" : ""}`}>{name}</h3>
+                  <h2 className={`font-bold text-lg mb-1 ${i === 0 ? "text-primary" : ""}`}>{name}</h2>
                   <p className="text-muted-foreground text-sm">{d(c.count)}</p>
                 </Link>
               </motion.div>
