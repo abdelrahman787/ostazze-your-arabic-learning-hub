@@ -153,6 +153,78 @@ const Admin = () => {
   const [teacherForm, setTeacherForm] = useState({ email: "", password: "", full_name: "", university: "", subjects: "" });
   const [addingTeacher, setAddingTeacher] = useState(false);
 
+  // Edit teacher modal
+  const [editTeacher, setEditTeacher] = useState<TeacherRow | null>(null);
+  const [editTeacherForm, setEditTeacherForm] = useState({
+    full_name: "", full_name_en: "", phone: "", bio: "", bio_en: "",
+    university: "", university_en: "", price: "", subjects: "", subjects_en: "", verified: false,
+  });
+  const [savingTeacher, setSavingTeacher] = useState(false);
+
+  const openEditTeacher = (tc: TeacherRow) => {
+    setEditTeacher(tc);
+    setEditTeacherForm({
+      full_name: tc.full_name || "",
+      full_name_en: tc.full_name_en || "",
+      phone: tc.phone || "",
+      bio: tc.bio || "",
+      bio_en: tc.bio_en || "",
+      university: tc.university || "",
+      university_en: tc.university_en || "",
+      price: tc.price != null ? String(tc.price) : "",
+      subjects: (tc.subjects || []).join(", "),
+      subjects_en: (tc.subjects_en || []).join(", "),
+      verified: tc.verified,
+    });
+  };
+
+  const handleSaveTeacher = async () => {
+    if (!editTeacher) return;
+    setSavingTeacher(true);
+    const f = editTeacherForm;
+    const subjects = f.subjects.split(",").map((s) => s.trim()).filter(Boolean);
+    const subjects_en = f.subjects_en.split(",").map((s) => s.trim()).filter(Boolean);
+    const price = f.price.trim() === "" ? null : Number(f.price);
+
+    const { error: pErr } = await supabase.from("profiles").update({
+      full_name: f.full_name || null,
+      full_name_en: f.full_name_en || null,
+      phone: f.phone || null,
+      bio: f.bio || null,
+      bio_en: f.bio_en || null,
+    }).eq("user_id", editTeacher.user_id);
+
+    const { error: tErr } = await supabase.from("teacher_profiles").update({
+      university: f.university || null,
+      university_en: f.university_en || null,
+      price,
+      subjects,
+      subjects_en,
+      verified: f.verified,
+    }).eq("user_id", editTeacher.user_id);
+
+    setSavingTeacher(false);
+    if (pErr || tErr) { toast.error((pErr || tErr)!.message); return; }
+
+    toast.success("تم حفظ بيانات المعلم ✓");
+    setTeachers((prev) => prev.map((tc) => tc.user_id === editTeacher.user_id ? {
+      ...tc,
+      full_name: f.full_name || null,
+      full_name_en: f.full_name_en || null,
+      phone: f.phone || null,
+      bio: f.bio || null,
+      bio_en: f.bio_en || null,
+      university: f.university || null,
+      university_en: f.university_en || null,
+      price,
+      subjects,
+      subjects_en,
+      verified: f.verified,
+    } : tc));
+    setEditTeacher(null);
+  };
+
+
   // Add admin/moderator modal
   const [showAddAdmin, setShowAddAdmin] = useState(false);
   const [addAdminEmail, setAddAdminEmail] = useState("");
