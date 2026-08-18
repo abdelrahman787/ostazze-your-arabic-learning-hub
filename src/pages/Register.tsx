@@ -31,10 +31,10 @@ const Register = () => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [timezone, setTimezone] = useState("Asia/Riyadh");
-  const [country, setCountry] = useState<Country | "">("");
   const [agreedTerms, setAgreedTerms] = useState(false);
+  // Defaults removed from UI; Egypt is the default market.
+  const timezone = "Asia/Riyadh";
+  const country = "EG";
   // Honeypot — bots fill this; real users never see it.
   const [website, setWebsite] = useState("");
 
