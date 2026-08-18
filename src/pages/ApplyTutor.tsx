@@ -336,7 +336,7 @@ const ApplyTutor = () => {
       phone: form.phone,
       email: form.email,
       nationality: form.nationality || null,
-      country: form.country || null,
+      country: null,
       city: null,
       specialization: form.specialization || null,
       university: form.university || null,
