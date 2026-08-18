@@ -109,9 +109,18 @@ const SalesHub = () => {
   const handleStatusChange = async (id: string, newStatus: string) => {
     setUpdatingId(id);
     try {
-      const { error } = await supabase.from("session_requests").update({ status: newStatus }).eq("id", id);
-      if (error) throw error;
-      toast.success("تم التحديث");
+      if (newStatus === "confirmed") {
+        const { data, error } = await supabase.functions.invoke("confirm-session-request", {
+          body: { request_id: id },
+        });
+        if (error) throw error;
+        if (!data?.success) throw new Error(data?.error || "تعذر تأكيد الحجز");
+        toast.success(data.whatsapp_error ? "تم التأكيد وإنشاء رابط Zoom، لكن تعذر إرسال WhatsApp" : "تم التأكيد وإنشاء رابط Zoom وإرسال الرسالة");
+      } else {
+        const { error } = await supabase.from("session_requests").update({ status: newStatus }).eq("id", id);
+        if (error) throw error;
+        toast.success("تم التحديث");
+      }
       fetchRequests();
     } catch (err: any) {
       toast.error("Error: " + err.message);

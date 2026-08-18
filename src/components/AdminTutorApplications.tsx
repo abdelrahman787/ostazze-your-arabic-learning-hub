@@ -50,7 +50,7 @@ const AdminTutorApplications = () => {
   const [statusFilter, setStatusFilter] = useState("all");
   const [selected, setSelected] = useState<TutorApplication | null>(null);
   const [approving, setApproving] = useState(false);
-  const [tempPassword, setTempPassword] = useState<{ email: string; password: string } | null>(null);
+  const [teacherAccess, setTeacherAccess] = useState<{ email: string; link: string; whatsappError?: string | null } | null>(null);
 
   const fetchApps = useCallback(async () => {
     setLoading(true);
@@ -98,6 +98,7 @@ const AdminTutorApplications = () => {
           action: "approve_tutor",
           email: a.email,
           password,
+          phone: a.phone,
           full_name: a.full_name,
           university: a.university || null,
           subjects: a.specialization ? [a.specialization] : [],
@@ -105,7 +106,14 @@ const AdminTutorApplications = () => {
         headers: { Authorization: `Bearer ${session?.access_token}` },
       });
       if (res.error) throw new Error(res.error.message);
-      const result = res.data as { error?: string; created?: boolean; message?: string; user_id?: string };
+      const result = res.data as {
+        error?: string;
+        created?: boolean;
+        message?: string;
+        user_id?: string;
+        password_reset_link?: string;
+        whatsapp_error?: string | null;
+      };
       if (result?.error) throw new Error(result.error);
 
       // If the applicant uploaded a photo and allowed public use, set it as their avatar.
@@ -120,8 +128,7 @@ const AdminTutorApplications = () => {
 
       await setStatus(a.id, "accepted");
       toast.success(result?.message || "تمت الإضافة كمعلم");
-      if (result?.created) setTempPassword({ email: a.email, password });
-
+      if (result?.password_reset_link) setTeacherAccess({ email: a.email, link: result.password_reset_link, whatsappError: result.whatsapp_error });
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "خطأ غير متوقع");
     }
@@ -286,23 +293,23 @@ const AdminTutorApplications = () => {
         </div>
       )}
 
-      {tempPassword && (
+      {teacherAccess && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-foreground/50 p-4">
           <div className="bg-card rounded-2xl shadow-xl w-full max-w-md p-6 space-y-4">
             <h3 className="font-black text-lg">تم إنشاء حساب المعلم ✅</h3>
             <p className="text-sm text-muted-foreground">
-              أرسل بيانات الدخول للمعلم — لن تظهر كلمة المرور مرة أخرى. بعد تسجيل الدخول سيُكمل خطوات تعيين كلمة مرور جديدة، وتعديل ملفه الشخصي، وإضافة حسابه البنكي.
+              تم إنشاء الحساب. أرسل للمعلم رابط تعيين كلمة المرور؛ الرابط صالح للاستخدام مرة واحدة.
             </p>
             <div className="space-y-2 text-sm">
-              <div className="p-3 rounded-xl bg-muted break-all"><b>البريد:</b> {tempPassword.email}</div>
-              <div className="p-3 rounded-xl bg-muted break-all"><b>كلمة المرور المؤقتة:</b> {tempPassword.password}</div>
-              <div className="p-3 rounded-xl bg-muted break-all"><b>رابط إكمال الحساب:</b> {`${window.location.origin}/teacher/onboarding`}</div>
+              <div className="p-3 rounded-xl bg-muted break-all"><b>البريد:</b> {teacherAccess.email}</div>
+              <div className="p-3 rounded-xl bg-muted break-all"><b>رابط تعيين كلمة المرور:</b> {teacherAccess.link}</div>
+              {teacherAccess.whatsappError && <div className="text-xs text-warning">تعذر الإرسال تلقائيًا: {teacherAccess.whatsappError}</div>}
             </div>
             <div className="flex gap-2">
-              <button onClick={() => { navigator.clipboard.writeText(`Email: ${tempPassword.email}\nPassword: ${tempPassword.password}\nComplete your account: ${window.location.origin}/teacher/onboarding`); toast.success("تم النسخ"); }}
+              <button onClick={() => { navigator.clipboard.writeText(`Email: ${teacherAccess.email}\nSet your password: ${teacherAccess.link}`); toast.success("تم النسخ"); }}
                 className="btn-ghost flex-1 flex items-center justify-center gap-2 py-2.5"><Copy size={15} /> نسخ</button>
 
-              <button onClick={() => setTempPassword(null)} className="btn-primary flex-1 py-2.5">تم</button>
+              <button onClick={() => setTeacherAccess(null)} className="btn-primary flex-1 py-2.5">تم</button>
             </div>
           </div>
         </div>

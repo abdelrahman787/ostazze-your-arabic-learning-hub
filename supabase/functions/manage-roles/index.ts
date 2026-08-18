@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { sendWapilotText } from "../_shared/wapilot.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -76,7 +77,7 @@ serve(async (req) => {
     }
 
     if (action === "approve_tutor") {
-      const { email, password, full_name, university, subjects } = body;
+      const { email, password, full_name, phone, university, subjects } = body;
       if (!email || !full_name) throw new Error("الاسم والإيميل مطلوبان");
 
       const { data: users } = await supabaseAdmin.auth.admin.listUsers();
@@ -102,7 +103,7 @@ serve(async (req) => {
 
       await supabaseAdmin
         .from("profiles")
-        .update({ account_type: "teacher", full_name, onboarding_completed: false })
+        .update({ account_type: "teacher", full_name, phone: phone || null, onboarding_completed: false })
         .eq("user_id", userId);
 
 
@@ -124,8 +125,41 @@ serve(async (req) => {
         if (tpError) throw tpError;
       }
 
+      const siteUrl = (Deno.env.get("PUBLIC_SITE_URL") || "https://ostaze.com").replace(/\/$/, "");
+      const { data: linkData, error: linkError } = await supabaseAdmin.auth.admin.generateLink({
+        type: "recovery",
+        email,
+        options: { redirectTo: `${siteUrl}/reset-password` },
+      });
+      if (linkError || !linkData?.properties?.action_link) {
+        throw linkError || new Error("تعذر إنشاء رابط تعيين كلمة المرور");
+      }
+
+      let whatsappError: string | null = null;
+      if (phone) {
+        try {
+          await sendWapilotText(phone, [
+            `مرحبًا ${full_name}`,
+            "تم قبول طلب انضمامك إلى فريق معلمي أستاذي.",
+            "استخدم الرابط التالي لتعيين كلمة مرور جديدة والدخول إلى حسابك:",
+            linkData.properties.action_link,
+          ].join("\n"));
+        } catch (error) {
+          whatsappError = error instanceof Error ? error.message : String(error);
+          console.error("Teacher approval WhatsApp failed:", whatsappError);
+        }
+      } else {
+        whatsappError = "Teacher has no phone number.";
+      }
+
       return new Response(
-        JSON.stringify({ message: created ? "تم إنشاء حساب المعلم" : "تمت ترقية الحساب الحالي إلى معلم", user_id: userId, created }),
+        JSON.stringify({
+          message: created ? "تم إنشاء حساب المعلم" : "تمت ترقية الحساب الحالي إلى معلم",
+          user_id: userId,
+          created,
+          password_reset_link: linkData.properties.action_link,
+          whatsapp_error: whatsappError,
+        }),
         { headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }

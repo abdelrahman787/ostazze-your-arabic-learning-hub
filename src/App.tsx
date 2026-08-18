@@ -53,6 +53,7 @@ const CourseDetail = lazy(() => import("./pages/CourseDetail"));
 const Login = lazy(() => import("./pages/Login"));
 const Register = lazy(() => import("./pages/Register"));
 const ForgotPassword = lazy(() => import("./pages/ForgotPassword"));
+const ResetPassword = lazy(() => import("./pages/ResetPassword"));
 const SmartDashboard = lazy(() => import("./pages/SmartDashboard"));
 const Admin = lazy(() => import("./pages/Admin"));
 const LectureView = lazy(() => import("./pages/LectureView"));
@@ -148,6 +149,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       "/login",
       "/register",
       "/forgot-password",
+      "/reset-password",
       "/dashboard",
       "/dashboard/teacher",
       "/admin",
@@ -210,6 +212,7 @@ const App = () => (
                           <Route path="/login" element={<Login />} />
                           <Route path="/register" element={<Register />} />
                           <Route path="/forgot-password" element={<ForgotPassword />} />
+                          <Route path="/reset-password" element={<ResetPassword />} />
                           <Route path="/dashboard" element={<ProtectedRoute><SmartDashboard /></ProtectedRoute>} />
                           <Route path="/dashboard/teacher" element={<ProtectedRoute><SmartDashboard /></ProtectedRoute>} />
                           <Route path="/lectures/:id" element={<ProtectedRoute><LectureView /></ProtectedRoute>} />
