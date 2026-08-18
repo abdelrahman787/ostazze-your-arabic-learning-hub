@@ -18,6 +18,7 @@ import NotificationBell from "@/components/NotificationBell";
 import AdminCourses from "@/components/AdminCourses";
 import AdminInvoices from "@/components/AdminInvoices";
 import AdminTutorApplications from "@/components/AdminTutorApplications";
+import AdminAutomationDiagnostics from "@/components/AdminAutomationDiagnostics";
 import NoIndex from "@/components/NoIndex";
 import { uploadVideoToBunny } from "@/lib/bunnyVideo";
 
