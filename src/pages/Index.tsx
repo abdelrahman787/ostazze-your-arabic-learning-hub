@@ -46,10 +46,10 @@ const HomePage = () => {
 
       <PageHelmet
         title={lang === "ar"
-          ? "OSTAZE | منصة أستاذي - دروس خصوصية ولايف أونلاين مع أفضل المعلمين"
+          ? "أستاذي OSTAZE | دروس خصوصية ولايف أونلاين"
           : "OSTAZE | Ostaze - Online Private & Live Tutoring Platform"}
         description={lang === "ar"
-          ? "OSTAZE (أستاذي) منصة دروس خصوصية ولايف أونلاين تربط الطلاب بأفضل المعلمين الجامعيين في السعودية، الإمارات، الكويت وقطر — حصص مباشرة بالزووم، كورسات مسجلة، وأسعار مدروسة."
+          ? "منصة أستاذي (OSTAZE) لدروس خصوصية ولايف أونلاين مع أفضل المعلمين الجامعيين في السعودية والكويت وقطر — حصص زووم مباشرة وكورسات مسجلة."
           : "OSTAZE (Ostaze) connects students with top university tutors in KSA, UAE, Kuwait & Qatar via Zoom live lessons and recorded courses at fair prices."}
         canonical="https://ostaze.com/"
         keywords={lang === "ar"
