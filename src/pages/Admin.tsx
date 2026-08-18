@@ -24,9 +24,16 @@ import { uploadVideoToBunny } from "@/lib/bunnyVideo";
 interface TeacherRow {
   user_id: string;
   full_name: string | null;
+  full_name_en: string | null;
+  phone: string | null;
+  bio: string | null;
+  bio_en: string | null;
   avatar_url: string | null;
   university: string | null;
+  university_en: string | null;
+  price: number | null;
   subjects: string[];
+  subjects_en: string[];
   verified: boolean;
 }
 
