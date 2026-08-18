@@ -3,6 +3,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
+import { uploadTeacherAvatar } from "@/lib/avatarUpload";
 import { toast } from "sonner";
 import type { LucideIcon } from "lucide-react";
 import {
@@ -158,8 +159,10 @@ const Admin = () => {
   const [editTeacherForm, setEditTeacherForm] = useState({
     full_name: "", full_name_en: "", phone: "", bio: "", bio_en: "",
     university: "", university_en: "", price: "", subjects: "", subjects_en: "", verified: false,
+    avatar_url: "",
   });
   const [savingTeacher, setSavingTeacher] = useState(false);
+  const [uploadingAvatar, setUploadingAvatar] = useState(false);
 
   const openEditTeacher = (tc: TeacherRow) => {
     setEditTeacher(tc);
@@ -175,6 +178,7 @@ const Admin = () => {
       subjects: (tc.subjects || []).join(", "),
       subjects_en: (tc.subjects_en || []).join(", "),
       verified: tc.verified,
+      avatar_url: tc.avatar_url || "",
     });
   };
 
@@ -191,7 +195,9 @@ const Admin = () => {
       full_name_en: f.full_name_en || null,
       phone: f.phone || null,
       bio: f.bio || null,
+      avatar_url: f.avatar_url || null,
       bio_en: f.bio_en || null,
+      avatar_url: f.avatar_url || null,
     }).eq("user_id", editTeacher.user_id);
 
     const { error: tErr } = await supabase.from("teacher_profiles").update({
