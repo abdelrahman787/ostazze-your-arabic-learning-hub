@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { copyApplicantPhotoToAvatar } from "@/lib/avatarUpload";
+
 import { toast } from "sonner";
 import { Loader2, Search, UserPlus, Mail, Phone, ExternalLink, X, RefreshCw, Check, Copy, FileDown } from "lucide-react";
 import { motion } from "framer-motion";
