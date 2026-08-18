@@ -1,0 +1,24 @@
+# OSTAZE (أستاذي)
+
+> Online tutoring marketplace connecting university students in Kuwait, Qatar, Saudi Arabia and the Gulf with verified university tutors for live Zoom lessons and recorded courses. Bilingual Arabic/English.
+
+OSTAZE lets students browse universities, colleges and subjects, find a verified tutor, and book a live one-to-one session or enrol in a recorded course. Tutors can apply to join the platform.
+
+## Pages
+
+- [Home](/): Search tutors, subjects and universities.
+- [Tutors](/teachers): Browse verified university tutors and book sessions.
+- [Subjects](/subjects): All subjects available for tutoring.
+- [Universities](/universities): Universities and colleges by country, with course catalogs.
+- [Categories](/categories): Academic categories and fields of study.
+- [Courses](/courses): Recorded courses students can enrol in.
+- [Apply as a Tutor](/apply-tutor): Application form for teachers who want to join.
+- [About](/about): About OSTAZE.
+- [Contact](/contact): How to reach the team.
+- [FAQ](/faq): Common questions about booking, payments and lessons.
+
+## Optional
+
+- [Terms](/terms): Terms of service.
+- [Privacy](/privacy): Privacy policy.
+- [Refund policy](/refund): Refund and cancellation rules.

@@ -183,7 +183,7 @@ const Subjects = () => {
                       <BookOpen size={20} />
                     </div>
                     <div className="min-w-0 flex-1 text-start">
-                      <h3 className="font-bold text-base mb-1 text-start">{d(s.name)}</h3>
+                      <h2 className="font-bold text-base mb-1 text-start">{d(s.name)}</h2>
                       <div className="flex items-center gap-3 text-muted-foreground text-xs mb-2 justify-start">
                         <span className="flex items-center gap-1">
                           <Users size={12} />

@@ -203,7 +203,7 @@ const NotificationBell = () => {
                       قراءة الكل
                     </button>
                   )}
-                  <button onClick={() => setOpen(false)} className="text-muted-foreground hover:text-foreground">
+                  <button onClick={() => setOpen(false)} aria-label="Close" className="text-muted-foreground hover:text-foreground">
                     <X size={16} />
                   </button>
                 </div>
