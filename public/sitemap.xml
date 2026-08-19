@@ -560,4 +560,9 @@
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://ostaze.com/teachers/a3a9ae7f-f578-4151-984b-2ecae1c96a23</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
