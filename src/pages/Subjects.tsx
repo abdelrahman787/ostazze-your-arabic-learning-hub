@@ -31,6 +31,7 @@ const Subjects = () => {
   const { t, d, lang } = useLanguage();
   const [searchParams, setSearchParams] = useSearchParams();
   const categoryParam = searchParams.get("category") || "";
+  const departmentParam = searchParams.get("department") || "";
   const [search, setSearch] = useState("");
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
 
@@ -51,8 +52,45 @@ const Subjects = () => {
     return subjects;
   }, [categoryAr, search]);
 
+  // ---- Department (subject) courses view ----
+  const departmentCourses = useMemo(() => {
+    if (!departmentParam) return [];
+    const seen = new Set<string>();
+    const list: { code: string; name_en: string; name_ar: string; credits: number }[] = [];
+    allUniversities.forEach(u => {
+      u.colleges.forEach(c => {
+        c.departments.forEach(dept => {
+          if (dept.name_en !== departmentParam) return;
+          dept.courses.forEach(course => {
+            const key = `${course.code}|${course.name_en}`;
+            if (seen.has(key)) return;
+            seen.add(key);
+            list.push({ code: course.code, name_en: course.name_en, name_ar: course.name_ar, credits: course.credits });
+          });
+        });
+      });
+    });
+    return list.sort((a, b) => a.code.localeCompare(b.code));
+  }, [departmentParam]);
+
+  const departmentAr = useMemo(() => {
+    const s = mockSubjects.find(x => x.name.en === departmentParam);
+    return s?.name.ar || departmentParam;
+  }, [departmentParam]);
+  const departmentDisplay = departmentParam ? (lang === "ar" ? departmentAr : departmentParam) : "";
+
+  const filteredCourses = useMemo(() => {
+    if (!search.trim()) return departmentCourses;
+    const q = search.toLowerCase();
+    return departmentCourses.filter(c =>
+      c.code.toLowerCase().includes(q) || c.name_en.toLowerCase().includes(q) || c.name_ar.toLowerCase().includes(q)
+    );
+  }, [departmentCourses, search]);
+
+  const listLength = departmentParam ? filteredCourses.length : filteredSubjects.length;
   const visibleSubjects = filteredSubjects.slice(0, visibleCount);
-  const hasMore = visibleCount < filteredSubjects.length;
+  const visibleCourses = filteredCourses.slice(0, visibleCount);
+  const hasMore = visibleCount < listLength;
 
   const getCoursesForSubject = (subjectNameEn: string) => {
     let count = 0;
@@ -65,6 +103,23 @@ const Subjects = () => {
     });
     return count;
   };
+
+  const openDepartment = (nameEn: string) => {
+    const next = new URLSearchParams(searchParams);
+    next.set("department", nameEn);
+    setSearchParams(next);
+    setSearch("");
+    setVisibleCount(ITEMS_PER_PAGE);
+  };
+
+  const clearDepartment = () => {
+    const next = new URLSearchParams(searchParams);
+    next.delete("department");
+    setSearchParams(next);
+    setSearch("");
+    setVisibleCount(ITEMS_PER_PAGE);
+  };
+
 
 
   const clearCategory = () => {
