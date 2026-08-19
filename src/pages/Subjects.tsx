@@ -321,23 +321,30 @@ const Subjects = () => {
         {hasMore && (
           <div className="text-center py-6">
             <button onClick={() => setVisibleCount(c => c + ITEMS_PER_PAGE)} className="btn-outline px-8">
-              {lang === "ar" ? `عرض المزيد (${filteredSubjects.length - visibleCount} متبقي)` : `Show More (${filteredSubjects.length - visibleCount} remaining)`}
+              {lang === "ar" ? `عرض المزيد (${listLength - visibleCount} متبقي)` : `Show More (${listLength - visibleCount} remaining)`}
             </button>
           </div>
         )}
 
-        {filteredSubjects.length === 0 && (
+        {listLength === 0 && (
           <div className="text-center py-16">
             <BookOpen size={40} className="mx-auto text-muted-foreground/30 mb-4" />
             <p className="text-muted-foreground font-medium">
-              {lang === "ar" ? "لا توجد مواد مطابقة" : "No matching subjects found"}
+              {departmentParam
+                ? (lang === "ar" ? "لا توجد مقررات مطابقة" : "No matching courses found")
+                : (lang === "ar" ? "لا توجد أقسام مطابقة" : "No matching departments found")}
             </p>
-            {categoryParam && (
+            {departmentParam ? (
+              <button onClick={clearDepartment} className="text-primary text-sm hover:underline mt-2">
+                {lang === "ar" ? "عرض كل الأقسام" : "Show all departments"}
+              </button>
+            ) : categoryParam ? (
               <button onClick={clearCategory} className="text-primary text-sm hover:underline mt-2">
                 {lang === "ar" ? "عرض كل المواد" : "Show all subjects"}
               </button>
-            )}
+            ) : null}
           </div>
+
         )}
 
         <section className="mt-14 max-w-3xl mx-auto space-y-6">
