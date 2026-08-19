@@ -103,7 +103,7 @@ const Navbar = () => {
           {/* Center nav */}
           <div className="hidden md:flex items-center gap-6 absolute left-1/2 -translate-x-1/2">
             {navLinks.map((l) => {
-              const isActive = location.pathname === l.path;
+              const isActive = l.match.includes(location.pathname);
               return (
                 <Link
                   key={l.path}
@@ -244,7 +244,7 @@ const Navbar = () => {
                 to={l.path}
                 onClick={() => setMobileOpen(false)}
                 className={`px-4 py-3 rounded-xl text-sm font-medium hover:bg-foreground/10 min-h-[44px] flex items-center ${
-                  location.pathname === l.path ? "text-primary font-bold bg-primary/10" : "text-foreground/80"
+                  l.match.includes(location.pathname) ? "text-primary font-bold bg-primary/10" : "text-foreground/80"
                 }`}
               >
                 {l.label}
