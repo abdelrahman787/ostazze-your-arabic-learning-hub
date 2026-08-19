@@ -255,14 +255,6 @@ const Subjects = () => {
             {visibleCourses.map((c, i) => (
               <motion.div key={`${c.code}-${i}`} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: Math.min(i * 0.02, 0.4) }}>
                 <div className="card-base p-5 h-full flex flex-col feature-card">
-                  <div className="flex items-center justify-between gap-2 mb-2">
-                    <span className="text-[11px] font-extrabold px-2 py-1 rounded-md bg-primary/10 text-primary tracking-wide">{c.code}</span>
-                    {c.credits > 0 && (
-                      <span className="text-[11px] text-muted-foreground font-semibold">
-                        {c.credits} {lang === "ar" ? "ساعة" : "cr"}
-                      </span>
-                    )}
-                  </div>
                   <h2 className="font-bold text-sm leading-snug text-start flex-1">
                     {lang === "ar" ? (c.name_ar || c.name_en) : c.name_en}
                   </h2>

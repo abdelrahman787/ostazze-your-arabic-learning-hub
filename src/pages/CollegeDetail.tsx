@@ -130,9 +130,7 @@ const DepartmentBlock = ({ dept, lang, index, onRequest }: DeptProps) => {
                         );
                         return (
                           <div key={course.code} className="flex items-center gap-3 py-2.5 px-3 rounded-lg bg-card hover:bg-primary/5 dark:hover:bg-primary/10 border border-border/40 hover:border-primary/30 transition-colors">
-                            <span className="font-mono text-[0.7rem] font-bold text-primary bg-primary/10 px-2 py-1 rounded shrink-0 tracking-wide">{course.code}</span>
                             <span className="text-sm text-foreground/90 truncate flex-1 font-medium">{courseName}</span>
-                            <span className="text-[0.65rem] text-muted-foreground shrink-0 hidden sm:inline">{course.credits}h</span>
                             <button type="button" onClick={() => onRequest(parentSubject, courseName)} className="shrink-0 inline-flex items-center gap-1.5 h-8 px-2.5 rounded-lg bg-primary/10 hover:bg-primary hover:text-primary-foreground text-primary text-xs font-bold transition-colors">
                               <CalendarPlus size={13} />
                               <span className="hidden sm:inline">{requestLabel}</span>
@@ -182,13 +180,9 @@ const DepartmentBlock = ({ dept, lang, index, onRequest }: DeptProps) => {
                                 const isElective = course.type?.toLowerCase().includes("elective");
                                 return (
                                   <div key={course.code} className="flex items-center gap-2.5 py-2 px-2.5 rounded-lg bg-card hover:bg-primary/5 dark:hover:bg-primary/10 border border-border/40 hover:border-primary/30 transition-colors">
-                                    <span className="font-mono text-[0.65rem] font-bold text-primary bg-primary/10 px-1.5 py-1 rounded shrink-0 tracking-wide">
-                                      {course.code}
-                                    </span>
                                     <div className="min-w-0 flex-1">
                                       <p className="text-sm text-foreground/90 truncate font-medium">{courseName}</p>
                                       <div className="flex items-center gap-2 mt-0.5">
-                                        <span className="text-[0.6rem] text-muted-foreground">{course.credits}h</span>
                                         {course.type && (
                                           <span className={`text-[0.6rem] px-1.5 py-0.5 rounded font-bold ${isElective ? "bg-accent/15 text-accent-foreground" : "bg-muted text-muted-foreground"}`}>
                                             {isElective ? (lang === "ar" ? "اختياري" : "Elective") : (lang === "ar" ? "إجباري" : "Required")}
