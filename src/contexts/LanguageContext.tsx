@@ -81,7 +81,7 @@ const translations = {
   // Subjects
   subjects_title: { ar: "المواد الدراسية", en: "Subjects" },
   subjects_subtitle: { ar: "اختر المادة التي تريد دراستها", en: "Choose the subject you want to study" },
-  subjects_view_teachers: { ar: "عرض المعلمين", en: "View Teachers" },
+  subjects_view_teachers: { ar: "اطلب هذه المادة", en: "Request this course" },
   subjects_teacher_count: { ar: "معلم", en: "teachers" },
 
   // Categories

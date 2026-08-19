@@ -258,10 +258,21 @@ const Subjects = () => {
                   <h2 className="font-bold text-sm leading-snug text-start flex-1">
                     {lang === "ar" ? (c.name_ar || c.name_en) : c.name_en}
                   </h2>
-                  <Link to="/teachers" className="btn-dark flex items-center justify-center gap-2 w-full mt-4 text-xs py-2">
+                  <a
+                    href={(() => {
+                      const courseName = lang === "ar" ? (c.name_ar || c.name_en) : c.name_en;
+                      const text = lang === "ar"
+                        ? `مرحباً، أرغب في طلب مادة: ${courseName}`
+                        : `Hello, I would like to request this course: ${courseName}`;
+                      return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+                    })()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-dark flex items-center justify-center gap-2 w-full mt-4 text-xs py-2"
+                  >
                     {t("subjects_view_teachers")}
                     <ArrowUpLeft size={13} />
-                  </Link>
+                  </a>
                 </div>
               </motion.div>
             ))}
