@@ -6,7 +6,7 @@ const translations = {
   // Navbar
   nav_home: { ar: "الرئيسية", en: "Home" },
   nav_teachers: { ar: "المعلمين", en: "Teachers" },
-  nav_categories: { ar: "التصنيفات", en: "Categories" },
+  nav_categories: { ar: "الاقسام", en: "Categories" },
   nav_subjects: { ar: "المواد", en: "Subjects" },
   nav_universities: { ar: "الجامعات", en: "Universities" },
   nav_courses: { ar: "الكورسات", en: "Courses" },
