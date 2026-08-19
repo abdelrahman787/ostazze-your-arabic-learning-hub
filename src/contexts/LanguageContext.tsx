@@ -21,7 +21,7 @@ const translations = {
   hero_title_1: { ar: "تعلّم مع", en: "Learn with the" },
   hero_title_2: { ar: "أفضل المعلمين", en: "Best Teachers" },
   hero_subtitle: { ar: "منصة تعليمية تربطك بأفضل الأساتذة الجامعيين في تخصصك عن طريق جلسات اونلاين", en: "An educational platform connecting you with the best private tutors for live online sessions" },
-  hero_cta: { ar: "ابدأ الآن", en: "Get Started" },
+  hero_cta: { ar: "احجز الان عبر الواتساب", en: "Book now via WhatsApp" },
   hero_browse: { ar: "تصفح المعلمين", en: "Browse Teachers" },
   hero_stat_teachers: { ar: "معلم", en: "Teachers" },
   hero_stat_students: { ar: "طالب", en: "Students" },
