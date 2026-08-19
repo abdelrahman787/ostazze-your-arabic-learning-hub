@@ -292,10 +292,10 @@ const IndexBelowFold = () => {
                       },
                     },
                   }}
-                  className="card-base group p-7 md:p-8 text-start"
+                  className="card-base group p-7 md:p-8 text-center"
                 >
                   <div
-                    className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 bg-gradient-to-br ${item.gradient} text-white shadow-lg shadow-primary/20`}
+                    className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 mx-auto bg-gradient-to-br ${item.gradient} text-white shadow-lg shadow-primary/20`}
                   >
                     <item.icon size={28} strokeWidth={1.8} />
                   </div>
