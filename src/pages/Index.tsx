@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
 import { GraduationCap } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import PageHelmet from "@/components/PageHelmet";
 import HeroOrbit from "@/components/HeroOrbit";
 import { Suspense, lazy } from "react";
 import { useInViewOnce } from "@/hooks/useInViewOnce";
+import { waLink } from "@/lib/whatsapp";
 
 // Keep Framer Motion and the long home-page sections out of the critical
 // route. The observer mounts them shortly before the user can see them, so
