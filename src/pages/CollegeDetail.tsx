@@ -76,6 +76,52 @@ const DepartmentBlock = ({ dept, lang, index, onRequest }: DeptProps) => {
           >
             <div className="p-4 space-y-5">
               {(() => {
+                const requestLabel = lang === "ar" ? "طلب حصة" : "Request a session";
+                const popular = getPopularCourses(dept.courses, 6);
+                if (popular.length < 3) return null;
+                return (
+                  <div className="rounded-xl border border-amber-400/30 bg-amber-400/[0.06] overflow-hidden">
+                    <div className="flex items-center gap-2 px-4 py-2.5 bg-amber-400/15 border-b border-amber-400/20">
+                      <Flame size={14} className="text-amber-600 dark:text-amber-400" />
+                      <h4 className="font-black text-sm text-amber-700 dark:text-amber-300">
+                        {lang === "ar" ? "الأكثر طلباً في هذا القسم" : "Most requested in this department"}
+                      </h4>
+                    </div>
+                    <div className="p-3 grid grid-cols-1 md:grid-cols-2 gap-2">
+                      {popular.map((course) => {
+                        const courseName = lang === "ar" ? course.name_ar : course.name_en;
+                        const parentSubject = resolveCourseSubject(
+                          course.code,
+                          {
+                            ar: dept.name_ar.replace(/^قسم\s+/, ""),
+                            en: dept.name_en.replace(/^Department of\s+/i, ""),
+                          },
+                          lang
+                        );
+                        return (
+                          <div key={`pop-${course.code}`} className="flex items-center gap-2.5 py-2 px-2.5 rounded-lg bg-card border border-amber-400/25 hover:border-amber-400/50 transition-colors">
+                            <span className="font-mono text-[0.65rem] font-bold text-amber-700 dark:text-amber-300 bg-amber-400/15 px-1.5 py-1 rounded shrink-0 tracking-wide">
+                              {course.code}
+                            </span>
+                            <p className="text-sm text-foreground/90 truncate flex-1 font-medium">{courseName}</p>
+                            <button
+                              type="button"
+                              aria-label={`${requestLabel}: ${courseName}`}
+                              onClick={() => onRequest(parentSubject, courseName)}
+                              className="shrink-0 inline-flex items-center gap-1.5 h-8 px-2 rounded-lg bg-primary/10 hover:bg-primary hover:text-primary-foreground text-primary text-xs font-bold transition-colors"
+                            >
+                              <CalendarPlus size={13} />
+                              <span className="hidden lg:inline">{requestLabel}</span>
+                            </button>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })()}
+              {(() => {
+
                 // Group courses by year → term
                 const requestLabel = lang === "ar" ? "طلب حصة" : "Request a session";
                 const termLabel = (term?: string) => {
