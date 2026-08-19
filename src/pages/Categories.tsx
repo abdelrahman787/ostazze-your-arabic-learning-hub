@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import {
   Cog, Stethoscope, Monitor, BarChart3, Globe2,
   FlaskConical, Scale, BookOpen, GraduationCap, Heart, Pill,
-  Palette, Wrench, BookText, TrendingUp, Search
+  Palette, Wrench, BookText, TrendingUp, Search, ChevronLeft
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { allUniversities } from "@/data/universitiesData";
