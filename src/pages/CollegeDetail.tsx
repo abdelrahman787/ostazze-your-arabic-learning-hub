@@ -130,9 +130,7 @@ const DepartmentBlock = ({ dept, lang, index, onRequest }: DeptProps) => {
                         );
                         return (
                           <div key={course.code} className="flex items-center gap-3 py-2.5 px-3 rounded-lg bg-card hover:bg-primary/5 dark:hover:bg-primary/10 border border-border/40 hover:border-primary/30 transition-colors">
-                            <span className="font-mono text-[0.7rem] font-bold text-primary bg-primary/10 px-2 py-1 rounded shrink-0 tracking-wide">{course.code}</span>
                             <span className="text-sm text-foreground/90 truncate flex-1 font-medium">{courseName}</span>
-                            <span className="text-[0.65rem] text-muted-foreground shrink-0 hidden sm:inline">{course.credits}h</span>
                             <button type="button" onClick={() => onRequest(parentSubject, courseName)} className="shrink-0 inline-flex items-center gap-1.5 h-8 px-2.5 rounded-lg bg-primary/10 hover:bg-primary hover:text-primary-foreground text-primary text-xs font-bold transition-colors">
                               <CalendarPlus size={13} />
                               <span className="hidden sm:inline">{requestLabel}</span>
