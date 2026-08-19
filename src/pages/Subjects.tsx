@@ -9,6 +9,7 @@ import PageHeader from "@/components/PageHeader";
 import PageHelmet from "@/components/PageHelmet";
 import FaqAccordion from "@/components/FaqAccordion";
 import { breadcrumbJsonLd, collectionPageJsonLd, faqJsonLd } from "@/lib/seo";
+import { WHATSAPP_NUMBER } from "@/lib/whatsapp";
 
 const categoryEnToAr = new Map<string, string>();
 mockCategories.forEach(c => categoryEnToAr.set(c.name.en, c.name.ar));
