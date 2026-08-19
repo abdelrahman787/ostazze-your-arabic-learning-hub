@@ -60,11 +60,11 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { label: t("nav_universities"), path: "/universities" },
-    { label: t("nav_subjects"), path: "/subjects" },
-    { label: t("nav_categories"), path: "/categories" },
-    { label: t("nav_teachers"), path: "/teachers" },
+    { label: t("nav_universities"), path: "/universities", match: ["/universities"] },
+    { label: t("nav_categories"), path: "/categories", match: ["/categories", "/subjects"] },
+    { label: t("nav_teachers"), path: "/teachers", match: ["/teachers"] },
   ];
+
 
   const dashboardPath = "/dashboard";
   const showBackButton = location.pathname !== "/";
