@@ -3,7 +3,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ChevronLeft, ChevronRight, ChevronDown,
-  BookOpen, Layers, GraduationCap, CalendarPlus, Loader2, Search,
+  BookOpen, Layers, GraduationCap, CalendarPlus, Loader2, Search, Flame,
 } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import PageHelmet from "@/components/PageHelmet";
@@ -13,6 +13,7 @@ import { allUniversities, College, Department } from "@/data/universitiesData";
 import { getCollegeIcon } from "@/lib/collegeIconMap";
 import { groupByField } from "@/lib/collegeFieldMap";
 import { resolveCourseSubject } from "@/lib/courseSubjectMap";
+import { getPopularCourses } from "@/lib/coursePopularity";
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
 import BookingFlowModal from "@/components/BookingFlowModal";
