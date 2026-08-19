@@ -83,57 +83,52 @@ const Categories = () => {
       />
       <PageHeader title={t("categories_title")} subtitle={t("categories_subtitle")} variant="categories" />
 
-      {/* Stats Bar */}
-      <div className="bg-primary/5 border-b border-border/50">
-        <div className="container py-4">
-          <div className="flex items-center justify-center gap-8 flex-wrap">
-            {[
-              { icon: BookOpen, value: stats.categories, label: lang === "ar" ? "تصنيف دراسي" : "Categories" },
-              { icon: GraduationCap, value: stats.totalDepts, label: lang === "ar" ? "قسم أكاديمي" : "Departments" },
-              { icon: TrendingUp, value: stats.totalCourses, label: lang === "ar" ? "مادة دراسية" : "Courses" },
-            ].map((s, i) => (
-              <div key={i} className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <s.icon size={16} className="text-primary" />
-                </div>
-                <div>
-                  <p className="font-black text-lg text-primary leading-none">{s.value}</p>
-                  <p className="text-[0.7rem] text-muted-foreground">{s.label}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
       <div className="container py-10">
-        {/* Search */}
-        <div className="max-w-md mx-auto mb-8">
+        {/* Search + stats in one calm row */}
+        <div className="max-w-3xl mx-auto mb-10 space-y-5">
           <div className="relative">
-            <Search size={16} className="absolute top-1/2 -translate-y-1/2 start-3 text-muted-foreground" />
+            <Search size={18} className="absolute top-1/2 -translate-y-1/2 start-4 text-muted-foreground" />
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder={lang === "ar" ? "ابحث في التصنيفات..." : "Search categories..."}
-              className="w-full ps-10 pe-4 py-2.5 rounded-xl border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+              placeholder={lang === "ar" ? "ابحث عن تصنيف..." : "Search a category..."}
+              className="w-full ps-12 pe-4 py-3.5 rounded-2xl border border-border bg-background text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
             />
+          </div>
+          <div className="flex items-center justify-center gap-2.5 flex-wrap text-xs">
+            {[
+              { icon: BookOpen, value: stats.categories, label: lang === "ar" ? "تصنيف" : "categories" },
+              { icon: GraduationCap, value: stats.totalDepts, label: lang === "ar" ? "قسم" : "departments" },
+              { icon: TrendingUp, value: stats.totalCourses, label: lang === "ar" ? "مادة" : "courses" },
+            ].map((s, i) => (
+              <span key={i} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-muted/60 text-muted-foreground">
+                <s.icon size={13} className="text-primary" />
+                <b className="text-foreground font-extrabold">{s.value}</b> {s.label}
+              </span>
+            ))}
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {/* Category list — wide, scannable rows */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {filtered.map((c, i) => {
             const name = d(c.name);
             const Icon = categoryIcons[name] || categoryIcons[c.name.ar] || BookOpen;
             return (
-              <motion.div key={c.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}>
-                <Link to={`/subjects?category=${encodeURIComponent(c.name.en)}`} className={`card-base p-8 text-center hover:border-primary/30 hover:shadow-lg cursor-pointer block ${i === 0 ? "card-active" : ""}`}>
-                  <motion.div whileHover={{ scale: 1.1 }} transition={{ type: "spring", stiffness: 300 }}
-                    className="icon-box-lg bg-primary/10 text-primary mx-auto mb-4">
-                    <Icon size={24} />
-                  </motion.div>
-                  <h2 className={`font-bold text-lg mb-1 ${i === 0 ? "text-primary" : ""}`}>{name}</h2>
-                  <p className="text-muted-foreground text-sm">{d(c.count)}</p>
+              <motion.div key={c.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: Math.min(i * 0.03, 0.3) }}>
+                <Link
+                  to={`/subjects?category=${encodeURIComponent(c.name.en)}`}
+                  className="group card-base p-5 flex items-center gap-4 text-start hover:border-primary/40 hover:shadow-lg"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0 transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                    <Icon size={22} />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <h2 className="font-bold text-[0.95rem] leading-snug truncate group-hover:text-primary transition-colors">{name}</h2>
+                    <p className="text-muted-foreground text-xs mt-0.5">{d(c.count)}</p>
+                  </div>
+                  <ChevronLeft size={18} className="text-muted-foreground/50 shrink-0 rtl:rotate-0 ltr:rotate-180 group-hover:text-primary transition-colors" />
                 </Link>
               </motion.div>
             );
@@ -141,10 +136,17 @@ const Categories = () => {
         </div>
 
         {filtered.length === 0 && (
-          <div className="text-center py-12 text-muted-foreground">
-            {lang === "ar" ? "لا توجد تصنيفات مطابقة" : "No matching categories"}
+          <div className="text-center py-16">
+            <Search size={38} className="mx-auto text-muted-foreground/30 mb-3" />
+            <p className="text-muted-foreground font-medium">
+              {lang === "ar" ? "لا توجد تصنيفات مطابقة" : "No matching categories"}
+            </p>
+            <button onClick={() => setSearch("")} className="text-primary text-sm hover:underline mt-2">
+              {lang === "ar" ? "عرض كل التصنيفات" : "Show all categories"}
+            </button>
           </div>
         )}
+
 
         <section className="mt-14 max-w-3xl mx-auto space-y-6">
           <p className="text-sm text-muted-foreground leading-relaxed text-center">{t("categories_intro")}</p>
