@@ -31,6 +31,7 @@ const Subjects = () => {
   const { t, d, lang } = useLanguage();
   const [searchParams, setSearchParams] = useSearchParams();
   const categoryParam = searchParams.get("category") || "";
+  const departmentParam = searchParams.get("department") || "";
   const [search, setSearch] = useState("");
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
 
@@ -51,8 +52,45 @@ const Subjects = () => {
     return subjects;
   }, [categoryAr, search]);
 
+  // ---- Department (subject) courses view ----
+  const departmentCourses = useMemo(() => {
+    if (!departmentParam) return [];
+    const seen = new Set<string>();
+    const list: { code: string; name_en: string; name_ar: string; credits: number }[] = [];
+    allUniversities.forEach(u => {
+      u.colleges.forEach(c => {
+        c.departments.forEach(dept => {
+          if (dept.name_en !== departmentParam) return;
+          dept.courses.forEach(course => {
+            const key = `${course.code}|${course.name_en}`;
+            if (seen.has(key)) return;
+            seen.add(key);
+            list.push({ code: course.code, name_en: course.name_en, name_ar: course.name_ar, credits: course.credits });
+          });
+        });
+      });
+    });
+    return list.sort((a, b) => a.code.localeCompare(b.code));
+  }, [departmentParam]);
+
+  const departmentAr = useMemo(() => {
+    const s = mockSubjects.find(x => x.name.en === departmentParam);
+    return s?.name.ar || departmentParam;
+  }, [departmentParam]);
+  const departmentDisplay = departmentParam ? (lang === "ar" ? departmentAr : departmentParam) : "";
+
+  const filteredCourses = useMemo(() => {
+    if (!search.trim()) return departmentCourses;
+    const q = search.toLowerCase();
+    return departmentCourses.filter(c =>
+      c.code.toLowerCase().includes(q) || c.name_en.toLowerCase().includes(q) || c.name_ar.toLowerCase().includes(q)
+    );
+  }, [departmentCourses, search]);
+
+  const listLength = departmentParam ? filteredCourses.length : filteredSubjects.length;
   const visibleSubjects = filteredSubjects.slice(0, visibleCount);
-  const hasMore = visibleCount < filteredSubjects.length;
+  const visibleCourses = filteredCourses.slice(0, visibleCount);
+  const hasMore = visibleCount < listLength;
 
   const getCoursesForSubject = (subjectNameEn: string) => {
     let count = 0;
@@ -65,6 +103,23 @@ const Subjects = () => {
     });
     return count;
   };
+
+  const openDepartment = (nameEn: string) => {
+    const next = new URLSearchParams(searchParams);
+    next.set("department", nameEn);
+    setSearchParams(next);
+    setSearch("");
+    setVisibleCount(ITEMS_PER_PAGE);
+  };
+
+  const clearDepartment = () => {
+    const next = new URLSearchParams(searchParams);
+    next.delete("department");
+    setSearchParams(next);
+    setSearch("");
+    setVisibleCount(ITEMS_PER_PAGE);
+  };
+
 
 
   const clearCategory = () => {
@@ -108,28 +163,44 @@ const Subjects = () => {
       />
       <PageHeader
         variant="subjects"
-        title={categoryDisplay || t("subjects_title")}
-        subtitle={categoryDisplay
-          ? (lang === "ar" ? `المواد الدراسية في تصنيف ${categoryDisplay}` : `Subjects in ${categoryDisplay}`)
+        title={departmentDisplay || categoryDisplay || t("subjects_title")}
+        subtitle={departmentDisplay
+          ? (lang === "ar" ? `المواد والمقررات في قسم ${departmentDisplay}` : `Courses in ${departmentDisplay}`)
+          : categoryDisplay
+          ? (lang === "ar" ? `الأقسام الأكاديمية في تصنيف ${categoryDisplay}` : `Departments in ${categoryDisplay}`)
           : t("subjects_subtitle")}
       />
 
       <div className="container py-10">
         {/* Breadcrumbs */}
-        <div className="flex items-center gap-1.5 text-sm text-muted-foreground mb-6">
+        <div className="flex items-center gap-1.5 text-sm text-muted-foreground mb-6 flex-wrap">
           <Link to="/" className="hover:text-primary transition-colors">{t("breadcrumb_home")}</Link>
           <ChevronRight size={12} />
           <Link to="/categories" className="hover:text-primary transition-colors">{t("nav_categories")}</Link>
           {categoryParam && (
             <>
               <ChevronRight size={12} />
-              <span className="text-foreground font-medium">{categoryDisplay}</span>
+              {departmentParam ? (
+                <button onClick={clearDepartment} className="hover:text-primary transition-colors">{categoryDisplay}</button>
+              ) : (
+                <span className="text-foreground font-medium">{categoryDisplay}</span>
+              )}
             </>
           )}
           {!categoryParam && (
             <>
               <ChevronRight size={12} />
-              <span className="text-foreground font-medium">{t("subjects_title")}</span>
+              {departmentParam ? (
+                <button onClick={clearDepartment} className="hover:text-primary transition-colors">{t("subjects_title")}</button>
+              ) : (
+                <span className="text-foreground font-medium">{t("subjects_title")}</span>
+              )}
+            </>
+          )}
+          {departmentParam && (
+            <>
+              <ChevronRight size={12} />
+              <span className="text-foreground font-medium">{departmentDisplay}</span>
             </>
           )}
         </div>
@@ -141,8 +212,10 @@ const Subjects = () => {
             <input
               type="text"
               value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder={lang === "ar" ? "ابحث في المواد الدراسية..." : "Search subjects..."}
+              onChange={(e) => { setSearch(e.target.value); setVisibleCount(ITEMS_PER_PAGE); }}
+              placeholder={departmentParam
+                ? (lang === "ar" ? "ابحث في المقررات..." : "Search courses...")
+                : (lang === "ar" ? "ابحث في الأقسام الأكاديمية..." : "Search departments...")}
               className="w-full ps-11 pe-4 py-3 rounded-xl border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
             />
           </div>
@@ -151,11 +224,18 @@ const Subjects = () => {
         {/* Toolbar */}
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3 flex-wrap">
-            <Link to="/categories" className="flex items-center gap-1.5 text-sm text-primary hover:underline font-medium">
-              <BackIcon size={14} />
-              {lang === "ar" ? "كل التصنيفات" : "All Categories"}
-            </Link>
-            {categoryParam && (
+            {departmentParam ? (
+              <button onClick={clearDepartment} className="flex items-center gap-1.5 text-sm text-primary hover:underline font-medium">
+                <BackIcon size={14} />
+                {lang === "ar" ? "كل الأقسام" : "All Departments"}
+              </button>
+            ) : (
+              <Link to="/categories" className="flex items-center gap-1.5 text-sm text-primary hover:underline font-medium">
+                <BackIcon size={14} />
+                {lang === "ar" ? "كل التصنيفات" : "All Categories"}
+              </Link>
+            )}
+            {categoryParam && !departmentParam && (
               <button onClick={clearCategory} className="flex items-center gap-1.5 text-xs bg-primary/10 text-primary px-3 py-1.5 rounded-full font-semibold">
                 <Filter size={12} />
                 {categoryDisplay}
@@ -164,12 +244,37 @@ const Subjects = () => {
             )}
           </div>
           <p className="text-sm text-muted-foreground font-medium">
-            {lang === "ar"
-              ? `${filteredSubjects.length} قسم أكاديمي`
-              : `${filteredSubjects.length} academic departments`}
+            {departmentParam
+              ? (lang === "ar" ? `${filteredCourses.length} مقرر` : `${filteredCourses.length} courses`)
+              : (lang === "ar" ? `${filteredSubjects.length} قسم أكاديمي` : `${filteredSubjects.length} academic departments`)}
           </p>
         </div>
 
+        {departmentParam ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pb-8">
+            {visibleCourses.map((c, i) => (
+              <motion.div key={`${c.code}-${i}`} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: Math.min(i * 0.02, 0.4) }}>
+                <div className="card-base p-5 h-full flex flex-col feature-card">
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <span className="text-[11px] font-extrabold px-2 py-1 rounded-md bg-primary/10 text-primary tracking-wide">{c.code}</span>
+                    {c.credits > 0 && (
+                      <span className="text-[11px] text-muted-foreground font-semibold">
+                        {c.credits} {lang === "ar" ? "ساعة" : "cr"}
+                      </span>
+                    )}
+                  </div>
+                  <h2 className="font-bold text-sm leading-snug text-start flex-1">
+                    {lang === "ar" ? (c.name_ar || c.name_en) : c.name_en}
+                  </h2>
+                  <Link to="/teachers" className="btn-dark flex items-center justify-center gap-2 w-full mt-4 text-xs py-2">
+                    {t("subjects_view_teachers")}
+                    <ArrowUpLeft size={13} />
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 pb-8">
           {visibleSubjects.map((s, i) => {
             const coursesCount = getCoursesForSubject(s.name.en);
@@ -177,6 +282,7 @@ const Subjects = () => {
             return (
               <motion.div key={s.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: Math.min(i * 0.03, 0.5) }}
                 className="h-full">
+                <button onClick={() => openDepartment(s.name.en)} className="w-full text-start h-full">
                 <div className={`card-base p-6 h-full flex flex-col feature-card ${i === 0 && !categoryParam ? "card-active" : ""}`}>
                   <div className="flex items-start gap-4 flex-1">
                     <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 ${colorClass}`}>
@@ -198,37 +304,47 @@ const Subjects = () => {
                       </div>
                     </div>
                   </div>
-                  <Link to="/teachers" className="btn-dark flex items-center justify-center gap-2 w-full mt-4 text-sm">
-                    {t("subjects_view_teachers")}
+                  <span className="btn-dark flex items-center justify-center gap-2 w-full mt-4 text-sm">
+                    {lang === "ar" ? "عرض المقررات" : "View Courses"}
                     <ArrowUpLeft size={14} />
-                  </Link>
+                  </span>
                 </div>
+                </button>
               </motion.div>
             );
           })}
         </div>
+        )}
+
 
         {/* Load More */}
         {hasMore && (
           <div className="text-center py-6">
             <button onClick={() => setVisibleCount(c => c + ITEMS_PER_PAGE)} className="btn-outline px-8">
-              {lang === "ar" ? `عرض المزيد (${filteredSubjects.length - visibleCount} متبقي)` : `Show More (${filteredSubjects.length - visibleCount} remaining)`}
+              {lang === "ar" ? `عرض المزيد (${listLength - visibleCount} متبقي)` : `Show More (${listLength - visibleCount} remaining)`}
             </button>
           </div>
         )}
 
-        {filteredSubjects.length === 0 && (
+        {listLength === 0 && (
           <div className="text-center py-16">
             <BookOpen size={40} className="mx-auto text-muted-foreground/30 mb-4" />
             <p className="text-muted-foreground font-medium">
-              {lang === "ar" ? "لا توجد مواد مطابقة" : "No matching subjects found"}
+              {departmentParam
+                ? (lang === "ar" ? "لا توجد مقررات مطابقة" : "No matching courses found")
+                : (lang === "ar" ? "لا توجد أقسام مطابقة" : "No matching departments found")}
             </p>
-            {categoryParam && (
+            {departmentParam ? (
+              <button onClick={clearDepartment} className="text-primary text-sm hover:underline mt-2">
+                {lang === "ar" ? "عرض كل الأقسام" : "Show all departments"}
+              </button>
+            ) : categoryParam ? (
               <button onClick={clearCategory} className="text-primary text-sm hover:underline mt-2">
                 {lang === "ar" ? "عرض كل المواد" : "Show all subjects"}
               </button>
-            )}
+            ) : null}
           </div>
+
         )}
 
         <section className="mt-14 max-w-3xl mx-auto space-y-6">
