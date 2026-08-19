@@ -272,11 +272,7 @@ const IndexBelowFold = () => {
                 desc: t("why_remote_desc"),
                 gradient: "from-primary to-primary-dark",
               },
-            ].map((item, i) => {
-              const indexLabel =
-                lang === "ar"
-                  ? ["٠١", "٠٢", "٠٣"][i]
-                  : String(i + 1).padStart(2, "0");
+            ].map((item) => {
               return (
                 <motion.div
                   key={item.title}
@@ -298,9 +294,6 @@ const IndexBelowFold = () => {
                   }}
                   className="card-base group p-7 md:p-8 text-start"
                 >
-                  <span className="absolute top-5 end-5 text-4xl font-black text-muted-foreground/20 leading-none">
-                    {indexLabel}
-                  </span>
                   <div
                     className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 bg-gradient-to-br ${item.gradient} text-white shadow-lg shadow-primary/20`}
                   >
