@@ -47,17 +47,19 @@ const DialCodeSelect = ({
   const { lang } = useLanguage();
   const isAr = lang === "ar";
 
+  const selected = DIAL_CODES.find((c) => c.code === value) || DIAL_CODES[0];
+
   return (
     <select
       dir="ltr"
       value={value}
       onChange={(e) => onChange(e.target.value)}
       aria-label={isAr ? "مفتاح الدولة" : "Country code"}
-      className={`input-base w-[130px] shrink-0 !px-2 text-sm font-semibold ${className}`}
+      className={`input-base w-[105px] shrink-0 !px-2 text-sm font-semibold ${className}`}
     >
       {DIAL_CODES.map((c) => (
         <option key={c.iso} value={c.code}>
-          {c.flag} +{c.code}
+          {c.flag} +{c.code} — {isAr ? c.ar : c.en}
         </option>
       ))}
     </select>
