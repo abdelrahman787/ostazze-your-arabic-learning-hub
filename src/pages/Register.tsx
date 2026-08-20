@@ -198,9 +198,12 @@ const Register = () => {
               <label className="block text-sm font-bold mb-1.5">
                 {lang === "ar" ? "رقم الواتساب" : "WhatsApp number"}
               </label>
-              <div className="relative">
-                <Phone size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                <input type="tel" inputMode="tel" dir="ltr" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+966 5X XXX XXXX" className="input-base !pr-10" required maxLength={20} />
+              <div className="flex gap-2" dir="ltr">
+                <DialCodeSelect value={dial} onChange={setDial} />
+                <div className="relative flex-1">
+                  <Phone size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                  <input type="tel" inputMode="tel" dir="ltr" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="5X XXX XXXX" className="input-base w-full !pl-10" required maxLength={20} />
+                </div>
               </div>
               <p className="text-[11px] text-muted-foreground mt-1">
                 {lang === "ar" ? "سنرسل لك رسالة ترحيب وتأكيدات الحجز على واتساب." : "We'll send your welcome message and booking confirmations on WhatsApp."}
