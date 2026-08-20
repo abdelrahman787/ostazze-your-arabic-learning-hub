@@ -372,7 +372,7 @@ const IndexBelowFold = () => {
                         className="text-5xl font-black leading-none transition-transform group-hover:scale-110 duration-300"
                         style={{ color: "hsl(14 91% 55%)" }}
                       >
-                        3326
+                        {registeredStudents}
                       </div>
                       <div>
                         <h4 className="text-lg font-bold mb-1">
