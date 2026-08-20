@@ -6,7 +6,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
   X, Loader2, Sparkles, Calendar, BookOpen, MessageSquare,
-  GraduationCap, BadgeCheck, CreditCard, CheckCircle2, Mail, Sun, CloudSun, Moon,
+  GraduationCap, BadgeCheck, CheckCircle2, Mail, Sun, CloudSun, Moon,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
@@ -470,22 +470,6 @@ const BookingFlowModal = ({ open, onClose, subject, courseLabel, teachers }: Pro
                     className="input-base w-full resize-none"
                   />
                 </div>
-
-                {/* Price summary */}
-                {effectivePrice > 0 && (
-                  <div className="flex items-center justify-between gap-2 bg-primary text-primary-foreground rounded-xl p-3 shadow-md">
-                    <span className="inline-flex items-center gap-2 text-sm font-bold">
-                      <CreditCard size={16} />
-                      {lang === "ar" ? "سعر الحصة" : "Session price"}
-                      {selectedTeacherId === AUTO_VALUE && (
-                        <span className="text-xs opacity-80 font-medium">
-                          {lang === "ar" ? "(يبدأ من)" : "(starts from)"}
-                        </span>
-                      )}
-                    </span>
-                    <span className="text-lg font-black">${effectivePrice}</span>
-                  </div>
-                )}
 
                 <motion.button
                   whileHover={{ scale: 1.01 }}
