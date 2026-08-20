@@ -102,7 +102,7 @@ const WhatsAppNumberGate = () => {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="5X XXX XXXX"
-                className="input-base w-full !pl-[calc(1ch_*_0.6_+_2.5rem)]"
+                className="input-base w-full !pl-[3.6rem]"
                 required
               />
             </div>
