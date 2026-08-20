@@ -400,8 +400,46 @@ const IndexBelowFold = () => {
         </div>
       </section>
 
+      {/* Testimonials */}
+      <div className="mt-20 md:mt-24 container">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
+          <h2 className="text-3xl font-extrabold mb-2">{t("testimonials_title")}</h2>
+          <p className="text-muted-foreground">{t("testimonials_subtitle")}</p>
+        </motion.div>
+        <motion.div
+          className="grid md:grid-cols-3 gap-5"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.15 }}
+          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.22, delayChildren: 0.1 } } }}
+        >
+          {mockTestimonials.map((tst, i) => (
+            <motion.div
+              key={i}
+              variants={{
+                hidden: { opacity: 0, y: 30, scale: 0.95 },
+                show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+              }}
+              className="card-base p-6 hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <img src={tst.avatar} alt={d(tst.name)} className="w-11 h-11 rounded-full object-cover" loading="lazy" decoding="async" />
+                <div>
+                  <h4 className="font-bold text-sm">{d(tst.name)}</h4>
+                  <p className="text-xs text-muted-foreground">{d(tst.university)}</p>
+                </div>
+              </div>
+              <div className="flex gap-1 mb-3">
+                {[...Array(5)].map((_, j) => <Star key={j} size={14} className="text-primary fill-primary" />)}
+              </div>
+              <p className="text-sm text-muted-foreground leading-relaxed">"{d(tst.quote)}"</p>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
 
       {/* Bottom CTA */}
+
       <section className="py-20 md:py-24 px-4 lg:px-8 bg-section-alt">
         <div className="stats-card-darkglow relative overflow-hidden rounded-[2rem] py-14 px-6 md:px-12">
           <div className="container text-center relative z-10">
