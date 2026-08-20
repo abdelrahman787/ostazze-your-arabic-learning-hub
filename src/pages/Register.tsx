@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Eye, EyeOff, User, Mail, Lock, GraduationCap, Loader2, BookOpen, Users } from "lucide-react";
+import { Eye, EyeOff, User, Mail, Lock, GraduationCap, Loader2, BookOpen, Users, Phone } from "lucide-react";
 import { motion } from "framer-motion";
 import { lovable } from "@/integrations/lovable/index";
 import PageHelmet from "@/components/PageHelmet";
@@ -30,6 +30,7 @@ const Register = () => {
   const [error, setError] = useState("");
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [agreedTerms, setAgreedTerms] = useState(false);
   // Defaults removed from UI; Egypt is the default market.
@@ -57,17 +58,26 @@ const Register = () => {
       setError(lang === "ar" ? "يجب الموافقة على الشروط والأحكام" : "You must agree to the terms and conditions");
       return;
     }
+    const phoneDigits = phone.replace(/[^0-9]/g, "");
+    if (phoneDigits.length < 8 || phoneDigits.length > 15) {
+      setError(lang === "ar"
+        ? "أدخل رقم واتساب صحيح بصيغة دولية (مثال: 966501234567)"
+        : "Enter a valid WhatsApp number in international format (e.g. 966501234567)");
+      return;
+    }
     setLoading(true);
     setError("");
     const result = await register(email, password, fullName, "student", timezone);
     if (result.error) {
       setError(result.error);
     } else {
-      // Persist country on profile (best-effort; CountryGate will catch if it fails)
+      // Persist country + WhatsApp number on profile (best-effort)
       const { data: sess } = await supabase.auth.getSession();
       const uid = sess.session?.user?.id;
       if (uid) {
-        await supabase.from("profiles").update({ country }).eq("user_id", uid);
+        await supabase.from("profiles").update({ country, phone: phoneDigits }).eq("user_id", uid);
+        // Fire the one-time welcome WhatsApp message
+        supabase.functions.invoke("send-welcome-whatsapp", { body: { phone: phoneDigits, lang } });
       }
       setSuccess(true);
     }
@@ -183,6 +193,18 @@ const Register = () => {
             <div>
               <label className="block text-sm font-bold mb-1.5">{t("login_email")}</label>
               <div className="relative"><Mail size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" /><input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="email@example.com" className="input-base !pr-10" required maxLength={255} /></div>
+            </div>
+            <div>
+              <label className="block text-sm font-bold mb-1.5">
+                {lang === "ar" ? "رقم الواتساب" : "WhatsApp number"}
+              </label>
+              <div className="relative">
+                <Phone size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                <input type="tel" inputMode="tel" dir="ltr" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+966 5X XXX XXXX" className="input-base !pr-10" required maxLength={20} />
+              </div>
+              <p className="text-[11px] text-muted-foreground mt-1">
+                {lang === "ar" ? "سنرسل لك رسالة ترحيب وتأكيدات الحجز على واتساب." : "We'll send your welcome message and booking confirmations on WhatsApp."}
+              </p>
             </div>
             <div>
               <label className="block text-sm font-bold mb-1.5">{t("login_password")}</label>

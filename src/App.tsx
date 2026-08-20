@@ -36,6 +36,7 @@ const FloatingWhatsApp = lazy(() => import("@/components/FloatingWhatsApp"));
 const AIChatWidget = lazy(() => import("@/components/AIChatWidget"));
 const CookieConsent = lazy(() => import("@/components/CookieConsent"));
 const CountryGate = lazy(() => import("@/components/CountryGate"));
+const WhatsAppNumberGate = lazy(() => import("@/components/WhatsAppNumberGate"));
 
 
 
@@ -114,6 +115,7 @@ const DeferredWidgets = () => {
         <AIChatWidget />
         <CookieConsent />
         <CountryGate>{null}</CountryGate>
+        <WhatsAppNumberGate />
       </Suspense>
     </NonCriticalBoundary>
   );
