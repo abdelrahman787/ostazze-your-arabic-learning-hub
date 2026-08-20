@@ -7,6 +7,7 @@ import { MotionConfig, motion, useInView, useReducedMotion } from "framer-motion
 import { useRef, useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import OurTeam from "@/components/OurTeam";
+import { getRegisteredStudents } from "@/lib/studentCount";
 
 import howStep1Asset from "@/assets/how-step-1.webp.asset.json";
 import howStep2Asset from "@/assets/how-step-2.webp.asset.json";
@@ -30,6 +31,7 @@ const IndexBelowFold = () => {
   const { t, d, lang } = useLanguage();
   const isReduced = useReducedMotion();
   const appleMotionLite = typeof document !== "undefined" && document.documentElement.dataset.appleMotionLite === "1";
+  const registeredStudents = getRegisteredStudents();
   const howStepsRef = useRef<HTMLDivElement>(null);
   const howStepsInView = useInView(howStepsRef, { once: true, amount: 0.2 });
   const [playHowSteps, setPlayHowSteps] = useState(false);
@@ -372,7 +374,7 @@ const IndexBelowFold = () => {
                         className="text-5xl font-black leading-none transition-transform group-hover:scale-110 duration-300"
                         style={{ color: "hsl(14 91% 55%)" }}
                       >
-                        3326
+                        {registeredStudents}
                       </div>
                       <div>
                         <h4 className="text-lg font-bold mb-1">
