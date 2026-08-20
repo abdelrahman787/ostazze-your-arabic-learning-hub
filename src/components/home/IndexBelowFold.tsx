@@ -458,7 +458,8 @@ const IndexBelowFold = () => {
                   ].map((u) => (
                     <div
                       key={u.alt}
-                      className="h-16 md:h-20 rounded-xl border border-border/60 bg-background/60 flex items-center justify-center p-3 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-all duration-500"
+                      className="h-16 md:h-20 rounded-xl border border-border/60 bg-background/60 flex items-center justify-center p-3 transition-all duration-500"
+
                     >
                       <img
                         src={u.src}
