@@ -60,8 +60,9 @@ const Register = () => {
       setError(lang === "ar" ? "يجب الموافقة على الشروط والأحكام" : "You must agree to the terms and conditions");
       return;
     }
-    const phoneDigits = phone.replace(/[^0-9]/g, "");
-    if (phoneDigits.length < 8 || phoneDigits.length > 15) {
+    const localDigits = phone.replace(/[^0-9]/g, "").replace(/^0+/, "");
+    const phoneDigits = localDigits.startsWith(dial) ? localDigits : `${dial}${localDigits}`;
+    if (localDigits.length < 6 || phoneDigits.length < 8 || phoneDigits.length > 15) {
       setError(lang === "ar"
         ? "أدخل رقم واتساب صحيح بصيغة دولية (مثال: 966501234567)"
         : "Enter a valid WhatsApp number in international format (e.g. 966501234567)");
