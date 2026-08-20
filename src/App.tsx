@@ -115,6 +115,7 @@ const DeferredWidgets = () => {
         <AIChatWidget />
         <CookieConsent />
         <CountryGate>{null}</CountryGate>
+        <WhatsAppNumberGate />
       </Suspense>
     </NonCriticalBoundary>
   );
