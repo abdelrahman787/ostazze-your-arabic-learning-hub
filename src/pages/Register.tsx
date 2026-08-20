@@ -2,12 +2,12 @@ import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Eye, EyeOff, User, Mail, Lock, GraduationCap, Loader2, BookOpen, Users, Phone } from "lucide-react";
+import { Eye, EyeOff, User, Mail, Lock, GraduationCap, Loader2, BookOpen, Users } from "lucide-react";
 import { motion } from "framer-motion";
 import { lovable } from "@/integrations/lovable/index";
 import PageHelmet from "@/components/PageHelmet";
 import { supabase } from "@/integrations/supabase/client";
-import DialCodeSelect from "@/components/DialCodeSelect";
+import DialCodeSelect, { DIAL_CODES } from "@/components/DialCodeSelect";
 
 const getPasswordStrength = (pw: string): { level: number; label: string; color: string } => {
   if (pw.length < 6) return { level: 0, label: "", color: "" };
@@ -38,6 +38,11 @@ const Register = () => {
   // Defaults removed from UI; Egypt is the default market.
   const timezone = "Asia/Riyadh";
   const country = "EG";
+  const selectedDial = DIAL_CODES.find((c) => c.code === dial) || DIAL_CODES[0];
+  const fullPhoneDisplay = useMemo(() => {
+    const local = phone.replace(/[^0-9]/g, "").replace(/^0+/, "");
+    return local ? `+${dial} ${local}` : "";
+  }, [phone, dial]);
   // Honeypot — bots fill this; real users never see it.
   const [website, setWebsite] = useState("");
 
@@ -201,13 +206,31 @@ const Register = () => {
               <label className="block text-sm font-bold mb-1.5">
                 {lang === "ar" ? "رقم الواتساب" : "WhatsApp number"}
               </label>
-              <div className="flex gap-2" dir="ltr">
+              <div className="flex gap-2 items-center" dir="ltr">
                 <DialCodeSelect value={dial} onChange={setDial} />
                 <div className="relative flex-1">
-                  <Phone size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                  <input type="tel" inputMode="tel" dir="ltr" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="5X XXX XXXX" className="input-base w-full !pl-10" required maxLength={20} />
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm font-bold text-muted-foreground select-none">
+                    +{dial}
+                  </span>
+                  <input
+                    type="tel"
+                    inputMode="tel"
+                    dir="ltr"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="5X XXX XXXX"
+                    className="input-base w-full !pl-[3.6rem]"
+                    required
+                    maxLength={20}
+                  />
                 </div>
               </div>
+              {fullPhoneDisplay && (
+                <p className="text-[11px] text-muted-foreground mt-1 text-center" dir="ltr">
+                  {lang === "ar" ? "الرقم الكامل: " : "Full number: "}
+                  <span className="font-semibold text-foreground">{fullPhoneDisplay}</span>
+                </p>
+              )}
               <p className="text-[11px] text-muted-foreground mt-1">
                 {lang === "ar" ? "سنرسل لك رسالة ترحيب وتأكيدات الحجز على واتساب." : "We'll send your welcome message and booking confirmations on WhatsApp."}
               </p>

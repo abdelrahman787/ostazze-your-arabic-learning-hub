@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { MessageCircle, Loader2 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
-import DialCodeSelect from "@/components/DialCodeSelect";
+import DialCodeSelect, { DIAL_CODES } from "@/components/DialCodeSelect";
 
 /**
  * Asks any signed-in user without a WhatsApp number to add one,
@@ -18,6 +18,12 @@ const WhatsAppNumberGate = () => {
   const [phone, setPhone] = useState("");
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+
+  const selected = DIAL_CODES.find((c) => c.code === dial) || DIAL_CODES[0];
+  const fullNumber = useMemo(() => {
+    const local = phone.replace(/[^0-9]/g, "").replace(/^0+/, "");
+    return local ? `+${dial} ${local}` : "";
+  }, [phone, dial]);
 
   useEffect(() => {
     if (!isLoggedIn || !user) return;
@@ -83,19 +89,30 @@ const WhatsAppNumberGate = () => {
             : "We use WhatsApp to send booking confirmations and session links. Pick your country code, then type your number."}
         </p>
         <form onSubmit={submit} className="space-y-3">
-          <div className="flex gap-2" dir="ltr">
+          <div className="flex gap-2 items-center" dir="ltr">
             <DialCodeSelect value={dial} onChange={setDial} />
-            <input
-              type="tel"
-              inputMode="tel"
-              dir="ltr"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              placeholder="5X XXX XXXX"
-              className="input-base flex-1"
-              required
-            />
+            <div className="relative flex-1">
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm font-bold text-muted-foreground select-none">
+                +{dial}
+              </span>
+              <input
+                type="tel"
+                inputMode="tel"
+                dir="ltr"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="5X XXX XXXX"
+                className="input-base w-full !pl-[3.6rem]"
+                required
+              />
+            </div>
           </div>
+          {fullNumber && (
+            <p className="text-xs text-muted-foreground text-center" dir="ltr">
+              {isAr ? "الرقم الكامل: " : "Full number: "}
+              <span className="font-semibold text-foreground">{fullNumber}</span>
+            </p>
+          )}
           {error && (
             <p role="alert" className="text-destructive text-sm">
               {error}
