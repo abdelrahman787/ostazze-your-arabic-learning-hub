@@ -69,7 +69,7 @@ const DialCodeSelect = ({
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-label={isAr ? "مفتاح الدولة" : "Country code"}
-        className={`input-base h-[42px] w-[82px] sm:w-[92px] flex items-center justify-between gap-1 px-2 text-sm font-semibold ${className}`}
+        className={`input-base h-auto w-[82px] sm:w-[92px] flex items-center justify-between gap-1 px-2 py-2.5 text-sm font-semibold ${className}`}
       >
         <span className="truncate">
           {selected.flag} +{selected.code}
