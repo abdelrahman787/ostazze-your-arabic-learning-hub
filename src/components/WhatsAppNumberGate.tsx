@@ -3,6 +3,7 @@ import { MessageCircle, Loader2 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
+import DialCodeSelect from "@/components/DialCodeSelect";
 
 /**
  * Asks any signed-in user without a WhatsApp number to add one,
