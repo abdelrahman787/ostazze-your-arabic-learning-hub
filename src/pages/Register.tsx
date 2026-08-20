@@ -7,7 +7,6 @@ import { motion } from "framer-motion";
 import { lovable } from "@/integrations/lovable/index";
 import PageHelmet from "@/components/PageHelmet";
 import { supabase } from "@/integrations/supabase/client";
-import DialCodeSelect from "@/components/DialCodeSelect";
 
 const getPasswordStrength = (pw: string): { level: number; label: string; color: string } => {
   if (pw.length < 6) return { level: 0, label: "", color: "" };
@@ -31,7 +30,6 @@ const Register = () => {
   const [error, setError] = useState("");
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
-  const [dial, setDial] = useState("966");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [agreedTerms, setAgreedTerms] = useState(false);
@@ -60,9 +58,8 @@ const Register = () => {
       setError(lang === "ar" ? "يجب الموافقة على الشروط والأحكام" : "You must agree to the terms and conditions");
       return;
     }
-    const localDigits = phone.replace(/[^0-9]/g, "").replace(/^0+/, "");
-    const phoneDigits = localDigits.startsWith(dial) ? localDigits : `${dial}${localDigits}`;
-    if (localDigits.length < 6 || phoneDigits.length < 8 || phoneDigits.length > 15) {
+    const phoneDigits = phone.replace(/[^0-9]/g, "");
+    if (phoneDigits.length < 8 || phoneDigits.length > 15) {
       setError(lang === "ar"
         ? "أدخل رقم واتساب صحيح بصيغة دولية (مثال: 966501234567)"
         : "Enter a valid WhatsApp number in international format (e.g. 966501234567)");
@@ -201,12 +198,9 @@ const Register = () => {
               <label className="block text-sm font-bold mb-1.5">
                 {lang === "ar" ? "رقم الواتساب" : "WhatsApp number"}
               </label>
-              <div className="flex gap-2" dir="ltr">
-                <DialCodeSelect value={dial} onChange={setDial} />
-                <div className="relative flex-1">
-                  <Phone size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                  <input type="tel" inputMode="tel" dir="ltr" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="5X XXX XXXX" className="input-base w-full !pl-10" required maxLength={20} />
-                </div>
+              <div className="relative">
+                <Phone size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                <input type="tel" inputMode="tel" dir="ltr" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+966 5X XXX XXXX" className="input-base !pr-10" required maxLength={20} />
               </div>
               <p className="text-[11px] text-muted-foreground mt-1">
                 {lang === "ar" ? "سنرسل لك رسالة ترحيب وتأكيدات الحجز على واتساب." : "We'll send your welcome message and booking confirmations on WhatsApp."}
