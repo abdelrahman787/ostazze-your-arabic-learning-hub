@@ -206,13 +206,31 @@ const Register = () => {
               <label className="block text-sm font-bold mb-1.5">
                 {lang === "ar" ? "رقم الواتساب" : "WhatsApp number"}
               </label>
-              <div className="flex gap-2" dir="ltr">
+              <div className="flex gap-2 items-center" dir="ltr">
                 <DialCodeSelect value={dial} onChange={setDial} />
                 <div className="relative flex-1">
-                  <Phone size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                  <input type="tel" inputMode="tel" dir="ltr" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="5X XXX XXXX" className="input-base w-full !pl-10" required maxLength={20} />
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm font-bold text-muted-foreground select-none">
+                    +{dial}
+                  </span>
+                  <input
+                    type="tel"
+                    inputMode="tel"
+                    dir="ltr"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="5X XXX XXXX"
+                    className="input-base w-full !pl-[calc(1ch_*_0.6_+_2.5rem)]"
+                    required
+                    maxLength={20}
+                  />
                 </div>
               </div>
+              {fullPhoneDisplay && (
+                <p className="text-[11px] text-muted-foreground mt-1 text-center" dir="ltr">
+                  {lang === "ar" ? "الرقم الكامل: " : "Full number: "}
+                  <span className="font-semibold text-foreground">{fullPhoneDisplay}</span>
+                </p>
+              )}
               <p className="text-[11px] text-muted-foreground mt-1">
                 {lang === "ar" ? "سنرسل لك رسالة ترحيب وتأكيدات الحجز على واتساب." : "We'll send your welcome message and booking confirmations on WhatsApp."}
               </p>
