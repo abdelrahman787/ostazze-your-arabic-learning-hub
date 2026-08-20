@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { MessageCircle, Loader2 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
-import DialCodeSelect from "@/components/DialCodeSelect";
+import DialCodeSelect, { DIAL_CODES } from "@/components/DialCodeSelect";
 
 /**
  * Asks any signed-in user without a WhatsApp number to add one,
@@ -18,6 +18,12 @@ const WhatsAppNumberGate = () => {
   const [phone, setPhone] = useState("");
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+
+  const selected = DIAL_CODES.find((c) => c.code === dial) || DIAL_CODES[0];
+  const fullNumber = useMemo(() => {
+    const local = phone.replace(/[^0-9]/g, "").replace(/^0+/, "");
+    return local ? `+${dial} ${local}` : "";
+  }, [phone, dial]);
 
   useEffect(() => {
     if (!isLoggedIn || !user) return;
