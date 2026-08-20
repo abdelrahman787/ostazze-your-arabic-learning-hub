@@ -43,8 +43,9 @@ const WhatsAppNumberGate = () => {
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const digits = phone.replace(/[^0-9]/g, "");
-    if (digits.length < 8) {
+    const local = phone.replace(/[^0-9]/g, "").replace(/^0+/, "");
+    const digits = local.startsWith(dial) ? local : `${dial}${local}`;
+    if (local.length < 6 || digits.length < 8) {
       setError(isAr ? "أدخل رقم واتساب صحيح بصيغة دولية" : "Enter a valid WhatsApp number in international format");
       return;
     }
