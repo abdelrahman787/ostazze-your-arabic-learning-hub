@@ -89,19 +89,30 @@ const WhatsAppNumberGate = () => {
             : "We use WhatsApp to send booking confirmations and session links. Pick your country code, then type your number."}
         </p>
         <form onSubmit={submit} className="space-y-3">
-          <div className="flex gap-2" dir="ltr">
+          <div className="flex gap-2 items-center" dir="ltr">
             <DialCodeSelect value={dial} onChange={setDial} />
-            <input
-              type="tel"
-              inputMode="tel"
-              dir="ltr"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              placeholder="5X XXX XXXX"
-              className="input-base flex-1"
-              required
-            />
+            <div className="relative flex-1">
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm font-bold text-muted-foreground select-none">
+                +{dial}
+              </span>
+              <input
+                type="tel"
+                inputMode="tel"
+                dir="ltr"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="5X XXX XXXX"
+                className="input-base w-full !pl-[calc(1ch_*_0.6_+_2.5rem)]"
+                required
+              />
+            </div>
           </div>
+          {fullNumber && (
+            <p className="text-xs text-muted-foreground text-center" dir="ltr">
+              {isAr ? "الرقم الكامل: " : "Full number: "}
+              <span className="font-semibold text-foreground">{fullNumber}</span>
+            </p>
+          )}
           {error && (
             <p role="alert" className="text-destructive text-sm">
               {error}
