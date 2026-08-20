@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { lovable } from "@/integrations/lovable/index";
 import PageHelmet from "@/components/PageHelmet";
 import { supabase } from "@/integrations/supabase/client";
+import DialCodeSelect from "@/components/DialCodeSelect";
 
 const getPasswordStrength = (pw: string): { level: number; label: string; color: string } => {
   if (pw.length < 6) return { level: 0, label: "", color: "" };
