@@ -31,6 +31,7 @@ const IndexBelowFold = () => {
   const { t, d, lang } = useLanguage();
   const isReduced = useReducedMotion();
   const appleMotionLite = typeof document !== "undefined" && document.documentElement.dataset.appleMotionLite === "1";
+  const registeredStudents = getRegisteredStudents();
   const howStepsRef = useRef<HTMLDivElement>(null);
   const howStepsInView = useInView(howStepsRef, { once: true, amount: 0.2 });
   const [playHowSteps, setPlayHowSteps] = useState(false);
