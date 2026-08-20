@@ -309,8 +309,8 @@ const IndexBelowFold = () => {
         </div>
       </section>
 
-      {/* Trust banner — Academic editorial (dark stats + light logos) */}
-      <section className="relative py-20 md:py-24 overflow-hidden bg-section-alt">
+      {/* Global platform banner — Earth connected through Ostaze */}
+      <section className="relative py-16 md:py-24 overflow-hidden bg-section-alt">
         <div
           className="absolute inset-0 pointer-events-none -z-10"
           style={{
@@ -331,19 +331,12 @@ const IndexBelowFold = () => {
             }}
           >
             <div className="grid lg:grid-cols-12">
-              {/* Left: Dark stats panel */}
-              <div
-                className="lg:col-span-5 relative overflow-hidden p-8 lg:p-14 flex flex-col justify-center text-white"
-                style={{
-                  background:
-                    "linear-gradient(160deg, hsl(222 47% 11%) 0%, hsl(222 47% 8%) 100%)",
-                }}
-              >
+              {/* Left: Headline + CTA */}
+              <div className="lg:col-span-5 relative overflow-hidden p-8 lg:p-14 flex flex-col justify-center text-white" style={{ background: "linear-gradient(160deg, hsl(222 47% 11%) 0%, hsl(222 47% 8%) 100%)" }}>
                 <div
                   className="absolute top-0 end-0 w-56 h-56 rounded-full pointer-events-none"
                   style={{
-                    background:
-                      "radial-gradient(50% 50% at 50% 50%, hsl(14 91% 50% / 0.18) 0%, hsl(14 91% 50% / 0.09) 45%, transparent 72%)",
+                    background: "radial-gradient(50% 50% at 50% 50%, hsl(14 91% 50% / 0.18) 0%, hsl(14 91% 50% / 0.09) 45%, transparent 72%)",
                     transform: "translate(30%, -30%) scale(1.6)",
                   }}
                   aria-hidden="true"
@@ -351,194 +344,62 @@ const IndexBelowFold = () => {
                 <div
                   className="absolute bottom-0 start-0 w-48 h-48 rounded-full pointer-events-none"
                   style={{
-                    background:
-                      "radial-gradient(50% 50% at 50% 50%, hsl(38 92% 55% / 0.10) 0%, hsl(38 92% 55% / 0.05) 45%, transparent 72%)",
+                    background: "radial-gradient(50% 50% at 50% 50%, hsl(38 92% 55% / 0.10) 0%, hsl(38 92% 55% / 0.05) 45%, transparent 72%)",
                     transform: "translate(-30%, 30%) scale(1.6)",
                   }}
                   aria-hidden="true"
                 />
-
                 <div className="relative z-10">
-                  <span className="inline-block px-4 py-1.5 rounded-full border border-white/15 text-white/70 text-[11px] font-semibold mb-8 uppercase tracking-[0.2em]">
-                    {lang === "ar" ? "تميّز أكاديمي" : "Education Excellence"}
+                  <span className="inline-block px-4 py-1.5 rounded-full border border-white/15 text-white/70 text-[11px] font-semibold mb-6 uppercase tracking-[0.2em]">
+                    {lang === "ar" ? "منصة واحدة" : "One Platform"}
                   </span>
-
-                  <div className="space-y-7">
-                    <div className="flex items-start gap-5 group">
-                      <div
-                        className="text-5xl font-black leading-none transition-transform group-hover:scale-110 duration-300"
-                        style={{ color: "hsl(14 91% 55%)" }}
-                      >
-                        12k+
-                      </div>
-                      <div>
-                        <h4 className="text-lg font-bold mb-1">
-                          {lang === "ar" ? "طالب نشط" : "Active students"}
-                        </h4>
-                        <p className="text-white/55 text-sm leading-relaxed">
-                          {lang === "ar"
-                            ? "طلاب من الخليج يبنون مستقبلهم معنا"
-                            : "GCC students building their future with us"}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="h-px bg-white/10 w-full" />
-
-                    <div className="flex items-start gap-5 group">
-                      <div
-                        className="text-5xl font-black leading-none transition-transform group-hover:scale-110 duration-300"
-                        style={{ color: "hsl(14 91% 55%)" }}
-                      >
-                        98%
-                      </div>
-                      <div>
-                        <h4 className="text-lg font-bold mb-1">
-                          {lang === "ar" ? "نسبة الرضا" : "Satisfaction rate"}
-                        </h4>
-                        <p className="text-white/55 text-sm leading-relaxed">
-                          {lang === "ar"
-                            ? "أعلى معدل نجاح ورضا للطلاب"
-                            : "Highest satisfaction rate in student success"}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-10 flex items-center gap-3 text-sm text-white/60">
-                    <div className="flex -space-x-2 rtl:space-x-reverse">
-                      <div className="w-8 h-8 rounded-full border-2 border-slate-900 bg-slate-600" />
-                      <div className="w-8 h-8 rounded-full border-2 border-slate-900 bg-slate-500" />
-                      <div className="w-8 h-8 rounded-full border-2 border-slate-900 bg-slate-400" />
-                    </div>
-                    <span>
-                      {lang === "ar"
-                        ? "انضم إلى آلاف الطلاب الذين يتعلمون مع أفضل المعلمين في استاذي"
-                        : "Join thousands of top students today"}
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right: Headline + logos */}
-              <div className="lg:col-span-7 p-8 lg:p-14 flex flex-col justify-center">
-                <div className="mb-10">
-                  <h2 className="text-3xl lg:text-4xl font-black text-foreground leading-tight mb-4">
-                    {lang === "ar" ? "طلابنا ملتحقون " : "Our students study at "}
+                  <h2 className="text-3xl lg:text-4xl font-black leading-tight mb-4">
+                    {lang === "ar" ? "اكتب مسارك الأكاديمي" : "Shape Your Academic Journey"}
                     <span
-                      className="bg-clip-text text-transparent"
-                      style={{
-                        backgroundImage:
-                          "linear-gradient(90deg, hsl(var(--primary)), hsl(38 92% 55%))",
-                      }}
+                      className="block bg-clip-text text-transparent mt-1"
+                      style={{ backgroundImage: "linear-gradient(90deg, hsl(var(--primary)), hsl(38 92% 55%))" }}
                     >
-                      {lang === "ar" ? "بأعرق الجامعات" : "top-tier universities"}
+                      {lang === "ar" ? "من أي مكان في العالم" : "From Anywhere in the World"}
                     </span>
                   </h2>
-                  <p className="text-muted-foreground max-w-xl leading-relaxed text-sm md:text-base">
+                  <p className="text-white/70 leading-relaxed text-sm md:text-base mb-8">
                     {lang === "ar"
-                      ? "طلابنا مقبولون في أعرق المؤسسات الأكاديمية في السعودية، الإمارات، الكويت وقطر."
-                      : "Our students are accepted at the most prestigious academic institutions across KSA, UAE, Kuwait and Qatar."}
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-3 gap-4 md:gap-6">
-                  {[
-                    { src: uniKsu.url, alt: "King Saud University" },
-                    { src: uniKfupm.url, alt: "KFUPM" },
-                    { src: uniKhalifa.url, alt: "Khalifa University" },
-                    { src: uniZayed.url, alt: "Zayed University" },
-                    { src: uniQatar.url, alt: "Qatar University" },
-                    { src: uniHbku.url, alt: "HBKU" },
-                  ].map((u) => (
-                    <div
-                      key={u.alt}
-                      className="h-16 md:h-20 rounded-xl border border-border/60 bg-background/60 flex items-center justify-center p-3 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-all duration-500"
-                    >
-                      <img
-                        src={u.src}
-                        alt={u.alt}
-                        loading="lazy"
-                        decoding="async"
-                        width={160}
-                        height={80}
-                        className="max-h-full max-w-full object-contain"
-                      />
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mt-10 pt-6 border-t border-border/60 flex items-center justify-between gap-4">
-                  <p className="text-sm text-muted-foreground">
-                    {lang === "ar"
-                      ? "مستقبلك الأكاديمي يبدأ من هنا"
-                      : "Your academic future starts here"}
+                      ? "استاذي تربطك بأفضل المعلمين والمدربين عبر منصة تعليمية واحدة، لتحقق أهدافك الأكاديمية بثقة ومرونة."
+                      : "OSTAZZE connects you with top teachers and trainers through one seamless learning platform, so you can reach your academic goals with confidence and flexibility."}
                   </p>
                   <Link
                     to="/universities"
-                    className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold text-primary-foreground transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
+                    className="group inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold text-primary-foreground transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl w-fit"
                     style={{
-                      background:
-                        "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(24 95% 55%) 100%)",
-                      boxShadow:
-                        "0 10px 30px -10px hsl(var(--primary) / 0.55), inset 0 1px 0 hsl(0 0% 100% / 0.25)",
+                      background: "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(24 95% 55%) 100%)",
+                      boxShadow: "0 10px 30px -10px hsl(var(--primary) / 0.55), inset 0 1px 0 hsl(0 0% 100% / 0.25)",
                     }}
                   >
                     <GraduationCap className="w-4 h-4" />
-                    <span>
-                      {lang === "ar" ? "تصفح كل الجامعات" : "Browse all universities"}
-                    </span>
+                    <span>{lang === "ar" ? "ابدأ رحلتك" : "Start your journey"}</span>
                     <ArrowLeft className="w-4 h-4 rtl:rotate-180 transition-transform group-hover:-translate-x-0.5 rtl:group-hover:translate-x-0.5" />
                   </Link>
                 </div>
               </div>
+
+              {/* Right: Earth platform image */}
+              <div className="lg:col-span-7 relative min-h-[320px] lg:min-h-[480px] overflow-hidden bg-[hsl(222_47%_8%)]">
+                <img
+                  src={earthPlatformImg}
+                  alt={lang === "ar" ? "منصة استاذي تربط الطلاب والمعلمين حول العالم" : "Ostaze platform connecting students and teachers around the world"}
+                  width={1440}
+                  height={768}
+                  loading="lazy"
+                  decoding="async"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to left, transparent 60%, hsl(222 47% 8% / 0.7) 100%)" }} />
+              </div>
             </div>
           </motion.div>
-
-          <div className="mt-20 md:mt-24">
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-              <h2 className="text-3xl font-extrabold mb-2">{t("testimonials_title")}</h2>
-              <p className="text-muted-foreground">{t("testimonials_subtitle")}</p>
-            </motion.div>
-            <motion.div
-              className="grid md:grid-cols-3 gap-5"
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.15 }}
-              variants={{ hidden: {}, show: { transition: { staggerChildren: 0.22, delayChildren: 0.1 } } }}
-            >
-              {mockTestimonials.map((tst, i) => (
-                <motion.div
-                  key={i}
-                  variants={{
-                    hidden: { opacity: 0, y: 30, scale: 0.95 },
-                    show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
-                  }}
-                  className="card-base p-6 hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
-                >
-                  <div className="flex gap-0.5 mb-3">
-                    {[1, 2, 3, 4, 5].map((n) => (
-                      <Star key={n} size={14} className="fill-warning text-warning" />
-                    ))}
-                  </div>
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-4">"{d(tst.quote)}"</p>
-                  <div className="flex items-center gap-3">
-                    {(tst as any).avatar ? (
-                      <img src={(tst as any).avatar} alt={d(tst.name)} loading="lazy" decoding="async" width={40} height={40} className="w-10 h-10 rounded-full object-cover" />
-                    ) : (
-                      <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold">{d(tst.name).charAt(0)}</div>
-                    )}
-                    <div>
-                      <div className="font-bold text-sm">{d(tst.name)}</div>
-                      <div className="text-muted-foreground text-xs">{d(tst.university)}</div>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
         </div>
       </section>
+
 
       {/* Bottom CTA */}
       <section className="py-20 md:py-24 px-4 lg:px-8 bg-section-alt">
