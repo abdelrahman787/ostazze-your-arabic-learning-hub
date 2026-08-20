@@ -443,7 +443,7 @@ const translations = {
   lesson_time: { ar: "الوقت", en: "Time" },
 
   // WhatsApp
-  whatsapp_msg: { ar: "مرحباً، أريد الاستفسار عن خدمات أسطازي", en: "Hello, I'd like to inquire about Ostaze services" },
+  whatsapp_msg: { ar: "مرحباً، أريد الاستفسار عن خدمات استاذي", en: "Hello, I'd like to inquire about Ostaze services" },
   whatsapp_tutor_title: { ar: "لم تجد المعلم المناسب؟", en: "Looking for a specific teacher?" },
   whatsapp_tutor_desc: { ar: "تواصل معنا على واتساب وسنساعدك في إيجاد معلم أو مدرب مناسب لك.", en: "WhatsApp us and we'll help you find a tutor or teacher for your needs." },
   whatsapp_tutor_cta: { ar: "تواصل معنا على واتساب", en: "Chat on WhatsApp" },
