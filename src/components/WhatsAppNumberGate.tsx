@@ -78,20 +78,23 @@ const WhatsAppNumberGate = () => {
         </div>
         <p className="text-sm text-muted-foreground mb-4">
           {isAr
-            ? "نحتاج رقم واتساب لإرسال تأكيدات الحجز وروابط الحصص. اكتب الرقم بصيغة دولية مثل ٩٦٦٥٠١٢٣٤٥٦٧."
-            : "We use WhatsApp to send booking confirmations and session links. Use international format, e.g. 966501234567."}
+            ? "نحتاج رقم واتساب لإرسال تأكيدات الحجز وروابط الحصص. اختر مفتاح الدولة ثم اكتب رقمك."
+            : "We use WhatsApp to send booking confirmations and session links. Pick your country code, then type your number."}
         </p>
         <form onSubmit={submit} className="space-y-3">
-          <input
-            type="tel"
-            inputMode="tel"
-            dir="ltr"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            placeholder="+966 5X XXX XXXX"
-            className="input-base"
-            required
-          />
+          <div className="flex gap-2" dir="ltr">
+            <DialCodeSelect value={dial} onChange={setDial} />
+            <input
+              type="tel"
+              inputMode="tel"
+              dir="ltr"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder="5X XXX XXXX"
+              className="input-base flex-1"
+              required
+            />
+          </div>
           {error && (
             <p role="alert" className="text-destructive text-sm">
               {error}
