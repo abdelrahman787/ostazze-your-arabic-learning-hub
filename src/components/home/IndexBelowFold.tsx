@@ -7,6 +7,7 @@ import { MotionConfig, motion, useInView, useReducedMotion } from "framer-motion
 import { useRef, useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import OurTeam from "@/components/OurTeam";
+import { getRegisteredStudents } from "@/lib/studentCount";
 
 import howStep1Asset from "@/assets/how-step-1.webp.asset.json";
 import howStep2Asset from "@/assets/how-step-2.webp.asset.json";
