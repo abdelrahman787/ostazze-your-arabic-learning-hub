@@ -372,7 +372,7 @@ const IndexBelowFold = () => {
                         className="text-5xl font-black leading-none transition-transform group-hover:scale-110 duration-300"
                         style={{ color: "hsl(14 91% 55%)" }}
                       >
-                        12k+
+                        3326
                       </div>
                       <div>
                         <h4 className="text-lg font-bold mb-1">
@@ -380,8 +380,8 @@ const IndexBelowFold = () => {
                         </h4>
                         <p className="text-white/55 text-sm leading-relaxed">
                           {lang === "ar"
-                            ? "طلاب من الخليج يبنون مستقبلهم معنا"
-                            : "GCC students building their future with us"}
+                            ? "طلاب من جميع انحاء العالم يبنون مستقبلهم معنا"
+                            : "Students from all over the world building their future with us"}
                         </p>
                       </div>
                     </div>
