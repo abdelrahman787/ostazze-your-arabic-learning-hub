@@ -58,17 +58,26 @@ const Register = () => {
       setError(lang === "ar" ? "يجب الموافقة على الشروط والأحكام" : "You must agree to the terms and conditions");
       return;
     }
+    const phoneDigits = phone.replace(/[^0-9]/g, "");
+    if (phoneDigits.length < 8 || phoneDigits.length > 15) {
+      setError(lang === "ar"
+        ? "أدخل رقم واتساب صحيح بصيغة دولية (مثال: 966501234567)"
+        : "Enter a valid WhatsApp number in international format (e.g. 966501234567)");
+      return;
+    }
     setLoading(true);
     setError("");
     const result = await register(email, password, fullName, "student", timezone);
     if (result.error) {
       setError(result.error);
     } else {
-      // Persist country on profile (best-effort; CountryGate will catch if it fails)
+      // Persist country + WhatsApp number on profile (best-effort)
       const { data: sess } = await supabase.auth.getSession();
       const uid = sess.session?.user?.id;
       if (uid) {
-        await supabase.from("profiles").update({ country }).eq("user_id", uid);
+        await supabase.from("profiles").update({ country, phone: phoneDigits }).eq("user_id", uid);
+        // Fire the one-time welcome WhatsApp message
+        supabase.functions.invoke("send-welcome-whatsapp", { body: { phone: phoneDigits, lang } });
       }
       setSuccess(true);
     }
