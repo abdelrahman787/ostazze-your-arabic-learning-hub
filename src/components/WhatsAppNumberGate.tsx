@@ -3,6 +3,7 @@ import { MessageCircle, Loader2 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
+import DialCodeSelect from "@/components/DialCodeSelect";
 
 /**
  * Asks any signed-in user without a WhatsApp number to add one,
@@ -13,6 +14,7 @@ const WhatsAppNumberGate = () => {
   const { lang } = useLanguage();
   const isAr = lang === "ar";
   const [open, setOpen] = useState(false);
+  const [dial, setDial] = useState("966");
   const [phone, setPhone] = useState("");
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
@@ -42,8 +44,9 @@ const WhatsAppNumberGate = () => {
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const digits = phone.replace(/[^0-9]/g, "");
-    if (digits.length < 8) {
+    const local = phone.replace(/[^0-9]/g, "").replace(/^0+/, "");
+    const digits = local.startsWith(dial) ? local : `${dial}${local}`;
+    if (local.length < 6 || digits.length < 8) {
       setError(isAr ? "أدخل رقم واتساب صحيح بصيغة دولية" : "Enter a valid WhatsApp number in international format");
       return;
     }
@@ -76,20 +79,23 @@ const WhatsAppNumberGate = () => {
         </div>
         <p className="text-sm text-muted-foreground mb-4">
           {isAr
-            ? "نحتاج رقم واتساب لإرسال تأكيدات الحجز وروابط الحصص. اكتب الرقم بصيغة دولية مثل ٩٦٦٥٠١٢٣٤٥٦٧."
-            : "We use WhatsApp to send booking confirmations and session links. Use international format, e.g. 966501234567."}
+            ? "نحتاج رقم واتساب لإرسال تأكيدات الحجز وروابط الحصص. اختر مفتاح الدولة ثم اكتب رقمك."
+            : "We use WhatsApp to send booking confirmations and session links. Pick your country code, then type your number."}
         </p>
         <form onSubmit={submit} className="space-y-3">
-          <input
-            type="tel"
-            inputMode="tel"
-            dir="ltr"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            placeholder="+966 5X XXX XXXX"
-            className="input-base"
-            required
-          />
+          <div className="flex gap-2" dir="ltr">
+            <DialCodeSelect value={dial} onChange={setDial} />
+            <input
+              type="tel"
+              inputMode="tel"
+              dir="ltr"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder="5X XXX XXXX"
+              className="input-base flex-1"
+              required
+            />
+          </div>
           {error && (
             <p role="alert" className="text-destructive text-sm">
               {error}
