@@ -13,6 +13,7 @@ const WhatsAppNumberGate = () => {
   const { lang } = useLanguage();
   const isAr = lang === "ar";
   const [open, setOpen] = useState(false);
+  const [dial, setDial] = useState("966");
   const [phone, setPhone] = useState("");
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
