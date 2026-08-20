@@ -55,7 +55,7 @@ const DialCodeSelect = ({
       value={value}
       onChange={(e) => onChange(e.target.value)}
       aria-label={isAr ? "مفتاح الدولة" : "Country code"}
-      className={`input-base w-[105px] shrink-0 !px-2 text-sm font-semibold ${className}`}
+      className={`input-base w-[92px] sm:w-[105px] shrink-0 !px-2 text-sm font-semibold ${className}`}
     >
       {DIAL_CODES.map((c) => (
         <option key={c.iso} value={c.code}>
