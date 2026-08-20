@@ -376,7 +376,7 @@ const IndexBelowFold = () => {
                       </div>
                       <div>
                         <h4 className="text-lg font-bold mb-1">
-                          {lang === "ar" ? "طالب نشط" : "Active students"}
+                          {lang === "ar" ? "طالب مسجل" : "Registered students"}
                         </h4>
                         <p className="text-white/55 text-sm leading-relaxed">
                           {lang === "ar"
