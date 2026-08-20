@@ -38,6 +38,11 @@ const Register = () => {
   // Defaults removed from UI; Egypt is the default market.
   const timezone = "Asia/Riyadh";
   const country = "EG";
+  const selectedDial = DIAL_CODES.find((c) => c.code === dial) || DIAL_CODES[0];
+  const fullPhoneDisplay = useMemo(() => {
+    const local = phone.replace(/[^0-9]/g, "").replace(/^0+/, "");
+    return local ? `+${dial} ${local}` : "";
+  }, [phone, dial]);
   // Honeypot — bots fill this; real users never see it.
   const [website, setWebsite] = useState("");
 
