@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Eye, EyeOff, User, Mail, Lock, GraduationCap, Loader2, BookOpen, Users } from "lucide-react";
+import { Eye, EyeOff, User, Mail, Lock, GraduationCap, Loader2, BookOpen, Users, Phone } from "lucide-react";
 import { motion } from "framer-motion";
 import { lovable } from "@/integrations/lovable/index";
 import PageHelmet from "@/components/PageHelmet";
