@@ -1165,10 +1165,32 @@ const Admin = () => {
                   className="input-base"
                   placeholder="اكتب الاسم بأي لغة — سيُترجم تلقائيًا"
                 />
-                <p className="text-xs text-muted-foreground mt-1.5">
-                  يظهر تلقائيًا: {editTeacherForm.full_name || "—"} / <span dir="ltr">{editTeacherForm.full_name_en || "—"}</span>
-                </p>
+                <div className="flex items-center justify-between gap-3 mt-1.5 flex-wrap">
+                  <p className="text-xs text-muted-foreground">
+                    يظهر تلقائيًا: {editTeacherForm.full_name || "—"} / <span dir="ltr">{editTeacherForm.full_name_en || "—"}</span>
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setManualName((v) => !v)}
+                    className="text-xs font-bold text-primary hover:underline"
+                  >
+                    {manualName ? "إخفاء التعديل اليدوي" : "تعديل الاسم يدويًا (عربي/إنجليزي)"}
+                  </button>
+                </div>
+                {manualName && (
+                  <div className="grid sm:grid-cols-2 gap-3 mt-3">
+                    <div>
+                      <label className="block text-xs font-bold mb-1">الاسم (عربي)</label>
+                      <input value={editTeacherForm.full_name} onChange={(e) => setEditTeacherForm((f) => ({ ...f, full_name: e.target.value }))} className="input-base" />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold mb-1">الاسم (إنجليزي)</label>
+                      <input dir="ltr" value={editTeacherForm.full_name_en} onChange={(e) => setEditTeacherForm((f) => ({ ...f, full_name_en: e.target.value }))} className="input-base" />
+                    </div>
+                  </div>
+                )}
               </div>
+
 
               <div>
                 <label className="block text-sm font-bold mb-1.5">رقم الهاتف</label>
