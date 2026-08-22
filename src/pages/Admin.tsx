@@ -168,6 +168,7 @@ const Admin = () => {
     university: "", university_en: "", major: "", major_en: "", price: "", subjects: "", subjects_en: "", verified: false,
     avatar_url: "",
   });
+  const [manualName, setManualName] = useState(false);
   const [savingTeacher, setSavingTeacher] = useState(false);
   const [uploadingAvatar, setUploadingAvatar] = useState(false);
 
