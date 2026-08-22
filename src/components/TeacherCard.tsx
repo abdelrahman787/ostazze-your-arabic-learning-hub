@@ -5,6 +5,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useBilingual } from "@/hooks/useBilingual";
 import { getTeacherMajor } from "@/lib/teacherMajors";
 import { getTeacherAvatar } from "@/lib/teacherAvatars";
+import { resolveDisplayName } from "@/lib/teacherNameTranslate";
 
 export interface TeacherData {
   user_id: string;
@@ -23,36 +24,16 @@ export interface TeacherData {
   verified: boolean;
 }
 
-// Basic Arabic → English transliteration fallback for names not stored bilingually.
-const AR_MAP: Record<string, string> = {
-  "ا": "a", "أ": "a", "إ": "i", "آ": "aa", "ب": "b", "ت": "t", "ث": "th",
-  "ج": "j", "ح": "h", "خ": "kh", "د": "d", "ذ": "dh", "ر": "r", "ز": "z",
-  "س": "s", "ش": "sh", "ص": "s", "ض": "d", "ط": "t", "ظ": "z", "ع": "a",
-  "غ": "gh", "ف": "f", "ق": "q", "ك": "k", "ل": "l", "م": "m", "ن": "n",
-  "ه": "h", "و": "w", "ي": "y", "ى": "a", "ة": "h", "ء": "", "ؤ": "o", "ئ": "e",
-};
-
-const transliterate = (name: string) => {
-  const out = name
-    .split("")
-    .map((ch) => (AR_MAP[ch] !== undefined ? AR_MAP[ch] : ch))
-    .join("");
-  return out
-    .split(/\s+/)
-    .filter(Boolean)
-    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-    .join(" ");
-};
-
 const TeacherCard = ({ teacher, index = 0 }: { teacher: TeacherData; index?: number }) => {
   const { t, lang } = useLanguage();
   const { b } = useBilingual();
 
-  const rawName = b(teacher.full_name, teacher.full_name_en, t("the_teacher"));
-  const displayName =
-    lang === "en" && !teacher.full_name_en && /[\u0600-\u06FF]/.test(rawName)
-      ? transliterate(rawName)
-      : rawName;
+  const displayName = resolveDisplayName(
+    lang === "en" ? "en" : "ar",
+    teacher.full_name,
+    teacher.full_name_en,
+    t("the_teacher")
+  );
   const initials = displayName
     .split(/\s+/)
     .slice(0, 2)

@@ -37,24 +37,7 @@ interface AvailSlot {
   end_time: string;
 }
 
-// Arabic → English transliteration fallback for names not stored bilingually.
-const AR_MAP: Record<string, string> = {
-  "ا": "a", "أ": "a", "إ": "i", "آ": "aa", "ب": "b", "ت": "t", "ث": "th",
-  "ج": "j", "ح": "h", "خ": "kh", "د": "d", "ذ": "dh", "ر": "r", "ز": "z",
-  "س": "s", "ش": "sh", "ص": "s", "ض": "d", "ط": "t", "ظ": "z", "ع": "a",
-  "غ": "gh", "ف": "f", "ق": "q", "ك": "k", "ل": "l", "م": "m", "ن": "n",
-  "ه": "h", "و": "w", "ي": "y", "ى": "a", "ة": "h", "ء": "", "ؤ": "o", "ئ": "e",
-};
-
-const transliterate = (name: string) =>
-  name
-    .split("")
-    .map((ch) => (AR_MAP[ch] !== undefined ? AR_MAP[ch] : ch))
-    .join("")
-    .split(/\s+/)
-    .filter(Boolean)
-    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-    .join(" ");
+import { resolveDisplayName } from "@/lib/teacherNameTranslate";
 
 const TeacherProfile = () => {
   const { id } = useParams();
@@ -130,11 +113,12 @@ const TeacherProfile = () => {
     );
   }
 
-  const rawName = b(teacher.full_name, teacher.full_name_en, t("the_teacher"));
-  const displayName =
-    lang === "en" && !teacher.full_name_en && /[\u0600-\u06FF]/.test(rawName)
-      ? transliterate(rawName)
-      : rawName;
+  const displayName = resolveDisplayName(
+    lang === "en" ? "en" : "ar",
+    teacher.full_name,
+    teacher.full_name_en,
+    t("the_teacher")
+  );
   const displayBio = b(teacher.bio, teacher.bio_en);
   const displaySubjects = bArr(teacher.subjects, teacher.subjects_en);
   const displayMajor =
