@@ -186,7 +186,7 @@ const TeacherCoursesPicker = ({ valueAr, valueEn, onChange }: Props) => {
             add(manual.ar, manual.en || manual.ar);
             setManual({ ar: "", en: "" });
           }}
-          className="btn-secondary flex items-center justify-center gap-1.5 px-4"
+          className="btn-outline flex items-center justify-center gap-1.5 px-4"
         >
           <Plus size={14} /> إضافة
         </button>
