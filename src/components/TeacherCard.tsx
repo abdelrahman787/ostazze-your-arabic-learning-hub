@@ -17,6 +17,8 @@ export interface TeacherData {
   subjects_en?: string[];
   university: string | null;
   university_en?: string | null;
+  major?: string | null;
+  major_en?: string | null;
   price: number;
   verified: boolean;
 }
@@ -101,7 +103,8 @@ const TeacherCard = ({ teacher, index = 0 }: { teacher: TeacherData; index?: num
         <div className="flex items-center gap-1.5 mb-4 text-primary">
           <BookOpen size={13} />
           <span className="text-xs font-semibold">
-            {getTeacherMajor(teacher.user_id, lang === "en" ? "en" : "ar")}
+            {b(teacher.major, teacher.major_en) ||
+              getTeacherMajor(teacher.user_id, lang === "en" ? "en" : "ar")}
           </span>
         </div>
 
