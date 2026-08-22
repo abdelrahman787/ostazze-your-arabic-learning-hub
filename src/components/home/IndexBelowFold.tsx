@@ -360,6 +360,7 @@ const IndexBelowFold = () => {
               { flag: "🇪🇸", ar: "الإسبانية", en: "Spanish", desc: "DELE prep" },
               { flag: "🇫🇷", ar: "الفرنسية", en: "French", desc: "DELF prep" },
               { flag: "🇹🇷", ar: "التركية", en: "Turkish", desc: "A1 – B1" },
+              { flag: "🇮🇹", ar: "الإيطالية", en: "Italian", desc: "CELI prep" },
             ].map((l) => {
               const name = lang === "ar" ? l.ar : l.en;
               return (
