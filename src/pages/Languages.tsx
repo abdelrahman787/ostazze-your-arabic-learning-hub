@@ -107,15 +107,15 @@ const Languages = () => {
         }
         jsonLd={[
           breadcrumbJsonLd([
-            { name: ar ? "الرئيسية" : "Home", url: "https://ostaze.com/" },
-            { name: ar ? "اللغات" : "Languages", url: "https://ostaze.com/languages" },
+            { name: ar ? "الرئيسية" : "Home", path: "/" },
+            { name: ar ? "اللغات" : "Languages", path: "/languages" },
           ]),
-          collectionPageJsonLd(
-            ar ? "دورات اللغات" : "Language Courses",
-            ar ? "دورات لغات مباشرة أونلاين" : "Live online language courses",
-            "https://ostaze.com/languages",
-            LANGUAGES.map((l) => (ar ? l.ar : l.en)),
-          ),
+          collectionPageJsonLd({
+            name: ar ? "دورات اللغات" : "Language Courses",
+            description: ar ? "دورات لغات مباشرة أونلاين" : "Live online language courses",
+            path: "/languages",
+            lang: ar ? "ar" : "en",
+          }),
           faqJsonLd(faq),
         ]}
       />
