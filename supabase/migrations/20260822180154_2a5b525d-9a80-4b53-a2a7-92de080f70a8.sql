@@ -1,0 +1,1 @@
+ALTER TABLE public.teacher_profiles ADD COLUMN IF NOT EXISTS major text, ADD COLUMN IF NOT EXISTS major_en text;
