@@ -138,7 +138,20 @@ const TeacherCoursesPicker = ({ valueAr, valueEn, onChange }: Props) => {
       </div>
 
       {query.trim().length >= 2 && (
-        <div className="max-h-56 overflow-y-auto rounded-xl border-2 border-border divide-y divide-border">
+        <div className="rounded-xl border-2 border-border">
+          <div className="flex items-center justify-between gap-2 px-3 py-2 border-b-2 border-border bg-muted/40">
+            <span className="text-[0.7rem] text-muted-foreground">
+              اختر أكثر من مقرر — القائمة تبقى مفتوحة حتى تنتهي
+            </span>
+            <button
+              type="button"
+              onClick={() => setQuery("")}
+              className="text-[0.7rem] font-bold text-primary hover:underline"
+            >
+              إغلاق القائمة
+            </button>
+          </div>
+          <div className="max-h-56 overflow-y-auto divide-y divide-border">
           {results.length === 0 ? (
             <p className="p-3 text-xs text-muted-foreground">لا توجد نتائج — يمكنك إضافة المقرر يدوياً بالأسفل.</p>
           ) : (
@@ -146,10 +159,7 @@ const TeacherCoursesPicker = ({ valueAr, valueEn, onChange }: Props) => {
               <button
                 key={c.key}
                 type="button"
-                onClick={() => {
-                  add(c.ar, c.en);
-                  setQuery("");
-                }}
+                onClick={() => add(c.ar, c.en)}
                 className="w-full text-start p-2.5 hover:bg-muted/60 transition flex items-center justify-between gap-3"
               >
                 <span className="min-w-0">
@@ -162,6 +172,7 @@ const TeacherCoursesPicker = ({ valueAr, valueEn, onChange }: Props) => {
               </button>
             ))
           )}
+          </div>
         </div>
       )}
 
