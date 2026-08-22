@@ -172,6 +172,7 @@ const TeacherCoursesPicker = ({ valueAr, valueEn, onChange }: Props) => {
               </button>
             ))
           )}
+          </div>
         </div>
       )}
 
