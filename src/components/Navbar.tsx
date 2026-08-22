@@ -63,6 +63,7 @@ const Navbar = () => {
     { label: t("nav_universities"), path: "/universities", match: ["/universities"] },
     { label: t("nav_categories"), path: "/categories", match: ["/categories", "/subjects"] },
     { label: t("nav_teachers"), path: "/teachers", match: ["/teachers"] },
+    { label: lang === "en" ? "Languages" : "اللغات", path: "/languages", match: ["/languages"] },
   ];
 
 
