@@ -22,6 +22,7 @@ import AdminAutomationDiagnostics from "@/components/AdminAutomationDiagnostics"
 import NoIndex from "@/components/NoIndex";
 import TeacherCoursesPicker from "@/components/admin/TeacherCoursesPicker";
 import { MAJORS } from "@/lib/teacherMajors";
+import { arToEn, enToAr } from "@/lib/teacherNameTranslate";
 
 import { uploadVideoToBunny } from "@/lib/bunnyVideo";
 
