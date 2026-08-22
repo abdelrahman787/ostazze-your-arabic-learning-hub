@@ -431,7 +431,7 @@ const ApplyTutor = () => {
             {T.eyebrow}
           </span>
           <h1 className="mt-4 text-3xl md:text-4xl font-bold text-foreground">
-            انضم إلى فريق أستاذي
+            {isAr ? "Join Us As Tutor\u00a0" : "Join Us As Tutor\u00a0"}
           </h1>
           <p className="mt-3 text-muted-foreground max-w-2xl">{T.lede}</p>
           <ul className="mt-6 grid sm:grid-cols-2 gap-3">
