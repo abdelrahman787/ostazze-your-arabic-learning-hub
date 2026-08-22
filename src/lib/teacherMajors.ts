@@ -1,5 +1,5 @@
 // Deterministic random "main major" per teacher — used for display only.
-const MAJORS: { ar: string; en: string }[] = [
+export const MAJORS: { ar: string; en: string }[] = [
   { ar: "الفيزياء", en: "Physics" },
   { ar: "الرياضيات", en: "Mathematics" },
   { ar: "الديناميكا", en: "Dynamics" },
