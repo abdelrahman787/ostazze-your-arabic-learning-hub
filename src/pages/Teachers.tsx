@@ -55,7 +55,7 @@ const Teachers = () => {
       setLoadingTimeout(false);
       const { data: tps } = await supabase
         .from("teacher_profiles")
-        .select("user_id, subjects, subjects_en, university, university_en, price, verified");
+        .select("user_id, subjects, subjects_en, university, university_en, major, major_en, price, verified");
 
       if (!tps || tps.length === 0) { setLoading(false); return; }
 
@@ -77,6 +77,8 @@ const Teachers = () => {
           subjects_en: (tp as any).subjects_en || [],
           university: tp.university || null,
           university_en: (tp as any).university_en || null,
+          major: (tp as any).major || null,
+          major_en: (tp as any).major_en || null,
           price: tp.price || 0,
           verified: tp.verified || false,
         };

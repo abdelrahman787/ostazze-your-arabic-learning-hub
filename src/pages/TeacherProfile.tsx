@@ -25,6 +25,8 @@ interface TeacherFull {
   subjects_en: string[];
   university: string | null;
   university_en: string | null;
+  major: string | null;
+  major_en: string | null;
   price: number;
   verified: boolean;
 }
@@ -72,7 +74,7 @@ const TeacherProfile = () => {
       setLoading(true);
       const { data: tp } = await supabase
         .from("teacher_profiles")
-        .select("user_id, subjects, subjects_en, university, university_en, price, verified")
+        .select("user_id, subjects, subjects_en, university, university_en, major, major_en, price, verified")
         .eq("user_id", id)
         .single();
 
@@ -92,6 +94,8 @@ const TeacherProfile = () => {
         subjects_en: (tp as any).subjects_en || [],
         university: tp.university || null,
         university_en: (tp as any).university_en || null,
+        major: (tp as any).major || null,
+        major_en: (tp as any).major_en || null,
         price: tp.price || 0,
         verified: tp.verified || false,
       });
@@ -133,7 +137,8 @@ const TeacherProfile = () => {
       : rawName;
   const displayBio = b(teacher.bio, teacher.bio_en);
   const displaySubjects = bArr(teacher.subjects, teacher.subjects_en);
-  const displayMajor = getTeacherMajor(teacher.user_id, lang === "en" ? "en" : "ar");
+  const displayMajor =
+    b(teacher.major, teacher.major_en) || getTeacherMajor(teacher.user_id, lang === "en" ? "en" : "ar");
 
   const facts = [
     { icon: GraduationCap, label: ar ? "التخصص" : "Specialization", value: displayMajor },

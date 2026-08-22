@@ -638,6 +638,8 @@ export type Database = {
         Row: {
           created_at: string
           id: string
+          major: string | null
+          major_en: string | null
           price: number | null
           subjects: string[] | null
           subjects_en: string[] | null
@@ -650,6 +652,8 @@ export type Database = {
         Insert: {
           created_at?: string
           id?: string
+          major?: string | null
+          major_en?: string | null
           price?: number | null
           subjects?: string[] | null
           subjects_en?: string[] | null
@@ -662,6 +666,8 @@ export type Database = {
         Update: {
           created_at?: string
           id?: string
+          major?: string | null
+          major_en?: string | null
           price?: number | null
           subjects?: string[] | null
           subjects_en?: string[] | null

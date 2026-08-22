@@ -35,6 +35,8 @@ interface TeacherRow {
   avatar_url: string | null;
   university: string | null;
   university_en: string | null;
+  major: string | null;
+  major_en: string | null;
   price: number | null;
   subjects: string[];
   subjects_en: string[];
@@ -161,7 +163,7 @@ const Admin = () => {
   const [editTeacher, setEditTeacher] = useState<TeacherRow | null>(null);
   const [editTeacherForm, setEditTeacherForm] = useState({
     full_name: "", full_name_en: "", phone: "", bio: "", bio_en: "",
-    university: "", university_en: "", price: "", subjects: "", subjects_en: "", verified: false,
+    university: "", university_en: "", major: "", major_en: "", price: "", subjects: "", subjects_en: "", verified: false,
     avatar_url: "",
   });
   const [savingTeacher, setSavingTeacher] = useState(false);
@@ -177,6 +179,8 @@ const Admin = () => {
       bio_en: tc.bio_en || "",
       university: tc.university || "",
       university_en: tc.university_en || "",
+      major: tc.major || "",
+      major_en: tc.major_en || "",
       price: tc.price != null ? String(tc.price) : "",
       subjects: (tc.subjects || []).join(", "),
       subjects_en: (tc.subjects_en || []).join(", "),
@@ -206,6 +210,8 @@ const Admin = () => {
     const { error: tErr } = await supabase.from("teacher_profiles").update({
       university: f.university || null,
       university_en: f.university_en || null,
+      major: f.major || null,
+      major_en: f.major_en || null,
       price,
       subjects,
       subjects_en,
@@ -227,6 +233,8 @@ const Admin = () => {
 
       university: f.university || null,
       university_en: f.university_en || null,
+      major: f.major || null,
+      major_en: f.major_en || null,
       price,
       subjects,
       subjects_en,
@@ -253,7 +261,7 @@ const Admin = () => {
     setLoading(true);
     const { data: teacherProfiles } = await supabase
       .from("teacher_profiles")
-      .select("user_id, university, university_en, verified, subjects, subjects_en, price");
+      .select("user_id, university, university_en, major, major_en, verified, subjects, subjects_en, price");
 
     if (!teacherProfiles || teacherProfiles.length === 0) {
       setTeachers([]);
@@ -281,6 +289,8 @@ const Admin = () => {
         avatar_url: profile?.avatar_url || null,
         university: tp.university,
         university_en: tp.university_en ?? null,
+        major: (tp as any).major ?? null,
+        major_en: (tp as any).major_en ?? null,
         price: tp.price ?? null,
         subjects: (tp.subjects as string[]) || [],
         subjects_en: (tp.subjects_en as string[]) || [],
@@ -1161,7 +1171,16 @@ const Admin = () => {
                 <label className="block text-sm font-bold mb-1.5">الجامعة (إنجليزي)</label>
                 <input dir="ltr" value={editTeacherForm.university_en} onChange={(e) => setEditTeacherForm((f) => ({ ...f, university_en: e.target.value }))} className="input-base" />
               </div>
+              <div>
+                <label className="block text-sm font-bold mb-1.5">المجال التخصصي (عربي)</label>
+                <input value={editTeacherForm.major} onChange={(e) => setEditTeacherForm((f) => ({ ...f, major: e.target.value }))} placeholder="مثال: الرياضيات" className="input-base" />
+              </div>
+              <div>
+                <label className="block text-sm font-bold mb-1.5">المجال التخصصي (إنجليزي)</label>
+                <input dir="ltr" value={editTeacherForm.major_en} onChange={(e) => setEditTeacherForm((f) => ({ ...f, major_en: e.target.value }))} placeholder="e.g. Mathematics" className="input-base" />
+              </div>
             </div>
+
             <TeacherCoursesPicker
               valueAr={editTeacherForm.subjects.split(",").map((s) => s.trim()).filter(Boolean)}
               valueEn={editTeacherForm.subjects_en.split(",").map((s) => s.trim()).filter(Boolean)}
