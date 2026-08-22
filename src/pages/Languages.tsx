@@ -64,6 +64,15 @@ const LANGUAGES: LangItem[] = [
     descEn: "Daily-life and study-in-Turkey Turkish with specialised tutors.",
     levels: ["A1", "A2", "B1"],
   },
+  {
+    id: "italian",
+    flag: "🇮🇹",
+    ar: "الإيطالية",
+    en: "Italian",
+    descAr: "محادثة وقواعد وتحضير امتحان CELI مع معلمين متخصصين.",
+    descEn: "Conversation, grammar and CELI exam preparation with specialised tutors.",
+    levels: ["A1", "A2", "B1"],
+  },
 ];
 
 const Languages = () => {
