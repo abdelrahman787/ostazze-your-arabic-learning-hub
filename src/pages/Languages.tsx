@@ -64,6 +64,15 @@ const LANGUAGES: LangItem[] = [
     descEn: "Daily-life and study-in-Turkey Turkish with specialised tutors.",
     levels: ["A1", "A2", "B1"],
   },
+  {
+    id: "italian",
+    flag: "🇮🇹",
+    ar: "الإيطالية",
+    en: "Italian",
+    descAr: "محادثة وقواعد وتحضير امتحان CELI مع معلمين متخصصين.",
+    descEn: "Conversation, grammar and CELI exam preparation with specialised tutors.",
+    levels: ["A1", "A2", "B1"],
+  },
 ];
 
 const Languages = () => {
@@ -133,7 +142,7 @@ const Languages = () => {
       <div className="container py-10">
         <div className="flex items-center justify-center gap-2.5 flex-wrap text-xs mb-10">
           {[
-            { icon: Sparkles, label: ar ? "٥ لغات" : "5 languages" },
+            { icon: Sparkles, label: ar ? "٦ لغات" : "6 languages" },
             { icon: Users, label: ar ? "معلمون متخصصون" : "Specialised tutors" },
             { icon: Clock, label: ar ? "مواعيد مرنة" : "Flexible timing" },
           ].map((s, i) => (
