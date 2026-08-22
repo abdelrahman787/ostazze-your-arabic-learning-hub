@@ -20,6 +20,8 @@ import AdminInvoices from "@/components/AdminInvoices";
 import AdminTutorApplications from "@/components/AdminTutorApplications";
 import AdminAutomationDiagnostics from "@/components/AdminAutomationDiagnostics";
 import NoIndex from "@/components/NoIndex";
+import TeacherCoursesPicker from "@/components/admin/TeacherCoursesPicker";
+
 import { uploadVideoToBunny } from "@/lib/bunnyVideo";
 
 // --- Types ---
@@ -1160,14 +1162,14 @@ const Admin = () => {
                 <input dir="ltr" value={editTeacherForm.university_en} onChange={(e) => setEditTeacherForm((f) => ({ ...f, university_en: e.target.value }))} className="input-base" />
               </div>
             </div>
-            <div>
-              <label className="block text-sm font-bold mb-1.5">المواد (عربي — مفصولة بفاصلة)</label>
-              <input value={editTeacherForm.subjects} onChange={(e) => setEditTeacherForm((f) => ({ ...f, subjects: e.target.value }))} className="input-base" placeholder="رياضيات, فيزياء" />
-            </div>
-            <div>
-              <label className="block text-sm font-bold mb-1.5">المواد (إنجليزي — مفصولة بفاصلة)</label>
-              <input dir="ltr" value={editTeacherForm.subjects_en} onChange={(e) => setEditTeacherForm((f) => ({ ...f, subjects_en: e.target.value }))} className="input-base" placeholder="Math, Physics" />
-            </div>
+            <TeacherCoursesPicker
+              valueAr={editTeacherForm.subjects.split(",").map((s) => s.trim()).filter(Boolean)}
+              valueEn={editTeacherForm.subjects_en.split(",").map((s) => s.trim()).filter(Boolean)}
+              onChange={(ar, en) =>
+                setEditTeacherForm((f) => ({ ...f, subjects: ar.join(", "), subjects_en: en.join(", ") }))
+              }
+            />
+
             <div>
               <label className="block text-sm font-bold mb-1.5">نبذة (عربي)</label>
               <textarea rows={3} value={editTeacherForm.bio} onChange={(e) => setEditTeacherForm((f) => ({ ...f, bio: e.target.value }))} className="input-base resize-none" />
