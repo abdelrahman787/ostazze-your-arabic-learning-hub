@@ -59,6 +59,15 @@ interface LectureRow {
   student_name?: string;
 }
 
+interface StudentRow {
+  user_id: string;
+  full_name: string | null;
+  full_name_en: string | null;
+  phone: string | null;
+  country: string | null;
+  created_at: string;
+}
+
 interface AdminUser {
   user_id: string;
   full_name: string | null;
@@ -136,6 +145,11 @@ const Admin = () => {
   const [uploading, setUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [allProfiles, setAllProfiles] = useState<ProfileOption[]>([]);
+
+  // Students tab state
+  const [students, setStudents] = useState<StudentRow[]>([]);
+  const [studentsLoading, setStudentsLoading] = useState(true);
+  const [studentSearch, setStudentSearch] = useState("");
   const videoRef = useRef<HTMLInputElement>(null);
   const pdfRef = useRef<HTMLInputElement>(null);
 
@@ -334,6 +348,18 @@ const Admin = () => {
     setAllProfiles(data || []);
   }, []);
 
+  const fetchStudents = useCallback(async () => {
+    setStudentsLoading(true);
+    const { data, error } = await supabase
+      .from("profiles")
+      .select("user_id, full_name, full_name_en, phone, country, created_at")
+      .eq("account_type", "student")
+      .order("created_at", { ascending: false });
+    if (error) toast.error(error.message);
+    setStudents((data as StudentRow[]) || []);
+    setStudentsLoading(false);
+  }, []);
+
   const fetchAdmins = useCallback(async () => {
     setAdminsLoading(true);
     const { data: roles } = await supabase.from("user_roles").select("user_id").eq("role", "admin");
@@ -374,9 +400,10 @@ const Admin = () => {
     fetchStats();
     fetchLectures();
     fetchProfiles();
+    fetchStudents();
     fetchAdmins();
     fetchTeacherAvailability();
-  }, [user, fetchTeachers, fetchStats, fetchLectures, fetchProfiles, fetchAdmins, fetchTeacherAvailability]);
+  }, [user, fetchTeachers, fetchStats, fetchLectures, fetchProfiles, fetchStudents, fetchAdmins, fetchTeacherAvailability]);
 
   // --- Handlers ---
   const handleVerify = async (userId: string) => {
@@ -614,12 +641,19 @@ const Admin = () => {
     return acc;
   }, {} as Record<string, { name: string; slots: AvailabilitySlot[] }>);
 
+  const filteredStudents = students.filter((st) => {
+    const q = studentSearch.trim().toLowerCase();
+    if (!q) return true;
+    return [st.full_name, st.full_name_en, st.phone].some((v) => (v || "").toLowerCase().includes(q));
+  });
+
   // --- Sidebar config ---
   const sidebarLinks = [
     { section: t("section_main"), items: [
       { icon: ShoppingBag, label: t("sales_hub"), tab: "sales" },
       { icon: CreditCard, label: "الفواتير والتقارير", tab: "invoices" },
       { icon: GraduationCap, label: t("admin_teachers"), tab: "teachers" },
+      { icon: Users, label: t("admin_students"), tab: "students" },
       { icon: Video, label: "المحاضرات", tab: "lectures" },
       { icon: Clock, label: t("sidebar_available_times"), tab: "availability" },
       { icon: UserPlus, label: "طلبات الانضمام كمعلم", tab: "applications" },
@@ -706,11 +740,13 @@ const Admin = () => {
             <div className="space-y-6 animate-fade-in">
               <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
                 {[
-                  { label: t("admin_teachers"), value: String(stats.teachers), icon: GraduationCap, color: "bg-primary/10 text-primary" },
-                  { label: t("admin_students"), value: String(stats.students), icon: Users, color: "bg-warning/10 text-warning" },
-                  { label: "المحاضرات", value: String(stats.lectures), icon: BookOpen, color: "bg-muted text-muted-foreground" },
+                  { label: t("admin_teachers"), value: String(stats.teachers), icon: GraduationCap, color: "bg-primary/10 text-primary", tab: "teachers" },
+                  { label: t("admin_students"), value: String(stats.students), icon: Users, color: "bg-warning/10 text-warning", tab: "students" },
+                  { label: "المحاضرات", value: String(stats.lectures), icon: BookOpen, color: "bg-muted text-muted-foreground", tab: "lectures" },
                 ].map((s, i) => (
-                  <StatCard key={s.label} label={s.label} value={s.value} icon={s.icon} color={s.color} index={i} />
+                  <button key={s.label} type="button" onClick={() => setActiveTab(s.tab)} className="text-start">
+                    <StatCard label={s.label} value={s.value} icon={s.icon} color={s.color} index={i} />
+                  </button>
                 ))}
               </div>
               <SalesHub />
@@ -920,6 +956,57 @@ const Admin = () => {
                       </div>
                     </motion.div>
                   ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Students Tab */}
+          {activeTab === "students" && (
+            <div className="space-y-4 animate-fade-in">
+              <div className="flex items-center justify-between gap-4 flex-wrap">
+                <div className="relative flex-1 max-w-md min-w-[200px]">
+                  <Search size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                  <input value={studentSearch} onChange={(e) => setStudentSearch(e.target.value)} placeholder="ابحث باسم الطالب أو رقم الواتساب" className="input-base !pr-10 !py-2.5 text-sm" />
+                </div>
+                <span className="text-sm text-muted-foreground font-bold">{filteredStudents.length} طالب</span>
+              </div>
+
+              {studentsLoading ? (
+                <div className="card-base p-16 text-center"><Loader2 className="mx-auto animate-spin text-muted-foreground mb-3" size={32} /></div>
+              ) : filteredStudents.length === 0 ? (
+                <div className="card-base p-16 text-center"><Users size={40} className="mx-auto text-muted-foreground/30 mb-3" /><p className="text-muted-foreground">{studentSearch ? t("no_results") : "لا يوجد طلاب مسجّلون"}</p></div>
+              ) : (
+                <div className="card-base overflow-hidden">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm">
+                      <thead><tr className="bg-muted/60">
+                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">الطالب</th>
+                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">واتساب</th>
+                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">الدولة</th>
+                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">تاريخ التسجيل</th>
+                      </tr></thead>
+                      <tbody>
+                        {filteredStudents.map((st) => (
+                          <tr key={st.user_id} className="border-t hover:bg-secondary/30 transition-colors">
+                            <td className="p-4">
+                              <div className="flex items-center gap-3">
+                                <div className="icon-box bg-warning/10"><User size={18} className="text-warning" /></div>
+                                <div className="font-bold text-sm">{resolveDisplayName(lang === "en" ? "en" : "ar", st.full_name, st.full_name_en, "—")}</div>
+                              </div>
+                            </td>
+                            <td className="p-4 text-muted-foreground text-sm">
+                              {st.phone ? (
+                                <a href={`https://wa.me/${st.phone.replace(/[^0-9]/g, "")}`} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium" dir="ltr">{st.phone}</a>
+                              ) : "—"}
+                            </td>
+                            <td className="p-4 text-muted-foreground text-sm">{st.country || "—"}</td>
+                            <td className="p-4 text-muted-foreground text-xs">{new Date(st.created_at).toLocaleDateString(lang === "en" ? "en-GB" : "ar-EG")}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               )}
             </div>
