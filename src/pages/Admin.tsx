@@ -21,6 +21,7 @@ import AdminTutorApplications from "@/components/AdminTutorApplications";
 import AdminAutomationDiagnostics from "@/components/AdminAutomationDiagnostics";
 import NoIndex from "@/components/NoIndex";
 import TeacherCoursesPicker from "@/components/admin/TeacherCoursesPicker";
+import { MAJORS } from "@/lib/teacherMajors";
 
 import { uploadVideoToBunny } from "@/lib/bunnyVideo";
 
