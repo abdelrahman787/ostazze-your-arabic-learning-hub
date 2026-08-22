@@ -1171,14 +1171,36 @@ const Admin = () => {
                 <label className="block text-sm font-bold mb-1.5">الجامعة (إنجليزي)</label>
                 <input dir="ltr" value={editTeacherForm.university_en} onChange={(e) => setEditTeacherForm((f) => ({ ...f, university_en: e.target.value }))} className="input-base" />
               </div>
-              <div>
-                <label className="block text-sm font-bold mb-1.5">المجال التخصصي (عربي)</label>
-                <input value={editTeacherForm.major} onChange={(e) => setEditTeacherForm((f) => ({ ...f, major: e.target.value }))} placeholder="مثال: الرياضيات" className="input-base" />
+              <div className="sm:col-span-2">
+                <label className="block text-sm font-bold mb-1.5">المجال التخصصي</label>
+                <select
+                  className="input-base"
+                  value={
+                    editTeacherForm.major === "" ? "" :
+                    MAJORS.some((m) => m.ar === editTeacherForm.major) ? editTeacherForm.major : "__custom__"
+                  }
+                  onChange={(e) => {
+                    const v = e.target.value;
+                    if (v === "") { setEditTeacherForm((f) => ({ ...f, major: "", major_en: "" })); return; }
+                    if (v === "__custom__") { setEditTeacherForm((f) => ({ ...f, major: " ", major_en: "" })); return; }
+                    const m = MAJORS.find((x) => x.ar === v)!;
+                    setEditTeacherForm((f) => ({ ...f, major: m.ar, major_en: m.en }));
+                  }}
+                >
+                  <option value="">— بدون تحديد —</option>
+                  {MAJORS.map((m) => (
+                    <option key={m.ar} value={m.ar}>{m.ar} / {m.en}</option>
+                  ))}
+                  <option value="__custom__">أخرى (كتابة يدوية)</option>
+                </select>
+                {editTeacherForm.major !== "" && !MAJORS.some((m) => m.ar === editTeacherForm.major) && (
+                  <div className="grid sm:grid-cols-2 gap-3 mt-3">
+                    <input value={editTeacherForm.major.trim()} onChange={(e) => setEditTeacherForm((f) => ({ ...f, major: e.target.value }))} placeholder="التخصص بالعربي" className="input-base" />
+                    <input dir="ltr" value={editTeacherForm.major_en} onChange={(e) => setEditTeacherForm((f) => ({ ...f, major_en: e.target.value }))} placeholder="Specialization in English" className="input-base" />
+                  </div>
+                )}
               </div>
-              <div>
-                <label className="block text-sm font-bold mb-1.5">المجال التخصصي (إنجليزي)</label>
-                <input dir="ltr" value={editTeacherForm.major_en} onChange={(e) => setEditTeacherForm((f) => ({ ...f, major_en: e.target.value }))} placeholder="e.g. Mathematics" className="input-base" />
-              </div>
+
             </div>
 
             <TeacherCoursesPicker
