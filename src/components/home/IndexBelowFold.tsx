@@ -315,6 +315,101 @@ const IndexBelowFold = () => {
         </div>
       </section>
 
+      {/* Languages */}
+      <section className="relative py-20 md:py-24 overflow-hidden">
+        <div
+          className="absolute inset-0 pointer-events-none -z-10"
+          aria-hidden="true"
+          style={{
+            background:
+              "radial-gradient(55% 50% at 50% 0%, hsl(var(--primary) / 0.08) 0%, transparent 70%)",
+          }}
+        />
+        <div className="container relative z-10">
+          <motion.div
+            initial={{ opacity: isReduced ? 1 : 0, y: isReduced ? 0 : 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: isReduced ? 0.1 : 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="text-center mb-12"
+          >
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold bg-primary/10 text-primary mb-4">
+              <Sparkles size={14} />
+              {lang === "ar" ? "اللغات" : "Languages"}
+            </span>
+            <h2 className="text-3xl md:text-4xl font-extrabold mb-3">
+              {lang === "ar" ? "تعلّم لغة جديدة مع معلمين متخصصين" : "Learn a new language with expert tutors"}
+            </h2>
+            <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto">
+              {lang === "ar"
+                ? "حصص لغات مباشرة أونلاين من المبتدئ حتى المتقدم — مع تحضير امتحانات معتمدة."
+                : "Live one-to-one language sessions from beginner to advanced — with certified exam preparation."}
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.15 }}
+            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12, delayChildren: 0.05 } } }}
+          >
+            {[
+              { flag: "🇬🇧", ar: "الإنجليزية", en: "English", desc: "IELTS & TOEFL" },
+              { flag: "🇩🇪", ar: "الألمانية", en: "German", desc: "Goethe & TestDaF" },
+              { flag: "🇪🇸", ar: "الإسبانية", en: "Spanish", desc: "DELE prep" },
+              { flag: "🇫🇷", ar: "الفرنسية", en: "French", desc: "DELF prep" },
+              { flag: "🇹🇷", ar: "التركية", en: "Turkish", desc: "A1 – B1" },
+            ].map((l) => {
+              const name = lang === "ar" ? l.ar : l.en;
+              return (
+                <motion.a
+                  key={l.en}
+                  href={waLink(
+                    lang === "ar"
+                      ? `مرحباً، أريد الاستفسار عن دورة ${l.ar} على منصة استاذي`
+                      : `Hello, I'd like to ask about the ${l.en} course on Ostaze`,
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  variants={{
+                    hidden: { opacity: isReduced ? 1 : 0, y: isReduced ? 0 : 24, scale: isReduced ? 1 : 0.95 },
+                    show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
+                  }}
+                  whileHover={{ y: -4 }}
+                  className="card-base group p-5 flex flex-col items-center text-center gap-3 hover:border-primary/40 hover:shadow-lg transition-all"
+                >
+                  <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-3xl shrink-0 group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
+                    {l.flag}
+                  </div>
+                  <h3 className="font-bold text-base text-foreground">{name}</h3>
+                  <p className="text-xs text-muted-foreground">{l.desc}</p>
+                </motion.a>
+              );
+            })}
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex justify-center mt-10"
+          >
+            <Link
+              to="/languages"
+              className="group inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold text-primary-foreground transition-all duration-300 hover:-translate-y-0.5"
+              style={{
+                background: "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-dark)) 100%)",
+                boxShadow: "0 10px 30px -10px hsl(var(--primary) / 0.5), inset 0 1px 0 hsl(0 0% 100% / 0.25)",
+              }}
+            >
+              <span>{lang === "ar" ? "كل دورات اللغات" : "All language courses"}</span>
+              <ArrowLeft className="w-4 h-4 rtl:rotate-180 transition-transform group-hover:-translate-x-0.5 rtl:group-hover:translate-x-0.5" />
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Trust banner — Academic editorial (dark stats + light logos) */}
       <section className="relative py-20 md:py-24 overflow-hidden bg-section-alt">
         <div
