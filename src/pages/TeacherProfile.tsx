@@ -218,7 +218,7 @@ const TeacherProfile = () => {
 
                   <div className="mt-5 grid grid-cols-2 gap-3">
                     {facts.map((f) => (
-                      <div key={f.label} className="flex items-center gap-2.5 rounded-2xl bg-secondary p-3 text-start">
+                      <div key={f.label} className="flex items-center gap-2.5 rounded-2xl border border-border/60 bg-muted/60 p-3 text-start">
                         <span className="w-9 h-9 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
                           <f.icon size={16} />
                         </span>
