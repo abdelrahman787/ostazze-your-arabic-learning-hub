@@ -22,6 +22,7 @@ import AdminAutomationDiagnostics from "@/components/AdminAutomationDiagnostics"
 import NoIndex from "@/components/NoIndex";
 import TeacherCoursesPicker from "@/components/admin/TeacherCoursesPicker";
 import { MAJORS } from "@/lib/teacherMajors";
+import { arToEn, enToAr } from "@/lib/teacherNameTranslate";
 
 import { uploadVideoToBunny } from "@/lib/bunnyVideo";
 
@@ -1148,14 +1149,27 @@ const Admin = () => {
             </div>
             <div className="grid sm:grid-cols-2 gap-4">
 
-              <div>
-                <label className="block text-sm font-bold mb-1.5">الاسم (عربي)</label>
-                <input value={editTeacherForm.full_name} onChange={(e) => setEditTeacherForm((f) => ({ ...f, full_name: e.target.value }))} className="input-base" />
+              <div className="sm:col-span-2">
+                <label className="block text-sm font-bold mb-1.5">اسم المعلم</label>
+                <input
+                  value={editTeacherForm.full_name || editTeacherForm.full_name_en}
+                  onChange={(e) => {
+                    const v = e.target.value;
+                    const isAr = /[\u0600-\u06FF]/.test(v);
+                    setEditTeacherForm((f) => ({
+                      ...f,
+                      full_name: isAr ? v : enToAr(v),
+                      full_name_en: isAr ? arToEn(v) : v,
+                    }));
+                  }}
+                  className="input-base"
+                  placeholder="اكتب الاسم بأي لغة — سيُترجم تلقائيًا"
+                />
+                <p className="text-xs text-muted-foreground mt-1.5">
+                  يظهر تلقائيًا: {editTeacherForm.full_name || "—"} / <span dir="ltr">{editTeacherForm.full_name_en || "—"}</span>
+                </p>
               </div>
-              <div>
-                <label className="block text-sm font-bold mb-1.5">الاسم (إنجليزي)</label>
-                <input dir="ltr" value={editTeacherForm.full_name_en} onChange={(e) => setEditTeacherForm((f) => ({ ...f, full_name_en: e.target.value }))} className="input-base" />
-              </div>
+
               <div>
                 <label className="block text-sm font-bold mb-1.5">رقم الهاتف</label>
                 <input dir="ltr" value={editTeacherForm.phone} onChange={(e) => setEditTeacherForm((f) => ({ ...f, phone: e.target.value }))} className="input-base" />
