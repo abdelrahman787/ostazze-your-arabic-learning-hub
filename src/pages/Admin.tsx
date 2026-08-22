@@ -22,7 +22,7 @@ import AdminAutomationDiagnostics from "@/components/AdminAutomationDiagnostics"
 import NoIndex from "@/components/NoIndex";
 import TeacherCoursesPicker from "@/components/admin/TeacherCoursesPicker";
 import { MAJORS } from "@/lib/teacherMajors";
-import { arToEn, enToAr } from "@/lib/teacherNameTranslate";
+import { arToEn, enToAr, resolveDisplayName } from "@/lib/teacherNameTranslate";
 
 import { uploadVideoToBunny } from "@/lib/bunnyVideo";
 
@@ -751,7 +751,7 @@ const Admin = () => {
                             <td className="p-4">
                               <div className="flex items-center gap-3">
                                 <div className="icon-box bg-primary/10"><GraduationCap size={18} className="text-primary" /></div>
-                                <div className="font-bold text-sm">{tc.full_name || "—"}</div>
+                                <div className="font-bold text-sm">{resolveDisplayName(lang === "en" ? "en" : "ar", tc.full_name, tc.full_name_en, "—")}</div>
                               </div>
                             </td>
                             <td className="p-4 text-muted-foreground text-sm">{tc.university || "—"}</td>
