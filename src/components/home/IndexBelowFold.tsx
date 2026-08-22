@@ -348,7 +348,7 @@ const IndexBelowFold = () => {
           </motion.div>
 
           <motion.div
-            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4"
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4"
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.15 }}
