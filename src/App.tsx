@@ -49,6 +49,7 @@ const Subjects = lazy(() => import("./pages/Subjects"));
 const Universities = lazy(() => import("./pages/Universities"));
 const CollegeDetail = lazy(() => import("./pages/CollegeDetail"));
 const Categories = lazy(() => import("./pages/Categories"));
+const Languages = lazy(() => import("./pages/Languages"));
 const Courses = lazy(() => import("./pages/Courses"));
 const CourseDetail = lazy(() => import("./pages/CourseDetail"));
 const Login = lazy(() => import("./pages/Login"));
@@ -209,6 +210,7 @@ const App = () => (
                           <Route path="/universities" element={<Universities />} />
                           <Route path="/universities/:uniId/colleges/:collegeId" element={<CollegeDetail />} />
                           <Route path="/categories" element={<Categories />} />
+                          <Route path="/languages" element={<Languages />} />
                           <Route path="/courses" element={<Courses />} />
                           <Route path="/courses/:id" element={<CourseDetail />} />
                           <Route path="/login" element={<Login />} />
