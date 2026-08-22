@@ -1171,7 +1171,16 @@ const Admin = () => {
                 <label className="block text-sm font-bold mb-1.5">الجامعة (إنجليزي)</label>
                 <input dir="ltr" value={editTeacherForm.university_en} onChange={(e) => setEditTeacherForm((f) => ({ ...f, university_en: e.target.value }))} className="input-base" />
               </div>
+              <div>
+                <label className="block text-sm font-bold mb-1.5">المجال التخصصي (عربي)</label>
+                <input value={editTeacherForm.major} onChange={(e) => setEditTeacherForm((f) => ({ ...f, major: e.target.value }))} placeholder="مثال: الرياضيات" className="input-base" />
+              </div>
+              <div>
+                <label className="block text-sm font-bold mb-1.5">المجال التخصصي (إنجليزي)</label>
+                <input dir="ltr" value={editTeacherForm.major_en} onChange={(e) => setEditTeacherForm((f) => ({ ...f, major_en: e.target.value }))} placeholder="e.g. Mathematics" className="input-base" />
+              </div>
             </div>
+
             <TeacherCoursesPicker
               valueAr={editTeacherForm.subjects.split(",").map((s) => s.trim()).filter(Boolean)}
               valueEn={editTeacherForm.subjects_en.split(",").map((s) => s.trim()).filter(Boolean)}
