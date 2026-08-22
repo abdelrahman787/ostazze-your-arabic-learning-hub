@@ -20,6 +20,8 @@ import AdminInvoices from "@/components/AdminInvoices";
 import AdminTutorApplications from "@/components/AdminTutorApplications";
 import AdminAutomationDiagnostics from "@/components/AdminAutomationDiagnostics";
 import NoIndex from "@/components/NoIndex";
+import TeacherCoursesPicker from "@/components/admin/TeacherCoursesPicker";
+
 import { uploadVideoToBunny } from "@/lib/bunnyVideo";
 
 // --- Types ---
