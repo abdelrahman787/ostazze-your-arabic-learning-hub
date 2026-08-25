@@ -1003,7 +1003,7 @@ const Admin = () => {
               <div className="flex items-center justify-between gap-4 flex-wrap">
                 <div className="relative flex-1 max-w-md min-w-[200px]">
                   <Search size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                  <input value={searchQuery} onChange={(e) => { setSearchQuery(e.target.value); setTeacherPage(0); }} placeholder={t("admin_search_placeholder")} className="input-base !pr-10 !py-2.5 text-sm" />
+                  <input value={teacherSearch} onChange={(e) => { setTeacherSearch(e.target.value); setTeacherPage(0); }} placeholder={t("admin_search_placeholder")} className="input-base !pr-10 !py-2.5 text-sm" />
                 </div>
                 <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setShowAddTeacher(true)}
                   className="btn-primary !py-2.5 text-sm flex items-center gap-2">
@@ -1014,7 +1014,7 @@ const Admin = () => {
               {loading ? (
                 <div className="card-base p-16 text-center"><Loader2 className="mx-auto animate-spin text-muted-foreground mb-3" size={32} /></div>
               ) : filteredTeachers.length === 0 ? (
-                <div className="card-base p-16 text-center"><GraduationCap size={40} className="mx-auto text-muted-foreground/30 mb-3" /><p className="text-muted-foreground">{searchQuery ? t("no_results") : t("no_teachers_registered")}</p></div>
+                <div className="card-base p-16 text-center"><GraduationCap size={40} className="mx-auto text-muted-foreground/30 mb-3" /><p className="text-muted-foreground">{teacherSearch ? t("no_results") : t("no_teachers_registered")}</p></div>
               ) : (
                 <div className="card-base overflow-hidden">
                   <div className="overflow-x-auto">
@@ -1115,7 +1115,7 @@ const Admin = () => {
               <div className="flex items-center justify-between gap-4 flex-wrap">
                 <div className="relative flex-1 max-w-md min-w-[200px]">
                   <Search size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                  <input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder={t("admin_search_placeholder")} className="input-base !pr-10 !py-2.5 text-sm" />
+                  <input value={lectureSearch} onChange={(e) => setLectureSearch(e.target.value)} placeholder={t("admin_search_placeholder")} className="input-base !pr-10 !py-2.5 text-sm" />
                 </div>
                 <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setShowAddLecture(true)}
                   className="btn-primary !py-2.5 text-sm flex items-center gap-2">
@@ -1126,7 +1126,7 @@ const Admin = () => {
               {lecturesLoading ? (
                 <div className="card-base p-16 text-center"><Loader2 className="mx-auto animate-spin text-muted-foreground mb-3" size={32} /></div>
               ) : filteredLectures.length === 0 ? (
-                <div className="card-base p-16 text-center"><BookOpen size={40} className="mx-auto text-muted-foreground/30 mb-3" /><p className="text-muted-foreground">{searchQuery ? "لا توجد نتائج" : "لا توجد محاضرات بعد"}</p></div>
+                <div className="card-base p-16 text-center"><BookOpen size={40} className="mx-auto text-muted-foreground/30 mb-3" /><p className="text-muted-foreground">{lectureSearch ? "لا توجد نتائج" : "لا توجد محاضرات بعد"}</p></div>
               ) : (
                 <div className="card-base overflow-hidden">
                   <div className="overflow-x-auto">
