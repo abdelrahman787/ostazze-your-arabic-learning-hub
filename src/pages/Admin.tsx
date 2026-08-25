@@ -10,7 +10,7 @@ import {
   GraduationCap, Users, Search, Plus,
   Shield, Video, BookOpen, Loader2, Upload, X, FileText, UserPlus, Home, ShoppingBag,
   ChevronLeft, ChevronRight, Clock, Menu, LogOut, LayoutDashboard, User, Lock,
-  Calendar, CreditCard
+  Calendar, CreditCard, RefreshCw, AlertTriangle, CheckCircle2, Mail, Phone, BookMarked
 } from "lucide-react";
 import { motion } from "framer-motion";
 import SalesHub from "@/components/SalesHub";
@@ -27,6 +27,22 @@ import { arToEn, enToAr, resolveDisplayName } from "@/lib/teacherNameTranslate";
 import { uploadVideoToBunny } from "@/lib/bunnyVideo";
 
 // --- Types ---
+type AdminTab =
+  | "overview"
+  | "sales"
+  | "invoices"
+  | "teachers"
+  | "students"
+  | "courses"
+  | "lectures"
+  | "availability"
+  | "applications"
+  | "diagnostics"
+  | "admins"
+  | "password";
+
+type AdminDataArea = AdminTab | "stats" | "profiles";
+
 interface TeacherRow {
   user_id: string;
   full_name: string | null;
