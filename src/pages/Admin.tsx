@@ -10,7 +10,7 @@ import {
   GraduationCap, Users, Search, Plus,
   Shield, Video, BookOpen, Loader2, Upload, X, FileText, UserPlus, Home, ShoppingBag,
   ChevronLeft, ChevronRight, Clock, Menu, LogOut, LayoutDashboard, User, Lock,
-  Calendar, CreditCard, RefreshCw, AlertTriangle, CheckCircle2, Mail, Phone, BookMarked
+  Calendar, CreditCard, RefreshCw, AlertTriangle, BookMarked
 } from "lucide-react";
 import { motion } from "framer-motion";
 import SalesHub from "@/components/SalesHub";
@@ -965,7 +965,7 @@ const Admin = () => {
                 ))}
               </div>
               <div className="grid gap-4 lg:grid-cols-3">
-                {sidebarLinks.flatMap((s) => s.items).filter((item) => item.tab !== "overview" && item.tab !== "password").map((item, index) => (
+                {sidebarLinks.flatMap((s) => s.items).filter((item) => item.tab !== "overview" && item.tab !== "password").map((item) => (
                   <button key={item.tab} type="button" onClick={() => openTab(item.tab)} className="card-base p-5 text-start hover:border-primary/30">
                     <div className="flex items-start gap-3">
                       <div className="icon-box bg-primary/10 text-primary"><item.icon size={18} /></div>
