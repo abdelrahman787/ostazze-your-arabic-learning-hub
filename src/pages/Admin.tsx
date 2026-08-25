@@ -43,6 +43,29 @@ type AdminTab =
 
 type AdminDataArea = AdminTab | "stats" | "profiles";
 
+const ADMIN_TABS: AdminTab[] = [
+  "overview",
+  "sales",
+  "invoices",
+  "teachers",
+  "students",
+  "courses",
+  "lectures",
+  "availability",
+  "applications",
+  "diagnostics",
+  "admins",
+  "password",
+];
+
+const isAdminTab = (value: unknown): value is AdminTab =>
+  typeof value === "string" && ADMIN_TABS.includes(value as AdminTab);
+
+interface SidebarSection {
+  section: string;
+  items: Array<{ icon: LucideIcon; label: string; tab: AdminTab; description?: string }>;
+}
+
 interface TeacherRow {
   user_id: string;
   full_name: string | null;
@@ -674,14 +697,17 @@ const Admin = () => {
 
   // --- Filters ---
   const filteredTeachers = teachers.filter((tc) => {
-    if (!searchQuery) return true;
-    const q = searchQuery.toLowerCase();
-    return tc.full_name?.toLowerCase().includes(q) || tc.university?.toLowerCase().includes(q) || tc.subjects.some((s) => s.toLowerCase().includes(q));
+    if (!teacherSearch) return true;
+    const q = teacherSearch.toLowerCase();
+    return [tc.full_name, tc.full_name_en, tc.university, tc.university_en, tc.major, tc.major_en, tc.phone]
+      .some((v) => (v || "").toLowerCase().includes(q)) ||
+      tc.subjects.some((s) => s.toLowerCase().includes(q)) ||
+      tc.subjects_en.some((s) => s.toLowerCase().includes(q));
   });
 
   const filteredLectures = lectures.filter((l) => {
-    if (!searchQuery) return true;
-    const q = searchQuery.toLowerCase();
+    if (!lectureSearch) return true;
+    const q = lectureSearch.toLowerCase();
     return l.title.toLowerCase().includes(q) || l.subject?.toLowerCase().includes(q) || l.teacher_name?.toLowerCase().includes(q) || l.student_name?.toLowerCase().includes(q);
   });
 
@@ -703,22 +729,26 @@ const Admin = () => {
   });
 
   // --- Sidebar config ---
-  const sidebarLinks = [
+  const sidebarLinks: SidebarSection[] = [
     { section: t("section_main"), items: [
-      { icon: ShoppingBag, label: t("sales_hub"), tab: "sales" },
-      { icon: CreditCard, label: "الفواتير والتقارير", tab: "invoices" },
-      { icon: GraduationCap, label: t("admin_teachers"), tab: "teachers" },
-      { icon: Users, label: t("admin_students"), tab: "students" },
-      { icon: Video, label: "المحاضرات", tab: "lectures" },
-      { icon: Clock, label: t("sidebar_available_times"), tab: "availability" },
-      { icon: UserPlus, label: "طلبات الانضمام كمعلم", tab: "applications" },
+      { icon: LayoutDashboard, label: isArabic ? "نظرة عامة" : "Overview", tab: "overview", description: isArabic ? "ملخص سريع لكل أجزاء المنصة" : "A quick summary of the platform" },
+      { icon: ShoppingBag, label: t("sales_hub"), tab: "sales", description: isArabic ? "طلبات الحجز والمدفوعات" : "Bookings and payments" },
+      { icon: CreditCard, label: isArabic ? "الفواتير والتقارير" : "Invoices & Reports", tab: "invoices", description: isArabic ? "متابعة المدفوعات والفواتير" : "Track payments and invoices" },
+      { icon: GraduationCap, label: t("admin_teachers"), tab: "teachers", description: isArabic ? "إضافة وتعديل بيانات المعلمين" : "Add and edit teacher profiles" },
+      { icon: Users, label: t("admin_students"), tab: "students", description: isArabic ? "بيانات الطلاب المسجلين" : "Registered student details" },
+      { icon: BookMarked, label: isArabic ? "المقررات" : "Courses", tab: "courses", description: isArabic ? "إدارة محتوى المقررات" : "Manage course content" },
+      { icon: Video, label: isArabic ? "المحاضرات" : "Lectures", tab: "lectures", description: isArabic ? "رفع وتعديل محاضرات الطلاب" : "Upload and edit lessons" },
+      { icon: Clock, label: t("sidebar_available_times"), tab: "availability", description: isArabic ? "مواعيد المعلمين المتاحة" : "Teacher available slots" },
+      { icon: UserPlus, label: isArabic ? "طلبات الانضمام كمعلم" : "Tutor Applications", tab: "applications", description: isArabic ? "مراجعة وقبول المتقدمين" : "Review and approve applicants" },
     ]},
     { section: t("section_account"), items: [
-      { icon: Shield, label: "فحص واتساب و Zoom", tab: "diagnostics" },
-      { icon: Shield, label: t("admin_admins"), tab: "admins" },
-      { icon: Lock, label: t("dash_change_password"), tab: "password" },
+      { icon: Shield, label: isArabic ? "فحص واتساب و Zoom" : "WhatsApp & Zoom Check", tab: "diagnostics", description: isArabic ? "اختبار الربط الآلي" : "Automation diagnostics" },
+      { icon: Shield, label: t("admin_admins"), tab: "admins", description: isArabic ? "صلاحيات الإدارة" : "Admin access" },
+      { icon: Lock, label: t("dash_change_password"), tab: "password", description: isArabic ? "تغيير كلمة مرور حسابك" : "Change your password" },
     ]},
   ];
+
+  const tabMeta = sidebarLinks.flatMap((s) => s.items).find((i) => i.tab === activeTab);
 
   // --- Auth loading / guard ---
   if (authLoading) {
