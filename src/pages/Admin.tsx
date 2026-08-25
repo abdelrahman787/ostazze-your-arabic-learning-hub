@@ -10,7 +10,7 @@ import {
   GraduationCap, Users, Search, Plus,
   Shield, Video, BookOpen, Loader2, Upload, X, FileText, UserPlus, Home, ShoppingBag,
   ChevronLeft, ChevronRight, Clock, Menu, LogOut, LayoutDashboard, User, Lock,
-  Calendar, CreditCard
+  Calendar, CreditCard, RefreshCw, AlertTriangle, BookMarked
 } from "lucide-react";
 import { motion } from "framer-motion";
 import SalesHub from "@/components/SalesHub";
@@ -27,6 +27,45 @@ import { arToEn, enToAr, resolveDisplayName } from "@/lib/teacherNameTranslate";
 import { uploadVideoToBunny } from "@/lib/bunnyVideo";
 
 // --- Types ---
+type AdminTab =
+  | "overview"
+  | "sales"
+  | "invoices"
+  | "teachers"
+  | "students"
+  | "courses"
+  | "lectures"
+  | "availability"
+  | "applications"
+  | "diagnostics"
+  | "admins"
+  | "password";
+
+type AdminDataArea = AdminTab | "stats" | "profiles";
+
+const ADMIN_TABS: AdminTab[] = [
+  "overview",
+  "sales",
+  "invoices",
+  "teachers",
+  "students",
+  "courses",
+  "lectures",
+  "availability",
+  "applications",
+  "diagnostics",
+  "admins",
+  "password",
+];
+
+const isAdminTab = (value: unknown): value is AdminTab =>
+  typeof value === "string" && ADMIN_TABS.includes(value as AdminTab);
+
+interface SidebarSection {
+  section: string;
+  items: Array<{ icon: LucideIcon; label: string; tab: AdminTab; description?: string }>;
+}
+
 interface TeacherRow {
   user_id: string;
   full_name: string | null;
@@ -98,15 +137,47 @@ interface AvailabilitySlot {
 
 // --- Sub-components ---
 const StatCard = ({ label, value, icon: Icon, color, index }: { label: string; value: string; icon: LucideIcon; color: string; index: number }) => (
-  <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.06 }} className="card-base p-5">
+  <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.04 }} className="card-base p-5 h-full">
     <div className="flex items-center gap-3">
-      <motion.div whileHover={{ scale: 1.15, rotate: 10 }} className={`icon-box ${color}`}><Icon size={20} /></motion.div>
+      <div className={`icon-box ${color}`}><Icon size={20} /></div>
       <div>
         <div className="text-2xl font-black">{value}</div>
         <div className="text-muted-foreground text-xs">{label}</div>
       </div>
     </div>
   </motion.div>
+);
+
+const LoadingPanel = ({ label = "جاري تحميل البيانات..." }: { label?: string }) => (
+  <div className="card-base p-12 text-center">
+    <Loader2 className="mx-auto animate-spin text-primary mb-3" size={30} />
+    <p className="text-sm font-bold text-muted-foreground">{label}</p>
+  </div>
+);
+
+const EmptyPanel = ({ icon: Icon, title, description }: { icon: LucideIcon; title: string; description?: string }) => (
+  <div className="card-base p-12 text-center">
+    <Icon size={40} className="mx-auto text-muted-foreground/30 mb-3" />
+    <p className="font-extrabold">{title}</p>
+    {description && <p className="text-sm text-muted-foreground mt-1">{description}</p>}
+  </div>
+);
+
+const ErrorPanel = ({ message, onRetry }: { message: string; onRetry: () => void }) => (
+  <div className="card-base p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-destructive/30">
+    <div className="flex items-start gap-3">
+      <div className="w-10 h-10 rounded-xl bg-destructive/10 text-destructive flex items-center justify-center shrink-0">
+        <AlertTriangle size={18} />
+      </div>
+      <div>
+        <p className="font-extrabold">تعذر تحميل البيانات</p>
+        <p className="text-sm text-muted-foreground mt-1">{message}</p>
+      </div>
+    </div>
+    <button onClick={onRetry} className="btn-outline !px-4 !py-2 text-sm inline-flex items-center gap-2 justify-center">
+      <RefreshCw size={14} /> إعادة المحاولة
+    </button>
+  </div>
 );
 
 const ModalWrapper = ({ children, onClose }: { children: React.ReactNode; onClose: () => void }) => (
@@ -123,20 +194,24 @@ const Admin = () => {
   const { t, lang } = useLanguage();
   const navigate = useNavigate();
 
-  const [activeTab, setActiveTab] = useState("sales");
+  const [activeTab, setActiveTab] = useState<AdminTab>("overview");
+  const isArabic = lang === "ar";
 
   // Listen for notification-driven tab switch
   useEffect(() => {
     const handler = (e: Event) => {
       const detail = (e as CustomEvent).detail;
-      if (detail) setActiveTab(detail);
+      if (isAdminTab(detail)) setActiveTab(detail);
     };
     window.addEventListener("switch-dashboard-tab", handler);
     return () => window.removeEventListener("switch-dashboard-tab", handler);
   }, []);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [teacherSearch, setTeacherSearch] = useState("");
+  const [lectureSearch, setLectureSearch] = useState("");
   const [teachers, setTeachers] = useState<TeacherRow[]>([]);
   const [loading, setLoading] = useState(true);
+  const [dataErrors, setDataErrors] = useState<Partial<Record<AdminDataArea, string>>>({});
+  const [refreshing, setRefreshing] = useState(false);
   const [stats, setStats] = useState({ teachers: 0, students: 0, lectures: 0 });
   const [teacherPage, setTeacherPage] = useState(0);
   const TEACHERS_PER_PAGE = 10;
@@ -192,6 +267,15 @@ const Admin = () => {
   const [manualName, setManualName] = useState(false);
   const [savingTeacher, setSavingTeacher] = useState(false);
   const [uploadingAvatar, setUploadingAvatar] = useState(false);
+
+  const setAreaError = useCallback((area: AdminDataArea, message?: string) => {
+    setDataErrors((prev) => {
+      const next = { ...prev };
+      if (message) next[area] = message;
+      else delete next[area];
+      return next;
+    });
+  }, []);
 
   const openEditTeacher = (tc: TeacherRow) => {
     setEditTeacher(tc);
@@ -283,21 +367,36 @@ const Admin = () => {
   // --- Data Fetching ---
   const fetchTeachers = useCallback(async () => {
     setLoading(true);
-    const { data: teacherProfiles } = await supabase
+    const { data: teacherProfiles, error: teacherError } = await supabase
       .from("teacher_profiles")
       .select("user_id, university, university_en, major, major_en, verified, subjects, subjects_en, price");
 
+    if (teacherError) {
+      setAreaError("teachers", teacherError.message);
+      setTeachers([]);
+      setLoading(false);
+      return;
+    }
+
     if (!teacherProfiles || teacherProfiles.length === 0) {
+      setAreaError("teachers");
       setTeachers([]);
       setLoading(false);
       return;
     }
 
     const userIds = teacherProfiles.map((tp) => tp.user_id);
-    const { data: profiles } = await supabase
+    const { data: profiles, error: profilesError } = await supabase
       .from("profiles")
       .select("user_id, full_name, full_name_en, phone, bio, bio_en, avatar_url")
       .in("user_id", userIds);
+
+    if (profilesError) {
+      setAreaError("teachers", profilesError.message);
+      setTeachers([]);
+      setLoading(false);
+      return;
+    }
 
     const profileMap = new Map(profiles?.map((p) => [p.user_id, p]) || []);
 
@@ -323,79 +422,140 @@ const Admin = () => {
     });
 
     setTeachers(merged);
+    setAreaError("teachers");
     setLoading(false);
-  }, []);
+  }, [setAreaError]);
 
   const fetchStats = useCallback(async () => {
-    const [{ count: teacherCount }, { count: studentCount }, { count: lectureCount }] = await Promise.all([
+    const [teacherResult, studentResult, lectureResult] = await Promise.all([
       supabase.from("profiles").select("*", { count: "exact", head: true }).eq("account_type", "teacher"),
       supabase.from("profiles").select("*", { count: "exact", head: true }).eq("account_type", "student"),
       supabase.from("lectures").select("*", { count: "exact", head: true }),
     ]);
 
-    setStats({ teachers: teacherCount || 0, students: studentCount || 0, lectures: lectureCount || 0 });
-  }, []);
+    const firstError = teacherResult.error || studentResult.error || lectureResult.error;
+    if (firstError) {
+      setAreaError("stats", firstError.message);
+      return;
+    }
+
+    setStats({ teachers: teacherResult.count || 0, students: studentResult.count || 0, lectures: lectureResult.count || 0 });
+    setAreaError("stats");
+  }, [setAreaError]);
 
   const fetchLectures = useCallback(async () => {
     setLecturesLoading(true);
-    const { data } = await supabase.from("lectures").select("*").order("created_at", { ascending: false });
+    const { data, error } = await supabase.from("lectures").select("*").order("created_at", { ascending: false });
+    if (error) {
+      setAreaError("lectures", error.message);
+      setLectures([]);
+      setLecturesLoading(false);
+      return;
+    }
     if (data && data.length > 0) {
       const allUserIds = [...new Set(data.flatMap((l) => [l.teacher_id, l.student_id]))];
-      const { data: profiles } = await supabase.from("profiles").select("user_id, full_name").in("user_id", allUserIds);
+      const { data: profiles, error: profilesError } = await supabase.from("profiles").select("user_id, full_name").in("user_id", allUserIds);
+      if (profilesError) {
+        setAreaError("lectures", profilesError.message);
+        setLectures([]);
+        setLecturesLoading(false);
+        return;
+      }
       const pMap = new Map(profiles?.map((p) => [p.user_id, p.full_name]) || []);
       setLectures(data.map((l) => ({ ...l, teacher_name: pMap.get(l.teacher_id) || "—", student_name: pMap.get(l.student_id) || "—" })) as LectureRow[]);
     } else {
       setLectures([]);
     }
+    setAreaError("lectures");
     setLecturesLoading(false);
-  }, []);
+  }, [setAreaError]);
 
   const fetchProfiles = useCallback(async () => {
-    const { data } = await supabase.from("profiles").select("user_id, full_name, account_type");
+    const { data, error } = await supabase.from("profiles").select("user_id, full_name, account_type");
+    if (error) {
+      setAreaError("profiles", error.message);
+      setAllProfiles([]);
+      return;
+    }
     setAllProfiles(data || []);
-  }, []);
+    setAreaError("profiles");
+  }, [setAreaError]);
 
   const fetchStudents = useCallback(async () => {
     setStudentsLoading(true);
     const { data, error } = await supabase.rpc("get_admin_students");
-    if (error) toast.error(error.message);
+    if (error) {
+      setAreaError("students", error.message);
+      toast.error(error.message);
+      setStudents([]);
+      setStudentsLoading(false);
+      return;
+    }
     setStudents((data as StudentRow[]) || []);
+    setAreaError("students");
     setStudentsLoading(false);
-  }, []);
+  }, [setAreaError]);
 
   const fetchAdmins = useCallback(async () => {
     setAdminsLoading(true);
-    const { data: roles } = await supabase.from("user_roles").select("user_id").eq("role", "admin");
+    const { data: roles, error: rolesError } = await supabase.from("user_roles").select("user_id").eq("role", "admin");
+    if (rolesError) {
+      setAreaError("admins", rolesError.message);
+      setAdmins([]);
+      setAdminsLoading(false);
+      return;
+    }
     if (roles && roles.length > 0) {
       const ids = roles.map((r) => r.user_id);
-      const { data: profiles } = await supabase.from("profiles").select("user_id, full_name").in("user_id", ids);
+      const { data: profiles, error: profilesError } = await supabase.from("profiles").select("user_id, full_name").in("user_id", ids);
+      if (profilesError) {
+        setAreaError("admins", profilesError.message);
+        setAdmins([]);
+        setAdminsLoading(false);
+        return;
+      }
       const profileMap = new Map(profiles?.map((p) => [p.user_id, p.full_name]) || []);
       setAdmins(ids.map((id) => ({ user_id: id, full_name: profileMap.get(id) || null })));
     } else {
       setAdmins([]);
     }
+    setAreaError("admins");
     setAdminsLoading(false);
-  }, []);
+  }, [setAreaError]);
 
   const fetchTeacherAvailability = useCallback(async () => {
     setAvailabilityLoading(true);
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from("teacher_availability")
       .select("*")
       .eq("is_active", true)
       .order("day_of_week")
       .order("start_time");
 
+    if (error) {
+      setAreaError("availability", error.message);
+      setTeacherAvailability([]);
+      setAvailabilityLoading(false);
+      return;
+    }
+
     if (data && data.length > 0) {
       const teacherIds = [...new Set(data.map((s) => s.teacher_id))];
-      const { data: profiles } = await supabase.from("profiles").select("user_id, full_name").in("user_id", teacherIds);
+      const { data: profiles, error: profilesError } = await supabase.from("profiles").select("user_id, full_name").in("user_id", teacherIds);
+      if (profilesError) {
+        setAreaError("availability", profilesError.message);
+        setTeacherAvailability([]);
+        setAvailabilityLoading(false);
+        return;
+      }
       const pMap = new Map(profiles?.map((p) => [p.user_id, p.full_name]) || []);
       setTeacherAvailability(data.map((s) => ({ ...s, teacher_name: pMap.get(s.teacher_id) || "—" })));
     } else {
       setTeacherAvailability([]);
     }
+    setAreaError("availability");
     setAvailabilityLoading(false);
-  }, []);
+  }, [setAreaError]);
 
   useEffect(() => {
     if (!user || user.role !== "admin") return;
@@ -407,6 +567,31 @@ const Admin = () => {
     fetchAdmins();
     fetchTeacherAvailability();
   }, [user, fetchTeachers, fetchStats, fetchLectures, fetchProfiles, fetchStudents, fetchAdmins, fetchTeacherAvailability]);
+
+  const refreshAdminData = useCallback(async () => {
+    if (!user || user.role !== "admin") return;
+    setRefreshing(true);
+    await Promise.all([
+      fetchTeachers(),
+      fetchStats(),
+      fetchLectures(),
+      fetchProfiles(),
+      fetchStudents(),
+      fetchAdmins(),
+      fetchTeacherAvailability(),
+    ]);
+    setRefreshing(false);
+    toast.success(isArabic ? "تم تحديث بيانات لوحة الإدارة" : "Admin data refreshed");
+  }, [user, isArabic, fetchTeachers, fetchStats, fetchLectures, fetchProfiles, fetchStudents, fetchAdmins, fetchTeacherAvailability]);
+
+  const openTab = useCallback((tab: AdminTab) => {
+    setActiveTab(tab);
+    setTeacherSearch("");
+    setLectureSearch("");
+    setStudentSearch("");
+    setTeacherPage(0);
+    setSidebarOpen(false);
+  }, []);
 
   // --- Handlers ---
   const handleVerify = async (userId: string) => {
@@ -622,14 +807,17 @@ const Admin = () => {
 
   // --- Filters ---
   const filteredTeachers = teachers.filter((tc) => {
-    if (!searchQuery) return true;
-    const q = searchQuery.toLowerCase();
-    return tc.full_name?.toLowerCase().includes(q) || tc.university?.toLowerCase().includes(q) || tc.subjects.some((s) => s.toLowerCase().includes(q));
+    if (!teacherSearch) return true;
+    const q = teacherSearch.toLowerCase();
+    return [tc.full_name, tc.full_name_en, tc.university, tc.university_en, tc.major, tc.major_en, tc.phone]
+      .some((v) => (v || "").toLowerCase().includes(q)) ||
+      tc.subjects.some((s) => s.toLowerCase().includes(q)) ||
+      tc.subjects_en.some((s) => s.toLowerCase().includes(q));
   });
 
   const filteredLectures = lectures.filter((l) => {
-    if (!searchQuery) return true;
-    const q = searchQuery.toLowerCase();
+    if (!lectureSearch) return true;
+    const q = lectureSearch.toLowerCase();
     return l.title.toLowerCase().includes(q) || l.subject?.toLowerCase().includes(q) || l.teacher_name?.toLowerCase().includes(q) || l.student_name?.toLowerCase().includes(q);
   });
 
@@ -651,22 +839,26 @@ const Admin = () => {
   });
 
   // --- Sidebar config ---
-  const sidebarLinks = [
+  const sidebarLinks: SidebarSection[] = [
     { section: t("section_main"), items: [
-      { icon: ShoppingBag, label: t("sales_hub"), tab: "sales" },
-      { icon: CreditCard, label: "الفواتير والتقارير", tab: "invoices" },
-      { icon: GraduationCap, label: t("admin_teachers"), tab: "teachers" },
-      { icon: Users, label: t("admin_students"), tab: "students" },
-      { icon: Video, label: "المحاضرات", tab: "lectures" },
-      { icon: Clock, label: t("sidebar_available_times"), tab: "availability" },
-      { icon: UserPlus, label: "طلبات الانضمام كمعلم", tab: "applications" },
+      { icon: LayoutDashboard, label: isArabic ? "نظرة عامة" : "Overview", tab: "overview", description: isArabic ? "ملخص سريع لكل أجزاء المنصة" : "A quick summary of the platform" },
+      { icon: ShoppingBag, label: t("sales_hub"), tab: "sales", description: isArabic ? "طلبات الحجز والمدفوعات" : "Bookings and payments" },
+      { icon: CreditCard, label: isArabic ? "الفواتير والتقارير" : "Invoices & Reports", tab: "invoices", description: isArabic ? "متابعة المدفوعات والفواتير" : "Track payments and invoices" },
+      { icon: GraduationCap, label: t("admin_teachers"), tab: "teachers", description: isArabic ? "إضافة وتعديل بيانات المعلمين" : "Add and edit teacher profiles" },
+      { icon: Users, label: t("admin_students"), tab: "students", description: isArabic ? "بيانات الطلاب المسجلين" : "Registered student details" },
+      { icon: BookMarked, label: isArabic ? "المقررات" : "Courses", tab: "courses", description: isArabic ? "إدارة محتوى المقررات" : "Manage course content" },
+      { icon: Video, label: isArabic ? "المحاضرات" : "Lectures", tab: "lectures", description: isArabic ? "رفع وتعديل محاضرات الطلاب" : "Upload and edit lessons" },
+      { icon: Clock, label: t("sidebar_available_times"), tab: "availability", description: isArabic ? "مواعيد المعلمين المتاحة" : "Teacher available slots" },
+      { icon: UserPlus, label: isArabic ? "طلبات الانضمام كمعلم" : "Tutor Applications", tab: "applications", description: isArabic ? "مراجعة وقبول المتقدمين" : "Review and approve applicants" },
     ]},
     { section: t("section_account"), items: [
-      { icon: Shield, label: "فحص واتساب و Zoom", tab: "diagnostics" },
-      { icon: Shield, label: t("admin_admins"), tab: "admins" },
-      { icon: Lock, label: t("dash_change_password"), tab: "password" },
+      { icon: Shield, label: isArabic ? "فحص واتساب و Zoom" : "WhatsApp & Zoom Check", tab: "diagnostics", description: isArabic ? "اختبار الربط الآلي" : "Automation diagnostics" },
+      { icon: Shield, label: t("admin_admins"), tab: "admins", description: isArabic ? "صلاحيات الإدارة" : "Admin access" },
+      { icon: Lock, label: t("dash_change_password"), tab: "password", description: isArabic ? "تغيير كلمة مرور حسابك" : "Change your password" },
     ]},
   ];
+
+  const tabMeta = sidebarLinks.flatMap((s) => s.items).find((i) => i.tab === activeTab);
 
   // --- Auth loading / guard ---
   if (authLoading) {
@@ -689,15 +881,22 @@ const Admin = () => {
     );
   }
 
-  const currentTabLabel = sidebarLinks.flatMap((s) => s.items).find((i) => i.tab === activeTab)?.label || t("admin_title");
+  const currentTabLabel = tabMeta?.label || t("admin_title");
+  const currentTabDescription = tabMeta?.description || (isArabic ? "إدارة بيانات ومحتوى المنصة" : "Manage platform data and content");
+  const overviewStats: Array<{ label: string; value: string; icon: LucideIcon; color: string; tab: AdminTab }> = [
+    { label: t("admin_teachers"), value: String(stats.teachers), icon: GraduationCap, color: "bg-primary/10 text-primary", tab: "teachers" },
+    { label: t("admin_students"), value: String(stats.students), icon: Users, color: "bg-warning/10 text-warning", tab: "students" },
+    { label: isArabic ? "المحاضرات" : "Lectures", value: String(stats.lectures), icon: BookOpen, color: "bg-success/10 text-success", tab: "lectures" },
+  ];
+  const dataProblemCount = Object.keys(dataErrors).length;
 
   return (
-    <div className="flex min-h-screen" style={{ paddingTop: "var(--navbar-h, 0px)" }}>
+    <div className="flex min-h-screen bg-background" style={{ paddingTop: "var(--navbar-h, 0px)" }}>
       <NoIndex title="Admin Panel" />
       {/* Sidebar */}
-      <aside style={{ top: "var(--navbar-h, 0px)" }} className={`fixed lg:sticky bottom-0 right-0 z-40 w-[260px] h-[calc(100vh-var(--navbar-h,0px))] bg-card border-l flex flex-col transition-transform duration-300 ${sidebarOpen ? "translate-x-0" : "translate-x-full lg:translate-x-0"}`}>
+      <aside style={{ top: "var(--navbar-h, 0px)" }} className={`fixed lg:sticky bottom-0 right-0 z-40 w-[280px] h-[calc(100vh-var(--navbar-h,0px))] bg-card border-l flex flex-col transition-transform duration-300 ${sidebarOpen ? "translate-x-0" : "translate-x-full lg:translate-x-0"}`}>
         <div className="p-5 border-b">
-          <Link to="/" className="text-xl font-black text-primary tracking-tight">OSTAZE</Link>
+          <Link to="/" className="text-xl font-black text-primary tracking-tight">🎓 OSTAZZE</Link>
           <p className="text-xs text-muted-foreground mt-0.5">{t("admin_title")}</p>
         </div>
         <nav className="flex-1 overflow-y-auto p-4 space-y-6">
@@ -705,10 +904,13 @@ const Admin = () => {
             <div key={s.section}>
               <div className="text-xs font-bold text-muted-foreground mb-2 px-3">{s.section}</div>
               {s.items.map((item) => (
-                <button key={item.tab} onClick={() => { setActiveTab(item.tab); setSearchQuery(""); setSidebarOpen(false); }}
-                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-colors mb-1 ${activeTab === item.tab ? "bg-primary text-primary-foreground font-bold" : "text-muted-foreground hover:bg-primary/5 hover:text-foreground"}`}>
-                  <motion.div whileHover={{ scale: 1.2, rotate: 10 }}><item.icon size={16} /></motion.div>
-                  {item.label}
+                <button key={item.tab} onClick={() => openTab(item.tab)}
+                  className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl text-sm transition-colors mb-1 text-start ${activeTab === item.tab ? "bg-primary text-primary-foreground font-bold" : "text-muted-foreground hover:bg-primary/5 hover:text-foreground"}`}>
+                  <span className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${activeTab === item.tab ? "bg-primary-foreground/15" : "bg-muted"}`}><item.icon size={16} /></span>
+                  <span className="min-w-0">
+                    <span className="block truncate">{item.label}</span>
+                    {item.description && <span className={`block text-[11px] font-medium truncate ${activeTab === item.tab ? "text-primary-foreground/75" : "text-muted-foreground"}`}>{item.description}</span>}
+                  </span>
                 </button>
               ))}
             </div>
@@ -725,29 +927,68 @@ const Admin = () => {
 
       {/* Main Content */}
       <main className="flex-1 min-w-0">
-        <header style={{ top: "var(--navbar-h, 0px)" }} className="bg-card border-b px-6 py-4 flex items-center justify-between sticky z-20">
-          <div className="flex items-center gap-3">
-            <button onClick={() => setSidebarOpen(true)} className="lg:hidden"><Menu size={20} /></button>
-            <h2 className="font-bold">{currentTabLabel}</h2>
+        <header style={{ top: "var(--navbar-h, 0px)" }} className="bg-card border-b px-4 sm:px-6 py-4 flex items-center justify-between sticky z-20 gap-4">
+          <div className="flex items-center gap-3 min-w-0">
+            <button onClick={() => setSidebarOpen(true)} className="lg:hidden w-10 h-10 rounded-xl bg-muted flex items-center justify-center" aria-label="فتح قائمة الإدارة"><Menu size={20} /></button>
+            <div className="min-w-0">
+              <h1 className="font-extrabold text-lg leading-tight truncate">{currentTabLabel}</h1>
+              <p className="text-xs text-muted-foreground truncate">{currentTabDescription}</p>
+            </div>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            <button onClick={refreshAdminData} disabled={refreshing} className="hidden sm:inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-secondary text-secondary-foreground text-xs font-bold disabled:opacity-50">
+              <RefreshCw size={14} className={refreshing ? "animate-spin" : ""} />
+              {isArabic ? "تحديث" : "Refresh"}
+            </button>
             <NotificationBell />
             <div className="w-9 h-9 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold">{user?.name?.charAt(0) || "A"}</div>
             <span className="text-sm font-medium hidden sm:block">{user?.name}</span>
           </div>
         </header>
 
-        <div className="p-6">
+        <div className="p-4 sm:p-6 space-y-6">
+          {dataProblemCount > 0 && activeTab === "overview" && (
+            <ErrorPanel
+              message={isArabic ? `${dataProblemCount} قسم يحتاج إعادة تحميل أو مراجعة صلاحيات.` : `${dataProblemCount} section needs a reload or permission review.`}
+              onRetry={refreshAdminData}
+            />
+          )}
+
+          {/* Overview Tab */}
+          {activeTab === "overview" && (
+            <div className="space-y-6 animate-fade-in">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {overviewStats.map((s, i) => (
+                  <button key={s.label} type="button" onClick={() => openTab(s.tab)} className="text-start h-full">
+                    <StatCard label={s.label} value={s.value} icon={s.icon} color={s.color} index={i} />
+                  </button>
+                ))}
+              </div>
+              <div className="grid gap-4 lg:grid-cols-3">
+                {sidebarLinks.flatMap((s) => s.items).filter((item) => item.tab !== "overview" && item.tab !== "password").map((item) => (
+                  <button key={item.tab} type="button" onClick={() => openTab(item.tab)} className="card-base p-5 text-start hover:border-primary/30">
+                    <div className="flex items-start gap-3">
+                      <div className="icon-box bg-primary/10 text-primary"><item.icon size={18} /></div>
+                      <div className="min-w-0">
+                        <div className="font-extrabold">{item.label}</div>
+                        <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
+                        <span className="inline-flex items-center gap-1 text-xs font-bold text-primary mt-3">
+                          {isArabic ? "فتح القسم" : "Open section"} <ChevronLeft size={13} />
+                        </span>
+                      </div>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Stats — show on sales tab */}
           {activeTab === "sales" && (
             <div className="space-y-6 animate-fade-in">
-              <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-                {[
-                  { label: t("admin_teachers"), value: String(stats.teachers), icon: GraduationCap, color: "bg-primary/10 text-primary", tab: "teachers" },
-                  { label: t("admin_students"), value: String(stats.students), icon: Users, color: "bg-warning/10 text-warning", tab: "students" },
-                  { label: "المحاضرات", value: String(stats.lectures), icon: BookOpen, color: "bg-muted text-muted-foreground", tab: "lectures" },
-                ].map((s, i) => (
-                  <button key={s.label} type="button" onClick={() => setActiveTab(s.tab)} className="text-start">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                {overviewStats.map((s, i) => (
+                  <button key={s.label} type="button" onClick={() => openTab(s.tab)} className="text-start h-full">
                     <StatCard label={s.label} value={s.value} icon={s.icon} color={s.color} index={i} />
                   </button>
                 ))}
@@ -762,7 +1003,7 @@ const Admin = () => {
               <div className="flex items-center justify-between gap-4 flex-wrap">
                 <div className="relative flex-1 max-w-md min-w-[200px]">
                   <Search size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                  <input value={searchQuery} onChange={(e) => { setSearchQuery(e.target.value); setTeacherPage(0); }} placeholder={t("admin_search_placeholder")} className="input-base !pr-10 !py-2.5 text-sm" />
+                  <input value={teacherSearch} onChange={(e) => { setTeacherSearch(e.target.value); setTeacherPage(0); }} placeholder={t("admin_search_placeholder")} className="input-base !pr-10 !py-2.5 text-sm" />
                 </div>
                 <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setShowAddTeacher(true)}
                   className="btn-primary !py-2.5 text-sm flex items-center gap-2">
@@ -770,10 +1011,12 @@ const Admin = () => {
                 </motion.button>
               </div>
 
-              {loading ? (
-                <div className="card-base p-16 text-center"><Loader2 className="mx-auto animate-spin text-muted-foreground mb-3" size={32} /></div>
+              {dataErrors.teachers ? (
+                <ErrorPanel message={dataErrors.teachers} onRetry={fetchTeachers} />
+              ) : loading ? (
+                <LoadingPanel />
               ) : filteredTeachers.length === 0 ? (
-                <div className="card-base p-16 text-center"><GraduationCap size={40} className="mx-auto text-muted-foreground/30 mb-3" /><p className="text-muted-foreground">{searchQuery ? t("no_results") : t("no_teachers_registered")}</p></div>
+                <EmptyPanel icon={GraduationCap} title={teacherSearch ? t("no_results") : t("no_teachers_registered")} description={isArabic ? "يمكن إضافة معلم جديد من الزر بالأعلى." : "Add a new teacher from the button above."} />
               ) : (
                 <div className="card-base overflow-hidden">
                   <div className="overflow-x-auto">
@@ -874,7 +1117,7 @@ const Admin = () => {
               <div className="flex items-center justify-between gap-4 flex-wrap">
                 <div className="relative flex-1 max-w-md min-w-[200px]">
                   <Search size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                  <input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder={t("admin_search_placeholder")} className="input-base !pr-10 !py-2.5 text-sm" />
+                  <input value={lectureSearch} onChange={(e) => setLectureSearch(e.target.value)} placeholder={t("admin_search_placeholder")} className="input-base !pr-10 !py-2.5 text-sm" />
                 </div>
                 <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setShowAddLecture(true)}
                   className="btn-primary !py-2.5 text-sm flex items-center gap-2">
@@ -882,10 +1125,12 @@ const Admin = () => {
                 </motion.button>
               </div>
 
-              {lecturesLoading ? (
-                <div className="card-base p-16 text-center"><Loader2 className="mx-auto animate-spin text-muted-foreground mb-3" size={32} /></div>
+              {dataErrors.lectures ? (
+                <ErrorPanel message={dataErrors.lectures} onRetry={fetchLectures} />
+              ) : lecturesLoading ? (
+                <LoadingPanel />
               ) : filteredLectures.length === 0 ? (
-                <div className="card-base p-16 text-center"><BookOpen size={40} className="mx-auto text-muted-foreground/30 mb-3" /><p className="text-muted-foreground">{searchQuery ? "لا توجد نتائج" : "لا توجد محاضرات بعد"}</p></div>
+                <EmptyPanel icon={BookOpen} title={lectureSearch ? (isArabic ? "لا توجد نتائج" : "No results") : (isArabic ? "لا توجد محاضرات بعد" : "No lectures yet")} description={isArabic ? "يمكن إضافة محاضرة جديدة من الزر بالأعلى." : "Add a new lecture from the button above."} />
               ) : (
                 <div className="card-base overflow-hidden">
                   <div className="overflow-x-auto">
@@ -931,13 +1176,12 @@ const Admin = () => {
           {/* Teacher Availability Tab */}
           {activeTab === "availability" && (
             <div className="space-y-4 animate-fade-in">
-              {availabilityLoading ? (
-                <div className="card-base p-16 text-center"><Loader2 className="mx-auto animate-spin text-muted-foreground mb-3" size={32} /></div>
+              {dataErrors.availability ? (
+                <ErrorPanel message={dataErrors.availability} onRetry={fetchTeacherAvailability} />
+              ) : availabilityLoading ? (
+                <LoadingPanel />
               ) : Object.keys(availabilityByTeacher).length === 0 ? (
-                <div className="card-base p-16 text-center">
-                  <Clock size={40} className="mx-auto text-muted-foreground/30 mb-3" />
-                  <p className="text-muted-foreground">لا توجد مواعيد متاحة من المعلمين</p>
-                </div>
+                <EmptyPanel icon={Clock} title={isArabic ? "لا توجد مواعيد متاحة من المعلمين" : "No teacher availability yet"} />
               ) : (
                 <div className="grid gap-4 md:grid-cols-2">
                   {Object.entries(availabilityByTeacher).map(([teacherId, { name, slots }]) => (
@@ -975,10 +1219,12 @@ const Admin = () => {
                 <span className="text-sm text-muted-foreground font-bold">{filteredStudents.length} طالب</span>
               </div>
 
-              {studentsLoading ? (
-                <div className="card-base p-16 text-center"><Loader2 className="mx-auto animate-spin text-muted-foreground mb-3" size={32} /></div>
+              {dataErrors.students ? (
+                <ErrorPanel message={dataErrors.students} onRetry={fetchStudents} />
+              ) : studentsLoading ? (
+                <LoadingPanel />
               ) : filteredStudents.length === 0 ? (
-                <div className="card-base p-16 text-center"><Users size={40} className="mx-auto text-muted-foreground/30 mb-3" /><p className="text-muted-foreground">{studentSearch ? t("no_results") : "لا يوجد طلاب مسجّلون"}</p></div>
+                <EmptyPanel icon={Users} title={studentSearch ? t("no_results") : (isArabic ? "لا يوجد طلاب مسجّلون" : "No registered students")} />
               ) : (
                 <div className="card-base overflow-hidden">
                   <div className="overflow-x-auto">
@@ -1054,10 +1300,12 @@ const Admin = () => {
                   <Shield size={16} /> إضافة مشرف
                 </motion.button>
               </div>
-              {adminsLoading ? (
-                <div className="card-base p-16 text-center"><Loader2 className="mx-auto animate-spin text-muted-foreground mb-3" size={32} /></div>
+              {dataErrors.admins ? (
+                <ErrorPanel message={dataErrors.admins} onRetry={fetchAdmins} />
+              ) : adminsLoading ? (
+                <LoadingPanel />
               ) : admins.length === 0 ? (
-                <div className="card-base p-16 text-center"><Shield size={40} className="mx-auto text-muted-foreground/30 mb-3" /><p className="text-muted-foreground">لا يوجد مدراء</p></div>
+                <EmptyPanel icon={Shield} title={isArabic ? "لا يوجد مدراء" : "No admins found"} />
               ) : (
                 <div className="card-base overflow-hidden">
                   <div className="overflow-x-auto">
