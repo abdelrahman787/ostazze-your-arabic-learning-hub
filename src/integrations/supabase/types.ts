@@ -825,6 +825,24 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_admin_students: {
+        Args: never
+        Returns: {
+          country: string
+          created_at: string
+          email: string
+          email_verified: boolean
+          full_name: string
+          full_name_en: string
+          last_sign_in_at: string
+          onboarding_completed: boolean
+          phone: string
+          timezone: string
+          updated_at: string
+          user_id: string
+          welcome_whatsapp_sent_at: string
+        }[]
+      }
       get_automation_cron_status: {
         Args: never
         Returns: {

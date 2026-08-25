@@ -63,9 +63,16 @@ interface StudentRow {
   user_id: string;
   full_name: string | null;
   full_name_en: string | null;
+  email: string | null;
+  email_verified: boolean | null;
+  last_sign_in_at: string | null;
   phone: string | null;
   country: string | null;
+  timezone: string | null;
+  onboarding_completed: boolean | null;
+  welcome_whatsapp_sent_at: string | null;
   created_at: string;
+  updated_at: string | null;
 }
 
 interface AdminUser {
@@ -350,11 +357,7 @@ const Admin = () => {
 
   const fetchStudents = useCallback(async () => {
     setStudentsLoading(true);
-    const { data, error } = await supabase
-      .from("profiles")
-      .select("user_id, full_name, full_name_en, phone, country, created_at")
-      .eq("account_type", "student")
-      .order("created_at", { ascending: false });
+    const { data, error } = await supabase.rpc("get_admin_students");
     if (error) toast.error(error.message);
     setStudents((data as StudentRow[]) || []);
     setStudentsLoading(false);
@@ -644,7 +647,7 @@ const Admin = () => {
   const filteredStudents = students.filter((st) => {
     const q = studentSearch.trim().toLowerCase();
     if (!q) return true;
-    return [st.full_name, st.full_name_en, st.phone].some((v) => (v || "").toLowerCase().includes(q));
+    return [st.full_name, st.full_name_en, st.phone, st.email].some((v) => (v || "").toLowerCase().includes(q));
   });
 
   // --- Sidebar config ---
@@ -967,7 +970,7 @@ const Admin = () => {
               <div className="flex items-center justify-between gap-4 flex-wrap">
                 <div className="relative flex-1 max-w-md min-w-[200px]">
                   <Search size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                  <input value={studentSearch} onChange={(e) => setStudentSearch(e.target.value)} placeholder="ابحث باسم الطالب أو رقم الواتساب" className="input-base !pr-10 !py-2.5 text-sm" />
+                  <input value={studentSearch} onChange={(e) => setStudentSearch(e.target.value)} placeholder="ابحث بالاسم أو البريد أو رقم الواتساب" className="input-base !pr-10 !py-2.5 text-sm" />
                 </div>
                 <span className="text-sm text-muted-foreground font-bold">{filteredStudents.length} طالب</span>
               </div>
@@ -982,8 +985,12 @@ const Admin = () => {
                     <table className="w-full text-sm">
                       <thead><tr className="bg-muted/60">
                         <th className="text-start p-4 font-bold text-muted-foreground text-xs">الطالب</th>
+                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">البريد الإلكتروني</th>
                         <th className="text-start p-4 font-bold text-muted-foreground text-xs">واتساب</th>
                         <th className="text-start p-4 font-bold text-muted-foreground text-xs">الدولة</th>
+                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">المنطقة الزمنية</th>
+                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">حالة الحساب</th>
+                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">آخر دخول</th>
                         <th className="text-start p-4 font-bold text-muted-foreground text-xs">تاريخ التسجيل</th>
                       </tr></thead>
                       <tbody>
@@ -996,11 +1003,37 @@ const Admin = () => {
                               </div>
                             </td>
                             <td className="p-4 text-muted-foreground text-sm">
+                              {st.email ? (
+                                <a href={`mailto:${st.email}`} className="text-primary hover:underline font-medium break-all" dir="ltr">{st.email}</a>
+                              ) : "—"}
+                            </td>
+                            <td className="p-4 text-muted-foreground text-sm">
                               {st.phone ? (
                                 <a href={`https://wa.me/${st.phone.replace(/[^0-9]/g, "")}`} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium" dir="ltr">{st.phone}</a>
                               ) : "—"}
                             </td>
                             <td className="p-4 text-muted-foreground text-sm">{st.country || "—"}</td>
+                            <td className="p-4 text-muted-foreground text-sm" dir="ltr">{st.timezone || "—"}</td>
+                            <td className="p-4">
+                              <div className="flex flex-col gap-1">
+                                {st.email_verified ? (
+                                  <span className="text-[10px] bg-success/10 text-success px-2 py-0.5 rounded-full font-semibold w-fit">بريد مُؤكَّد</span>
+                                ) : (
+                                  <span className="text-[10px] bg-warning/10 text-warning px-2 py-0.5 rounded-full font-semibold w-fit">بريد غير مُؤكَّد</span>
+                                )}
+                                {st.welcome_whatsapp_sent_at ? (
+                                  <span className="text-[10px] bg-primary/10 text-primary px-2 py-0.5 rounded-full font-semibold w-fit">واتساب مُرسَل</span>
+                                ) : (
+                                  <span className="text-[10px] bg-muted text-muted-foreground px-2 py-0.5 rounded-full font-semibold w-fit">واتساب غير مُرسَل</span>
+                                )}
+                                {st.onboarding_completed ? (
+                                  <span className="text-[10px] bg-success/10 text-success px-2 py-0.5 rounded-full font-semibold w-fit">اكتمل الإعداد</span>
+                                ) : (
+                                  <span className="text-[10px] bg-muted text-muted-foreground px-2 py-0.5 rounded-full font-semibold w-fit">إعداد غير مكتمل</span>
+                                )}
+                              </div>
+                            </td>
+                            <td className="p-4 text-muted-foreground text-xs" dir="ltr">{st.last_sign_in_at ? new Date(st.last_sign_in_at).toLocaleDateString(lang === "en" ? "en-GB" : "ar-EG") : "—"}</td>
                             <td className="p-4 text-muted-foreground text-xs">{new Date(st.created_at).toLocaleDateString(lang === "en" ? "en-GB" : "ar-EG")}</td>
                           </tr>
                         ))}
