@@ -114,15 +114,47 @@ interface AvailabilitySlot {
 
 // --- Sub-components ---
 const StatCard = ({ label, value, icon: Icon, color, index }: { label: string; value: string; icon: LucideIcon; color: string; index: number }) => (
-  <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.06 }} className="card-base p-5">
+  <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.04 }} className="card-base p-5 h-full">
     <div className="flex items-center gap-3">
-      <motion.div whileHover={{ scale: 1.15, rotate: 10 }} className={`icon-box ${color}`}><Icon size={20} /></motion.div>
+      <div className={`icon-box ${color}`}><Icon size={20} /></div>
       <div>
         <div className="text-2xl font-black">{value}</div>
         <div className="text-muted-foreground text-xs">{label}</div>
       </div>
     </div>
   </motion.div>
+);
+
+const LoadingPanel = ({ label = "جاري تحميل البيانات..." }: { label?: string }) => (
+  <div className="card-base p-12 text-center">
+    <Loader2 className="mx-auto animate-spin text-primary mb-3" size={30} />
+    <p className="text-sm font-bold text-muted-foreground">{label}</p>
+  </div>
+);
+
+const EmptyPanel = ({ icon: Icon, title, description }: { icon: LucideIcon; title: string; description?: string }) => (
+  <div className="card-base p-12 text-center">
+    <Icon size={40} className="mx-auto text-muted-foreground/30 mb-3" />
+    <p className="font-extrabold">{title}</p>
+    {description && <p className="text-sm text-muted-foreground mt-1">{description}</p>}
+  </div>
+);
+
+const ErrorPanel = ({ message, onRetry }: { message: string; onRetry: () => void }) => (
+  <div className="card-base p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-destructive/30">
+    <div className="flex items-start gap-3">
+      <div className="w-10 h-10 rounded-xl bg-destructive/10 text-destructive flex items-center justify-center shrink-0">
+        <AlertTriangle size={18} />
+      </div>
+      <div>
+        <p className="font-extrabold">تعذر تحميل البيانات</p>
+        <p className="text-sm text-muted-foreground mt-1">{message}</p>
+      </div>
+    </div>
+    <button onClick={onRetry} className="btn-outline !px-4 !py-2 text-sm inline-flex items-center gap-2 justify-center">
+      <RefreshCw size={14} /> إعادة المحاولة
+    </button>
+  </div>
 );
 
 const ModalWrapper = ({ children, onClose }: { children: React.ReactNode; onClose: () => void }) => (
@@ -139,20 +171,24 @@ const Admin = () => {
   const { t, lang } = useLanguage();
   const navigate = useNavigate();
 
-  const [activeTab, setActiveTab] = useState("sales");
+  const [activeTab, setActiveTab] = useState<AdminTab>("overview");
+  const isArabic = lang === "ar";
 
   // Listen for notification-driven tab switch
   useEffect(() => {
     const handler = (e: Event) => {
       const detail = (e as CustomEvent).detail;
-      if (detail) setActiveTab(detail);
+      if (isAdminTab(detail)) setActiveTab(detail);
     };
     window.addEventListener("switch-dashboard-tab", handler);
     return () => window.removeEventListener("switch-dashboard-tab", handler);
   }, []);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [teacherSearch, setTeacherSearch] = useState("");
+  const [lectureSearch, setLectureSearch] = useState("");
   const [teachers, setTeachers] = useState<TeacherRow[]>([]);
   const [loading, setLoading] = useState(true);
+  const [dataErrors, setDataErrors] = useState<Partial<Record<AdminDataArea, string>>>({});
+  const [refreshing, setRefreshing] = useState(false);
   const [stats, setStats] = useState({ teachers: 0, students: 0, lectures: 0 });
   const [teacherPage, setTeacherPage] = useState(0);
   const TEACHERS_PER_PAGE = 10;
