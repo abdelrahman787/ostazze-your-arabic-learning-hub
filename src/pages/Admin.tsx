@@ -268,6 +268,15 @@ const Admin = () => {
   const [savingTeacher, setSavingTeacher] = useState(false);
   const [uploadingAvatar, setUploadingAvatar] = useState(false);
 
+  const setAreaError = useCallback((area: AdminDataArea, message?: string) => {
+    setDataErrors((prev) => {
+      const next = { ...prev };
+      if (message) next[area] = message;
+      else delete next[area];
+      return next;
+    });
+  }, []);
+
   const openEditTeacher = (tc: TeacherRow) => {
     setEditTeacher(tc);
     setEditTeacherForm({
@@ -358,21 +367,36 @@ const Admin = () => {
   // --- Data Fetching ---
   const fetchTeachers = useCallback(async () => {
     setLoading(true);
-    const { data: teacherProfiles } = await supabase
+    const { data: teacherProfiles, error: teacherError } = await supabase
       .from("teacher_profiles")
       .select("user_id, university, university_en, major, major_en, verified, subjects, subjects_en, price");
 
+    if (teacherError) {
+      setAreaError("teachers", teacherError.message);
+      setTeachers([]);
+      setLoading(false);
+      return;
+    }
+
     if (!teacherProfiles || teacherProfiles.length === 0) {
+      setAreaError("teachers");
       setTeachers([]);
       setLoading(false);
       return;
     }
 
     const userIds = teacherProfiles.map((tp) => tp.user_id);
-    const { data: profiles } = await supabase
+    const { data: profiles, error: profilesError } = await supabase
       .from("profiles")
       .select("user_id, full_name, full_name_en, phone, bio, bio_en, avatar_url")
       .in("user_id", userIds);
+
+    if (profilesError) {
+      setAreaError("teachers", profilesError.message);
+      setTeachers([]);
+      setLoading(false);
+      return;
+    }
 
     const profileMap = new Map(profiles?.map((p) => [p.user_id, p]) || []);
 
@@ -398,79 +422,140 @@ const Admin = () => {
     });
 
     setTeachers(merged);
+    setAreaError("teachers");
     setLoading(false);
-  }, []);
+  }, [setAreaError]);
 
   const fetchStats = useCallback(async () => {
-    const [{ count: teacherCount }, { count: studentCount }, { count: lectureCount }] = await Promise.all([
+    const [teacherResult, studentResult, lectureResult] = await Promise.all([
       supabase.from("profiles").select("*", { count: "exact", head: true }).eq("account_type", "teacher"),
       supabase.from("profiles").select("*", { count: "exact", head: true }).eq("account_type", "student"),
       supabase.from("lectures").select("*", { count: "exact", head: true }),
     ]);
 
-    setStats({ teachers: teacherCount || 0, students: studentCount || 0, lectures: lectureCount || 0 });
-  }, []);
+    const firstError = teacherResult.error || studentResult.error || lectureResult.error;
+    if (firstError) {
+      setAreaError("stats", firstError.message);
+      return;
+    }
+
+    setStats({ teachers: teacherResult.count || 0, students: studentResult.count || 0, lectures: lectureResult.count || 0 });
+    setAreaError("stats");
+  }, [setAreaError]);
 
   const fetchLectures = useCallback(async () => {
     setLecturesLoading(true);
-    const { data } = await supabase.from("lectures").select("*").order("created_at", { ascending: false });
+    const { data, error } = await supabase.from("lectures").select("*").order("created_at", { ascending: false });
+    if (error) {
+      setAreaError("lectures", error.message);
+      setLectures([]);
+      setLecturesLoading(false);
+      return;
+    }
     if (data && data.length > 0) {
       const allUserIds = [...new Set(data.flatMap((l) => [l.teacher_id, l.student_id]))];
-      const { data: profiles } = await supabase.from("profiles").select("user_id, full_name").in("user_id", allUserIds);
+      const { data: profiles, error: profilesError } = await supabase.from("profiles").select("user_id, full_name").in("user_id", allUserIds);
+      if (profilesError) {
+        setAreaError("lectures", profilesError.message);
+        setLectures([]);
+        setLecturesLoading(false);
+        return;
+      }
       const pMap = new Map(profiles?.map((p) => [p.user_id, p.full_name]) || []);
       setLectures(data.map((l) => ({ ...l, teacher_name: pMap.get(l.teacher_id) || "—", student_name: pMap.get(l.student_id) || "—" })) as LectureRow[]);
     } else {
       setLectures([]);
     }
+    setAreaError("lectures");
     setLecturesLoading(false);
-  }, []);
+  }, [setAreaError]);
 
   const fetchProfiles = useCallback(async () => {
-    const { data } = await supabase.from("profiles").select("user_id, full_name, account_type");
+    const { data, error } = await supabase.from("profiles").select("user_id, full_name, account_type");
+    if (error) {
+      setAreaError("profiles", error.message);
+      setAllProfiles([]);
+      return;
+    }
     setAllProfiles(data || []);
-  }, []);
+    setAreaError("profiles");
+  }, [setAreaError]);
 
   const fetchStudents = useCallback(async () => {
     setStudentsLoading(true);
     const { data, error } = await supabase.rpc("get_admin_students");
-    if (error) toast.error(error.message);
+    if (error) {
+      setAreaError("students", error.message);
+      toast.error(error.message);
+      setStudents([]);
+      setStudentsLoading(false);
+      return;
+    }
     setStudents((data as StudentRow[]) || []);
+    setAreaError("students");
     setStudentsLoading(false);
-  }, []);
+  }, [setAreaError]);
 
   const fetchAdmins = useCallback(async () => {
     setAdminsLoading(true);
-    const { data: roles } = await supabase.from("user_roles").select("user_id").eq("role", "admin");
+    const { data: roles, error: rolesError } = await supabase.from("user_roles").select("user_id").eq("role", "admin");
+    if (rolesError) {
+      setAreaError("admins", rolesError.message);
+      setAdmins([]);
+      setAdminsLoading(false);
+      return;
+    }
     if (roles && roles.length > 0) {
       const ids = roles.map((r) => r.user_id);
-      const { data: profiles } = await supabase.from("profiles").select("user_id, full_name").in("user_id", ids);
+      const { data: profiles, error: profilesError } = await supabase.from("profiles").select("user_id, full_name").in("user_id", ids);
+      if (profilesError) {
+        setAreaError("admins", profilesError.message);
+        setAdmins([]);
+        setAdminsLoading(false);
+        return;
+      }
       const profileMap = new Map(profiles?.map((p) => [p.user_id, p.full_name]) || []);
       setAdmins(ids.map((id) => ({ user_id: id, full_name: profileMap.get(id) || null })));
     } else {
       setAdmins([]);
     }
+    setAreaError("admins");
     setAdminsLoading(false);
-  }, []);
+  }, [setAreaError]);
 
   const fetchTeacherAvailability = useCallback(async () => {
     setAvailabilityLoading(true);
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from("teacher_availability")
       .select("*")
       .eq("is_active", true)
       .order("day_of_week")
       .order("start_time");
 
+    if (error) {
+      setAreaError("availability", error.message);
+      setTeacherAvailability([]);
+      setAvailabilityLoading(false);
+      return;
+    }
+
     if (data && data.length > 0) {
       const teacherIds = [...new Set(data.map((s) => s.teacher_id))];
-      const { data: profiles } = await supabase.from("profiles").select("user_id, full_name").in("user_id", teacherIds);
+      const { data: profiles, error: profilesError } = await supabase.from("profiles").select("user_id, full_name").in("user_id", teacherIds);
+      if (profilesError) {
+        setAreaError("availability", profilesError.message);
+        setTeacherAvailability([]);
+        setAvailabilityLoading(false);
+        return;
+      }
       const pMap = new Map(profiles?.map((p) => [p.user_id, p.full_name]) || []);
       setTeacherAvailability(data.map((s) => ({ ...s, teacher_name: pMap.get(s.teacher_id) || "—" })));
     } else {
       setTeacherAvailability([]);
     }
+    setAreaError("availability");
     setAvailabilityLoading(false);
-  }, []);
+  }, [setAreaError]);
 
   useEffect(() => {
     if (!user || user.role !== "admin") return;
