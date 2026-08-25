@@ -647,7 +647,7 @@ const Admin = () => {
   const filteredStudents = students.filter((st) => {
     const q = studentSearch.trim().toLowerCase();
     if (!q) return true;
-    return [st.full_name, st.full_name_en, st.phone].some((v) => (v || "").toLowerCase().includes(q));
+    return [st.full_name, st.full_name_en, st.phone, st.email].some((v) => (v || "").toLowerCase().includes(q));
   });
 
   // --- Sidebar config ---
