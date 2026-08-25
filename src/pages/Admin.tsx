@@ -1011,10 +1011,12 @@ const Admin = () => {
                 </motion.button>
               </div>
 
-              {loading ? (
-                <div className="card-base p-16 text-center"><Loader2 className="mx-auto animate-spin text-muted-foreground mb-3" size={32} /></div>
+              {dataErrors.teachers ? (
+                <ErrorPanel message={dataErrors.teachers} onRetry={fetchTeachers} />
+              ) : loading ? (
+                <LoadingPanel />
               ) : filteredTeachers.length === 0 ? (
-                <div className="card-base p-16 text-center"><GraduationCap size={40} className="mx-auto text-muted-foreground/30 mb-3" /><p className="text-muted-foreground">{teacherSearch ? t("no_results") : t("no_teachers_registered")}</p></div>
+                <EmptyPanel icon={GraduationCap} title={teacherSearch ? t("no_results") : t("no_teachers_registered")} description={isArabic ? "يمكن إضافة معلم جديد من الزر بالأعلى." : "Add a new teacher from the button above."} />
               ) : (
                 <div className="card-base overflow-hidden">
                   <div className="overflow-x-auto">
@@ -1123,10 +1125,12 @@ const Admin = () => {
                 </motion.button>
               </div>
 
-              {lecturesLoading ? (
-                <div className="card-base p-16 text-center"><Loader2 className="mx-auto animate-spin text-muted-foreground mb-3" size={32} /></div>
+              {dataErrors.lectures ? (
+                <ErrorPanel message={dataErrors.lectures} onRetry={fetchLectures} />
+              ) : lecturesLoading ? (
+                <LoadingPanel />
               ) : filteredLectures.length === 0 ? (
-                <div className="card-base p-16 text-center"><BookOpen size={40} className="mx-auto text-muted-foreground/30 mb-3" /><p className="text-muted-foreground">{lectureSearch ? "لا توجد نتائج" : "لا توجد محاضرات بعد"}</p></div>
+                <EmptyPanel icon={BookOpen} title={lectureSearch ? (isArabic ? "لا توجد نتائج" : "No results") : (isArabic ? "لا توجد محاضرات بعد" : "No lectures yet")} description={isArabic ? "يمكن إضافة محاضرة جديدة من الزر بالأعلى." : "Add a new lecture from the button above."} />
               ) : (
                 <div className="card-base overflow-hidden">
                   <div className="overflow-x-auto">
@@ -1172,13 +1176,12 @@ const Admin = () => {
           {/* Teacher Availability Tab */}
           {activeTab === "availability" && (
             <div className="space-y-4 animate-fade-in">
-              {availabilityLoading ? (
-                <div className="card-base p-16 text-center"><Loader2 className="mx-auto animate-spin text-muted-foreground mb-3" size={32} /></div>
+              {dataErrors.availability ? (
+                <ErrorPanel message={dataErrors.availability} onRetry={fetchTeacherAvailability} />
+              ) : availabilityLoading ? (
+                <LoadingPanel />
               ) : Object.keys(availabilityByTeacher).length === 0 ? (
-                <div className="card-base p-16 text-center">
-                  <Clock size={40} className="mx-auto text-muted-foreground/30 mb-3" />
-                  <p className="text-muted-foreground">لا توجد مواعيد متاحة من المعلمين</p>
-                </div>
+                <EmptyPanel icon={Clock} title={isArabic ? "لا توجد مواعيد متاحة من المعلمين" : "No teacher availability yet"} />
               ) : (
                 <div className="grid gap-4 md:grid-cols-2">
                   {Object.entries(availabilityByTeacher).map(([teacherId, { name, slots }]) => (
@@ -1216,10 +1219,12 @@ const Admin = () => {
                 <span className="text-sm text-muted-foreground font-bold">{filteredStudents.length} طالب</span>
               </div>
 
-              {studentsLoading ? (
-                <div className="card-base p-16 text-center"><Loader2 className="mx-auto animate-spin text-muted-foreground mb-3" size={32} /></div>
+              {dataErrors.students ? (
+                <ErrorPanel message={dataErrors.students} onRetry={fetchStudents} />
+              ) : studentsLoading ? (
+                <LoadingPanel />
               ) : filteredStudents.length === 0 ? (
-                <div className="card-base p-16 text-center"><Users size={40} className="mx-auto text-muted-foreground/30 mb-3" /><p className="text-muted-foreground">{studentSearch ? t("no_results") : "لا يوجد طلاب مسجّلون"}</p></div>
+                <EmptyPanel icon={Users} title={studentSearch ? t("no_results") : (isArabic ? "لا يوجد طلاب مسجّلون" : "No registered students")} />
               ) : (
                 <div className="card-base overflow-hidden">
                   <div className="overflow-x-auto">
@@ -1295,10 +1300,12 @@ const Admin = () => {
                   <Shield size={16} /> إضافة مشرف
                 </motion.button>
               </div>
-              {adminsLoading ? (
-                <div className="card-base p-16 text-center"><Loader2 className="mx-auto animate-spin text-muted-foreground mb-3" size={32} /></div>
+              {dataErrors.admins ? (
+                <ErrorPanel message={dataErrors.admins} onRetry={fetchAdmins} />
+              ) : adminsLoading ? (
+                <LoadingPanel />
               ) : admins.length === 0 ? (
-                <div className="card-base p-16 text-center"><Shield size={40} className="mx-auto text-muted-foreground/30 mb-3" /><p className="text-muted-foreground">لا يوجد مدراء</p></div>
+                <EmptyPanel icon={Shield} title={isArabic ? "لا يوجد مدراء" : "No admins found"} />
               ) : (
                 <div className="card-base overflow-hidden">
                   <div className="overflow-x-auto">
