@@ -357,11 +357,7 @@ const Admin = () => {
 
   const fetchStudents = useCallback(async () => {
     setStudentsLoading(true);
-    const { data, error } = await supabase
-      .from("profiles")
-      .select("user_id, full_name, full_name_en, phone, country, created_at")
-      .eq("account_type", "student")
-      .order("created_at", { ascending: false });
+    const { data, error } = await supabase.rpc("get_admin_students");
     if (error) toast.error(error.message);
     setStudents((data as StudentRow[]) || []);
     setStudentsLoading(false);
