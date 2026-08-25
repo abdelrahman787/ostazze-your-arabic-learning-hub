@@ -568,6 +568,31 @@ const Admin = () => {
     fetchTeacherAvailability();
   }, [user, fetchTeachers, fetchStats, fetchLectures, fetchProfiles, fetchStudents, fetchAdmins, fetchTeacherAvailability]);
 
+  const refreshAdminData = useCallback(async () => {
+    if (!user || user.role !== "admin") return;
+    setRefreshing(true);
+    await Promise.all([
+      fetchTeachers(),
+      fetchStats(),
+      fetchLectures(),
+      fetchProfiles(),
+      fetchStudents(),
+      fetchAdmins(),
+      fetchTeacherAvailability(),
+    ]);
+    setRefreshing(false);
+    toast.success(isArabic ? "تم تحديث بيانات لوحة الإدارة" : "Admin data refreshed");
+  }, [user, isArabic, fetchTeachers, fetchStats, fetchLectures, fetchProfiles, fetchStudents, fetchAdmins, fetchTeacherAvailability]);
+
+  const openTab = useCallback((tab: AdminTab) => {
+    setActiveTab(tab);
+    setTeacherSearch("");
+    setLectureSearch("");
+    setStudentSearch("");
+    setTeacherPage(0);
+    setSidebarOpen(false);
+  }, []);
+
   // --- Handlers ---
   const handleVerify = async (userId: string) => {
     const { error } = await supabase.from("teacher_profiles").update({ verified: true }).eq("user_id", userId);
@@ -856,15 +881,22 @@ const Admin = () => {
     );
   }
 
-  const currentTabLabel = sidebarLinks.flatMap((s) => s.items).find((i) => i.tab === activeTab)?.label || t("admin_title");
+  const currentTabLabel = tabMeta?.label || t("admin_title");
+  const currentTabDescription = tabMeta?.description || (isArabic ? "إدارة بيانات ومحتوى المنصة" : "Manage platform data and content");
+  const overviewStats: Array<{ label: string; value: string; icon: LucideIcon; color: string; tab: AdminTab }> = [
+    { label: t("admin_teachers"), value: String(stats.teachers), icon: GraduationCap, color: "bg-primary/10 text-primary", tab: "teachers" },
+    { label: t("admin_students"), value: String(stats.students), icon: Users, color: "bg-warning/10 text-warning", tab: "students" },
+    { label: isArabic ? "المحاضرات" : "Lectures", value: String(stats.lectures), icon: BookOpen, color: "bg-success/10 text-success", tab: "lectures" },
+  ];
+  const dataProblemCount = Object.keys(dataErrors).length;
 
   return (
-    <div className="flex min-h-screen" style={{ paddingTop: "var(--navbar-h, 0px)" }}>
+    <div className="flex min-h-screen bg-background" style={{ paddingTop: "var(--navbar-h, 0px)" }}>
       <NoIndex title="Admin Panel" />
       {/* Sidebar */}
-      <aside style={{ top: "var(--navbar-h, 0px)" }} className={`fixed lg:sticky bottom-0 right-0 z-40 w-[260px] h-[calc(100vh-var(--navbar-h,0px))] bg-card border-l flex flex-col transition-transform duration-300 ${sidebarOpen ? "translate-x-0" : "translate-x-full lg:translate-x-0"}`}>
+      <aside style={{ top: "var(--navbar-h, 0px)" }} className={`fixed lg:sticky bottom-0 right-0 z-40 w-[280px] h-[calc(100vh-var(--navbar-h,0px))] bg-card border-l flex flex-col transition-transform duration-300 ${sidebarOpen ? "translate-x-0" : "translate-x-full lg:translate-x-0"}`}>
         <div className="p-5 border-b">
-          <Link to="/" className="text-xl font-black text-primary tracking-tight">OSTAZE</Link>
+          <Link to="/" className="text-xl font-black text-primary tracking-tight">🎓 OSTAZZE</Link>
           <p className="text-xs text-muted-foreground mt-0.5">{t("admin_title")}</p>
         </div>
         <nav className="flex-1 overflow-y-auto p-4 space-y-6">
@@ -872,10 +904,13 @@ const Admin = () => {
             <div key={s.section}>
               <div className="text-xs font-bold text-muted-foreground mb-2 px-3">{s.section}</div>
               {s.items.map((item) => (
-                <button key={item.tab} onClick={() => { setActiveTab(item.tab); setSearchQuery(""); setSidebarOpen(false); }}
-                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-colors mb-1 ${activeTab === item.tab ? "bg-primary text-primary-foreground font-bold" : "text-muted-foreground hover:bg-primary/5 hover:text-foreground"}`}>
-                  <motion.div whileHover={{ scale: 1.2, rotate: 10 }}><item.icon size={16} /></motion.div>
-                  {item.label}
+                <button key={item.tab} onClick={() => openTab(item.tab)}
+                  className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl text-sm transition-colors mb-1 text-start ${activeTab === item.tab ? "bg-primary text-primary-foreground font-bold" : "text-muted-foreground hover:bg-primary/5 hover:text-foreground"}`}>
+                  <span className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${activeTab === item.tab ? "bg-primary-foreground/15" : "bg-muted"}`}><item.icon size={16} /></span>
+                  <span className="min-w-0">
+                    <span className="block truncate">{item.label}</span>
+                    {item.description && <span className={`block text-[11px] font-medium truncate ${activeTab === item.tab ? "text-primary-foreground/75" : "text-muted-foreground"}`}>{item.description}</span>}
+                  </span>
                 </button>
               ))}
             </div>
@@ -892,29 +927,68 @@ const Admin = () => {
 
       {/* Main Content */}
       <main className="flex-1 min-w-0">
-        <header style={{ top: "var(--navbar-h, 0px)" }} className="bg-card border-b px-6 py-4 flex items-center justify-between sticky z-20">
-          <div className="flex items-center gap-3">
-            <button onClick={() => setSidebarOpen(true)} className="lg:hidden"><Menu size={20} /></button>
-            <h2 className="font-bold">{currentTabLabel}</h2>
+        <header style={{ top: "var(--navbar-h, 0px)" }} className="bg-card border-b px-4 sm:px-6 py-4 flex items-center justify-between sticky z-20 gap-4">
+          <div className="flex items-center gap-3 min-w-0">
+            <button onClick={() => setSidebarOpen(true)} className="lg:hidden w-10 h-10 rounded-xl bg-muted flex items-center justify-center" aria-label="فتح قائمة الإدارة"><Menu size={20} /></button>
+            <div className="min-w-0">
+              <h1 className="font-extrabold text-lg leading-tight truncate">{currentTabLabel}</h1>
+              <p className="text-xs text-muted-foreground truncate">{currentTabDescription}</p>
+            </div>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            <button onClick={refreshAdminData} disabled={refreshing} className="hidden sm:inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-secondary text-secondary-foreground text-xs font-bold disabled:opacity-50">
+              <RefreshCw size={14} className={refreshing ? "animate-spin" : ""} />
+              {isArabic ? "تحديث" : "Refresh"}
+            </button>
             <NotificationBell />
             <div className="w-9 h-9 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold">{user?.name?.charAt(0) || "A"}</div>
             <span className="text-sm font-medium hidden sm:block">{user?.name}</span>
           </div>
         </header>
 
-        <div className="p-6">
+        <div className="p-4 sm:p-6 space-y-6">
+          {dataProblemCount > 0 && activeTab === "overview" && (
+            <ErrorPanel
+              message={isArabic ? `${dataProblemCount} قسم يحتاج إعادة تحميل أو مراجعة صلاحيات.` : `${dataProblemCount} section needs a reload or permission review.`}
+              onRetry={refreshAdminData}
+            />
+          )}
+
+          {/* Overview Tab */}
+          {activeTab === "overview" && (
+            <div className="space-y-6 animate-fade-in">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {overviewStats.map((s, i) => (
+                  <button key={s.label} type="button" onClick={() => openTab(s.tab)} className="text-start h-full">
+                    <StatCard label={s.label} value={s.value} icon={s.icon} color={s.color} index={i} />
+                  </button>
+                ))}
+              </div>
+              <div className="grid gap-4 lg:grid-cols-3">
+                {sidebarLinks.flatMap((s) => s.items).filter((item) => item.tab !== "overview" && item.tab !== "password").map((item, index) => (
+                  <button key={item.tab} type="button" onClick={() => openTab(item.tab)} className="card-base p-5 text-start hover:border-primary/30">
+                    <div className="flex items-start gap-3">
+                      <div className="icon-box bg-primary/10 text-primary"><item.icon size={18} /></div>
+                      <div className="min-w-0">
+                        <div className="font-extrabold">{item.label}</div>
+                        <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
+                        <span className="inline-flex items-center gap-1 text-xs font-bold text-primary mt-3">
+                          {isArabic ? "فتح القسم" : "Open section"} <ChevronLeft size={13} />
+                        </span>
+                      </div>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Stats — show on sales tab */}
           {activeTab === "sales" && (
             <div className="space-y-6 animate-fade-in">
-              <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-                {[
-                  { label: t("admin_teachers"), value: String(stats.teachers), icon: GraduationCap, color: "bg-primary/10 text-primary", tab: "teachers" },
-                  { label: t("admin_students"), value: String(stats.students), icon: Users, color: "bg-warning/10 text-warning", tab: "students" },
-                  { label: "المحاضرات", value: String(stats.lectures), icon: BookOpen, color: "bg-muted text-muted-foreground", tab: "lectures" },
-                ].map((s, i) => (
-                  <button key={s.label} type="button" onClick={() => setActiveTab(s.tab)} className="text-start">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                {overviewStats.map((s, i) => (
+                  <button key={s.label} type="button" onClick={() => openTab(s.tab)} className="text-start h-full">
                     <StatCard label={s.label} value={s.value} icon={s.icon} color={s.color} index={i} />
                   </button>
                 ))}
