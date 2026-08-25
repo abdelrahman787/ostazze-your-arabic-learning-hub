@@ -63,9 +63,16 @@ interface StudentRow {
   user_id: string;
   full_name: string | null;
   full_name_en: string | null;
+  email: string | null;
+  email_verified: boolean | null;
+  last_sign_in_at: string | null;
   phone: string | null;
   country: string | null;
+  timezone: string | null;
+  onboarding_completed: boolean | null;
+  welcome_whatsapp_sent_at: string | null;
   created_at: string;
+  updated_at: string | null;
 }
 
 interface AdminUser {
