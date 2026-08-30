@@ -65,6 +65,8 @@ const TeacherFinance = () => {
   const [txs, setTxs] = useState<Tx[]>([]);
   const [bank, setBank] = useState(emptyBank);
   const [hasBank, setHasBank] = useState(false);
+  const [editingBank, setEditingBank] = useState(false);
+  const [savedBank, setSavedBank] = useState(emptyBank);
 
   const load = useCallback(async () => {
     if (!user) return;
