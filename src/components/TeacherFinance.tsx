@@ -65,6 +65,8 @@ const TeacherFinance = () => {
   const [txs, setTxs] = useState<Tx[]>([]);
   const [bank, setBank] = useState(emptyBank);
   const [hasBank, setHasBank] = useState(false);
+  const [editingBank, setEditingBank] = useState(false);
+  const [savedBank, setSavedBank] = useState(emptyBank);
 
   const load = useCallback(async () => {
     if (!user) return;
@@ -93,15 +95,20 @@ const TeacherFinance = () => {
     );
     setTxs((txRes.data || []).map((t) => ({ ...t, amount: Number(t.amount) })));
     if (bankRes.data) {
-      setHasBank(true);
-      setBank({
+      const b = {
         account_holder: bankRes.data.account_holder || "",
         bank_name: bankRes.data.bank_name || "",
         country: bankRes.data.country || "",
         iban: bankRes.data.iban || "",
         account_number: bankRes.data.account_number || "",
         swift: bankRes.data.swift || "",
-      });
+      };
+      setHasBank(true);
+      setBank(b);
+      setSavedBank(b);
+      setEditingBank(false);
+    } else {
+      setEditingBank(true);
     }
     setLoading(false);
   }, [user]);
@@ -132,6 +139,8 @@ const TeacherFinance = () => {
     setSaving(false);
     if (error) return toast.error(error.message);
     setHasBank(true);
+    setSavedBank(bank);
+    setEditingBank(false);
     toast.success(T("تم حفظ بيانات الحساب البنكي", "Bank details saved"));
   };
 
@@ -173,12 +182,40 @@ const TeacherFinance = () => {
         <div className="flex items-center gap-2 mb-5">
           <Landmark size={18} className="text-primary" />
           <h3 className="font-extrabold">{T("بيانات الحساب البنكي", "Bank account details")}</h3>
-          {!hasBank && (
+          {!hasBank ? (
             <span className="tag-outline text-[0.65rem] text-warning border-warning/40">
               {T("غير مكتمل", "Incomplete")}
             </span>
+          ) : (
+            <span className="tag-outline text-[0.65rem] text-success border-success/40">
+              {T("محفوظ", "Saved")}
+            </span>
+          )}
+          {hasBank && !editingBank && (
+            <button onClick={() => setEditingBank(true)} className="ms-auto text-xs font-bold text-primary hover:underline">
+              {T("تعديل", "Edit")}
+            </button>
           )}
         </div>
+
+        {hasBank && !editingBank ? (
+          <div className="grid gap-2 sm:grid-cols-2">
+            {([
+              [T("اسم صاحب الحساب", "Account holder"), savedBank.account_holder],
+              [T("اسم البنك", "Bank name"), savedBank.bank_name],
+              [T("الدولة", "Country"), savedBank.country || "—"],
+              ["IBAN", savedBank.iban || "—"],
+              [T("رقم الحساب", "Account number"), savedBank.account_number || "—"],
+              ["SWIFT", savedBank.swift || "—"],
+            ] as [string, string][]).map(([k, v]) => (
+              <div key={k} className="flex items-center justify-between gap-3 rounded-xl bg-muted/60 border px-3 py-2">
+                <span className="text-xs text-muted-foreground">{k}</span>
+                <span className="text-sm font-bold truncate" dir="auto">{v}</span>
+              </div>
+            ))}
+          </div>
+        ) : (
+        <>
         <div className="grid gap-4 md:grid-cols-2">
           <div>
             <label className={lbl}>{T("اسم صاحب الحساب", "Account holder")}</label>
@@ -205,10 +242,19 @@ const TeacherFinance = () => {
             <input className={input} dir="ltr" value={bank.swift} onChange={(e) => setBank((b) => ({ ...b, swift: e.target.value }))} />
           </div>
         </div>
-        <button onClick={saveBank} disabled={saving} className="btn-primary mt-5 flex items-center gap-2 disabled:opacity-50">
-          {saving ? <Loader2 size={16} className="animate-spin" /> : <Save size={16} />}
-          {T("حفظ البيانات", "Save details")}
-        </button>
+        <div className="flex items-center gap-3 mt-5">
+          <button onClick={saveBank} disabled={saving} className="btn-primary flex items-center gap-2 disabled:opacity-50">
+            {saving ? <Loader2 size={16} className="animate-spin" /> : <Save size={16} />}
+            {T("حفظ البيانات", "Save details")}
+          </button>
+          {hasBank && (
+            <button onClick={() => { setBank(savedBank); setEditingBank(false); }} className="text-sm font-bold text-muted-foreground hover:text-foreground">
+              {T("إلغاء", "Cancel")}
+            </button>
+          )}
+        </div>
+        </>
+        )}
       </div>
 
       {/* Transactions */}

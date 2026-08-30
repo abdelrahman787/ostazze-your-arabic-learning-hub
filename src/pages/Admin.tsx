@@ -267,6 +267,10 @@ const Admin = () => {
     university: "", university_en: "", major: "", major_en: "", price: "", subjects: "", subjects_en: "", verified: false,
     avatar_url: "",
   });
+  const [editTeacherBank, setEditTeacherBank] = useState<{
+    account_holder: string; bank_name: string; country: string | null;
+    iban: string | null; account_number: string | null; swift: string | null; balance: number;
+  } | null>(null);
   const [manualName, setManualName] = useState(false);
   const [savingTeacher, setSavingTeacher] = useState(false);
   const [uploadingAvatar, setUploadingAvatar] = useState(false);
@@ -282,6 +286,13 @@ const Admin = () => {
 
   const openEditTeacher = (tc: TeacherRow) => {
     setEditTeacher(tc);
+    setEditTeacherBank(null);
+    supabase
+      .from("teacher_bank_accounts")
+      .select("*")
+      .eq("user_id", tc.user_id)
+      .maybeSingle()
+      .then(({ data }) => setEditTeacherBank(data ?? null));
     setEditTeacherForm({
       full_name: tc.full_name || "",
       full_name_en: tc.full_name_en || "",
@@ -1637,6 +1648,30 @@ const Admin = () => {
             <div>
               <label className="block text-sm font-bold mb-1.5">نبذة (إنجليزي)</label>
               <textarea dir="ltr" rows={3} value={editTeacherForm.bio_en} onChange={(e) => setEditTeacherForm((f) => ({ ...f, bio_en: e.target.value }))} className="input-base resize-none" />
+            </div>
+            {/* Bank details (read-only) */}
+            <div className="p-4 rounded-xl border-2 border-border bg-muted/50">
+              <h4 className="font-extrabold text-sm mb-3">البيانات البنكية والرصيد</h4>
+              {!editTeacherBank ? (
+                <p className="text-xs text-muted-foreground">لم يضف المعلم بياناته البنكية بعد</p>
+              ) : (
+                <div className="grid gap-2 sm:grid-cols-2 text-sm">
+                  {([
+                    ["صاحب الحساب", editTeacherBank.account_holder],
+                    ["البنك", editTeacherBank.bank_name],
+                    ["الدولة", editTeacherBank.country || "—"],
+                    ["IBAN", editTeacherBank.iban || "—"],
+                    ["رقم الحساب", editTeacherBank.account_number || "—"],
+                    ["SWIFT", editTeacherBank.swift || "—"],
+                    ["الرصيد", `${Number(editTeacherBank.balance || 0).toLocaleString("ar-EG")} EGP`],
+                  ] as [string, string][]).map(([k, v]) => (
+                    <div key={k} className="flex justify-between gap-2 rounded-lg bg-card px-3 py-2 border border-border">
+                      <span className="text-xs text-muted-foreground">{k}</span>
+                      <span className="font-bold text-xs truncate" dir="auto">{v}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
             <label className="flex items-center gap-3 p-3 rounded-xl border-2 border-border cursor-pointer">
               <input type="checkbox" checked={editTeacherForm.verified} onChange={(e) => setEditTeacherForm((f) => ({ ...f, verified: e.target.checked }))} className="w-4 h-4 accent-primary" />
