@@ -195,7 +195,7 @@ const AdminTeacherFinance = () => {
         ) : (
           <div className="space-y-1 max-h-[520px] overflow-y-auto">
             {filtered.map((tc) => {
-              const name = resolveDisplayName(tc.full_name, tc.full_name_en, lang) || "—";
+              const name = resolveDisplayName(lang as "ar" | "en", tc.full_name, tc.full_name_en, "—");
               const active = selected?.user_id === tc.user_id;
               return (
                 <button
@@ -223,7 +223,7 @@ const AdminTeacherFinance = () => {
         <div className="space-y-5">
           <div className="flex items-center justify-between">
             <h3 className="font-extrabold text-lg">
-              {resolveDisplayName(selected.full_name, selected.full_name_en, lang)}
+              {resolveDisplayName(lang as "ar" | "en", selected.full_name, selected.full_name_en, "—")}
             </h3>
             <button onClick={() => loadDetail(selected.user_id)} className="text-xs font-bold text-primary flex items-center gap-1">
               <RefreshCw size={13} /> {T("تحديث", "Refresh")}
