@@ -182,12 +182,40 @@ const TeacherFinance = () => {
         <div className="flex items-center gap-2 mb-5">
           <Landmark size={18} className="text-primary" />
           <h3 className="font-extrabold">{T("بيانات الحساب البنكي", "Bank account details")}</h3>
-          {!hasBank && (
+          {!hasBank ? (
             <span className="tag-outline text-[0.65rem] text-warning border-warning/40">
               {T("غير مكتمل", "Incomplete")}
             </span>
+          ) : (
+            <span className="tag-outline text-[0.65rem] text-success border-success/40">
+              {T("محفوظ", "Saved")}
+            </span>
+          )}
+          {hasBank && !editingBank && (
+            <button onClick={() => setEditingBank(true)} className="ms-auto text-xs font-bold text-primary hover:underline">
+              {T("تعديل", "Edit")}
+            </button>
           )}
         </div>
+
+        {hasBank && !editingBank ? (
+          <div className="grid gap-2 sm:grid-cols-2">
+            {([
+              [T("اسم صاحب الحساب", "Account holder"), savedBank.account_holder],
+              [T("اسم البنك", "Bank name"), savedBank.bank_name],
+              [T("الدولة", "Country"), savedBank.country || "—"],
+              ["IBAN", savedBank.iban || "—"],
+              [T("رقم الحساب", "Account number"), savedBank.account_number || "—"],
+              ["SWIFT", savedBank.swift || "—"],
+            ] as [string, string][]).map(([k, v]) => (
+              <div key={k} className="flex items-center justify-between gap-3 rounded-xl bg-muted/60 border px-3 py-2">
+                <span className="text-xs text-muted-foreground">{k}</span>
+                <span className="text-sm font-bold truncate" dir="auto">{v}</span>
+              </div>
+            ))}
+          </div>
+        ) : (
+        <>
         <div className="grid gap-4 md:grid-cols-2">
           <div>
             <label className={lbl}>{T("اسم صاحب الحساب", "Account holder")}</label>
