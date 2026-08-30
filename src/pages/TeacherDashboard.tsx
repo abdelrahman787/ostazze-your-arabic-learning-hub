@@ -5,13 +5,14 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
 import {
   Menu, LogOut, LayoutDashboard, BookOpen, User, Clock,
-  GraduationCap, Video, FileText, MessageSquare, Loader2, ArrowLeft, Star, Lock
+  GraduationCap, Video, FileText, MessageSquare, Loader2, ArrowLeft, Star, Lock, Wallet
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import NotificationBell from "@/components/NotificationBell";
 import TeacherAvailabilityManager from "@/components/TeacherAvailabilityManager";
 import MyLessons from "@/components/MyLessons";
+import TeacherFinance from "@/components/TeacherFinance";
 
 interface TeacherLecture {
   id: string;
@@ -161,6 +162,9 @@ const TeacherDashboard = () => {
       { icon: Star, label: t("sidebar_my_lessons"), tab: "mylessons" },
       { icon: Clock, label: t("sidebar_available_times"), tab: "availability" },
     ]},
+    { section: lang === "ar" ? "الماليات" : "Finance", items: [
+      { icon: Wallet, label: lang === "ar" ? "المحفظة والمعاملات" : "Wallet & transactions", tab: "finance" },
+    ]},
     { section: t("section_account"), items: [
       { icon: User, label: t("sidebar_profile"), tab: "profile" },
       { icon: Lock, label: t("dash_change_password"), tab: "password" },
@@ -203,7 +207,7 @@ const TeacherDashboard = () => {
             <button onClick={() => setSidebarOpen(true)} className="lg:hidden"><Menu size={20} /></button>
             <h2 className="font-bold">
               {showConversations ? t("stat_conversations") : 
-               tab === "overview" ? t("dash_overview") : tab === "lectures" ? t("sidebar_my_lectures") : tab === "mylessons" ? t("sidebar_my_lessons") : tab === "profile" ? t("sidebar_profile") : tab === "availability" ? t("sidebar_available_times") : tab === "password" ? t("dash_change_password") : ""}
+               tab === "overview" ? t("dash_overview") : tab === "lectures" ? t("sidebar_my_lectures") : tab === "mylessons" ? t("sidebar_my_lessons") : tab === "finance" ? (lang === "ar" ? "المحفظة والمعاملات" : "Wallet & transactions") : tab === "profile" ? t("sidebar_profile") : tab === "availability" ? t("sidebar_available_times") : tab === "password" ? t("dash_change_password") : ""}
             </h2>
           </div>
           <div className="flex items-center gap-3">
@@ -357,6 +361,12 @@ const TeacherDashboard = () => {
           {tab === "mylessons" && (
             <div className="animate-fade-in">
               <MyLessons role="teacher" />
+            </div>
+          )}
+
+          {tab === "finance" && (
+            <div className="animate-fade-in">
+              <TeacherFinance />
             </div>
           )}
 
