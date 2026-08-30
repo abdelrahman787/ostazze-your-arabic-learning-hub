@@ -139,6 +139,8 @@ const TeacherFinance = () => {
     setSaving(false);
     if (error) return toast.error(error.message);
     setHasBank(true);
+    setSavedBank(bank);
+    setEditingBank(false);
     toast.success(T("تم حفظ بيانات الحساب البنكي", "Bank details saved"));
   };
 
