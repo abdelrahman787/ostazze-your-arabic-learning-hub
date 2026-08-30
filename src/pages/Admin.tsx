@@ -10,13 +10,14 @@ import {
   GraduationCap, Users, Search, Plus,
   Shield, Video, BookOpen, Loader2, Upload, X, FileText, UserPlus, Home, ShoppingBag,
   ChevronLeft, ChevronRight, Clock, Menu, LogOut, LayoutDashboard, User, Lock,
-  Calendar, CreditCard, RefreshCw, AlertTriangle, BookMarked
+  Calendar, CreditCard, RefreshCw, AlertTriangle, BookMarked, Wallet
 } from "lucide-react";
 import { motion } from "framer-motion";
 import SalesHub from "@/components/SalesHub";
 import NotificationBell from "@/components/NotificationBell";
 import AdminCourses from "@/components/AdminCourses";
 import AdminInvoices from "@/components/AdminInvoices";
+import AdminTeacherFinance from "@/components/admin/AdminTeacherFinance";
 import AdminTutorApplications from "@/components/AdminTutorApplications";
 import AdminAutomationDiagnostics from "@/components/AdminAutomationDiagnostics";
 import NoIndex from "@/components/NoIndex";
@@ -31,6 +32,7 @@ type AdminTab =
   | "overview"
   | "sales"
   | "invoices"
+  | "finance"
   | "teachers"
   | "students"
   | "courses"
@@ -47,6 +49,7 @@ const ADMIN_TABS: AdminTab[] = [
   "overview",
   "sales",
   "invoices",
+  "finance",
   "teachers",
   "students",
   "courses",
@@ -844,6 +847,7 @@ const Admin = () => {
       { icon: LayoutDashboard, label: isArabic ? "نظرة عامة" : "Overview", tab: "overview", description: isArabic ? "ملخص سريع لكل أجزاء المنصة" : "A quick summary of the platform" },
       { icon: ShoppingBag, label: t("sales_hub"), tab: "sales", description: isArabic ? "طلبات الحجز والمدفوعات" : "Bookings and payments" },
       { icon: CreditCard, label: isArabic ? "الفواتير والتقارير" : "Invoices & Reports", tab: "invoices", description: isArabic ? "متابعة المدفوعات والفواتير" : "Track payments and invoices" },
+      { icon: Wallet, label: isArabic ? "ماليات المعلمين" : "Teacher Finances", tab: "finance", description: isArabic ? "الأرصدة والتحويلات والمعاملات" : "Balances, payouts and transactions" },
       { icon: GraduationCap, label: t("admin_teachers"), tab: "teachers", description: isArabic ? "إضافة وتعديل بيانات المعلمين" : "Add and edit teacher profiles" },
       { icon: Users, label: t("admin_students"), tab: "students", description: isArabic ? "بيانات الطلاب المسجلين" : "Registered student details" },
       { icon: BookMarked, label: isArabic ? "المقررات" : "Courses", tab: "courses", description: isArabic ? "إدارة محتوى المقررات" : "Manage course content" },
@@ -1091,6 +1095,15 @@ const Admin = () => {
               <AdminInvoices />
             </div>
           )}
+
+          {/* Teacher Finances Tab */}
+          {activeTab === "finance" && (
+            <div className="animate-fade-in">
+              <AdminTeacherFinance />
+            </div>
+          )}
+
+
 
           {activeTab === "applications" && (
             <div className="animate-fade-in">

@@ -706,6 +706,59 @@ export type Database = {
         }
         Relationships: []
       }
+      teacher_transactions: {
+        Row: {
+          amount: number
+          created_at: string
+          created_by: string | null
+          currency: string
+          description: string | null
+          id: string
+          paid_at: string | null
+          session_request_id: string | null
+          status: string
+          teacher_id: string
+          type: string
+          updated_at: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          created_by?: string | null
+          currency?: string
+          description?: string | null
+          id?: string
+          paid_at?: string | null
+          session_request_id?: string | null
+          status?: string
+          teacher_id: string
+          type: string
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          created_by?: string | null
+          currency?: string
+          description?: string | null
+          id?: string
+          paid_at?: string | null
+          session_request_id?: string | null
+          status?: string
+          teacher_id?: string
+          type?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "teacher_transactions_session_request_id_fkey"
+            columns: ["session_request_id"]
+            isOneToOne: false
+            referencedRelation: "session_requests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       tutor_applications: {
         Row: {
           admin_notes: string | null
@@ -898,6 +951,16 @@ export type Database = {
           full_name: string
           full_name_en: string
           user_id: string
+        }[]
+      }
+      get_teacher_finance_summary: {
+        Args: { _teacher_id: string }
+        Returns: {
+          available_balance: number
+          pending_amount: number
+          total_earned: number
+          total_paid_out: number
+          transactions_count: number
         }[]
       }
       has_role: {
