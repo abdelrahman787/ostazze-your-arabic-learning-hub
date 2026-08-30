@@ -282,6 +282,13 @@ const Admin = () => {
 
   const openEditTeacher = (tc: TeacherRow) => {
     setEditTeacher(tc);
+    setEditTeacherBank(null);
+    supabase
+      .from("teacher_bank_accounts")
+      .select("*")
+      .eq("user_id", tc.user_id)
+      .maybeSingle()
+      .then(({ data }) => setEditTeacherBank(data ?? null));
     setEditTeacherForm({
       full_name: tc.full_name || "",
       full_name_en: tc.full_name_en || "",
