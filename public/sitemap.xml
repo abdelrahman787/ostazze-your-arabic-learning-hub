@@ -565,4 +565,14 @@
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://ostaze.com/teachers/6aac99e2-4903-4b50-abc1-bda3d7060845</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ostaze.com/teachers/c5773e72-e45a-46d5-9c06-d39c38203060</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
