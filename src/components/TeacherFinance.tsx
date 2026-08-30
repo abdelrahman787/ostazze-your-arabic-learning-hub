@@ -95,15 +95,20 @@ const TeacherFinance = () => {
     );
     setTxs((txRes.data || []).map((t) => ({ ...t, amount: Number(t.amount) })));
     if (bankRes.data) {
-      setHasBank(true);
-      setBank({
+      const b = {
         account_holder: bankRes.data.account_holder || "",
         bank_name: bankRes.data.bank_name || "",
         country: bankRes.data.country || "",
         iban: bankRes.data.iban || "",
         account_number: bankRes.data.account_number || "",
         swift: bankRes.data.swift || "",
-      });
+      };
+      setHasBank(true);
+      setBank(b);
+      setSavedBank(b);
+      setEditingBank(false);
+    } else {
+      setEditingBank(true);
     }
     setLoading(false);
   }, [user]);
