@@ -267,6 +267,10 @@ const Admin = () => {
     university: "", university_en: "", major: "", major_en: "", price: "", subjects: "", subjects_en: "", verified: false,
     avatar_url: "",
   });
+  const [editTeacherBank, setEditTeacherBank] = useState<{
+    account_holder: string; bank_name: string; country: string | null;
+    iban: string | null; account_number: string | null; swift: string | null; balance: number;
+  } | null>(null);
   const [manualName, setManualName] = useState(false);
   const [savingTeacher, setSavingTeacher] = useState(false);
   const [uploadingAvatar, setUploadingAvatar] = useState(false);
