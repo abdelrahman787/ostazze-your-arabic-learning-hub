@@ -242,10 +242,19 @@ const TeacherFinance = () => {
             <input className={input} dir="ltr" value={bank.swift} onChange={(e) => setBank((b) => ({ ...b, swift: e.target.value }))} />
           </div>
         </div>
-        <button onClick={saveBank} disabled={saving} className="btn-primary mt-5 flex items-center gap-2 disabled:opacity-50">
-          {saving ? <Loader2 size={16} className="animate-spin" /> : <Save size={16} />}
-          {T("حفظ البيانات", "Save details")}
-        </button>
+        <div className="flex items-center gap-3 mt-5">
+          <button onClick={saveBank} disabled={saving} className="btn-primary flex items-center gap-2 disabled:opacity-50">
+            {saving ? <Loader2 size={16} className="animate-spin" /> : <Save size={16} />}
+            {T("حفظ البيانات", "Save details")}
+          </button>
+          {hasBank && (
+            <button onClick={() => { setBank(savedBank); setEditingBank(false); }} className="text-sm font-bold text-muted-foreground hover:text-foreground">
+              {T("إلغاء", "Cancel")}
+            </button>
+          )}
+        </div>
+        </>
+        )}
       </div>
 
       {/* Transactions */}
