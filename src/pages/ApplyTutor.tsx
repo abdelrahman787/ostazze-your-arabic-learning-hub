@@ -4,7 +4,7 @@ import { Send, CheckCircle2, GraduationCap, Upload, FileText, X } from "lucide-r
 import { useLanguage } from "@/contexts/LanguageContext";
 import PageHelmet from "@/components/PageHelmet";
 
-import { WHATSAPP_NUMBER } from "@/lib/whatsapp";
+import TutorCoursesPicker from "@/components/TutorCoursesPicker";
 import { supabase } from "@/integrations/supabase/client";
 
 const SPECIALIZATIONS = [
@@ -355,32 +355,15 @@ const ApplyTutor = () => {
       lang,
     });
     setSaving(false);
-    if (error) console.error("tutor application save failed", error);
-    const L = (ar: string, en: string) => (isAr ? ar : en);
-    const lines = [
-      L("طلب انضمام كمعلم في أستاذي", "Teacher application — Ostaze"),
-      "",
-      `${L("الاسم", "Name")}: ${form.name}`,
-      `${L("واتساب", "WhatsApp")}: ${form.phone}`,
-      `${L("البريد", "Email")}: ${form.email}`,
-      `${L("الجنسية", "Nationality")}: ${form.nationality}`,
-      `${L("صورة شخصية", "Photo")}: ${photoFile ? (useAvatar ? L("مرفوعة - موافق كصورة ملف شخصي", "uploaded - approved as profile picture") : L("مرفوعة - غير موافق", "uploaded - not approved")) : L("غير مرفقة", "not provided")}`,
-      `${L("التخصص", "Specialization")}: ${form.specialization}`,
-      `${L("الجامعة", "University")}: ${form.university}`,
-      `${L("المؤهل", "Degree")}: ${form.degree}`,
-      `${L("سنوات الخبرة", "Experience")}: ${form.experience}`,
-      `${L("لغة التدريس", "Teaching language")}: ${form.teachLang}`,
-      `${L("المواد", "Courses")}: ${form.courses}`,
-      `${L("سبق التسجيل", "Recorded before")}: ${form.recordedBefore}`,
-      `${L("مكان هادئ", "Quiet place")}: ${form.quietPlace}`,
-      `${L("الأدوات", "Tools")}: ${tools.join(", ")}`,
-      `${L("رابط الفيديو التجريبي", "Demo video")}: ${form.demoLink || L("مرفوع/غير متوفر", "uploaded / not provided")}`,
-    ];
-    window.open(
-      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`,
-      "_blank",
-      "noopener"
-    );
+    if (error) {
+      console.error("tutor application save failed", error);
+      setPhotoError(
+        isAr
+          ? "تعذر إرسال الطلب، حاول مرة أخرى."
+          : "Could not submit your application, please try again."
+      );
+      return;
+    }
     setSent(true);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -431,7 +414,7 @@ const ApplyTutor = () => {
             {T.eyebrow}
           </span>
           <h1 className="mt-4 text-3xl md:text-4xl font-bold text-foreground">
-            {isAr ? "Join Us As Tutor\u00a0" : "Join Us As Tutor\u00a0"}
+            {isAr ? "انضم إلينا كمعلم" : "Join Us As Tutor"}
           </h1>
           <p className="mt-3 text-muted-foreground max-w-2xl">{T.lede}</p>
           <ul className="mt-6 grid sm:grid-cols-2 gap-3">
@@ -592,14 +575,11 @@ const ApplyTutor = () => {
                   ? ["عربي", "إنجليزي", "عربي وإنجليزي"]
                   : ["Arabic", "English", "Arabic and English"],
               })}
-              {Field({
-                k: "courses",
-                label: isAr ? "المواد التي تستطيع تدريسها" : "Courses You Can Teach",
-                required: true,
-                full: true,
-                area: true,
-                placeholder: isAr ? "مثال: تفاضل ١، فيزياء ١٠١" : "Example: Calculus 1, Physics 101",
-              })}
+              <TutorCoursesPicker
+                value={form.courses}
+                onChange={(v) => setForm((p) => ({ ...p, courses: v }))}
+                isAr={isAr}
+              />
             </Section>
 
             <Section num="03" title={T.s3}>
