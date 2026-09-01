@@ -355,32 +355,15 @@ const ApplyTutor = () => {
       lang,
     });
     setSaving(false);
-    if (error) console.error("tutor application save failed", error);
-    const L = (ar: string, en: string) => (isAr ? ar : en);
-    const lines = [
-      L("طلب انضمام كمعلم في أستاذي", "Teacher application — Ostaze"),
-      "",
-      `${L("الاسم", "Name")}: ${form.name}`,
-      `${L("واتساب", "WhatsApp")}: ${form.phone}`,
-      `${L("البريد", "Email")}: ${form.email}`,
-      `${L("الجنسية", "Nationality")}: ${form.nationality}`,
-      `${L("صورة شخصية", "Photo")}: ${photoFile ? (useAvatar ? L("مرفوعة - موافق كصورة ملف شخصي", "uploaded - approved as profile picture") : L("مرفوعة - غير موافق", "uploaded - not approved")) : L("غير مرفقة", "not provided")}`,
-      `${L("التخصص", "Specialization")}: ${form.specialization}`,
-      `${L("الجامعة", "University")}: ${form.university}`,
-      `${L("المؤهل", "Degree")}: ${form.degree}`,
-      `${L("سنوات الخبرة", "Experience")}: ${form.experience}`,
-      `${L("لغة التدريس", "Teaching language")}: ${form.teachLang}`,
-      `${L("المواد", "Courses")}: ${form.courses}`,
-      `${L("سبق التسجيل", "Recorded before")}: ${form.recordedBefore}`,
-      `${L("مكان هادئ", "Quiet place")}: ${form.quietPlace}`,
-      `${L("الأدوات", "Tools")}: ${tools.join(", ")}`,
-      `${L("رابط الفيديو التجريبي", "Demo video")}: ${form.demoLink || L("مرفوع/غير متوفر", "uploaded / not provided")}`,
-    ];
-    window.open(
-      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`,
-      "_blank",
-      "noopener"
-    );
+    if (error) {
+      console.error("tutor application save failed", error);
+      setPhotoError(
+        isAr
+          ? "تعذر إرسال الطلب، حاول مرة أخرى."
+          : "Could not submit your application, please try again."
+      );
+      return;
+    }
     setSent(true);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
