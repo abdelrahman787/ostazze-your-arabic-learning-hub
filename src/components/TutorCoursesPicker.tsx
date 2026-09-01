@@ -87,7 +87,7 @@ const TutorCoursesPicker = ({ value, onChange, isAr }: Props) => {
     const v = name.trim();
     if (!v) return;
     if (selected.some((s) => s.toLowerCase() === v.toLowerCase())) return;
-    onChange([...selected, v].join("، ".trim() === "" ? ", " : isAr ? "، " : ", "));
+    onChange([...selected, v].join(isAr ? "، " : ", "));
   };
 
   const remove = (i: number) =>
