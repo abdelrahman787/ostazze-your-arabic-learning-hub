@@ -168,7 +168,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     if (!user) return { error: "Not logged in" };
     try {
       // Build the profiles update payload (only include defined fields)
-      const profileData: Record<string, string | undefined> = {};
+      const profileData: { full_name?: string; bio?: string; phone?: string } = {};
       if (data.full_name !== undefined) profileData.full_name = data.full_name;
       if (data.bio !== undefined) profileData.bio = data.bio;
       if (data.phone !== undefined) profileData.phone = data.phone;
