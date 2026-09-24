@@ -6,20 +6,13 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-// Trusted server-side pricing table. MUST stay in sync with src/lib/pricing.ts.
-// Charged currency is always EGP (Stripe). Amounts here are in EGP cents.
-type Country = "EG" | "QA" | "KW";
-const SESSION_PRICE_EGP_CENTS: Record<Country, number> = {
-  EG: Math.round(200 * 1 * 100),        // 200 EGP
-  QA: Math.round(150 * 14.64 * 100),    // 150 QAR → EGP
-  KW: Math.round(120 * 14.54 * 100),    // 120 KWD → EGP
-};
+// Trusted server-side price. MUST stay in sync with src/lib/pricing.ts.
+// One hour = 125 SAR, always charged in EGP.
+const BASE_PRICE_SAR = 125;
+const SAR_TO_EGP = 12.95;
 
-function resolveAmountCents(country: unknown): number {
-  const c = (typeof country === "string" && country in SESSION_PRICE_EGP_CENTS
-    ? country
-    : "EG") as Country;
-  return SESSION_PRICE_EGP_CENTS[c];
+function resolveAmountCents(_country: unknown): number {
+  return Math.round(BASE_PRICE_SAR * SAR_TO_EGP * 100);
 }
 
 serve(async (req) => {

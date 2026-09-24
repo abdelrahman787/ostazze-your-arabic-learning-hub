@@ -68,6 +68,7 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const CheckoutReturn = lazy(() => import("./pages/CheckoutReturn"));
 const Checkout = lazy(() => import("./pages/Checkout"));
 const FAQ = lazy(() => import("./pages/FAQ"));
+const Pricing = lazy(() => import("./pages/Pricing"));
 const ZoomTestPage = lazy(() => import("./pages/ZoomTestPage"));
 const MyBookings = lazy(() => import("./pages/MyBookings"));
 
@@ -229,6 +230,7 @@ const App = () => (
                           <Route path="/checkout" element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
                           <Route path="/checkout/return" element={<CheckoutReturn />} />
                           <Route path="/faq" element={<FAQ />} />
+                          <Route path="/pricing" element={<Pricing />} />
                           <Route path="/zoom-test" element={<ProtectedRoute><ZoomTestPage /></ProtectedRoute>} />
                           <Route path="/my-bookings" element={<ProtectedRoute><MyBookings /></ProtectedRoute>} />
                           <Route path="*" element={<NotFound />} />
