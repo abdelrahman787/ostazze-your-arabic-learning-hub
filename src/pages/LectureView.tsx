@@ -166,7 +166,7 @@ const LectureView = () => {
   useEffect(() => {
     if (!id) return;
     const channel = supabase
-      .channel(`chat-${id}`)
+      .channel(`chat-${id}-${Math.random().toString(36).slice(2)}`)
       .on(
         "postgres_changes",
         {
