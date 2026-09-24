@@ -75,6 +75,7 @@ const Footer = () => {
               <Link to="/privacy" className="text-black/60 dark:text-white/60 hover:text-primary transition-colors">{t("footer_privacy")}</Link>
               <Link to="/refund" className="text-black/60 dark:text-white/60 hover:text-primary transition-colors">{t("footer_refund")}</Link>
               <Link to="/faq" className="text-black/60 dark:text-white/60 hover:text-primary transition-colors">{t("footer_faq")}</Link>
+              <Link to="/pricing" className="text-black/60 dark:text-white/60 hover:text-primary transition-colors">{lang === "ar" ? "الأسعار" : "Pricing"}</Link>
             </div>
           </div>
 
