@@ -41,10 +41,18 @@ const countryNames: Record<string, { ar: string; en: string }> = {
   EG: { ar: "مصر", en: "Egypt" },
 };
 
-const comingSoonCountries = [
-  { code: "AE", name_ar: countryNames.AE.ar, name_en: countryNames.AE.en, universities: [] as University[] },
-  { code: "EG", name_ar: countryNames.EG.ar, name_en: countryNames.EG.en, universities: [] as University[] },
+// Countries teased with a "Coming Soon" card until their universities are added.
+// A country drops off this list automatically as soon as it has universities.
+const comingSoonTeaser = [
+  { code: "AE", name_ar: countryNames.AE.ar, name_en: countryNames.AE.en },
+  { code: "EG", name_ar: countryNames.EG.ar, name_en: countryNames.EG.en },
 ];
+
+const getComingSoonCountries = (universities: University[]) =>
+  comingSoonTeaser
+    .filter((c) => !universities.some((u) => u.country_code === c.code))
+    .map((c) => ({ ...c, universities: [] as University[] }));
+
 
 const countryColors: Record<string, { from: string; to: string; accent: string }> = {
   KW: { from: "from-green-500/20", to: "to-red-500/10", accent: "text-green-600 dark:text-green-400" },
@@ -155,6 +163,7 @@ type View = "countries" | "universities" | "university";
 const Universities = () => {
   const { lang, t } = useLanguage();
   const countries = useMemo(() => getCountries(), []);
+  const comingSoonCountries = useMemo(() => getComingSoonCountries(allUniversities), []);
   const [view, setView] = useState<View>("countries");
   const [selectedCountry, setSelectedCountry] = useState<typeof countries[0] | null>(null);
   const [selectedUni, setSelectedUni] = useState<University | null>(null);
