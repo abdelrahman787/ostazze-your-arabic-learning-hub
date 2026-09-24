@@ -67,7 +67,7 @@ const AdminTutorApplications = () => {
 
   useEffect(() => {
     const channel = supabase
-      .channel("admin-tutor-applications")
+      .channel(`admin-tutor-applications-${Math.random().toString(36).slice(2)}`)
       .on("postgres_changes", { event: "*", schema: "public", table: "tutor_applications" }, () => fetchApps())
       .subscribe();
     return () => { supabase.removeChannel(channel); };

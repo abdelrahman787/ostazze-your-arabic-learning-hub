@@ -77,7 +77,7 @@ const SalesHub = () => {
   // Realtime: refresh on any change to session_requests
   useEffect(() => {
     const channel = supabase
-      .channel("admin-session-requests")
+      .channel(`admin-session-requests-${Math.random().toString(36).slice(2)}`)
       .on("postgres_changes", { event: "*", schema: "public", table: "session_requests" }, () => {
         fetchRequests();
       })
