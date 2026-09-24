@@ -1,0 +1,1 @@
+ALTER POLICY live_sessions_enrolled_select ON public.course_live_sessions TO authenticated;
