@@ -19,7 +19,7 @@ const paths = [...readFileSync("public/sitemap.xml", "utf8").matchAll(/<loc>http
 
 // Internal link graph from what pages render as <a href>.
 const linked = new Set<string>(["/"]);
-["/subjects", "/universities", "/teachers", "/categories", "/about", "/contact", "/faq", "/pricing", "/terms", "/privacy", "/refund"].forEach((p) => linked.add(p)); // navbar/footer
+["/subjects", "/universities", "/teachers", "/categories", "/about", "/contact", "/faq", "/pricing", "/terms", "/privacy", "/refund", "/courses", "/languages"].forEach((p) => linked.add(p)); // navbar/footer
 ["kuwait", "qatar", "saudi-arabia", "uae"].forEach((s) => linked.add(`/universities/${s}`)); // footer hubs
 for (const u of allUniversities) {
   linked.add(countryPath(u.country_code));

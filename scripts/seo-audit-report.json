@@ -134,20 +134,6 @@
   "duplicateCanonicals": [],
   "problems": [
     {
-      "path": "/languages",
-      "status": "valuable",
-      "notes": [
-        "orphan: no internal link found"
-      ]
-    },
-    {
-      "path": "/courses",
-      "status": "valuable",
-      "notes": [
-        "orphan: no internal link found"
-      ]
-    },
-    {
       "path": "/apply-tutor",
       "status": "unchecked",
       "notes": [
