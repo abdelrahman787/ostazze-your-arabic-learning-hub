@@ -1,3 +1,4 @@
+import { SITE } from "@/config/site";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -29,9 +30,9 @@ const Contact = () => {
   };
 
   const contactInfo = [
-    { icon: Mail, label: t("contact_email_label"), value: "info@ostaze.com", href: "mailto:info@ostaze.com" },
-    { icon: Phone, label: t("contact_phone_label"), value: "+201130382206", href: "tel:+201130382206" },
-    { icon: MapPin, label: t("contact_location_label"), value: t("footer_location"), href: "#" },
+    { icon: Mail, label: t("contact_email_label"), value: SITE.email, href: `mailto:${SITE.email}` },
+    { icon: Phone, label: t("contact_phone_label"), value: SITE.phoneDisplay, href: `tel:${SITE.phone}` },
+    { icon: MapPin, label: t("contact_location_label"), value: lang === "ar" ? `${SITE.city.ar} - ${SITE.country.ar}` : `${SITE.city.en} - ${SITE.country.en}`, href: undefined as string | undefined },
     { icon: MessageCircle, label: t("contact_whatsapp_label"), value: t("contact_whatsapp_value"), href: waLink(lang === "ar" ? "مرحباً، أريد الاستفسار عن خدمات أسطازي" : "Hello, I'd like to inquire about Ostaze services") },
   ];
 
@@ -63,7 +64,7 @@ const Contact = () => {
           {/* Contact Info */}
           <div className="lg:col-span-2 space-y-5">
             {contactInfo.map((item, i) => (
-              <motion.a key={i} href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined}
+              <motion.a key={i} href={item.href} target={item.href?.startsWith("http") ? "_blank" : undefined}
                 rel="noopener noreferrer"
                 initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.1 }}
                 className="card-base p-5 flex items-start gap-4 feature-card block">

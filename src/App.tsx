@@ -24,11 +24,9 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
 import ProtectedRoute from "@/components/ProtectedRoute";
 import ScrollToTop from "@/components/ScrollToTop";
-import GlobalSeo from "@/components/GlobalSeo";
 import RouteSkeleton from "@/components/RouteSkeleton";
 
 
@@ -45,6 +43,9 @@ if (typeof window !== "undefined" && window.location.pathname === "/") {
 }
 const Index = lazy(indexImport);
 
+// Footer is below the fold: lazy so it stays out of the initial JS budget.
+const GlobalSeo = lazy(() => import("@/components/GlobalSeo"));
+const Footer = lazy(() => import("@/components/Footer"));
 const FloatingWhatsApp = lazy(() => import("@/components/FloatingWhatsApp"));
 const AIChatWidget = lazy(() => import("@/components/AIChatWidget"));
 const CookieConsent = lazy(() => import("@/components/CookieConsent"));
@@ -188,7 +189,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       >
         {children}
       </main>
-      {!hideFooter && <Footer />}
+      {!hideFooter && <Suspense fallback={<div className="min-h-[420px]" aria-hidden="true" />}><Footer /></Suspense>}
       <DeferredWidgets />
     </div>
   );
@@ -209,7 +210,7 @@ const App = () => (
                 <BrowserRouter>
                   <ScrollToTop />
                   <TrailingSlashRedirect />
-                  <GlobalSeo />
+                  <Suspense fallback={null}><GlobalSeo /></Suspense>
                   <IdlePrefetch />
                   <Layout>
                     <PageTransition>

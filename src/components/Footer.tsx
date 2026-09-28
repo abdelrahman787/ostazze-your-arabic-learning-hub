@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Facebook, Linkedin, Twitter, Mail, Phone, MapPin, GraduationCap } from "lucide-react";
+import { SITE } from "@/config/site";
+import { Facebook, Mail, Phone, MapPin, GraduationCap } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useState } from "react";
 
@@ -35,14 +36,12 @@ const Footer = () => {
             </Link>
             <p className="text-sm leading-relaxed text-black/75 dark:text-white/75 mb-5">{t("footer_desc")}</p>
             <div className="flex gap-2">
-              {[
-                { Icon: Facebook, label: "Facebook", href: "#" },
-                { Icon: Linkedin, label: "LinkedIn", href: "#" },
-                { Icon: Twitter, label: "Twitter", href: "#" },
-              ].map(({ Icon, label, href }) => (
+              {SITE.social.map(({ network, url }) => ({ Icon: Facebook, label: network, href: url })).map(({ Icon, label, href }) => (
                 <a
                   key={label}
                   href={href}
+                  target="_blank"
+                  rel="noopener noreferrer me"
                   aria-label={label}
                   className="w-9 h-9 rounded-full bg-black/5 border border-black/10 text-black/70 hover:bg-primary hover:border-primary hover:text-white flex items-center justify-center transition-all dark:bg-white/5 dark:border-white/10 dark:text-white/70"
                 >
@@ -89,9 +88,9 @@ const Footer = () => {
           <div>
             <h4 className="font-bold text-black dark:text-white mb-5 text-sm">{t("footer_contact_us")}</h4>
             <div className="flex flex-col gap-3 text-sm mb-6">
-              <div className="flex items-center gap-2.5 text-black/60 dark:text-white/60"><Mail size={14} /><span>info@ostaze.com</span></div>
-              <div className="flex items-center gap-2.5 text-black/60 dark:text-white/60"><Phone size={14} /><span dir="ltr">+201130382206</span></div>
-              <div className="flex items-center gap-2.5 text-black/60 dark:text-white/60"><MapPin size={14} /><span>{t("footer_location")}</span></div>
+              <div className="flex items-center gap-2.5 text-black/60 dark:text-white/60"><Mail size={14} /><a href={`mailto:${SITE.email}`} className="hover:text-primary">{SITE.email}</a></div>
+              <div className="flex items-center gap-2.5 text-black/60 dark:text-white/60"><Phone size={14} /><a href={`tel:${SITE.phone}`} dir="ltr" className="hover:text-primary">{SITE.phoneDisplay}</a></div>
+              <div className="flex items-center gap-2.5 text-black/60 dark:text-white/60"><MapPin size={14} /><span>{lang === "ar" ? `${SITE.city.ar} - ${SITE.country.ar}` : `${SITE.city.en} - ${SITE.country.en}`}</span></div>
             </div>
 
             {/* Newsletter */}
@@ -112,7 +111,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-black/10 dark:border-white/10 mt-12 pt-6 text-center text-sm text-black/40 dark:text-white/40">
-          © {new Date().getFullYear()} Ostaze. {t("footer_rights").replace(/© \d{4} Ostaze\. ?/, "")}
+          © {new Date().getFullYear()} {SITE.name}. {t("footer_rights").replace(/© \d{4} Ostaze\. ?/, "")}
         </div>
       </div>
     </footer>

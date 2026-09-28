@@ -15,18 +15,7 @@ const HomePage = () => {
   const { t, lang } = useLanguage();
   const [belowFoldRef, belowFoldReady] = useInViewOnce<HTMLDivElement>("1200px 0px");
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "EducationalOrganization",
-    name: "Ostaze",
-    url: "https://ostaze.com",
-    description: lang === "ar"
-      ? "منصة كورسات تعليمية رقمية: كورسات مسجلة وحية بوصول مدى الحياة في مختلف التخصصات الأكاديمية والمهنية"
-      : "A digital online learning platform offering recorded and live courses with lifetime access across academic and professional subjects",
-    address: { "@type": "PostalAddress", addressLocality: "Riyadh", addressCountry: "SA" },
-    sameAs: ["https://ostaze.com"],
-    offers: { "@type": "AggregateOffer", priceCurrency: "USD", lowPrice: "19", highPrice: "299" },
-  };
+  // Organization/WebSite JSON-LD is emitted site-wide by GlobalSeo from src/config/site.ts.
 
   return (
     <div className="relative">
@@ -55,7 +44,6 @@ const HomePage = () => {
         keywords={lang === "ar"
           ? "منصة استاذي، موقع استاذي، أستاذي، استاذي، OSTAZE، Ostaze، منصة دروس لايف، دروس خصوصية اونلاين، حصص لايف زووم، كورسات مسجلة، حجز معلم خصوصي، جامعة الكويت، جامعة قطر"
           : "ostaze, ostaze platform, online tutoring platform, private online tutors, live online lessons, zoom tutoring, university tutors Kuwait, university tutors Qatar"}
-        jsonLd={jsonLd}
       />
 
       {/* Hero — CSS-only animations to keep framer-motion off the critical path */}

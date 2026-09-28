@@ -1,1 +1,3 @@
 - All subject/country/university/college URLs are built only via src/lib/slugs.ts; the sitemap reads them via scripts/export-route-slugs.ts — one source of truth so links and sitemap never drift.
+- Business identity (name, phone, WhatsApp, location, socials, logo) lives only in src/config/site.ts; JSON-LD, footer, contact and WhatsApp links read from it so they never disagree.
+- Footer and GlobalSeo are lazy-loaded; homepage/about use src/data/catalogStats.ts instead of universitiesData — keeps initial JS under the 195 KB gzip budget.
