@@ -179,13 +179,13 @@ const ApplyTutor = () => {
       : "Please fill in the form below. Our team will review your application and contact you if shortlisted.",
     checklist: isAr
       ? [
-          "جهّز السيرة الذاتية بصيغة PDF أو DOC أو DOCX.",
+          "جهّز السيرة الذاتية بصيغة PDF (حتى ٥ ميجابايت).",
           "جهّز فيديو شرح تجريبي مدته من ٥ إلى ١٠ دقائق.",
           "استخدم رابط Google Drive أو YouTube غير معلن.",
           "يرجى تعبئة جميع الحقول المطلوبة بدقة.",
         ]
       : [
-          "Prepare your CV in PDF, DOC, or DOCX format.",
+          "Prepare your CV as a PDF (up to 5 MB).",
           "Prepare a 5–10 minute demo lesson video.",
           "Use a Google Drive or Unlisted YouTube link.",
           "Complete all required fields carefully.",
@@ -212,8 +212,6 @@ const ApplyTutor = () => {
   const [saving, setSaving] = useState(false);
   const [cvFile, setCvFile] = useState<File | null>(null);
   const [cvError, setCvError] = useState("");
-  const [demoFile, setDemoFile] = useState<File | null>(null);
-  const [demoError, setDemoError] = useState("");
   const [photoFile, setPhotoFile] = useState<File | null>(null);
   const [photoPreview, setPhotoPreview] = useState<string>("");
   const [photoError, setPhotoError] = useState("");
@@ -244,43 +242,29 @@ const ApplyTutor = () => {
   const onPickCv = (file: File | null) => {
     setCvError("");
     if (!file) return setCvFile(null);
-    const okExt = /\.(pdf|doc|docx)$/i.test(file.name);
+    const okExt = /\.pdf$/i.test(file.name) && (!file.type || file.type === "application/pdf");
     if (!okExt) {
-      setCvError(isAr ? "الملفات المسموحة: PDF أو DOC أو DOCX" : "Allowed files: PDF, DOC or DOCX");
+      setCvError(isAr ? "الملف المسموح: PDF فقط" : "Only PDF files are allowed");
       return setCvFile(null);
     }
-    if (file.size > 10 * 1024 * 1024) {
-      setCvError(isAr ? "الحد الأقصى لحجم الملف ١٠ ميجابايت" : "Maximum file size is 10 MB");
+    if (file.size > 5 * 1024 * 1024) {
+      setCvError(isAr ? "الحد الأقصى لحجم الملف ٥ ميجابايت" : "Maximum file size is 5 MB");
       return setCvFile(null);
     }
     setCvFile(file);
   };
 
-  const onPickDemo = (file: File | null) => {
-    setDemoError("");
-    if (!file) return setDemoFile(null);
-    const okExt = /\.(mp4|mov|m4v|webm|avi|mkv)$/i.test(file.name);
-    if (!okExt) {
-      setDemoError(isAr ? "الصيغ المسموحة: MP4 أو MOV أو WEBM" : "Allowed formats: MP4, MOV or WEBM");
-      return setDemoFile(null);
-    }
-    if (file.size > 100 * 1024 * 1024) {
-      setDemoError(isAr ? "الحد الأقصى لحجم الفيديو ١٠٠ ميجابايت" : "Maximum video size is 100 MB");
-      return setDemoFile(null);
-    }
-    setDemoFile(file);
-  };
 
 
   // Uploads go through a server-issued one-time URL; the bucket is never writable anonymously.
-  const uploadApplicantFile = async (kind: "cv" | "photo" | "demo", file: File): Promise<string | null> => {
+  const uploadApplicantFile = async (kind: "cv" | "photo", file: File): Promise<string | null> => {
     const ext = file.name.split(".").pop()?.toLowerCase() || "";
     const { data, error } = await supabase.functions.invoke("tutor-upload-url", {
       body: { kind, ext, contentType: file.type || "", size: file.size },
     });
-    if (error || !data?.path || !data?.token) return null;
+    if (error || !data?.path || !data?.token || !data?.bucket) return null;
     const { error: upErr } = await supabase.storage
-      .from("tutor-cvs")
+      .from(data.bucket as string)
       .uploadToSignedUrl(data.path, data.token, file, { contentType: file.type || undefined });
     return upErr ? null : (data.path as string);
   };
@@ -299,16 +283,6 @@ const ApplyTutor = () => {
       }
     }
 
-    let demoPath: string | null = null;
-    if (demoFile) {
-      demoPath = await uploadApplicantFile("demo", demoFile);
-      if (!demoPath) {
-        setDemoError(isAr ? "تعذر رفع الفيديو، حاول مرة أخرى." : "Video upload failed, please try again.");
-        setSaving(false);
-        return;
-      }
-    }
-
     let photoPath: string | null = null;
     if (photoFile) {
       photoPath = await uploadApplicantFile("photo", photoFile);
@@ -321,7 +295,6 @@ const ApplyTutor = () => {
 
     const { error } = await supabase.from("tutor_applications").insert({
       cv_file_path: cvPath,
-      demo_file_path: demoPath,
       photo_file_path: photoPath,
       use_photo_as_avatar: photoFile ? useAvatar ?? false : null,
       full_name: form.name,
@@ -623,12 +596,12 @@ const ApplyTutor = () => {
                     className="btn-ghost cursor-pointer text-sm flex items-center gap-2 px-4 py-2.5 border border-border rounded-xl"
                   >
                     <Upload size={16} />
-                    {isAr ? "اختر ملف (PDF / DOC / DOCX)" : "Choose file (PDF / DOC / DOCX)"}
+                    {isAr ? "اختر ملف PDF" : "Choose PDF file"}
                   </label>
                   <input
                     id="cvFile"
                     type="file"
-                    accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                    accept=".pdf,application/pdf"
                     className="sr-only"
                     onChange={(e) => onPickCv(e.target.files?.[0] || null)}
                   />
@@ -668,49 +641,6 @@ const ApplyTutor = () => {
                   ? "فيديو من ٥ إلى ١٠ دقائق، وتأكد أن الصلاحية «Anyone with the link can view»."
                   : "A 5–10 minute video. Make sure sharing is set to “Anyone with the link can view”.",
               })}
-              <div className="sm:col-span-2 space-y-1.5">
-                <label htmlFor="demoFile" className="block text-sm font-bold">
-                  {isAr ? "أو ارفع فيديو الشرح (اختياري)" : "Or upload your demo video (optional)"}
-                </label>
-                <div className="flex flex-wrap items-center gap-3">
-                  <label
-                    htmlFor="demoFile"
-                    className="btn-ghost cursor-pointer text-sm flex items-center gap-2 px-4 py-2.5 border border-border rounded-xl"
-                  >
-                    <Upload size={16} />
-                    {isAr ? "اختر فيديو (MP4 / MOV / WEBM)" : "Choose video (MP4 / MOV / WEBM)"}
-                  </label>
-                  <input
-                    id="demoFile"
-                    type="file"
-                    accept="video/mp4,video/quicktime,video/webm,.mp4,.mov,.m4v,.webm"
-                    className="sr-only"
-                    onChange={(e) => onPickDemo(e.target.files?.[0] || null)}
-                  />
-                  {demoFile && (
-                    <span className="flex items-center gap-2 text-sm font-bold text-primary">
-                      <FileText size={15} /> {demoFile.name}
-                      <button
-                        type="button"
-                        onClick={() => onPickDemo(null)}
-                        className="text-muted-foreground hover:text-destructive"
-                        aria-label={isAr ? "إزالة الفيديو" : "Remove video"}
-                      >
-                        <X size={14} />
-                      </button>
-                    </span>
-                  )}
-                </div>
-                {demoError ? (
-                  <p className="text-xs text-destructive">{demoError}</p>
-                ) : (
-                  <p className="text-xs text-muted-foreground">
-                    {isAr
-                      ? "يمكنك مشاركة رابط الفيديو أو رفعه مباشرة (الحد الأقصى ١٠٠ ميجابايت). كلاهما اختياري."
-                      : "Share a video link or upload the file directly (max 100 MB). Both are optional."}
-                  </p>
-                )}
-              </div>
             </Section>
 
             <div className="card-base p-6 flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
