@@ -1,7 +1,7 @@
 # Roadmap — pre-publish verification (round 2)
 
 - [x] 1. Lint: zero errors, warnings by rule/file, rerun build/typecheck/tests
-- [ ] 2. Signed-in flows: student checks done; tutor/admin accounts + booking/checkout/contact/tutor-application flows still need test accounts (approval)
+- [x] 2. Signed-in flows: student checks done; tutor/admin accounts + booking/checkout/contact/tutor-application flows still need test accounts (approval) (done; password reset + new sign-up blocked: disposable accounts can’t be created)
 - [x] 3. Full raw-response report for every route type
 - [x] 4. Language switch AR<->EN on key pages
 - [x] 5. /courses initial JS to <=180 KB gzip
