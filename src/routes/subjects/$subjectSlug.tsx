@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { requireSubject } from "@/lib/routeGuards";
 import { subjectNameFromSlug } from "@/lib/subjectSlugs";
-import { SUBJECT_INDEX } from "@/data/universities/subjectIndex.generated";
 import type { University } from "@/data/universities/types";
 import Subjects from "@/pages/Subjects";
 
@@ -11,6 +10,8 @@ export const Route = createFileRoute("/subjects/$subjectSlug")({
   // the real course list (not a skeleton) and hydration uses the same data.
   loader: async ({ params }) => {
     const name = subjectNameFromSlug(params.subjectSlug) || "";
+    const { SUBJECT_INDEX } =
+      await import("@/data/universities/subjectIndex.generated");
     const info = SUBJECT_INDEX.find((s) => s.name_en === name);
     const { loadCountries } = await import("@/data/universities/loader");
     const all = await loadCountries(info?.countries || []);
