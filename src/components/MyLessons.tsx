@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { useAuth } from "@/contexts/AuthContext";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useLanguage, type TranslationKey } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
 import {
   Loader2,
@@ -120,7 +120,7 @@ const MyLessons = ({ role }: { role: "student" | "teacher" }) => {
                     : "bg-muted text-muted-foreground"
               }`}
             >
-              {t(`bstatus_${lesson.status}` as any) || lesson.status}
+              {t(`bstatus_${lesson.status}` as TranslationKey) || lesson.status}
             </span>
           </div>
 

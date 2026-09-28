@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { Link } from "@/lib/router-compat";
 import { useAuth } from "@/contexts/AuthContext";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useLanguage, type TranslationKey } from "@/contexts/LanguageContext";
 import {
   Eye,
   EyeOff,
@@ -401,7 +401,7 @@ const Register = () => {
                   <p
                     className={`text-xs font-medium ${pwStrength.level === 1 ? "text-destructive" : pwStrength.level === 2 ? "text-amber-500" : "text-emerald-500"}`}
                   >
-                    {t(pwStrength.label as any)}
+                    {t(pwStrength.label as TranslationKey)}
                   </p>
                 </div>
               )}
