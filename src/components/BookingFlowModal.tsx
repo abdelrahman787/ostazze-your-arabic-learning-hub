@@ -316,9 +316,7 @@ const BookingFlowModal = ({ open, onClose, subject, courseLabel, teachers }: Pro
                 country={country}
                 teacherName={headerTeacherName}
                 subject={subject}
-                customerEmail={user?.email || undefined}
-                userId={user?.id}
-                returnUrl={`${window.location.origin}/checkout/return?session_id={CHECKOUT_SESSION_ID}`}
+                returnUrl={`${window.location.origin}/checkout/return`}
               />
             ) : (
               <div className="space-y-5">
