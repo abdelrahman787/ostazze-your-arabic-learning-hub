@@ -1,6 +1,6 @@
 import { mockSubjects, mockCategories } from "@/data/mockData";
 import { BookOpen, Users, ArrowUpLeft, Search, Filter, X, ArrowRight, ArrowLeft, ChevronRight } from "lucide-react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useMemo, useState } from "react";
@@ -10,6 +10,8 @@ import PageHelmet from "@/components/PageHelmet";
 import FaqAccordion from "@/components/FaqAccordion";
 import { breadcrumbJsonLd, collectionPageJsonLd, faqJsonLd } from "@/lib/seo";
 import { WHATSAPP_NUMBER } from "@/lib/whatsapp";
+import { subjectNameFromSlug, subjectPath } from "@/lib/slugs";
+import NotFound from "./NotFound";
 
 const categoryEnToAr = new Map<string, string>();
 mockCategories.forEach(c => categoryEnToAr.set(c.name.en, c.name.ar));
@@ -30,9 +32,12 @@ const iconColors = [
 
 const Subjects = () => {
   const { t, d, lang } = useLanguage();
+  const { subjectSlug } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
-  const categoryParam = searchParams.get("category") || "";
-  const departmentParam = searchParams.get("department") || "";
+  // A subject detail page lives at /subjects/:subjectSlug. Category is a non-indexable filter.
+  const categoryParam = subjectSlug ? "" : searchParams.get("category") || "";
+  const legacyDepartment = searchParams.get("department") || "";
+  const departmentParam = subjectSlug ? subjectNameFromSlug(subjectSlug) || "" : "";
   const [search, setSearch] = useState("");
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
 
@@ -105,18 +110,7 @@ const Subjects = () => {
     return count;
   };
 
-  const openDepartment = (nameEn: string) => {
-    const next = new URLSearchParams(searchParams);
-    next.set("department", nameEn);
-    setSearchParams(next);
-    setSearch("");
-    setVisibleCount(ITEMS_PER_PAGE);
-  };
-
   const clearDepartment = () => {
-    const next = new URLSearchParams(searchParams);
-    next.delete("department");
-    setSearchParams(next);
     setSearch("");
     setVisibleCount(ITEMS_PER_PAGE);
   };
@@ -136,30 +130,50 @@ const Subjects = () => {
     { q: lang === "ar" ? "هل يمكنني طلب مادة جديدة؟" : "Can I request a new subject?", a: lang === "ar" ? "نعم، تواصل معنا وسنحاول إيجاد معلم متخصص خلال 48 ساعة." : "Yes — contact us and we'll try to source a specialized tutor within 48 hours." },
   ];
 
+  // Legacy /subjects?department=X -> permanent clean route (client-side replace).
+  if (!subjectSlug && legacyDepartment) {
+    return <Navigate to={subjectPath(legacyDepartment)} replace />;
+  }
+  if (subjectSlug && !departmentParam) return <NotFound />;
+
+  const homeLabel = lang === "ar" ? "الرئيسية" : "Home";
+  const pageTitle = departmentParam
+    ? (lang === "ar" ? `دروس خصوصية في ${departmentDisplay} - مقررات ومعلمون` : `${departmentDisplay} Tutoring - Courses & Tutors`)
+    : categoryDisplay
+    ? `${categoryDisplay} - ${lang === "ar" ? "المواد الدراسية - أستاذي OSTAZE" : "Subjects - OSTAZE"}`
+    : (lang === "ar" ? "المواد الدراسية - أستاذي OSTAZE" : "Subjects - OSTAZE");
+  const pageDescription = departmentParam
+    ? (lang === "ar"
+      ? `${departmentCourses.length} مقرر في ${departmentDisplay} من جامعات الخليج. احجز حصة خصوصية أونلاين مع معلم متخصص في ${departmentDisplay}.`
+      : `${departmentCourses.length} ${departmentDisplay} courses from Gulf universities. Book a live online session with a specialized ${departmentDisplay} tutor.`)
+    : (lang === "ar"
+      ? "اختر مادتك الدراسية على منصة أستاذي — رياضيات، فيزياء، برمجة، لغة إنجليزية، هندسة والمزيد. معلمون متخصصون بتقييمات وأسعار واضحة."
+      : "Pick your subject on OSTAZE — math, physics, programming, English, engineering and more. Specialized tutors with clear ratings and pricing.");
+  const selfPath = departmentParam ? subjectPath(departmentParam) : "/subjects";
+  // Filtered/search states are not separate pages.
+  const isFilterState = !departmentParam && (!!categoryParam || searchParams.has("search"));
+
   return (
     <div>
       <PageHelmet
-        title={categoryDisplay
-          ? `${categoryDisplay} - ${lang === "ar" ? "المواد الدراسية - أستاذي OSTAZE" : "Subjects - OSTAZE"}`
-          : (lang === "ar" ? "المواد الدراسية - أستاذي OSTAZE" : "Subjects - OSTAZE")}
-        description={lang === "ar"
-          ? "اختر مادتك الدراسية على منصة أستاذي — رياضيات، فيزياء، برمجة، لغة إنجليزية، هندسة والمزيد. معلمون متخصصون بتقييمات وأسعار واضحة."
-          : "Pick your subject on OSTAZE — math, physics, programming, English, engineering and more. Specialized tutors with clear ratings and pricing."}
-        canonical="https://ostaze.com/subjects"
+        title={pageTitle}
+        description={pageDescription}
+        canonical={`https://ostaze.com${selfPath}`}
+        noindex={isFilterState}
         keywords={lang === "ar" ? "مواد دراسية, دروس خصوصية, جامعات الكويت, جامعات قطر" : "subjects, tutoring, Kuwait universities, Qatar universities"}
         jsonLd={[
           collectionPageJsonLd({
-            name: categoryDisplay || t("subjects_title"),
-            description: t("subjects_intro"),
-            path: "/subjects",
+            name: departmentDisplay || categoryDisplay || t("subjects_title"),
+            description: departmentParam ? pageDescription : t("subjects_intro"),
+            path: selfPath,
             lang,
           }),
           breadcrumbJsonLd([
-            { name: lang === "ar" ? "الرئيسية" : "Home", path: "/" },
+            { name: homeLabel, path: "/" },
             { name: t("subjects_title"), path: "/subjects" },
-            ...(categoryDisplay ? [{ name: categoryDisplay, path: `/subjects?category=${encodeURIComponent(categoryDisplay)}` }] : []),
+            ...(departmentParam ? [{ name: departmentDisplay, path: selfPath }] : []),
           ]),
-          faqJsonLd(subjFaq),
+          ...(departmentParam ? [] : [faqJsonLd(subjFaq)]),
         ]}
       />
       <PageHeader
@@ -182,7 +196,7 @@ const Subjects = () => {
             <>
               <ChevronRight size={12} />
               {departmentParam ? (
-                <button onClick={clearDepartment} className="hover:text-primary transition-colors">{categoryDisplay}</button>
+                <Link to="/subjects" className="hover:text-primary transition-colors">{categoryDisplay}</Link>
               ) : (
                 <span className="text-foreground font-medium">{categoryDisplay}</span>
               )}
@@ -192,7 +206,7 @@ const Subjects = () => {
             <>
               <ChevronRight size={12} />
               {departmentParam ? (
-                <button onClick={clearDepartment} className="hover:text-primary transition-colors">{t("subjects_title")}</button>
+                <Link to="/subjects" onClick={clearDepartment} className="hover:text-primary transition-colors">{t("subjects_title")}</Link>
               ) : (
                 <span className="text-foreground font-medium">{t("subjects_title")}</span>
               )}
@@ -226,10 +240,10 @@ const Subjects = () => {
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3 flex-wrap">
             {departmentParam ? (
-              <button onClick={clearDepartment} className="flex items-center gap-1.5 text-sm text-primary hover:underline font-medium">
+              <Link to="/subjects" onClick={clearDepartment} className="flex items-center gap-1.5 text-sm text-primary hover:underline font-medium">
                 <BackIcon size={14} />
                 {lang === "ar" ? "كل الأقسام" : "All Departments"}
-              </button>
+              </Link>
             ) : (
               <Link to="/categories" className="flex items-center gap-1.5 text-sm text-primary hover:underline font-medium">
                 <BackIcon size={14} />
@@ -286,7 +300,7 @@ const Subjects = () => {
             return (
               <motion.div key={s.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: Math.min(i * 0.03, 0.5) }}
                 className="h-full">
-                <button onClick={() => openDepartment(s.name.en)} className="w-full text-start h-full">
+                <Link to={subjectPath(s.name.en)} onClick={clearDepartment} className="block w-full text-start h-full">
                 <div className={`card-base p-6 h-full flex flex-col feature-card ${i === 0 && !categoryParam ? "card-active" : ""}`}>
                   <div className="flex items-start gap-4 flex-1">
                     <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 ${colorClass}`}>
@@ -313,7 +327,7 @@ const Subjects = () => {
                     <ArrowUpLeft size={14} />
                   </span>
                 </div>
-                </button>
+                </Link>
               </motion.div>
             );
           })}
@@ -339,9 +353,9 @@ const Subjects = () => {
                 : (lang === "ar" ? "لا توجد أقسام مطابقة" : "No matching departments found")}
             </p>
             {departmentParam ? (
-              <button onClick={clearDepartment} className="text-primary text-sm hover:underline mt-2">
+              <Link to="/subjects" onClick={clearDepartment} className="text-primary text-sm hover:underline mt-2 inline-block">
                 {lang === "ar" ? "عرض كل الأقسام" : "Show all departments"}
-              </button>
+              </Link>
             ) : categoryParam ? (
               <button onClick={clearCategory} className="text-primary text-sm hover:underline mt-2">
                 {lang === "ar" ? "عرض كل المواد" : "Show all subjects"}
