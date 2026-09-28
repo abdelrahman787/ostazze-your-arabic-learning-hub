@@ -10,7 +10,7 @@ import PageHelmet from "@/components/PageHelmet";
 import FaqAccordion from "@/components/FaqAccordion";
 import { breadcrumbJsonLd, collectionPageJsonLd, faqJsonLd } from "@/lib/seo";
 import { WHATSAPP_NUMBER } from "@/lib/whatsapp";
-import { subjectNameFromSlug, subjectPath } from "@/lib/slugs";
+import { subjectNameFromSlug, subjectPath, universityPath } from "@/lib/slugs";
 import NotFound from "./NotFound";
 
 const categoryEnToAr = new Map<string, string>();
@@ -77,6 +77,11 @@ const Subjects = () => {
       });
     });
     return list.sort((a, b) => a.code.localeCompare(b.code));
+  }, [departmentParam]);
+
+  const departmentUniversities = useMemo(() => {
+    if (!departmentParam) return [];
+    return allUniversities.filter(u => u.colleges.some(c => c.departments.some(dp => dp.name_en === departmentParam)));
   }, [departmentParam]);
 
   const departmentAr = useMemo(() => {
@@ -366,7 +371,22 @@ const Subjects = () => {
         )}
 
         <section className="mt-14 max-w-3xl mx-auto space-y-6">
-          <p className="text-sm text-muted-foreground leading-relaxed text-center">{t("subjects_intro")}</p>
+          {departmentParam ? (
+            departmentUniversities.length > 0 && (
+              <div className="text-center">
+                <h2 className="text-lg font-extrabold mb-3">{lang === "ar" ? `جامعات تدرّس ${departmentDisplay}` : `Universities teaching ${departmentDisplay}`}</h2>
+                <div className="flex flex-wrap justify-center gap-2 text-xs">
+                  {departmentUniversities.map(u => (
+                    <Link key={u.id} to={universityPath(u)} className="px-3 py-1 rounded-full bg-foreground/5 hover:bg-primary/10 hover:text-primary font-bold transition-colors">
+                      {lang === "ar" ? u.name_ar : u.name_en}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )
+          ) : (
+            <p className="text-sm text-muted-foreground leading-relaxed text-center">{t("subjects_intro")}</p>
+          )}
           <div className="flex flex-wrap justify-center gap-2 text-xs">
             <Link to="/categories" className="px-3 py-1 rounded-full bg-foreground/5 hover:bg-primary/10 hover:text-primary font-bold transition-colors">{lang === "ar" ? "التصنيفات" : "Categories"}</Link>
             <Link to="/universities" className="px-3 py-1 rounded-full bg-foreground/5 hover:bg-primary/10 hover:text-primary font-bold transition-colors">{lang === "ar" ? "الجامعات" : "Universities"}</Link>

@@ -208,7 +208,11 @@ const App = () => (
 
                           <Route path="/teachers/:id" element={<TeacherProfile />} />
                           <Route path="/subjects" element={<Subjects />} />
+                         <Route path="/subjects/:subjectSlug" element={<Subjects />} />
                           <Route path="/universities" element={<Universities />} />
+                         <Route path="/universities/:countrySlug" element={<Universities />} />
+                         <Route path="/universities/:countrySlug/:universitySlug" element={<Universities />} />
+                         <Route path="/universities/:countrySlug/:universitySlug/colleges/:collegeId" element={<CollegeDetail />} />
                           <Route path="/universities/:uniId/colleges/:collegeId" element={<CollegeDetail />} />
                           <Route path="/categories" element={<Categories />} />
                           <Route path="/languages" element={<Languages />} />

@@ -1,5 +1,5 @@
-import { useState, useMemo } from "react";
-import { Link } from "react-router-dom";
+import { useState, useMemo, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   GraduationCap, Building2, ChevronLeft, Globe,
@@ -18,6 +18,10 @@ import flagSA from "@/assets/flag-sa.svg";
 import flagAE from "@/assets/flag-ae.svg";
 import flagEG from "@/assets/flag-eg.svg";
 import WhatsAppQuickBook from "@/components/WhatsAppQuickBook";
+import NotFound from "./NotFound";
+import { countryCodeFromSlug, countryPath, universityPath, collegePath, findUniversityBySlugs } from "@/lib/slugs";
+
+const MotionLink = motion.create(Link);
 
 // Group universities by country
 const getCountries = () => {
@@ -95,14 +99,14 @@ const AnimatedFlag = ({ code, size = 120 }: { code: string; size?: number }) => 
 // ===== Compact grid-style College Card =====
 const CollegeCard = ({
   college,
-  uniId,
+  university,
   lang,
   index,
   gradient,
   accent,
 }: {
   college: College;
-  uniId: string;
+  university: University;
   lang: "ar" | "en";
   index: number;
   gradient: string;
@@ -122,7 +126,7 @@ const CollegeCard = ({
       transition={{ delay: index * 0.03 }}
     >
       <Link
-        to={`/universities/${uniId}/colleges/${college.id}`}
+        to={collegePath(university, college)}
         className={`group relative h-full flex flex-col gap-3 p-4 rounded-2xl border border-border/50 bg-gradient-to-br ${gradient} hover:border-primary/50 hover:shadow-lg hover:-translate-y-0.5 transition-all overflow-hidden`}
       >
         <div className="flex items-start justify-between gap-2">
@@ -164,18 +168,17 @@ const Universities = () => {
   const { lang, t } = useLanguage();
   const countries = useMemo(() => getCountries(), []);
   const comingSoonCountries = useMemo(() => getComingSoonCountries(allUniversities), []);
-  const [view, setView] = useState<View>("countries");
-  const [selectedCountry, setSelectedCountry] = useState<typeof countries[0] | null>(null);
-  const [selectedUni, setSelectedUni] = useState<University | null>(null);
+  // The selected country/university come from the URL so every view is shareable.
+  const { countrySlug: cSlug, universitySlug: uSlug } = useParams();
+  const selectedCountry = useMemo(() => {
+    const code = countryCodeFromSlug(cSlug);
+    return code ? countries.find((c) => c.code === code) || null : null;
+  }, [cSlug, countries]);
+  const selectedUni: University | null = useMemo(() => (uSlug ? findUniversityBySlugs(cSlug, uSlug) || null : null), [cSlug, uSlug]);
+  const view: View = selectedUni ? "university" : selectedCountry ? "universities" : "countries";
+  const notFound = (!!cSlug && !selectedCountry) || (!!uSlug && !selectedUni);
   const [searchQuery, setSearchQuery] = useState("");
-
-  const goToCountry = (c: typeof countries[0]) => { setSelectedCountry(c); setView("universities"); setSearchQuery(""); };
-  const goToUni = (u: University) => { setSelectedUni(u); setView("university"); setSearchQuery(""); };
-  const goBack = () => {
-    if (view === "university") { setView("universities"); setSelectedUni(null); }
-    else if (view === "universities") { setView("countries"); setSelectedCountry(null); }
-    setSearchQuery("");
-  };
+  useEffect(() => { setSearchQuery(""); }, [cSlug, uSlug]);
 
   const filteredUnis = useMemo(() => {
     if (!selectedCountry || !searchQuery.trim()) return selectedCountry?.universities || [];
@@ -198,29 +201,55 @@ const Universities = () => {
     { q: lang === "ar" ? "هل تختلف الأسعار حسب الجامعة؟" : "Do prices vary by university?", a: lang === "ar" ? "السعر يحدده كل معلم بشكل مستقل ويظهر بوضوح في ملفه قبل الحجز." : "Each tutor sets their own rate which is clearly displayed on their profile before booking." },
   ];
 
+  if (notFound) return <NotFound />;
+
+  const countryLabel = selectedCountry ? (lang === "ar" ? selectedCountry.name_ar : selectedCountry.name_en) : "";
+  const uniLabel = selectedUni ? (lang === "ar" ? selectedUni.name_ar : selectedUni.name_en) : "";
+  const selfPath = selectedUni ? universityPath(selectedUni) : selectedCountry ? countryPath(selectedCountry.code) : "/universities";
+  const h1Text = selectedUni
+    ? uniLabel
+    : selectedCountry
+    ? (lang === "ar" ? `جامعات ${countryLabel}` : `Universities in ${countryLabel}`)
+    : (lang === "ar" ? "الدولة" : t("universities_title"));
+  const uniCourseCount = selectedUni ? selectedUni.colleges.reduce((s, c) => s + c.departments.reduce((s2, d) => s2 + d.courses.length, 0), 0) : 0;
+  const seoTitle = selectedUni
+    ? (lang === "ar" ? `دروس خصوصية لطلاب ${uniLabel}` : `${uniLabel} Tutoring - Colleges & Courses`)
+    : selectedCountry
+    ? (lang === "ar" ? `جامعات ${countryLabel} - معلمون ومقررات` : `Universities in ${countryLabel} - Tutors & Courses`)
+    : (lang === "ar" ? "الدولة - أستاذي OSTAZE" : "Countries - OSTAZE");
+  const seoDescription = selectedUni
+    ? (lang === "ar"
+      ? `${selectedUni.colleges.length} كلية و${uniCourseCount} مقرر في ${uniLabel}. احجز حصة خصوصية أونلاين مع معلم متخصص في مقررك.`
+      : `${selectedUni.colleges.length} colleges and ${uniCourseCount} courses at ${uniLabel}. Book a live online session with a tutor for your course.`)
+    : selectedCountry
+    ? (lang === "ar"
+      ? `${selectedCountry.universities.length} جامعة في ${countryLabel} مع كلياتها ومقرراتها. اختر جامعتك واحجز معلماً متخصصاً.`
+      : `${selectedCountry.universities.length} universities in ${countryLabel} with their colleges and courses. Pick yours and book a specialized tutor.`)
+    : (lang === "ar"
+      ? "اكتشف الجامعات المدعومة على منصة أستاذي — جامعة الكويت، جامعة قطر، والمزيد. معلمون متخصصون لكل جامعة ومنهج."
+      : "Discover universities supported by OSTAZE — Kuwait University, Qatar University and more. Specialized tutors for every program.");
+
   return (
     <div className="min-h-screen">
       <PageHelmet
-        title={lang === "ar"
-          ? "الدولة - أستاذي OSTAZE"
-          : "Countries - OSTAZE"}
-        description={lang === "ar"
-          ? "اكتشف الجامعات المدعومة على منصة أستاذي — جامعة الكويت، جامعة قطر، والمزيد. معلمون متخصصون لكل جامعة ومنهج."
-          : "Discover universities supported by OSTAZE — Kuwait University, Qatar University and more. Specialized tutors for every program."}
-        canonical="https://ostaze.com/universities"
+        title={seoTitle}
+        description={seoDescription}
+        canonical={`https://ostaze.com${selfPath}`}
         keywords={lang === "ar" ? "جامعات الكويت, جامعات قطر, كليات, معلمون" : "Kuwait universities, Qatar universities, colleges, tutors"}
         jsonLd={[
           collectionPageJsonLd({
-            name: lang === "ar" ? "جامعات الكويت وقطر" : "Universities of Kuwait & Qatar",
-            description: lang === "ar" ? "دليل الجامعات والكليات والمواد" : "Directory of universities, colleges and subjects",
-            path: "/universities",
+            name: h1Text,
+            description: seoDescription,
+            path: selfPath,
             lang,
           }),
           breadcrumbJsonLd([
             { name: lang === "ar" ? "الرئيسية" : "Home", path: "/" },
             { name: lang === "ar" ? "الدولة" : "Countries", path: "/universities" },
+            ...(selectedCountry ? [{ name: countryLabel, path: countryPath(selectedCountry.code) }] : []),
+            ...(selectedUni ? [{ name: uniLabel, path: universityPath(selectedUni) }] : []),
           ]),
-          faqJsonLd(uniFaq),
+          ...(view === "countries" ? [faqJsonLd(uniFaq)] : []),
         ]}
       />
       {/* Header */}
@@ -229,7 +258,7 @@ const Universities = () => {
           <GraduationCap size={16} />
           {lang === "ar" ? "الدليل الأكاديمي" : "Academic Directory"}
         </motion.div>
-        <h1 className="text-3xl md:text-5xl font-black tracking-tight">{lang === "ar" ? "الدولة" : t("universities_title")}</h1>
+        <h1 className="text-3xl md:text-5xl font-black tracking-tight">{h1Text}</h1>
         
       </div>
 
@@ -241,16 +270,16 @@ const Universities = () => {
           {view === "countries" && <span className="text-foreground font-medium">{lang === "ar" ? "الدولة" : t("universities_title")}</span>}
           {view === "universities" && selectedCountry && (
             <>
-              <button onClick={() => { setView("countries"); setSelectedCountry(null); }} className="hover:text-primary transition-colors">{lang === "ar" ? "الدولة" : t("universities_title")}</button>
+              <Link to="/universities" className="hover:text-primary transition-colors">{lang === "ar" ? "الدولة" : t("universities_title")}</Link>
               <ChevronRight size={12} />
               <span className="text-foreground font-medium">{lang === "ar" ? selectedCountry.name_ar : selectedCountry.name_en}</span>
             </>
           )}
           {view === "university" && selectedCountry && selectedUni && (
             <>
-              <button onClick={() => { setView("countries"); setSelectedCountry(null); }} className="hover:text-primary transition-colors">{lang === "ar" ? "الدولة" : t("universities_title")}</button>
+              <Link to="/universities" className="hover:text-primary transition-colors">{lang === "ar" ? "الدولة" : t("universities_title")}</Link>
               <ChevronRight size={12} />
-              <button onClick={() => { setView("universities"); setSelectedUni(null); }} className="hover:text-primary transition-colors">{lang === "ar" ? selectedCountry.name_ar : selectedCountry.name_en}</button>
+              <Link to={countryPath(selectedCountry.code)} className="hover:text-primary transition-colors">{lang === "ar" ? selectedCountry.name_ar : selectedCountry.name_en}</Link>
               <ChevronRight size={12} />
               <span className="text-foreground font-medium truncate max-w-[200px]">{lang === "ar" ? selectedUni.name_ar : selectedUni.name_en}</span>
             </>
@@ -259,12 +288,12 @@ const Universities = () => {
 
         {view !== "countries" && (
           <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="flex items-center justify-between mb-6 gap-4">
-            <button onClick={goBack} className="flex items-center gap-2 text-sm text-primary hover:underline font-medium shrink-0">
+            <Link to={view === "university" && selectedCountry ? countryPath(selectedCountry.code) : "/universities"} className="flex items-center gap-2 text-sm text-primary hover:underline font-medium shrink-0">
               <ChevronLeft size={16} />
               {view === "universities"
                 ? lang === "ar" ? "العودة للدول" : "Back to Countries"
                 : lang === "ar" ? "العودة للجامعات" : "Back to Universities"}
-            </button>
+            </Link>
           </motion.div>
         )}
 
@@ -280,14 +309,14 @@ const Universities = () => {
                 const totalCourses = c.universities.reduce((s, u) => s + u.colleges.reduce((s2, col) => s2 + col.departments.reduce((s3, d) => s3 + d.courses.length, 0), 0), 0);
 
                 return (
-                  <motion.button
+                  <MotionLink
                     key={c.code}
+                    to={countryPath(c.code)}
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: i * 0.15 }}
                     whileHover={{ scale: 1.02, y: -6 }}
                     whileTap={{ scale: 0.98 }}
-                    onClick={() => goToCountry(c)}
                     className="card-base p-8 flex flex-col items-center gap-5 hover:border-primary/40 hover:shadow-2xl transition-all cursor-pointer group relative overflow-hidden"
                   >
                     <div className={`absolute inset-0 bg-gradient-to-br ${colors.from} ${colors.to} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
@@ -312,7 +341,7 @@ const Universities = () => {
                         <span>{totalCourses} {lang === "ar" ? "مادة" : "Courses"}</span>
                       </div>
                     </div>
-                  </motion.button>
+                  </MotionLink>
                 );
               })}
 
@@ -363,8 +392,8 @@ const Universities = () => {
                   const totalDepts = u.colleges.reduce((s, c) => s + c.departments.length, 0);
                   const totalCourses = u.colleges.reduce((s, c) => s + c.departments.reduce((s2, d) => s2 + d.courses.length, 0), 0);
                   return (
-                    <motion.button key={u.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
-                      whileHover={{ y: -6, scale: 1.01 }} whileTap={{ scale: 0.98 }} onClick={() => goToUni(u)}
+                    <MotionLink key={u.id} to={universityPath(u)} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
+                      whileHover={{ y: -6, scale: 1.01 }} whileTap={{ scale: 0.98 }}
                       className="card-base p-6 text-start hover:border-primary/30 hover:shadow-xl transition-all cursor-pointer group"
                     >
                       <div className="flex items-start justify-between mb-4">
@@ -395,7 +424,7 @@ const Universities = () => {
                           </div>
                         ))}
                       </div>
-                    </motion.button>
+                    </MotionLink>
                   );
                 })}
               </div>
@@ -492,7 +521,7 @@ const Universities = () => {
                             <CollegeCard
                               key={college.id}
                               college={college}
-                              uniId={selectedUni.id}
+                              university={selectedUni}
                               lang={lang}
                               index={i}
                               gradient={field.gradient}
