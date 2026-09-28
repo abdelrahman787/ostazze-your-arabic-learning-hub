@@ -55,4 +55,5 @@ export async function requireCollege(
     !uni?.colleges.some((c) => c.id.toLowerCase() === collegeId.toLowerCase())
   )
     throw notFound();
+  return uni;
 }
