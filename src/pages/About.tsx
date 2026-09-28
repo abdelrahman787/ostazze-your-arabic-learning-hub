@@ -65,7 +65,7 @@ const About = () => {
 
         {/* Stats */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+          className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-16">
           {stats.map((s, i) => (
             <div key={i} className="card-base p-6 text-center">
               <p className="text-3xl font-black gradient-text mb-1">{s.value}</p>
