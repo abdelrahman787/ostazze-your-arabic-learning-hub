@@ -1,0 +1,6 @@
+-- Access matrix for tutor-cvs (PDF only, own folder <uid>/<uuid>.pdf) and tutor-photos (admin only).
+-- Run as a privileged DO block; the final RAISE rolls everything back and carries the report.
+-- Expected: A_upload_own_pdf=OK A_upload_docx=DENIED A_upload_chosen_name=DENIED A_upload_into_B=DENIED
+-- A_read_own=1 A_read_B=0 A_replace_B=0 A_delete_B=0 A_read_photos=0 A_replace_own=1 A_delete_own=1
+-- anon_read_list=0 anon_upload=DENIED anon_delete=0 admin_read_B_and_photo=2 admin_replace=1 admin_delete=1
+-- (Full script: see chat history 2026-09-28; mirrors supabase/tests/security_matrix.sql style.)
