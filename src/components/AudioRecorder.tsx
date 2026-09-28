@@ -23,7 +23,7 @@ const AudioRecorder = ({ onRecorded, disabled, userId, lectureId }: AudioRecorde
   const [duration, setDuration] = useState(0);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef<Blob[]>([]);
-  const timerRef = useRef<ReturnType<typeof setInterval>>();
+  const timerRef = useRef<ReturnType<typeof setInterval> | undefined>(undefined);
 
   const startRecording = useCallback(async () => {
     if (!isMediaRecorderSupported()) return;

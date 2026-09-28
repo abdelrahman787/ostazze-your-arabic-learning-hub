@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { ArrowLeft, GraduationCap, BookOpen, Landmark, Building2, Library, School, Flame, Atom } from "lucide-react";
 import { UNIVERSITY_INDEX } from "@/data/universities/universityIndex.generated";
 import { useLanguage } from "@/contexts/LanguageContext";

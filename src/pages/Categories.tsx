@@ -6,7 +6,7 @@ import {
   FlaskConical, Scale, BookOpen, GraduationCap, Heart, Pill,
   Palette, Wrench, BookText, TrendingUp, Search, ChevronLeft
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { CATALOG_TOTALS } from "@/data/universities/subjectIndex.generated";
 import { useState, useMemo } from "react";
 import PageHeader from "@/components/PageHeader";

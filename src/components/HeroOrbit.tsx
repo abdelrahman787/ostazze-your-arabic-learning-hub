@@ -192,7 +192,7 @@ const HeroOrbit = () => {
                     <Icon className="text-primary" size={22} />
                   </div>
                   <span className="text-[10px] md:text-[11px] font-semibold text-foreground/80 whitespace-nowrap">
-                    {t(s.key)}
+                    {t(s.key as never)}
                   </span>
                 </div>
               </div>

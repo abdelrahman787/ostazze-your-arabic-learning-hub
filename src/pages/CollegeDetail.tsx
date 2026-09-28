@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect, useCallback } from "react";
-import { Link, useParams, useNavigate, Navigate } from "react-router-dom";
+import { Link, useParams, useNavigate, Navigate } from "@/lib/router-compat";
 import { findUniversityBySlugs, collegePath, countryPath, universityPath, isCollegeIndexable } from "@/lib/slugs";
 import { subjectPath, isSubjectIndexable } from "@/lib/subjectSlugs";
 import { motion, AnimatePresence } from "framer-motion";
@@ -226,7 +226,12 @@ const DepartmentBlock = ({ dept, lang, index, onRequest }: DeptProps) => {
 };
 
 const CollegeDetail = () => {
-  const { uniId, collegeId, countrySlug, universitySlug } = useParams();
+  const params = useParams();
+  // Legacy /universities/:uniId/colleges/:collegeId shares the first dynamic segment with the clean route.
+  const isLegacy = !params.universitySlug;
+  const { collegeId, universitySlug } = params;
+  const uniId = isLegacy ? params.countrySlug : undefined;
+  const countrySlug = isLegacy ? undefined : params.countrySlug;
   const navigate = useNavigate();
   const { lang, t } = useLanguage();
   const [search, setSearch] = useState("");

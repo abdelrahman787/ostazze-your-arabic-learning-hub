@@ -1,9 +1,8 @@
 import { defineConfig } from "vitest/config";
-import react from "@vitejs/plugin-react-swc";
 import path from "path";
 
+// Standalone test config (the app itself builds through @lovable.dev/vite-tanstack-config).
 export default defineConfig({
-  plugins: [react()],
   test: {
     environment: "jsdom",
     globals: true,

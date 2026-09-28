@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { SITE } from "@/config/site";
 import { Facebook, Mail, Phone, MapPin, GraduationCap } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";

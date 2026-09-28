@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import {
   Calculator, Atom, FlaskConical, Languages,
   Code, Zap, PenTool, HeartPulse, Dna
@@ -240,7 +240,7 @@ const OrbitSubjects = () => {
                         <Link
                           to="/subjects"
                           className="group flex flex-col items-center gap-1.5"
-                          aria-label={t(subj.key)}
+                          aria-label={t(subj.key as never)}
                         >
                           <div
                             className="w-[64px] h-[64px] rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
@@ -258,7 +258,7 @@ const OrbitSubjects = () => {
                             />
                           </div>
                           <span className="text-[11px] md:text-xs font-semibold text-white/90 group-hover:text-white whitespace-nowrap drop-shadow-md">
-                            {t(subj.key)}
+                            {t(subj.key as never)}
                           </span>
                         </Link>
                       </div>

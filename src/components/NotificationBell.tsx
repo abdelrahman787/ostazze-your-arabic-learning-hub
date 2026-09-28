@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "@/lib/router-compat";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { Bell, BookOpen, MessageSquare, Check, X, Loader2, CalendarCheck, CheckCircle, ShoppingBag, AlertTriangle, DollarSign } from "lucide-react";

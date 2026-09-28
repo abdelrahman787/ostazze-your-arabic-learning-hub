@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation } from "@/lib/router-compat";
 import { ReactElement, useEffect, useRef, useState } from "react";
 
 interface Props {
