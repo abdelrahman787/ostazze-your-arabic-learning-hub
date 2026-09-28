@@ -21,6 +21,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useMemo, useState } from "react";
 import { SUBJECT_INDEX } from "@/data/universities/subjectIndex.generated";
 import { useCountryUniversities } from "@/data/universities/loader";
+import type { University } from "@/data/universities/types";
 import RouteSkeleton from "@/components/RouteSkeleton";
 import PageHeader from "@/components/PageHeader";
 import PageHelmet from "@/components/PageHelmet";
@@ -54,7 +55,9 @@ const iconColors = [
   "text-fuchsia-600 bg-fuchsia-500/15",
 ];
 
-const Subjects = () => {
+const Subjects = ({
+  initialUniversities,
+}: { initialUniversities?: University[] } = {}) => {
   const { t, d, lang } = useLanguage();
   const { subjectSlug } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -94,8 +97,13 @@ const Subjects = () => {
   const subjectInfo = departmentParam
     ? subjectByName.get(departmentParam)
     : undefined;
-  const { data: allUniversities, error: subjectLoadError } =
-    useCountryUniversities(subjectInfo?.countries || []);
+  const loadedUniversities = useCountryUniversities(
+    initialUniversities ? [] : subjectInfo?.countries || [],
+  );
+  const allUniversities = initialUniversities ?? loadedUniversities.data;
+  const subjectLoadError = initialUniversities
+    ? false
+    : loadedUniversities.error;
   const departmentCourses = useMemo(() => {
     if (!departmentParam || !allUniversities) return [];
     const seen = new Set<string>();
