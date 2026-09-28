@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate, Link } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "@/lib/router-compat";
 import { motion } from "framer-motion";
 import { CreditCard, ArrowLeft, Loader2, Calendar, Clock, BookOpen, User } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";

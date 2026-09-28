@@ -1,4 +1,4 @@
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams, Link } from "@/lib/router-compat";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { CheckCircle, Mail } from "lucide-react";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";

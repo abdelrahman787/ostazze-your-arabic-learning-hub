@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect, useCallback } from "react";
-import { Link, useParams, useNavigate, Navigate } from "react-router-dom";
+import { Link, useParams, useNavigate, Navigate } from "@/lib/router-compat";
 import { findUniversityBySlugs, collegePath, countryPath, universityPath, isCollegeIndexable } from "@/lib/slugs";
 import { subjectPath, isSubjectIndexable } from "@/lib/subjectSlugs";
 import { motion, AnimatePresence } from "framer-motion";

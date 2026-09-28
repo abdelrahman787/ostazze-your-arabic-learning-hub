@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { Check, Clock, Globe } from "lucide-react";
 import PageHelmet from "@/components/PageHelmet";
 import PageHeader from "@/components/PageHeader";

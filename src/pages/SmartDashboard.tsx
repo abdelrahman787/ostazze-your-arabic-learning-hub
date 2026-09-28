@@ -1,6 +1,6 @@
 import { useAuth } from "@/contexts/AuthContext";
 import { Loader2, ShieldAlert } from "lucide-react";
-import { Link, Navigate, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation } from "@/lib/router-compat";
 import { useEffect } from "react";
 import Dashboard from "./Dashboard";
 import TeacherDashboard from "./TeacherDashboard";

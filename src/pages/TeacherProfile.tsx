@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link } from "@/lib/router-compat";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useBilingual } from "@/hooks/useBilingual";
 import { Clock, BookOpen, Loader2, BadgeCheck, GraduationCap, Video, Languages, CalendarCheck, MessageCircle, ChevronLeft } from "lucide-react";

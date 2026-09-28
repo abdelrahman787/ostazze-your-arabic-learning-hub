@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { motion } from "framer-motion";
 import { Search, Clock, PlayCircle, Radio, Layers, BookMarked, Filter } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";

@@ -1,6 +1,6 @@
 import { mockSubjects, mockCategories } from "@/data/mockData";
 import { BookOpen, Users, ArrowUpLeft, Search, Filter, X, ArrowRight, ArrowLeft, ChevronRight } from "lucide-react";
-import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
+import { Link, Navigate, useParams, useSearchParams } from "@/lib/router-compat";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useMemo, useState } from "react";

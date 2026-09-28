@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Eye, EyeOff, User, Mail, Lock, GraduationCap, Loader2, BookOpen, Users, Phone } from "lucide-react";

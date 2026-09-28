@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams, Link } from "@/lib/router-compat";
 import TeacherCard from "@/components/TeacherCard";
 import type { TeacherData } from "@/components/TeacherCard";
 import { UserX, RefreshCw, Sparkles, Users, Calendar, GraduationCap } from "lucide-react";
