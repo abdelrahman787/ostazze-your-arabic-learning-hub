@@ -29,7 +29,7 @@ const NotificationBell = lazy(() => import("@/components/NotificationBell"));
 
 const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
-  const { isLoggedIn, user, logout } = useAuth();
+  const { isLoggedIn, user, logout, loading: authLoading } = useAuth();
   const { t, toggleLang, lang } = useLanguage();
   const location = useLocation();
   const navigate = useNavigate();
@@ -311,7 +311,8 @@ const Navbar = () => {
                 </a>
                 <Link
                   to="/login"
-                  className="px-4 py-1.5 rounded-full text-sm font-semibold bg-primary text-primary-foreground hover:bg-primary-dark transition-colors shadow-[0_4px_14px_hsl(14_91%_50%/0.35)]"
+                  aria-hidden={authLoading || undefined}
+                  className={`px-4 py-1.5 rounded-full text-sm font-semibold bg-primary text-primary-foreground hover:bg-primary-dark transition-colors shadow-[0_4px_14px_hsl(14_91%_50%/0.35)] ${authLoading ? "invisible" : ""}`}
                 >
                   {t("nav_login")}
                 </Link>
