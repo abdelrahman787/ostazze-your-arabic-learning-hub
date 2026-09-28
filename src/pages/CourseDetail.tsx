@@ -57,30 +57,31 @@ const typeConfig = {
   hybrid: { icon: Layers, ar: "كورس مختلط", en: "Hybrid Course" },
 } as const;
 
-const CourseDetail = () => {
+const CourseDetail = ({ initialCourse }: { initialCourse?: Course | null } = {}) => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { t, lang } = useLanguage();
   const { b } = useBilingual();
   const { user, isLoggedIn } = useAuth();
-  const [course, setCourse] = useState<Course | null>(null);
+  // Server-rendered pages arrive with the public course already loaded.
+  const [course, setCourse] = useState<Course | null>(initialCourse ?? null);
   const [lessons, setLessons] = useState<Lesson[]>([]);
   const [liveSessions, setLiveSessions] = useState<LiveSession[]>([]);
   const [enrolled, setEnrolled] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!initialCourse);
   const [enrolling, setEnrolling] = useState(false);
 
   useEffect(() => {
     const fetch = async () => {
       if (!id) return;
-      setLoading(true);
+      if (!initialCourse) setLoading(true);
       const [{ data: c }, { data: l }, { data: s }] = await Promise.all([
         supabase.from("courses").select("*").eq("id", id).maybeSingle(),
         supabase.from("course_lessons").select("id, title, title_en, duration_minutes, order_index, is_free_preview, video_url").eq("course_id", id).order("order_index"),
         // Public-safe schedule (no zoom_url) via SECURITY DEFINER function
         supabase.rpc("get_course_live_sessions_public", { _course_id: id }),
       ]);
-      setCourse((c as Course) || null);
+      setCourse((c as Course) || initialCourse || null);
       setLessons((l as Lesson[]) || []);
       setLiveSessions((s as LiveSession[]) || []);
 

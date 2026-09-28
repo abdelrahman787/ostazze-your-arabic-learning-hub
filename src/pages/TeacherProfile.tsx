@@ -38,14 +38,18 @@ interface AvailSlot {
 }
 
 import { resolveDisplayName } from "@/lib/teacherNameTranslate";
+import type { PublicTeacher } from "@/lib/publicData.functions";
 
-const TeacherProfile = () => {
+const TeacherProfile = ({ initialTeacher }: { initialTeacher?: PublicTeacher | null } = {}) => {
   const { id } = useParams();
   const { t, lang } = useLanguage();
   const { b, bArr } = useBilingual();
-  const [teacher, setTeacher] = useState<TeacherFull | null>(null);
+  // Server-rendered pages arrive with the public tutor already loaded.
+  const [teacher, setTeacher] = useState<TeacherFull | null>(() =>
+    initialTeacher ? { ...initialTeacher, full_name: initialTeacher.full_name || t("the_teacher") } : null
+  );
   const [availability, setAvailability] = useState<AvailSlot[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!initialTeacher);
   const [showBooking, setShowBooking] = useState(false);
 
   const ar = lang === "ar";
@@ -54,6 +58,11 @@ const TeacherProfile = () => {
   useEffect(() => {
     if (!id) return;
     const fetch = async () => {
+      if (initialTeacher) {
+        const { data: avail } = await supabase.rpc("get_public_teacher_availability", { _teacher_id: id });
+        setAvailability((avail as AvailSlot[]) || []);
+        return;
+      }
       setLoading(true);
       const { data: tp } = await supabase
         .from("teacher_profiles")

@@ -44,11 +44,35 @@ function isH3SwallowedErrorBody(body: string): boolean {
   }
 }
 
+// Private areas: never indexed. Sent as a header so crawlers see it before any HTML.
+const PRIVATE_PREFIXES = [
+  "/admin", "/dashboard", "/checkout", "/login", "/register", "/forgot-password", "/reset-password",
+  "/teacher/onboarding", "/my-bookings", "/lectures", "/zoom-test",
+];
+const isPrivatePath = (path: string) =>
+  PRIVATE_PREFIXES.some((p) => path === p || path.startsWith(`${p}/`));
+
+// Trailing-slash variants -> permanent redirect to the canonical no-slash URL (query kept).
+function trailingSlashRedirect(request: Request): Response | null {
+  if (request.method !== "GET" && request.method !== "HEAD") return null;
+  const url = new URL(request.url);
+  if (url.pathname === "/" || !url.pathname.endsWith("/")) return null;
+  if (url.pathname.startsWith("/_serverFn") || url.pathname.startsWith("/api/")) return null;
+  const clean = url.pathname.replace(/\/+$/, "") || "/";
+  return new Response(null, { status: 301, headers: { location: `${clean}${url.search}` } });
+}
+
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
+      const slashRedirect = trailingSlashRedirect(request);
+      if (slashRedirect) return slashRedirect;
       const handler = await getServerEntry();
-      const response = await handler.fetch(request, env, ctx);
+      let response = await handler.fetch(request, env, ctx);
+      if (isPrivatePath(new URL(request.url).pathname)) {
+        response = new Response(response.body, response);
+        response.headers.set("X-Robots-Tag", "noindex, nofollow");
+      }
       return await normalizeCatastrophicSsrResponse(response);
     } catch (error) {
       console.error(error);

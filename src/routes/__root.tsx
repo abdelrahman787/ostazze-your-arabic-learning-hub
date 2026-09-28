@@ -8,8 +8,8 @@ import {
   useRouter,
 } from "@tanstack/react-router";
 import { MotionConfig } from "framer-motion";
-import { Suspense, lazy, useEffect, type ReactNode } from "react";
-import { HelmetProvider } from "react-helmet-async";
+import { useEffect, type ReactNode } from "react";
+import { organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 import appCss from "../styles.css?url";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { AuthProvider } from "@/contexts/AuthContext";
@@ -23,11 +23,8 @@ import { reportLovableError } from "@/lib/lovable-error-reporting";
 import { startPerfMonitor } from "@/lib/perfMonitor";
 import { initMotionVisibility } from "@/lib/motionVisibility";
 
-const GlobalSeo = lazy(() => import("@/components/GlobalSeo"));
 
-const SITE_TITLE = "أستاذي OSTAZE | دروس خصوصية ولايف أونلاين";
-const SITE_DESC =
-  "منصة أستاذي (OSTAZE) لدروس خصوصية ولايف أونلاين مع أفضل المعلمين الجامعيين في السعودية والكويت وقطر — حصص زووم مباشرة وكورسات مسجلة.";
+// Page titles/descriptions come from each page (PageHelmet / NoIndex) so the root never duplicates them.
 const CSP =
   "default-src 'self'; img-src 'self' data: blob: https://*.supabase.co https://storage.googleapis.com https://*.googleusercontent.com https://lh3.googleusercontent.com https://images.unsplash.com https://plus.unsplash.com https://*.b-cdn.net https://*.mediadelivery.net; style-src 'self' 'unsafe-inline' https://assets.mediadelivery.net; font-src 'self' data: https://assets.mediadelivery.net; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com https://assets.mediadelivery.net; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.stripe.com https://*.lovable.app https://*.lovable.dev https://*.mediadelivery.net https://*.b-cdn.net; media-src 'self' blob: https://*.supabase.co https://*.mediadelivery.net https://*.b-cdn.net; frame-src 'self' https://js.stripe.com https://hooks.stripe.com https://docs.google.com https://www.youtube.com https://www.youtube-nocookie.com https://iframe.mediadelivery.net; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests";
 
@@ -44,8 +41,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1.0" },
-      { title: SITE_TITLE },
-      { name: "description", content: SITE_DESC },
       { name: "google-site-verification", content: "I1mHlSOpekjvp0cAlfyxLVLwVhjv2-6Q2muAEL3Mkgw" },
       { name: "google-site-verification", content: "yXef1zMfFx9-rAG2OaGpgyeB0LnB8Bh3C9fZ6ZUlfU4" },
       { name: "author", content: "OSTAZE - أستاذي" },
@@ -58,12 +53,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "theme-color", content: "#0F172A" },
       { name: "format-detection", content: "telephone=no" },
       { property: "og:site_name", content: "OSTAZE" },
-      { property: "og:type", content: "website" },
-      { property: "og:title", content: SITE_TITLE },
-      { property: "og:description", content: SITE_DESC },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: SITE_TITLE },
-      { name: "twitter:description", content: SITE_DESC },
       { property: "og:locale", content: "ar_SA" },
       { property: "og:locale:alternate", content: "en_US" },
     ],
@@ -75,7 +65,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "shortcut icon", href: "/favicon-32.png?v=3", type: "image/png" },
       { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png?v=3" },
     ],
-    scripts: [{ children: APPLE_MOTION_SCRIPT }, { children: THEME_SCRIPT }],
+    scripts: [
+      { children: APPLE_MOTION_SCRIPT },
+      { children: THEME_SCRIPT },
+      { type: "application/ld+json", children: JSON.stringify(organizationJsonLd("ar")) },
+      { type: "application/ld+json", children: JSON.stringify(websiteJsonLd("ar")) },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
@@ -132,7 +127,6 @@ function Providers({ children }: { children: ReactNode }) {
   const { queryClient } = Route.useRouteContext();
   return (
     <ErrorBoundary>
-      <HelmetProvider>
         <QueryClientProvider client={queryClient}>
           <ThemeProvider>
             <LanguageProvider>
@@ -142,7 +136,6 @@ function Providers({ children }: { children: ReactNode }) {
             </LanguageProvider>
           </ThemeProvider>
         </QueryClientProvider>
-      </HelmetProvider>
     </ErrorBoundary>
   );
 }
@@ -152,9 +145,6 @@ function RootComponent() {
   return (
     <Providers>
       <ScrollToTop />
-      <Suspense fallback={null}>
-        <GlobalSeo />
-      </Suspense>
       <IdlePrefetch />
       <Layout>
         <PageTransition>
