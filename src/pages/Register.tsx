@@ -131,7 +131,7 @@ const Register = () => {
           <div className="space-y-4 w-full max-w-xs">
             {[
               { icon: BookOpen, text: lang === "ar" ? "وصول فوري لأفضل المعلمين" : "Instant access to the best teachers" },
-              { icon: Users, text: lang === "ar" ? "انضم لمجتمع من آلاف الطلاب" : "Join a community of thousands" },
+              { icon: Users, text: lang === "ar" ? "معلمون موثّقون لكل مادة" : "Verified tutors for every subject" },
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-3 text-sm text-muted-foreground">
                 <div className="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0">

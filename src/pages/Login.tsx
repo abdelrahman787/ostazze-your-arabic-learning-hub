@@ -90,7 +90,7 @@ const Login = () => {
           <div className="space-y-4 w-full max-w-xs">
             {[
               { icon: BookOpen, text: lang === "ar" ? "جلسات مباشرة مع أفضل المعلمين" : "Live sessions with the best teachers" },
-              { icon: Users, text: lang === "ar" ? "آلاف الطلاب يتعلمون معنا" : "Thousands of students learning with us" },
+              { icon: Users, text: lang === "ar" ? "جلسات مباشرة مع معلمين موثّقين" : "Live sessions with verified tutors" },
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-3 text-sm text-muted-foreground">
                 <div className="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0">
