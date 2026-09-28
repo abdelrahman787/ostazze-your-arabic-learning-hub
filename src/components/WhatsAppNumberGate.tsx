@@ -44,14 +44,21 @@ const WhatsAppNumberGate = () => {
     e.preventDefault();
     const digits = phone.replace(/[^0-9]/g, "");
     if (digits.length < 8) {
-      setError(isAr ? "أدخل رقم واتساب صحيح بصيغة دولية" : "Enter a valid WhatsApp number in international format");
+      setError(
+        isAr
+          ? "أدخل رقم واتساب صحيح بصيغة دولية"
+          : "Enter a valid WhatsApp number in international format",
+      );
       return;
     }
     setSaving(true);
     setError("");
-    const { error: fnError } = await supabase.functions.invoke("send-welcome-whatsapp", {
-      body: { phone: digits, lang },
-    });
+    const { error: fnError } = await supabase.functions.invoke(
+      "send-welcome-whatsapp",
+      {
+        body: { phone: digits, lang },
+      },
+    );
     setSaving(false);
     if (fnError) {
       // The number is saved server-side before sending; don't block the user.
@@ -65,7 +72,11 @@ const WhatsAppNumberGate = () => {
 
   return (
     <div className="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-black/60">
-      <div className="card-base w-full max-w-md p-6" role="dialog" aria-modal="true">
+      <div
+        className="card-base w-full max-w-md p-6"
+        role="dialog"
+        aria-modal="true"
+      >
         <div className="flex items-center gap-3 mb-3">
           <span className="w-11 h-11 rounded-xl bg-[#25D366]/15 text-[#25D366] flex items-center justify-center">
             <MessageCircle size={22} />
@@ -95,7 +106,11 @@ const WhatsAppNumberGate = () => {
               {error}
             </p>
           )}
-          <button type="submit" disabled={saving} className="btn-primary w-full flex items-center justify-center gap-2">
+          <button
+            type="submit"
+            disabled={saving}
+            className="btn-primary w-full flex items-center justify-center gap-2"
+          >
             {saving && <Loader2 size={16} className="animate-spin" />}
             {isAr ? "حفظ ومتابعة" : "Save and continue"}
           </button>

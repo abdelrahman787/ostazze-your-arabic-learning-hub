@@ -18,6 +18,9 @@ export const SITE = {
   country: { ar: "مصر", en: "Egypt", code: "EG" },
   // Verified third-party profiles only. Never include the site's own URL.
   social: [
-    { network: "Facebook", url: "https://www.facebook.com/profile.php?id=61588891482013" },
+    {
+      network: "Facebook",
+      url: "https://www.facebook.com/profile.php?id=61588891482013",
+    },
   ] as const,
 } as const;

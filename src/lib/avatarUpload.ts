@@ -18,11 +18,13 @@ const extOf = (nameOrType: string) => {
 export async function uploadTeacherAvatar(
   file: File | Blob,
   userId: string,
-  fileName?: string
+  fileName?: string,
 ): Promise<string> {
   const ext = extOf(fileName || (file as File).name || file.type || "");
-  if (!/^(jpe?g|png|webp)$/.test(ext)) throw new Error("Unsupported image type");
-  if (file.size > 5 * 1024 * 1024) throw new Error("Image too large (max 5 MB)");
+  if (!/^(jpe?g|png|webp)$/.test(ext))
+    throw new Error("Unsupported image type");
+  if (file.size > 5 * 1024 * 1024)
+    throw new Error("Image too large (max 5 MB)");
   // Folder-per-user: storage rules only let the owner (or an admin) write here.
   const path = `${FOLDER}/${userId}/${Date.now()}.${ext}`;
   const { error } = await supabase.storage.from(BUCKET).upload(path, file, {
@@ -36,9 +38,11 @@ export async function uploadTeacherAvatar(
 /** Copy an applicant photo from private applicant storage to a public avatar URL. */
 export async function copyApplicantPhotoToAvatar(
   photoPath: string,
-  userId: string
+  userId: string,
 ): Promise<string> {
-  const { data, error } = await supabase.storage.from(tutorFileBucket(photoPath)).download(photoPath);
+  const { data, error } = await supabase.storage
+    .from(tutorFileBucket(photoPath))
+    .download(photoPath);
   if (error || !data) throw error || new Error("تعذر تحميل الصورة");
   return uploadTeacherAvatar(data, userId, photoPath);
 }

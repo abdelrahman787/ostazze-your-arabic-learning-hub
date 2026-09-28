@@ -19,24 +19,47 @@ const ALLOWED_ORIGINS = new Set([
 ]);
 const RETURN_PATH = "/checkout/return";
 
-const BodySchema = z.object({
-  country: z.string().trim().regex(/^[A-Z]{2}$/).optional().nullable(),
-  teacherName: z.string().trim().max(120).optional().nullable(),
-  subject: z.string().trim().max(160).optional().nullable(),
-  returnUrl: z.string().url().max(500).optional().nullable(),
-}).strict();
+const BodySchema = z
+  .object({
+    country: z
+      .string()
+      .trim()
+      .regex(/^[A-Z]{2}$/)
+      .optional()
+      .nullable(),
+    teacherName: z.string().trim().max(120).optional().nullable(),
+    subject: z.string().trim().max(160).optional().nullable(),
+    returnUrl: z.string().url().max(500).optional().nullable(),
+  })
+  .strict();
 
 const json = (body: unknown, status = 200) =>
-  new Response(JSON.stringify(body), { status, headers: { ...corsHeaders, "Content-Type": "application/json" } });
+  new Response(JSON.stringify(body), {
+    status,
+    headers: { ...corsHeaders, "Content-Type": "application/json" },
+  });
 
 /** Server-side only. Live requires an explicit STRIPE_MODE=live AND a live key; otherwise sandbox. */
 function resolveEnv(): StripeEnv {
-  const live = Deno.env.get("STRIPE_MODE") === "live" && !!Deno.env.get("STRIPE_LIVE_API_KEY");
+  const live =
+    Deno.env.get("STRIPE_MODE") === "live" &&
+    !!Deno.env.get("STRIPE_LIVE_API_KEY");
   return live ? "live" : "sandbox";
 }
 
-function resolveReturnUrl(candidate: string | null | undefined, origin: string | null): string | null {
-  const base = candidate ? (() => { try { return new URL(candidate); } catch { return null; } })() : null;
+function resolveReturnUrl(
+  candidate: string | null | undefined,
+  origin: string | null,
+): string | null {
+  const base = candidate
+    ? (() => {
+        try {
+          return new URL(candidate);
+        } catch {
+          return null;
+        }
+      })()
+    : null;
   const originOk = (o: string) => ALLOWED_ORIGINS.has(o);
   if (base) {
     if (!originOk(base.origin) || base.pathname !== RETURN_PATH) return null;
@@ -48,24 +71,37 @@ function resolveReturnUrl(candidate: string | null | undefined, origin: string |
 }
 
 Deno.serve(async (req) => {
-  if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
+  if (req.method === "OPTIONS")
+    return new Response("ok", { headers: corsHeaders });
   if (req.method !== "POST") return json({ error: "Method not allowed" }, 405);
 
   // 1. Authenticate
   const authHeader = req.headers.get("Authorization") ?? "";
-  if (!authHeader.startsWith("Bearer ")) return json({ error: "Unauthorized" }, 401);
-  const userClient = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_ANON_KEY")!, {
-    global: { headers: { Authorization: authHeader } },
-  });
-  const { data: userData, error: userErr } = await userClient.auth.getUser(authHeader.slice(7));
+  if (!authHeader.startsWith("Bearer "))
+    return json({ error: "Unauthorized" }, 401);
+  const userClient = createClient(
+    Deno.env.get("SUPABASE_URL")!,
+    Deno.env.get("SUPABASE_ANON_KEY")!,
+    {
+      global: { headers: { Authorization: authHeader } },
+    },
+  );
+  const { data: userData, error: userErr } = await userClient.auth.getUser(
+    authHeader.slice(7),
+  );
   const user = userData?.user;
   if (userErr || !user) return json({ error: "Unauthorized" }, 401);
 
   // 2. Validate body
   let raw: unknown;
-  try { raw = await req.json(); } catch { return json({ error: "Invalid JSON" }, 400); }
+  try {
+    raw = await req.json();
+  } catch {
+    return json({ error: "Invalid JSON" }, 400);
+  }
   const parsed = BodySchema.safeParse(raw);
-  if (!parsed.success) return json({ error: parsed.error.flatten().fieldErrors }, 400);
+  if (!parsed.success)
+    return json({ error: parsed.error.flatten().fieldErrors }, 400);
   const { country, teacherName, subject, returnUrl } = parsed.data;
 
   const finalReturnUrl = resolveReturnUrl(returnUrl, req.headers.get("origin"));
@@ -73,25 +109,39 @@ Deno.serve(async (req) => {
 
   try {
     // 3. Rate limit: 5 sessions per user per 10 minutes
-    const admin = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
-    const allowed = await checkRateLimit(admin, "create-checkout", user.id, 5, 600);
-    if (!allowed) return json({ error: "Too many requests, try again later" }, 429);
+    const admin = createClient(
+      Deno.env.get("SUPABASE_URL")!,
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+    );
+    const allowed = await checkRateLimit(
+      admin,
+      "create-checkout",
+      user.id,
+      5,
+      600,
+    );
+    if (!allowed)
+      return json({ error: "Too many requests, try again later" }, 429);
 
     const env = resolveEnv();
     const stripe = createStripeClient(env);
 
     const session = await stripe.checkout.sessions.create({
-      line_items: [{
-        price_data: {
-          currency: "egp",
-          product_data: {
-            name: `Tutoring Session${subject ? ` - ${subject}` : ""}`,
-            ...(teacherName && { description: `Session with ${teacherName}` }),
+      line_items: [
+        {
+          price_data: {
+            currency: "egp",
+            product_data: {
+              name: `Tutoring Session${subject ? ` - ${subject}` : ""}`,
+              ...(teacherName && {
+                description: `Session with ${teacherName}`,
+              }),
+            },
+            unit_amount: AMOUNT_CENTS,
           },
-          unit_amount: AMOUNT_CENTS,
+          quantity: 1,
         },
-        quantity: 1,
-      }],
+      ],
       mode: "payment",
       ui_mode: "embedded",
       return_url: finalReturnUrl,
@@ -101,7 +151,10 @@ Deno.serve(async (req) => {
 
     return json({ clientSecret: session.client_secret });
   } catch (error: unknown) {
-    console.error("Checkout error:", error instanceof Error ? error.message : String(error));
+    console.error(
+      "Checkout error:",
+      error instanceof Error ? error.message : String(error),
+    );
     return json({ error: "Failed to create checkout session" }, 500);
   }
 });

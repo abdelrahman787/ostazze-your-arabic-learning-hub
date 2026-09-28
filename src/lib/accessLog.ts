@@ -39,7 +39,6 @@ export function logAccessEvent(event: AccessEvent) {
     ts: new Date().toISOString(),
     ...event,
   };
-  // eslint-disable-next-line no-console
   console.info(PREFIX, event.type, payload);
 }
 
@@ -47,7 +46,7 @@ export function logAccessDenied(
   source: string,
   required: string,
   actual: string | undefined,
-  resource?: string
+  resource?: string,
 ) {
   logAccessEvent({
     type: "access_denied",
@@ -62,7 +61,7 @@ export function logRoleRedirect(
   source: string,
   from: string,
   to: string,
-  role: string
+  role: string,
 ) {
   logAccessEvent({
     type: "role_redirect",
@@ -76,12 +75,14 @@ export function logRoleRedirect(
 export function logSignedUrlFailure(
   bucket: string,
   path: string | null | undefined,
-  error?: unknown
+  error?: unknown,
 ) {
   logAccessEvent({
     type: path ? "signed_url_failure" : "signed_url_missing_path",
     source: "storageUrls",
     resource: `${bucket}/${path ?? "<no-path>"}`,
-    extra: error ? { error: String((error as Error)?.message ?? error) } : undefined,
+    extra: error
+      ? { error: String((error as Error)?.message ?? error) }
+      : undefined,
   });
 }

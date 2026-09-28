@@ -5,7 +5,9 @@ interface CountUpNumberProps {
   duration?: number;
 }
 
-const parseTarget = (val: string): { prefix: string; number: number; suffix: string; decimals: number } => {
+const parseTarget = (
+  val: string,
+): { prefix: string; number: number; suffix: string; decimals: number } => {
   const match = val.match(/^([+]?)([0-9,.]+)(.*)$/);
   if (!match) return { prefix: "", number: 0, suffix: val, decimals: 0 };
   const prefix = match[1];
@@ -16,7 +18,11 @@ const parseTarget = (val: string): { prefix: string; number: number; suffix: str
   return { prefix, number, suffix, decimals };
 };
 
-const formatNumber = (n: number, decimals: number, addCommas: boolean): string => {
+const formatNumber = (
+  n: number,
+  decimals: number,
+  addCommas: boolean,
+): string => {
   const fixed = n.toFixed(decimals);
   if (!addCommas) return fixed;
   const parts = fixed.split(".");
@@ -51,13 +57,19 @@ const CountUpNumber = ({ target, duration = 2000 }: CountUpNumberProps) => {
           requestAnimationFrame(animate);
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.3 },
     );
     observer.observe(el);
     return () => observer.disconnect();
   }, [number, decimals, duration, hasCommas]);
 
-  return <span ref={ref}>{prefix}{display}{suffix}</span>;
+  return (
+    <span ref={ref}>
+      {prefix}
+      {display}
+      {suffix}
+    </span>
+  );
 };
 
 export default CountUpNumber;

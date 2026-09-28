@@ -43,20 +43,32 @@ const SmartDashboard = () => {
 
   // Teacher route: must be a teacher (admin is already redirected above).
   if (isTeacherRoute && user.role !== "teacher") {
-    return <RoleDeniedScreen
-      ar={ar}
-      route="/dashboard/teacher"
-      requiredRole="teacher"
-      actualRole={user.role}
-    />;
+    return (
+      <RoleDeniedScreen
+        ar={ar}
+        route="/dashboard/teacher"
+        requiredRole="teacher"
+        actualRole={user.role}
+      />
+    );
   }
 
   if (user.role === "teacher") {
-    return <><NoIndex title="Teacher Dashboard" /><TeacherOnboardingBanner /><TeacherDashboard /></>;
+    return (
+      <>
+        <NoIndex title="Teacher Dashboard" />
+        <TeacherOnboardingBanner />
+        <TeacherDashboard />
+      </>
+    );
   }
 
-
-  return <><NoIndex title="Dashboard" /><Dashboard /></>;
+  return (
+    <>
+      <NoIndex title="Dashboard" />
+      <Dashboard />
+    </>
+  );
 };
 
 interface RoleDeniedProps {
@@ -66,7 +78,12 @@ interface RoleDeniedProps {
   actualRole: string;
 }
 
-const RoleDeniedScreen = ({ ar, route, requiredRole, actualRole }: RoleDeniedProps) => {
+const RoleDeniedScreen = ({
+  ar,
+  route,
+  requiredRole,
+  actualRole,
+}: RoleDeniedProps) => {
   // Log once on mount to avoid spamming on re-renders
   useEffect(() => {
     logAccessDenied("SmartDashboard", requiredRole, actualRole, route);

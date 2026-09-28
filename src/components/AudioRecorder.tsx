@@ -16,20 +16,29 @@ interface AudioRecorderProps {
   lectureId: string;
 }
 
-const AudioRecorder = ({ onRecorded, disabled, userId, lectureId }: AudioRecorderProps) => {
+const AudioRecorder = ({
+  onRecorded,
+  disabled,
+  userId,
+  lectureId,
+}: AudioRecorderProps) => {
   const { t } = useLanguage();
   const [recording, setRecording] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [duration, setDuration] = useState(0);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef<Blob[]>([]);
-  const timerRef = useRef<ReturnType<typeof setInterval> | undefined>(undefined);
+  const timerRef = useRef<ReturnType<typeof setInterval> | undefined>(
+    undefined,
+  );
 
   const startRecording = useCallback(async () => {
     if (!isMediaRecorderSupported()) return;
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const mimeType = MediaRecorder.isTypeSupported("audio/webm") ? "audio/webm" : "audio/ogg";
+      const mimeType = MediaRecorder.isTypeSupported("audio/webm")
+        ? "audio/webm"
+        : "audio/ogg";
       const mediaRecorder = new MediaRecorder(stream, { mimeType });
       mediaRecorderRef.current = mediaRecorder;
       chunksRef.current = [];
@@ -43,14 +52,18 @@ const AudioRecorder = ({ onRecorded, disabled, userId, lectureId }: AudioRecorde
         clearInterval(timerRef.current);
         setDuration(0);
 
-        const mimeType = MediaRecorder.isTypeSupported("audio/webm") ? "audio/webm" : "audio/ogg";
+        const mimeType = MediaRecorder.isTypeSupported("audio/webm")
+          ? "audio/webm"
+          : "audio/ogg";
         const ext = mimeType === "audio/webm" ? "webm" : "ogg";
         const blob = new Blob(chunksRef.current, { type: mimeType });
         if (blob.size === 0) return;
 
         setUploading(true);
         const fileName = `${userId}/${lectureId}/${Date.now()}.${ext}`;
-        const { error } = await supabase.storage.from("chat-audio").upload(fileName, blob);
+        const { error } = await supabase.storage
+          .from("chat-audio")
+          .upload(fileName, blob);
 
         if (!error) {
           // Store storage path; AudioPlayer signs on demand
@@ -73,7 +86,8 @@ const AudioRecorder = ({ onRecorded, disabled, userId, lectureId }: AudioRecorde
     setRecording(false);
   }, []);
 
-  const formatTime = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+  const formatTime = (s: number) =>
+    `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
 
   if (!isMediaRecorderSupported()) {
     return (
@@ -97,7 +111,9 @@ const AudioRecorder = ({ onRecorded, disabled, userId, lectureId }: AudioRecorde
   if (recording) {
     return (
       <div className="flex items-center gap-2">
-        <span className="text-xs text-destructive font-mono animate-pulse">{formatTime(duration)}</span>
+        <span className="text-xs text-destructive font-mono animate-pulse">
+          {formatTime(duration)}
+        </span>
         <motion.button
           whileTap={{ scale: 0.9 }}
           onClick={stopRecording}

@@ -6,10 +6,26 @@ import loay from "@/assets/team-loay.webp.asset.json";
 import khaled from "@/assets/team-khaled.webp.asset.json";
 
 const team = [
-  { img: naga.url, name: { ar: "محمد نجا", en: "Mohamed Naga" }, role: { ar: "الرئيس التنفيذي", en: "Chief Executive Officer" } },
-  { img: safi.url, name: { ar: "أحمد صافي", en: "Ahmed Safi" }, role: { ar: "المدير المالي", en: "Chief Financial Manager" } },
-  { img: loay.url, name: { ar: "لؤي محمد", en: "Loay Mohamed" }, role: { ar: "مدير العمليات", en: "Chief Operational Officer" } },
-  { img: khaled.url, name: { ar: "خالد جلال", en: "Khaled Galal" }, role: { ar: "المدير التقني", en: "Chief Technical Officer" } },
+  {
+    img: naga.url,
+    name: { ar: "محمد نجا", en: "Mohamed Naga" },
+    role: { ar: "الرئيس التنفيذي", en: "Chief Executive Officer" },
+  },
+  {
+    img: safi.url,
+    name: { ar: "أحمد صافي", en: "Ahmed Safi" },
+    role: { ar: "المدير المالي", en: "Chief Financial Manager" },
+  },
+  {
+    img: loay.url,
+    name: { ar: "لؤي محمد", en: "Loay Mohamed" },
+    role: { ar: "مدير العمليات", en: "Chief Operational Officer" },
+  },
+  {
+    img: khaled.url,
+    name: { ar: "خالد جلال", en: "Khaled Galal" },
+    role: { ar: "المدير التقني", en: "Chief Technical Officer" },
+  },
 ];
 
 const OurTeam = () => {
@@ -26,8 +42,13 @@ const OurTeam = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <span className="inline-block px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-4"
-            style={{ background: "hsl(var(--primary) / 0.12)", color: "hsl(var(--primary))" }}>
+          <span
+            className="inline-block px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-4"
+            style={{
+              background: "hsl(var(--primary) / 0.12)",
+              color: "hsl(var(--primary))",
+            }}
+          >
             {isAr ? "تعرف علينا" : "Meet Us"}
           </span>
           <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground">
@@ -49,7 +70,9 @@ const OurTeam = () => {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: i * 0.08, duration: 0.45, ease: "easeOut" }}
               className="group relative rounded-2xl overflow-hidden bg-card border border-border/50 hover:border-primary/40 transition-all duration-300 hover:-translate-y-1"
-              style={{ boxShadow: "0 4px 20px -8px hsl(var(--foreground) / 0.1)" }}
+              style={{
+                boxShadow: "0 4px 20px -8px hsl(var(--foreground) / 0.1)",
+              }}
             >
               <div className="aspect-[4/5] overflow-hidden bg-muted">
                 <img

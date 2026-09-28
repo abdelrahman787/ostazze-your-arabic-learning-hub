@@ -121,7 +121,7 @@ export const getCoursePrefix = (code: string): string => {
 export const resolveCourseSubject = (
   courseCode: string,
   fallback: { ar: string; en: string },
-  lang: "ar" | "en"
+  lang: "ar" | "en",
 ): string => {
   const prefix = getCoursePrefix(courseCode);
   const subject = PREFIX_MAP[prefix];

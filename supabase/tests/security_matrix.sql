@@ -1,5 +1,6 @@
 -- Access-control test matrix for the six security findings closed in
--- drizzle/migrations/0002_close_six_security_findings.sql.
+-- drizzle/migrations/0002_close_six_security_findings.sql, plus SSR-era boundary checks (S*).
+-- Run with a privileged SQL runner (expects RESULT passed=49 failed=0).
 -- Runs as a privileged user, switches role/JWT claims per check, and ends by
 -- raising an exception so EVERY change (fixtures included) is rolled back.
 -- Output: the exception message is the PASS/FAIL report.
@@ -59,8 +60,7 @@ BEGIN
     ('anon','deny','F3 anon lists/reads CVs','SELECT 1 FROM storage.objects WHERE bucket_id=''tutor-cvs'''),
     ('anon','deny','F3 anon deletes CV','DELETE FROM storage.objects WHERE bucket_id=''tutor-cvs'''),
     ('student','deny','F3 student lists CVs','SELECT 1 FROM storage.objects WHERE bucket_id=''tutor-cvs'''),
-    ('tutor_a','ok','F3 tutor A uploads into own folder','INSERT INTO storage.objects(bucket_id,name) VALUES (''tutor-cvs'',''a54d78e1-15e2-48b3-b72d-ca998ee977ed/new.pdf'')'),
-    ('tutor_a','deny','F3 tutor A uploads non-allowed type','INSERT INTO storage.objects(bucket_id,name) VALUES (''tutor-cvs'',''a54d78e1-15e2-48b3-b72d-ca998ee977ed/evil.exe'')'),
+    ('tutor_a','deny','F3 tutor A writes CV storage directly (server step only)','INSERT INTO storage.objects(bucket_id,name) VALUES (''tutor-cvs'',''a54d78e1-15e2-48b3-b72d-ca998ee977ed/new.pdf'')'),
     ('tutor_a','deny','F3 tutor A uploads into tutor B folder','INSERT INTO storage.objects(bucket_id,name) VALUES (''tutor-cvs'',''bd335f03-dbab-4451-bab5-5d3acc17f333/x.pdf'')'),
     ('tutor_a','ok','F3 tutor A reads own CV','SELECT 1 FROM storage.objects WHERE bucket_id=''tutor-cvs'' AND name=''a54d78e1-15e2-48b3-b72d-ca998ee977ed/cv.pdf'''),
     ('tutor_a','deny','F3 tutor A reads tutor B CV','SELECT 1 FROM storage.objects WHERE bucket_id=''tutor-cvs'' AND name LIKE ''bd335f03%'''),
@@ -79,7 +79,14 @@ BEGIN
     ('tutor_a','deny','F5 tutor A overwrites course cover','UPDATE storage.objects SET metadata=''{}'' WHERE bucket_id=''course-covers'' AND name=''cover-test.png'''),
     ('tutor_a','deny','F5 tutor A deletes tutor B avatar','DELETE FROM storage.objects WHERE bucket_id=''course-covers'' AND name LIKE ''teacher-avatars/bd335f03%'''),
     ('admin','ok','F4 admin uploads course cover','INSERT INTO storage.objects(bucket_id,name) VALUES (''course-covers'',''cover-admin.png'')'),
-    ('admin','ok','F5 admin deletes course cover','DELETE FROM storage.objects WHERE bucket_id=''course-covers'' AND name=''cover-test.png''')
+    ('admin','ok','F5 admin deletes course cover','DELETE FROM storage.objects WHERE bucket_id=''course-covers'' AND name=''cover-test.png'''),
+    -- SSR-era boundaries: private tables stay closed to visitors and other users
+    ('anon','deny','S1 anon reads contact messages','SELECT 1 FROM public.contact_messages'),
+    ('anon','deny','S2 anon reads profiles table','SELECT 1 FROM public.profiles'),
+    ('anon','deny','S3 anon reads bookings','SELECT 1 FROM public.bookings'),
+    ('tutor_a','deny','S4 tutor A reads student bookings with tutor B','SELECT 1 FROM public.bookings WHERE teacher_id=''bd335f03-dbab-4451-bab5-5d3acc17f333'''),
+    ('anon','deny','S5 anon reads unverified tutor rows','SELECT 1 FROM public.teacher_profiles WHERE verified = false'),
+    ('anon','deny','S6 anon reads unpublished courses','SELECT 1 FROM public.courses WHERE is_published = false')
   ) AS t(who, expect, label, q) LOOP
     BEGIN
       PERFORM set_config('role', CASE WHEN c.who='anon' THEN 'anon' ELSE 'authenticated' END, true);

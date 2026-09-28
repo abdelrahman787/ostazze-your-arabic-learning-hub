@@ -33,7 +33,10 @@ const FaqAccordion = ({ items, defaultOpen = -1 }: Props) => {
               aria-expanded={isOpen}
               className="w-full flex items-center justify-between gap-4 p-5 text-start hover:bg-foreground/[0.02] transition-colors"
             >
-              <span className="font-bold text-[15px] leading-relaxed" itemProp="name">
+              <span
+                className="font-bold text-[15px] leading-relaxed"
+                itemProp="name"
+              >
                 {it.q}
               </span>
               <ChevronDown

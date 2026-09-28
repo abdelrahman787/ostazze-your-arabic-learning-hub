@@ -28,7 +28,10 @@ const CookieConsent = () => {
 
   const accept = () => {
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({ essential: true, ts: Date.now() }));
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({ essential: true, ts: Date.now() }),
+      );
     } catch {
       /* noop */
     }
@@ -41,7 +44,9 @@ const CookieConsent = () => {
     <div
       role="dialog"
       aria-live="polite"
-      aria-label={lang === "ar" ? "إشعار ملفات تعريف الارتباط" : "Cookie notice"}
+      aria-label={
+        lang === "ar" ? "إشعار ملفات تعريف الارتباط" : "Cookie notice"
+      }
       className="fixed bottom-4 inset-x-4 md:inset-x-auto md:end-6 md:bottom-6 md:max-w-md z-[60] card-base p-4 shadow-2xl border border-border/60 bg-background"
     >
       <div className="flex items-start gap-3">
@@ -50,13 +55,18 @@ const CookieConsent = () => {
         </div>
         <div className="flex-1">
           <p className="text-sm font-bold mb-1">
-            {lang === "ar" ? "نستخدم تخزيناً أساسياً فقط" : "We use essential storage only"}
+            {lang === "ar"
+              ? "نستخدم تخزيناً أساسياً فقط"
+              : "We use essential storage only"}
           </p>
           <p className="text-xs text-muted-foreground leading-relaxed mb-3">
             {lang === "ar"
               ? "نستخدم تخزيناً ضرورياً فقط لتذكر تسجيل دخولك وتفضيلاتك. لا نستخدم أي أدوات تتبع أو إعلانات."
               : "We only use essential storage to remember your login and preferences. We don't use any tracking or advertising tools."}{" "}
-            <Link to="/privacy" className="text-primary font-semibold hover:underline">
+            <Link
+              to="/privacy"
+              className="text-primary font-semibold hover:underline"
+            >
               {lang === "ar" ? "سياسة الخصوصية" : "Privacy Policy"}
             </Link>
           </p>

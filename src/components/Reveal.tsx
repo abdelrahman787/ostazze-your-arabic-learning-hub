@@ -43,9 +43,11 @@ export default function Reveal({
   }, [visible, rootMargin, delay]);
 
   return (
-    <div ref={ref} className={`reveal ${visible ? "is-visible" : ""} ${className}`.trim()}>
+    <div
+      ref={ref}
+      className={`reveal ${visible ? "is-visible" : ""} ${className}`.trim()}
+    >
       {children}
     </div>
   );
 }
-

@@ -4,7 +4,8 @@ import { sendWapilotText } from "../_shared/wapilot.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers":
+    "authorization, x-client-info, apikey, content-type",
 };
 
 serve(async (req) => {
@@ -15,7 +16,7 @@ serve(async (req) => {
   try {
     const supabaseAdmin = createClient(
       Deno.env.get("SUPABASE_URL")!,
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
     );
 
     // Verify caller is admin
@@ -23,7 +24,10 @@ serve(async (req) => {
     if (!authHeader) throw new Error("No authorization header");
 
     const token = authHeader.replace("Bearer ", "");
-    const { data: { user: caller }, error: authError } = await supabaseAdmin.auth.getUser(token);
+    const {
+      data: { user: caller },
+      error: authError,
+    } = await supabaseAdmin.auth.getUser(token);
     if (authError || !caller) throw new Error("Unauthorized");
 
     const { data: callerRole } = await supabaseAdmin
@@ -40,15 +44,17 @@ serve(async (req) => {
 
     if (action === "create_teacher") {
       const { email, password, full_name, university, subjects, price } = body;
-      if (!email || !password || !full_name) throw new Error("الاسم والإيميل وكلمة المرور مطلوبة");
+      if (!email || !password || !full_name)
+        throw new Error("الاسم والإيميل وكلمة المرور مطلوبة");
 
       // Create user via admin API
-      const { data: newUser, error: createError } = await supabaseAdmin.auth.admin.createUser({
-        email,
-        password,
-        email_confirm: true,
-        user_metadata: { full_name, account_type: "teacher" },
-      });
+      const { data: newUser, error: createError } =
+        await supabaseAdmin.auth.admin.createUser({
+          email,
+          password,
+          email_confirm: true,
+          user_metadata: { full_name, account_type: "teacher" },
+        });
       if (createError) throw createError;
 
       const userId = newUser.user.id;
@@ -60,19 +66,20 @@ serve(async (req) => {
         .eq("user_id", userId);
 
       // Create teacher_profile
-      await supabaseAdmin
-        .from("teacher_profiles")
-        .insert({
-          user_id: userId,
-          verified: true,
-          university: university || null,
-          subjects: subjects || [],
-          price: price || 0,
-        });
+      await supabaseAdmin.from("teacher_profiles").insert({
+        user_id: userId,
+        verified: true,
+        university: university || null,
+        subjects: subjects || [],
+        price: price || 0,
+      });
 
       return new Response(
-        JSON.stringify({ message: "تم إنشاء حساب المعلم بنجاح", user_id: userId }),
-        { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        JSON.stringify({
+          message: "تم إنشاء حساب المعلم بنجاح",
+          user_id: userId,
+        }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" } },
       );
     }
 
@@ -81,7 +88,9 @@ serve(async (req) => {
       if (!email || !full_name) throw new Error("الاسم والإيميل مطلوبان");
 
       const { data: users } = await supabaseAdmin.auth.admin.listUsers();
-      const existing = users?.users?.find((u) => u.email?.toLowerCase() === String(email).toLowerCase());
+      const existing = users?.users?.find(
+        (u) => u.email?.toLowerCase() === String(email).toLowerCase(),
+      );
 
       let userId: string;
       let created = false;
@@ -89,13 +98,15 @@ serve(async (req) => {
       if (existing) {
         userId = existing.id;
       } else {
-        if (!password || String(password).length < 8) throw new Error("كلمة مرور مؤقتة غير صالحة");
-        const { data: newUser, error: createError } = await supabaseAdmin.auth.admin.createUser({
-          email,
-          password,
-          email_confirm: true,
-          user_metadata: { full_name, account_type: "teacher" },
-        });
+        if (!password || String(password).length < 8)
+          throw new Error("كلمة مرور مؤقتة غير صالحة");
+        const { data: newUser, error: createError } =
+          await supabaseAdmin.auth.admin.createUser({
+            email,
+            password,
+            email_confirm: true,
+            user_metadata: { full_name, account_type: "teacher" },
+          });
         if (createError) throw createError;
         userId = newUser.user.id;
         created = true;
@@ -103,9 +114,13 @@ serve(async (req) => {
 
       await supabaseAdmin
         .from("profiles")
-        .update({ account_type: "teacher", full_name, phone: phone || null, onboarding_completed: false })
+        .update({
+          account_type: "teacher",
+          full_name,
+          phone: phone || null,
+          onboarding_completed: false,
+        })
         .eq("user_id", userId);
-
 
       const { data: existingTP } = await supabaseAdmin
         .from("teacher_profiles")
@@ -116,21 +131,34 @@ serve(async (req) => {
       if (existingTP) {
         await supabaseAdmin
           .from("teacher_profiles")
-          .update({ verified: true, university: university || null, subjects: subjects || [] })
+          .update({
+            verified: true,
+            university: university || null,
+            subjects: subjects || [],
+          })
           .eq("user_id", userId);
       } else {
         const { error: tpError } = await supabaseAdmin
           .from("teacher_profiles")
-          .insert({ user_id: userId, verified: true, university: university || null, subjects: subjects || [], price: 0 });
+          .insert({
+            user_id: userId,
+            verified: true,
+            university: university || null,
+            subjects: subjects || [],
+            price: 0,
+          });
         if (tpError) throw tpError;
       }
 
-      const siteUrl = (Deno.env.get("PUBLIC_SITE_URL") || "https://ostaze.com").replace(/\/$/, "");
-      const { data: linkData, error: linkError } = await supabaseAdmin.auth.admin.generateLink({
-        type: "recovery",
-        email,
-        options: { redirectTo: `${siteUrl}/reset-password` },
-      });
+      const siteUrl = (
+        Deno.env.get("PUBLIC_SITE_URL") || "https://ostaze.com"
+      ).replace(/\/$/, "");
+      const { data: linkData, error: linkError } =
+        await supabaseAdmin.auth.admin.generateLink({
+          type: "recovery",
+          email,
+          options: { redirectTo: `${siteUrl}/reset-password` },
+        });
       if (linkError || !linkData?.properties?.action_link) {
         throw linkError || new Error("تعذر إنشاء رابط تعيين كلمة المرور");
       }
@@ -138,14 +166,18 @@ serve(async (req) => {
       let whatsappError: string | null = null;
       if (phone) {
         try {
-          await sendWapilotText(phone, [
-            `مرحبًا ${full_name}`,
-            "تم قبول طلب انضمامك إلى فريق معلمي أستاذي.",
-            "استخدم الرابط التالي لتعيين كلمة مرور جديدة والدخول إلى حسابك:",
-            linkData.properties.action_link,
-          ].join("\n"));
+          await sendWapilotText(
+            phone,
+            [
+              `مرحبًا ${full_name}`,
+              "تم قبول طلب انضمامك إلى فريق معلمي أستاذي.",
+              "استخدم الرابط التالي لتعيين كلمة مرور جديدة والدخول إلى حسابك:",
+              linkData.properties.action_link,
+            ].join("\n"),
+          );
         } catch (error) {
-          whatsappError = error instanceof Error ? error.message : String(error);
+          whatsappError =
+            error instanceof Error ? error.message : String(error);
           console.error("Teacher approval WhatsApp failed:", whatsappError);
         }
       } else {
@@ -154,23 +186,27 @@ serve(async (req) => {
 
       return new Response(
         JSON.stringify({
-          message: created ? "تم إنشاء حساب المعلم" : "تمت ترقية الحساب الحالي إلى معلم",
+          message: created
+            ? "تم إنشاء حساب المعلم"
+            : "تمت ترقية الحساب الحالي إلى معلم",
           user_id: userId,
           created,
           whatsapp_error: whatsappError,
         }),
-        { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        { headers: { ...corsHeaders, "Content-Type": "application/json" } },
       );
     }
 
     if (action === "add_role") {
       const { email, role } = body;
       if (!email || !role) throw new Error("Email and role are required");
-      if (!["admin", "moderator"].includes(role)) throw new Error("Invalid role");
+      if (!["admin", "moderator"].includes(role))
+        throw new Error("Invalid role");
 
       const { data: users } = await supabaseAdmin.auth.admin.listUsers();
       const targetUser = users?.users?.find((u) => u.email === email);
-      if (!targetUser) throw new Error("المستخدم غير موجود بهذا البريد الإلكتروني");
+      if (!targetUser)
+        throw new Error("المستخدم غير موجود بهذا البريد الإلكتروني");
 
       const { data: existing } = await supabaseAdmin
         .from("user_roles")
@@ -188,8 +224,11 @@ serve(async (req) => {
       if (insertError) throw insertError;
 
       return new Response(
-        JSON.stringify({ message: "تمت إضافة الدور بنجاح", user_id: targetUser.id }),
-        { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        JSON.stringify({
+          message: "تمت إضافة الدور بنجاح",
+          user_id: targetUser.id,
+        }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" } },
       );
     }
 
@@ -211,7 +250,7 @@ serve(async (req) => {
 
       return new Response(
         JSON.stringify({ message: "تمت إزالة الدور بنجاح" }),
-        { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        { headers: { ...corsHeaders, "Content-Type": "application/json" } },
       );
     }
 
@@ -242,7 +281,7 @@ serve(async (req) => {
 
       return new Response(
         JSON.stringify({ message: "تمت إضافة المعلم بنجاح" }),
-        { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        { headers: { ...corsHeaders, "Content-Type": "application/json" } },
       );
     }
 

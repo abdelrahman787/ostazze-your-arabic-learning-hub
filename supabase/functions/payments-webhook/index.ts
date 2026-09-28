@@ -4,7 +4,7 @@ import { type StripeEnv, verifyWebhook } from "../_shared/stripe.ts";
 
 const supabase = createClient(
   Deno.env.get("SUPABASE_URL")!,
-  Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
+  Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
 );
 
 serve(async (req) => {
@@ -21,7 +21,7 @@ serve(async (req) => {
 
     switch (event.type) {
       case "checkout.session.completed":
-        await handleCheckoutCompleted(event.data.object);
+        await handleCheckoutCompleted(event.data.object as CheckoutSession);
         break;
       default:
         console.log("Unhandled event:", event.type);
@@ -37,7 +37,12 @@ serve(async (req) => {
   }
 });
 
-async function handleCheckoutCompleted(session: any) {
+type CheckoutSession = {
+  id?: string;
+  metadata?: Record<string, string> | null;
+};
+
+async function handleCheckoutCompleted(session: CheckoutSession) {
   console.log("Checkout completed:", session.id);
   const userId = session.metadata?.userId;
   if (!userId) {
@@ -62,6 +67,9 @@ async function handleCheckoutCompleted(session: any) {
       .from("session_requests")
       .update({ status: "paid_awaiting_assignment" })
       .eq("id", request.id);
-    console.log("Session request marked paid, awaiting admin assignment:", request.id);
+    console.log(
+      "Session request marked paid, awaiting admin assignment:",
+      request.id,
+    );
   }
 }

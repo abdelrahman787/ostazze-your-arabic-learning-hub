@@ -6,8 +6,14 @@ const KEY = "ostaze_geo_country";
 function guessFromTimezone(): string | null {
   const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
   const map: Record<string, string> = {
-    "Africa/Cairo": "EG", "Asia/Riyadh": "SA", "Asia/Dubai": "AE", "Asia/Qatar": "QA",
-    "Asia/Kuwait": "KW", "Asia/Bahrain": "BH", "Asia/Muscat": "OM", "Asia/Amman": "JO",
+    "Africa/Cairo": "EG",
+    "Asia/Riyadh": "SA",
+    "Asia/Dubai": "AE",
+    "Asia/Qatar": "QA",
+    "Asia/Kuwait": "KW",
+    "Asia/Bahrain": "BH",
+    "Asia/Muscat": "OM",
+    "Asia/Amman": "JO",
     "Europe/London": "GB",
   };
   return map[tz] ?? null;
@@ -15,7 +21,8 @@ function guessFromTimezone(): string | null {
 
 /** Detects the visitor's country from their IP (cached), falling back to timezone. */
 export function useVisitorCountry(): { country: Country; loading: boolean } {
-  const cached = typeof window !== "undefined" ? sessionStorage.getItem(KEY) : null;
+  const cached =
+    typeof window !== "undefined" ? sessionStorage.getItem(KEY) : null;
   const [raw, setRaw] = useState<string | null>(cached ?? guessFromTimezone());
   const [loading, setLoading] = useState(!cached);
 
@@ -32,7 +39,10 @@ export function useVisitorCountry(): { country: Country; loading: boolean } {
         }
       })
       .catch(() => {})
-      .finally(() => { clearTimeout(t); setLoading(false); });
+      .finally(() => {
+        clearTimeout(t);
+        setLoading(false);
+      });
     return () => ctrl.abort();
   }, [cached]);
 

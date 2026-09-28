@@ -1,7 +1,14 @@
 import { Link } from "@/lib/router-compat";
 import {
-  Calculator, Atom, FlaskConical, Languages,
-  Code, Zap, PenTool, HeartPulse, Dna
+  Calculator,
+  Atom,
+  FlaskConical,
+  Languages,
+  Code,
+  Zap,
+  PenTool,
+  HeartPulse,
+  Dna,
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useEffect, useRef, useState } from "react";
@@ -63,13 +70,19 @@ const OrbitSubjects = () => {
     let frame = 0;
 
     const tick = (now: number) => {
-      const nodes = sectionRef.current?.querySelectorAll<HTMLElement>("[data-orbit-traveler]") ?? [];
+      const nodes =
+        sectionRef.current?.querySelectorAll<HTMLElement>(
+          "[data-orbit-traveler]",
+        ) ?? [];
       nodes.forEach((node) => {
         const radius = Number(node.dataset.orbitRadius || 0);
         const baseAngle = Number(node.dataset.orbitBaseAngle || 0);
         const duration = Number(node.dataset.orbitDuration || 60);
         const direction = Number(node.dataset.orbitDirection || 1);
-        const angle = (baseAngle + (((now / 1000) % duration) / duration) * 360 * direction) * (Math.PI / 180);
+        const angle =
+          (baseAngle +
+            (((now / 1000) % duration) / duration) * 360 * direction) *
+          (Math.PI / 180);
         const x = Math.cos(angle) * radius;
         const y = Math.sin(angle) * radius;
         node.style.transform = `translate(-50%, -50%) translate3d(${x}px, ${y}px, 0)`;
@@ -95,7 +108,10 @@ const OrbitSubjects = () => {
   });
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden py-12 bg-[hsl(265_45%_8%)]">
+    <section
+      ref={sectionRef}
+      className="relative overflow-hidden py-12 bg-[hsl(265_45%_8%)]"
+    >
       {/* Deep radial glow background - purple + orange accents */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -132,7 +148,9 @@ const OrbitSubjects = () => {
           <h2 className="text-2xl md:text-3xl font-extrabold mb-2 text-white">
             {t("popular_title")}
           </h2>
-          <p className="text-sm text-white/60 max-w-xl mx-auto">{t("popular_subtitle")}</p>
+          <p className="text-sm text-white/60 max-w-xl mx-auto">
+            {t("popular_subtitle")}
+          </p>
         </div>
 
         {/* Orbit Stage */}
@@ -270,14 +288,14 @@ const OrbitSubjects = () => {
           </div>
         </div>
 
-
         {/* CTA below — extra spacing so it doesn't overlap the orbit rings */}
         <div className="text-center mt-10 md:mt-14 animate-fade-in">
           <Link
             to="/subjects"
             className="inline-flex items-center gap-2 px-8 py-3 rounded-full font-bold text-white text-sm md:text-base transition-all hover:scale-105"
             style={{
-              background: "linear-gradient(135deg, hsl(22 95% 55%), hsl(18 90% 45%))",
+              background:
+                "linear-gradient(135deg, hsl(22 95% 55%), hsl(18 90% 45%))",
               boxShadow: "0 8px 20px hsl(22 95% 45% / 0.4)",
             }}
           >

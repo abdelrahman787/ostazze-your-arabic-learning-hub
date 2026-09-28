@@ -7,10 +7,34 @@ import { uploadTeacherAvatar } from "@/lib/avatarUpload";
 import { toast } from "sonner";
 import type { LucideIcon } from "lucide-react";
 import {
-  GraduationCap, Users, Search, Plus,
-  Shield, Video, BookOpen, Loader2, Upload, X, FileText, UserPlus, Home, ShoppingBag,
-  ChevronLeft, ChevronRight, Clock, Menu, LogOut, LayoutDashboard, User, Lock,
-  Calendar, CreditCard, RefreshCw, AlertTriangle, BookMarked, Wallet
+  GraduationCap,
+  Users,
+  Search,
+  Plus,
+  Shield,
+  Video,
+  BookOpen,
+  Loader2,
+  Upload,
+  X,
+  FileText,
+  UserPlus,
+  Home,
+  ShoppingBag,
+  ChevronLeft,
+  ChevronRight,
+  Clock,
+  Menu,
+  LogOut,
+  LayoutDashboard,
+  User,
+  Lock,
+  Calendar,
+  CreditCard,
+  RefreshCw,
+  AlertTriangle,
+  BookMarked,
+  Wallet,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import SalesHub from "@/components/SalesHub";
@@ -66,7 +90,12 @@ const isAdminTab = (value: unknown): value is AdminTab =>
 
 interface SidebarSection {
   section: string;
-  items: Array<{ icon: LucideIcon; label: string; tab: AdminTab; description?: string }>;
+  items: Array<{
+    icon: LucideIcon;
+    label: string;
+    tab: AdminTab;
+    description?: string;
+  }>;
 }
 
 interface TeacherRow {
@@ -139,10 +168,29 @@ interface AvailabilitySlot {
 }
 
 // --- Sub-components ---
-const StatCard = ({ label, value, icon: Icon, color, index }: { label: string; value: string; icon: LucideIcon; color: string; index: number }) => (
-  <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.04 }} className="card-base p-5 h-full">
+const StatCard = ({
+  label,
+  value,
+  icon: Icon,
+  color,
+  index,
+}: {
+  label: string;
+  value: string;
+  icon: LucideIcon;
+  color: string;
+  index: number;
+}) => (
+  <motion.div
+    initial={{ opacity: 0, y: 10 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: index * 0.04 }}
+    className="card-base p-5 h-full"
+  >
     <div className="flex items-center gap-3">
-      <div className={`icon-box ${color}`}><Icon size={20} /></div>
+      <div className={`icon-box ${color}`}>
+        <Icon size={20} />
+      </div>
       <div>
         <div className="text-2xl font-black">{value}</div>
         <div className="text-muted-foreground text-xs">{label}</div>
@@ -151,22 +199,42 @@ const StatCard = ({ label, value, icon: Icon, color, index }: { label: string; v
   </motion.div>
 );
 
-const LoadingPanel = ({ label = "جاري تحميل البيانات..." }: { label?: string }) => (
+const LoadingPanel = ({
+  label = "جاري تحميل البيانات...",
+}: {
+  label?: string;
+}) => (
   <div className="card-base p-12 text-center">
     <Loader2 className="mx-auto animate-spin text-primary mb-3" size={30} />
     <p className="text-sm font-bold text-muted-foreground">{label}</p>
   </div>
 );
 
-const EmptyPanel = ({ icon: Icon, title, description }: { icon: LucideIcon; title: string; description?: string }) => (
+const EmptyPanel = ({
+  icon: Icon,
+  title,
+  description,
+}: {
+  icon: LucideIcon;
+  title: string;
+  description?: string;
+}) => (
   <div className="card-base p-12 text-center">
     <Icon size={40} className="mx-auto text-muted-foreground/30 mb-3" />
     <p className="font-extrabold">{title}</p>
-    {description && <p className="text-sm text-muted-foreground mt-1">{description}</p>}
+    {description && (
+      <p className="text-sm text-muted-foreground mt-1">{description}</p>
+    )}
   </div>
 );
 
-const ErrorPanel = ({ message, onRetry }: { message: string; onRetry: () => void }) => (
+const ErrorPanel = ({
+  message,
+  onRetry,
+}: {
+  message: string;
+  onRetry: () => void;
+}) => (
   <div className="card-base p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-destructive/30">
     <div className="flex items-start gap-3">
       <div className="w-10 h-10 rounded-xl bg-destructive/10 text-destructive flex items-center justify-center shrink-0">
@@ -177,15 +245,28 @@ const ErrorPanel = ({ message, onRetry }: { message: string; onRetry: () => void
         <p className="text-sm text-muted-foreground mt-1">{message}</p>
       </div>
     </div>
-    <button onClick={onRetry} className="btn-outline !px-4 !py-2 text-sm inline-flex items-center gap-2 justify-center">
+    <button
+      onClick={onRetry}
+      className="btn-outline !px-4 !py-2 text-sm inline-flex items-center gap-2 justify-center"
+    >
       <RefreshCw size={14} /> إعادة المحاولة
     </button>
   </div>
 );
 
-const ModalWrapper = ({ children, onClose }: { children: React.ReactNode; onClose: () => void }) => (
+const ModalWrapper = ({
+  children,
+  onClose,
+}: {
+  children: React.ReactNode;
+  onClose: () => void;
+}) => (
   <div className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/40">
-    <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-card rounded-2xl shadow-xl w-full max-w-lg mx-4 max-h-[90vh] overflow-y-auto">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      className="bg-card rounded-2xl shadow-xl w-full max-w-lg mx-4 max-h-[90vh] overflow-y-auto"
+    >
       {children}
     </motion.div>
   </div>
@@ -213,7 +294,9 @@ const Admin = () => {
   const [lectureSearch, setLectureSearch] = useState("");
   const [teachers, setTeachers] = useState<TeacherRow[]>([]);
   const [loading, setLoading] = useState(true);
-  const [dataErrors, setDataErrors] = useState<Partial<Record<AdminDataArea, string>>>({});
+  const [dataErrors, setDataErrors] = useState<
+    Partial<Record<AdminDataArea, string>>
+  >({});
   const [refreshing, setRefreshing] = useState(false);
   const [stats, setStats] = useState({ teachers: 0, students: 0, lectures: 0 });
   const [teacherPage, setTeacherPage] = useState(0);
@@ -224,7 +307,12 @@ const Admin = () => {
   const [lectures, setLectures] = useState<LectureRow[]>([]);
   const [lecturesLoading, setLecturesLoading] = useState(true);
   const [showAddLecture, setShowAddLecture] = useState(false);
-  const [lectureForm, setLectureForm] = useState({ title: "", subject: "", teacher_id: "", student_id: "" });
+  const [lectureForm, setLectureForm] = useState({
+    title: "",
+    subject: "",
+    teacher_id: "",
+    student_id: "",
+  });
   const [videoFile, setVideoFile] = useState<File | null>(null);
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
@@ -252,24 +340,48 @@ const Admin = () => {
   const [adminsLoading, setAdminsLoading] = useState(true);
 
   // Teacher availability state
-  const [teacherAvailability, setTeacherAvailability] = useState<AvailabilitySlot[]>([]);
+  const [teacherAvailability, setTeacherAvailability] = useState<
+    AvailabilitySlot[]
+  >([]);
   const [availabilityLoading, setAvailabilityLoading] = useState(true);
 
   // Add teacher modal
   const [showAddTeacher, setShowAddTeacher] = useState(false);
-  const [teacherForm, setTeacherForm] = useState({ email: "", password: "", full_name: "", university: "", subjects: "" });
+  const [teacherForm, setTeacherForm] = useState({
+    email: "",
+    password: "",
+    full_name: "",
+    university: "",
+    subjects: "",
+  });
   const [addingTeacher, setAddingTeacher] = useState(false);
 
   // Edit teacher modal
   const [editTeacher, setEditTeacher] = useState<TeacherRow | null>(null);
   const [editTeacherForm, setEditTeacherForm] = useState({
-    full_name: "", full_name_en: "", phone: "", bio: "", bio_en: "",
-    university: "", university_en: "", major: "", major_en: "", price: "", subjects: "", subjects_en: "", verified: false,
+    full_name: "",
+    full_name_en: "",
+    phone: "",
+    bio: "",
+    bio_en: "",
+    university: "",
+    university_en: "",
+    major: "",
+    major_en: "",
+    price: "",
+    subjects: "",
+    subjects_en: "",
+    verified: false,
     avatar_url: "",
   });
   const [editTeacherBank, setEditTeacherBank] = useState<{
-    account_holder: string; bank_name: string; country: string | null;
-    iban: string | null; account_number: string | null; swift: string | null; balance: number;
+    account_holder: string;
+    bank_name: string;
+    country: string | null;
+    iban: string | null;
+    account_number: string | null;
+    swift: string | null;
+    balance: number;
   } | null>(null);
   const [manualName, setManualName] = useState(false);
   const [savingTeacher, setSavingTeacher] = useState(false);
@@ -315,75 +427,106 @@ const Admin = () => {
     if (!editTeacher) return;
     setSavingTeacher(true);
     const f = editTeacherForm;
-    const subjects = f.subjects.split(",").map((s) => s.trim()).filter(Boolean);
-    const subjects_en = f.subjects_en.split(",").map((s) => s.trim()).filter(Boolean);
+    const subjects = f.subjects
+      .split(",")
+      .map((s) => s.trim())
+      .filter(Boolean);
+    const subjects_en = f.subjects_en
+      .split(",")
+      .map((s) => s.trim())
+      .filter(Boolean);
     const price = f.price.trim() === "" ? null : Number(f.price);
 
-    const { error: pErr } = await supabase.from("profiles").update({
-      full_name: f.full_name || null,
-      full_name_en: f.full_name_en || null,
-      phone: f.phone || null,
-      bio: f.bio || null,
-      bio_en: f.bio_en || null,
-      avatar_url: f.avatar_url || null,
+    const { error: pErr } = await supabase
+      .from("profiles")
+      .update({
+        full_name: f.full_name || null,
+        full_name_en: f.full_name_en || null,
+        phone: f.phone || null,
+        bio: f.bio || null,
+        bio_en: f.bio_en || null,
+        avatar_url: f.avatar_url || null,
+      })
+      .eq("user_id", editTeacher.user_id);
 
-    }).eq("user_id", editTeacher.user_id);
-
-    const { error: tErr } = await supabase.from("teacher_profiles").update({
-      university: f.university || null,
-      university_en: f.university_en || null,
-      major: f.major || null,
-      major_en: f.major_en || null,
-      price,
-      subjects,
-      subjects_en,
-      verified: f.verified,
-    }).eq("user_id", editTeacher.user_id);
+    const { error: tErr } = await supabase
+      .from("teacher_profiles")
+      .update({
+        university: f.university || null,
+        university_en: f.university_en || null,
+        major: f.major || null,
+        major_en: f.major_en || null,
+        price,
+        subjects,
+        subjects_en,
+        verified: f.verified,
+      })
+      .eq("user_id", editTeacher.user_id);
 
     setSavingTeacher(false);
-    if (pErr || tErr) { toast.error((pErr || tErr)!.message); return; }
+    if (pErr || tErr) {
+      toast.error((pErr || tErr)!.message);
+      return;
+    }
 
     toast.success("تم حفظ بيانات المعلم ✓");
-    setTeachers((prev) => prev.map((tc) => tc.user_id === editTeacher.user_id ? {
-      ...tc,
-      full_name: f.full_name || null,
-      full_name_en: f.full_name_en || null,
-      phone: f.phone || null,
-      bio: f.bio || null,
-      bio_en: f.bio_en || null,
-      avatar_url: f.avatar_url || null,
+    setTeachers((prev) =>
+      prev.map((tc) =>
+        tc.user_id === editTeacher.user_id
+          ? {
+              ...tc,
+              full_name: f.full_name || null,
+              full_name_en: f.full_name_en || null,
+              phone: f.phone || null,
+              bio: f.bio || null,
+              bio_en: f.bio_en || null,
+              avatar_url: f.avatar_url || null,
 
-      university: f.university || null,
-      university_en: f.university_en || null,
-      major: f.major || null,
-      major_en: f.major_en || null,
-      price,
-      subjects,
-      subjects_en,
-      verified: f.verified,
-    } : tc));
+              university: f.university || null,
+              university_en: f.university_en || null,
+              major: f.major || null,
+              major_en: f.major_en || null,
+              price,
+              subjects,
+              subjects_en,
+              verified: f.verified,
+            }
+          : tc,
+      ),
+    );
     setEditTeacher(null);
   };
-
 
   // Add admin/moderator modal
   const [showAddAdmin, setShowAddAdmin] = useState(false);
   const [addAdminEmail, setAddAdminEmail] = useState("");
-  const [addAdminRole, setAddAdminRole] = useState<"admin" | "moderator">("moderator");
+  const [addAdminRole, setAddAdminRole] = useState<"admin" | "moderator">(
+    "moderator",
+  );
   const [addingAdmin, setAddingAdmin] = useState(false);
 
   // Password change
   const [pwForm, setPwForm] = useState({ current: "", newPw: "", confirm: "" });
   const [pwSaving, setPwSaving] = useState(false);
 
-  const DAYS = [t("day_sun"), t("day_mon"), t("day_tue"), t("day_wed"), t("day_thu"), t("day_fri"), t("day_sat")];
+  const DAYS = [
+    t("day_sun"),
+    t("day_mon"),
+    t("day_tue"),
+    t("day_wed"),
+    t("day_thu"),
+    t("day_fri"),
+    t("day_sat"),
+  ];
 
   // --- Data Fetching ---
   const fetchTeachers = useCallback(async () => {
     setLoading(true);
     const { data: teacherProfiles, error: teacherError } = await supabase
       .from("teacher_profiles")
-      .select("user_id, university, university_en, major, major_en, verified, subjects, subjects_en, price");
+      .select(
+        "user_id, university, university_en, major, major_en, verified, subjects, subjects_en, price",
+      );
 
     if (teacherError) {
       setAreaError("teachers", teacherError.message);
@@ -402,7 +545,9 @@ const Admin = () => {
     const userIds = teacherProfiles.map((tp) => tp.user_id);
     const { data: profiles, error: profilesError } = await supabase
       .from("profiles")
-      .select("user_id, full_name, full_name_en, phone, bio, bio_en, avatar_url")
+      .select(
+        "user_id, full_name, full_name_en, phone, bio, bio_en, avatar_url",
+      )
       .in("user_id", userIds);
 
     if (profilesError) {
@@ -426,8 +571,8 @@ const Admin = () => {
         avatar_url: profile?.avatar_url || null,
         university: tp.university,
         university_en: tp.university_en ?? null,
-        major: (tp as any).major ?? null,
-        major_en: (tp as any).major_en ?? null,
+        major: tp.major ?? null,
+        major_en: tp.major_en ?? null,
         price: tp.price ?? null,
         subjects: (tp.subjects as string[]) || [],
         subjects_en: (tp.subjects_en as string[]) || [],
@@ -442,24 +587,38 @@ const Admin = () => {
 
   const fetchStats = useCallback(async () => {
     const [teacherResult, studentResult, lectureResult] = await Promise.all([
-      supabase.from("profiles").select("*", { count: "exact", head: true }).eq("account_type", "teacher"),
-      supabase.from("profiles").select("*", { count: "exact", head: true }).eq("account_type", "student"),
+      supabase
+        .from("profiles")
+        .select("*", { count: "exact", head: true })
+        .eq("account_type", "teacher"),
+      supabase
+        .from("profiles")
+        .select("*", { count: "exact", head: true })
+        .eq("account_type", "student"),
       supabase.from("lectures").select("*", { count: "exact", head: true }),
     ]);
 
-    const firstError = teacherResult.error || studentResult.error || lectureResult.error;
+    const firstError =
+      teacherResult.error || studentResult.error || lectureResult.error;
     if (firstError) {
       setAreaError("stats", firstError.message);
       return;
     }
 
-    setStats({ teachers: teacherResult.count || 0, students: studentResult.count || 0, lectures: lectureResult.count || 0 });
+    setStats({
+      teachers: teacherResult.count || 0,
+      students: studentResult.count || 0,
+      lectures: lectureResult.count || 0,
+    });
     setAreaError("stats");
   }, [setAreaError]);
 
   const fetchLectures = useCallback(async () => {
     setLecturesLoading(true);
-    const { data, error } = await supabase.from("lectures").select("*").order("created_at", { ascending: false });
+    const { data, error } = await supabase
+      .from("lectures")
+      .select("*")
+      .order("created_at", { ascending: false });
     if (error) {
       setAreaError("lectures", error.message);
       setLectures([]);
@@ -467,16 +626,29 @@ const Admin = () => {
       return;
     }
     if (data && data.length > 0) {
-      const allUserIds = [...new Set(data.flatMap((l) => [l.teacher_id, l.student_id]))];
-      const { data: profiles, error: profilesError } = await supabase.from("profiles").select("user_id, full_name").in("user_id", allUserIds);
+      const allUserIds = [
+        ...new Set(data.flatMap((l) => [l.teacher_id, l.student_id])),
+      ];
+      const { data: profiles, error: profilesError } = await supabase
+        .from("profiles")
+        .select("user_id, full_name")
+        .in("user_id", allUserIds);
       if (profilesError) {
         setAreaError("lectures", profilesError.message);
         setLectures([]);
         setLecturesLoading(false);
         return;
       }
-      const pMap = new Map(profiles?.map((p) => [p.user_id, p.full_name]) || []);
-      setLectures(data.map((l) => ({ ...l, teacher_name: pMap.get(l.teacher_id) || "—", student_name: pMap.get(l.student_id) || "—" })) as LectureRow[]);
+      const pMap = new Map(
+        profiles?.map((p) => [p.user_id, p.full_name]) || [],
+      );
+      setLectures(
+        data.map((l) => ({
+          ...l,
+          teacher_name: pMap.get(l.teacher_id) || "—",
+          student_name: pMap.get(l.student_id) || "—",
+        })) as LectureRow[],
+      );
     } else {
       setLectures([]);
     }
@@ -485,7 +657,9 @@ const Admin = () => {
   }, [setAreaError]);
 
   const fetchProfiles = useCallback(async () => {
-    const { data, error } = await supabase.from("profiles").select("user_id, full_name, account_type");
+    const { data, error } = await supabase
+      .from("profiles")
+      .select("user_id, full_name, account_type");
     if (error) {
       setAreaError("profiles", error.message);
       setAllProfiles([]);
@@ -512,7 +686,10 @@ const Admin = () => {
 
   const fetchAdmins = useCallback(async () => {
     setAdminsLoading(true);
-    const { data: roles, error: rolesError } = await supabase.from("user_roles").select("user_id").eq("role", "admin");
+    const { data: roles, error: rolesError } = await supabase
+      .from("user_roles")
+      .select("user_id")
+      .eq("role", "admin");
     if (rolesError) {
       setAreaError("admins", rolesError.message);
       setAdmins([]);
@@ -521,15 +698,25 @@ const Admin = () => {
     }
     if (roles && roles.length > 0) {
       const ids = roles.map((r) => r.user_id);
-      const { data: profiles, error: profilesError } = await supabase.from("profiles").select("user_id, full_name").in("user_id", ids);
+      const { data: profiles, error: profilesError } = await supabase
+        .from("profiles")
+        .select("user_id, full_name")
+        .in("user_id", ids);
       if (profilesError) {
         setAreaError("admins", profilesError.message);
         setAdmins([]);
         setAdminsLoading(false);
         return;
       }
-      const profileMap = new Map(profiles?.map((p) => [p.user_id, p.full_name]) || []);
-      setAdmins(ids.map((id) => ({ user_id: id, full_name: profileMap.get(id) || null })));
+      const profileMap = new Map(
+        profiles?.map((p) => [p.user_id, p.full_name]) || [],
+      );
+      setAdmins(
+        ids.map((id) => ({
+          user_id: id,
+          full_name: profileMap.get(id) || null,
+        })),
+      );
     } else {
       setAdmins([]);
     }
@@ -555,15 +742,25 @@ const Admin = () => {
 
     if (data && data.length > 0) {
       const teacherIds = [...new Set(data.map((s) => s.teacher_id))];
-      const { data: profiles, error: profilesError } = await supabase.from("profiles").select("user_id, full_name").in("user_id", teacherIds);
+      const { data: profiles, error: profilesError } = await supabase
+        .from("profiles")
+        .select("user_id, full_name")
+        .in("user_id", teacherIds);
       if (profilesError) {
         setAreaError("availability", profilesError.message);
         setTeacherAvailability([]);
         setAvailabilityLoading(false);
         return;
       }
-      const pMap = new Map(profiles?.map((p) => [p.user_id, p.full_name]) || []);
-      setTeacherAvailability(data.map((s) => ({ ...s, teacher_name: pMap.get(s.teacher_id) || "—" })));
+      const pMap = new Map(
+        profiles?.map((p) => [p.user_id, p.full_name]) || [],
+      );
+      setTeacherAvailability(
+        data.map((s) => ({
+          ...s,
+          teacher_name: pMap.get(s.teacher_id) || "—",
+        })),
+      );
     } else {
       setTeacherAvailability([]);
     }
@@ -580,7 +777,16 @@ const Admin = () => {
     fetchStudents();
     fetchAdmins();
     fetchTeacherAvailability();
-  }, [user, fetchTeachers, fetchStats, fetchLectures, fetchProfiles, fetchStudents, fetchAdmins, fetchTeacherAvailability]);
+  }, [
+    user,
+    fetchTeachers,
+    fetchStats,
+    fetchLectures,
+    fetchProfiles,
+    fetchStudents,
+    fetchAdmins,
+    fetchTeacherAvailability,
+  ]);
 
   const refreshAdminData = useCallback(async () => {
     if (!user || user.role !== "admin") return;
@@ -595,8 +801,20 @@ const Admin = () => {
       fetchTeacherAvailability(),
     ]);
     setRefreshing(false);
-    toast.success(isArabic ? "تم تحديث بيانات لوحة الإدارة" : "Admin data refreshed");
-  }, [user, isArabic, fetchTeachers, fetchStats, fetchLectures, fetchProfiles, fetchStudents, fetchAdmins, fetchTeacherAvailability]);
+    toast.success(
+      isArabic ? "تم تحديث بيانات لوحة الإدارة" : "Admin data refreshed",
+    );
+  }, [
+    user,
+    isArabic,
+    fetchTeachers,
+    fetchStats,
+    fetchLectures,
+    fetchProfiles,
+    fetchStudents,
+    fetchAdmins,
+    fetchTeacherAvailability,
+  ]);
 
   const openTab = useCallback((tab: AdminTab) => {
     setActiveTab(tab);
@@ -609,20 +827,36 @@ const Admin = () => {
 
   // --- Handlers ---
   const handleVerify = async (userId: string) => {
-    const { error } = await supabase.from("teacher_profiles").update({ verified: true }).eq("user_id", userId);
+    const { error } = await supabase
+      .from("teacher_profiles")
+      .update({ verified: true })
+      .eq("user_id", userId);
     if (error) {
       toast.error(error.message);
     } else {
       toast.success(t("teacher_verified"));
-      setTeachers((prev) => prev.map((tc) => tc.user_id === userId ? { ...tc, verified: true } : tc));
+      setTeachers((prev) =>
+        prev.map((tc) =>
+          tc.user_id === userId ? { ...tc, verified: true } : tc,
+        ),
+      );
     }
   };
 
   const handleDeleteTeacher = async (userId: string) => {
     if (!confirm(t("admin_delete") + "?")) return;
-    const { error } = await supabase.from("teacher_profiles").delete().eq("user_id", userId);
-    if (error) { toast.error(error.message); return; }
-    await supabase.from("profiles").update({ account_type: "student" }).eq("user_id", userId);
+    const { error } = await supabase
+      .from("teacher_profiles")
+      .delete()
+      .eq("user_id", userId);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+    await supabase
+      .from("profiles")
+      .update({ account_type: "student" })
+      .eq("user_id", userId);
     toast.success(t("admin_delete") + " ✓");
     setTeachers((prev) => prev.filter((tc) => tc.user_id !== userId));
     fetchStats();
@@ -630,7 +864,11 @@ const Admin = () => {
   };
 
   const handleAddLecture = async () => {
-    if (!lectureForm.title || !lectureForm.teacher_id || !lectureForm.student_id) {
+    if (
+      !lectureForm.title ||
+      !lectureForm.teacher_id ||
+      !lectureForm.student_id
+    ) {
       toast.error(t("admin_fill_required_fields"));
       return;
     }
@@ -646,13 +884,15 @@ const Admin = () => {
         bunny_video_id = await uploadVideoToBunny(
           videoFile,
           lectureForm.title,
-          (pct) => setUploadProgress(pct)
+          (pct) => setUploadProgress(pct),
         );
       }
       if (pdfFile) {
         const ext = pdfFile.name.split(".").pop();
         const path = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
-        const { error } = await supabase.storage.from("lecture-pdfs").upload(path, pdfFile);
+        const { error } = await supabase.storage
+          .from("lecture-pdfs")
+          .upload(path, pdfFile);
         if (error) throw error;
         uploadedPdfPaths.push(path);
         pdf_url = path;
@@ -668,18 +908,25 @@ const Admin = () => {
         pdf_url,
       });
       if (error) {
-        if (uploadedPdfPaths.length > 0) await supabase.storage.from("lecture-pdfs").remove(uploadedPdfPaths);
+        if (uploadedPdfPaths.length > 0)
+          await supabase.storage.from("lecture-pdfs").remove(uploadedPdfPaths);
         throw error;
       }
 
       toast.success(t("lecture_added"));
       setShowAddLecture(false);
-      setLectureForm({ title: "", subject: "", teacher_id: "", student_id: "" });
+      setLectureForm({
+        title: "",
+        subject: "",
+        teacher_id: "",
+        student_id: "",
+      });
       setVideoFile(null);
       setPdfFile(null);
       fetchLectures();
       fetchStats();
-    } catch (err: any) {
+    } catch (caught) {
+      const err = caught as Error;
       toast.error(err.message);
     }
     setUploading(false);
@@ -700,14 +947,16 @@ const Admin = () => {
         bunny_video_id = await uploadVideoToBunny(
           editVideoFile,
           editLecture.title,
-          (pct) => setEditUploadProgress(pct)
+          (pct) => setEditUploadProgress(pct),
         );
         video_url = null;
       }
       if (editPdfFile) {
         const ext = editPdfFile.name.split(".").pop();
         const path = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
-        const { error } = await supabase.storage.from("lecture-pdfs").upload(path, editPdfFile);
+        const { error } = await supabase.storage
+          .from("lecture-pdfs")
+          .upload(path, editPdfFile);
         if (error) throw error;
         pdf_url = path;
       }
@@ -723,7 +972,8 @@ const Admin = () => {
       setEditVideoFile(null);
       setEditPdfFile(null);
       fetchLectures();
-    } catch (err: any) {
+    } catch (caught) {
+      const err = caught as Error;
       toast.error(err.message);
     }
     setEditUploading(false);
@@ -733,7 +983,10 @@ const Admin = () => {
   const handleDeleteLecture = async (id: string) => {
     if (!confirm(t("admin_delete") + "?")) return;
     const { error } = await supabase.from("lectures").delete().eq("id", id);
-    if (error) { toast.error(error.message); return; }
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
     toast.success(t("admin_delete") + " ✓");
     setLectures((prev) => prev.filter((l) => l.id !== id));
     fetchStats();
@@ -746,7 +999,9 @@ const Admin = () => {
     }
     setAddingTeacher(true);
     try {
-      const { data: { session } } = await supabase.auth.getSession();
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
       const res = await supabase.functions.invoke("manage-roles", {
         body: {
           action: "create_teacher",
@@ -754,7 +1009,12 @@ const Admin = () => {
           password: teacherForm.password,
           full_name: teacherForm.full_name,
           university: teacherForm.university || null,
-          subjects: teacherForm.subjects ? teacherForm.subjects.split(",").map((s) => s.trim()).filter(Boolean) : [],
+          subjects: teacherForm.subjects
+            ? teacherForm.subjects
+                .split(",")
+                .map((s) => s.trim())
+                .filter(Boolean)
+            : [],
           price: 0,
         },
         headers: { Authorization: `Bearer ${session?.access_token}` },
@@ -764,11 +1024,18 @@ const Admin = () => {
       if (result?.error) throw new Error(result.error);
       toast.success(t("teacher_account_created"));
       setShowAddTeacher(false);
-      setTeacherForm({ email: "", password: "", full_name: "", university: "", subjects: "" });
+      setTeacherForm({
+        email: "",
+        password: "",
+        full_name: "",
+        university: "",
+        subjects: "",
+      });
       fetchTeachers();
       fetchStats();
       fetchProfiles();
-    } catch (err: any) {
+    } catch (caught) {
+      const err = caught as Error;
       toast.error(err.message);
     }
     setAddingTeacher(false);
@@ -781,7 +1048,9 @@ const Admin = () => {
     }
     setAddingAdmin(true);
     try {
-      const { data: { session } } = await supabase.auth.getSession();
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
       const res = await supabase.functions.invoke("manage-roles", {
         body: { action: "add_role", email: addAdminEmail, role: addAdminRole },
         headers: { Authorization: `Bearer ${session?.access_token}` },
@@ -793,7 +1062,8 @@ const Admin = () => {
       setShowAddAdmin(false);
       setAddAdminEmail("");
       fetchAdmins();
-    } catch (err: any) {
+    } catch (caught) {
+      const err = caught as Error;
       toast.error(err.message);
     }
     setAddingAdmin(false);
@@ -811,7 +1081,11 @@ const Admin = () => {
     setPwSaving(true);
     const result = await changePassword(pwForm.current, pwForm.newPw);
     if (result.error) {
-      toast.error(result.error === "current_password_wrong" ? t("current_password_wrong") : result.error);
+      toast.error(
+        result.error === "current_password_wrong"
+          ? t("current_password_wrong")
+          : result.error,
+      );
     } else {
       toast.success(t("password_changed"));
       setPwForm({ current: "", newPw: "", confirm: "" });
@@ -823,57 +1097,177 @@ const Admin = () => {
   const filteredTeachers = teachers.filter((tc) => {
     if (!teacherSearch) return true;
     const q = teacherSearch.toLowerCase();
-    return [tc.full_name, tc.full_name_en, tc.university, tc.university_en, tc.major, tc.major_en, tc.phone]
-      .some((v) => (v || "").toLowerCase().includes(q)) ||
+    return (
+      [
+        tc.full_name,
+        tc.full_name_en,
+        tc.university,
+        tc.university_en,
+        tc.major,
+        tc.major_en,
+        tc.phone,
+      ].some((v) => (v || "").toLowerCase().includes(q)) ||
       tc.subjects.some((s) => s.toLowerCase().includes(q)) ||
-      tc.subjects_en.some((s) => s.toLowerCase().includes(q));
+      tc.subjects_en.some((s) => s.toLowerCase().includes(q))
+    );
   });
 
   const filteredLectures = lectures.filter((l) => {
     if (!lectureSearch) return true;
     const q = lectureSearch.toLowerCase();
-    return l.title.toLowerCase().includes(q) || l.subject?.toLowerCase().includes(q) || l.teacher_name?.toLowerCase().includes(q) || l.student_name?.toLowerCase().includes(q);
+    return (
+      l.title.toLowerCase().includes(q) ||
+      l.subject?.toLowerCase().includes(q) ||
+      l.teacher_name?.toLowerCase().includes(q) ||
+      l.student_name?.toLowerCase().includes(q)
+    );
   });
 
-  const teacherProfilesList = allProfiles.filter((p) => p.account_type === "teacher");
-  const studentProfilesList = allProfiles.filter((p) => p.account_type === "student");
+  const teacherProfilesList = allProfiles.filter(
+    (p) => p.account_type === "teacher",
+  );
+  const studentProfilesList = allProfiles.filter(
+    (p) => p.account_type === "student",
+  );
 
   // Group availability by teacher
-  const availabilityByTeacher = teacherAvailability.reduce((acc, slot) => {
-    const key = slot.teacher_id;
-    if (!acc[key]) acc[key] = { name: slot.teacher_name || "—", slots: [] };
-    acc[key].slots.push(slot);
-    return acc;
-  }, {} as Record<string, { name: string; slots: AvailabilitySlot[] }>);
+  const availabilityByTeacher = teacherAvailability.reduce(
+    (acc, slot) => {
+      const key = slot.teacher_id;
+      if (!acc[key]) acc[key] = { name: slot.teacher_name || "—", slots: [] };
+      acc[key].slots.push(slot);
+      return acc;
+    },
+    {} as Record<string, { name: string; slots: AvailabilitySlot[] }>,
+  );
 
   const filteredStudents = students.filter((st) => {
     const q = studentSearch.trim().toLowerCase();
     if (!q) return true;
-    return [st.full_name, st.full_name_en, st.phone, st.email].some((v) => (v || "").toLowerCase().includes(q));
+    return [st.full_name, st.full_name_en, st.phone, st.email].some((v) =>
+      (v || "").toLowerCase().includes(q),
+    );
   });
 
   // --- Sidebar config ---
   const sidebarLinks: SidebarSection[] = [
-    { section: t("section_main"), items: [
-      { icon: LayoutDashboard, label: isArabic ? "نظرة عامة" : "Overview", tab: "overview", description: isArabic ? "ملخص سريع لكل أجزاء المنصة" : "A quick summary of the platform" },
-      { icon: ShoppingBag, label: t("sales_hub"), tab: "sales", description: isArabic ? "طلبات الحجز والمدفوعات" : "Bookings and payments" },
-      { icon: CreditCard, label: isArabic ? "الفواتير والتقارير" : "Invoices & Reports", tab: "invoices", description: isArabic ? "متابعة المدفوعات والفواتير" : "Track payments and invoices" },
-      { icon: Wallet, label: isArabic ? "ماليات المعلمين" : "Teacher Finances", tab: "finance", description: isArabic ? "الأرصدة والتحويلات والمعاملات" : "Balances, payouts and transactions" },
-      { icon: GraduationCap, label: t("admin_teachers"), tab: "teachers", description: isArabic ? "إضافة وتعديل بيانات المعلمين" : "Add and edit teacher profiles" },
-      { icon: Users, label: t("admin_students"), tab: "students", description: isArabic ? "بيانات الطلاب المسجلين" : "Registered student details" },
-      { icon: BookMarked, label: isArabic ? "المقررات" : "Courses", tab: "courses", description: isArabic ? "إدارة محتوى المقررات" : "Manage course content" },
-      { icon: Video, label: isArabic ? "المحاضرات" : "Lectures", tab: "lectures", description: isArabic ? "رفع وتعديل محاضرات الطلاب" : "Upload and edit lessons" },
-      { icon: Clock, label: t("sidebar_available_times"), tab: "availability", description: isArabic ? "مواعيد المعلمين المتاحة" : "Teacher available slots" },
-      { icon: UserPlus, label: isArabic ? "طلبات الانضمام كمعلم" : "Tutor Applications", tab: "applications", description: isArabic ? "مراجعة وقبول المتقدمين" : "Review and approve applicants" },
-    ]},
-    { section: t("section_account"), items: [
-      { icon: Shield, label: isArabic ? "فحص واتساب و Zoom" : "WhatsApp & Zoom Check", tab: "diagnostics", description: isArabic ? "اختبار الربط الآلي" : "Automation diagnostics" },
-      { icon: Shield, label: t("admin_admins"), tab: "admins", description: isArabic ? "صلاحيات الإدارة" : "Admin access" },
-      { icon: Lock, label: t("dash_change_password"), tab: "password", description: isArabic ? "تغيير كلمة مرور حسابك" : "Change your password" },
-    ]},
+    {
+      section: t("section_main"),
+      items: [
+        {
+          icon: LayoutDashboard,
+          label: isArabic ? "نظرة عامة" : "Overview",
+          tab: "overview",
+          description: isArabic
+            ? "ملخص سريع لكل أجزاء المنصة"
+            : "A quick summary of the platform",
+        },
+        {
+          icon: ShoppingBag,
+          label: t("sales_hub"),
+          tab: "sales",
+          description: isArabic
+            ? "طلبات الحجز والمدفوعات"
+            : "Bookings and payments",
+        },
+        {
+          icon: CreditCard,
+          label: isArabic ? "الفواتير والتقارير" : "Invoices & Reports",
+          tab: "invoices",
+          description: isArabic
+            ? "متابعة المدفوعات والفواتير"
+            : "Track payments and invoices",
+        },
+        {
+          icon: Wallet,
+          label: isArabic ? "ماليات المعلمين" : "Teacher Finances",
+          tab: "finance",
+          description: isArabic
+            ? "الأرصدة والتحويلات والمعاملات"
+            : "Balances, payouts and transactions",
+        },
+        {
+          icon: GraduationCap,
+          label: t("admin_teachers"),
+          tab: "teachers",
+          description: isArabic
+            ? "إضافة وتعديل بيانات المعلمين"
+            : "Add and edit teacher profiles",
+        },
+        {
+          icon: Users,
+          label: t("admin_students"),
+          tab: "students",
+          description: isArabic
+            ? "بيانات الطلاب المسجلين"
+            : "Registered student details",
+        },
+        {
+          icon: BookMarked,
+          label: isArabic ? "المقررات" : "Courses",
+          tab: "courses",
+          description: isArabic
+            ? "إدارة محتوى المقررات"
+            : "Manage course content",
+        },
+        {
+          icon: Video,
+          label: isArabic ? "المحاضرات" : "Lectures",
+          tab: "lectures",
+          description: isArabic
+            ? "رفع وتعديل محاضرات الطلاب"
+            : "Upload and edit lessons",
+        },
+        {
+          icon: Clock,
+          label: t("sidebar_available_times"),
+          tab: "availability",
+          description: isArabic
+            ? "مواعيد المعلمين المتاحة"
+            : "Teacher available slots",
+        },
+        {
+          icon: UserPlus,
+          label: isArabic ? "طلبات الانضمام كمعلم" : "Tutor Applications",
+          tab: "applications",
+          description: isArabic
+            ? "مراجعة وقبول المتقدمين"
+            : "Review and approve applicants",
+        },
+      ],
+    },
+    {
+      section: t("section_account"),
+      items: [
+        {
+          icon: Shield,
+          label: isArabic ? "فحص واتساب و Zoom" : "WhatsApp & Zoom Check",
+          tab: "diagnostics",
+          description: isArabic
+            ? "اختبار الربط الآلي"
+            : "Automation diagnostics",
+        },
+        {
+          icon: Shield,
+          label: t("admin_admins"),
+          tab: "admins",
+          description: isArabic ? "صلاحيات الإدارة" : "Admin access",
+        },
+        {
+          icon: Lock,
+          label: t("dash_change_password"),
+          tab: "password",
+          description: isArabic
+            ? "تغيير كلمة مرور حسابك"
+            : "Change your password",
+        },
+      ],
+    },
   ];
 
-  const tabMeta = sidebarLinks.flatMap((s) => s.items).find((i) => i.tab === activeTab);
+  const tabMeta = sidebarLinks
+    .flatMap((s) => s.items)
+    .find((i) => i.tab === activeTab);
 
   // --- Auth loading / guard ---
   if (authLoading) {
@@ -888,7 +1282,9 @@ const Admin = () => {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-background gap-4">
         <Shield size={48} className="text-muted-foreground/30" />
-        <p className="text-muted-foreground font-bold">ليس لديك صلاحية الوصول لهذه الصفحة</p>
+        <p className="text-muted-foreground font-bold">
+          ليس لديك صلاحية الوصول لهذه الصفحة
+        </p>
         <Link to="/" className="btn-primary text-sm flex items-center gap-2">
           <Home size={16} /> العودة للرئيسية
         </Link>
@@ -897,34 +1293,90 @@ const Admin = () => {
   }
 
   const currentTabLabel = tabMeta?.label || t("admin_title");
-  const currentTabDescription = tabMeta?.description || (isArabic ? "إدارة بيانات ومحتوى المنصة" : "Manage platform data and content");
-  const overviewStats: Array<{ label: string; value: string; icon: LucideIcon; color: string; tab: AdminTab }> = [
-    { label: t("admin_teachers"), value: String(stats.teachers), icon: GraduationCap, color: "bg-primary/10 text-primary", tab: "teachers" },
-    { label: t("admin_students"), value: String(stats.students), icon: Users, color: "bg-warning/10 text-warning", tab: "students" },
-    { label: isArabic ? "المحاضرات" : "Lectures", value: String(stats.lectures), icon: BookOpen, color: "bg-success/10 text-success", tab: "lectures" },
+  const currentTabDescription =
+    tabMeta?.description ||
+    (isArabic
+      ? "إدارة بيانات ومحتوى المنصة"
+      : "Manage platform data and content");
+  const overviewStats: Array<{
+    label: string;
+    value: string;
+    icon: LucideIcon;
+    color: string;
+    tab: AdminTab;
+  }> = [
+    {
+      label: t("admin_teachers"),
+      value: String(stats.teachers),
+      icon: GraduationCap,
+      color: "bg-primary/10 text-primary",
+      tab: "teachers",
+    },
+    {
+      label: t("admin_students"),
+      value: String(stats.students),
+      icon: Users,
+      color: "bg-warning/10 text-warning",
+      tab: "students",
+    },
+    {
+      label: isArabic ? "المحاضرات" : "Lectures",
+      value: String(stats.lectures),
+      icon: BookOpen,
+      color: "bg-success/10 text-success",
+      tab: "lectures",
+    },
   ];
   const dataProblemCount = Object.keys(dataErrors).length;
 
   return (
-    <div className="flex min-h-screen bg-background" style={{ paddingTop: "var(--navbar-h, 0px)" }}>
+    <div
+      className="flex min-h-screen bg-background"
+      style={{ paddingTop: "var(--navbar-h, 0px)" }}
+    >
       <NoIndex title="Admin Panel" />
       {/* Sidebar */}
-      <aside style={{ top: "var(--navbar-h, 0px)" }} className={`fixed lg:sticky bottom-0 right-0 z-40 w-[280px] h-[calc(100vh-var(--navbar-h,0px))] bg-card border-l flex flex-col transition-transform duration-300 ${sidebarOpen ? "translate-x-0" : "translate-x-full lg:translate-x-0"}`}>
+      <aside
+        style={{ top: "var(--navbar-h, 0px)" }}
+        className={`fixed lg:sticky bottom-0 right-0 z-40 w-[280px] h-[calc(100vh-var(--navbar-h,0px))] bg-card border-l flex flex-col transition-transform duration-300 ${sidebarOpen ? "translate-x-0" : "translate-x-full lg:translate-x-0"}`}
+      >
         <div className="p-5 border-b">
-          <Link to="/" className="text-xl font-black text-primary tracking-tight">🎓 OSTAZZE</Link>
-          <p className="text-xs text-muted-foreground mt-0.5">{t("admin_title")}</p>
+          <Link
+            to="/"
+            className="text-xl font-black text-primary tracking-tight"
+          >
+            🎓 OSTAZZE
+          </Link>
+          <p className="text-xs text-muted-foreground mt-0.5">
+            {t("admin_title")}
+          </p>
         </div>
         <nav className="flex-1 overflow-y-auto p-4 space-y-6">
           {sidebarLinks.map((s) => (
             <div key={s.section}>
-              <div className="text-xs font-bold text-muted-foreground mb-2 px-3">{s.section}</div>
+              <div className="text-xs font-bold text-muted-foreground mb-2 px-3">
+                {s.section}
+              </div>
               {s.items.map((item) => (
-                <button key={item.tab} onClick={() => openTab(item.tab)}
-                  className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl text-sm transition-colors mb-1 text-start ${activeTab === item.tab ? "bg-primary text-primary-foreground font-bold" : "text-muted-foreground hover:bg-primary/5 hover:text-foreground"}`}>
-                  <span className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${activeTab === item.tab ? "bg-primary-foreground/15" : "bg-muted"}`}><item.icon size={16} /></span>
+                <button
+                  key={item.tab}
+                  onClick={() => openTab(item.tab)}
+                  className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl text-sm transition-colors mb-1 text-start ${activeTab === item.tab ? "bg-primary text-primary-foreground font-bold" : "text-muted-foreground hover:bg-primary/5 hover:text-foreground"}`}
+                >
+                  <span
+                    className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${activeTab === item.tab ? "bg-primary-foreground/15" : "bg-muted"}`}
+                  >
+                    <item.icon size={16} />
+                  </span>
                   <span className="min-w-0">
                     <span className="block truncate">{item.label}</span>
-                    {item.description && <span className={`block text-[11px] font-medium truncate ${activeTab === item.tab ? "text-primary-foreground/75" : "text-muted-foreground"}`}>{item.description}</span>}
+                    {item.description && (
+                      <span
+                        className={`block text-[11px] font-medium truncate ${activeTab === item.tab ? "text-primary-foreground/75" : "text-muted-foreground"}`}
+                      >
+                        {item.description}
+                      </span>
+                    )}
                   </span>
                 </button>
               ))}
@@ -932,39 +1384,78 @@ const Admin = () => {
           ))}
         </nav>
         <div className="p-4 border-t">
-          <button onClick={() => { logout(); navigate("/"); }} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-destructive hover:bg-destructive/10 transition-colors">
+          <button
+            onClick={() => {
+              logout();
+              navigate("/");
+            }}
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-destructive hover:bg-destructive/10 transition-colors"
+          >
             <LogOut size={16} /> {t("nav_logout")}
           </button>
         </div>
       </aside>
 
-      {sidebarOpen && <div className="fixed inset-0 z-30 bg-foreground/30 lg:hidden" onClick={() => setSidebarOpen(false)} />}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 z-30 bg-foreground/30 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
 
       {/* Main Content */}
       <main className="flex-1 min-w-0">
-        <header style={{ top: "var(--navbar-h, 0px)" }} className="bg-card border-b px-4 sm:px-6 py-4 flex items-center justify-between sticky z-20 gap-4">
+        <header
+          style={{ top: "var(--navbar-h, 0px)" }}
+          className="bg-card border-b px-4 sm:px-6 py-4 flex items-center justify-between sticky z-20 gap-4"
+        >
           <div className="flex items-center gap-3 min-w-0">
-            <button onClick={() => setSidebarOpen(true)} className="lg:hidden w-10 h-10 rounded-xl bg-muted flex items-center justify-center" aria-label="فتح قائمة الإدارة"><Menu size={20} /></button>
+            <button
+              onClick={() => setSidebarOpen(true)}
+              className="lg:hidden w-10 h-10 rounded-xl bg-muted flex items-center justify-center"
+              aria-label="فتح قائمة الإدارة"
+            >
+              <Menu size={20} />
+            </button>
             <div className="min-w-0">
-              <h1 className="font-extrabold text-lg leading-tight truncate">{currentTabLabel}</h1>
-              <p className="text-xs text-muted-foreground truncate">{currentTabDescription}</p>
+              <h1 className="font-extrabold text-lg leading-tight truncate">
+                {currentTabLabel}
+              </h1>
+              <p className="text-xs text-muted-foreground truncate">
+                {currentTabDescription}
+              </p>
             </div>
           </div>
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-            <button onClick={refreshAdminData} disabled={refreshing} className="hidden sm:inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-secondary text-secondary-foreground text-xs font-bold disabled:opacity-50">
-              <RefreshCw size={14} className={refreshing ? "animate-spin" : ""} />
+            <button
+              onClick={refreshAdminData}
+              disabled={refreshing}
+              className="hidden sm:inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-secondary text-secondary-foreground text-xs font-bold disabled:opacity-50"
+            >
+              <RefreshCw
+                size={14}
+                className={refreshing ? "animate-spin" : ""}
+              />
               {isArabic ? "تحديث" : "Refresh"}
             </button>
             <NotificationBell />
-            <div className="w-9 h-9 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold">{user?.name?.charAt(0) || "A"}</div>
-            <span className="text-sm font-medium hidden sm:block">{user?.name}</span>
+            <div className="w-9 h-9 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold">
+              {user?.name?.charAt(0) || "A"}
+            </div>
+            <span className="text-sm font-medium hidden sm:block">
+              {user?.name}
+            </span>
           </div>
         </header>
 
         <div className="p-4 sm:p-6 space-y-6">
           {dataProblemCount > 0 && activeTab === "overview" && (
             <ErrorPanel
-              message={isArabic ? `${dataProblemCount} قسم يحتاج إعادة تحميل أو مراجعة صلاحيات.` : `${dataProblemCount} section needs a reload or permission review.`}
+              message={
+                isArabic
+                  ? `${dataProblemCount} قسم يحتاج إعادة تحميل أو مراجعة صلاحيات.`
+                  : `${dataProblemCount} section needs a reload or permission review.`
+              }
               onRetry={refreshAdminData}
             />
           )}
@@ -974,26 +1465,53 @@ const Admin = () => {
             <div className="space-y-6 animate-fade-in">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {overviewStats.map((s, i) => (
-                  <button key={s.label} type="button" onClick={() => openTab(s.tab)} className="text-start h-full">
-                    <StatCard label={s.label} value={s.value} icon={s.icon} color={s.color} index={i} />
+                  <button
+                    key={s.label}
+                    type="button"
+                    onClick={() => openTab(s.tab)}
+                    className="text-start h-full"
+                  >
+                    <StatCard
+                      label={s.label}
+                      value={s.value}
+                      icon={s.icon}
+                      color={s.color}
+                      index={i}
+                    />
                   </button>
                 ))}
               </div>
               <div className="grid gap-4 lg:grid-cols-3">
-                {sidebarLinks.flatMap((s) => s.items).filter((item) => item.tab !== "overview" && item.tab !== "password").map((item) => (
-                  <button key={item.tab} type="button" onClick={() => openTab(item.tab)} className="card-base p-5 text-start hover:border-primary/30">
-                    <div className="flex items-start gap-3">
-                      <div className="icon-box bg-primary/10 text-primary"><item.icon size={18} /></div>
-                      <div className="min-w-0">
-                        <div className="font-extrabold">{item.label}</div>
-                        <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
-                        <span className="inline-flex items-center gap-1 text-xs font-bold text-primary mt-3">
-                          {isArabic ? "فتح القسم" : "Open section"} <ChevronLeft size={13} />
-                        </span>
+                {sidebarLinks
+                  .flatMap((s) => s.items)
+                  .filter(
+                    (item) =>
+                      item.tab !== "overview" && item.tab !== "password",
+                  )
+                  .map((item) => (
+                    <button
+                      key={item.tab}
+                      type="button"
+                      onClick={() => openTab(item.tab)}
+                      className="card-base p-5 text-start hover:border-primary/30"
+                    >
+                      <div className="flex items-start gap-3">
+                        <div className="icon-box bg-primary/10 text-primary">
+                          <item.icon size={18} />
+                        </div>
+                        <div className="min-w-0">
+                          <div className="font-extrabold">{item.label}</div>
+                          <p className="text-sm text-muted-foreground mt-1">
+                            {item.description}
+                          </p>
+                          <span className="inline-flex items-center gap-1 text-xs font-bold text-primary mt-3">
+                            {isArabic ? "فتح القسم" : "Open section"}{" "}
+                            <ChevronLeft size={13} />
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                  </button>
-                ))}
+                    </button>
+                  ))}
               </div>
             </div>
           )}
@@ -1003,8 +1521,19 @@ const Admin = () => {
             <div className="space-y-6 animate-fade-in">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
                 {overviewStats.map((s, i) => (
-                  <button key={s.label} type="button" onClick={() => openTab(s.tab)} className="text-start h-full">
-                    <StatCard label={s.label} value={s.value} icon={s.icon} color={s.color} index={i} />
+                  <button
+                    key={s.label}
+                    type="button"
+                    onClick={() => openTab(s.tab)}
+                    className="text-start h-full"
+                  >
+                    <StatCard
+                      label={s.label}
+                      value={s.value}
+                      icon={s.icon}
+                      color={s.color}
+                      index={i}
+                    />
                   </button>
                 ))}
               </div>
@@ -1017,79 +1546,202 @@ const Admin = () => {
             <div className="space-y-4 animate-fade-in">
               <div className="flex items-center justify-between gap-4 flex-wrap">
                 <div className="relative flex-1 max-w-md min-w-[200px]">
-                  <Search size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                  <input value={teacherSearch} onChange={(e) => { setTeacherSearch(e.target.value); setTeacherPage(0); }} placeholder={t("admin_search_placeholder")} className="input-base !pr-10 !py-2.5 text-sm" />
+                  <Search
+                    size={16}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+                  />
+                  <input
+                    value={teacherSearch}
+                    onChange={(e) => {
+                      setTeacherSearch(e.target.value);
+                      setTeacherPage(0);
+                    }}
+                    placeholder={t("admin_search_placeholder")}
+                    className="input-base !pr-10 !py-2.5 text-sm"
+                  />
                 </div>
-                <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setShowAddTeacher(true)}
-                  className="btn-primary !py-2.5 text-sm flex items-center gap-2">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setShowAddTeacher(true)}
+                  className="btn-primary !py-2.5 text-sm flex items-center gap-2"
+                >
                   <UserPlus size={16} /> إضافة معلم
                 </motion.button>
               </div>
 
               {dataErrors.teachers ? (
-                <ErrorPanel message={dataErrors.teachers} onRetry={fetchTeachers} />
+                <ErrorPanel
+                  message={dataErrors.teachers}
+                  onRetry={fetchTeachers}
+                />
               ) : loading ? (
                 <LoadingPanel />
               ) : filteredTeachers.length === 0 ? (
-                <EmptyPanel icon={GraduationCap} title={teacherSearch ? t("no_results") : t("no_teachers_registered")} description={isArabic ? "يمكن إضافة معلم جديد من الزر بالأعلى." : "Add a new teacher from the button above."} />
+                <EmptyPanel
+                  icon={GraduationCap}
+                  title={
+                    teacherSearch
+                      ? t("no_results")
+                      : t("no_teachers_registered")
+                  }
+                  description={
+                    isArabic
+                      ? "يمكن إضافة معلم جديد من الزر بالأعلى."
+                      : "Add a new teacher from the button above."
+                  }
+                />
               ) : (
                 <div className="card-base overflow-hidden">
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm">
-                      <thead><tr className="bg-muted/60">
-                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">{t("th_teacher")}</th>
-                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">{t("th_university")}</th>
-                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">{t("th_subjects")}</th>
-                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">{t("th_status")}</th>
-                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">{t("th_actions")}</th>
-                      </tr></thead>
+                      <thead>
+                        <tr className="bg-muted/60">
+                          <th className="text-start p-4 font-bold text-muted-foreground text-xs">
+                            {t("th_teacher")}
+                          </th>
+                          <th className="text-start p-4 font-bold text-muted-foreground text-xs">
+                            {t("th_university")}
+                          </th>
+                          <th className="text-start p-4 font-bold text-muted-foreground text-xs">
+                            {t("th_subjects")}
+                          </th>
+                          <th className="text-start p-4 font-bold text-muted-foreground text-xs">
+                            {t("th_status")}
+                          </th>
+                          <th className="text-start p-4 font-bold text-muted-foreground text-xs">
+                            {t("th_actions")}
+                          </th>
+                        </tr>
+                      </thead>
                       <tbody>
-                        {filteredTeachers.slice(teacherPage * TEACHERS_PER_PAGE, (teacherPage + 1) * TEACHERS_PER_PAGE).map((tc) => (
-                          <tr key={tc.user_id} className="border-t hover:bg-secondary/30 transition-colors">
-                            <td className="p-4">
-                              <div className="flex items-center gap-3">
-                                <div className="icon-box bg-primary/10"><GraduationCap size={18} className="text-primary" /></div>
-                                <div className="font-bold text-sm">{resolveDisplayName(lang === "en" ? "en" : "ar", tc.full_name, tc.full_name_en, "—")}</div>
-                              </div>
-                            </td>
-                            <td className="p-4 text-muted-foreground text-sm">{tc.university || "—"}</td>
-                            <td className="p-4">
-                              <div className="flex gap-1.5 flex-wrap">
-                                {tc.subjects.length > 0 ? tc.subjects.slice(0, 2).map((s, i) => <span key={i} className="tag-outline text-[0.7rem]">{s}</span>) : <span className="text-muted-foreground text-xs">—</span>}
-                              </div>
-                            </td>
-                            <td className="p-4">
-                              {tc.verified
-                                ? <span className="text-xs bg-success/10 text-success px-2.5 py-1 rounded-full font-semibold">{t("teacher_verified")}</span>
-                                : <span className="text-xs bg-warning/10 text-warning px-2.5 py-1 rounded-full font-semibold">{t("admin_under_review")}</span>}
-                            </td>
-                            <td className="p-4">
-                              <div className="flex gap-2">
-                                {!tc.verified && (
-                                  <button onClick={() => handleVerify(tc.user_id)} className="text-xs bg-success/10 text-success px-3 py-1.5 rounded-lg font-semibold hover:bg-success/20 transition-colors">{t("admin_verify")}</button>
+                        {filteredTeachers
+                          .slice(
+                            teacherPage * TEACHERS_PER_PAGE,
+                            (teacherPage + 1) * TEACHERS_PER_PAGE,
+                          )
+                          .map((tc) => (
+                            <tr
+                              key={tc.user_id}
+                              className="border-t hover:bg-secondary/30 transition-colors"
+                            >
+                              <td className="p-4">
+                                <div className="flex items-center gap-3">
+                                  <div className="icon-box bg-primary/10">
+                                    <GraduationCap
+                                      size={18}
+                                      className="text-primary"
+                                    />
+                                  </div>
+                                  <div className="font-bold text-sm">
+                                    {resolveDisplayName(
+                                      lang === "en" ? "en" : "ar",
+                                      tc.full_name,
+                                      tc.full_name_en,
+                                      "—",
+                                    )}
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="p-4 text-muted-foreground text-sm">
+                                {tc.university || "—"}
+                              </td>
+                              <td className="p-4">
+                                <div className="flex gap-1.5 flex-wrap">
+                                  {tc.subjects.length > 0 ? (
+                                    tc.subjects.slice(0, 2).map((s, i) => (
+                                      <span
+                                        key={i}
+                                        className="tag-outline text-[0.7rem]"
+                                      >
+                                        {s}
+                                      </span>
+                                    ))
+                                  ) : (
+                                    <span className="text-muted-foreground text-xs">
+                                      —
+                                    </span>
+                                  )}
+                                </div>
+                              </td>
+                              <td className="p-4">
+                                {tc.verified ? (
+                                  <span className="text-xs bg-success/10 text-success px-2.5 py-1 rounded-full font-semibold">
+                                    {t("teacher_verified")}
+                                  </span>
+                                ) : (
+                                  <span className="text-xs bg-warning/10 text-warning px-2.5 py-1 rounded-full font-semibold">
+                                    {t("admin_under_review")}
+                                  </span>
                                 )}
-                                <button onClick={() => openEditTeacher(tc)} className="text-xs bg-primary/10 text-primary px-3 py-1.5 rounded-lg font-semibold hover:bg-primary/20 transition-colors">تعديل</button>
-                                <button onClick={() => handleDeleteTeacher(tc.user_id)} className="text-xs bg-destructive/10 text-destructive px-3 py-1.5 rounded-lg font-semibold hover:bg-destructive/20 transition-colors">{t("admin_delete")}</button>
-                              </div>
-                            </td>
-                          </tr>
-                        ))}
+                              </td>
+                              <td className="p-4">
+                                <div className="flex gap-2">
+                                  {!tc.verified && (
+                                    <button
+                                      onClick={() => handleVerify(tc.user_id)}
+                                      className="text-xs bg-success/10 text-success px-3 py-1.5 rounded-lg font-semibold hover:bg-success/20 transition-colors"
+                                    >
+                                      {t("admin_verify")}
+                                    </button>
+                                  )}
+                                  <button
+                                    onClick={() => openEditTeacher(tc)}
+                                    className="text-xs bg-primary/10 text-primary px-3 py-1.5 rounded-lg font-semibold hover:bg-primary/20 transition-colors"
+                                  >
+                                    تعديل
+                                  </button>
+                                  <button
+                                    onClick={() =>
+                                      handleDeleteTeacher(tc.user_id)
+                                    }
+                                    className="text-xs bg-destructive/10 text-destructive px-3 py-1.5 rounded-lg font-semibold hover:bg-destructive/20 transition-colors"
+                                  >
+                                    {t("admin_delete")}
+                                  </button>
+                                </div>
+                              </td>
+                            </tr>
+                          ))}
                       </tbody>
                     </table>
                   </div>
                   {filteredTeachers.length > TEACHERS_PER_PAGE && (
                     <div className="flex items-center justify-between px-4 py-3 border-t">
                       <span className="text-xs text-muted-foreground">
-                        {t("page_label")} {teacherPage + 1} {t("page_of")} {Math.ceil(filteredTeachers.length / TEACHERS_PER_PAGE)}
+                        {t("page_label")} {teacherPage + 1} {t("page_of")}{" "}
+                        {Math.ceil(filteredTeachers.length / TEACHERS_PER_PAGE)}
                       </span>
                       <div className="flex gap-2">
-                        <button onClick={() => setTeacherPage((p) => Math.max(0, p - 1))} disabled={teacherPage === 0}
-                          className="px-3 py-1.5 rounded-lg bg-secondary text-xs font-bold disabled:opacity-40 flex items-center gap-1 hover:bg-secondary/80">
+                        <button
+                          onClick={() =>
+                            setTeacherPage((p) => Math.max(0, p - 1))
+                          }
+                          disabled={teacherPage === 0}
+                          className="px-3 py-1.5 rounded-lg bg-secondary text-xs font-bold disabled:opacity-40 flex items-center gap-1 hover:bg-secondary/80"
+                        >
                           <ChevronRight size={14} /> {t("page_prev")}
                         </button>
-                        <button onClick={() => setTeacherPage((p) => Math.min(Math.ceil(filteredTeachers.length / TEACHERS_PER_PAGE) - 1, p + 1))}
-                          disabled={teacherPage >= Math.ceil(filteredTeachers.length / TEACHERS_PER_PAGE) - 1}
-                          className="px-3 py-1.5 rounded-lg bg-secondary text-xs font-bold disabled:opacity-40 flex items-center gap-1 hover:bg-secondary/80">
+                        <button
+                          onClick={() =>
+                            setTeacherPage((p) =>
+                              Math.min(
+                                Math.ceil(
+                                  filteredTeachers.length / TEACHERS_PER_PAGE,
+                                ) - 1,
+                                p + 1,
+                              ),
+                            )
+                          }
+                          disabled={
+                            teacherPage >=
+                            Math.ceil(
+                              filteredTeachers.length / TEACHERS_PER_PAGE,
+                            ) -
+                              1
+                          }
+                          className="px-3 py-1.5 rounded-lg bg-secondary text-xs font-bold disabled:opacity-40 flex items-center gap-1 hover:bg-secondary/80"
+                        >
                           {t("page_next")} <ChevronLeft size={14} />
                         </button>
                       </div>
@@ -1113,8 +1765,6 @@ const Admin = () => {
               <AdminTeacherFinance />
             </div>
           )}
-
-
 
           {activeTab === "applications" && (
             <div className="animate-fade-in">
@@ -1140,51 +1790,129 @@ const Admin = () => {
             <div className="space-y-4 animate-fade-in">
               <div className="flex items-center justify-between gap-4 flex-wrap">
                 <div className="relative flex-1 max-w-md min-w-[200px]">
-                  <Search size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                  <input value={lectureSearch} onChange={(e) => setLectureSearch(e.target.value)} placeholder={t("admin_search_placeholder")} className="input-base !pr-10 !py-2.5 text-sm" />
+                  <Search
+                    size={16}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+                  />
+                  <input
+                    value={lectureSearch}
+                    onChange={(e) => setLectureSearch(e.target.value)}
+                    placeholder={t("admin_search_placeholder")}
+                    className="input-base !pr-10 !py-2.5 text-sm"
+                  />
                 </div>
-                <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setShowAddLecture(true)}
-                  className="btn-primary !py-2.5 text-sm flex items-center gap-2">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setShowAddLecture(true)}
+                  className="btn-primary !py-2.5 text-sm flex items-center gap-2"
+                >
                   <Plus size={16} /> إضافة محاضرة
                 </motion.button>
               </div>
 
               {dataErrors.lectures ? (
-                <ErrorPanel message={dataErrors.lectures} onRetry={fetchLectures} />
+                <ErrorPanel
+                  message={dataErrors.lectures}
+                  onRetry={fetchLectures}
+                />
               ) : lecturesLoading ? (
                 <LoadingPanel />
               ) : filteredLectures.length === 0 ? (
-                <EmptyPanel icon={BookOpen} title={lectureSearch ? (isArabic ? "لا توجد نتائج" : "No results") : (isArabic ? "لا توجد محاضرات بعد" : "No lectures yet")} description={isArabic ? "يمكن إضافة محاضرة جديدة من الزر بالأعلى." : "Add a new lecture from the button above."} />
+                <EmptyPanel
+                  icon={BookOpen}
+                  title={
+                    lectureSearch
+                      ? isArabic
+                        ? "لا توجد نتائج"
+                        : "No results"
+                      : isArabic
+                        ? "لا توجد محاضرات بعد"
+                        : "No lectures yet"
+                  }
+                  description={
+                    isArabic
+                      ? "يمكن إضافة محاضرة جديدة من الزر بالأعلى."
+                      : "Add a new lecture from the button above."
+                  }
+                />
               ) : (
                 <div className="card-base overflow-hidden">
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm">
-                      <thead><tr className="bg-muted/60">
-                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">المحاضرة</th>
-                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">المادة</th>
-                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">المعلم</th>
-                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">الطالب</th>
-                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">المحتوى</th>
-                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">الإجراءات</th>
-                      </tr></thead>
+                      <thead>
+                        <tr className="bg-muted/60">
+                          <th className="text-start p-4 font-bold text-muted-foreground text-xs">
+                            المحاضرة
+                          </th>
+                          <th className="text-start p-4 font-bold text-muted-foreground text-xs">
+                            المادة
+                          </th>
+                          <th className="text-start p-4 font-bold text-muted-foreground text-xs">
+                            المعلم
+                          </th>
+                          <th className="text-start p-4 font-bold text-muted-foreground text-xs">
+                            الطالب
+                          </th>
+                          <th className="text-start p-4 font-bold text-muted-foreground text-xs">
+                            المحتوى
+                          </th>
+                          <th className="text-start p-4 font-bold text-muted-foreground text-xs">
+                            الإجراءات
+                          </th>
+                        </tr>
+                      </thead>
                       <tbody>
                         {filteredLectures.map((l) => (
-                          <tr key={l.id} className="border-t hover:bg-secondary/30 transition-colors">
+                          <tr
+                            key={l.id}
+                            className="border-t hover:bg-secondary/30 transition-colors"
+                          >
                             <td className="p-4 font-bold text-sm">{l.title}</td>
-                            <td className="p-4 text-muted-foreground text-sm">{l.subject || "—"}</td>
+                            <td className="p-4 text-muted-foreground text-sm">
+                              {l.subject || "—"}
+                            </td>
                             <td className="p-4 text-sm">{l.teacher_name}</td>
                             <td className="p-4 text-sm">{l.student_name}</td>
                             <td className="p-4">
                               <div className="flex gap-2">
-                                {(l.video_url || l.bunny_video_id) && <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full font-semibold flex items-center gap-1"><Video size={10} /> فيديو</span>}
-                                {l.pdf_url && <span className="text-xs bg-destructive/10 text-destructive px-2 py-1 rounded-full font-semibold flex items-center gap-1"><FileText size={10} /> PDF</span>}
-                                {!l.video_url && !l.bunny_video_id && !l.pdf_url && <span className="text-muted-foreground text-xs">—</span>}
+                                {(l.video_url || l.bunny_video_id) && (
+                                  <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full font-semibold flex items-center gap-1">
+                                    <Video size={10} /> فيديو
+                                  </span>
+                                )}
+                                {l.pdf_url && (
+                                  <span className="text-xs bg-destructive/10 text-destructive px-2 py-1 rounded-full font-semibold flex items-center gap-1">
+                                    <FileText size={10} /> PDF
+                                  </span>
+                                )}
+                                {!l.video_url &&
+                                  !l.bunny_video_id &&
+                                  !l.pdf_url && (
+                                    <span className="text-muted-foreground text-xs">
+                                      —
+                                    </span>
+                                  )}
                               </div>
                             </td>
                             <td className="p-4">
                               <div className="flex gap-2">
-                                <button onClick={() => { setEditLecture(l); setEditVideoFile(null); setEditPdfFile(null); }} className="text-xs bg-primary/10 text-primary px-3 py-1.5 rounded-lg font-semibold hover:bg-primary/20 transition-colors flex items-center gap-1"><Upload size={10} /> تعديل</button>
-                                <button onClick={() => handleDeleteLecture(l.id)} className="text-xs bg-destructive/10 text-destructive px-3 py-1.5 rounded-lg font-semibold hover:bg-destructive/20 transition-colors">حذف</button>
+                                <button
+                                  onClick={() => {
+                                    setEditLecture(l);
+                                    setEditVideoFile(null);
+                                    setEditPdfFile(null);
+                                  }}
+                                  className="text-xs bg-primary/10 text-primary px-3 py-1.5 rounded-lg font-semibold hover:bg-primary/20 transition-colors flex items-center gap-1"
+                                >
+                                  <Upload size={10} /> تعديل
+                                </button>
+                                <button
+                                  onClick={() => handleDeleteLecture(l.id)}
+                                  className="text-xs bg-destructive/10 text-destructive px-3 py-1.5 rounded-lg font-semibold hover:bg-destructive/20 transition-colors"
+                                >
+                                  حذف
+                                </button>
                               </div>
                             </td>
                           </tr>
@@ -1201,32 +1929,59 @@ const Admin = () => {
           {activeTab === "availability" && (
             <div className="space-y-4 animate-fade-in">
               {dataErrors.availability ? (
-                <ErrorPanel message={dataErrors.availability} onRetry={fetchTeacherAvailability} />
+                <ErrorPanel
+                  message={dataErrors.availability}
+                  onRetry={fetchTeacherAvailability}
+                />
               ) : availabilityLoading ? (
                 <LoadingPanel />
               ) : Object.keys(availabilityByTeacher).length === 0 ? (
-                <EmptyPanel icon={Clock} title={isArabic ? "لا توجد مواعيد متاحة من المعلمين" : "No teacher availability yet"} />
+                <EmptyPanel
+                  icon={Clock}
+                  title={
+                    isArabic
+                      ? "لا توجد مواعيد متاحة من المعلمين"
+                      : "No teacher availability yet"
+                  }
+                />
               ) : (
                 <div className="grid gap-4 md:grid-cols-2">
-                  {Object.entries(availabilityByTeacher).map(([teacherId, { name, slots }]) => (
-                    <motion.div key={teacherId} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="card-base p-5">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="icon-box bg-primary/10"><GraduationCap size={18} className="text-primary" /></div>
-                        <h4 className="font-bold">{name}</h4>
-                      </div>
-                      <div className="space-y-2">
-                        {slots.map((slot) => (
-                          <div key={slot.id} className="flex items-center justify-between p-3 bg-secondary rounded-xl text-sm">
-                            <div className="flex items-center gap-2">
-                              <Calendar size={14} className="text-primary" />
-                              <span className="font-medium">{DAYS[slot.day_of_week]}</span>
-                            </div>
-                            <span className="text-muted-foreground">{slot.start_time.slice(0, 5)} - {slot.end_time.slice(0, 5)}</span>
+                  {Object.entries(availabilityByTeacher).map(
+                    ([teacherId, { name, slots }]) => (
+                      <motion.div
+                        key={teacherId}
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="card-base p-5"
+                      >
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className="icon-box bg-primary/10">
+                            <GraduationCap size={18} className="text-primary" />
                           </div>
-                        ))}
-                      </div>
-                    </motion.div>
-                  ))}
+                          <h4 className="font-bold">{name}</h4>
+                        </div>
+                        <div className="space-y-2">
+                          {slots.map((slot) => (
+                            <div
+                              key={slot.id}
+                              className="flex items-center justify-between p-3 bg-secondary rounded-xl text-sm"
+                            >
+                              <div className="flex items-center gap-2">
+                                <Calendar size={14} className="text-primary" />
+                                <span className="font-medium">
+                                  {DAYS[slot.day_of_week]}
+                                </span>
+                              </div>
+                              <span className="text-muted-foreground">
+                                {slot.start_time.slice(0, 5)} -{" "}
+                                {slot.end_time.slice(0, 5)}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </motion.div>
+                    ),
+                  )}
                 </div>
               )}
             </div>
@@ -1237,74 +1992,178 @@ const Admin = () => {
             <div className="space-y-4 animate-fade-in">
               <div className="flex items-center justify-between gap-4 flex-wrap">
                 <div className="relative flex-1 max-w-md min-w-[200px]">
-                  <Search size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                  <input value={studentSearch} onChange={(e) => setStudentSearch(e.target.value)} placeholder="ابحث بالاسم أو البريد أو رقم الواتساب" className="input-base !pr-10 !py-2.5 text-sm" />
+                  <Search
+                    size={16}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+                  />
+                  <input
+                    value={studentSearch}
+                    onChange={(e) => setStudentSearch(e.target.value)}
+                    placeholder="ابحث بالاسم أو البريد أو رقم الواتساب"
+                    className="input-base !pr-10 !py-2.5 text-sm"
+                  />
                 </div>
-                <span className="text-sm text-muted-foreground font-bold">{filteredStudents.length} طالب</span>
+                <span className="text-sm text-muted-foreground font-bold">
+                  {filteredStudents.length} طالب
+                </span>
               </div>
 
               {dataErrors.students ? (
-                <ErrorPanel message={dataErrors.students} onRetry={fetchStudents} />
+                <ErrorPanel
+                  message={dataErrors.students}
+                  onRetry={fetchStudents}
+                />
               ) : studentsLoading ? (
                 <LoadingPanel />
               ) : filteredStudents.length === 0 ? (
-                <EmptyPanel icon={Users} title={studentSearch ? t("no_results") : (isArabic ? "لا يوجد طلاب مسجّلون" : "No registered students")} />
+                <EmptyPanel
+                  icon={Users}
+                  title={
+                    studentSearch
+                      ? t("no_results")
+                      : isArabic
+                        ? "لا يوجد طلاب مسجّلون"
+                        : "No registered students"
+                  }
+                />
               ) : (
                 <div className="card-base overflow-hidden">
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm">
-                      <thead><tr className="bg-muted/60">
-                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">الطالب</th>
-                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">البريد الإلكتروني</th>
-                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">واتساب</th>
-                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">الدولة</th>
-                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">المنطقة الزمنية</th>
-                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">حالة الحساب</th>
-                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">آخر دخول</th>
-                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">تاريخ التسجيل</th>
-                      </tr></thead>
+                      <thead>
+                        <tr className="bg-muted/60">
+                          <th className="text-start p-4 font-bold text-muted-foreground text-xs">
+                            الطالب
+                          </th>
+                          <th className="text-start p-4 font-bold text-muted-foreground text-xs">
+                            البريد الإلكتروني
+                          </th>
+                          <th className="text-start p-4 font-bold text-muted-foreground text-xs">
+                            واتساب
+                          </th>
+                          <th className="text-start p-4 font-bold text-muted-foreground text-xs">
+                            الدولة
+                          </th>
+                          <th className="text-start p-4 font-bold text-muted-foreground text-xs">
+                            المنطقة الزمنية
+                          </th>
+                          <th className="text-start p-4 font-bold text-muted-foreground text-xs">
+                            حالة الحساب
+                          </th>
+                          <th className="text-start p-4 font-bold text-muted-foreground text-xs">
+                            آخر دخول
+                          </th>
+                          <th className="text-start p-4 font-bold text-muted-foreground text-xs">
+                            تاريخ التسجيل
+                          </th>
+                        </tr>
+                      </thead>
                       <tbody>
                         {filteredStudents.map((st) => (
-                          <tr key={st.user_id} className="border-t hover:bg-secondary/30 transition-colors">
+                          <tr
+                            key={st.user_id}
+                            className="border-t hover:bg-secondary/30 transition-colors"
+                          >
                             <td className="p-4">
                               <div className="flex items-center gap-3">
-                                <div className="icon-box bg-warning/10"><User size={18} className="text-warning" /></div>
-                                <div className="font-bold text-sm">{resolveDisplayName(lang === "en" ? "en" : "ar", st.full_name, st.full_name_en, "—")}</div>
+                                <div className="icon-box bg-warning/10">
+                                  <User size={18} className="text-warning" />
+                                </div>
+                                <div className="font-bold text-sm">
+                                  {resolveDisplayName(
+                                    lang === "en" ? "en" : "ar",
+                                    st.full_name,
+                                    st.full_name_en,
+                                    "—",
+                                  )}
+                                </div>
                               </div>
                             </td>
                             <td className="p-4 text-muted-foreground text-sm">
                               {st.email ? (
-                                <a href={`mailto:${st.email}`} className="text-primary hover:underline font-medium break-all" dir="ltr">{st.email}</a>
-                              ) : "—"}
+                                <a
+                                  href={`mailto:${st.email}`}
+                                  className="text-primary hover:underline font-medium break-all"
+                                  dir="ltr"
+                                >
+                                  {st.email}
+                                </a>
+                              ) : (
+                                "—"
+                              )}
                             </td>
                             <td className="p-4 text-muted-foreground text-sm">
                               {st.phone ? (
-                                <a href={`https://wa.me/${st.phone.replace(/[^0-9]/g, "")}`} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium" dir="ltr">{st.phone}</a>
-                              ) : "—"}
+                                <a
+                                  href={`https://wa.me/${st.phone.replace(/[^0-9]/g, "")}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-primary hover:underline font-medium"
+                                  dir="ltr"
+                                >
+                                  {st.phone}
+                                </a>
+                              ) : (
+                                "—"
+                              )}
                             </td>
-                            <td className="p-4 text-muted-foreground text-sm">{st.country || "—"}</td>
-                            <td className="p-4 text-muted-foreground text-sm" dir="ltr">{st.timezone || "—"}</td>
+                            <td className="p-4 text-muted-foreground text-sm">
+                              {st.country || "—"}
+                            </td>
+                            <td
+                              className="p-4 text-muted-foreground text-sm"
+                              dir="ltr"
+                            >
+                              {st.timezone || "—"}
+                            </td>
                             <td className="p-4">
                               <div className="flex flex-col gap-1">
                                 {st.email_verified ? (
-                                  <span className="text-[10px] bg-success/10 text-success px-2 py-0.5 rounded-full font-semibold w-fit">بريد مُؤكَّد</span>
+                                  <span className="text-[10px] bg-success/10 text-success px-2 py-0.5 rounded-full font-semibold w-fit">
+                                    بريد مُؤكَّد
+                                  </span>
                                 ) : (
-                                  <span className="text-[10px] bg-warning/10 text-warning px-2 py-0.5 rounded-full font-semibold w-fit">بريد غير مُؤكَّد</span>
+                                  <span className="text-[10px] bg-warning/10 text-warning px-2 py-0.5 rounded-full font-semibold w-fit">
+                                    بريد غير مُؤكَّد
+                                  </span>
                                 )}
                                 {st.welcome_whatsapp_sent_at ? (
-                                  <span className="text-[10px] bg-primary/10 text-primary px-2 py-0.5 rounded-full font-semibold w-fit">واتساب مُرسَل</span>
+                                  <span className="text-[10px] bg-primary/10 text-primary px-2 py-0.5 rounded-full font-semibold w-fit">
+                                    واتساب مُرسَل
+                                  </span>
                                 ) : (
-                                  <span className="text-[10px] bg-muted text-muted-foreground px-2 py-0.5 rounded-full font-semibold w-fit">واتساب غير مُرسَل</span>
+                                  <span className="text-[10px] bg-muted text-muted-foreground px-2 py-0.5 rounded-full font-semibold w-fit">
+                                    واتساب غير مُرسَل
+                                  </span>
                                 )}
                                 {st.onboarding_completed ? (
-                                  <span className="text-[10px] bg-success/10 text-success px-2 py-0.5 rounded-full font-semibold w-fit">اكتمل الإعداد</span>
+                                  <span className="text-[10px] bg-success/10 text-success px-2 py-0.5 rounded-full font-semibold w-fit">
+                                    اكتمل الإعداد
+                                  </span>
                                 ) : (
-                                  <span className="text-[10px] bg-muted text-muted-foreground px-2 py-0.5 rounded-full font-semibold w-fit">إعداد غير مكتمل</span>
+                                  <span className="text-[10px] bg-muted text-muted-foreground px-2 py-0.5 rounded-full font-semibold w-fit">
+                                    إعداد غير مكتمل
+                                  </span>
                                 )}
                               </div>
                             </td>
-                            <td className="p-4 text-muted-foreground text-xs" dir="ltr">{st.last_sign_in_at ? new Date(st.last_sign_in_at).toLocaleDateString(lang === "en" ? "en-GB" : "ar-EG") : "—"}</td>
-                            <td className="p-4 text-muted-foreground text-xs">{new Date(st.created_at).toLocaleDateString(lang === "en" ? "en-GB" : "ar-EG")}</td>
+                            <td
+                              className="p-4 text-muted-foreground text-xs"
+                              dir="ltr"
+                            >
+                              {st.last_sign_in_at
+                                ? new Date(
+                                    st.last_sign_in_at,
+                                  ).toLocaleDateString(
+                                    lang === "en" ? "en-GB" : "ar-EG",
+                                  )
+                                : "—"}
+                            </td>
+                            <td className="p-4 text-muted-foreground text-xs">
+                              {new Date(st.created_at).toLocaleDateString(
+                                lang === "en" ? "en-GB" : "ar-EG",
+                              )}
+                            </td>
                           </tr>
                         ))}
                       </tbody>
@@ -1319,8 +2178,12 @@ const Admin = () => {
           {activeTab === "admins" && (
             <div className="space-y-4 animate-fade-in">
               <div className="flex justify-end">
-                <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setShowAddAdmin(true)}
-                  className="btn-primary !py-2.5 text-sm flex items-center gap-2">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setShowAddAdmin(true)}
+                  className="btn-primary !py-2.5 text-sm flex items-center gap-2"
+                >
                   <Shield size={16} /> إضافة مشرف
                 </motion.button>
               </div>
@@ -1329,28 +2192,50 @@ const Admin = () => {
               ) : adminsLoading ? (
                 <LoadingPanel />
               ) : admins.length === 0 ? (
-                <EmptyPanel icon={Shield} title={isArabic ? "لا يوجد مدراء" : "No admins found"} />
+                <EmptyPanel
+                  icon={Shield}
+                  title={isArabic ? "لا يوجد مدراء" : "No admins found"}
+                />
               ) : (
                 <div className="card-base overflow-hidden">
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm">
-                      <thead><tr className="bg-muted/60">
-                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">المدير</th>
-                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">معرّف المستخدم</th>
-                        <th className="text-start p-4 font-bold text-muted-foreground text-xs">الحالة</th>
-                      </tr></thead>
+                      <thead>
+                        <tr className="bg-muted/60">
+                          <th className="text-start p-4 font-bold text-muted-foreground text-xs">
+                            المدير
+                          </th>
+                          <th className="text-start p-4 font-bold text-muted-foreground text-xs">
+                            معرّف المستخدم
+                          </th>
+                          <th className="text-start p-4 font-bold text-muted-foreground text-xs">
+                            الحالة
+                          </th>
+                        </tr>
+                      </thead>
                       <tbody>
                         {admins.map((admin) => (
-                          <tr key={admin.user_id} className="border-t hover:bg-secondary/30 transition-colors">
+                          <tr
+                            key={admin.user_id}
+                            className="border-t hover:bg-secondary/30 transition-colors"
+                          >
                             <td className="p-4">
                               <div className="flex items-center gap-3">
-                                <div className="icon-box bg-primary/10"><Shield size={18} className="text-primary" /></div>
-                                <div className="font-bold text-sm">{admin.full_name || "مدير بدون اسم"}</div>
+                                <div className="icon-box bg-primary/10">
+                                  <Shield size={18} className="text-primary" />
+                                </div>
+                                <div className="font-bold text-sm">
+                                  {admin.full_name || "مدير بدون اسم"}
+                                </div>
                               </div>
                             </td>
-                            <td className="p-4 text-muted-foreground text-xs font-mono">{admin.user_id.slice(0, 8)}...</td>
+                            <td className="p-4 text-muted-foreground text-xs font-mono">
+                              {admin.user_id.slice(0, 8)}...
+                            </td>
                             <td className="p-4">
-                              <span className="text-xs bg-success/10 text-success px-2.5 py-1 rounded-full font-semibold">مدير نشط</span>
+                              <span className="text-xs bg-success/10 text-success px-2.5 py-1 rounded-full font-semibold">
+                                مدير نشط
+                              </span>
                             </td>
                           </tr>
                         ))}
@@ -1365,21 +2250,54 @@ const Admin = () => {
           {/* Password Change Tab */}
           {activeTab === "password" && (
             <div className="card-base p-6 animate-fade-in max-w-lg">
-              <h3 className="font-extrabold text-lg mb-6">{t("dash_change_password")}</h3>
+              <h3 className="font-extrabold text-lg mb-6">
+                {t("dash_change_password")}
+              </h3>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-bold mb-1.5">{t("dash_current_password")}</label>
-                  <input type="password" value={pwForm.current} onChange={(e) => setPwForm((f) => ({ ...f, current: e.target.value }))} className="input-base" />
+                  <label className="block text-sm font-bold mb-1.5">
+                    {t("dash_current_password")}
+                  </label>
+                  <input
+                    type="password"
+                    value={pwForm.current}
+                    onChange={(e) =>
+                      setPwForm((f) => ({ ...f, current: e.target.value }))
+                    }
+                    className="input-base"
+                  />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold mb-1.5">{t("dash_new_password")}</label>
-                  <input type="password" value={pwForm.newPw} onChange={(e) => setPwForm((f) => ({ ...f, newPw: e.target.value }))} className="input-base" />
+                  <label className="block text-sm font-bold mb-1.5">
+                    {t("dash_new_password")}
+                  </label>
+                  <input
+                    type="password"
+                    value={pwForm.newPw}
+                    onChange={(e) =>
+                      setPwForm((f) => ({ ...f, newPw: e.target.value }))
+                    }
+                    className="input-base"
+                  />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold mb-1.5">{t("register_confirm")}</label>
-                  <input type="password" value={pwForm.confirm} onChange={(e) => setPwForm((f) => ({ ...f, confirm: e.target.value }))} className="input-base" />
+                  <label className="block text-sm font-bold mb-1.5">
+                    {t("register_confirm")}
+                  </label>
+                  <input
+                    type="password"
+                    value={pwForm.confirm}
+                    onChange={(e) =>
+                      setPwForm((f) => ({ ...f, confirm: e.target.value }))
+                    }
+                    className="input-base"
+                  />
                 </div>
-                <button onClick={handleChangePassword} disabled={pwSaving} className="btn-primary flex items-center gap-2 disabled:opacity-50">
+                <button
+                  onClick={handleChangePassword}
+                  disabled={pwSaving}
+                  className="btn-primary flex items-center gap-2 disabled:opacity-50"
+                >
                   {pwSaving && <Loader2 size={14} className="animate-spin" />}
                   {t("dash_update_password")}
                 </button>
@@ -1394,57 +2312,134 @@ const Admin = () => {
         <ModalWrapper onClose={() => setShowAddLecture(false)}>
           <div className="flex items-center justify-between p-5 border-b">
             <h3 className="font-extrabold text-lg">إضافة محاضرة جديدة</h3>
-            <button onClick={() => setShowAddLecture(false)} className="text-muted-foreground hover:text-foreground"><X size={20} /></button>
+            <button
+              onClick={() => setShowAddLecture(false)}
+              className="text-muted-foreground hover:text-foreground"
+            >
+              <X size={20} />
+            </button>
           </div>
           <div className="p-5 space-y-4">
             <div>
-              <label className="block text-sm font-bold mb-1.5">اسم المحاضرة *</label>
-              <input value={lectureForm.title} onChange={(e) => setLectureForm((f) => ({ ...f, title: e.target.value }))} className="input-base" placeholder="مثال: مقدمة في التفاضل" />
+              <label className="block text-sm font-bold mb-1.5">
+                اسم المحاضرة *
+              </label>
+              <input
+                value={lectureForm.title}
+                onChange={(e) =>
+                  setLectureForm((f) => ({ ...f, title: e.target.value }))
+                }
+                className="input-base"
+                placeholder="مثال: مقدمة في التفاضل"
+              />
             </div>
             <div>
               <label className="block text-sm font-bold mb-1.5">المادة</label>
-              <input value={lectureForm.subject} onChange={(e) => setLectureForm((f) => ({ ...f, subject: e.target.value }))} className="input-base" placeholder="مثال: الرياضيات" />
+              <input
+                value={lectureForm.subject}
+                onChange={(e) =>
+                  setLectureForm((f) => ({ ...f, subject: e.target.value }))
+                }
+                className="input-base"
+                placeholder="مثال: الرياضيات"
+              />
             </div>
             <div>
               <label className="block text-sm font-bold mb-1.5">المعلم *</label>
-              <select value={lectureForm.teacher_id} onChange={(e) => setLectureForm((f) => ({ ...f, teacher_id: e.target.value }))} className="input-base">
+              <select
+                value={lectureForm.teacher_id}
+                onChange={(e) =>
+                  setLectureForm((f) => ({ ...f, teacher_id: e.target.value }))
+                }
+                className="input-base"
+              >
                 <option value="">اختر المعلم</option>
-                {teacherProfilesList.map((p) => <option key={p.user_id} value={p.user_id}>{p.full_name || p.user_id}</option>)}
+                {teacherProfilesList.map((p) => (
+                  <option key={p.user_id} value={p.user_id}>
+                    {p.full_name || p.user_id}
+                  </option>
+                ))}
               </select>
             </div>
             <div>
               <label className="block text-sm font-bold mb-1.5">الطالب *</label>
-              <select value={lectureForm.student_id} onChange={(e) => setLectureForm((f) => ({ ...f, student_id: e.target.value }))} className="input-base">
+              <select
+                value={lectureForm.student_id}
+                onChange={(e) =>
+                  setLectureForm((f) => ({ ...f, student_id: e.target.value }))
+                }
+                className="input-base"
+              >
                 <option value="">اختر الطالب</option>
-                {studentProfilesList.map((p) => <option key={p.user_id} value={p.user_id}>{p.full_name || p.user_id}</option>)}
+                {studentProfilesList.map((p) => (
+                  <option key={p.user_id} value={p.user_id}>
+                    {p.full_name || p.user_id}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-bold mb-1.5">فيديو المحاضرة</label>
-                <input ref={videoRef} type="file" accept="video/*" className="hidden" onChange={(e) => setVideoFile(e.target.files?.[0] || null)} />
-                <button onClick={() => videoRef.current?.click()} className="w-full flex items-center justify-center gap-2 p-3 border-2 border-dashed rounded-xl text-sm text-muted-foreground hover:border-primary hover:text-primary transition-colors">
+                <label className="block text-sm font-bold mb-1.5">
+                  فيديو المحاضرة
+                </label>
+                <input
+                  ref={videoRef}
+                  type="file"
+                  accept="video/*"
+                  className="hidden"
+                  onChange={(e) => setVideoFile(e.target.files?.[0] || null)}
+                />
+                <button
+                  onClick={() => videoRef.current?.click()}
+                  className="w-full flex items-center justify-center gap-2 p-3 border-2 border-dashed rounded-xl text-sm text-muted-foreground hover:border-primary hover:text-primary transition-colors"
+                >
                   <Upload size={16} />
                   {videoFile ? videoFile.name.slice(0, 20) : "رفع فيديو"}
                 </button>
               </div>
               <div>
-                <label className="block text-sm font-bold mb-1.5">ملف PDF</label>
-                <input ref={pdfRef} type="file" accept=".pdf" className="hidden" onChange={(e) => setPdfFile(e.target.files?.[0] || null)} />
-                <button onClick={() => pdfRef.current?.click()} className="w-full flex items-center justify-center gap-2 p-3 border-2 border-dashed rounded-xl text-sm text-muted-foreground hover:border-destructive hover:text-destructive transition-colors">
+                <label className="block text-sm font-bold mb-1.5">
+                  ملف PDF
+                </label>
+                <input
+                  ref={pdfRef}
+                  type="file"
+                  accept=".pdf"
+                  className="hidden"
+                  onChange={(e) => setPdfFile(e.target.files?.[0] || null)}
+                />
+                <button
+                  onClick={() => pdfRef.current?.click()}
+                  className="w-full flex items-center justify-center gap-2 p-3 border-2 border-dashed rounded-xl text-sm text-muted-foreground hover:border-destructive hover:text-destructive transition-colors"
+                >
                   <FileText size={16} />
                   {pdfFile ? pdfFile.name.slice(0, 20) : "رفع PDF"}
                 </button>
               </div>
             </div>
-            <button onClick={handleAddLecture} disabled={uploading} className="btn-primary w-full flex items-center justify-center gap-2">
+            <button
+              onClick={handleAddLecture}
+              disabled={uploading}
+              className="btn-primary w-full flex items-center justify-center gap-2"
+            >
               {uploading ? (
-                <><Loader2 size={16} className="animate-spin" /> {videoFile && uploadProgress > 0 ? `رفع الفيديو ${uploadProgress}%` : "جاري الرفع..."}</>
-              ) : <><Plus size={16} /> إضافة المحاضرة</>}
+                <>
+                  <Loader2 size={16} className="animate-spin" />{" "}
+                  {videoFile && uploadProgress > 0
+                    ? `رفع الفيديو ${uploadProgress}%`
+                    : "جاري الرفع..."}
+                </>
+              ) : (
+                <>
+                  <Plus size={16} /> إضافة المحاضرة
+                </>
+              )}
             </button>
             {videoFile && (
               <p className="text-xs text-muted-foreground text-center">
-                🔒 الفيديو سيتم تشفيره تلقائياً ورفعه على Bunny.net Stream مع حماية ضد التحميل وعلامة مائية لكل طالب
+                🔒 الفيديو سيتم تشفيره تلقائياً ورفعه على Bunny.net Stream مع
+                حماية ضد التحميل وعلامة مائية لكل طالب
               </p>
             )}
           </div>
@@ -1455,37 +2450,114 @@ const Admin = () => {
       {editLecture && (
         <ModalWrapper onClose={() => setEditLecture(null)}>
           <div className="flex items-center justify-between p-5 border-b">
-            <h3 className="font-extrabold text-lg">تعديل محاضرة: {editLecture.title}</h3>
-            <button onClick={() => setEditLecture(null)} className="text-muted-foreground hover:text-foreground"><X size={20} /></button>
+            <h3 className="font-extrabold text-lg">
+              تعديل محاضرة: {editLecture.title}
+            </h3>
+            <button
+              onClick={() => setEditLecture(null)}
+              className="text-muted-foreground hover:text-foreground"
+            >
+              <X size={20} />
+            </button>
           </div>
           <div className="p-5 space-y-4">
             <div className="text-sm text-muted-foreground space-y-1">
-              <p>المادة: <span className="font-bold text-foreground">{editLecture.subject || "—"}</span></p>
-              <p>المعلم: <span className="font-bold text-foreground">{editLecture.teacher_name || "—"}</span></p>
-              <p>الطالب: <span className="font-bold text-foreground">{editLecture.student_name || "—"}</span></p>
+              <p>
+                المادة:{" "}
+                <span className="font-bold text-foreground">
+                  {editLecture.subject || "—"}
+                </span>
+              </p>
+              <p>
+                المعلم:{" "}
+                <span className="font-bold text-foreground">
+                  {editLecture.teacher_name || "—"}
+                </span>
+              </p>
+              <p>
+                الطالب:{" "}
+                <span className="font-bold text-foreground">
+                  {editLecture.student_name || "—"}
+                </span>
+              </p>
             </div>
             <div className="border-t pt-4 space-y-3">
               <div>
-                <label className="block text-sm font-bold mb-1.5">فيديو المحاضرة {(editLecture.video_url || editLecture.bunny_video_id) && <span className="text-success text-xs font-normal">(يوجد فيديو حالياً)</span>}</label>
-                <input ref={editVideoRef} type="file" accept="video/*" className="hidden" onChange={(e) => setEditVideoFile(e.target.files?.[0] || null)} />
-                <button onClick={() => editVideoRef.current?.click()} className="w-full flex items-center justify-center gap-2 p-3 border-2 border-dashed rounded-xl text-sm text-muted-foreground hover:border-primary hover:text-primary transition-colors">
+                <label className="block text-sm font-bold mb-1.5">
+                  فيديو المحاضرة{" "}
+                  {(editLecture.video_url || editLecture.bunny_video_id) && (
+                    <span className="text-success text-xs font-normal">
+                      (يوجد فيديو حالياً)
+                    </span>
+                  )}
+                </label>
+                <input
+                  ref={editVideoRef}
+                  type="file"
+                  accept="video/*"
+                  className="hidden"
+                  onChange={(e) =>
+                    setEditVideoFile(e.target.files?.[0] || null)
+                  }
+                />
+                <button
+                  onClick={() => editVideoRef.current?.click()}
+                  className="w-full flex items-center justify-center gap-2 p-3 border-2 border-dashed rounded-xl text-sm text-muted-foreground hover:border-primary hover:text-primary transition-colors"
+                >
                   <Upload size={16} />
-                  {editVideoFile ? editVideoFile.name.slice(0, 30) : (editLecture.video_url || editLecture.bunny_video_id) ? "استبدال الفيديو" : "رفع فيديو"}
+                  {editVideoFile
+                    ? editVideoFile.name.slice(0, 30)
+                    : editLecture.video_url || editLecture.bunny_video_id
+                      ? "استبدال الفيديو"
+                      : "رفع فيديو"}
                 </button>
               </div>
               <div>
-                <label className="block text-sm font-bold mb-1.5">ملف PDF {editLecture.pdf_url && <span className="text-success text-xs font-normal">(يوجد ملف حالياً)</span>}</label>
-                <input ref={editPdfRef} type="file" accept=".pdf" className="hidden" onChange={(e) => setEditPdfFile(e.target.files?.[0] || null)} />
-                <button onClick={() => editPdfRef.current?.click()} className="w-full flex items-center justify-center gap-2 p-3 border-2 border-dashed rounded-xl text-sm text-muted-foreground hover:border-destructive hover:text-destructive transition-colors">
+                <label className="block text-sm font-bold mb-1.5">
+                  ملف PDF{" "}
+                  {editLecture.pdf_url && (
+                    <span className="text-success text-xs font-normal">
+                      (يوجد ملف حالياً)
+                    </span>
+                  )}
+                </label>
+                <input
+                  ref={editPdfRef}
+                  type="file"
+                  accept=".pdf"
+                  className="hidden"
+                  onChange={(e) => setEditPdfFile(e.target.files?.[0] || null)}
+                />
+                <button
+                  onClick={() => editPdfRef.current?.click()}
+                  className="w-full flex items-center justify-center gap-2 p-3 border-2 border-dashed rounded-xl text-sm text-muted-foreground hover:border-destructive hover:text-destructive transition-colors"
+                >
                   <FileText size={16} />
-                  {editPdfFile ? editPdfFile.name.slice(0, 30) : editLecture.pdf_url ? "استبدال PDF" : "رفع PDF"}
+                  {editPdfFile
+                    ? editPdfFile.name.slice(0, 30)
+                    : editLecture.pdf_url
+                      ? "استبدال PDF"
+                      : "رفع PDF"}
                 </button>
               </div>
             </div>
-            <button onClick={handleEditLecture} disabled={editUploading || (!editVideoFile && !editPdfFile)} className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50">
+            <button
+              onClick={handleEditLecture}
+              disabled={editUploading || (!editVideoFile && !editPdfFile)}
+              className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50"
+            >
               {editUploading ? (
-                <><Loader2 size={16} className="animate-spin" /> {editVideoFile && editUploadProgress > 0 ? `رفع الفيديو ${editUploadProgress}%` : "جاري الرفع..."}</>
-              ) : <><Upload size={16} /> حفظ التعديلات</>}
+                <>
+                  <Loader2 size={16} className="animate-spin" />{" "}
+                  {editVideoFile && editUploadProgress > 0
+                    ? `رفع الفيديو ${editUploadProgress}%`
+                    : "جاري الرفع..."}
+                </>
+              ) : (
+                <>
+                  <Upload size={16} /> حفظ التعديلات
+                </>
+              )}
             </button>
           </div>
         </ModalWrapper>
@@ -1496,17 +2568,32 @@ const Admin = () => {
         <ModalWrapper onClose={() => setEditTeacher(null)}>
           <div className="flex items-center justify-between p-5 border-b">
             <h3 className="font-extrabold text-lg">تعديل بيانات المعلم</h3>
-            <button onClick={() => setEditTeacher(null)} className="text-muted-foreground hover:text-foreground"><X size={20} /></button>
+            <button
+              onClick={() => setEditTeacher(null)}
+              className="text-muted-foreground hover:text-foreground"
+            >
+              <X size={20} />
+            </button>
           </div>
           <div className="p-5 space-y-4 max-h-[70vh] overflow-y-auto">
             <div className="flex items-center gap-4 p-4 rounded-xl border-2 border-border">
               {editTeacherForm.avatar_url ? (
-                <img src={editTeacherForm.avatar_url} alt="صورة المعلم" width={72} height={72} className="w-[72px] h-[72px] rounded-2xl object-cover border border-border" />
+                <img
+                  src={editTeacherForm.avatar_url}
+                  alt="صورة المعلم"
+                  width={72}
+                  height={72}
+                  className="w-[72px] h-[72px] rounded-2xl object-cover border border-border"
+                />
               ) : (
-                <div className="w-[72px] h-[72px] rounded-2xl bg-primary/10 text-primary flex items-center justify-center font-black">؟</div>
+                <div className="w-[72px] h-[72px] rounded-2xl bg-primary/10 text-primary flex items-center justify-center font-black">
+                  ؟
+                </div>
               )}
               <div className="flex-1 space-y-2">
-                <label className="block text-sm font-bold">الصورة الشخصية</label>
+                <label className="block text-sm font-bold">
+                  الصورة الشخصية
+                </label>
                 <div className="flex flex-wrap items-center gap-2">
                   <label className="btn-ghost text-sm px-3 py-2 cursor-pointer">
                     {uploadingAvatar ? "جاري الرفع..." : "رفع صورة"}
@@ -1521,31 +2608,52 @@ const Admin = () => {
                         if (!file || !editTeacher) return;
                         setUploadingAvatar(true);
                         try {
-                          const url = await uploadTeacherAvatar(file, editTeacher.user_id);
-                          setEditTeacherForm((f) => ({ ...f, avatar_url: url }));
+                          const url = await uploadTeacherAvatar(
+                            file,
+                            editTeacher.user_id,
+                          );
+                          setEditTeacherForm((f) => ({
+                            ...f,
+                            avatar_url: url,
+                          }));
                           toast.success("تم رفع الصورة — لا تنسَ الحفظ");
                         } catch (err) {
-                          toast.error(err instanceof Error ? err.message : "تعذر رفع الصورة");
+                          toast.error(
+                            err instanceof Error
+                              ? err.message
+                              : "تعذر رفع الصورة",
+                          );
                         }
                         setUploadingAvatar(false);
                       }}
                     />
                   </label>
                   {editTeacherForm.avatar_url && (
-                    <button type="button" onClick={() => setEditTeacherForm((f) => ({ ...f, avatar_url: "" }))} className="btn-ghost text-sm px-3 py-2 text-destructive">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setEditTeacherForm((f) => ({ ...f, avatar_url: "" }))
+                      }
+                      className="btn-ghost text-sm px-3 py-2 text-destructive"
+                    >
                       إزالة الصورة
                     </button>
                   )}
                 </div>
-                <p className="text-xs text-muted-foreground">تظهر هذه الصورة في صفحة المعلمين وملفه الشخصي.</p>
+                <p className="text-xs text-muted-foreground">
+                  تظهر هذه الصورة في صفحة المعلمين وملفه الشخصي.
+                </p>
               </div>
             </div>
             <div className="grid sm:grid-cols-2 gap-4">
-
               <div className="sm:col-span-2">
-                <label className="block text-sm font-bold mb-1.5">اسم المعلم</label>
+                <label className="block text-sm font-bold mb-1.5">
+                  اسم المعلم
+                </label>
                 <input
-                  value={editTeacherForm.full_name || editTeacherForm.full_name_en}
+                  value={
+                    editTeacherForm.full_name || editTeacherForm.full_name_en
+                  }
                   onChange={(e) => {
                     const v = e.target.value;
                     const isAr = /[\u0600-\u06FF]/.test(v);
@@ -1560,125 +2668,304 @@ const Admin = () => {
                 />
                 <div className="flex items-center justify-between gap-3 mt-1.5 flex-wrap">
                   <p className="text-xs text-muted-foreground">
-                    يظهر تلقائيًا: {editTeacherForm.full_name || "—"} / <span dir="ltr">{editTeacherForm.full_name_en || "—"}</span>
+                    يظهر تلقائيًا: {editTeacherForm.full_name || "—"} /{" "}
+                    <span dir="ltr">{editTeacherForm.full_name_en || "—"}</span>
                   </p>
                   <button
                     type="button"
                     onClick={() => setManualName((v) => !v)}
                     className="text-xs font-bold text-primary hover:underline"
                   >
-                    {manualName ? "إخفاء التعديل اليدوي" : "تعديل الاسم يدويًا (عربي/إنجليزي)"}
+                    {manualName
+                      ? "إخفاء التعديل اليدوي"
+                      : "تعديل الاسم يدويًا (عربي/إنجليزي)"}
                   </button>
                 </div>
                 {manualName && (
                   <div className="grid sm:grid-cols-2 gap-3 mt-3">
                     <div>
-                      <label className="block text-xs font-bold mb-1">الاسم (عربي)</label>
-                      <input value={editTeacherForm.full_name} onChange={(e) => setEditTeacherForm((f) => ({ ...f, full_name: e.target.value }))} className="input-base" />
+                      <label className="block text-xs font-bold mb-1">
+                        الاسم (عربي)
+                      </label>
+                      <input
+                        value={editTeacherForm.full_name}
+                        onChange={(e) =>
+                          setEditTeacherForm((f) => ({
+                            ...f,
+                            full_name: e.target.value,
+                          }))
+                        }
+                        className="input-base"
+                      />
                     </div>
                     <div>
-                      <label className="block text-xs font-bold mb-1">الاسم (إنجليزي)</label>
-                      <input dir="ltr" value={editTeacherForm.full_name_en} onChange={(e) => setEditTeacherForm((f) => ({ ...f, full_name_en: e.target.value }))} className="input-base" />
+                      <label className="block text-xs font-bold mb-1">
+                        الاسم (إنجليزي)
+                      </label>
+                      <input
+                        dir="ltr"
+                        value={editTeacherForm.full_name_en}
+                        onChange={(e) =>
+                          setEditTeacherForm((f) => ({
+                            ...f,
+                            full_name_en: e.target.value,
+                          }))
+                        }
+                        className="input-base"
+                      />
                     </div>
                   </div>
                 )}
               </div>
 
-
               <div>
-                <label className="block text-sm font-bold mb-1.5">رقم الهاتف</label>
-                <input dir="ltr" value={editTeacherForm.phone} onChange={(e) => setEditTeacherForm((f) => ({ ...f, phone: e.target.value }))} className="input-base" />
+                <label className="block text-sm font-bold mb-1.5">
+                  رقم الهاتف
+                </label>
+                <input
+                  dir="ltr"
+                  value={editTeacherForm.phone}
+                  onChange={(e) =>
+                    setEditTeacherForm((f) => ({ ...f, phone: e.target.value }))
+                  }
+                  className="input-base"
+                />
               </div>
               <div>
-                <label className="block text-sm font-bold mb-1.5">سعر الساعة</label>
-                <input dir="ltr" type="number" min="0" value={editTeacherForm.price} onChange={(e) => setEditTeacherForm((f) => ({ ...f, price: e.target.value }))} className="input-base" />
+                <label className="block text-sm font-bold mb-1.5">
+                  سعر الساعة
+                </label>
+                <input
+                  dir="ltr"
+                  type="number"
+                  min="0"
+                  value={editTeacherForm.price}
+                  onChange={(e) =>
+                    setEditTeacherForm((f) => ({ ...f, price: e.target.value }))
+                  }
+                  className="input-base"
+                />
               </div>
               <div>
-                <label className="block text-sm font-bold mb-1.5">الجامعة (عربي)</label>
-                <input value={editTeacherForm.university} onChange={(e) => setEditTeacherForm((f) => ({ ...f, university: e.target.value }))} className="input-base" />
+                <label className="block text-sm font-bold mb-1.5">
+                  الجامعة (عربي)
+                </label>
+                <input
+                  value={editTeacherForm.university}
+                  onChange={(e) =>
+                    setEditTeacherForm((f) => ({
+                      ...f,
+                      university: e.target.value,
+                    }))
+                  }
+                  className="input-base"
+                />
               </div>
               <div>
-                <label className="block text-sm font-bold mb-1.5">الجامعة (إنجليزي)</label>
-                <input dir="ltr" value={editTeacherForm.university_en} onChange={(e) => setEditTeacherForm((f) => ({ ...f, university_en: e.target.value }))} className="input-base" />
+                <label className="block text-sm font-bold mb-1.5">
+                  الجامعة (إنجليزي)
+                </label>
+                <input
+                  dir="ltr"
+                  value={editTeacherForm.university_en}
+                  onChange={(e) =>
+                    setEditTeacherForm((f) => ({
+                      ...f,
+                      university_en: e.target.value,
+                    }))
+                  }
+                  className="input-base"
+                />
               </div>
               <div className="sm:col-span-2">
-                <label className="block text-sm font-bold mb-1.5">المجال التخصصي</label>
+                <label className="block text-sm font-bold mb-1.5">
+                  المجال التخصصي
+                </label>
                 <select
                   className="input-base"
                   value={
-                    editTeacherForm.major === "" ? "" :
-                    MAJORS.some((m) => m.ar === editTeacherForm.major) ? editTeacherForm.major : "__custom__"
+                    editTeacherForm.major === ""
+                      ? ""
+                      : MAJORS.some((m) => m.ar === editTeacherForm.major)
+                        ? editTeacherForm.major
+                        : "__custom__"
                   }
                   onChange={(e) => {
                     const v = e.target.value;
-                    if (v === "") { setEditTeacherForm((f) => ({ ...f, major: "", major_en: "" })); return; }
-                    if (v === "__custom__") { setEditTeacherForm((f) => ({ ...f, major: " ", major_en: "" })); return; }
+                    if (v === "") {
+                      setEditTeacherForm((f) => ({
+                        ...f,
+                        major: "",
+                        major_en: "",
+                      }));
+                      return;
+                    }
+                    if (v === "__custom__") {
+                      setEditTeacherForm((f) => ({
+                        ...f,
+                        major: " ",
+                        major_en: "",
+                      }));
+                      return;
+                    }
                     const m = MAJORS.find((x) => x.ar === v)!;
-                    setEditTeacherForm((f) => ({ ...f, major: m.ar, major_en: m.en }));
+                    setEditTeacherForm((f) => ({
+                      ...f,
+                      major: m.ar,
+                      major_en: m.en,
+                    }));
                   }}
                 >
                   <option value="">— بدون تحديد —</option>
                   {MAJORS.map((m) => (
-                    <option key={m.ar} value={m.ar}>{m.ar} / {m.en}</option>
+                    <option key={m.ar} value={m.ar}>
+                      {m.ar} / {m.en}
+                    </option>
                   ))}
                   <option value="__custom__">أخرى (كتابة يدوية)</option>
                 </select>
-                {editTeacherForm.major !== "" && !MAJORS.some((m) => m.ar === editTeacherForm.major) && (
-                  <div className="grid sm:grid-cols-2 gap-3 mt-3">
-                    <input value={editTeacherForm.major.trim()} onChange={(e) => setEditTeacherForm((f) => ({ ...f, major: e.target.value }))} placeholder="التخصص بالعربي" className="input-base" />
-                    <input dir="ltr" value={editTeacherForm.major_en} onChange={(e) => setEditTeacherForm((f) => ({ ...f, major_en: e.target.value }))} placeholder="Specialization in English" className="input-base" />
-                  </div>
-                )}
+                {editTeacherForm.major !== "" &&
+                  !MAJORS.some((m) => m.ar === editTeacherForm.major) && (
+                    <div className="grid sm:grid-cols-2 gap-3 mt-3">
+                      <input
+                        value={editTeacherForm.major.trim()}
+                        onChange={(e) =>
+                          setEditTeacherForm((f) => ({
+                            ...f,
+                            major: e.target.value,
+                          }))
+                        }
+                        placeholder="التخصص بالعربي"
+                        className="input-base"
+                      />
+                      <input
+                        dir="ltr"
+                        value={editTeacherForm.major_en}
+                        onChange={(e) =>
+                          setEditTeacherForm((f) => ({
+                            ...f,
+                            major_en: e.target.value,
+                          }))
+                        }
+                        placeholder="Specialization in English"
+                        className="input-base"
+                      />
+                    </div>
+                  )}
               </div>
-
             </div>
 
             <TeacherCoursesPicker
-              valueAr={editTeacherForm.subjects.split(",").map((s) => s.trim()).filter(Boolean)}
-              valueEn={editTeacherForm.subjects_en.split(",").map((s) => s.trim()).filter(Boolean)}
+              valueAr={editTeacherForm.subjects
+                .split(",")
+                .map((s) => s.trim())
+                .filter(Boolean)}
+              valueEn={editTeacherForm.subjects_en
+                .split(",")
+                .map((s) => s.trim())
+                .filter(Boolean)}
               onChange={(ar, en) =>
-                setEditTeacherForm((f) => ({ ...f, subjects: ar.join(", "), subjects_en: en.join(", ") }))
+                setEditTeacherForm((f) => ({
+                  ...f,
+                  subjects: ar.join(", "),
+                  subjects_en: en.join(", "),
+                }))
               }
             />
 
             <div>
-              <label className="block text-sm font-bold mb-1.5">نبذة (عربي)</label>
-              <textarea rows={3} value={editTeacherForm.bio} onChange={(e) => setEditTeacherForm((f) => ({ ...f, bio: e.target.value }))} className="input-base resize-none" />
+              <label className="block text-sm font-bold mb-1.5">
+                نبذة (عربي)
+              </label>
+              <textarea
+                rows={3}
+                value={editTeacherForm.bio}
+                onChange={(e) =>
+                  setEditTeacherForm((f) => ({ ...f, bio: e.target.value }))
+                }
+                className="input-base resize-none"
+              />
             </div>
             <div>
-              <label className="block text-sm font-bold mb-1.5">نبذة (إنجليزي)</label>
-              <textarea dir="ltr" rows={3} value={editTeacherForm.bio_en} onChange={(e) => setEditTeacherForm((f) => ({ ...f, bio_en: e.target.value }))} className="input-base resize-none" />
+              <label className="block text-sm font-bold mb-1.5">
+                نبذة (إنجليزي)
+              </label>
+              <textarea
+                dir="ltr"
+                rows={3}
+                value={editTeacherForm.bio_en}
+                onChange={(e) =>
+                  setEditTeacherForm((f) => ({ ...f, bio_en: e.target.value }))
+                }
+                className="input-base resize-none"
+              />
             </div>
             {/* Bank details (read-only) */}
             <div className="p-4 rounded-xl border-2 border-border bg-muted/50">
-              <h4 className="font-extrabold text-sm mb-3">البيانات البنكية والرصيد</h4>
+              <h4 className="font-extrabold text-sm mb-3">
+                البيانات البنكية والرصيد
+              </h4>
               {!editTeacherBank ? (
-                <p className="text-xs text-muted-foreground">لم يضف المعلم بياناته البنكية بعد</p>
+                <p className="text-xs text-muted-foreground">
+                  لم يضف المعلم بياناته البنكية بعد
+                </p>
               ) : (
                 <div className="grid gap-2 sm:grid-cols-2 text-sm">
-                  {([
-                    ["صاحب الحساب", editTeacherBank.account_holder],
-                    ["البنك", editTeacherBank.bank_name],
-                    ["الدولة", editTeacherBank.country || "—"],
-                    ["IBAN", editTeacherBank.iban || "—"],
-                    ["رقم الحساب", editTeacherBank.account_number || "—"],
-                    ["SWIFT", editTeacherBank.swift || "—"],
-                    ["الرصيد", `${Number(editTeacherBank.balance || 0).toLocaleString("ar-EG")} EGP`],
-                  ] as [string, string][]).map(([k, v]) => (
-                    <div key={k} className="flex justify-between gap-2 rounded-lg bg-card px-3 py-2 border border-border">
+                  {(
+                    [
+                      ["صاحب الحساب", editTeacherBank.account_holder],
+                      ["البنك", editTeacherBank.bank_name],
+                      ["الدولة", editTeacherBank.country || "—"],
+                      ["IBAN", editTeacherBank.iban || "—"],
+                      ["رقم الحساب", editTeacherBank.account_number || "—"],
+                      ["SWIFT", editTeacherBank.swift || "—"],
+                      [
+                        "الرصيد",
+                        `${Number(editTeacherBank.balance || 0).toLocaleString("ar-EG")} EGP`,
+                      ],
+                    ] as [string, string][]
+                  ).map(([k, v]) => (
+                    <div
+                      key={k}
+                      className="flex justify-between gap-2 rounded-lg bg-card px-3 py-2 border border-border"
+                    >
                       <span className="text-xs text-muted-foreground">{k}</span>
-                      <span className="font-bold text-xs truncate" dir="auto">{v}</span>
+                      <span className="font-bold text-xs truncate" dir="auto">
+                        {v}
+                      </span>
                     </div>
                   ))}
                 </div>
               )}
             </div>
             <label className="flex items-center gap-3 p-3 rounded-xl border-2 border-border cursor-pointer">
-              <input type="checkbox" checked={editTeacherForm.verified} onChange={(e) => setEditTeacherForm((f) => ({ ...f, verified: e.target.checked }))} className="w-4 h-4 accent-primary" />
-              <span className="text-sm font-bold">معلم موثّق (يظهر للطلاب)</span>
+              <input
+                type="checkbox"
+                checked={editTeacherForm.verified}
+                onChange={(e) =>
+                  setEditTeacherForm((f) => ({
+                    ...f,
+                    verified: e.target.checked,
+                  }))
+                }
+                className="w-4 h-4 accent-primary"
+              />
+              <span className="text-sm font-bold">
+                معلم موثّق (يظهر للطلاب)
+              </span>
             </label>
-            <button onClick={handleSaveTeacher} disabled={savingTeacher} className="btn-primary w-full flex items-center justify-center gap-2">
-              {savingTeacher ? <><Loader2 size={16} className="animate-spin" /> جاري الحفظ...</> : "حفظ التعديلات"}
+            <button
+              onClick={handleSaveTeacher}
+              disabled={savingTeacher}
+              className="btn-primary w-full flex items-center justify-center gap-2"
+            >
+              {savingTeacher ? (
+                <>
+                  <Loader2 size={16} className="animate-spin" /> جاري الحفظ...
+                </>
+              ) : (
+                "حفظ التعديلات"
+              )}
             </button>
           </div>
         </ModalWrapper>
@@ -1689,32 +2976,96 @@ const Admin = () => {
         <ModalWrapper onClose={() => setShowAddTeacher(false)}>
           <div className="flex items-center justify-between p-5 border-b">
             <h3 className="font-extrabold text-lg">إضافة معلم جديد</h3>
-            <button onClick={() => setShowAddTeacher(false)} className="text-muted-foreground hover:text-foreground"><X size={20} /></button>
+            <button
+              onClick={() => setShowAddTeacher(false)}
+              className="text-muted-foreground hover:text-foreground"
+            >
+              <X size={20} />
+            </button>
           </div>
           <div className="p-5 space-y-4">
-            <p className="text-muted-foreground text-sm">أدخل بيانات المعلم لإنشاء حساب جديد.</p>
+            <p className="text-muted-foreground text-sm">
+              أدخل بيانات المعلم لإنشاء حساب جديد.
+            </p>
             <div>
-              <label className="block text-sm font-bold mb-1.5">الاسم الكامل *</label>
-              <input value={teacherForm.full_name} onChange={(e) => setTeacherForm((f) => ({ ...f, full_name: e.target.value }))} className="input-base" placeholder="مثال: أحمد محمد" />
+              <label className="block text-sm font-bold mb-1.5">
+                الاسم الكامل *
+              </label>
+              <input
+                value={teacherForm.full_name}
+                onChange={(e) =>
+                  setTeacherForm((f) => ({ ...f, full_name: e.target.value }))
+                }
+                className="input-base"
+                placeholder="مثال: أحمد محمد"
+              />
             </div>
             <div>
-              <label className="block text-sm font-bold mb-1.5">البريد الإلكتروني *</label>
-              <input value={teacherForm.email} onChange={(e) => setTeacherForm((f) => ({ ...f, email: e.target.value }))} className="input-base" placeholder="example@email.com" type="email" />
+              <label className="block text-sm font-bold mb-1.5">
+                البريد الإلكتروني *
+              </label>
+              <input
+                value={teacherForm.email}
+                onChange={(e) =>
+                  setTeacherForm((f) => ({ ...f, email: e.target.value }))
+                }
+                className="input-base"
+                placeholder="example@email.com"
+                type="email"
+              />
             </div>
             <div>
-              <label className="block text-sm font-bold mb-1.5">كلمة المرور *</label>
-              <input value={teacherForm.password} onChange={(e) => setTeacherForm((f) => ({ ...f, password: e.target.value }))} className="input-base" placeholder="كلمة مرور قوية" type="password" />
+              <label className="block text-sm font-bold mb-1.5">
+                كلمة المرور *
+              </label>
+              <input
+                value={teacherForm.password}
+                onChange={(e) =>
+                  setTeacherForm((f) => ({ ...f, password: e.target.value }))
+                }
+                className="input-base"
+                placeholder="كلمة مرور قوية"
+                type="password"
+              />
             </div>
             <div>
               <label className="block text-sm font-bold mb-1.5">الجامعة</label>
-              <input value={teacherForm.university} onChange={(e) => setTeacherForm((f) => ({ ...f, university: e.target.value }))} className="input-base" placeholder="مثال: جامعة الملك سعود" />
+              <input
+                value={teacherForm.university}
+                onChange={(e) =>
+                  setTeacherForm((f) => ({ ...f, university: e.target.value }))
+                }
+                className="input-base"
+                placeholder="مثال: جامعة الملك سعود"
+              />
             </div>
             <div>
-              <label className="block text-sm font-bold mb-1.5">المواد (مفصولة بفاصلة)</label>
-              <input value={teacherForm.subjects} onChange={(e) => setTeacherForm((f) => ({ ...f, subjects: e.target.value }))} className="input-base" placeholder="مثال: رياضيات, فيزياء, كيمياء" />
+              <label className="block text-sm font-bold mb-1.5">
+                المواد (مفصولة بفاصلة)
+              </label>
+              <input
+                value={teacherForm.subjects}
+                onChange={(e) =>
+                  setTeacherForm((f) => ({ ...f, subjects: e.target.value }))
+                }
+                className="input-base"
+                placeholder="مثال: رياضيات, فيزياء, كيمياء"
+              />
             </div>
-            <button onClick={handleAddTeacher} disabled={addingTeacher} className="btn-primary w-full flex items-center justify-center gap-2">
-              {addingTeacher ? <><Loader2 size={16} className="animate-spin" /> جاري الإنشاء...</> : <><UserPlus size={16} /> إنشاء حساب المعلم</>}
+            <button
+              onClick={handleAddTeacher}
+              disabled={addingTeacher}
+              className="btn-primary w-full flex items-center justify-center gap-2"
+            >
+              {addingTeacher ? (
+                <>
+                  <Loader2 size={16} className="animate-spin" /> جاري الإنشاء...
+                </>
+              ) : (
+                <>
+                  <UserPlus size={16} /> إنشاء حساب المعلم
+                </>
+              )}
             </button>
           </div>
         </ModalWrapper>
@@ -1725,29 +3076,63 @@ const Admin = () => {
         <ModalWrapper onClose={() => setShowAddAdmin(false)}>
           <div className="flex items-center justify-between p-5 border-b">
             <h3 className="font-extrabold text-lg">إضافة مشرف / مدير</h3>
-            <button onClick={() => setShowAddAdmin(false)} className="text-muted-foreground hover:text-foreground"><X size={20} /></button>
+            <button
+              onClick={() => setShowAddAdmin(false)}
+              className="text-muted-foreground hover:text-foreground"
+            >
+              <X size={20} />
+            </button>
           </div>
           <div className="p-5 space-y-4">
-            <p className="text-muted-foreground text-sm">أدخل البريد الإلكتروني لمستخدم مسجّل لمنحه صلاحية الإشراف أو الإدارة.</p>
+            <p className="text-muted-foreground text-sm">
+              أدخل البريد الإلكتروني لمستخدم مسجّل لمنحه صلاحية الإشراف أو
+              الإدارة.
+            </p>
             <div>
-              <label className="block text-sm font-bold mb-1.5">البريد الإلكتروني *</label>
-              <input value={addAdminEmail} onChange={(e) => setAddAdminEmail(e.target.value)} className="input-base" placeholder="example@email.com" type="email" />
+              <label className="block text-sm font-bold mb-1.5">
+                البريد الإلكتروني *
+              </label>
+              <input
+                value={addAdminEmail}
+                onChange={(e) => setAddAdminEmail(e.target.value)}
+                className="input-base"
+                placeholder="example@email.com"
+                type="email"
+              />
             </div>
             <div>
-              <label className="block text-sm font-bold mb-1.5">نوع الصلاحية</label>
+              <label className="block text-sm font-bold mb-1.5">
+                نوع الصلاحية
+              </label>
               <div className="flex gap-3">
-                <button onClick={() => setAddAdminRole("moderator")}
-                  className={`flex-1 p-3 rounded-xl border-2 text-sm font-bold transition-all ${addAdminRole === "moderator" ? "border-primary bg-primary/5 text-primary" : "border-border text-muted-foreground hover:border-muted-foreground"}`}>
+                <button
+                  onClick={() => setAddAdminRole("moderator")}
+                  className={`flex-1 p-3 rounded-xl border-2 text-sm font-bold transition-all ${addAdminRole === "moderator" ? "border-primary bg-primary/5 text-primary" : "border-border text-muted-foreground hover:border-muted-foreground"}`}
+                >
                   مشرف
                 </button>
-                <button onClick={() => setAddAdminRole("admin")}
-                  className={`flex-1 p-3 rounded-xl border-2 text-sm font-bold transition-all ${addAdminRole === "admin" ? "border-primary bg-primary/5 text-primary" : "border-border text-muted-foreground hover:border-muted-foreground"}`}>
+                <button
+                  onClick={() => setAddAdminRole("admin")}
+                  className={`flex-1 p-3 rounded-xl border-2 text-sm font-bold transition-all ${addAdminRole === "admin" ? "border-primary bg-primary/5 text-primary" : "border-border text-muted-foreground hover:border-muted-foreground"}`}
+                >
                   مدير
                 </button>
               </div>
             </div>
-            <button onClick={handleAddAdmin} disabled={addingAdmin} className="btn-primary w-full flex items-center justify-center gap-2">
-              {addingAdmin ? <><Loader2 size={16} className="animate-spin" /> جاري الإضافة...</> : <><Shield size={16} /> إضافة الصلاحية</>}
+            <button
+              onClick={handleAddAdmin}
+              disabled={addingAdmin}
+              className="btn-primary w-full flex items-center justify-center gap-2"
+            >
+              {addingAdmin ? (
+                <>
+                  <Loader2 size={16} className="animate-spin" /> جاري الإضافة...
+                </>
+              ) : (
+                <>
+                  <Shield size={16} /> إضافة الصلاحية
+                </>
+              )}
             </button>
           </div>
         </ModalWrapper>

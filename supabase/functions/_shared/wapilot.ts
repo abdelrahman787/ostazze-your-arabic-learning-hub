@@ -3,25 +3,33 @@ export function normalizeChatId(phone: string): string {
   return digits.endsWith("@c.us") ? digits : digits;
 }
 
-export async function sendWapilotText(chatId: string, text: string): Promise<Record<string, unknown>> {
+export async function sendWapilotText(
+  chatId: string,
+  text: string,
+): Promise<Record<string, unknown>> {
   const token = Deno.env.get("WAPILOT_API_TOKEN");
   const instanceId = Deno.env.get("WAPILOT_INSTANCE_ID");
-  const baseUrl = (Deno.env.get("WAPILOT_API_BASE_URL") || "https://api.wapilot.net/api/v2").replace(/\/$/, "");
+  const baseUrl = (
+    Deno.env.get("WAPILOT_API_BASE_URL") || "https://api.wapilot.net/api/v2"
+  ).replace(/\/$/, "");
 
   if (!token || !instanceId) {
     throw new Error("WhatsApp integration is not configured.");
   }
 
-  const response = await fetch(`${baseUrl}/${encodeURIComponent(instanceId)}/send-message`, {
-    method: "POST",
-    headers: {
-      accept: "application/json",
-      "content-type": "application/json",
-      token,
-      "Idempotency-Key": crypto.randomUUID(),
+  const response = await fetch(
+    `${baseUrl}/${encodeURIComponent(instanceId)}/send-message`,
+    {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+        "content-type": "application/json",
+        token,
+        "Idempotency-Key": crypto.randomUUID(),
+      },
+      body: JSON.stringify({ chat_id: normalizeChatId(chatId), text }),
     },
-    body: JSON.stringify({ chat_id: normalizeChatId(chatId), text }),
-  });
+  );
 
   const raw = await response.text();
   let payload: Record<string, unknown>;

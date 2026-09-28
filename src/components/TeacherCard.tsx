@@ -24,7 +24,13 @@ export interface TeacherData {
   verified: boolean;
 }
 
-const TeacherCard = ({ teacher, index = 0 }: { teacher: TeacherData; index?: number }) => {
+const TeacherCard = ({
+  teacher,
+  index = 0,
+}: {
+  teacher: TeacherData;
+  index?: number;
+}) => {
   const { t, lang } = useLanguage();
   const { b } = useBilingual();
 
@@ -32,7 +38,7 @@ const TeacherCard = ({ teacher, index = 0 }: { teacher: TeacherData; index?: num
     lang === "en" ? "en" : "ar",
     teacher.full_name,
     teacher.full_name_en,
-    t("the_teacher")
+    t("the_teacher"),
   );
   const initials = displayName
     .split(/\s+/)
@@ -64,7 +70,10 @@ const TeacherCard = ({ teacher, index = 0 }: { teacher: TeacherData; index?: num
       <div className="px-5 -mt-10 flex items-end gap-3">
         <div className="relative shrink-0">
           <img
-            src={teacher.avatar_url || getTeacherAvatar(teacher.user_id, teacher.full_name)}
+            src={
+              teacher.avatar_url ||
+              getTeacherAvatar(teacher.user_id, teacher.full_name)
+            }
             alt={displayName}
             className="w-20 h-20 rounded-2xl object-cover border-4 border-card shadow-md"
             loading="lazy"
@@ -73,7 +82,6 @@ const TeacherCard = ({ teacher, index = 0 }: { teacher: TeacherData; index?: num
             height={80}
           />
         </div>
-
       </div>
 
       {/* Body */}
@@ -88,8 +96,6 @@ const TeacherCard = ({ teacher, index = 0 }: { teacher: TeacherData; index?: num
               getTeacherMajor(teacher.user_id, lang === "en" ? "en" : "ar")}
           </span>
         </div>
-
-
 
         <div className="mt-auto">
           <Link

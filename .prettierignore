@@ -1,0 +1,3 @@
+# Generated files — produced by scripts, compared byte-for-byte in tests
+*.generated.ts
+src/routeTree.gen.ts

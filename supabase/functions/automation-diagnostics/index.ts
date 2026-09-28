@@ -4,7 +4,8 @@ import { sendWapilotText, normalizeChatId } from "../_shared/wapilot.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers":
+    "authorization, x-client-info, apikey, content-type",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
@@ -15,7 +16,8 @@ const json = (body: unknown, status = 200) =>
   });
 
 serve(async (req) => {
-  if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
+  if (req.method === "OPTIONS")
+    return new Response("ok", { headers: corsHeaders });
 
   try {
     const authHeader = req.headers.get("Authorization");
@@ -25,7 +27,9 @@ serve(async (req) => {
       Deno.env.get("SUPABASE_URL")!,
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
     );
-    const { data: caller, error: callerError } = await admin.auth.getUser(authHeader.slice(7));
+    const { data: caller, error: callerError } = await admin.auth.getUser(
+      authHeader.slice(7),
+    );
     if (callerError || !caller.user) throw new Error("Unauthorized");
     const { data: role } = await admin
       .from("user_roles")
@@ -35,28 +39,40 @@ serve(async (req) => {
       .maybeSingle();
     if (!role) throw new Error("Admins only.");
 
-    const body = req.method === "POST" ? await req.json().catch(() => ({})) : {};
+    const body =
+      req.method === "POST" ? await req.json().catch(() => ({})) : {};
     const action = (body as { action?: string }).action || "diagnose";
 
     const token = Deno.env.get("WAPILOT_API_TOKEN");
     const instanceId = Deno.env.get("WAPILOT_INSTANCE_ID");
-    const baseUrl = (Deno.env.get("WAPILOT_API_BASE_URL") || "https://api.wapilot.net/api/v2").replace(/\/$/, "");
+    const baseUrl = (
+      Deno.env.get("WAPILOT_API_BASE_URL") || "https://api.wapilot.net/api/v2"
+    ).replace(/\/$/, "");
 
     // ---- Safe test message (explicit opt-in only) ----
     if (action === "send_test") {
       const phone = String((body as { phone?: string }).phone || "").trim();
       const confirmed = (body as { confirm?: boolean }).confirm === true;
       if (!confirmed) throw new Error("Explicit confirmation required.");
-      if (normalizeChatId(phone).length < 8) throw new Error("Provide a valid international phone number.");
-      await sendWapilotText(phone, "اختبار من أستاذي: تكامل واتساب يعمل بنجاح ✅");
-      return json({ success: true, sent_to: `***${normalizeChatId(phone).slice(-4)}` });
+      if (normalizeChatId(phone).length < 8)
+        throw new Error("Provide a valid international phone number.");
+      await sendWapilotText(
+        phone,
+        "اختبار من أستاذي: تكامل واتساب يعمل بنجاح ✅",
+      );
+      return json({
+        success: true,
+        sent_to: `***${normalizeChatId(phone).slice(-4)}`,
+      });
     }
 
     // ---- Diagnostics (never sends a message) ----
     const secrets = {
       wapilot_token: Boolean(token),
       wapilot_instance_id: Boolean(instanceId),
-      wapilot_base_url_configured: Boolean(Deno.env.get("WAPILOT_API_BASE_URL")),
+      wapilot_base_url_configured: Boolean(
+        Deno.env.get("WAPILOT_API_BASE_URL"),
+      ),
       wapilot_base_url_effective: baseUrl,
       zoom_account_id: Boolean(Deno.env.get("ZOOM_ACCOUNT_ID")),
       zoom_client_id: Boolean(Deno.env.get("ZOOM_CLIENT_ID")),
@@ -72,14 +88,23 @@ serve(async (req) => {
           headers: { accept: "application/json", token },
         });
         const raw = await res.text();
-        if (!res.ok) throw new Error(`WaPilot /instances failed (${res.status})`);
+        if (!res.ok)
+          throw new Error(`WaPilot /instances failed (${res.status})`);
         const parsed = JSON.parse(raw) as Record<string, unknown>;
         const list: Array<Record<string, unknown>> = Array.isArray(parsed)
           ? parsed
           : (parsed.data as Array<Record<string, unknown>>) ||
-            (parsed.instances as Array<Record<string, unknown>>) || [];
+            (parsed.instances as Array<Record<string, unknown>>) ||
+            [];
         const match = list.find((i) =>
-          [i.instance_uniquename, i.instance_id, i.id, i.uuid, i.instance_name, i.name]
+          [
+            i.instance_uniquename,
+            i.instance_id,
+            i.id,
+            i.uuid,
+            i.instance_name,
+            i.name,
+          ]
             .filter(Boolean)
             .some((v) => String(v) === String(instanceId)),
         );
@@ -92,8 +117,12 @@ serve(async (req) => {
           is_api: match?.is_api ?? null,
           subscription_status: match?.subscription_status ?? null,
           instance_name: match?.instance_name ?? null,
-          plan_name: (match?.subscription as Record<string, unknown> | undefined)?.plan_name ?? null,
-          plan_end_date: (match?.subscription as Record<string, unknown> | undefined)?.end_date ?? null,
+          plan_name:
+            (match?.subscription as Record<string, unknown> | undefined)
+              ?.plan_name ?? null,
+          plan_end_date:
+            (match?.subscription as Record<string, unknown> | undefined)
+              ?.end_date ?? null,
         };
       } catch (error) {
         lastError = error instanceof Error ? error.message : String(error);
@@ -104,8 +133,15 @@ serve(async (req) => {
     }
 
     // ---- Zoom credential check (token only, creates no meeting) ----
-    let zoomAuth: { ok: boolean; error: string | null } = { ok: false, error: "Missing Zoom credentials." };
-    if (secrets.zoom_account_id && secrets.zoom_client_id && secrets.zoom_client_secret) {
+    let zoomAuth: { ok: boolean; error: string | null } = {
+      ok: false,
+      error: "Missing Zoom credentials.",
+    };
+    if (
+      secrets.zoom_account_id &&
+      secrets.zoom_client_id &&
+      secrets.zoom_client_secret
+    ) {
       try {
         const res = await fetch(
           `https://zoom.us/oauth/token?grant_type=account_credentials&account_id=${encodeURIComponent(Deno.env.get("ZOOM_ACCOUNT_ID")!)}`,
@@ -117,10 +153,15 @@ serve(async (req) => {
             },
           },
         );
-        zoomAuth = res.ok ? { ok: true, error: null } : { ok: false, error: `Zoom auth failed (${res.status})` };
+        zoomAuth = res.ok
+          ? { ok: true, error: null }
+          : { ok: false, error: `Zoom auth failed (${res.status})` };
         if (!res.ok) lastError = lastError || zoomAuth.error;
       } catch (error) {
-        zoomAuth = { ok: false, error: error instanceof Error ? error.message : String(error) };
+        zoomAuth = {
+          ok: false,
+          error: error instanceof Error ? error.message : String(error),
+        };
         lastError = lastError || zoomAuth.error;
       }
     }
@@ -128,7 +169,9 @@ serve(async (req) => {
     // ---- Scheduler + pending reminders ----
     let schedulerRows: Record<string, unknown> | null = null;
     try {
-      const { data } = await admin.rpc("get_automation_cron_status").maybeSingle();
+      const { data } = await admin
+        .rpc("get_automation_cron_status")
+        .maybeSingle();
       schedulerRows = (data as Record<string, unknown>) ?? null;
     } catch (_e) {
       schedulerRows = null;

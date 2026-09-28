@@ -24,9 +24,11 @@ const FAQ = () => {
       <PageHelmet
         title={t("faq_title")}
         description={t("faq_subtitle")}
-        keywords={lang === "ar"
-          ? "أسئلة شائعة, ostaze, حجز جلسة, استرداد, دفع, جلسات مباشرة"
-          : "FAQ, ostaze, booking, refund, payment, live sessions"}
+        keywords={
+          lang === "ar"
+            ? "أسئلة شائعة, ostaze, حجز جلسة, استرداد, دفع, جلسات مباشرة"
+            : "FAQ, ostaze, booking, refund, payment, live sessions"
+        }
         jsonLd={[
           faqJsonLd(items),
           breadcrumbJsonLd([
@@ -35,7 +37,11 @@ const FAQ = () => {
           ]),
         ]}
       />
-      <PageHeader title={t("faq_title")} subtitle={t("faq_subtitle")} variant="teachers" />
+      <PageHeader
+        title={t("faq_title")}
+        subtitle={t("faq_subtitle")}
+        variant="teachers"
+      />
 
       <div className="container py-12">
         <div className="max-w-3xl mx-auto">
@@ -43,7 +49,10 @@ const FAQ = () => {
 
           <div className="mt-10 text-center card-base p-6">
             <p className="font-bold mb-2">{t("faq_more")}</p>
-            <Link to="/contact" className="btn-primary inline-flex items-center gap-2">
+            <Link
+              to="/contact"
+              className="btn-primary inline-flex items-center gap-2"
+            >
               <MessageCircle size={16} /> {t("faq_contact_cta")}
             </Link>
           </div>

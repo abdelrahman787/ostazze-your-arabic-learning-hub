@@ -88,8 +88,8 @@ serve(async (req) => {
       .from("user_roles")
       .select("role")
       .eq("user_id", userId);
-    const allowed = (roles ?? []).some((r) =>
-      r.role === "admin" || r.role === "teacher"
+    const allowed = (roles ?? []).some(
+      (r) => r.role === "admin" || r.role === "teacher",
     );
     if (!allowed) {
       return new Response(
@@ -137,17 +137,14 @@ serve(async (req) => {
       },
     };
 
-    const zoomRes = await fetch(
-      "https://api.zoom.us/v2/users/me/meetings",
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(meetingPayload),
+    const zoomRes = await fetch("https://api.zoom.us/v2/users/me/meetings", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
       },
-    );
+      body: JSON.stringify(meetingPayload),
+    });
 
     const zoomText = await zoomRes.text();
     if (!zoomRes.ok) {
@@ -180,12 +177,9 @@ serve(async (req) => {
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     console.error("zoom-create-meeting error:", message);
-    return new Response(
-      JSON.stringify({ success: false, error: message }),
-      {
-        status: 500,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      },
-    );
+    return new Response(JSON.stringify({ success: false, error: message }), {
+      status: 500,
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
   }
 });

@@ -12,7 +12,8 @@ interface PageHelmetProps {
 }
 
 const SITE = "https://ostaze.com";
-const DEFAULT_OG = "https://storage.googleapis.com/gpt-engineer-file-uploads/Z79KI50YEuSGVGIjgK4BMa4CRzy2/social-images/social-1774873100528-edu-ostazze.webp";
+const DEFAULT_OG =
+  "https://storage.googleapis.com/gpt-engineer-file-uploads/Z79KI50YEuSGVGIjgK4BMa4CRzy2/social-images/social-1774873100528-edu-ostazze.webp";
 
 const PageHelmet = ({
   title,
@@ -27,7 +28,8 @@ const PageHelmet = ({
   const { pathname } = useLocation();
   const fullTitle = title.includes("OSTAZE") ? title : `${title} | OSTAZE`;
   // Canonical is always self-referencing, https://ostaze.com, no query, no trailing slash.
-  const normalize = (u: string) => u.replace(/[?#].*$/, "").replace(/(.)\/+$/, "$1");
+  const normalize = (u: string) =>
+    u.replace(/[?#].*$/, "").replace(/(.)\/+$/, "$1");
   const url = normalize(canonical || `${SITE}${pathname}`);
   const ldArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 
@@ -58,7 +60,9 @@ const PageHelmet = ({
           key={i}
           type="application/ld+json"
           // React 19 renders <title>/<meta>/<link> straight into <head> (also during server rendering).
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(ld).replace(/</g, "\\u003c") }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(ld).replace(/</g, "\\u003c"),
+          }}
         />
       ))}
     </>

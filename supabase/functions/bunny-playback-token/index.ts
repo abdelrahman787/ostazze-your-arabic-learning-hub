@@ -17,7 +17,7 @@ const corsHeaders = {
 async function sha256Hex(input: string): Promise<string> {
   const buf = await crypto.subtle.digest(
     "SHA-256",
-    new TextEncoder().encode(input)
+    new TextEncoder().encode(input),
   );
   return Array.from(new Uint8Array(buf))
     .map((b) => b.toString(16).padStart(2, "0"))
@@ -53,7 +53,11 @@ const referrerHostsFromRequest = (req: Request) => {
  * is on Bunny's account API, so it needs the account API key rather than the
  * per-library Stream API key used for video upload calls.
  */
-async function ensureAllowedReferrers(libraryId: string, apiKey: string, req: Request) {
+async function ensureAllowedReferrers(
+  libraryId: string,
+  apiKey: string,
+  req: Request,
+) {
   await Promise.all(
     referrerHostsFromRequest(req).map(async (hostname) => {
       try {
@@ -72,7 +76,12 @@ async function ensureAllowedReferrers(libraryId: string, apiKey: string, req: Re
 
         if (!res.ok && res.status !== 400 && res.status !== 409) {
           const txt = await res.text();
-          console.warn("Bunny allowed referrer update failed:", hostname, res.status, txt);
+          console.warn(
+            "Bunny allowed referrer update failed:",
+            hostname,
+            res.status,
+            txt,
+          );
         }
       } catch (e) {
         console.warn("Bunny allowed referrer update failed:", hostname, e);
@@ -98,11 +107,12 @@ Deno.serve(async (req) => {
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
       Deno.env.get("SUPABASE_ANON_KEY")!,
-      { global: { headers: { Authorization: authHeader } } }
+      { global: { headers: { Authorization: authHeader } } },
     );
 
     const token = authHeader.replace("Bearer ", "");
-    const { data: userData, error: userErr } = await supabase.auth.getUser(token);
+    const { data: userData, error: userErr } =
+      await supabase.auth.getUser(token);
     if (userErr || !userData?.user) {
       return new Response(JSON.stringify({ error: "Unauthorized" }), {
         status: 401,
@@ -142,7 +152,7 @@ Deno.serve(async (req) => {
         {
           status: 404,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
-        }
+        },
       );
     }
 
@@ -182,7 +192,7 @@ Deno.serve(async (req) => {
         {
           status: 500,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
-        }
+        },
       );
     }
 
@@ -190,11 +200,15 @@ Deno.serve(async (req) => {
 
     // Make sure the app domains are whitelisted on the library, otherwise
     // Bunny shows "This content is blocked" inside the iframe.
-    const accountApiKey = Deno.env.get("BUNNY_ACCOUNT_API_KEY") || Deno.env.get("BUNNY_STREAM_API_KEY");
+    const accountApiKey =
+      Deno.env.get("BUNNY_ACCOUNT_API_KEY") ||
+      Deno.env.get("BUNNY_STREAM_API_KEY");
     if (accountApiKey) {
       await ensureAllowedReferrers(libraryId, accountApiKey, req);
     } else {
-      console.warn("BUNNY_ACCOUNT_API_KEY is not configured; allowed referrers were not updated");
+      console.warn(
+        "BUNNY_ACCOUNT_API_KEY is not configured; allowed referrers were not updated",
+      );
     }
 
     // Token valid for 10 minutes only — client will auto-refresh
@@ -223,7 +237,7 @@ Deno.serve(async (req) => {
       {
         status: 200,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
-      }
+      },
     );
   } catch (err) {
     console.error("bunny-playback-token error:", err);
@@ -234,7 +248,7 @@ Deno.serve(async (req) => {
       {
         status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
-      }
+      },
     );
   }
 });

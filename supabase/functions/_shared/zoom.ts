@@ -2,7 +2,8 @@ async function getZoomAccessToken(): Promise<string> {
   const accountId = Deno.env.get("ZOOM_ACCOUNT_ID");
   const clientId = Deno.env.get("ZOOM_CLIENT_ID");
   const clientSecret = Deno.env.get("ZOOM_CLIENT_SECRET");
-  if (!accountId || !clientId || !clientSecret) throw new Error("Missing Zoom credentials in environment.");
+  if (!accountId || !clientId || !clientSecret)
+    throw new Error("Missing Zoom credentials in environment.");
 
   const response = await fetch(
     `https://zoom.us/oauth/token?grant_type=account_credentials&account_id=${encodeURIComponent(accountId)}`,
@@ -15,9 +16,11 @@ async function getZoomAccessToken(): Promise<string> {
     },
   );
   const raw = await response.text();
-  if (!response.ok) throw new Error(`Zoom token request failed (${response.status}): ${raw}`);
+  if (!response.ok)
+    throw new Error(`Zoom token request failed (${response.status}): ${raw}`);
   const payload = JSON.parse(raw) as { access_token?: string };
-  if (!payload.access_token) throw new Error("Zoom did not return an access token.");
+  if (!payload.access_token)
+    throw new Error("Zoom did not return an access token.");
   return payload.access_token;
 }
 
@@ -25,7 +28,13 @@ export async function createZoomMeeting(input: {
   topic: string;
   startTime: string;
   duration?: number;
-}): Promise<{ join_url: string; start_url?: string; password?: string; id?: number; start_time?: string }> {
+}): Promise<{
+  join_url: string;
+  start_url?: string;
+  password?: string;
+  id?: number;
+  start_time?: string;
+}> {
   const accessToken = await getZoomAccessToken();
   const response = await fetch("https://api.zoom.us/v2/users/me/meetings", {
     method: "POST",
@@ -50,8 +59,21 @@ export async function createZoomMeeting(input: {
     }),
   });
   const raw = await response.text();
-  if (!response.ok) throw new Error(`Zoom create meeting failed (${response.status}): ${raw}`);
-  const meeting = JSON.parse(raw) as { join_url?: string; start_url?: string; password?: string; id?: number; start_time?: string };
+  if (!response.ok)
+    throw new Error(`Zoom create meeting failed (${response.status}): ${raw}`);
+  const meeting = JSON.parse(raw) as {
+    join_url?: string;
+    start_url?: string;
+    password?: string;
+    id?: number;
+    start_time?: string;
+  };
   if (!meeting.join_url) throw new Error("Zoom did not return a join URL.");
-  return { join_url: meeting.join_url, start_url: meeting.start_url, password: meeting.password, id: meeting.id, start_time: meeting.start_time };
+  return {
+    join_url: meeting.join_url,
+    start_url: meeting.start_url,
+    password: meeting.password,
+    id: meeting.id,
+    start_time: meeting.start_time,
+  };
 }

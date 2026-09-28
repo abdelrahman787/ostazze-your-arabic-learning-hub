@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { GraduationCap, ChevronDown, Globe, Calendar, BookOpen } from "lucide-react";
+import {
+  GraduationCap,
+  ChevronDown,
+  Globe,
+  Calendar,
+  BookOpen,
+} from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import type { University, College } from "@/data/universities/types";
 import { getCollegeIcon } from "@/lib/collegeIconMap";
@@ -9,7 +15,13 @@ interface Props {
   university: University;
 }
 
-const CollegeAccordion = ({ college, lang }: { college: College; lang: "ar" | "en" }) => {
+const CollegeAccordion = ({
+  college,
+  lang,
+}: {
+  college: College;
+  lang: "ar" | "en";
+}) => {
   const [open, setOpen] = useState(false);
   const name = lang === "ar" ? college.name_ar : college.name_en;
   const totalDepts = college.departments.length;
@@ -32,7 +44,10 @@ const CollegeAccordion = ({ college, lang }: { college: College; lang: "ar" | "e
             </p>
           </div>
         </div>
-        <motion.div animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.2 }}>
+        <motion.div
+          animate={{ rotate: open ? 180 : 0 }}
+          transition={{ duration: 0.2 }}
+        >
           <ChevronDown size={16} className="text-muted-foreground" />
         </motion.div>
       </button>
@@ -48,15 +63,21 @@ const CollegeAccordion = ({ college, lang }: { college: College; lang: "ar" | "e
             <div className="px-3 pb-3 space-y-1.5">
               {college.departments.map((dept) => (
                 <div key={dept.id} className="p-2.5 bg-secondary/60 rounded-lg">
-                  <p className="text-sm font-medium">{lang === "ar" ? dept.name_ar : dept.name_en}</p>
+                  <p className="text-sm font-medium">
+                    {lang === "ar" ? dept.name_ar : dept.name_en}
+                  </p>
                   <div className="flex items-center gap-2 mt-1 flex-wrap">
                     {dept.degrees.map((d) => (
-                      <span key={d} className="text-[0.65rem] bg-primary/10 text-primary px-1.5 py-0.5 rounded font-semibold">
+                      <span
+                        key={d}
+                        className="text-[0.65rem] bg-primary/10 text-primary px-1.5 py-0.5 rounded font-semibold"
+                      >
                         {d}
                       </span>
                     ))}
                     <span className="text-[0.65rem] text-muted-foreground">
-                      • {dept.courses.length} {lang === "ar" ? "مادة" : "courses"}
+                      • {dept.courses.length}{" "}
+                      {lang === "ar" ? "مادة" : "courses"}
                     </span>
                   </div>
                 </div>
@@ -74,10 +95,13 @@ const UniversityDetails = ({ university }: Props) => {
   const name = lang === "ar" ? university.name_ar : university.name_en;
   const country = lang === "ar" ? university.country_ar : university.country_en;
   const totalColleges = university.colleges.length;
-  const totalDepts = university.colleges.reduce((s, c) => s + c.departments.length, 0);
+  const totalDepts = university.colleges.reduce(
+    (s, c) => s + c.departments.length,
+    0,
+  );
   const totalCourses = university.colleges.reduce(
     (s, c) => s + c.departments.reduce((s2, d) => s2 + d.courses.length, 0),
-    0
+    0,
   );
 
   return (
@@ -100,14 +124,20 @@ const UniversityDetails = ({ university }: Props) => {
             <span className="text-xs text-muted-foreground flex items-center gap-1">
               <Calendar size={11} /> {university.founded}
             </span>
-            <span className={`text-[0.65rem] font-bold px-2 py-0.5 rounded-full ${
-              university.type === "public"
-                ? "bg-success/10 text-success"
-                : "bg-accent/10 text-accent-foreground"
-            }`}>
+            <span
+              className={`text-[0.65rem] font-bold px-2 py-0.5 rounded-full ${
+                university.type === "public"
+                  ? "bg-success/10 text-success"
+                  : "bg-accent/10 text-accent-foreground"
+              }`}
+            >
               {university.type === "public"
-                ? lang === "ar" ? "حكومية" : "Public"
-                : lang === "ar" ? "خاصة" : "Private"}
+                ? lang === "ar"
+                  ? "حكومية"
+                  : "Public"
+                : lang === "ar"
+                  ? "خاصة"
+                  : "Private"}
             </span>
           </div>
         </div>
@@ -120,7 +150,10 @@ const UniversityDetails = ({ university }: Props) => {
           { label: lang === "ar" ? "قسم" : "Depts", value: totalDepts },
           { label: lang === "ar" ? "مادة" : "Courses", value: totalCourses },
         ].map((s) => (
-          <div key={s.label} className="text-center p-3 bg-primary/5 dark:bg-primary/10 border border-primary/10 dark:border-primary/20 rounded-xl">
+          <div
+            key={s.label}
+            className="text-center p-3 bg-primary/5 dark:bg-primary/10 border border-primary/10 dark:border-primary/20 rounded-xl"
+          >
             <p className="font-black text-xl text-primary">{s.value}</p>
             <p className="text-xs text-foreground/70 font-medium">{s.label}</p>
           </div>

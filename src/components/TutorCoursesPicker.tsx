@@ -33,34 +33,36 @@ const TutorCoursesPicker = ({ value, onChange, isAr }: Props) => {
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
-    import("@/data/universities/loader").then((m) => m.loadAllUniversities()).then((allUniversities) => {
-      if (cancelled) return;
-      const seen = new Set<string>();
-      const out: CourseOption[] = [];
-      for (const uni of allUniversities) {
-        for (const college of uni.colleges || []) {
-          for (const dept of college.departments || []) {
-            for (const c of dept.courses || []) {
-              const ar = (c.name_ar || c.name_en || "").trim();
-              const en = (c.name_en || c.name_ar || "").trim();
-              if (!ar && !en) continue;
-              const key = `${ar}|${en}`;
-              if (seen.has(key)) continue;
-              seen.add(key);
-              out.push({
-                key,
-                ar,
-                en,
-                dept: dept.name_ar || dept.name_en,
-                uni: uni.name_ar || uni.name_en,
-              });
+    import("@/data/universities/loader")
+      .then((m) => m.loadAllUniversities())
+      .then((allUniversities) => {
+        if (cancelled) return;
+        const seen = new Set<string>();
+        const out: CourseOption[] = [];
+        for (const uni of allUniversities) {
+          for (const college of uni.colleges || []) {
+            for (const dept of college.departments || []) {
+              for (const c of dept.courses || []) {
+                const ar = (c.name_ar || c.name_en || "").trim();
+                const en = (c.name_en || c.name_ar || "").trim();
+                if (!ar && !en) continue;
+                const key = `${ar}|${en}`;
+                if (seen.has(key)) continue;
+                seen.add(key);
+                out.push({
+                  key,
+                  ar,
+                  en,
+                  dept: dept.name_ar || dept.name_en,
+                  uni: uni.name_ar || uni.name_en,
+                });
+              }
             }
           }
         }
-      }
-      setCatalog(out);
-      setLoading(false);
-    });
+        setCatalog(out);
+        setLoading(false);
+      });
     return () => {
       cancelled = true;
     };
@@ -127,7 +129,10 @@ const TutorCoursesPicker = ({ value, onChange, isAr }: Props) => {
       </div>
 
       <div className="relative">
-        <Search size={16} className="absolute top-1/2 -translate-y-1/2 start-3 text-muted-foreground" />
+        <Search
+          size={16}
+          className="absolute top-1/2 -translate-y-1/2 start-3 text-muted-foreground"
+        />
         <input
           type="text"
           value={query}
@@ -138,7 +143,10 @@ const TutorCoursesPicker = ({ value, onChange, isAr }: Props) => {
           }
         />
         {loading && (
-          <Loader2 size={16} className="animate-spin absolute top-1/2 -translate-y-1/2 end-3 text-muted-foreground" />
+          <Loader2
+            size={16}
+            className="animate-spin absolute top-1/2 -translate-y-1/2 end-3 text-muted-foreground"
+          />
         )}
       </div>
 
@@ -174,7 +182,9 @@ const TutorCoursesPicker = ({ value, onChange, isAr }: Props) => {
                   className="w-full text-start p-2.5 hover:bg-muted/60 transition flex items-center justify-between gap-3"
                 >
                   <span className="min-w-0">
-                    <span className="block text-sm font-bold truncate">{isAr ? c.ar : c.en}</span>
+                    <span className="block text-sm font-bold truncate">
+                      {isAr ? c.ar : c.en}
+                    </span>
                     <span className="block text-[0.7rem] text-muted-foreground truncate">
                       {c.dept} · {c.uni}
                     </span>
@@ -200,7 +210,11 @@ const TutorCoursesPicker = ({ value, onChange, isAr }: Props) => {
             }
           }}
           className="input-base"
-          placeholder={isAr ? "أو اكتب اسم المادة يدوياً" : "Or type a course name manually"}
+          placeholder={
+            isAr
+              ? "أو اكتب اسم المادة يدوياً"
+              : "Or type a course name manually"
+          }
         />
         <button
           type="button"

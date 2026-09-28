@@ -86,10 +86,22 @@ const tools = [
       parameters: {
         type: "object",
         properties: {
-          subject: { type: "string", description: "Subject name (Arabic or English)" },
-          university: { type: "string", description: "University name (Arabic or English)" },
-          max_price: { type: "number", description: "Maximum price per session" },
-          verified_only: { type: "boolean", description: "Only show verified teachers" },
+          subject: {
+            type: "string",
+            description: "Subject name (Arabic or English)",
+          },
+          university: {
+            type: "string",
+            description: "University name (Arabic or English)",
+          },
+          max_price: {
+            type: "number",
+            description: "Maximum price per session",
+          },
+          verified_only: {
+            type: "boolean",
+            description: "Only show verified teachers",
+          },
         },
       },
     },
@@ -129,8 +141,14 @@ const tools = [
         properties: {
           teacher_id: { type: "string" },
           subject: { type: "string" },
-          preferred_date: { type: "string", description: "Date in YYYY-MM-DD format" },
-          preferred_time: { type: "string", description: "Time in HH:MM format" },
+          preferred_date: {
+            type: "string",
+            description: "Date in YYYY-MM-DD format",
+          },
+          preferred_time: {
+            type: "string",
+            description: "Time in HH:MM format",
+          },
           notes: { type: "string" },
         },
         required: ["teacher_id", "subject", "preferred_date", "preferred_time"],
@@ -165,14 +183,37 @@ const tools = [
 
 // ─── Subject synonyms for fuzzy matching ──────────────────────────
 const SUBJECT_SYNONYMS: Record<string, string[]> = {
-  "رياضيات": ["رياضيات", "التفاضل والتكامل", "الإحصاء", "الجبر", "حساب", "تفاضل", "تكامل", "إحصاء", "جبر"],
-  "math": ["math", "mathematics", "calculus", "statistics", "algebra", "linear algebra"],
-  "فيزياء": ["فيزياء", "فيزياء عامة", "ميكانيكا", "كهرومغناطيسية"],
-  "physics": ["physics", "general physics", "mechanics"],
-  "كيمياء": ["كيمياء", "كيمياء عامة", "كيمياء عضوية"],
-  "chemistry": ["chemistry", "general chemistry", "organic chemistry"],
-  "برمجة": ["برمجة", "أساسيات البرمجة", "هياكل البيانات", "خوارزميات"],
-  "programming": ["programming", "data structures", "algorithms", "coding", "computer science"],
+  رياضيات: [
+    "رياضيات",
+    "التفاضل والتكامل",
+    "الإحصاء",
+    "الجبر",
+    "حساب",
+    "تفاضل",
+    "تكامل",
+    "إحصاء",
+    "جبر",
+  ],
+  math: [
+    "math",
+    "mathematics",
+    "calculus",
+    "statistics",
+    "algebra",
+    "linear algebra",
+  ],
+  فيزياء: ["فيزياء", "فيزياء عامة", "ميكانيكا", "كهرومغناطيسية"],
+  physics: ["physics", "general physics", "mechanics"],
+  كيمياء: ["كيمياء", "كيمياء عامة", "كيمياء عضوية"],
+  chemistry: ["chemistry", "general chemistry", "organic chemistry"],
+  برمجة: ["برمجة", "أساسيات البرمجة", "هياكل البيانات", "خوارزميات"],
+  programming: [
+    "programming",
+    "data structures",
+    "algorithms",
+    "coding",
+    "computer science",
+  ],
 };
 
 function expandSubjectSearch(subject: string): string[] {
@@ -180,7 +221,7 @@ function expandSubjectSearch(subject: string): string[] {
   const expanded = new Set<string>([s]);
   for (const [key, synonyms] of Object.entries(SUBJECT_SYNONYMS)) {
     if (s.includes(key.toLowerCase()) || key.toLowerCase().includes(s)) {
-      synonyms.forEach(syn => expanded.add(syn.toLowerCase()));
+      synonyms.forEach((syn) => expanded.add(syn.toLowerCase()));
     }
   }
   return Array.from(expanded);
@@ -192,14 +233,16 @@ async function executeToolCall(
   name: string,
   args: Record<string, unknown>,
   supabaseAdmin: ReturnType<typeof createClient>,
-  studentId: string | null
+  studentId: string | null,
 ): Promise<string> {
   try {
     switch (name) {
       case "search_teachers": {
         let query = supabaseAdmin
           .from("teacher_profiles")
-          .select("user_id, price, verified, subjects, subjects_en, university, university_en");
+          .select(
+            "user_id, price, verified, subjects, subjects_en, university, university_en",
+          );
 
         if (args.verified_only) query = query.eq("verified", true);
         if (args.max_price) query = query.lte("price", args.max_price);
@@ -213,8 +256,20 @@ async function executeToolCall(
           const searchTerms = expandSubjectSearch(args.subject as string);
           results = results.filter(
             (t) =>
-              t.subjects?.some((sub: string) => searchTerms.some(term => sub.toLowerCase().includes(term) || term.includes(sub.toLowerCase()))) ||
-              t.subjects_en?.some((sub: string) => searchTerms.some(term => sub.toLowerCase().includes(term) || term.includes(sub.toLowerCase())))
+              t.subjects?.some((sub: string) =>
+                searchTerms.some(
+                  (term) =>
+                    sub.toLowerCase().includes(term) ||
+                    term.includes(sub.toLowerCase()),
+                ),
+              ) ||
+              t.subjects_en?.some((sub: string) =>
+                searchTerms.some(
+                  (term) =>
+                    sub.toLowerCase().includes(term) ||
+                    term.includes(sub.toLowerCase()),
+                ),
+              ),
           );
         }
         if (args.university) {
@@ -222,7 +277,7 @@ async function executeToolCall(
           results = results.filter(
             (t) =>
               t.university?.toLowerCase().includes(u) ||
-              t.university_en?.toLowerCase().includes(u)
+              t.university_en?.toLowerCase().includes(u),
           );
         }
 
@@ -245,12 +300,18 @@ async function executeToolCall(
             const reviews = reviewsRes.data || [];
             const avgRating =
               reviews.length > 0
-                ? (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1)
+                ? (
+                    reviews.reduce((sum, r) => sum + r.rating, 0) /
+                    reviews.length
+                  ).toFixed(1)
                 : null;
 
             return {
               teacher_id: t.user_id,
-              name: profileRes.data?.full_name || profileRes.data?.full_name_en || "معلم",
+              name:
+                profileRes.data?.full_name ||
+                profileRes.data?.full_name_en ||
+                "معلم",
               name_en: profileRes.data?.full_name_en,
               subjects: t.subjects,
               subjects_en: t.subjects_en,
@@ -261,13 +322,13 @@ async function executeToolCall(
               rating: avgRating,
               review_count: reviews.length,
             };
-          })
+          }),
         );
 
         // Sort: verified first, then by rating
         enriched.sort((a, b) => {
           if (a.verified !== b.verified) return a.verified ? -1 : 1;
-          return (parseFloat(b.rating || "0") - parseFloat(a.rating || "0"));
+          return parseFloat(b.rating || "0") - parseFloat(a.rating || "0");
         });
 
         return JSON.stringify({ teachers: enriched, total: enriched.length });
@@ -276,15 +337,32 @@ async function executeToolCall(
       case "get_teacher_details": {
         const tid = args.teacher_id as string;
         const [tpRes, profRes, revRes] = await Promise.all([
-          supabaseAdmin.from("teacher_profiles").select("*").eq("user_id", tid).maybeSingle(),
-          supabaseAdmin.from("profiles").select("full_name, full_name_en, bio, bio_en").eq("user_id", tid).maybeSingle(),
-          supabaseAdmin.from("teacher_reviews").select("rating, comment, created_at").eq("teacher_id", tid).eq("status", "approved").order("created_at", { ascending: false }).limit(5),
+          supabaseAdmin
+            .from("teacher_profiles")
+            .select("*")
+            .eq("user_id", tid)
+            .maybeSingle(),
+          supabaseAdmin
+            .from("profiles")
+            .select("full_name, full_name_en, bio, bio_en")
+            .eq("user_id", tid)
+            .maybeSingle(),
+          supabaseAdmin
+            .from("teacher_reviews")
+            .select("rating, comment, created_at")
+            .eq("teacher_id", tid)
+            .eq("status", "approved")
+            .order("created_at", { ascending: false })
+            .limit(5),
         ]);
 
         const reviews = revRes.data || [];
-        const avgRating = reviews.length > 0
-          ? (reviews.reduce((s, r) => s + r.rating, 0) / reviews.length).toFixed(1)
-          : null;
+        const avgRating =
+          reviews.length > 0
+            ? (
+                reviews.reduce((s, r) => s + r.rating, 0) / reviews.length
+              ).toFixed(1)
+            : null;
 
         return JSON.stringify({
           teacher_id: tid,
@@ -310,8 +388,24 @@ async function executeToolCall(
 
         if (error) return JSON.stringify({ error: error.message });
 
-        const dayNames = ["الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
-        const dayNamesEn = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        const dayNames = [
+          "الأحد",
+          "الاثنين",
+          "الثلاثاء",
+          "الأربعاء",
+          "الخميس",
+          "الجمعة",
+          "السبت",
+        ];
+        const dayNamesEn = [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ];
 
         const slots = (data || []).map((s) => ({
           day: dayNames[s.day_of_week],
@@ -324,28 +418,40 @@ async function executeToolCall(
       }
 
       case "create_booking": {
-        if (!studentId) return JSON.stringify({ error: "الطالب غير مسجل الدخول" });
-
-        const { data, error } = await supabaseAdmin.from("session_requests").insert({
-          student_id: studentId,
-          teacher_id: args.teacher_id as string,
-          subject: args.subject as string,
-          preferred_date: args.preferred_date as string,
-          preferred_time: args.preferred_time as string,
-          notes: (args.notes as string) || null,
-          status: "pending",
-        }).select("id").single();
-
-        if (error) return JSON.stringify({ error: error.message });
-        return JSON.stringify({ success: true, booking_id: data.id, message: "تم إرسال طلب الحجز بنجاح" });
-      }
-
-      case "get_student_bookings": {
-        if (!studentId) return JSON.stringify({ error: "الطالب غير مسجل الدخول" });
+        if (!studentId)
+          return JSON.stringify({ error: "الطالب غير مسجل الدخول" });
 
         const { data, error } = await supabaseAdmin
           .from("session_requests")
-          .select("id, subject, preferred_date, preferred_time, status, teacher_id, notes")
+          .insert({
+            student_id: studentId,
+            teacher_id: args.teacher_id as string,
+            subject: args.subject as string,
+            preferred_date: args.preferred_date as string,
+            preferred_time: args.preferred_time as string,
+            notes: (args.notes as string) || null,
+            status: "pending",
+          })
+          .select("id")
+          .single();
+
+        if (error) return JSON.stringify({ error: error.message });
+        return JSON.stringify({
+          success: true,
+          booking_id: data.id,
+          message: "تم إرسال طلب الحجز بنجاح",
+        });
+      }
+
+      case "get_student_bookings": {
+        if (!studentId)
+          return JSON.stringify({ error: "الطالب غير مسجل الدخول" });
+
+        const { data, error } = await supabaseAdmin
+          .from("session_requests")
+          .select(
+            "id, subject, preferred_date, preferred_time, status, teacher_id, notes",
+          )
           .eq("student_id", studentId)
           .order("created_at", { ascending: false })
           .limit(10);
@@ -361,7 +467,7 @@ async function executeToolCall(
               .eq("user_id", b.teacher_id)
               .maybeSingle();
             return { ...b, teacher_name: prof?.full_name || "معلم" };
-          })
+          }),
         );
 
         return JSON.stringify({ bookings: enriched });
@@ -388,11 +494,15 @@ async function executeToolCall(
 
         const unis = new Map<string, string>();
         (data || []).forEach((t) => {
-          if (t.university) unis.set(t.university, t.university_en || t.university);
+          if (t.university)
+            unis.set(t.university, t.university_en || t.university);
         });
 
         return JSON.stringify({
-          universities: Array.from(unis.entries()).map(([ar, en]) => ({ name_ar: ar, name_en: en })),
+          universities: Array.from(unis.entries()).map(([ar, en]) => ({
+            name_ar: ar,
+            name_en: en,
+          })),
         });
       }
 
@@ -400,12 +510,15 @@ async function executeToolCall(
         return JSON.stringify({ error: `Unknown function: ${name}` });
     }
   } catch (e) {
-    return JSON.stringify({ error: e instanceof Error ? e.message : "Unknown error" });
+    return JSON.stringify({
+      error: e instanceof Error ? e.message : "Unknown error",
+    });
   }
 }
 
 serve(async (req) => {
-  if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
+  if (req.method === "OPTIONS")
+    return new Response(null, { headers: corsHeaders });
 
   try {
     const body = await req.json();
@@ -422,7 +535,8 @@ serve(async (req) => {
     // ─── Auth: derive student_id from JWT, ignore client-supplied identity ───
     let student_id: string | null = null;
     let student_name: string | null = null;
-    const authHeader = req.headers.get("Authorization") || req.headers.get("authorization");
+    const authHeader =
+      req.headers.get("Authorization") || req.headers.get("authorization");
     if (authHeader && authHeader.startsWith("Bearer ")) {
       const token = authHeader.slice(7);
       try {
@@ -460,19 +574,22 @@ serve(async (req) => {
     ];
 
     // Call AI with tools
-    let response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${LOVABLE_API_KEY}`,
-        "Content-Type": "application/json",
+    let response = await fetch(
+      "https://ai.gateway.lovable.dev/v1/chat/completions",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${LOVABLE_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          model: "google/gemini-2.5-flash",
+          messages: allMessages,
+          tools,
+          tool_choice: "auto",
+        }),
       },
-      body: JSON.stringify({
-        model: "google/gemini-2.5-flash",
-        messages: allMessages,
-        tools,
-        tool_choice: "auto",
-      }),
-    });
+    );
 
     if (!response.ok) {
       const status = response.status;
@@ -509,7 +626,12 @@ serve(async (req) => {
       for (const tc of toolCalls) {
         const fnName = tc.function.name;
         const fnArgs = JSON.parse(tc.function.arguments || "{}");
-        const fnResult = await executeToolCall(fnName, fnArgs, supabaseAdmin, student_id);
+        const fnResult = await executeToolCall(
+          fnName,
+          fnArgs,
+          supabaseAdmin,
+          student_id,
+        );
 
         allMessages.push({
           role: "tool",
@@ -519,19 +641,22 @@ serve(async (req) => {
       }
 
       // Call AI again with tool results
-      response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${LOVABLE_API_KEY}`,
-          "Content-Type": "application/json",
+      response = await fetch(
+        "https://ai.gateway.lovable.dev/v1/chat/completions",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${LOVABLE_API_KEY}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            model: "google/gemini-2.5-flash",
+            messages: allMessages,
+            tools,
+            tool_choice: "auto",
+          }),
         },
-        body: JSON.stringify({
-          model: "google/gemini-2.5-flash",
-          messages: allMessages,
-          tools,
-          tool_choice: "auto",
-        }),
-      });
+      );
 
       if (!response.ok) {
         const txt = await response.text();
@@ -543,7 +668,8 @@ serve(async (req) => {
       choice = result.choices?.[0];
     }
 
-    const assistantContent = choice?.message?.content || "عذراً، حصلت مشكلة. حاول تاني.";
+    const assistantContent =
+      choice?.message?.content || "عذراً، حصلت مشكلة. حاول تاني.";
 
     // Save messages to DB if conversation_id provided
     if (conversation_id && student_id) {
@@ -560,8 +686,13 @@ serve(async (req) => {
   } catch (e) {
     console.error("ostazze-chat error:", e);
     return new Response(
-      JSON.stringify({ error: e instanceof Error ? e.message : "Unknown error" }),
-      { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      JSON.stringify({
+        error: e instanceof Error ? e.message : "Unknown error",
+      }),
+      {
+        status: 500,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      },
     );
   }
 });

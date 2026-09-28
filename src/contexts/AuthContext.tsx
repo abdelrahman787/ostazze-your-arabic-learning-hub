@@ -1,5 +1,13 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
+// Sign-in library loads after first paint so it stays out of every page's first download.
+const getSb = () =>
+  import("@/integrations/supabase/client").then((m) => m.supabase);
 import type { User as SupabaseUser } from "@supabase/supabase-js";
 
 interface AppUser {
@@ -22,7 +30,7 @@ interface AuthContextType {
     password: string,
     fullName: string,
     accountType: string,
-    timezone?: string
+    timezone?: string,
   ) => Promise<{ error?: string }>;
   logout: () => Promise<void>;
   updateProfile: (data: {
@@ -31,7 +39,10 @@ interface AuthContextType {
     phone?: string;
     price?: number;
   }) => Promise<{ error?: string }>;
-  changePassword: (currentPassword: string, newPassword: string) => Promise<{ error?: string }>;
+  changePassword: (
+    currentPassword: string,
+    newPassword: string,
+  ) => Promise<{ error?: string }>;
   resendVerificationEmail: () => Promise<{ error?: string }>;
 }
 
@@ -51,6 +62,7 @@ export const useAuth = () => useContext(AuthContext);
 
 // Parallelizes role + profile fetch: 2 concurrent queries instead of 2-3 sequential ones
 async function buildAppUser(supaUser: SupabaseUser): Promise<AppUser> {
+  const supabase = await getSb();
   const [roleResult, profileResult] = await Promise.all([
     supabase
       .from("user_roles")
@@ -77,9 +89,7 @@ async function buildAppUser(supaUser: SupabaseUser): Promise<AppUser> {
   return {
     id: supaUser.id,
     name:
-      profileResult.data?.full_name ||
-      supaUser.user_metadata?.full_name ||
-      "",
+      profileResult.data?.full_name || supaUser.user_metadata?.full_name || "",
     email: supaUser.email || "",
     role,
     avatar: profileResult.data?.avatar_url || undefined,
@@ -94,30 +104,43 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     setLoading(true);
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (session?.user) {
-        const su = session.user;
-        setUser({
-          id: su.id,
-          name: su.user_metadata?.full_name || "",
-          email: su.email || "",
-          role: "student",
-          emailVerified: !!su.email_confirmed_at,
-        });
-        buildAppUser(su).then((appUser) => setUser(appUser));
-      } else {
-        setUser(null);
-      }
-      setLoading(false);
+    let cancelled = false;
+    let unsubscribe: (() => void) | undefined;
+    void getSb().then((supabase) => {
+      if (cancelled) return;
+      const {
+        data: { subscription },
+      } = supabase.auth.onAuthStateChange((_event, session) => {
+        if (session?.user) {
+          const su = session.user;
+          setUser({
+            id: su.id,
+            name: su.user_metadata?.full_name || "",
+            email: su.email || "",
+            role: "student",
+            emailVerified: !!su.email_confirmed_at,
+          });
+          buildAppUser(su).then((appUser) => setUser(appUser));
+        } else {
+          setUser(null);
+        }
+        setLoading(false);
+      });
+      unsubscribe = () => subscription.unsubscribe();
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      cancelled = true;
+      unsubscribe?.();
+    };
   }, []);
 
   const login = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    const supabase = await getSb();
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
     if (error) return { error: error.message };
     return {};
   };
@@ -127,8 +150,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     password: string,
     fullName: string,
     accountType: string,
-    timezone?: string
+    timezone?: string,
   ) => {
+    const supabase = await getSb();
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
@@ -148,13 +172,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           account_type: accountType,
           ...(timezone ? { timezone } : {}),
         },
-        { onConflict: "user_id" }
+        { onConflict: "user_id" },
       );
     }
     return {};
   };
 
   const logout = async () => {
+    const supabase = await getSb();
     await supabase.auth.signOut();
     setUser(null);
   };
@@ -165,10 +190,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     phone?: string;
     price?: number;
   }) => {
+    const supabase = await getSb();
     if (!user) return { error: "Not logged in" };
     try {
       // Build the profiles update payload (only include defined fields)
-      const profileData: { full_name?: string; bio?: string; phone?: string } = {};
+      const profileData: { full_name?: string; bio?: string; phone?: string } =
+        {};
       if (data.full_name !== undefined) profileData.full_name = data.full_name;
       if (data.bio !== undefined) profileData.bio = data.bio;
       if (data.phone !== undefined) profileData.phone = data.phone;
@@ -205,20 +232,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
       // Reflect name change locally without waiting for a re-fetch
       if (data.full_name !== undefined) {
-        setUser((prev) =>
-          prev ? { ...prev, name: data.full_name! } : null
-        );
+        setUser((prev) => (prev ? { ...prev, name: data.full_name! } : null));
       }
       return {};
-    } catch (e: any) {
+    } catch (caught) {
+      const e = caught as Error;
       return { error: e.message };
     }
   };
 
   const changePassword = async (
     currentPassword: string,
-    newPassword: string
+    newPassword: string,
   ) => {
+    const supabase = await getSb();
     if (!user) return { error: "Not logged in" };
     // Re-authenticate to verify current password before updating
     const { error: signInError } = await supabase.auth.signInWithPassword({
@@ -232,6 +259,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const resendVerificationEmail = async () => {
+    const supabase = await getSb();
     if (!user) return { error: "Not logged in" };
     const { error } = await supabase.auth.resend({
       type: "signup",

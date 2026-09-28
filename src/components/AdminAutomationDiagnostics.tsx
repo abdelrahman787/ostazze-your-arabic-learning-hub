@@ -18,7 +18,15 @@ const Dot = ({ ok }: { ok: boolean }) => (
   />
 );
 
-const Row = ({ label, ok, value }: { label: string; ok: boolean; value?: string }) => (
+const Row = ({
+  label,
+  ok,
+  value,
+}: {
+  label: string;
+  ok: boolean;
+  value?: string;
+}) => (
   <div className="flex items-center justify-between gap-3 py-2.5 border-b border-border/60 last:border-0">
     <span className="text-sm text-muted-foreground">{label}</span>
     <span className="flex items-center gap-2 text-sm font-semibold">
@@ -41,9 +49,12 @@ export default function AdminAutomationDiagnostics() {
   const run = async () => {
     setLoading(true);
     setError(null);
-    const { data: res, error: err } = await supabase.functions.invoke("automation-diagnostics", {
-      body: { action: "diagnose" },
-    });
+    const { data: res, error: err } = await supabase.functions.invoke(
+      "automation-diagnostics",
+      {
+        body: { action: "diagnose" },
+      },
+    );
     setLoading(false);
     if (err || !res?.success) {
       setError(res?.error || err?.message || "تعذر تشغيل الفحص");
@@ -55,12 +66,19 @@ export default function AdminAutomationDiagnostics() {
   const sendTest = async () => {
     if (!confirmTest || !phone.trim()) return;
     setSending(true);
-    const { data: res, error: err } = await supabase.functions.invoke("automation-diagnostics", {
-      body: { action: "send_test", phone: phone.trim(), confirm: true },
-    });
+    const { data: res, error: err } = await supabase.functions.invoke(
+      "automation-diagnostics",
+      {
+        body: { action: "send_test", phone: phone.trim(), confirm: true },
+      },
+    );
     setSending(false);
     if (err || !res?.success) {
-      toast({ title: "فشل الإرسال", description: res?.error || err?.message, variant: "destructive" });
+      toast({
+        title: "فشل الإرسال",
+        description: res?.error || err?.message,
+        variant: "destructive",
+      });
       return;
     }
     toast({ title: "تم إرسال رسالة الاختبار ✅" });
@@ -83,7 +101,9 @@ export default function AdminAutomationDiagnostics() {
       </div>
 
       {error && (
-        <div className="p-4 rounded-xl bg-destructive/10 text-destructive text-sm">{error}</div>
+        <div className="p-4 rounded-xl bg-destructive/10 text-destructive text-sm">
+          {error}
+        </div>
       )}
 
       {data && (
@@ -91,7 +111,10 @@ export default function AdminAutomationDiagnostics() {
           <div className="rounded-2xl border border-border p-4">
             <h3 className="font-bold mb-2 text-sm">المفاتيح السرية</h3>
             <Row label="WAPILOT_API_TOKEN" ok={Boolean(s?.wapilot_token)} />
-            <Row label="WAPILOT_INSTANCE_ID" ok={Boolean(s?.wapilot_instance_id)} />
+            <Row
+              label="WAPILOT_INSTANCE_ID"
+              ok={Boolean(s?.wapilot_instance_id)}
+            />
             <Row
               label="WAPILOT_API_BASE_URL"
               ok
@@ -99,14 +122,21 @@ export default function AdminAutomationDiagnostics() {
             />
             <Row label="ZOOM_ACCOUNT_ID" ok={Boolean(s?.zoom_account_id)} />
             <Row label="ZOOM_CLIENT_ID" ok={Boolean(s?.zoom_client_id)} />
-            <Row label="ZOOM_CLIENT_SECRET" ok={Boolean(s?.zoom_client_secret)} />
+            <Row
+              label="ZOOM_CLIENT_SECRET"
+              ok={Boolean(s?.zoom_client_secret)}
+            />
           </div>
 
           <div className="rounded-2xl border border-border p-4">
             <h3 className="font-bold mb-2 text-sm">اتصال WaPilot</h3>
             <Row label="الخدمة متاحة" ok={Boolean(w?.reachable)} />
             <Row label="الجهاز موجود" ok={Boolean(w?.instance_found)} />
-            <Row label="الحالة" ok={w?.status === "WORKING"} value={String(w?.status ?? "-")} />
+            <Row
+              label="الحالة"
+              ok={w?.status === "WORKING"}
+              value={String(w?.status ?? "-")}
+            />
             <Row
               label="حالة الجلسة"
               ok={w?.session_status === "WORKING"}
@@ -122,13 +152,21 @@ export default function AdminAutomationDiagnostics() {
 
           <div className="rounded-2xl border border-border p-4">
             <h3 className="font-bold mb-2 text-sm">Zoom والمجدول</h3>
-            <Row label="بيانات Zoom صالحة" ok={data.zoom.ok} value={data.zoom.error || undefined} />
+            <Row
+              label="بيانات Zoom صالحة"
+              ok={data.zoom.ok}
+              value={data.zoom.error || undefined}
+            />
             <Row
               label="مهمة التذكيرات مفعلة"
               ok={Boolean(data.scheduler?.active)}
               value={data.scheduler?.schedule || "-"}
             />
-            <Row label="جلسات مؤكدة قادمة" ok value={String(data.upcoming_confirmed_sessions)} />
+            <Row
+              label="جلسات مؤكدة قادمة"
+              ok
+              value={String(data.upcoming_confirmed_sessions)}
+            />
           </div>
 
           {data.last_error && (

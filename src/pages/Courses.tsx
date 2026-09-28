@@ -1,7 +1,15 @@
 import { useEffect, useState, useMemo } from "react";
 import { Link } from "@/lib/router-compat";
 import { motion } from "framer-motion";
-import { Search, Clock, PlayCircle, Radio, Layers, BookMarked, Filter } from "lucide-react";
+import {
+  Search,
+  Clock,
+  PlayCircle,
+  Radio,
+  Layers,
+  BookMarked,
+  Filter,
+} from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useBilingual } from "@/hooks/useBilingual";
 import { supabase } from "@/integrations/supabase/client";
@@ -28,9 +36,24 @@ interface CourseCard {
 }
 
 const typeConfig = {
-  recorded: { icon: PlayCircle, ar: "مسجّل", en: "Recorded", color: "bg-blue-500/10 text-blue-600 dark:text-blue-400" },
-  live: { icon: Radio, ar: "لايف", en: "Live", color: "bg-rose-500/10 text-rose-600 dark:text-rose-400" },
-  hybrid: { icon: Layers, ar: "مختلط", en: "Hybrid", color: "bg-violet-500/10 text-violet-600 dark:text-violet-400" },
+  recorded: {
+    icon: PlayCircle,
+    ar: "مسجّل",
+    en: "Recorded",
+    color: "bg-blue-500/10 text-blue-600 dark:text-blue-400",
+  },
+  live: {
+    icon: Radio,
+    ar: "لايف",
+    en: "Live",
+    color: "bg-rose-500/10 text-rose-600 dark:text-rose-400",
+  },
+  hybrid: {
+    icon: Layers,
+    ar: "مختلط",
+    en: "Hybrid",
+    color: "bg-violet-500/10 text-violet-600 dark:text-violet-400",
+  },
 } as const;
 
 const CourseCardSkeleton = () => (
@@ -45,32 +68,39 @@ const CourseCardSkeleton = () => (
   </div>
 );
 
-const Courses = () => {
+const Courses = ({
+  initialCourses,
+}: { initialCourses?: CourseCard[] } = {}) => {
   const { t, lang } = useLanguage();
   const { b } = useBilingual();
-  const [courses, setCourses] = useState<CourseCard[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [courses, setCourses] = useState<CourseCard[]>(initialCourses ?? []);
+  const [loading, setLoading] = useState(!initialCourses);
   const [search, setSearch] = useState("");
-  const [filterType, setFilterType] = useState<"all" | "recorded" | "live" | "hybrid">("all");
+  const [filterType, setFilterType] = useState<
+    "all" | "recorded" | "live" | "hybrid"
+  >("all");
   const [filterCategory, setFilterCategory] = useState("");
 
   useEffect(() => {
+    if (initialCourses) return;
     const fetch = async () => {
       setLoading(true);
       const { data } = await supabase
         .from("courses")
-        .select("id, title, title_en, short_description, short_description_en, price, course_type, cover_image_url, total_hours, category, category_en, instructor_name, instructor_name_en, level, enrollment_count")
+        .select(
+          "id, title, title_en, short_description, short_description_en, price, course_type, cover_image_url, total_hours, category, category_en, instructor_name, instructor_name_en, level, enrollment_count",
+        )
         .eq("is_published", true)
         .order("enrollment_count", { ascending: false });
       setCourses((data as CourseCard[]) || []);
       setLoading(false);
     };
     fetch();
-  }, []);
+  }, [initialCourses]);
 
   const categories = useMemo(() => {
     const set = new Set<string>();
-    courses.forEach(c => {
+    courses.forEach((c) => {
       const cat = b(c.category, c.category_en);
       if (cat) set.add(cat);
     });
@@ -79,22 +109,36 @@ const Courses = () => {
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
-    return courses.filter(c => {
+    return courses.filter((c) => {
       if (filterType !== "all" && c.course_type !== filterType) return false;
-      if (filterCategory && b(c.category, c.category_en) !== filterCategory) return false;
+      if (filterCategory && b(c.category, c.category_en) !== filterCategory)
+        return false;
       if (q) {
         const title = b(c.title, c.title_en).toLowerCase();
-        const desc = (b(c.short_description, c.short_description_en) || "").toLowerCase();
-        const inst = (b(c.instructor_name, c.instructor_name_en) || "").toLowerCase();
-        if (!title.includes(q) && !desc.includes(q) && !inst.includes(q)) return false;
+        const desc = (
+          b(c.short_description, c.short_description_en) || ""
+        ).toLowerCase();
+        const inst = (
+          b(c.instructor_name, c.instructor_name_en) || ""
+        ).toLowerCase();
+        if (!title.includes(q) && !desc.includes(q) && !inst.includes(q))
+          return false;
       }
       return true;
     });
   }, [courses, search, filterType, filterCategory, b]);
 
-  const tabs: Array<{ key: typeof filterType; label: string; icon?: typeof PlayCircle }> = [
+  const tabs: Array<{
+    key: typeof filterType;
+    label: string;
+    icon?: typeof PlayCircle;
+  }> = [
     { key: "all", label: lang === "ar" ? "الكل" : "All", icon: BookMarked },
-    { key: "recorded", label: lang === "ar" ? "مسجّلة" : "Recorded", icon: PlayCircle },
+    {
+      key: "recorded",
+      label: lang === "ar" ? "مسجّلة" : "Recorded",
+      icon: PlayCircle,
+    },
     { key: "live", label: lang === "ar" ? "لايف" : "Live", icon: Radio },
     { key: "hybrid", label: lang === "ar" ? "مختلط" : "Hybrid", icon: Layers },
   ];
@@ -102,17 +146,25 @@ const Courses = () => {
   return (
     <div>
       <PageHelmet
-        title={lang === "ar"
-          ? "الكورسات المسجلة - أستاذي OSTAZE"
-          : "Recorded Courses - OSTAZE"}
-        description={lang === "ar"
-          ? "تصفح الكورسات المسجلة على منصة أستاذي — دروس جامعية مسجلة بجودة عالية في الرياضيات، الفيزياء، البرمجة، اللغة الإنجليزية وغيرها."
-          : "Browse OSTAZE recorded courses — high-quality university lessons in math, physics, programming, English and more."}
+        title={
+          lang === "ar"
+            ? "الكورسات المسجلة - أستاذي OSTAZE"
+            : "Recorded Courses - OSTAZE"
+        }
+        description={
+          lang === "ar"
+            ? "تصفح الكورسات المسجلة على منصة أستاذي — دروس جامعية مسجلة بجودة عالية في الرياضيات، الفيزياء، البرمجة، اللغة الإنجليزية وغيرها."
+            : "Browse OSTAZE recorded courses — high-quality university lessons in math, physics, programming, English and more."
+        }
         canonical="https://ostaze.com/courses"
       />
       <PageHeader
         title={lang === "ar" ? "الكورسات" : "Courses"}
-        subtitle={lang === "ar" ? "كورسات احترافية مسجلة ولايف بإشراف نخبة من المتخصصين" : "Professional recorded and live courses by top instructors"}
+        subtitle={
+          lang === "ar"
+            ? "كورسات احترافية مسجلة ولايف بإشراف نخبة من المتخصصين"
+            : "Professional recorded and live courses by top instructors"
+        }
         variant="subjects"
       />
 
@@ -121,11 +173,18 @@ const Courses = () => {
         <div className="card-base p-5 mb-6">
           <div className="flex flex-col md:flex-row gap-3 md:items-center">
             <div className="flex-1 relative">
-              <Search size={18} className="absolute top-1/2 -translate-y-1/2 start-4 text-muted-foreground" />
+              <Search
+                size={18}
+                className="absolute top-1/2 -translate-y-1/2 start-4 text-muted-foreground"
+              />
               <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder={lang === "ar" ? "ابحث عن كورس، تصنيف، أو مدرّس..." : "Search by course, category, or instructor..."}
+                placeholder={
+                  lang === "ar"
+                    ? "ابحث عن كورس، تصنيف، أو مدرّس..."
+                    : "Search by course, category, or instructor..."
+                }
                 className="input-base !ps-11"
               />
             </div>
@@ -135,8 +194,14 @@ const Courses = () => {
                 onChange={(e) => setFilterCategory(e.target.value)}
                 className="input-base !w-auto"
               >
-                <option value="">{lang === "ar" ? "كل التصنيفات" : "All categories"}</option>
-                {categories.map((c) => <option key={c} value={c}>{c}</option>)}
+                <option value="">
+                  {lang === "ar" ? "كل التصنيفات" : "All categories"}
+                </option>
+                {categories.map((c) => (
+                  <option key={c} value={c}>
+                    {c}
+                  </option>
+                ))}
               </select>
             )}
           </div>
@@ -165,10 +230,16 @@ const Courses = () => {
         {/* Grid */}
         {loading ? (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {[...Array(6)].map((_, i) => <CourseCardSkeleton key={i} />)}
+            {[...Array(6)].map((_, i) => (
+              <CourseCardSkeleton key={i} />
+            ))}
           </div>
         ) : filtered.length === 0 ? (
-          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="text-center py-20">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center py-20"
+          >
             <div className="w-20 h-20 rounded-2xl bg-muted flex items-center justify-center mx-auto mb-5">
               <BookMarked size={36} className="text-muted-foreground/50" />
             </div>
@@ -176,7 +247,9 @@ const Courses = () => {
               {lang === "ar" ? "لا توجد كورسات حالياً" : "No courses available"}
             </h3>
             <p className="text-muted-foreground max-w-md mx-auto">
-              {lang === "ar" ? "جرّب تغيير معايير البحث أو ارجع لاحقاً" : "Try changing your search filters or come back later"}
+              {lang === "ar"
+                ? "جرّب تغيير معايير البحث أو ارجع لاحقاً"
+                : "Try changing your search filters or come back later"}
             </p>
           </motion.div>
         ) : (
@@ -201,7 +274,10 @@ const Courses = () => {
                     transition={{ duration: 0.35, delay: i * 0.04 }}
                     className="card-base overflow-hidden flex flex-col group hover:shadow-[0_12px_30px_-12px_hsl(14_91%_50%/0.35)] transition-all"
                   >
-                    <Link to={`/courses/${c.id}`} className="block relative aspect-video overflow-hidden bg-gradient-to-br from-primary/20 to-primary/5">
+                    <Link
+                      to={`/courses/${c.id}`}
+                      className="block relative aspect-video overflow-hidden bg-gradient-to-br from-primary/20 to-primary/5"
+                    >
                       {c.cover_image_url ? (
                         <img
                           src={c.cover_image_url}
@@ -214,14 +290,18 @@ const Courses = () => {
                           <BookMarked size={48} />
                         </div>
                       )}
-                      <div className={`absolute top-3 start-3 px-2.5 py-1 rounded-full text-[0.7rem] font-bold flex items-center gap-1.5 ${cfg.color}`}>
+                      <div
+                        className={`absolute top-3 start-3 px-2.5 py-1 rounded-full text-[0.7rem] font-bold flex items-center gap-1.5 ${cfg.color}`}
+                      >
                         <TypeIcon size={12} /> {lang === "ar" ? cfg.ar : cfg.en}
                       </div>
                     </Link>
 
                     <div className="p-5 flex flex-col flex-1">
                       {cat && (
-                        <span className="text-[0.7rem] font-bold text-primary uppercase tracking-wide mb-1.5">{cat}</span>
+                        <span className="text-[0.7rem] font-bold text-primary uppercase tracking-wide mb-1.5">
+                          {cat}
+                        </span>
                       )}
                       <Link to={`/courses/${c.id}`} className="block">
                         <h3 className="font-bold text-base leading-snug mb-2 line-clamp-2 group-hover:text-primary transition-colors">
@@ -229,31 +309,51 @@ const Courses = () => {
                         </h3>
                       </Link>
                       {desc && (
-                        <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2 mb-3">{desc}</p>
+                        <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2 mb-3">
+                          {desc}
+                        </p>
                       )}
                       {inst && (
                         <p className="text-xs text-foreground/60 mb-3">
-                          {lang === "ar" ? "بإشراف " : "By "}<span className="font-semibold text-foreground/80">{inst}</span>
+                          {lang === "ar" ? "بإشراف " : "By "}
+                          <span className="font-semibold text-foreground/80">
+                            {inst}
+                          </span>
                         </p>
                       )}
                       <div className="flex items-center gap-3 text-xs text-muted-foreground mb-4">
                         {c.total_hours > 0 && (
-                          <span className="flex items-center gap-1"><Clock size={13} /> {c.total_hours} {lang === "ar" ? "س" : "h"}</span>
+                          <span className="flex items-center gap-1">
+                            <Clock size={13} /> {c.total_hours}{" "}
+                            {lang === "ar" ? "س" : "h"}
+                          </span>
                         )}
                         {c.enrollment_count > 0 && (
-                          <span>{c.enrollment_count} {lang === "ar" ? "مشترك" : "enrolled"}</span>
+                          <span>
+                            {c.enrollment_count}{" "}
+                            {lang === "ar" ? "مشترك" : "enrolled"}
+                          </span>
                         )}
                       </div>
                       <div className="mt-auto flex items-center justify-between gap-3">
                         <div>
                           <div className="text-2xl font-black text-primary">
-                            {c.price === 0 ? (lang === "ar" ? "مجاني" : "Free") : c.price}
+                            {c.price === 0
+                              ? lang === "ar"
+                                ? "مجاني"
+                                : "Free"
+                              : c.price}
                           </div>
                           {c.price > 0 && (
-                            <div className="text-[0.65rem] text-muted-foreground -mt-1">{lang === "ar" ? "ر.س" : "SAR"}</div>
+                            <div className="text-[0.65rem] text-muted-foreground -mt-1">
+                              {lang === "ar" ? "ر.س" : "SAR"}
+                            </div>
                           )}
                         </div>
-                        <Link to={`/courses/${c.id}`} className="btn-primary !py-2.5 text-sm">
+                        <Link
+                          to={`/courses/${c.id}`}
+                          className="btn-primary !py-2.5 text-sm"
+                        >
                           {lang === "ar" ? "عرض التفاصيل" : "View Details"}
                         </Link>
                       </div>

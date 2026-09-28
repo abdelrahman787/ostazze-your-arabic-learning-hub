@@ -6,10 +6,9 @@ import { useEffect, useRef, useState } from "react";
  * viewport, and never flips back. Falls back to `true` immediately if
  * IntersectionObserver is unavailable.
  */
-export function useInViewOnce<T extends Element>(rootMargin = "600px 0px"): [
-  React.MutableRefObject<T | null>,
-  boolean,
-] {
+export function useInViewOnce<T extends Element>(
+  rootMargin = "600px 0px",
+): [React.MutableRefObject<T | null>, boolean] {
   const ref = useRef<T | null>(null);
   const [inView, setInView] = useState(false);
 

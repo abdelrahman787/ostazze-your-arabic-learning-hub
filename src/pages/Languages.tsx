@@ -70,7 +70,8 @@ const LANGUAGES: LangItem[] = [
     ar: "الإيطالية",
     en: "Italian",
     descAr: "محادثة وقواعد وتحضير امتحان CELI مع معلمين متخصصين.",
-    descEn: "Conversation, grammar and CELI exam preparation with specialised tutors.",
+    descEn:
+      "Conversation, grammar and CELI exam preparation with specialised tutors.",
     levels: ["A1", "A2", "B1"],
   },
 ];
@@ -87,13 +88,17 @@ const Languages = () => {
         : "One-to-one live sessions over Zoom with a specialised tutor, scheduled around your availability.",
     },
     {
-      q: ar ? "هل أحتاج مستوى سابق للبدء؟" : "Do I need prior knowledge to start?",
+      q: ar
+        ? "هل أحتاج مستوى سابق للبدء؟"
+        : "Do I need prior knowledge to start?",
       a: ar
         ? "لا، نبدأ معك من مستوى A1 ونحدد مستواك في حصة تقييم قصيرة."
         : "No. We start from A1 and assess your level in a short placement session.",
     },
     {
-      q: ar ? "هل توجد شهادة أو تحضير امتحانات؟" : "Is exam preparation available?",
+      q: ar
+        ? "هل توجد شهادة أو تحضير امتحانات؟"
+        : "Is exam preparation available?",
       a: ar
         ? "نعم، نوفّر تحضير IELTS و TOEFL و Goethe و DELF حسب اللغة."
         : "Yes — IELTS, TOEFL, Goethe and DELF preparation depending on the language.",
@@ -103,7 +108,9 @@ const Languages = () => {
   return (
     <div>
       <PageHelmet
-        title={ar ? "دورات اللغات - أستاذي OSTAZE" : "Language Courses - OSTAZE"}
+        title={
+          ar ? "دورات اللغات - أستاذي OSTAZE" : "Language Courses - OSTAZE"
+        }
         description={
           ar
             ? "تعلّم الإنجليزية والألمانية والإسبانية والفرنسية والتركية مع معلمين متخصصين في حصص مباشرة أونلاين على منصة أستاذي."
@@ -121,7 +128,9 @@ const Languages = () => {
           ]),
           collectionPageJsonLd({
             name: ar ? "دورات اللغات" : "Language Courses",
-            description: ar ? "دورات لغات مباشرة أونلاين" : "Live online language courses",
+            description: ar
+              ? "دورات لغات مباشرة أونلاين"
+              : "Live online language courses",
             path: "/languages",
             lang: ar ? "ar" : "en",
           }),
@@ -143,10 +152,16 @@ const Languages = () => {
         <div className="flex items-center justify-center gap-2.5 flex-wrap text-xs mb-10">
           {[
             { icon: Sparkles, label: ar ? "٦ لغات" : "6 languages" },
-            { icon: Users, label: ar ? "معلمون متخصصون" : "Specialised tutors" },
+            {
+              icon: Users,
+              label: ar ? "معلمون متخصصون" : "Specialised tutors",
+            },
             { icon: Clock, label: ar ? "مواعيد مرنة" : "Flexible timing" },
           ].map((s, i) => (
-            <span key={i} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-muted/60 text-muted-foreground">
+            <span
+              key={i}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-muted/60 text-muted-foreground"
+            >
               <s.icon size={13} className="text-primary" />
               <b className="text-foreground font-extrabold">{s.label}</b>
             </span>
@@ -165,12 +180,19 @@ const Languages = () => {
                 className="card-base p-6 flex flex-col gap-4 hover:border-primary/40 hover:shadow-lg transition-all"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-3xl shrink-0" aria-hidden="true">
+                  <div
+                    className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-3xl shrink-0"
+                    aria-hidden="true"
+                  >
                     {l.flag}
                   </div>
                   <div className="min-w-0">
-                    <h2 className="font-extrabold text-lg leading-snug">{name}</h2>
-                    <p className="text-xs text-muted-foreground">{ar ? l.en : l.ar}</p>
+                    <h2 className="font-extrabold text-lg leading-snug">
+                      {name}
+                    </h2>
+                    <p className="text-xs text-muted-foreground">
+                      {ar ? l.en : l.ar}
+                    </p>
                   </div>
                 </div>
 
@@ -180,7 +202,10 @@ const Languages = () => {
 
                 <div className="flex flex-wrap gap-1.5">
                   {l.levels.map((lv) => (
-                    <span key={lv} className="px-2.5 py-1 rounded-full bg-muted/60 text-[11px] font-bold text-muted-foreground">
+                    <span
+                      key={lv}
+                      className="px-2.5 py-1 rounded-full bg-muted/60 text-[11px] font-bold text-muted-foreground"
+                    >
                       {lv}
                     </span>
                   ))}
@@ -206,18 +231,29 @@ const Languages = () => {
 
         <section className="mt-14 max-w-3xl mx-auto space-y-6">
           <div className="flex flex-wrap justify-center gap-2 text-xs">
-            <Link to="/teachers" className="px-3 py-1 rounded-full bg-primary/10 text-primary font-bold hover:bg-primary/20 transition-colors">
+            <Link
+              to="/teachers"
+              className="px-3 py-1 rounded-full bg-primary/10 text-primary font-bold hover:bg-primary/20 transition-colors"
+            >
               {ar ? "المعلمون" : "Tutors"}
             </Link>
-            <Link to="/subjects" className="px-3 py-1 rounded-full bg-foreground/5 hover:bg-primary/10 hover:text-primary font-bold transition-colors">
+            <Link
+              to="/subjects"
+              className="px-3 py-1 rounded-full bg-foreground/5 hover:bg-primary/10 hover:text-primary font-bold transition-colors"
+            >
               {ar ? "كل المواد" : "All subjects"}
             </Link>
-            <Link to="/universities" className="px-3 py-1 rounded-full bg-foreground/5 hover:bg-primary/10 hover:text-primary font-bold transition-colors">
+            <Link
+              to="/universities"
+              className="px-3 py-1 rounded-full bg-foreground/5 hover:bg-primary/10 hover:text-primary font-bold transition-colors"
+            >
               {ar ? "الجامعات" : "Universities"}
             </Link>
           </div>
           <div>
-            <h3 className="text-lg font-extrabold mb-3 text-center">{ar ? "الأسئلة الشائعة" : "FAQ"}</h3>
+            <h3 className="text-lg font-extrabold mb-3 text-center">
+              {ar ? "الأسئلة الشائعة" : "FAQ"}
+            </h3>
             <FaqAccordion items={faq} defaultOpen={0} />
           </div>
         </section>

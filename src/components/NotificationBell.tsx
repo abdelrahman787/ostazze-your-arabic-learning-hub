@@ -2,7 +2,19 @@ import { useState, useEffect, useCallback } from "react";
 import { Link, useNavigate } from "@/lib/router-compat";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
-import { Bell, BookOpen, MessageSquare, Check, X, Loader2, CalendarCheck, CheckCircle, ShoppingBag, AlertTriangle, DollarSign } from "lucide-react";
+import {
+  Bell,
+  BookOpen,
+  MessageSquare,
+  Check,
+  X,
+  Loader2,
+  CalendarCheck,
+  CheckCircle,
+  ShoppingBag,
+  AlertTriangle,
+  DollarSign,
+} from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface NotificationItem {
@@ -45,32 +57,53 @@ const NotificationBell = () => {
   useEffect(() => {
     if (!user) return;
     const channel = supabase
-      .channel(`notifications-${user.id}-${Math.random().toString(36).slice(2)}`)
+      .channel(
+        `notifications-${user.id}-${Math.random().toString(36).slice(2)}`,
+      )
       .on(
         "postgres_changes",
-        { event: "INSERT", schema: "public", table: "notifications", filter: `user_id=eq.${user.id}` },
+        {
+          event: "INSERT",
+          schema: "public",
+          table: "notifications",
+          filter: `user_id=eq.${user.id}`,
+        },
         (payload) => {
-          setNotifications((prev) => [payload.new as NotificationItem, ...prev]);
-        }
+          setNotifications((prev) => [
+            payload.new as NotificationItem,
+            ...prev,
+          ]);
+        },
       )
       .subscribe();
-    return () => { supabase.removeChannel(channel); };
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [user]);
 
   const markAsRead = async (id: string) => {
     await supabase.from("notifications").update({ is_read: true }).eq("id", id);
-    setNotifications((prev) => prev.map((n) => n.id === id ? { ...n, is_read: true } : n));
+    setNotifications((prev) =>
+      prev.map((n) => (n.id === id ? { ...n, is_read: true } : n)),
+    );
   };
 
   const markAllRead = async () => {
     if (!user) return;
-    await supabase.from("notifications").update({ is_read: true }).eq("user_id", user.id).eq("is_read", false);
+    await supabase
+      .from("notifications")
+      .update({ is_read: true })
+      .eq("user_id", user.id)
+      .eq("is_read", false);
     setNotifications((prev) => prev.map((n) => ({ ...n, is_read: true })));
   };
 
   const switchTab = (tab: string) => {
     // Dispatch immediately and after a short delay (in case the dashboard mounts after navigation)
-    const fire = () => window.dispatchEvent(new CustomEvent("switch-dashboard-tab", { detail: tab }));
+    const fire = () =>
+      window.dispatchEvent(
+        new CustomEvent("switch-dashboard-tab", { detail: tab }),
+      );
     fire();
     setTimeout(fire, 150);
     setTimeout(fire, 400);
@@ -83,12 +116,20 @@ const NotificationBell = () => {
     const role = user?.role;
 
     // Navigate based on notification type
-    if ((n.type === "new_lecture" || n.type === "new_message") && n.lecture_id) {
+    if (
+      (n.type === "new_lecture" || n.type === "new_message") &&
+      n.lecture_id
+    ) {
       navigate(`/lectures/${n.lecture_id}`);
       return;
     }
 
-    if (n.type === "booking_confirmed" || n.type === "booking_rejected" || n.type === "booking_cancelled" || n.type === "new_booking") {
+    if (
+      n.type === "booking_confirmed" ||
+      n.type === "booking_rejected" ||
+      n.type === "booking_cancelled" ||
+      n.type === "new_booking"
+    ) {
       // Route to the appropriate dashboard based on role; SmartDashboard handles /dashboard for both
       navigate("/dashboard");
       switchTab("mylessons");
@@ -113,33 +154,57 @@ const NotificationBell = () => {
 
   const getNotificationIcon = (type: string) => {
     switch (type) {
-      case "new_lecture": return <BookOpen size={14} className="text-primary" />;
-      case "new_message": return <MessageSquare size={14} className="text-success" />;
-      case "booking_confirmed": return <CheckCircle size={14} className="text-success" />;
-      case "booking_rejected": return <X size={14} className="text-destructive" />;
-      case "new_booking": return <CalendarCheck size={14} className="text-primary" />;
-      case "admin_new_request": return <ShoppingBag size={14} className="text-primary" />;
-      case "admin_cancellation": return <AlertTriangle size={14} className="text-destructive" />;
-      case "admin_new_payment": return <DollarSign size={14} className="text-success" />;
-      default: return <Bell size={14} className="text-muted-foreground" />;
+      case "new_lecture":
+        return <BookOpen size={14} className="text-primary" />;
+      case "new_message":
+        return <MessageSquare size={14} className="text-success" />;
+      case "booking_confirmed":
+        return <CheckCircle size={14} className="text-success" />;
+      case "booking_rejected":
+        return <X size={14} className="text-destructive" />;
+      case "new_booking":
+        return <CalendarCheck size={14} className="text-primary" />;
+      case "admin_new_request":
+        return <ShoppingBag size={14} className="text-primary" />;
+      case "admin_cancellation":
+        return <AlertTriangle size={14} className="text-destructive" />;
+      case "admin_new_payment":
+        return <DollarSign size={14} className="text-success" />;
+      default:
+        return <Bell size={14} className="text-muted-foreground" />;
     }
   };
 
   const getNotificationColor = (type: string) => {
     switch (type) {
-      case "new_lecture": return "bg-primary/10";
-      case "new_message": return "bg-success/10";
-      case "booking_confirmed": return "bg-success/10";
-      case "booking_rejected": return "bg-destructive/10";
-      case "new_booking": return "bg-primary/10";
-      case "admin_new_request": return "bg-primary/10";
-      case "admin_cancellation": return "bg-destructive/10";
-      case "admin_new_payment": return "bg-success/10";
-      default: return "bg-muted";
+      case "new_lecture":
+        return "bg-primary/10";
+      case "new_message":
+        return "bg-success/10";
+      case "booking_confirmed":
+        return "bg-success/10";
+      case "booking_rejected":
+        return "bg-destructive/10";
+      case "new_booking":
+        return "bg-primary/10";
+      case "admin_new_request":
+        return "bg-primary/10";
+      case "admin_cancellation":
+        return "bg-destructive/10";
+      case "admin_new_payment":
+        return "bg-success/10";
+      default:
+        return "bg-muted";
     }
   };
 
-  const arPlural = (n: number, one: string, two: string, few: string, many: string) => {
+  const arPlural = (
+    n: number,
+    one: string,
+    two: string,
+    few: string,
+    many: string,
+  ) => {
     if (n === 1) return one;
     if (n === 2) return two;
     if (n >= 3 && n <= 10) return `${n} ${few}`;
@@ -151,15 +216,19 @@ const NotificationBell = () => {
     if (diff < 0) return "الآن";
     const mins = Math.floor(diff / 60000);
     if (mins < 1) return "الآن";
-    if (mins < 60) return `منذ ${arPlural(mins, "دقيقة", "دقيقتين", "دقائق", "دقيقة")}`;
+    if (mins < 60)
+      return `منذ ${arPlural(mins, "دقيقة", "دقيقتين", "دقائق", "دقيقة")}`;
     const hours = Math.floor(mins / 60);
-    if (hours < 24) return `منذ ${arPlural(hours, "ساعة", "ساعتين", "ساعات", "ساعة")}`;
+    if (hours < 24)
+      return `منذ ${arPlural(hours, "ساعة", "ساعتين", "ساعات", "ساعة")}`;
     const days = Math.floor(hours / 24);
     if (days < 7) return `منذ ${arPlural(days, "يوم", "يومين", "أيام", "يوم")}`;
     const weeks = Math.floor(days / 7);
-    if (weeks < 5) return `منذ ${arPlural(weeks, "أسبوع", "أسبوعين", "أسابيع", "أسبوع")}`;
+    if (weeks < 5)
+      return `منذ ${arPlural(weeks, "أسبوع", "أسبوعين", "أسابيع", "أسبوع")}`;
     const months = Math.floor(days / 30);
-    if (months < 12) return `منذ ${arPlural(months, "شهر", "شهرين", "أشهر", "شهر")}`;
+    if (months < 12)
+      return `منذ ${arPlural(months, "شهر", "شهرين", "أشهر", "شهر")}`;
     const years = Math.floor(days / 365);
     return `منذ ${arPlural(years, "سنة", "سنتين", "سنوات", "سنة")}`;
   };
@@ -187,7 +256,10 @@ const NotificationBell = () => {
       <AnimatePresence>
         {open && (
           <>
-            <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
+            <div
+              className="fixed inset-0 z-40"
+              onClick={() => setOpen(false)}
+            />
             <motion.div
               initial={{ opacity: 0, y: 8, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -199,11 +271,18 @@ const NotificationBell = () => {
                 <h3 className="font-extrabold text-sm">الإشعارات</h3>
                 <div className="flex items-center gap-2">
                   {unreadCount > 0 && (
-                    <button onClick={markAllRead} className="text-xs text-primary font-bold hover:underline">
+                    <button
+                      onClick={markAllRead}
+                      className="text-xs text-primary font-bold hover:underline"
+                    >
                       قراءة الكل
                     </button>
                   )}
-                  <button onClick={() => setOpen(false)} aria-label="Close" className="text-muted-foreground hover:text-foreground">
+                  <button
+                    onClick={() => setOpen(false)}
+                    aria-label="Close"
+                    className="text-muted-foreground hover:text-foreground"
+                  >
                     <X size={16} />
                   </button>
                 </div>
@@ -212,11 +291,18 @@ const NotificationBell = () => {
               {/* List */}
               <div className="overflow-y-auto max-h-[55vh]">
                 {loading ? (
-                  <div className="flex justify-center py-8"><Loader2 className="animate-spin text-primary" size={20} /></div>
+                  <div className="flex justify-center py-8">
+                    <Loader2 className="animate-spin text-primary" size={20} />
+                  </div>
                 ) : notifications.length === 0 ? (
                   <div className="text-center py-8">
-                    <Bell size={32} className="mx-auto text-muted-foreground/30 mb-2" />
-                    <p className="text-muted-foreground text-sm">لا توجد إشعارات</p>
+                    <Bell
+                      size={32}
+                      className="mx-auto text-muted-foreground/30 mb-2"
+                    />
+                    <p className="text-muted-foreground text-sm">
+                      لا توجد إشعارات
+                    </p>
                   </div>
                 ) : (
                   notifications.map((n) => (
@@ -225,13 +311,23 @@ const NotificationBell = () => {
                       onClick={() => handleNotificationClick(n)}
                       className={`w-full text-right flex gap-3 p-3 border-b last:border-0 transition-colors hover:bg-secondary/50 ${!n.is_read ? "bg-primary/5" : ""}`}
                     >
-                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${getNotificationColor(n.type)}`}>
+                      <div
+                        className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${getNotificationColor(n.type)}`}
+                      >
                         {getNotificationIcon(n.type)}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="font-bold text-xs leading-relaxed">{n.title}</p>
-                        {n.body && <p className="text-muted-foreground text-[0.7rem] truncate">{n.body}</p>}
-                        <p className="text-[0.6rem] text-muted-foreground mt-1">{timeAgo(n.created_at)}</p>
+                        <p className="font-bold text-xs leading-relaxed">
+                          {n.title}
+                        </p>
+                        {n.body && (
+                          <p className="text-muted-foreground text-[0.7rem] truncate">
+                            {n.body}
+                          </p>
+                        )}
+                        <p className="text-[0.6rem] text-muted-foreground mt-1">
+                          {timeAgo(n.created_at)}
+                        </p>
                       </div>
                       {!n.is_read && (
                         <div className="shrink-0 self-start mt-1">

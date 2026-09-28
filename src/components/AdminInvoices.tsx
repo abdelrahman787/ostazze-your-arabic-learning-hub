@@ -1,7 +1,16 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Loader2, CreditCard, Search, Download, FileText, TrendingUp, DollarSign, RefreshCw } from "lucide-react";
+import {
+  Loader2,
+  CreditCard,
+  Search,
+  Download,
+  FileText,
+  TrendingUp,
+  DollarSign,
+  RefreshCw,
+} from "lucide-react";
 import { motion } from "framer-motion";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
@@ -69,18 +78,26 @@ const AdminInvoices = () => {
         const studentIds = [...new Set(enr.map((e) => e.student_id))];
         const courseIds = [...new Set(enr.map((e) => e.course_id))];
         const [{ data: profiles }, { data: courses }] = await Promise.all([
-          supabase.from("profiles").select("user_id, full_name").in("user_id", studentIds),
-          supabase.from("courses").select("id, title, price").in("id", courseIds),
+          supabase
+            .from("profiles")
+            .select("user_id, full_name")
+            .in("user_id", studentIds),
+          supabase
+            .from("courses")
+            .select("id, title, price")
+            .in("id", courseIds),
         ]);
-        const pMap = new Map(profiles?.map((p) => [p.user_id, p.full_name]) || []);
+        const pMap = new Map(
+          profiles?.map((p) => [p.user_id, p.full_name]) || [],
+        );
         const cMap = new Map(courses?.map((c) => [c.id, c]) || []);
         setEnrollments(
-          enr.map((e: any) => ({
+          enr.map((e) => ({
             ...e,
             student_name: pMap.get(e.student_id) || "—",
             course_title: cMap.get(e.course_id)?.title || "—",
             amount_paid: e.amount_paid ?? cMap.get(e.course_id)?.price ?? 0,
-          }))
+          })),
         );
       } else {
         setEnrollments([]);
@@ -93,28 +110,55 @@ const AdminInvoices = () => {
         .order("created_at", { ascending: false });
 
       if (sr && sr.length > 0) {
-        const allIds = [...new Set(sr.flatMap((r: any) => [r.student_id, r.teacher_id].filter(Boolean)))];
-        const teacherIds = [...new Set(sr.map((r: any) => r.teacher_id).filter(Boolean))];
+        const allIds = [
+          ...new Set(
+            sr.flatMap((r) =>
+              [r.student_id, r.teacher_id].filter((x): x is string =>
+                Boolean(x),
+              ),
+            ),
+          ),
+        ];
+        const teacherIds = [
+          ...new Set(
+            sr.map((r) => r.teacher_id).filter((x): x is string => Boolean(x)),
+          ),
+        ];
         const [{ data: profiles }, { data: tps }] = await Promise.all([
-          supabase.from("profiles").select("user_id, full_name").in("user_id", allIds),
+          supabase
+            .from("profiles")
+            .select("user_id, full_name")
+            .in("user_id", allIds),
           teacherIds.length > 0
-            ? supabase.from("teacher_profiles").select("user_id, price").in("user_id", teacherIds)
-            : Promise.resolve({ data: [] as any[] }),
+            ? supabase
+                .from("teacher_profiles")
+                .select("user_id, price")
+                .in("user_id", teacherIds)
+            : Promise.resolve({
+                data: [] as { user_id: string; price: number | null }[],
+              }),
         ]);
-        const pMap = new Map(profiles?.map((p) => [p.user_id, p.full_name]) || []);
-        const priceMap = new Map((tps || []).map((t: any) => [t.user_id, Number(t.price) || 0]));
+        const pMap = new Map(
+          profiles?.map((p) => [p.user_id, p.full_name]) || [],
+        );
+        const priceMap = new Map(
+          (tps || []).map((t) => [t.user_id, Number(t.price) || 0]),
+        );
         setSessions(
-          sr.map((r: any) => ({
+          sr.map((r) => ({
             ...r,
             student_name: pMap.get(r.student_id) || "—",
-            teacher_name: r.teacher_id ? pMap.get(r.teacher_id) || "—" : null,
+            teacher_name: r.teacher_id
+              ? pMap.get(r.teacher_id) || "—"
+              : undefined,
             amount: r.teacher_id ? priceMap.get(r.teacher_id) || 0 : 0,
-          }))
+          })),
         );
       } else {
         setSessions([]);
       }
-    } catch (err: any) {
+    } catch (caught) {
+      const err = caught as Error;
       toast.error("خطأ في تحميل البيانات: " + err.message);
     }
     setLoading(false);
@@ -141,8 +185,12 @@ const AdminInvoices = () => {
 
   const stats = useMemo(() => {
     const paid = enrollments.filter((e) => e.status === "active");
-    const totalRev = paid.reduce((sum, e) => sum + (Number(e.amount_paid) || 0), 0);
-    const sessionRev = sessions.filter((s) => s.status === "completed" || s.status === "confirmed")
+    const totalRev = paid.reduce(
+      (sum, e) => sum + (Number(e.amount_paid) || 0),
+      0,
+    );
+    const sessionRev = sessions
+      .filter((s) => s.status === "completed" || s.status === "confirmed")
       .reduce((sum, s) => sum + (s.amount || 0), 0);
     return {
       totalInvoices: enrollments.length,
@@ -162,11 +210,17 @@ const AdminInvoices = () => {
       doc.setFontSize(10);
       doc.setTextColor(120);
       doc.text(`Generated: ${new Date().toLocaleString("en-US")}`, 14, 25);
-      doc.text(`Total Invoices: ${stats.totalInvoices}  |  Paid: ${stats.paidInvoices}  |  Revenue: ${stats.totalRevenue.toFixed(2)} SAR`, 14, 31);
+      doc.text(
+        `Total Invoices: ${stats.totalInvoices}  |  Paid: ${stats.paidInvoices}  |  Revenue: ${stats.totalRevenue.toFixed(2)} SAR`,
+        14,
+        31,
+      );
 
       autoTable(doc, {
         startY: 38,
-        head: [["#", "Date", "Student", "Course", "Amount", "Status", "Payment ID"]],
+        head: [
+          ["#", "Date", "Student", "Course", "Amount", "Status", "Payment ID"],
+        ],
         body: filtered.map((e, i) => [
           String(i + 1),
           new Date(e.created_at).toLocaleDateString("en-US"),
@@ -177,13 +231,18 @@ const AdminInvoices = () => {
           (e.payment_id || "-").slice(0, 20),
         ]),
         styles: { fontSize: 8, cellPadding: 2 },
-        headStyles: { fillColor: [232, 78, 15], textColor: 255, fontStyle: "bold" },
+        headStyles: {
+          fillColor: [232, 78, 15],
+          textColor: 255,
+          fontStyle: "bold",
+        },
         alternateRowStyles: { fillColor: [250, 250, 250] },
       });
 
       doc.save(`ostaze-invoices-${Date.now()}.pdf`);
       toast.success("تم تنزيل التقرير ✓");
-    } catch (err: any) {
+    } catch (caught) {
+      const err = caught as Error;
       toast.error("خطأ: " + err.message);
     }
     setGenerating(false);
@@ -200,9 +259,14 @@ const AdminInvoices = () => {
       doc.text(`Generated: ${new Date().toLocaleString("en-US")}`, 14, 25);
 
       // Summary stats
-      const sessionsCompleted = sessions.filter((s) => s.status === "completed").length;
-      const sessionsConfirmed = sessions.filter((s) => s.status === "confirmed").length;
-      const sessionRev = sessions.filter((s) => s.status === "completed" || s.status === "confirmed")
+      const sessionsCompleted = sessions.filter(
+        (s) => s.status === "completed",
+      ).length;
+      const sessionsConfirmed = sessions.filter(
+        (s) => s.status === "confirmed",
+      ).length;
+      const sessionRev = sessions
+        .filter((s) => s.status === "completed" || s.status === "confirmed")
         .reduce((sum, s) => sum + (s.amount || 0), 0);
 
       doc.setTextColor(0);
@@ -210,14 +274,27 @@ const AdminInvoices = () => {
       doc.text("Summary", 14, 38);
       doc.setFontSize(9);
       doc.text(`Total Sessions: ${sessions.length}`, 14, 45);
-      doc.text(`Confirmed: ${sessionsConfirmed}  |  Completed: ${sessionsCompleted}`, 14, 51);
-      doc.text(`Course Revenue: ${enrollments.filter((e) => e.status === "active").reduce((s, e) => s + Number(e.amount_paid || 0), 0).toFixed(2)} SAR`, 14, 57);
+      doc.text(
+        `Confirmed: ${sessionsConfirmed}  |  Completed: ${sessionsCompleted}`,
+        14,
+        51,
+      );
+      doc.text(
+        `Course Revenue: ${enrollments
+          .filter((e) => e.status === "active")
+          .reduce((s, e) => s + Number(e.amount_paid || 0), 0)
+          .toFixed(2)} SAR`,
+        14,
+        57,
+      );
       doc.text(`Session Revenue: ${sessionRev.toFixed(2)} SAR`, 14, 63);
       doc.text(`Total Revenue: ${stats.totalRevenue.toFixed(2)} SAR`, 14, 69);
 
       autoTable(doc, {
         startY: 78,
-        head: [["#", "Date", "Student", "Teacher", "Subject", "Amount", "Status"]],
+        head: [
+          ["#", "Date", "Student", "Teacher", "Subject", "Amount", "Status"],
+        ],
         body: sessions.map((s, i) => [
           String(i + 1),
           new Date(s.created_at).toLocaleDateString("en-US"),
@@ -228,13 +305,18 @@ const AdminInvoices = () => {
           s.status,
         ]),
         styles: { fontSize: 8, cellPadding: 2 },
-        headStyles: { fillColor: [27, 42, 74], textColor: 255, fontStyle: "bold" },
+        headStyles: {
+          fillColor: [27, 42, 74],
+          textColor: 255,
+          fontStyle: "bold",
+        },
         alternateRowStyles: { fillColor: [250, 250, 250] },
       });
 
       doc.save(`ostaze-sales-${Date.now()}.pdf`);
       toast.success("تم تنزيل التقرير ✓");
-    } catch (err: any) {
+    } catch (caught) {
+      const err = caught as Error;
       toast.error("خطأ: " + err.message);
     }
     setGenerating(false);
@@ -245,14 +327,37 @@ const AdminInvoices = () => {
       {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { label: "إجمالي الفواتير", value: String(stats.totalInvoices), icon: FileText, color: "bg-primary/10 text-primary" },
-          { label: "مدفوعة", value: String(stats.paidInvoices), icon: CreditCard, color: "bg-success/10 text-success" },
-          { label: "قيد الانتظار", value: String(stats.pendingCount), icon: RefreshCw, color: "bg-warning/10 text-warning" },
-          { label: "إجمالي الإيرادات", value: `${stats.totalRevenue.toFixed(0)} ر.س`, icon: DollarSign, color: "bg-accent text-accent-foreground" },
+          {
+            label: "إجمالي الفواتير",
+            value: String(stats.totalInvoices),
+            icon: FileText,
+            color: "bg-primary/10 text-primary",
+          },
+          {
+            label: "مدفوعة",
+            value: String(stats.paidInvoices),
+            icon: CreditCard,
+            color: "bg-success/10 text-success",
+          },
+          {
+            label: "قيد الانتظار",
+            value: String(stats.pendingCount),
+            icon: RefreshCw,
+            color: "bg-warning/10 text-warning",
+          },
+          {
+            label: "إجمالي الإيرادات",
+            value: `${stats.totalRevenue.toFixed(0)} ر.س`,
+            icon: DollarSign,
+            color: "bg-accent text-accent-foreground",
+          },
         ].map((s) => (
           <div key={s.label} className="card-base p-5">
             <div className="flex items-center gap-3">
-              <motion.div whileHover={{ scale: 1.15, rotate: 10 }} className={`icon-box ${s.color}`}>
+              <motion.div
+                whileHover={{ scale: 1.15, rotate: 10 }}
+                className={`icon-box ${s.color}`}
+              >
                 <s.icon size={20} />
               </motion.div>
               <div>
@@ -285,7 +390,10 @@ const AdminInvoices = () => {
           {/* Filters */}
           <div className="card-base p-4 flex flex-wrap items-center gap-3">
             <div className="relative flex-1 min-w-[200px]">
-              <Search size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+              <Search
+                size={16}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+              />
               <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
@@ -293,14 +401,21 @@ const AdminInvoices = () => {
                 className="input-base !pr-10 !py-2.5 text-sm"
               />
             </div>
-            <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="input-base !py-2.5 text-sm !w-auto min-w-[140px]">
+            <select
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value)}
+              className="input-base !py-2.5 text-sm !w-auto min-w-[140px]"
+            >
               <option value="all">كل الحالات</option>
               <option value="active">مدفوع</option>
               <option value="pending">قيد الانتظار</option>
               <option value="cancelled">ملغي</option>
               <option value="refunded">مسترد</option>
             </select>
-            <button onClick={fetchData} className="btn-outline !py-2.5 text-sm flex items-center gap-2">
+            <button
+              onClick={fetchData}
+              className="btn-outline !py-2.5 text-sm flex items-center gap-2"
+            >
               <RefreshCw size={14} /> تحديث
             </button>
             <motion.button
@@ -309,7 +424,11 @@ const AdminInvoices = () => {
               disabled={generating || filtered.length === 0}
               className="btn-primary !py-2.5 text-sm flex items-center gap-2 disabled:opacity-50"
             >
-              {generating ? <Loader2 size={14} className="animate-spin" /> : <Download size={14} />}
+              {generating ? (
+                <Loader2 size={14} className="animate-spin" />
+              ) : (
+                <Download size={14} />
+              )}
               تنزيل PDF
             </motion.button>
           </div>
@@ -318,12 +437,18 @@ const AdminInvoices = () => {
           <div className="card-base p-6">
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-extrabold text-lg">قائمة الفواتير</h3>
-              <span className="text-xs text-muted-foreground">{filtered.length} / {enrollments.length}</span>
+              <span className="text-xs text-muted-foreground">
+                {filtered.length} / {enrollments.length}
+              </span>
             </div>
             {loading ? (
-              <div className="flex justify-center py-8"><Loader2 className="animate-spin text-primary" size={24} /></div>
+              <div className="flex justify-center py-8">
+                <Loader2 className="animate-spin text-primary" size={24} />
+              </div>
             ) : filtered.length === 0 ? (
-              <p className="text-muted-foreground text-sm text-center py-6">لا توجد فواتير</p>
+              <p className="text-muted-foreground text-sm text-center py-6">
+                لا توجد فواتير
+              </p>
             ) : (
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
@@ -340,15 +465,32 @@ const AdminInvoices = () => {
                   </thead>
                   <tbody>
                     {filtered.map((e) => (
-                      <tr key={e.id} className="border-b last:border-0 hover:bg-secondary/50">
-                        <td className="py-3 px-2 whitespace-nowrap text-xs">{new Date(e.created_at).toLocaleDateString("ar-EG")}</td>
-                        <td className="py-3 px-2 font-medium">{e.student_name}</td>
+                      <tr
+                        key={e.id}
+                        className="border-b last:border-0 hover:bg-secondary/50"
+                      >
+                        <td className="py-3 px-2 whitespace-nowrap text-xs">
+                          {new Date(e.created_at).toLocaleDateString("ar-EG")}
+                        </td>
+                        <td className="py-3 px-2 font-medium">
+                          {e.student_name}
+                        </td>
                         <td className="py-3 px-2">{e.course_title}</td>
-                        <td className="py-3 px-2 font-bold text-primary whitespace-nowrap">{Number(e.amount_paid || 0).toFixed(2)} ر.س</td>
-                        <td className="py-3 px-2 text-xs text-muted-foreground">{e.payment_provider || "—"}</td>
-                        <td className="py-3 px-2 text-xs font-mono text-muted-foreground">{e.payment_id ? e.payment_id.slice(0, 12) + "..." : "—"}</td>
+                        <td className="py-3 px-2 font-bold text-primary whitespace-nowrap">
+                          {Number(e.amount_paid || 0).toFixed(2)} ر.س
+                        </td>
+                        <td className="py-3 px-2 text-xs text-muted-foreground">
+                          {e.payment_provider || "—"}
+                        </td>
+                        <td className="py-3 px-2 text-xs font-mono text-muted-foreground">
+                          {e.payment_id
+                            ? e.payment_id.slice(0, 12) + "..."
+                            : "—"}
+                        </td>
                         <td className="py-3 px-2">
-                          <span className={`px-2 py-1 rounded-full text-xs font-bold whitespace-nowrap ${statusColor[e.status] || "bg-muted text-muted-foreground"}`}>
+                          <span
+                            className={`px-2 py-1 rounded-full text-xs font-bold whitespace-nowrap ${statusColor[e.status] || "bg-muted text-muted-foreground"}`}
+                          >
                             {statusLabel[e.status] || e.status}
                           </span>
                         </td>
@@ -366,36 +508,62 @@ const AdminInvoices = () => {
         <div className="grid md:grid-cols-2 gap-4">
           <div className="card-base p-6">
             <div className="flex items-start gap-4 mb-4">
-              <div className="icon-box bg-primary/10 text-primary"><FileText size={24} /></div>
+              <div className="icon-box bg-primary/10 text-primary">
+                <FileText size={24} />
+              </div>
               <div>
                 <h3 className="font-extrabold text-lg mb-1">تقرير الفواتير</h3>
-                <p className="text-sm text-muted-foreground">قائمة كاملة بكل عمليات الدفع، المبالغ، والحالات.</p>
+                <p className="text-sm text-muted-foreground">
+                  قائمة كاملة بكل عمليات الدفع، المبالغ، والحالات.
+                </p>
               </div>
             </div>
             <div className="text-xs text-muted-foreground mb-4">
-              يحتوي على {enrollments.length} فاتورة • إجمالي {stats.totalRevenue.toFixed(0)} ر.س
+              يحتوي على {enrollments.length} فاتورة • إجمالي{" "}
+              {stats.totalRevenue.toFixed(0)} ر.س
             </div>
-            <motion.button whileTap={{ scale: 0.97 }} onClick={generateInvoicesReport} disabled={generating}
-              className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50">
-              {generating ? <Loader2 size={16} className="animate-spin" /> : <Download size={16} />}
+            <motion.button
+              whileTap={{ scale: 0.97 }}
+              onClick={generateInvoicesReport}
+              disabled={generating}
+              className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50"
+            >
+              {generating ? (
+                <Loader2 size={16} className="animate-spin" />
+              ) : (
+                <Download size={16} />
+              )}
               تنزيل تقرير الفواتير (PDF)
             </motion.button>
           </div>
 
           <div className="card-base p-6">
             <div className="flex items-start gap-4 mb-4">
-              <div className="icon-box bg-accent text-accent-foreground"><TrendingUp size={24} /></div>
+              <div className="icon-box bg-accent text-accent-foreground">
+                <TrendingUp size={24} />
+              </div>
               <div>
                 <h3 className="font-extrabold text-lg mb-1">تقرير المبيعات</h3>
-                <p className="text-sm text-muted-foreground">تقرير شامل عن الجلسات والإيرادات بكل التفاصيل.</p>
+                <p className="text-sm text-muted-foreground">
+                  تقرير شامل عن الجلسات والإيرادات بكل التفاصيل.
+                </p>
               </div>
             </div>
             <div className="text-xs text-muted-foreground mb-4">
-              يحتوي على {sessions.length} جلسة • {sessions.filter((s) => s.status === "completed").length} مكتملة
+              يحتوي على {sessions.length} جلسة •{" "}
+              {sessions.filter((s) => s.status === "completed").length} مكتملة
             </div>
-            <motion.button whileTap={{ scale: 0.97 }} onClick={generateSalesReport} disabled={generating}
-              className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50">
-              {generating ? <Loader2 size={16} className="animate-spin" /> : <Download size={16} />}
+            <motion.button
+              whileTap={{ scale: 0.97 }}
+              onClick={generateSalesReport}
+              disabled={generating}
+              className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50"
+            >
+              {generating ? (
+                <Loader2 size={16} className="animate-spin" />
+              ) : (
+                <Download size={16} />
+              )}
               تنزيل تقرير المبيعات (PDF)
             </motion.button>
           </div>

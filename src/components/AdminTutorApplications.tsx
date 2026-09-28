@@ -4,7 +4,19 @@ import { tutorFileBucket } from "@/lib/tutorFiles";
 import { copyApplicantPhotoToAvatar } from "@/lib/avatarUpload";
 
 import { toast } from "sonner";
-import { Loader2, Search, UserPlus, Mail, Phone, ExternalLink, X, RefreshCw, Check, Copy, FileDown } from "lucide-react";
+import {
+  Loader2,
+  Search,
+  UserPlus,
+  Mail,
+  Phone,
+  ExternalLink,
+  X,
+  RefreshCw,
+  Check,
+  Copy,
+  FileDown,
+} from "lucide-react";
 import { motion } from "framer-motion";
 
 interface TutorApplication {
@@ -51,7 +63,10 @@ const AdminTutorApplications = () => {
   const [statusFilter, setStatusFilter] = useState("all");
   const [selected, setSelected] = useState<TutorApplication | null>(null);
   const [approving, setApproving] = useState(false);
-  const [teacherAccess, setTeacherAccess] = useState<{ email: string; whatsappError?: string | null } | null>(null);
+  const [teacherAccess, setTeacherAccess] = useState<{
+    email: string;
+    whatsappError?: string | null;
+  } | null>(null);
 
   const fetchApps = useCallback(async () => {
     setLoading(true);
@@ -64,24 +79,39 @@ const AdminTutorApplications = () => {
     setLoading(false);
   }, []);
 
-  useEffect(() => { fetchApps(); }, [fetchApps]);
+  useEffect(() => {
+    fetchApps();
+  }, [fetchApps]);
 
   useEffect(() => {
     const channel = supabase
-      .channel(`admin-tutor-applications-${Math.random().toString(36).slice(2)}`)
-      .on("postgres_changes", { event: "*", schema: "public", table: "tutor_applications" }, () => fetchApps())
+      .channel(
+        `admin-tutor-applications-${Math.random().toString(36).slice(2)}`,
+      )
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "tutor_applications" },
+        () => fetchApps(),
+      )
       .subscribe();
-    return () => { supabase.removeChannel(channel); };
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [fetchApps]);
 
   const openCvFile = async (path: string) => {
-    const { data, error } = await supabase.storage.from(tutorFileBucket(path)).createSignedUrl(path, 300);
+    const { data, error } = await supabase.storage
+      .from(tutorFileBucket(path))
+      .createSignedUrl(path, 300);
     if (error || !data?.signedUrl) return toast.error("تعذر فتح الملف");
     window.open(data.signedUrl, "_blank", "noopener");
   };
 
   const setStatus = async (id: string, status: string) => {
-    const { error } = await supabase.from("tutor_applications").update({ status }).eq("id", id);
+    const { error } = await supabase
+      .from("tutor_applications")
+      .update({ status })
+      .eq("id", id);
     if (error) return toast.error("خطأ: " + error.message);
     toast.success("تم التحديث");
     setApps((p) => p.map((a) => (a.id === id ? { ...a, status } : a)));
@@ -89,11 +119,18 @@ const AdminTutorApplications = () => {
   };
 
   const approveAsTeacher = async (a: TutorApplication) => {
-    if (!confirm(`سيتم إنشاء حساب معلم للمتقدم ${a.full_name} (${a.email}). متابعة؟`)) return;
+    if (
+      !confirm(
+        `سيتم إنشاء حساب معلم للمتقدم ${a.full_name} (${a.email}). متابعة؟`,
+      )
+    )
+      return;
     setApproving(true);
     try {
       const password = `Ostaze#${Math.random().toString(36).slice(2, 10)}${Math.floor(Math.random() * 90 + 10)}`;
-      const { data: { session } } = await supabase.auth.getSession();
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
       const res = await supabase.functions.invoke("manage-roles", {
         body: {
           action: "approve_tutor",
@@ -119,8 +156,14 @@ const AdminTutorApplications = () => {
       // If the applicant uploaded a photo and allowed public use, set it as their avatar.
       if (result?.user_id && a.photo_file_path && a.use_photo_as_avatar) {
         try {
-          const url = await copyApplicantPhotoToAvatar(a.photo_file_path, result.user_id);
-          await supabase.from("profiles").update({ avatar_url: url }).eq("user_id", result.user_id);
+          const url = await copyApplicantPhotoToAvatar(
+            a.photo_file_path,
+            result.user_id,
+          );
+          await supabase
+            .from("profiles")
+            .update({ avatar_url: url })
+            .eq("user_id", result.user_id);
         } catch {
           toast.warning("تم إنشاء الحساب لكن تعذر نقل الصورة الشخصية");
         }
@@ -128,20 +171,33 @@ const AdminTutorApplications = () => {
 
       await setStatus(a.id, "accepted");
       toast.success(result?.message || "تمت الإضافة كمعلم");
-      setTeacherAccess({ email: a.email, whatsappError: result?.whatsapp_error ?? null });
+      setTeacherAccess({
+        email: a.email,
+        whatsappError: result?.whatsapp_error ?? null,
+      });
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "خطأ غير متوقع");
     }
     setApproving(false);
   };
 
-  const filtered = useMemo(() => apps.filter((a) => {
-    if (statusFilter !== "all" && a.status !== statusFilter) return false;
-    if (!q) return true;
-    const s = q.toLowerCase();
-    return [a.full_name, a.email, a.phone, a.specialization, a.university, a.country]
-      .some((v) => v?.toLowerCase().includes(s));
-  }), [apps, q, statusFilter]);
+  const filtered = useMemo(
+    () =>
+      apps.filter((a) => {
+        if (statusFilter !== "all" && a.status !== statusFilter) return false;
+        if (!q) return true;
+        const s = q.toLowerCase();
+        return [
+          a.full_name,
+          a.email,
+          a.phone,
+          a.specialization,
+          a.university,
+          a.country,
+        ].some((v) => v?.toLowerCase().includes(s));
+      }),
+    [apps, q, statusFilter],
+  );
 
   const stats = {
     total: apps.length,
@@ -161,12 +217,29 @@ const AdminTutorApplications = () => {
     <div className="space-y-6 animate-fade-in">
       <div className="grid grid-cols-3 gap-4">
         {[
-          { label: "إجمالي الطلبات", value: stats.total, cls: "bg-primary/10 text-primary" },
-          { label: "طلبات جديدة", value: stats.new, cls: "bg-warning/10 text-warning" },
-          { label: "مقبولون", value: stats.accepted, cls: "bg-success/10 text-success" },
+          {
+            label: "إجمالي الطلبات",
+            value: stats.total,
+            cls: "bg-primary/10 text-primary",
+          },
+          {
+            label: "طلبات جديدة",
+            value: stats.new,
+            cls: "bg-warning/10 text-warning",
+          },
+          {
+            label: "مقبولون",
+            value: stats.accepted,
+            cls: "bg-success/10 text-success",
+          },
         ].map((s) => (
           <div key={s.label} className="card-base p-5 flex items-center gap-3">
-            <motion.div whileHover={{ scale: 1.1 }} className={`icon-box ${s.cls}`}><UserPlus size={20} /></motion.div>
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              className={`icon-box ${s.cls}`}
+            >
+              <UserPlus size={20} />
+            </motion.div>
             <div>
               <div className="text-xl font-black">{s.value}</div>
               <div className="text-muted-foreground text-xs">{s.label}</div>
@@ -177,61 +250,121 @@ const AdminTutorApplications = () => {
 
       <div className="card-base p-4 flex flex-wrap items-center gap-3">
         <div className="relative flex-1 min-w-[200px]">
-          <Search size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-          <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="ابحث بالاسم، البريد، التخصص..." className="input-base !pr-10 !py-2.5 text-sm" />
+          <Search
+            size={16}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+          />
+          <input
+            value={q}
+            onChange={(e) => setQ(e.target.value)}
+            placeholder="ابحث بالاسم، البريد، التخصص..."
+            className="input-base !pr-10 !py-2.5 text-sm"
+          />
         </div>
-        <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="input-base !py-2.5 text-sm w-auto">
+        <select
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value)}
+          className="input-base !py-2.5 text-sm w-auto"
+        >
           <option value="all">كل الحالات</option>
-          {Object.entries(STATUSES).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}
+          {Object.entries(STATUSES).map(([k, v]) => (
+            <option key={k} value={k}>
+              {v.label}
+            </option>
+          ))}
         </select>
-        <button onClick={fetchApps} className="btn-ghost flex items-center gap-2 text-sm px-3 py-2.5">
+        <button
+          onClick={fetchApps}
+          className="btn-ghost flex items-center gap-2 text-sm px-3 py-2.5"
+        >
           <RefreshCw size={16} /> تحديث
         </button>
       </div>
 
       {loading ? (
-        <div className="flex justify-center py-16"><Loader2 className="animate-spin text-primary" size={28} /></div>
+        <div className="flex justify-center py-16">
+          <Loader2 className="animate-spin text-primary" size={28} />
+        </div>
       ) : filtered.length === 0 ? (
-        <div className="card-base p-12 text-center text-muted-foreground">لا توجد طلبات انضمام حتى الآن</div>
+        <div className="card-base p-12 text-center text-muted-foreground">
+          لا توجد طلبات انضمام حتى الآن
+        </div>
       ) : (
         <div className="space-y-3">
           {filtered.map((a) => (
-            <div key={a.id} className="card-base p-5 flex flex-wrap items-center gap-4">
+            <div
+              key={a.id}
+              className="card-base p-5 flex flex-wrap items-center gap-4"
+            >
               <div className="flex-1 min-w-[200px]">
                 <div className="font-black">{a.full_name}</div>
                 <div className="text-xs text-muted-foreground mt-1">
-                  {[a.specialization, a.university, a.country].filter(Boolean).join(" • ")}
+                  {[a.specialization, a.university, a.country]
+                    .filter(Boolean)
+                    .join(" • ")}
                 </div>
                 <div className="flex flex-wrap gap-3 mt-2 text-xs text-muted-foreground">
-                  <a href={`mailto:${a.email}`} className="flex items-center gap-1 hover:text-primary"><Mail size={13} /> {a.email}</a>
-                  <a href={`https://wa.me/${a.phone.replace(/[^\d]/g, "")}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-primary"><Phone size={13} /> {a.phone}</a>
+                  <a
+                    href={`mailto:${a.email}`}
+                    className="flex items-center gap-1 hover:text-primary"
+                  >
+                    <Mail size={13} /> {a.email}
+                  </a>
+                  <a
+                    href={`https://wa.me/${a.phone.replace(/[^\d]/g, "")}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 hover:text-primary"
+                  >
+                    <Phone size={13} /> {a.phone}
+                  </a>
                 </div>
               </div>
-              <span className={`text-xs font-bold px-3 py-1.5 rounded-full ${STATUSES[a.status]?.cls || "bg-muted"}`}>
+              <span
+                className={`text-xs font-bold px-3 py-1.5 rounded-full ${STATUSES[a.status]?.cls || "bg-muted"}`}
+              >
                 {STATUSES[a.status]?.label || a.status}
               </span>
-              <div className="text-xs text-muted-foreground">{new Date(a.created_at).toLocaleDateString("ar-EG")}</div>
-              <button onClick={() => setSelected(a)} className="btn-primary text-sm px-4 py-2">التفاصيل</button>
+              <div className="text-xs text-muted-foreground">
+                {new Date(a.created_at).toLocaleDateString("ar-EG")}
+              </div>
+              <button
+                onClick={() => setSelected(a)}
+                className="btn-primary text-sm px-4 py-2"
+              >
+                التفاصيل
+              </button>
             </div>
           ))}
         </div>
       )}
 
       {selected && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/40 p-4" onClick={() => setSelected(null)}>
-          <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }}
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/40 p-4"
+          onClick={() => setSelected(null)}
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
             onClick={(e) => e.stopPropagation()}
-            className="bg-card rounded-2xl shadow-xl w-full max-w-2xl max-h-[88vh] overflow-y-auto">
+            className="bg-card rounded-2xl shadow-xl w-full max-w-2xl max-h-[88vh] overflow-y-auto"
+          >
             <div className="flex items-center justify-between p-5 border-b border-border sticky top-0 bg-card">
               <h3 className="font-black text-lg">{selected.full_name}</h3>
-              <button onClick={() => setSelected(null)} className="text-muted-foreground hover:text-foreground"><X size={20} /></button>
+              <button
+                onClick={() => setSelected(null)}
+                className="text-muted-foreground hover:text-foreground"
+              >
+                <X size={20} />
+              </button>
             </div>
             <div className="p-5 space-y-1">
               <Row label="البريد" value={selected.email} />
               <Row label="واتساب" value={selected.phone} />
               <Row label="الجنسية" value={selected.nationality} />
               <Row label="الدولة" value={selected.country} />
-              
+
               <Row label="التخصص" value={selected.specialization} />
               <Row label="الجامعة" value={selected.university} />
               <Row label="المؤهل" value={selected.degree} />
@@ -242,48 +375,87 @@ const AdminTutorApplications = () => {
               <Row label="مكان هادئ" value={selected.quiet_place} />
               <Row label="الأدوات" value={selected.tools?.join(", ")} />
 
-              <Row label="استخدام صورته كصورة ملف شخصي" value={selected.photo_file_path ? (selected.use_photo_as_avatar ? "نعم" : "لا") : null} />
+              <Row
+                label="استخدام صورته كصورة ملف شخصي"
+                value={
+                  selected.photo_file_path
+                    ? selected.use_photo_as_avatar
+                      ? "نعم"
+                      : "لا"
+                    : null
+                }
+              />
               <div className="flex flex-wrap gap-3 pt-4">
                 {selected.cv_file_path && (
-                  <button onClick={() => openCvFile(selected.cv_file_path!)} className="btn-ghost text-sm flex items-center gap-2 px-3 py-2">
+                  <button
+                    onClick={() => openCvFile(selected.cv_file_path!)}
+                    className="btn-ghost text-sm flex items-center gap-2 px-3 py-2"
+                  >
                     <FileDown size={15} /> ملف السيرة الذاتية المرفوع
                   </button>
                 )}
                 {selected.cv_link && (
-                  <a href={selected.cv_link} target="_blank" rel="noopener noreferrer" className="btn-ghost text-sm flex items-center gap-2 px-3 py-2">
+                  <a
+                    href={selected.cv_link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-ghost text-sm flex items-center gap-2 px-3 py-2"
+                  >
                     <ExternalLink size={15} /> السيرة الذاتية
                   </a>
                 )}
                 {selected.demo_link && (
-                  <a href={selected.demo_link} target="_blank" rel="noopener noreferrer" className="btn-ghost text-sm flex items-center gap-2 px-3 py-2">
+                  <a
+                    href={selected.demo_link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-ghost text-sm flex items-center gap-2 px-3 py-2"
+                  >
                     <ExternalLink size={15} /> رابط فيديو الشرح
                   </a>
                 )}
                 {selected.photo_file_path && (
-                  <button onClick={() => openCvFile(selected.photo_file_path!)} className="btn-ghost text-sm flex items-center gap-2 px-3 py-2">
+                  <button
+                    onClick={() => openCvFile(selected.photo_file_path!)}
+                    className="btn-ghost text-sm flex items-center gap-2 px-3 py-2"
+                  >
                     <FileDown size={15} /> الصورة الشخصية
                   </button>
                 )}
                 {selected.demo_file_path && (
-                  <button onClick={() => openCvFile(selected.demo_file_path!)} className="btn-ghost text-sm flex items-center gap-2 px-3 py-2">
+                  <button
+                    onClick={() => openCvFile(selected.demo_file_path!)}
+                    className="btn-ghost text-sm flex items-center gap-2 px-3 py-2"
+                  >
                     <FileDown size={15} /> فيديو الشرح المرفوع
                   </button>
                 )}
               </div>
               <div className="pt-5">
-                <button onClick={() => approveAsTeacher(selected)} disabled={approving}
-                  className="btn-primary w-full flex items-center justify-center gap-2 py-3 disabled:opacity-60">
-                  {approving ? <Loader2 size={16} className="animate-spin" /> : <Check size={16} />}
+                <button
+                  onClick={() => approveAsTeacher(selected)}
+                  disabled={approving}
+                  className="btn-primary w-full flex items-center justify-center gap-2 py-3 disabled:opacity-60"
+                >
+                  {approving ? (
+                    <Loader2 size={16} className="animate-spin" />
+                  ) : (
+                    <Check size={16} />
+                  )}
                   قبول وإضافته كمعلم مباشرة
                 </button>
                 <p className="text-xs text-muted-foreground mt-2">
-                  ينشئ حساب معلم بنفس بريد المتقدم (أو يرقّي حسابه الحالي) ويظهر فوراً في صفحة المعلمين.
+                  ينشئ حساب معلم بنفس بريد المتقدم (أو يرقّي حسابه الحالي) ويظهر
+                  فوراً في صفحة المعلمين.
                 </p>
               </div>
               <div className="pt-5 flex flex-wrap gap-2">
                 {Object.entries(STATUSES).map(([k, v]) => (
-                  <button key={k} onClick={() => setStatus(selected.id, k)}
-                    className={`text-sm font-bold px-4 py-2 rounded-xl transition ${selected.status === k ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground hover:bg-primary/10"}`}>
+                  <button
+                    key={k}
+                    onClick={() => setStatus(selected.id, k)}
+                    className={`text-sm font-bold px-4 py-2 rounded-xl transition ${selected.status === k ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground hover:bg-primary/10"}`}
+                  >
                     {v.label}
                   </button>
                 ))}
@@ -298,24 +470,46 @@ const AdminTutorApplications = () => {
           <div className="bg-card rounded-2xl shadow-xl w-full max-w-md p-6 space-y-4">
             <h3 className="font-black text-lg">تم إنشاء حساب المعلم ✅</h3>
             <p className="text-sm text-muted-foreground">
-              تم إرسال رابط تعيين كلمة المرور إلى المعلم عبر واتساب. الرابط صالح للاستخدام مرة واحدة.
+              تم إرسال رابط تعيين كلمة المرور إلى المعلم عبر واتساب. الرابط صالح
+              للاستخدام مرة واحدة.
             </p>
             <div className="space-y-2 text-sm">
-              <div className="p-3 rounded-xl bg-muted break-all"><b>البريد:</b> {teacherAccess.email}</div>
-              {teacherAccess.whatsappError
-                ? <div className="text-xs text-warning">تعذر الإرسال تلقائيًا عبر واتساب: {teacherAccess.whatsappError} — اطلب من المعلم استخدام "نسيت كلمة المرور" بنفس البريد.</div>
-                : <div className="p-3 rounded-xl bg-muted">تم الإرسال عبر واتساب بنجاح.</div>}
+              <div className="p-3 rounded-xl bg-muted break-all">
+                <b>البريد:</b> {teacherAccess.email}
+              </div>
+              {teacherAccess.whatsappError ? (
+                <div className="text-xs text-warning">
+                  تعذر الإرسال تلقائيًا عبر واتساب:{" "}
+                  {teacherAccess.whatsappError} — اطلب من المعلم استخدام "نسيت
+                  كلمة المرور" بنفس البريد.
+                </div>
+              ) : (
+                <div className="p-3 rounded-xl bg-muted">
+                  تم الإرسال عبر واتساب بنجاح.
+                </div>
+              )}
             </div>
             <div className="flex gap-2">
-              <button onClick={() => { navigator.clipboard.writeText(teacherAccess.email); toast.success("تم نسخ البريد"); }}
-                className="btn-ghost flex-1 flex items-center justify-center gap-2 py-2.5"><Copy size={15} /> نسخ البريد</button>
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText(teacherAccess.email);
+                  toast.success("تم نسخ البريد");
+                }}
+                className="btn-ghost flex-1 flex items-center justify-center gap-2 py-2.5"
+              >
+                <Copy size={15} /> نسخ البريد
+              </button>
 
-              <button onClick={() => setTeacherAccess(null)} className="btn-primary flex-1 py-2.5">تم</button>
+              <button
+                onClick={() => setTeacherAccess(null)}
+                className="btn-primary flex-1 py-2.5"
+              >
+                تم
+              </button>
             </div>
           </div>
         </div>
       )}
-
     </div>
   );
 };

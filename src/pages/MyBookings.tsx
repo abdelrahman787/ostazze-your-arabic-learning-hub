@@ -2,8 +2,19 @@ import { useEffect, useState } from "react";
 import { Link } from "@/lib/router-compat";
 import { motion } from "framer-motion";
 import {
-  Calendar, Clock, BookOpen, User, Sparkles, CheckCircle2,
-  XCircle, CreditCard, Loader2, Inbox, Video, MessageSquare, AlertCircle,
+  Calendar,
+  Clock,
+  BookOpen,
+  User,
+  Sparkles,
+  CheckCircle2,
+  XCircle,
+  CreditCard,
+  Loader2,
+  Inbox,
+  Video,
+  MessageSquare,
+  AlertCircle,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
@@ -37,9 +48,12 @@ interface SessionRequest {
 
 const statusMeta = (
   status: RequestStatus,
-  lang: "ar" | "en"
+  lang: "ar" | "en",
 ): { label: string; tone: string; Icon: typeof CheckCircle2 } => {
-  const map: Record<RequestStatus, { ar: string; en: string; tone: string; Icon: typeof CheckCircle2 }> = {
+  const map: Record<
+    RequestStatus,
+    { ar: string; en: string; tone: string; Icon: typeof CheckCircle2 }
+  > = {
     pending: {
       ar: "بانتظار التأكيد",
       en: "Awaiting confirmation",
@@ -84,12 +98,15 @@ const statusMeta = (
 const formatDate = (date: string | null, lang: "ar" | "en") => {
   if (!date) return lang === "ar" ? "غير محدد" : "Not set";
   try {
-    return new Date(date).toLocaleDateString(lang === "ar" ? "ar-EG" : "en-US", {
-      weekday: "short",
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    });
+    return new Date(date).toLocaleDateString(
+      lang === "ar" ? "ar-EG" : "en-US",
+      {
+        weekday: "short",
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      },
+    );
   } catch {
     return date;
   }
@@ -133,7 +150,9 @@ const MyBookings = () => {
       setLoading(true);
       const { data, error } = await supabase
         .from("session_requests")
-        .select("id, teacher_id, subject, preferred_date, preferred_time, status, notes, reject_reason, zoom_url, created_at")
+        .select(
+          "id, teacher_id, subject, preferred_date, preferred_time, status, notes, reject_reason, zoom_url, created_at",
+        )
         .eq("student_id", user.id)
         .order("created_at", { ascending: false });
 
@@ -146,25 +165,37 @@ const MyBookings = () => {
       const rows = (data || []) as SessionRequest[];
 
       // Fetch teacher profiles in one shot
-      const teacherIds = [...new Set(rows.map((r) => r.teacher_id).filter(Boolean) as string[])];
-      let profileMap = new Map<string, { full_name: string | null; avatar_url: string | null }>();
+      const teacherIds = [
+        ...new Set(rows.map((r) => r.teacher_id).filter(Boolean) as string[]),
+      ];
+      let profileMap = new Map<
+        string,
+        { full_name: string | null; avatar_url: string | null }
+      >();
       if (teacherIds.length > 0) {
-        const { data: profiles } = await supabase.rpc("get_public_profiles", { _user_ids: teacherIds });
+        const { data: profiles } = await supabase.rpc("get_public_profiles", {
+          _user_ids: teacherIds,
+        });
         profileMap = new Map(
-          (profiles || []).map((p: any) => [
+          (profiles || []).map((p) => [
             p.user_id,
             {
-              full_name: lang === "ar" ? p.full_name : p.full_name_en || p.full_name,
+              full_name:
+                lang === "ar" ? p.full_name : p.full_name_en || p.full_name,
               avatar_url: p.avatar_url,
             },
-          ])
+          ]),
         );
       }
 
       const enriched = rows.map((r) => ({
         ...r,
-        teacher_name: r.teacher_id ? profileMap.get(r.teacher_id)?.full_name || null : null,
-        teacher_avatar: r.teacher_id ? profileMap.get(r.teacher_id)?.avatar_url || null : null,
+        teacher_name: r.teacher_id
+          ? profileMap.get(r.teacher_id)?.full_name || null
+          : null,
+        teacher_avatar: r.teacher_id
+          ? profileMap.get(r.teacher_id)?.avatar_url || null
+          : null,
       }));
 
       setRequests(enriched);
@@ -174,15 +205,21 @@ const MyBookings = () => {
   }, [user, authLoading, lang]);
 
   const filtered = requests.filter((r) => {
-    if (filter === "active") return ["pending", "pending_payment", "confirmed"].includes(r.status);
-    if (filter === "past") return ["rejected", "cancelled", "completed"].includes(r.status);
+    if (filter === "active")
+      return ["pending", "pending_payment", "confirmed"].includes(r.status);
+    if (filter === "past")
+      return ["rejected", "cancelled", "completed"].includes(r.status);
     return true;
   });
 
   const counts = {
     all: requests.length,
-    active: requests.filter((r) => ["pending", "pending_payment", "confirmed"].includes(r.status)).length,
-    past: requests.filter((r) => ["rejected", "cancelled", "completed"].includes(r.status)).length,
+    active: requests.filter((r) =>
+      ["pending", "pending_payment", "confirmed"].includes(r.status),
+    ).length,
+    past: requests.filter((r) =>
+      ["rejected", "cancelled", "completed"].includes(r.status),
+    ).length,
   };
 
   const tabs: { key: typeof filter; ar: string; en: string }[] = [
@@ -196,12 +233,19 @@ const MyBookings = () => {
       <div>
         <PageHeader
           title={lang === "ar" ? "حجوزاتي" : "My Bookings"}
-          subtitle={lang === "ar" ? "تتبع طلبات حصصك" : "Track your session requests"}
+          subtitle={
+            lang === "ar" ? "تتبع طلبات حصصك" : "Track your session requests"
+          }
         />
         <div className="container py-16 text-center">
-          <AlertCircle size={48} className="mx-auto text-muted-foreground/50 mb-4" />
+          <AlertCircle
+            size={48}
+            className="mx-auto text-muted-foreground/50 mb-4"
+          />
           <p className="text-lg font-bold mb-4">
-            {lang === "ar" ? "يجب تسجيل الدخول لعرض حجوزاتك" : "Sign in to view your bookings"}
+            {lang === "ar"
+              ? "يجب تسجيل الدخول لعرض حجوزاتك"
+              : "Sign in to view your bookings"}
           </p>
           <Link to="/login" className="btn-primary inline-flex">
             {lang === "ar" ? "تسجيل الدخول" : "Sign in"}
@@ -215,11 +259,19 @@ const MyBookings = () => {
     <div>
       <PageHelmet
         title={lang === "ar" ? "حجوزاتي | OSTAZE" : "My Bookings | OSTAZE"}
-        description={lang === "ar" ? "تتبع حالة طلبات حصصك" : "Track your session request status"}
+        description={
+          lang === "ar"
+            ? "تتبع حالة طلبات حصصك"
+            : "Track your session request status"
+        }
       />
       <PageHeader
         title={lang === "ar" ? "حجوزاتي" : "My Bookings"}
-        subtitle={lang === "ar" ? "تتبع حالة طلبات حصصك ومواعيدها" : "Track your session requests and schedules"}
+        subtitle={
+          lang === "ar"
+            ? "تتبع حالة طلبات حصصك ومواعيدها"
+            : "Track your session requests and schedules"
+        }
       />
 
       <div className="container py-8">
@@ -238,9 +290,13 @@ const MyBookings = () => {
                 }`}
               >
                 {lang === "ar" ? tab.ar : tab.en}
-                <span className={`ms-2 inline-flex items-center justify-center min-w-5 h-5 px-1.5 rounded-full text-[0.65rem] ${
-                  active ? "bg-primary-foreground/20" : "bg-muted text-muted-foreground"
-                }`}>
+                <span
+                  className={`ms-2 inline-flex items-center justify-center min-w-5 h-5 px-1.5 rounded-full text-[0.65rem] ${
+                    active
+                      ? "bg-primary-foreground/20"
+                      : "bg-muted text-muted-foreground"
+                  }`}
+                >
                   {counts[tab.key]}
                 </span>
               </button>
@@ -250,7 +306,9 @@ const MyBookings = () => {
 
         {loading ? (
           <div className="grid md:grid-cols-2 gap-5">
-            {[...Array(4)].map((_, i) => <RequestCardSkeleton key={i} />)}
+            {[...Array(4)].map((_, i) => (
+              <RequestCardSkeleton key={i} />
+            ))}
           </div>
         ) : filtered.length === 0 ? (
           <motion.div
@@ -270,11 +328,17 @@ const MyBookings = () => {
                 : "Browse tutors or your university courses to book your first session"}
             </p>
             <div className="flex items-center justify-center gap-3 flex-wrap">
-              <Link to="/teachers" className="btn-primary inline-flex items-center gap-2">
+              <Link
+                to="/teachers"
+                className="btn-primary inline-flex items-center gap-2"
+              >
                 <User size={16} />
                 {lang === "ar" ? "تصفح المعلمين" : "Browse tutors"}
               </Link>
-              <Link to="/universities" className="btn-outline inline-flex items-center gap-2">
+              <Link
+                to="/universities"
+                className="btn-outline inline-flex items-center gap-2"
+              >
                 <BookOpen size={16} />
                 {lang === "ar" ? "تصفح المواد" : "Browse subjects"}
               </Link>
@@ -314,8 +378,11 @@ const MyBookings = () => {
                       <div className="min-w-0">
                         <p className="font-extrabold text-foreground text-sm truncate">
                           {isAutoAssign
-                            ? lang === "ar" ? "سيتم تخصيص مدرس" : "Tutor will be assigned"
-                            : req.teacher_name || (lang === "ar" ? "المدرس" : "Tutor")}
+                            ? lang === "ar"
+                              ? "سيتم تخصيص مدرس"
+                              : "Tutor will be assigned"
+                            : req.teacher_name ||
+                              (lang === "ar" ? "المدرس" : "Tutor")}
                         </p>
                         {req.subject && (
                           <p className="text-xs text-muted-foreground flex items-center gap-1 mt-0.5">
@@ -325,8 +392,15 @@ const MyBookings = () => {
                         )}
                       </div>
                     </div>
-                    <span className={`shrink-0 inline-flex items-center gap-1.5 text-[0.7rem] font-bold px-2.5 py-1 rounded-full border ${meta.tone}`}>
-                      <meta.Icon size={11} className={req.status === "pending" ? "animate-spin" : ""} />
+                    <span
+                      className={`shrink-0 inline-flex items-center gap-1.5 text-[0.7rem] font-bold px-2.5 py-1 rounded-full border ${meta.tone}`}
+                    >
+                      <meta.Icon
+                        size={11}
+                        className={
+                          req.status === "pending" ? "animate-spin" : ""
+                        }
+                      />
                       {meta.label}
                     </span>
                   </div>
@@ -354,16 +428,21 @@ const MyBookings = () => {
                   </div>
 
                   {/* Auto-assign note */}
-                  {isAutoAssign && req.status !== "rejected" && req.status !== "cancelled" && (
-                    <div className="flex items-start gap-2 text-xs bg-primary/5 border border-primary/20 rounded-lg p-2.5">
-                      <Sparkles size={12} className="text-primary mt-0.5 shrink-0" />
-                      <p className="text-foreground/80">
-                        {lang === "ar"
-                          ? "فريقنا يبحث لك عن أنسب مدرس متاح في هذه المادة وسنتواصل معك قريباً."
-                          : "Our team is finding the best available tutor for this subject — we'll contact you soon."}
-                      </p>
-                    </div>
-                  )}
+                  {isAutoAssign &&
+                    req.status !== "rejected" &&
+                    req.status !== "cancelled" && (
+                      <div className="flex items-start gap-2 text-xs bg-primary/5 border border-primary/20 rounded-lg p-2.5">
+                        <Sparkles
+                          size={12}
+                          className="text-primary mt-0.5 shrink-0"
+                        />
+                        <p className="text-foreground/80">
+                          {lang === "ar"
+                            ? "فريقنا يبحث لك عن أنسب مدرس متاح في هذه المادة وسنتواصل معك قريباً."
+                            : "Our team is finding the best available tutor for this subject — we'll contact you soon."}
+                        </p>
+                      </div>
+                    )}
 
                   {/* Notes */}
                   {req.notes && (
@@ -403,12 +482,15 @@ const MyBookings = () => {
                         <CreditCard size={14} />
                         {lang === "ar" ? "إكمال الدفع" : "Complete payment"}
                       </Link>
-                    ) : req.status === "rejected" || req.status === "cancelled" ? (
+                    ) : req.status === "rejected" ||
+                      req.status === "cancelled" ? (
                       <Link
                         to="/teachers"
                         className="btn-outline w-full inline-flex items-center justify-center gap-2 text-sm"
                       >
-                        {lang === "ar" ? "احجز حصة جديدة" : "Book another session"}
+                        {lang === "ar"
+                          ? "احجز حصة جديدة"
+                          : "Book another session"}
                       </Link>
                     ) : (
                       <p className="text-center text-[0.7rem] text-muted-foreground">

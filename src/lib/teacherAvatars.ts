@@ -21,31 +21,136 @@ import arabFemale4 from "@/assets/avatars/arab-female-4.jpg";
 import arabFemale5 from "@/assets/avatars/arab-female-5.jpg";
 
 const POOLS = {
-  khaleejiMale: [khaleejiMale1, khaleejiMale2, khaleejiMale3, khaleejiMale4, khaleejiMale5],
-  khaleejiFemale: [khaleejiFemale1, khaleejiFemale2, khaleejiFemale3, khaleejiFemale4, khaleejiFemale5],
+  khaleejiMale: [
+    khaleejiMale1,
+    khaleejiMale2,
+    khaleejiMale3,
+    khaleejiMale4,
+    khaleejiMale5,
+  ],
+  khaleejiFemale: [
+    khaleejiFemale1,
+    khaleejiFemale2,
+    khaleejiFemale3,
+    khaleejiFemale4,
+    khaleejiFemale5,
+  ],
   arabMale: [arabMale1, arabMale2, arabMale3, arabMale4, arabMale5],
   arabFemale: [arabFemale1, arabFemale2, arabFemale3, arabFemale4, arabFemale5],
 };
 
 const FEMALE_TOKENS = [
-  "فاطمة", "عائشة", "خديجة", "مريم", "سارة", "ساره", "نورة", "نوره", "هيا", "شهد",
-  "ريم", "لمى", "لمي", "دانة", "دانه", "رغد", "أميرة", "اميرة", "هند", "لطيفة",
-  "منى", "منال", "سلمى", "سلمي", "لينا", "روان", "رنا", "غادة", "غاده", "شيماء",
-  "أسماء", "اسماء", "بشرى", "نجلاء", "هدى", "هدي", "ياسمين", "ملك", "جنى", "جنه",
-  "fatima", "aisha", "khadija", "maryam", "sara", "sarah", "noura", "nora", "haya",
-  "reem", "lama", "dana", "raghad", "amira", "hind", "latifa", "mona", "manal",
-  "salma", "lina", "rawan", "rana", "ghada", "shaimaa", "asma", "huda", "yasmin",
-  "malak", "jana",
+  "فاطمة",
+  "عائشة",
+  "خديجة",
+  "مريم",
+  "سارة",
+  "ساره",
+  "نورة",
+  "نوره",
+  "هيا",
+  "شهد",
+  "ريم",
+  "لمى",
+  "لمي",
+  "دانة",
+  "دانه",
+  "رغد",
+  "أميرة",
+  "اميرة",
+  "هند",
+  "لطيفة",
+  "منى",
+  "منال",
+  "سلمى",
+  "سلمي",
+  "لينا",
+  "روان",
+  "رنا",
+  "غادة",
+  "غاده",
+  "شيماء",
+  "أسماء",
+  "اسماء",
+  "بشرى",
+  "نجلاء",
+  "هدى",
+  "هدي",
+  "ياسمين",
+  "ملك",
+  "جنى",
+  "جنه",
+  "fatima",
+  "aisha",
+  "khadija",
+  "maryam",
+  "sara",
+  "sarah",
+  "noura",
+  "nora",
+  "haya",
+  "reem",
+  "lama",
+  "dana",
+  "raghad",
+  "amira",
+  "hind",
+  "latifa",
+  "mona",
+  "manal",
+  "salma",
+  "lina",
+  "rawan",
+  "rana",
+  "ghada",
+  "shaimaa",
+  "asma",
+  "huda",
+  "yasmin",
+  "malak",
+  "jana",
 ];
 
 const KHALEEJI_TOKENS = [
-  "الشمري", "الغامدي", "القحطاني", "العتيبي", "المطيري", "السبيعي", "الدوسري",
-  "الخالدي", "الحربي", "العنزي", "الرشيدي", "الزهراني", "المالكي", "الفهد",
-  "السعود", "الكواري", "المنصوري", "النعيمي", "الهاجري", "المري", "الكعبي",
-  "بن ", "آل ", "بنت ",
-  "سعود", "فيصل", "تركي", "سلطان", "منصور", "ناصر", "بندر", "مشعل", "طلال",
-  "نايف", "بدر",
-  "al-", "al ", "bin ", "bint ",
+  "الشمري",
+  "الغامدي",
+  "القحطاني",
+  "العتيبي",
+  "المطيري",
+  "السبيعي",
+  "الدوسري",
+  "الخالدي",
+  "الحربي",
+  "العنزي",
+  "الرشيدي",
+  "الزهراني",
+  "المالكي",
+  "الفهد",
+  "السعود",
+  "الكواري",
+  "المنصوري",
+  "النعيمي",
+  "الهاجري",
+  "المري",
+  "الكعبي",
+  "بن ",
+  "آل ",
+  "بنت ",
+  "سعود",
+  "فيصل",
+  "تركي",
+  "سلطان",
+  "منصور",
+  "ناصر",
+  "بندر",
+  "مشعل",
+  "طلال",
+  "نايف",
+  "بدر",
+  "al-",
+  "al ",
+  "bin ",
+  "bint ",
 ];
 
 // Stronger hash (FNV-1a-ish) to spread across the pool more evenly than *31.
@@ -70,12 +175,19 @@ const isKhaleeji = (name: string): boolean => {
   return KHALEEJI_TOKENS.some((t) => lower.includes(t.toLowerCase()));
 };
 
-export const getTeacherAvatar = (teacherId: string, fullName: string): string => {
+export const getTeacherAvatar = (
+  teacherId: string,
+  fullName: string,
+): string => {
   const female = isFemale(fullName);
   const khaleeji = isKhaleeji(fullName);
   const pool = khaleeji
-    ? female ? POOLS.khaleejiFemale : POOLS.khaleejiMale
-    : female ? POOLS.arabFemale : POOLS.arabMale;
+    ? female
+      ? POOLS.khaleejiFemale
+      : POOLS.khaleejiMale
+    : female
+      ? POOLS.arabFemale
+      : POOLS.arabMale;
   // Combine id + name so two teachers sharing a bucket but with different names diverge.
   return pool[hash(`${teacherId}|${fullName}`) % pool.length];
 };

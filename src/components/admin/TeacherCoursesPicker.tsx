@@ -27,35 +27,37 @@ const TeacherCoursesPicker = ({ valueAr, valueEn, onChange }: Props) => {
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
-    import("@/data/universities/loader").then((m) => m.loadAllUniversities()).then((allUniversities) => {
-      if (cancelled) return;
-      const seen = new Set<string>();
-      const out: CourseOption[] = [];
-      for (const uni of allUniversities) {
-        for (const college of uni.colleges || []) {
-          for (const dept of college.departments || []) {
-            for (const c of dept.courses || []) {
-              const ar = (c.name_ar || c.name_en || "").trim();
-              const en = (c.name_en || c.name_ar || "").trim();
-              if (!ar && !en) continue;
-              const key = `${ar}|${en}`;
-              if (seen.has(key)) continue;
-              seen.add(key);
-              out.push({
-                key,
-                ar,
-                en,
-                uni: uni.name_ar || uni.name_en,
-                dept: dept.name_ar || dept.name_en,
-              });
+    import("@/data/universities/loader")
+      .then((m) => m.loadAllUniversities())
+      .then((allUniversities) => {
+        if (cancelled) return;
+        const seen = new Set<string>();
+        const out: CourseOption[] = [];
+        for (const uni of allUniversities) {
+          for (const college of uni.colleges || []) {
+            for (const dept of college.departments || []) {
+              for (const c of dept.courses || []) {
+                const ar = (c.name_ar || c.name_en || "").trim();
+                const en = (c.name_en || c.name_ar || "").trim();
+                if (!ar && !en) continue;
+                const key = `${ar}|${en}`;
+                if (seen.has(key)) continue;
+                seen.add(key);
+                out.push({
+                  key,
+                  ar,
+                  en,
+                  uni: uni.name_ar || uni.name_en,
+                  dept: dept.name_ar || dept.name_en,
+                });
+              }
             }
           }
         }
-      }
-      out.sort((a, b) => a.ar.localeCompare(b.ar, "ar"));
-      setCatalog(out);
-      setLoading(false);
-    });
+        out.sort((a, b) => a.ar.localeCompare(b.ar, "ar"));
+        setCatalog(out);
+        setLoading(false);
+      });
     return () => {
       cancelled = true;
     };
@@ -71,27 +73,30 @@ const TeacherCoursesPicker = ({ valueAr, valueEn, onChange }: Props) => {
           !picked.has(c.ar.toLowerCase()) &&
           (c.ar.toLowerCase().includes(q) ||
             c.en.toLowerCase().includes(q) ||
-            c.dept.toLowerCase().includes(q))
+            c.dept.toLowerCase().includes(q)),
       )
       .slice(0, 40);
   }, [catalog, query, valueAr]);
 
   const add = (ar: string, en: string) => {
     if (!ar.trim()) return;
-    if (valueAr.some((s) => s.toLowerCase() === ar.trim().toLowerCase())) return;
+    if (valueAr.some((s) => s.toLowerCase() === ar.trim().toLowerCase()))
+      return;
     onChange([...valueAr, ar.trim()], [...valueEn, (en || ar).trim()]);
   };
 
   const remove = (i: number) => {
     onChange(
       valueAr.filter((_, idx) => idx !== i),
-      valueEn.filter((_, idx) => idx !== i)
+      valueEn.filter((_, idx) => idx !== i),
     );
   };
 
   return (
     <div className="space-y-3">
-      <label className="block text-sm font-bold">المقررات الدراسية للمعلم</label>
+      <label className="block text-sm font-bold">
+        المقررات الدراسية للمعلم
+      </label>
 
       {/* Selected chips */}
       <div className="flex flex-wrap gap-2 min-h-[2.5rem] p-2 rounded-xl border-2 border-border bg-muted/30">
@@ -125,7 +130,10 @@ const TeacherCoursesPicker = ({ valueAr, valueEn, onChange }: Props) => {
 
       {/* Search catalog */}
       <div className="relative">
-        <Search size={16} className="absolute top-1/2 -translate-y-1/2 start-3 text-muted-foreground" />
+        <Search
+          size={16}
+          className="absolute top-1/2 -translate-y-1/2 start-3 text-muted-foreground"
+        />
         <input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -133,7 +141,10 @@ const TeacherCoursesPicker = ({ valueAr, valueEn, onChange }: Props) => {
           placeholder="ابحث في مقررات الجامعات (عربي أو إنجليزي)..."
         />
         {loading && (
-          <Loader2 size={16} className="animate-spin absolute top-1/2 -translate-y-1/2 end-3 text-muted-foreground" />
+          <Loader2
+            size={16}
+            className="animate-spin absolute top-1/2 -translate-y-1/2 end-3 text-muted-foreground"
+          />
         )}
       </div>
 
@@ -152,26 +163,33 @@ const TeacherCoursesPicker = ({ valueAr, valueEn, onChange }: Props) => {
             </button>
           </div>
           <div className="max-h-56 overflow-y-auto divide-y divide-border">
-          {results.length === 0 ? (
-            <p className="p-3 text-xs text-muted-foreground">لا توجد نتائج — يمكنك إضافة المقرر يدوياً بالأسفل.</p>
-          ) : (
-            results.map((c) => (
-              <button
-                key={c.key}
-                type="button"
-                onClick={() => add(c.ar, c.en)}
-                className="w-full text-start p-2.5 hover:bg-muted/60 transition flex items-center justify-between gap-3"
-              >
-                <span className="min-w-0">
-                  <span className="block text-sm font-bold truncate">{c.ar}</span>
-                  <span className="block text-[0.7rem] text-muted-foreground truncate" dir="ltr">
-                    {c.en} — {c.dept} · {c.uni}
+            {results.length === 0 ? (
+              <p className="p-3 text-xs text-muted-foreground">
+                لا توجد نتائج — يمكنك إضافة المقرر يدوياً بالأسفل.
+              </p>
+            ) : (
+              results.map((c) => (
+                <button
+                  key={c.key}
+                  type="button"
+                  onClick={() => add(c.ar, c.en)}
+                  className="w-full text-start p-2.5 hover:bg-muted/60 transition flex items-center justify-between gap-3"
+                >
+                  <span className="min-w-0">
+                    <span className="block text-sm font-bold truncate">
+                      {c.ar}
+                    </span>
+                    <span
+                      className="block text-[0.7rem] text-muted-foreground truncate"
+                      dir="ltr"
+                    >
+                      {c.en} — {c.dept} · {c.uni}
+                    </span>
                   </span>
-                </span>
-                <Plus size={14} className="text-primary shrink-0" />
-              </button>
-            ))
-          )}
+                  <Plus size={14} className="text-primary shrink-0" />
+                </button>
+              ))
+            )}
           </div>
         </div>
       )}

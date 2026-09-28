@@ -1,5 +1,14 @@
 import { useEffect, useRef, useState } from "react";
-import { Calculator, Atom, FlaskConical, Languages, Code, Zap, PenTool, HeartPulse } from "lucide-react";
+import {
+  Calculator,
+  Atom,
+  FlaskConical,
+  Languages,
+  Code,
+  Zap,
+  PenTool,
+  HeartPulse,
+} from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import gradCap from "@/assets/hero-3d-cap.webp";
 
@@ -63,7 +72,9 @@ const HeroOrbit = () => {
 
     // Cache node metadata once instead of querying + parsing datasets every
     // frame. This removes ~40 DOM reads/frame on mobile.
-    const rawNodes = ref.current?.querySelectorAll<HTMLElement>("[data-orbit-traveler]");
+    const rawNodes = ref.current?.querySelectorAll<HTMLElement>(
+      "[data-orbit-traveler]",
+    );
     if (!rawNodes || rawNodes.length === 0) return;
     const nodes = Array.from(rawNodes).map((node) => ({
       node,
@@ -80,7 +91,7 @@ const HeroOrbit = () => {
           ([entry]) => {
             visible = entry.isIntersecting;
           },
-          { threshold: 0.01 }
+          { threshold: 0.01 },
         )
       : null;
     if (io && ref.current) io.observe(ref.current);
@@ -88,7 +99,9 @@ const HeroOrbit = () => {
     // The orbit is decorative. Keep it at 15fps on Apple devices and 30fps
     // elsewhere; this preserves motion without saturating touch scrolling or
     // the compositor on iPad/iPhone/Mac.
-    const appleMotionLite = typeof document !== "undefined" && document.documentElement.dataset.appleMotionLite === "1";
+    const appleMotionLite =
+      typeof document !== "undefined" &&
+      document.documentElement.dataset.appleMotionLite === "1";
     const minDelta = appleMotionLite ? 1000 / 15 : 1000 / 30;
     let last = 0;
     let frame = 0;
@@ -125,7 +138,10 @@ const HeroOrbit = () => {
   });
 
   return (
-    <div ref={ref} className="relative w-full h-full flex items-center justify-center scale-[0.72] md:scale-100">
+    <div
+      ref={ref}
+      className="relative w-full h-full flex items-center justify-center scale-[0.72] md:scale-100"
+    >
       {/* Orbit rings */}
       {ORBITS.map((o, i) => (
         <div
@@ -143,7 +159,11 @@ const HeroOrbit = () => {
       <div className="absolute z-20 w-28 h-28 md:w-36 md:h-36 flex items-center justify-center float-y">
         <div
           className="absolute inset-0 rounded-full"
-          style={{ background: "radial-gradient(circle, hsl(14 91% 50% / 0.45), transparent 70%)", transform: "scale(1.8)" }}
+          style={{
+            background:
+              "radial-gradient(circle, hsl(14 91% 50% / 0.45), transparent 70%)",
+            transform: "scale(1.8)",
+          }}
         />
         <img
           src={gradCap}
@@ -151,7 +171,7 @@ const HeroOrbit = () => {
           width={320}
           height={320}
           decoding="async"
-          {...({ fetchpriority: "high" } as any)}
+          fetchPriority="high"
           className="relative w-full h-full object-contain drop-shadow-[0_12px_24px_hsl(14_91%_45%/0.55)]"
         />
       </div>
@@ -184,9 +204,11 @@ const HeroOrbit = () => {
                   <div
                     className="w-[56px] h-[56px] rounded-full flex items-center justify-center"
                     style={{
-                      background: "linear-gradient(135deg, hsl(var(--card) / 0.95), hsl(var(--card) / 0.75))",
+                      background:
+                        "linear-gradient(135deg, hsl(var(--card) / 0.95), hsl(var(--card) / 0.75))",
                       border: "1px solid hsl(14 91% 50% / 0.35)",
-                      boxShadow: "0 6px 14px hsl(0 0% 0% / 0.12), inset 0 1px 0 hsl(0 0% 100% / 0.4)",
+                      boxShadow:
+                        "0 6px 14px hsl(0 0% 0% / 0.12), inset 0 1px 0 hsl(0 0% 100% / 0.4)",
                     }}
                   >
                     <Icon className="text-primary" size={22} />

@@ -1,7 +1,18 @@
 import { useParams, Link } from "@/lib/router-compat";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useBilingual } from "@/hooks/useBilingual";
-import { Clock, BookOpen, Loader2, BadgeCheck, GraduationCap, Video, Languages, CalendarCheck, MessageCircle, ChevronLeft } from "lucide-react";
+import {
+  Clock,
+  BookOpen,
+  Loader2,
+  BadgeCheck,
+  GraduationCap,
+  Video,
+  Languages,
+  CalendarCheck,
+  MessageCircle,
+  ChevronLeft,
+} from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import BookSessionModal from "@/components/BookSessionModal";
@@ -40,39 +51,64 @@ interface AvailSlot {
 import { resolveDisplayName } from "@/lib/teacherNameTranslate";
 import type { PublicTeacher } from "@/lib/publicData.functions";
 
-const TeacherProfile = ({ initialTeacher }: { initialTeacher?: PublicTeacher | null } = {}) => {
+const TeacherProfile = ({
+  initialTeacher,
+}: { initialTeacher?: PublicTeacher | null } = {}) => {
   const { id } = useParams();
   const { t, lang } = useLanguage();
   const { b, bArr } = useBilingual();
   // Server-rendered pages arrive with the public tutor already loaded.
   const [teacher, setTeacher] = useState<TeacherFull | null>(() =>
-    initialTeacher ? { ...initialTeacher, full_name: initialTeacher.full_name || t("the_teacher") } : null
+    initialTeacher
+      ? {
+          ...initialTeacher,
+          full_name: initialTeacher.full_name || t("the_teacher"),
+        }
+      : null,
   );
   const [availability, setAvailability] = useState<AvailSlot[]>([]);
   const [loading, setLoading] = useState(!initialTeacher);
   const [showBooking, setShowBooking] = useState(false);
 
   const ar = lang === "ar";
-  const DAYS = [t("day_sun"), t("day_mon"), t("day_tue"), t("day_wed"), t("day_thu"), t("day_fri"), t("day_sat")];
+  const DAYS = [
+    t("day_sun"),
+    t("day_mon"),
+    t("day_tue"),
+    t("day_wed"),
+    t("day_thu"),
+    t("day_fri"),
+    t("day_sat"),
+  ];
 
   useEffect(() => {
     if (!id) return;
     const fetch = async () => {
       if (initialTeacher) {
-        const { data: avail } = await supabase.rpc("get_public_teacher_availability", { _teacher_id: id });
+        const { data: avail } = await supabase.rpc(
+          "get_public_teacher_availability",
+          { _teacher_id: id },
+        );
         setAvailability((avail as AvailSlot[]) || []);
         return;
       }
       setLoading(true);
       const { data: tp } = await supabase
         .from("teacher_profiles")
-        .select("user_id, subjects, subjects_en, university, university_en, major, major_en, price, verified")
+        .select(
+          "user_id, subjects, subjects_en, university, university_en, major, major_en, price, verified",
+        )
         .eq("user_id", id)
         .single();
 
-      if (!tp) { setLoading(false); return; }
+      if (!tp) {
+        setLoading(false);
+        return;
+      }
 
-      const { data: profileRows } = await supabase.rpc("get_public_profile", { _user_id: id });
+      const { data: profileRows } = await supabase.rpc("get_public_profile", {
+        _user_id: id,
+      });
       const profile = (profileRows as any[])?.[0] || null;
 
       setTeacher({
@@ -83,16 +119,19 @@ const TeacherProfile = ({ initialTeacher }: { initialTeacher?: PublicTeacher | n
         bio_en: profile?.bio_en || null,
         avatar_url: profile?.avatar_url || null,
         subjects: tp.subjects || [],
-        subjects_en: (tp as any).subjects_en || [],
+        subjects_en: tp.subjects_en || [],
         university: tp.university || null,
-        university_en: (tp as any).university_en || null,
-        major: (tp as any).major || null,
-        major_en: (tp as any).major_en || null,
+        university_en: tp.university_en || null,
+        major: tp.major || null,
+        major_en: tp.major_en || null,
         price: tp.price || 0,
         verified: tp.verified || false,
       });
 
-      const { data: avail } = await supabase.rpc("get_public_teacher_availability", { _teacher_id: id });
+      const { data: avail } = await supabase.rpc(
+        "get_public_teacher_availability",
+        { _teacher_id: id },
+      );
 
       setAvailability((avail as AvailSlot[]) || []);
       setLoading(false);
@@ -112,7 +151,9 @@ const TeacherProfile = ({ initialTeacher }: { initialTeacher?: PublicTeacher | n
     return (
       <div className="container py-20 text-center">
         <h1 className="text-2xl font-bold">{t("teacher_not_found")}</h1>
-        <Link to="/teachers" className="btn-primary mt-4 inline-block">{t("teacher_back")}</Link>
+        <Link to="/teachers" className="btn-primary mt-4 inline-block">
+          {t("teacher_back")}
+        </Link>
       </div>
     );
   }
@@ -121,32 +162,60 @@ const TeacherProfile = ({ initialTeacher }: { initialTeacher?: PublicTeacher | n
     lang === "en" ? "en" : "ar",
     teacher.full_name,
     teacher.full_name_en,
-    t("the_teacher")
+    t("the_teacher"),
   );
   const displayBio = b(teacher.bio, teacher.bio_en);
   const displaySubjects = bArr(teacher.subjects, teacher.subjects_en);
   const displayMajor =
-    b(teacher.major, teacher.major_en) || getTeacherMajor(teacher.user_id, lang === "en" ? "en" : "ar");
+    b(teacher.major, teacher.major_en) ||
+    getTeacherMajor(teacher.user_id, lang === "en" ? "en" : "ar");
 
   const facts = [
-    { icon: GraduationCap, label: ar ? "التخصص" : "Specialization", value: displayMajor },
-    { icon: BookOpen, label: ar ? "المقررات" : "Courses", value: `${displaySubjects.length}` },
-    { icon: Video, label: ar ? "نوع الحصص" : "Session type", value: ar ? "أونلاين مباشر" : "Live online" },
-    { icon: Languages, label: ar ? "لغة الشرح" : "Teaching language", value: ar ? "عربي / إنجليزي" : "Arabic / English" },
+    {
+      icon: GraduationCap,
+      label: ar ? "التخصص" : "Specialization",
+      value: displayMajor,
+    },
+    {
+      icon: BookOpen,
+      label: ar ? "المقررات" : "Courses",
+      value: `${displaySubjects.length}`,
+    },
+    {
+      icon: Video,
+      label: ar ? "نوع الحصص" : "Session type",
+      value: ar ? "أونلاين مباشر" : "Live online",
+    },
+    {
+      icon: Languages,
+      label: ar ? "لغة الشرح" : "Teaching language",
+      value: ar ? "عربي / إنجليزي" : "Arabic / English",
+    },
   ];
 
   return (
     <div className="pb-16">
       <PageHelmet
         title={displayName}
-        description={(displayBio || `${displayName} — ${displayMajor}`).slice(0, 160)}
+        description={(() => {
+          const subj = displaySubjects.slice(0, 3).join(ar ? "، " : ", ");
+          const base = ar
+            ? `${displayName} — ${displayMajor}. حصص خصوصية أونلاين مباشرة${subj ? ` في ${subj}` : ""} على منصة أستاذي.`
+            : `${displayName} — ${displayMajor}. Live private online sessions${subj ? ` in ${subj}` : ""} on OSTAZE.`;
+          return (
+            displayBio && displayBio.length >= 80 ? displayBio : base
+          ).slice(0, 160);
+        })()}
         ogType="profile"
         jsonLd={[
           personJsonLd({
             id: teacher.user_id,
             name: displayName,
             jobTitle: ar ? "معلم" : "Tutor",
-            university: (ar ? teacher.university : teacher.university_en || teacher.university) || null,
+            university:
+              (ar
+                ? teacher.university
+                : teacher.university_en || teacher.university) || null,
             image: teacher.avatar_url,
             subjects: displaySubjects,
           }),
@@ -163,9 +232,13 @@ const TeacherProfile = ({ initialTeacher }: { initialTeacher?: PublicTeacher | n
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,hsl(var(--primary)/0.25),transparent_60%)]" />
         <div className="container relative pt-page pb-20">
           <nav className="text-sm text-muted-foreground mb-6 flex items-center gap-1.5 flex-wrap">
-            <Link to="/teachers" className="hover:text-primary font-medium">{t("nav_teachers")}</Link>
+            <Link to="/teachers" className="hover:text-primary font-medium">
+              {t("nav_teachers")}
+            </Link>
             <ChevronLeft size={14} className="ltr:rotate-180" />
-            <span className="text-foreground font-semibold truncate max-w-[220px]">{displayName}</span>
+            <span className="text-foreground font-semibold truncate max-w-[220px]">
+              {displayName}
+            </span>
           </nav>
         </div>
       </section>
@@ -183,7 +256,10 @@ const TeacherProfile = ({ initialTeacher }: { initialTeacher?: PublicTeacher | n
             >
               <div className="flex flex-col sm:flex-row sm:items-start gap-5 text-center sm:text-start">
                 <img
-                  src={teacher.avatar_url || getTeacherAvatar(teacher.user_id, teacher.full_name)}
+                  src={
+                    teacher.avatar_url ||
+                    getTeacherAvatar(teacher.user_id, teacher.full_name)
+                  }
                   alt={displayName}
                   className="w-28 h-28 rounded-3xl object-cover shadow-lg border-4 border-card mx-auto sm:mx-0 shrink-0"
                   width={112}
@@ -192,7 +268,9 @@ const TeacherProfile = ({ initialTeacher }: { initialTeacher?: PublicTeacher | n
                 />
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center justify-center sm:justify-start gap-2 flex-wrap mb-2">
-                    <h1 className="text-2xl sm:text-3xl font-black leading-tight">{displayName}</h1>
+                    <h1 className="text-2xl sm:text-3xl font-black leading-tight">
+                      {displayName}
+                    </h1>
                     {teacher.verified && (
                       <span className="inline-flex items-center gap-1 text-xs bg-success/15 text-success px-2.5 py-1 rounded-full font-bold">
                         <BadgeCheck size={13} />
@@ -207,13 +285,20 @@ const TeacherProfile = ({ initialTeacher }: { initialTeacher?: PublicTeacher | n
 
                   <div className="mt-5 grid grid-cols-2 gap-3">
                     {facts.map((f) => (
-                      <div key={f.label} className="flex items-center gap-2.5 rounded-2xl border border-border/60 bg-muted/60 p-3 text-start">
+                      <div
+                        key={f.label}
+                        className="flex items-center gap-2.5 rounded-2xl border border-border/60 bg-muted/60 p-3 text-start"
+                      >
                         <span className="w-9 h-9 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
                           <f.icon size={16} />
                         </span>
                         <div className="min-w-0">
-                          <p className="text-[11px] text-muted-foreground font-medium">{f.label}</p>
-                          <p className="text-sm font-bold truncate">{f.value}</p>
+                          <p className="text-[11px] text-muted-foreground font-medium">
+                            {f.label}
+                          </p>
+                          <p className="text-sm font-bold truncate">
+                            {f.value}
+                          </p>
                         </div>
                       </div>
                     ))}
@@ -224,7 +309,9 @@ const TeacherProfile = ({ initialTeacher }: { initialTeacher?: PublicTeacher | n
 
             {/* About */}
             <div className="card-base p-6">
-              <h2 className="font-extrabold text-lg mb-3">{ar ? "نبذة عن المعلم" : "About the tutor"}</h2>
+              <h2 className="font-extrabold text-lg mb-3">
+                {ar ? "نبذة عن المعلم" : "About the tutor"}
+              </h2>
               <p className="text-muted-foreground leading-relaxed">
                 {displayBio ||
                   (ar
@@ -236,10 +323,14 @@ const TeacherProfile = ({ initialTeacher }: { initialTeacher?: PublicTeacher | n
             {/* Subjects */}
             {displaySubjects.length > 0 && (
               <div className="card-base p-6">
-                <h2 className="font-extrabold text-lg mb-4">{ar ? "المقررات التي يدرّسها" : "Courses taught"}</h2>
+                <h2 className="font-extrabold text-lg mb-4">
+                  {ar ? "المقررات التي يدرّسها" : "Courses taught"}
+                </h2>
                 <div className="flex flex-wrap gap-2">
                   {displaySubjects.map((s, i) => (
-                    <span key={i} className="badge-brand">{s}</span>
+                    <span key={i} className="badge-brand">
+                      {s}
+                    </span>
                   ))}
                 </div>
               </div>
@@ -254,9 +345,16 @@ const TeacherProfile = ({ initialTeacher }: { initialTeacher?: PublicTeacher | n
                 </h2>
                 <div className="grid sm:grid-cols-2 gap-3">
                   {availability.map((a, i) => (
-                    <div key={i} className="flex items-center justify-between p-3 border border-border/60 bg-muted/60 rounded-xl">
-                      <span className="font-bold text-sm">{DAYS[a.day_of_week]}</span>
-                      <span className="text-muted-foreground text-sm">{a.start_time.slice(0, 5)} - {a.end_time.slice(0, 5)}</span>
+                    <div
+                      key={i}
+                      className="flex items-center justify-between p-3 border border-border/60 bg-muted/60 rounded-xl"
+                    >
+                      <span className="font-bold text-sm">
+                        {DAYS[a.day_of_week]}
+                      </span>
+                      <span className="text-muted-foreground text-sm">
+                        {a.start_time.slice(0, 5)} - {a.end_time.slice(0, 5)}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -267,19 +365,33 @@ const TeacherProfile = ({ initialTeacher }: { initialTeacher?: PublicTeacher | n
           {/* Sticky booking sidebar */}
           <aside className="lg:sticky lg:top-24 space-y-4">
             <div className="card-base p-6">
-              <h2 className="font-extrabold text-lg mb-1">{ar ? "احجز مع المعلم" : "Book with this tutor"}</h2>
+              <h2 className="font-extrabold text-lg mb-1">
+                {ar ? "احجز مع المعلم" : "Book with this tutor"}
+              </h2>
               <p className="text-sm text-muted-foreground mb-5">
-                {ar ? "اختر وقتك المفضل وسنؤكد الحجز معك." : "Pick your preferred time and we'll confirm your booking."}
+                {ar
+                  ? "اختر وقتك المفضل وسنؤكد الحجز معك."
+                  : "Pick your preferred time and we'll confirm your booking."}
               </p>
 
               <ul className="space-y-2.5 mb-5 text-sm">
                 {[
-                  ar ? "حصة أونلاين مباشرة عبر Zoom" : "Live online session via Zoom",
-                  ar ? "تأكيد سريع على الواتساب" : "Fast confirmation on WhatsApp",
+                  ar
+                    ? "حصة أونلاين مباشرة عبر Zoom"
+                    : "Live online session via Zoom",
+                  ar
+                    ? "تأكيد سريع على الواتساب"
+                    : "Fast confirmation on WhatsApp",
                   ar ? "إعادة جدولة مرنة" : "Flexible rescheduling",
                 ].map((line) => (
-                  <li key={line} className="flex items-start gap-2 text-muted-foreground">
-                    <CalendarCheck size={16} className="text-primary mt-0.5 shrink-0" />
+                  <li
+                    key={line}
+                    className="flex items-start gap-2 text-muted-foreground"
+                  >
+                    <CalendarCheck
+                      size={16}
+                      className="text-primary mt-0.5 shrink-0"
+                    />
                     <span>{line}</span>
                   </li>
                 ))}
@@ -296,7 +408,7 @@ const TeacherProfile = ({ initialTeacher }: { initialTeacher?: PublicTeacher | n
                 href={waLink(
                   ar
                     ? `مرحباً، أريد حجز حصة مع ${displayName}`
-                    : `Hello, I'd like to book a session with ${displayName}`
+                    : `Hello, I'd like to book a session with ${displayName}`,
                 )}
                 target="_blank"
                 rel="noopener noreferrer"

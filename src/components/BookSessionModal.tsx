@@ -4,7 +4,14 @@ import { useNavigate } from "@/lib/router-compat";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { X, Loader2, Calendar, BookOpen, CheckCircle2, Mail } from "lucide-react";
+import {
+  X,
+  Loader2,
+  Calendar,
+  BookOpen,
+  CheckCircle2,
+  Mail,
+} from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 
@@ -16,7 +23,6 @@ interface Props {
   subjects: string[];
 }
 
-
 type DaySlot = { day: number; slot: "morning" | "afternoon" | "evening" };
 
 const SLOTS: { key: DaySlot["slot"]; hour: number }[] = [
@@ -25,7 +31,13 @@ const SLOTS: { key: DaySlot["slot"]; hour: number }[] = [
   { key: "evening", hour: 19 },
 ];
 
-const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects }: Props) => {
+const BookSessionModal = ({
+  open,
+  onClose,
+  teacherId,
+  teacherName,
+  subjects,
+}: Props) => {
   const { user } = useAuth();
   const { t, lang } = useLanguage();
   const navigate = useNavigate();
@@ -54,9 +66,18 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects }: P
   ];
 
   const slotLabels = {
-    morning: { label: t("preferred_morning"), time: t("preferred_morning_time") },
-    afternoon: { label: t("preferred_afternoon"), time: t("preferred_afternoon_time") },
-    evening: { label: t("preferred_evening"), time: t("preferred_evening_time") },
+    morning: {
+      label: t("preferred_morning"),
+      time: t("preferred_morning_time"),
+    },
+    afternoon: {
+      label: t("preferred_afternoon"),
+      time: t("preferred_afternoon_time"),
+    },
+    evening: {
+      label: t("preferred_evening"),
+      time: t("preferred_evening_time"),
+    },
   };
 
   const toggleSlot = (day: number, slot: DaySlot["slot"]) => {
@@ -123,7 +144,7 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects }: P
     if (form.notes.trim()) noteParts.push(form.notes.trim());
     if (selectedSlots.length > 1) {
       noteParts.push(
-        `${t("preferred_slots_label")}: ${selectedSlots.map((s) => formatSlot(s.day, s.slot)).join(", ")}`
+        `${t("preferred_slots_label")}: ${selectedSlots.map((s) => formatSlot(s.day, s.slot)).join(", ")}`,
       );
     }
 
@@ -142,7 +163,8 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects }: P
       if (error) throw error;
 
       setShowSuccess(true);
-    } catch (e: any) {
+    } catch (caught) {
+      const e = caught as Error;
       toast.error((lang === "ar" ? "خطأ: " : "Error: ") + e.message);
     } finally {
       setSubmitting(false);
@@ -199,7 +221,9 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects }: P
                 </div>
                 <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground bg-secondary/60 rounded-xl py-2.5 px-3">
                   <Mail size={14} className="text-primary" />
-                  {lang === "ar" ? "راجع بريدك الإلكتروني خلال الساعات القادمة" : "Check your email in the next few hours"}
+                  {lang === "ar"
+                    ? "راجع بريدك الإلكتروني خلال الساعات القادمة"
+                    : "Check your email in the next few hours"}
                 </div>
                 <div className="flex gap-3 pt-2">
                   <button
@@ -211,7 +235,10 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects }: P
                   >
                     {t("my_bookings")}
                   </button>
-                  <button onClick={onClose} className="btn-outline flex-1 text-sm">
+                  <button
+                    onClick={onClose}
+                    className="btn-outline flex-1 text-sm"
+                  >
                     {t("close_btn")}
                   </button>
                 </div>
@@ -221,11 +248,14 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects }: P
                 {subjects.length > 0 && (
                   <div>
                     <label className="text-sm font-bold mb-1.5 flex items-center gap-1.5 text-foreground">
-                      <BookOpen size={14} className="text-primary" /> {t("the_subject")}
+                      <BookOpen size={14} className="text-primary" />{" "}
+                      {t("the_subject")}
                     </label>
                     <select
                       value={form.subject}
-                      onChange={(e) => setForm((f) => ({ ...f, subject: e.target.value }))}
+                      onChange={(e) =>
+                        setForm((f) => ({ ...f, subject: e.target.value }))
+                      }
                       className="input-base"
                     >
                       {subjects.map((s, i) => (
@@ -243,7 +273,9 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects }: P
                       <Calendar size={20} />
                     </div>
                     <div>
-                      <h3 className="font-extrabold text-foreground">{t("preferred_time_title")}</h3>
+                      <h3 className="font-extrabold text-foreground">
+                        {t("preferred_time_title")}
+                      </h3>
                       <p className="text-xs text-muted-foreground leading-relaxed mt-0.5">
                         {t("preferred_time_subtitle")}
                       </p>
@@ -310,7 +342,9 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects }: P
                   </label>
                   <textarea
                     value={form.notes}
-                    onChange={(e) => setForm((f) => ({ ...f, notes: e.target.value }))}
+                    onChange={(e) =>
+                      setForm((f) => ({ ...f, notes: e.target.value }))
+                    }
                     rows={2}
                     className="input-base resize-none"
                   />
@@ -323,7 +357,9 @@ const BookSessionModal = ({ open, onClose, teacherId, teacherName, subjects }: P
                   disabled={submitting || selectedSlots.length === 0}
                   className="w-full text-base font-extrabold bg-primary text-primary-foreground px-6 py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 hover:bg-primary-dark hover:shadow-[0_8px_24px_hsl(14_91%_49%/0.4)] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:shadow-none"
                 >
-                  {submitting ? <Loader2 size={18} className="animate-spin" /> : null}
+                  {submitting ? (
+                    <Loader2 size={18} className="animate-spin" />
+                  ) : null}
                   {submitting ? t("sending") : t("confirm_booking_btn")}
                 </motion.button>
               </div>

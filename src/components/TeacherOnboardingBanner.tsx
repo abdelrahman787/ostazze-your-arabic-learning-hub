@@ -21,7 +21,8 @@ const TeacherOnboardingBanner = () => {
         .select("onboarding_completed")
         .eq("user_id", user.id)
         .maybeSingle();
-      if (!cancelled) setPending(data ? data.onboarding_completed === false : false);
+      if (!cancelled)
+        setPending(data ? data.onboarding_completed === false : false);
     })();
     return () => {
       cancelled = true;
@@ -41,7 +42,10 @@ const TeacherOnboardingBanner = () => {
             ? "أكمل تفعيل حسابك: كلمة المرور، الملف الشخصي، والحساب البنكي لاستلام أرباحك."
             : "Finish your setup: password, profile, and bank details to receive your earnings."}
         </p>
-        <Link to="/teacher/onboarding" className="btn-primary text-sm px-4 py-2.5">
+        <Link
+          to="/teacher/onboarding"
+          className="btn-primary text-sm px-4 py-2.5"
+        >
           {isAr ? "إكمال الخطوات" : "Complete setup"}
         </Link>
       </div>

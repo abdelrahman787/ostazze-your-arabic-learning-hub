@@ -44,10 +44,21 @@ const TeacherAvailabilityManager = () => {
     setLoading(false);
   }, [user]);
 
-  useEffect(() => { fetchSlots(); }, [fetchSlots]);
+  useEffect(() => {
+    fetchSlots();
+  }, [fetchSlots]);
 
   const addSlot = (day: number) => {
-    setSlots((prev) => [...prev, { day_of_week: day, start_time: "09:00", end_time: "17:00", is_active: true, isNew: true }]);
+    setSlots((prev) => [
+      ...prev,
+      {
+        day_of_week: day,
+        start_time: "09:00",
+        end_time: "17:00",
+        is_active: true,
+        isNew: true,
+      },
+    ]);
   };
 
   const removeSlot = async (index: number) => {
@@ -59,8 +70,14 @@ const TeacherAvailabilityManager = () => {
     toast.success(t("time_deleted"));
   };
 
-  const updateSlot = (index: number, field: keyof Slot, value: string | boolean) => {
-    setSlots((prev) => prev.map((s, i) => i === index ? { ...s, [field]: value } : s));
+  const updateSlot = (
+    index: number,
+    field: keyof Slot,
+    value: string | boolean,
+  ) => {
+    setSlots((prev) =>
+      prev.map((s, i) => (i === index ? { ...s, [field]: value } : s)),
+    );
   };
 
   const saveAll = async () => {
@@ -73,7 +90,10 @@ const TeacherAvailabilityManager = () => {
       .eq("teacher_id", user.id);
 
     try {
-      await supabase.from("teacher_availability").delete().eq("teacher_id", user.id);
+      await supabase
+        .from("teacher_availability")
+        .delete()
+        .eq("teacher_id", user.id);
       const activeSlots = slots.filter((s) => s.is_active);
       if (activeSlots.length > 0) {
         const { error } = await supabase.from("teacher_availability").insert(
@@ -83,57 +103,100 @@ const TeacherAvailabilityManager = () => {
             start_time: s.start_time,
             end_time: s.end_time,
             is_active: true,
-          }))
+          })),
         );
         if (error) {
           // Restore previous slots to prevent data loss
           if (previousSlots && previousSlots.length > 0) {
-            await supabase.from("teacher_availability").insert(
-              previousSlots.map(({ id: _id, ...rest }) => rest)
-            );
+            await supabase
+              .from("teacher_availability")
+              .insert(previousSlots.map(({ id: _id, ...rest }) => rest));
           }
           throw error;
         }
       }
       toast.success(t("schedule_saved"));
       fetchSlots();
-    } catch (e: any) {
+    } catch (caught) {
+      const e = caught as Error;
       toast.error(t("save_error") + " " + e.message);
     }
     setSaving(false);
   };
 
-  if (loading) return <div className="flex justify-center py-12"><Loader2 className="animate-spin text-primary" size={32} /></div>;
+  if (loading)
+    return (
+      <div className="flex justify-center py-12">
+        <Loader2 className="animate-spin text-primary" size={32} />
+      </div>
+    );
 
   return (
     <div className="max-w-2xl space-y-4">
       <div className="flex items-center justify-between mb-2">
-        <h3 className="font-extrabold text-lg flex items-center gap-2"><Clock size={20} className="text-primary" /> {t("manage_availability")}</h3>
+        <h3 className="font-extrabold text-lg flex items-center gap-2">
+          <Clock size={20} className="text-primary" />{" "}
+          {t("manage_availability")}
+        </h3>
       </div>
-      
+
       {DAYS.map((day) => {
         const daySlots = slots.filter((s) => s.day_of_week === day.value);
         return (
           <div key={day.value} className="card-base p-4">
             <div className="flex items-center justify-between mb-2">
               <span className="font-bold text-sm">{day.label}</span>
-              <button onClick={() => addSlot(day.value)} className="text-primary text-xs font-bold flex items-center gap-1 hover:underline">
+              <button
+                onClick={() => addSlot(day.value)}
+                className="text-primary text-xs font-bold flex items-center gap-1 hover:underline"
+              >
                 <Plus size={14} /> {t("add_time")}
               </button>
             </div>
             {daySlots.length === 0 ? (
-              <p className="text-muted-foreground text-xs">{t("no_times_set")}</p>
+              <p className="text-muted-foreground text-xs">
+                {t("no_times_set")}
+              </p>
             ) : (
               <div className="space-y-2">
                 {daySlots.map((slot) => {
                   const idx = slots.indexOf(slot);
                   return (
-                    <div key={idx} className="flex items-center gap-3 p-2 bg-secondary rounded-xl">
-                      <input type="checkbox" checked={slot.is_active} onChange={(e) => updateSlot(idx, "is_active", e.target.checked)} className="w-4 h-4 accent-primary" />
-                      <input type="time" value={slot.start_time} onChange={(e) => updateSlot(idx, "start_time", e.target.value)} className="input-base !w-auto text-sm" />
-                      <span className="text-muted-foreground text-sm">{t("to_word")}</span>
-                      <input type="time" value={slot.end_time} onChange={(e) => updateSlot(idx, "end_time", e.target.value)} className="input-base !w-auto text-sm" />
-                      <button onClick={() => removeSlot(idx)} className="text-destructive hover:bg-destructive/10 p-1.5 rounded-lg transition-colors">
+                    <div
+                      key={idx}
+                      className="flex items-center gap-3 p-2 bg-secondary rounded-xl"
+                    >
+                      <input
+                        type="checkbox"
+                        checked={slot.is_active}
+                        onChange={(e) =>
+                          updateSlot(idx, "is_active", e.target.checked)
+                        }
+                        className="w-4 h-4 accent-primary"
+                      />
+                      <input
+                        type="time"
+                        value={slot.start_time}
+                        onChange={(e) =>
+                          updateSlot(idx, "start_time", e.target.value)
+                        }
+                        className="input-base !w-auto text-sm"
+                      />
+                      <span className="text-muted-foreground text-sm">
+                        {t("to_word")}
+                      </span>
+                      <input
+                        type="time"
+                        value={slot.end_time}
+                        onChange={(e) =>
+                          updateSlot(idx, "end_time", e.target.value)
+                        }
+                        className="input-base !w-auto text-sm"
+                      />
+                      <button
+                        onClick={() => removeSlot(idx)}
+                        className="text-destructive hover:bg-destructive/10 p-1.5 rounded-lg transition-colors"
+                      >
                         <Trash2 size={14} />
                       </button>
                     </div>
@@ -145,9 +208,18 @@ const TeacherAvailabilityManager = () => {
         );
       })}
 
-      <motion.button whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }} onClick={saveAll} disabled={saving}
-        className="btn-primary w-full flex items-center justify-center gap-2">
-        {saving ? <Loader2 size={16} className="animate-spin" /> : <Save size={16} />}
+      <motion.button
+        whileHover={{ scale: 1.01 }}
+        whileTap={{ scale: 0.99 }}
+        onClick={saveAll}
+        disabled={saving}
+        className="btn-primary w-full flex items-center justify-center gap-2"
+      >
+        {saving ? (
+          <Loader2 size={16} className="animate-spin" />
+        ) : (
+          <Save size={16} />
+        )}
         {saving ? t("saving") : t("save_schedule")}
       </motion.button>
     </div>

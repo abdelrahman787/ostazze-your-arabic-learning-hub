@@ -32,9 +32,7 @@ export default function ZoomTest() {
         setTokenStatus(`❌ ${data?.error || "Unknown response"}`);
       }
     } catch (err) {
-      setTokenStatus(
-        `❌ ${err instanceof Error ? err.message : String(err)}`,
-      );
+      setTokenStatus(`❌ ${err instanceof Error ? err.message : String(err)}`);
     } finally {
       setTokenLoading(false);
     }

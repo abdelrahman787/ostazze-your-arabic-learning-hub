@@ -6,7 +6,10 @@ import { logSignedUrlFailure } from "@/lib/accessLog";
  *  - A full Supabase public URL like `https://<ref>.supabase.co/storage/v1/object/public/<bucket>/<path>`
  *  - A bare object path like `1700000000-abc.mp4` or `course-id/123-xyz.mp4`
  */
-export function extractStoragePath(stored: string | null | undefined, bucket: string): string | null {
+export function extractStoragePath(
+  stored: string | null | undefined,
+  bucket: string,
+): string | null {
   if (!stored) return null;
   // Already a path?
   if (!/^https?:\/\//i.test(stored)) return stored;
@@ -39,7 +42,7 @@ export function extractStoragePath(stored: string | null | undefined, bucket: st
 export async function getSignedFileUrl(
   bucket: string,
   storedValue: string | null | undefined,
-  expiresIn = 3600
+  expiresIn = 3600,
 ): Promise<string | null> {
   const path = extractStoragePath(storedValue, bucket);
   if (!path) {
@@ -47,7 +50,9 @@ export async function getSignedFileUrl(
     return null;
   }
 
-  const { data, error } = await supabase.storage.from(bucket).createSignedUrl(path, expiresIn);
+  const { data, error } = await supabase.storage
+    .from(bucket)
+    .createSignedUrl(path, expiresIn);
   if (error || !data?.signedUrl) {
     logSignedUrlFailure(bucket, path, error);
     return null;
