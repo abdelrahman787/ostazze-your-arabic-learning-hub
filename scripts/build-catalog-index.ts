@@ -1,7 +1,9 @@
-// Writes src/data/universities/catalog.generated.ts (lightweight index) from the per-country modules.
+// Writes the lightweight catalog indexes from the per-country modules.
 import { writeFileSync } from "node:fs";
 import { allUniversities } from "../src/data/universities/all";
-import { buildCatalogIndex, renderCatalogModule } from "../src/data/universities/buildIndex";
+import { buildCatalogIndex, renderUniversityIndexModule, renderSubjectIndexModule } from "../src/data/universities/buildIndex";
 
-writeFileSync("src/data/universities/catalog.generated.ts", renderCatalogModule(buildCatalogIndex(allUniversities)));
-console.log(`catalog index written (${allUniversities.length} universities)`);
+const idx = buildCatalogIndex(allUniversities);
+writeFileSync("src/data/universities/universityIndex.generated.ts", renderUniversityIndexModule(idx));
+writeFileSync("src/data/universities/subjectIndex.generated.ts", renderSubjectIndexModule(idx));
+console.log(`catalog indexes written (${idx.universities.length} universities, ${idx.subjects.length} subjects)`);
