@@ -1,6 +1,7 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { sendWapilotText } from "../_shared/wapilot.ts";
+import { hasAal2, MFA_REQUIRED_MESSAGE } from "../_shared/mfa.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -38,6 +39,7 @@ serve(async (req) => {
       .single();
 
     if (!callerRole) throw new Error("Only admins can manage roles");
+    if (!hasAal2(authHeader)) throw new Error(MFA_REQUIRED_MESSAGE);
 
     const body = await req.json();
     const { action } = body;

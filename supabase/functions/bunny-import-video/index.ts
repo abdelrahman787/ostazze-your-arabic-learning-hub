@@ -1,4 +1,5 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
+import { hasAal2, MFA_REQUIRED_MESSAGE } from "../_shared/mfa.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -45,8 +46,11 @@ Deno.serve(async (req) => {
       .eq("role", "admin")
       .maybeSingle();
 
-    if (!roleRow) {
-      return jsonResponse({ error: "Forbidden" }, 403);
+    if (!roleRow || !hasAal2(authHeader)) {
+      return jsonResponse(
+        { error: roleRow ? MFA_REQUIRED_MESSAGE : "Forbidden" },
+        403,
+      );
     }
 
     const body = await req.json().catch(() => ({}));
