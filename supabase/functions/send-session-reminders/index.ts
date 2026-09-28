@@ -1,11 +1,26 @@
-import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { createClient } from "npm:@supabase/supabase-js@2";
 import { sendWapilotText } from "../_shared/wapilot.ts";
+import { timingSafeEqual } from "../_shared/security.ts";
 
-serve(async (req) => {
-  if (req.method !== "POST" && req.method !== "GET") return new Response("Method not allowed", { status: 405 });
+const json = (body: unknown, status = 200) =>
+  new Response(JSON.stringify(body), { status, headers: { "Content-Type": "application/json" } });
+
+Deno.serve(async (req) => {
+  if (req.method !== "POST") return json({ error: "Method not allowed" }, 405);
+
+  const admin = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
+
+  // Dedicated cron secret stored in public.internal_secrets (service role / cron only).
+  const provided = req.headers.get("x-cron-secret") ?? "";
+  const { data: secretRow, error: secretErr } = await admin
+    .from("internal_secrets").select("value").eq("name", "session_reminders_cron").maybeSingle();
+  if (secretErr || !secretRow?.value) {
+    console.error("send-session-reminders: cron secret unavailable");
+    return json({ error: "Unauthorized" }, 401);
+  }
+  if (!provided || !timingSafeEqual(provided, secretRow.value)) return json({ error: "Unauthorized" }, 401);
+
   try {
-    const admin = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
     const today = new Date().toISOString().slice(0, 10);
     const { data: requests, error } = await admin.from("session_requests")
       .select("id, student_id, subject, preferred_date, preferred_time, zoom_url, whatsapp_reminder_1h_sent_at, whatsapp_start_sent_at")
@@ -20,7 +35,8 @@ serve(async (req) => {
       : { data: [] };
     const profileMap = new Map((profiles || []).map((p) => [p.user_id, p]));
     const now = Date.now();
-    const results: Array<Record<string, unknown>> = [];
+    let oneHour = 0;
+    let start = 0;
 
     for (const request of requests || []) {
       if (!request.preferred_date || !request.preferred_time) continue;
@@ -32,18 +48,18 @@ serve(async (req) => {
       if (minutesUntil >= 50 && minutesUntil <= 70 && !request.whatsapp_reminder_1h_sent_at) {
         await sendWapilotText(student.phone, `تذكير من أستاذي: محاضرتك بعد حوالي ساعة.\nرابط Zoom: ${request.zoom_url}`);
         await admin.from("session_requests").update({ whatsapp_reminder_1h_sent_at: new Date().toISOString() }).eq("id", request.id);
-        results.push({ id: request.id, type: "one_hour", sent: true });
+        oneHour++;
       } else if (minutesUntil >= 0 && minutesUntil <= 15 && !request.whatsapp_start_sent_at) {
         await sendWapilotText(student.phone, `حان موعد محاضرتك الآن من أستاذي.\nرابط Zoom: ${request.zoom_url}`);
         await admin.from("session_requests").update({ whatsapp_start_sent_at: new Date().toISOString() }).eq("id", request.id);
-        results.push({ id: request.id, type: "start", sent: true });
+        start++;
       }
     }
 
-    return new Response(JSON.stringify({ success: true, results }), { headers: { "Content-Type": "application/json" } });
+    // Counts only — no internal request IDs in the response.
+    return json({ success: true, sent: { one_hour: oneHour, start } });
   } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
-    console.error("send-session-reminders error:", message);
-    return new Response(JSON.stringify({ success: false, error: message }), { status: 500, headers: { "Content-Type": "application/json" } });
+    console.error("send-session-reminders error:", error instanceof Error ? error.message : String(error));
+    return json({ success: false }, 500);
   }
 });
