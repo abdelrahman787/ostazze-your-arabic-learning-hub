@@ -1,0 +1,326 @@
+{
+  "total": 431,
+  "counts": {
+    "valuable": 406,
+    "unchecked": 25
+  },
+  "duplicateTitles": [],
+  "duplicateH1": [
+    {
+      "value": "College of Science",
+      "pages": [
+        "/universities/kuwait/ku/colleges/kw-ku-sci",
+        "/universities/saudi-arabia/ksu/colleges/sa-ksu-college-of-science",
+        "/universities/uae/uaeu/colleges/ae-uaeu-college-of-science"
+      ]
+    },
+    {
+      "value": "College of Medicine",
+      "pages": [
+        "/universities/kuwait/ku/colleges/kw-ku-med",
+        "/universities/qatar/qu/colleges/qa-qu-med",
+        "/universities/saudi-arabia/ksu/colleges/sa-ksu-college-of-medicine"
+      ]
+    },
+    {
+      "value": "College of Law",
+      "pages": [
+        "/universities/kuwait/ku/colleges/kw-ku-law",
+        "/universities/qatar/qu/colleges/qa-qu-law",
+        "/universities/qatar/lu/colleges/qa-lu-college-of-law",
+        "/universities/uae/uaeu/colleges/ae-uaeu-college-of-law",
+        "/universities/uae/uos/colleges/ae-uos-college-of-law"
+      ]
+    },
+    {
+      "value": "College of Business Administration",
+      "pages": [
+        "/universities/kuwait/ku/colleges/kw-ku-bus",
+        "/universities/kuwait/aum/colleges/kw-aum-college-of-business-administra",
+        "/universities/kuwait/gust/colleges/kw-gust-college-of-business-administration",
+        "/universities/saudi-arabia/ksu/colleges/sa-ksu-college-of-business-administration"
+      ]
+    },
+    {
+      "value": "College of Education",
+      "pages": [
+        "/universities/kuwait/ku/colleges/kw-ku-edu",
+        "/universities/qatar/qu/colleges/qa-qu-edu",
+        "/universities/saudi-arabia/ksu/colleges/sa-ksu-college-of-education",
+        "/universities/uae/uaeu/colleges/ae-uaeu-college-of-education"
+      ]
+    },
+    {
+      "value": "College of Pharmacy",
+      "pages": [
+        "/universities/kuwait/ku/colleges/kw-ku-pharm",
+        "/universities/qatar/qu/colleges/qa-qu-pharm",
+        "/universities/saudi-arabia/ksu/colleges/sa-ksu-college-of-pharmacy"
+      ]
+    },
+    {
+      "value": "College of Sharia and Islamic Studies",
+      "pages": [
+        "/universities/kuwait/ku/colleges/kw-ku-sharia",
+        "/universities/qatar/qu/colleges/qa-qu-sharia",
+        "/universities/uae/uos/colleges/ae-uos-college-of-sharia-and-islamic-studies"
+      ]
+    },
+    {
+      "value": "College of Nursing",
+      "pages": [
+        "/universities/kuwait/ku/colleges/kw-ku-nurs",
+        "/universities/qatar/qu/colleges/qa-qu-nurs",
+        "/universities/saudi-arabia/ksu/colleges/sa-ksu-college-of-nursing"
+      ]
+    },
+    {
+      "value": "College of Arts & Sciences",
+      "pages": [
+        "/universities/kuwait/auk/colleges/kw-auk-college-of-arts-sciences",
+        "/universities/kuwait/gust/colleges/kw-gust-college-of-arts-sciences"
+      ]
+    },
+    {
+      "value": "College of Engineering",
+      "pages": [
+        "/universities/kuwait/au/colleges/kw-au-college-of-engineering",
+        "/universities/qatar/qu/colleges/qa-qu-eng",
+        "/universities/qatar/tamuq/colleges/qa-tamuq-college-of-engineering",
+        "/universities/saudi-arabia/ksu/colleges/sa-ksu-college-of-engineering",
+        "/universities/uae/uaeu/colleges/ae-uaeu-college-of-engineering"
+      ]
+    },
+    {
+      "value": "College of Business",
+      "pages": [
+        "/universities/kuwait/au/colleges/kw-au-college-of-business",
+        "/universities/qatar/udst/colleges/qa-udst-business",
+        "/universities/uae/zu/colleges/ae-zu-college-of-business"
+      ]
+    },
+    {
+      "value": "College of Business and Economics",
+      "pages": [
+        "/universities/qatar/qu/colleges/qa-qu-bus",
+        "/universities/uae/uaeu/colleges/ae-uaeu-college-of-business-and-economics"
+      ]
+    },
+    {
+      "value": "College of Health Sciences",
+      "pages": [
+        "/universities/qatar/qu/colleges/qa-qu-hlth",
+        "/universities/qatar/udst/colleges/qa-udst-health-sciences"
+      ]
+    },
+    {
+      "value": "College of Humanities and Social Sciences",
+      "pages": [
+        "/universities/qatar/hbku/colleges/qa-hbku-hss",
+        "/universities/saudi-arabia/ksu/colleges/sa-ksu-college-of-humanities-and-social-science",
+        "/universities/uae/uaeu/colleges/ae-uaeu-college-of-humanities-and-social-science",
+        "/universities/uae/zu/colleges/ae-zu-college-of-humanities-and-social-science"
+      ]
+    },
+    {
+      "value": "College of Medicine and Health Sciences",
+      "pages": [
+        "/universities/uae/ku/colleges/ae-ku-college-of-medicine-and-health-sciences",
+        "/universities/uae/uaeu/colleges/ae-uaeu-college-of-medicine-and-health-sciences"
+      ]
+    }
+  ],
+  "duplicateDescriptions": [],
+  "duplicateCanonicals": [],
+  "problems": [
+    {
+      "path": "/languages",
+      "status": "valuable",
+      "notes": [
+        "orphan: no internal link found"
+      ]
+    },
+    {
+      "path": "/courses",
+      "status": "valuable",
+      "notes": [
+        "orphan: no internal link found"
+      ]
+    },
+    {
+      "path": "/apply-tutor",
+      "status": "unchecked",
+      "notes": [
+        "dynamic page (teacher/course) — content comes from the database; check manually"
+      ]
+    },
+    {
+      "path": "/courses/0cc99608-245b-420c-bfc0-eadda81480c9",
+      "status": "unchecked",
+      "notes": [
+        "dynamic page (teacher/course) — content comes from the database; check manually"
+      ]
+    },
+    {
+      "path": "/courses/5f12328c-3b46-4d9b-b06d-4f28543d53fd",
+      "status": "unchecked",
+      "notes": [
+        "dynamic page (teacher/course) — content comes from the database; check manually"
+      ]
+    },
+    {
+      "path": "/courses/2bb86317-0b2b-48ff-a10c-ae955fd908e3",
+      "status": "unchecked",
+      "notes": [
+        "dynamic page (teacher/course) — content comes from the database; check manually"
+      ]
+    },
+    {
+      "path": "/courses/338cc56b-8b1a-483a-af29-0193acb85c0a",
+      "status": "unchecked",
+      "notes": [
+        "dynamic page (teacher/course) — content comes from the database; check manually"
+      ]
+    },
+    {
+      "path": "/courses/913c7374-6fe1-410c-8663-7c659a88d131",
+      "status": "unchecked",
+      "notes": [
+        "dynamic page (teacher/course) — content comes from the database; check manually"
+      ]
+    },
+    {
+      "path": "/teachers/a54d78e1-15e2-48b3-b72d-ca998ee977ed",
+      "status": "unchecked",
+      "notes": [
+        "dynamic page (teacher/course) — content comes from the database; check manually"
+      ]
+    },
+    {
+      "path": "/teachers/bd335f03-dbab-4451-bab5-5d3acc17f333",
+      "status": "unchecked",
+      "notes": [
+        "dynamic page (teacher/course) — content comes from the database; check manually"
+      ]
+    },
+    {
+      "path": "/teachers/f7daed00-dc81-49a2-a69e-f7d824483f45",
+      "status": "unchecked",
+      "notes": [
+        "dynamic page (teacher/course) — content comes from the database; check manually"
+      ]
+    },
+    {
+      "path": "/teachers/d3bf8bd0-568f-4c67-87a5-6b4f57bcc51c",
+      "status": "unchecked",
+      "notes": [
+        "dynamic page (teacher/course) — content comes from the database; check manually"
+      ]
+    },
+    {
+      "path": "/teachers/581a2837-9642-4555-8c79-46c64ccbaca8",
+      "status": "unchecked",
+      "notes": [
+        "dynamic page (teacher/course) — content comes from the database; check manually"
+      ]
+    },
+    {
+      "path": "/teachers/83c4f0b8-05fd-4f1a-bcac-0a1de99553f1",
+      "status": "unchecked",
+      "notes": [
+        "dynamic page (teacher/course) — content comes from the database; check manually"
+      ]
+    },
+    {
+      "path": "/teachers/e33e78f2-8302-4c4f-b91f-87426c554133",
+      "status": "unchecked",
+      "notes": [
+        "dynamic page (teacher/course) — content comes from the database; check manually"
+      ]
+    },
+    {
+      "path": "/teachers/4126522c-a5c1-4e8a-8fef-6b0367d15650",
+      "status": "unchecked",
+      "notes": [
+        "dynamic page (teacher/course) — content comes from the database; check manually"
+      ]
+    },
+    {
+      "path": "/teachers/26806192-8693-4571-bde9-01e53b1ce8fa",
+      "status": "unchecked",
+      "notes": [
+        "dynamic page (teacher/course) — content comes from the database; check manually"
+      ]
+    },
+    {
+      "path": "/teachers/c6fef6dd-0d27-48f2-a0d9-8dd66e5225cd",
+      "status": "unchecked",
+      "notes": [
+        "dynamic page (teacher/course) — content comes from the database; check manually"
+      ]
+    },
+    {
+      "path": "/teachers/de446fec-54e6-42ce-b777-eaf85e44f3b2",
+      "status": "unchecked",
+      "notes": [
+        "dynamic page (teacher/course) — content comes from the database; check manually"
+      ]
+    },
+    {
+      "path": "/teachers/596296df-abba-484f-ba62-2c4d2f1e6838",
+      "status": "unchecked",
+      "notes": [
+        "dynamic page (teacher/course) — content comes from the database; check manually"
+      ]
+    },
+    {
+      "path": "/teachers/258e2be0-64a3-4791-a967-0648f57aeeba",
+      "status": "unchecked",
+      "notes": [
+        "dynamic page (teacher/course) — content comes from the database; check manually"
+      ]
+    },
+    {
+      "path": "/teachers/75ffa8f9-3285-4cc4-9ba5-fa0cbafa933b",
+      "status": "unchecked",
+      "notes": [
+        "dynamic page (teacher/course) — content comes from the database; check manually"
+      ]
+    },
+    {
+      "path": "/teachers/1891393b-0145-4f93-9cb5-35a81a89952f",
+      "status": "unchecked",
+      "notes": [
+        "dynamic page (teacher/course) — content comes from the database; check manually"
+      ]
+    },
+    {
+      "path": "/teachers/3778e93e-9959-45b1-bbe0-50feafca75ac",
+      "status": "unchecked",
+      "notes": [
+        "dynamic page (teacher/course) — content comes from the database; check manually"
+      ]
+    },
+    {
+      "path": "/teachers/f5f86b1b-8c19-4baa-8fd4-bcbe76001dce",
+      "status": "unchecked",
+      "notes": [
+        "dynamic page (teacher/course) — content comes from the database; check manually"
+      ]
+    },
+    {
+      "path": "/teachers/1363a366-aa19-40e7-b529-04a378751a5e",
+      "status": "unchecked",
+      "notes": [
+        "dynamic page (teacher/course) — content comes from the database; check manually"
+      ]
+    },
+    {
+      "path": "/teachers/a8cbdcf9-2345-4a36-a4cd-4767a5d3a367",
+      "status": "unchecked",
+      "notes": [
+        "dynamic page (teacher/course) — content comes from the database; check manually"
+      ]
+    }
+  ]
+}
