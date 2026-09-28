@@ -3,7 +3,6 @@
 // so URLs stay identical in Arabic and English.
 import type { University, College } from "@/data/universities/types";
 import { UNIVERSITY_INDEX } from "@/data/universities/universityIndex.generated";
-import { SUBJECT_INDEX } from "@/data/universities/subjectIndex.generated";
 import { slugify } from "@/lib/slugify";
 
 export { slugify };
@@ -33,7 +32,7 @@ export const findUniversityBySlugs = (cSlug?: string, uSlug?: string) => {
 // ---- Colleges: slug = lowercased college id ----
 export const collegeSlug = (c: Pick<College, "id">) => c.id.toLowerCase();
 
-// ---- Path builders (the only place URLs are built) ----
+// ---- Path builders (the only place URLs are built; subject paths live in ./subjectSlugs) ----
 export const universitiesPath = () => "/universities";
 export const countryPath = (code: string) => `/universities/${countrySlug(code)}`;
 export const universityPath = (u: Pick<University, "id" | "country_code">) =>
@@ -41,25 +40,11 @@ export const universityPath = (u: Pick<University, "id" | "country_code">) =>
 export const collegePath = (u: Pick<University, "id" | "country_code">, c: Pick<College, "id">) =>
   `${universityPath(u)}/colleges/${collegeSlug(c)}`;
 
-// ---- Subjects (academic departments), keyed by English department name ----
-// Slugs are precomputed in the generated subject index (see src/data/universities/buildIndex.ts).
-const subjectSlugByName = new Map(SUBJECT_INDEX.map((x) => [x.name_en, x.slug]));
-const subjectNameBySlug = new Map(SUBJECT_INDEX.map((x) => [x.slug, x.name_en]));
-const subjectCourseCount = new Map(SUBJECT_INDEX.map((x) => [x.name_en, x.uniqueCourses]));
-
-export const subjectSlug = (nameEn: string) => subjectSlugByName.get(nameEn) || slugify(nameEn);
-export const subjectNameFromSlug = (slug?: string) => (slug ? subjectNameBySlug.get(slug.toLowerCase()) : undefined);
-export const subjectPath = (nameEn: string) => `/subjects/${subjectSlug(nameEn)}`;
-export const allSubjectSlugs = () => [...subjectNameBySlug.keys()];
-
 // ---- Indexability: only pages with real, distinct content go in the sitemap / get indexed ----
 export const MIN_INDEXABLE_COURSES = 5;
 // Department names that are requirement buckets rather than real subjects.
-const BUCKET_NAME = /elective|choose|option|\bcore\b|requirement|free\s|general education|minor|track|concentration/i;
+export const BUCKET_NAME = /elective|choose|option|\bcore\b|requirement|free\s|general education|minor|track|concentration/i;
 
-export const subjectCourses = (nameEn: string) => subjectCourseCount.get(nameEn) || 0;
-export const isSubjectIndexable = (nameEn: string) =>
-  subjectCourses(nameEn) >= MIN_INDEXABLE_COURSES && !BUCKET_NAME.test(nameEn);
 export const collegeCourseCount = (c: Pick<College, "departments">) =>
   c.departments.reduce((s, d) => s + d.courses.length, 0);
 export const isCollegeIndexable = (c: Pick<College, "departments">) => collegeCourseCount(c) >= MIN_INDEXABLE_COURSES;
