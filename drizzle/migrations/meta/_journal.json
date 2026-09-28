@@ -50,6 +50,13 @@
       "when": 1790613528715,
       "tag": "0006_tighten_definer_functions",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1790618211340,
+      "tag": "0007_require_admin_mfa",
+      "breakpoints": true
     }
   ]
 }
