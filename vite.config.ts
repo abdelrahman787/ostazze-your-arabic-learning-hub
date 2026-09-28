@@ -1,57 +1,32 @@
-import { defineConfig, loadEnv } from "vite";
-import react from "@vitejs/plugin-react-swc";
-import path from "path";
-import { componentTagger } from "lovable-tagger";
-import { visualizer } from "rollup-plugin-visualizer";
+// @lovable.dev/vite-tanstack-config already includes the following — do NOT add them manually
+// or the app will break with duplicate plugins:
+//   - TanStack devtools (dev-only, first), tanstackStart, viteReact, tailwindcss, tsConfigPaths,
+//     nitro (build-only using cloudflare as a default target), VITE_* env injection, @ path alias,
+//     React/TanStack dedupe, error logger plugins, and sandbox detection (port/host/strictPort).
+// You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
+import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
-
+// Fallbacks so a missing env never crashes production (ported from the old vite.config).
 const FALLBACK_SUPABASE_URL = "https://dqqfzpghixfvhhpxfgwv.supabase.co";
 const FALLBACK_SUPABASE_PUBLISHABLE_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRxcWZ6cGdoaXhmdmhocHhmZ3d2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMwOTMzNjcsImV4cCI6MjA4ODY2OTM2N30.7WsVUn0uoogL7xfQ80Fw_UUncbEHPf10tPYue4DuYSg";
 const FALLBACK_SUPABASE_PROJECT_ID = "dqqfzpghixfvhhpxfgwv";
 
-export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), "");
-
-  return {
-    server: {
-      host: "::",
-      port: 8080,
-      hmr: {
-        overlay: false,
-      },
-    },
-    plugins: [
-      react(),
-      mode === "development" && componentTagger(),
-      process.env.ANALYZE ? visualizer({ filename: "dist/stats.html", template: "treemap", gzipSize: true, brotliSize: true }) : null,
-    ].filter(Boolean) as any,
-    resolve: {
-      alias: {
-        "@": path.resolve(__dirname, "./src"),
-      },
-    },
+export default defineConfig({
+  tanstackStart: {
+    // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
+    // nitro/vite builds from this
+    server: { entry: "server" },
+  },
+  vite: {
     define: {
-      "import.meta.env.VITE_SUPABASE_URL": JSON.stringify(
-        env.VITE_SUPABASE_URL || FALLBACK_SUPABASE_URL
-      ),
+      "import.meta.env.VITE_SUPABASE_URL": JSON.stringify(process.env.VITE_SUPABASE_URL || FALLBACK_SUPABASE_URL),
       "import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY": JSON.stringify(
-        env.VITE_SUPABASE_PUBLISHABLE_KEY || FALLBACK_SUPABASE_PUBLISHABLE_KEY
+        process.env.VITE_SUPABASE_PUBLISHABLE_KEY || FALLBACK_SUPABASE_PUBLISHABLE_KEY,
       ),
       "import.meta.env.VITE_SUPABASE_PROJECT_ID": JSON.stringify(
-        env.VITE_SUPABASE_PROJECT_ID || FALLBACK_SUPABASE_PROJECT_ID
+        process.env.VITE_SUPABASE_PROJECT_ID || FALLBACK_SUPABASE_PROJECT_ID,
       ),
     },
-    build: {
-      rollupOptions: {
-        output: {
-          manualChunks(id) {
-            // Consolidate all lucide-react icon imports into a single chunk
-            // so we don't ship 6+ tiny per-icon requests on the initial load.
-            if (id.includes("node_modules/lucide-react/")) return "icons";
-          },
-        },
-      },
-    },
-  };
+  },
 });

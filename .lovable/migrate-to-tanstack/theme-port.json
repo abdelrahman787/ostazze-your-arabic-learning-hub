@@ -1,0 +1,12 @@
+{
+  "customizations": [
+    { "token": "Warm Ember color tokens (:root/.dark HSL variables incl. primary-dark/light, gold, success, warning, glass, nav)", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "colors mapping (hsl(var(--*)) incl. success, warning, primary-dark, primary-light, sidebar)", "source": "tailwind.config.ts", "reappliedIn": "src/styles.css" },
+    { "token": "fontFamily arabic/sans/display/serif", "source": "tailwind.config.ts", "reappliedIn": "src/styles.css" },
+    { "token": "container (center, 1.5rem padding, 1200px)", "source": "tailwind.config.ts", "reappliedIn": "src/styles.css" },
+    { "token": "keyframes/animation accordion-down, accordion-up, fade-in", "source": "tailwind.config.ts", "reappliedIn": "src/styles.css" },
+    { "token": "self-hosted @font-face (IBM Plex Sans Arabic, Inter, fallbacks)", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "component classes (card-base, btn-*, input-base, badge-brand, icon-box, glass, pt-page, etc.)", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "custom keyframes (orbit, fab-pulse, flag-wave, glow, reveal-up, page-in, nav-drop-in, apple-soft-*)", "source": "src/index.css", "reappliedIn": "src/styles.css" }
+  ]
+}
