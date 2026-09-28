@@ -480,14 +480,14 @@ const Dashboard = () => {
                         <Link
                           key={lec.id}
                           to={`/lectures/${lec.id}`}
-                          className="flex items-center justify-between p-3 bg-secondary rounded-xl hover:bg-secondary/80 transition-colors group"
+                          className="flex items-center justify-between gap-3 p-3 bg-muted text-foreground border border-border rounded-xl transition-colors group hover:bg-background hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                         >
                           <div className="flex items-center gap-3">
                             <div className="icon-box bg-primary/10">
                               <BookOpen size={16} className="text-primary" />
                             </div>
                             <div>
-                              <div className="font-bold text-sm group-hover:text-primary transition-colors">
+                              <div className="font-bold text-sm text-foreground group-hover:underline">
                                 {lec.title}
                               </div>
                               <div className="text-muted-foreground text-xs">

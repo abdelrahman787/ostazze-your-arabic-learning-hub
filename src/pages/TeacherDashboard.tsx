@@ -768,6 +768,8 @@ const TeacherDashboard = () => {
               <TeacherAvailabilityManager />
             </div>
           )}
+          </>
+          )}
         </div>
       </main>
     </div>
