@@ -1,7 +1,8 @@
 // Centralized JSON-LD builders for Ostaze SEO.
 // Keep schemas conservative — only emit valid, accurate data.
 
-export const SITE_URL = "https://ostaze.com";
+import { SITE } from "@/config/site";
+export const SITE_URL = SITE.url;
 export const SITE_NAME = "OSTAZE";
 
 /**
@@ -46,48 +47,36 @@ export const organizationJsonLd = (lang: "ar" | "en" = "ar") => ({
   "@context": "https://schema.org",
   "@type": "EducationalOrganization",
   "@id": `${SITE_URL}/#organization`,
-  name: SITE_NAME,
-  alternateName: lang === "ar" ? BRAND_VARIANTS_AR : BRAND_VARIANTS_EN,
-  url: SITE_URL,
-  logo: `${SITE_URL}/favicon.png`,
+  name: SITE.name,
+  alternateName: SITE.alternateNameAr,
+  url: SITE.url,
+  logo: SITE.logo,
   description:
     lang === "ar"
-      ? "منصة OSTAZE (أستاذي / استاذي) — منصة دروس خصوصية ولايف أونلاين تجمع الطلاب بأفضل المعلمين الجامعيين في الكويت وقطر، عبر حصص مباشرة بالزووم وكورسات مسجلة."
-      : "OSTAZE (Ostaze) is an online private tutoring and live-lesson platform connecting students with top university tutors in Kuwait & Qatar via Zoom and recorded courses.",
-  keywords: lang === "ar" ? ALL_KEYWORDS_AR : ALL_KEYWORDS_EN,
-  email: "info@ostaze.com",
-  telephone: "+966559003498",
-  address: {
-    "@type": "PostalAddress",
-    addressCountry: "SA",
-    addressLocality: "Riyadh",
-  },
+      ? "منصة OSTAZE (أستاذي) — دروس خصوصية وحصص مباشرة أونلاين تجمع الطلاب بمعلمين جامعيين متخصصين، عبر حصص زووم وكورسات مسجلة."
+      : "OSTAZE is an online private tutoring and live-lesson platform connecting students with specialized university tutors via Zoom sessions and recorded courses.",
+  email: SITE.email,
+  telephone: SITE.phone,
   contactPoint: {
     "@type": "ContactPoint",
-    telephone: "+966559003498",
+    telephone: SITE.phone,
     contactType: "customer support",
-    email: "info@ostaze.com",
+    email: SITE.email,
     availableLanguage: ["Arabic", "English"],
   },
-  sameAs: [SITE_URL],
+  ...(SITE.social.length ? { sameAs: SITE.social.map((s) => s.url) } : {}),
 });
 
+// No SearchAction: /teachers does not read a ?q= search parameter.
 export const websiteJsonLd = (lang: "ar" | "en" = "ar") => ({
   "@context": "https://schema.org",
   "@type": "WebSite",
   "@id": `${SITE_URL}/#website`,
-  name: SITE_NAME,
+  name: SITE.name,
+  alternateName: SITE.alternateNameAr,
   url: SITE_URL,
-  inLanguage: lang === "ar" ? "ar-SA" : "en-US",
+  inLanguage: lang === "ar" ? "ar" : "en",
   publisher: { "@id": `${SITE_URL}/#organization` },
-  potentialAction: {
-    "@type": "SearchAction",
-    target: {
-      "@type": "EntryPoint",
-      urlTemplate: `${SITE_URL}/teachers?q={search_term_string}`,
-    },
-    "query-input": "required name=search_term_string",
-  },
 });
 
 export const breadcrumbJsonLd = (
