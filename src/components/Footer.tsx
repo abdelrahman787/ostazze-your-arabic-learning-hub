@@ -60,6 +60,10 @@ const Footer = () => {
                 { label: t("nav_teachers"), path: "/teachers" },
                 { label: t("nav_universities"), path: "/universities" },
                 { label: t("nav_categories"), path: "/categories" },
+                ...Array.from(new Set(allUniversities.map((u) => u.country_code))).map((cc) => {
+                  const u = allUniversities.find((x) => x.country_code === cc)!;
+                  return { label: lang === "ar" ? `جامعات ${u.country_ar}` : `Universities in ${u.country_en}`, path: countryPath(cc) };
+                }),
               ].map((l) => (
                 <Link key={l.path} to={l.path} className="text-black/60 dark:text-white/60 hover:text-primary transition-colors">{l.label}</Link>
               ))}

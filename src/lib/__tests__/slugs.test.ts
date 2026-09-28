@@ -4,7 +4,7 @@ import { resolve } from "node:path";
 import { allUniversities } from "@/data/universitiesData";
 import {
   allSubjectSlugs, countryPath, universityPath, collegePath, subjectPath,
-  subjectNameFromSlug, findUniversityBySlugs,
+  subjectNameFromSlug, findUniversityBySlugs, isSubjectIndexable, isCollegeIndexable, isUniversityIndexable,
 } from "@/lib/slugs";
 
 const sitemapPaths = () =>
@@ -31,10 +31,11 @@ describe("slugs", () => {
     const expected = new Set<string>();
     for (const u of allUniversities) {
       expected.add(countryPath(u.country_code));
+      if (!isUniversityIndexable(u)) continue;
       expected.add(universityPath(u));
-      u.colleges.forEach((c) => c.departments.length && expected.add(collegePath(u, c)));
+      u.colleges.forEach((c) => isCollegeIndexable(c) && expected.add(collegePath(u, c)));
     }
-    allSubjectSlugs().forEach((s) => expected.add(`/subjects/${s}`));
+    allSubjectSlugs().filter((s) => isSubjectIndexable(subjectNameFromSlug(s)!)).forEach((s) => expected.add(`/subjects/${s}`));
     const inSitemap = new Set(sitemapPaths().filter((p) => /^\/(universities|subjects)\//.test(p)));
     expect([...inSitemap].sort()).toEqual([...expected].sort());
   });

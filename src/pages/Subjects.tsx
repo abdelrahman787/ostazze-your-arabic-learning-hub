@@ -10,7 +10,7 @@ import PageHelmet from "@/components/PageHelmet";
 import FaqAccordion from "@/components/FaqAccordion";
 import { breadcrumbJsonLd, collectionPageJsonLd, faqJsonLd } from "@/lib/seo";
 import { WHATSAPP_NUMBER } from "@/lib/whatsapp";
-import { subjectNameFromSlug, subjectPath, universityPath } from "@/lib/slugs";
+import { subjectNameFromSlug, subjectPath, universityPath, isSubjectIndexable } from "@/lib/slugs";
 import NotFound from "./NotFound";
 
 const categoryEnToAr = new Map<string, string>();
@@ -164,7 +164,7 @@ const Subjects = () => {
         title={pageTitle}
         description={pageDescription}
         canonical={`https://ostaze.com${selfPath}`}
-        noindex={isFilterState}
+        noindex={isFilterState || (!!departmentParam && !isSubjectIndexable(departmentParam))}
         keywords={lang === "ar" ? "مواد دراسية, دروس خصوصية, جامعات الكويت, جامعات قطر" : "subjects, tutoring, Kuwait universities, Qatar universities"}
         jsonLd={[
           collectionPageJsonLd({
@@ -390,6 +390,9 @@ const Subjects = () => {
           <div className="flex flex-wrap justify-center gap-2 text-xs">
             <Link to="/categories" className="px-3 py-1 rounded-full bg-foreground/5 hover:bg-primary/10 hover:text-primary font-bold transition-colors">{lang === "ar" ? "التصنيفات" : "Categories"}</Link>
             <Link to="/universities" className="px-3 py-1 rounded-full bg-foreground/5 hover:bg-primary/10 hover:text-primary font-bold transition-colors">{lang === "ar" ? "الجامعات" : "Universities"}</Link>
+            {departmentParam && (
+              <Link to={`/teachers?subject=${encodeURIComponent(departmentParam)}`} className="px-3 py-1 rounded-full bg-foreground/5 hover:bg-primary/10 hover:text-primary font-bold transition-colors">{lang === "ar" ? `معلمو ${departmentDisplay}` : `${departmentDisplay} tutors`}</Link>
+            )}
             <Link to="/teachers" className="px-3 py-1 rounded-full bg-primary/10 text-primary font-bold hover:bg-primary/20 transition-colors">{lang === "ar" ? "المعلمون" : "Tutors"}</Link>
           </div>
           <div>
