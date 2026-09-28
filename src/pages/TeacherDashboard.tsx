@@ -82,7 +82,9 @@ const TeacherDashboard = () => {
       .maybeSingle()
       .then(({ data }) => {
         if (!cancelled)
-          setOnboardingPending(data ? data.onboarding_completed === false : false);
+          setOnboardingPending(
+            data ? data.onboarding_completed === false : false,
+          );
       });
     return () => {
       cancelled = true;
@@ -370,405 +372,450 @@ const TeacherDashboard = () => {
               </span>
             </div>
           ) : (
-          <>
-          {onboardingPending && <TeacherOnboardingBanner />}
-          {tab === "overview" && !showConversations && (
-            <div className="space-y-6 animate-fade-in">
-              <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-                {[
-                  {
-                    label: t("stat_total_lectures"),
-                    value: String(stats.totalLectures),
-                    icon: BookOpen,
-                    color: "bg-primary/10 text-primary",
-                    clickable: false,
-                  },
-                  {
-                    label: t("stat_num_students"),
-                    value: String(stats.totalStudents),
-                    icon: GraduationCap,
-                    color: "bg-success/10 text-success",
-                    clickable: false,
-                  },
-                  {
-                    label: t("stat_conversations"),
-                    value: String(stats.conversations),
-                    icon: MessageSquare,
-                    color: "bg-warning/10 text-warning",
-                    clickable: true,
-                  },
-                ].map((s) => (
-                  <div
-                    key={s.label}
-                    className={`card-base p-5 ${s.clickable ? "cursor-pointer hover:border-primary/30 hover:shadow-md transition-all" : ""}`}
-                    onClick={() => s.clickable && setShowConversations(true)}
-                  >
-                    <div className="flex items-center gap-3">
-                      <motion.div
-                        whileHover={{ scale: 1.15, rotate: 10 }}
-                        className={`icon-box ${s.color}`}
+            <>
+              {onboardingPending && <TeacherOnboardingBanner />}
+              {tab === "overview" && !showConversations && (
+                <div className="space-y-6 animate-fade-in">
+                  <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+                    {[
+                      {
+                        label: t("stat_total_lectures"),
+                        value: String(stats.totalLectures),
+                        icon: BookOpen,
+                        color: "bg-primary/10 text-primary",
+                        clickable: false,
+                      },
+                      {
+                        label: t("stat_num_students"),
+                        value: String(stats.totalStudents),
+                        icon: GraduationCap,
+                        color: "bg-success/10 text-success",
+                        clickable: false,
+                      },
+                      {
+                        label: t("stat_conversations"),
+                        value: String(stats.conversations),
+                        icon: MessageSquare,
+                        color: "bg-warning/10 text-warning",
+                        clickable: true,
+                      },
+                    ].map((s) => (
+                      <div
+                        key={s.label}
+                        className={`card-base p-5 ${s.clickable ? "cursor-pointer hover:border-primary/30 hover:shadow-md transition-all" : ""}`}
+                        onClick={() =>
+                          s.clickable && setShowConversations(true)
+                        }
                       >
-                        <s.icon size={20} />
-                      </motion.div>
-                      <div>
-                        <div className="text-xl font-black">{s.value}</div>
-                        <div className="text-muted-foreground text-xs">
-                          {s.label}
+                        <div className="flex items-center gap-3">
+                          <motion.div
+                            whileHover={{ scale: 1.15, rotate: 10 }}
+                            className={`icon-box ${s.color}`}
+                          >
+                            <s.icon size={20} />
+                          </motion.div>
+                          <div>
+                            <div className="text-xl font-black">{s.value}</div>
+                            <div className="text-muted-foreground text-xs">
+                              {s.label}
+                            </div>
+                          </div>
                         </div>
                       </div>
+                    ))}
+                  </div>
+
+                  <div className="stats-gradient rounded-2xl p-7 text-primary-foreground">
+                    <h3 className="text-xl font-extrabold mb-2">
+                      {t("welcome_teacher")} {user?.name} 👋
+                    </h3>
+                    <p className="opacity-90 text-sm">
+                      {t("welcome_teacher_sub")}
+                    </p>
+                  </div>
+
+                  <div className="card-base p-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="font-extrabold">{t("recent_lectures")}</h3>
+                      {lectures.length > 3 && (
+                        <button
+                          onClick={() => setTab("lectures")}
+                          className="text-primary-dark dark:text-primary text-sm font-bold rounded hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card disabled:opacity-60 disabled:cursor-not-allowed"
+                        >
+                          {t("view_all")}
+                        </button>
+                      )}
                     </div>
+                    {lecturesLoading ? (
+                      <div className="flex justify-center py-8">
+                        <Loader2
+                          className="animate-spin text-primary"
+                          size={24}
+                        />
+                      </div>
+                    ) : lectures.length === 0 ? (
+                      <p className="text-muted-foreground text-sm text-center py-6">
+                        {t("no_lectures_recorded")}
+                      </p>
+                    ) : (
+                      <div className="space-y-3">
+                        {lectures.slice(0, 3).map((lec) => (
+                          <Link
+                            key={lec.id}
+                            to={`/lectures/${lec.id}`}
+                            className="flex items-center justify-between gap-3 p-3 bg-muted text-foreground border border-border rounded-xl transition-colors group hover:bg-background hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card"
+                          >
+                            <div className="flex items-center gap-3 min-w-0">
+                              <div className="icon-box bg-primary/10 shrink-0">
+                                <BookOpen
+                                  size={16}
+                                  className="text-primary"
+                                  aria-hidden="true"
+                                />
+                              </div>
+                              <div className="min-w-0">
+                                <div className="font-bold text-sm text-foreground truncate group-hover:underline group-focus-visible:underline">
+                                  {lec.title}
+                                </div>
+                                <div className="text-muted-foreground text-xs truncate">
+                                  {t("the_student")}: {lec.student_name}{" "}
+                                  {lec.subject && `• ${lec.subject}`}
+                                </div>
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-2 shrink-0">
+                              {lec.video_url && (
+                                <Video
+                                  size={14}
+                                  className="text-success"
+                                  aria-label={t("video_available")}
+                                />
+                              )}
+                              {lec.pdf_url && (
+                                <FileText
+                                  size={14}
+                                  className="text-destructive"
+                                  aria-label={t("pdf_available")}
+                                />
+                              )}
+                              <ArrowLeft
+                                size={14}
+                                aria-hidden="true"
+                                className="text-muted-foreground group-hover:text-foreground ltr:rotate-180"
+                              />
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                ))}
-              </div>
-
-              <div className="stats-gradient rounded-2xl p-7 text-primary-foreground">
-                <h3 className="text-xl font-extrabold mb-2">
-                  {t("welcome_teacher")} {user?.name} 👋
-                </h3>
-                <p className="opacity-90 text-sm">{t("welcome_teacher_sub")}</p>
-              </div>
-
-              <div className="card-base p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="font-extrabold">{t("recent_lectures")}</h3>
-                  {lectures.length > 3 && (
-                    <button
-                      onClick={() => setTab("lectures")}
-                      className="text-primary-dark dark:text-primary text-sm font-bold rounded hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card disabled:opacity-60 disabled:cursor-not-allowed"
-                    >
-                      {t("view_all")}
-                    </button>
-                  )}
                 </div>
-                {lecturesLoading ? (
-                  <div className="flex justify-center py-8">
-                    <Loader2 className="animate-spin text-primary" size={24} />
-                  </div>
-                ) : lectures.length === 0 ? (
-                  <p className="text-muted-foreground text-sm text-center py-6">
-                    {t("no_lectures_recorded")}
-                  </p>
-                ) : (
-                  <div className="space-y-3">
-                    {lectures.slice(0, 3).map((lec) => (
-                      <Link
-                        key={lec.id}
-                        to={`/lectures/${lec.id}`}
-                        className="flex items-center justify-between gap-3 p-3 bg-muted text-foreground border border-border rounded-xl transition-colors group hover:bg-background hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card"
-                      >
-                        <div className="flex items-center gap-3 min-w-0">
-                          <div className="icon-box bg-primary/10 shrink-0">
-                            <BookOpen size={16} className="text-primary" aria-hidden="true" />
+              )}
+
+              {/* Conversations list */}
+              {tab === "overview" && showConversations && (
+                <div className="space-y-4 animate-fade-in">
+                  <button
+                    onClick={() => setShowConversations(false)}
+                    className="text-sm text-primary font-bold hover:underline flex items-center gap-1 mb-4"
+                  >
+                    <ArrowLeft size={14} /> {t("dash_overview")}
+                  </button>
+                  {lecturesLoading ? (
+                    <div className="flex justify-center py-12">
+                      <Loader2
+                        className="animate-spin text-primary"
+                        size={32}
+                      />
+                    </div>
+                  ) : lecturesWithMessages.length === 0 ? (
+                    <div className="card-base p-12 text-center">
+                      <MessageSquare
+                        size={48}
+                        className="mx-auto text-muted-foreground/30 mb-3"
+                      />
+                      <p className="text-muted-foreground">
+                        لا توجد محادثات بعد
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="space-y-3">
+                      {lecturesWithMessages.map((lec) => (
+                        <Link
+                          key={lec.id}
+                          to={`/lectures/${lec.id}`}
+                          className="card-base p-4 flex items-center gap-4 hover:border-primary/30 hover:shadow-md transition-all group"
+                        >
+                          <div className="icon-box bg-warning/10">
+                            <MessageSquare size={18} className="text-warning" />
                           </div>
-                          <div className="min-w-0">
-                            <div className="font-bold text-sm text-foreground truncate group-hover:underline group-focus-visible:underline">
+                          <div className="flex-1 min-w-0">
+                            <div className="font-bold text-sm group-hover:text-primary transition-colors">
                               {lec.title}
                             </div>
-                            <div className="text-muted-foreground text-xs truncate">
+                            <div className="text-muted-foreground text-xs">
                               {t("the_student")}: {lec.student_name}{" "}
                               {lec.subject && `• ${lec.subject}`}
                             </div>
                           </div>
-                        </div>
-                        <div className="flex items-center gap-2 shrink-0">
-                          {lec.video_url && (
-                            <Video size={14} className="text-success" aria-label={t("video_available")} />
-                          )}
-                          {lec.pdf_url && (
-                            <FileText size={14} className="text-destructive" aria-label={t("pdf_available")} />
-                          )}
-                          <ArrowLeft
-                            size={14}
-                            aria-hidden="true"
-                            className="text-muted-foreground group-hover:text-foreground ltr:rotate-180"
-                          />
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-
-          {/* Conversations list */}
-          {tab === "overview" && showConversations && (
-            <div className="space-y-4 animate-fade-in">
-              <button
-                onClick={() => setShowConversations(false)}
-                className="text-sm text-primary font-bold hover:underline flex items-center gap-1 mb-4"
-              >
-                <ArrowLeft size={14} /> {t("dash_overview")}
-              </button>
-              {lecturesLoading ? (
-                <div className="flex justify-center py-12">
-                  <Loader2 className="animate-spin text-primary" size={32} />
-                </div>
-              ) : lecturesWithMessages.length === 0 ? (
-                <div className="card-base p-12 text-center">
-                  <MessageSquare
-                    size={48}
-                    className="mx-auto text-muted-foreground/30 mb-3"
-                  />
-                  <p className="text-muted-foreground">لا توجد محادثات بعد</p>
-                </div>
-              ) : (
-                <div className="space-y-3">
-                  {lecturesWithMessages.map((lec) => (
-                    <Link
-                      key={lec.id}
-                      to={`/lectures/${lec.id}`}
-                      className="card-base p-4 flex items-center gap-4 hover:border-primary/30 hover:shadow-md transition-all group"
-                    >
-                      <div className="icon-box bg-warning/10">
-                        <MessageSquare size={18} className="text-warning" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="font-bold text-sm group-hover:text-primary transition-colors">
-                          {lec.title}
-                        </div>
-                        <div className="text-muted-foreground text-xs">
-                          {t("the_student")}: {lec.student_name}{" "}
-                          {lec.subject && `• ${lec.subject}`}
-                        </div>
-                      </div>
-                      <ArrowLeft
-                        size={16}
-                        className="text-muted-foreground group-hover:text-primary shrink-0"
-                      />
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-          )}
-
-          {tab === "lectures" && (
-            <div className="animate-fade-in">
-              {lecturesLoading ? (
-                <div className="flex justify-center py-12">
-                  <Loader2 className="animate-spin text-primary" size={32} />
-                </div>
-              ) : lectures.length === 0 ? (
-                <div className="card-base p-12 text-center">
-                  <BookOpen
-                    size={48}
-                    className="mx-auto text-muted-foreground/30 mb-3"
-                  />
-                  <p className="text-muted-foreground">
-                    {t("no_lectures_recorded")}
-                  </p>
-                  <p className="text-muted-foreground text-xs mt-1">
-                    {t("admin_adds_lectures")}
-                  </p>
-                </div>
-              ) : (
-                <div className="grid gap-4 md:grid-cols-2">
-                  {lectures.map((lec, i) => (
-                    <motion.div
-                      key={lec.id}
-                      initial={{ opacity: 0, y: 16 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: i * 0.05 }}
-                    >
-                      <Link
-                        to={`/lectures/${lec.id}`}
-                        className="card-base p-5 block hover:shadow-md transition-shadow group"
-                      >
-                        <div className="flex items-start justify-between mb-3">
-                          <div>
-                            <h4 className="font-bold text-sm group-hover:text-primary transition-colors">
-                              {lec.title}
-                            </h4>
-                            {lec.subject && (
-                              <span className="tag-outline text-[0.65rem] mt-1 inline-block">
-                                {lec.subject}
-                              </span>
-                            )}
-                          </div>
                           <ArrowLeft
                             size={16}
-                            className="text-muted-foreground group-hover:text-primary transition-colors mt-1"
+                            className="text-muted-foreground group-hover:text-primary shrink-0"
                           />
-                        </div>
-                        <div className="flex items-center gap-2 mb-3">
-                          <div className="w-6 h-6 rounded-full bg-success/10 text-success flex items-center justify-center text-xs font-bold">
-                            {lec.student_name?.charAt(0) || "S"}
-                          </div>
-                          <span className="text-sm text-muted-foreground">
-                            {t("the_student")}:{" "}
-                            <span className="text-foreground font-medium">
-                              {lec.student_name}
-                            </span>
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                          <span className="flex items-center gap-1">
-                            <Video
-                              size={12}
-                              className={lec.video_url ? "text-success" : ""}
-                            />
-                            {lec.video_url
-                              ? t("video_available")
-                              : t("no_video")}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <FileText
-                              size={12}
-                              className={lec.pdf_url ? "text-destructive" : ""}
-                            />
-                            {lec.pdf_url ? t("pdf_available") : t("no_file")}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <MessageSquare size={12} />
-                            {t("chat_word")}
-                          </span>
-                        </div>
-                        <div className="text-[0.65rem] text-muted-foreground mt-2">
-                          {new Date(lec.created_at).toLocaleDateString(
-                            lang === "ar" ? "ar" : "en",
-                            { year: "numeric", month: "long", day: "numeric" },
-                          )}
-                        </div>
-                      </Link>
-                    </motion.div>
-                  ))}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
                 </div>
               )}
-            </div>
-          )}
 
-          {tab === "mylessons" && (
-            <div className="animate-fade-in">
-              <MyLessons role="teacher" />
-            </div>
-          )}
-
-          {tab === "finance" && (
-            <div className="animate-fade-in">
-              <TeacherFinance />
-            </div>
-          )}
-
-          {tab === "profile" && (
-            <div className="card-base p-6 animate-fade-in max-w-2xl">
-              <h3 className="font-extrabold text-lg mb-6">
-                {t("dash_edit_profile")}
-              </h3>
-              {profileLoading ? (
-                <div className="flex justify-center py-8">
-                  <Loader2 className="animate-spin text-primary" size={24} />
-                </div>
-              ) : (
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-bold mb-1.5">
-                      {t("register_name")}
-                    </label>
-                    <input
-                      className="input-base"
-                      value={profileForm.fullName}
-                      onChange={(e) =>
-                        setProfileForm((f) => ({
-                          ...f,
-                          fullName: e.target.value,
-                        }))
-                      }
-                      placeholder={t("register_name")}
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-bold mb-1.5">
-                      {t("bio_label")}
-                    </label>
-                    <textarea
-                      rows={4}
-                      className="input-base resize-none"
-                      value={profileForm.bio}
-                      onChange={(e) =>
-                        setProfileForm((f) => ({ ...f, bio: e.target.value }))
-                      }
-                      placeholder={t("bio_placeholder")}
-                    />
-                  </div>
-                  <button
-                    onClick={handleSaveProfile}
-                    disabled={profileSaving}
-                    className="btn-primary flex items-center gap-2 disabled:opacity-50"
-                  >
-                    {profileSaving && (
-                      <Loader2 size={16} className="animate-spin" />
-                    )}
-                    {t("dash_save")}
-                  </button>
+              {tab === "lectures" && (
+                <div className="animate-fade-in">
+                  {lecturesLoading ? (
+                    <div className="flex justify-center py-12">
+                      <Loader2
+                        className="animate-spin text-primary"
+                        size={32}
+                      />
+                    </div>
+                  ) : lectures.length === 0 ? (
+                    <div className="card-base p-12 text-center">
+                      <BookOpen
+                        size={48}
+                        className="mx-auto text-muted-foreground/30 mb-3"
+                      />
+                      <p className="text-muted-foreground">
+                        {t("no_lectures_recorded")}
+                      </p>
+                      <p className="text-muted-foreground text-xs mt-1">
+                        {t("admin_adds_lectures")}
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="grid gap-4 md:grid-cols-2">
+                      {lectures.map((lec, i) => (
+                        <motion.div
+                          key={lec.id}
+                          initial={{ opacity: 0, y: 16 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: i * 0.05 }}
+                        >
+                          <Link
+                            to={`/lectures/${lec.id}`}
+                            className="card-base p-5 block hover:shadow-md transition-shadow group"
+                          >
+                            <div className="flex items-start justify-between mb-3">
+                              <div>
+                                <h4 className="font-bold text-sm group-hover:text-primary transition-colors">
+                                  {lec.title}
+                                </h4>
+                                {lec.subject && (
+                                  <span className="tag-outline text-[0.65rem] mt-1 inline-block">
+                                    {lec.subject}
+                                  </span>
+                                )}
+                              </div>
+                              <ArrowLeft
+                                size={16}
+                                className="text-muted-foreground group-hover:text-primary transition-colors mt-1"
+                              />
+                            </div>
+                            <div className="flex items-center gap-2 mb-3">
+                              <div className="w-6 h-6 rounded-full bg-success/10 text-success flex items-center justify-center text-xs font-bold">
+                                {lec.student_name?.charAt(0) || "S"}
+                              </div>
+                              <span className="text-sm text-muted-foreground">
+                                {t("the_student")}:{" "}
+                                <span className="text-foreground font-medium">
+                                  {lec.student_name}
+                                </span>
+                              </span>
+                            </div>
+                            <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                              <span className="flex items-center gap-1">
+                                <Video
+                                  size={12}
+                                  className={
+                                    lec.video_url ? "text-success" : ""
+                                  }
+                                />
+                                {lec.video_url
+                                  ? t("video_available")
+                                  : t("no_video")}
+                              </span>
+                              <span className="flex items-center gap-1">
+                                <FileText
+                                  size={12}
+                                  className={
+                                    lec.pdf_url ? "text-destructive" : ""
+                                  }
+                                />
+                                {lec.pdf_url
+                                  ? t("pdf_available")
+                                  : t("no_file")}
+                              </span>
+                              <span className="flex items-center gap-1">
+                                <MessageSquare size={12} />
+                                {t("chat_word")}
+                              </span>
+                            </div>
+                            <div className="text-[0.65rem] text-muted-foreground mt-2">
+                              {new Date(lec.created_at).toLocaleDateString(
+                                lang === "ar" ? "ar" : "en",
+                                {
+                                  year: "numeric",
+                                  month: "long",
+                                  day: "numeric",
+                                },
+                              )}
+                            </div>
+                          </Link>
+                        </motion.div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               )}
-            </div>
-          )}
 
-          {tab === "password" && (
-            <div className="card-base p-6 animate-fade-in max-w-lg">
-              <h3 className="font-extrabold text-lg mb-6">
-                {t("dash_change_password")}
-              </h3>
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-bold mb-1.5">
-                    {t("dash_current_password")}
-                  </label>
-                  <input
-                    type="password"
-                    value={pwForm.current}
-                    onChange={(e) =>
-                      setPwForm((f) => ({ ...f, current: e.target.value }))
-                    }
-                    className="input-base"
-                  />
+              {tab === "mylessons" && (
+                <div className="animate-fade-in">
+                  <MyLessons role="teacher" />
                 </div>
-                <div>
-                  <label className="block text-sm font-bold mb-1.5">
-                    {t("dash_new_password")}
-                  </label>
-                  <input
-                    type="password"
-                    value={pwForm.newPw}
-                    onChange={(e) =>
-                      setPwForm((f) => ({ ...f, newPw: e.target.value }))
-                    }
-                    className="input-base"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-bold mb-1.5">
-                    {t("register_confirm")}
-                  </label>
-                  <input
-                    type="password"
-                    value={pwForm.confirm}
-                    onChange={(e) =>
-                      setPwForm((f) => ({ ...f, confirm: e.target.value }))
-                    }
-                    className="input-base"
-                  />
-                </div>
-                <button
-                  onClick={handleChangePassword}
-                  disabled={pwSaving}
-                  className="btn-primary flex items-center gap-2 disabled:opacity-50"
-                >
-                  {pwSaving && <Loader2 size={14} className="animate-spin" />}
-                  {t("dash_update_password")}
-                </button>
-              </div>
-            </div>
-          )}
+              )}
 
-          {tab === "availability" && (
-            <div className="animate-fade-in">
-              <TeacherAvailabilityManager />
-            </div>
-          )}
-          </>
+              {tab === "finance" && (
+                <div className="animate-fade-in">
+                  <TeacherFinance />
+                </div>
+              )}
+
+              {tab === "profile" && (
+                <div className="card-base p-6 animate-fade-in max-w-2xl">
+                  <h3 className="font-extrabold text-lg mb-6">
+                    {t("dash_edit_profile")}
+                  </h3>
+                  {profileLoading ? (
+                    <div className="flex justify-center py-8">
+                      <Loader2
+                        className="animate-spin text-primary"
+                        size={24}
+                      />
+                    </div>
+                  ) : (
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-sm font-bold mb-1.5">
+                          {t("register_name")}
+                        </label>
+                        <input
+                          className="input-base"
+                          value={profileForm.fullName}
+                          onChange={(e) =>
+                            setProfileForm((f) => ({
+                              ...f,
+                              fullName: e.target.value,
+                            }))
+                          }
+                          placeholder={t("register_name")}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-bold mb-1.5">
+                          {t("bio_label")}
+                        </label>
+                        <textarea
+                          rows={4}
+                          className="input-base resize-none"
+                          value={profileForm.bio}
+                          onChange={(e) =>
+                            setProfileForm((f) => ({
+                              ...f,
+                              bio: e.target.value,
+                            }))
+                          }
+                          placeholder={t("bio_placeholder")}
+                        />
+                      </div>
+                      <button
+                        onClick={handleSaveProfile}
+                        disabled={profileSaving}
+                        className="btn-primary flex items-center gap-2 disabled:opacity-50"
+                      >
+                        {profileSaving && (
+                          <Loader2 size={16} className="animate-spin" />
+                        )}
+                        {t("dash_save")}
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {tab === "password" && (
+                <div className="card-base p-6 animate-fade-in max-w-lg">
+                  <h3 className="font-extrabold text-lg mb-6">
+                    {t("dash_change_password")}
+                  </h3>
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-bold mb-1.5">
+                        {t("dash_current_password")}
+                      </label>
+                      <input
+                        type="password"
+                        value={pwForm.current}
+                        onChange={(e) =>
+                          setPwForm((f) => ({ ...f, current: e.target.value }))
+                        }
+                        className="input-base"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-bold mb-1.5">
+                        {t("dash_new_password")}
+                      </label>
+                      <input
+                        type="password"
+                        value={pwForm.newPw}
+                        onChange={(e) =>
+                          setPwForm((f) => ({ ...f, newPw: e.target.value }))
+                        }
+                        className="input-base"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-bold mb-1.5">
+                        {t("register_confirm")}
+                      </label>
+                      <input
+                        type="password"
+                        value={pwForm.confirm}
+                        onChange={(e) =>
+                          setPwForm((f) => ({ ...f, confirm: e.target.value }))
+                        }
+                        className="input-base"
+                      />
+                    </div>
+                    <button
+                      onClick={handleChangePassword}
+                      disabled={pwSaving}
+                      className="btn-primary flex items-center gap-2 disabled:opacity-50"
+                    >
+                      {pwSaving && (
+                        <Loader2 size={14} className="animate-spin" />
+                      )}
+                      {t("dash_update_password")}
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {tab === "availability" && (
+                <div className="animate-fade-in">
+                  <TeacherAvailabilityManager />
+                </div>
+              )}
+            </>
           )}
         </div>
       </main>

@@ -71,7 +71,9 @@ const AdminMfaGate = ({ children }: { children: React.ReactNode }) => {
     });
     setBusy(false);
     if (error) {
-      setErr(ar ? "الرمز غير صحيح، حاول مرة أخرى." : "Invalid code, try again.");
+      setErr(
+        ar ? "الرمز غير صحيح، حاول مرة أخرى." : "Invalid code, try again.",
+      );
       return;
     }
     setCode("");
@@ -84,7 +86,10 @@ const AdminMfaGate = ({ children }: { children: React.ReactNode }) => {
     <div className="min-h-screen pt-page flex items-start justify-center bg-background px-4">
       <div className="w-full max-w-md bg-card text-card-foreground border border-border rounded-2xl p-6 sm:p-8 shadow-lg">
         <div className="flex items-center gap-3 mb-4">
-          <span className="icon-box bg-primary/10 text-primary shrink-0" aria-hidden="true">
+          <span
+            className="icon-box bg-primary/10 text-primary shrink-0"
+            aria-hidden="true"
+          >
             <ShieldCheck size={20} />
           </span>
           <h1 className="text-lg font-extrabold">
@@ -123,7 +128,9 @@ const AdminMfaGate = ({ children }: { children: React.ReactNode }) => {
                   />
                 </div>
                 <p className="text-xs text-muted-foreground break-all">
-                  {ar ? "أو أدخل المفتاح يدويًا:" : "Or enter the key manually:"}{" "}
+                  {ar
+                    ? "أو أدخل المفتاح يدويًا:"
+                    : "Or enter the key manually:"}{" "}
                   <code className="text-foreground">{stage.secret}</code>
                 </p>
               </>
@@ -135,7 +142,10 @@ const AdminMfaGate = ({ children }: { children: React.ReactNode }) => {
               </p>
             )}
             <div>
-              <label htmlFor="mfa-code" className="block text-sm font-bold mb-1.5">
+              <label
+                htmlFor="mfa-code"
+                className="block text-sm font-bold mb-1.5"
+              >
                 {ar ? "رمز التحقق" : "Verification code"}
               </label>
               <input

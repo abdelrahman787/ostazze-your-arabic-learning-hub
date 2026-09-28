@@ -16,7 +16,10 @@ const TeacherOnboardingBanner = () => {
       aria-label={isAr ? "إكمال إعداد الحساب" : "Finish account setup"}
       className="mb-6 rounded-2xl border border-primary/40 bg-card text-card-foreground p-4 grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3 sm:flex sm:gap-4"
     >
-      <span className="icon-box bg-primary/10 text-primary shrink-0" aria-hidden="true">
+      <span
+        className="icon-box bg-primary/10 text-primary shrink-0"
+        aria-hidden="true"
+      >
         <Rocket size={18} />
       </span>
       <p className="min-w-0 sm:flex-1 text-sm font-bold break-words">
