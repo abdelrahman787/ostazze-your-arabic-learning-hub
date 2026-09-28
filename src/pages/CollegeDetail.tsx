@@ -334,7 +334,9 @@ const DepartmentBlock = ({ dept, lang, index, onRequest }: DeptProps) => {
   );
 };
 
-const CollegeDetail = () => {
+const CollegeDetail = ({
+  initialUniversity,
+}: { initialUniversity?: University } = {}) => {
   const params = useParams();
   // Legacy /universities/:uniId/colleges/:collegeId shares the first dynamic segment with the clean route.
   const isLegacy = !params.universitySlug;
@@ -353,9 +355,11 @@ const CollegeDetail = () => {
         : findUniversitySummary(uniId),
     [uniId, countrySlug, universitySlug],
   );
-  const { data: countryData, error: countryError } = useCountryUniversities(
-    summary ? [summary.country_code] : [],
+  const { data: loadedCountry, error: loadError } = useCountryUniversities(
+    summary && !initialUniversity ? [summary.country_code] : [],
   );
+  const countryData = initialUniversity ? [initialUniversity] : loadedCountry;
+  const countryError = initialUniversity ? false : loadError;
   const university: University | undefined = useMemo(
     () =>
       summary && countryData

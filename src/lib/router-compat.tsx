@@ -10,12 +10,13 @@ import {
   useSearch as tsSearch,
   useRouter,
   Link as TSLink,
-  Navigate as TSNavigate,
   Outlet as TSOutlet,
 } from "@tanstack/react-router";
 import {
   useMemo,
   useCallback,
+  useEffect,
+  useRef,
   forwardRef,
   type ComponentProps,
   type ReactNode,
@@ -192,16 +193,24 @@ export function Navigate({
   replace?: boolean;
   state?: unknown;
 }) {
-  const { pathname, search, hash } = parseTo(to);
-  return (
-    <TSNavigate
-      to={pathname as never}
-      search={search as never}
-      hash={hash}
-      state={state as never}
-      replace={replace}
-    />
-  );
+  // Navigate exactly once. Re-firing on every render (new state object each time)
+  // caused a React update loop when a protected page redirected to /login.
+  const tsNav = tsNavigate();
+  const done = useRef(false);
+  useEffect(() => {
+    if (done.current) return;
+    done.current = true;
+    const { pathname, search, hash } = parseTo(to);
+    void tsNav({
+      to: pathname as never,
+      search: search as never,
+      hash,
+      state: state as never,
+      replace,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  return null;
 }
 
 // ---------- Outlet ----------

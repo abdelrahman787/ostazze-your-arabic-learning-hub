@@ -100,10 +100,10 @@ async function buildAppUser(supaUser: SupabaseUser): Promise<AppUser> {
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<AppUser | null>(null);
-  const [loading, setLoading] = useState(false);
+  // Starts true on server and browser alike, so no signed-out UI flashes before the session is read.
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true);
     let cancelled = false;
     let unsubscribe: (() => void) | undefined;
     void getSb().then((supabase) => {
