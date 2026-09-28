@@ -1,0 +1,18 @@
+{"functions": [
+  {"name": "automation-diagnostics", "classification": "internal-only", "signal": "called from 1 src/ file; kept on backend this pass to avoid moving security-hardened code", "outcome": "left"},
+  {"name": "bunny-create-video", "classification": "unknown", "signal": "no src/ call sites", "outcome": "left"},
+  {"name": "bunny-import-video", "classification": "internal-only", "signal": "called from 1 src/ file; uses backend secrets; kept this pass", "outcome": "left"},
+  {"name": "bunny-playback-token", "classification": "internal-only", "signal": "called from 1 src/ file; signs playback tokens with backend secrets; kept this pass", "outcome": "left"},
+  {"name": "confirm-session-request", "classification": "internal-only", "signal": "called from 1 src/ file; also used by webhook sync; kept this pass", "outcome": "left"},
+  {"name": "create-admin", "classification": "unknown", "signal": "no src/ call sites", "outcome": "left"},
+  {"name": "create-checkout", "classification": "internal-only", "signal": "called from 1 src/ file; Stripe + rate limiting; kept this pass", "outcome": "left"},
+  {"name": "manage-roles", "classification": "internal-only", "signal": "called from 2 src/ files; service-role admin actions; kept this pass", "outcome": "left"},
+  {"name": "ostazze-chat", "classification": "custom response", "signal": "streams AI replies; called from 1 src/ file; kept this pass", "outcome": "left"},
+  {"name": "payments-webhook", "classification": "webhook receiver", "signal": "Stripe webhook, fixed URL", "outcome": "left"},
+  {"name": "send-session-reminders", "classification": "cron target", "signal": "protected by cron secret, no src/ callers", "outcome": "left"},
+  {"name": "send-welcome-whatsapp", "classification": "internal-only", "signal": "called from 2 src/ files; kept this pass", "outcome": "left"},
+  {"name": "submit-contact", "classification": "internal-only", "signal": "called from 1 src/ file; rate-limited; kept this pass", "outcome": "left"},
+  {"name": "tutor-upload-url", "classification": "internal-only", "signal": "called from 1 src/ file; file-content validation with service role; kept this pass", "outcome": "left"},
+  {"name": "zoom-create-meeting", "classification": "unknown", "signal": "no src/ call sites", "outcome": "left"},
+  {"name": "zoom-get-token", "classification": "internal-only", "signal": "called from 1 src/ file; kept this pass", "outcome": "left"}
+]}
