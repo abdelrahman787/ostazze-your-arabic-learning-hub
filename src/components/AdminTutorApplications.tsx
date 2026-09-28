@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { tutorFileBucket } from "@/lib/tutorFiles";
 import { copyApplicantPhotoToAvatar } from "@/lib/avatarUpload";
 
 import { toast } from "sonner";
@@ -74,7 +75,7 @@ const AdminTutorApplications = () => {
   }, [fetchApps]);
 
   const openCvFile = async (path: string) => {
-    const { data, error } = await supabase.storage.from("tutor-cvs").createSignedUrl(path, 300);
+    const { data, error } = await supabase.storage.from(tutorFileBucket(path)).createSignedUrl(path, 300);
     if (error || !data?.signedUrl) return toast.error("تعذر فتح الملف");
     window.open(data.signedUrl, "_blank", "noopener");
   };

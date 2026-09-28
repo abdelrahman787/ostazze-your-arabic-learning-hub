@@ -1,4 +1,4 @@
-// Issues a one-time signed upload URL into the private tutor-cvs bucket for
+// Issues a one-time signed upload URL into the private tutor-cvs (PDF, 5MB) or tutor-photos bucket for
 // tutor applicants (who are not signed in). The client never gets general
 // write access: type, size and object path are validated here.
 import { createClient } from "npm:@supabase/supabase-js@2";
@@ -7,13 +7,12 @@ import { z } from "npm:zod@3";
 import { checkRateLimit, sha256Hex } from "../_shared/security.ts";
 
 const RULES = {
-  cv: { exts: ["pdf", "doc", "docx"], mimes: ["application/pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"], max: 10 * 1024 * 1024 },
-  photo: { exts: ["jpg", "jpeg", "png", "webp"], mimes: ["image/jpeg", "image/png", "image/webp"], max: 5 * 1024 * 1024 },
-  demo: { exts: ["mp4", "mov", "m4v", "webm"], mimes: ["video/mp4", "video/quicktime", "video/x-m4v", "video/webm"], max: 100 * 1024 * 1024 },
+  cv: { bucket: "tutor-cvs", exts: ["pdf"], mimes: ["application/pdf"], max: 5 * 1024 * 1024 },
+  photo: { bucket: "tutor-photos", exts: ["jpg", "jpeg", "png", "webp"], mimes: ["image/jpeg", "image/png", "image/webp"], max: 5 * 1024 * 1024 },
 } as const;
 
 const Body = z.object({
-  kind: z.enum(["cv", "photo", "demo"]),
+  kind: z.enum(["cv", "photo"]),
   ext: z.string().trim().toLowerCase().regex(/^[a-z0-9]{2,5}$/),
   contentType: z.string().trim().max(120),
   size: z.number().int().positive(),
@@ -33,7 +32,7 @@ Deno.serve(async (req) => {
   const { kind, ext, contentType, size } = parsed.data;
   const rule = RULES[kind];
   if (!(rule.exts as readonly string[]).includes(ext)) return json({ error: "File type not allowed" }, 400);
-  if (contentType && !(rule.mimes as readonly string[]).includes(contentType)) return json({ error: "File type not allowed" }, 400);
+  if (!(rule.mimes as readonly string[]).includes(contentType)) return json({ error: "File type not allowed" }, 400);
   if (size > rule.max) return json({ error: "File too large" }, 400);
 
   const admin = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
@@ -45,8 +44,11 @@ Deno.serve(async (req) => {
     return json({ error: "Temporarily unavailable" }, 503);
   }
 
-  const path = `applications/${new Date().getFullYear()}/${kind}-${crypto.randomUUID()}.${ext}`;
-  const { data, error } = await admin.storage.from("tutor-cvs").createSignedUploadUrl(path);
+  // Unpredictable server-generated name; client never picks the path.
+  const path = kind === "cv"
+    ? `applications/${crypto.randomUUID()}.pdf`
+    : `photo/${crypto.randomUUID()}.${ext === "jpeg" ? "jpg" : ext}`;
+  const { data, error } = await admin.storage.from(rule.bucket).createSignedUploadUrl(path);
   if (error || !data) return json({ error: "Could not prepare upload" }, 500);
-  return json({ path, token: data.token });
+  return json({ path, token: data.token, bucket: rule.bucket });
 });

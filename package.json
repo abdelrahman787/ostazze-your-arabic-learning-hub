@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "predev": "node scripts/generate-sitemap.mjs",
+    "predev": "(vite-node scripts/export-route-slugs.ts && node scripts/generate-sitemap.mjs) || echo sitemap skipped",
     "dev": "vite",
     "catalog:index": "vite-node scripts/build-catalog-index.ts",
     "prebuild": "vite-node scripts/build-catalog-index.ts && vite-node scripts/export-route-slugs.ts && node scripts/generate-sitemap.mjs && node scripts/validate-sitemap.mjs",

@@ -1,4 +1,5 @@
 import { supabase } from "@/integrations/supabase/client";
+import { tutorFileBucket } from "@/lib/tutorFiles";
 
 // Profile pictures are stored in the public `course-covers` bucket under a
 // dedicated folder so they can be displayed publicly on teacher pages.
@@ -32,12 +33,12 @@ export async function uploadTeacherAvatar(
   return supabase.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
 }
 
-/** Copy an applicant photo from the private tutor-cvs bucket to a public avatar URL. */
+/** Copy an applicant photo from private applicant storage to a public avatar URL. */
 export async function copyApplicantPhotoToAvatar(
   photoPath: string,
   userId: string
 ): Promise<string> {
-  const { data, error } = await supabase.storage.from("tutor-cvs").download(photoPath);
+  const { data, error } = await supabase.storage.from(tutorFileBucket(photoPath)).download(photoPath);
   if (error || !data) throw error || new Error("تعذر تحميل الصورة");
   return uploadTeacherAvatar(data, userId, photoPath);
 }
