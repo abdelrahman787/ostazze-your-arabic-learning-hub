@@ -88,7 +88,6 @@ const AnimationDebugOverlay = () => {
       let orbitNodes = 0;
       if (orbitRoot) {
         try {
-          // @ts-ignore - getAnimations is widely supported
           orbitAnims = document.querySelectorAll(".orbit-traveler").length || (orbitRoot.getAnimations?.() ?? []).length;
         } catch {
           orbitAnims = -1;

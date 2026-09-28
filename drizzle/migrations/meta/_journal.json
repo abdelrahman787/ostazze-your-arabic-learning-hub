@@ -8,6 +8,13 @@
       "when": 1790253214486,
       "tag": "0000_live_sessions_policy_authenticated_only",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1790592702604,
+      "tag": "0001_contact_messages_rate_limits_cron_secret",
+      "breakpoints": true
     }
   ]
 }

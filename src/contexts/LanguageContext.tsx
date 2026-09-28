@@ -70,7 +70,7 @@ const translations = {
 
   // CTA
   cta_title: { ar: "ابدأ رحلتك التعليمية اليوم", en: "Start Your Learning Journey Today" },
-  cta_subtitle: { ar: "انضم إلى آلاف الطلاب الذين يتعلمون مع أفضل المعلمين في استاذي", en: "Join thousands of students learning with the best teachers at Ostaze" },
+  cta_subtitle: { ar: "تعلّم مع معلمين موثّقين في استاذي", en: "Learn with verified tutors at Ostaze" },
   cta_register: { ar: "أنشئ حسابك مجاناً", en: "Create Free Account" },
 
   // Universities
@@ -464,7 +464,7 @@ const translations = {
 
   // Popular Subjects
   popular_title: { ar: "المواد الأكثر طلباً", en: "Most Popular Subjects" },
-  popular_subtitle: { ar: "اكتشف المواد التي يدرسها آلاف الطلاب على منصتنا", en: "Discover subjects studied by thousands of students on our platform" },
+  popular_subtitle: { ar: "اكتشف المواد المتاحة على منصتنا", en: "Discover the subjects available on our platform" },
   subj_math: { ar: "رياضيات", en: "Mathematics" },
   subj_physics: { ar: "فيزياء", en: "Physics" },
   subj_chemistry: { ar: "كيمياء", en: "Chemistry" },
@@ -731,7 +731,7 @@ const translations = {
   home_verified_cta: { ar: "عرض كل المعلمين", en: "View all tutors" },
   home_logos_title: { ar: "نخدم طلاب من أهم الجامعات", en: "Serving students from leading universities" },
   home_logos_badge: { ar: "موثوق من الأفضل", en: "Trusted by the best" },
-  home_logos_subtitle: { ar: "نخبة من جامعات الكويت وقطر يثقون بمنصتنا لتعليم أبنائهم", en: "Top universities in Kuwait and Qatar trust our platform" },
+  home_logos_subtitle: { ar: "جامعات نغطي موادها في دليلنا", en: "Universities whose courses are covered in our directory" },
   home_logos_cta: { ar: "استعرض كل الجامعات", en: "Browse all universities" },
   home_trust_badge: { ar: "موثّق من Ostaze", en: "Ostaze Verified" },
   home_view_profile: { ar: "عرض الملف", en: "View profile" },

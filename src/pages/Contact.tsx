@@ -10,6 +10,33 @@ import { Mail, Phone, MapPin, Send, MessageCircle, Loader2, Building2, Clock, Ti
 import { useToast } from "@/hooks/use-toast";
 import { faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import { waLink } from "@/lib/whatsapp";
+import { supabase } from "@/integrations/supabase/client";
+
+type ContactInfoItem = { icon: React.ComponentType<{ size?: number | string }>; label: string; value: string; href?: string };
+
+export const ContactInfoCard = ({ icon: Icon, label, value, href, index = 0 }: ContactInfoItem & { index?: number }) => {
+  const isExternal = !!href && href.startsWith("http");
+  const isTel = !!href && href.startsWith("tel");
+  const body = (
+    <>
+      <div className="w-11 h-11 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
+        <Icon size={20} />
+      </div>
+      <div>
+        <p className="text-sm font-bold mb-0.5">{label}</p>
+        <p className="text-sm text-muted-foreground" dir={isTel ? "ltr" : undefined}>{value}</p>
+      </div>
+    </>
+  );
+  const motionProps = { initial: { opacity: 0, x: -20 }, animate: { opacity: 1, x: 0 }, transition: { delay: index * 0.1 } };
+  const cls = "card-base p-5 flex items-start gap-4 feature-card block";
+  if (!href) return <motion.div {...motionProps} className={cls}>{body}</motion.div>;
+  return (
+    <motion.a href={href} target={isExternal ? "_blank" : undefined} rel={isExternal ? "noopener noreferrer" : undefined} {...motionProps} className={cls}>
+      {body}
+    </motion.a>
+  );
+};
 
 const Contact = () => {
   const { t, lang } = useLanguage();
@@ -19,14 +46,27 @@ const Contact = () => {
   const [message, setMessage] = useState("");
   const [sending, setSending] = useState(false);
 
+  const [website, setWebsite] = useState(""); // honeypot
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSending(true);
-    // Simulate sending
-    await new Promise(r => setTimeout(r, 1500));
-    toast({ title: t("contact_success") });
-    setName(""); setEmail(""); setMessage("");
-    setSending(false);
+    try {
+      const { data, error } = await supabase.functions.invoke("submit-contact", {
+        body: { name: name.trim(), email: email.trim(), message: message.trim(), lang, ...(website ? { website } : {}) },
+      });
+      if (error || !data?.ok) throw new Error(error?.message || "failed");
+      toast({ title: t("contact_success") });
+      setName(""); setEmail(""); setMessage("");
+    } catch {
+      toast({
+        title: lang === "ar" ? "تعذّر إرسال رسالتك" : "Your message could not be sent",
+        description: lang === "ar" ? `حاول مرة أخرى أو راسلنا على ${SITE.email}` : `Please try again or email ${SITE.email}`,
+        variant: "destructive",
+      });
+    } finally {
+      setSending(false);
+    }
   };
 
   const contactInfo = [
@@ -64,18 +104,7 @@ const Contact = () => {
           {/* Contact Info */}
           <div className="lg:col-span-2 space-y-5">
             {contactInfo.map((item, i) => (
-              <motion.a key={i} href={item.href} target={item.href?.startsWith("http") ? "_blank" : undefined}
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.1 }}
-                className="card-base p-5 flex items-start gap-4 feature-card block">
-                <div className="w-11 h-11 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
-                  <item.icon size={20} />
-                </div>
-                <div>
-                  <p className="text-sm font-bold mb-0.5">{item.label}</p>
-                  <p className="text-sm text-muted-foreground" dir={item.href.startsWith("tel") ? "ltr" : undefined}>{item.value}</p>
-                </div>
-              </motion.a>
+              <ContactInfoCard key={i} index={i} {...item} />
             ))}
           </div>
 
@@ -95,6 +124,9 @@ const Contact = () => {
                 <div>
                   <label className="block text-sm font-bold mb-1.5">{t("contact_message")}</label>
                   <textarea value={message} onChange={e => setMessage(e.target.value)} rows={5} className="input-base resize-none" required maxLength={1000} />
+                </div>
+                <div aria-hidden="true" className="hidden">
+                  <label>Website<input type="text" tabIndex={-1} autoComplete="off" value={website} onChange={e => setWebsite(e.target.value)} /></label>
                 </div>
                 <button type="submit" disabled={sending} className="btn-primary w-full flex items-center justify-center gap-2">
                   {sending ? <Loader2 size={18} className="animate-spin" /> : <Send size={16} />}

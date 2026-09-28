@@ -2,11 +2,9 @@ import { Link } from "react-router-dom";
 import { SITE } from "@/config/site";
 import { Facebook, Mail, Phone, MapPin, GraduationCap } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useState } from "react";
 
 const Footer = () => {
   const { t, lang } = useLanguage();
-  const [email, setEmail] = useState("");
 
   return (
     <footer className="relative overflow-hidden text-foreground/75 mt-16">
@@ -87,26 +85,11 @@ const Footer = () => {
 
           <div>
             <h4 className="font-bold text-black dark:text-white mb-5 text-sm">{t("footer_contact_us")}</h4>
-            <div className="flex flex-col gap-3 text-sm mb-6">
+            <div className="flex flex-col gap-3 text-sm">
               <div className="flex items-center gap-2.5 text-black/60 dark:text-white/60"><Mail size={14} /><a href={`mailto:${SITE.email}`} className="hover:text-primary">{SITE.email}</a></div>
               <div className="flex items-center gap-2.5 text-black/60 dark:text-white/60"><Phone size={14} /><a href={`tel:${SITE.phone}`} dir="ltr" className="hover:text-primary">{SITE.phoneDisplay}</a></div>
               <div className="flex items-center gap-2.5 text-black/60 dark:text-white/60"><MapPin size={14} /><span>{lang === "ar" ? `${SITE.city.ar} - ${SITE.country.ar}` : `${SITE.city.en} - ${SITE.country.en}`}</span></div>
             </div>
-
-            {/* Newsletter */}
-            <h4 className="font-bold text-black dark:text-white mb-3 text-sm">{t("footer_newsletter_title")}</h4>
-            <form onSubmit={(e) => { e.preventDefault(); setEmail(""); }} className="flex gap-2">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder={t("footer_newsletter_placeholder")}
-                className="flex-1 bg-black/5 border border-black/10 rounded-full px-4 py-2 text-sm text-black placeholder:text-black/40 focus:outline-none focus:border-primary min-h-[40px] dark:bg-white/5 dark:border-white/10 dark:text-white dark:placeholder:text-white/40"
-              />
-              <button type="submit" className="bg-primary text-white px-4 py-2 rounded-full text-sm font-bold hover:bg-primary-dark transition-colors min-h-[40px] shadow-[0_4px_14px_hsl(14_91%_50%/0.35)]">
-                {t("footer_newsletter_btn")}
-              </button>
-            </form>
           </div>
         </div>
 

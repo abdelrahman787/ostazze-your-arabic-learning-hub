@@ -133,9 +133,7 @@ export default function Checkout() {
                 country={country}
                 teacherName={state.teacherName}
                 subject={state.subject}
-                customerEmail={user?.email || undefined}
-                userId={user?.id}
-                returnUrl={`${window.location.origin}/checkout/return?session_id={CHECKOUT_SESSION_ID}`}
+                returnUrl={`${window.location.origin}/checkout/return`}
               />
             )}
           </motion.div>

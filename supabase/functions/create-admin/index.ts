@@ -34,8 +34,8 @@ serve(async (req) => {
     );
 
     // Optional: read admins payload from body, otherwise fall back to bootstrap defaults
-    let body: any = {};
-    try { body = await req.json(); } catch {}
+    let body: { admins?: unknown } = {};
+    try { body = await req.json(); } catch { body = {}; }
     const adminsToCreate: Array<{ email: string; password: string; name: string }> = Array.isArray(body?.admins)
       ? body.admins
       : [];
