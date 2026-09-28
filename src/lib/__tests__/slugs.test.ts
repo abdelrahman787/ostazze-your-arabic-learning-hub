@@ -1,11 +1,9 @@
 import { describe, it, expect } from "vitest";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { allUniversities } from "@/data/universitiesData";
-import {
-  allSubjectSlugs, countryPath, universityPath, collegePath, subjectPath,
-  subjectNameFromSlug, findUniversityBySlugs, isSubjectIndexable, isCollegeIndexable, isUniversityIndexable,
-} from "@/lib/slugs";
+import { allUniversities } from "@/data/universities/all";
+import { countryPath, universityPath, collegePath, findUniversityBySlugs, isCollegeIndexable, isUniversityIndexable } from "@/lib/slugs";
+import { allSubjectSlugs, subjectPath, subjectNameFromSlug, isSubjectIndexable } from "@/lib/subjectSlugs";
 
 const sitemapPaths = () =>
   [...readFileSync(resolve("public/sitemap.xml"), "utf8").matchAll(/<loc>https:\/\/ostaze\.com([^<]*)<\/loc>/g)].map((m) => m[1]);
