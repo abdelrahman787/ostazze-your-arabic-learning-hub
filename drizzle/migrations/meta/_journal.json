@@ -15,6 +15,13 @@
       "when": 1790592702604,
       "tag": "0001_contact_messages_rate_limits_cron_secret",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1790594275733,
+      "tag": "0002_close_six_security_findings",
+      "breakpoints": true
     }
   ]
 }
