@@ -155,6 +155,36 @@ export type Database = {
           },
         ]
       }
+      contact_messages: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          lang: string | null
+          message: string
+          name: string
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          lang?: string | null
+          message: string
+          name: string
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          lang?: string | null
+          message?: string
+          name?: string
+          status?: string
+        }
+        Relationships: []
+      }
       course_enrollments: {
         Row: {
           amount_paid: number | null
@@ -371,6 +401,24 @@ export type Database = {
         }
         Relationships: []
       }
+      internal_secrets: {
+        Row: {
+          created_at: string
+          name: string
+          value: string
+        }
+        Insert: {
+          created_at?: string
+          name: string
+          value: string
+        }
+        Update: {
+          created_at?: string
+          name?: string
+          value?: string
+        }
+        Relationships: []
+      }
       lectures: {
         Row: {
           bunny_video_id: string | null
@@ -505,6 +553,27 @@ export type Database = {
           updated_at?: string
           user_id?: string
           welcome_whatsapp_sent_at?: string | null
+        }
+        Relationships: []
+      }
+      rate_limit_events: {
+        Row: {
+          bucket: string
+          created_at: string
+          id: number
+          subject: string
+        }
+        Insert: {
+          bucket: string
+          created_at?: string
+          id?: never
+          subject: string
+        }
+        Update: {
+          bucket?: string
+          created_at?: string
+          id?: never
+          subject?: string
         }
         Relationships: []
       }
