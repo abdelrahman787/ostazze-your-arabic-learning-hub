@@ -256,17 +256,13 @@ const ApplyTutor = () => {
 
 
 
-  // Uploads go through a server-issued one-time URL; the bucket is never writable anonymously.
+  // Files go through a server function that checks real file content, size and picks the name.
   const uploadApplicantFile = async (kind: "cv" | "photo", file: File): Promise<string | null> => {
-    const ext = file.name.split(".").pop()?.toLowerCase() || "";
-    const { data, error } = await supabase.functions.invoke("tutor-upload-url", {
-      body: { kind, ext, contentType: file.type || "", size: file.size },
-    });
-    if (error || !data?.path || !data?.token || !data?.bucket) return null;
-    const { error: upErr } = await supabase.storage
-      .from(data.bucket as string)
-      .uploadToSignedUrl(data.path, data.token, file, { contentType: file.type || undefined });
-    return upErr ? null : (data.path as string);
+    const body = new FormData();
+    body.append("kind", kind);
+    body.append("file", file);
+    const { data, error } = await supabase.functions.invoke("tutor-upload-url", { body });
+    return error || !data?.path ? null : (data.path as string);
   };
 
   const onSubmit = async (e: React.FormEvent) => {
