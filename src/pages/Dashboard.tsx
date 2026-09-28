@@ -278,7 +278,8 @@ const Dashboard = () => {
                 <button
                   key={item.tab}
                   onClick={() => {
-                    if ((item as any).href) navigate((item as any).href);
+                    const href = "href" in item ? (item.href as string | undefined) : undefined;
+                    if (href) navigate(href);
                     else setTab(item.tab);
                     setSidebarOpen(false);
                   }}

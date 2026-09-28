@@ -44,7 +44,7 @@ export function startPerfMonitor(thresholds: Partial<PerfThresholds> = {}) {
         loadTime?: number;
       };
       const time =
-        (last as any).renderTime || (last as any).loadTime || last.startTime;
+        last.renderTime || last.loadTime || last.startTime;
       const level = time > t.lcpMs ? "warn" : "log";
       console[level](
         tag,
@@ -61,7 +61,9 @@ export function startPerfMonitor(thresholds: Partial<PerfThresholds> = {}) {
   try {
     let clsValue = 0;
     const clsObserver = new PerformanceObserver((list) => {
-      for (const entry of list.getEntries() as any[]) {
+      for (const entry of list.getEntries() as Array<
+        PerformanceEntry & { hadRecentInput?: boolean; value: number }
+      >) {
         if (!entry.hadRecentInput) {
           clsValue += entry.value;
         }

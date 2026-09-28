@@ -90,7 +90,7 @@ const AIChatWidget = () => {
   const ensureConversation = useCallback(async () => {
     if (conversationId || !isLoggedIn || !user) return conversationId;
     const { data, error } = await supabase
-      .from("ai_chat_conversations" as any)
+      .from("ai_chat_conversations")
       .insert({ user_id: user.id })
       .select("id")
       .single();
@@ -98,7 +98,7 @@ const AIChatWidget = () => {
       console.error("Failed to create conversation:", error);
       return null;
     }
-    const id = (data as any).id;
+    const id = data.id;
     setConversationId(id);
     return id;
   }, [conversationId, isLoggedIn, user]);

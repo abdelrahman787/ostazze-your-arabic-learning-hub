@@ -39,7 +39,6 @@ export function logAccessEvent(event: AccessEvent) {
     ts: new Date().toISOString(),
     ...event,
   };
-  // eslint-disable-next-line no-console
   console.info(PREFIX, event.type, payload);
 }
 

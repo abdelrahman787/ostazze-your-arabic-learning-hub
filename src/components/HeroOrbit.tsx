@@ -171,7 +171,7 @@ const HeroOrbit = () => {
           width={320}
           height={320}
           decoding="async"
-          {...({ fetchpriority: "high" } as any)}
+          fetchPriority="high"
           className="relative w-full h-full object-contain drop-shadow-[0_12px_24px_hsl(14_91%_45%/0.55)]"
         />
       </div>
