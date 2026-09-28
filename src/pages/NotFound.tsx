@@ -36,14 +36,22 @@ const NotFound = () => {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-muted p-4">
-      <NoIndex title="404" />
+      <NoIndex title={lang === "ar" ? "الصفحة غير موجودة" : "Page Not Found"} />
       <div className="text-center max-w-lg w-full animate-fade-in motion-reduce:animate-none">
         <div className="inline-block mb-4 transition-transform duration-300 hover:scale-110 hover:rotate-[10deg] motion-reduce:transition-none">
           <div className="w-20 h-20 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mx-auto">
             <AlertTriangle size={40} />
           </div>
         </div>
-        <h1 className="mb-3 text-6xl font-black text-foreground">404</h1>
+        <p
+          className="mb-1 text-6xl font-black text-foreground"
+          aria-hidden="true"
+        >
+          404
+        </p>
+        <h1 className="mb-3 text-2xl font-extrabold text-foreground">
+          {lang === "ar" ? "الصفحة غير موجودة" : "Page Not Found"}
+        </h1>
         <p className="mb-6 text-lg text-muted-foreground">
           {t("not_found_desc")}
         </p>
