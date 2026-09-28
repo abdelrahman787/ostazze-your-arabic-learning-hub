@@ -638,7 +638,7 @@ const Admin = () => {
     setUploadProgress(0);
     let pdf_url: string | null = null;
     let bunny_video_id: string | null = null;
-    let uploadedPdfPaths: string[] = [];
+    const uploadedPdfPaths: string[] = [];
 
     try {
       // Upload video to Bunny.net Stream (encrypted + watermarked playback)
