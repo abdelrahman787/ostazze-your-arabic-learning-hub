@@ -27,7 +27,8 @@ BEGIN
     VALUES (student, tutor_a, '2099-01-01', '10:00', 'completed');
   INSERT INTO public.teacher_reviews(teacher_id, student_id, rating, comment, status)
     VALUES (tutor_b, student, 5, 'approved-test', 'approved'),
-           (tutor_b, admin_u, 1, 'rejected-test', 'rejected');
+           (tutor_b, admin_u, 1, 'rejected-test', 'rejected'),
+           (tutor_b, student, 3, 'pending-test', 'pending');
 
   FOR c IN SELECT * FROM (VALUES
     -- who, expect, label, sql  (expect: ok = runs and touches >=1 row; deny = error or 0 rows)
@@ -49,7 +50,7 @@ BEGIN
     ('anon','deny','F2 public RPC hides rejected review','SELECT 1 FROM public.get_public_teacher_reviews(''bd335f03-dbab-4451-bab5-5d3acc17f333'') WHERE comment=''rejected-test'''),
     ('student','ok','F2 student reviews tutor after completed session','INSERT INTO public.teacher_reviews(teacher_id,student_id,rating) VALUES (''a54d78e1-15e2-48b3-b72d-ca998ee977ed'',''facac84e-e25e-43d6-aae9-ecc9fa90eb45'',4)'),
     ('student','deny','F2 student reviews tutor without completed session','INSERT INTO public.teacher_reviews(teacher_id,student_id,rating) VALUES (''87e84015-7542-4808-a797-eecce7826cc8'',''facac84e-e25e-43d6-aae9-ecc9fa90eb45'',4)'),
-    ('student','deny','F2 student self-approves (status forced to pending)','UPDATE public.teacher_reviews SET status=''approved'' WHERE comment=''approved-test'' RETURNING 1 FROM (SELECT 1) x WHERE false'),
+    ('student','deny','F2 student self-approves (status forced to pending)',''),
     ('tutor_a','deny','F2 user edits another user''s review','UPDATE public.teacher_reviews SET comment=''x'' WHERE comment=''approved-test'''),
     ('student','deny','F2 student deletes review','DELETE FROM public.teacher_reviews WHERE comment=''approved-test'''),
     ('admin','ok','F2 admin moderates review','UPDATE public.teacher_reviews SET status=''approved'' WHERE comment=''rejected-test'''),
@@ -88,10 +89,9 @@ BEGIN
           WHEN 'tutor_a' THEN tutor_a WHEN 'tutor_b' THEN tutor_b
           WHEN 'student' THEN student ELSE admin_u END)::text END, true);
       IF c.label LIKE 'F2 student self-approves%' THEN
-        EXECUTE 'UPDATE public.teacher_reviews SET status=''approved'' WHERE comment=''approved-test''';
-        PERFORM set_config('role', 'postgres', true);
-        SELECT count(*) INTO n FROM public.teacher_reviews WHERE comment='approved-test' AND status='approved';
-        n := 1 - n; -- approved-test is not the student's own row? then 0 rows changed
+        EXECUTE 'UPDATE public.teacher_reviews SET status=''approved'' WHERE comment=''pending-test''';
+        PERFORM set_config('role', 'none', true);
+        SELECT count(*) INTO n FROM public.teacher_reviews WHERE comment='pending-test' AND status='approved';
       ELSE
         EXECUTE c.q;
         GET DIAGNOSTICS n = ROW_COUNT;
@@ -110,6 +110,6 @@ BEGIN
     IF ok THEN passed := passed + 1; ELSE failed := failed + 1; END IF;
     report := report || E'\n' || CASE WHEN ok THEN 'PASS ' ELSE 'FAIL ' END || c.label || ' [' || left(err, 80) || ']';
   END LOOP;
-  RAISE EXCEPTION 'RESULT passed=% failed=%%', passed, failed, report;
+  RAISE EXCEPTION 'RESULT passed=% failed=% %', passed, failed, report;
 END
 $test$;
