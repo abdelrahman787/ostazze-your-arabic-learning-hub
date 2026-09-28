@@ -36,6 +36,11 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://ostaze.com/pricing</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://ostaze.com/apply-tutor</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -54,16 +59,6 @@
     <loc>https://ostaze.com/faq</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://ostaze.com/login</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://ostaze.com/register</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.4</priority>
   </url>
   <url>
     <loc>https://ostaze.com/terms</loc>
@@ -577,121 +572,145 @@
   </url>
   <url>
     <loc>https://ostaze.com/courses/0cc99608-245b-420c-bfc0-eadda81480c9</loc>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ostaze.com/courses/5f12328c-3b46-4d9b-b06d-4f28543d53fd</loc>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ostaze.com/courses/2bb86317-0b2b-48ff-a10c-ae955fd908e3</loc>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ostaze.com/courses/338cc56b-8b1a-483a-af29-0193acb85c0a</loc>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ostaze.com/courses/913c7374-6fe1-410c-8663-7c659a88d131</loc>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ostaze.com/teachers/e38b511f-a5af-4876-bf02-6cecff7e8618</loc>
+    <loc>https://ostaze.com/teachers/a54d78e1-15e2-48b3-b72d-ca998ee977ed</loc>
+    <lastmod>2026-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ostaze.com/teachers/4032ee11-4807-4140-9fe5-755c53855146</loc>
+    <loc>https://ostaze.com/teachers/bd335f03-dbab-4451-bab5-5d3acc17f333</loc>
+    <lastmod>2026-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ostaze.com/teachers/0ad868e6-bc9d-4c7c-a2ec-a782b3d469ec</loc>
+    <loc>https://ostaze.com/teachers/f7daed00-dc81-49a2-a69e-f7d824483f45</loc>
+    <lastmod>2026-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ostaze.com/teachers/f02b50cc-dd40-4eed-b590-f253d8b00119</loc>
+    <loc>https://ostaze.com/teachers/d3bf8bd0-568f-4c67-87a5-6b4f57bcc51c</loc>
+    <lastmod>2026-04-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ostaze.com/teachers/e70ff95f-6073-4d74-b768-0bf09502d319</loc>
+    <loc>https://ostaze.com/teachers/581a2837-9642-4555-8c79-46c64ccbaca8</loc>
+    <lastmod>2026-04-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ostaze.com/teachers/4b446749-fd6a-4896-89e2-09155a9d5242</loc>
+    <loc>https://ostaze.com/teachers/83c4f0b8-05fd-4f1a-bcac-0a1de99553f1</loc>
+    <lastmod>2026-04-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ostaze.com/teachers/82860378-d4b1-4b2a-87f5-955cf7379969</loc>
+    <loc>https://ostaze.com/teachers/e33e78f2-8302-4c4f-b91f-87426c554133</loc>
+    <lastmod>2026-04-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ostaze.com/teachers/b46ecb1b-f82e-48d6-b687-16289a7b3f46</loc>
+    <loc>https://ostaze.com/teachers/4126522c-a5c1-4e8a-8fef-6b0367d15650</loc>
+    <lastmod>2026-04-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ostaze.com/teachers/14eb6f02-0cc5-4ab8-ad5f-a21eb45f357b</loc>
+    <loc>https://ostaze.com/teachers/26806192-8693-4571-bde9-01e53b1ce8fa</loc>
+    <lastmod>2026-04-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ostaze.com/teachers/4515efb4-0181-468c-8ee0-32813570750e</loc>
+    <loc>https://ostaze.com/teachers/c6fef6dd-0d27-48f2-a0d9-8dd66e5225cd</loc>
+    <lastmod>2026-04-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ostaze.com/teachers/5cee1f63-431a-4995-a215-e1ec93a50acb</loc>
+    <loc>https://ostaze.com/teachers/de446fec-54e6-42ce-b777-eaf85e44f3b2</loc>
+    <lastmod>2026-04-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ostaze.com/teachers/409ba222-8cdb-4885-b927-0c56d30ec894</loc>
+    <loc>https://ostaze.com/teachers/596296df-abba-484f-ba62-2c4d2f1e6838</loc>
+    <lastmod>2026-04-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ostaze.com/teachers/331624bd-7886-4712-8efe-076b08eb45e8</loc>
+    <loc>https://ostaze.com/teachers/258e2be0-64a3-4791-a967-0648f57aeeba</loc>
+    <lastmod>2026-04-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ostaze.com/teachers/a5a2b085-c8a8-4df6-a682-e35ab1d675dc</loc>
+    <loc>https://ostaze.com/teachers/75ffa8f9-3285-4cc4-9ba5-fa0cbafa933b</loc>
+    <lastmod>2026-04-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ostaze.com/teachers/58d85d44-2865-43d6-bba4-f5112832da41</loc>
+    <loc>https://ostaze.com/teachers/1891393b-0145-4f93-9cb5-35a81a89952f</loc>
+    <lastmod>2026-08-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ostaze.com/teachers/46efcc2b-fd14-4ed1-a39b-e43d70cd6554</loc>
+    <loc>https://ostaze.com/teachers/3778e93e-9959-45b1-bbe0-50feafca75ac</loc>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ostaze.com/teachers/86756774-7107-429e-b3f0-b3686b09972e</loc>
+    <loc>https://ostaze.com/teachers/f5f86b1b-8c19-4baa-8fd4-bcbe76001dce</loc>
+    <lastmod>2026-09-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ostaze.com/teachers/c5773e72-e45a-46d5-9c06-d39c38203060</loc>
+    <loc>https://ostaze.com/teachers/1363a366-aa19-40e7-b529-04a378751a5e</loc>
+    <lastmod>2026-08-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ostaze.com/teachers/2fa20d93-8b1c-45d8-a4c6-8b77914c6b0f</loc>
+    <loc>https://ostaze.com/teachers/a8cbdcf9-2345-4a36-a4cd-4767a5d3a367</loc>
+    <lastmod>2026-09-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
