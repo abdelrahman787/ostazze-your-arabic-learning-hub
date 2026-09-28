@@ -27,11 +27,11 @@ const TeacherCoursesPicker = ({ valueAr, valueEn, onChange }: Props) => {
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
-    import("@/data/universitiesData").then((mod) => {
+    import("@/data/universities/loader").then((m) => m.loadAllUniversities()).then((allUniversities) => {
       if (cancelled) return;
       const seen = new Set<string>();
       const out: CourseOption[] = [];
-      for (const uni of mod.allUniversities) {
+      for (const uni of allUniversities) {
         for (const college of uni.colleges || []) {
           for (const dept of college.departments || []) {
             for (const c of dept.courses || []) {

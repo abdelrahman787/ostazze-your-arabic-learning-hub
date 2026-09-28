@@ -7,7 +7,7 @@ import {
   Palette, Wrench, BookText, TrendingUp, Search, ChevronLeft
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { allUniversities } from "@/data/universitiesData";
+import { CATALOG_TOTALS } from "@/data/universities/subjectIndex.generated";
 import { useState, useMemo } from "react";
 import PageHeader from "@/components/PageHeader";
 import PageHelmet from "@/components/PageHelmet";
@@ -37,8 +37,8 @@ const Categories = () => {
   const [search, setSearch] = useState("");
 
   const stats = useMemo(() => {
-    const totalCourses = allUniversities.reduce((s, u) => s + u.colleges.reduce((s2, c) => s2 + c.departments.reduce((s3, dd) => s3 + dd.courses.length, 0), 0), 0);
-    const totalDepts = allUniversities.reduce((s, u) => s + u.colleges.reduce((s2, c) => s2 + c.departments.length, 0), 0);
+    const totalCourses = CATALOG_TOTALS.courses;
+    const totalDepts = CATALOG_TOTALS.departments;
     return { categories: mockCategories.length, totalDepts, totalCourses };
   }, []);
 

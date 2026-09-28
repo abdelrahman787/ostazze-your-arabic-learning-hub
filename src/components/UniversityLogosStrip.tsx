@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowLeft, GraduationCap, BookOpen, Landmark, Building2, Library, School, Flame, Atom } from "lucide-react";
-import { allUniversities } from "@/data/universitiesData";
+import { UNIVERSITY_INDEX } from "@/data/universities/universityIndex.generated";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const initials = (name: string) =>
@@ -69,7 +69,7 @@ const UniversityItem = ({
 
 const UniversityLogosStrip = () => {
   const { t, lang } = useLanguage();
-  const list = allUniversities.slice(0, 12);
+  const list = UNIVERSITY_INDEX.slice(0, 12);
 
   return (
     <section className="relative py-16 md:py-20 overflow-hidden">

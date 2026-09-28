@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { GraduationCap, ChevronDown, Globe, Calendar, BookOpen } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { University, College } from "@/data/universitiesData";
+import type { University, College } from "@/data/universities/types";
 import { getCollegeIcon } from "@/lib/collegeIconMap";
 
 interface Props {
