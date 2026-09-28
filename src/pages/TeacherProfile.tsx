@@ -143,7 +143,7 @@ const TeacherProfile = () => {
             name: displayName,
             jobTitle: ar ? "معلم" : "Tutor",
             university: (ar ? teacher.university : teacher.university_en || teacher.university) || null,
-            image: null,
+            image: teacher.avatar_url,
             subjects: displaySubjects,
           }),
           breadcrumbJsonLd([
