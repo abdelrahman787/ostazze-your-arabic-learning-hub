@@ -1,0 +1,1055 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Ported from tailwind.config.ts (Tailwind v3) — Warm Ember design tokens stay HSL triplets in :root/.dark below. */
+@theme inline {
+  --font-arabic: "IBM Plex Sans Arabic", sans-serif;
+  --font-sans: "Work Sans", "IBM Plex Sans Arabic", system-ui, sans-serif;
+  --font-display: "Instrument Serif", "IBM Plex Sans Arabic", Georgia, serif;
+  --font-serif: "Instrument Serif", Georgia, serif;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-primary-dark: hsl(var(--primary-dark));
+  --color-primary-light: hsl(var(--primary-light));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-success: hsl(var(--success));
+  --color-success-foreground: hsl(var(--success-foreground));
+  --color-warning: hsl(var(--warning));
+  --color-warning-foreground: hsl(var(--warning-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-sidebar: hsl(var(--sidebar-background));
+  --color-sidebar-foreground: hsl(var(--sidebar-foreground));
+  --color-sidebar-primary: hsl(var(--sidebar-primary));
+  --color-sidebar-primary-foreground: hsl(var(--sidebar-primary-foreground));
+  --color-sidebar-accent: hsl(var(--sidebar-accent));
+  --color-sidebar-accent-foreground: hsl(var(--sidebar-accent-foreground));
+  --color-sidebar-border: hsl(var(--sidebar-border));
+  --color-sidebar-ring: hsl(var(--sidebar-ring));
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-fade-in: fade-in 0.5s ease-out;
+  --breakpoint-2xl: 1200px;
+}
+
+@keyframes accordion-down { from { height: 0 } to { height: var(--radix-accordion-content-height) } }
+@keyframes accordion-up { from { height: var(--radix-accordion-content-height) } to { height: 0 } }
+@keyframes fade-in { from { opacity: 0; transform: translateY(10px) } to { opacity: 1; transform: translateY(0) } }
+
+/* v3 container config: centered, 1.5rem padding, max 1200px */
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+  width: 100%;
+  max-width: 1200px;
+}
+
+
+/* ============================================================
+   Phase 2 — Self-hosted fonts (no fonts.googleapis / fonts.gstatic)
+   Arabic active: 2 files (IBM Plex Sans Arabic 400 + 700) ≈ 85 KB
+   English active: +1 file (Inter Latin variable) ≈ 47 KB
+   LCP (Arabic bold heading) preloaded from index.html.
+   ============================================================ */
+
+/* IBM Plex Sans Arabic — Arabic subset only. Latin/numerals fall
+   through to the metric-adjusted system fallback below to avoid
+   pulling Inter in Arabic mode. */
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/ibm-plex-sans-arabic-400.woff2') format('woff2');
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+200C-200E,
+                 U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FEFC;
+}
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/ibm-plex-sans-arabic-700.woff2') format('woff2');
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+200C-200E,
+                 U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FEFC;
+}
+
+/* Inter — Latin subset. One variable file covers weights 100–900.
+   Only downloaded when Latin glyphs actually render (English mode). */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/inter-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+                 U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F,
+                 U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+                 U+FEFF, U+FFFD;
+}
+
+/* Metric-compatible fallbacks — used pre-swap so layout does not shift
+   when the real webfont loads. Values approximate the target font's
+   x-height / cap-height on top of a local system font. */
+@font-face {
+  font-family: 'IBM Plex Sans Arabic Fallback';
+  src: local('Segoe UI'), local('Tahoma'), local('Arial');
+  size-adjust: 101%;
+  ascent-override: 100%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Inter Fallback';
+  src: local('Arial'), local('Helvetica'), local('Segoe UI');
+  size-adjust: 107%;
+  ascent-override: 90%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+}
+
+
+@layer base {
+  :root {
+    --navbar-h: 80px;
+    /* Warm Ember (light) — cream paper background, deep charcoal ink,
+       signature orange primary, warm gold as editorial accent. */
+    --background: 36 40% 97%;
+    --foreground: 24 20% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 24 20% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 24 20% 12%;
+    --primary: 14 91% 49%;
+    --primary-foreground: 0 0% 100%;
+    --primary-dark: 14 88% 40%;
+    --primary-light: 30 100% 94%;
+    --secondary: 24 18% 14%;
+    --secondary-foreground: 42 60% 92%;
+    --muted: 36 28% 93%;
+    --muted-foreground: 24 12% 38%;
+    /* Accent = warm gold (#f0d78c) */
+    --accent: 41 74% 74%;
+    --accent-foreground: 24 30% 14%;
+    --gold: 41 74% 74%;
+    --gold-deep: 38 55% 52%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 160 60% 38%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    --border: 30 18% 88%;
+    --input: 30 18% 88%;
+    --ring: 14 91% 49%;
+    --radius: 0.75rem;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 24 20% 12%;
+    --sidebar-primary: 14 91% 49%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 36 30% 94%;
+    --sidebar-accent-foreground: 14 88% 40%;
+    --sidebar-border: 30 18% 88%;
+    --sidebar-ring: 14 91% 49%;
+    --glass-bg: 0 0% 100% / 0.72;
+    --glass-border: 24 20% 12% / 0.08;
+    --nav-bg: 0 0% 100% / 0.92;
+    --nav-border: 30 18% 82% / 0.6;
+  }
+
+  .dark {
+    /* Warm Ember (dark) — charcoal #0d0d0d / #1a1a1a base,
+       orange primary, gold accent for headings and highlights. */
+    --background: 0 0% 5%;
+    --foreground: 42 40% 96%;
+    --card: 0 0% 10%;
+    --card-foreground: 42 40% 96%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 42 40% 96%;
+    --primary: 14 91% 55%;
+    --primary-foreground: 0 0% 100%;
+    --primary-dark: 14 88% 45%;
+    --primary-light: 30 100% 94%;
+    --secondary: 0 0% 14%;
+    --secondary-foreground: 42 40% 96%;
+    --muted: 0 0% 14%;
+    --muted-foreground: 42 20% 78%;
+    --accent: 41 74% 68%;
+    --accent-foreground: 0 0% 8%;
+    --gold: 41 74% 74%;
+    --gold-deep: 38 65% 58%;
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 160 60% 48%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 55%;
+    --warning-foreground: 0 0% 100%;
+    --border: 0 0% 18%;
+    --input: 0 0% 16%;
+    --ring: 14 91% 55%;
+    --sidebar-background: 0 0% 5%;
+    --sidebar-foreground: 42 40% 96%;
+    --sidebar-primary: 14 91% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 14%;
+    --sidebar-accent-foreground: 42 40% 96%;
+    --sidebar-border: 0 0% 18%;
+    --sidebar-ring: 14 91% 55%;
+    --glass-bg: 0 0% 10% / 0.62;
+    --glass-border: 42 40% 96% / 0.08;
+    --nav-bg: 0 0% 7% / 0.92;
+    --nav-border: 42 40% 96% / 0.09;
+  }
+}
+
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    background-color: hsl(var(--background));
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: "Work Sans", "Inter", "Inter Fallback", "IBM Plex Sans Arabic", "IBM Plex Sans Arabic Fallback", system-ui, sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6, .font-display {
+    font-family: "Instrument Serif", "IBM Plex Sans Arabic", "IBM Plex Sans Arabic Fallback", Georgia, serif;
+    letter-spacing: -0.015em;
+    font-weight: 400;
+  }
+  :lang(ar) body,
+  [dir="rtl"] body {
+    font-family: "IBM Plex Sans Arabic", "IBM Plex Sans Arabic Fallback", system-ui, sans-serif;
+  }
+  :lang(ar) h1, :lang(ar) h2, :lang(ar) h3, :lang(ar) h4, :lang(ar) h5, :lang(ar) h6,
+  [dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3, [dir="rtl"] h4, [dir="rtl"] h5, [dir="rtl"] h6 {
+    font-family: "IBM Plex Sans Arabic", "IBM Plex Sans Arabic Fallback", system-ui, sans-serif;
+    letter-spacing: -0.005em;
+    font-weight: 700;
+  }
+  a, button, [role="button"],
+  input, select, textarea,
+  .card-base, .btn-primary, .btn-outline, .btn-dark,
+  .tag-outline, .badge-brand, .icon-box, .icon-box-lg,
+  nav, .glass, .glass-strong {
+    transition: background-color 0.3s ease, color 0.15s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+}
+
+@layer utilities {
+  /* Unified page top spacing — accounts for the floating sticky navbar.
+     Use on the first section of any page that does NOT have a hero extending
+     behind the navbar. Adds the navbar height plus a small breathing gap. */
+  .pt-page {
+    padding-top: calc(var(--navbar-h, 80px) + 1.5rem);
+  }
+  .pt-page-lg {
+    padding-top: calc(var(--navbar-h, 80px) + 3rem);
+  }
+  .min-h-page {
+    min-height: calc(100vh - var(--navbar-h, 80px));
+  }
+
+  /* Card-Y inspired hero background: deep dark + radial orange/warm glow + grid */
+  .hero-gradient {
+    background: linear-gradient(160deg, hsl(30 60% 97%) 0%, hsl(25 50% 96%) 30%, hsl(var(--background)) 100%);
+    position: relative;
+  }
+  .hero-gradient::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 50%, hsl(14 91% 49% / 0.08) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .dark .hero-gradient {
+    background:
+      radial-gradient(ellipse 70% 55% at 50% 45%, hsl(14 91% 50% / 0.28) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 80% 20%, hsl(24 95% 55% / 0.12) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 40% at 20% 80%, hsl(14 91% 45% / 0.10) 0%, transparent 55%),
+      hsl(var(--background));
+  }
+  .dark .hero-gradient::before {
+    background:
+      linear-gradient(hsl(30 30% 96% / 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(30 30% 96% / 0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 30%, transparent 80%);
+  }
+
+  /* Star/dust field for dark mode hero */
+  .dark .hero-gradient::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 20% 30%, hsl(30 30% 96% / 0.3), transparent),
+      radial-gradient(1px 1px at 60% 70%, hsl(30 30% 96% / 0.25), transparent),
+      radial-gradient(1px 1px at 80% 20%, hsl(14 91% 70% / 0.4), transparent),
+      radial-gradient(1px 1px at 30% 80%, hsl(30 30% 96% / 0.2), transparent),
+      radial-gradient(1.5px 1.5px at 70% 40%, hsl(14 91% 70% / 0.3), transparent),
+      radial-gradient(1px 1px at 10% 60%, hsl(30 30% 96% / 0.25), transparent),
+      radial-gradient(1px 1px at 90% 85%, hsl(30 30% 96% / 0.2), transparent);
+    background-size: 100% 100%;
+    pointer-events: none;
+  }
+
+  .hero-glow {
+    opacity: 0.9;
+  }
+
+  .orbit-center-glow {
+    opacity: 0.8;
+  }
+
+  /* Continuous orbit rotation — pure CSS so it never stalls on re-renders */
+  @keyframes orbit-spin-cw {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  @keyframes orbit-spin-ccw {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(-360deg); }
+  }
+  .orbit-spin {
+    animation: orbit-spin-cw linear infinite;
+    will-change: transform;
+    transform: translateZ(0);
+  }
+  .orbit-spin-reverse {
+    animation: orbit-spin-ccw linear infinite;
+    will-change: transform;
+    transform: translateZ(0);
+  }
+  .orbit-raf {
+    will-change: transform;
+    transform: rotate(var(--orbit-angle, 0deg)) translateZ(0);
+    backface-visibility: hidden;
+    contain: layout paint style;
+  }
+  .orbit-traveler {
+    will-change: transform;
+    transform: translate(-50%, -50%) translate3d(0, 0, 0);
+    backface-visibility: hidden;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .orbit-spin, .orbit-spin-reverse { animation: none !important; }
+    .orbit-raf { transform: rotate(0deg) translateZ(0) !important; }
+  }
+
+  /* Section background with subtle glow for dark mode */
+  .glow-section {
+    position: relative;
+    overflow: hidden;
+  }
+  .dark .glow-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 40% at 50% 0%, hsl(14 91% 50% / 0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .stats-gradient {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(24 94% 53%));
+  }
+  .cta-gradient {
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 50%, hsl(14 91% 50% / 0.18) 0%, transparent 70%),
+      linear-gradient(160deg, hsl(220 45% 15%), hsl(222 47% 9%));
+  }
+  .dark .cta-gradient {
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 50%, hsl(14 91% 50% / 0.28) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 80% 20%, hsl(24 95% 55% / 0.15) 0%, transparent 60%),
+      linear-gradient(160deg, hsl(230 35% 10%), hsl(230 35% 4%));
+  }
+  .card-base {
+    @apply bg-card rounded-2xl border transition-all duration-300 relative overflow-hidden;
+  }
+  /* Light mode: subtle glass + lift */
+  .card-base {
+    background: linear-gradient(160deg, hsl(0 0% 100%) 0%, hsl(30 40% 98%) 100%);
+    box-shadow: 0 2px 8px hsl(230 25% 15% / 0.04), 0 8px 24px hsl(230 25% 15% / 0.04);
+  }
+  .dark .card-base {
+    background:
+      radial-gradient(ellipse 90% 60% at 50% 0%, hsl(14 91% 50% / 0.06) 0%, transparent 60%),
+      linear-gradient(160deg, hsl(230 30% 13% / 0.96) 0%, hsl(230 35% 8% / 0.9) 100%);
+    /* backdrop-filter removed (WebKit scroll repaint cost) */
+    border-color: hsl(30 30% 96% / 0.08);
+    box-shadow:
+      0 4px 20px hsl(230 35% 0% / 0.35),
+      0 1px 0 hsl(30 30% 96% / 0.06) inset,
+      0 -1px 0 hsl(230 35% 0% / 0.4) inset;
+  }
+  /* Subtle orange glow on top edge for dark cards */
+  .dark .card-base::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 20%;
+    right: 20%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(14 91% 55% / 0.4), transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+  .dark .card-base:hover::before {
+    opacity: 1;
+  }
+  .card-hover {
+    @apply hover:-translate-y-1 hover:shadow-lg;
+  }
+  .card-base:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 40px hsl(14 91% 49% / 0.12), 0 0 0 1px hsl(14 91% 49% / 0.18);
+    border-color: hsl(14 91% 49% / 0.25);
+  }
+  .dark .card-base:hover,
+  .dark .card-hover:hover {
+    box-shadow:
+      0 18px 48px hsl(14 91% 50% / 0.22),
+      0 0 0 1px hsl(14 91% 55% / 0.28),
+      inset 0 1px 0 hsl(30 30% 96% / 0.08);
+    border-color: hsl(14 91% 55% / 0.35);
+    transform: translateY(-3px);
+  }
+  .card-active {
+    @apply border-primary/40 shadow-md shadow-primary/5;
+  }
+  .icon-box {
+    @apply w-12 h-12 rounded-xl flex items-center justify-center;
+  }
+  .icon-box-lg {
+    @apply w-14 h-14 rounded-2xl flex items-center justify-center;
+  }
+  .badge-brand {
+    @apply bg-primary/10 text-primary dark:bg-primary/20 px-4 py-1.5 rounded-full text-sm font-semibold;
+  }
+  /* Card-Y style pill badge: orange capsule + label */
+  .badge-pill {
+    @apply inline-flex items-center gap-2 rounded-full text-sm font-medium;
+    padding: 4px 14px 4px 4px;
+    background: hsl(var(--card) / 0.92);
+    border: 1px solid hsl(var(--border) / 0.6);
+    color: hsl(var(--foreground) / 0.85);
+  }
+  .badge-pill-tag {
+    background: linear-gradient(135deg, hsl(14 91% 55%), hsl(24 95% 58%));
+    color: white;
+    padding: 3px 12px;
+    border-radius: 9999px;
+    font-weight: 700;
+    font-size: 0.78rem;
+  }
+  .input-base {
+    @apply w-full border bg-card rounded-xl px-4 py-3 text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/10 transition-all duration-200;
+  }
+  .dark .input-base,
+  .dark input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  .dark textarea,
+  .dark select {
+    background: hsl(230 30% 11% / 0.7);
+    border-color: hsl(30 30% 96% / 0.1);
+    color: hsl(30 30% 96%);
+  }
+  .dark .input-base:focus,
+  .dark input:focus,
+  .dark textarea:focus,
+  .dark select:focus {
+    border-color: hsl(14 91% 55% / 0.6);
+    box-shadow: 0 0 0 3px hsl(14 91% 55% / 0.15);
+  }
+  /* Make native date/time picker icons visible in dark mode */
+  .dark input[type="date"]::-webkit-calendar-picker-indicator,
+  .dark input[type="time"]::-webkit-calendar-picker-indicator,
+  .dark input[type="datetime-local"]::-webkit-calendar-picker-indicator,
+  .dark input[type="month"]::-webkit-calendar-picker-indicator,
+  .dark input[type="week"]::-webkit-calendar-picker-indicator {
+    filter: invert(1) brightness(1.5);
+    opacity: 0.85;
+    cursor: pointer;
+  }
+  .dark input[type="date"]::-webkit-calendar-picker-indicator:hover,
+  .dark input[type="time"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+  }
+  .btn-primary {
+    @apply bg-primary text-primary-foreground px-6 py-3 rounded-xl font-bold transition-all duration-200 hover:bg-primary-dark hover:shadow-[0_8px_24px_hsl(14_91%_49%/0.35)];
+  }
+  /* Card-Y style: pure white CTA pill */
+  .btn-cta-light {
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-bold transition-all duration-300;
+    background: hsl(0 0% 100%);
+    color: hsl(230 35% 10%);
+    box-shadow: 0 8px 32px hsl(0 0% 100% / 0.18), 0 0 0 1px hsl(0 0% 100% / 0.1);
+  }
+  .btn-cta-light:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 44px hsl(0 0% 100% / 0.28), 0 0 0 1px hsl(0 0% 100% / 0.2);
+  }
+  .btn-outline {
+    @apply border-2 border-primary text-primary px-6 py-3 rounded-xl font-bold transition-all duration-200 hover:bg-primary hover:text-primary-foreground;
+  }
+  .btn-dark {
+    @apply bg-primary text-primary-foreground px-6 py-3 rounded-xl font-semibold transition-all duration-200 hover:bg-primary/90 text-sm;
+  }
+  .tag-outline {
+    @apply border border-border rounded-lg px-3 py-1 text-xs font-medium text-foreground/70;
+  }
+  .dark .tag-outline {
+    border-color: hsl(30 30% 96% / 0.12);
+    background: hsl(230 25% 14% / 0.5);
+  }
+  /* Warm alt surface — matches homepage's warm-neutral family.
+     Light: warm sand (--muted #F4EFE9). Dark: warm espresso (--muted #2C2520)
+     with a subtle primary radial glow echoing the hero. */
+  .bg-section-alt {
+    position: relative;
+    background:
+      radial-gradient(ellipse 70% 40% at 50% 0%, hsl(14 91% 49% / 0.04) 0%, transparent 70%),
+      hsl(var(--muted));
+  }
+  .dark .bg-section-alt {
+    background:
+      radial-gradient(ellipse 70% 40% at 50% 0%, hsl(14 91% 55% / 0.07) 0%, transparent 70%),
+      hsl(var(--muted));
+  }
+
+  /* Shared dot-grid texture — same pattern used in the footer, lifted as a
+     reusable utility for hero / CTA bands. Direction-agnostic (RTL safe). */
+  .bg-dot-grid {
+    background-image: radial-gradient(circle at 1px 1px, hsl(var(--foreground) / 0.06) 1px, transparent 0);
+    background-size: 40px 40px;
+  }
+  .dark .bg-dot-grid {
+    background-image: radial-gradient(circle at 1px 1px, hsl(var(--foreground) / 0.05) 1px, transparent 0);
+  }
+
+  /* Floating navbar pill (Card-Y style) */
+  .nav-pill {
+    background: hsl(var(--nav-bg));
+    border: 1px solid hsl(var(--nav-border));
+    border-radius: 9999px;
+    box-shadow: 0 8px 32px hsl(230 35% 6% / 0.2);
+  }
+  .dark .nav-pill {
+    box-shadow: 0 8px 32px hsl(230 35% 0% / 0.5), 0 0 0 1px hsl(30 30% 96% / 0.05);
+  }
+
+  /* Gradient text utilities */
+  .gradient-text {
+    background: linear-gradient(135deg, hsl(0 0% 100%), hsl(30 100% 94%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  /* Soft fade gradient text for the second line of the hero title */
+  .text-gradient-soft {
+    background: linear-gradient(180deg, hsl(30 30% 96% / 0.95) 0%, hsl(30 30% 96% / 0.4) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Glassmorphism */
+  .glass {
+    background: hsl(var(--glass-bg));
+    /* backdrop-filter removed (WebKit scroll repaint cost) */
+    border: 1px solid hsl(var(--glass-border));
+  }
+  .glass-strong {
+    background: hsl(var(--glass-bg));
+    /* backdrop-filter removed (WebKit scroll repaint cost) */
+    border: 1px solid hsl(var(--glass-border));
+  }
+
+  /* Feature card hover */
+  .feature-card {
+    @apply card-base p-7 text-center transition-all duration-300;
+    border: 1px solid transparent;
+  }
+  .feature-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 50px hsl(14 91% 49% / 0.08);
+    border-color: hsl(14 91% 49% / 0.2);
+  }
+  .dark .feature-card:hover {
+    box-shadow: 0 20px 60px hsl(14 91% 50% / 0.18);
+    border-color: hsl(14 91% 55% / 0.3);
+  }
+
+  /* 3D hero element glow + float */
+  .hero-3d-glow {
+    filter: drop-shadow(0 30px 60px hsl(14 91% 50% / 0.55))
+            drop-shadow(0 0 80px hsl(14 91% 55% / 0.4));
+  }
+
+  /* Calm glassmorphic Stats card: deep navy + soft warm glow */
+  .stats-card-darkglow {
+    position: relative;
+    background:
+      radial-gradient(ellipse 70% 70% at 100% 0%, hsl(28 80% 55% / 0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 70% at 0% 100%, hsl(14 70% 45% / 0.15) 0%, transparent 60%),
+      linear-gradient(135deg, hsl(228 35% 14%) 0%, hsl(225 38% 11%) 50%, hsl(222 40% 9%) 100%);
+    /* backdrop-filter removed: extremely expensive to repaint on WebKit while scrolling.
+       The layered gradients above are already near-opaque, so the look is unchanged. */
+    box-shadow:
+      0 30px 80px -20px hsl(228 50% 5% / 0.6),
+      0 0 0 1px hsl(30 30% 96% / 0.06),
+      inset 0 1px 0 hsl(30 30% 96% / 0.08);
+  }
+  .stats-card-darkglow::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background:
+      radial-gradient(circle 220px at 88% 12%, hsl(28 80% 60% / 0.12) 0%, transparent 70%),
+      radial-gradient(circle 180px at 12% 88%, hsl(14 70% 50% / 0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .stats-card-darkglow::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-image:
+      radial-gradient(1px 1px at 25% 35%, hsl(30 30% 96% / 0.25), transparent),
+      radial-gradient(1px 1px at 75% 60%, hsl(30 30% 96% / 0.18), transparent),
+      radial-gradient(1px 1px at 50% 85%, hsl(30 30% 96% / 0.2), transparent);
+    pointer-events: none;
+    opacity: 0.7;
+  }
+  .dark .stats-card-darkglow {
+    background:
+      radial-gradient(ellipse 70% 70% at 100% 0%, hsl(28 80% 50% / 0.15) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 70% at 0% 100%, hsl(14 70% 40% / 0.12) 0%, transparent 60%),
+      linear-gradient(135deg, hsl(228 35% 10%) 0%, hsl(225 38% 7%) 50%, hsl(222 40% 5%) 100%);
+    box-shadow:
+      0 40px 100px -20px hsl(228 50% 0% / 0.7),
+      0 0 0 1px hsl(30 30% 96% / 0.05),
+      inset 0 1px 0 hsl(30 30% 96% / 0.06);
+  }
+
+  /* 3D glassmorphic stat tile — calm tone */
+  .stats-tile-glass {
+    position: relative;
+    background:
+      linear-gradient(160deg, hsl(0 0% 100% / 0.14) 0%, hsl(0 0% 100% / 0.07) 50%, hsl(0 0% 100% / 0.04) 100%);
+    /* backdrop-filter removed (WebKit scroll repaint cost) */
+    border: 1px solid hsl(0 0% 100% / 0.15);
+    border-radius: 1.25rem;
+    box-shadow:
+      0 8px 28px hsl(228 50% 5% / 0.35),
+      inset 0 1px 0 hsl(0 0% 100% / 0.2),
+      inset 0 -1px 0 hsl(0 0% 100% / 0.04);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+  }
+  .stats-tile-glass::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, hsl(0 0% 100% / 0.1) 0%, transparent 100%);
+    pointer-events: none;
+    border-radius: inherit;
+  }
+  .stats-tile-glass:hover {
+    background:
+      linear-gradient(160deg, hsl(0 0% 100% / 0.18) 0%, hsl(0 0% 100% / 0.08) 50%, hsl(0 0% 100% / 0.03) 100%);
+    transform: translateY(-4px) scale(1.02);
+    border-color: hsl(14 91% 60% / 0.4);
+    box-shadow:
+      0 16px 44px hsl(228 50% 5% / 0.45),
+      0 0 24px hsl(14 91% 50% / 0.15),
+      inset 0 1px 0 hsl(0 0% 100% / 0.28);
+  }
+  .stats-tile-glass > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Card-Y "How it works" step circle with orange glow */
+  .step-circle-glow {
+    position: relative;
+    background: radial-gradient(circle at 50% 50%, hsl(14 91% 50% / 0.18) 0%, hsl(14 91% 50% / 0.04) 70%);
+    border: 1px solid hsl(14 91% 55% / 0.25);
+  }
+  .step-circle-glow::after {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border-radius: 9999px;
+    background: radial-gradient(circle, hsl(14 91% 50% / 0.3) 0%, transparent 70%);
+    filter: blur(12px);
+    z-index: -1;
+    opacity: 0.5;
+  }
+  .dark .step-circle-glow {
+    background: radial-gradient(circle at 50% 50%, hsl(14 91% 50% / 0.28) 0%, hsl(230 35% 10%) 75%);
+    border-color: hsl(14 91% 55% / 0.4);
+  }
+  .dark .step-circle-glow::after {
+    opacity: 0.8;
+  }
+}
+
+/* FAB pulse animation */
+@keyframes fab-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(14 91% 49% / 0.4); }
+  50% { box-shadow: 0 0 0 12px hsl(14 91% 49% / 0); }
+}
+.fab-pulse {
+  animation: fab-pulse 2s ease-in-out infinite;
+}
+
+/* Keyframes — defined globally so animations always run from page load */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes scaleInBounce {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.08); }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.08); }
+}
+
+.float-y {
+  animation: float-y 5s ease-in-out infinite;
+  will-change: transform;
+  transform: translateZ(0);
+}
+.glow-pulse {
+  animation: glow-pulse 4s ease-in-out infinite;
+  will-change: opacity, transform;
+  transform: translateZ(0);
+}
+
+/* Respect user preference — disable continuous animations only */
+@media (prefers-reduced-motion: reduce) {
+  .float-y,
+  .glow-pulse,
+  .flag-wave {
+    animation: none !important;
+  }
+}
+
+/* Flag waving animation */
+@keyframes flag-wave {
+  0% { transform: perspective(400px) rotateY(0deg) skewX(0deg) scaleX(1); }
+  10% { transform: perspective(400px) rotateY(-2deg) skewX(-1.5deg) scaleX(0.98); }
+  20% { transform: perspective(400px) rotateY(3deg) skewX(2deg) scaleX(1.01); }
+  30% { transform: perspective(400px) rotateY(-1.5deg) skewX(-2.5deg) scaleX(0.97); }
+  40% { transform: perspective(400px) rotateY(2.5deg) skewX(1.5deg) scaleX(1.02); }
+  50% { transform: perspective(400px) rotateY(-1deg) skewX(-1deg) scaleX(0.99); }
+  60% { transform: perspective(400px) rotateY(2deg) skewX(2.5deg) scaleX(1.01); }
+  70% { transform: perspective(400px) rotateY(-2.5deg) skewX(-2deg) scaleX(0.98); }
+  80% { transform: perspective(400px) rotateY(1.5deg) skewX(1deg) scaleX(1.01); }
+  90% { transform: perspective(400px) rotateY(-0.5deg) skewX(-0.5deg) scaleX(0.995); }
+  100% { transform: perspective(400px) rotateY(0deg) skewX(0deg) scaleX(1); }
+}
+.flag-wave {
+  transform-origin: left center;
+  animation: flag-wave 3s ease-in-out infinite;
+}
+.flag-wave-container {
+  perspective: 500px;
+}
+
+/* Global focus-visible ring for accessibility (keyboard nav) */
+*:focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Ambient glow drift — GPU-friendly (transform + opacity only) */
+@keyframes glow-drift-a {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.18; }
+  50% { transform: translate3d(40px, -30px, 0) scale(1.15); opacity: 0.28; }
+}
+@keyframes glow-drift-b {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.18; }
+  50% { transform: translate3d(-50px, 25px, 0) scale(1.1); opacity: 0.3; }
+}
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.08); }
+}
+.glow-drift-a {
+  animation: glow-drift-a 14s ease-in-out infinite;
+}
+.glow-drift-b {
+  animation: glow-drift-b 18s ease-in-out infinite;
+}
+.glow-pulse-soft {
+  animation: glow-pulse 6s ease-in-out infinite;
+}
+
+/* Let the browser skip layout/paint work for the long home-page body until
+   it approaches the viewport. The intrinsic size prevents a scrollbar jump
+   while the lazy chunk is being fetched. */
+.home-below-fold {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1800px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .glow-drift-a, .glow-drift-b, .glow-pulse-soft { animation: none; }
+}
+
+/* Thin glass dividers between university cells in unified container */
+.university-cell {
+  position: relative;
+}
+.university-cell::before {
+  content: "";
+  position: absolute;
+  top: 12%;
+  bottom: 12%;
+  inset-inline-end: 0;
+  width: 1px;
+  background: hsl(var(--foreground) / 0.08);
+  pointer-events: none;
+}
+.university-cell::after {
+  content: "";
+  position: absolute;
+  inset-inline: 12%;
+  bottom: 0;
+  height: 1px;
+  background: hsl(var(--foreground) / 0.08);
+  pointer-events: none;
+}
+/* Remove right divider on last column per breakpoint */
+@media (max-width: 639px) {
+  .university-cell:nth-child(2n)::before { display: none; }
+  .university-cell:nth-last-child(-n+2):nth-child(2n+1)::after,
+  .university-cell:last-child::after { display: none; }
+  .university-cell:nth-last-child(2):nth-child(odd)::after { display: none; }
+}
+@media (min-width: 640px) and (max-width: 767px) {
+  .university-cell:nth-child(3n)::before { display: none; }
+  .university-cell:nth-last-child(-n+3)::after { display: none; }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .university-cell:nth-child(4n)::before { display: none; }
+  .university-cell:nth-last-child(-n+4)::after { display: none; }
+}
+@media (min-width: 1024px) {
+  .university-cell:nth-child(6n)::before { display: none; }
+  .university-cell:nth-last-child(-n+6)::after { display: none; }
+}
+
+
+/* ============================================
+   Video watermark anti-piracy floating overlay
+   ============================================ */
+@keyframes watermarkFloat {
+  0%   { transform: translate(0, 0); opacity: 0.3; }
+  25%  { transform: translate(60vw, 10vh); opacity: 0.4; }
+  50%  { transform: translate(40vw, 50vh); opacity: 0.25; }
+  75%  { transform: translate(5vw, 30vh); opacity: 0.35; }
+  100% { transform: translate(0, 0); opacity: 0.3; }
+}
+@keyframes watermarkFloat2 {
+  0%   { transform: translate(0, 0); opacity: 0.25; }
+  33%  { transform: translate(-50vw, -30vh); opacity: 0.35; }
+  66%  { transform: translate(-20vw, -15vh); opacity: 0.2; }
+  100% { transform: translate(0, 0); opacity: 0.25; }
+}
+.watermark-float {
+  animation: watermarkFloat 22s linear infinite;
+}
+.watermark-float-2 {
+  animation: watermarkFloat2 28s linear infinite;
+}
+
+/* ============================================================
+   P2.5 — Motion polish tokens & utilities
+   Transform + opacity only. No animation library on critical path.
+   ============================================================ */
+:root {
+  --motion-fast: 140ms;
+  --motion-standard: 220ms;
+  --motion-slow: 320ms;
+  --motion-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --motion-ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Route entry — 200ms opacity + translateY(6px) */
+@keyframes page-in {
+  from { opacity: 0; transform: translate3d(0, 6px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+.animate-page-in { animation: page-in 200ms var(--motion-ease-standard) both; }
+
+/* Nav dropdown / mobile menu — 180ms */
+@keyframes nav-drop-in {
+  from { opacity: 0; transform: translate3d(0, -6px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+.animate-nav-drop {
+  animation: nav-drop-in 180ms var(--motion-ease-standard) both;
+  transform-origin: top center;
+}
+
+/* Homepage hero — kept longer intentionally for LCP polish */
+@keyframes hero-fade-in {
+  from { opacity: 0; transform: translate3d(0, 20px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes hero-scale-in {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.hero-fade-in  { animation: hero-fade-in 500ms var(--motion-ease-emphasized) both; }
+.hero-scale-in { animation: hero-scale-in 700ms var(--motion-ease-emphasized) both; }
+
+/* Reveal-on-scroll — one-time. Gated by IntersectionObserver in JS. */
+@keyframes reveal-up {
+  from { opacity: 0; transform: translate3d(0, 12px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+.reveal { opacity: 0; transform: translate3d(0, 12px, 0); }
+.reveal.is-visible { animation: reveal-up 340ms var(--motion-ease-emphasized) both; }
+
+/* Card stagger — cap at 40ms/item, 200ms total */
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 40ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 80ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 120ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 160ms; }
+.stagger-children > *:nth-child(n+6) { animation-delay: 200ms; }
+
+/* Interactive lifts — transform only; will-change scoped to hover */
+.hover-lift-sm { transition: transform var(--motion-fast) var(--motion-ease-standard); }
+.hover-lift-sm:hover, .hover-lift-sm:focus-visible {
+  transform: translateY(-1px); will-change: transform;
+}
+.hover-lift-md { transition: transform 180ms var(--motion-ease-standard); }
+.hover-lift-md:hover, .hover-lift-md:focus-visible {
+  transform: translateY(-2px); will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-page-in,
+  .animate-nav-drop,
+  .hero-fade-in,
+  .hero-scale-in,
+  .reveal,
+  .reveal.is-visible {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .hover-lift-sm, .hover-lift-md { transition: none !important; }
+}
+
+/* Tab-hidden pause — toggled by src/lib/motionVisibility.ts */
+html[data-motion-paused="1"] *,
+html[data-motion-paused="1"] *::before,
+html[data-motion-paused="1"] *::after {
+  animation-play-state: paused !important;
+}
+
+/* Safari/WebKit fallback for decorative motion. Static cards and orbit nodes
+   preserve the layout while avoiding compositor stalls during touch scroll. */
+html[data-apple-motion-lite] .float-y,
+html[data-apple-motion-lite] .glow-drift-a,
+html[data-apple-motion-lite] .glow-drift-b,
+html[data-apple-motion-lite] .glow-pulse-soft,
+html[data-apple-motion-lite] .orbit-spin,
+html[data-apple-motion-lite] .orbit-spin-reverse {
+  animation: none !important;
+}
+html[data-apple-motion-lite] .how-it-works-section [style*="transform"] {
+  transform: none !important;
+}
+html[data-apple-motion-lite] .how-it-works-section [style*="opacity"] {
+  opacity: 1 !important;
+}
+html[data-apple-motion-lite] .how-it-works-section [class*="drop-shadow"] {
+  filter: none !important;
+}
+html[data-apple-motion-lite] .home-below-fold {
+  content-visibility: visible;
+  contain-intrinsic-size: none;
+}
+html[data-apple-motion-lite] .home-below-fold * {
+  animation: none !important;
+  transition: none !important;
+}
+html[data-apple-motion-lite] .home-below-fold [style*="opacity"] {
+  opacity: 1 !important;
+}
+html[data-apple-motion-lite] .home-below-fold [style*="transform"]:not(.apple-soft-float) {
+  transform: none !important;
+}
+@keyframes apple-soft-reveal {
+  from { opacity: 0; transform: translate3d(0, 12px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes apple-soft-float {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -4px, 0); }
+}
+html[data-apple-motion-lite] .how-it-works-section .apple-soft-reveal {
+  animation: apple-soft-reveal 520ms cubic-bezier(.22, 1, .36, 1) both !important;
+}
+html[data-apple-motion-lite] .how-it-works-section .apple-soft-reveal:nth-child(2) {
+  animation-delay: 90ms !important;
+}
+html[data-apple-motion-lite] .how-it-works-section .apple-soft-reveal:nth-child(3) {
+  animation-delay: 180ms !important;
+}
+html[data-apple-motion-lite] .how-it-works-section .apple-soft-float {
+  animation: apple-soft-float 5.5s ease-in-out 520ms infinite !important;
+}
+
+/* Mobile — silence continuous decorative loops (battery + TBT) */
+@media (max-width: 640px) {
+  .orbit-spin, .orbit-spin-reverse,
+  .float-y, .glow-pulse-slow,
+  .glow-drift-a, .glow-drift-b, .glow-pulse-soft,
+  .watermark-float, .watermark-float-2,
+  .fab-pulse-ring {
+    animation: none !important;
+  }
+}
