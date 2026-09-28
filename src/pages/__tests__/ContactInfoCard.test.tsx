@@ -1,3 +1,4 @@
+import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { MapPin, Phone } from "lucide-react";
 import { ContactInfoCard } from "@/pages/Contact";
