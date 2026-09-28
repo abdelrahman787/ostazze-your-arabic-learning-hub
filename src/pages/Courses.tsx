@@ -12,7 +12,6 @@ import {
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useBilingual } from "@/hooks/useBilingual";
-import { supabase } from "@/integrations/supabase/client";
 import PageHeader from "@/components/PageHeader";
 import PageHelmet from "@/components/PageHelmet";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -85,6 +84,7 @@ const Courses = ({
     if (initialCourses) return;
     const fetch = async () => {
       setLoading(true);
+      const { supabase } = await import("@/integrations/supabase/client");
       const { data } = await supabase
         .from("courses")
         .select(
