@@ -12,7 +12,7 @@ import { faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import { waLink } from "@/lib/whatsapp";
 import { supabase } from "@/integrations/supabase/client";
 
-type ContactInfoItem = { icon: React.ComponentType<{ size?: number }>; label: string; value: string; href?: string };
+type ContactInfoItem = { icon: React.ComponentType<{ size?: number | string }>; label: string; value: string; href?: string };
 
 export const ContactInfoCard = ({ icon: Icon, label, value, href, index = 0 }: ContactInfoItem & { index?: number }) => {
   const isExternal = !!href && href.startsWith("http");
