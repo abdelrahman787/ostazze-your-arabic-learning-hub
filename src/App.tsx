@@ -1,6 +1,19 @@
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { useEffect as useEffectTS } from "react";
+
+// Trailing-slash policy: no trailing slash (except "/"). /subjects/ -> /subjects in one replace.
+const TrailingSlashRedirect = () => {
+  const { pathname, search, hash } = useLocation();
+  const navigate = useNavigate();
+  useEffectTS(() => {
+    if (pathname.length > 1 && pathname.endsWith("/")) {
+      navigate(pathname.replace(/\/+$/, "") + search + hash, { replace: true });
+    }
+  }, [pathname, search, hash, navigate]);
+  return null;
+};
 import { MotionConfig } from "framer-motion";
 import { Component, ErrorInfo, ReactNode, Suspense, lazy, useEffect } from "react";
 import { useDeferredMount } from "@/hooks/useDeferredMount";
@@ -195,6 +208,7 @@ const App = () => (
                 {/* Toaster/Sonner are rendered inside DeferredWidgets (idle-mounted) */}
                 <BrowserRouter>
                   <ScrollToTop />
+                  <TrailingSlashRedirect />
                   <GlobalSeo />
                   <IdlePrefetch />
                   <Layout>
