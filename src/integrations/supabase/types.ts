@@ -754,6 +754,7 @@ export type Database = {
           created_at: string
           id: string
           rating: number
+          status: string
           student_id: string
           teacher_id: string
         }
@@ -762,6 +763,7 @@ export type Database = {
           created_at?: string
           id?: string
           rating: number
+          status?: string
           student_id: string
           teacher_id: string
         }
@@ -770,6 +772,7 @@ export type Database = {
           created_at?: string
           id?: string
           rating?: number
+          status?: string
           student_id?: string
           teacher_id?: string
         }
@@ -1020,6 +1023,22 @@ export type Database = {
           full_name: string
           full_name_en: string
           user_id: string
+        }[]
+      }
+      get_public_teacher_availability: {
+        Args: { _teacher_id: string }
+        Returns: {
+          day_of_week: number
+          end_time: string
+          start_time: string
+        }[]
+      }
+      get_public_teacher_reviews: {
+        Args: { _teacher_id: string }
+        Returns: {
+          comment: string
+          created_at: string
+          rating: number
         }[]
       }
       get_teacher_finance_summary: {
