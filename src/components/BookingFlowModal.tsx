@@ -491,6 +491,8 @@ const BookingFlowModal = ({ open, onClose, subject, courseLabel, teachers }: Pro
     </AnimatePresence>
   );
 
+  // Pop-ups attach to the page body, which only exists in the browser.
+  if (typeof document === "undefined") return null;
   return createPortal(modalContent, document.body);
 };
 

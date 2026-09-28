@@ -1,4 +1,3 @@
-import { Helmet } from "react-helmet-async";
 import { useLocation } from "@/lib/router-compat";
 
 interface PageHelmetProps {
@@ -33,7 +32,7 @@ const PageHelmet = ({
   const ldArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 
   return (
-    <Helmet>
+    <>
       <title>{fullTitle}</title>
       {description && <meta name="description" content={description} />}
       {keywords && <meta name="keywords" content={keywords} />}
@@ -55,11 +54,14 @@ const PageHelmet = ({
       <meta name="twitter:image" content={ogImage} />
 
       {ldArray.map((ld, i) => (
-        <script key={i} type="application/ld+json">
-          {JSON.stringify(ld)}
-        </script>
+        <script
+          key={i}
+          type="application/ld+json"
+          // React 19 renders <title>/<meta>/<link> straight into <head> (also during server rendering).
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(ld).replace(/</g, "\\u003c") }}
+        />
       ))}
-    </Helmet>
+    </>
   );
 };
 
