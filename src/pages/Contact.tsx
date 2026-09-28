@@ -64,7 +64,7 @@ const Contact = () => {
           {/* Contact Info */}
           <div className="lg:col-span-2 space-y-5">
             {contactInfo.map((item, i) => (
-              <motion.a key={i} href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined}
+              <motion.a key={i} href={item.href} target={item.href?.startsWith("http") ? "_blank" : undefined}
                 rel="noopener noreferrer"
                 initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.1 }}
                 className="card-base p-5 flex items-start gap-4 feature-card block">
