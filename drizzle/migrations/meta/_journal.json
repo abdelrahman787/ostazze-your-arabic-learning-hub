@@ -29,6 +29,13 @@
       "when": 1790599247144,
       "tag": "0003_course_covers_scoped_select",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1790603148777,
+      "tag": "0004_tutor_cvs_pdf_only_and_tutor_photos",
+      "breakpoints": true
     }
   ]
 }
