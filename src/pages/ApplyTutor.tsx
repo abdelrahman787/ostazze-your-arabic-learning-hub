@@ -272,59 +272,51 @@ const ApplyTutor = () => {
   };
 
 
+  // Uploads go through a server-issued one-time URL; the bucket is never writable anonymously.
+  const uploadApplicantFile = async (kind: "cv" | "photo" | "demo", file: File): Promise<string | null> => {
+    const ext = file.name.split(".").pop()?.toLowerCase() || "";
+    const { data, error } = await supabase.functions.invoke("tutor-upload-url", {
+      body: { kind, ext, contentType: file.type || "", size: file.size },
+    });
+    if (error || !data?.path || !data?.token) return null;
+    const { error: upErr } = await supabase.storage
+      .from("tutor-cvs")
+      .uploadToSignedUrl(data.path, data.token, file, { contentType: file.type || undefined });
+    return upErr ? null : (data.path as string);
+  };
+
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
 
     let cvPath: string | null = null;
     if (cvFile) {
-      const ext = cvFile.name.split(".").pop()?.toLowerCase() || "pdf";
-      const safeName = (form.name || "applicant").replace(/[^\p{L}\p{N}]+/gu, "-").slice(0, 40);
-      const path = `${new Date().getFullYear()}/${crypto.randomUUID()}-${safeName}.${ext}`;
-      const { error: upErr } = await supabase.storage
-        .from("tutor-cvs")
-        .upload(path, cvFile, { contentType: cvFile.type || undefined, upsert: false });
-      if (upErr) {
-        console.error("cv upload failed", upErr);
+      cvPath = await uploadApplicantFile("cv", cvFile);
+      if (!cvPath) {
         setCvError(isAr ? "تعذر رفع الملف، حاول مرة أخرى." : "Upload failed, please try again.");
         setSaving(false);
         return;
       }
-      cvPath = path;
     }
 
     let demoPath: string | null = null;
     if (demoFile) {
-      const ext = demoFile.name.split(".").pop()?.toLowerCase() || "mp4";
-      const safeName = (form.name || "applicant").replace(/[^\p{L}\p{N}]+/gu, "-").slice(0, 40);
-      const path = `${new Date().getFullYear()}/demo-${crypto.randomUUID()}-${safeName}.${ext}`;
-      const { error: upErr } = await supabase.storage
-        .from("tutor-cvs")
-        .upload(path, demoFile, { contentType: demoFile.type || undefined, upsert: false });
-      if (upErr) {
-        console.error("demo upload failed", upErr);
+      demoPath = await uploadApplicantFile("demo", demoFile);
+      if (!demoPath) {
         setDemoError(isAr ? "تعذر رفع الفيديو، حاول مرة أخرى." : "Video upload failed, please try again.");
         setSaving(false);
         return;
       }
-      demoPath = path;
     }
 
     let photoPath: string | null = null;
     if (photoFile) {
-      const ext = photoFile.name.split(".").pop()?.toLowerCase() || "jpg";
-      const safeName = (form.name || "applicant").replace(/[^\p{L}\p{N}]+/gu, "-").slice(0, 40);
-      const path = `${new Date().getFullYear()}/photo-${crypto.randomUUID()}-${safeName}.${ext}`;
-      const { error: upErr } = await supabase.storage
-        .from("tutor-cvs")
-        .upload(path, photoFile, { contentType: photoFile.type || undefined, upsert: false });
-      if (upErr) {
-        console.error("photo upload failed", upErr);
+      photoPath = await uploadApplicantFile("photo", photoFile);
+      if (!photoPath) {
         setPhotoError(isAr ? "تعذر رفع الصورة، حاول مرة أخرى." : "Photo upload failed, please try again.");
         setSaving(false);
         return;
       }
-      photoPath = path;
     }
 
     const { error } = await supabase.from("tutor_applications").insert({

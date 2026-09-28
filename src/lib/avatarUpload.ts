@@ -20,9 +20,12 @@ export async function uploadTeacherAvatar(
   fileName?: string
 ): Promise<string> {
   const ext = extOf(fileName || (file as File).name || file.type || "");
-  const path = `${FOLDER}/${userId}-${Date.now()}.${ext}`;
+  if (!/^(jpe?g|png|webp)$/.test(ext)) throw new Error("Unsupported image type");
+  if (file.size > 5 * 1024 * 1024) throw new Error("Image too large (max 5 MB)");
+  // Folder-per-user: storage rules only let the owner (or an admin) write here.
+  const path = `${FOLDER}/${userId}/${Date.now()}.${ext}`;
   const { error } = await supabase.storage.from(BUCKET).upload(path, file, {
-    upsert: true,
+    upsert: false,
     contentType: file.type || `image/${ext === "jpg" ? "jpeg" : ext}`,
   });
   if (error) throw error;
