@@ -83,12 +83,7 @@ const TeacherProfile = () => {
         verified: tp.verified || false,
       });
 
-      const { data: avail } = await supabase
-        .from("teacher_availability")
-        .select("day_of_week, start_time, end_time")
-        .eq("teacher_id", id)
-        .eq("is_active", true)
-        .order("day_of_week");
+      const { data: avail } = await supabase.rpc("get_public_teacher_availability", { _teacher_id: id });
 
       setAvailability((avail as AvailSlot[]) || []);
       setLoading(false);

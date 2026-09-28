@@ -238,7 +238,8 @@ async function executeToolCall(
               supabaseAdmin
                 .from("teacher_reviews")
                 .select("rating")
-                .eq("teacher_id", t.user_id),
+                .eq("teacher_id", t.user_id)
+                .eq("status", "approved"),
             ]);
 
             const reviews = reviewsRes.data || [];
@@ -277,7 +278,7 @@ async function executeToolCall(
         const [tpRes, profRes, revRes] = await Promise.all([
           supabaseAdmin.from("teacher_profiles").select("*").eq("user_id", tid).maybeSingle(),
           supabaseAdmin.from("profiles").select("full_name, full_name_en, bio, bio_en").eq("user_id", tid).maybeSingle(),
-          supabaseAdmin.from("teacher_reviews").select("rating, comment, created_at").eq("teacher_id", tid).order("created_at", { ascending: false }).limit(5),
+          supabaseAdmin.from("teacher_reviews").select("rating, comment, created_at").eq("teacher_id", tid).eq("status", "approved").order("created_at", { ascending: false }).limit(5),
         ]);
 
         const reviews = revRes.data || [];
