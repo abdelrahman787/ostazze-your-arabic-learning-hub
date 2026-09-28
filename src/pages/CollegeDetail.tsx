@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect, useCallback } from "react";
 import { Link, useParams, useNavigate, Navigate } from "react-router-dom";
-import { findUniversityBySlugs, collegePath, countryPath, universityPath, subjectPath, isSubjectIndexable, isCollegeIndexable } from "@/lib/slugs";
+import { findUniversityBySlugs, collegePath, countryPath, universityPath, isCollegeIndexable } from "@/lib/slugs";
+import { subjectPath, isSubjectIndexable } from "@/lib/subjectSlugs";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ChevronLeft, ChevronRight, ChevronDown,
@@ -10,7 +11,10 @@ import PageHeader from "@/components/PageHeader";
 import PageHelmet from "@/components/PageHelmet";
 import { breadcrumbJsonLd, collectionPageJsonLd } from "@/lib/seo";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { allUniversities, College, Department } from "@/data/universitiesData";
+import type { College, Department, University } from "@/data/universities/types";
+import { findUniversitySummary } from "@/data/universities/countries";
+import { useCountryUniversities } from "@/data/universities/loader";
+import RouteSkeleton from "@/components/RouteSkeleton";
 import { getCollegeIcon } from "@/lib/collegeIconMap";
 import { groupByField } from "@/lib/collegeFieldMap";
 import { resolveCourseSubject } from "@/lib/courseSubjectMap";
@@ -227,10 +231,17 @@ const CollegeDetail = () => {
   const { lang, t } = useLanguage();
   const [search, setSearch] = useState("");
 
-  const university = useMemo(
-    () => (countrySlug ? findUniversityBySlugs(countrySlug, universitySlug) : allUniversities.find((u) => u.id === uniId)),
+  // Resolve against the small index, then load only that university's country chunk.
+  const summary = useMemo(
+    () => (countrySlug ? findUniversityBySlugs(countrySlug, universitySlug) : findUniversitySummary(uniId)),
     [uniId, countrySlug, universitySlug]
   );
+  const { data: countryData, error: countryError } = useCountryUniversities(summary ? [summary.country_code] : []);
+  const university: University | undefined = useMemo(
+    () => (summary && countryData ? countryData.find((u) => u.id === summary.id) : undefined),
+    [summary, countryData]
+  );
+  const loadingCountry = !!summary && !countryData && !countryError;
   const college: College | undefined = useMemo(
     () => university?.colleges.find((c) => c.id.toLowerCase() === collegeId?.toLowerCase()),
     [university, collegeId]
@@ -326,6 +337,8 @@ const CollegeDetail = () => {
   if (university && college && !countrySlug) {
     return <Navigate to={collegePath(university, college)} replace />;
   }
+
+  if (loadingCountry) return <RouteSkeleton />;
 
   if (!university || !college) {
     return (
