@@ -2,3 +2,4 @@
 - Business identity (name, phone, WhatsApp, location, socials, logo) lives only in src/config/site.ts; JSON-LD, footer, contact and WhatsApp links read from it so they never disagree.
 - University data is split per country (src/data/universities/{kw,qa,sa,ae}.ts), loaded only through loader.ts; UI reads the generated universityIndex/subjectIndex (scripts/build-catalog-index.ts, checked by a test); all.ts is for scripts/tests only — so no page downloads the whole catalog.
 - Footer stays eager (visible content) and there is no global TooltipProvider; initial JS target is <=180 KB gzip.
+- Public tutor availability/reviews are read only via get_public_teacher_availability / get_public_teacher_reviews RPCs; tutor applicant files upload only through the tutor-upload-url function; avatars live at course-covers/teacher-avatars/<uid>/ — so tables and buckets stay closed to direct public access. Access tests: supabase/tests/security_matrix.sql.
