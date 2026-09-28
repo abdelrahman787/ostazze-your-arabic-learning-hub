@@ -44,9 +44,7 @@ if (typeof window !== "undefined" && window.location.pathname === "/") {
 }
 const Index = lazy(indexImport);
 
-// Footer is below the fold: lazy so it stays out of the initial JS budget.
 const GlobalSeo = lazy(() => import("@/components/GlobalSeo"));
-const Footer = lazy(() => import("@/components/Footer"));
 const FloatingWhatsApp = lazy(() => import("@/components/FloatingWhatsApp"));
 const AIChatWidget = lazy(() => import("@/components/AIChatWidget"));
 const CookieConsent = lazy(() => import("@/components/CookieConsent"));
