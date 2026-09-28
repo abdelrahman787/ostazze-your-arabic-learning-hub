@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { GraduationCap, BookOpen, Calendar, Building2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { allUniversities } from "@/data/universitiesData";
+import { UNIVERSITY_COUNT } from "@/data/catalogStats";
 
 const StatsBar = () => {
   const { t } = useLanguage();
@@ -39,7 +39,7 @@ const StatsBar = () => {
     { icon: GraduationCap, value: stats.tutors, label: t("stats_tutors") },
     { icon: BookOpen, value: stats.subjects, label: t("stats_subjects_held") },
     { icon: Calendar, value: stats.sessions, label: t("stats_sessions_held") },
-    { icon: Building2, value: allUniversities.length, label: t("stats_universities") },
+    { icon: Building2, value: UNIVERSITY_COUNT, label: t("stats_universities") },
   ];
 
   return (

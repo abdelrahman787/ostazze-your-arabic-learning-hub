@@ -2,6 +2,9 @@ import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import PageHelmet from "@/components/PageHelmet";
 import PageHeader from "@/components/PageHeader";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { UNIVERSITY_COUNT } from "@/data/catalogStats";
 import { Target, Eye, Heart, Users, GraduationCap, Globe, Award, Sparkles } from "lucide-react";
 
 const About = () => {
@@ -14,11 +17,18 @@ const About = () => {
     { icon: Sparkles, title: t("about_value4_title"), desc: t("about_value4_desc"), color: "text-amber-500" },
   ];
 
+  // Live counts only — no fixed marketing claims.
+  const [counts, setCounts] = useState<{ tutors: number | null; sessions: number | null }>({ tutors: null, sessions: null });
+  useEffect(() => {
+    Promise.all([
+      supabase.from("teacher_profiles").select("id", { count: "exact", head: true }),
+      supabase.from("session_requests").select("id", { count: "exact", head: true }).eq("status", "completed"),
+    ]).then(([tp, sr]) => setCounts({ tutors: tp.count ?? null, sessions: sr.count ?? null })).catch(() => {});
+  }, []);
   const stats = [
-    { value: "500+", label: t("about_stat_teachers") },
-    { value: "10,000+", label: t("about_stat_students") },
-    { value: "50,000+", label: t("about_stat_sessions") },
-    { value: "4.8", label: t("about_stat_rating") },
+    { value: counts.tutors === null ? "—" : String(counts.tutors), label: t("about_stat_teachers") },
+    { value: counts.sessions === null ? "—" : String(counts.sessions), label: t("about_stat_sessions") },
+    { value: String(UNIVERSITY_COUNT), label: lang === "ar" ? "جامعة في الدليل" : "Universities in our directory" },
   ];
 
   return (
