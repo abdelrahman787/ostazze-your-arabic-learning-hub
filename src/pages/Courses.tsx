@@ -1,6 +1,5 @@
 import { useEffect, useState, useMemo } from "react";
 import { Link } from "@/lib/router-compat";
-import { motion } from "framer-motion";
 import {
   Search,
   Clock,
@@ -235,11 +234,7 @@ const Courses = ({
             ))}
           </div>
         ) : filtered.length === 0 ? (
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center py-20"
-          >
+          <div className="text-center py-20 animate-fade-in motion-reduce:animate-none">
             <div className="w-20 h-20 rounded-2xl bg-muted flex items-center justify-center mx-auto mb-5">
               <BookMarked size={36} className="text-muted-foreground/50" />
             </div>
@@ -251,7 +246,7 @@ const Courses = ({
                 ? "جرّب تغيير معايير البحث أو ارجع لاحقاً"
                 : "Try changing your search filters or come back later"}
             </p>
-          </motion.div>
+          </div>
         ) : (
           <>
             <p className="text-muted-foreground text-sm mb-5 font-medium">
@@ -266,13 +261,9 @@ const Courses = ({
                 const inst = b(c.instructor_name, c.instructor_name_en);
                 const cat = b(c.category, c.category_en);
                 return (
-                  <motion.div
+                  <div
                     key={c.id}
-                    initial={{ opacity: 0, y: 16 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-40px" }}
-                    transition={{ duration: 0.35, delay: i * 0.04 }}
-                    className="card-base overflow-hidden flex flex-col group hover:shadow-[0_12px_30px_-12px_hsl(14_91%_50%/0.35)] transition-all"
+                    className="animate-fade-in motion-reduce:animate-none card-base overflow-hidden flex flex-col group hover:shadow-[0_12px_30px_-12px_hsl(14_91%_50%/0.35)] transition-all"
                   >
                     <Link
                       to={`/courses/${c.id}`}
@@ -358,7 +349,7 @@ const Courses = ({
                         </Link>
                       </div>
                     </div>
-                  </motion.div>
+                  </div>
                 );
               })}
             </div>

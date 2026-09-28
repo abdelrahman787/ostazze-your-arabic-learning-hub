@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import { motion } from "framer-motion";
 
 /** Categories: open book, folder tabs, grid pattern */
 const CategoriesIllustration = () => (
@@ -930,22 +929,13 @@ const PageHeader = ({
       <Illustration />
       <div className="container text-center relative z-10">
         {children}
-        <motion.h1
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-3xl md:text-5xl font-black mb-3 tracking-tight"
-        >
+        <h1 className="text-3xl md:text-5xl font-black mb-3 tracking-tight animate-fade-in motion-reduce:animate-none">
           {title}
-        </motion.h1>
+        </h1>
         {subtitle && (
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.1 }}
-            className="text-muted-foreground text-base max-w-xl mx-auto"
-          >
+          <p className="text-muted-foreground text-base max-w-xl mx-auto animate-fade-in motion-reduce:animate-none">
             {subtitle}
-          </motion.p>
+          </p>
         )}
       </div>
     </section>
