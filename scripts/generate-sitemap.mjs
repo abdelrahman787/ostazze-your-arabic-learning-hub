@@ -27,22 +27,17 @@ const entries = [
   { path: "/refund", changefreq: "yearly", priority: "0.3" },
 ];
 
-// --- University / college routes, parsed from the static data module ---
+// --- Country / university / college / subject routes, exported from src/lib/slugs.ts
+// by scripts/export-route-slugs.ts (single source of truth for URLs).
 try {
-  const src = readFileSync(resolve("src/data/universitiesData.ts"), "utf8");
-  const allIds = [...src.matchAll(/id:\s*"([A-Za-z0-9-]+)"/g)].map((m) => m[1]);
-  const unis = new Set(allIds.filter((id) => id.split("-").length === 2));
-  const collegeIds = [...src.matchAll(/id:\s*"([A-Za-z0-9-]+)",[\s\S]{0,400}?departments:/g)]
-    .map((m) => m[1])
-    .filter((id) => !unis.has(id));
-  for (const collegeId of new Set(collegeIds)) {
-    const parts = collegeId.split("-");
-    const uniId = `${parts[0]}-${parts[1]}`;
-    if (!unis.has(uniId)) continue;
-    entries.push({ path: `/universities/${uniId}/colleges/${collegeId}`, changefreq: "monthly", priority: "0.6" });
+  const paths = JSON.parse(readFileSync(resolve("scripts/.route-slugs.json"), "utf8"));
+  for (const path of paths) {
+    const depth = path.split("/").length;
+    entries.push({ path, changefreq: "monthly", priority: depth <= 3 ? "0.7" : "0.6" });
   }
 } catch (err) {
-  console.warn("sitemap: could not parse universities data —", err.message);
+  console.error("sitemap: run scripts/export-route-slugs.ts first —", err.message);
+  process.exit(1);
 }
 
 // --- Dynamic rows from the backend ---

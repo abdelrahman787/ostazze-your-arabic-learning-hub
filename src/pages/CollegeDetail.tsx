@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect, useCallback } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate, Navigate } from "react-router-dom";
+import { findUniversityBySlugs, collegePath, countryPath, universityPath } from "@/lib/slugs";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ChevronLeft, ChevronRight, ChevronDown,
@@ -214,17 +215,17 @@ const DepartmentBlock = ({ dept, lang, index, onRequest }: DeptProps) => {
 };
 
 const CollegeDetail = () => {
-  const { uniId, collegeId } = useParams();
+  const { uniId, collegeId, countrySlug, universitySlug } = useParams();
   const navigate = useNavigate();
   const { lang, t } = useLanguage();
   const [search, setSearch] = useState("");
 
   const university = useMemo(
-    () => allUniversities.find((u) => u.id === uniId),
-    [uniId]
+    () => (countrySlug ? findUniversityBySlugs(countrySlug, universitySlug) : allUniversities.find((u) => u.id === uniId)),
+    [uniId, countrySlug, universitySlug]
   );
   const college: College | undefined = useMemo(
-    () => university?.colleges.find((c) => c.id === collegeId),
+    () => university?.colleges.find((c) => c.id.toLowerCase() === collegeId?.toLowerCase()),
     [university, collegeId]
   );
 
@@ -314,6 +315,11 @@ const CollegeDetail = () => {
     );
   }, [college, search]);
 
+  // Legacy /universities/:uniId/colleges/:collegeId -> clean canonical route.
+  if (university && college && !countrySlug) {
+    return <Navigate to={collegePath(university, college)} replace />;
+  }
+
   if (!university || !college) {
     return (
       <div className="min-h-screen container py-20 text-center">
@@ -351,16 +357,17 @@ const CollegeDetail = () => {
               lang === "ar"
                 ? "أقسام ومواد الكلية"
                 : "College departments and courses",
-            path: `/universities/${university.id}/colleges/${college.id}`,
+            path: collegePath(university, college),
             lang,
           }),
           breadcrumbJsonLd([
             { name: lang === "ar" ? "الرئيسية" : "Home", path: "/" },
             { name: lang === "ar" ? "الجامعات" : "Universities", path: "/universities" },
-            { name: uniName, path: `/universities` },
+            { name: lang === "ar" ? university.country_ar : university.country_en, path: countryPath(university.country_code) },
+            { name: uniName, path: universityPath(university) },
             {
               name: collegeName,
-              path: `/universities/${university.id}/colleges/${college.id}`,
+              path: collegePath(university, college),
             },
           ]),
         ]}
@@ -388,9 +395,13 @@ const CollegeDetail = () => {
             {lang === "ar" ? "الجامعات" : "Universities"}
           </Link>
           <ChevronRight size={12} />
-          <span className="hover:text-primary transition-colors truncate max-w-[200px]">
+          <Link to={countryPath(university.country_code)} className="hover:text-primary transition-colors">
+            {lang === "ar" ? university.country_ar : university.country_en}
+          </Link>
+          <ChevronRight size={12} />
+          <Link to={universityPath(university)} className="hover:text-primary transition-colors truncate max-w-[200px]">
             {uniName}
-          </span>
+          </Link>
           <ChevronRight size={12} />
           <span className="text-foreground font-medium truncate max-w-[200px]">
             {collegeName}
@@ -430,11 +441,11 @@ const CollegeDetail = () => {
               <CollegeIcon size={28} className="text-primary" />
             </div>
             <div className="flex-1 min-w-0">
-              <h1 className="font-black text-2xl md:text-3xl leading-tight">
+              <h2 className="font-black text-2xl md:text-3xl leading-tight">
                 {collegeName}
-              </h1>
+              </h2>
               <Link
-                to="/universities"
+                to={universityPath(university)}
                 className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary mt-1 transition-colors"
               >
                 <GraduationCap size={13} />

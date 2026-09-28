@@ -1,0 +1,1 @@
+- All subject/country/university/college URLs are built only via src/lib/slugs.ts; the sitemap reads them via scripts/export-route-slugs.ts — one source of truth so links and sitemap never drift.
