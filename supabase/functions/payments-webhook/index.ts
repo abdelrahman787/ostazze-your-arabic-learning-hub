@@ -21,7 +21,7 @@ serve(async (req) => {
 
     switch (event.type) {
       case "checkout.session.completed":
-        await handleCheckoutCompleted(event.data.object);
+        await handleCheckoutCompleted(event.data.object as CheckoutSession);
         break;
       default:
         console.log("Unhandled event:", event.type);
@@ -37,7 +37,9 @@ serve(async (req) => {
   }
 });
 
-async function handleCheckoutCompleted(session: any) {
+type CheckoutSession = { id?: string; metadata?: Record<string, string> | null };
+
+async function handleCheckoutCompleted(session: CheckoutSession) {
   console.log("Checkout completed:", session.id);
   const userId = session.metadata?.userId;
   if (!userId) {
