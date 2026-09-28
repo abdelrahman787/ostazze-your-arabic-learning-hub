@@ -227,7 +227,7 @@ const ApplyTutor = () => {
       setUseAvatar(null);
       return setPhotoFile(null);
     }
-    if (!/^image\//.test(file.type)) {
+    if (!/^image\/(jpeg|png|webp)$/.test(file.type)) {
       setPhotoError(isAr ? "الرجاء اختيار صورة JPG أو PNG" : "Please choose a JPG or PNG image");
       return setPhotoFile(null);
     }
