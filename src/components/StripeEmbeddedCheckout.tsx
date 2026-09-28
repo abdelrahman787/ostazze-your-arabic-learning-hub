@@ -1,4 +1,7 @@
-import { EmbeddedCheckoutProvider, EmbeddedCheckout } from "@stripe/react-stripe-js";
+import {
+  EmbeddedCheckoutProvider,
+  EmbeddedCheckout,
+} from "@stripe/react-stripe-js";
 import { getStripe } from "@/lib/stripe";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -9,10 +12,20 @@ interface StripeEmbeddedCheckoutProps {
   returnUrl?: string;
 }
 
-export function StripeEmbeddedCheckout({ country, teacherName, subject, returnUrl }: StripeEmbeddedCheckoutProps) {
+export function StripeEmbeddedCheckout({
+  country,
+  teacherName,
+  subject,
+  returnUrl,
+}: StripeEmbeddedCheckoutProps) {
   const fetchClientSecret = async (): Promise<string> => {
     const { data, error } = await supabase.functions.invoke("create-checkout", {
-      body: { country: country || null, teacherName: teacherName || null, subject: subject || null, returnUrl: returnUrl || null },
+      body: {
+        country: country || null,
+        teacherName: teacherName || null,
+        subject: subject || null,
+        returnUrl: returnUrl || null,
+      },
     });
     if (error || !data?.clientSecret) {
       throw new Error(error?.message || "Failed to create checkout session");
@@ -22,7 +35,10 @@ export function StripeEmbeddedCheckout({ country, teacherName, subject, returnUr
 
   return (
     <div id="checkout">
-      <EmbeddedCheckoutProvider stripe={getStripe()} options={{ fetchClientSecret }}>
+      <EmbeddedCheckoutProvider
+        stripe={getStripe()}
+        options={{ fetchClientSecret }}
+      >
         <EmbeddedCheckout />
       </EmbeddedCheckoutProvider>
     </div>

@@ -29,7 +29,9 @@ export default function CountrySelector({ value, onChange, required }: Props) {
             }`}
             aria-pressed={active}
           >
-            <div className="text-2xl mb-1" aria-hidden>{meta.flag}</div>
+            <div className="text-2xl mb-1" aria-hidden>
+              {meta.flag}
+            </div>
             <div className="text-sm font-bold">{meta[lang]}</div>
             <div className="text-[11px] text-muted-foreground mt-0.5">
               {price.amount} {lang === "ar" ? price.symbol : price.currency}

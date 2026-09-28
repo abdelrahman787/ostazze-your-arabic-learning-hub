@@ -3,7 +3,14 @@ import { Link } from "@/lib/router-compat";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
-import { GraduationCap, Video, FileText, MessageSquare, Loader2, ArrowLeft } from "lucide-react";
+import {
+  GraduationCap,
+  Video,
+  FileText,
+  MessageSquare,
+  Loader2,
+  ArrowLeft,
+} from "lucide-react";
 import { motion } from "framer-motion";
 
 interface LectureItem {
@@ -29,7 +36,9 @@ const StudentLectures = () => {
     const fetchData = async () => {
       const { data } = await supabase
         .from("lectures")
-        .select("id, title, subject, teacher_id, video_url, bunny_video_id, pdf_url, created_at")
+        .select(
+          "id, title, subject, teacher_id, video_url, bunny_video_id, pdf_url, created_at",
+        )
         .eq("student_id", user.id)
         .order("created_at", { ascending: false });
 
@@ -39,8 +48,15 @@ const StudentLectures = () => {
           .from("profiles")
           .select("user_id, full_name, full_name_en")
           .in("user_id", teacherIds);
-        const pMap = new Map(profiles?.map((p) => [p.user_id, p.full_name]) || []);
-        setLectures(data.map((l) => ({ ...l, teacher_name: pMap.get(l.teacher_id) || "—" })));
+        const pMap = new Map(
+          profiles?.map((p) => [p.user_id, p.full_name]) || [],
+        );
+        setLectures(
+          data.map((l) => ({
+            ...l,
+            teacher_name: pMap.get(l.teacher_id) || "—",
+          })),
+        );
       } else {
         setLectures([]);
       }
@@ -60,9 +76,14 @@ const StudentLectures = () => {
   if (lectures.length === 0) {
     return (
       <div className="text-center p-12">
-        <GraduationCap size={48} className="mx-auto text-muted-foreground/30 mb-3" />
+        <GraduationCap
+          size={48}
+          className="mx-auto text-muted-foreground/30 mb-3"
+        />
         <p className="text-muted-foreground">{t("no_lectures_yet")}</p>
-        <p className="text-muted-foreground text-xs mt-1">{t("lectures_added_by_admin")}</p>
+        <p className="text-muted-foreground text-xs mt-1">
+          {t("lectures_added_by_admin")}
+        </p>
       </div>
     );
   }
@@ -84,25 +105,55 @@ const StudentLectures = () => {
             >
               <div className="flex items-start justify-between mb-3">
                 <div>
-                  <h4 className="font-bold text-sm group-hover:text-primary transition-colors">{lec.title}</h4>
-                  {lec.subject && <span className="tag-outline text-[0.65rem] mt-1 inline-block">{lec.subject}</span>}
+                  <h4 className="font-bold text-sm group-hover:text-primary transition-colors">
+                    {lec.title}
+                  </h4>
+                  {lec.subject && (
+                    <span className="tag-outline text-[0.65rem] mt-1 inline-block">
+                      {lec.subject}
+                    </span>
+                  )}
                 </div>
-                <ArrowLeft size={16} className="text-muted-foreground group-hover:text-primary transition-colors mt-1" />
+                <ArrowLeft
+                  size={16}
+                  className="text-muted-foreground group-hover:text-primary transition-colors mt-1"
+                />
               </div>
 
               <div className="flex items-center gap-2 mb-3">
-                <div className="w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold">{lec.teacher_name?.charAt(0) || "T"}</div>
-                <span className="text-sm text-muted-foreground">{t("the_teacher")}: <span className="text-foreground font-medium">{lec.teacher_name}</span></span>
+                <div className="w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold">
+                  {lec.teacher_name?.charAt(0) || "T"}
+                </div>
+                <span className="text-sm text-muted-foreground">
+                  {t("the_teacher")}:{" "}
+                  <span className="text-foreground font-medium">
+                    {lec.teacher_name}
+                  </span>
+                </span>
               </div>
 
               <div className="flex items-center gap-4 text-xs text-muted-foreground">
                 <span className="flex items-center gap-1">
-                  <Video size={12} className={(lec.video_url || lec.bunny_video_id) ? "text-success" : ""} />
-                  {(lec.video_url || lec.bunny_video_id) ? t("video_available") : t("no_video")}
-                  {lec.bunny_video_id && <span className="text-[0.6rem] bg-success/10 text-success px-1.5 py-0.5 rounded-full ms-1">🔒</span>}
+                  <Video
+                    size={12}
+                    className={
+                      lec.video_url || lec.bunny_video_id ? "text-success" : ""
+                    }
+                  />
+                  {lec.video_url || lec.bunny_video_id
+                    ? t("video_available")
+                    : t("no_video")}
+                  {lec.bunny_video_id && (
+                    <span className="text-[0.6rem] bg-success/10 text-success px-1.5 py-0.5 rounded-full ms-1">
+                      🔒
+                    </span>
+                  )}
                 </span>
                 <span className="flex items-center gap-1">
-                  <FileText size={12} className={lec.pdf_url ? "text-destructive" : ""} />
+                  <FileText
+                    size={12}
+                    className={lec.pdf_url ? "text-destructive" : ""}
+                  />
                   {lec.pdf_url ? t("pdf_available") : t("no_file")}
                 </span>
                 <span className="flex items-center gap-1">
@@ -111,7 +162,10 @@ const StudentLectures = () => {
                 </span>
               </div>
               <div className="text-[0.65rem] text-muted-foreground mt-2">
-                {new Date(lec.created_at).toLocaleDateString(lang === "ar" ? "ar" : "en", { year: "numeric", month: "long", day: "numeric" })}
+                {new Date(lec.created_at).toLocaleDateString(
+                  lang === "ar" ? "ar" : "en",
+                  { year: "numeric", month: "long", day: "numeric" },
+                )}
               </div>
             </Link>
           </motion.div>

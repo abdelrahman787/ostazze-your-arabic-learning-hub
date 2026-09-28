@@ -159,35 +159,41 @@ export function getFieldId(nameAr: string, nameEn: string): string {
   // Order matters: more specific first
   if (
     /(medicine|medical|dental|dentistry|pharmac|nursing|health|veterinar|طب|صحة|تمريض|أسنان|صيدلة|بيطر)/.test(
-      text
+      text,
     )
   )
     return "health";
 
-  if (/(computer|software|informatics|cyber|data\s*science|artificial|حاسب|معلوماتية|سيبراني|برمجيات)/.test(text))
+  if (
+    /(computer|software|informatics|cyber|data\s*science|artificial|حاسب|معلوماتية|سيبراني|برمجيات)/.test(
+      text,
+    )
+  )
     return "it";
   if (/(information\s*technology|\bit\b|\bcit\b)/.test(text)) return "it";
 
-  if (/(engineer|engineering|architecture|architectural|هندسة|عمارة)/.test(text))
+  if (
+    /(engineer|engineering|architecture|architectural|هندسة|عمارة)/.test(text)
+  )
     return "engineering";
 
   if (
     /(business|commerce|economic|management|administration|marketing|accounting|finance|إدارة|تجارة|اقتصاد|محاسبة|مالية|تسويق)/.test(
-      text
+      text,
     )
   )
     return "business";
 
   if (
     /(science|physics|chemistry|biology|mathematics|\bmath\b|statistics|علوم|فيزياء|كيمياء|أحياء|رياضيات|إحصاء)/.test(
-      text
+      text,
     )
   )
     return "science";
 
   if (
     /(arts|humanities|literature|languages|design|fine\s*arts|آداب|فنون|لغات|أدب|تصميم)/.test(
-      text
+      text,
     )
   )
     return "arts";
@@ -198,7 +204,7 @@ export function getFieldId(nameAr: string, nameEn: string): string {
 
   if (
     /(social|sociology|psychology|media|communication|journalism|اجتماع|نفس|إعلام|اتصال)/.test(
-      text
+      text,
     )
   )
     return "social";
@@ -218,7 +224,7 @@ export function getCollegeField(nameAr: string, nameEn: string): CollegeField {
 /** Group an array of items by field, returning ordered list of { field, items }. */
 export function groupByField<T>(
   items: T[],
-  getName: (item: T) => { ar: string; en: string }
+  getName: (item: T) => { ar: string; en: string },
 ): { field: CollegeField; items: T[] }[] {
   const map = new Map<string, T[]>();
   for (const item of items) {

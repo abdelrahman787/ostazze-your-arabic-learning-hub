@@ -17,7 +17,9 @@
     "test:watch": "vitest",
     "perf:budget": "node scripts/perf-budget.mjs",
     "build:check": "vite build && node scripts/perf-budget.mjs",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "build:node": "NITRO_PRESET=node-server vite build",
+    "start": "node .output/server/index.mjs"
   },
   "overrides": {
     "rolldown": "1.2.1"
@@ -121,5 +123,8 @@
     "rollup-plugin-visualizer": "^7.0.1",
     "vitest": "^3.2.4"
   },
-  "version": "0.0.0"
+  "version": "0.0.0",
+  "engines": {
+    "node": ">=22"
+  }
 }

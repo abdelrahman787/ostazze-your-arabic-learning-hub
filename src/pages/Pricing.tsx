@@ -13,28 +13,54 @@ export default function Pricing() {
   const meta = CURRENCIES[country];
 
   const features = ar
-    ? ["جلسة مباشرة أونلاين لمدة ساعة كاملة", "معلم متخصص في مادتك الجامعية", "اختر الموعد المناسب لك", "دفع آمن ومشفّر"]
-    : ["Full one-hour live online session", "Tutor specialised in your university subject", "Pick the time that suits you", "Secure, encrypted payment"];
+    ? [
+        "جلسة مباشرة أونلاين لمدة ساعة كاملة",
+        "معلم متخصص في مادتك الجامعية",
+        "اختر الموعد المناسب لك",
+        "دفع آمن ومشفّر",
+      ]
+    : [
+        "Full one-hour live online session",
+        "Tutor specialised in your university subject",
+        "Pick the time that suits you",
+        "Secure, encrypted payment",
+      ];
 
   return (
     <div className="min-h-screen pb-16">
       <PageHelmet
         title={ar ? "الأسعار — استاذي" : "Pricing — OSTAZE"}
-        description={ar ? "سعر الساعة الواحدة مع معلمي استاذي." : "Hourly price for live sessions with OSTAZE tutors."}
+        description={
+          ar
+            ? "سعر الساعة الواحدة للحصص الخصوصية المباشرة مع معلمي أستاذي: 125 ريال سعودي أو ما يعادلها بعملتك، بدون اشتراك."
+            : "Hourly price for live private sessions with OSTAZE tutors: 125 SAR or the equivalent in your currency, no subscription."
+        }
       />
-      <PageHeader title={ar ? "الأسعار" : "Pricing"} subtitle={ar ? "سعر واضح وبسيط لكل ساعة" : "Simple, clear hourly pricing"} variant="teachers" />
+      <PageHeader
+        title={ar ? "الأسعار" : "Pricing"}
+        subtitle={
+          ar ? "سعر واضح وبسيط لكل ساعة" : "Simple, clear hourly pricing"
+        }
+        variant="teachers"
+      />
 
       <div className="container max-w-md mx-auto px-4 mt-10">
         <div className="card-base p-8 text-center border-2 border-primary">
           <div className="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mx-auto mb-4">
             <Clock size={24} />
           </div>
-          <h2 className="text-lg font-extrabold">{ar ? "ساعة واحدة" : "One hour"}</h2>
-          <div className={`text-4xl font-black text-primary my-4 ${loading ? "opacity-50" : ""}`} aria-live="polite">
+          <h2 className="text-lg font-extrabold">
+            {ar ? "ساعة واحدة" : "One hour"}
+          </h2>
+          <div
+            className={`text-4xl font-black text-primary my-4 ${loading ? "opacity-50" : ""}`}
+            aria-live="polite"
+          >
             {formatPrice(country, ar ? "ar" : "en")}
           </div>
           <p className="text-xs text-muted-foreground inline-flex items-center gap-1">
-            <Globe size={12} /> {meta.flag} {ar ? `السعر بعملة ${meta.ar}` : `Price shown for ${meta.en}`}
+            <Globe size={12} /> {meta.flag}{" "}
+            {ar ? `السعر بعملة ${meta.ar}` : `Price shown for ${meta.en}`}
           </p>
           <ul className="text-start space-y-3 my-6">
             {features.map((f) => (
@@ -48,7 +74,9 @@ export default function Pricing() {
           </Link>
           {country !== "EG" && (
             <p className="text-[11px] text-muted-foreground mt-4">
-              {ar ? "يتم الدفع بالجنيه المصري بما يعادل السعر أعلاه: " : "Charged in Egyptian pounds, equivalent to: "}
+              {ar
+                ? "يتم الدفع بالجنيه المصري بما يعادل السعر أعلاه: "
+                : "Charged in Egyptian pounds, equivalent to: "}
               {formatPrice("EG", ar ? "ar" : "en")}
             </p>
           )}

@@ -1,5 +1,9 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { logAccessDenied, logRoleRedirect, logSignedUrlFailure } from "@/lib/accessLog";
+import {
+  logAccessDenied,
+  logRoleRedirect,
+  logSignedUrlFailure,
+} from "@/lib/accessLog";
 
 describe("accessLog", () => {
   let infoSpy: ReturnType<typeof vi.spyOn>;
@@ -49,14 +53,20 @@ describe("accessLog", () => {
     logSignedUrlFailure("lecture-videos", null);
     const [, type, payload] = infoSpy.mock.calls[0];
     expect(type).toBe("signed_url_missing_path");
-    expect((payload as Record<string, unknown>).resource).toBe("lecture-videos/<no-path>");
+    expect((payload as Record<string, unknown>).resource).toBe(
+      "lecture-videos/<no-path>",
+    );
   });
 
   it("emits signed_url_failure when path is present and includes error message", () => {
     logSignedUrlFailure("lecture-pdfs", "doc.pdf", new Error("RLS denied"));
     const [, type, payload] = infoSpy.mock.calls[0];
     expect(type).toBe("signed_url_failure");
-    expect((payload as Record<string, unknown>).resource).toBe("lecture-pdfs/doc.pdf");
-    expect((payload as { extra?: { error?: string } }).extra?.error).toBe("RLS denied");
+    expect((payload as Record<string, unknown>).resource).toBe(
+      "lecture-pdfs/doc.pdf",
+    );
+    expect((payload as { extra?: { error?: string } }).extra?.error).toBe(
+      "RLS denied",
+    );
   });
 });

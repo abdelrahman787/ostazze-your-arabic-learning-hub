@@ -27,12 +27,16 @@ const referrerHostsFromRequest = (req: Request) => {
         "dc7db421-26c3-4945-8236-93600ec382aa.lovableproject.com",
         "ostazze-learn-hub.lovable.app",
         "ostaze.com",
-      ].filter(Boolean) as string[]
-    )
+      ].filter(Boolean) as string[],
+    ),
   );
 };
 
-const ensureAllowedReferrers = async (libraryId: string, apiKey: string, req: Request) => {
+const ensureAllowedReferrers = async (
+  libraryId: string,
+  apiKey: string,
+  req: Request,
+) => {
   await Promise.all(
     referrerHostsFromRequest(req).map(async (hostname) => {
       const res = await fetch(
@@ -45,14 +49,19 @@ const ensureAllowedReferrers = async (libraryId: string, apiKey: string, req: Re
             accept: "application/json",
           },
           body: JSON.stringify({ Hostname: hostname }),
-        }
+        },
       );
 
       if (!res.ok && res.status !== 400 && res.status !== 409) {
         const txt = await res.text();
-        console.warn("Bunny allowed referrer update failed:", hostname, res.status, txt);
+        console.warn(
+          "Bunny allowed referrer update failed:",
+          hostname,
+          res.status,
+          txt,
+        );
       }
-    })
+    }),
   );
 };
 
@@ -73,11 +82,12 @@ Deno.serve(async (req) => {
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
       Deno.env.get("SUPABASE_ANON_KEY")!,
-      { global: { headers: { Authorization: authHeader } } }
+      { global: { headers: { Authorization: authHeader } } },
     );
 
     const token = authHeader.replace("Bearer ", "");
-    const { data: userData, error: userErr } = await supabase.auth.getUser(token);
+    const { data: userData, error: userErr } =
+      await supabase.auth.getUser(token);
     if (userErr || !userData?.user) {
       return new Response(JSON.stringify({ error: "Unauthorized" }), {
         status: 401,
@@ -118,7 +128,7 @@ Deno.serve(async (req) => {
         {
           status: 500,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
-        }
+        },
       );
     }
 
@@ -136,7 +146,7 @@ Deno.serve(async (req) => {
           accept: "application/json",
         },
         body: JSON.stringify({ title: title || "Untitled" }),
-      }
+      },
     );
 
     if (!bunnyRes.ok) {
@@ -147,7 +157,7 @@ Deno.serve(async (req) => {
         {
           status: 502,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
-        }
+        },
       );
     }
 
@@ -160,7 +170,7 @@ Deno.serve(async (req) => {
     const sigInput = `${libraryId}${apiKey}${expirationTime}${guid}`;
     const sigBuf = await crypto.subtle.digest(
       "SHA-256",
-      new TextEncoder().encode(sigInput)
+      new TextEncoder().encode(sigInput),
     );
     const authorizationSignature = Array.from(new Uint8Array(sigBuf))
       .map((b) => b.toString(16).padStart(2, "0"))
@@ -177,7 +187,7 @@ Deno.serve(async (req) => {
       {
         status: 200,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
-      }
+      },
     );
   } catch (err) {
     console.error("bunny-create-video error:", err);
@@ -188,7 +198,7 @@ Deno.serve(async (req) => {
       {
         status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
-      }
+      },
     );
   }
 });

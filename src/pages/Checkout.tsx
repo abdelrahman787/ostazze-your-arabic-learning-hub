@@ -1,11 +1,24 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, Link } from "@/lib/router-compat";
 import { motion } from "framer-motion";
-import { CreditCard, ArrowLeft, Loader2, Calendar, Clock, BookOpen, User } from "lucide-react";
+import {
+  CreditCard,
+  ArrowLeft,
+  Loader2,
+  Calendar,
+  Clock,
+  BookOpen,
+  User,
+} from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
-import { getDisplayPrice, getCheckoutAmountEGP, formatPrice, type Country } from "@/lib/pricing";
+import {
+  getDisplayPrice,
+  getCheckoutAmountEGP,
+  formatPrice,
+  type Country,
+} from "@/lib/pricing";
 import { StripeEmbeddedCheckout } from "@/components/StripeEmbeddedCheckout";
 import PageHelmet from "@/components/PageHelmet";
 import { toast } from "sonner";
@@ -71,7 +84,9 @@ export default function Checkout() {
     <div className="min-h-screen pt-page pb-12 bg-gradient-to-b from-background to-secondary/30">
       <PageHelmet
         title={lang === "ar" ? "إتمام الدفع — أستاذي" : "Checkout — OSTAZE"}
-        description={lang === "ar" ? "إتمام دفع الجلسة" : "Complete your session payment"}
+        description={
+          lang === "ar" ? "إتمام دفع الجلسة" : "Complete your session payment"
+        }
         noindex
       />
 
@@ -119,7 +134,9 @@ export default function Checkout() {
                     disabled={loadingCountry}
                     className="btn-primary inline-flex items-center gap-2"
                   >
-                    {loadingCountry && <Loader2 size={16} className="animate-spin" />}
+                    {loadingCountry && (
+                      <Loader2 size={16} className="animate-spin" />
+                    )}
                     {lang === "ar" ? "ادفع الآن" : "Pay now"}
                   </button>
                 </div>
@@ -150,12 +167,28 @@ export default function Checkout() {
             </h2>
 
             <div className="space-y-3 text-sm">
-              <Row icon={<User size={14} />} label={lang === "ar" ? "المعلم" : "Teacher"} value={state.teacherName} />
+              <Row
+                icon={<User size={14} />}
+                label={lang === "ar" ? "المعلم" : "Teacher"}
+                value={state.teacherName}
+              />
               {state.subject && (
-                <Row icon={<BookOpen size={14} />} label={lang === "ar" ? "المادة" : "Subject"} value={state.subject} />
+                <Row
+                  icon={<BookOpen size={14} />}
+                  label={lang === "ar" ? "المادة" : "Subject"}
+                  value={state.subject}
+                />
               )}
-              <Row icon={<Calendar size={14} />} label={lang === "ar" ? "التاريخ" : "Date"} value={state.date} />
-              <Row icon={<Clock size={14} />} label={lang === "ar" ? "الوقت" : "Time"} value={state.time} />
+              <Row
+                icon={<Calendar size={14} />}
+                label={lang === "ar" ? "التاريخ" : "Date"}
+                value={state.date}
+              />
+              <Row
+                icon={<Clock size={14} />}
+                label={lang === "ar" ? "الوقت" : "Time"}
+                value={state.time}
+              />
             </div>
 
             <div className="border-t border-border my-5" />
@@ -171,19 +204,24 @@ export default function Checkout() {
               </div>
 
               <div className="flex items-center justify-between pt-3 mt-3 border-t border-border">
-                <span className="font-extrabold">{lang === "ar" ? "الإجمالي" : "Total"}</span>
+                <span className="font-extrabold">
+                  {lang === "ar" ? "الإجمالي" : "Total"}
+                </span>
                 <span className="text-xl font-extrabold text-primary">
                   {egpAmount.toFixed(2)} {lang === "ar" ? "ج.م" : "EGP"}
                 </span>
               </div>
             </div>
 
-
             <p className="text-[11px] text-muted-foreground mt-5 leading-relaxed">
               {t("checkout_terms_agree")}{" "}
-              <Link to="/terms" className="text-primary hover:underline">{t("checkout_terms_link")}</Link>
+              <Link to="/terms" className="text-primary hover:underline">
+                {t("checkout_terms_link")}
+              </Link>
               {" · "}
-              <Link to="/refund" className="text-primary hover:underline">{t("checkout_refund_link")}</Link>
+              <Link to="/refund" className="text-primary hover:underline">
+                {t("checkout_refund_link")}
+              </Link>
             </p>
           </motion.aside>
         </div>
@@ -192,10 +230,20 @@ export default function Checkout() {
   );
 }
 
-function Row({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
+function Row({
+  icon,
+  label,
+  value,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  value: string;
+}) {
   return (
     <div className="flex items-start justify-between gap-3">
-      <span className="inline-flex items-center gap-1.5 text-muted-foreground">{icon} {label}</span>
+      <span className="inline-flex items-center gap-1.5 text-muted-foreground">
+        {icon} {label}
+      </span>
       <span className="font-semibold text-end">{value}</span>
     </div>
   );

@@ -12,7 +12,11 @@ interface Props {
   teacherOnly?: boolean;
 }
 
-const ProtectedRoute = ({ children, adminOnly = false, teacherOnly = false }: Props) => {
+const ProtectedRoute = ({
+  children,
+  adminOnly = false,
+  teacherOnly = false,
+}: Props) => {
   const { user, loading } = useAuth();
   const location = useLocation();
   const { lang } = useLanguage();

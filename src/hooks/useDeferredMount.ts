@@ -6,7 +6,11 @@ import { useEffect, useState } from "react";
  * first. Used to defer non-critical widgets so they don't inflate TBT
  * or contend for the main thread during the initial render.
  */
-export function useDeferredMount(options?: { timeout?: number; skipIdle?: boolean; onInteraction?: boolean }): boolean {
+export function useDeferredMount(options?: {
+  timeout?: number;
+  skipIdle?: boolean;
+  onInteraction?: boolean;
+}): boolean {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -32,14 +36,26 @@ export function useDeferredMount(options?: { timeout?: number; skipIdle?: boolea
     ];
     if (onInteraction) {
       events.forEach((ev) =>
-        window.addEventListener(ev, arm, { once: true, passive: true } as AddEventListenerOptions),
+        window.addEventListener(ev, arm, {
+          once: true,
+          passive: true,
+        } as AddEventListenerOptions),
       );
     }
 
     let ricId: number | undefined;
     let toId: number | undefined;
-    const ric = (window as unknown as { requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number }).requestIdleCallback;
-    const cic = (window as unknown as { cancelIdleCallback?: (id: number) => void }).cancelIdleCallback;
+    const ric = (
+      window as unknown as {
+        requestIdleCallback?: (
+          cb: () => void,
+          opts?: { timeout: number },
+        ) => number;
+      }
+    ).requestIdleCallback;
+    const cic = (
+      window as unknown as { cancelIdleCallback?: (id: number) => void }
+    ).cancelIdleCallback;
     if (!skipIdle && typeof ric === "function") {
       ricId = ric(arm, { timeout });
     } else {

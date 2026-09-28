@@ -16,7 +16,9 @@ const isChunkLoadError = (err: unknown): boolean => {
   if (!err) return false;
   const e = err as { name?: string; message?: string };
   const msg = `${e.name ?? ""} ${e.message ?? ""}`;
-  return /ChunkLoadError|Loading chunk|Loading CSS chunk|dynamically imported module|Failed to fetch dynamically|Importing a module script failed/i.test(msg);
+  return /ChunkLoadError|Loading chunk|Loading CSS chunk|dynamically imported module|Failed to fetch dynamically|Importing a module script failed/i.test(
+    msg,
+  );
 };
 
 class ErrorBoundary extends Component<Props, State> {
@@ -74,7 +76,9 @@ class ErrorBoundary extends Component<Props, State> {
 
       if (chunk) {
         this.reloadForFreshVersion();
-        return <div className="min-h-screen bg-background" aria-hidden="true" />;
+        return (
+          <div className="min-h-screen bg-background" aria-hidden="true" />
+        );
       }
 
       return (
@@ -83,8 +87,12 @@ class ErrorBoundary extends Component<Props, State> {
             <div className="w-16 h-16 rounded-2xl bg-destructive/10 text-destructive flex items-center justify-center mx-auto mb-4 text-2xl">
               ⚠️
             </div>
-            <h1 className="text-2xl font-extrabold text-foreground mb-2">حدث خطأ غير متوقع</h1>
-            <p className="text-muted-foreground mb-6 text-sm">نعتذر عن هذا الخطأ. يرجى المحاولة مرة أخرى.</p>
+            <h1 className="text-2xl font-extrabold text-foreground mb-2">
+              حدث خطأ غير متوقع
+            </h1>
+            <p className="text-muted-foreground mb-6 text-sm">
+              نعتذر عن هذا الخطأ. يرجى المحاولة مرة أخرى.
+            </p>
             <div className="flex items-center justify-center gap-3">
               <button
                 onClick={this.handleReset}
@@ -109,4 +117,3 @@ class ErrorBoundary extends Component<Props, State> {
 }
 
 export default ErrorBoundary;
-

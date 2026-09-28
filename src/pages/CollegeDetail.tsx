@@ -1,17 +1,34 @@
 import { useState, useMemo, useEffect, useCallback } from "react";
 import { Link, useParams, useNavigate, Navigate } from "@/lib/router-compat";
-import { findUniversityBySlugs, collegePath, countryPath, universityPath, isCollegeIndexable } from "@/lib/slugs";
+import {
+  findUniversityBySlugs,
+  collegePath,
+  countryPath,
+  universityPath,
+  isCollegeIndexable,
+} from "@/lib/slugs";
 import { subjectPath, isSubjectIndexable } from "@/lib/subjectSlugs";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  ChevronLeft, ChevronRight, ChevronDown,
-  BookOpen, Layers, GraduationCap, CalendarPlus, Loader2, Search,
+  ChevronLeft,
+  ChevronRight,
+  ChevronDown,
+  BookOpen,
+  Layers,
+  GraduationCap,
+  CalendarPlus,
+  Loader2,
+  Search,
 } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import PageHelmet from "@/components/PageHelmet";
 import { breadcrumbJsonLd, collectionPageJsonLd } from "@/lib/seo";
 import { useLanguage } from "@/contexts/LanguageContext";
-import type { College, Department, University } from "@/data/universities/types";
+import type {
+  College,
+  Department,
+  University,
+} from "@/data/universities/types";
 import { findUniversitySummary } from "@/data/universities/countries";
 import { useCountryUniversities } from "@/data/universities/loader";
 import RouteSkeleton from "@/components/RouteSkeleton";
@@ -65,14 +82,22 @@ const DepartmentBlock = ({ dept, lang, index, onRequest }: DeptProps) => {
             </span>
           </div>
         </div>
-        <motion.div animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.2 }}>
+        <motion.div
+          animate={{ rotate: open ? 180 : 0 }}
+          transition={{ duration: 0.2 }}
+        >
           <ChevronDown size={18} className="text-primary/80" />
         </motion.div>
       </button>
       {isSubjectIndexable(dept.name_en) && (
         <div className="px-5 pb-3 -mt-2">
-          <Link to={subjectPath(dept.name_en)} className="text-xs text-primary hover:underline font-medium">
-            {lang === "ar" ? `كل مقررات ${dept.name_ar} ومعلموها` : `All ${dept.name_en} courses & tutors`}
+          <Link
+            to={subjectPath(dept.name_en)}
+            className="text-xs text-primary hover:underline font-medium"
+          >
+            {lang === "ar"
+              ? `كل مقررات ${dept.name_ar} ومعلموها`
+              : `All ${dept.name_en} courses & tutors`}
           </Link>
         </div>
       )}
@@ -89,7 +114,8 @@ const DepartmentBlock = ({ dept, lang, index, onRequest }: DeptProps) => {
             <div className="p-4 space-y-5">
               {(() => {
                 // Group courses by year → term
-                const requestLabel = lang === "ar" ? "طلب حصة" : "Request a session";
+                const requestLabel =
+                  lang === "ar" ? "طلب حصة" : "Request a session";
                 const termLabel = (term?: string) => {
                   if (!term) return lang === "ar" ? "غير محدد" : "Unscheduled";
                   const map: Record<string, { ar: string; en: string }> = {
@@ -103,16 +129,36 @@ const DepartmentBlock = ({ dept, lang, index, onRequest }: DeptProps) => {
                 };
                 const yearLabel = (y?: number) => {
                   if (!y) return lang === "ar" ? "بدون سنة" : "No Year";
-                  const ords = lang === "ar"
-                    ? ["", "الأولى", "الثانية", "الثالثة", "الرابعة", "الخامسة", "السادسة"]
-                    : ["", "First", "Second", "Third", "Fourth", "Fifth", "Sixth"];
+                  const ords =
+                    lang === "ar"
+                      ? [
+                          "",
+                          "الأولى",
+                          "الثانية",
+                          "الثالثة",
+                          "الرابعة",
+                          "الخامسة",
+                          "السادسة",
+                        ]
+                      : [
+                          "",
+                          "First",
+                          "Second",
+                          "Third",
+                          "Fourth",
+                          "Fifth",
+                          "Sixth",
+                        ];
                   return lang === "ar"
                     ? `السنة ${ords[y] || y}`
                     : `Year ${y} (${ords[y] || y})`;
                 };
 
                 // Group
-                const yearMap = new Map<number, Map<string, typeof dept.courses>>();
+                const yearMap = new Map<
+                  number,
+                  Map<string, typeof dept.courses>
+                >();
                 dept.courses.forEach((c) => {
                   const y = c.year ?? 0;
                   const t = c.term ?? "";
@@ -122,8 +168,16 @@ const DepartmentBlock = ({ dept, lang, index, onRequest }: DeptProps) => {
                   (tm.get(t) as any).push(c);
                 });
 
-                const termOrder: Record<string, number> = { Fall: 1, Spring: 2, Summer: 3, Winter: 4, "": 99 };
-                const years = [...yearMap.keys()].sort((a, b) => (a || 99) - (b || 99));
+                const termOrder: Record<string, number> = {
+                  Fall: 1,
+                  Spring: 2,
+                  Summer: 3,
+                  Winter: 4,
+                  "": 99,
+                };
+                const years = [...yearMap.keys()].sort(
+                  (a, b) => (a || 99) - (b || 99),
+                );
                 const hasGrouping = dept.courses.some((c) => c.year || c.term);
 
                 if (!hasGrouping) {
@@ -131,21 +185,35 @@ const DepartmentBlock = ({ dept, lang, index, onRequest }: DeptProps) => {
                   return (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                       {dept.courses.map((course) => {
-                        const courseName = lang === "ar" ? course.name_ar : course.name_en;
+                        const courseName =
+                          lang === "ar" ? course.name_ar : course.name_en;
                         const parentSubject = resolveCourseSubject(
                           course.code,
                           {
                             ar: dept.name_ar.replace(/^قسم\s+/, ""),
                             en: dept.name_en.replace(/^Department of\s+/i, ""),
                           },
-                          lang
+                          lang,
                         );
                         return (
-                          <div key={course.code} className="flex items-center gap-3 py-2.5 px-3 rounded-lg bg-card hover:bg-primary/5 dark:hover:bg-primary/10 border border-border/40 hover:border-primary/30 transition-colors">
-                            <span className="text-sm text-foreground/90 truncate flex-1 font-medium">{courseName}</span>
-                            <button type="button" onClick={() => onRequest(parentSubject, courseName)} className="shrink-0 inline-flex items-center gap-1.5 h-8 px-2.5 rounded-lg bg-primary/10 hover:bg-primary hover:text-primary-foreground text-primary text-xs font-bold transition-colors">
+                          <div
+                            key={course.code}
+                            className="flex items-center gap-3 py-2.5 px-3 rounded-lg bg-card hover:bg-primary/5 dark:hover:bg-primary/10 border border-border/40 hover:border-primary/30 transition-colors"
+                          >
+                            <span className="text-sm text-foreground/90 truncate flex-1 font-medium">
+                              {courseName}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() =>
+                                onRequest(parentSubject, courseName)
+                              }
+                              className="shrink-0 inline-flex items-center gap-1.5 h-8 px-2.5 rounded-lg bg-primary/10 hover:bg-primary hover:text-primary-foreground text-primary text-xs font-bold transition-colors"
+                            >
                               <CalendarPlus size={13} />
-                              <span className="hidden sm:inline">{requestLabel}</span>
+                              <span className="hidden sm:inline">
+                                {requestLabel}
+                              </span>
                             </button>
                           </div>
                         );
@@ -156,14 +224,22 @@ const DepartmentBlock = ({ dept, lang, index, onRequest }: DeptProps) => {
 
                 return years.map((y) => {
                   const terms = [...yearMap.get(y)!.entries()].sort(
-                    (a, b) => (termOrder[a[0]] ?? 50) - (termOrder[b[0]] ?? 50)
+                    (a, b) => (termOrder[a[0]] ?? 50) - (termOrder[b[0]] ?? 50),
                   );
-                  const yearTotal = terms.reduce((s, [, cs]) => s + cs.length, 0);
+                  const yearTotal = terms.reduce(
+                    (s, [, cs]) => s + cs.length,
+                    0,
+                  );
                   return (
-                    <div key={y} className="rounded-xl border border-primary/15 bg-primary/[0.03] overflow-hidden">
+                    <div
+                      key={y}
+                      className="rounded-xl border border-primary/15 bg-primary/[0.03] overflow-hidden"
+                    >
                       <div className="flex items-center gap-2 px-4 py-2.5 bg-primary/10 border-b border-primary/15">
                         <GraduationCap size={14} className="text-primary" />
-                        <h4 className="font-black text-sm text-primary">{yearLabel(y || undefined)}</h4>
+                        <h4 className="font-black text-sm text-primary">
+                          {yearLabel(y || undefined)}
+                        </h4>
                         <span className="text-[0.65rem] font-bold px-2 py-0.5 rounded-full bg-background/80 text-primary ms-auto">
                           {yearTotal} {lang === "ar" ? "مادة" : "courses"}
                         </span>
@@ -175,36 +251,69 @@ const DepartmentBlock = ({ dept, lang, index, onRequest }: DeptProps) => {
                               <span className="text-xs font-bold text-foreground/80 uppercase tracking-wide">
                                 {termLabel(term || undefined)}
                               </span>
-                              <span className="text-[0.6rem] text-muted-foreground">• {courses.length}</span>
+                              <span className="text-[0.6rem] text-muted-foreground">
+                                • {courses.length}
+                              </span>
                               <div className="flex-1 h-px bg-border/50" />
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                               {courses.map((course) => {
-                                const courseName = lang === "ar" ? course.name_ar : course.name_en;
+                                const courseName =
+                                  lang === "ar"
+                                    ? course.name_ar
+                                    : course.name_en;
                                 const parentSubject = resolveCourseSubject(
                                   course.code,
                                   {
                                     ar: dept.name_ar.replace(/^قسم\s+/, ""),
-                                    en: dept.name_en.replace(/^Department of\s+/i, ""),
+                                    en: dept.name_en.replace(
+                                      /^Department of\s+/i,
+                                      "",
+                                    ),
                                   },
-                                  lang
+                                  lang,
                                 );
-                                const isElective = course.type?.toLowerCase().includes("elective");
+                                const isElective = course.type
+                                  ?.toLowerCase()
+                                  .includes("elective");
                                 return (
-                                  <div key={course.code} className="flex items-center gap-2.5 py-2 px-2.5 rounded-lg bg-card hover:bg-primary/5 dark:hover:bg-primary/10 border border-border/40 hover:border-primary/30 transition-colors">
+                                  <div
+                                    key={course.code}
+                                    className="flex items-center gap-2.5 py-2 px-2.5 rounded-lg bg-card hover:bg-primary/5 dark:hover:bg-primary/10 border border-border/40 hover:border-primary/30 transition-colors"
+                                  >
                                     <div className="min-w-0 flex-1">
-                                      <p className="text-sm text-foreground/90 truncate font-medium">{courseName}</p>
+                                      <p className="text-sm text-foreground/90 truncate font-medium">
+                                        {courseName}
+                                      </p>
                                       <div className="flex items-center gap-2 mt-0.5">
                                         {course.type && (
-                                          <span className={`text-[0.6rem] px-1.5 py-0.5 rounded font-bold ${isElective ? "bg-accent/15 text-accent-foreground" : "bg-muted text-muted-foreground"}`}>
-                                            {isElective ? (lang === "ar" ? "اختياري" : "Elective") : (lang === "ar" ? "إجباري" : "Required")}
+                                          <span
+                                            className={`text-[0.6rem] px-1.5 py-0.5 rounded font-bold ${isElective ? "bg-accent/15 text-accent-foreground" : "bg-muted text-muted-foreground"}`}
+                                          >
+                                            {isElective
+                                              ? lang === "ar"
+                                                ? "اختياري"
+                                                : "Elective"
+                                              : lang === "ar"
+                                                ? "إجباري"
+                                                : "Required"}
                                           </span>
                                         )}
                                       </div>
                                     </div>
-                                    <button type="button" title={`${requestLabel} • ${parentSubject}`} aria-label={`${requestLabel}: ${courseName}`} onClick={() => onRequest(parentSubject, courseName)} className="shrink-0 inline-flex items-center gap-1.5 h-8 px-2 rounded-lg bg-primary/10 hover:bg-primary hover:text-primary-foreground text-primary text-xs font-bold transition-colors">
+                                    <button
+                                      type="button"
+                                      title={`${requestLabel} • ${parentSubject}`}
+                                      aria-label={`${requestLabel}: ${courseName}`}
+                                      onClick={() =>
+                                        onRequest(parentSubject, courseName)
+                                      }
+                                      className="shrink-0 inline-flex items-center gap-1.5 h-8 px-2 rounded-lg bg-primary/10 hover:bg-primary hover:text-primary-foreground text-primary text-xs font-bold transition-colors"
+                                    >
                                       <CalendarPlus size={13} />
-                                      <span className="hidden lg:inline">{requestLabel}</span>
+                                      <span className="hidden lg:inline">
+                                        {requestLabel}
+                                      </span>
                                     </button>
                                   </div>
                                 );
@@ -238,18 +347,29 @@ const CollegeDetail = () => {
 
   // Resolve against the small index, then load only that university's country chunk.
   const summary = useMemo(
-    () => (countrySlug ? findUniversityBySlugs(countrySlug, universitySlug) : findUniversitySummary(uniId)),
-    [uniId, countrySlug, universitySlug]
+    () =>
+      countrySlug
+        ? findUniversityBySlugs(countrySlug, universitySlug)
+        : findUniversitySummary(uniId),
+    [uniId, countrySlug, universitySlug],
   );
-  const { data: countryData, error: countryError } = useCountryUniversities(summary ? [summary.country_code] : []);
+  const { data: countryData, error: countryError } = useCountryUniversities(
+    summary ? [summary.country_code] : [],
+  );
   const university: University | undefined = useMemo(
-    () => (summary && countryData ? countryData.find((u) => u.id === summary.id) : undefined),
-    [summary, countryData]
+    () =>
+      summary && countryData
+        ? countryData.find((u) => u.id === summary.id)
+        : undefined,
+    [summary, countryData],
   );
   const loadingCountry = !!summary && !countryData && !countryError;
   const college: College | undefined = useMemo(
-    () => university?.colleges.find((c) => c.id.toLowerCase() === collegeId?.toLowerCase()),
-    [university, collegeId]
+    () =>
+      university?.colleges.find(
+        (c) => c.id.toLowerCase() === collegeId?.toLowerCase(),
+      ),
+    [university, collegeId],
   );
 
   // Booking modal state
@@ -266,7 +386,7 @@ const CollegeDetail = () => {
     const { data: tps } = await supabase
       .from("teacher_profiles")
       .select(
-        "user_id, subjects, subjects_en, university, university_en, price, verified"
+        "user_id, subjects, subjects_en, university, university_en, price, verified",
       );
     if (!tps || tps.length === 0) {
       setAllTeachers([]);
@@ -275,8 +395,12 @@ const CollegeDetail = () => {
       return;
     }
     const userIds = tps.map((tp) => tp.user_id);
-    const { data: profiles } = await supabase.rpc("get_public_profiles", { _user_ids: userIds });
-    const profileMap = new Map((profiles || []).map((p: any) => [p.user_id, p]));
+    const { data: profiles } = await supabase.rpc("get_public_profiles", {
+      _user_ids: userIds,
+    });
+    const profileMap = new Map(
+      (profiles || []).map((p: any) => [p.user_id, p]),
+    );
     const merged: TeacherData[] = tps.map((tp) => {
       const profile = profileMap.get(tp.user_id);
       return {
@@ -306,15 +430,15 @@ const CollegeDetail = () => {
       setBookingOpen(true);
       fetchTeachers();
     },
-    [fetchTeachers]
+    [fetchTeachers],
   );
 
   const bookingTeachers = useMemo(() => {
     if (!bookingSubject) return [] as TeacherData[];
     const q = bookingSubject.toLowerCase().trim();
     return allTeachers.filter((tc) => {
-      const all = [...(tc.subjects || []), ...(tc.subjects_en || [])].map(
-        (s) => s.toLowerCase()
+      const all = [...(tc.subjects || []), ...(tc.subjects_en || [])].map((s) =>
+        s.toLowerCase(),
       );
       return all.some((s) => s.includes(q) || q.includes(s));
     });
@@ -333,8 +457,8 @@ const CollegeDetail = () => {
           (c) =>
             c.name_ar.includes(search) ||
             c.name_en.toLowerCase().includes(q) ||
-            c.code.toLowerCase().includes(q)
-        )
+            c.code.toLowerCase().includes(q),
+        ),
     );
   }, [college, search]);
 
@@ -351,7 +475,10 @@ const CollegeDetail = () => {
         <p className="text-lg text-muted-foreground mb-4">
           {lang === "ar" ? "الكلية غير موجودة" : "College not found"}
         </p>
-        <Link to="/universities" className="text-primary font-bold hover:underline">
+        <Link
+          to="/universities"
+          className="text-primary font-bold hover:underline"
+        >
           {lang === "ar" ? "← العودة للجامعات" : "← Back to Universities"}
         </Link>
       </div>
@@ -363,7 +490,7 @@ const CollegeDetail = () => {
   const CollegeIcon = getCollegeIcon(college.name_ar, college.name_en);
   const totalCourses = college.departments.reduce(
     (s, d) => s + d.courses.length,
-    0
+    0,
   );
 
   return (
@@ -388,8 +515,15 @@ const CollegeDetail = () => {
           }),
           breadcrumbJsonLd([
             { name: lang === "ar" ? "الرئيسية" : "Home", path: "/" },
-            { name: lang === "ar" ? "الجامعات" : "Universities", path: "/universities" },
-            { name: lang === "ar" ? university.country_ar : university.country_en, path: countryPath(university.country_code) },
+            {
+              name: lang === "ar" ? "الجامعات" : "Universities",
+              path: "/universities",
+            },
+            {
+              name:
+                lang === "ar" ? university.country_ar : university.country_en,
+              path: countryPath(university.country_code),
+            },
             { name: uniName, path: universityPath(university) },
             {
               name: collegeName,
@@ -417,15 +551,24 @@ const CollegeDetail = () => {
             {lang === "ar" ? "الرئيسية" : "Home"}
           </Link>
           <ChevronRight size={12} />
-          <Link to="/universities" className="hover:text-primary transition-colors">
+          <Link
+            to="/universities"
+            className="hover:text-primary transition-colors"
+          >
             {lang === "ar" ? "الجامعات" : "Universities"}
           </Link>
           <ChevronRight size={12} />
-          <Link to={countryPath(university.country_code)} className="hover:text-primary transition-colors">
+          <Link
+            to={countryPath(university.country_code)}
+            className="hover:text-primary transition-colors"
+          >
             {lang === "ar" ? university.country_ar : university.country_en}
           </Link>
           <ChevronRight size={12} />
-          <Link to={universityPath(university)} className="hover:text-primary transition-colors truncate max-w-[200px]">
+          <Link
+            to={universityPath(university)}
+            className="hover:text-primary transition-colors truncate max-w-[200px]"
+          >
             {uniName}
           </Link>
           <ChevronRight size={12} />
@@ -452,7 +595,9 @@ const CollegeDetail = () => {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder={
-                lang === "ar" ? "ابحث في الأقسام والمواد..." : "Search departments & courses..."
+                lang === "ar"
+                  ? "ابحث في الأقسام والمواد..."
+                  : "Search departments & courses..."
               }
               className="ps-9 h-9 text-sm"
             />
@@ -498,7 +643,9 @@ const CollegeDetail = () => {
               >
                 <s.icon size={16} className="text-primary mx-auto mb-1.5" />
                 <p className="font-black text-xl text-primary">{s.value}</p>
-                <p className="text-xs text-foreground/70 font-medium">{s.label}</p>
+                <p className="text-xs text-foreground/70 font-medium">
+                  {s.label}
+                </p>
               </div>
             ))}
           </div>
@@ -523,46 +670,49 @@ const CollegeDetail = () => {
         </div>
 
         <div className="space-y-8">
-          {groupByField(filteredDepts, (d) => ({ ar: d.name_ar, en: d.name_en })).map(
-            ({ field, items }) => {
-              const FieldIcon = field.icon;
-              return (
-                <section key={field.id}>
-                  <div className="flex items-center gap-2.5 mb-3">
-                    <div
-                      className={`w-8 h-8 rounded-lg bg-background ring-1 ${field.ring} ${field.accent} flex items-center justify-center shadow-sm`}
-                    >
-                      <FieldIcon size={15} />
-                    </div>
-                    <h3 className={`font-black text-sm ${field.accent}`}>
-                      {lang === "ar" ? field.label_ar : field.label_en}
-                    </h3>
-                    <span className="text-[0.65rem] font-bold px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
-                      {items.length}
-                    </span>
-                    <div className="flex-1 h-px bg-border/60" />
+          {groupByField(filteredDepts, (d) => ({
+            ar: d.name_ar,
+            en: d.name_en,
+          })).map(({ field, items }) => {
+            const FieldIcon = field.icon;
+            return (
+              <section key={field.id}>
+                <div className="flex items-center gap-2.5 mb-3">
+                  <div
+                    className={`w-8 h-8 rounded-lg bg-background ring-1 ${field.ring} ${field.accent} flex items-center justify-center shadow-sm`}
+                  >
+                    <FieldIcon size={15} />
                   </div>
-                  <div className="flex flex-col gap-3">
-                    {items.map((dept, i) => (
-                      <DepartmentBlock
-                        key={dept.id}
-                        dept={dept}
-                        lang={lang}
-                        index={i}
-                        onRequest={handleBookingTrigger}
-                      />
-                    ))}
-                  </div>
-                </section>
-              );
-            }
-          )}
+                  <h3 className={`font-black text-sm ${field.accent}`}>
+                    {lang === "ar" ? field.label_ar : field.label_en}
+                  </h3>
+                  <span className="text-[0.65rem] font-bold px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
+                    {items.length}
+                  </span>
+                  <div className="flex-1 h-px bg-border/60" />
+                </div>
+                <div className="flex flex-col gap-3">
+                  {items.map((dept, i) => (
+                    <DepartmentBlock
+                      key={dept.id}
+                      dept={dept}
+                      lang={lang}
+                      index={i}
+                      onRequest={handleBookingTrigger}
+                    />
+                  ))}
+                </div>
+              </section>
+            );
+          })}
         </div>
 
         {filteredDepts.length === 0 && (
           <div className="text-center py-12 text-muted-foreground">
             <Search size={40} className="mx-auto mb-3 opacity-40" />
-            <p>{lang === "ar" ? "لم يتم العثور على نتائج" : "No results found"}</p>
+            <p>
+              {lang === "ar" ? "لم يتم العثور على نتائج" : "No results found"}
+            </p>
           </div>
         )}
       </div>

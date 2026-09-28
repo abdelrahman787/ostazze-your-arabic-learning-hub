@@ -1,19 +1,45 @@
 import { motion } from "framer-motion";
 import { Link } from "@/lib/router-compat";
-import { ArrowLeft, GraduationCap, BookOpen, Landmark, Building2, Library, School, Flame, Atom } from "lucide-react";
+import {
+  ArrowLeft,
+  GraduationCap,
+  BookOpen,
+  Landmark,
+  Building2,
+  Library,
+  School,
+  Flame,
+  Atom,
+} from "lucide-react";
 import { UNIVERSITY_INDEX } from "@/data/universities/universityIndex.generated";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const initials = (name: string) =>
   name
-    .replace(/^(جامعة|كلية|University of|University|College of|College)\s+/i, "")
+    .replace(
+      /^(جامعة|كلية|University of|University|College of|College)\s+/i,
+      "",
+    )
     .split(/\s+/)
     .slice(0, 2)
     .map((w) => w[0])
     .join("")
     .toUpperCase();
 
-const ICONS = [GraduationCap, BookOpen, Flame, GraduationCap, Landmark, School, GraduationCap, Building2, School, GraduationCap, Library, Atom];
+const ICONS = [
+  GraduationCap,
+  BookOpen,
+  Flame,
+  GraduationCap,
+  Landmark,
+  School,
+  GraduationCap,
+  Building2,
+  School,
+  GraduationCap,
+  Library,
+  Atom,
+];
 
 const UniversityItem = ({
   name,
@@ -146,7 +172,6 @@ const UniversityLogosStrip = () => {
             })}
           </div>
         </div>
-
       </div>
     </section>
   );

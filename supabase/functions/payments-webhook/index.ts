@@ -4,7 +4,7 @@ import { type StripeEnv, verifyWebhook } from "../_shared/stripe.ts";
 
 const supabase = createClient(
   Deno.env.get("SUPABASE_URL")!,
-  Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
+  Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
 );
 
 serve(async (req) => {
@@ -62,6 +62,9 @@ async function handleCheckoutCompleted(session: any) {
       .from("session_requests")
       .update({ status: "paid_awaiting_assignment" })
       .eq("id", request.id);
-    console.log("Session request marked paid, awaiting admin assignment:", request.id);
+    console.log(
+      "Session request marked paid, awaiting admin assignment:",
+      request.id,
+    );
   }
 }

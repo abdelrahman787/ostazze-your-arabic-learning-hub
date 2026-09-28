@@ -11,37 +11,80 @@ export const SITE_NAME = "OSTAZE";
  * so meta keywords + JSON-LD alternateName stay in sync.
  */
 export const BRAND_VARIANTS_AR = [
-  "أستاذي", "استاذي", "أُسطازي", "استاذي", "أستاذي",
-  "اوستاز", "أوستاز", "اوستازي", "OSTAZE", "Ostaze",
+  "أستاذي",
+  "استاذي",
+  "أُسطازي",
+  "استاذي",
+  "أستاذي",
+  "اوستاز",
+  "أوستاز",
+  "اوستازي",
+  "OSTAZE",
+  "Ostaze",
 ];
 
-export const BRAND_VARIANTS_EN = [
-  "Ostaze", "OSTAZE", "Ostazi", "Ostazee",
-];
+export const BRAND_VARIANTS_EN = ["Ostaze", "OSTAZE", "Ostazi", "Ostazee"];
 
 /** Search-intent phrases students use when looking for tutors / lessons. */
 export const SEARCH_PHRASES_AR = [
-  "منصة استاذي", "موقع استاذي", "منصة أستاذي", "موقع أستاذي", "منصة أستاذي",
-  "منصة دروس لايف", "منصة دروس أونلاين", "موقع تعليم خصوصي", "موقع دروس خصوصية",
-  "معلمين خصوصي أونلاين", "دروس خصوصية اونلاين", "حصص أونلاين مباشرة",
-  "حصص لايف زووم", "تعليم عن بعد", "كورسات أونلاين", "كورسات مسجلة",
-  "كورسات لايف", "منصة تعليمية", "أفضل منصة دروس خصوصية", "حجز معلم خصوصي",
-  "معلم رياضيات خصوصي", "معلم فيزياء خصوصي", "معلم كيمياء خصوصي",
-  "معلم انجليزي خصوصي", "معلم برمجة خصوصي", "مدرس خصوصي اونلاين",
-  "دروس جامعية", "شرح مواد جامعية", "جامعة الكويت", "جامعة قطر",
+  "منصة استاذي",
+  "موقع استاذي",
+  "منصة أستاذي",
+  "موقع أستاذي",
+  "منصة أستاذي",
+  "منصة دروس لايف",
+  "منصة دروس أونلاين",
+  "موقع تعليم خصوصي",
+  "موقع دروس خصوصية",
+  "معلمين خصوصي أونلاين",
+  "دروس خصوصية اونلاين",
+  "حصص أونلاين مباشرة",
+  "حصص لايف زووم",
+  "تعليم عن بعد",
+  "كورسات أونلاين",
+  "كورسات مسجلة",
+  "كورسات لايف",
+  "منصة تعليمية",
+  "أفضل منصة دروس خصوصية",
+  "حجز معلم خصوصي",
+  "معلم رياضيات خصوصي",
+  "معلم فيزياء خصوصي",
+  "معلم كيمياء خصوصي",
+  "معلم انجليزي خصوصي",
+  "معلم برمجة خصوصي",
+  "مدرس خصوصي اونلاين",
+  "دروس جامعية",
+  "شرح مواد جامعية",
+  "جامعة الكويت",
+  "جامعة قطر",
   "تدريس جامعي خصوصي",
 ];
 
 export const SEARCH_PHRASES_EN = [
-  "ostaze platform", "online tutoring platform", "private online tutors",
-  "live online lessons", "zoom tutoring", "university tutors Kuwait",
-  "university tutors Qatar", "math tutor online", "physics tutor online",
-  "english tutor online", "programming tutor online", "private lessons online",
-  "remote learning platform", "online courses Arabic",
+  "ostaze platform",
+  "online tutoring platform",
+  "private online tutors",
+  "live online lessons",
+  "zoom tutoring",
+  "university tutors Kuwait",
+  "university tutors Qatar",
+  "math tutor online",
+  "physics tutor online",
+  "english tutor online",
+  "programming tutor online",
+  "private lessons online",
+  "remote learning platform",
+  "online courses Arabic",
 ];
 
-export const ALL_KEYWORDS_AR = [...BRAND_VARIANTS_AR, ...SEARCH_PHRASES_AR].join("، ");
-export const ALL_KEYWORDS_EN = [...BRAND_VARIANTS_EN, ...SEARCH_PHRASES_EN].join(", ");
+export const ALL_KEYWORDS_AR = [
+  ...BRAND_VARIANTS_AR,
+  ...SEARCH_PHRASES_AR,
+].join("، ");
+export const ALL_KEYWORDS_EN = [
+  ...BRAND_VARIANTS_EN,
+  ...SEARCH_PHRASES_EN,
+].join(", ");
 
 export const organizationJsonLd = (lang: "ar" | "en" = "ar") => ({
   "@context": "https://schema.org",
@@ -80,7 +123,7 @@ export const websiteJsonLd = (lang: "ar" | "en" = "ar") => ({
 });
 
 export const breadcrumbJsonLd = (
-  items: Array<{ name: string; path: string }>
+  items: Array<{ name: string; path: string }>,
 ) => ({
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -94,7 +137,7 @@ export const breadcrumbJsonLd = (
 
 export const itemListJsonLd = (
   name: string,
-  items: Array<{ name: string; url: string }>
+  items: Array<{ name: string; url: string }>,
 ) => ({
   "@context": "https://schema.org",
   "@type": "ItemList",
@@ -164,9 +207,7 @@ export const personJsonLd = (p: {
   url: `${SITE_URL}/teachers/${p.id}`,
 });
 
-export const faqJsonLd = (
-  items: Array<{ q: string; a: string }>
-) => ({
+export const faqJsonLd = (items: Array<{ q: string; a: string }>) => ({
   "@context": "https://schema.org",
   "@type": "FAQPage",
   mainEntity: items.map((it) => ({

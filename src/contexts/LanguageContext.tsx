@@ -1,4 +1,11 @@
-import { createContext, useContext, useState, useEffect, ReactNode, useCallback } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+  useCallback,
+} from "react";
 
 type Lang = "ar" | "en";
 
@@ -17,10 +24,16 @@ const translations = {
   nav_logout: { ar: "تسجيل الخروج", en: "Logout" },
 
   // Hero
-  hero_badge: { ar: "منصة تعليمية للطلبة الجامعيين", en: "Educational Platform for University Students" },
+  hero_badge: {
+    ar: "منصة تعليمية للطلبة الجامعيين",
+    en: "Educational Platform for University Students",
+  },
   hero_title_1: { ar: "تعلّم مع", en: "Learn with the" },
   hero_title_2: { ar: "أفضل المعلمين", en: "Best Teachers" },
-  hero_subtitle: { ar: "منصة تعليمية تربطك بأفضل الأساتذة الجامعيين في تخصصك عن طريق جلسات اونلاين", en: "An educational platform connecting you with the best private tutors for live online sessions" },
+  hero_subtitle: {
+    ar: "منصة تعليمية تربطك بأفضل الأساتذة الجامعيين في تخصصك عن طريق جلسات اونلاين",
+    en: "An educational platform connecting you with the best private tutors for live online sessions",
+  },
   hero_cta: { ar: "احجز الان عبر الواتساب", en: "Book now via WhatsApp" },
   hero_browse: { ar: "تصفح المعلمين", en: "Browse Teachers" },
   hero_stat_teachers: { ar: "معلم", en: "Teachers" },
@@ -33,19 +46,37 @@ const translations = {
 
   // Why Choose Us
   why_title: { ar: "لماذا تختارنا؟", en: "Why Choose Us?" },
-  why_subtitle: { ar: "تجربة تعليمية فريدة مع أفضل المعلمين وأدوات تفاعلية", en: "Experience unique learning with the best teachers and interactive tools" },
+  why_subtitle: {
+    ar: "تجربة تعليمية فريدة مع أفضل المعلمين وأدوات تفاعلية",
+    en: "Experience unique learning with the best teachers and interactive tools",
+  },
   why_teachers: { ar: "معلمون متميزون", en: "Quality Tutors" },
-  why_teachers_desc: { ar: "معلمون معتمدون من أفضل الجامعات", en: "Certified Professors from top universities" },
+  why_teachers_desc: {
+    ar: "معلمون معتمدون من أفضل الجامعات",
+    en: "Certified Professors from top universities",
+  },
   why_schedule: { ar: "مواعيد مرنة", en: "Flexible Schedule" },
-  why_schedule_desc: { ar: "احجز جلستك في الوقت المناسب لك", en: "Book your session at your convenience" },
+  why_schedule_desc: {
+    ar: "احجز جلستك في الوقت المناسب لك",
+    en: "Book your session at your convenience",
+  },
   why_remote: { ar: "تعلم عن بعد", en: "Learn Remotely" },
-  why_remote_desc: { ar: "جلسات مباشرة عبر Zoom من أي مكان", en: "Live sessions via Zoom from anywhere" },
+  why_remote_desc: {
+    ar: "جلسات مباشرة عبر Zoom من أي مكان",
+    en: "Live sessions via Zoom from anywhere",
+  },
 
   // Teachers Section
   teachers_title: { ar: "نخبة المعلمين", en: "Top Tutors" },
-  teachers_subtitle: { ar: "تعرف على نخبة من أفضل المعلمين", en: "Meet our top teachers" },
+  teachers_subtitle: {
+    ar: "تعرف على نخبة من أفضل المعلمين",
+    en: "Meet our top teachers",
+  },
   teachers_view_all: { ar: "عرض الكل", en: "View All" },
-  teachers_choose: { ar: "اختر معلمك وابدأ التعلم", en: "Choose your tutor and start learning" },
+  teachers_choose: {
+    ar: "اختر معلمك وابدأ التعلم",
+    en: "Choose your tutor and start learning",
+  },
   teacher_view_profile: { ar: "عرض الملف الشخصي", en: "View Profile" },
   teacher_per_session: { ar: "لكل جلسة", en: "per session" },
   teacher_verified: { ar: "موثق", en: "Verified" },
@@ -66,27 +97,45 @@ const translations = {
 
   // Testimonials
   testimonials_title: { ar: "ماذا يقول طلابنا", en: "What Our Students Say" },
-  testimonials_subtitle: { ar: "آراء الطلاب حول تجربتهم في المنصة", en: "Student feedback about our platform experience" },
+  testimonials_subtitle: {
+    ar: "آراء الطلاب حول تجربتهم في المنصة",
+    en: "Student feedback about our platform experience",
+  },
 
   // CTA
-  cta_title: { ar: "ابدأ رحلتك التعليمية اليوم", en: "Start Your Learning Journey Today" },
-  cta_subtitle: { ar: "تعلّم مع معلمين موثّقين في استاذي", en: "Learn with verified tutors at Ostaze" },
+  cta_title: {
+    ar: "ابدأ رحلتك التعليمية اليوم",
+    en: "Start Your Learning Journey Today",
+  },
+  cta_subtitle: {
+    ar: "تعلّم مع معلمين موثّقين في استاذي",
+    en: "Learn with verified tutors at Ostaze",
+  },
   cta_register: { ar: "أنشئ حسابك مجاناً", en: "Create Free Account" },
 
   // Universities
   universities_title: { ar: "الجامعات", en: "Countries" },
-  universities_subtitle: { ar: "اختر جامعتك للعثور على معلمين متخصصين", en: "Choose your university to find specialized teachers" },
+  universities_subtitle: {
+    ar: "اختر جامعتك للعثور على معلمين متخصصين",
+    en: "Choose your university to find specialized teachers",
+  },
   universities_view_subjects: { ar: "عرض المواد", en: "View Subjects" },
 
   // Subjects
   subjects_title: { ar: "المواد الدراسية", en: "Subjects" },
-  subjects_subtitle: { ar: "اختر المادة التي تريد دراستها", en: "Choose the subject you want to study" },
+  subjects_subtitle: {
+    ar: "اختر المادة التي تريد دراستها",
+    en: "Choose the subject you want to study",
+  },
   subjects_view_teachers: { ar: "اطلب هذه المادة", en: "Request this course" },
   subjects_teacher_count: { ar: "معلم", en: "teachers" },
 
   // Categories
   categories_title: { ar: "التصنيفات الدراسية", en: "Categories" },
-  categories_subtitle: { ar: "تصفح المواد حسب التخصص", en: "Browse subjects by specialization" },
+  categories_subtitle: {
+    ar: "تصفح المواد حسب التخصص",
+    en: "Browse subjects by specialization",
+  },
 
   // Search & Filter
   search_placeholder: { ar: "بحث عن معلم...", en: "Search for a teacher..." },
@@ -102,7 +151,10 @@ const translations = {
 
   // Login
   login_title: { ar: "تسجيل الدخول", en: "Login" },
-  login_subtitle: { ar: "سجل دخولك للوصول إلى حسابك", en: "Sign in to access your account" },
+  login_subtitle: {
+    ar: "سجل دخولك للوصول إلى حسابك",
+    en: "Sign in to access your account",
+  },
   login_google: { ar: "تسجيل الدخول بجوجل", en: "Sign in with Google" },
   login_or: { ar: "أو", en: "or" },
   login_email: { ar: "البريد الإلكتروني", en: "Email" },
@@ -112,31 +164,52 @@ const translations = {
   login_no_account: { ar: "ليس لديك حساب؟", en: "Don't have an account?" },
   login_register_now: { ar: "سجل الآن", en: "Register now" },
   login_error: { ar: "بيانات الدخول غير صحيحة", en: "Invalid credentials" },
-  login_email_note: { ar: "ملاحظة: بعد التسجيل، ستحتاج لتأكيد بريدك الإلكتروني", en: "Note: After registration, you'll need to verify your email" },
+  login_email_note: {
+    ar: "ملاحظة: بعد التسجيل، ستحتاج لتأكيد بريدك الإلكتروني",
+    en: "Note: After registration, you'll need to verify your email",
+  },
 
   // Register
   register_title: { ar: "إنشاء حساب طالب", en: "Create Student Account" },
-  register_subtitle: { ar: "أنشئ حسابك وابدأ رحلة التعلم", en: "Create your account and start learning" },
+  register_subtitle: {
+    ar: "أنشئ حسابك وابدأ رحلة التعلم",
+    en: "Create your account and start learning",
+  },
   register_google: { ar: "التسجيل بجوجل", en: "Sign up with Google" },
   register_name: { ar: "الاسم الكامل", en: "Full Name" },
-  register_password_hint: { ar: "8 أحرف على الأقل", en: "At least 8 characters" },
+  register_password_hint: {
+    ar: "8 أحرف على الأقل",
+    en: "At least 8 characters",
+  },
   register_confirm: { ar: "تأكيد كلمة المرور", en: "Confirm Password" },
   register_account_type: { ar: "نوع الحساب", en: "Account Type" },
   register_student: { ar: "طالب", en: "Student" },
   register_teacher: { ar: "معلم", en: "Teacher" },
   register_submit: { ar: "إنشاء حساب", en: "Create Account" },
-  register_has_account: { ar: "لديك حساب بالفعل؟", en: "Already have an account?" },
+  register_has_account: {
+    ar: "لديك حساب بالفعل؟",
+    en: "Already have an account?",
+  },
   register_login: { ar: "سجل دخولك", en: "Sign in" },
   register_success_title: { ar: "تم إنشاء الحساب!", en: "Account Created!" },
-  register_success_msg: { ar: "تم إرسال رسالة تأكيد إلى بريدك الإلكتروني. يرجى التحقق منه لتفعيل حسابك.", en: "A verification email has been sent to your inbox. Please verify to activate your account." },
+  register_success_msg: {
+    ar: "تم إرسال رسالة تأكيد إلى بريدك الإلكتروني. يرجى التحقق منه لتفعيل حسابك.",
+    en: "A verification email has been sent to your inbox. Please verify to activate your account.",
+  },
   register_go_login: { ar: "الذهاب إلى تسجيل الدخول", en: "Go to Login" },
   register_timezone: { ar: "المنطقة الزمنية", en: "Timezone" },
 
   // Forgot Password
   forgot_title: { ar: "نسيت كلمة المرور؟", en: "Forgot Password?" },
-  forgot_subtitle: { ar: "أدخل بريدك الإلكتروني وسنرسل لك رابط إعادة التعيين", en: "Enter your email and we'll send you a reset link" },
+  forgot_subtitle: {
+    ar: "أدخل بريدك الإلكتروني وسنرسل لك رابط إعادة التعيين",
+    en: "Enter your email and we'll send you a reset link",
+  },
   forgot_submit: { ar: "إرسال رابط إعادة التعيين", en: "Send Reset Link" },
-  forgot_sent: { ar: "تم إرسال رابط إعادة تعيين كلمة المرور إلى", en: "A password reset link has been sent to" },
+  forgot_sent: {
+    ar: "تم إرسال رابط إعادة تعيين كلمة المرور إلى",
+    en: "A password reset link has been sent to",
+  },
   forgot_back: { ar: "العودة لتسجيل الدخول", en: "Back to Login" },
 
   // Dashboard
@@ -154,7 +227,10 @@ const translations = {
   dash_total_payments: { ar: "إجمالي المدفوعات", en: "Total Payments" },
   dash_given_rating: { ar: "التقييم المُعطى", en: "Given Rating" },
   dash_welcome: { ar: "مرحباً بك في Ostaze!", en: "Welcome to Ostaze!" },
-  dash_welcome_sub: { ar: "ابدأ رحلتك التعليمية واحجز أول جلسة مع أفضل المعلمين", en: "Start your learning journey and book your first session with the best teachers" },
+  dash_welcome_sub: {
+    ar: "ابدأ رحلتك التعليمية واحجز أول جلسة مع أفضل المعلمين",
+    en: "Start your learning journey and book your first session with the best teachers",
+  },
   dash_quick_actions: { ar: "إجراءات سريعة", en: "Quick Actions" },
   dash_recent_sessions: { ar: "آخر الجلسات", en: "Recent Sessions" },
   dash_edit_profile: { ar: "تعديل الملف الشخصي", en: "Edit Profile" },
@@ -193,7 +269,10 @@ const translations = {
 
   // Admin
   admin_title: { ar: "لوحة الإدارة", en: "Admin Dashboard" },
-  admin_subtitle: { ar: "إدارة المعلمين والمشرفين والمحتوى", en: "Manage teachers, admins, and content" },
+  admin_subtitle: {
+    ar: "إدارة المعلمين والمشرفين والمحتوى",
+    en: "Manage teachers, admins, and content",
+  },
   admin_teachers: { ar: "المعلمون", en: "Teachers" },
   admin_admins: { ar: "المشرفون", en: "Admins" },
   admin_videos: { ar: "الفيديوهات", en: "Videos" },
@@ -217,7 +296,10 @@ const translations = {
   tdash_total_earnings: { ar: "إجمالي الأرباح", en: "Total Earnings" },
   tdash_avg_rating: { ar: "متوسط التقييم", en: "Average Rating" },
   tdash_welcome: { ar: "مرحباً أيها المعلم!", en: "Welcome, Teacher!" },
-  tdash_welcome_sub: { ar: "لديك 3 جلسات اليوم. تأكد من مراجعة جدولك.", en: "You have 3 sessions today. Make sure to review your schedule." },
+  tdash_welcome_sub: {
+    ar: "لديك 3 جلسات اليوم. تأكد من مراجعة جدولك.",
+    en: "You have 3 sessions today. Make sure to review your schedule.",
+  },
   tdash_academic_title: { ar: "لقبك الأكاديمي", en: "Academic Title" },
   tdash_bio: { ar: "نبذة تعريفية", en: "Bio" },
   tdash_session_price: { ar: "سعر الجلسة (ر.س)", en: "Session Price (SAR)" },
@@ -225,8 +307,14 @@ const translations = {
   tdash_zoom_link: { ar: "رابط Zoom", en: "Zoom Link" },
   tdash_save_schedule: { ar: "حفظ المواعيد", en: "Save Schedule" },
   tdash_to: { ar: "إلى", en: "to" },
-  tdash_total_earnings_val: { ar: "إجمالي الأرباح: 6,750 ر.س", en: "Total Earnings: 6,750 SAR" },
-  tdash_earnings_coming: { ar: "تفاصيل الأرباح ستتوفر قريباً", en: "Earnings details coming soon" },
+  tdash_total_earnings_val: {
+    ar: "إجمالي الأرباح: 6,750 ر.س",
+    en: "Total Earnings: 6,750 SAR",
+  },
+  tdash_earnings_coming: {
+    ar: "تفاصيل الأرباح ستتوفر قريباً",
+    en: "Earnings details coming soon",
+  },
 
   // Days
   day_sun: { ar: "الأحد", en: "Sunday" },
@@ -251,27 +339,54 @@ const translations = {
   custom_appointment: { ar: "موعد مخصص", en: "Custom appointment" },
   choose_day: { ar: "اختر اليوم المناسب", en: "Choose suitable day" },
   choose_time: { ar: "اختر الوقت", en: "Choose time" },
-  no_available_slots: { ar: "لا توجد مواعيد متاحة حالياً", en: "No available slots currently" },
+  no_available_slots: {
+    ar: "لا توجد مواعيد متاحة حالياً",
+    en: "No available slots currently",
+  },
   request_custom: { ar: "اطلب موعد مخصص ←", en: "Request custom slot →" },
-  custom_note: { ar: "اختر التاريخ والوقت المناسب لك وسيتم إرسال الطلب للإدارة", en: "Choose your preferred date and time, and the request will be sent to administration" },
+  custom_note: {
+    ar: "اختر التاريخ والوقت المناسب لك وسيتم إرسال الطلب للإدارة",
+    en: "Choose your preferred date and time, and the request will be sent to administration",
+  },
   the_subject: { ar: "المادة", en: "Subject" },
   the_date: { ar: "التاريخ", en: "Date" },
   the_time: { ar: "الوقت", en: "Time" },
-  custom_reason: { ar: "ملاحظات إضافية (اختياري)", en: "Additional notes (optional)" },
+  custom_reason: {
+    ar: "ملاحظات إضافية (اختياري)",
+    en: "Additional notes (optional)",
+  },
   notes_optional: { ar: "ملاحظات (اختياري)", en: "Notes (optional)" },
   session_price: { ar: "سعر الجلسة", en: "Session Price" },
   confirm_booking_btn: { ar: "إرسال الطلب →", en: "Send Request →" },
-  send_request_btn: { ar: "إرسال طلب الموعد →", en: "Send Appointment Request →" },
+  send_request_btn: {
+    ar: "إرسال طلب الموعد →",
+    en: "Send Appointment Request →",
+  },
   sending: { ar: "جاري الإرسال...", en: "Sending..." },
   login_required: { ar: "يجب تسجيل الدخول أولاً", en: "You must login first" },
   select_date_time: { ar: "اختر التاريخ والوقت", en: "Select date and time" },
-  booking_success: { ar: "تم إرسال طلب الجلسة بنجاح! ✅", en: "Session request sent successfully! ✅" },
-  custom_booking_success: { ar: "تم إرسال طلب الموعد المخصص! ⏳", en: "Custom appointment request sent! ⏳" },
-  slot_taken: { ar: "هذا الموعد محجوز بالفعل! اختر وقتاً آخر ⚠️", en: "This slot is already booked! Choose another time ⚠️" },
+  booking_success: {
+    ar: "تم إرسال طلب الجلسة بنجاح! ✅",
+    en: "Session request sent successfully! ✅",
+  },
+  custom_booking_success: {
+    ar: "تم إرسال طلب الموعد المخصص! ⏳",
+    en: "Custom appointment request sent! ⏳",
+  },
+  slot_taken: {
+    ar: "هذا الموعد محجوز بالفعل! اختر وقتاً آخر ⚠️",
+    en: "This slot is already booked! Choose another time ⚠️",
+  },
   custom_tag: { ar: "[موعد مخصص]", en: "[Custom appointment]" },
 
-  preferred_time_title: { ar: "متى تفضل أوقات حصصك؟", en: "When do you prefer your session times?" },
-  preferred_time_subtitle: { ar: "حدّد كل الأوقات المناسبة لك. كل ما اخترت أوقات مناسبة أكثر، ساعدتنا نلاقي لك المعلم المناسب بشكل أسرع! (اختياري)", en: "Select all times that work for you. The more times you select, the faster we can find the right teacher for you! (optional)" },
+  preferred_time_title: {
+    ar: "متى تفضل أوقات حصصك؟",
+    en: "When do you prefer your session times?",
+  },
+  preferred_time_subtitle: {
+    ar: "حدّد كل الأوقات المناسبة لك. كل ما اخترت أوقات مناسبة أكثر، ساعدتنا نلاقي لك المعلم المناسب بشكل أسرع! (اختياري)",
+    en: "Select all times that work for you. The more times you select, the faster we can find the right teacher for you! (optional)",
+  },
   preferred_morning: { ar: "فترة الصباح", en: "Morning" },
   preferred_afternoon: { ar: "فترة الظهيرة", en: "Afternoon" },
   preferred_evening: { ar: "فترة المساء", en: "Evening" },
@@ -279,12 +394,20 @@ const translations = {
   preferred_afternoon_time: { ar: "١٢ ظ-٥ م", en: "12PM-5PM" },
   preferred_evening_time: { ar: "٥ م-٩ م", en: "5PM-9PM" },
   preferred_slots_label: { ar: "الأوقات المفضلة", en: "Preferred times" },
-  no_preferred_time_selected: { ar: "حدّد يوماً ووقتاً على الأقل", en: "Pick at least one day and time" },
-  request_success_title: { ar: "تم إرسال الطلب بنجاح! ✅", en: "Request sent successfully! ✅" },
-  request_success_message: { ar: "سنتواصل معك قريباً لتأكيد الموعد وتعيين المعلم المناسب.", en: "We'll contact you soon to confirm the appointment and assign the right teacher." },
+  no_preferred_time_selected: {
+    ar: "حدّد يوماً ووقتاً على الأقل",
+    en: "Pick at least one day and time",
+  },
+  request_success_title: {
+    ar: "تم إرسال الطلب بنجاح! ✅",
+    en: "Request sent successfully! ✅",
+  },
+  request_success_message: {
+    ar: "سنتواصل معك قريباً لتأكيد الموعد وتعيين المعلم المناسب.",
+    en: "We'll contact you soon to confirm the appointment and assign the right teacher.",
+  },
   close_btn: { ar: "إغلاق", en: "Close" },
   my_bookings: { ar: "حجوزاتي", en: "My bookings" },
-
 
   // Booking manager
   no_bookings: { ar: "لا توجد طلبات", en: "No requests" },
@@ -292,10 +415,16 @@ const translations = {
   reject_btn: { ar: "رفض", en: "Reject" },
   cancel_booking: { ar: "إلغاء الطلب", en: "Cancel Request" },
   enter_lecture: { ar: "دخول المحاضرة →", en: "Enter Lecture →" },
-  reject_reason: { ar: "سبب الرفض (اختياري)...", en: "Rejection reason (optional)..." },
+  reject_reason: {
+    ar: "سبب الرفض (اختياري)...",
+    en: "Rejection reason (optional)...",
+  },
   confirm_reject: { ar: "تأكيد الرفض", en: "Confirm Rejection" },
   processing: { ar: "جاري...", en: "Processing..." },
-  booking_accepted: { ar: "تم قبول الطلب وإنشاء المحاضرة ✅", en: "Request accepted and lecture created ✅" },
+  booking_accepted: {
+    ar: "تم قبول الطلب وإنشاء المحاضرة ✅",
+    en: "Request accepted and lecture created ✅",
+  },
   booking_rejected: { ar: "تم رفض الطلب", en: "Request rejected" },
   booking_updated: { ar: "تم تحديث الطلب", en: "Request updated" },
   rejection_reason_label: { ar: "سبب الرفض:", en: "Rejection reason:" },
@@ -310,16 +439,28 @@ const translations = {
 
   // Teacher profile page
   no_reviews_yet: { ar: "لا توجد تقييمات حتى الآن", en: "No reviews yet" },
-  no_teachers_registered: { ar: "لا يوجد معلمون مسجلون حالياً", en: "No registered teachers currently" },
+  no_teachers_registered: {
+    ar: "لا يوجد معلمون مسجلون حالياً",
+    en: "No registered teachers currently",
+  },
 
   // Teacher dashboard profile
   academic_title: { ar: "اللقب الأكاديمي", en: "Academic Title" },
-  academic_title_placeholder: { ar: "مثال: أستاذ مساعد", en: "e.g. Assistant Professor" },
+  academic_title_placeholder: {
+    ar: "مثال: أستاذ مساعد",
+    en: "e.g. Assistant Professor",
+  },
   bio_label: { ar: "نبذة تعريفية", en: "Bio" },
-  bio_placeholder: { ar: "اكتب نبذة عنك وخبراتك...", en: "Write about yourself and your experience..." },
+  bio_placeholder: {
+    ar: "اكتب نبذة عنك وخبراتك...",
+    en: "Write about yourself and your experience...",
+  },
   session_price_label: { ar: "سعر الجلسة", en: "Session Price" },
   years_experience: { ar: "سنوات الخبرة", en: "Years of Experience" },
-  earnings_system_dev: { ar: "نظام الأرباح قيد التطوير وسيكون متاحاً قريباً", en: "Earnings system is under development and will be available soon" },
+  earnings_system_dev: {
+    ar: "نظام الأرباح قيد التطوير وسيكون متاحاً قريباً",
+    en: "Earnings system is under development and will be available soon",
+  },
   session_label: { ar: "جلسة:", en: "Session:" },
   subject_word: { ar: "مادة", en: "Subject" },
 
@@ -329,13 +470,19 @@ const translations = {
   no_times_set: { ar: "لا توجد أوقات محددة", en: "No times set" },
   to_word: { ar: "إلى", en: "to" },
   time_deleted: { ar: "تم حذف الوقت", en: "Time deleted" },
-  schedule_saved: { ar: "تم حفظ الجدول بنجاح ✅", en: "Schedule saved successfully ✅" },
+  schedule_saved: {
+    ar: "تم حفظ الجدول بنجاح ✅",
+    en: "Schedule saved successfully ✅",
+  },
   save_error: { ar: "خطأ في الحفظ:", en: "Save error:" },
   saving: { ar: "جاري الحفظ...", en: "Saving..." },
   save_schedule: { ar: "حفظ الجدول", en: "Save Schedule" },
 
   // Footer
-  footer_desc: { ar: "منصة تعليمية للطلبة الجامعيين تربطك بأفضل المدرسين الخصوصيين لجلسات مباشرة عبر الإنترنت.", en: "An educational platform for university students connecting you with the best private tutors for live online sessions." },
+  footer_desc: {
+    ar: "منصة تعليمية للطلبة الجامعيين تربطك بأفضل المدرسين الخصوصيين لجلسات مباشرة عبر الإنترنت.",
+    en: "An educational platform for university students connecting you with the best private tutors for live online sessions.",
+  },
   footer_quick_links: { ar: "روابط سريعة", en: "Quick Links" },
   footer_about: { ar: "من نحن", en: "About Us" },
   footer_contact: { ar: "تواصل معنا", en: "Contact Us" },
@@ -343,12 +490,18 @@ const translations = {
   footer_privacy: { ar: "سياسة الخصوصية", en: "Privacy Policy" },
   footer_refund: { ar: "سياسة الاسترداد", en: "Refund Policy" },
   footer_contact_us: { ar: "تواصل معنا", en: "Contact Us" },
-  footer_rights: { ar: "© 2026 Ostaze. جميع الحقوق محفوظة", en: "© 2026 Ostaze. All rights reserved" },
+  footer_rights: {
+    ar: "© 2026 Ostaze. جميع الحقوق محفوظة",
+    en: "© 2026 Ostaze. All rights reserved",
+  },
   footer_location: { ar: "القاهرة - مصر", en: "Cairo - Egypt" },
 
   // Common
   coming_soon: { ar: "قريباً", en: "Coming Soon" },
-  coming_soon_desc: { ar: "هذا القسم قيد التطوير", en: "This section is under development" },
+  coming_soon_desc: {
+    ar: "هذا القسم قيد التطوير",
+    en: "This section is under development",
+  },
   user_word: { ar: "مستخدم", en: "User" },
   sar: { ar: "ر.س", en: "SAR" },
   mock_user_name: { ar: "مستخدم تجريبي", en: "Test User" },
@@ -361,7 +514,10 @@ const translations = {
 
   // 404
   not_found_title: { ar: "الصفحة غير موجودة", en: "Page not found" },
-  not_found_desc: { ar: "عذراً! الصفحة التي تبحث عنها غير موجودة", en: "Oops! The page you're looking for doesn't exist" },
+  not_found_desc: {
+    ar: "عذراً! الصفحة التي تبحث عنها غير موجودة",
+    en: "Oops! The page you're looking for doesn't exist",
+  },
   not_found_back: { ar: "العودة للرئيسية", en: "Return to Home" },
 
   // Categories counts
@@ -373,8 +529,14 @@ const translations = {
   nav_home_link: { ar: "الرئيسية", en: "Home" },
 
   // Dashboard sidebar & labels
-  sidebar_student_dashboard: { ar: "لوحة تحكم الطالب", en: "Student Dashboard" },
-  sidebar_teacher_dashboard: { ar: "لوحة تحكم المعلم", en: "Teacher Dashboard" },
+  sidebar_student_dashboard: {
+    ar: "لوحة تحكم الطالب",
+    en: "Student Dashboard",
+  },
+  sidebar_teacher_dashboard: {
+    ar: "لوحة تحكم المعلم",
+    en: "Teacher Dashboard",
+  },
   sidebar_teaching: { ar: "التدريس", en: "Teaching" },
   sidebar_my_lectures: { ar: "محاضراتي", en: "My Lectures" },
   sidebar_my_lessons: { ar: "دروسي", en: "My Lessons" },
@@ -395,18 +557,33 @@ const translations = {
 
   // Welcome messages
   welcome_student: { ar: "مرحباً", en: "Welcome" },
-  welcome_student_sub: { ar: "هنا يمكنك متابعة محاضراتك والتواصل مع معلميك.", en: "Here you can follow your lectures and communicate with your teachers." },
+  welcome_student_sub: {
+    ar: "هنا يمكنك متابعة محاضراتك والتواصل مع معلميك.",
+    en: "Here you can follow your lectures and communicate with your teachers.",
+  },
   welcome_teacher: { ar: "مرحباً أستاذ", en: "Welcome, Professor" },
-  welcome_teacher_sub: { ar: "هنا يمكنك إدارة محاضراتك والتواصل مع طلابك.", en: "Here you can manage your lectures and communicate with your students." },
+  welcome_teacher_sub: {
+    ar: "هنا يمكنك إدارة محاضراتك والتواصل مع طلابك.",
+    en: "Here you can manage your lectures and communicate with your students.",
+  },
 
   // Quick actions & recent
   quick_actions: { ar: "إجراءات سريعة", en: "Quick Actions" },
   recent_lectures: { ar: "أحدث المحاضرات", en: "Recent Lectures" },
   view_all: { ar: "عرض الكل", en: "View All" },
   no_lectures_yet: { ar: "لا توجد محاضرات بعد", en: "No lectures yet" },
-  no_lectures_recorded: { ar: "لا توجد محاضرات مسجلة بعد", en: "No recorded lectures yet" },
-  lectures_added_by_admin: { ar: "سيتم إضافة المحاضرات من قبل الإدارة", en: "Lectures will be added by administration" },
-  admin_adds_lectures: { ar: "سيقوم الأدمن بإضافة المحاضرات وربطها بك", en: "Admin will add lectures and link them to you" },
+  no_lectures_recorded: {
+    ar: "لا توجد محاضرات مسجلة بعد",
+    en: "No recorded lectures yet",
+  },
+  lectures_added_by_admin: {
+    ar: "سيتم إضافة المحاضرات من قبل الإدارة",
+    en: "Lectures will be added by administration",
+  },
+  admin_adds_lectures: {
+    ar: "سيقوم الأدمن بإضافة المحاضرات وربطها بك",
+    en: "Admin will add lectures and link them to you",
+  },
   the_teacher: { ar: "المعلم", en: "Teacher" },
   the_student: { ar: "الطالب", en: "Student" },
 
@@ -427,7 +604,10 @@ const translations = {
   sales_pending_requests: { ar: "طلبات معلقة", en: "Pending Requests" },
   sales_assigned_requests: { ar: "طلبات معيّنة", en: "Assigned Requests" },
   sales_completed_requests: { ar: "طلبات مكتملة", en: "Completed Requests" },
-  sales_no_requests: { ar: "لا توجد طلبات جلسات بعد", en: "No session requests yet" },
+  sales_no_requests: {
+    ar: "لا توجد طلبات جلسات بعد",
+    en: "No session requests yet",
+  },
   sales_assign: { ar: "تعيين", en: "Assign" },
   sales_assigned: { ar: "تم التعيين", en: "Assigned" },
   sales_select_teacher: { ar: "اختر المعلم", en: "Select Teacher" },
@@ -443,28 +623,61 @@ const translations = {
   lesson_time: { ar: "الوقت", en: "Time" },
 
   // WhatsApp
-  whatsapp_msg: { ar: "مرحباً، أريد الاستفسار عن خدمات استاذي", en: "Hello, I'd like to inquire about Ostaze services" },
-  whatsapp_tutor_title: { ar: "لم تجد المعلم المناسب؟", en: "Looking for a specific teacher?" },
-  whatsapp_tutor_desc: { ar: "تواصل معنا على واتساب وسنساعدك في إيجاد معلم أو مدرب مناسب لك.", en: "WhatsApp us and we'll help you find a tutor or teacher for your needs." },
+  whatsapp_msg: {
+    ar: "مرحباً، أريد الاستفسار عن خدمات استاذي",
+    en: "Hello, I'd like to inquire about Ostaze services",
+  },
+  whatsapp_tutor_title: {
+    ar: "لم تجد المعلم المناسب؟",
+    en: "Looking for a specific teacher?",
+  },
+  whatsapp_tutor_desc: {
+    ar: "تواصل معنا على واتساب وسنساعدك في إيجاد معلم أو مدرب مناسب لك.",
+    en: "WhatsApp us and we'll help you find a tutor or teacher for your needs.",
+  },
   whatsapp_tutor_cta: { ar: "تواصل معنا على واتساب", en: "Chat on WhatsApp" },
 
-  whatsapp_cta_title: { ar: "أو احجز جلستك الآن", en: "Or Book Your Session Now" },
-  whatsapp_cta_subtitle: { ar: "اطلب جلستك الخاصة مباشرة عبر واتساب", en: "Request your private session instantly via WhatsApp" },
-  whatsapp_cta_button: { ar: "اطلب جلسة عبر واتساب", en: "Request a Session via WhatsApp" },
+  whatsapp_cta_title: {
+    ar: "أو احجز جلستك الآن",
+    en: "Or Book Your Session Now",
+  },
+  whatsapp_cta_subtitle: {
+    ar: "اطلب جلستك الخاصة مباشرة عبر واتساب",
+    en: "Request your private session instantly via WhatsApp",
+  },
+  whatsapp_cta_button: {
+    ar: "اطلب جلسة عبر واتساب",
+    en: "Request a Session via WhatsApp",
+  },
 
   // How It Works
   how_title: { ar: "كيف يعمل استاذي؟", en: "How Ostaze Works?" },
-  how_subtitle: { ar: "ثلاث خطوات بسيطة لبدء رحلة التعلم", en: "Three simple steps to start your learning journey" },
+  how_subtitle: {
+    ar: "ثلاث خطوات بسيطة لبدء رحلة التعلم",
+    en: "Three simple steps to start your learning journey",
+  },
   how_step1_title: { ar: "اختر دولتك", en: "Select Your Country" },
-  how_step1_desc: { ar: "حدد دولتك لعرض الجامعات والأسعار بالعملة المناسبة لك", en: "\n" },
+  how_step1_desc: {
+    ar: "حدد دولتك لعرض الجامعات والأسعار بالعملة المناسبة لك",
+    en: "\n",
+  },
   how_step2_title: { ar: "اختر جامعتك", en: "Pick Your University" },
-  how_step2_desc: { ar: "تصفّح الجامعات والكليات والمواد ثم اختر الأنسب لتخصصك", en: "\n" },
+  how_step2_desc: {
+    ar: "تصفّح الجامعات والكليات والمواد ثم اختر الأنسب لتخصصك",
+    en: "\n",
+  },
   how_step3_title: { ar: "احجز جلستك الخاصة", en: "Book Your Private Classes" },
-  how_step3_desc: { ar: "اختر الموعد المناسب واحجز جلسة Online مباشرة مع الدكتور", en: "\n" },
+  how_step3_desc: {
+    ar: "اختر الموعد المناسب واحجز جلسة Online مباشرة مع الدكتور",
+    en: "\n",
+  },
 
   // Popular Subjects
   popular_title: { ar: "المواد الأكثر طلباً", en: "Most Popular Subjects" },
-  popular_subtitle: { ar: "اكتشف المواد المتاحة على منصتنا", en: "Discover the subjects available on our platform" },
+  popular_subtitle: {
+    ar: "اكتشف المواد المتاحة على منصتنا",
+    en: "Discover the subjects available on our platform",
+  },
   subj_math: { ar: "رياضيات", en: "Mathematics" },
   subj_physics: { ar: "فيزياء", en: "Physics" },
   subj_chemistry: { ar: "كيمياء", en: "Chemistry" },
@@ -478,16 +691,25 @@ const translations = {
   subj_anatomy: { ar: "تشريح", en: "Anatomy" },
 
   // Hero search
-  hero_search_placeholder: { ar: "ابحث عن مادة أو معلم...", en: "Search for a subject or teacher..." },
+  hero_search_placeholder: {
+    ar: "ابحث عن مادة أو معلم...",
+    en: "Search for a subject or teacher...",
+  },
 
   // Footer newsletter
-  footer_newsletter_title: { ar: "اشترك في النشرة البريدية", en: "Subscribe to Newsletter" },
+  footer_newsletter_title: {
+    ar: "اشترك في النشرة البريدية",
+    en: "Subscribe to Newsletter",
+  },
   footer_newsletter_placeholder: { ar: "بريدك الإلكتروني", en: "Your email" },
   footer_newsletter_btn: { ar: "اشترك", en: "Subscribe" },
 
   // LectureView
   lecture_not_found: { ar: "المحاضرة غير موجودة", en: "Lecture not found" },
-  lecture_access_denied: { ar: "ليس لديك صلاحية لعرض هذه المحاضرة", en: "You do not have permission to view this lecture" },
+  lecture_access_denied: {
+    ar: "ليس لديك صلاحية لعرض هذه المحاضرة",
+    en: "You do not have permission to view this lecture",
+  },
   go_back: { ar: "العودة", en: "Go Back" },
   audio_message: { ar: "رسالة صوتية", en: "Voice message" },
   hide_file: { ar: "إخفاء الملف", en: "Hide File" },
@@ -495,44 +717,107 @@ const translations = {
   hide_chat: { ar: "إخفاء المحادثة", en: "Hide Chat" },
   open_chat: { ar: "المحادثة", en: "Chat" },
   material_file: { ar: "ملف المادة", en: "Material File" },
-  no_messages_yet: { ar: "لا توجد رسائل بعد. ابدأ المحادثة!", en: "No messages yet. Start the conversation!" },
+  no_messages_yet: {
+    ar: "لا توجد رسائل بعد. ابدأ المحادثة!",
+    en: "No messages yet. Start the conversation!",
+  },
   type_message: { ar: "اكتب رسالة...", en: "Type a message..." },
   join_zoom: { ar: "انضم عبر Zoom", en: "Join via Zoom" },
   zoom_link: { ar: "رابط Zoom متاح", en: "Zoom Link Available" },
 
   // Email verification
-  email_not_verified_title: { ar: "بريدك الإلكتروني لم يتم تأكيده", en: "Your email is not verified" },
-  email_not_verified_body: { ar: "يرجى التحقق من بريدك الإلكتروني والنقر على رابط التأكيد لتفعيل جميع الميزات.", en: "Please check your inbox and click the verification link to unlock all features." },
-  resend_email: { ar: "إعادة إرسال رابط التأكيد", en: "Resend Verification Email" },
-  email_resent: { ar: "تم إرسال رابط التأكيد مجدداً ✅", en: "Verification link resent ✅" },
+  email_not_verified_title: {
+    ar: "بريدك الإلكتروني لم يتم تأكيده",
+    en: "Your email is not verified",
+  },
+  email_not_verified_body: {
+    ar: "يرجى التحقق من بريدك الإلكتروني والنقر على رابط التأكيد لتفعيل جميع الميزات.",
+    en: "Please check your inbox and click the verification link to unlock all features.",
+  },
+  resend_email: {
+    ar: "إعادة إرسال رابط التأكيد",
+    en: "Resend Verification Email",
+  },
+  email_resent: {
+    ar: "تم إرسال رابط التأكيد مجدداً ✅",
+    en: "Verification link resent ✅",
+  },
 
   // Profile save
-  profile_saved: { ar: "تم حفظ الملف الشخصي بنجاح ✅", en: "Profile saved successfully ✅" },
-  password_changed: { ar: "تم تغيير كلمة المرور بنجاح ✅", en: "Password changed successfully ✅" },
-  password_mismatch: { ar: "كلمة المرور الجديدة غير متطابقة", en: "New passwords do not match" },
-  password_too_short: { ar: "كلمة المرور يجب أن تكون 8 أحرف على الأقل", en: "Password must be at least 8 characters" },
-  current_password_wrong: { ar: "كلمة المرور الحالية غير صحيحة", en: "Current password is incorrect" },
+  profile_saved: {
+    ar: "تم حفظ الملف الشخصي بنجاح ✅",
+    en: "Profile saved successfully ✅",
+  },
+  password_changed: {
+    ar: "تم تغيير كلمة المرور بنجاح ✅",
+    en: "Password changed successfully ✅",
+  },
+  password_mismatch: {
+    ar: "كلمة المرور الجديدة غير متطابقة",
+    en: "New passwords do not match",
+  },
+  password_too_short: {
+    ar: "كلمة المرور يجب أن تكون 8 أحرف على الأقل",
+    en: "Password must be at least 8 characters",
+  },
+  current_password_wrong: {
+    ar: "كلمة المرور الحالية غير صحيحة",
+    en: "Current password is incorrect",
+  },
 
   // Reviews
   rate_teacher: { ar: "تقييم المعلم", en: "Rate Teacher" },
   your_review: { ar: "تقييمك", en: "Your Review" },
   submit_review: { ar: "إرسال التقييم", en: "Submit Review" },
-  review_comment_placeholder: { ar: "شارك تجربتك مع هذا المعلم...", en: "Share your experience with this teacher..." },
-  review_submitted: { ar: "تم إرسال التقييم بنجاح ✅", en: "Review submitted successfully ✅" },
-  review_login_required: { ar: "يجب تسجيل الدخول لتقديم تقييم", en: "You must be logged in to submit a review" },
-  review_booking_required: { ar: "يجب إكمال جلسة مع هذا المعلم أولاً", en: "You must complete a session with this teacher first" },
+  review_comment_placeholder: {
+    ar: "شارك تجربتك مع هذا المعلم...",
+    en: "Share your experience with this teacher...",
+  },
+  review_submitted: {
+    ar: "تم إرسال التقييم بنجاح ✅",
+    en: "Review submitted successfully ✅",
+  },
+  review_login_required: {
+    ar: "يجب تسجيل الدخول لتقديم تقييم",
+    en: "You must be logged in to submit a review",
+  },
+  review_booking_required: {
+    ar: "يجب إكمال جلسة مع هذا المعلم أولاً",
+    en: "You must complete a session with this teacher first",
+  },
   avg_rating: { ar: "متوسط التقييم", en: "Average Rating" },
   reviews_count_label: { ar: "تقييمات", en: "reviews" },
-  already_reviewed: { ar: "لقد قدّمت تقييماً بالفعل", en: "You have already submitted a review" },
+  already_reviewed: {
+    ar: "لقد قدّمت تقييماً بالفعل",
+    en: "You have already submitted a review",
+  },
 
   // Admin search
   admin_search_placeholder: { ar: "بحث...", en: "Search..." },
-  admin_fill_required_fields: { ar: "يرجى ملء جميع الحقول المطلوبة", en: "Please fill all required fields" },
-  admin_enter_email: { ar: "يرجى إدخال البريد الإلكتروني", en: "Please enter an email address" },
-  admin_role_added: { ar: "تمت إضافة الصلاحية بنجاح", en: "Role added successfully" },
-  teacher_account_created: { ar: "تم إنشاء حساب المعلم بنجاح", en: "Teacher account created successfully" },
-  lecture_added: { ar: "تمت إضافة المحاضرة بنجاح", en: "Lecture added successfully" },
-  lecture_updated: { ar: "تم تحديث المحاضرة بنجاح", en: "Lecture updated successfully" },
+  admin_fill_required_fields: {
+    ar: "يرجى ملء جميع الحقول المطلوبة",
+    en: "Please fill all required fields",
+  },
+  admin_enter_email: {
+    ar: "يرجى إدخال البريد الإلكتروني",
+    en: "Please enter an email address",
+  },
+  admin_role_added: {
+    ar: "تمت إضافة الصلاحية بنجاح",
+    en: "Role added successfully",
+  },
+  teacher_account_created: {
+    ar: "تم إنشاء حساب المعلم بنجاح",
+    en: "Teacher account created successfully",
+  },
+  lecture_added: {
+    ar: "تمت إضافة المحاضرة بنجاح",
+    en: "Lecture added successfully",
+  },
+  lecture_updated: {
+    ar: "تم تحديث المحاضرة بنجاح",
+    en: "Lecture updated successfully",
+  },
   loading: { ar: "جاري التحميل...", en: "Loading..." },
   no_results: { ar: "لا توجد نتائج", en: "No results found" },
 
@@ -543,26 +828,53 @@ const translations = {
   page_label: { ar: "صفحة", en: "Page" },
 
   // MediaRecorder
-  mic_not_supported: { ar: "التسجيل الصوتي غير مدعوم في هذا المتصفح", en: "Voice recording is not supported in this browser" },
+  mic_not_supported: {
+    ar: "التسجيل الصوتي غير مدعوم في هذا المتصفح",
+    en: "Voice recording is not supported in this browser",
+  },
 
   // About page
   about_title: { ar: "من نحن", en: "About Us" },
-  about_subtitle: { ar: "تعرف على منصة أسطازي ورسالتنا التعليمية", en: "Learn about Ostaze and our educational mission" },
+  about_subtitle: {
+    ar: "تعرف على منصة أسطازي ورسالتنا التعليمية",
+    en: "Learn about Ostaze and our educational mission",
+  },
   about_mission_title: { ar: "رسالتنا", en: "Our Mission" },
-  about_mission_desc: { ar: "تقديم كورسات تعليمية رقمية عالية الجودة في مختلف التخصصات، تدمج بين الدروس المسجلة المتاحة مدى الحياة والجلسات المباشرة التفاعلية، لتمكين كل متعلم من تطوير مهاراته بسرعته الخاصة.", en: "To deliver high-quality digital courses across diverse disciplines, blending lifetime-access recorded lessons with interactive live sessions, empowering every learner to grow at their own pace." },
+  about_mission_desc: {
+    ar: "تقديم كورسات تعليمية رقمية عالية الجودة في مختلف التخصصات، تدمج بين الدروس المسجلة المتاحة مدى الحياة والجلسات المباشرة التفاعلية، لتمكين كل متعلم من تطوير مهاراته بسرعته الخاصة.",
+    en: "To deliver high-quality digital courses across diverse disciplines, blending lifetime-access recorded lessons with interactive live sessions, empowering every learner to grow at their own pace.",
+  },
   about_vision_title: { ar: "رؤيتنا", en: "Our Vision" },
-  about_vision_desc: { ar: "أن نكون منصة الكورسات الرقمية الرائدة في الشرق الأوسط، نوفر محتوى تعليمياً موثوقاً ومتقناً يفتح آفاقاً جديدة لكل متعلم.", en: "To be the leading digital course platform in the Middle East, providing trusted, well-crafted educational content that opens new horizons for every learner." },
+  about_vision_desc: {
+    ar: "أن نكون منصة الكورسات الرقمية الرائدة في الشرق الأوسط، نوفر محتوى تعليمياً موثوقاً ومتقناً يفتح آفاقاً جديدة لكل متعلم.",
+    en: "To be the leading digital course platform in the Middle East, providing trusted, well-crafted educational content that opens new horizons for every learner.",
+  },
   about_story_title: { ar: "قصتنا", en: "Our Story" },
-  about_story_desc: { ar: "بدأت OSTAZE كفكرة بسيطة: ماذا لو أصبح التعليم عالي الجودة متاحاً للجميع، في أي وقت ومن أي مكان؟ بنينا منصة كورسات رقمية تجمع بين أحدث التقنيات وخبرة المتخصصين، لتقديم تجربة تعلم مرنة وممتعة تتجاوز حدود الفصول التقليدية.", en: "OSTAZE started with a simple idea: what if high-quality education were accessible to everyone, anytime, anywhere? We built a digital course platform that combines cutting-edge technology with expert knowledge, delivering a flexible, engaging learning experience beyond the limits of traditional classrooms." },
+  about_story_desc: {
+    ar: "بدأت OSTAZE كفكرة بسيطة: ماذا لو أصبح التعليم عالي الجودة متاحاً للجميع، في أي وقت ومن أي مكان؟ بنينا منصة كورسات رقمية تجمع بين أحدث التقنيات وخبرة المتخصصين، لتقديم تجربة تعلم مرنة وممتعة تتجاوز حدود الفصول التقليدية.",
+    en: "OSTAZE started with a simple idea: what if high-quality education were accessible to everyone, anytime, anywhere? We built a digital course platform that combines cutting-edge technology with expert knowledge, delivering a flexible, engaging learning experience beyond the limits of traditional classrooms.",
+  },
   about_values_title: { ar: "قيمنا", en: "Our Values" },
   about_value1_title: { ar: "الجودة", en: "Quality" },
-  about_value1_desc: { ar: "نختار معلمينا بعناية لضمان أعلى مستوى من التعليم", en: "We carefully select our teachers to ensure the highest level of education" },
+  about_value1_desc: {
+    ar: "نختار معلمينا بعناية لضمان أعلى مستوى من التعليم",
+    en: "We carefully select our teachers to ensure the highest level of education",
+  },
   about_value2_title: { ar: "الشغف", en: "Passion" },
-  about_value2_desc: { ar: "نؤمن أن التعليم الحقيقي يبدأ من الشغف بالمعرفة", en: "We believe that true education starts from a passion for knowledge" },
+  about_value2_desc: {
+    ar: "نؤمن أن التعليم الحقيقي يبدأ من الشغف بالمعرفة",
+    en: "We believe that true education starts from a passion for knowledge",
+  },
   about_value3_title: { ar: "الوصول", en: "Accessibility" },
-  about_value3_desc: { ar: "نجعل التعليم المتميز متاحاً للجميع من أي مكان", en: "We make excellent education accessible to everyone from anywhere" },
+  about_value3_desc: {
+    ar: "نجعل التعليم المتميز متاحاً للجميع من أي مكان",
+    en: "We make excellent education accessible to everyone from anywhere",
+  },
   about_value4_title: { ar: "الابتكار", en: "Innovation" },
-  about_value4_desc: { ar: "نستخدم أحدث التقنيات لتقديم تجربة تعليمية متطورة", en: "We use the latest technologies to deliver an advanced learning experience" },
+  about_value4_desc: {
+    ar: "نستخدم أحدث التقنيات لتقديم تجربة تعليمية متطورة",
+    en: "We use the latest technologies to deliver an advanced learning experience",
+  },
   about_stat_teachers: { ar: "معلم معتمد", en: "Certified Teachers" },
   about_stat_students: { ar: "طالب نشط", en: "Active Students" },
   about_stat_sessions: { ar: "جلسة مكتملة", en: "Completed Sessions" },
@@ -570,13 +882,19 @@ const translations = {
 
   // Contact page
   contact_title: { ar: "تواصل معنا", en: "Contact Us" },
-  contact_subtitle: { ar: "نحن هنا لمساعدتك. تواصل معنا بأي طريقة تناسبك", en: "We're here to help. Reach out to us in any way that suits you" },
+  contact_subtitle: {
+    ar: "نحن هنا لمساعدتك. تواصل معنا بأي طريقة تناسبك",
+    en: "We're here to help. Reach out to us in any way that suits you",
+  },
   contact_form_title: { ar: "أرسل لنا رسالة", en: "Send us a message" },
   contact_name: { ar: "الاسم", en: "Name" },
   contact_email: { ar: "البريد الإلكتروني", en: "Email" },
   contact_message: { ar: "الرسالة", en: "Message" },
   contact_send: { ar: "إرسال", en: "Send" },
-  contact_success: { ar: "تم إرسال رسالتك بنجاح! سنتواصل معك قريباً ✅", en: "Your message has been sent successfully! We'll contact you soon ✅" },
+  contact_success: {
+    ar: "تم إرسال رسالتك بنجاح! سنتواصل معك قريباً ✅",
+    en: "Your message has been sent successfully! We'll contact you soon ✅",
+  },
   contact_email_label: { ar: "البريد الإلكتروني", en: "Email" },
   contact_phone_label: { ar: "الهاتف", en: "Phone" },
   contact_location_label: { ar: "الموقع", en: "Location" },
@@ -585,60 +903,183 @@ const translations = {
 
   // Terms page
   terms_title: { ar: "الشروط والأحكام", en: "Terms & Conditions" },
-  terms_subtitle: { ar: "يرجى قراءة الشروط والأحكام بعناية قبل استخدام المنصة", en: "Please read the terms and conditions carefully before using the platform" },
-  terms_last_updated: { ar: "آخر تحديث: أبريل 2026", en: "Last updated: April 2026" },
+  terms_subtitle: {
+    ar: "يرجى قراءة الشروط والأحكام بعناية قبل استخدام المنصة",
+    en: "Please read the terms and conditions carefully before using the platform",
+  },
+  terms_last_updated: {
+    ar: "آخر تحديث: أبريل 2026",
+    en: "Last updated: April 2026",
+  },
   terms_section1_title: { ar: "قبول الشروط", en: "Acceptance of Terms" },
-  terms_section1_content: { ar: "باستخدامك لمنصة أسطازي، فإنك توافق على الالتزام بهذه الشروط والأحكام. إذا كنت لا توافق على أي من هذه الشروط، يرجى عدم استخدام المنصة.", en: "By using the Ostaze platform, you agree to be bound by these terms and conditions. If you do not agree to any of these terms, please do not use the platform." },
-  terms_section2_title: { ar: "الحسابات والتسجيل", en: "Accounts & Registration" },
-  terms_section2_content: { ar: "يجب عليك تقديم معلومات دقيقة وكاملة عند إنشاء حسابك. أنت مسؤول عن الحفاظ على سرية معلومات حسابك وعن جميع الأنشطة التي تتم تحت حسابك.", en: "You must provide accurate and complete information when creating your account. You are responsible for maintaining the confidentiality of your account information and for all activities that occur under your account." },
-  terms_section3_title: { ar: "الكورسات الرقمية والجلسات", en: "Digital Courses & Sessions" },
-  terms_section3_content: { ar: "تقدّم OSTAZE منتجين رئيسيين: (1) كورسات رقمية مسجلة بوصول مدى الحياة بعد الشراء، (2) كورسات حية وجلسات خاصة بمواعيد محددة. عند شراء كورس، يحصل المشتري على وصول فوري للمحتوى المسجل، وحق حضور الجلسات الحية المرفقة. لا يجوز تنزيل المحتوى أو إعادة توزيعه.", en: "OSTAZE offers two main products: (1) recorded digital courses with lifetime access upon purchase, (2) live courses and private sessions at scheduled times. Upon purchase, the buyer gets immediate access to recorded content and the right to attend bundled live sessions. Content may not be downloaded or redistributed." },
-  terms_section4_title: { ar: "المدفوعات والاسترداد", en: "Payments & Refunds" },
-  terms_section4_content: { ar: "تتم جميع المدفوعات بشكل آمن عبر مزود دفع معتمد. للكورسات الرقمية: يحق لك استرداد كامل القيمة خلال 14 يوماً من الشراء بشرط عدم إكمال أكثر من 25% من المحتوى. للجلسات الخاصة: يمكن الإلغاء قبل 24 ساعة من الموعد دون رسوم. للتفاصيل الكاملة، راجع سياسة الاسترداد.", en: "All payments are processed securely through an approved payment provider. For digital courses: you are entitled to a full refund within 14 days of purchase, provided you have not completed more than 25% of the content. For private sessions: cancellation is allowed up to 24 hours before the scheduled time without charges. For full details, see our Refund Policy." },
-  terms_section5_title: { ar: "حقوق الملكية الفكرية", en: "Intellectual Property" },
-  terms_section5_content: { ar: "جميع المحتويات المتاحة على المنصة، بما في ذلك النصوص والرسومات والشعارات، هي ملكية لأسطازي ومحمية بموجب قوانين حقوق الملكية الفكرية.", en: "All content available on the platform, including text, graphics, and logos, is the property of Ostaze and is protected by intellectual property laws." },
+  terms_section1_content: {
+    ar: "باستخدامك لمنصة أسطازي، فإنك توافق على الالتزام بهذه الشروط والأحكام. إذا كنت لا توافق على أي من هذه الشروط، يرجى عدم استخدام المنصة.",
+    en: "By using the Ostaze platform, you agree to be bound by these terms and conditions. If you do not agree to any of these terms, please do not use the platform.",
+  },
+  terms_section2_title: {
+    ar: "الحسابات والتسجيل",
+    en: "Accounts & Registration",
+  },
+  terms_section2_content: {
+    ar: "يجب عليك تقديم معلومات دقيقة وكاملة عند إنشاء حسابك. أنت مسؤول عن الحفاظ على سرية معلومات حسابك وعن جميع الأنشطة التي تتم تحت حسابك.",
+    en: "You must provide accurate and complete information when creating your account. You are responsible for maintaining the confidentiality of your account information and for all activities that occur under your account.",
+  },
+  terms_section3_title: {
+    ar: "الكورسات الرقمية والجلسات",
+    en: "Digital Courses & Sessions",
+  },
+  terms_section3_content: {
+    ar: "تقدّم OSTAZE منتجين رئيسيين: (1) كورسات رقمية مسجلة بوصول مدى الحياة بعد الشراء، (2) كورسات حية وجلسات خاصة بمواعيد محددة. عند شراء كورس، يحصل المشتري على وصول فوري للمحتوى المسجل، وحق حضور الجلسات الحية المرفقة. لا يجوز تنزيل المحتوى أو إعادة توزيعه.",
+    en: "OSTAZE offers two main products: (1) recorded digital courses with lifetime access upon purchase, (2) live courses and private sessions at scheduled times. Upon purchase, the buyer gets immediate access to recorded content and the right to attend bundled live sessions. Content may not be downloaded or redistributed.",
+  },
+  terms_section4_title: {
+    ar: "المدفوعات والاسترداد",
+    en: "Payments & Refunds",
+  },
+  terms_section4_content: {
+    ar: "تتم جميع المدفوعات بشكل آمن عبر مزود دفع معتمد. للكورسات الرقمية: يحق لك استرداد كامل القيمة خلال 14 يوماً من الشراء بشرط عدم إكمال أكثر من 25% من المحتوى. للجلسات الخاصة: يمكن الإلغاء قبل 24 ساعة من الموعد دون رسوم. للتفاصيل الكاملة، راجع سياسة الاسترداد.",
+    en: "All payments are processed securely through an approved payment provider. For digital courses: you are entitled to a full refund within 14 days of purchase, provided you have not completed more than 25% of the content. For private sessions: cancellation is allowed up to 24 hours before the scheduled time without charges. For full details, see our Refund Policy.",
+  },
+  terms_section5_title: {
+    ar: "حقوق الملكية الفكرية",
+    en: "Intellectual Property",
+  },
+  terms_section5_content: {
+    ar: "جميع المحتويات المتاحة على المنصة، بما في ذلك النصوص والرسومات والشعارات، هي ملكية لأسطازي ومحمية بموجب قوانين حقوق الملكية الفكرية.",
+    en: "All content available on the platform, including text, graphics, and logos, is the property of Ostaze and is protected by intellectual property laws.",
+  },
   terms_section6_title: { ar: "تعديل الشروط", en: "Modification of Terms" },
-  terms_section6_content: { ar: "نحتفظ بالحق في تعديل هذه الشروط في أي وقت. سيتم إخطارك بأي تغييرات جوهرية عبر البريد الإلكتروني أو من خلال إشعار على المنصة.", en: "We reserve the right to modify these terms at any time. You will be notified of any material changes via email or through a notice on the platform." },
-  terms_section7_title: { ar: "مسؤوليات الطالب والمعلم", en: "Student & Tutor Responsibilities" },
-  terms_section7_content: { ar: "يلتزم الطلاب باحترام أوقات الجلسات والحضور في الموعد. يلتزم المعلمون بتقديم محتوى احترافي ومناسب للمستوى المُعلن، والاستجابة لرسائل الطلاب خلال 24 ساعة عمل. في حال عدم الحضور (No-Show) من الطالب دون إلغاء قبل ساعتين، تُعتبر الجلسة قد قُدمت ولا تُسترد. في حال عدم حضور المعلم، يُسترد المبلغ كاملاً للطالب أو يُعاد جدولة الجلسة.", en: "Students must respect session times and attend on schedule. Tutors must deliver professional content appropriate to the advertised level and respond to student messages within 24 business hours. If a student no-shows without cancelling 2+ hours in advance, the session is considered delivered and non-refundable. If a tutor no-shows, the student receives a full refund or rescheduled session." },
-  terms_section8_title: { ar: "تسجيل الجلسات والخصوصية", en: "Session Recordings & Privacy" },
-  terms_section8_content: { ar: "قد تُسجَّل بعض الجلسات الحية لأغراض الجودة أو لإتاحتها للطالب لاحقاً، ويتم إخطار جميع الأطراف قبل بدء التسجيل. لا يُسمح للطلاب أو المعلمين بإعادة نشر التسجيلات أو مشاركتها خارج المنصة. الرسائل النصية والملفات داخل المحاضرات مشفرة أثناء النقل.", en: "Some live sessions may be recorded for quality assurance or later access by the student. All parties are notified before recording starts. Students and tutors may not redistribute recordings or share them outside the platform. Chat messages and files within lectures are encrypted in transit." },
-  terms_section9_title: { ar: "حدود المسؤولية والقانون الحاكم", en: "Liability Limits & Governing Law" },
-  terms_section9_content: { ar: "تُقدَّم الخدمة \"كما هي\" دون ضمانات صريحة أو ضمنية تتجاوز ما يفرضه القانون. لا تتحمل OSTAZE المسؤولية عن أي أضرار غير مباشرة أو تبعية. يُحكم هذه الشروط بموجب أنظمة المملكة العربية السعودية، وتختص المحاكم المختصة بمدينة الرياض بأي نزاع. يجوز للأطراف اللجوء أولاً إلى التسوية الودية عبر بريد disputes@ostaze.com.", en: "The service is provided \"as is\" without warranties beyond what the law mandates. OSTAZE is not liable for indirect or consequential damages. These terms are governed by the laws of the Kingdom of Saudi Arabia, and the competent courts in Riyadh have jurisdiction over any dispute. Parties are encouraged to first attempt amicable resolution via disputes@ostaze.com." },
+  terms_section6_content: {
+    ar: "نحتفظ بالحق في تعديل هذه الشروط في أي وقت. سيتم إخطارك بأي تغييرات جوهرية عبر البريد الإلكتروني أو من خلال إشعار على المنصة.",
+    en: "We reserve the right to modify these terms at any time. You will be notified of any material changes via email or through a notice on the platform.",
+  },
+  terms_section7_title: {
+    ar: "مسؤوليات الطالب والمعلم",
+    en: "Student & Tutor Responsibilities",
+  },
+  terms_section7_content: {
+    ar: "يلتزم الطلاب باحترام أوقات الجلسات والحضور في الموعد. يلتزم المعلمون بتقديم محتوى احترافي ومناسب للمستوى المُعلن، والاستجابة لرسائل الطلاب خلال 24 ساعة عمل. في حال عدم الحضور (No-Show) من الطالب دون إلغاء قبل ساعتين، تُعتبر الجلسة قد قُدمت ولا تُسترد. في حال عدم حضور المعلم، يُسترد المبلغ كاملاً للطالب أو يُعاد جدولة الجلسة.",
+    en: "Students must respect session times and attend on schedule. Tutors must deliver professional content appropriate to the advertised level and respond to student messages within 24 business hours. If a student no-shows without cancelling 2+ hours in advance, the session is considered delivered and non-refundable. If a tutor no-shows, the student receives a full refund or rescheduled session.",
+  },
+  terms_section8_title: {
+    ar: "تسجيل الجلسات والخصوصية",
+    en: "Session Recordings & Privacy",
+  },
+  terms_section8_content: {
+    ar: "قد تُسجَّل بعض الجلسات الحية لأغراض الجودة أو لإتاحتها للطالب لاحقاً، ويتم إخطار جميع الأطراف قبل بدء التسجيل. لا يُسمح للطلاب أو المعلمين بإعادة نشر التسجيلات أو مشاركتها خارج المنصة. الرسائل النصية والملفات داخل المحاضرات مشفرة أثناء النقل.",
+    en: "Some live sessions may be recorded for quality assurance or later access by the student. All parties are notified before recording starts. Students and tutors may not redistribute recordings or share them outside the platform. Chat messages and files within lectures are encrypted in transit.",
+  },
+  terms_section9_title: {
+    ar: "حدود المسؤولية والقانون الحاكم",
+    en: "Liability Limits & Governing Law",
+  },
+  terms_section9_content: {
+    ar: 'تُقدَّم الخدمة "كما هي" دون ضمانات صريحة أو ضمنية تتجاوز ما يفرضه القانون. لا تتحمل OSTAZE المسؤولية عن أي أضرار غير مباشرة أو تبعية. يُحكم هذه الشروط بموجب أنظمة المملكة العربية السعودية، وتختص المحاكم المختصة بمدينة الرياض بأي نزاع. يجوز للأطراف اللجوء أولاً إلى التسوية الودية عبر بريد disputes@ostaze.com.',
+    en: 'The service is provided "as is" without warranties beyond what the law mandates. OSTAZE is not liable for indirect or consequential damages. These terms are governed by the laws of the Kingdom of Saudi Arabia, and the competent courts in Riyadh have jurisdiction over any dispute. Parties are encouraged to first attempt amicable resolution via disputes@ostaze.com.',
+  },
 
   // Privacy page
   privacy_title: { ar: "سياسة الخصوصية", en: "Privacy Policy" },
-  privacy_subtitle: { ar: "كيف نجمع ونستخدم ونحمي معلوماتك الشخصية", en: "How we collect, use, and protect your personal information" },
+  privacy_subtitle: {
+    ar: "كيف نجمع ونستخدم ونحمي معلوماتك الشخصية",
+    en: "How we collect, use, and protect your personal information",
+  },
   privacy_badge: { ar: "بياناتك محمية", en: "Your Data is Protected" },
-  privacy_last_updated: { ar: "آخر تحديث: أبريل 2026", en: "Last updated: April 2026" },
-  privacy_section1_title: { ar: "المعلومات التي نجمعها", en: "Information We Collect" },
-  privacy_section1_content: { ar: "نجمع المعلومات التي تقدمها مباشرة عند التسجيل: الاسم، البريد الإلكتروني، رقم الهاتف، المنطقة الزمنية، والصورة الشخصية إن وُجدت. كما نجمع معلومات الاستخدام تلقائياً مثل عنوان IP ونوع المتصفح وصفحات الموقع التي تزورها. عند الدفع، تتم معالجة بيانات بطاقتك مباشرة عبر مزود الدفع (Stripe) ولا نحتفظ بأي أرقام بطاقات على خوادمنا.", en: "We collect information you provide directly during registration: name, email, phone, timezone, and avatar if any. We also automatically collect usage information such as IP address, browser type, and pages you visit. Payments are processed directly by our payment provider (Stripe); we never store card numbers on our servers." },
-  privacy_section2_title: { ar: "كيف نستخدم معلوماتك", en: "How We Use Your Information" },
-  privacy_section2_content: { ar: "نستخدم معلوماتك لتقديم خدماتنا وتحسينها، تأكيد الحجوزات، تسهيل الجلسات الحية، إرسال إشعارات عن المحاضرات الجديدة والرسائل، معالجة المدفوعات، الرد على استفساراتك، والامتثال لمتطلبات قانونية. الأساس القانوني للمعالجة: تنفيذ العقد بينك وبيننا، موافقتك (للإشعارات)، ومصلحتنا المشروعة في حماية المنصة من الإساءة.", en: "We use your information to provide and improve our services, confirm bookings, facilitate live sessions, send notifications about new lectures and messages, process payments, respond to your inquiries, and comply with legal requirements. Lawful bases for processing: performance of our contract with you, your consent (for notifications), and our legitimate interest in protecting the platform from abuse." },
-  privacy_section3_title: { ar: "مشاركة المعلومات والمعالجون", en: "Information Sharing & Processors" },
-  privacy_section3_content: { ar: "لا نبيع أو نؤجر معلوماتك. نشاركها فقط مع مقدمي الخدمات الذين يساعدوننا في تشغيل المنصة، بموجب اتفاقيات معالجة بيانات صارمة: Supabase (قاعدة البيانات والتخزين)، Stripe (المدفوعات)، Zoom/Daily (الجلسات الحية)، Lovable AI / Google Gemini (المساعد الذكي)، WhatsApp Business (الدعم). قد نشارك المعلومات إذا طُلب منا قانونياً أو لحماية حقوقنا أو سلامة المستخدمين.", en: "We do not sell or rent your information. We share it only with service providers that help us operate the platform under strict data processing agreements: Supabase (database & storage), Stripe (payments), Zoom/Daily (live sessions), Lovable AI / Google Gemini (AI assistant), WhatsApp Business (support). We may share information when legally required or to protect our rights or user safety." },
-  privacy_section4_title: { ar: "ملفات تعريف الارتباط والتخزين المحلي", en: "Cookies & Local Storage" },
-  privacy_section4_content: { ar: "نستخدم تخزيناً محلياً ضرورياً (localStorage) لحفظ جلسة تسجيل دخولك وتفضيل اللغة فقط. لا نستخدم أي أدوات تتبع إعلانية أو تحليلات طرف ثالث افتراضياً. إذا أُضيفت لاحقاً، فستحتاج موافقتك الصريحة عبر شريط التفضيلات.", en: "We use only essential local storage (localStorage) to keep you logged in and remember your language preference. We do not use any advertising trackers or third-party analytics by default. If added later, your explicit consent will be requested via the preferences banner." },
+  privacy_last_updated: {
+    ar: "آخر تحديث: أبريل 2026",
+    en: "Last updated: April 2026",
+  },
+  privacy_section1_title: {
+    ar: "المعلومات التي نجمعها",
+    en: "Information We Collect",
+  },
+  privacy_section1_content: {
+    ar: "نجمع المعلومات التي تقدمها مباشرة عند التسجيل: الاسم، البريد الإلكتروني، رقم الهاتف، المنطقة الزمنية، والصورة الشخصية إن وُجدت. كما نجمع معلومات الاستخدام تلقائياً مثل عنوان IP ونوع المتصفح وصفحات الموقع التي تزورها. عند الدفع، تتم معالجة بيانات بطاقتك مباشرة عبر مزود الدفع (Stripe) ولا نحتفظ بأي أرقام بطاقات على خوادمنا.",
+    en: "We collect information you provide directly during registration: name, email, phone, timezone, and avatar if any. We also automatically collect usage information such as IP address, browser type, and pages you visit. Payments are processed directly by our payment provider (Stripe); we never store card numbers on our servers.",
+  },
+  privacy_section2_title: {
+    ar: "كيف نستخدم معلوماتك",
+    en: "How We Use Your Information",
+  },
+  privacy_section2_content: {
+    ar: "نستخدم معلوماتك لتقديم خدماتنا وتحسينها، تأكيد الحجوزات، تسهيل الجلسات الحية، إرسال إشعارات عن المحاضرات الجديدة والرسائل، معالجة المدفوعات، الرد على استفساراتك، والامتثال لمتطلبات قانونية. الأساس القانوني للمعالجة: تنفيذ العقد بينك وبيننا، موافقتك (للإشعارات)، ومصلحتنا المشروعة في حماية المنصة من الإساءة.",
+    en: "We use your information to provide and improve our services, confirm bookings, facilitate live sessions, send notifications about new lectures and messages, process payments, respond to your inquiries, and comply with legal requirements. Lawful bases for processing: performance of our contract with you, your consent (for notifications), and our legitimate interest in protecting the platform from abuse.",
+  },
+  privacy_section3_title: {
+    ar: "مشاركة المعلومات والمعالجون",
+    en: "Information Sharing & Processors",
+  },
+  privacy_section3_content: {
+    ar: "لا نبيع أو نؤجر معلوماتك. نشاركها فقط مع مقدمي الخدمات الذين يساعدوننا في تشغيل المنصة، بموجب اتفاقيات معالجة بيانات صارمة: Supabase (قاعدة البيانات والتخزين)، Stripe (المدفوعات)، Zoom/Daily (الجلسات الحية)، Lovable AI / Google Gemini (المساعد الذكي)، WhatsApp Business (الدعم). قد نشارك المعلومات إذا طُلب منا قانونياً أو لحماية حقوقنا أو سلامة المستخدمين.",
+    en: "We do not sell or rent your information. We share it only with service providers that help us operate the platform under strict data processing agreements: Supabase (database & storage), Stripe (payments), Zoom/Daily (live sessions), Lovable AI / Google Gemini (AI assistant), WhatsApp Business (support). We may share information when legally required or to protect our rights or user safety.",
+  },
+  privacy_section4_title: {
+    ar: "ملفات تعريف الارتباط والتخزين المحلي",
+    en: "Cookies & Local Storage",
+  },
+  privacy_section4_content: {
+    ar: "نستخدم تخزيناً محلياً ضرورياً (localStorage) لحفظ جلسة تسجيل دخولك وتفضيل اللغة فقط. لا نستخدم أي أدوات تتبع إعلانية أو تحليلات طرف ثالث افتراضياً. إذا أُضيفت لاحقاً، فستحتاج موافقتك الصريحة عبر شريط التفضيلات.",
+    en: "We use only essential local storage (localStorage) to keep you logged in and remember your language preference. We do not use any advertising trackers or third-party analytics by default. If added later, your explicit consent will be requested via the preferences banner.",
+  },
   privacy_section5_title: { ar: "حقوقك", en: "Your Rights" },
-  privacy_section5_content: { ar: "لديك الحق في: الوصول إلى بياناتك، تصحيحها، حذفها (الحق في النسيان)، نقلها إلى مزود آخر، الاعتراض على المعالجة، وسحب موافقتك في أي وقت. لممارسة أي حق، أرسل طلبك إلى privacy@ostaze.com وسنرد خلال 30 يوماً.", en: "You have the right to: access your data, rectify it, erase it (right to be forgotten), port it to another provider, object to processing, and withdraw consent at any time. To exercise any right, email privacy@ostaze.com and we will respond within 30 days." },
-  privacy_section6_title: { ar: "مدد الاحتفاظ بالبيانات", en: "Data Retention" },
-  privacy_section6_content: { ar: "نحتفظ ببيانات الحساب طوال فترة نشاطه ولمدة 5 سنوات بعد آخر نشاط للأغراض المحاسبية والقانونية. تُحفظ تسجيلات الجلسات لمدة 90 يوماً ثم تُحذف تلقائياً. تُحفظ سجلات الدعم لمدة سنتين. يمكنك طلب حذف فوري في أي وقت ما لم يُلزمنا القانون بالاحتفاظ.", en: "We retain account data while the account is active and for 5 years after last activity for accounting and legal purposes. Session recordings are kept for 90 days then auto-deleted. Support logs are kept for 2 years. You can request immediate deletion at any time unless legally required to retain." },
+  privacy_section5_content: {
+    ar: "لديك الحق في: الوصول إلى بياناتك، تصحيحها، حذفها (الحق في النسيان)، نقلها إلى مزود آخر، الاعتراض على المعالجة، وسحب موافقتك في أي وقت. لممارسة أي حق، أرسل طلبك إلى privacy@ostaze.com وسنرد خلال 30 يوماً.",
+    en: "You have the right to: access your data, rectify it, erase it (right to be forgotten), port it to another provider, object to processing, and withdraw consent at any time. To exercise any right, email privacy@ostaze.com and we will respond within 30 days.",
+  },
+  privacy_section6_title: {
+    ar: "مدد الاحتفاظ بالبيانات",
+    en: "Data Retention",
+  },
+  privacy_section6_content: {
+    ar: "نحتفظ ببيانات الحساب طوال فترة نشاطه ولمدة 5 سنوات بعد آخر نشاط للأغراض المحاسبية والقانونية. تُحفظ تسجيلات الجلسات لمدة 90 يوماً ثم تُحذف تلقائياً. تُحفظ سجلات الدعم لمدة سنتين. يمكنك طلب حذف فوري في أي وقت ما لم يُلزمنا القانون بالاحتفاظ.",
+    en: "We retain account data while the account is active and for 5 years after last activity for accounting and legal purposes. Session recordings are kept for 90 days then auto-deleted. Support logs are kept for 2 years. You can request immediate deletion at any time unless legally required to retain.",
+  },
   privacy_section7_title: { ar: "الأطفال والقاصرون", en: "Children & Minors" },
-  privacy_section7_content: { ar: "المنصة غير مخصصة للأطفال دون سن 13 عاماً، ولا نقبل تسجيلهم. للمستخدمين بين 13 و 18 سنة، يجب الحصول على موافقة ولي الأمر، ويحق لولي الأمر طلب حذف الحساب في أي وقت.", en: "The platform is not intended for children under 13, and we do not accept their registrations. Users aged 13–18 must have parental consent; a parent or guardian may request account deletion at any time." },
-  privacy_section8_title: { ar: "نقل البيانات الدولي", en: "International Data Transfers" },
-  privacy_section8_content: { ar: "تُستضاف خوادمنا بشكل أساسي في مراكز بيانات تابعة لمزودي الخدمة المعتمدين، وقد تنقل البيانات إلى دول خارج بلدك مع تطبيق ضمانات تعاقدية معيارية (SCCs) لحماية بياناتك بمستوى مماثل لحماية القانون المحلي.", en: "Our servers are primarily hosted by approved providers and data may be transferred to countries outside yours, with Standard Contractual Clauses (SCCs) in place to protect your data at a level equivalent to local law." },
+  privacy_section7_content: {
+    ar: "المنصة غير مخصصة للأطفال دون سن 13 عاماً، ولا نقبل تسجيلهم. للمستخدمين بين 13 و 18 سنة، يجب الحصول على موافقة ولي الأمر، ويحق لولي الأمر طلب حذف الحساب في أي وقت.",
+    en: "The platform is not intended for children under 13, and we do not accept their registrations. Users aged 13–18 must have parental consent; a parent or guardian may request account deletion at any time.",
+  },
+  privacy_section8_title: {
+    ar: "نقل البيانات الدولي",
+    en: "International Data Transfers",
+  },
+  privacy_section8_content: {
+    ar: "تُستضاف خوادمنا بشكل أساسي في مراكز بيانات تابعة لمزودي الخدمة المعتمدين، وقد تنقل البيانات إلى دول خارج بلدك مع تطبيق ضمانات تعاقدية معيارية (SCCs) لحماية بياناتك بمستوى مماثل لحماية القانون المحلي.",
+    en: "Our servers are primarily hosted by approved providers and data may be transferred to countries outside yours, with Standard Contractual Clauses (SCCs) in place to protect your data at a level equivalent to local law.",
+  },
   privacy_section9_title: { ar: "تواصل بشأن الخصوصية", en: "Privacy Contact" },
-  privacy_section9_content: { ar: "لأي استفسار عن خصوصيتك أو لطلب ممارسة حقوقك: privacy@ostaze.com — أو عبر صفحة التواصل. نلتزم بالرد خلال 30 يوماً كحد أقصى.", en: "For any privacy inquiry or to exercise your rights: privacy@ostaze.com — or via our Contact page. We commit to responding within a maximum of 30 days." },
+  privacy_section9_content: {
+    ar: "لأي استفسار عن خصوصيتك أو لطلب ممارسة حقوقك: privacy@ostaze.com — أو عبر صفحة التواصل. نلتزم بالرد خلال 30 يوماً كحد أقصى.",
+    en: "For any privacy inquiry or to exercise your rights: privacy@ostaze.com — or via our Contact page. We commit to responding within a maximum of 30 days.",
+  },
 
   // Teachers empty state
-  teachers_empty_title: { ar: "لا يوجد معلمون حالياً", en: "No Teachers Available" },
-  teachers_empty_desc: { ar: "نعمل على إضافة أفضل المعلمين المعتمدين. تابعنا للحصول على آخر التحديثات!", en: "We're working on adding the best certified teachers. Follow us for the latest updates!" },
-  teachers_loading_timeout: { ar: "يبدو أن التحميل يستغرق وقتاً. حاول تحديث الصفحة.", en: "Loading seems to be taking a while. Try refreshing the page." },
+  teachers_empty_title: {
+    ar: "لا يوجد معلمون حالياً",
+    en: "No Teachers Available",
+  },
+  teachers_empty_desc: {
+    ar: "نعمل على إضافة أفضل المعلمين المعتمدين. تابعنا للحصول على آخر التحديثات!",
+    en: "We're working on adding the best certified teachers. Follow us for the latest updates!",
+  },
+  teachers_loading_timeout: {
+    ar: "يبدو أن التحميل يستغرق وقتاً. حاول تحديث الصفحة.",
+    en: "Loading seems to be taking a while. Try refreshing the page.",
+  },
 
   // 404 improvements
-  not_found_search_placeholder: { ar: "ابحث عن ما تريد...", en: "Search for what you need..." },
-  not_found_quick_links: { ar: "أو جرب هذه الروابط:", en: "Or try these links:" },
-  not_found_suggestion: { ar: "ممكن تكون بتدور على:", en: "You might be looking for:" },
+  not_found_search_placeholder: {
+    ar: "ابحث عن ما تريد...",
+    en: "Search for what you need...",
+  },
+  not_found_quick_links: {
+    ar: "أو جرب هذه الروابط:",
+    en: "Or try these links:",
+  },
+  not_found_suggestion: {
+    ar: "ممكن تكون بتدور على:",
+    en: "You might be looking for:",
+  },
 
   // Login improvements
   login_welcome_back: { ar: "مرحباً بعودتك! 👋", en: "Welcome back! 👋" },
@@ -655,10 +1096,19 @@ const translations = {
   breadcrumb_countries: { ar: "الدول", en: "Countries" },
 
   // Payments
-  payment_success_title: { ar: "تم الدفع بنجاح! ✅", en: "Payment Successful!" },
-  payment_success_msg: { ar: "تم تأكيد جلستك. ستصلك إشعار بالتفاصيل.", en: "Your session has been confirmed. You'll receive a notification with the details." },
+  payment_success_title: {
+    ar: "تم الدفع بنجاح! ✅",
+    en: "Payment Successful!",
+  },
+  payment_success_msg: {
+    ar: "تم تأكيد جلستك. ستصلك إشعار بالتفاصيل.",
+    en: "Your session has been confirmed. You'll receive a notification with the details.",
+  },
   payment_error_title: { ar: "حدث خطأ", en: "Something went wrong" },
-  payment_error_msg: { ar: "لم يتم العثور على معلومات الجلسة.", en: "No session information found." },
+  payment_error_msg: {
+    ar: "لم يتم العثور على معلومات الجلسة.",
+    en: "No session information found.",
+  },
   go_to_dashboard: { ar: "الذهاب للوحة التحكم", en: "Go to Dashboard" },
   proceed_to_payment: { ar: "المتابعة للدفع", en: "Proceed to Payment" },
 
@@ -673,30 +1123,84 @@ const translations = {
 
   // Contact trust block
   contact_trust_entity_label: { ar: "الكيان القانوني", en: "Legal Entity" },
-  contact_trust_entity_value: { ar: "OSTAZE Educational Services (TODO: تأكيد الاسم المسجل)", en: "OSTAZE Educational Services (TODO: confirm registered name)" },
+  contact_trust_entity_value: {
+    ar: "OSTAZE Educational Services (TODO: تأكيد الاسم المسجل)",
+    en: "OSTAZE Educational Services (TODO: confirm registered name)",
+  },
   contact_trust_hours_label: { ar: "ساعات العمل", en: "Working Hours" },
-  contact_trust_hours_value: { ar: "الأحد – الخميس، 9 صباحاً – 6 مساءً (بتوقيت السعودية)", en: "Sun–Thu, 9 AM – 6 PM (AST)" },
+  contact_trust_hours_value: {
+    ar: "الأحد – الخميس، 9 صباحاً – 6 مساءً (بتوقيت السعودية)",
+    en: "Sun–Thu, 9 AM – 6 PM (AST)",
+  },
   contact_trust_sla_label: { ar: "وقت الاستجابة", en: "Response Time" },
-  contact_trust_sla_value: { ar: "نرد على جميع الرسائل خلال 24 ساعة عمل", en: "We respond to all messages within 24 business hours" },
-  contact_trust_quick_help: { ar: "روابط مساعدة سريعة", en: "Quick Help Links" },
+  contact_trust_sla_value: {
+    ar: "نرد على جميع الرسائل خلال 24 ساعة عمل",
+    en: "We respond to all messages within 24 business hours",
+  },
+  contact_trust_quick_help: {
+    ar: "روابط مساعدة سريعة",
+    en: "Quick Help Links",
+  },
 
   // ===== FAQ =====
   faq_title: { ar: "الأسئلة الشائعة", en: "Frequently Asked Questions" },
-  faq_subtitle: { ar: "إجابات سريعة عن الحجز، الدفع، الاسترداد، والجلسات المباشرة", en: "Quick answers about booking, payments, refunds, and live sessions" },
-  faq_q_book: { ar: "كيف أحجز جلسة مع معلم؟", en: "How do I book a session with a tutor?" },
-  faq_a_book: { ar: "تصفّح المعلمين، اختر المعلم المناسب، حدّد الموعد والمدة من ملفه ثم أكمل الدفع. سيصلك تأكيد الجلسة فوراً عبر البريد ولوحة التحكم.", en: "Browse tutors, pick the one you like, choose a slot and duration on their profile, then pay. You'll get immediate confirmation by email and in your dashboard." },
-  faq_q_pay: { ar: "ما طرق الدفع المتاحة؟", en: "What payment methods are available?" },
-  faq_a_pay: { ar: "ندعم بطاقات Mada وVisa وMastercard عبر بوابة دفع آمنة (Stripe). يتم تشفير بيانات البطاقة بالكامل ولا تُخزَّن لدينا.", en: "We support Mada, Visa, and Mastercard through a secure gateway (Stripe). Card data is fully encrypted and never stored on our servers." },
+  faq_subtitle: {
+    ar: "إجابات سريعة عن الحجز، الدفع، الاسترداد، والجلسات المباشرة",
+    en: "Quick answers about booking, payments, refunds, and live sessions",
+  },
+  faq_q_book: {
+    ar: "كيف أحجز جلسة مع معلم؟",
+    en: "How do I book a session with a tutor?",
+  },
+  faq_a_book: {
+    ar: "تصفّح المعلمين، اختر المعلم المناسب، حدّد الموعد والمدة من ملفه ثم أكمل الدفع. سيصلك تأكيد الجلسة فوراً عبر البريد ولوحة التحكم.",
+    en: "Browse tutors, pick the one you like, choose a slot and duration on their profile, then pay. You'll get immediate confirmation by email and in your dashboard.",
+  },
+  faq_q_pay: {
+    ar: "ما طرق الدفع المتاحة؟",
+    en: "What payment methods are available?",
+  },
+  faq_a_pay: {
+    ar: "ندعم بطاقات Mada وVisa وMastercard عبر بوابة دفع آمنة (Stripe). يتم تشفير بيانات البطاقة بالكامل ولا تُخزَّن لدينا.",
+    en: "We support Mada, Visa, and Mastercard through a secure gateway (Stripe). Card data is fully encrypted and never stored on our servers.",
+  },
   faq_q_refund: { ar: "ما سياسة الاسترداد؟", en: "What is the refund policy?" },
-  faq_a_refund: { ar: "يمكنك طلب استرداد كامل خلال 14 يوماً من الشراء بشرط عدم استهلاك أكثر من 25% من المحتوى أو حضور أكثر من جلسة مباشرة واحدة. للتفاصيل راجع صفحة الاسترداد.", en: "You may request a full refund within 14 days of purchase, provided you haven't consumed more than 25% of content or attended more than one live session. See our refund page for details." },
-  faq_q_cancel: { ar: "كيف ألغي أو أعيد جدولة جلسة؟", en: "How do I cancel or reschedule a session?" },
-  faq_a_cancel: { ar: "يمكنك الإلغاء أو إعادة الجدولة قبل 12 ساعة من موعد الجلسة من لوحة التحكم > دروسي بدون أي رسوم.", en: "You can cancel or reschedule up to 12 hours before the session from Dashboard > My Lessons at no cost." },
-  faq_q_live: { ar: "كيف تتم الجلسات المباشرة؟", en: "How do live sessions work?" },
-  faq_a_live: { ar: "تُعقد الجلسات عبر رابط فيديو آمن (Zoom/Meet) يصل إليك قبل الموعد بساعة. يكفي متصفح حديث ومايك وكاميرا يعملان.", en: "Live sessions run on a secure video link (Zoom/Meet) sent an hour before the session. You only need a modern browser, working mic and camera." },
-  faq_q_tech: { ar: "ما المتطلبات التقنية؟", en: "What are the technical requirements?" },
-  faq_a_tech: { ar: "اتصال إنترنت 5 ميجا فأعلى، متصفح حديث (Chrome/Edge/Safari)، مايك وكاميرا، وسماعة لتجربة أوضح.", en: "5 Mbps+ internet, a modern browser (Chrome/Edge/Safari), mic and camera, and headphones for clearer audio." },
-  faq_q_become_tutor: { ar: "كيف أصبح معلماً على المنصة؟", en: "How do I become a tutor on Ostaze?" },
-  faq_a_become_tutor: { ar: "سجّل حساب معلم وأكمل ملفك (الجامعة، المواد، السعر، السيرة الذاتية). سيراجع فريق التحقق ملفك خلال 48 ساعة عمل قبل التفعيل.", en: "Register as a tutor and complete your profile (university, subjects, price, bio). Our verification team reviews within 48 business hours before activation." },
+  faq_a_refund: {
+    ar: "يمكنك طلب استرداد كامل خلال 14 يوماً من الشراء بشرط عدم استهلاك أكثر من 25% من المحتوى أو حضور أكثر من جلسة مباشرة واحدة. للتفاصيل راجع صفحة الاسترداد.",
+    en: "You may request a full refund within 14 days of purchase, provided you haven't consumed more than 25% of content or attended more than one live session. See our refund page for details.",
+  },
+  faq_q_cancel: {
+    ar: "كيف ألغي أو أعيد جدولة جلسة؟",
+    en: "How do I cancel or reschedule a session?",
+  },
+  faq_a_cancel: {
+    ar: "يمكنك الإلغاء أو إعادة الجدولة قبل 12 ساعة من موعد الجلسة من لوحة التحكم > دروسي بدون أي رسوم.",
+    en: "You can cancel or reschedule up to 12 hours before the session from Dashboard > My Lessons at no cost.",
+  },
+  faq_q_live: {
+    ar: "كيف تتم الجلسات المباشرة؟",
+    en: "How do live sessions work?",
+  },
+  faq_a_live: {
+    ar: "تُعقد الجلسات عبر رابط فيديو آمن (Zoom/Meet) يصل إليك قبل الموعد بساعة. يكفي متصفح حديث ومايك وكاميرا يعملان.",
+    en: "Live sessions run on a secure video link (Zoom/Meet) sent an hour before the session. You only need a modern browser, working mic and camera.",
+  },
+  faq_q_tech: {
+    ar: "ما المتطلبات التقنية؟",
+    en: "What are the technical requirements?",
+  },
+  faq_a_tech: {
+    ar: "اتصال إنترنت 5 ميجا فأعلى، متصفح حديث (Chrome/Edge/Safari)، مايك وكاميرا، وسماعة لتجربة أوضح.",
+    en: "5 Mbps+ internet, a modern browser (Chrome/Edge/Safari), mic and camera, and headphones for clearer audio.",
+  },
+  faq_q_become_tutor: {
+    ar: "كيف أصبح معلماً على المنصة؟",
+    en: "How do I become a tutor on Ostaze?",
+  },
+  faq_a_become_tutor: {
+    ar: "سجّل حساب معلم وأكمل ملفك (الجامعة، المواد، السعر، السيرة الذاتية). سيراجع فريق التحقق ملفك خلال 48 ساعة عمل قبل التفعيل.",
+    en: "Register as a tutor and complete your profile (university, subjects, price, bio). Our verification team reviews within 48 business hours before activation.",
+  },
   faq_more: { ar: "هل لديك سؤال آخر؟", en: "Have another question?" },
   faq_contact_cta: { ar: "تواصل معنا", en: "Contact us" },
 
@@ -704,20 +1208,41 @@ const translations = {
   footer_faq: { ar: "الأسئلة الشائعة", en: "FAQ" },
 
   // ===== Refund note =====
-  refund_note_title: { ar: "ضمان استرداد 14 يوماً", en: "14-Day Refund Guarantee" },
-  refund_note_body: { ar: "استرداد كامل خلال 14 يوماً وفق الشروط.", en: "Full refund within 14 days under our terms." },
+  refund_note_title: {
+    ar: "ضمان استرداد 14 يوماً",
+    en: "14-Day Refund Guarantee",
+  },
+  refund_note_body: {
+    ar: "استرداد كامل خلال 14 يوماً وفق الشروط.",
+    en: "Full refund within 14 days under our terms.",
+  },
   refund_note_link: { ar: "تفاصيل سياسة الاسترداد", en: "View refund policy" },
-  checkout_terms_agree: { ar: "بإتمام الدفع فأنت توافق على", en: "By completing payment you agree to our" },
+  checkout_terms_agree: {
+    ar: "بإتمام الدفع فأنت توافق على",
+    en: "By completing payment you agree to our",
+  },
   checkout_terms_link: { ar: "الشروط والأحكام", en: "Terms" },
   checkout_refund_link: { ar: "سياسة الاسترداد", en: "Refund Policy" },
 
   // ===== Password checklist =====
   pwd_req_title: { ar: "متطلبات كلمة المرور", en: "Password requirements" },
   pwd_req_len: { ar: "8 أحرف على الأقل", en: "At least 8 characters" },
-  pwd_req_upper: { ar: "حرف كبير واحد على الأقل (A-Z)", en: "At least one uppercase letter (A-Z)" },
-  pwd_req_num: { ar: "رقم واحد على الأقل (0-9)", en: "At least one number (0-9)" },
-  pwd_req_sym: { ar: "رمز خاص واحد على الأقل (!@#$...)", en: "At least one special character (!@#$...)" },
-  login_security_note: { ar: "حماية تلقائية ضد محاولات الدخول المتكررة، وجلسة مشفرة بـ JWT.", en: "Automatic protection against repeated login attempts; sessions are JWT-secured." },
+  pwd_req_upper: {
+    ar: "حرف كبير واحد على الأقل (A-Z)",
+    en: "At least one uppercase letter (A-Z)",
+  },
+  pwd_req_num: {
+    ar: "رقم واحد على الأقل (0-9)",
+    en: "At least one number (0-9)",
+  },
+  pwd_req_sym: {
+    ar: "رمز خاص واحد على الأقل (!@#$...)",
+    en: "At least one special character (!@#$...)",
+  },
+  login_security_note: {
+    ar: "حماية تلقائية ضد محاولات الدخول المتكررة، وجلسة مشفرة بـ JWT.",
+    en: "Automatic protection against repeated login attempts; sessions are JWT-secured.",
+  },
 
   // ===== Stats bar =====
   stats_tutors: { ar: "معلم موثّق", en: "Verified tutors" },
@@ -727,25 +1252,49 @@ const translations = {
 
   // ===== Verified strip & home extras =====
   home_verified_title: { ar: "معلمون موثّقون", en: "Verified Tutors" },
-  home_verified_subtitle: { ar: "نخبة من المعلمين تم التحقق من بياناتهم وخبراتهم", en: "Hand-picked tutors with verified credentials" },
+  home_verified_subtitle: {
+    ar: "نخبة من المعلمين تم التحقق من بياناتهم وخبراتهم",
+    en: "Hand-picked tutors with verified credentials",
+  },
   home_verified_cta: { ar: "عرض كل المعلمين", en: "View all tutors" },
-  home_logos_title: { ar: "نخدم طلاب من أهم الجامعات", en: "Serving students from leading universities" },
+  home_logos_title: {
+    ar: "نخدم طلاب من أهم الجامعات",
+    en: "Serving students from leading universities",
+  },
   home_logos_badge: { ar: "موثوق من الأفضل", en: "Trusted by the best" },
-  home_logos_subtitle: { ar: "جامعات نغطي موادها في دليلنا", en: "Universities whose courses are covered in our directory" },
+  home_logos_subtitle: {
+    ar: "جامعات نغطي موادها في دليلنا",
+    en: "Universities whose courses are covered in our directory",
+  },
   home_logos_cta: { ar: "استعرض كل الجامعات", en: "Browse all universities" },
   home_trust_badge: { ar: "موثّق من Ostaze", en: "Ostaze Verified" },
   home_view_profile: { ar: "عرض الملف", en: "View profile" },
 
   // ===== Universities intro =====
-  uni_intro_title: { ar: "جامعات الكويت وقطر", en: "Universities of Kuwait & Qatar" },
-  uni_intro_p1: { ar: "نوفّر تغطية شاملة لأبرز الجامعات في الكويت وقطر مع كليات ومواد محدّثة، لمساعدتك في إيجاد معلم متخصص في تخصصك بدقّة.", en: "Comprehensive coverage of leading universities across Kuwait and Qatar with up-to-date colleges and subjects, helping you find a tutor specialized in your exact major." },
-  uni_intro_p2: { ar: "استكشف الجامعات حسب الدولة، تصفّح كلياتها، ثم انتقل مباشرة إلى المواد والمعلمين المتاحين.", en: "Explore universities by country, browse their colleges, then jump directly to available subjects and tutors." },
+  uni_intro_title: {
+    ar: "جامعات الكويت وقطر",
+    en: "Universities of Kuwait & Qatar",
+  },
+  uni_intro_p1: {
+    ar: "نوفّر تغطية شاملة لأبرز الجامعات في الكويت وقطر مع كليات ومواد محدّثة، لمساعدتك في إيجاد معلم متخصص في تخصصك بدقّة.",
+    en: "Comprehensive coverage of leading universities across Kuwait and Qatar with up-to-date colleges and subjects, helping you find a tutor specialized in your exact major.",
+  },
+  uni_intro_p2: {
+    ar: "استكشف الجامعات حسب الدولة، تصفّح كلياتها، ثم انتقل مباشرة إلى المواد والمعلمين المتاحين.",
+    en: "Explore universities by country, browse their colleges, then jump directly to available subjects and tutors.",
+  },
   uni_colleges_count: { ar: "كلية", en: "colleges" },
   uni_view_subjects: { ar: "تصفّح المواد", en: "Browse subjects" },
 
   // ===== Subjects/Categories intro =====
-  subjects_intro: { ar: "اختر مادتك الدراسية لتصل مباشرة لمعلمين متخصصين بأسعار وتقييمات واضحة.", en: "Pick your subject and instantly reach specialized tutors with transparent pricing and reviews." },
-  categories_intro: { ar: "تصفّح التصنيفات الرئيسية للوصول السريع إلى المواد والمعلمين.", en: "Browse top categories for quick access to subjects and tutors." },
+  subjects_intro: {
+    ar: "اختر مادتك الدراسية لتصل مباشرة لمعلمين متخصصين بأسعار وتقييمات واضحة.",
+    en: "Pick your subject and instantly reach specialized tutors with transparent pricing and reviews.",
+  },
+  categories_intro: {
+    ar: "تصفّح التصنيفات الرئيسية للوصول السريع إلى المواد والمعلمين.",
+    en: "Browse top categories for quick access to subjects and tutors.",
+  },
   related_links: { ar: "روابط ذات صلة", en: "Related links" },
 } as const;
 
@@ -782,24 +1331,36 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     if (!hydrated) {
       try {
-        const saved = typeof localStorage !== "undefined" ? localStorage.getItem("ostazze_lang") : null;
+        const saved =
+          typeof localStorage !== "undefined"
+            ? localStorage.getItem("ostazze_lang")
+            : null;
         if (saved === "en" || saved === "ar") {
           if (saved !== lang) setLang(saved);
         }
-      } catch { /* ignore */ }
+      } catch {
+        /* ignore */
+      }
       setHydrated(true);
       return;
     }
-    try { localStorage.setItem("ostazze_lang", lang); } catch { /* ignore */ }
+    try {
+      localStorage.setItem("ostazze_lang", lang);
+    } catch {
+      /* ignore */
+    }
     document.documentElement.setAttribute("dir", dir);
     document.documentElement.setAttribute("lang", lang);
   }, [lang, dir, hydrated]);
 
-  const toggleLang = useCallback(() => setLang((l) => (l === "ar" ? "en" : "ar")), []);
+  const toggleLang = useCallback(
+    () => setLang((l) => (l === "ar" ? "en" : "ar")),
+    [],
+  );
 
   const t = useCallback(
     (key: TranslationKey): string => translations[key]?.[lang] || key,
-    [lang]
+    [lang],
   );
 
   const d = useCallback(
@@ -808,7 +1369,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
       if (typeof obj === "string") return obj;
       return obj[lang] || obj.ar || "";
     },
-    [lang]
+    [lang],
   );
 
   return (

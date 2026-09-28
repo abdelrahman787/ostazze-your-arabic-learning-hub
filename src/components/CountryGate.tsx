@@ -11,7 +11,11 @@ import { toast } from "sonner";
  * Forces logged-in users (especially OAuth signups) to choose their country
  * once before they can use the app. Stored in profiles.country.
  */
-export default function CountryGate({ children }: { children: React.ReactNode }) {
+export default function CountryGate({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const { user, isLoggedIn } = useAuth();
   const [country, setCountry] = useState<Country | null | undefined>(undefined); // undefined = loading
   const [picking, setPicking] = useState<Country | "">("");
@@ -31,7 +35,9 @@ export default function CountryGate({ children }: { children: React.ReactNode })
         .maybeSingle();
       if (!cancelled) setCountry((data?.country as Country) ?? null);
     })();
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
   }, [isLoggedIn, user?.id]);
 
   const { lang } = useLanguage();

@@ -19,7 +19,9 @@ export default function CheckoutReturn() {
             <>
               <CheckCircle className="mx-auto text-success" size={56} />
               <h1 className="text-2xl font-extrabold">
-                {lang === "ar" ? "تم حجز المحاضرة بنجاح ✅" : "Lecture booked successfully ✅"}
+                {lang === "ar"
+                  ? "تم حجز المحاضرة بنجاح ✅"
+                  : "Lecture booked successfully ✅"}
               </h1>
               <p className="text-muted-foreground leading-relaxed">
                 {lang === "ar"
@@ -28,13 +30,19 @@ export default function CheckoutReturn() {
               </p>
               <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground bg-secondary/60 rounded-xl py-2.5 px-3">
                 <Mail size={14} className="text-primary" />
-                {lang === "ar" ? "راجع بريدك الإلكتروني خلال الساعات القادمة" : "Check your email in the next few hours"}
+                {lang === "ar"
+                  ? "راجع بريدك الإلكتروني خلال الساعات القادمة"
+                  : "Check your email in the next few hours"}
               </div>
             </>
           ) : (
             <>
-              <h1 className="text-2xl font-extrabold">{t("payment_error_title") || "Something went wrong"}</h1>
-              <p className="text-muted-foreground">{t("payment_error_msg") || "No session information found."}</p>
+              <h1 className="text-2xl font-extrabold">
+                {t("payment_error_title") || "Something went wrong"}
+              </h1>
+              <p className="text-muted-foreground">
+                {t("payment_error_msg") || "No session information found."}
+              </p>
             </>
           )}
           <Link to="/my-bookings" className="btn-primary inline-block mt-4">
@@ -42,9 +50,13 @@ export default function CheckoutReturn() {
           </Link>
           <p className="text-[11px] text-muted-foreground mt-4 leading-relaxed">
             {t("checkout_terms_agree")}{" "}
-            <Link to="/terms" className="text-primary hover:underline">{t("checkout_terms_link")}</Link>
+            <Link to="/terms" className="text-primary hover:underline">
+              {t("checkout_terms_link")}
+            </Link>
             {" · "}
-            <Link to="/refund" className="text-primary hover:underline">{t("checkout_refund_link")}</Link>
+            <Link to="/refund" className="text-primary hover:underline">
+              {t("checkout_refund_link")}
+            </Link>
           </p>
         </div>
       </div>

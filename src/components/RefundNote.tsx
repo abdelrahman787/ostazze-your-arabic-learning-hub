@@ -13,7 +13,10 @@ const RefundNote = ({ className = "" }: { className?: string }) => {
       <div className="leading-relaxed">
         <p className="font-bold text-foreground">{t("refund_note_title")}</p>
         <p className="text-muted-foreground">{t("refund_note_body")}</p>
-        <Link to="/refund" className="text-primary hover:underline text-xs font-bold mt-0.5 inline-block">
+        <Link
+          to="/refund"
+          className="text-primary hover:underline text-xs font-bold mt-0.5 inline-block"
+        >
           {t("refund_note_link")}
         </Link>
       </div>

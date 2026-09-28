@@ -2,14 +2,24 @@ import { useState, useMemo, useEffect } from "react";
 import { Link, useParams } from "@/lib/router-compat";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  GraduationCap, Building2, ChevronLeft, Globe,
-  BookOpen, ExternalLink, Layers, Search, ChevronRight,
+  GraduationCap,
+  Building2,
+  ChevronLeft,
+  Globe,
+  BookOpen,
+  ExternalLink,
+  Layers,
+  Search,
+  ChevronRight,
 } from "lucide-react";
 import PageHelmet from "@/components/PageHelmet";
 import { breadcrumbJsonLd, collectionPageJsonLd, faqJsonLd } from "@/lib/seo";
 import { useLanguage } from "@/contexts/LanguageContext";
 import type { University, College } from "@/data/universities/types";
-import { COUNTRY_INDEX, type UniversitySummary } from "@/data/universities/countries";
+import {
+  COUNTRY_INDEX,
+  type UniversitySummary,
+} from "@/data/universities/countries";
 import { useCountryUniversities } from "@/data/universities/loader";
 import RouteSkeleton from "@/components/RouteSkeleton";
 import { getCollegeIcon } from "@/lib/collegeIconMap";
@@ -22,11 +32,24 @@ import flagAE from "@/assets/flag-ae.svg";
 import flagEG from "@/assets/flag-eg.svg";
 import WhatsAppQuickBook from "@/components/WhatsAppQuickBook";
 import NotFound from "./NotFound";
-import { countryCodeFromSlug, countryPath, universityPath, collegePath, findUniversityBySlugs, isUniversityIndexable } from "@/lib/slugs";
+import {
+  countryCodeFromSlug,
+  countryPath,
+  universityPath,
+  collegePath,
+  findUniversityBySlugs,
+  isUniversityIndexable,
+} from "@/lib/slugs";
 
 const MotionLink = motion.create(Link);
 
-const flagImages: Record<string, string> = { KW: flagKW, QA: flagQA, SA: flagSA, AE: flagAE, EG: flagEG };
+const flagImages: Record<string, string> = {
+  KW: flagKW,
+  QA: flagQA,
+  SA: flagSA,
+  AE: flagAE,
+  EG: flagEG,
+};
 
 const countryNames: Record<string, { ar: string; en: string }> = {
   KW: { ar: "الكويت", en: "Kuwait" },
@@ -48,13 +71,35 @@ const getComingSoonCountries = () =>
     .filter((c) => !COUNTRY_INDEX.some((x) => x.code === c.code))
     .map((c) => ({ ...c, universities: [] as UniversitySummary[] }));
 
-
-const countryColors: Record<string, { from: string; to: string; accent: string }> = {
-  KW: { from: "from-green-500/20", to: "to-red-500/10", accent: "text-green-600 dark:text-green-400" },
-  QA: { from: "from-red-600/20", to: "to-red-400/10", accent: "text-red-600 dark:text-red-400" },
-  SA: { from: "from-green-700/20", to: "to-green-500/10", accent: "text-green-700 dark:text-green-400" },
-  AE: { from: "from-red-600/20", to: "to-green-600/10", accent: "text-emerald-600 dark:text-emerald-400" },
-  EG: { from: "from-red-700/20", to: "to-black/10", accent: "text-red-700 dark:text-red-500" },
+const countryColors: Record<
+  string,
+  { from: string; to: string; accent: string }
+> = {
+  KW: {
+    from: "from-green-500/20",
+    to: "to-red-500/10",
+    accent: "text-green-600 dark:text-green-400",
+  },
+  QA: {
+    from: "from-red-600/20",
+    to: "to-red-400/10",
+    accent: "text-red-600 dark:text-red-400",
+  },
+  SA: {
+    from: "from-green-700/20",
+    to: "to-green-500/10",
+    accent: "text-green-700 dark:text-green-400",
+  },
+  AE: {
+    from: "from-red-600/20",
+    to: "to-green-600/10",
+    accent: "text-emerald-600 dark:text-emerald-400",
+  },
+  EG: {
+    from: "from-red-700/20",
+    to: "to-black/10",
+    accent: "text-red-700 dark:text-red-500",
+  },
 };
 
 const flagGlow: Record<string, string> = {
@@ -66,11 +111,22 @@ const flagGlow: Record<string, string> = {
 };
 
 // ===== Static high-quality flag with subtle ambient glow =====
-const AnimatedFlag = ({ code, size = 120 }: { code: string; size?: number }) => (
-  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
+const AnimatedFlag = ({
+  code,
+  size = 120,
+}: {
+  code: string;
+  size?: number;
+}) => (
+  <div
+    className="relative flex items-center justify-center"
+    style={{ width: size, height: size }}
+  >
     <div
       className="absolute -inset-2 rounded-full opacity-30 pointer-events-none"
-      style={{ background: `radial-gradient(50% 50% at 50% 50%, ${flagGlow[code] || flagGlow.KW} 0%, transparent 70%)` }}
+      style={{
+        background: `radial-gradient(50% 50% at 50% 50%, ${flagGlow[code] || flagGlow.KW} 0%, transparent 70%)`,
+      }}
     />
     <img
       src={flagImages[code]}
@@ -84,8 +140,6 @@ const AnimatedFlag = ({ code, size = 120 }: { code: string; size?: number }) => 
     />
   </div>
 );
-
-
 
 // ===== Compact grid-style College Card =====
 const CollegeCard = ({
@@ -106,7 +160,7 @@ const CollegeCard = ({
   const name = lang === "ar" ? college.name_ar : college.name_en;
   const totalCourses = college.departments.reduce(
     (s, d) => s + d.courses.length,
-    0
+    0,
   );
   const CollegeIcon = getCollegeIcon(college.name_ar, college.name_en);
 
@@ -166,65 +220,139 @@ const Universities = () => {
     return code ? countries.find((c) => c.code === code) || null : null;
   }, [cSlug, countries]);
   // Summary (from the small index) drives routing + SEO; full colleges load with the country's chunk.
-  const selectedSummary: UniversitySummary | null = useMemo(() => (uSlug ? findUniversityBySlugs(cSlug, uSlug) || null : null), [cSlug, uSlug]);
-  const { data: countryData, error: countryError } = useCountryUniversities(selectedSummary ? [selectedSummary.country_code] : []);
+  const selectedSummary: UniversitySummary | null = useMemo(
+    () => (uSlug ? findUniversityBySlugs(cSlug, uSlug) || null : null),
+    [cSlug, uSlug],
+  );
+  const { data: countryData, error: countryError } = useCountryUniversities(
+    selectedSummary ? [selectedSummary.country_code] : [],
+  );
   const selectedUni: University | null = useMemo(
-    () => (selectedSummary && countryData ? countryData.find((u) => u.id === selectedSummary.id) || null : null),
+    () =>
+      selectedSummary && countryData
+        ? countryData.find((u) => u.id === selectedSummary.id) || null
+        : null,
     [selectedSummary, countryData],
   );
-  const view: View = selectedSummary ? "university" : selectedCountry ? "universities" : "countries";
-  const notFound = (!!cSlug && !selectedCountry) || (!!uSlug && !selectedSummary);
+  const view: View = selectedSummary
+    ? "university"
+    : selectedCountry
+      ? "universities"
+      : "countries";
+  const notFound =
+    (!!cSlug && !selectedCountry) || (!!uSlug && !selectedSummary);
   const [searchQuery, setSearchQuery] = useState("");
-  useEffect(() => { setSearchQuery(""); }, [cSlug, uSlug]);
+  useEffect(() => {
+    setSearchQuery("");
+  }, [cSlug, uSlug]);
 
   const filteredUnis = useMemo(() => {
-    if (!selectedCountry || !searchQuery.trim()) return selectedCountry?.universities || [];
+    if (!selectedCountry || !searchQuery.trim())
+      return selectedCountry?.universities || [];
     const q = searchQuery.toLowerCase();
-    return selectedCountry.universities.filter(u => u.name_ar.includes(searchQuery) || u.name_en.toLowerCase().includes(q));
+    return selectedCountry.universities.filter(
+      (u) =>
+        u.name_ar.includes(searchQuery) || u.name_en.toLowerCase().includes(q),
+    );
   }, [selectedCountry, searchQuery]);
 
   const filteredColleges = useMemo(() => {
     if (!selectedUni || !searchQuery.trim()) return selectedUni?.colleges || [];
     const q = searchQuery.toLowerCase();
-    return selectedUni.colleges.filter(c =>
-      c.name_ar.includes(searchQuery) || c.name_en.toLowerCase().includes(q) ||
-      c.departments.some(d => d.name_ar.includes(searchQuery) || d.name_en.toLowerCase().includes(q))
+    return selectedUni.colleges.filter(
+      (c) =>
+        c.name_ar.includes(searchQuery) ||
+        c.name_en.toLowerCase().includes(q) ||
+        c.departments.some(
+          (d) =>
+            d.name_ar.includes(searchQuery) ||
+            d.name_en.toLowerCase().includes(q),
+        ),
     );
   }, [selectedUni, searchQuery]);
 
   const uniFaq = [
-    { q: lang === "ar" ? "كيف أجد معلماً من جامعتي؟" : "How do I find a tutor from my university?", a: lang === "ar" ? "اختر دولتك ثم جامعتك ثم تصفّح المواد للوصول إلى المعلمين المتخصصين بها." : "Pick your country, your university, then browse subjects to reach specialized tutors." },
-    { q: lang === "ar" ? "هل تغطون كل الجامعات؟" : "Do you cover all universities?", a: lang === "ar" ? "نضيف جامعات وكليات بشكل مستمر بناءً على الطلب — تواصل معنا لاقتراح إضافة جامعتك." : "We continuously add universities and colleges based on demand — contact us to suggest yours." },
-    { q: lang === "ar" ? "هل تختلف الأسعار حسب الجامعة؟" : "Do prices vary by university?", a: lang === "ar" ? "السعر يحدده كل معلم بشكل مستقل ويظهر بوضوح في ملفه قبل الحجز." : "Each tutor sets their own rate which is clearly displayed on their profile before booking." },
+    {
+      q:
+        lang === "ar"
+          ? "كيف أجد معلماً من جامعتي؟"
+          : "How do I find a tutor from my university?",
+      a:
+        lang === "ar"
+          ? "اختر دولتك ثم جامعتك ثم تصفّح المواد للوصول إلى المعلمين المتخصصين بها."
+          : "Pick your country, your university, then browse subjects to reach specialized tutors.",
+    },
+    {
+      q:
+        lang === "ar"
+          ? "هل تغطون كل الجامعات؟"
+          : "Do you cover all universities?",
+      a:
+        lang === "ar"
+          ? "نضيف جامعات وكليات بشكل مستمر بناءً على الطلب — تواصل معنا لاقتراح إضافة جامعتك."
+          : "We continuously add universities and colleges based on demand — contact us to suggest yours.",
+    },
+    {
+      q:
+        lang === "ar"
+          ? "هل تختلف الأسعار حسب الجامعة؟"
+          : "Do prices vary by university?",
+      a:
+        lang === "ar"
+          ? "السعر يحدده كل معلم بشكل مستقل ويظهر بوضوح في ملفه قبل الحجز."
+          : "Each tutor sets their own rate which is clearly displayed on their profile before booking.",
+    },
   ];
 
   if (notFound) return <NotFound />;
 
-  const countryLabel = selectedCountry ? (lang === "ar" ? selectedCountry.name_ar : selectedCountry.name_en) : "";
-  const uniLabel = selectedSummary ? (lang === "ar" ? selectedSummary.name_ar : selectedSummary.name_en) : "";
-  const selfPath = selectedSummary ? universityPath(selectedSummary) : selectedCountry ? countryPath(selectedCountry.code) : "/universities";
+  const countryLabel = selectedCountry
+    ? lang === "ar"
+      ? selectedCountry.name_ar
+      : selectedCountry.name_en
+    : "";
+  const uniLabel = selectedSummary
+    ? lang === "ar"
+      ? selectedSummary.name_ar
+      : selectedSummary.name_en
+    : "";
+  const selfPath = selectedSummary
+    ? universityPath(selectedSummary)
+    : selectedCountry
+      ? countryPath(selectedCountry.code)
+      : "/universities";
   const h1Text = selectedSummary
     ? uniLabel
     : selectedCountry
-    ? (lang === "ar" ? `جامعات ${countryLabel}` : `Universities in ${countryLabel}`)
-    : (lang === "ar" ? "الدولة" : t("universities_title"));
+      ? lang === "ar"
+        ? `جامعات ${countryLabel}`
+        : `Universities in ${countryLabel}`
+      : lang === "ar"
+        ? "الدولة"
+        : t("universities_title");
   const uniCourseCount = selectedSummary ? selectedSummary.courses : 0;
   const seoTitle = selectedSummary
-    ? (lang === "ar" ? `دروس خصوصية لطلاب ${uniLabel}` : `${uniLabel} Tutoring - Colleges & Courses`)
+    ? lang === "ar"
+      ? `دروس خصوصية لطلاب ${uniLabel}`
+      : `${uniLabel} Tutoring - Colleges & Courses`
     : selectedCountry
-    ? (lang === "ar" ? `جامعات ${countryLabel} - معلمون ومقررات` : `Universities in ${countryLabel} - Tutors & Courses`)
-    : (lang === "ar" ? "الدولة - أستاذي OSTAZE" : "Countries - OSTAZE");
+      ? lang === "ar"
+        ? `جامعات ${countryLabel} - معلمون ومقررات`
+        : `Universities in ${countryLabel} - Tutors & Courses`
+      : lang === "ar"
+        ? "الدولة - أستاذي OSTAZE"
+        : "Countries - OSTAZE";
   const seoDescription = selectedSummary
-    ? (lang === "ar"
+    ? lang === "ar"
       ? `${selectedSummary.colleges} كلية و${uniCourseCount} مقرر في ${uniLabel}. احجز حصة خصوصية أونلاين مع معلم متخصص في مقررك.`
-      : `${selectedSummary.colleges} colleges and ${uniCourseCount} courses at ${uniLabel}. Book a live online session with a tutor for your course.`)
+      : `${selectedSummary.colleges} colleges and ${uniCourseCount} courses at ${uniLabel}. Book a live online session with a tutor for your course.`
     : selectedCountry
-    ? (lang === "ar"
-      ? `${selectedCountry.universities.length} جامعة في ${countryLabel} مع كلياتها ومقرراتها. اختر جامعتك واحجز معلماً متخصصاً.`
-      : `${selectedCountry.universities.length} universities in ${countryLabel} with their colleges and courses. Pick yours and book a specialized tutor.`)
-    : (lang === "ar"
-      ? "اكتشف الجامعات المدعومة على منصة أستاذي — جامعة الكويت، جامعة قطر، والمزيد. معلمون متخصصون لكل جامعة ومنهج."
-      : "Discover universities supported by OSTAZE — Kuwait University, Qatar University and more. Specialized tutors for every program.");
+      ? lang === "ar"
+        ? `${selectedCountry.universities.length} جامعة في ${countryLabel} مع كلياتها ومقرراتها. اختر جامعتك واحجز معلماً متخصصاً.`
+        : `${selectedCountry.universities.length} universities in ${countryLabel} with their colleges and courses. Pick yours and book a specialized tutor.`
+      : lang === "ar"
+        ? "اكتشف الجامعات المدعومة على منصة أستاذي — جامعة الكويت، جامعة قطر، والمزيد. معلمون متخصصون لكل جامعة ومنهج."
+        : "Discover universities supported by OSTAZE — Kuwait University, Qatar University and more. Specialized tutors for every program.";
 
   return (
     <div className="min-h-screen">
@@ -233,7 +361,11 @@ const Universities = () => {
         description={seoDescription}
         canonical={`https://ostaze.com${selfPath}`}
         noindex={!!selectedSummary && !isUniversityIndexable(selectedSummary)}
-        keywords={lang === "ar" ? "جامعات الكويت, جامعات قطر, كليات, معلمون" : "Kuwait universities, Qatar universities, colleges, tutors"}
+        keywords={
+          lang === "ar"
+            ? "جامعات الكويت, جامعات قطر, كليات, معلمون"
+            : "Kuwait universities, Qatar universities, colleges, tutors"
+        }
         jsonLd={[
           collectionPageJsonLd({
             name: h1Text,
@@ -243,54 +375,115 @@ const Universities = () => {
           }),
           breadcrumbJsonLd([
             { name: lang === "ar" ? "الرئيسية" : "Home", path: "/" },
-            { name: lang === "ar" ? "الدولة" : "Countries", path: "/universities" },
-            ...(selectedCountry ? [{ name: countryLabel, path: countryPath(selectedCountry.code) }] : []),
-            ...(selectedSummary ? [{ name: uniLabel, path: universityPath(selectedSummary) }] : []),
+            {
+              name: lang === "ar" ? "الدولة" : "Countries",
+              path: "/universities",
+            },
+            ...(selectedCountry
+              ? [
+                  {
+                    name: countryLabel,
+                    path: countryPath(selectedCountry.code),
+                  },
+                ]
+              : []),
+            ...(selectedSummary
+              ? [{ name: uniLabel, path: universityPath(selectedSummary) }]
+              : []),
           ]),
           ...(view === "countries" ? [faqJsonLd(uniFaq)] : []),
         ]}
       />
       {/* Header */}
       <div className="container pt-page-lg pb-4">
-        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-bold mb-4">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-bold mb-4"
+        >
           <GraduationCap size={16} />
           {lang === "ar" ? "الدليل الأكاديمي" : "Academic Directory"}
         </motion.div>
-        <h1 className="text-3xl md:text-5xl font-black tracking-tight">{h1Text}</h1>
-        
+        <h1 className="text-3xl md:text-5xl font-black tracking-tight">
+          {h1Text}
+        </h1>
       </div>
 
       <div className="container py-8">
         {/* Breadcrumbs */}
         <div className="flex items-center gap-1.5 text-sm text-muted-foreground mb-6">
-          <Link to="/" className="hover:text-primary transition-colors">{lang === "ar" ? "الرئيسية" : "Home"}</Link>
+          <Link to="/" className="hover:text-primary transition-colors">
+            {lang === "ar" ? "الرئيسية" : "Home"}
+          </Link>
           <ChevronRight size={12} />
-          {view === "countries" && <span className="text-foreground font-medium">{lang === "ar" ? "الدولة" : t("universities_title")}</span>}
+          {view === "countries" && (
+            <span className="text-foreground font-medium">
+              {lang === "ar" ? "الدولة" : t("universities_title")}
+            </span>
+          )}
           {view === "universities" && selectedCountry && (
             <>
-              <Link to="/universities" className="hover:text-primary transition-colors">{lang === "ar" ? "الدولة" : t("universities_title")}</Link>
+              <Link
+                to="/universities"
+                className="hover:text-primary transition-colors"
+              >
+                {lang === "ar" ? "الدولة" : t("universities_title")}
+              </Link>
               <ChevronRight size={12} />
-              <span className="text-foreground font-medium">{lang === "ar" ? selectedCountry.name_ar : selectedCountry.name_en}</span>
+              <span className="text-foreground font-medium">
+                {lang === "ar"
+                  ? selectedCountry.name_ar
+                  : selectedCountry.name_en}
+              </span>
             </>
           )}
           {view === "university" && selectedCountry && selectedSummary && (
             <>
-              <Link to="/universities" className="hover:text-primary transition-colors">{lang === "ar" ? "الدولة" : t("universities_title")}</Link>
+              <Link
+                to="/universities"
+                className="hover:text-primary transition-colors"
+              >
+                {lang === "ar" ? "الدولة" : t("universities_title")}
+              </Link>
               <ChevronRight size={12} />
-              <Link to={countryPath(selectedCountry.code)} className="hover:text-primary transition-colors">{lang === "ar" ? selectedCountry.name_ar : selectedCountry.name_en}</Link>
+              <Link
+                to={countryPath(selectedCountry.code)}
+                className="hover:text-primary transition-colors"
+              >
+                {lang === "ar"
+                  ? selectedCountry.name_ar
+                  : selectedCountry.name_en}
+              </Link>
               <ChevronRight size={12} />
-              <span className="text-foreground font-medium truncate max-w-[200px]">{uniLabel}</span>
+              <span className="text-foreground font-medium truncate max-w-[200px]">
+                {uniLabel}
+              </span>
             </>
           )}
         </div>
 
         {view !== "countries" && (
-          <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="flex items-center justify-between mb-6 gap-4">
-            <Link to={view === "university" && selectedCountry ? countryPath(selectedCountry.code) : "/universities"} className="flex items-center gap-2 text-sm text-primary hover:underline font-medium shrink-0">
+          <motion.div
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="flex items-center justify-between mb-6 gap-4"
+          >
+            <Link
+              to={
+                view === "university" && selectedCountry
+                  ? countryPath(selectedCountry.code)
+                  : "/universities"
+              }
+              className="flex items-center gap-2 text-sm text-primary hover:underline font-medium shrink-0"
+            >
               <ChevronLeft size={16} />
               {view === "universities"
-                ? lang === "ar" ? "العودة للدول" : "Back to Countries"
-                : lang === "ar" ? "العودة للجامعات" : "Back to Universities"}
+                ? lang === "ar"
+                  ? "العودة للدول"
+                  : "Back to Countries"
+                : lang === "ar"
+                  ? "العودة للجامعات"
+                  : "Back to Universities"}
             </Link>
           </motion.div>
         )}
@@ -298,13 +491,27 @@ const Universities = () => {
         <AnimatePresence mode="wait">
           {/* === COUNTRIES === */}
           {view === "countries" && (
-            <motion.div key="countries" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}
+            <motion.div
+              key="countries"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
               className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-6xl mx-auto"
             >
               {countries.map((c, i) => {
-                const colors = countryColors[c.code] || { from: "from-primary/20", to: "to-accent/10", accent: "text-primary" };
-                const totalDepts = c.universities.reduce((s, u) => s + u.departments, 0);
-                const totalCourses = c.universities.reduce((s, u) => s + u.courses, 0);
+                const colors = countryColors[c.code] || {
+                  from: "from-primary/20",
+                  to: "to-accent/10",
+                  accent: "text-primary",
+                };
+                const totalDepts = c.universities.reduce(
+                  (s, u) => s + u.departments,
+                  0,
+                );
+                const totalCourses = c.universities.reduce(
+                  (s, u) => s + u.courses,
+                  0,
+                );
 
                 return (
                   <MotionLink
@@ -317,8 +524,10 @@ const Universities = () => {
                     whileTap={{ scale: 0.98 }}
                     className="card-base p-8 flex flex-col items-center gap-5 hover:border-primary/40 hover:shadow-2xl transition-all cursor-pointer group relative overflow-hidden"
                   >
-                    <div className={`absolute inset-0 bg-gradient-to-br ${colors.from} ${colors.to} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-                    
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-br ${colors.from} ${colors.to} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                    />
+
                     {/* Animated Flag Image */}
                     <div className="relative z-10">
                       <AnimatedFlag code={c.code} size={160} />
@@ -326,17 +535,24 @@ const Universities = () => {
 
                     {/* Static text - no animation */}
                     <div className="text-center relative z-10">
-                      <h3 className="font-black text-2xl mb-1">{lang === "ar" ? c.name_ar : c.name_en}</h3>
+                      <h3 className="font-black text-2xl mb-1">
+                        {lang === "ar" ? c.name_ar : c.name_en}
+                      </h3>
                       <div className="flex items-center justify-center gap-4 text-sm text-muted-foreground mt-3">
                         <span className="flex items-center gap-1.5">
                           <GraduationCap size={14} className={colors.accent} />
-                          <strong>{c.universities.length}</strong> {lang === "ar" ? "جامعة" : "Universities"}
+                          <strong>{c.universities.length}</strong>{" "}
+                          {lang === "ar" ? "جامعة" : "Universities"}
                         </span>
                       </div>
                       <div className="flex items-center justify-center gap-4 text-xs text-muted-foreground mt-2">
-                        <span>{totalDepts} {lang === "ar" ? "قسم" : "Depts"}</span>
+                        <span>
+                          {totalDepts} {lang === "ar" ? "قسم" : "Depts"}
+                        </span>
                         <span>•</span>
-                        <span>{totalCourses} {lang === "ar" ? "مادة" : "Courses"}</span>
+                        <span>
+                          {totalCourses} {lang === "ar" ? "مادة" : "Courses"}
+                        </span>
                       </div>
                     </div>
                   </MotionLink>
@@ -344,7 +560,11 @@ const Universities = () => {
               })}
 
               {comingSoonCountries.map((c, i) => {
-                const colors = countryColors[c.code] || { from: "from-primary/20", to: "to-accent/10", accent: "text-primary" };
+                const colors = countryColors[c.code] || {
+                  from: "from-primary/20",
+                  to: "to-accent/10",
+                  accent: "text-primary",
+                };
                 return (
                   <motion.div
                     key={c.code}
@@ -353,7 +573,9 @@ const Universities = () => {
                     transition={{ delay: (countries.length + i) * 0.15 }}
                     className="card-base p-8 flex flex-col items-center gap-5 relative overflow-hidden opacity-80"
                   >
-                    <div className={`absolute inset-0 bg-gradient-to-br ${colors.from} ${colors.to} opacity-30`} />
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-br ${colors.from} ${colors.to} opacity-30`}
+                    />
                     <span className="absolute top-3 end-3 z-20 text-[0.6rem] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider bg-primary/15 text-primary">
                       {lang === "ar" ? "قريباً" : "Coming Soon"}
                     </span>
@@ -361,27 +583,46 @@ const Universities = () => {
                       <AnimatedFlag code={c.code} size={160} />
                     </div>
                     <div className="text-center relative z-10">
-                      <h3 className="font-black text-2xl mb-1">{lang === "ar" ? c.name_ar : c.name_en}</h3>
+                      <h3 className="font-black text-2xl mb-1">
+                        {lang === "ar" ? c.name_ar : c.name_en}
+                      </h3>
                       <p className="text-sm text-muted-foreground mt-3">
-                        {lang === "ar" ? "سيتم إضافة الجامعات قريباً" : "Universities coming soon"}
+                        {lang === "ar"
+                          ? "سيتم إضافة الجامعات قريباً"
+                          : "Universities coming soon"}
                       </p>
                     </div>
                   </motion.div>
                 );
               })}
-
             </motion.div>
           )}
 
           {/* === UNIVERSITIES === */}
           {view === "universities" && selectedCountry && (
-            <motion.div key="universities" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
+            <motion.div
+              key="universities"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+            >
               <div className="flex items-center gap-4 mb-8">
-                <img src={flagImages[selectedCountry.code]} alt={selectedCountry.code} className="w-14 h-9 object-cover rounded shadow ring-1 ring-foreground/10" />
+                <img
+                  src={flagImages[selectedCountry.code]}
+                  alt={selectedCountry.code}
+                  className="w-14 h-9 object-cover rounded shadow ring-1 ring-foreground/10"
+                />
                 <div>
-                  <h2 className="text-2xl font-black">{lang === "ar" ? selectedCountry.name_ar : selectedCountry.name_en}</h2>
+                  <h2 className="text-2xl font-black">
+                    {lang === "ar"
+                      ? selectedCountry.name_ar
+                      : selectedCountry.name_en}
+                  </h2>
                   <p className="text-sm text-muted-foreground mt-0.5">
-                    {selectedCountry.universities.length} {lang === "ar" ? "مؤسسة تعليمية" : "Educational Institutions"}
+                    {selectedCountry.universities.length}{" "}
+                    {lang === "ar"
+                      ? "مؤسسة تعليمية"
+                      : "Educational Institutions"}
                   </p>
                 </div>
               </div>
@@ -390,14 +631,25 @@ const Universities = () => {
                   const totalDepts = u.departments;
                   const totalCourses = u.courses;
                   return (
-                    <MotionLink key={u.id} to={universityPath(u)} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
-                      whileHover={{ y: -6, scale: 1.01 }} whileTap={{ scale: 0.98 }}
+                    <MotionLink
+                      key={u.id}
+                      to={universityPath(u)}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.05 }}
+                      whileHover={{ y: -6, scale: 1.01 }}
+                      whileTap={{ scale: 0.98 }}
                       className="card-base p-6 text-start hover:border-primary/30 hover:shadow-xl transition-all cursor-pointer group"
                     >
                       <div className="flex items-start justify-between mb-4">
                         <div className="w-14 h-14 rounded-2xl bg-white dark:bg-white/95 ring-1 ring-border/60 flex items-center justify-center overflow-hidden group-hover:scale-110 transition-transform shadow-sm">
                           {u.logo ? (
-                            <img src={u.logo} alt={lang === "ar" ? u.name_ar : u.name_en} loading="lazy" className="w-full h-full object-contain p-1.5" />
+                            <img
+                              src={u.logo}
+                              alt={lang === "ar" ? u.name_ar : u.name_en}
+                              loading="lazy"
+                              className="w-full h-full object-contain p-1.5"
+                            />
                           ) : (
                             <GraduationCap size={22} className="text-primary" />
                           )}
@@ -408,17 +660,29 @@ const Universities = () => {
                       </h3>
                       <div className="flex items-center gap-2 text-xs text-muted-foreground mb-4">
                         <Globe size={11} />
-                        <span>{lang === "ar" ? u.country_ar : u.country_en}</span>
+                        <span>
+                          {lang === "ar" ? u.country_ar : u.country_en}
+                        </span>
                       </div>
                       <div className="grid grid-cols-3 gap-2 pt-3 border-t border-border/50">
                         {[
-                          { v: u.colleges, l: lang === "ar" ? "كلية" : "Colleges" },
+                          {
+                            v: u.colleges,
+                            l: lang === "ar" ? "كلية" : "Colleges",
+                          },
                           { v: totalDepts, l: lang === "ar" ? "قسم" : "Depts" },
-                          { v: totalCourses, l: lang === "ar" ? "مادة" : "Courses" },
-                        ].map(s => (
+                          {
+                            v: totalCourses,
+                            l: lang === "ar" ? "مادة" : "Courses",
+                          },
+                        ].map((s) => (
                           <div key={s.l} className="text-center">
-                            <p className="font-black text-sm text-primary">{s.v}</p>
-                            <p className="text-[0.6rem] text-muted-foreground">{s.l}</p>
+                            <p className="font-black text-sm text-primary">
+                              {s.v}
+                            </p>
+                            <p className="text-[0.6rem] text-muted-foreground">
+                              {s.l}
+                            </p>
                           </div>
                         ))}
                       </div>
@@ -429,7 +693,11 @@ const Universities = () => {
               {filteredUnis.length === 0 && (
                 <div className="text-center py-12 text-muted-foreground">
                   <Search size={40} className="mx-auto mb-3 opacity-40" />
-                  <p>{lang === "ar" ? "لم يتم العثور على نتائج" : "No results found"}</p>
+                  <p>
+                    {lang === "ar"
+                      ? "لم يتم العثور على نتائج"
+                      : "No results found"}
+                  </p>
                 </div>
               )}
             </motion.div>
@@ -437,11 +705,24 @@ const Universities = () => {
 
           {/* === UNIVERSITY DETAIL: loading this country's chunk === */}
           {view === "university" && !selectedUni && (
-            <motion.div key="university-loading" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+            <motion.div
+              key="university-loading"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
               {countryError ? (
                 <div className="text-center py-16">
-                  <p className="text-muted-foreground mb-4">{lang === "ar" ? "تعذّر تحميل بيانات الجامعة." : "Couldn't load this university."}</p>
-                  <button type="button" onClick={() => window.location.reload()} className="text-primary font-bold hover:underline">
+                  <p className="text-muted-foreground mb-4">
+                    {lang === "ar"
+                      ? "تعذّر تحميل بيانات الجامعة."
+                      : "Couldn't load this university."}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => window.location.reload()}
+                    className="text-primary font-bold hover:underline"
+                  >
                     {lang === "ar" ? "إعادة المحاولة" : "Try again"}
                   </button>
                 </div>
@@ -453,47 +734,110 @@ const Universities = () => {
 
           {/* === UNIVERSITY DETAIL === */}
           {view === "university" && selectedUni && (
-            <motion.div key="university" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
+            <motion.div
+              key="university"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+            >
               {/* Header Card */}
               <div className="card-base p-6 md:p-8 mb-8 relative overflow-hidden">
                 <div className="absolute top-0 end-0 w-40 h-40 bg-gradient-to-bl rtl:bg-gradient-to-br from-primary/10 to-transparent ltr:rounded-bl-full rtl:rounded-br-full" />
                 <div className="flex items-start gap-5 relative z-10">
                   <div className="w-20 h-20 rounded-2xl bg-white dark:bg-white/95 ring-1 ring-border/60 flex items-center justify-center shrink-0 shadow-lg overflow-hidden">
                     {selectedUni.logo ? (
-                      <img src={selectedUni.logo} alt={lang === "ar" ? selectedUni.name_ar : selectedUni.name_en} className="w-full h-full object-contain p-2" />
+                      <img
+                        src={selectedUni.logo}
+                        alt={
+                          lang === "ar"
+                            ? selectedUni.name_ar
+                            : selectedUni.name_en
+                        }
+                        className="w-full h-full object-contain p-2"
+                      />
                     ) : (
                       <GraduationCap size={30} className="text-primary" />
                     )}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h2 className="font-black text-2xl md:text-3xl leading-tight">{lang === "ar" ? selectedUni.name_ar : selectedUni.name_en}</h2>
+                    <h2 className="font-black text-2xl md:text-3xl leading-tight">
+                      {lang === "ar"
+                        ? selectedUni.name_ar
+                        : selectedUni.name_en}
+                    </h2>
                     <div className="flex items-center gap-4 mt-2 flex-wrap">
-                      <span className="text-sm text-muted-foreground flex items-center gap-1.5"><Globe size={13} /> {lang === "ar" ? selectedUni.country_ar : selectedUni.country_en}</span>
+                      <span className="text-sm text-muted-foreground flex items-center gap-1.5">
+                        <Globe size={13} />{" "}
+                        {lang === "ar"
+                          ? selectedUni.country_ar
+                          : selectedUni.country_en}
+                      </span>
                     </div>
                   </div>
                 </div>
                 <div className="grid grid-cols-3 gap-3 mt-6">
                   {[
-                    { icon: Building2, label: lang === "ar" ? "كلية" : "Colleges", value: selectedUni.colleges.length },
-                    { icon: Layers, label: lang === "ar" ? "قسم" : "Departments", value: selectedUni.colleges.reduce((s, c) => s + c.departments.length, 0) },
-                    { icon: BookOpen, label: lang === "ar" ? "مادة" : "Courses", value: selectedUni.colleges.reduce((s, c) => s + c.departments.reduce((s2, d) => s2 + d.courses.length, 0), 0) },
+                    {
+                      icon: Building2,
+                      label: lang === "ar" ? "كلية" : "Colleges",
+                      value: selectedUni.colleges.length,
+                    },
+                    {
+                      icon: Layers,
+                      label: lang === "ar" ? "قسم" : "Departments",
+                      value: selectedUni.colleges.reduce(
+                        (s, c) => s + c.departments.length,
+                        0,
+                      ),
+                    },
+                    {
+                      icon: BookOpen,
+                      label: lang === "ar" ? "مادة" : "Courses",
+                      value: selectedUni.colleges.reduce(
+                        (s, c) =>
+                          s +
+                          c.departments.reduce(
+                            (s2, d) => s2 + d.courses.length,
+                            0,
+                          ),
+                        0,
+                      ),
+                    },
                   ].map((s) => (
-                    <div key={s.label} className="text-center p-4 bg-primary/5 dark:bg-primary/10 rounded-xl border border-primary/10 dark:border-primary/20">
-                      <s.icon size={16} className="text-primary mx-auto mb-1.5" />
-                      <p className="font-black text-xl text-primary">{s.value}</p>
-                      <p className="text-xs text-foreground/70 font-medium">{s.label}</p>
+                    <div
+                      key={s.label}
+                      className="text-center p-4 bg-primary/5 dark:bg-primary/10 rounded-xl border border-primary/10 dark:border-primary/20"
+                    >
+                      <s.icon
+                        size={16}
+                        className="text-primary mx-auto mb-1.5"
+                      />
+                      <p className="font-black text-xl text-primary">
+                        {s.value}
+                      </p>
+                      <p className="text-xs text-foreground/70 font-medium">
+                        {s.label}
+                      </p>
                     </div>
                   ))}
                 </div>
-                <a href={selectedUni.website} target="_blank" rel="noopener noreferrer"
-                  className="mt-5 inline-flex items-center gap-2 text-sm text-primary hover:underline font-medium">
+                <a
+                  href={selectedUni.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-5 inline-flex items-center gap-2 text-sm text-primary hover:underline font-medium"
+                >
                   <ExternalLink size={14} />
-                  {lang === "ar" ? "زيارة موقع الجامعة" : "Visit University Website"}
+                  {lang === "ar"
+                    ? "زيارة موقع الجامعة"
+                    : "Visit University Website"}
                 </a>
               </div>
 
               <WhatsAppQuickBook
-                context={lang === "ar" ? selectedUni.name_ar : selectedUni.name_en}
+                context={
+                  lang === "ar" ? selectedUni.name_ar : selectedUni.name_en
+                }
                 className="mb-8"
               />
 
@@ -503,56 +847,64 @@ const Universities = () => {
                   <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
                     <Building2 size={16} className="text-primary" />
                   </div>
-                  {lang === "ar" ? "الكليات والأقسام" : "Colleges & Departments"}
+                  {lang === "ar"
+                    ? "الكليات والأقسام"
+                    : "Colleges & Departments"}
                 </h3>
                 <span className="text-xs bg-primary/10 dark:bg-primary/20 text-primary px-3 py-1 rounded-full border border-primary/10 dark:border-primary/20">
-                  {filteredColleges.length} {lang === "ar" ? "كلية" : "colleges"}
+                  {filteredColleges.length}{" "}
+                  {lang === "ar" ? "كلية" : "colleges"}
                 </span>
               </div>
 
               <div className="space-y-8">
-                {groupByField(filteredColleges, (c) => ({ ar: c.name_ar, en: c.name_en })).map(
-                  ({ field, items }) => {
-                    const FieldIcon = field.icon;
-                    return (
-                      <section key={field.id}>
-                        <div className="flex items-center gap-2.5 mb-3">
-                          <div
-                            className={`w-8 h-8 rounded-lg bg-background ring-1 ${field.ring} ${field.accent} flex items-center justify-center shadow-sm`}
-                          >
-                            <FieldIcon size={15} />
-                          </div>
-                          <h4 className={`font-black text-sm ${field.accent}`}>
-                            {lang === "ar" ? field.label_ar : field.label_en}
-                          </h4>
-                          <span className="text-[0.65rem] font-bold px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
-                            {items.length}
-                          </span>
-                          <div className="flex-1 h-px bg-border/60" />
+                {groupByField(filteredColleges, (c) => ({
+                  ar: c.name_ar,
+                  en: c.name_en,
+                })).map(({ field, items }) => {
+                  const FieldIcon = field.icon;
+                  return (
+                    <section key={field.id}>
+                      <div className="flex items-center gap-2.5 mb-3">
+                        <div
+                          className={`w-8 h-8 rounded-lg bg-background ring-1 ${field.ring} ${field.accent} flex items-center justify-center shadow-sm`}
+                        >
+                          <FieldIcon size={15} />
                         </div>
-                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-                          {items.map((college, i) => (
-                            <CollegeCard
-                              key={college.id}
-                              college={college}
-                              university={selectedUni}
-                              lang={lang}
-                              index={i}
-                              gradient={field.gradient}
-                              accent={field.accent}
-                            />
-                          ))}
-                        </div>
-                      </section>
-                    );
-                  }
-                )}
+                        <h4 className={`font-black text-sm ${field.accent}`}>
+                          {lang === "ar" ? field.label_ar : field.label_en}
+                        </h4>
+                        <span className="text-[0.65rem] font-bold px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
+                          {items.length}
+                        </span>
+                        <div className="flex-1 h-px bg-border/60" />
+                      </div>
+                      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+                        {items.map((college, i) => (
+                          <CollegeCard
+                            key={college.id}
+                            college={college}
+                            university={selectedUni}
+                            lang={lang}
+                            index={i}
+                            gradient={field.gradient}
+                            accent={field.accent}
+                          />
+                        ))}
+                      </div>
+                    </section>
+                  );
+                })}
               </div>
 
               {filteredColleges.length === 0 && (
                 <div className="text-center py-12 text-muted-foreground">
                   <Search size={40} className="mx-auto mb-3 opacity-40" />
-                  <p>{lang === "ar" ? "لم يتم العثور على نتائج" : "No results found"}</p>
+                  <p>
+                    {lang === "ar"
+                      ? "لم يتم العثور على نتائج"
+                      : "No results found"}
+                  </p>
                 </div>
               )}
             </motion.div>

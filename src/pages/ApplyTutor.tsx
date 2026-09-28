@@ -1,6 +1,13 @@
 import { useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
-import { Send, CheckCircle2, GraduationCap, Upload, FileText, X } from "lucide-react";
+import {
+  Send,
+  CheckCircle2,
+  GraduationCap,
+  Upload,
+  FileText,
+  X,
+} from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import PageHelmet from "@/components/PageHelmet";
 
@@ -65,7 +72,6 @@ const emptyForm = {
   quietPlace: "",
   demoLink: "",
 };
-
 
 const FieldBase = ({
   k,
@@ -158,8 +164,6 @@ const Section = ({
   </section>
 );
 
-
-
 const ApplyTutor = () => {
   const { lang } = useLanguage();
   const isAr = lang === "ar";
@@ -167,7 +171,6 @@ const ApplyTutor = () => {
   const [form, setForm] = useState({ ...emptyForm });
   const [tools, setTools] = useState<string[]>([]);
 
-  
   const toggleTool = (t: string) =>
     setTools((p) => (p.includes(t) ? p.filter((x) => x !== t) : [...p, t]));
 
@@ -205,9 +208,7 @@ const ApplyTutor = () => {
       : "Our team will review it and contact you if shortlisted. Complete sending in the WhatsApp window.",
   };
 
-  const yesNo = isAr
-    ? ["نعم", "لا", "أحياناً"]
-    : ["Yes", "No", "Sometimes"];
+  const yesNo = isAr ? ["نعم", "لا", "أحياناً"] : ["Yes", "No", "Sometimes"];
 
   const [saving, setSaving] = useState(false);
   const [cvFile, setCvFile] = useState<File | null>(null);
@@ -228,11 +229,19 @@ const ApplyTutor = () => {
       return setPhotoFile(null);
     }
     if (!/^image\/(jpeg|png|webp)$/.test(file.type)) {
-      setPhotoError(isAr ? "الرجاء اختيار صورة JPG أو PNG" : "Please choose a JPG or PNG image");
+      setPhotoError(
+        isAr
+          ? "الرجاء اختيار صورة JPG أو PNG"
+          : "Please choose a JPG or PNG image",
+      );
       return setPhotoFile(null);
     }
     if (file.size > 5 * 1024 * 1024) {
-      setPhotoError(isAr ? "الحد الأقصى لحجم الصورة ٥ ميجابايت" : "Maximum photo size is 5 MB");
+      setPhotoError(
+        isAr
+          ? "الحد الأقصى لحجم الصورة ٥ ميجابايت"
+          : "Maximum photo size is 5 MB",
+      );
       return setPhotoFile(null);
     }
     setPhotoFile(file);
@@ -242,26 +251,38 @@ const ApplyTutor = () => {
   const onPickCv = (file: File | null) => {
     setCvError("");
     if (!file) return setCvFile(null);
-    const okExt = /\.pdf$/i.test(file.name) && (!file.type || file.type === "application/pdf");
+    const okExt =
+      /\.pdf$/i.test(file.name) &&
+      (!file.type || file.type === "application/pdf");
     if (!okExt) {
-      setCvError(isAr ? "الملف المسموح: PDF فقط" : "Only PDF files are allowed");
+      setCvError(
+        isAr ? "الملف المسموح: PDF فقط" : "Only PDF files are allowed",
+      );
       return setCvFile(null);
     }
     if (file.size > 5 * 1024 * 1024) {
-      setCvError(isAr ? "الحد الأقصى لحجم الملف ٥ ميجابايت" : "Maximum file size is 5 MB");
+      setCvError(
+        isAr
+          ? "الحد الأقصى لحجم الملف ٥ ميجابايت"
+          : "Maximum file size is 5 MB",
+      );
       return setCvFile(null);
     }
     setCvFile(file);
   };
 
-
-
   // Files go through a server function that checks real file content, size and picks the name.
-  const uploadApplicantFile = async (kind: "cv" | "photo", file: File): Promise<string | null> => {
+  const uploadApplicantFile = async (
+    kind: "cv" | "photo",
+    file: File,
+  ): Promise<string | null> => {
     const body = new FormData();
     body.append("kind", kind);
     body.append("file", file);
-    const { data, error } = await supabase.functions.invoke("tutor-upload-url", { body });
+    const { data, error } = await supabase.functions.invoke(
+      "tutor-upload-url",
+      { body },
+    );
     return error || !data?.path ? null : (data.path as string);
   };
 
@@ -273,7 +294,11 @@ const ApplyTutor = () => {
     if (cvFile) {
       cvPath = await uploadApplicantFile("cv", cvFile);
       if (!cvPath) {
-        setCvError(isAr ? "تعذر رفع الملف، حاول مرة أخرى." : "Upload failed, please try again.");
+        setCvError(
+          isAr
+            ? "تعذر رفع الملف، حاول مرة أخرى."
+            : "Upload failed, please try again.",
+        );
         setSaving(false);
         return;
       }
@@ -283,7 +308,11 @@ const ApplyTutor = () => {
     if (photoFile) {
       photoPath = await uploadApplicantFile("photo", photoFile);
       if (!photoPath) {
-        setPhotoError(isAr ? "تعذر رفع الصورة، حاول مرة أخرى." : "Photo upload failed, please try again.");
+        setPhotoError(
+          isAr
+            ? "تعذر رفع الصورة، حاول مرة أخرى."
+            : "Photo upload failed, please try again.",
+        );
         setSaving(false);
         return;
       }
@@ -292,7 +321,7 @@ const ApplyTutor = () => {
     const { error } = await supabase.from("tutor_applications").insert({
       cv_file_path: cvPath,
       photo_file_path: photoPath,
-      use_photo_as_avatar: photoFile ? useAvatar ?? false : null,
+      use_photo_as_avatar: photoFile ? (useAvatar ?? false) : null,
       full_name: form.name,
       phone: form.phone,
       email: form.email,
@@ -321,7 +350,7 @@ const ApplyTutor = () => {
       setPhotoError(
         isAr
           ? "تعذر إرسال الطلب، حاول مرة أخرى."
-          : "Could not submit your application, please try again."
+          : "Could not submit your application, please try again.",
       );
       return;
     }
@@ -351,10 +380,8 @@ const ApplyTutor = () => {
         onChange={(v) => setForm((p) => ({ ...p, [props.k]: v }))}
       />
     ),
-    []
+    [],
   );
-
-
 
   return (
     <div>
@@ -381,7 +408,10 @@ const ApplyTutor = () => {
           <ul className="mt-6 grid sm:grid-cols-2 gap-3">
             {T.checklist.map((c) => (
               <li key={c} className="flex items-start gap-2 text-sm">
-                <CheckCircle2 size={16} className="text-primary shrink-0 mt-0.5" />
+                <CheckCircle2
+                  size={16}
+                  className="text-primary shrink-0 mt-0.5"
+                />
                 <span className="text-muted-foreground">{c}</span>
               </li>
             ))}
@@ -435,7 +465,10 @@ const ApplyTutor = () => {
                   ? "سيتم إنشاء حسابك على المنصة بنفس هذا البريد عند القبول."
                   : "If accepted, your teacher account will be created with this email.",
               })}
-              {Field({ k: "nationality", label: isAr ? "الجنسية" : "Nationality" })}
+              {Field({
+                k: "nationality",
+                label: isAr ? "الجنسية" : "Nationality",
+              })}
 
               <div className="sm:col-span-2 space-y-3">
                 <label htmlFor="photoFile" className="block text-sm font-bold">
@@ -456,7 +489,9 @@ const ApplyTutor = () => {
                     className="btn-ghost cursor-pointer text-sm flex items-center gap-2 px-4 py-2.5 border border-border rounded-xl"
                   >
                     <Upload size={16} />
-                    {isAr ? "اختر صورة (JPG / PNG)" : "Choose photo (JPG / PNG)"}
+                    {isAr
+                      ? "اختر صورة (JPG / PNG)"
+                      : "Choose photo (JPG / PNG)"}
                   </label>
                   <input
                     id="photoFile"
@@ -500,7 +535,6 @@ const ApplyTutor = () => {
                     </span>
                   </label>
                 )}
-
               </div>
             </Section>
 
@@ -515,7 +549,10 @@ const ApplyTutor = () => {
                   ? "اختر أقرب تخصص للمواد التي تستطيع تدريسها."
                   : "Choose the closest specialization to the courses you can teach.",
               })}
-              {Field({ k: "university", label: isAr ? "الجامعة" : "University" })}
+              {Field({
+                k: "university",
+                label: isAr ? "الجامعة" : "University",
+              })}
               {Field({
                 k: "degree",
                 label: isAr ? "المؤهل العلمي" : "Degree",
@@ -526,7 +563,9 @@ const ApplyTutor = () => {
 
               {Field({
                 k: "experience",
-                label: isAr ? "سنوات الخبرة في التدريس" : "Years of Teaching Experience",
+                label: isAr
+                  ? "سنوات الخبرة في التدريس"
+                  : "Years of Teaching Experience",
                 type: "number",
               })}
               {Field({
@@ -546,17 +585,23 @@ const ApplyTutor = () => {
             <Section num="03" title={T.s3}>
               {Field({
                 k: "recordedBefore",
-                label: isAr ? "هل سبق لك تسجيل دروس؟" : "Have you recorded lessons before?",
+                label: isAr
+                  ? "هل سبق لك تسجيل دروس؟"
+                  : "Have you recorded lessons before?",
                 options: yesNo,
               })}
               {Field({
                 k: "quietPlace",
-                label: isAr ? "هل لديك مكان هادئ للتسجيل؟" : "Do you have a quiet place for recording?",
+                label: isAr
+                  ? "هل لديك مكان هادئ للتسجيل؟"
+                  : "Do you have a quiet place for recording?",
                 options: yesNo,
               })}
               <div className="sm:col-span-2 space-y-2">
                 <span className="block text-sm font-bold">
-                  {isAr ? "البرامج أو الأدوات المستخدمة" : "Tools / Apps Used Before"}
+                  {isAr
+                    ? "البرامج أو الأدوات المستخدمة"
+                    : "Tools / Apps Used Before"}
                 </span>
                 <div className="flex flex-wrap gap-2">
                   {TOOLS.map((tool) => {
@@ -641,7 +686,10 @@ const ApplyTutor = () => {
 
             <div className="card-base p-6 flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
               <p className="text-sm text-muted-foreground">{T.note}</p>
-              <button type="submit" className="btn-primary flex items-center justify-center gap-2 shrink-0">
+              <button
+                type="submit"
+                className="btn-primary flex items-center justify-center gap-2 shrink-0"
+              >
                 <Send size={16} />
                 {saving ? "..." : T.submit}
               </button>

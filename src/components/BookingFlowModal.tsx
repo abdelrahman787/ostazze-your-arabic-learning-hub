@@ -5,8 +5,19 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
-  X, Loader2, Sparkles, Calendar, BookOpen, MessageSquare,
-  GraduationCap, BadgeCheck, CheckCircle2, Mail, Sun, CloudSun, Moon,
+  X,
+  Loader2,
+  Sparkles,
+  Calendar,
+  BookOpen,
+  MessageSquare,
+  GraduationCap,
+  BadgeCheck,
+  CheckCircle2,
+  Mail,
+  Sun,
+  CloudSun,
+  Moon,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
@@ -38,12 +49,19 @@ const SLOTS: { key: DaySlot["slot"]; hour: number; icon: React.ReactNode }[] = [
  * Unified booking modal: lets the student pick a tutor from a dropdown
  * (or "Pick one for me") then proceeds to payment in the same flow.
  */
-const BookingFlowModal = ({ open, onClose, subject, courseLabel, teachers }: Props) => {
+const BookingFlowModal = ({
+  open,
+  onClose,
+  subject,
+  courseLabel,
+  teachers,
+}: Props) => {
   const { user } = useAuth();
   const { lang, t } = useLanguage();
   const navigate = useNavigate();
 
-  const [selectedTeacherId, setSelectedTeacherId] = useState<string>(AUTO_VALUE);
+  const [selectedTeacherId, setSelectedTeacherId] =
+    useState<string>(AUTO_VALUE);
   const [notes, setNotes] = useState("");
   const [selectedSlots, setSelectedSlots] = useState<DaySlot[]>([]);
   const [submitting, setSubmitting] = useState(false);
@@ -75,7 +93,7 @@ const BookingFlowModal = ({ open, onClose, subject, courseLabel, teachers }: Pro
 
   const selectedTeacher = useMemo(
     () => teachers.find((t) => t.user_id === selectedTeacherId) || null,
-    [teachers, selectedTeacherId]
+    [teachers, selectedTeacherId],
   );
 
   // Resolve the price: chosen teacher's price, or the cheapest available as
@@ -86,7 +104,9 @@ const BookingFlowModal = ({ open, onClose, subject, courseLabel, teachers }: Pro
   }, [teachers]);
 
   const effectivePrice =
-    selectedTeacherId === AUTO_VALUE ? cheapestPrice : selectedTeacher?.price || 0;
+    selectedTeacherId === AUTO_VALUE
+      ? cheapestPrice
+      : selectedTeacher?.price || 0;
 
   const teacherDisplayName = (tc: TeacherData) =>
     lang === "ar" ? tc.full_name : tc.full_name_en || tc.full_name;
@@ -102,9 +122,18 @@ const BookingFlowModal = ({ open, onClose, subject, courseLabel, teachers }: Pro
   ];
 
   const slotLabels = {
-    morning: { label: t("preferred_morning"), time: t("preferred_morning_time") },
-    afternoon: { label: t("preferred_afternoon"), time: t("preferred_afternoon_time") },
-    evening: { label: t("preferred_evening"), time: t("preferred_evening_time") },
+    morning: {
+      label: t("preferred_morning"),
+      time: t("preferred_morning_time"),
+    },
+    afternoon: {
+      label: t("preferred_afternoon"),
+      time: t("preferred_afternoon_time"),
+    },
+    evening: {
+      label: t("preferred_evening"),
+      time: t("preferred_evening_time"),
+    },
   };
 
   const toggleSlot = (day: number, slot: DaySlot["slot"]) => {
@@ -153,7 +182,9 @@ const BookingFlowModal = ({ open, onClose, subject, courseLabel, teachers }: Pro
 
   const handleSubmit = async () => {
     if (!user) {
-      toast.error(lang === "ar" ? "يجب تسجيل الدخول أولاً" : "Please sign in first");
+      toast.error(
+        lang === "ar" ? "يجب تسجيل الدخول أولاً" : "Please sign in first",
+      );
       navigate("/login");
       return;
     }
@@ -175,24 +206,25 @@ const BookingFlowModal = ({ open, onClose, subject, courseLabel, teachers }: Pro
         noteParts.push(
           lang === "ar"
             ? `المادة الأصلية: ${courseLabel}`
-            : `Original course: ${courseLabel}`
+            : `Original course: ${courseLabel}`,
         );
       }
       if (selectedTeacherId === AUTO_VALUE) {
         noteParts.push(
           lang === "ar"
             ? "الطالب اختار: اختر لي مدرس مناسب"
-            : "Student chose: assign me a tutor"
+            : "Student chose: assign me a tutor",
         );
       }
       if (selectedSlots.length > 0) {
         noteParts.push(
-          `${t("preferred_slots_label")}: ${selectedSlots.map((s) => formatSlot(s.day, s.slot)).join(", ")}`
+          `${t("preferred_slots_label")}: ${selectedSlots.map((s) => formatSlot(s.day, s.slot)).join(", ")}`,
         );
       }
       if (notes.trim()) noteParts.push(notes.trim());
 
-      const teacherId = selectedTeacherId === AUTO_VALUE ? null : selectedTeacherId;
+      const teacherId =
+        selectedTeacherId === AUTO_VALUE ? null : selectedTeacherId;
 
       const { data, error } = await supabase
         .from("session_requests")
@@ -226,9 +258,11 @@ const BookingFlowModal = ({ open, onClose, subject, courseLabel, teachers }: Pro
 
   const amountInCents = effectivePrice ? Math.round(effectivePrice * 100) : 0;
 
-  const headerTeacherName =
-    selectedTeacher ? teacherDisplayName(selectedTeacher)
-      : lang === "ar" ? "مدرس متخصص" : "A specialized tutor";
+  const headerTeacherName = selectedTeacher
+    ? teacherDisplayName(selectedTeacher)
+    : lang === "ar"
+      ? "مدرس متخصص"
+      : "A specialized tutor";
 
   const modalContent = (
     <AnimatePresence>
@@ -285,7 +319,9 @@ const BookingFlowModal = ({ open, onClose, subject, courseLabel, teachers }: Pro
                 </motion.div>
                 <div>
                   <h3 className="text-xl font-black text-foreground mb-2">
-                    {lang === "ar" ? "تم حجز المحاضرة بنجاح ✅" : "Lecture booked successfully ✅"}
+                    {lang === "ar"
+                      ? "تم حجز المحاضرة بنجاح ✅"
+                      : "Lecture booked successfully ✅"}
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed px-2">
                     {lang === "ar"
@@ -301,12 +337,18 @@ const BookingFlowModal = ({ open, onClose, subject, courseLabel, teachers }: Pro
                 </div>
                 <div className="flex gap-3 pt-2">
                   <button
-                    onClick={() => { onClose(); navigate("/my-bookings"); }}
+                    onClick={() => {
+                      onClose();
+                      navigate("/my-bookings");
+                    }}
                     className="btn-primary flex-1 text-sm"
                   >
                     {lang === "ar" ? "حجوزاتي" : "My bookings"}
                   </button>
-                  <button onClick={onClose} className="btn-outline flex-1 text-sm">
+                  <button
+                    onClick={onClose}
+                    className="btn-outline flex-1 text-sm"
+                  >
                     {lang === "ar" ? "إغلاق" : "Close"}
                   </button>
                 </div>
@@ -332,7 +374,8 @@ const BookingFlowModal = ({ open, onClose, subject, courseLabel, teachers }: Pro
                     className="input-base w-full"
                   >
                     <option value={AUTO_VALUE}>
-                      ✨ {lang === "ar"
+                      ✨{" "}
+                      {lang === "ar"
                         ? "اختر لي مدرس مناسب (نخصص لك الأنسب)"
                         : "Pick a tutor for me (we'll match the best)"}
                     </option>
@@ -358,11 +401,14 @@ const BookingFlowModal = ({ open, onClose, subject, courseLabel, teachers }: Pro
                     <div className="mt-2 flex items-center gap-2 text-xs text-muted-foreground">
                       {selectedTeacher.verified && (
                         <span className="inline-flex items-center gap-1 text-success font-bold">
-                          <BadgeCheck size={12} /> {lang === "ar" ? "موثّق" : "Verified"}
+                          <BadgeCheck size={12} />{" "}
+                          {lang === "ar" ? "موثّق" : "Verified"}
                         </span>
                       )}
                       {selectedTeacher.university && (
-                        <span className="truncate">• {selectedTeacher.university}</span>
+                        <span className="truncate">
+                          • {selectedTeacher.university}
+                        </span>
                       )}
                     </div>
                   )}
@@ -386,7 +432,9 @@ const BookingFlowModal = ({ open, onClose, subject, courseLabel, teachers }: Pro
                       <Calendar size={20} />
                     </div>
                     <div>
-                      <h3 className="font-extrabold text-foreground">{t("preferred_time_title")}</h3>
+                      <h3 className="font-extrabold text-foreground">
+                        {t("preferred_time_title")}
+                      </h3>
                       <p className="text-xs text-muted-foreground leading-relaxed mt-0.5">
                         {t("preferred_time_subtitle")}
                       </p>
@@ -476,12 +524,22 @@ const BookingFlowModal = ({ open, onClose, subject, courseLabel, teachers }: Pro
                   disabled={submitting || selectedSlots.length === 0}
                   className="w-full text-base font-extrabold bg-primary text-primary-foreground px-6 py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 hover:bg-primary-dark hover:shadow-[0_8px_24px_hsl(14_91%_49%/0.4)] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:shadow-none"
                 >
-                  {submitting ? <Loader2 size={18} className="animate-spin" /> : <Sparkles size={18} />}
+                  {submitting ? (
+                    <Loader2 size={18} className="animate-spin" />
+                  ) : (
+                    <Sparkles size={18} />
+                  )}
                   {submitting
-                    ? lang === "ar" ? "جاري الإرسال..." : "Sending..."
+                    ? lang === "ar"
+                      ? "جاري الإرسال..."
+                      : "Sending..."
                     : effectivePrice > 0
-                      ? lang === "ar" ? "تابع للدفع" : "Continue to payment"
-                      : lang === "ar" ? "تأكيد الحجز" : "Confirm booking"}
+                      ? lang === "ar"
+                        ? "تابع للدفع"
+                        : "Continue to payment"
+                      : lang === "ar"
+                        ? "تأكيد الحجز"
+                        : "Confirm booking"}
                 </motion.button>
               </div>
             )}

@@ -3,7 +3,14 @@ import { useState, useEffect } from "react";
 import { useSearchParams, Link } from "@/lib/router-compat";
 import TeacherCard from "@/components/TeacherCard";
 import type { TeacherData } from "@/components/TeacherCard";
-import { UserX, RefreshCw, Sparkles, Users, Calendar, GraduationCap } from "lucide-react";
+import {
+  UserX,
+  RefreshCw,
+  Sparkles,
+  Users,
+  Calendar,
+  GraduationCap,
+} from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
@@ -31,16 +38,19 @@ const TeacherCardSkeleton = () => (
   </div>
 );
 
-const Teachers = () => {
+const Teachers = ({
+  initialTeachers,
+}: { initialTeachers?: TeacherData[] } = {}) => {
   const { t, lang } = useLanguage();
   const [searchParams] = useSearchParams();
   const initialSubject = searchParams.get("subject") || "";
   const courseLabel = searchParams.get("course") || "";
-  const [teachers, setTeachers] = useState<TeacherData[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [teachers, setTeachers] = useState<TeacherData[]>(
+    initialTeachers ?? [],
+  );
+  const [loading, setLoading] = useState(!initialTeachers);
   const [loadingTimeout, setLoadingTimeout] = useState(false);
   const [assignModalOpen, setAssignModalOpen] = useState(false);
-
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -50,19 +60,29 @@ const Teachers = () => {
   }, [loading]);
 
   useEffect(() => {
+    if (initialTeachers) return;
     const fetchTeachers = async () => {
       setLoading(true);
       setLoadingTimeout(false);
       const { data: tps } = await supabase
         .from("teacher_profiles")
-        .select("user_id, subjects, subjects_en, university, university_en, major, major_en, price, verified");
+        .select(
+          "user_id, subjects, subjects_en, university, university_en, major, major_en, price, verified",
+        );
 
-      if (!tps || tps.length === 0) { setLoading(false); return; }
+      if (!tps || tps.length === 0) {
+        setLoading(false);
+        return;
+      }
 
       const userIds = tps.map((tp) => tp.user_id);
-      const { data: profiles } = await supabase.rpc("get_public_profiles", { _user_ids: userIds });
+      const { data: profiles } = await supabase.rpc("get_public_profiles", {
+        _user_ids: userIds,
+      });
 
-      const profileMap = new Map((profiles || []).map((p: any) => [p.user_id, p]));
+      const profileMap = new Map(
+        (profiles || []).map((p: any) => [p.user_id, p]),
+      );
 
       const merged: TeacherData[] = tps.map((tp) => {
         const profile = profileMap.get(tp.user_id);
@@ -88,23 +108,30 @@ const Teachers = () => {
       setLoading(false);
     };
     fetchTeachers();
-  }, [t]);
+  }, [t, initialTeachers]);
 
   const sorted = teachers;
-
 
   return (
     <div>
       <PageHelmet
-        title={lang === "ar"
-          ? "المعلمون - أفضل المعلمين الجامعيين - أستاذي OSTAZE"
-          : "Tutors - Top University Tutors - OSTAZE"}
-        description={lang === "ar"
-          ? "تصفح أفضل المعلمين الجامعيين على منصة أستاذي — معلمون متخصصون بتقييمات حقيقية من الطلاب. احجز حصتك الخصوصية الآن."
-          : "Browse top university tutors on OSTAZE — verified specialists with real student ratings. Book your private session now."}
+        title={
+          lang === "ar"
+            ? "المعلمون - أفضل المعلمين الجامعيين - أستاذي OSTAZE"
+            : "Tutors - Top University Tutors - OSTAZE"
+        }
+        description={
+          lang === "ar"
+            ? "تصفح أفضل المعلمين الجامعيين على منصة أستاذي — معلمون متخصصون بتقييمات حقيقية من الطلاب. احجز حصتك الخصوصية الآن."
+            : "Browse top university tutors on OSTAZE — verified specialists with real student ratings. Book your private session now."
+        }
         canonical="https://ostaze.com/teachers"
       />
-      <PageHeader title={t("teachers_title")} subtitle={t("teachers_choose")} variant="teachers">
+      <PageHeader
+        title={t("teachers_title")}
+        subtitle={t("teachers_choose")}
+        variant="teachers"
+      >
         <div className="flex justify-center md:justify-start mb-6 md:mb-0 md:absolute md:start-4 lg:start-6 md:top-0">
           <Link
             to="/apply-tutor"
@@ -164,31 +191,52 @@ const Teachers = () => {
         {loading ? (
           <div>
             {loadingTimeout && (
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center mb-6">
-                <p className="text-muted-foreground text-sm">{t("teachers_loading_timeout")}</p>
-                <button onClick={() => window.location.reload()} className="text-primary text-sm font-bold hover:underline mt-2 inline-flex items-center gap-1.5">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-center mb-6"
+              >
+                <p className="text-muted-foreground text-sm">
+                  {t("teachers_loading_timeout")}
+                </p>
+                <button
+                  onClick={() => window.location.reload()}
+                  className="text-primary text-sm font-bold hover:underline mt-2 inline-flex items-center gap-1.5"
+                >
                   <RefreshCw size={14} />
                   {lang === "ar" ? "تحديث الصفحة" : "Refresh Page"}
                 </button>
               </motion.div>
             )}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[...Array(6)].map((_, i) => <TeacherCardSkeleton key={i} />)}
+              {[...Array(6)].map((_, i) => (
+                <TeacherCardSkeleton key={i} />
+              ))}
             </div>
           </div>
         ) : (
           <>
-            <p className="text-muted-foreground text-sm mb-6 font-medium">{t("showing_results")} {sorted.length} {t("teacher_word")}</p>
+            <p className="text-muted-foreground text-sm mb-6 font-medium">
+              {t("showing_results")} {sorted.length} {t("teacher_word")}
+            </p>
             {sorted.length > 0 ? (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {sorted.map((tc, i) => <TeacherCard key={tc.user_id} teacher={tc} index={i} />)}
+                {sorted.map((tc, i) => (
+                  <TeacherCard key={tc.user_id} teacher={tc} index={i} />
+                ))}
               </div>
             ) : (
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center py-16 max-w-xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-center py-16 max-w-xl mx-auto"
+              >
                 <div className="w-20 h-20 rounded-2xl bg-muted flex items-center justify-center mx-auto mb-5">
                   <UserX size={36} className="text-muted-foreground/50" />
                 </div>
-                <h3 className="text-xl font-extrabold mb-2">{t("teachers_empty_title")}</h3>
+                <h3 className="text-xl font-extrabold mb-2">
+                  {t("teachers_empty_title")}
+                </h3>
                 <p className="text-muted-foreground mx-auto mb-6">
                   {initialSubject
                     ? lang === "ar"
@@ -206,10 +254,18 @@ const Teachers = () => {
                       {lang === "ar" ? "اطلب مدرس مناسب" : "Request a tutor"}
                     </button>
                   )}
-                  <a href="/register" className="btn-outline inline-flex items-center gap-2">
+                  <a
+                    href="/register"
+                    className="btn-outline inline-flex items-center gap-2"
+                  >
                     {t("teachers_empty_register_cta")}
                   </a>
-                  <a href={waLink()} target="_blank" rel="noopener noreferrer" className="btn-outline inline-flex items-center gap-2">
+                  <a
+                    href={waLink()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-outline inline-flex items-center gap-2"
+                  >
                     {t("teachers_empty_contact_cta")}
                   </a>
                 </div>

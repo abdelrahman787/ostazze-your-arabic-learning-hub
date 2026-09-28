@@ -1,8 +1,18 @@
 import { Link } from "@/lib/router-compat";
 import {
-  Star, ArrowLeft, Sparkles, GraduationCap, CalendarCheck, Video,
+  Star,
+  ArrowLeft,
+  Sparkles,
+  GraduationCap,
+  CalendarCheck,
+  Video,
 } from "lucide-react";
-import { MotionConfig, motion, useInView, useReducedMotion } from "framer-motion";
+import {
+  MotionConfig,
+  motion,
+  useInView,
+  useReducedMotion,
+} from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import OurTeam from "@/components/OurTeam";
@@ -23,7 +33,9 @@ const howStep3Img = howStep3Asset.url;
 const IndexBelowFold = () => {
   const { t, d, lang } = useLanguage();
   const isReduced = useReducedMotion();
-  const appleMotionLite = typeof document !== "undefined" && document.documentElement.dataset.appleMotionLite === "1";
+  const appleMotionLite =
+    typeof document !== "undefined" &&
+    document.documentElement.dataset.appleMotionLite === "1";
   const howStepsRef = useRef<HTMLDivElement>(null);
   const howStepsInView = useInView(howStepsRef, { once: true, amount: 0.2 });
   const [playHowSteps, setPlayHowSteps] = useState(false);
@@ -42,7 +54,8 @@ const IndexBelowFold = () => {
       if (!el) return;
       const rect = el.getBoundingClientRect();
       const vh = window.innerHeight || document.documentElement.clientHeight;
-      if (rect.top < vh * 0.82 && rect.bottom > vh * 0.18) setPlayHowSteps(true);
+      if (rect.top < vh * 0.82 && rect.bottom > vh * 0.18)
+        setPlayHowSteps(true);
     };
     const frame = requestAnimationFrame(check);
     const timeout = window.setTimeout(check, 700);
@@ -57,370 +70,540 @@ const IndexBelowFold = () => {
   }, [playHowSteps]);
 
   const howSteps = [
-    { key: "١", image: howStep1Img, titleKey: "how_step1_title", descKey: "how_step1_desc" },
-    { key: "٢", image: howStep2Img, titleKey: "how_step2_title", descKey: "how_step2_desc" },
-    { key: "٣", image: howStep3Img, titleKey: "how_step3_title", descKey: "how_step3_desc" },
+    {
+      key: "١",
+      image: howStep1Img,
+      titleKey: "how_step1_title",
+      descKey: "how_step1_desc",
+    },
+    {
+      key: "٢",
+      image: howStep2Img,
+      titleKey: "how_step2_title",
+      descKey: "how_step2_desc",
+    },
+    {
+      key: "٣",
+      image: howStep3Img,
+      titleKey: "how_step3_title",
+      descKey: "how_step3_desc",
+    },
   ] as const;
 
   return (
     <MotionConfig reducedMotion={appleMotionLite ? "always" : "user"}>
       <>
-      {/* How It Works + WhatsApp CTA — combined section */}
-      <section className="how-it-works-section py-20 md:py-24 overflow-hidden bg-section-alt">
-        <div className="container">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
-            <h2 className="text-3xl font-extrabold mb-2">{t("how_title")}</h2>
-            <p className="text-muted-foreground">{t("how_subtitle")}</p>
-          </motion.div>
-          <motion.div
-            ref={howStepsRef}
-            initial="hidden"
-            animate={playHowSteps ? "show" : "hidden"}
-            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.2, delayChildren: 0.05 } } }}
-            className="grid md:grid-cols-3 gap-10 md:gap-6 relative max-w-5xl mx-auto"
-          >
-            {howSteps.map((step, i) => (
-              <Link to="/universities" key={step.key} className="apple-soft-reveal block group">
-                <motion.div
-                  variants={{ hidden: {}, show: { transition: { staggerChildren: 0.08, delayChildren: 0.02 } } }}
-                  className="text-center relative"
+        {/* How It Works + WhatsApp CTA — combined section */}
+        <section className="how-it-works-section py-20 md:py-24 overflow-hidden bg-section-alt">
+          <div className="container">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-14"
+            >
+              <h2 className="text-3xl font-extrabold mb-2">{t("how_title")}</h2>
+              <p className="text-muted-foreground">{t("how_subtitle")}</p>
+            </motion.div>
+            <motion.div
+              ref={howStepsRef}
+              initial="hidden"
+              animate={playHowSteps ? "show" : "hidden"}
+              variants={{
+                hidden: {},
+                show: {
+                  transition: { staggerChildren: 0.2, delayChildren: 0.05 },
+                },
+              }}
+              className="grid md:grid-cols-3 gap-10 md:gap-6 relative max-w-5xl mx-auto"
+            >
+              {howSteps.map((step, i) => (
+                <Link
+                  to="/universities"
+                  key={step.key}
+                  className="apple-soft-reveal block group"
                 >
                   <motion.div
                     variants={{
-                      hidden: { opacity: 0, y: -20, scale: 0.5 },
-                      show: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 220, damping: 14 } },
+                      hidden: {},
+                      show: {
+                        transition: {
+                          staggerChildren: 0.08,
+                          delayChildren: 0.02,
+                        },
+                      },
                     }}
-                    className="text-6xl md:text-7xl font-black text-primary leading-none mb-3 relative z-10"
-                    style={{ textShadow: "0 6px 20px hsl(var(--primary) / 0.25)" }}
+                    className="text-center relative"
                   >
-                    {lang === "ar" ? step.key : String(i + 1)}
+                    <motion.div
+                      variants={{
+                        hidden: { opacity: 0, y: -20, scale: 0.5 },
+                        show: {
+                          opacity: 1,
+                          y: 0,
+                          scale: 1,
+                          transition: {
+                            type: "spring",
+                            stiffness: 220,
+                            damping: 14,
+                          },
+                        },
+                      }}
+                      className="text-6xl md:text-7xl font-black text-primary leading-none mb-3 relative z-10"
+                      style={{
+                        textShadow: "0 6px 20px hsl(var(--primary) / 0.25)",
+                      }}
+                    >
+                      {lang === "ar" ? step.key : String(i + 1)}
+                    </motion.div>
+
+                    <motion.h3
+                      variants={{
+                        hidden: { opacity: 0, y: 10 },
+                        show: {
+                          opacity: 1,
+                          y: 0,
+                          transition: { duration: 0.4 },
+                        },
+                      }}
+                      className="font-extrabold text-xl md:text-2xl mb-6 text-foreground whitespace-pre-line"
+                    >
+                      {t(step.titleKey)}
+                    </motion.h3>
+
+                    <motion.div
+                      variants={{
+                        hidden: { opacity: 0, y: 40, scale: 0.9 },
+                        show: {
+                          opacity: 1,
+                          y: 0,
+                          scale: 1,
+                          transition: {
+                            type: "spring",
+                            stiffness: 140,
+                            damping: 18,
+                          },
+                        },
+                      }}
+                      whileHover={{ y: -6 }}
+                      className="relative mx-auto w-full max-w-[260px] aspect-square flex items-center justify-center"
+                    >
+                      <div
+                        className="absolute inset-4 rounded-[45%_55%_60%_40%/50%_45%_55%_50%] bg-[hsl(28_60%_88%)] dark:bg-[hsl(28_25%_22%)] opacity-90 blur-[1px]"
+                        aria-hidden="true"
+                      />
+                      <motion.img
+                        src={step.image}
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        width={520}
+                        height={520}
+                        // Do not start an infinite animation before this card
+                        // enters the viewport; hidden animated images are a
+                        // frequent source of Safari scroll/compositing jank.
+                        animate={
+                          playHowSteps && !appleMotionLite
+                            ? { y: [0, -6, 0] }
+                            : undefined
+                        }
+                        transition={
+                          playHowSteps && !appleMotionLite
+                            ? {
+                                duration: 3.5,
+                                repeat: Infinity,
+                                delay: i * 0.4,
+                                ease: "easeInOut",
+                              }
+                            : undefined
+                        }
+                        className="apple-soft-float relative z-10 w-full h-full object-contain drop-shadow-[0_10px_25px_hsl(var(--primary)/0.15)]"
+                      />
+                    </motion.div>
+
+                    <motion.p
+                      variants={{
+                        hidden: { opacity: 0 },
+                        show: { opacity: 1, transition: { duration: 0.5 } },
+                      }}
+                      className="text-muted-foreground text-sm leading-relaxed max-w-xs mx-auto mt-4"
+                    >
+                      {t(step.descKey)}
+                    </motion.p>
                   </motion.div>
+                </Link>
+              ))}
+            </motion.div>
 
-                  <motion.h3
-                    variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0, transition: { duration: 0.4 } } }}
-                    className="font-extrabold text-xl md:text-2xl mb-6 text-foreground whitespace-pre-line"
-                  >
-                    {t(step.titleKey)}
-                  </motion.h3>
-
-                  <motion.div
-                    variants={{
-                      hidden: { opacity: 0, y: 40, scale: 0.9 },
-                      show: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 140, damping: 18 } },
-                    }}
-                    whileHover={{ y: -6 }}
-                    className="relative mx-auto w-full max-w-[260px] aspect-square flex items-center justify-center"
-                  >
-                    <div className="absolute inset-4 rounded-[45%_55%_60%_40%/50%_45%_55%_50%] bg-[hsl(28_60%_88%)] dark:bg-[hsl(28_25%_22%)] opacity-90 blur-[1px]" aria-hidden="true" />
-                    <motion.img
-                      src={step.image}
-                      alt=""
-                      loading="lazy"
-                      decoding="async"
-                      width={520}
-                      height={520}
-                      // Do not start an infinite animation before this card
-                      // enters the viewport; hidden animated images are a
-                      // frequent source of Safari scroll/compositing jank.
-                      animate={playHowSteps && !appleMotionLite ? { y: [0, -6, 0] } : undefined}
-                      transition={playHowSteps && !appleMotionLite ? { duration: 3.5, repeat: Infinity, delay: i * 0.4, ease: "easeInOut" } : undefined}
-                      className="apple-soft-float relative z-10 w-full h-full object-contain drop-shadow-[0_10px_25px_hsl(var(--primary)/0.15)]"
-                    />
-                  </motion.div>
-
-                  <motion.p
-                    variants={{ hidden: { opacity: 0 }, show: { opacity: 1, transition: { duration: 0.5 } } }}
-                    className="text-muted-foreground text-sm leading-relaxed max-w-xs mx-auto mt-4"
-                  >
-                    {t(step.descKey)}
-                  </motion.p>
-                </motion.div>
-              </Link>
-            ))}
-          </motion.div>
-
-          <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="flex justify-center mt-12">
-            <Link
-              to="/universities"
-              className="inline-flex items-center gap-2 px-9 py-3.5 rounded-full text-sm md:text-base font-bold text-primary-foreground transition-all duration-300 hover:-translate-y-0.5"
-              style={{
-                background: "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-dark)) 100%)",
-                boxShadow: "0 12px 30px -10px hsl(var(--primary) / 0.55), inset 0 1px 0 hsl(0 0% 100% / 0.25)",
-              }}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex justify-center mt-12"
             >
-              <span>{lang === "ar" ? "ابدأ الآن" : "Get Started"}</span>
-            </Link>
-          </motion.div>
-
-          {/* WhatsApp CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="relative rounded-[2rem] overflow-hidden p-8 md:p-12 text-center border mt-16"
-            style={{
-              background: "linear-gradient(140deg, hsl(var(--card)) 0%, hsl(var(--background)) 60%, hsl(var(--primary) / 0.06) 100%)",
-              borderColor: "hsl(var(--primary) / 0.2)",
-              boxShadow: "0 30px 80px -30px hsl(var(--primary) / 0.35), inset 0 1px 0 hsl(0 0% 100% / 0.06)",
-            }}
-          >
-            <div
-              className="absolute inset-0 opacity-[0.18] pointer-events-none"
-              style={{
-                backgroundImage: "radial-gradient(hsl(var(--primary) / 0.5) 1px, transparent 1px)",
-                backgroundSize: "22px 22px",
-                maskImage: "radial-gradient(ellipse at center, black 35%, transparent 80%)",
-                WebkitMaskImage: "radial-gradient(ellipse at center, black 35%, transparent 80%)",
-              }}
-            />
-            <div
-              className="absolute -top-20 -right-20 w-[280px] h-[280px] rounded-full opacity-30 pointer-events-none"
-              style={{ background: "radial-gradient(50% 50% at 50% 50%, hsl(38 92% 55% / 0.45) 0%, hsl(38 92% 55% / 0.2) 40%, transparent 72%)" }}
-            />
-            <div className="relative z-10">
-              <h2 className="text-2xl md:text-3xl font-extrabold mb-3">{t("whatsapp_cta_title")}</h2>
-              <p className="text-muted-foreground mb-6 max-w-md mx-auto">{t("whatsapp_cta_subtitle")}</p>
-              <a
-                href={`https://wa.me/201130382206?text=${encodeURIComponent(t("whatsapp_msg"))}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-sm font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
+              <Link
+                to="/universities"
+                className="inline-flex items-center gap-2 px-9 py-3.5 rounded-full text-sm md:text-base font-bold text-primary-foreground transition-all duration-300 hover:-translate-y-0.5"
                 style={{
-                  background: "linear-gradient(135deg, #25D366 0%, #128C7E 100%)",
-                  boxShadow: "0 10px 30px -10px rgba(37,211,102,0.55), inset 0 1px 0 rgba(255,255,255,0.25)",
+                  background:
+                    "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-dark)) 100%)",
+                  boxShadow:
+                    "0 12px 30px -10px hsl(var(--primary) / 0.55), inset 0 1px 0 hsl(0 0% 100% / 0.25)",
                 }}
               >
-                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                </svg>
-                <span>{t("whatsapp_cta_button")}</span>
-              </a>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+                <span>{lang === "ar" ? "ابدأ الآن" : "Get Started"}</span>
+              </Link>
+            </motion.div>
 
-      {/* Why Choose Us */}
-      <section className="relative py-20 md:py-28 overflow-hidden bg-section-alt">
-        {/* Soft ambient glow */}
-        <div
-          className="absolute inset-0 pointer-events-none -z-10"
-          aria-hidden="true"
-          style={{
-            background:
-              "radial-gradient(60% 50% at 50% 0%, hsl(var(--primary) / 0.10) 0%, transparent 70%)",
-          }}
-        />
-
-        <div className="container relative z-10">
-          <motion.div
-            initial={{ opacity: isReduced ? 1 : 0, y: isReduced ? 0 : 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{
-              duration: isReduced ? 0.1 : 0.6,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-            className="text-center mb-14"
-          >
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold bg-primary/10 text-primary mb-4">
-              <Sparkles size={14} />
-              {lang === "ar" ? "المزايا" : "Why us"}
-            </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3">
-              {t("why_title")}
-            </h2>
-            <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto">
-              {t("why_subtitle")}
-            </p>
-          </motion.div>
-
-          <motion.div
-            className="grid md:grid-cols-3 gap-6"
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.15 }}
-            variants={{
-              hidden: {},
-              show: {
-                transition: { staggerChildren: 0.18, delayChildren: 0.1 },
-              },
-            }}
-          >
-            {[
-              {
-                icon: GraduationCap,
-                title: t("why_teachers"),
-                desc: t("why_teachers_desc"),
-                gradient: "from-primary to-primary-dark",
-              },
-              {
-                icon: CalendarCheck,
-                title: t("why_schedule"),
-                desc: t("why_schedule_desc"),
-                gradient: "from-primary-dark to-primary",
-              },
-              {
-                icon: Video,
-                title: t("why_remote"),
-                desc: t("why_remote_desc"),
-                gradient: "from-primary to-primary-dark",
-              },
-            ].map((item) => {
-              return (
-                <motion.div
-                  key={item.title}
-                  variants={{
-                    hidden: {
-                      opacity: isReduced ? 1 : 0,
-                      y: isReduced ? 0 : 40,
-                      scale: isReduced ? 1 : 0.95,
-                    },
-                    show: {
-                      opacity: 1,
-                      y: 0,
-                      scale: 1,
-                      transition: {
-                        duration: isReduced ? 0.1 : 0.6,
-                        ease: [0.22, 1, 0.36, 1],
-                      },
-                    },
-                  }}
-                  className="card-base group p-7 md:p-8 text-center"
-                >
-                  <div
-                    className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 mx-auto bg-gradient-to-br ${item.gradient} text-white shadow-lg shadow-primary/20`}
-                  >
-                    <item.icon size={28} strokeWidth={1.8} />
-                  </div>
-                  <h3 className="text-xl font-bold mb-2 text-foreground">
-                    {item.title}
-                  </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {item.desc}
-                  </p>
-                </motion.div>
-              );
-            })}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Languages */}
-      <section className="relative py-20 md:py-24 overflow-hidden">
-        <div
-          className="absolute inset-0 pointer-events-none -z-10"
-          aria-hidden="true"
-          style={{
-            background:
-              "radial-gradient(55% 50% at 50% 0%, hsl(var(--primary) / 0.08) 0%, transparent 70%)",
-          }}
-        />
-        <div className="container relative z-10">
-          <motion.div
-            initial={{ opacity: isReduced ? 1 : 0, y: isReduced ? 0 : 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: isReduced ? 0.1 : 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="text-center mb-12"
-          >
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold bg-primary/10 text-primary mb-4">
-              <Sparkles size={14} />
-              {lang === "ar" ? "اللغات" : "Languages"}
-            </span>
-            <h2 className="text-3xl md:text-4xl font-extrabold mb-3">
-              {lang === "ar" ? "تعلّم لغة جديدة مع معلمين متخصصين" : "Learn a new language with expert tutors"}
-            </h2>
-            <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto">
-              {lang === "ar"
-                ? "حصص لغات مباشرة أونلاين من المبتدئ حتى المتقدم — مع تحضير امتحانات معتمدة."
-                : "Live one-to-one language sessions from beginner to advanced — with certified exam preparation."}
-            </p>
-          </motion.div>
-
-          <motion.div
-            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4"
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.15 }}
-            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12, delayChildren: 0.05 } } }}
-          >
-            {[
-              { flag: "🇬🇧", ar: "الإنجليزية", en: "English", desc: "IELTS & TOEFL" },
-              { flag: "🇩🇪", ar: "الألمانية", en: "German", desc: "Goethe & TestDaF" },
-              { flag: "🇪🇸", ar: "الإسبانية", en: "Spanish", desc: "DELE prep" },
-              { flag: "🇫🇷", ar: "الفرنسية", en: "French", desc: "DELF prep" },
-              { flag: "🇹🇷", ar: "التركية", en: "Turkish", desc: "A1 – B1" },
-              { flag: "🇮🇹", ar: "الإيطالية", en: "Italian", desc: "CELI prep" },
-            ].map((l) => {
-              const name = lang === "ar" ? l.ar : l.en;
-              return (
-                <motion.a
-                  key={l.en}
-                  href={waLink(
-                    lang === "ar"
-                      ? `مرحباً، أريد الاستفسار عن دورة ${l.ar} على منصة استاذي`
-                      : `Hello, I'd like to ask about the ${l.en} course on Ostaze`,
-                  )}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  variants={{
-                    hidden: { opacity: isReduced ? 1 : 0, y: isReduced ? 0 : 24, scale: isReduced ? 1 : 0.95 },
-                    show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
-                  }}
-                  whileHover={{ y: -4 }}
-                  className="card-base group p-5 flex flex-col items-center text-center gap-3 hover:border-primary/40 hover:shadow-lg transition-all"
-                >
-                  <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-3xl shrink-0 group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
-                    {l.flag}
-                  </div>
-                  <h3 className="font-bold text-base text-foreground">{name}</h3>
-                  <p className="text-xs text-muted-foreground">{l.desc}</p>
-                </motion.a>
-              );
-            })}
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="flex justify-center mt-10"
-          >
-            <Link
-              to="/languages"
-              className="group inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold text-primary-foreground transition-all duration-300 hover:-translate-y-0.5"
+            {/* WhatsApp CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="relative rounded-[2rem] overflow-hidden p-8 md:p-12 text-center border mt-16"
               style={{
-                background: "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-dark)) 100%)",
-                boxShadow: "0 10px 30px -10px hsl(var(--primary) / 0.5), inset 0 1px 0 hsl(0 0% 100% / 0.25)",
+                background:
+                  "linear-gradient(140deg, hsl(var(--card)) 0%, hsl(var(--background)) 60%, hsl(var(--primary) / 0.06) 100%)",
+                borderColor: "hsl(var(--primary) / 0.2)",
+                boxShadow:
+                  "0 30px 80px -30px hsl(var(--primary) / 0.35), inset 0 1px 0 hsl(0 0% 100% / 0.06)",
               }}
             >
-              <span>{lang === "ar" ? "كل دورات اللغات" : "All language courses"}</span>
-              <ArrowLeft className="w-4 h-4 rtl:rotate-180 transition-transform group-hover:-translate-x-0.5 rtl:group-hover:translate-x-0.5" />
-            </Link>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Bottom CTA */}
-      <section className="py-20 md:py-24 px-4 lg:px-8 bg-section-alt">
-        <div className="stats-card-darkglow relative overflow-hidden rounded-[2rem] py-14 px-6 md:px-12">
-          <div className="container text-center relative z-10">
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <h2 className="text-3xl md:text-4xl font-black text-white mb-3 drop-shadow-[0_2px_8px_hsl(0_0%_0%_/_0.25)]">{t("cta_title")}</h2>
-              <p className="text-white/85 mb-8 max-w-lg mx-auto text-sm md:text-base">{t("cta_subtitle")}</p>
-              <div className="flex justify-center gap-3 flex-wrap">
-                <Link to="/register" className="btn-cta-light text-base">{t("cta_register")}</Link>
-                <Link to="/teachers" className="inline-flex items-center justify-center px-7 py-3.5 rounded-full font-bold border-2 border-white/30 text-white bg-white/[0.06] hover:bg-white/10 transition-all">
-                  {t("hero_browse")}
-                </Link>
+              <div
+                className="absolute inset-0 opacity-[0.18] pointer-events-none"
+                style={{
+                  backgroundImage:
+                    "radial-gradient(hsl(var(--primary) / 0.5) 1px, transparent 1px)",
+                  backgroundSize: "22px 22px",
+                  maskImage:
+                    "radial-gradient(ellipse at center, black 35%, transparent 80%)",
+                  WebkitMaskImage:
+                    "radial-gradient(ellipse at center, black 35%, transparent 80%)",
+                }}
+              />
+              <div
+                className="absolute -top-20 -right-20 w-[280px] h-[280px] rounded-full opacity-30 pointer-events-none"
+                style={{
+                  background:
+                    "radial-gradient(50% 50% at 50% 50%, hsl(38 92% 55% / 0.45) 0%, hsl(38 92% 55% / 0.2) 40%, transparent 72%)",
+                }}
+              />
+              <div className="relative z-10">
+                <h2 className="text-2xl md:text-3xl font-extrabold mb-3">
+                  {t("whatsapp_cta_title")}
+                </h2>
+                <p className="text-muted-foreground mb-6 max-w-md mx-auto">
+                  {t("whatsapp_cta_subtitle")}
+                </p>
+                <a
+                  href={`https://wa.me/201130382206?text=${encodeURIComponent(t("whatsapp_msg"))}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-sm font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, #25D366 0%, #128C7E 100%)",
+                    boxShadow:
+                      "0 10px 30px -10px rgba(37,211,102,0.55), inset 0 1px 0 rgba(255,255,255,0.25)",
+                  }}
+                >
+                  <svg
+                    className="w-5 h-5"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                  </svg>
+                  <span>{t("whatsapp_cta_button")}</span>
+                </a>
               </div>
             </motion.div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <OurTeam />
+        {/* Why Choose Us */}
+        <section className="relative py-20 md:py-28 overflow-hidden bg-section-alt">
+          {/* Soft ambient glow */}
+          <div
+            className="absolute inset-0 pointer-events-none -z-10"
+            aria-hidden="true"
+            style={{
+              background:
+                "radial-gradient(60% 50% at 50% 0%, hsl(var(--primary) / 0.10) 0%, transparent 70%)",
+            }}
+          />
+
+          <div className="container relative z-10">
+            <motion.div
+              initial={{ opacity: isReduced ? 1 : 0, y: isReduced ? 0 : 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: isReduced ? 0.1 : 0.6,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="text-center mb-14"
+            >
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold bg-primary/10 text-primary mb-4">
+                <Sparkles size={14} />
+                {lang === "ar" ? "المزايا" : "Why us"}
+              </span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3">
+                {t("why_title")}
+              </h2>
+              <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto">
+                {t("why_subtitle")}
+              </p>
+            </motion.div>
+
+            <motion.div
+              className="grid md:grid-cols-3 gap-6"
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.15 }}
+              variants={{
+                hidden: {},
+                show: {
+                  transition: { staggerChildren: 0.18, delayChildren: 0.1 },
+                },
+              }}
+            >
+              {[
+                {
+                  icon: GraduationCap,
+                  title: t("why_teachers"),
+                  desc: t("why_teachers_desc"),
+                  gradient: "from-primary to-primary-dark",
+                },
+                {
+                  icon: CalendarCheck,
+                  title: t("why_schedule"),
+                  desc: t("why_schedule_desc"),
+                  gradient: "from-primary-dark to-primary",
+                },
+                {
+                  icon: Video,
+                  title: t("why_remote"),
+                  desc: t("why_remote_desc"),
+                  gradient: "from-primary to-primary-dark",
+                },
+              ].map((item) => {
+                return (
+                  <motion.div
+                    key={item.title}
+                    variants={{
+                      hidden: {
+                        opacity: isReduced ? 1 : 0,
+                        y: isReduced ? 0 : 40,
+                        scale: isReduced ? 1 : 0.95,
+                      },
+                      show: {
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        transition: {
+                          duration: isReduced ? 0.1 : 0.6,
+                          ease: [0.22, 1, 0.36, 1],
+                        },
+                      },
+                    }}
+                    className="card-base group p-7 md:p-8 text-center"
+                  >
+                    <div
+                      className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 mx-auto bg-gradient-to-br ${item.gradient} text-white shadow-lg shadow-primary/20`}
+                    >
+                      <item.icon size={28} strokeWidth={1.8} />
+                    </div>
+                    <h3 className="text-xl font-bold mb-2 text-foreground">
+                      {item.title}
+                    </h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Languages */}
+        <section className="relative py-20 md:py-24 overflow-hidden">
+          <div
+            className="absolute inset-0 pointer-events-none -z-10"
+            aria-hidden="true"
+            style={{
+              background:
+                "radial-gradient(55% 50% at 50% 0%, hsl(var(--primary) / 0.08) 0%, transparent 70%)",
+            }}
+          />
+          <div className="container relative z-10">
+            <motion.div
+              initial={{ opacity: isReduced ? 1 : 0, y: isReduced ? 0 : 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: isReduced ? 0.1 : 0.6,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="text-center mb-12"
+            >
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold bg-primary/10 text-primary mb-4">
+                <Sparkles size={14} />
+                {lang === "ar" ? "اللغات" : "Languages"}
+              </span>
+              <h2 className="text-3xl md:text-4xl font-extrabold mb-3">
+                {lang === "ar"
+                  ? "تعلّم لغة جديدة مع معلمين متخصصين"
+                  : "Learn a new language with expert tutors"}
+              </h2>
+              <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto">
+                {lang === "ar"
+                  ? "حصص لغات مباشرة أونلاين من المبتدئ حتى المتقدم — مع تحضير امتحانات معتمدة."
+                  : "Live one-to-one language sessions from beginner to advanced — with certified exam preparation."}
+              </p>
+            </motion.div>
+
+            <motion.div
+              className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4"
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.15 }}
+              variants={{
+                hidden: {},
+                show: {
+                  transition: { staggerChildren: 0.12, delayChildren: 0.05 },
+                },
+              }}
+            >
+              {[
+                {
+                  flag: "🇬🇧",
+                  ar: "الإنجليزية",
+                  en: "English",
+                  desc: "IELTS & TOEFL",
+                },
+                {
+                  flag: "🇩🇪",
+                  ar: "الألمانية",
+                  en: "German",
+                  desc: "Goethe & TestDaF",
+                },
+                {
+                  flag: "🇪🇸",
+                  ar: "الإسبانية",
+                  en: "Spanish",
+                  desc: "DELE prep",
+                },
+                { flag: "🇫🇷", ar: "الفرنسية", en: "French", desc: "DELF prep" },
+                { flag: "🇹🇷", ar: "التركية", en: "Turkish", desc: "A1 – B1" },
+                {
+                  flag: "🇮🇹",
+                  ar: "الإيطالية",
+                  en: "Italian",
+                  desc: "CELI prep",
+                },
+              ].map((l) => {
+                const name = lang === "ar" ? l.ar : l.en;
+                return (
+                  <motion.a
+                    key={l.en}
+                    href={waLink(
+                      lang === "ar"
+                        ? `مرحباً، أريد الاستفسار عن دورة ${l.ar} على منصة استاذي`
+                        : `Hello, I'd like to ask about the ${l.en} course on Ostaze`,
+                    )}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    variants={{
+                      hidden: {
+                        opacity: isReduced ? 1 : 0,
+                        y: isReduced ? 0 : 24,
+                        scale: isReduced ? 1 : 0.95,
+                      },
+                      show: {
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+                      },
+                    }}
+                    whileHover={{ y: -4 }}
+                    className="card-base group p-5 flex flex-col items-center text-center gap-3 hover:border-primary/40 hover:shadow-lg transition-all"
+                  >
+                    <div
+                      className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-3xl shrink-0 group-hover:scale-110 transition-transform duration-300"
+                      aria-hidden="true"
+                    >
+                      {l.flag}
+                    </div>
+                    <h3 className="font-bold text-base text-foreground">
+                      {name}
+                    </h3>
+                    <p className="text-xs text-muted-foreground">{l.desc}</p>
+                  </motion.a>
+                );
+              })}
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex justify-center mt-10"
+            >
+              <Link
+                to="/languages"
+                className="group inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold text-primary-foreground transition-all duration-300 hover:-translate-y-0.5"
+                style={{
+                  background:
+                    "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-dark)) 100%)",
+                  boxShadow:
+                    "0 10px 30px -10px hsl(var(--primary) / 0.5), inset 0 1px 0 hsl(0 0% 100% / 0.25)",
+                }}
+              >
+                <span>
+                  {lang === "ar" ? "كل دورات اللغات" : "All language courses"}
+                </span>
+                <ArrowLeft className="w-4 h-4 rtl:rotate-180 transition-transform group-hover:-translate-x-0.5 rtl:group-hover:translate-x-0.5" />
+              </Link>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Bottom CTA */}
+        <section className="py-20 md:py-24 px-4 lg:px-8 bg-section-alt">
+          <div className="stats-card-darkglow relative overflow-hidden rounded-[2rem] py-14 px-6 md:px-12">
+            <div className="container text-center relative z-10">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                <h2 className="text-3xl md:text-4xl font-black text-white mb-3 drop-shadow-[0_2px_8px_hsl(0_0%_0%_/_0.25)]">
+                  {t("cta_title")}
+                </h2>
+                <p className="text-white/85 mb-8 max-w-lg mx-auto text-sm md:text-base">
+                  {t("cta_subtitle")}
+                </p>
+                <div className="flex justify-center gap-3 flex-wrap">
+                  <Link to="/register" className="btn-cta-light text-base">
+                    {t("cta_register")}
+                  </Link>
+                  <Link
+                    to="/teachers"
+                    className="inline-flex items-center justify-center px-7 py-3.5 rounded-full font-bold border-2 border-white/30 text-white bg-white/[0.06] hover:bg-white/10 transition-all"
+                  >
+                    {t("hero_browse")}
+                  </Link>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        <OurTeam />
       </>
     </MotionConfig>
   );

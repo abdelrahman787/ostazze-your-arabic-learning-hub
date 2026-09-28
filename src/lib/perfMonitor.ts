@@ -9,11 +9,11 @@
  */
 
 type PerfThresholds = {
-  lcpMs: number;       // Largest Contentful Paint warning threshold
-  clsScore: number;    // Cumulative Layout Shift warning threshold
-  longTaskMs: number;  // Single long task duration threshold
+  lcpMs: number; // Largest Contentful Paint warning threshold
+  clsScore: number; // Cumulative Layout Shift warning threshold
+  longTaskMs: number; // Single long task duration threshold
   longTaskBudgetMs: number; // Total long-task time within window
-  windowMs: number;    // Window for accumulating long tasks
+  windowMs: number; // Window for accumulating long tasks
 };
 
 const DEFAULTS: PerfThresholds = {
@@ -25,7 +25,8 @@ const DEFAULTS: PerfThresholds = {
 };
 
 const tag = "%c[OSTAZE/perf]";
-const tagStyle = "background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold";
+const tagStyle =
+  "background:#E84E0F;color:#fff;padding:2px 6px;border-radius:4px;font-weight:bold";
 
 let started = false;
 
@@ -38,10 +39,18 @@ export function startPerfMonitor(thresholds: Partial<PerfThresholds> = {}) {
   try {
     const lcpObserver = new PerformanceObserver((list) => {
       const entries = list.getEntries();
-      const last = entries[entries.length - 1] as PerformanceEntry & { renderTime?: number; loadTime?: number };
-      const time = (last as any).renderTime || (last as any).loadTime || last.startTime;
+      const last = entries[entries.length - 1] as PerformanceEntry & {
+        renderTime?: number;
+        loadTime?: number;
+      };
+      const time =
+        (last as any).renderTime || (last as any).loadTime || last.startTime;
       const level = time > t.lcpMs ? "warn" : "log";
-      console[level](tag, tagStyle, `LCP: ${Math.round(time)}ms${time > t.lcpMs ? "  ⚠ slow" : "  ✓"}`);
+      console[level](
+        tag,
+        tagStyle,
+        `LCP: ${Math.round(time)}ms${time > t.lcpMs ? "  ⚠ slow" : "  ✓"}`,
+      );
     });
     lcpObserver.observe({ type: "largest-contentful-paint", buffered: true });
   } catch {
@@ -58,7 +67,11 @@ export function startPerfMonitor(thresholds: Partial<PerfThresholds> = {}) {
         }
       }
       const level = clsValue > t.clsScore ? "warn" : "log";
-      console[level](tag, tagStyle, `CLS: ${clsValue.toFixed(3)}${clsValue > t.clsScore ? "  ⚠ layout shift" : ""}`);
+      console[level](
+        tag,
+        tagStyle,
+        `CLS: ${clsValue.toFixed(3)}${clsValue > t.clsScore ? "  ⚠ layout shift" : ""}`,
+      );
     });
     clsObserver.observe({ type: "layout-shift", buffered: true });
   } catch {
@@ -74,7 +87,10 @@ export function startPerfMonitor(thresholds: Partial<PerfThresholds> = {}) {
       const now = performance.now();
       for (const entry of list.getEntries()) {
         if (entry.duration >= t.longTaskMs) {
-          recent.push({ end: entry.startTime + entry.duration, dur: entry.duration });
+          recent.push({
+            end: entry.startTime + entry.duration,
+            dur: entry.duration,
+          });
         }
       }
       // Drop entries outside the rolling window
@@ -88,7 +104,7 @@ export function startPerfMonitor(thresholds: Partial<PerfThresholds> = {}) {
           tag,
           tagStyle,
           `Animation jank likely: ${recent.length} long tasks consumed ${Math.round(total)}ms in the last ${t.windowMs}ms. ` +
-            `Consider deferring heavy work, lazy-loading routes, or reducing CSS filters/blurs.`
+            `Consider deferring heavy work, lazy-loading routes, or reducing CSS filters/blurs.`,
         );
         // Re-enable warnings after a cooldown so we don't spam the console.
         setTimeout(() => {

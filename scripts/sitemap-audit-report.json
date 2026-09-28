@@ -1,0 +1,51 @@
+{
+  "base": "http://localhost:3999",
+  "totals": {
+    "home": {
+      "total": 1,
+      "pass": 1,
+      "fail": 0
+    },
+    "list": {
+      "total": 4,
+      "pass": 4,
+      "fail": 0
+    },
+    "static": {
+      "total": 10,
+      "pass": 10,
+      "fail": 0
+    },
+    "university": {
+      "total": 22,
+      "pass": 22,
+      "fail": 0
+    },
+    "college": {
+      "total": 101,
+      "pass": 101,
+      "fail": 0
+    },
+    "country": {
+      "total": 4,
+      "pass": 4,
+      "fail": 0
+    },
+    "subject": {
+      "total": 265,
+      "pass": 265,
+      "fail": 0
+    },
+    "course": {
+      "total": 5,
+      "pass": 5,
+      "fail": 0
+    },
+    "tutor": {
+      "total": 19,
+      "pass": 19,
+      "fail": 0
+    }
+  },
+  "failures": []
+}

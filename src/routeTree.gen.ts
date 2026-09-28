@@ -27,6 +27,7 @@ import { Route as RegisterRouteImport } from './routes/register'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ZoomTestRouteImport } from './routes/zoom-test'
+import { Route as ApiHealthRouteImport } from './routes/api/health'
 import { Route as CheckoutIndexRouteImport } from './routes/checkout/index'
 import { Route as CheckoutReturnRouteImport } from './routes/checkout/return'
 import { Route as CoursesIndexRouteImport } from './routes/courses/index'
@@ -133,6 +134,11 @@ const TermsRoute = TermsRouteImport.update({
 const ZoomTestRoute = ZoomTestRouteImport.update({
   id: '/zoom-test',
   path: '/zoom-test',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiHealthRoute = ApiHealthRouteImport.update({
+  id: '/api/health',
+  path: '/api/health',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CheckoutIndexRoute = CheckoutIndexRouteImport.update({
@@ -244,6 +250,7 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/terms': typeof TermsRoute
   '/zoom-test': typeof ZoomTestRoute
+  '/api/health': typeof ApiHealthRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/courses/$id': typeof CoursesIdRoute
   '/dashboard/teacher': typeof DashboardTeacherRoute
@@ -281,6 +288,7 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/terms': typeof TermsRoute
   '/zoom-test': typeof ZoomTestRoute
+  '/api/health': typeof ApiHealthRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/courses/$id': typeof CoursesIdRoute
   '/dashboard/teacher': typeof DashboardTeacherRoute
@@ -319,6 +327,7 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/terms': typeof TermsRoute
   '/zoom-test': typeof ZoomTestRoute
+  '/api/health': typeof ApiHealthRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/courses/$id': typeof CoursesIdRoute
   '/dashboard/teacher': typeof DashboardTeacherRoute
@@ -358,6 +367,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/terms'
     | '/zoom-test'
+    | '/api/health'
     | '/checkout/return'
     | '/courses/$id'
     | '/dashboard/teacher'
@@ -395,6 +405,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/terms'
     | '/zoom-test'
+    | '/api/health'
     | '/checkout/return'
     | '/courses/$id'
     | '/dashboard/teacher'
@@ -432,6 +443,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/terms'
     | '/zoom-test'
+    | '/api/health'
     | '/checkout/return'
     | '/courses/$id'
     | '/dashboard/teacher'
@@ -470,6 +482,7 @@ export interface RootRouteChildren {
   ResetPasswordRoute: typeof ResetPasswordRoute
   TermsRoute: typeof TermsRoute
   ZoomTestRoute: typeof ZoomTestRoute
+  ApiHealthRoute: typeof ApiHealthRoute
   CheckoutReturnRoute: typeof CheckoutReturnRoute
   CoursesIdRoute: typeof CoursesIdRoute
   DashboardTeacherRoute: typeof DashboardTeacherRoute
@@ -617,6 +630,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ZoomTestRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/health': {
+      id: '/api/health'
+      path: '/api/health'
+      fullPath: '/api/health'
+      preLoaderRoute: typeof ApiHealthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/checkout/': {
       id: '/checkout/'
       path: '/checkout'
@@ -758,6 +778,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResetPasswordRoute: ResetPasswordRoute,
   TermsRoute: TermsRoute,
   ZoomTestRoute: ZoomTestRoute,
+  ApiHealthRoute: ApiHealthRoute,
   CheckoutReturnRoute: CheckoutReturnRoute,
   CoursesIdRoute: CoursesIdRoute,
   DashboardTeacherRoute: DashboardTeacherRoute,

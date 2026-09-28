@@ -1,137 +1,102 @@
 #!/usr/bin/env node
 /**
- * OSTAZZE performance budget checker.
+ * OSTAZE performance budget (TanStack Start / Nitro output).
  *
- * Runs against the production build in `dist/`. Reports actual gzip sizes
- * (Lovable production currently serves gzip, not Brotli). Exits non-zero
- * when a build-size budget fails.
+ * For each representative route, fetches the server-rendered HTML from a running
+ * server and measures only that page's first-load assets (scripts, modulepreloads,
+ * stylesheets it references), gzip-compressed from the build's public directory.
+ * Fails (exit 1) if the homepage's initial client JS exceeds 180 KB gzip.
  *
- * Runtime metrics (Performance, FCP, LCP, TBT, CLS) are documented as
- * manual Lighthouse steps in docs/HOSTING_RECOMMENDATIONS.md — Chromium
- * is NOT required for this script and NOT guaranteed in Lovable's
- * production build environment.
- *
- * Usage: node scripts/perf-budget.mjs
+ * Usage:
+ *   BASE=http://localhost:3999 PUBLIC_DIR=.output/public node scripts/perf-budget.mjs
+ * Defaults: BASE=http://localhost:3000, PUBLIC_DIR=.output/public (falls back to dist/client).
+ * Optional: ROUTES_EXTRA="/teachers/<id>,/courses/<id>" (otherwise discovered from list pages).
  */
-import { readdirSync, readFileSync, statSync, existsSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 import { gzipSync } from "node:zlib";
-import { join, extname, basename } from "node:path";
+import { join } from "node:path";
 
-const DIST = "dist";
-const INDEX_HTML = join(DIST, "index.html");
+const BASE = (process.env.BASE || "http://localhost:3000").replace(/\/$/, "");
+const PUBLIC_DIR =
+  process.env.PUBLIC_DIR || (existsSync(".output/public") ? ".output/public" : "dist/client");
+const HOME_JS_BUDGET_KB = 180;
 
-// Build-size budgets (compressed / on-the-wire)
-const BUDGETS = {
-  initialJsGzipKB: 195,
-  initialCssGzipKB: 25,
-  initialFontsKB: 100,
-  initialFontRequests: 2,
-  totalInitialTransferKB: 400,
-};
+const gz = (buf) => gzipSync(buf).length;
+const kb = (n) => (n / 1024).toFixed(1);
 
-// Runtime targets (measured manually via mobile Lighthouse against
-// https://ostaze.com/ — see docs/HOSTING_RECOMMENDATIONS.md).
-const RUNTIME_TARGETS = {
-  performance: 90,
-  fcpMs: 2200,
-  lcpMs: 2500,
-  tbtMs: 300,
-  cls: 0.01,
-};
-
-function fail(msg) {
-  console.error(`\u2716 ${msg}`);
-  process.exitCode = 1;
-}
-function ok(msg) {
-  console.log(`\u2714 ${msg}`);
-}
-function info(msg) {
-  console.log(`  ${msg}`);
+async function html(path) {
+  const res = await fetch(BASE + path, { redirect: "manual" });
+  return { status: res.status, text: await res.text() };
 }
 
-if (!existsSync(INDEX_HTML)) {
-  console.error("dist/index.html not found. Run `vite build` first.");
-  process.exit(2);
+function assetsOf(page) {
+  const pick = (re) => [...page.matchAll(re)].map((m) => m[1]);
+  const js = new Set([
+    ...pick(/<script[^>]+src="([^"]+)"/g),
+    ...pick(/<link[^>]+rel="modulepreload"[^>]+href="([^"]+)"/g),
+    ...pick(/<link[^>]+href="([^"]+)"[^>]+rel="modulepreload"/g),
+  ]);
+  // Inline module bootstrap imports (e.g. import("/assets/x.js"))
+  for (const m of page.matchAll(/import\(["'](\/assets\/[^"']+\.js)["']\)/g)) js.add(m[1]);
+  const css = new Set([
+    ...pick(/<link[^>]+rel="stylesheet"[^>]+href="([^"]+)"/g),
+    ...pick(/<link[^>]+href="([^"]+)"[^>]+rel="stylesheet"/g),
+  ]);
+  return { js: [...js], css: [...css] };
 }
 
-const html = readFileSync(INDEX_HTML, "utf8");
-
-// Collect initial resources referenced from index.html
-const scriptSrcs = [...html.matchAll(/<script[^>]+src="([^"]+)"/g)].map(m => m[1]);
-const modulePreloads = [...html.matchAll(/<link[^>]+rel="modulepreload"[^>]+href="([^"]+)"/g)].map(m => m[1]);
-const styleHrefs = [...html.matchAll(/<link[^>]+rel="stylesheet"[^>]+href="([^"]+)"/g)].map(m => m[1]);
-const preloadFonts = [...html.matchAll(/<link[^>]+rel="preload"[^>]+as="font"[^>]+href="([^"]+)"/g)].map(m => m[1]);
-
-// Google Fonts check
-const gFontHits = [
-  ...[...html.matchAll(/fonts\.googleapis\.com/g)],
-  ...[...html.matchAll(/fonts\.gstatic\.com/g)],
-];
-if (gFontHits.length > 0) fail(`Found ${gFontHits.length} Google Fonts references in index.html`);
-else ok("No Google Fonts references in index.html");
-
-const localAsset = (href) => {
-  if (!href) return null;
-  const clean = href.startsWith("/") ? href.slice(1) : href;
-  const p = join(DIST, clean);
-  return existsSync(p) ? p : null;
-};
-
-function fileGzipBytes(path) {
-  const buf = readFileSync(path);
-  return gzipSync(buf).length;
-}
-function fileBytes(path) {
-  return statSync(path).size;
-}
-
-const initialJs = [...new Set([...scriptSrcs, ...modulePreloads])]
-  .map(localAsset).filter(Boolean);
-const initialCss = [...new Set(styleHrefs)].map(localAsset).filter(Boolean);
-const initialFonts = [...new Set(preloadFonts)].map(localAsset).filter(Boolean);
-
-const jsGzip = initialJs.reduce((a, p) => a + fileGzipBytes(p), 0);
-const cssGzip = initialCss.reduce((a, p) => a + fileGzipBytes(p), 0);
-const fontBytes = initialFonts.reduce((a, p) => a + fileBytes(p), 0);
-
-// framer-motion must NOT be in the initial graph
-let framerInInitial = false;
-for (const p of initialJs) {
-  const txt = readFileSync(p, "utf8");
-  if (/framer-motion|["']framer["']|__FRAMER_MOTION__/.test(txt) && /motion\(|useMotionValue|useSpring|AnimatePresence/.test(txt)) {
-    framerInInitial = true;
-    console.error(`  framer-motion detected in initial chunk: ${basename(p)}`);
+function sizeOf(list) {
+  let total = 0;
+  const missing = [];
+  for (const href of list) {
+    if (!href.startsWith("/")) continue; // external
+    const p = join(PUBLIC_DIR, href.split("?")[0]);
+    if (!existsSync(p)) { missing.push(href); continue; }
+    total += gz(readFileSync(p));
   }
+  return { total, missing };
 }
-if (framerInInitial) fail("framer-motion present in initial graph");
-else ok("framer-motion is NOT in initial graph");
 
-const totalInitial = jsGzip + cssGzip + fontBytes;
-
-console.log("\n--- Initial transfer ---");
-info(`Initial JS (gzip):     ${(jsGzip/1024).toFixed(1)} KB  (budget ${BUDGETS.initialJsGzipKB} KB)`);
-info(`Initial CSS (gzip):    ${(cssGzip/1024).toFixed(1)} KB  (budget ${BUDGETS.initialCssGzipKB} KB)`);
-info(`Initial fonts (raw):   ${(fontBytes/1024).toFixed(1)} KB in ${initialFonts.length} file(s)  (budget ${BUDGETS.initialFontsKB} KB / ${BUDGETS.initialFontRequests} req)`);
-info(`Total initial:         ${(totalInitial/1024).toFixed(1)} KB  (budget ${BUDGETS.totalInitialTransferKB} KB)`);
-
-if (jsGzip/1024 > BUDGETS.initialJsGzipKB) fail(`Initial JS over budget`);
-else ok("Initial JS within budget");
-if (cssGzip/1024 > BUDGETS.initialCssGzipKB) fail(`Initial CSS over budget`);
-else ok("Initial CSS within budget");
-if (fontBytes/1024 > BUDGETS.initialFontsKB) fail(`Initial fonts over byte budget`);
-else ok("Initial fonts within byte budget");
-if (initialFonts.length > BUDGETS.initialFontRequests) fail(`Too many initial font requests`);
-else ok("Initial font request count within budget");
-if (totalInitial/1024 > BUDGETS.totalInitialTransferKB) fail(`Total initial transfer over budget`);
-else ok("Total initial transfer within budget");
-
-console.log("\n--- Runtime targets (manual Lighthouse) ---");
-for (const [k, v] of Object.entries(RUNTIME_TARGETS)) info(`${k}: ${v}`);
-console.log("\nMeasure with 3 cold-cache mobile Lighthouse runs against https://ostaze.com/.");
-
-if (process.exitCode) {
-  console.error("\nPerformance budget FAILED.");
-} else {
-  console.log("\nPerformance budget PASSED.");
+async function discover(listPath, prefix) {
+  const { text } = await html(listPath);
+  const m = text.match(new RegExp(`href="(${prefix}[0-9a-f-]{36})"`));
+  return m ? m[1] : null;
 }
+
+const routes = [
+  "/",
+  "/teachers",
+  (await discover("/teachers", "/teachers/")) || null,
+  "/courses",
+  (await discover("/courses", "/courses/")) || null,
+  "/subjects/computer-science",
+  "/universities",
+  "/universities/kuwait/ku",
+  "/universities/kuwait/ku/colleges/kw-ku-arts",
+  ...(process.env.ROUTES_EXTRA ? process.env.ROUTES_EXTRA.split(",") : []),
+].filter(Boolean);
+
+let failed = false;
+console.log(`Base ${BASE}, assets from ${PUBLIC_DIR}\n`);
+console.log("route".padEnd(48) + "status  HTML gz  CSS gz   JS gz");
+for (const r of routes) {
+  const { status, text } = await html(r);
+  const { js, css } = assetsOf(text);
+  const j = sizeOf(js);
+  const c = sizeOf(css);
+  console.log(
+    r.padEnd(48) + String(status).padEnd(8) +
+    `${kb(gz(Buffer.from(text)))}`.padStart(7) + `${kb(c.total)}`.padStart(8) + `${kb(j.total)}`.padStart(8) + " KB",
+  );
+  if (j.missing.length || c.missing.length) console.log(`  missing assets: ${[...j.missing, ...c.missing].join(", ")}`);
+  if (r === "/") {
+    if (j.total === 0) { console.error("  ✖ no homepage JS found — wrong BASE/PUBLIC_DIR?"); failed = true; }
+    else if (j.total / 1024 > HOME_JS_BUDGET_KB) {
+      console.error(`  ✖ homepage initial JS ${kb(j.total)} KB > ${HOME_JS_BUDGET_KB} KB budget`);
+      failed = true;
+    }
+  }
+  if (status !== 200) { console.error(`  ✖ ${r} returned ${status}`); failed = true; }
+}
+console.log(failed ? "\nPerformance budget FAILED." : `\nPerformance budget PASSED (homepage JS ≤ ${HOME_JS_BUDGET_KB} KB gzip).`);
+process.exit(failed ? 1 : 0);

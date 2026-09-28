@@ -20,24 +20,29 @@ describe("extractStoragePath", () => {
   });
 
   it("passes through bare object paths", () => {
-    expect(extractStoragePath("1700000000-abc.mp4", "lecture-videos"))
-      .toBe("1700000000-abc.mp4");
-    expect(extractStoragePath("course-id/123-xyz.mp4", "lecture-videos"))
-      .toBe("course-id/123-xyz.mp4");
+    expect(extractStoragePath("1700000000-abc.mp4", "lecture-videos")).toBe(
+      "1700000000-abc.mp4",
+    );
+    expect(extractStoragePath("course-id/123-xyz.mp4", "lecture-videos")).toBe(
+      "course-id/123-xyz.mp4",
+    );
   });
 
   it("extracts path from public Supabase URLs", () => {
-    const url = "https://abc.supabase.co/storage/v1/object/public/lecture-videos/1700-foo.mp4";
+    const url =
+      "https://abc.supabase.co/storage/v1/object/public/lecture-videos/1700-foo.mp4";
     expect(extractStoragePath(url, "lecture-videos")).toBe("1700-foo.mp4");
   });
 
   it("extracts path from signed Supabase URLs and strips query string", () => {
-    const url = "https://abc.supabase.co/storage/v1/object/sign/lecture-pdfs/folder/file.pdf?token=xyz";
+    const url =
+      "https://abc.supabase.co/storage/v1/object/sign/lecture-pdfs/folder/file.pdf?token=xyz";
     expect(extractStoragePath(url, "lecture-pdfs")).toBe("folder/file.pdf");
   });
 
   it("extracts path from authenticated URLs", () => {
-    const url = "https://abc.supabase.co/storage/v1/object/authenticated/chat-audio/u1/clip.webm";
+    const url =
+      "https://abc.supabase.co/storage/v1/object/authenticated/chat-audio/u1/clip.webm";
     expect(extractStoragePath(url, "chat-audio")).toBe("u1/clip.webm");
   });
 

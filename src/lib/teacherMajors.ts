@@ -30,7 +30,10 @@ const hashString = (input: string): number => {
   return Math.abs(h);
 };
 
-export const getTeacherMajor = (teacherId: string, lang: "ar" | "en"): string => {
+export const getTeacherMajor = (
+  teacherId: string,
+  lang: "ar" | "en",
+): string => {
   const idx = hashString(teacherId) % MAJORS.length;
   return MAJORS[idx][lang];
 };

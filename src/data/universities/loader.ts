@@ -33,7 +33,8 @@ export function loadCountry(code: string): Promise<University[]> {
   return p;
 }
 
-const sortCodes = (codes: string[]) => COUNTRY_MODULE_CODES.filter((c) => codes.includes(c));
+const sortCodes = (codes: string[]) =>
+  COUNTRY_MODULE_CODES.filter((c) => codes.includes(c));
 
 export const loadCountries = (codes: string[]) =>
   Promise.all(sortCodes(codes).map(loadCountry)).then((lists) => lists.flat());
@@ -49,7 +50,11 @@ const getLoaded = (codes: string[]) => {
 /** Loads the given countries' universities. `data` is null while downloading. */
 export function useCountryUniversities(codes: string[]) {
   const key = sortCodes(codes).join(",");
-  const [state, setState] = useState<{ key: string; data: University[] | null; error: boolean }>(() => ({
+  const [state, setState] = useState<{
+    key: string;
+    data: University[] | null;
+    error: boolean;
+  }>(() => ({
     key,
     data: getLoaded(codes),
     error: false,

@@ -1,6 +1,14 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, X, Send, Bot, User, Loader2, Trash2 } from "lucide-react";
+import {
+  MessageCircle,
+  X,
+  Send,
+  Bot,
+  User,
+  Loader2,
+  Trash2,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useAuth } from "@/contexts/AuthContext";
@@ -21,12 +29,32 @@ const isUnansweredResponse = (text: string): boolean => {
   if (!text) return true;
   const t = text.toLowerCase();
   const patterns = [
-    "i don't know", "i do not know", "i'm not sure", "i am not sure",
-    "i can't help", "i cannot help", "i'm unable", "i am unable",
-    "sorry, i don't", "sorry, i can't", "i don't have", "no information",
-    "لا أعرف", "لا اعرف", "مش عارف", "مش متأكد", "لست متأكد",
-    "ماعنديش", "ما عنديش", "معنديش", "مش قادر", "لا أستطيع",
-    "مفيش معلومات", "ما عندي معلومات", "للأسف", "للاسف",
+    "i don't know",
+    "i do not know",
+    "i'm not sure",
+    "i am not sure",
+    "i can't help",
+    "i cannot help",
+    "i'm unable",
+    "i am unable",
+    "sorry, i don't",
+    "sorry, i can't",
+    "i don't have",
+    "no information",
+    "لا أعرف",
+    "لا اعرف",
+    "مش عارف",
+    "مش متأكد",
+    "لست متأكد",
+    "ماعنديش",
+    "ما عنديش",
+    "معنديش",
+    "مش قادر",
+    "لا أستطيع",
+    "مفيش معلومات",
+    "ما عندي معلومات",
+    "للأسف",
+    "للاسف",
   ];
   return patterns.some((p) => t.includes(p));
 };
@@ -99,18 +127,35 @@ const AIChatWidget = () => {
           apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
         },
         body: JSON.stringify({
-          messages: newMessages.map((m) => ({ role: m.role, content: m.content })),
+          messages: newMessages.map((m) => ({
+            role: m.role,
+            content: m.content,
+          })),
           conversation_id: convId,
         }),
       });
 
       if (resp.status === 429) {
-        toast({ title: lang === "ar" ? "انتظر قليلاً" : "Rate limited", description: lang === "ar" ? "حاول مرة أخرى بعد قليل" : "Please try again shortly", variant: "destructive" });
+        toast({
+          title: lang === "ar" ? "انتظر قليلاً" : "Rate limited",
+          description:
+            lang === "ar"
+              ? "حاول مرة أخرى بعد قليل"
+              : "Please try again shortly",
+          variant: "destructive",
+        });
         setIsLoading(false);
         return;
       }
       if (resp.status === 402) {
-        toast({ title: lang === "ar" ? "خطأ" : "Error", description: lang === "ar" ? "خدمة الذكاء الاصطناعي غير متاحة حالياً" : "AI service unavailable", variant: "destructive" });
+        toast({
+          title: lang === "ar" ? "خطأ" : "Error",
+          description:
+            lang === "ar"
+              ? "خدمة الذكاء الاصطناعي غير متاحة حالياً"
+              : "AI service unavailable",
+          variant: "destructive",
+        });
         setIsLoading(false);
         return;
       }
@@ -121,7 +166,11 @@ const AIChatWidget = () => {
       const content = data.content || "";
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content, showWhatsApp: isUnansweredResponse(content) },
+        {
+          role: "assistant",
+          content,
+          showWhatsApp: isUnansweredResponse(content),
+        },
       ]);
     } catch (e: any) {
       console.error("Chat error:", e);
@@ -129,7 +178,10 @@ const AIChatWidget = () => {
         ...prev,
         {
           role: "assistant",
-          content: lang === "ar" ? "عذراً، حصلت مشكلة تقنية. حاول مرة تانية 🙏" : "Sorry, something went wrong. Please try again 🙏",
+          content:
+            lang === "ar"
+              ? "عذراً، حصلت مشكلة تقنية. حاول مرة تانية 🙏"
+              : "Sorry, something went wrong. Please try again 🙏",
           showWhatsApp: true,
         },
       ]);
@@ -167,7 +219,9 @@ const AIChatWidget = () => {
             onClick={() => setIsOpen(true)}
             className="fixed bottom-6 left-6 z-50 w-16 h-16 rounded-full bg-gradient-to-br from-primary to-primary-dark text-primary-foreground flex items-center justify-center shadow-[0_8px_30px_hsl(14_91%_50%/0.5)] hover:shadow-[0_12px_40px_hsl(14_91%_50%/0.7)] transition-shadow"
             title={lang === "ar" ? "مساعد أستاذي" : "Ostaze Assistant"}
-            aria-label={lang === "ar" ? "افتح مساعد أستاذي" : "Open Ostaze Assistant"}
+            aria-label={
+              lang === "ar" ? "افتح مساعد أستاذي" : "Open Ostaze Assistant"
+            }
           >
             {/* Pulsing rings */}
             <span className="absolute inset-0 rounded-full bg-primary/40 animate-ping" />
@@ -200,24 +254,36 @@ const AIChatWidget = () => {
                     {lang === "ar" ? "مساعد أستاذي" : "Ostaze Assistant"}
                   </h3>
                   <p className="text-[11px] opacity-80">
-                    {lang === "ar" ? "متاح دائماً لمساعدتك" : "Always here to help"}
+                    {lang === "ar"
+                      ? "متاح دائماً لمساعدتك"
+                      : "Always here to help"}
                   </p>
                 </div>
               </div>
               <div className="flex items-center gap-1">
                 {messages.length > 0 && (
-                  <button onClick={clearChat} className="p-1.5 rounded-lg hover:bg-white/20 transition-colors" title={lang === "ar" ? "محادثة جديدة" : "New chat"}>
+                  <button
+                    onClick={clearChat}
+                    className="p-1.5 rounded-lg hover:bg-white/20 transition-colors"
+                    title={lang === "ar" ? "محادثة جديدة" : "New chat"}
+                  >
                     <Trash2 size={16} />
                   </button>
                 )}
-                <button onClick={() => setIsOpen(false)} className="p-1.5 rounded-lg hover:bg-white/20 transition-colors">
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="p-1.5 rounded-lg hover:bg-white/20 transition-colors"
+                >
                   <X size={18} />
                 </button>
               </div>
             </div>
 
             {/* Messages Area */}
-            <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-3">
+            <div
+              ref={scrollRef}
+              className="flex-1 overflow-y-auto p-4 space-y-3"
+            >
               {messages.length === 0 && (
                 <div className="text-center py-8 space-y-3">
                   <div className="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center">
@@ -225,7 +291,9 @@ const AIChatWidget = () => {
                   </div>
                   <div>
                     <h4 className="font-bold text-foreground">
-                      {lang === "ar" ? "أهلاً! أنا أستاذي 👋" : "Hi! I'm Ostaze 👋"}
+                      {lang === "ar"
+                        ? "أهلاً! أنا أستاذي 👋"
+                        : "Hi! I'm Ostaze 👋"}
                     </h4>
                     <p className="text-sm text-muted-foreground mt-1">
                       {lang === "ar"
@@ -236,9 +304,13 @@ const AIChatWidget = () => {
                   {/* Quick Actions */}
                   <div className="space-y-2 pt-2">
                     {[
-                      lang === "ar" ? "عاوز معلم رياضيات" : "I need a math teacher",
+                      lang === "ar"
+                        ? "عاوز معلم رياضيات"
+                        : "I need a math teacher",
                       lang === "ar" ? "عرض حجوزاتي" : "Show my bookings",
-                      lang === "ar" ? "إيه المواد المتاحة؟" : "What subjects are available?",
+                      lang === "ar"
+                        ? "إيه المواد المتاحة؟"
+                        : "What subjects are available?",
                     ].map((q) => (
                       <button
                         key={q}
@@ -256,14 +328,17 @@ const AIChatWidget = () => {
                           (async () => {
                             try {
                               const convId = await ensureConversation();
-                              const { data: sessionData } = await supabase.auth.getSession();
-                              const accessToken = sessionData?.session?.access_token;
+                              const { data: sessionData } =
+                                await supabase.auth.getSession();
+                              const accessToken =
+                                sessionData?.session?.access_token;
                               const resp = await fetch(CHAT_URL, {
                                 method: "POST",
                                 headers: {
                                   "Content-Type": "application/json",
                                   Authorization: `Bearer ${accessToken || import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
-                                  apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
+                                  apikey: import.meta.env
+                                    .VITE_SUPABASE_PUBLISHABLE_KEY,
                                 },
                                 body: JSON.stringify({
                                   messages: [{ role: "user", content: q }],
@@ -271,10 +346,30 @@ const AIChatWidget = () => {
                                 }),
                               });
                               const data = await resp.json();
-                              const content = data.content || data.error || "Error";
-                              setMessages((prev) => [...prev, { role: "assistant", content, showWhatsApp: isUnansweredResponse(content) || !!data.error }]);
+                              const content =
+                                data.content || data.error || "Error";
+                              setMessages((prev) => [
+                                ...prev,
+                                {
+                                  role: "assistant",
+                                  content,
+                                  showWhatsApp:
+                                    isUnansweredResponse(content) ||
+                                    !!data.error,
+                                },
+                              ]);
                             } catch {
-                              setMessages((prev) => [...prev, { role: "assistant", content: lang === "ar" ? "عذراً، حصلت مشكلة." : "Sorry, an error occurred.", showWhatsApp: true }]);
+                              setMessages((prev) => [
+                                ...prev,
+                                {
+                                  role: "assistant",
+                                  content:
+                                    lang === "ar"
+                                      ? "عذراً، حصلت مشكلة."
+                                      : "Sorry, an error occurred.",
+                                  showWhatsApp: true,
+                                },
+                              ]);
                             } finally {
                               setIsLoading(false);
                             }
@@ -290,8 +385,13 @@ const AIChatWidget = () => {
               )}
 
               {messages.map((msg, i) => (
-                <div key={i} className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"}`}>
-                  <div className={`flex gap-2 w-full ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
+                <div
+                  key={i}
+                  className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"}`}
+                >
+                  <div
+                    className={`flex gap-2 w-full ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+                  >
                     {msg.role === "assistant" && (
                       <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
                         <Bot size={14} className="text-primary" />
@@ -323,16 +423,24 @@ const AIChatWidget = () => {
                         href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
                           lang === "ar"
                             ? "أهلاً، محتاج مساعدة من فريق أستاذي"
-                            : "Hi, I need help from the Ostazze team"
+                            : "Hi, I need help from the Ostazze team",
                         )}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#25D366] text-white text-sm font-semibold shadow hover:shadow-lg hover:brightness-110 transition"
                       >
-                        <svg viewBox="0 0 32 32" width="16" height="16" fill="currentColor" aria-hidden="true">
-                          <path d="M16.075 5.5C10.273 5.5 5.5 10.273 5.5 16.075c0 1.92.532 3.79 1.534 5.41L5.5 26.5l5.13-1.508a10.55 10.55 0 0 0 5.445 1.513h.005c5.8 0 10.575-4.773 10.575-10.575 0-2.823-1.1-5.475-3.097-7.47A10.494 10.494 0 0 0 16.076 5.5zM19.11 17.205c-.372 0-1.088 1.39-1.518 1.39a.63.63 0 0 1-.315-.1c-.802-.402-1.504-.817-2.163-1.447-.545-.516-1.146-1.29-1.46-1.963a.426.426 0 0 1-.073-.215c0-.33.99-.945.99-1.49 0-.143-.73-2.09-.832-2.335-.143-.372-.214-.487-.6-.487-.187 0-.36-.043-.53-.043-.302 0-.53.115-.738.33-.42.43-1.21 1.318-1.21 2.494 0 1.146.832 2.264 1.318 2.808 1.418 1.62 3.32 3.022 5.388 3.624.96.288 1.918.404 2.78.434.687.026 1.347-.103 1.847-.41.32-.195.52-.482.62-.722.16-.38.16-.7.16-1.013 0-.146-.16-.246-.36-.345l-1.66-.866c-.246-.13-.41-.246-.575-.246z"/>
+                        <svg
+                          viewBox="0 0 32 32"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path d="M16.075 5.5C10.273 5.5 5.5 10.273 5.5 16.075c0 1.92.532 3.79 1.534 5.41L5.5 26.5l5.13-1.508a10.55 10.55 0 0 0 5.445 1.513h.005c5.8 0 10.575-4.773 10.575-10.575 0-2.823-1.1-5.475-3.097-7.47A10.494 10.494 0 0 0 16.076 5.5zM19.11 17.205c-.372 0-1.088 1.39-1.518 1.39a.63.63 0 0 1-.315-.1c-.802-.402-1.504-.817-2.163-1.447-.545-.516-1.146-1.29-1.46-1.963a.426.426 0 0 1-.073-.215c0-.33.99-.945.99-1.49 0-.143-.73-2.09-.832-2.335-.143-.372-.214-.487-.6-.487-.187 0-.36-.043-.53-.043-.302 0-.53.115-.738.33-.42.43-1.21 1.318-1.21 2.494 0 1.146.832 2.264 1.318 2.808 1.418 1.62 3.32 3.022 5.388 3.624.96.288 1.918.404 2.78.434.687.026 1.347-.103 1.847-.41.32-.195.52-.482.62-.722.16-.38.16-.7.16-1.013 0-.146-.16-.246-.36-.345l-1.66-.866c-.246-.13-.41-.246-.575-.246z" />
                         </svg>
-                        {lang === "ar" ? "كلّمنا على واتساب" : "Chat on WhatsApp"}
+                        {lang === "ar"
+                          ? "كلّمنا على واتساب"
+                          : "Chat on WhatsApp"}
                       </a>
                     </div>
                   )}
@@ -346,9 +454,18 @@ const AIChatWidget = () => {
                   </div>
                   <div className="bg-muted rounded-2xl rounded-bl-md px-4 py-3">
                     <div className="flex gap-1">
-                      <span className="w-2 h-2 rounded-full bg-muted-foreground/40 animate-bounce" style={{ animationDelay: "0ms" }} />
-                      <span className="w-2 h-2 rounded-full bg-muted-foreground/40 animate-bounce" style={{ animationDelay: "150ms" }} />
-                      <span className="w-2 h-2 rounded-full bg-muted-foreground/40 animate-bounce" style={{ animationDelay: "300ms" }} />
+                      <span
+                        className="w-2 h-2 rounded-full bg-muted-foreground/40 animate-bounce"
+                        style={{ animationDelay: "0ms" }}
+                      />
+                      <span
+                        className="w-2 h-2 rounded-full bg-muted-foreground/40 animate-bounce"
+                        style={{ animationDelay: "150ms" }}
+                      />
+                      <span
+                        className="w-2 h-2 rounded-full bg-muted-foreground/40 animate-bounce"
+                        style={{ animationDelay: "300ms" }}
+                      />
                     </div>
                   </div>
                 </div>
@@ -370,7 +487,9 @@ const AIChatWidget = () => {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={handleKeyDown}
-                  placeholder={lang === "ar" ? "اكتب رسالتك..." : "Type your message..."}
+                  placeholder={
+                    lang === "ar" ? "اكتب رسالتك..." : "Type your message..."
+                  }
                   rows={1}
                   className="flex-1 resize-none rounded-xl border border-input bg-background px-3 py-2.5 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 max-h-24"
                   style={{ minHeight: "40px" }}
@@ -381,7 +500,11 @@ const AIChatWidget = () => {
                   disabled={!input.trim() || isLoading}
                   className="rounded-xl h-10 w-10 shrink-0"
                 >
-                  {isLoading ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}
+                  {isLoading ? (
+                    <Loader2 size={18} className="animate-spin" />
+                  ) : (
+                    <Send size={18} />
+                  )}
                 </Button>
               </div>
             </div>

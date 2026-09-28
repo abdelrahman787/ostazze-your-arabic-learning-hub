@@ -81,24 +81,29 @@ const AnimationDebugOverlay = () => {
 
       // Probe the orbit DOM
       const orbitRoot = document.querySelector<HTMLElement>(
-        ".orbit-traveler, .orbit-raf, .orbit-spin, .orbit-spin-reverse"
+        ".orbit-traveler, .orbit-raf, .orbit-spin, .orbit-spin-reverse",
       );
       let orbitAnims = 0;
       let orbitTransform = "—";
       let orbitNodes = 0;
       if (orbitRoot) {
         try {
-          orbitAnims = document.querySelectorAll(".orbit-traveler").length || (orbitRoot.getAnimations?.() ?? []).length;
+          orbitAnims =
+            document.querySelectorAll(".orbit-traveler").length ||
+            (orbitRoot.getAnimations?.() ?? []).length;
         } catch {
           orbitAnims = -1;
         }
         const cs = getComputedStyle(orbitRoot);
-        orbitTransform = cs.transform === "none" ? "none" : cs.transform.slice(0, 48);
+        orbitTransform =
+          cs.transform === "none" ? "none" : cs.transform.slice(0, 48);
         const section = orbitRoot.closest("section");
         orbitNodes = section ? section.querySelectorAll("*").length : 0;
       }
 
-      const motionEls = document.querySelectorAll("[data-projection-id]").length;
+      const motionEls = document.querySelectorAll(
+        "[data-projection-id]",
+      ).length;
 
       setStats({
         fps,
@@ -110,7 +115,9 @@ const AnimationDebugOverlay = () => {
         orbitTransform,
         orbitNodes,
         motionEls,
-        sinceMount: Math.round((performance.now() - mountedAtRef.current) / 1000),
+        sinceMount: Math.round(
+          (performance.now() - mountedAtRef.current) / 1000,
+        ),
       });
     }, 500);
 
@@ -140,7 +147,11 @@ const AnimationDebugOverlay = () => {
   }
 
   const fpsColor =
-    stats.fps >= 50 ? "text-emerald-300" : stats.fps >= 30 ? "text-amber-300" : "text-red-300";
+    stats.fps >= 50
+      ? "text-emerald-300"
+      : stats.fps >= 30
+        ? "text-amber-300"
+        : "text-red-300";
   const visColor =
     stats.visibility === "visible" ? "text-emerald-300" : "text-red-300";
 
@@ -177,7 +188,9 @@ const AnimationDebugOverlay = () => {
           </span>
         </Row>
         <Row label="Long frames (&gt;50ms)">
-          <span className={stats.longFrames ? "text-amber-300" : "text-emerald-300"}>
+          <span
+            className={stats.longFrames ? "text-amber-300" : "text-emerald-300"}
+          >
             {stats.longFrames}
           </span>
         </Row>
@@ -185,18 +198,29 @@ const AnimationDebugOverlay = () => {
           <span className={visColor}>{stats.visibility}</span>
         </Row>
         <Row label="Reduced motion">
-          <span className={stats.reducedMotion ? "text-red-300" : "text-emerald-300"}>
+          <span
+            className={
+              stats.reducedMotion ? "text-red-300" : "text-emerald-300"
+            }
+          >
             {stats.reducedMotion ? "ON (anims disabled)" : "off"}
           </span>
         </Row>
         <div className="my-1 h-px bg-white/10" />
         <Row label="Orbit CSS anims">
-          <span className={stats.orbitAnims > 0 ? "text-emerald-300" : "text-red-300"}>
+          <span
+            className={
+              stats.orbitAnims > 0 ? "text-emerald-300" : "text-red-300"
+            }
+          >
             {stats.orbitAnims}
           </span>
         </Row>
         <Row label="Orbit transform">
-          <span className="text-white/70 truncate max-w-[180px]" title={stats.orbitTransform}>
+          <span
+            className="text-white/70 truncate max-w-[180px]"
+            title={stats.orbitTransform}
+          >
             {stats.orbitTransform}
           </span>
         </Row>
@@ -210,15 +234,22 @@ const AnimationDebugOverlay = () => {
           <span className="text-white/60">{stats.sinceMount}s</span>
         </Row>
         <p className="text-[10px] text-white/50 leading-snug pt-1">
-          Tip: if "Orbit transform" stops changing while FPS &amp; visibility are healthy, the
-          stall is in the CSS layer (e.g. animation paused or element off-screen).
+          Tip: if "Orbit transform" stops changing while FPS &amp; visibility
+          are healthy, the stall is in the CSS layer (e.g. animation paused or
+          element off-screen).
         </p>
       </div>
     </div>
   );
 };
 
-const Row = ({ label, children }: { label: string; children: React.ReactNode }) => (
+const Row = ({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) => (
   <div className="flex items-center justify-between gap-3">
     <span className="text-white/60">{label}</span>
     {children}

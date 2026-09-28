@@ -6,15 +6,37 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import PageHelmet from "@/components/PageHelmet";
 import PageHeader from "@/components/PageHeader";
 import FaqAccordion from "@/components/FaqAccordion";
-import { Mail, Phone, MapPin, Send, MessageCircle, Loader2, Building2, Clock, Timer, ShieldCheck } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Send,
+  MessageCircle,
+  Loader2,
+  Building2,
+  Clock,
+  Timer,
+  ShieldCheck,
+} from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import { waLink } from "@/lib/whatsapp";
 import { supabase } from "@/integrations/supabase/client";
 
-type ContactInfoItem = { icon: React.ComponentType<{ size?: number | string }>; label: string; value: string; href?: string };
+type ContactInfoItem = {
+  icon: React.ComponentType<{ size?: number | string }>;
+  label: string;
+  value: string;
+  href?: string;
+};
 
-export const ContactInfoCard = ({ icon: Icon, label, value, href, index = 0 }: ContactInfoItem & { index?: number }) => {
+export const ContactInfoCard = ({
+  icon: Icon,
+  label,
+  value,
+  href,
+  index = 0,
+}: ContactInfoItem & { index?: number }) => {
   const isExternal = !!href && href.startsWith("http");
   const isTel = !!href && href.startsWith("tel");
   const body = (
@@ -24,15 +46,35 @@ export const ContactInfoCard = ({ icon: Icon, label, value, href, index = 0 }: C
       </div>
       <div>
         <p className="text-sm font-bold mb-0.5">{label}</p>
-        <p className="text-sm text-muted-foreground" dir={isTel ? "ltr" : undefined}>{value}</p>
+        <p
+          className="text-sm text-muted-foreground"
+          dir={isTel ? "ltr" : undefined}
+        >
+          {value}
+        </p>
       </div>
     </>
   );
-  const motionProps = { initial: { opacity: 0, x: -20 }, animate: { opacity: 1, x: 0 }, transition: { delay: index * 0.1 } };
+  const motionProps = {
+    initial: { opacity: 0, x: -20 },
+    animate: { opacity: 1, x: 0 },
+    transition: { delay: index * 0.1 },
+  };
   const cls = "card-base p-5 flex items-start gap-4 feature-card block";
-  if (!href) return <motion.div {...motionProps} className={cls}>{body}</motion.div>;
+  if (!href)
+    return (
+      <motion.div {...motionProps} className={cls}>
+        {body}
+      </motion.div>
+    );
   return (
-    <motion.a href={href} target={isExternal ? "_blank" : undefined} rel={isExternal ? "noopener noreferrer" : undefined} {...motionProps} className={cls}>
+    <motion.a
+      href={href}
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noopener noreferrer" : undefined}
+      {...motionProps}
+      className={cls}
+    >
       {body}
     </motion.a>
   );
@@ -52,16 +94,33 @@ const Contact = () => {
     e.preventDefault();
     setSending(true);
     try {
-      const { data, error } = await supabase.functions.invoke("submit-contact", {
-        body: { name: name.trim(), email: email.trim(), message: message.trim(), lang, ...(website ? { website } : {}) },
-      });
+      const { data, error } = await supabase.functions.invoke(
+        "submit-contact",
+        {
+          body: {
+            name: name.trim(),
+            email: email.trim(),
+            message: message.trim(),
+            lang,
+            ...(website ? { website } : {}),
+          },
+        },
+      );
       if (error || !data?.ok) throw new Error(error?.message || "failed");
       toast({ title: t("contact_success") });
-      setName(""); setEmail(""); setMessage("");
+      setName("");
+      setEmail("");
+      setMessage("");
     } catch {
       toast({
-        title: lang === "ar" ? "تعذّر إرسال رسالتك" : "Your message could not be sent",
-        description: lang === "ar" ? `حاول مرة أخرى أو راسلنا على ${SITE.email}` : `Please try again or email ${SITE.email}`,
+        title:
+          lang === "ar"
+            ? "تعذّر إرسال رسالتك"
+            : "Your message could not be sent",
+        description:
+          lang === "ar"
+            ? `حاول مرة أخرى أو راسلنا على ${SITE.email}`
+            : `Please try again or email ${SITE.email}`,
         variant: "destructive",
       });
     } finally {
@@ -70,10 +129,37 @@ const Contact = () => {
   };
 
   const contactInfo = [
-    { icon: Mail, label: t("contact_email_label"), value: SITE.email, href: `mailto:${SITE.email}` },
-    { icon: Phone, label: t("contact_phone_label"), value: SITE.phoneDisplay, href: `tel:${SITE.phone}` },
-    { icon: MapPin, label: t("contact_location_label"), value: lang === "ar" ? `${SITE.city.ar} - ${SITE.country.ar}` : `${SITE.city.en} - ${SITE.country.en}`, href: undefined as string | undefined },
-    { icon: MessageCircle, label: t("contact_whatsapp_label"), value: t("contact_whatsapp_value"), href: waLink(lang === "ar" ? "مرحباً، أريد الاستفسار عن خدمات أسطازي" : "Hello, I'd like to inquire about Ostaze services") },
+    {
+      icon: Mail,
+      label: t("contact_email_label"),
+      value: SITE.email,
+      href: `mailto:${SITE.email}`,
+    },
+    {
+      icon: Phone,
+      label: t("contact_phone_label"),
+      value: SITE.phoneDisplay,
+      href: `tel:${SITE.phone}`,
+    },
+    {
+      icon: MapPin,
+      label: t("contact_location_label"),
+      value:
+        lang === "ar"
+          ? `${SITE.city.ar} - ${SITE.country.ar}`
+          : `${SITE.city.en} - ${SITE.country.en}`,
+      href: undefined as string | undefined,
+    },
+    {
+      icon: MessageCircle,
+      label: t("contact_whatsapp_label"),
+      value: t("contact_whatsapp_value"),
+      href: waLink(
+        lang === "ar"
+          ? "مرحباً، أريد الاستفسار عن خدمات أسطازي"
+          : "Hello, I'd like to inquire about Ostaze services",
+      ),
+    },
   ];
 
   const contactFaq = [
@@ -87,8 +173,16 @@ const Contact = () => {
     <div>
       <PageHelmet
         title={t("contact_title")}
-        description={t("contact_subtitle")}
-        keywords={lang === "ar" ? "تواصل, دعم, ostaze, خدمة العملاء" : "contact, support, ostaze, customer service"}
+        description={
+          lang === "ar"
+            ? "تواصل مع فريق أستاذي عبر واتساب أو الهاتف أو نموذج التواصل لحجز حصة خصوصية أو للاستفسار عن المعلمين والأسعار."
+            : "Contact the OSTAZE team via WhatsApp, phone or the contact form to book a private session or ask about tutors and prices."
+        }
+        keywords={
+          lang === "ar"
+            ? "تواصل, دعم, ostaze, خدمة العملاء"
+            : "contact, support, ostaze, customer service"
+        }
         jsonLd={[
           faqJsonLd(contactFaq),
           breadcrumbJsonLd([
@@ -97,7 +191,11 @@ const Contact = () => {
           ]),
         ]}
       />
-      <PageHeader title={t("contact_title")} subtitle={t("contact_subtitle")} variant="teachers" />
+      <PageHeader
+        title={t("contact_title")}
+        subtitle={t("contact_subtitle")}
+        variant="teachers"
+      />
 
       <div className="container py-12">
         <div className="grid lg:grid-cols-5 gap-10 max-w-5xl mx-auto">
@@ -109,27 +207,77 @@ const Contact = () => {
           </div>
 
           {/* Contact Form */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="lg:col-span-3">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="lg:col-span-3"
+          >
             <div className="card-base p-8">
-              <h2 className="text-xl font-extrabold mb-6">{t("contact_form_title")}</h2>
+              <h2 className="text-xl font-extrabold mb-6">
+                {t("contact_form_title")}
+              </h2>
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div>
-                  <label className="block text-sm font-bold mb-1.5">{t("contact_name")}</label>
-                  <input type="text" value={name} onChange={e => setName(e.target.value)} className="input-base" required maxLength={100} />
+                  <label className="block text-sm font-bold mb-1.5">
+                    {t("contact_name")}
+                  </label>
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="input-base"
+                    required
+                    maxLength={100}
+                  />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold mb-1.5">{t("contact_email")}</label>
-                  <input type="email" value={email} onChange={e => setEmail(e.target.value)} className="input-base" required maxLength={255} />
+                  <label className="block text-sm font-bold mb-1.5">
+                    {t("contact_email")}
+                  </label>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="input-base"
+                    required
+                    maxLength={255}
+                  />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold mb-1.5">{t("contact_message")}</label>
-                  <textarea value={message} onChange={e => setMessage(e.target.value)} rows={5} className="input-base resize-none" required maxLength={1000} />
+                  <label className="block text-sm font-bold mb-1.5">
+                    {t("contact_message")}
+                  </label>
+                  <textarea
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    rows={5}
+                    className="input-base resize-none"
+                    required
+                    maxLength={1000}
+                  />
                 </div>
                 <div aria-hidden="true" className="hidden">
-                  <label>Website<input type="text" tabIndex={-1} autoComplete="off" value={website} onChange={e => setWebsite(e.target.value)} /></label>
+                  <label>
+                    Website
+                    <input
+                      type="text"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={website}
+                      onChange={(e) => setWebsite(e.target.value)}
+                    />
+                  </label>
                 </div>
-                <button type="submit" disabled={sending} className="btn-primary w-full flex items-center justify-center gap-2">
-                  {sending ? <Loader2 size={18} className="animate-spin" /> : <Send size={16} />}
+                <button
+                  type="submit"
+                  disabled={sending}
+                  className="btn-primary w-full flex items-center justify-center gap-2"
+                >
+                  {sending ? (
+                    <Loader2 size={18} className="animate-spin" />
+                  ) : (
+                    <Send size={16} />
+                  )}
                   {t("contact_send")}
                 </button>
               </form>
@@ -148,21 +296,27 @@ const Contact = () => {
               <Building2 size={16} className="text-primary mt-1 shrink-0" />
               <div>
                 <p className="font-bold">{t("contact_trust_entity_label")}</p>
-                <p className="text-muted-foreground">{t("contact_trust_entity_value")}</p>
+                <p className="text-muted-foreground">
+                  {t("contact_trust_entity_value")}
+                </p>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <Clock size={16} className="text-primary mt-1 shrink-0" />
               <div>
                 <p className="font-bold">{t("contact_trust_hours_label")}</p>
-                <p className="text-muted-foreground">{t("contact_trust_hours_value")}</p>
+                <p className="text-muted-foreground">
+                  {t("contact_trust_hours_value")}
+                </p>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <Timer size={16} className="text-primary mt-1 shrink-0" />
               <div>
                 <p className="font-bold">{t("contact_trust_sla_label")}</p>
-                <p className="text-muted-foreground">{t("contact_trust_sla_value")}</p>
+                <p className="text-muted-foreground">
+                  {t("contact_trust_sla_value")}
+                </p>
               </div>
             </div>
             <div className="flex items-start gap-3">
@@ -170,10 +324,18 @@ const Contact = () => {
               <div>
                 <p className="font-bold">{t("contact_trust_quick_help")}</p>
                 <div className="flex flex-wrap gap-2 mt-1">
-                  <Link to="/privacy" className="text-primary hover:underline">{t("footer_privacy")}</Link>
-                  <Link to="/terms" className="text-primary hover:underline">{t("footer_terms")}</Link>
-                  <Link to="/refund" className="text-primary hover:underline">{t("footer_refund")}</Link>
-                  <Link to="/faq" className="text-primary hover:underline">{t("footer_faq")}</Link>
+                  <Link to="/privacy" className="text-primary hover:underline">
+                    {t("footer_privacy")}
+                  </Link>
+                  <Link to="/terms" className="text-primary hover:underline">
+                    {t("footer_terms")}
+                  </Link>
+                  <Link to="/refund" className="text-primary hover:underline">
+                    {t("footer_refund")}
+                  </Link>
+                  <Link to="/faq" className="text-primary hover:underline">
+                    {t("footer_faq")}
+                  </Link>
                 </div>
               </div>
             </div>
@@ -185,7 +347,10 @@ const Contact = () => {
           <h3 className="text-lg font-extrabold mb-3">{t("faq_title")}</h3>
           <FaqAccordion items={contactFaq} defaultOpen={0} />
           <div className="text-center mt-4">
-            <Link to="/faq" className="text-primary text-sm font-bold hover:underline">
+            <Link
+              to="/faq"
+              className="text-primary text-sm font-bold hover:underline"
+            >
               {lang === "ar" ? "عرض كل الأسئلة الشائعة ←" : "View all FAQs →"}
             </Link>
           </div>

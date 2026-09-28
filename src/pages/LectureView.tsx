@@ -6,7 +6,14 @@ import { supabase } from "@/integrations/supabase/client";
 import { getSignedFileUrl } from "@/lib/storageUrls";
 import { getBunnyEmbedUrl } from "@/lib/bunnyVideo";
 import {
-  FileText, Send, Loader2, MessageSquare, Video, X, ArrowRight, ExternalLink,
+  FileText,
+  Send,
+  Loader2,
+  MessageSquare,
+  Video,
+  X,
+  ArrowRight,
+  ExternalLink,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
@@ -92,8 +99,12 @@ const LectureView = () => {
     } else {
       // Legacy: Supabase Storage signed URLs (1h expiry)
       const [vUrl, pUrl] = await Promise.all([
-        data.video_url ? getSignedFileUrl("lecture-videos", data.video_url, 3600) : Promise.resolve(null),
-        data.pdf_url ? getSignedFileUrl("lecture-pdfs", data.pdf_url, 3600) : Promise.resolve(null),
+        data.video_url
+          ? getSignedFileUrl("lecture-videos", data.video_url, 3600)
+          : Promise.resolve(null),
+        data.pdf_url
+          ? getSignedFileUrl("lecture-pdfs", data.pdf_url, 3600)
+          : Promise.resolve(null),
       ]);
       setSignedVideoUrl(vUrl);
       setSignedPdfUrl(pUrl);
@@ -120,14 +131,17 @@ const LectureView = () => {
   // Auto-refresh Bunny token every 8 minutes (token expires after 10)
   useEffect(() => {
     if (!lecture?.bunny_video_id) return;
-    const interval = setInterval(async () => {
-      try {
-        const url = await getBunnyEmbedUrl(lecture.id);
-        setBunnyEmbedUrl(url);
-      } catch (e) {
-        console.error("Bunny token refresh failed:", e);
-      }
-    }, 8 * 60 * 1000);
+    const interval = setInterval(
+      async () => {
+        try {
+          const url = await getBunnyEmbedUrl(lecture.id);
+          setBunnyEmbedUrl(url);
+        } catch (e) {
+          console.error("Bunny token refresh failed:", e);
+        }
+      },
+      8 * 60 * 1000,
+    );
     return () => clearInterval(interval);
   }, [lecture?.id, lecture?.bunny_video_id]);
 
@@ -145,12 +159,19 @@ const LectureView = () => {
         return;
       }
       // F12 / DevTools
-      if (e.key === "F12") { e.preventDefault(); return; }
+      if (e.key === "F12") {
+        e.preventDefault();
+        return;
+      }
       // Ctrl/Cmd + S, P, U, Shift+I, Shift+J, Shift+C
       if ((e.ctrlKey || e.metaKey) && ["s", "p", "u"].includes(k)) {
         e.preventDefault();
       }
-      if ((e.ctrlKey || e.metaKey) && e.shiftKey && ["i", "j", "c"].includes(k)) {
+      if (
+        (e.ctrlKey || e.metaKey) &&
+        e.shiftKey &&
+        ["i", "j", "c"].includes(k)
+      ) {
         e.preventDefault();
       }
     };
@@ -177,18 +198,27 @@ const LectureView = () => {
         },
         (payload) => {
           setMessages((prev) => [...prev, payload.new as ChatMsg]);
-        }
+        },
       )
       .subscribe();
-    return () => { supabase.removeChannel(channel); };
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [id]);
 
-  useEffect(() => { scrollToBottom(); }, [messages]);
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   const handleSend = async () => {
     if (!newMsg.trim() || !user || !id) return;
     // Authorization: only teacher or student of this lecture can send messages
-    if (lecture && user.id !== lecture.teacher_id && user.id !== lecture.student_id) return;
+    if (
+      lecture &&
+      user.id !== lecture.teacher_id &&
+      user.id !== lecture.student_id
+    )
+      return;
     setSending(true);
     await supabase
       .from("chat_messages")
@@ -199,7 +229,12 @@ const LectureView = () => {
 
   const handleAudioRecorded = async (audioUrl: string) => {
     if (!user || !id) return;
-    if (lecture && user.id !== lecture.teacher_id && user.id !== lecture.student_id) return;
+    if (
+      lecture &&
+      user.id !== lecture.teacher_id &&
+      user.id !== lecture.student_id
+    )
+      return;
     await supabase.from("chat_messages").insert({
       lecture_id: id,
       sender_id: user.id,
@@ -238,7 +273,10 @@ const LectureView = () => {
     <div className="min-h-[calc(100vh-var(--navbar-h))] bg-background flex flex-col">
       <NoIndex title="Lecture" />
       {/* Sub-header */}
-      <div className="sticky bg-card border-b px-4 py-2 flex items-center justify-between z-40 shadow-sm" style={{ top: "var(--navbar-h)" }}>
+      <div
+        className="sticky bg-card border-b px-4 py-2 flex items-center justify-between z-40 shadow-sm"
+        style={{ top: "var(--navbar-h)" }}
+      >
         <div className="flex items-center gap-3">
           <button
             onClick={() => navigate(-1)}
@@ -321,7 +359,7 @@ const LectureView = () => {
               <div className="flex-1">
                 <iframe
                   src={`https://docs.google.com/gview?url=${encodeURIComponent(
-                    signedPdfUrl
+                    signedPdfUrl,
                   )}&embedded=true`}
                   className="w-full h-full"
                   title="PDF Viewer"
@@ -365,7 +403,8 @@ const LectureView = () => {
                   </div>
                 </div>
                 <p className="text-[0.65rem] text-muted-foreground/70 text-center mt-2">
-                  🔒 محمي بتشفير. أي محاولة تسجيل/توزيع تحمل بصمة حسابك ({user?.email}) ومخالفة لشروط الاستخدام.
+                  🔒 محمي بتشفير. أي محاولة تسجيل/توزيع تحمل بصمة حسابك (
+                  {user?.email}) ومخالفة لشروط الاستخدام.
                 </p>
               </div>
             ) : signedVideoUrl ? (
@@ -381,12 +420,20 @@ const LectureView = () => {
               </div>
             ) : lecture.bunny_video_id ? (
               <div className="text-center">
-                <Loader2 size={32} className="mx-auto animate-spin text-primary mb-3" />
-                <p className="text-muted-foreground text-sm">جاري تجهيز الفيديو المشفّر...</p>
+                <Loader2
+                  size={32}
+                  className="mx-auto animate-spin text-primary mb-3"
+                />
+                <p className="text-muted-foreground text-sm">
+                  جاري تجهيز الفيديو المشفّر...
+                </p>
               </div>
             ) : (
               <div className="text-center">
-                <Video size={48} className="mx-auto text-muted-foreground/30 mb-3" />
+                <Video
+                  size={48}
+                  className="mx-auto text-muted-foreground/30 mb-3"
+                />
                 <p className="text-muted-foreground">{t("no_video")}</p>
               </div>
             )}
@@ -410,7 +457,7 @@ const LectureView = () => {
               <div className="flex-1">
                 <iframe
                   src={`https://docs.google.com/gview?url=${encodeURIComponent(
-                    signedPdfUrl
+                    signedPdfUrl,
                   )}&embedded=true`}
                   className="w-full h-full"
                   title="PDF Viewer"

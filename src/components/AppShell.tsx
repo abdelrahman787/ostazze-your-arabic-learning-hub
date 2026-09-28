@@ -1,21 +1,37 @@
-import { Component, ErrorInfo, ReactNode, Suspense, lazy, useEffect } from "react";
+import {
+  Component,
+  ErrorInfo,
+  ReactNode,
+  Suspense,
+  lazy,
+  useEffect,
+} from "react";
 import { useLocation } from "@/lib/router-compat";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import RouteSkeleton from "@/components/RouteSkeleton";
 import { useDeferredMount } from "@/hooks/useDeferredMount";
 
-const Toaster = lazy(() => import("@/components/ui/toaster").then(m => ({ default: m.Toaster })));
-const Sonner = lazy(() => import("@/components/ui/sonner").then(m => ({ default: m.Toaster })));
+const Toaster = lazy(() =>
+  import("@/components/ui/toaster").then((m) => ({ default: m.Toaster })),
+);
+const Sonner = lazy(() =>
+  import("@/components/ui/sonner").then((m) => ({ default: m.Toaster })),
+);
 const FloatingWhatsApp = lazy(() => import("@/components/FloatingWhatsApp"));
 const AIChatWidget = lazy(() => import("@/components/AIChatWidget"));
 const CookieConsent = lazy(() => import("@/components/CookieConsent"));
 const CountryGate = lazy(() => import("@/components/CountryGate"));
-const WhatsAppNumberGate = lazy(() => import("@/components/WhatsAppNumberGate"));
+const WhatsAppNumberGate = lazy(
+  () => import("@/components/WhatsAppNumberGate"),
+);
 
 const RouteFallback = () => <RouteSkeleton />;
 
-class NonCriticalBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
+class NonCriticalBoundary extends Component<
+  { children: ReactNode },
+  { failed: boolean }
+> {
   constructor(props: { children: ReactNode }) {
     super(props);
     this.state = { failed: false };
@@ -38,7 +54,11 @@ class NonCriticalBoundary extends Component<{ children: ReactNode }, { failed: b
 const DeferredWidgets = () => {
   // Keep non-critical widgets out of the cold-load path and don't trigger
   // chunk fetches on first tap/scroll, which can cause stale mobile caches to reload.
-  const ready = useDeferredMount({ timeout: 8000, skipIdle: true, onInteraction: false });
+  const ready = useDeferredMount({
+    timeout: 8000,
+    skipIdle: true,
+    onInteraction: false,
+  });
   if (!ready) return null;
   return (
     <NonCriticalBoundary>
@@ -63,9 +83,14 @@ export const IdlePrefetch = () => {
       import("@/pages/Teachers");
       import("@/pages/Subjects");
     };
-    const ric = (window as unknown as {
-      requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number;
-    }).requestIdleCallback;
+    const ric = (
+      window as unknown as {
+        requestIdleCallback?: (
+          cb: () => void,
+          o?: { timeout: number },
+        ) => number;
+      }
+    ).requestIdleCallback;
     if (typeof ric === "function") {
       ric(run, { timeout: 4000 });
     } else {
@@ -75,8 +100,6 @@ export const IdlePrefetch = () => {
   }, []);
   return null;
 };
-
-
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
@@ -89,13 +112,15 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
       "/dashboard",
       "/dashboard/teacher",
       "/admin",
-    ].includes(location.pathname) ||
-    location.pathname.startsWith("/lectures/");
+    ].includes(location.pathname) || location.pathname.startsWith("/lectures/");
 
   return (
     <div className="relative min-h-screen flex flex-col">
       {/* Skip Navigation for Accessibility */}
-      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:bg-primary focus:text-primary-foreground focus:px-4 focus:py-2 focus:rounded-lg focus:font-bold">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:bg-primary focus:text-primary-foreground focus:px-4 focus:py-2 focus:rounded-lg focus:font-bold"
+      >
         Skip to content
       </a>
       <Navbar />
@@ -112,6 +137,5 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
     </div>
   );
 };
-
 
 export { RouteFallback };
