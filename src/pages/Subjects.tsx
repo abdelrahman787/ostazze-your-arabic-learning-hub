@@ -4,17 +4,22 @@ import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useMemo, useState } from "react";
-import { allUniversities } from "@/data/universitiesData";
+import { SUBJECT_INDEX } from "@/data/universities/subjectIndex.generated";
+import { useCountryUniversities } from "@/data/universities/loader";
+import RouteSkeleton from "@/components/RouteSkeleton";
 import PageHeader from "@/components/PageHeader";
 import PageHelmet from "@/components/PageHelmet";
 import FaqAccordion from "@/components/FaqAccordion";
 import { breadcrumbJsonLd, collectionPageJsonLd, faqJsonLd } from "@/lib/seo";
 import { WHATSAPP_NUMBER } from "@/lib/whatsapp";
-import { subjectNameFromSlug, subjectPath, universityPath, isSubjectIndexable } from "@/lib/slugs";
+import { universityPath } from "@/lib/slugs";
+import { subjectNameFromSlug, subjectPath, isSubjectIndexable } from "@/lib/subjectSlugs";
 import NotFound from "./NotFound";
 
 const categoryEnToAr = new Map<string, string>();
 mockCategories.forEach(c => categoryEnToAr.set(c.name.en, c.name.ar));
+
+const subjectByName = new Map(SUBJECT_INDEX.map((x) => [x.name_en, x]));
 
 const ITEMS_PER_PAGE = 18;
 
@@ -58,9 +63,11 @@ const Subjects = () => {
     return subjects;
   }, [categoryAr, search]);
 
-  // ---- Department (subject) courses view ----
+  // ---- Department (subject) courses view: load only the countries that teach it ----
+  const subjectInfo = departmentParam ? subjectByName.get(departmentParam) : undefined;
+  const { data: allUniversities, error: subjectLoadError } = useCountryUniversities(subjectInfo?.countries || []);
   const departmentCourses = useMemo(() => {
-    if (!departmentParam) return [];
+    if (!departmentParam || !allUniversities) return [];
     const seen = new Set<string>();
     const list: { code: string; name_en: string; name_ar: string; credits: number }[] = [];
     allUniversities.forEach(u => {
@@ -77,12 +84,12 @@ const Subjects = () => {
       });
     });
     return list.sort((a, b) => a.code.localeCompare(b.code));
-  }, [departmentParam]);
+  }, [departmentParam, allUniversities]);
 
   const departmentUniversities = useMemo(() => {
-    if (!departmentParam) return [];
+    if (!departmentParam || !allUniversities) return [];
     return allUniversities.filter(u => u.colleges.some(c => c.departments.some(dp => dp.name_en === departmentParam)));
-  }, [departmentParam]);
+  }, [departmentParam, allUniversities]);
 
   const departmentAr = useMemo(() => {
     const s = mockSubjects.find(x => x.name.en === departmentParam);
@@ -103,17 +110,7 @@ const Subjects = () => {
   const visibleCourses = filteredCourses.slice(0, visibleCount);
   const hasMore = visibleCount < listLength;
 
-  const getCoursesForSubject = (subjectNameEn: string) => {
-    let count = 0;
-    allUniversities.forEach(u => {
-      u.colleges.forEach(c => {
-        c.departments.forEach(dept => {
-          if (dept.name_en === subjectNameEn) count += dept.courses.length;
-        });
-      });
-    });
-    return count;
-  };
+  const getCoursesForSubject = (subjectNameEn: string) => subjectByName.get(subjectNameEn)?.courses || 0;
 
   const clearDepartment = () => {
     setSearch("");
@@ -140,6 +137,8 @@ const Subjects = () => {
     return <Navigate to={subjectPath(legacyDepartment)} replace />;
   }
   if (subjectSlug && !departmentParam) return <NotFound />;
+  // Course counts/descriptions depend on the country chunks; show the skeleton until they arrive.
+  if (departmentParam && !allUniversities && !subjectLoadError) return <RouteSkeleton />;
 
   const homeLabel = lang === "ar" ? "الرئيسية" : "Home";
   const pageTitle = departmentParam

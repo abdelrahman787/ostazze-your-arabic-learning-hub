@@ -1,4 +1,5 @@
-import { allUniversities } from "@/data/universitiesData";
+import { SUBJECT_INDEX, CATEGORY_INDEX } from "@/data/universities/subjectIndex.generated";
+import { collegeToCategory } from "@/data/universities/categories";
 
 // Pool of KSA universities used to replace legacy AAST references.
 // A different one is picked on every module load / render refresh.
@@ -73,98 +74,22 @@ export const mockTeachers: Teacher[] = [
   { id: "6", name: { ar: "د. نورة الحربي", en: "Dr. Noura Al-Harbi" }, title: { ar: "متخصصة في الإحصاء مع التركيز على التطبيقات العملية والبحثية", en: "Statistics specialist focusing on practical and research applications" }, subjects: [{ ar: "الإحصاء", en: "Statistics" }, { ar: "أساسيات البرمجة", en: "Programming Basics" }], price: 140, currency: { ar: "ر.س", en: "SAR" }, rating: 4.7, reviews: 89, verified: false, featured: false, university: { ar: "الجامعة الأمريكية في الكويت", en: "American University of Kuwait" }, yearsExperience: 5, totalSessions: 112, bio: { ar: "متخصصة في الإحصاء التطبيقي.", en: "Specialist in applied statistics." }, availability: [{ day: { ar: "الأحد", en: "Sunday" }, start: "16:00", end: "21:00" }] },
 ];
 
-// ===== DERIVE CATEGORIES FROM UNIVERSITY DATA =====
-const collegeToCategory: Record<string, { ar: string; en: string; icon: string }> = {
-  "engineering": { ar: "الهندسة والبترول", en: "Engineering & Petroleum", icon: "⚙️" },
-  "science": { ar: "العلوم", en: "Sciences", icon: "🔬" },
-  "arts": { ar: "الآداب والعلوم الإنسانية", en: "Arts & Humanities", icon: "📚" },
-  "medicine": { ar: "الطب", en: "Medicine", icon: "🏥" },
-  "business": { ar: "إدارة الأعمال", en: "Business Administration", icon: "📊" },
-  "law": { ar: "الحقوق والقانون", en: "Law", icon: "⚖️" },
-  "education": { ar: "التربية", en: "Education", icon: "🎓" },
-  "pharmacy": { ar: "الصيدلة", en: "Pharmacy", icon: "💊" },
-  "nursing": { ar: "التمريض", en: "Nursing", icon: "🩺" },
-  "sharia": { ar: "الشريعة والدراسات الإسلامية", en: "Sharia & Islamic Studies", icon: "📖" },
-  "allied": { ar: "العلوم الطبية المساندة", en: "Allied Health Sciences", icon: "🧬" },
-  "computing": { ar: "الحوسبة وتقنية المعلومات", en: "Computing & IT", icon: "💻" },
-  "design": { ar: "الفنون والتصميم", en: "Fine Arts & Design", icon: "🎨" },
-  "health": { ar: "العلوم الصحية", en: "Health Sciences", icon: "❤️" },
-  "technology": { ar: "التكنولوجيا", en: "Technology", icon: "🔧" },
-};
-
-function classifyCollege(nameEn: string): string {
-  const lower = nameEn.toLowerCase();
-  if (lower.includes("engineering") || lower.includes("petroleum")) return "engineering";
-  if (lower.includes("computer") || lower.includes("computing") || lower.includes("information technology")) return "computing";
-  if (lower.includes("medicine") || lower.includes("medical")) return "medicine";
-  if (lower.includes("business") || lower.includes("management") || lower.includes("economics")) return "business";
-  if (lower.includes("law")) return "law";
-  if (lower.includes("education")) return "education";
-  if (lower.includes("pharmacy")) return "pharmacy";
-  if (lower.includes("nursing")) return "nursing";
-  if (lower.includes("sharia") || lower.includes("islamic")) return "sharia";
-  if (lower.includes("allied") || lower.includes("health science")) return "allied";
-  if (lower.includes("science") && !lower.includes("art")) return "science";
-  if (lower.includes("art") || lower.includes("humanities") || lower.includes("social")) return "arts";
-  if (lower.includes("fine art") || lower.includes("design")) return "design";
-  if (lower.includes("technology") || lower.includes("udst")) return "technology";
-  if (lower.includes("health")) return "health";
-  return "arts";
-}
-
-// Build categories dynamically
-const buildCategories = (): Category[] => {
-  const catMap = new Map<string, { ar: string; en: string; icon: string; deptCount: number }>();
-  allUniversities.forEach(u => {
-    u.colleges.forEach(c => {
-      const key = classifyCollege(c.name_en);
-      const info = collegeToCategory[key] || { ar: key, en: key, icon: "📘" };
-      if (!catMap.has(key)) {
-        catMap.set(key, { ...info, deptCount: 0 });
-      }
-      catMap.get(key)!.deptCount += c.departments.length;
-    });
-  });
-  return Array.from(catMap.entries()).map(([key, val], i) => ({
+// ===== CATEGORIES & SUBJECTS, derived from the generated subject index (no course data) =====
+export const mockCategories: Category[] = CATEGORY_INDEX.map((c, i) => {
+  const info = collegeToCategory[c.key] || { ar: c.key, en: c.key, icon: "📘" };
+  return {
     id: String(i + 1),
-    icon: val.icon,
-    name: { ar: val.ar, en: val.en },
-    count: { ar: `${val.deptCount} قسم`, en: `${val.deptCount} departments` },
-  }));
-};
+    icon: info.icon,
+    name: { ar: info.ar, en: info.en },
+    count: { ar: `${c.departments} قسم`, en: `${c.departments} departments` },
+  };
+});
 
-// Build subjects dynamically from all departments
-const buildSubjects = (): Subject[] => {
-  const subjects: Subject[] = [];
-  const seen = new Set<string>();
-  let id = 1;
-  allUniversities.forEach(u => {
-    u.colleges.forEach(c => {
-      const catKey = classifyCollege(c.name_en);
-      const catInfo = collegeToCategory[catKey];
-      c.departments.forEach(d => {
-        if (!seen.has(d.name_en)) {
-          seen.add(d.name_en);
-          subjects.push({
-            id: String(id++),
-            name: { ar: d.name_ar, en: d.name_en },
-            teacherCount: Math.floor(Math.random() * 20) + 5,
-            category: catInfo?.ar || catKey,
-          });
-        }
-      });
-    });
-  });
-  return subjects;
-};
-
-export const mockCategories: Category[] = buildCategories();
-export const mockSubjects: Subject[] = buildSubjects();
-
-export const mockUniversities: University[] = allUniversities.map(u => ({
-  id: u.id,
-  name: { ar: u.name_ar, en: u.name_en },
-  country: { ar: u.country_ar, en: u.country_en },
+export const mockSubjects: Subject[] = SUBJECT_INDEX.map((s, i) => ({
+  id: String(i + 1),
+  name: { ar: s.name_ar, en: s.name_en },
+  teacherCount: Math.floor(Math.random() * 20) + 5,
+  category: s.category_ar,
 }));
 
 export const mockReviews: Review[] = [

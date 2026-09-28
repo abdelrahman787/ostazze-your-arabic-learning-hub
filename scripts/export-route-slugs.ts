@@ -1,8 +1,9 @@
 // Exports the canonical country/university/college/subject paths from src/lib/slugs.ts
 // so the sitemap generator uses exactly the same URLs as the app.
 import { writeFileSync } from "node:fs";
-import { allUniversities } from "../src/data/universitiesData";
-import { allSubjectSlugs, countryPath, universityPath, collegePath, subjectNameFromSlug, isSubjectIndexable, isCollegeIndexable, isUniversityIndexable } from "../src/lib/slugs";
+import { allUniversities } from "../src/data/universities/all";
+import { countryPath, universityPath, collegePath, isCollegeIndexable, isUniversityIndexable } from "../src/lib/slugs";
+import { allSubjectSlugs, subjectNameFromSlug, isSubjectIndexable } from "../src/lib/subjectSlugs";
 
 const paths = new Set<string>();
 for (const u of allUniversities) {

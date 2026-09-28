@@ -8,7 +8,10 @@ import {
 import PageHelmet from "@/components/PageHelmet";
 import { breadcrumbJsonLd, collectionPageJsonLd, faqJsonLd } from "@/lib/seo";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { allUniversities, University, College } from "@/data/universitiesData";
+import type { University, College } from "@/data/universities/types";
+import { COUNTRY_INDEX, type UniversitySummary } from "@/data/universities/countries";
+import { useCountryUniversities } from "@/data/universities/loader";
+import RouteSkeleton from "@/components/RouteSkeleton";
 import { getCollegeIcon } from "@/lib/collegeIconMap";
 import { groupByField } from "@/lib/collegeFieldMap";
 import { Input } from "@/components/ui/input";
@@ -22,18 +25,6 @@ import NotFound from "./NotFound";
 import { countryCodeFromSlug, countryPath, universityPath, collegePath, findUniversityBySlugs, isUniversityIndexable } from "@/lib/slugs";
 
 const MotionLink = motion.create(Link);
-
-// Group universities by country
-const getCountries = () => {
-  const map = new Map<string, { code: string; name_ar: string; name_en: string; universities: University[] }>();
-  allUniversities.forEach((u) => {
-    if (!map.has(u.country_code)) {
-      map.set(u.country_code, { code: u.country_code, name_ar: u.country_ar, name_en: u.country_en, universities: [] });
-    }
-    map.get(u.country_code)!.universities.push(u);
-  });
-  return Array.from(map.values());
-};
 
 const flagImages: Record<string, string> = { KW: flagKW, QA: flagQA, SA: flagSA, AE: flagAE, EG: flagEG };
 
@@ -52,10 +43,10 @@ const comingSoonTeaser = [
   { code: "EG", name_ar: countryNames.EG.ar, name_en: countryNames.EG.en },
 ];
 
-const getComingSoonCountries = (universities: University[]) =>
+const getComingSoonCountries = () =>
   comingSoonTeaser
-    .filter((c) => !universities.some((u) => u.country_code === c.code))
-    .map((c) => ({ ...c, universities: [] as University[] }));
+    .filter((c) => !COUNTRY_INDEX.some((x) => x.code === c.code))
+    .map((c) => ({ ...c, universities: [] as UniversitySummary[] }));
 
 
 const countryColors: Record<string, { from: string; to: string; accent: string }> = {
@@ -166,17 +157,23 @@ type View = "countries" | "universities" | "university";
 
 const Universities = () => {
   const { lang, t } = useLanguage();
-  const countries = useMemo(() => getCountries(), []);
-  const comingSoonCountries = useMemo(() => getComingSoonCountries(allUniversities), []);
+  const countries = COUNTRY_INDEX;
+  const comingSoonCountries = useMemo(() => getComingSoonCountries(), []);
   // The selected country/university come from the URL so every view is shareable.
   const { countrySlug: cSlug, universitySlug: uSlug } = useParams();
   const selectedCountry = useMemo(() => {
     const code = countryCodeFromSlug(cSlug);
     return code ? countries.find((c) => c.code === code) || null : null;
   }, [cSlug, countries]);
-  const selectedUni: University | null = useMemo(() => (uSlug ? findUniversityBySlugs(cSlug, uSlug) || null : null), [cSlug, uSlug]);
-  const view: View = selectedUni ? "university" : selectedCountry ? "universities" : "countries";
-  const notFound = (!!cSlug && !selectedCountry) || (!!uSlug && !selectedUni);
+  // Summary (from the small index) drives routing + SEO; full colleges load with the country's chunk.
+  const selectedSummary: UniversitySummary | null = useMemo(() => (uSlug ? findUniversityBySlugs(cSlug, uSlug) || null : null), [cSlug, uSlug]);
+  const { data: countryData, error: countryError } = useCountryUniversities(selectedSummary ? [selectedSummary.country_code] : []);
+  const selectedUni: University | null = useMemo(
+    () => (selectedSummary && countryData ? countryData.find((u) => u.id === selectedSummary.id) || null : null),
+    [selectedSummary, countryData],
+  );
+  const view: View = selectedSummary ? "university" : selectedCountry ? "universities" : "countries";
+  const notFound = (!!cSlug && !selectedCountry) || (!!uSlug && !selectedSummary);
   const [searchQuery, setSearchQuery] = useState("");
   useEffect(() => { setSearchQuery(""); }, [cSlug, uSlug]);
 
@@ -204,23 +201,23 @@ const Universities = () => {
   if (notFound) return <NotFound />;
 
   const countryLabel = selectedCountry ? (lang === "ar" ? selectedCountry.name_ar : selectedCountry.name_en) : "";
-  const uniLabel = selectedUni ? (lang === "ar" ? selectedUni.name_ar : selectedUni.name_en) : "";
-  const selfPath = selectedUni ? universityPath(selectedUni) : selectedCountry ? countryPath(selectedCountry.code) : "/universities";
-  const h1Text = selectedUni
+  const uniLabel = selectedSummary ? (lang === "ar" ? selectedSummary.name_ar : selectedSummary.name_en) : "";
+  const selfPath = selectedSummary ? universityPath(selectedSummary) : selectedCountry ? countryPath(selectedCountry.code) : "/universities";
+  const h1Text = selectedSummary
     ? uniLabel
     : selectedCountry
     ? (lang === "ar" ? `جامعات ${countryLabel}` : `Universities in ${countryLabel}`)
     : (lang === "ar" ? "الدولة" : t("universities_title"));
-  const uniCourseCount = selectedUni ? selectedUni.colleges.reduce((s, c) => s + c.departments.reduce((s2, d) => s2 + d.courses.length, 0), 0) : 0;
-  const seoTitle = selectedUni
+  const uniCourseCount = selectedSummary ? selectedSummary.courses : 0;
+  const seoTitle = selectedSummary
     ? (lang === "ar" ? `دروس خصوصية لطلاب ${uniLabel}` : `${uniLabel} Tutoring - Colleges & Courses`)
     : selectedCountry
     ? (lang === "ar" ? `جامعات ${countryLabel} - معلمون ومقررات` : `Universities in ${countryLabel} - Tutors & Courses`)
     : (lang === "ar" ? "الدولة - أستاذي OSTAZE" : "Countries - OSTAZE");
-  const seoDescription = selectedUni
+  const seoDescription = selectedSummary
     ? (lang === "ar"
-      ? `${selectedUni.colleges.length} كلية و${uniCourseCount} مقرر في ${uniLabel}. احجز حصة خصوصية أونلاين مع معلم متخصص في مقررك.`
-      : `${selectedUni.colleges.length} colleges and ${uniCourseCount} courses at ${uniLabel}. Book a live online session with a tutor for your course.`)
+      ? `${selectedSummary.colleges} كلية و${uniCourseCount} مقرر في ${uniLabel}. احجز حصة خصوصية أونلاين مع معلم متخصص في مقررك.`
+      : `${selectedSummary.colleges} colleges and ${uniCourseCount} courses at ${uniLabel}. Book a live online session with a tutor for your course.`)
     : selectedCountry
     ? (lang === "ar"
       ? `${selectedCountry.universities.length} جامعة في ${countryLabel} مع كلياتها ومقرراتها. اختر جامعتك واحجز معلماً متخصصاً.`
@@ -235,7 +232,7 @@ const Universities = () => {
         title={seoTitle}
         description={seoDescription}
         canonical={`https://ostaze.com${selfPath}`}
-        noindex={!!selectedUni && !isUniversityIndexable(selectedUni)}
+        noindex={!!selectedSummary && !isUniversityIndexable(selectedSummary)}
         keywords={lang === "ar" ? "جامعات الكويت, جامعات قطر, كليات, معلمون" : "Kuwait universities, Qatar universities, colleges, tutors"}
         jsonLd={[
           collectionPageJsonLd({
@@ -248,7 +245,7 @@ const Universities = () => {
             { name: lang === "ar" ? "الرئيسية" : "Home", path: "/" },
             { name: lang === "ar" ? "الدولة" : "Countries", path: "/universities" },
             ...(selectedCountry ? [{ name: countryLabel, path: countryPath(selectedCountry.code) }] : []),
-            ...(selectedUni ? [{ name: uniLabel, path: universityPath(selectedUni) }] : []),
+            ...(selectedSummary ? [{ name: uniLabel, path: universityPath(selectedSummary) }] : []),
           ]),
           ...(view === "countries" ? [faqJsonLd(uniFaq)] : []),
         ]}
@@ -276,13 +273,13 @@ const Universities = () => {
               <span className="text-foreground font-medium">{lang === "ar" ? selectedCountry.name_ar : selectedCountry.name_en}</span>
             </>
           )}
-          {view === "university" && selectedCountry && selectedUni && (
+          {view === "university" && selectedCountry && selectedSummary && (
             <>
               <Link to="/universities" className="hover:text-primary transition-colors">{lang === "ar" ? "الدولة" : t("universities_title")}</Link>
               <ChevronRight size={12} />
               <Link to={countryPath(selectedCountry.code)} className="hover:text-primary transition-colors">{lang === "ar" ? selectedCountry.name_ar : selectedCountry.name_en}</Link>
               <ChevronRight size={12} />
-              <span className="text-foreground font-medium truncate max-w-[200px]">{lang === "ar" ? selectedUni.name_ar : selectedUni.name_en}</span>
+              <span className="text-foreground font-medium truncate max-w-[200px]">{uniLabel}</span>
             </>
           )}
         </div>
@@ -306,8 +303,8 @@ const Universities = () => {
             >
               {countries.map((c, i) => {
                 const colors = countryColors[c.code] || { from: "from-primary/20", to: "to-accent/10", accent: "text-primary" };
-                const totalDepts = c.universities.reduce((s, u) => s + u.colleges.reduce((s2, col) => s2 + col.departments.length, 0), 0);
-                const totalCourses = c.universities.reduce((s, u) => s + u.colleges.reduce((s2, col) => s2 + col.departments.reduce((s3, d) => s3 + d.courses.length, 0), 0), 0);
+                const totalDepts = c.universities.reduce((s, u) => s + u.departments, 0);
+                const totalCourses = c.universities.reduce((s, u) => s + u.courses, 0);
 
                 return (
                   <MotionLink
@@ -390,8 +387,8 @@ const Universities = () => {
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 {filteredUnis.map((u, i) => {
-                  const totalDepts = u.colleges.reduce((s, c) => s + c.departments.length, 0);
-                  const totalCourses = u.colleges.reduce((s, c) => s + c.departments.reduce((s2, d) => s2 + d.courses.length, 0), 0);
+                  const totalDepts = u.departments;
+                  const totalCourses = u.courses;
                   return (
                     <MotionLink key={u.id} to={universityPath(u)} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
                       whileHover={{ y: -6, scale: 1.01 }} whileTap={{ scale: 0.98 }}
@@ -415,7 +412,7 @@ const Universities = () => {
                       </div>
                       <div className="grid grid-cols-3 gap-2 pt-3 border-t border-border/50">
                         {[
-                          { v: u.colleges.length, l: lang === "ar" ? "كلية" : "Colleges" },
+                          { v: u.colleges, l: lang === "ar" ? "كلية" : "Colleges" },
                           { v: totalDepts, l: lang === "ar" ? "قسم" : "Depts" },
                           { v: totalCourses, l: lang === "ar" ? "مادة" : "Courses" },
                         ].map(s => (
@@ -434,6 +431,22 @@ const Universities = () => {
                   <Search size={40} className="mx-auto mb-3 opacity-40" />
                   <p>{lang === "ar" ? "لم يتم العثور على نتائج" : "No results found"}</p>
                 </div>
+              )}
+            </motion.div>
+          )}
+
+          {/* === UNIVERSITY DETAIL: loading this country's chunk === */}
+          {view === "university" && !selectedUni && (
+            <motion.div key="university-loading" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              {countryError ? (
+                <div className="text-center py-16">
+                  <p className="text-muted-foreground mb-4">{lang === "ar" ? "تعذّر تحميل بيانات الجامعة." : "Couldn't load this university."}</p>
+                  <button type="button" onClick={() => window.location.reload()} className="text-primary font-bold hover:underline">
+                    {lang === "ar" ? "إعادة المحاولة" : "Try again"}
+                  </button>
+                </div>
+              ) : (
+                <RouteSkeleton />
               )}
             </motion.div>
           )}

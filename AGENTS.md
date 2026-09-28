@@ -1,3 +1,4 @@
-- All subject/country/university/college URLs are built only via src/lib/slugs.ts; the sitemap reads them via scripts/export-route-slugs.ts — one source of truth so links and sitemap never drift.
+- All country/university/college URLs are built only via src/lib/slugs.ts and subject URLs via src/lib/subjectSlugs.ts (split so university pages skip the subject index); the sitemap reads them via scripts/export-route-slugs.ts — one source of truth so links and sitemap never drift.
 - Business identity (name, phone, WhatsApp, location, socials, logo) lives only in src/config/site.ts; JSON-LD, footer, contact and WhatsApp links read from it so they never disagree.
-- Footer and GlobalSeo are lazy-loaded; homepage/about use src/data/catalogStats.ts instead of universitiesData — keeps initial JS under the 195 KB gzip budget.
+- University data is split per country (src/data/universities/{kw,qa,sa,ae}.ts), loaded only through loader.ts; UI reads the generated universityIndex/subjectIndex (scripts/build-catalog-index.ts, checked by a test); all.ts is for scripts/tests only — so no page downloads the whole catalog.
+- Footer stays eager (visible content) and there is no global TooltipProvider; initial JS target is <=180 KB gzip.

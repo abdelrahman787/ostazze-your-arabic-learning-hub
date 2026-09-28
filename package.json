@@ -6,7 +6,8 @@
   "scripts": {
     "predev": "node scripts/generate-sitemap.mjs",
     "dev": "vite",
-    "prebuild": "vite-node scripts/export-route-slugs.ts && node scripts/generate-sitemap.mjs && node scripts/validate-sitemap.mjs",
+    "catalog:index": "vite-node scripts/build-catalog-index.ts",
+    "prebuild": "vite-node scripts/build-catalog-index.ts && vite-node scripts/export-route-slugs.ts && node scripts/generate-sitemap.mjs && node scripts/validate-sitemap.mjs",
     "build": "vite build",
     "seo:audit": "vite-node scripts/seo-audit.ts",
     "build:dev": "vite build --mode development",

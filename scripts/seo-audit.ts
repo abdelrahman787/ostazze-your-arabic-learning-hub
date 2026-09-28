@@ -3,12 +3,9 @@
 // Checks entity existence, H1/title/description/canonical duplicates, thin content and orphans,
 // using the same data + URL rules the pages render from. Reports problems; never hides them.
 import { readFileSync, writeFileSync } from "node:fs";
-import { allUniversities } from "../src/data/universitiesData";
-import {
-  countryCodeFromSlug, findUniversityBySlugs, subjectNameFromSlug, countryPath, universityPath,
-  collegePath, subjectPath, isSubjectIndexable, isCollegeIndexable, isUniversityIndexable,
-  subjectCourses, collegeCourseCount, MIN_INDEXABLE_COURSES,
-} from "../src/lib/slugs";
+import { allUniversities } from "../src/data/universities/all";
+import { countryCodeFromSlug, findUniversityBySlugs, countryPath, universityPath, collegePath, isCollegeIndexable, isUniversityIndexable, collegeCourseCount, MIN_INDEXABLE_COURSES } from "../src/lib/slugs";
+import { subjectNameFromSlug, subjectPath, isSubjectIndexable, subjectCourses } from "../src/lib/subjectSlugs";
 
 type Row = { path: string; status: "valuable" | "thin" | "not_found" | "protected" | "unchecked"; h1?: string; title?: string; description?: string; units?: number; notes: string[] };
 

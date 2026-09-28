@@ -1,4 +1,4 @@
-import { TooltipProvider } from "@/components/ui/tooltip";
+import Footer from "@/components/Footer";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { useEffect as useEffectTS } from "react";
@@ -43,9 +43,7 @@ if (typeof window !== "undefined" && window.location.pathname === "/") {
 }
 const Index = lazy(indexImport);
 
-// Footer is below the fold: lazy so it stays out of the initial JS budget.
 const GlobalSeo = lazy(() => import("@/components/GlobalSeo"));
-const Footer = lazy(() => import("@/components/Footer"));
 const FloatingWhatsApp = lazy(() => import("@/components/FloatingWhatsApp"));
 const AIChatWidget = lazy(() => import("@/components/AIChatWidget"));
 const CookieConsent = lazy(() => import("@/components/CookieConsent"));
@@ -189,7 +187,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       >
         {children}
       </main>
-      {!hideFooter && <Suspense fallback={<div className="min-h-[420px]" aria-hidden="true" />}><Footer /></Suspense>}
+      {!hideFooter && <Footer />}
       <DeferredWidgets />
     </div>
   );
@@ -202,7 +200,6 @@ const App = () => (
         <ThemeProvider>
           <LanguageProvider>
             <AuthProvider>
-              <TooltipProvider>
                 {/* reducedMotion="user" makes every reveal/transition respect
                     prefers-reduced-motion (content shows instantly). */}
                 <MotionConfig reducedMotion="user">
@@ -261,7 +258,6 @@ const App = () => (
                 </MotionConfig>
 
                 
-              </TooltipProvider>
             </AuthProvider>
           </LanguageProvider>
         </ThemeProvider>
