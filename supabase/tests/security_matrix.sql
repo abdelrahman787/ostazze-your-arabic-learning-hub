@@ -26,7 +26,7 @@ BEGIN
   INSERT INTO public.bookings(student_id, teacher_id, scheduled_date, scheduled_time, status)
     VALUES (student, tutor_a, '2099-01-01', '10:00', 'completed');
   INSERT INTO public.teacher_reviews(teacher_id, student_id, rating, comment, status)
-    VALUES (tutor_b, student, 5, 'approved-test', 'approved'),
+    VALUES (tutor_b, tutor_a, 5, 'approved-test', 'approved'),
            (tutor_b, admin_u, 1, 'rejected-test', 'rejected'),
            (tutor_b, student, 3, 'pending-test', 'pending');
 
