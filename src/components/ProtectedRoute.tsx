@@ -5,6 +5,7 @@ import { Link } from "@/lib/router-compat";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useEffect } from "react";
 import { logAccessDenied } from "@/lib/accessLog";
+import AdminMfaGate from "@/components/AdminMfaGate";
 
 interface Props {
   children: React.ReactNode;
@@ -57,6 +58,10 @@ const ProtectedRoute = ({
         path={location.pathname}
       />
     );
+  }
+
+  if (user.role === "admin" && (adminOnly || teacherOnly)) {
+    return <AdminMfaGate>{children}</AdminMfaGate>;
   }
 
   return <>{children}</>;
