@@ -27,3 +27,4 @@ dist-ssr
 *.sln
 *.sw?
 scripts/.route-slugs.json
+scripts/seo-audit-report.json

@@ -60,6 +60,13 @@ const Footer = () => {
                 { label: t("nav_teachers"), path: "/teachers" },
                 { label: t("nav_universities"), path: "/universities" },
                 { label: t("nav_categories"), path: "/categories" },
+                { label: lang === "ar" ? "الدورات" : "Courses", path: "/courses" },
+                { label: lang === "ar" ? "اللغات" : "Languages", path: "/languages" },
+                // Country hubs (static list: keeps the heavy universities data out of every page).
+                ...[["kuwait","الكويت","Kuwait"],["qatar","قطر","Qatar"],["saudi-arabia","السعودية","Saudi Arabia"],["uae","الإمارات","UAE"]].map(([slug, ar, en]) => ({
+                  label: lang === "ar" ? `جامعات ${ar}` : `Universities in ${en}`,
+                  path: `/universities/${slug}`,
+                })),
               ].map((l) => (
                 <Link key={l.path} to={l.path} className="text-black/60 dark:text-white/60 hover:text-primary transition-colors">{l.label}</Link>
               ))}

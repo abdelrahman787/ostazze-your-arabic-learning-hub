@@ -76,3 +76,31 @@ export const subjectSlug = (nameEn: string) => subjectSlugByName.get(nameEn) || 
 export const subjectNameFromSlug = (slug?: string) => (slug ? subjectNameBySlug.get(slug.toLowerCase()) : undefined);
 export const subjectPath = (nameEn: string) => `/subjects/${subjectSlug(nameEn)}`;
 export const allSubjectSlugs = () => [...subjectNameBySlug.keys()];
+
+// ---- Indexability: only pages with real, distinct content go in the sitemap / get indexed ----
+export const MIN_INDEXABLE_COURSES = 5;
+// Department names that are requirement buckets rather than real subjects.
+const BUCKET_NAME = /elective|choose|option|\bcore\b|requirement|free\s|general education|minor|track|concentration/i;
+
+const subjectCourseCount = new Map<string, number>();
+(() => {
+  const seen = new Map<string, Set<string>>();
+  allUniversities.forEach((u) =>
+    u.colleges.forEach((c) =>
+      c.departments.forEach((d) => {
+        const set = seen.get(d.name_en) || new Set<string>();
+        d.courses.forEach((x) => set.add(x.code || x.name_en));
+        seen.set(d.name_en, set);
+      }),
+    ),
+  );
+  seen.forEach((set, name) => subjectCourseCount.set(name, set.size));
+})();
+
+export const subjectCourses = (nameEn: string) => subjectCourseCount.get(nameEn) || 0;
+export const isSubjectIndexable = (nameEn: string) =>
+  subjectCourses(nameEn) >= MIN_INDEXABLE_COURSES && !BUCKET_NAME.test(nameEn);
+export const collegeCourseCount = (c: Pick<College, "departments">) =>
+  c.departments.reduce((s, d) => s + d.courses.length, 0);
+export const isCollegeIndexable = (c: Pick<College, "departments">) => collegeCourseCount(c) >= MIN_INDEXABLE_COURSES;
+export const isUniversityIndexable = (u: Pick<University, "colleges">) => u.colleges.some(isCollegeIndexable);

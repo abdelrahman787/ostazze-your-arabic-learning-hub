@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect, useCallback } from "react";
 import { Link, useParams, useNavigate, Navigate } from "react-router-dom";
-import { findUniversityBySlugs, collegePath, countryPath, universityPath } from "@/lib/slugs";
+import { findUniversityBySlugs, collegePath, countryPath, universityPath, subjectPath, isSubjectIndexable, isCollegeIndexable } from "@/lib/slugs";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ChevronLeft, ChevronRight, ChevronDown,
@@ -65,6 +65,13 @@ const DepartmentBlock = ({ dept, lang, index, onRequest }: DeptProps) => {
           <ChevronDown size={18} className="text-primary/80" />
         </motion.div>
       </button>
+      {isSubjectIndexable(dept.name_en) && (
+        <div className="px-5 pb-3 -mt-2">
+          <Link to={subjectPath(dept.name_en)} className="text-xs text-primary hover:underline font-medium">
+            {lang === "ar" ? `كل مقررات ${dept.name_ar} ومعلموها` : `All ${dept.name_en} courses & tutors`}
+          </Link>
+        </div>
+      )}
 
       <AnimatePresence>
         {open && (
@@ -345,6 +352,7 @@ const CollegeDetail = () => {
     <div className="min-h-screen">
       <PageHelmet
         title={`${collegeName} — ${uniName}`}
+        noindex={!isCollegeIndexable(college)}
         description={
           lang === "ar"
             ? `أقسام ومواد ${collegeName} في ${uniName}. اطلب حصة خاصة مع معلم متخصص.`

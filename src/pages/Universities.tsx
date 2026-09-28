@@ -19,7 +19,7 @@ import flagAE from "@/assets/flag-ae.svg";
 import flagEG from "@/assets/flag-eg.svg";
 import WhatsAppQuickBook from "@/components/WhatsAppQuickBook";
 import NotFound from "./NotFound";
-import { countryCodeFromSlug, countryPath, universityPath, collegePath, findUniversityBySlugs } from "@/lib/slugs";
+import { countryCodeFromSlug, countryPath, universityPath, collegePath, findUniversityBySlugs, isUniversityIndexable } from "@/lib/slugs";
 
 const MotionLink = motion.create(Link);
 
@@ -235,6 +235,7 @@ const Universities = () => {
         title={seoTitle}
         description={seoDescription}
         canonical={`https://ostaze.com${selfPath}`}
+        noindex={!!selectedUni && !isUniversityIndexable(selectedUni)}
         keywords={lang === "ar" ? "جامعات الكويت, جامعات قطر, كليات, معلمون" : "Kuwait universities, Qatar universities, colleges, tutors"}
         jsonLd={[
           collectionPageJsonLd({
