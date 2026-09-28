@@ -113,12 +113,12 @@ const AdminInvoices = () => {
         const allIds = [
           ...new Set(
             sr.flatMap((r) =>
-              [r.student_id, r.teacher_id].filter(Boolean),
+              [r.student_id, r.teacher_id].filter((x): x is string => Boolean(x)),
             ),
           ),
         ];
         const teacherIds = [
-          ...new Set(sr.map((r) => r.teacher_id).filter(Boolean)),
+          ...new Set(sr.map((r) => r.teacher_id).filter((x): x is string => Boolean(x))),
         ];
         const [{ data: profiles }, { data: tps }] = await Promise.all([
           supabase
@@ -130,7 +130,7 @@ const AdminInvoices = () => {
                 .from("teacher_profiles")
                 .select("user_id, price")
                 .in("user_id", teacherIds)
-            : Promise.resolve({ data: [] as any[] }),
+            : Promise.resolve({ data: [] as { user_id: string; price: number | null }[] }),
         ]);
         const pMap = new Map(
           profiles?.map((p) => [p.user_id, p.full_name]) || [],
@@ -142,7 +142,7 @@ const AdminInvoices = () => {
           sr.map((r) => ({
             ...r,
             student_name: pMap.get(r.student_id) || "—",
-            teacher_name: r.teacher_id ? pMap.get(r.teacher_id) || "—" : null,
+            teacher_name: r.teacher_id ? pMap.get(r.teacher_id) || "—" : undefined,
             amount: r.teacher_id ? priceMap.get(r.teacher_id) || 0 : 0,
           })),
         );

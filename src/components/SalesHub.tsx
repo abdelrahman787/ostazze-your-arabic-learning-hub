@@ -67,7 +67,7 @@ const SalesHub = () => {
       const allIds = [
         ...new Set(
           data.flatMap((r) =>
-            [r.student_id, r.teacher_id].filter(Boolean),
+            [r.student_id, r.teacher_id].filter((x): x is string => Boolean(x)),
           ),
         ),
       ];
@@ -81,7 +81,7 @@ const SalesHub = () => {
         data.map((r) => ({
           ...r,
           student_name: pMap.get(r.student_id) || "—",
-          teacher_name: r.teacher_id ? pMap.get(r.teacher_id) || "—" : null,
+          teacher_name: r.teacher_id ? pMap.get(r.teacher_id) || "—" : undefined,
         })),
       );
     } else {
