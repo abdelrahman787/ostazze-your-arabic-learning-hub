@@ -27,7 +27,9 @@ const PageHelmet = ({
 }: PageHelmetProps) => {
   const { pathname } = useLocation();
   const fullTitle = title.includes("OSTAZE") ? title : `${title} | OSTAZE`;
-  const url = canonical || `${SITE}${pathname}`;
+  // Canonical is always self-referencing, https://ostaze.com, no query, no trailing slash.
+  const normalize = (u: string) => u.replace(/[?#].*$/, "").replace(/(.)\/+$/, "$1");
+  const url = normalize(canonical || `${SITE}${pathname}`);
   const ldArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 
   return (
