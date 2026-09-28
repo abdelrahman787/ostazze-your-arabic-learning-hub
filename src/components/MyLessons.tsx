@@ -57,7 +57,9 @@ const MyLessons = ({ role }: { role: "student" | "teacher" }) => {
         data.map((r) => ({
           ...r,
           teacher_name:
-            role === "student" && r.teacher_id ? pMap.get(r.teacher_id) || "—" : undefined,
+            role === "student" && r.teacher_id
+              ? pMap.get(r.teacher_id) || "—"
+              : undefined,
           student_name:
             role === "teacher" ? pMap.get(r.student_id) || "—" : undefined,
         })),

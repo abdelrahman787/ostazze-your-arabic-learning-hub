@@ -140,9 +140,7 @@ const AdminTeacherFinance = () => {
           }
         : null,
     );
-    const s = Array.isArray(sumRes.data)
-      ? sumRes.data[0]
-      : sumRes.data;
+    const s = Array.isArray(sumRes.data) ? sumRes.data[0] : sumRes.data;
     setSummary({
       available_balance: Number(s?.available_balance || 0),
       pending_amount: Number(s?.pending_amount || 0),
@@ -393,7 +391,10 @@ const AdminTeacherFinance = () => {
                   className={input}
                   value={form.type}
                   onChange={(e) =>
-                    setForm((f) => ({ ...f, type: e.target.value as (typeof TX_TYPES)[number] }))
+                    setForm((f) => ({
+                      ...f,
+                      type: e.target.value as (typeof TX_TYPES)[number],
+                    }))
                   }
                 >
                   {TX_TYPES.map((tp) => (
@@ -439,7 +440,10 @@ const AdminTeacherFinance = () => {
                   className={input}
                   value={form.status}
                   onChange={(e) =>
-                    setForm((f) => ({ ...f, status: e.target.value as (typeof TX_STATUSES)[number] }))
+                    setForm((f) => ({
+                      ...f,
+                      status: e.target.value as (typeof TX_STATUSES)[number],
+                    }))
                   }
                 >
                   {TX_STATUSES.map((s) => (

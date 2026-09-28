@@ -37,7 +37,10 @@ serve(async (req) => {
   }
 });
 
-type CheckoutSession = { id?: string; metadata?: Record<string, string> | null };
+type CheckoutSession = {
+  id?: string;
+  metadata?: Record<string, string> | null;
+};
 
 async function handleCheckoutCompleted(session: CheckoutSession) {
   console.log("Checkout completed:", session.id);

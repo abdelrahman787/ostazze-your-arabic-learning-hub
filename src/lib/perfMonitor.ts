@@ -43,8 +43,7 @@ export function startPerfMonitor(thresholds: Partial<PerfThresholds> = {}) {
         renderTime?: number;
         loadTime?: number;
       };
-      const time =
-        last.renderTime || last.loadTime || last.startTime;
+      const time = last.renderTime || last.loadTime || last.startTime;
       const level = time > t.lcpMs ? "warn" : "log";
       console[level](
         tag,

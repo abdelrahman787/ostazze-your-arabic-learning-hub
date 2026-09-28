@@ -18,7 +18,8 @@ import { join } from "node:path";
 
 const BASE = (process.env.BASE || "http://localhost:3000").replace(/\/$/, "");
 const PUBLIC_DIR =
-  process.env.PUBLIC_DIR || (existsSync(".output/public") ? ".output/public" : "dist/client");
+  process.env.PUBLIC_DIR ||
+  (existsSync(".output/public") ? ".output/public" : "dist/client");
 const HOME_JS_BUDGET_KB = 180;
 
 const gz = (buf) => gzipSync(buf).length;
@@ -37,7 +38,8 @@ function assetsOf(page) {
     ...pick(/<link[^>]+href="([^"]+)"[^>]+rel="modulepreload"/g),
   ]);
   // Inline module bootstrap imports (e.g. import("/assets/x.js"))
-  for (const m of page.matchAll(/import\(["'](\/assets\/[^"']+\.js)["']\)/g)) js.add(m[1]);
+  for (const m of page.matchAll(/import\(["'](\/assets\/[^"']+\.js)["']\)/g))
+    js.add(m[1]);
   const css = new Set([
     ...pick(/<link[^>]+rel="stylesheet"[^>]+href="([^"]+)"/g),
     ...pick(/<link[^>]+href="([^"]+)"[^>]+rel="stylesheet"/g),
@@ -51,7 +53,10 @@ function sizeOf(list) {
   for (const href of list) {
     if (!href.startsWith("/")) continue; // external
     const p = join(PUBLIC_DIR, href.split("?")[0]);
-    if (!existsSync(p)) { missing.push(href); continue; }
+    if (!existsSync(p)) {
+      missing.push(href);
+      continue;
+    }
     total += gz(readFileSync(p));
   }
   return { total, missing };
@@ -85,18 +90,34 @@ for (const r of routes) {
   const j = sizeOf(js);
   const c = sizeOf(css);
   console.log(
-    r.padEnd(48) + String(status).padEnd(8) +
-    `${kb(gz(Buffer.from(text)))}`.padStart(7) + `${kb(c.total)}`.padStart(8) + `${kb(j.total)}`.padStart(8) + " KB",
+    r.padEnd(48) +
+      String(status).padEnd(8) +
+      `${kb(gz(Buffer.from(text)))}`.padStart(7) +
+      `${kb(c.total)}`.padStart(8) +
+      `${kb(j.total)}`.padStart(8) +
+      " KB",
   );
-  if (j.missing.length || c.missing.length) console.log(`  missing assets: ${[...j.missing, ...c.missing].join(", ")}`);
+  if (j.missing.length || c.missing.length)
+    console.log(`  missing assets: ${[...j.missing, ...c.missing].join(", ")}`);
   if (r === "/") {
-    if (j.total === 0) { console.error("  ✖ no homepage JS found — wrong BASE/PUBLIC_DIR?"); failed = true; }
-    else if (j.total / 1024 > HOME_JS_BUDGET_KB) {
-      console.error(`  ✖ homepage initial JS ${kb(j.total)} KB > ${HOME_JS_BUDGET_KB} KB budget`);
+    if (j.total === 0) {
+      console.error("  ✖ no homepage JS found — wrong BASE/PUBLIC_DIR?");
+      failed = true;
+    } else if (j.total / 1024 > HOME_JS_BUDGET_KB) {
+      console.error(
+        `  ✖ homepage initial JS ${kb(j.total)} KB > ${HOME_JS_BUDGET_KB} KB budget`,
+      );
       failed = true;
     }
   }
-  if (status !== 200) { console.error(`  ✖ ${r} returned ${status}`); failed = true; }
+  if (status !== 200) {
+    console.error(`  ✖ ${r} returned ${status}`);
+    failed = true;
+  }
 }
-console.log(failed ? "\nPerformance budget FAILED." : `\nPerformance budget PASSED (homepage JS ≤ ${HOME_JS_BUDGET_KB} KB gzip).`);
+console.log(
+  failed
+    ? "\nPerformance budget FAILED."
+    : `\nPerformance budget PASSED (homepage JS ≤ ${HOME_JS_BUDGET_KB} KB gzip).`,
+);
 process.exit(failed ? 1 : 0);

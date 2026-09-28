@@ -81,7 +81,9 @@ const SalesHub = () => {
         data.map((r) => ({
           ...r,
           student_name: pMap.get(r.student_id) || "—",
-          teacher_name: r.teacher_id ? pMap.get(r.teacher_id) || "—" : undefined,
+          teacher_name: r.teacher_id
+            ? pMap.get(r.teacher_id) || "—"
+            : undefined,
         })),
       );
     } else {

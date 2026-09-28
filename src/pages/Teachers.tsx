@@ -80,9 +80,7 @@ const Teachers = ({
         _user_ids: userIds,
       });
 
-      const profileMap = new Map(
-        (profiles || []).map((p) => [p.user_id, p]),
-      );
+      const profileMap = new Map((profiles || []).map((p) => [p.user_id, p]));
 
       const merged: TeacherData[] = tps.map((tp) => {
         const profile = profileMap.get(tp.user_id);
