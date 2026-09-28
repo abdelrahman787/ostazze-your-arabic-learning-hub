@@ -226,7 +226,12 @@ const DepartmentBlock = ({ dept, lang, index, onRequest }: DeptProps) => {
 };
 
 const CollegeDetail = () => {
-  const { uniId, collegeId, countrySlug, universitySlug } = useParams();
+  const params = useParams();
+  // Legacy /universities/:uniId/colleges/:collegeId shares the first dynamic segment with the clean route.
+  const isLegacy = !params.universitySlug;
+  const { collegeId, universitySlug } = params;
+  const uniId = isLegacy ? params.countrySlug : undefined;
+  const countrySlug = isLegacy ? undefined : params.countrySlug;
   const navigate = useNavigate();
   const { lang, t } = useLanguage();
   const [search, setSearch] = useState("");
