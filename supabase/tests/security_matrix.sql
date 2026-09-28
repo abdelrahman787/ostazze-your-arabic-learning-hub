@@ -45,13 +45,13 @@ BEGIN
     ('anon','ok','F1 public profile gets verified tutor slots via RPC','SELECT 1 FROM public.get_public_teacher_availability(''bd335f03-dbab-4451-bab5-5d3acc17f333'')'),
     -- 2. teacher_reviews
     ('anon','deny','F2 anon reads reviews table','SELECT 1 FROM public.teacher_reviews'),
-    ('tutor_a','deny','F2 other user reads raw reviews (student ids)','SELECT 1 FROM public.teacher_reviews'),
+    ('tutor_b','deny','F2 other user reads raw reviews (student ids)','SELECT 1 FROM public.teacher_reviews'),
     ('anon','ok','F2 public RPC returns approved review','SELECT 1 FROM public.get_public_teacher_reviews(''bd335f03-dbab-4451-bab5-5d3acc17f333'') WHERE comment=''approved-test'''),
     ('anon','deny','F2 public RPC hides rejected review','SELECT 1 FROM public.get_public_teacher_reviews(''bd335f03-dbab-4451-bab5-5d3acc17f333'') WHERE comment=''rejected-test'''),
     ('student','ok','F2 student reviews tutor after completed session','INSERT INTO public.teacher_reviews(teacher_id,student_id,rating) VALUES (''a54d78e1-15e2-48b3-b72d-ca998ee977ed'',''facac84e-e25e-43d6-aae9-ecc9fa90eb45'',4)'),
     ('student','deny','F2 student reviews tutor without completed session','INSERT INTO public.teacher_reviews(teacher_id,student_id,rating) VALUES (''87e84015-7542-4808-a797-eecce7826cc8'',''facac84e-e25e-43d6-aae9-ecc9fa90eb45'',4)'),
     ('student','deny','F2 student self-approves (status forced to pending)',''),
-    ('tutor_a','deny','F2 user edits another user''s review','UPDATE public.teacher_reviews SET comment=''x'' WHERE comment=''approved-test'''),
+    ('student','deny','F2 user edits another user''s review','UPDATE public.teacher_reviews SET comment=''x'' WHERE comment=''approved-test'''),
     ('student','deny','F2 student deletes review','DELETE FROM public.teacher_reviews WHERE comment=''approved-test'''),
     ('admin','ok','F2 admin moderates review','UPDATE public.teacher_reviews SET status=''approved'' WHERE comment=''rejected-test'''),
     -- 3. tutor-cvs (findings 3)
