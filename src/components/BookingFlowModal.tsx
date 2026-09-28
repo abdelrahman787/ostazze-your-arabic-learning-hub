@@ -250,7 +250,8 @@ const BookingFlowModal = ({
         setSessionRequestId(data.id);
         setShowSuccess(true);
       }
-    } catch (e: any) {
+    } catch (caught) {
+      const e = caught as Error;
       toast.error((lang === "ar" ? "خطأ: " : "Error: ") + e.message);
     }
     setSubmitting(false);

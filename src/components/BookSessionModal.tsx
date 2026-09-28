@@ -163,7 +163,8 @@ const BookSessionModal = ({
       if (error) throw error;
 
       setShowSuccess(true);
-    } catch (e: any) {
+    } catch (caught) {
+      const e = caught as Error;
       toast.error((lang === "ar" ? "خطأ: " : "Error: ") + e.message);
     } finally {
       setSubmitting(false);

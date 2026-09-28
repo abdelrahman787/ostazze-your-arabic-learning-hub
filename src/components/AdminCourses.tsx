@@ -251,7 +251,8 @@ const AdminCourses = () => {
 
       setShowForm(false);
       fetchCourses();
-    } catch (err: any) {
+    } catch (caught) {
+      const err = caught as Error;
       toast.error(err.message);
     }
     setSaving(false);
@@ -377,7 +378,8 @@ const AdminCourses = () => {
       }
       setShowLessonForm(false);
       await fetchCourseChildren(expandedCourse);
-    } catch (err: any) {
+    } catch (caught) {
+      const err = caught as Error;
       toast.error(err.message);
     }
     setLessonSaving(false);
@@ -462,7 +464,8 @@ const AdminCourses = () => {
       }
       setShowSessionForm(false);
       await fetchCourseChildren(expandedCourse);
-    } catch (err: any) {
+    } catch (caught) {
+      const err = caught as Error;
       toast.error(err.message);
     }
     setSessionSaving(false);

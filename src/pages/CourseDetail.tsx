@@ -159,7 +159,8 @@ const CourseDetail = ({
             : "Payment system coming soon",
         );
       }
-    } catch (err: any) {
+    } catch (caught) {
+      const err = caught as Error;
       toast.error(err.message);
     }
     setEnrolling(false);

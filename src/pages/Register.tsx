@@ -138,7 +138,8 @@ const Register = () => {
         redirect_uri: window.location.origin,
       });
       if (error) setError(error.message || t("login_error"));
-    } catch (err: any) {
+    } catch (caught) {
+      const err = caught as Error;
       setError(err.message || t("login_error"));
     }
     setGoogleLoading(false);

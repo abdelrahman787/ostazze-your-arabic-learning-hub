@@ -81,7 +81,7 @@ const Teachers = ({
       });
 
       const profileMap = new Map(
-        (profiles || []).map((p: any) => [p.user_id, p]),
+        (profiles || []).map((p) => [p.user_id, p]),
       );
 
       const merged: TeacherData[] = tps.map((tp) => {
@@ -94,11 +94,11 @@ const Teachers = ({
           bio_en: profile?.bio_en || null,
           avatar_url: profile?.avatar_url || null,
           subjects: tp.subjects || [],
-          subjects_en: (tp as any).subjects_en || [],
+          subjects_en: tp.subjects_en || [],
           university: tp.university || null,
-          university_en: (tp as any).university_en || null,
-          major: (tp as any).major || null,
-          major_en: (tp as any).major_en || null,
+          university_en: tp.university_en || null,
+          major: tp.major || null,
+          major_en: tp.major_en || null,
           price: tp.price || 0,
           verified: tp.verified || false,
         };

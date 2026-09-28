@@ -235,7 +235,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         setUser((prev) => (prev ? { ...prev, name: data.full_name! } : null));
       }
       return {};
-    } catch (e: any) {
+    } catch (caught) {
+      const e = caught as Error;
       return { error: e.message };
     }
   };

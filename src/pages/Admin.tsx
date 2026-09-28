@@ -571,8 +571,8 @@ const Admin = () => {
         avatar_url: profile?.avatar_url || null,
         university: tp.university,
         university_en: tp.university_en ?? null,
-        major: (tp as any).major ?? null,
-        major_en: (tp as any).major_en ?? null,
+        major: tp.major ?? null,
+        major_en: tp.major_en ?? null,
         price: tp.price ?? null,
         subjects: (tp.subjects as string[]) || [],
         subjects_en: (tp.subjects_en as string[]) || [],
@@ -925,7 +925,8 @@ const Admin = () => {
       setPdfFile(null);
       fetchLectures();
       fetchStats();
-    } catch (err: any) {
+    } catch (caught) {
+      const err = caught as Error;
       toast.error(err.message);
     }
     setUploading(false);
@@ -971,7 +972,8 @@ const Admin = () => {
       setEditVideoFile(null);
       setEditPdfFile(null);
       fetchLectures();
-    } catch (err: any) {
+    } catch (caught) {
+      const err = caught as Error;
       toast.error(err.message);
     }
     setEditUploading(false);
@@ -1032,7 +1034,8 @@ const Admin = () => {
       fetchTeachers();
       fetchStats();
       fetchProfiles();
-    } catch (err: any) {
+    } catch (caught) {
+      const err = caught as Error;
       toast.error(err.message);
     }
     setAddingTeacher(false);
@@ -1059,7 +1062,8 @@ const Admin = () => {
       setShowAddAdmin(false);
       setAddAdminEmail("");
       fetchAdmins();
-    } catch (err: any) {
+    } catch (caught) {
+      const err = caught as Error;
       toast.error(err.message);
     }
     setAddingAdmin(false);

@@ -92,7 +92,7 @@ const AdminInvoices = () => {
         );
         const cMap = new Map(courses?.map((c) => [c.id, c]) || []);
         setEnrollments(
-          enr.map((e: any) => ({
+          enr.map((e) => ({
             ...e,
             student_name: pMap.get(e.student_id) || "—",
             course_title: cMap.get(e.course_id)?.title || "—",
@@ -112,13 +112,13 @@ const AdminInvoices = () => {
       if (sr && sr.length > 0) {
         const allIds = [
           ...new Set(
-            sr.flatMap((r: any) =>
+            sr.flatMap((r) =>
               [r.student_id, r.teacher_id].filter(Boolean),
             ),
           ),
         ];
         const teacherIds = [
-          ...new Set(sr.map((r: any) => r.teacher_id).filter(Boolean)),
+          ...new Set(sr.map((r) => r.teacher_id).filter(Boolean)),
         ];
         const [{ data: profiles }, { data: tps }] = await Promise.all([
           supabase
@@ -136,10 +136,10 @@ const AdminInvoices = () => {
           profiles?.map((p) => [p.user_id, p.full_name]) || [],
         );
         const priceMap = new Map(
-          (tps || []).map((t: any) => [t.user_id, Number(t.price) || 0]),
+          (tps || []).map((t) => [t.user_id, Number(t.price) || 0]),
         );
         setSessions(
-          sr.map((r: any) => ({
+          sr.map((r) => ({
             ...r,
             student_name: pMap.get(r.student_id) || "—",
             teacher_name: r.teacher_id ? pMap.get(r.teacher_id) || "—" : null,
@@ -149,7 +149,8 @@ const AdminInvoices = () => {
       } else {
         setSessions([]);
       }
-    } catch (err: any) {
+    } catch (caught) {
+      const err = caught as Error;
       toast.error("خطأ في تحميل البيانات: " + err.message);
     }
     setLoading(false);
@@ -232,7 +233,8 @@ const AdminInvoices = () => {
 
       doc.save(`ostaze-invoices-${Date.now()}.pdf`);
       toast.success("تم تنزيل التقرير ✓");
-    } catch (err: any) {
+    } catch (caught) {
+      const err = caught as Error;
       toast.error("خطأ: " + err.message);
     }
     setGenerating(false);
@@ -305,7 +307,8 @@ const AdminInvoices = () => {
 
       doc.save(`ostaze-sales-${Date.now()}.pdf`);
       toast.success("تم تنزيل التقرير ✓");
-    } catch (err: any) {
+    } catch (caught) {
+      const err = caught as Error;
       toast.error("خطأ: " + err.message);
     }
     setGenerating(false);

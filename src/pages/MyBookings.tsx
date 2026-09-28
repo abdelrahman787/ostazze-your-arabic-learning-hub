@@ -177,7 +177,7 @@ const MyBookings = () => {
           _user_ids: teacherIds,
         });
         profileMap = new Map(
-          (profiles || []).map((p: any) => [
+          (profiles || []).map((p) => [
             p.user_id,
             {
               full_name:

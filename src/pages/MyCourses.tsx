@@ -99,7 +99,7 @@ const MyCourses = () => {
       );
       const sessions = sessionResults
         .flatMap((r, i) =>
-          (r.data || []).map((s: any) => ({ ...s, course_id: courseIds[i] })),
+          (r.data || []).map((s) => ({ ...s, course_id: courseIds[i] })),
         )
         .filter((s) => !s.is_completed)
         .sort((a, b) =>

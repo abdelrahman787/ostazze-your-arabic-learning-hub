@@ -66,7 +66,7 @@ const SalesHub = () => {
     if (data && data.length > 0) {
       const allIds = [
         ...new Set(
-          (data as any[]).flatMap((r: any) =>
+          data.flatMap((r) =>
             [r.student_id, r.teacher_id].filter(Boolean),
           ),
         ),
@@ -75,10 +75,10 @@ const SalesHub = () => {
         _user_ids: allIds,
       });
       const pMap = new Map(
-        (profiles || []).map((p: any) => [p.user_id, p.full_name]),
+        (profiles || []).map((p) => [p.user_id, p.full_name]),
       );
       setRequests(
-        (data as any[]).map((r: any) => ({
+        data.map((r) => ({
           ...r,
           student_name: pMap.get(r.student_id) || "—",
           teacher_name: r.teacher_id ? pMap.get(r.teacher_id) || "—" : null,
@@ -100,7 +100,7 @@ const SalesHub = () => {
         _user_ids: ids,
       });
       setTeachers(
-        (profiles || []).map((p: any) => ({
+        (profiles || []).map((p) => ({
           user_id: p.user_id,
           full_name: p.full_name,
         })),
@@ -148,7 +148,8 @@ const SalesHub = () => {
       setAssignTeacherId("");
       setAssignZoom("");
       fetchRequests();
-    } catch (err: any) {
+    } catch (caught) {
+      const err = caught as Error;
       toast.error("Error: " + err.message);
     }
     setAssigning(false);
@@ -180,7 +181,8 @@ const SalesHub = () => {
         toast.success("تم التحديث");
       }
       fetchRequests();
-    } catch (err: any) {
+    } catch (caught) {
+      const err = caught as Error;
       toast.error("Error: " + err.message);
     }
     setUpdatingId(null);

@@ -25,7 +25,7 @@ const StatsBar = () => {
         ]);
         if (!mounted) return;
         const uniqueSubjects = new Set<string>();
-        (tProfiles.data || []).forEach((row: any) => {
+        (tProfiles.data || []).forEach((row) => {
           (row?.subjects || []).forEach(
             (s: string) => s && uniqueSubjects.add(s.trim()),
           );

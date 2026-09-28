@@ -172,7 +172,8 @@ const AIChatWidget = () => {
           showWhatsApp: isUnansweredResponse(content),
         },
       ]);
-    } catch (e: any) {
+    } catch (caught) {
+      const e = caught as Error;
       console.error("Chat error:", e);
       setMessages((prev) => [
         ...prev,

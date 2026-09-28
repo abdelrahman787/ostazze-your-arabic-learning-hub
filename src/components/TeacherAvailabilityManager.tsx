@@ -117,7 +117,8 @@ const TeacherAvailabilityManager = () => {
       }
       toast.success(t("schedule_saved"));
       fetchSlots();
-    } catch (e: any) {
+    } catch (caught) {
+      const e = caught as Error;
       toast.error(t("save_error") + " " + e.message);
     }
     setSaving(false);

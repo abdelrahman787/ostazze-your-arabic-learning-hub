@@ -101,7 +101,7 @@ const TeacherDashboard = () => {
       ]);
 
       const pMap = new Map(
-        (profilesResult.data || []).map((p: any) => [p.user_id, p.full_name]),
+        (profilesResult.data || []).map((p) => [p.user_id, p.full_name]),
       );
       const convLectureIds = new Set(
         convResult.data?.map((m) => m.lecture_id) || [],
