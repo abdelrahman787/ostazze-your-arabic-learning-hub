@@ -111,7 +111,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-black/10 dark:border-white/10 mt-12 pt-6 text-center text-sm text-black/40 dark:text-white/40">
-          © {new Date().getFullYear()} Ostaze. {t("footer_rights").replace(/© \d{4} Ostaze\. ?/, "")}
+          © {new Date().getFullYear()} {SITE.name}. {t("footer_rights").replace(/© \d{4} Ostaze\. ?/, "")}
         </div>
       </div>
     </footer>
