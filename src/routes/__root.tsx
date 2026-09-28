@@ -35,6 +35,10 @@ const CSP =
 const APPLE_MOTION_SCRIPT =
   "try{var p=navigator.platform||'';if(/Mac|iPhone|iPad|iPod/i.test(p)||(p==='MacIntel'&&navigator.maxTouchPoints>1)){document.documentElement.dataset.appleMotionLite='1'}}catch(e){}";
 
+// Theme bootstrap before first paint (avoids a light flash for dark-mode users).
+const THEME_SCRIPT =
+  "try{var t=localStorage.getItem('ostazze_theme');if(!t&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)t='dark';if(t==='dark')document.documentElement.classList.add('dark')}catch(e){}";
+
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
     meta: [
@@ -71,7 +75,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "shortcut icon", href: "/favicon-32.png?v=3", type: "image/png" },
       { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png?v=3" },
     ],
-    scripts: [{ children: APPLE_MOTION_SCRIPT }],
+    scripts: [{ children: APPLE_MOTION_SCRIPT }, { children: THEME_SCRIPT }],
   }),
   shellComponent: RootShell,
   component: RootComponent,

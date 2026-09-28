@@ -13,6 +13,7 @@ export const useTheme = () => useContext(ThemeContext);
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window === "undefined") return "light";
     const saved = localStorage.getItem("ostazze_theme");
     if (saved === "light" || saved === "dark") return saved as Theme;
     // Auto — follow the OS preference on first visit.
