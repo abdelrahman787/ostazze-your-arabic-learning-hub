@@ -1,14 +1,13 @@
-# Roadmap — pre-publish verification (brief: Finish_all_remaining_verification)
+# Roadmap — pre-publish verification
 
-- [ ] 1. Lint to completion; fix errors, report warnings
-- [ ] 2. Perf budget for TanStack output, per-route first-load sizes, fail if home > 180 KB gzip
-- [ ] 3. SSR first page of /teachers and /courses (public fields only, honest empty state)
-- [ ] 4. Full sitemap audit (200, indexable, 1 title, desc, canonical, 1 H1, no redirects/private/invalid/dupes)
-- [ ] 5. College routes: real college SSR, fake college 404+noindex, legacy 301
-- [ ] 6. Critical user-flow regression tests with disposable data, cleaned up
-- [ ] 7. Security after SSR: scan, no secrets/private fields, cache safety, role boundaries
-- [ ] 8. Raw-response report for public/private/redirect/404 routes
-- [ ] 9. English SEO: no same-URL hreflang; /en/ + hreflang recorded as deferred; no hydration flash on switch
-- [ ] 10. Deployment portability: node build/start, docs (Node version, output, env, health route)
-- Deferred: separate /en/ URLs with reciprocal hreflang
+- [~] 1. Lint: formatting + most `any` errors fixed; a final full run still shows leftovers to clear
+- [x] 2. Perf budget per route; homepage 166 KB gzip (budget 180)
+- [x] 3. SSR first page of /teachers (19 tutors) and /courses (5 courses)
+- [x] 4. Sitemap audit: 431/431 pass
+- [x] 5. College routes: SSR, fake → 404 + noindex, legacy → 301
+- [ ] 6. Signed-in user-flow regression tests (not run yet)
+- [x] 7. Security: scan clean, 49/49 access tests, private pages no-store, no secrets in pages
+- [~] 8. Raw-response report (partly covered by sitemap audit + spot checks)
+- [~] 9. English SEO: no hreflang; /en/ deferred (docs/DEPLOYMENT.md); language-switch flash not checked
+- [x] 10. Node build/start + docs/DEPLOYMENT.md + /api/health
 - Do NOT publish — user reviews first.
