@@ -29,11 +29,10 @@ const BodySchema = z.object({
 const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), { status, headers: { ...corsHeaders, "Content-Type": "application/json" } });
 
-/** Mode is decided server-side only: STRIPE_MODE, else live when a live key exists. */
+/** Server-side only. Live requires an explicit STRIPE_MODE=live AND a live key; otherwise sandbox. */
 function resolveEnv(): StripeEnv {
-  const mode = Deno.env.get("STRIPE_MODE");
-  if (mode === "live" || mode === "sandbox") return mode;
-  return Deno.env.get("STRIPE_LIVE_API_KEY") ? "live" : "sandbox";
+  const live = Deno.env.get("STRIPE_MODE") === "live" && !!Deno.env.get("STRIPE_LIVE_API_KEY");
+  return live ? "live" : "sandbox";
 }
 
 function resolveReturnUrl(candidate: string | null | undefined, origin: string | null): string | null {
