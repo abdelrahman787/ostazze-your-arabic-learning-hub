@@ -112,7 +112,7 @@ const BookingManager = ({ role }: Props) => {
   const updateStatus = async (id: string, status: string, reason?: string) => {
     setActionLoading(id);
     try {
-      const updateData: any = { status };
+      const updateData: { status: string; reject_reason?: string } = { status };
       if (reason) updateData.reject_reason = reason;
 
       const { error } = await supabase

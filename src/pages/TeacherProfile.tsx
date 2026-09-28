@@ -109,7 +109,7 @@ const TeacherProfile = ({
       const { data: profileRows } = await supabase.rpc("get_public_profile", {
         _user_id: id,
       });
-      const profile = (profileRows as any[])?.[0] || null;
+      const profile = (profileRows as Record<string, unknown>[] | null)?.[0] || null;
 
       setTeacher({
         user_id: tp.user_id,

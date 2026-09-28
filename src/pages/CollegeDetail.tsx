@@ -164,8 +164,8 @@ const DepartmentBlock = ({ dept, lang, index, onRequest }: DeptProps) => {
                   const t = c.term ?? "";
                   if (!yearMap.has(y)) yearMap.set(y, new Map());
                   const tm = yearMap.get(y)!;
-                  if (!tm.has(t)) tm.set(t, [] as any);
-                  (tm.get(t) as any).push(c);
+                  if (!tm.has(t)) tm.set(t, []);
+                  tm.get(t)!.push(c);
                 });
 
                 const termOrder: Record<string, number> = {

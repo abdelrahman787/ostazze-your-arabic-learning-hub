@@ -120,7 +120,7 @@ const MyLessons = ({ role }: { role: "student" | "teacher" }) => {
                     : "bg-muted text-muted-foreground"
               }`}
             >
-              {t(`bstatus_${lesson.status}` as any) || lesson.status}
+              {t(`bstatus_${lesson.status}` as TranslationKey) || lesson.status}
             </span>
           </div>
 
