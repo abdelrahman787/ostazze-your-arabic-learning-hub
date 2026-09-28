@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { hasAal2, MFA_REQUIRED_MESSAGE } from "../_shared/mfa.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -88,7 +89,11 @@ serve(async (req) => {
       .select("role")
       .eq("user_id", claimsData.claims.sub as string)
       .eq("role", "admin");
-    if (!roles || roles.length === 0) {
+    if (
+      !roles ||
+      roles.length === 0 ||
+      !hasAal2(req.headers.get("Authorization"))
+    ) {
       return new Response(
         JSON.stringify({ success: false, error: "Forbidden" }),
         {

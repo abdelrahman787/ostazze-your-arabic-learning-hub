@@ -2,6 +2,7 @@ import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { createZoomMeeting } from "../_shared/zoom.ts";
 import { sendWapilotText } from "../_shared/wapilot.ts";
+import { hasAal2, MFA_REQUIRED_MESSAGE } from "../_shared/mfa.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -32,6 +33,8 @@ serve(async (req) => {
       .eq("role", "admin")
       .maybeSingle();
     if (!role) throw new Error("Only admins can confirm session requests.");
+    if (!hasAal2(req.headers.get("Authorization")))
+      throw new Error(MFA_REQUIRED_MESSAGE);
 
     const { request_id } = (await req.json()) as { request_id?: string };
     if (!request_id) throw new Error("request_id is required.");

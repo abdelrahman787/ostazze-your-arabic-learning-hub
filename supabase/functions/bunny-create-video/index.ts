@@ -2,6 +2,7 @@
 // + a direct upload endpoint. Admin uploads the file directly from the browser
 // using PUT to Bunny's video URL.
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
+import { hasAal2, MFA_REQUIRED_MESSAGE } from "../_shared/mfa.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -105,6 +106,12 @@ Deno.serve(async (req) => {
       .eq("role", "admin")
       .maybeSingle();
 
+    if (roleRow && !hasAal2(req.headers.get("Authorization"))) {
+      return new Response(JSON.stringify({ error: MFA_REQUIRED_MESSAGE }), {
+        status: 403,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
     if (!roleRow) {
       return new Response(JSON.stringify({ error: "Forbidden" }), {
         status: 403,
