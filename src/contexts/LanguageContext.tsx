@@ -1298,7 +1298,7 @@ const translations = {
   related_links: { ar: "روابط ذات صلة", en: "Related links" },
 } as const;
 
-type TranslationKey = keyof typeof translations;
+export type TranslationKey = keyof typeof translations;
 
 interface LanguageContextType {
   lang: Lang;
