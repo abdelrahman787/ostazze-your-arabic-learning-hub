@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation, useNavigate } from "react-router-dom";
@@ -189,7 +190,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       >
         {children}
       </main>
-      {!hideFooter && <Suspense fallback={<div className="min-h-[420px]" aria-hidden="true" />}><Footer /></Suspense>}
+      {!hideFooter && <Footer />}
       <DeferredWidgets />
     </div>
   );
