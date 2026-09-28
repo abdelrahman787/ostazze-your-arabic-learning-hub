@@ -26,6 +26,7 @@ import NotificationBell from "@/components/NotificationBell";
 import TeacherAvailabilityManager from "@/components/TeacherAvailabilityManager";
 import MyLessons from "@/components/MyLessons";
 import TeacherFinance from "@/components/TeacherFinance";
+import TeacherOnboardingBanner from "@/components/TeacherOnboardingBanner";
 
 interface TeacherLecture {
   id: string;
@@ -65,6 +66,28 @@ const TeacherDashboard = () => {
 
   // Conversations view
   const [showConversations, setShowConversations] = useState(false);
+
+  // Onboarding status is resolved before the content renders so the setup
+  // banner never pushes the dashboard down after first paint.
+  const [onboardingPending, setOnboardingPending] = useState<boolean | null>(
+    null,
+  );
+  useEffect(() => {
+    if (!user) return;
+    let cancelled = false;
+    supabase
+      .from("profiles")
+      .select("onboarding_completed")
+      .eq("user_id", user.id)
+      .maybeSingle()
+      .then(({ data }) => {
+        if (!cancelled)
+          setOnboardingPending(data ? data.onboarding_completed === false : false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [user]);
 
   // Listen for notification-driven tab switch
   useEffect(() => {
@@ -298,7 +321,11 @@ const TeacherDashboard = () => {
           className="bg-card border-b px-6 py-4 flex items-center justify-between sticky z-20"
         >
           <div className="flex items-center gap-3">
-            <button onClick={() => setSidebarOpen(true)} className="lg:hidden">
+            <button
+              onClick={() => setSidebarOpen(true)}
+              className="lg:hidden min-h-11 min-w-11 -ms-2 flex items-center justify-center rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              aria-label={lang === "ar" ? "فتح القائمة" : "Open menu"}
+            >
               <Menu size={20} />
             </button>
             <h2 className="font-bold">
@@ -334,7 +361,17 @@ const TeacherDashboard = () => {
           </div>
         </header>
 
-        <div className="p-6">
+        <div className="p-4 sm:p-6">
+          {onboardingPending === null ? (
+            <div className="flex justify-center py-12" role="status">
+              <Loader2 className="animate-spin text-primary" size={28} />
+              <span className="sr-only">
+                {lang === "ar" ? "جارٍ التحميل" : "Loading"}
+              </span>
+            </div>
+          ) : (
+          <>
+          {onboardingPending && <TeacherOnboardingBanner />}
           {tab === "overview" && !showConversations && (
             <div className="space-y-6 animate-fade-in">
               <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
@@ -397,7 +434,7 @@ const TeacherDashboard = () => {
                   {lectures.length > 3 && (
                     <button
                       onClick={() => setTab("lectures")}
-                      className="text-primary text-sm font-bold hover:underline"
+                      className="text-primary-dark dark:text-primary text-sm font-bold rounded hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card disabled:opacity-60 disabled:cursor-not-allowed"
                     >
                       {t("view_all")}
                     </button>
@@ -417,32 +454,33 @@ const TeacherDashboard = () => {
                       <Link
                         key={lec.id}
                         to={`/lectures/${lec.id}`}
-                        className="flex items-center justify-between p-3 bg-secondary rounded-xl hover:bg-secondary/80 transition-colors group"
+                        className="flex items-center justify-between gap-3 p-3 bg-muted text-foreground border border-border rounded-xl transition-colors group hover:bg-background hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card"
                       >
-                        <div className="flex items-center gap-3">
-                          <div className="icon-box bg-primary/10">
-                            <BookOpen size={16} className="text-primary" />
+                        <div className="flex items-center gap-3 min-w-0">
+                          <div className="icon-box bg-primary/10 shrink-0">
+                            <BookOpen size={16} className="text-primary" aria-hidden="true" />
                           </div>
-                          <div>
-                            <div className="font-bold text-sm group-hover:text-primary transition-colors">
+                          <div className="min-w-0">
+                            <div className="font-bold text-sm text-foreground truncate group-hover:underline group-focus-visible:underline">
                               {lec.title}
                             </div>
-                            <div className="text-muted-foreground text-xs">
+                            <div className="text-muted-foreground text-xs truncate">
                               {t("the_student")}: {lec.student_name}{" "}
                               {lec.subject && `• ${lec.subject}`}
                             </div>
                           </div>
                         </div>
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 shrink-0">
                           {lec.video_url && (
-                            <Video size={14} className="text-success" />
+                            <Video size={14} className="text-success" aria-label={t("video_available")} />
                           )}
                           {lec.pdf_url && (
-                            <FileText size={14} className="text-destructive" />
+                            <FileText size={14} className="text-destructive" aria-label={t("pdf_available")} />
                           )}
                           <ArrowLeft
                             size={14}
-                            className="text-muted-foreground group-hover:text-primary"
+                            aria-hidden="true"
+                            className="text-muted-foreground group-hover:text-foreground ltr:rotate-180"
                           />
                         </div>
                       </Link>
