@@ -27,11 +27,24 @@ const entries = [
   { path: "/refund", changefreq: "yearly", priority: "0.3" },
 ];
 
-// --- University / college routes, parsed from the static data module ---
+// --- Country / university / college / subject routes, parsed from the static data module.
+// Slug rules mirror src/lib/slugs.ts (checked by src/lib/__tests__/slugs.test.ts).
+const COUNTRY_SLUGS = { KW: "kuwait", QA: "qatar", SA: "saudi-arabia", AE: "uae", EG: "egypt" };
+const slugify = (s) =>
+  s.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
+    .replace(/&/g, " and ").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 try {
   const src = readFileSync(resolve("src/data/universitiesData.ts"), "utf8");
   const allIds = [...src.matchAll(/id:\s*"([A-Za-z0-9-]+)"/g)].map((m) => m[1]);
-  const unis = new Set(allIds.filter((id) => id.split("-").length === 2));
+  const unis = new Set(allIds.filter((id) => id.split("-").length === 2 && COUNTRY_SLUGS[id.split("-")[0]]));
+  const uniPath = (uniId) => {
+    const [cc, ...rest] = uniId.split("-");
+    return `/universities/${COUNTRY_SLUGS[cc]}/${rest.join("-").toLowerCase()}`;
+  };
+  const countries = new Set([...unis].map((u) => u.split("-")[0]));
+  for (const cc of countries) entries.push({ path: `/universities/${COUNTRY_SLUGS[cc]}`, changefreq: "monthly", priority: "0.7" });
+  for (const u of unis) entries.push({ path: uniPath(u), changefreq: "monthly", priority: "0.7" });
+
   const collegeIds = [...src.matchAll(/id:\s*"([A-Za-z0-9-]+)",[\s\S]{0,400}?departments:/g)]
     .map((m) => m[1])
     .filter((id) => !unis.has(id));
@@ -39,10 +52,25 @@ try {
     const parts = collegeId.split("-");
     const uniId = `${parts[0]}-${parts[1]}`;
     if (!unis.has(uniId)) continue;
-    entries.push({ path: `/universities/${uniId}/colleges/${collegeId}`, changefreq: "monthly", priority: "0.6" });
+    entries.push({ path: `${uniPath(uniId)}/colleges/${collegeId.toLowerCase()}`, changefreq: "monthly", priority: "0.6" });
+  }
+
+  // Subjects = unique English department names (departments are the objects with `degrees:`).
+  const deptNames = [...new Set(
+    [...src.matchAll(/name_en:\s*("(?:[^"\\]|\\.)*"),\s*degrees:/g)].map((m) => JSON.parse(m[1])),
+  )].sort((a, b) => a.localeCompare(b, "en"));
+  const used = new Set();
+  for (const name of deptNames) {
+    const base = slugify(name) || "subject";
+    let slug = base;
+    let n = 2;
+    while (used.has(slug)) slug = `${base}-${n++}`;
+    used.add(slug);
+    entries.push({ path: `/subjects/${slug}`, changefreq: "monthly", priority: "0.6" });
   }
 } catch (err) {
-  console.warn("sitemap: could not parse universities data —", err.message);
+  console.error("sitemap: could not parse universities data —", err.message);
+  process.exit(1);
 }
 
 // --- Dynamic rows from the backend ---
