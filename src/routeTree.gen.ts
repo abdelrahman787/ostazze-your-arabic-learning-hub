@@ -17,6 +17,7 @@ import { Route as CategoriesRouteImport } from './routes/categories'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
+import { Route as IgcseRouteImport } from './routes/igcse'
 import { Route as LanguagesRouteImport } from './routes/languages'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as MyBookingsRouteImport } from './routes/my-bookings'
@@ -85,6 +86,11 @@ const FaqRoute = FaqRouteImport.update({
 const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
   id: '/forgot-password',
   path: '/forgot-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IgcseRoute = IgcseRouteImport.update({
+  id: '/igcse',
+  path: '/igcse',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LanguagesRoute = LanguagesRouteImport.update({
@@ -246,6 +252,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/forgot-password': typeof ForgotPasswordRoute
+  '/igcse': typeof IgcseRoute
   '/languages': typeof LanguagesRoute
   '/login': typeof LoginRoute
   '/my-bookings': typeof MyBookingsRoute
@@ -285,6 +292,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/forgot-password': typeof ForgotPasswordRoute
+  '/igcse': typeof IgcseRoute
   '/languages': typeof LanguagesRoute
   '/login': typeof LoginRoute
   '/my-bookings': typeof MyBookingsRoute
@@ -325,6 +333,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/forgot-password': typeof ForgotPasswordRoute
+  '/igcse': typeof IgcseRoute
   '/languages': typeof LanguagesRoute
   '/login': typeof LoginRoute
   '/my-bookings': typeof MyBookingsRoute
@@ -366,6 +375,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/forgot-password'
+    | '/igcse'
     | '/languages'
     | '/login'
     | '/my-bookings'
@@ -405,6 +415,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/forgot-password'
+    | '/igcse'
     | '/languages'
     | '/login'
     | '/my-bookings'
@@ -444,6 +455,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/forgot-password'
+    | '/igcse'
     | '/languages'
     | '/login'
     | '/my-bookings'
@@ -484,6 +496,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
+  IgcseRoute: typeof IgcseRoute
   LanguagesRoute: typeof LanguagesRoute
   LoginRoute: typeof LoginRoute
   MyBookingsRoute: typeof MyBookingsRoute
@@ -571,6 +584,13 @@ declare module '@tanstack/react-router' {
       path: '/forgot-password'
       fullPath: '/forgot-password'
       preLoaderRoute: typeof ForgotPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/igcse': {
+      id: '/igcse'
+      path: '/igcse'
+      fullPath: '/igcse'
+      preLoaderRoute: typeof IgcseRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/languages': {
@@ -788,6 +808,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
+  IgcseRoute: IgcseRoute,
   LanguagesRoute: LanguagesRoute,
   LoginRoute: LoginRoute,
   MyBookingsRoute: MyBookingsRoute,
