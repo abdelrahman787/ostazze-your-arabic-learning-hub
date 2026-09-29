@@ -494,19 +494,19 @@ export const universities: University[] = [
               {
                 code: "0418-126",
                 name_en: "Computer Programming I",
-                name_ar: "Computer Programming I",
+                name_ar: "برمجة الحاسوب I",
                 credits: 3,
               },
               {
                 code: "0480-201",
                 name_en: "Statistics for Sciences and Engineering",
-                name_ar: "Statistics for Sciences and Engineering",
+                name_ar: "الإحصاء للعلوم والهندسة",
                 credits: 3,
               },
               {
                 code: "0430-101",
                 name_en: "General Physics",
-                name_ar: "General Physics",
+                name_ar: "الفيزياء العامة",
                 credits: 3,
               },
               {
@@ -549,31 +549,31 @@ export const universities: University[] = [
               {
                 code: "0410-250",
                 name_en: "Introduction to Foundations of Mathematics",
-                name_ar: "Introduction to Foundations of Mathematics",
+                name_ar: "مقدمة في أسس الرياضيات",
                 credits: 3,
               },
               {
                 code: "0410-261",
                 name_en: "Introduction to Abstract Algebra (I)",
-                name_ar: "Introduction to Abstract Algebra (I)",
+                name_ar: "مقدمة في الجبر التجريدي (I)",
                 credits: 3,
               },
               {
                 code: "0410-262",
                 name_en: "Introduction to Abstract Algebra (II)",
-                name_ar: "Introduction to Abstract Algebra (II)",
+                name_ar: "مقدمة في الجبر التجريدي (II)",
                 credits: 3,
               },
               {
                 code: "0410-329",
                 name_en: "Introduction to Real Analysis",
-                name_ar: "Introduction to Real Analysis",
+                name_ar: "مقدمة في التحليل الحقيقي",
                 credits: 3,
               },
               {
                 code: "0410-330",
                 name_en: "Functions of Complex Variable",
-                name_ar: "Functions of Complex Variable",
+                name_ar: "دوال المتغير المركب",
                 credits: 3,
               },
               {
@@ -585,25 +585,25 @@ export const universities: University[] = [
               {
                 code: "0410-362",
                 name_en: "Computational Linear Algebra",
-                name_ar: "Computational Linear Algebra",
+                name_ar: "الجبر الخطي الحسابي",
                 credits: 3,
               },
               {
                 code: "0410-363",
                 name_en: "Advanced Linear Algebra",
-                name_ar: "Advanced Linear Algebra",
+                name_ar: "الجبر الخطي المتقدم",
                 credits: 3,
               },
               {
                 code: "0410-375",
                 name_en: "Introduction to Topology",
-                name_ar: "Introduction to Topology",
+                name_ar: "مقدمة في الطوبولوجيا",
                 credits: 3,
               },
               {
                 code: "0410-415",
                 name_en: "Partial Differential Equations",
-                name_ar: "Partial Differential Equations",
+                name_ar: "المعادلات التفاضلية الجزئية",
                 credits: 3,
               },
               {
@@ -1363,19 +1363,19 @@ export const universities: University[] = [
               {
                 code: "0418-231",
                 name_en: "Introduction to Computer Security",
-                name_ar: "Introduction to Computer Security",
+                name_ar: "مقدمة في أمن الحاسوب",
                 credits: 3,
               },
               {
                 code: "0418-312",
                 name_en: "Applied Cryptography",
-                name_ar: "Applied Cryptography",
+                name_ar: "التشفير التطبيقي",
                 credits: 3,
               },
               {
                 code: "0418-348",
                 name_en: "Secure Programming",
-                name_ar: "Secure Programming",
+                name_ar: "البرمجة الآمنة",
                 credits: 3,
               },
               {
@@ -1387,7 +1387,7 @@ export const universities: University[] = [
               {
                 code: "0418-493",
                 name_en: "Computer Security Design",
-                name_ar: "Computer Security Design",
+                name_ar: "تصميم أمن الحاسوب",
                 credits: 3,
               },
               {
@@ -1417,43 +1417,43 @@ export const universities: University[] = [
               {
                 code: "0418-498",
                 name_en: "Topics in Computer Security",
-                name_ar: "Topics in Computer Security",
+                name_ar: "موضوعات في أمن الحاسوب",
                 credits: 3,
               },
               {
                 code: "0410-261",
                 name_en: "Introduction to Abstract Algebra",
-                name_ar: "Introduction to Abstract Algebra",
+                name_ar: "مقدمة في الجبر التجريدي",
                 credits: 3,
               },
               {
                 code: "1830-432",
                 name_en: "Cybersecurity in Healthcare",
-                name_ar: "Cybersecurity in Healthcare",
+                name_ar: "الأمن السيبراني في الرعاية الصحية",
                 credits: 3,
               },
               {
                 code: "1830-351",
                 name_en: "Information Technology and Cyber Ethics",
-                name_ar: "Information Technology and Cyber Ethics",
+                name_ar: "تكنولوجيا المعلومات وأخلاقيات الفضاء السيبراني",
                 credits: 3,
               },
               {
                 code: "1830-434",
                 name_en: "Security Operations",
-                name_ar: "Security Operations",
+                name_ar: "عمليات الأمن",
                 credits: 3,
               },
               {
                 code: "1830-435",
                 name_en: "Digital Security Forensics",
-                name_ar: "Digital Security Forensics",
+                name_ar: "التحقيق الجنائي في الأمن الرقمي",
                 credits: 3,
               },
               {
                 code: "1830-436",
                 name_en: "Usable Security and Privacy",
-                name_ar: "Usable Security and Privacy",
+                name_ar: "الأمان والخصوصية القابلة للاستخدام",
                 credits: 3,
               },
             ],
@@ -1589,153 +1589,152 @@ export const universities: University[] = [
               {
                 code: "0600-209",
                 name_en: "Engineering Economy",
-                name_ar: "Engineering Economy",
+                name_ar: "الاقتصاد الهندسي",
                 credits: 3,
               },
               {
                 code: "0600-304",
                 name_en: "Engineering Probability & Statistics",
-                name_ar: "Engineering Probability & Statistics",
+                name_ar: "الاحتمالات والإحصاء الهندسي",
                 credits: 3,
               },
               {
                 code: "0600-307",
                 name_en:
                   "Applied Numerical Methods and Programming in Engineering",
-                name_ar:
-                  "Applied Numerical Methods and Programming in Engineering",
+                name_ar: "الأساليب العددية والبرمجة التطبيقية في الهندسة",
                 credits: 3,
               },
               {
                 code: "0610-212",
                 name_en: "Advanced Mathematics for Electrical Engineering",
-                name_ar: "Advanced Mathematics for Electrical Engineering",
+                name_ar: "الرياضيات المتقدمة للهندسة الكهربائية",
                 credits: 3,
               },
               {
                 code: "0610-213",
                 name_en: "Linear Circuits Analysis",
-                name_ar: "Linear Circuits Analysis",
+                name_ar: "تحليل الدوائر الخطية",
                 credits: 3,
               },
               {
                 code: "0610-233",
                 name_en: "Electronics I",
-                name_ar: "Electronics I",
+                name_ar: "إلكترونيات I",
                 credits: 3,
               },
               {
                 code: "0610-234",
                 name_en: "Electronics Laboratory I",
-                name_ar: "Electronics Laboratory I",
+                name_ar: "مختبر إلكترونيات I",
                 credits: 1,
               },
               {
                 code: "0610-297",
                 name_en: "Cornerstone Design",
-                name_ar: "Cornerstone Design",
+                name_ar: "التصميم الأساسي",
                 credits: 3,
               },
               {
                 code: "0610-312",
                 name_en: "Signals and Systems",
-                name_ar: "Signals and Systems",
+                name_ar: "الإشارات والأنظمة",
                 credits: 3,
               },
               {
                 code: "0610-320",
                 name_en: "Electromagnetic Field Theory",
-                name_ar: "Electromagnetic Field Theory",
+                name_ar: "نظرية المجال الكهرومغناطيسي",
                 credits: 3,
               },
               {
                 code: "0610-333",
                 name_en: "Electronics II",
-                name_ar: "Electronics II",
+                name_ar: "إلكترونيات II",
                 credits: 3,
               },
               {
                 code: "0610-334",
                 name_en: "Electronics Laboratory II",
-                name_ar: "Electronics Laboratory II",
+                name_ar: "مختبر إلكترونيات II",
                 credits: 1,
               },
               {
                 code: "0610-343",
                 name_en: "Energy Conversion I",
-                name_ar: "Energy Conversion I",
+                name_ar: "تحويل الطاقة I",
                 credits: 3,
               },
               {
                 code: "0610-345",
                 name_en: "Energy Conversion Laboratory I",
-                name_ar: "Energy Conversion Laboratory I",
+                name_ar: "مختبر تحويل الطاقة I",
                 credits: 1,
               },
               {
                 code: "0610-350",
                 name_en: "Power System Analysis I",
-                name_ar: "Power System Analysis I",
+                name_ar: "تحليل أنظمة القوى I",
                 credits: 3,
               },
               {
                 code: "0610-370",
                 name_en: "Control Theory I",
-                name_ar: "Control Theory I",
+                name_ar: "نظرية التحكم I",
                 credits: 3,
               },
               {
                 code: "0610-374",
                 name_en: "Control Laboratory I",
-                name_ar: "Control Laboratory I",
+                name_ar: "مختبر التحكم I",
                 credits: 1,
               },
               {
                 code: "0610-381",
                 name_en: "Communication Theory",
-                name_ar: "Communication Theory",
+                name_ar: "نظرية الاتصال",
                 credits: 3,
               },
               {
                 code: "0610-384",
                 name_en: "Communication Laboratory",
-                name_ar: "Communication Laboratory",
+                name_ar: "مختبر الاتصال",
                 credits: 1,
               },
               {
                 code: "0610-385",
                 name_en: "Introduction to Digital Signal Processing",
-                name_ar: "Introduction to Digital Signal Processing",
+                name_ar: "مقدمة في معالجة الإشارة الرقمية",
                 credits: 3,
               },
               {
                 code: "0610-497",
                 name_en: "Engineering Design",
-                name_ar: "Engineering Design",
+                name_ar: "التصميم الهندسي",
                 credits: 3,
               },
               {
                 code: "0612-262",
                 name_en: "Fundamentals of Digital Logic",
-                name_ar: "Fundamentals of Digital Logic",
+                name_ar: "أساسيات المنطق الرقمي",
                 credits: 3,
               },
               {
                 code: "0612-264",
                 name_en: "Digital Logic Laboratory",
-                name_ar: "Digital Logic Laboratory",
+                name_ar: "مختبر المنطق الرقمي",
                 credits: 1,
               },
               {
                 code: "0612-363",
                 name_en: "Introduction to Embedded Systems",
-                name_ar: "Introduction to Embedded Systems",
+                name_ar: "مقدمة في الأنظمة المضمنة",
                 credits: 3,
               },
               {
                 code: "0612-364",
                 name_en: "Introduction to Embedded Systems Laboratory",
-                name_ar: "Introduction to Embedded Systems Laboratory",
+                name_ar: "مقدمة في مختبر الأنظمة المضمنة",
                 credits: 1,
               },
             ],
@@ -1749,7 +1748,7 @@ export const universities: University[] = [
               {
                 code: "0330-100",
                 name_en: "Kuwait Modern and Contemporary History",
-                name_ar: "Kuwait Modern and Contemporary History",
+                name_ar: "تاريخ الكويت الحديث والمعاصر",
                 credits: 3,
               },
               {
@@ -1769,7 +1768,7 @@ export const universities: University[] = [
                 name_en:
                   "History of Arab and Islamic Civilization (or a humanities course)",
                 name_ar:
-                  "History of Arab and Islamic Civilization (or a humanities course)",
+                  "تاريخ الحضارة العربية والإسلامية (أو مقرر علوم إنسانية)",
                 credits: 3,
               },
               {
@@ -1841,25 +1840,25 @@ export const universities: University[] = [
               {
                 code: "0600-201",
                 name_en: "Introduction to Design and Product Fabrication",
-                name_ar: "Introduction to Design and Product Fabrication",
+                name_ar: "مقدمة في التصميم وتصنيع المنتجات",
                 credits: 3,
               },
               {
                 code: "0600-202",
                 name_en: "Statics",
-                name_ar: "Statics",
+                name_ar: "السكون",
                 credits: 3,
               },
               {
                 code: "0600-203",
                 name_en: "Dynamics",
-                name_ar: "Dynamics",
+                name_ar: "الديناميكا",
                 credits: 3,
               },
               {
                 code: "0600-204",
                 name_en: "Strength of Materials",
-                name_ar: "Strength of Materials",
+                name_ar: "مقاومة المواد",
                 credits: 3,
               },
               {
@@ -1871,7 +1870,7 @@ export const universities: University[] = [
               {
                 code: "0600-209",
                 name_en: "Engineering Economy",
-                name_ar: "Engineering Economy",
+                name_ar: "الاقتصاد الهندسي",
                 credits: 3,
               },
               {
@@ -1879,155 +1878,154 @@ export const universities: University[] = [
                 name_en:
                   "Introduction to Electrical Engineering Principles for non-EE",
                 name_ar:
-                  "Introduction to Electrical Engineering Principles for non-EE",
+                  "مقدمة في مبادئ الهندسة الكهربائية لغير مهندسي الكهرباء",
                 credits: 3,
               },
               {
                 code: "0600-211",
                 name_en: "Introduction to EE Principles for non-EE Lab",
-                name_ar: "Introduction to EE Principles for non-EE Lab",
+                name_ar:
+                  "مقدمة في مبادئ الهندسة الكهربائية لغير مهندسي الكهرباء - مختبر",
                 credits: 1,
               },
               {
                 code: "0600-221",
                 name_en: "Programming Fundamentals for Engineers",
-                name_ar: "Programming Fundamentals for Engineers",
+                name_ar: "أساسيات البرمجة للمهندسين",
                 credits: 3,
               },
               {
                 code: "0600-304",
                 name_en: "Engineering Probability and Statistics",
-                name_ar: "Engineering Probability and Statistics",
+                name_ar: "الاحتمالات والإحصاء الهندسي",
                 credits: 3,
               },
               {
                 code: "0600-307",
                 name_en:
                   "Applied Numerical Methods and Programming in Engineering",
-                name_ar:
-                  "Applied Numerical Methods and Programming in Engineering",
+                name_ar: "الأساليب العددية والبرمجة التطبيقية في الهندسة",
                 credits: 3,
               },
               {
                 code: "0630-241",
                 name_en: "Material Science & Metallurgy I",
-                name_ar: "Material Science & Metallurgy I",
+                name_ar: "علم المواد وعلم المعادن I",
                 credits: 3,
               },
               {
                 code: "0630-311",
                 name_en: "Theory of Machines",
-                name_ar: "Theory of Machines",
+                name_ar: "نظرية الآلات",
                 credits: 3,
               },
               {
                 code: "0630-318",
                 name_en: "System Dynamics",
-                name_ar: "System Dynamics",
+                name_ar: "ديناميكيات النظم",
                 credits: 3,
               },
               {
                 code: "0630-322",
                 name_en: "Engineering Thermodynamics II",
-                name_ar: "Engineering Thermodynamics II",
+                name_ar: "الديناميكا الحرارية الهندسية II",
                 credits: 3,
               },
               {
                 code: "0630-331",
                 name_en: "Fluid Mechanics I",
-                name_ar: "Fluid Mechanics I",
+                name_ar: "ميكانيكا الموائع I",
                 credits: 3,
               },
               {
                 code: "0630-351",
                 name_en: "Mechanical Design I",
-                name_ar: "Mechanical Design I",
+                name_ar: "التصميم الميكانيكي I",
                 credits: 3,
               },
               {
                 code: "0630-353",
                 name_en: "Manufacturing Processes",
-                name_ar: "Manufacturing Processes",
+                name_ar: "عمليات التصنيع",
                 credits: 3,
               },
               {
                 code: "0630-373",
                 name_en: "Mechanical Engineering Fundamentals Laboratory",
-                name_ar: "Mechanical Engineering Fundamentals Laboratory",
+                name_ar: "مختبر أساسيات الهندسة الميكانيكية",
                 credits: 1,
               },
               {
                 code: "0630-415",
                 name_en: "Mechanical Vibrations",
-                name_ar: "Mechanical Vibrations",
+                name_ar: "الاهتزازات الميكانيكية",
                 credits: 3,
               },
               {
                 code: "0630-417",
                 name_en: "Control of Mechanical Systems",
-                name_ar: "Control of Mechanical Systems",
+                name_ar: "التحكم في الأنظمة الميكانيكية",
                 credits: 3,
               },
               {
                 code: "0630-421",
                 name_en: "Heat Transfer",
-                name_ar: "Heat Transfer",
+                name_ar: "انتقال الحرارة",
                 credits: 3,
               },
               {
                 code: "0630-424",
                 name_en: "Air-Conditioning and Refrigeration",
-                name_ar: "Air-Conditioning and Refrigeration",
+                name_ar: "تكييف الهواء والتبريد",
                 credits: 3,
               },
               {
                 code: "0630-451",
                 name_en: "Mechanical Design II",
-                name_ar: "Mechanical Design II",
+                name_ar: "التصميم الميكانيكي II",
                 credits: 3,
               },
               {
                 code: "0630-455",
                 name_en: "Computational Methods in Design",
-                name_ar: "Computational Methods in Design",
+                name_ar: "الأساليب الحسابية في التصميم",
                 credits: 3,
               },
               {
                 code: "0630-458",
                 name_en: "Capstone Design I",
-                name_ar: "Capstone Design I",
+                name_ar: "تصميم المشروع الختامي I",
                 credits: 3,
               },
               {
                 code: "0630-459",
                 name_en: "Capstone Design II",
-                name_ar: "Capstone Design II",
+                name_ar: "تصميم المشروع الختامي II",
                 credits: 3,
               },
               {
                 code: "0630-473",
                 name_en: "Thermal Science Laboratory I",
-                name_ar: "Thermal Science Laboratory I",
+                name_ar: "مختبر العلوم الحرارية I",
                 credits: 1,
               },
               {
                 code: "0630-474",
                 name_en:
                   "Dynamics of Machines and Mechanical Vibrations Laboratory",
-                name_ar:
-                  "Dynamics of Machines and Mechanical Vibrations Laboratory",
+                name_ar: "مختبر ديناميكا الآلات والاهتزازات الميكانيكية",
                 credits: 1,
               },
               {
                 code: "0630-475",
                 name_en: "Thermal Science Laboratory II",
-                name_ar: "Thermal Science Laboratory II",
+                name_ar: "مختبر العلوم الحرارية II",
                 credits: 1,
               },
               {
                 code: "0630-476",
                 name_en: "Control of Mechanical Systems Laboratory",
-                name_ar: "Control of Mechanical Systems Laboratory",
+                name_ar: "مختبر التحكم في الأنظمة الميكانيكية",
                 credits: 1,
               },
             ],
@@ -2059,7 +2057,7 @@ export const universities: University[] = [
               {
                 code: "0600-310",
                 name_en: "Engineering Ethics",
-                name_ar: "Engineering Ethics",
+                name_ar: "الأخلاقيات الهندسية",
                 credits: 3,
               },
               {
@@ -2131,7 +2129,7 @@ export const universities: University[] = [
               {
                 code: "0600-201",
                 name_en: "Introduction to Design and Product Fabrication",
-                name_ar: "Introduction to Design and Product Fabrication",
+                name_ar: "مقدمة في التصميم وتصنيع المنتجات",
                 credits: 3,
               },
               {
@@ -2143,153 +2141,152 @@ export const universities: University[] = [
               {
                 code: "0600-209",
                 name_en: "Engineering Economy",
-                name_ar: "Engineering Economy",
+                name_ar: "الاقتصاد الهندسي",
                 credits: 3,
               },
               {
                 code: "0600-304",
                 name_en: "Engineering Probability and Statistics",
-                name_ar: "Engineering Probability and Statistics",
+                name_ar: "الاحتمالات والإحصاء الهندسي",
                 credits: 3,
               },
               {
                 code: "0600-307",
                 name_en:
                   "Applied Numerical Methods and Programming in Engineering",
-                name_ar:
-                  "Applied Numerical Methods and Programming in Engineering",
+                name_ar: "الأساليب العددية والبرمجة التطبيقية في الهندسة",
                 credits: 3,
               },
               {
                 code: "0640-211",
                 name_en: "Chemical Engineering Principles",
-                name_ar: "Chemical Engineering Principles",
+                name_ar: "مبادئ الهندسة الكيميائية",
                 credits: 3,
               },
               {
                 code: "0640-241",
                 name_en: "Fluid Mechanics",
-                name_ar: "Fluid Mechanics",
+                name_ar: "ميكانيكا الموائع",
                 credits: 3,
               },
               {
                 code: "0640-242",
                 name_en: "Fluid Mechanics Laboratory",
-                name_ar: "Fluid Mechanics Laboratory",
+                name_ar: "مختبر ميكانيكا الموائع",
                 credits: 1,
               },
               {
                 code: "0640-291",
                 name_en: "Fundamentals of Chemical Engineering Design",
-                name_ar: "Fundamentals of Chemical Engineering Design",
+                name_ar: "أساسيات تصميم الهندسة الكيميائية",
                 credits: 3,
               },
               {
                 code: "0640-321",
                 name_en: "Chemical Engineering Thermodynamics",
-                name_ar: "Chemical Engineering Thermodynamics",
+                name_ar: "الديناميكا الحرارية في الهندسة الكيميائية",
                 credits: 3,
               },
               {
                 code: "0640-324",
                 name_en: "Kinetics and Reactor Design (A)",
-                name_ar: "Kinetics and Reactor Design (A)",
+                name_ar: "الحركية وتصميم المفاعلات (أ)",
                 credits: 3,
               },
               {
                 code: "0640-343",
                 name_en: "Heat Transfer",
-                name_ar: "Heat Transfer",
+                name_ar: "انتقال الحرارة",
                 credits: 3,
               },
               {
                 code: "0640-344",
                 name_en: "Heat Transfer Laboratory",
-                name_ar: "Heat Transfer Laboratory",
+                name_ar: "مختبر انتقال الحرارة",
                 credits: 1,
               },
               {
                 code: "0640-345",
                 name_en: "Mass Transfer",
-                name_ar: "Mass Transfer",
+                name_ar: "انتقال الكتلة",
                 credits: 3,
               },
               {
                 code: "0640-351",
                 name_en: "Process Dynamics and Control",
-                name_ar: "Process Dynamics and Control",
+                name_ar: "ديناميكيات العمليات والتحكم فيها",
                 credits: 3,
               },
               {
                 code: "0640-352",
                 name_en: "Process Dynamics and Control Laboratory",
-                name_ar: "Process Dynamics and Control Laboratory",
+                name_ar: "مختبر ديناميكيات العمليات والتحكم فيها",
                 credits: 1,
               },
               {
                 code: "0640-393",
                 name_en: "Chemical Process Synthesis",
-                name_ar: "Chemical Process Synthesis",
+                name_ar: "تخليق العمليات الكيميائية",
                 credits: 3,
               },
               {
                 code: "0640-428",
                 name_en: "Kinetics and Reactor Design (B)",
-                name_ar: "Kinetics and Reactor Design (B)",
+                name_ar: "الحركية وتصميم المفاعلات (ب)",
                 credits: 3,
               },
               {
                 code: "0640-440",
                 name_en: "Mass Transfer Operations",
-                name_ar: "Mass Transfer Operations",
+                name_ar: "عمليات انتقال الكتلة",
                 credits: 3,
               },
               {
                 code: "0640-443",
                 name_en: "Mass Transfer Operations Laboratory",
-                name_ar: "Mass Transfer Operations Laboratory",
+                name_ar: "مختبر عمليات انتقال الكتلة",
                 credits: 1,
               },
               {
                 code: "0640-461",
                 name_en: "Water Desalination",
-                name_ar: "Water Desalination",
+                name_ar: "تحلية المياه",
                 credits: 3,
               },
               {
                 code: "0640-472",
                 name_en: "Petroleum Refining Engineering",
-                name_ar: "Petroleum Refining Engineering",
+                name_ar: "هندسة تكرير البترول",
                 credits: 3,
               },
               {
                 code: "0640-482",
                 name_en: "Industrial Safety",
-                name_ar: "Industrial Safety",
+                name_ar: "السلامة الصناعية",
                 credits: 3,
               },
               {
                 code: "0640-491",
                 name_en: "Plant Design",
-                name_ar: "Plant Design",
+                name_ar: "تصميم المصانع",
                 credits: 3,
               },
               {
                 code: "0420-208",
                 name_en: "General and Analytical Chemistry",
-                name_ar: "General and Analytical Chemistry",
+                name_ar: "الكيمياء العامة والتحليلية",
                 credits: 4,
               },
               {
                 code: "0420-217",
                 name_en: "Physical Chemistry",
-                name_ar: "Physical Chemistry",
+                name_ar: "الكيمياء الفيزيائية",
                 credits: 3,
               },
               {
                 code: "0420-269",
                 name_en: "Organic Chemistry",
-                name_ar: "Organic Chemistry",
+                name_ar: "الكيمياء العضوية",
                 credits: 4,
               },
             ],
@@ -2303,13 +2300,13 @@ export const universities: University[] = [
               {
                 code: "9988-123",
                 name_en: "Technical English I (Intermediate Writing Skills)",
-                name_ar: "Technical English I (Intermediate Writing Skills)",
+                name_ar: "اللغة الإنجليزية الفنية I (مهارات الكتابة المتوسطة)",
                 credits: 3,
               },
               {
                 code: "9988-221",
                 name_en: "Technical English II (Technical Writing)",
-                name_ar: "Technical English II (Technical Writing)",
+                name_ar: "اللغة الإنجليزية الفنية II (الكتابة الفنية)",
                 credits: 3,
               },
               {
@@ -2321,7 +2318,7 @@ export const universities: University[] = [
               {
                 code: "0600-310",
                 name_en: "Engineering Ethics",
-                name_ar: "Engineering Ethics",
+                name_ar: "الأخلاقيات الهندسية",
                 credits: 3,
               },
               {
@@ -2393,13 +2390,13 @@ export const universities: University[] = [
               {
                 code: "0600-104",
                 name_en: "Engineering Graphics",
-                name_ar: "Engineering Graphics",
+                name_ar: "الرسومات الهندسية",
                 credits: 2,
               },
               {
                 code: "0600-200",
                 name_en: "Computer Programming for Engineers",
-                name_ar: "Computer Programming for Engineers",
+                name_ar: "برمجة الحاسوب للمهندسين",
                 credits: 3,
               },
               {
@@ -2411,175 +2408,175 @@ export const universities: University[] = [
               {
                 code: "0600-207",
                 name_en: "Electrical Engineering Fundamentals Laboratory",
-                name_ar: "Electrical Engineering Fundamentals Laboratory",
+                name_ar: "مختبر أساسيات الهندسة الكهربائية",
                 credits: 1,
               },
               {
                 code: "0600-209",
                 name_en: "Engineering Economy",
-                name_ar: "Engineering Economy",
+                name_ar: "الاقتصاد الهندسي",
                 credits: 3,
               },
               {
                 code: "0600-304",
                 name_en: "Probability and Statistics for Engineering",
-                name_ar: "Probability and Statistics for Engineering",
+                name_ar: "الاحتمالات والإحصاء للهندسة",
                 credits: 3,
               },
               {
                 code: "0600-308",
                 name_en: "Numerical Methods in Engineering",
-                name_ar: "Numerical Methods in Engineering",
+                name_ar: "الطرق العددية في الهندسة",
                 credits: 3,
               },
               {
                 code: "0612-201",
                 name_en: "Advanced Computer Programming",
-                name_ar: "Advanced Computer Programming",
+                name_ar: "برمجة الحاسوب المتقدمة",
                 credits: 3,
               },
               {
                 code: "0612-203",
                 name_en: "Discrete Structures",
-                name_ar: "Discrete Structures",
+                name_ar: "البنى المتقطعة",
                 credits: 3,
               },
               {
                 code: "0612-207",
                 name_en: "Data Structures",
-                name_ar: "Data Structures",
+                name_ar: "هياكل البيانات",
                 credits: 3,
               },
               {
                 code: "0612-262",
                 name_en: "Fundamentals of Digital Logic",
-                name_ar: "Fundamentals of Digital Logic",
+                name_ar: "أساسيات المنطق الرقمي",
                 credits: 3,
               },
               {
                 code: "0612-264",
                 name_en: "Fundamentals of Digital Logic Laboratory",
-                name_ar: "Fundamentals of Digital Logic Laboratory",
+                name_ar: "مختبر أساسيات المنطق الرقمي",
                 credits: 1,
               },
               {
                 code: "0612-300",
                 name_en: "Design & Analysis of Algorithms",
-                name_ar: "Design & Analysis of Algorithms",
+                name_ar: "تصميم وتحليل الخوارزميات",
                 credits: 3,
               },
               {
                 code: "0612-336",
                 name_en: "Machine Learning",
-                name_ar: "Machine Learning",
+                name_ar: "تعلم الآلة",
                 credits: 3,
               },
               {
                 code: "0612-341",
                 name_en: "Database Management Systems",
-                name_ar: "Database Management Systems",
+                name_ar: "أنظمة إدارة قواعد البيانات",
                 credits: 3,
               },
               {
                 code: "0612-342",
                 name_en: "Database Management Systems Laboratory",
-                name_ar: "Database Management Systems Laboratory",
+                name_ar: "مختبر أنظمة إدارة قواعد البيانات",
                 credits: 1,
               },
               {
                 code: "0612-356",
                 name_en: "Computer Networks",
-                name_ar: "Computer Networks",
+                name_ar: "شبكات الحاسوب",
                 credits: 3,
               },
               {
                 code: "0612-357",
                 name_en: "Computer Networks Laboratory",
-                name_ar: "Computer Networks Laboratory",
+                name_ar: "مختبر شبكات الحاسوب",
                 credits: 1,
               },
               {
                 code: "0612-363",
                 name_en: "Introduction to Embedded Systems",
-                name_ar: "Introduction to Embedded Systems",
+                name_ar: "مقدمة في الأنظمة المضمنة",
                 credits: 3,
               },
               {
                 code: "0612-364",
                 name_en: "Introduction to Embedded Systems Laboratory",
-                name_ar: "Introduction to Embedded Systems Laboratory",
+                name_ar: "مقدمة في مختبر الأنظمة المضمنة",
                 credits: 1,
               },
               {
                 code: "0612-368",
                 name_en: "Computer Organization",
-                name_ar: "Computer Organization",
+                name_ar: "تنظيم الحاسوب",
                 credits: 3,
               },
               {
                 code: "0612-371",
                 name_en: "Software Engineering and Development",
-                name_ar: "Software Engineering and Development",
+                name_ar: "هندسة وتطوير البرمجيات",
                 credits: 3,
               },
               {
                 code: "0612-433",
                 name_en: "Computer Vision",
-                name_ar: "Computer Vision",
+                name_ar: "الرؤية الحاسوبية",
                 credits: 3,
               },
               {
                 code: "0612-445",
                 name_en: "Operating System Principles",
-                name_ar: "Operating System Principles",
+                name_ar: "مبادئ أنظمة التشغيل",
                 credits: 3,
               },
               {
                 code: "0612-453",
                 name_en: "Cryptography and Network Security",
-                name_ar: "Cryptography and Network Security",
+                name_ar: "التشفير وأمن الشبكات",
                 credits: 3,
               },
               {
                 code: "0612-468",
                 name_en: "Computer Architecture",
-                name_ar: "Computer Architecture",
+                name_ar: "معمارية الحاسوب",
                 credits: 3,
               },
               {
                 code: "0612-469",
                 name_en: "Computer Architecture Laboratory",
-                name_ar: "Computer Architecture Laboratory",
+                name_ar: "مختبر معمارية الحاسوب",
                 credits: 1,
               },
               {
                 code: "0612-494",
                 name_en: "Computer Systems Engineering",
-                name_ar: "Computer Systems Engineering",
+                name_ar: "هندسة أنظمة الحاسوب",
                 credits: 3,
               },
               {
                 code: "0612-495",
                 name_en: "Capstone Design",
-                name_ar: "Capstone Design",
+                name_ar: "تصميم المشروع الختامي",
                 credits: 3,
               },
               {
                 code: "0610-213",
                 name_en: "Linear Circuit Analysis",
-                name_ar: "Linear Circuit Analysis",
+                name_ar: "تحليل الدوائر الخطية",
                 credits: 3,
               },
               {
                 code: "0610-233",
                 name_en: "Electronics I",
-                name_ar: "Electronics I",
+                name_ar: "إلكترونيات I",
                 credits: 3,
               },
               {
                 code: "0610-234",
                 name_en: "Electronics I Laboratory",
-                name_ar: "Electronics I Laboratory",
+                name_ar: "مختبر إلكترونيات I",
                 credits: 1,
               },
             ],
@@ -2690,143 +2687,141 @@ export const universities: University[] = [
               {
                 code: "0600-202",
                 name_en: "Statics",
-                name_ar: "Statics",
+                name_ar: "السكون",
                 credits: 3,
               },
               {
                 code: "0600-203",
                 name_en: "Dynamics",
-                name_ar: "Dynamics",
+                name_ar: "الديناميكا",
                 credits: 3,
               },
               {
                 code: "0600-204",
                 name_en: "Strength of Materials",
-                name_ar: "Strength of Materials",
+                name_ar: "مقاومة المواد",
                 credits: 3,
               },
               {
                 code: "0600-208",
                 name_en: "Engineering Thermodynamics I",
-                name_ar: "Engineering Thermodynamics I",
+                name_ar: "الديناميكا الحرارية الهندسية I",
                 credits: 3,
               },
               {
                 code: "0600-209",
                 name_en: "Engineering Economy",
-                name_ar: "Engineering Economy",
+                name_ar: "الاقتصاد الهندسي",
                 credits: 3,
               },
               {
                 code: "0600-304",
                 name_en: "Engineering Probability and Statistics",
-                name_ar: "Engineering Probability and Statistics",
+                name_ar: "الاحتمالات والإحصاء الهندسي",
                 credits: 3,
               },
               {
                 code: "0600-307",
                 name_en:
                   "Applied Numerical Methods and Programming in Engineering",
-                name_ar:
-                  "Applied Numerical Methods and Programming in Engineering",
+                name_ar: "الأساليب العددية والبرمجة التطبيقية في الهندسة",
                 credits: 3,
               },
               {
                 code: "0620-201",
                 name_en: "Introduction to Design",
-                name_ar: "Introduction to Design",
+                name_ar: "مقدمة في التصميم",
                 credits: 3,
               },
               {
                 code: "0620-235",
                 name_en: "Geomatics Engineering",
-                name_ar: "Geomatics Engineering",
+                name_ar: "هندسة المساحة الجيومكانية",
                 credits: 3,
               },
               {
                 code: "0620-252",
                 name_en: "Building Materials",
-                name_ar: "Building Materials",
+                name_ar: "مواد البناء",
                 credits: 3,
               },
               {
                 code: "0620-271",
                 name_en: "Structural Analysis I",
-                name_ar: "Structural Analysis I",
+                name_ar: "التحليل الإنشائي I",
                 credits: 3,
               },
               {
                 code: "0620-310",
                 name_en: "Fluid Mechanics",
-                name_ar: "Fluid Mechanics",
+                name_ar: "ميكانيكا الموائع",
                 credits: 3,
               },
               {
                 code: "0620-311",
                 name_en: "Water Resources",
-                name_ar: "Water Resources",
+                name_ar: "الموارد المائية",
                 credits: 4,
               },
               {
                 code: "0620-312",
                 name_en: "Environmental Engineering",
-                name_ar: "Environmental Engineering",
+                name_ar: "الهندسة البيئية",
                 credits: 3,
               },
               {
                 code: "0620-350",
                 name_en: "Soil Mechanics",
-                name_ar: "Soil Mechanics",
+                name_ar: "ميكانيكا التربة",
                 credits: 4,
               },
               {
                 code: "0620-366",
                 name_en: "Transportation Engineering",
-                name_ar: "Transportation Engineering",
+                name_ar: "هندسة النقل",
                 credits: 4,
               },
               {
                 code: "0620-371",
                 name_en: "Structural Analysis II",
-                name_ar: "Structural Analysis II",
+                name_ar: "التحليل الإنشائي II",
                 credits: 3,
               },
               {
                 code: "0620-373",
                 name_en: "Reinforced Concrete I",
-                name_ar: "Reinforced Concrete I",
+                name_ar: "الخرسانة المسلحة I",
                 credits: 3,
               },
               {
                 code: "0620-430",
                 name_en:
                   "Legal, Professional, and Social Aspects of Engineering",
-                name_ar:
-                  "Legal, Professional, and Social Aspects of Engineering",
+                name_ar: "الجوانب القانونية والمهنية والاجتماعية للهندسة",
                 credits: 3,
               },
               {
                 code: "0620-435",
                 name_en: "Construction Engineering and Management",
-                name_ar: "Construction Engineering and Management",
+                name_ar: "هندسة وإدارة الإنشاءات",
                 credits: 4,
               },
               {
                 code: "0620-451",
                 name_en: "Foundation Engineering",
-                name_ar: "Foundation Engineering",
+                name_ar: "هندسة الأساسات",
                 credits: 3,
               },
               {
                 code: "0620-473",
                 name_en: "Reinforced Concrete II",
-                name_ar: "Reinforced Concrete II",
+                name_ar: "الخرسانة المسلحة II",
                 credits: 3,
               },
               {
                 code: "0620-490",
                 name_en: "Capstone Design",
-                name_ar: "Capstone Design",
+                name_ar: "تصميم المشروع الختامي",
                 credits: 3,
               },
             ],
@@ -2931,19 +2926,19 @@ export const universities: University[] = [
               {
                 code: "0600-201",
                 name_en: "Introduction to Design and Product Fabrication",
-                name_ar: "Introduction to Design and Product Fabrication",
+                name_ar: "مقدمة في التصميم وتصنيع المنتجات",
                 credits: 3,
               },
               {
                 code: "0600-202",
                 name_en: "Statics",
-                name_ar: "Statics",
+                name_ar: "السكون",
                 credits: 3,
               },
               {
                 code: "0600-204",
                 name_en: "Strength of Materials",
-                name_ar: "Strength of Materials",
+                name_ar: "مقاومة المواد",
                 credits: 3,
               },
               {
@@ -2951,171 +2946,171 @@ export const universities: University[] = [
                 name_en:
                   "Introduction to Electrical Engineering Principles for non-EE",
                 name_ar:
-                  "Introduction to Electrical Engineering Principles for non-EE",
+                  "مقدمة في مبادئ الهندسة الكهربائية لغير مهندسي الكهرباء",
                 credits: 3,
               },
               {
                 code: "0600-211",
                 name_en: "Introduction to EE Principles for non-EE Lab",
-                name_ar: "Introduction to EE Principles for non-EE Lab",
+                name_ar:
+                  "مقدمة في مبادئ الهندسة الكهربائية لغير مهندسي الكهرباء - مختبر",
                 credits: 1,
               },
               {
                 code: "0600-208",
                 name_en: "Thermodynamics",
-                name_ar: "Thermodynamics",
+                name_ar: "الديناميكا الحرارية",
                 credits: 3,
               },
               {
                 code: "0600-209",
                 name_en: "Engineering Economy",
-                name_ar: "Engineering Economy",
+                name_ar: "الاقتصاد الهندسي",
                 credits: 3,
               },
               {
                 code: "0600-304",
                 name_en: "Engineering Probability and Statistics",
-                name_ar: "Engineering Probability and Statistics",
+                name_ar: "الاحتمالات والإحصاء الهندسي",
                 credits: 3,
               },
               {
                 code: "0600-307",
                 name_en:
                   "Applied Numerical Methods and Programming in Engineering",
-                name_ar:
-                  "Applied Numerical Methods and Programming in Engineering",
+                name_ar: "الأساليب العددية والبرمجة التطبيقية في الهندسة",
                 credits: 3,
               },
               {
                 code: "0650-150",
                 name_en: "Introduction to Petroleum Engineering",
-                name_ar: "Introduction to Petroleum Engineering",
+                name_ar: "مقدمة في هندسة البترول",
                 credits: 1,
               },
               {
                 code: "0650-221",
                 name_en: "Reservoir Rock Properties",
-                name_ar: "Reservoir Rock Properties",
+                name_ar: "خصائص صخور المكمن",
                 credits: 3,
               },
               {
                 code: "0650-241",
                 name_en: "Fluid Mechanics",
-                name_ar: "Fluid Mechanics",
+                name_ar: "ميكانيكا الموائع",
                 credits: 3,
               },
               {
                 code: "0650-251",
                 name_en: "Introduction to Petroleum Engineering Design",
-                name_ar: "Introduction to Petroleum Engineering Design",
+                name_ar: "مقدمة في تصميم هندسة البترول",
                 credits: 3,
               },
               {
                 code: "0650-322",
                 name_en: "Reservoir Rock Lab",
-                name_ar: "Reservoir Rock Lab",
+                name_ar: "مختبر صخور المكمن",
                 credits: 1,
               },
               {
                 code: "0650-323",
                 name_en: "Phase Behavior of Reservoir Fluids",
-                name_ar: "Phase Behavior of Reservoir Fluids",
+                name_ar: "سلوك أطوار سوائل المكامن",
                 credits: 3,
               },
               {
                 code: "0650-324",
                 name_en: "Reservoir Engineering",
-                name_ar: "Reservoir Engineering",
+                name_ar: "هندسة المكامن",
                 credits: 3,
               },
               {
                 code: "0650-333",
                 name_en: "PVT Lab",
-                name_ar: "PVT Lab",
+                name_ar: "معمل PVT",
                 credits: 1,
               },
               {
                 code: "0650-341",
                 name_en: "Oil Well Drilling and Completion",
-                name_ar: "Oil Well Drilling and Completion",
+                name_ar: "حفر آبار النفط وإكمالها",
                 credits: 3,
               },
               {
                 code: "0650-342",
                 name_en: "Mud and Cement Lab",
-                name_ar: "Mud and Cement Lab",
+                name_ar: "مختبر الطين والأسمنت",
                 credits: 1,
               },
               {
                 code: "0650-351",
                 name_en: "Petroleum Geology",
-                name_ar: "Petroleum Geology",
+                name_ar: "جيولوجيا البترول",
                 credits: 3,
               },
               {
                 code: "0650-354",
                 name_en: "Well Logging",
-                name_ar: "Well Logging",
+                name_ar: "تسجيل آبار النفط",
                 credits: 3,
               },
               {
                 code: "0650-355",
                 name_en: "Well Logging Lab",
-                name_ar: "Well Logging Lab",
+                name_ar: "مختبر تسجيل الآبار",
                 credits: 1,
               },
               {
                 code: "0650-411",
                 name_en: "Petroleum Production Engineering",
-                name_ar: "Petroleum Production Engineering",
+                name_ar: "هندسة إنتاج البترول",
                 credits: 3,
               },
               {
                 code: "0650-425",
                 name_en: "Natural Gas Reservoir Engineering",
-                name_ar: "Natural Gas Reservoir Engineering",
+                name_ar: "هندسة مكامن الغاز الطبيعي",
                 credits: 3,
               },
               {
                 code: "0650-427",
                 name_en: "Secondary Recovery",
-                name_ar: "Secondary Recovery",
+                name_ar: "استخلاص ثانوي",
                 credits: 3,
               },
               {
                 code: "0650-432",
                 name_en: "Well Testing",
-                name_ar: "Well Testing",
+                name_ar: "اختبار الآبار",
                 credits: 3,
               },
               {
                 code: "0650-435",
                 name_en: "Production Equipment Design",
-                name_ar: "Production Equipment Design",
+                name_ar: "تصميم معدات الإنتاج",
                 credits: 3,
               },
               {
                 code: "0650-437",
                 name_en: "Numerical Methods in Petroleum Engineering",
-                name_ar: "Numerical Methods in Petroleum Engineering",
+                name_ar: "الطرق العددية في هندسة البترول",
                 credits: 3,
               },
               {
                 code: "0650-449",
                 name_en: "Petroleum Economics",
-                name_ar: "Petroleum Economics",
+                name_ar: "اقتصاديات البترول",
                 credits: 3,
               },
               {
                 code: "0650-496",
                 name_en: "Petroleum Engineering Design",
-                name_ar: "Petroleum Engineering Design",
+                name_ar: "تصميم هندسة البترول",
                 credits: 3,
               },
               {
                 code: "0460-101",
                 name_en: "Physical Geology",
-                name_ar: "Physical Geology",
+                name_ar: "الجيولوجيا الطبيعية",
                 credits: 3,
               },
             ],
@@ -3221,19 +3216,19 @@ export const universities: University[] = [
               {
                 code: "0600-201",
                 name_en: "Introduction to Design and Product Fabrication",
-                name_ar: "Introduction to Design and Product Fabrication",
+                name_ar: "مقدمة في التصميم وتصنيع المنتجات",
                 credits: 3,
               },
               {
                 code: "0600-202",
                 name_en: "Statics",
-                name_ar: "Statics",
+                name_ar: "السكون",
                 credits: 3,
               },
               {
                 code: "0600-209",
                 name_en: "Engineering Economy",
-                name_ar: "Engineering Economy",
+                name_ar: "الاقتصاد الهندسي",
                 credits: 3,
               },
               {
@@ -3241,133 +3236,134 @@ export const universities: University[] = [
                 name_en:
                   "Introduction to Electrical Engineering Principles for non-EE",
                 name_ar:
-                  "Introduction to Electrical Engineering Principles for non-EE",
+                  "مقدمة في مبادئ الهندسة الكهربائية لغير مهندسي الكهرباء",
                 credits: 3,
               },
               {
                 code: "0600-211",
                 name_en: "Introduction to EE Principles for non-EE Lab",
-                name_ar: "Introduction to EE Principles for non-EE Lab",
+                name_ar:
+                  "مقدمة في مبادئ الهندسة الكهربائية لغير مهندسي الكهرباء - مختبر",
                 credits: 1,
               },
               {
                 code: "0600-221",
                 name_en: "Programming Fundamentals for Engineers",
-                name_ar: "Programming Fundamentals for Engineers",
+                name_ar: "أساسيات البرمجة للمهندسين",
                 credits: 3,
               },
               {
                 code: "0600-304",
                 name_en: "Engineering Probability and Statistics",
-                name_ar: "Engineering Probability and Statistics",
+                name_ar: "الاحتمالات والإحصاء الهندسي",
                 credits: 3,
               },
               {
                 code: "0600-308",
                 name_en: "Numerical Methods in Engineering",
-                name_ar: "Numerical Methods in Engineering",
+                name_ar: "الطرق العددية في الهندسة",
                 credits: 3,
               },
               {
                 code: "0660-221",
                 name_en: "Introduction to Industrial Engineering",
-                name_ar: "Introduction to Industrial Engineering",
+                name_ar: "مقدمة في الهندسة الصناعية",
                 credits: 3,
               },
               {
                 code: "0660-312",
                 name_en: "Industrial Engineering Labs",
-                name_ar: "Industrial Engineering Labs",
+                name_ar: "مختبرات الهندسة الصناعية",
                 credits: 2,
               },
               {
                 code: "0660-321",
                 name_en: "Work Design and Measurement",
-                name_ar: "Work Design and Measurement",
+                name_ar: "تصميم وقياس العمل",
                 credits: 3,
               },
               {
                 code: "0660-325",
                 name_en: "Safety and Health for Engineers",
-                name_ar: "Safety and Health for Engineers",
+                name_ar: "السلامة والصحة للمهندسين",
                 credits: 3,
               },
               {
                 code: "0660-351",
                 name_en: "Engineering Statistical Analysis",
-                name_ar: "Engineering Statistical Analysis",
+                name_ar: "التحليل الإحصائي الهندسي",
                 credits: 3,
               },
               {
                 code: "0660-352",
                 name_en: "Production Cost Analysis",
-                name_ar: "Production Cost Analysis",
+                name_ar: "تحليل تكلفة الإنتاج",
                 credits: 3,
               },
               {
                 code: "0660-361",
                 name_en: "Operations Research I",
-                name_ar: "Operations Research I",
+                name_ar: "بحوث العمليات I",
                 credits: 3,
               },
               {
                 code: "0660-371",
                 name_en: "Engineering Management",
-                name_ar: "Engineering Management",
+                name_ar: "الإدارة الهندسية",
                 credits: 3,
               },
               {
                 code: "0660-372",
                 name_en: "Project Management and Control",
-                name_ar: "Project Management and Control",
+                name_ar: "إدارة المشاريع والتحكم",
                 credits: 3,
               },
               {
                 code: "0660-434",
                 name_en: "Facilities Planning and Design",
-                name_ar: "Facilities Planning and Design",
+                name_ar: "تخطيط وتصميم المنشآت",
                 credits: 3,
               },
               {
                 code: "0660-454",
                 name_en: "Production Planning and Inventory Control",
-                name_ar: "Production Planning and Inventory Control",
+                name_ar: "تخطيط الإنتاج والتحكم في المخزون",
                 credits: 3,
               },
               {
                 code: "0660-457",
                 name_en: "Quality Control",
-                name_ar: "Quality Control",
+                name_ar: "مراقبة الجودة",
                 credits: 3,
               },
               {
                 code: "0660-461",
                 name_en: "Operations Research II",
-                name_ar: "Operations Research II",
+                name_ar: "بحوث العمليات II",
                 credits: 3,
               },
               {
                 code: "0660-481",
                 name_en: "Systems Simulation",
-                name_ar: "Systems Simulation",
+                name_ar: "محاكاة النظم",
                 credits: 3,
               },
               {
                 code: "0660-496",
                 name_en: "Design in Industrial Engineering",
-                name_ar: "Design in Industrial Engineering",
+                name_ar: "التصميم في الهندسة الصناعية",
                 credits: 3,
               },
               {
                 code: "0630-241",
                 name_en: "Material Science and Metallurgy",
-                name_ar: "Material Science and Metallurgy",
+                name_ar: "علم المواد وعلم المعادن",
                 credits: 3,
               },
               {
                 code: "0630-353",
                 name_en: "Manufacturing Processes",
-                name_ar: "Manufacturing Processes",
+                name_ar: "عمليات التصنيع",
                 credits: 3,
               },
             ],
@@ -4236,7 +4232,7 @@ export const universities: University[] = [
               {
                 code: "ACCT 201",
                 name_en: "Principles of Financial Accounting",
-                name_ar: "Principles of Financial Accounting",
+                name_ar: "مبادئ المحاسبة المالية",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -4247,7 +4243,7 @@ export const universities: University[] = [
               {
                 code: "ACCT 205",
                 name_en: "Managerial Accounting",
-                name_ar: "Managerial Accounting",
+                name_ar: "المحاسبة الإدارية",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -4258,7 +4254,7 @@ export const universities: University[] = [
               {
                 code: "BUS 209",
                 name_en: "Data Analytics 1",
-                name_ar: "Data Analytics 1",
+                name_ar: "تحليلات البيانات 1",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -4269,7 +4265,7 @@ export const universities: University[] = [
               {
                 code: "ECON 200",
                 name_en: "Principles of Microeconomics",
-                name_ar: "Principles of Microeconomics",
+                name_ar: "مبادئ الاقتصاد الجزئي",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -4280,7 +4276,7 @@ export const universities: University[] = [
               {
                 code: "ECON 201",
                 name_en: "Principles of Macroeconomics",
-                name_ar: "Principles of Macroeconomics",
+                name_ar: "مبادئ الاقتصاد الكلي",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -4291,7 +4287,7 @@ export const universities: University[] = [
               {
                 code: "FINC 232",
                 name_en: "Financial Management",
-                name_ar: "Financial Management",
+                name_ar: "الإدارة المالية",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -4302,7 +4298,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 201",
                 name_en: "Principles of Management",
-                name_ar: "Principles of Management",
+                name_ar: "مبادئ الإدارة",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -4313,7 +4309,7 @@ export const universities: University[] = [
               {
                 code: "MRKT 200",
                 name_en: "Principles of Marketing",
-                name_ar: "Principles of Marketing",
+                name_ar: "مبادئ التسويق",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -4324,7 +4320,7 @@ export const universities: University[] = [
               {
                 code: "BEAL 401",
                 name_en: "Legal & Ethical Issues in Business",
-                name_ar: "Legal & Ethical Issues in Business",
+                name_ar: "القضايا القانونية والأخلاقية في الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -4335,7 +4331,7 @@ export const universities: University[] = [
               {
                 code: "BUS 321",
                 name_en: "International Business Management",
-                name_ar: "International Business Management",
+                name_ar: "إدارة الأعمال الدولية",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -4346,7 +4342,7 @@ export const universities: University[] = [
               {
                 code: "ENTR 313",
                 name_en: "Managing Entrepreneurial Ventures",
-                name_ar: "Managing Entrepreneurial Ventures",
+                name_ar: "إدارة المشاريع الريادية",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -4357,7 +4353,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 346",
                 name_en: "Production & Operations Management",
-                name_ar: "Production & Operations Management",
+                name_ar: "إدارة الإنتاج والعمليات",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -4368,7 +4364,7 @@ export const universities: University[] = [
               {
                 code: "BUS 490",
                 name_en: "Common Capstone",
-                name_ar: "Common Capstone",
+                name_ar: "مشروع التخرج المشترك",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -4379,7 +4375,7 @@ export const universities: University[] = [
               {
                 code: "PENDING",
                 name_en: "Internship (no course code given)",
-                name_ar: "Internship (no course code given)",
+                name_ar: "تدريب عملي",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -4390,7 +4386,7 @@ export const universities: University[] = [
               {
                 code: "ACCT 301",
                 name_en: "Intermediate Accounting I",
-                name_ar: "Intermediate Accounting I",
+                name_ar: "المحاسبة المتوسطة I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ACCOUNTING-B-B-A"],
@@ -4398,7 +4394,7 @@ export const universities: University[] = [
               {
                 code: "ACCT 305",
                 name_en: "Intermediate Accounting II",
-                name_ar: "Intermediate Accounting II",
+                name_ar: "المحاسبة المتوسطة II",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ACCOUNTING-B-B-A"],
@@ -4406,7 +4402,7 @@ export const universities: University[] = [
               {
                 code: "ACCT 401",
                 name_en: "Advanced Managerial Accounting",
-                name_ar: "Advanced Managerial Accounting",
+                name_ar: "المحاسبة الإدارية المتقدمة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ACCOUNTING-B-B-A"],
@@ -4414,7 +4410,7 @@ export const universities: University[] = [
               {
                 code: "ACCT 405",
                 name_en: "Advanced Financial Accounting",
-                name_ar: "Advanced Financial Accounting",
+                name_ar: "المحاسبة المالية المتقدمة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ACCOUNTING-B-B-A"],
@@ -4422,7 +4418,7 @@ export const universities: University[] = [
               {
                 code: "ACCT 410",
                 name_en: "Auditing",
-                name_ar: "Auditing",
+                name_ar: "التدقيق",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ACCOUNTING-B-B-A"],
@@ -4430,7 +4426,7 @@ export const universities: University[] = [
               {
                 code: "ACCT 413",
                 name_en: "Accounting Capstone",
-                name_ar: "Accounting Capstone",
+                name_ar: "مشروع المحاسبة الختامي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ACCOUNTING-B-B-A"],
@@ -4438,7 +4434,7 @@ export const universities: University[] = [
               {
                 code: "ACCT 334",
                 name_en: "Accounting for Tax",
-                name_ar: "Accounting for Tax",
+                name_ar: "المحاسبة الضريبية",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-ACCOUNTING-B-B-A"],
@@ -4446,7 +4442,7 @@ export const universities: University[] = [
               {
                 code: "ACCT 389",
                 name_en: "Special Topics",
-                name_ar: "Special Topics",
+                name_ar: "موضوعات خاصة",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-ACCOUNTING-B-B-A"],
@@ -4454,7 +4450,7 @@ export const universities: University[] = [
               {
                 code: "ACCT 421",
                 name_en: "International Financial Reporting Standards",
-                name_ar: "International Financial Reporting Standards",
+                name_ar: "معايير التقارير المالية الدولية",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-ACCOUNTING-B-B-A"],
@@ -4462,7 +4458,7 @@ export const universities: University[] = [
               {
                 code: "BUS 389",
                 name_en: "Special Topics",
-                name_ar: "Special Topics",
+                name_ar: "موضوعات خاصة",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -4473,7 +4469,7 @@ export const universities: University[] = [
               {
                 code: "BUS 489",
                 name_en: "Interdisciplinary Honors Seminar",
-                name_ar: "Interdisciplinary Honors Seminar",
+                name_ar: "حلقة دراسية شرفية متعددة التخصصات",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -4484,7 +4480,7 @@ export const universities: University[] = [
               {
                 code: "BEAL 403",
                 name_en: "Corporate Governance and Ethics",
-                name_ar: "Corporate Governance and Ethics",
+                name_ar: "حوكمة الشركات والأخلاقيات",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -4495,7 +4491,7 @@ export const universities: University[] = [
               {
                 code: "ACCT 365",
                 name_en: "Financial Statement Analysis",
-                name_ar: "Financial Statement Analysis",
+                name_ar: "تحليل القوائم المالية",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -4506,7 +4502,7 @@ export const universities: University[] = [
               {
                 code: "FINC 341",
                 name_en: "Corporate Finance",
-                name_ar: "Corporate Finance",
+                name_ar: "تمويل الشركات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-FINANCE-B-B-A"],
@@ -4514,7 +4510,7 @@ export const universities: University[] = [
               {
                 code: "FINC 345",
                 name_en: "Investment and Securities Analysis",
-                name_ar: "Investment and Securities Analysis",
+                name_ar: "تحليل الاستثمار والأوراق المالية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-FINANCE-B-B-A"],
@@ -4522,7 +4518,7 @@ export const universities: University[] = [
               {
                 code: "FINC 355",
                 name_en: "Financial Institutions of the Gulf",
-                name_ar: "Financial Institutions of the Gulf",
+                name_ar: "المؤسسات المالية الخليجية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-FINANCE-B-B-A"],
@@ -4530,7 +4526,7 @@ export const universities: University[] = [
               {
                 code: "FINC 365",
                 name_en: "International Finance",
-                name_ar: "International Finance",
+                name_ar: "المالية الدولية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-FINANCE-B-B-A"],
@@ -4538,7 +4534,7 @@ export const universities: University[] = [
               {
                 code: "FINC 413",
                 name_en: "Finance Capstone",
-                name_ar: "Finance Capstone",
+                name_ar: "مشروع التخرج في المالية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-FINANCE-B-B-A"],
@@ -4546,7 +4542,7 @@ export const universities: University[] = [
               {
                 code: "FINC 445",
                 name_en: "Portfolio Management",
-                name_ar: "Portfolio Management",
+                name_ar: "إدارة المحافظ",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-FINANCE-B-B-A"],
@@ -4554,7 +4550,7 @@ export const universities: University[] = [
               {
                 code: "FINC 343",
                 name_en: "Financial Services Management",
-                name_ar: "Financial Services Management",
+                name_ar: "إدارة الخدمات المالية",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-FINANCE-B-B-A"],
@@ -4562,7 +4558,7 @@ export const universities: University[] = [
               {
                 code: "FINC 350",
                 name_en: "Islamic Banking and Finance",
-                name_ar: "Islamic Banking and Finance",
+                name_ar: "الصيرفة والتمويل الإسلامي",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-FINANCE-B-B-A"],
@@ -4570,7 +4566,7 @@ export const universities: University[] = [
               {
                 code: "FINC 360",
                 name_en: "Financial Derivatives",
-                name_ar: "Financial Derivatives",
+                name_ar: "المشتقات المالية",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-FINANCE-B-B-A"],
@@ -4578,7 +4574,7 @@ export const universities: University[] = [
               {
                 code: "FINC 389",
                 name_en: "Special Topics",
-                name_ar: "Special Topics",
+                name_ar: "موضوعات خاصة",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-FINANCE-B-B-A"],
@@ -4586,7 +4582,7 @@ export const universities: University[] = [
               {
                 code: "FINC 440",
                 name_en: "Fixed Income Analysis",
-                name_ar: "Fixed Income Analysis",
+                name_ar: "تحليل الدخل الثابت",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-FINANCE-B-B-A"],
@@ -4610,7 +4606,7 @@ export const universities: University[] = [
               {
                 code: "ACCT 201",
                 name_en: "Principles of Financial Accounting",
-                name_ar: "Principles of Financial Accounting",
+                name_ar: "مبادئ المحاسبة المالية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ECONOMICS-B-B-A"],
@@ -4618,7 +4614,7 @@ export const universities: University[] = [
               {
                 code: "ACCT 205",
                 name_en: "Managerial Accounting",
-                name_ar: "Managerial Accounting",
+                name_ar: "المحاسبة الإدارية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ECONOMICS-B-B-A"],
@@ -4626,7 +4622,7 @@ export const universities: University[] = [
               {
                 code: "BUS 209",
                 name_en: "Data Analytics 1",
-                name_ar: "Data Analytics 1",
+                name_ar: "تحليلات البيانات 1",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ECONOMICS-B-B-A"],
@@ -4634,7 +4630,7 @@ export const universities: University[] = [
               {
                 code: "ECON 200",
                 name_en: "Principles of Microeconomics",
-                name_ar: "Principles of Microeconomics",
+                name_ar: "مبادئ الاقتصاد الجزئي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ECONOMICS-B-B-A"],
@@ -4642,7 +4638,7 @@ export const universities: University[] = [
               {
                 code: "ECON 201",
                 name_en: "Principles of Macroeconomics",
-                name_ar: "Principles of Macroeconomics",
+                name_ar: "مبادئ الاقتصاد الكلي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ECONOMICS-B-B-A"],
@@ -4650,7 +4646,7 @@ export const universities: University[] = [
               {
                 code: "FINC 232",
                 name_en: "Financial Management",
-                name_ar: "Financial Management",
+                name_ar: "الإدارة المالية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ECONOMICS-B-B-A"],
@@ -4658,7 +4654,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 201",
                 name_en: "Principles of Management",
-                name_ar: "Principles of Management",
+                name_ar: "مبادئ الإدارة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ECONOMICS-B-B-A"],
@@ -4666,7 +4662,7 @@ export const universities: University[] = [
               {
                 code: "MRKT 200",
                 name_en: "Principles of Marketing",
-                name_ar: "Principles of Marketing",
+                name_ar: "مبادئ التسويق",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ECONOMICS-B-B-A"],
@@ -4674,7 +4670,7 @@ export const universities: University[] = [
               {
                 code: "BEAL 401",
                 name_en: "Legal & Ethical Issues in Business",
-                name_ar: "Legal & Ethical Issues in Business",
+                name_ar: "القضايا القانونية والأخلاقية في الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ECONOMICS-B-B-A"],
@@ -4682,7 +4678,7 @@ export const universities: University[] = [
               {
                 code: "BUS 321",
                 name_en: "International Business Management",
-                name_ar: "International Business Management",
+                name_ar: "إدارة الأعمال الدولية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ECONOMICS-B-B-A"],
@@ -4690,7 +4686,7 @@ export const universities: University[] = [
               {
                 code: "ENTR 313",
                 name_en: "Managing Entrepreneurial Ventures",
-                name_ar: "Managing Entrepreneurial Ventures",
+                name_ar: "إدارة المشاريع الريادية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ECONOMICS-B-B-A"],
@@ -4698,7 +4694,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 346",
                 name_en: "Production & Operations Management",
-                name_ar: "Production & Operations Management",
+                name_ar: "إدارة الإنتاج والعمليات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ECONOMICS-B-B-A"],
@@ -4706,7 +4702,7 @@ export const universities: University[] = [
               {
                 code: "BUS 490",
                 name_en: "Common Capstone",
-                name_ar: "Common Capstone",
+                name_ar: "مشروع التخرج المشترك",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ECONOMICS-B-B-A"],
@@ -4714,7 +4710,7 @@ export const universities: University[] = [
               {
                 code: "PENDING",
                 name_en: "Internship (no course code given)",
-                name_ar: "Internship (no course code given)",
+                name_ar: "تدريب عملي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ECONOMICS-B-B-A"],
@@ -4722,7 +4718,7 @@ export const universities: University[] = [
               {
                 code: "ECON 305",
                 name_en: "International Economics",
-                name_ar: "International Economics",
+                name_ar: "الاقتصاد الدولي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ECONOMICS-B-B-A"],
@@ -4730,7 +4726,7 @@ export const universities: University[] = [
               {
                 code: "ECON 310",
                 name_en: "Intermediate Microeconomics",
-                name_ar: "Intermediate Microeconomics",
+                name_ar: "الاقتصاد الجزئي المتوسط",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ECONOMICS-B-B-A"],
@@ -4738,7 +4734,7 @@ export const universities: University[] = [
               {
                 code: "ECON 312",
                 name_en: "Intermediate Macroeconomics",
-                name_ar: "Intermediate Macroeconomics",
+                name_ar: "الاقتصاد الكلي المتوسط",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ECONOMICS-B-B-A"],
@@ -4746,7 +4742,7 @@ export const universities: University[] = [
               {
                 code: "ECON 315",
                 name_en: "Managerial Economics",
-                name_ar: "Managerial Economics",
+                name_ar: "الاقتصاد الإداري",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ECONOMICS-B-B-A"],
@@ -4754,7 +4750,7 @@ export const universities: University[] = [
               {
                 code: "ECON 363",
                 name_en: "Environmental and Resources Economics",
-                name_ar: "Environmental and Resources Economics",
+                name_ar: "اقتصاديات البيئة والموارد",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ECONOMICS-B-B-A"],
@@ -4762,7 +4758,7 @@ export const universities: University[] = [
               {
                 code: "ECON 413",
                 name_en: "Economics Capstone",
-                name_ar: "Economics Capstone",
+                name_ar: "مشروع تخرج في الاقتصاد",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ECONOMICS-B-B-A"],
@@ -4770,7 +4766,7 @@ export const universities: University[] = [
               {
                 code: "ECON 304",
                 name_en: "Economics of Labor",
-                name_ar: "Economics of Labor",
+                name_ar: "اقتصاديات العمل",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-ECONOMICS-B-B-A"],
@@ -4778,7 +4774,7 @@ export const universities: University[] = [
               {
                 code: "ECON 389",
                 name_en: "Special Topics",
-                name_ar: "Special Topics",
+                name_ar: "موضوعات خاصة",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-ECONOMICS-B-B-A"],
@@ -4786,7 +4782,7 @@ export const universities: University[] = [
               {
                 code: "ECON 405",
                 name_en: "Comparative Economic Systems",
-                name_ar: "Comparative Economic Systems",
+                name_ar: "النظم الاقتصادية المقارنة",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-ECONOMICS-B-B-A"],
@@ -4794,7 +4790,7 @@ export const universities: University[] = [
               {
                 code: "ECON 409",
                 name_en: "Economic Development",
-                name_ar: "Economic Development",
+                name_ar: "التنمية الاقتصادية",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-ECONOMICS-B-B-A"],
@@ -4802,7 +4798,7 @@ export const universities: University[] = [
               {
                 code: "ECON 429",
                 name_en: "Environmental and Energy Policy",
-                name_ar: "Environmental and Energy Policy",
+                name_ar: "السياسة البيئية وسياسة الطاقة",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-ECONOMICS-B-B-A"],
@@ -4824,7 +4820,7 @@ export const universities: University[] = [
               {
                 id: "KW-AUK-HUMAN-RESOURCE-MANAGEMENT-B-B-A",
                 name_en: "Human Resource Management (B.B.A.)",
-                name_ar: "Human Resource Management (B.B.A.)",
+                name_ar: "إدارة الموارد البشرية (بكالوريوس إدارة الأعمال)",
                 degree: "BBA",
               },
             ],
@@ -4832,7 +4828,7 @@ export const universities: University[] = [
               {
                 code: "ACCT 201",
                 name_en: "Principles of Financial Accounting",
-                name_ar: "Principles of Financial Accounting",
+                name_ar: "مبادئ المحاسبة المالية",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -4843,7 +4839,7 @@ export const universities: University[] = [
               {
                 code: "ACCT 205",
                 name_en: "Managerial Accounting",
-                name_ar: "Managerial Accounting",
+                name_ar: "المحاسبة الإدارية",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -4854,7 +4850,7 @@ export const universities: University[] = [
               {
                 code: "BUS 209",
                 name_en: "Data Analytics 1",
-                name_ar: "Data Analytics 1",
+                name_ar: "تحليلات البيانات 1",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -4865,7 +4861,7 @@ export const universities: University[] = [
               {
                 code: "ECON 200",
                 name_en: "Principles of Microeconomics",
-                name_ar: "Principles of Microeconomics",
+                name_ar: "مبادئ الاقتصاد الجزئي",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -4876,7 +4872,7 @@ export const universities: University[] = [
               {
                 code: "ECON 201",
                 name_en: "Principles of Macroeconomics",
-                name_ar: "Principles of Macroeconomics",
+                name_ar: "مبادئ الاقتصاد الكلي",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -4887,7 +4883,7 @@ export const universities: University[] = [
               {
                 code: "FINC 232",
                 name_en: "Financial Management",
-                name_ar: "Financial Management",
+                name_ar: "الإدارة المالية",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -4898,7 +4894,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 201",
                 name_en: "Principles of Management",
-                name_ar: "Principles of Management",
+                name_ar: "مبادئ الإدارة",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -4909,7 +4905,7 @@ export const universities: University[] = [
               {
                 code: "MRKT 200",
                 name_en: "Principles of Marketing",
-                name_ar: "Principles of Marketing",
+                name_ar: "مبادئ التسويق",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -4920,7 +4916,7 @@ export const universities: University[] = [
               {
                 code: "BEAL 401",
                 name_en: "Legal & Ethical Issues in Business",
-                name_ar: "Legal & Ethical Issues in Business",
+                name_ar: "القضايا القانونية والأخلاقية في الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -4931,7 +4927,7 @@ export const universities: University[] = [
               {
                 code: "BUS 321",
                 name_en: "International Business Management",
-                name_ar: "International Business Management",
+                name_ar: "إدارة الأعمال الدولية",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -4942,7 +4938,7 @@ export const universities: University[] = [
               {
                 code: "ENTR 313",
                 name_en: "Managing Entrepreneurial Ventures",
-                name_ar: "Managing Entrepreneurial Ventures",
+                name_ar: "إدارة المشاريع الريادية",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -4953,7 +4949,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 346",
                 name_en: "Production & Operations Management",
-                name_ar: "Production & Operations Management",
+                name_ar: "إدارة الإنتاج والعمليات",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -4964,7 +4960,7 @@ export const universities: University[] = [
               {
                 code: "BUS 490",
                 name_en: "Common Capstone",
-                name_ar: "Common Capstone",
+                name_ar: "مشروع التخرج المشترك",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -4975,7 +4971,7 @@ export const universities: University[] = [
               {
                 code: "PENDING",
                 name_en: "Internship (no course code given)",
-                name_ar: "Internship (no course code given)",
+                name_ar: "تدريب عملي",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -4986,7 +4982,7 @@ export const universities: University[] = [
               {
                 code: "HR 305",
                 name_en: "Human Resources Management",
-                name_ar: "Human Resources Management",
+                name_ar: "إدارة الموارد البشرية",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -4997,7 +4993,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 301",
                 name_en: "Organizational Development and Change",
-                name_ar: "Organizational Development and Change",
+                name_ar: "التطوير والتغيير التنظيمي",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -5008,7 +5004,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 315",
                 name_en: "Decision Making in Management",
-                name_ar: "Decision Making in Management",
+                name_ar: "اتخاذ القرار في الإدارة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-MANAGEMENT-B-B-A"],
@@ -5016,7 +5012,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 333",
                 name_en: "Organizational Behavior",
-                name_ar: "Organizational Behavior",
+                name_ar: "السلوك التنظيمي",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -5027,7 +5023,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 350",
                 name_en: "Essentials of Business Communication",
-                name_ar: "Essentials of Business Communication",
+                name_ar: "أساسيات الاتصال في الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-MANAGEMENT-B-B-A"],
@@ -5035,7 +5031,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 413",
                 name_en: "Management Capstone",
-                name_ar: "Management Capstone",
+                name_ar: "مشروع تخرج في الإدارة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-MANAGEMENT-B-B-A"],
@@ -5043,7 +5039,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 303",
                 name_en: "Management and Leadership",
-                name_ar: "Management and Leadership",
+                name_ar: "الإدارة والقيادة",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-MANAGEMENT-B-B-A"],
@@ -5051,7 +5047,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 343",
                 name_en: "Quantitative Research Methods for Business",
-                name_ar: "Quantitative Research Methods for Business",
+                name_ar: "أساليب البحث الكمي للأعمال",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-MANAGEMENT-B-B-A"],
@@ -5059,7 +5055,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 389",
                 name_en: "Special Topics",
-                name_ar: "Special Topics",
+                name_ar: "موضوعات خاصة",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-MANAGEMENT-B-B-A"],
@@ -5067,7 +5063,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 415",
                 name_en: "Services Management",
-                name_ar: "Services Management",
+                name_ar: "إدارة الخدمات",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-MANAGEMENT-B-B-A"],
@@ -5075,7 +5071,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 300",
                 name_en: "Quality Management",
-                name_ar: "Quality Management",
+                name_ar: "إدارة الجودة",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-MANAGEMENT-B-B-A"],
@@ -5083,7 +5079,7 @@ export const universities: University[] = [
               {
                 code: "BUS 389",
                 name_en: "Special Topics",
-                name_ar: "Special Topics",
+                name_ar: "موضوعات خاصة",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-MANAGEMENT-B-B-A"],
@@ -5091,7 +5087,7 @@ export const universities: University[] = [
               {
                 code: "BUS 489",
                 name_en: "Interdisciplinary Honors Seminar",
-                name_ar: "Interdisciplinary Honors Seminar",
+                name_ar: "حلقة دراسية شرفية متعددة التخصصات",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-MANAGEMENT-B-B-A"],
@@ -5099,7 +5095,7 @@ export const universities: University[] = [
               {
                 code: "BEAL 403",
                 name_en: "Corporate Governance and Ethics",
-                name_ar: "Corporate Governance and Ethics",
+                name_ar: "حوكمة الشركات والأخلاقيات",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -5110,7 +5106,7 @@ export const universities: University[] = [
               {
                 code: "HR 310",
                 name_en: "Recruitment, Staffing and Talent Management",
-                name_ar: "Recruitment, Staffing and Talent Management",
+                name_ar: "التوظيف والتوظيف وإدارة المواهب",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-HUMAN-RESOURCE-MANAGEMENT-B-B-A"],
@@ -5118,7 +5114,7 @@ export const universities: University[] = [
               {
                 code: "HR 311",
                 name_en: "Total Rewards: Compensation",
-                name_ar: "Total Rewards: Compensation",
+                name_ar: "المكافآت الكلية: التعويضات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-HUMAN-RESOURCE-MANAGEMENT-B-B-A"],
@@ -5126,7 +5122,7 @@ export const universities: University[] = [
               {
                 code: "HR 320",
                 name_en: "Data Analytics for HRM",
-                name_ar: "Data Analytics for HRM",
+                name_ar: "تحليلات البيانات لإدارة الموارد البشرية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-HUMAN-RESOURCE-MANAGEMENT-B-B-A"],
@@ -5134,7 +5130,7 @@ export const universities: University[] = [
               {
                 code: "HR 413",
                 name_en: "Capstone - Strategic Human Resources Management",
-                name_ar: "Capstone - Strategic Human Resources Management",
+                name_ar: "المشروع الختامي - إدارة الموارد البشرية الاستراتيجية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-HUMAN-RESOURCE-MANAGEMENT-B-B-A"],
@@ -5142,7 +5138,7 @@ export const universities: University[] = [
               {
                 code: "HR 344",
                 name_en: "Managing Conflict",
-                name_ar: "Managing Conflict",
+                name_ar: "إدارة النزاع",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-HUMAN-RESOURCE-MANAGEMENT-B-B-A"],
@@ -5150,7 +5146,7 @@ export const universities: University[] = [
               {
                 code: "HR 350",
                 name_en: "International Human Resources Management",
-                name_ar: "International Human Resources Management",
+                name_ar: "إدارة الموارد البشرية الدولية",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-HUMAN-RESOURCE-MANAGEMENT-B-B-A"],
@@ -5158,7 +5154,7 @@ export const universities: University[] = [
               {
                 code: "HR 389",
                 name_en: "Special Topic",
-                name_ar: "Special Topic",
+                name_ar: "موضوع خاص",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-HUMAN-RESOURCE-MANAGEMENT-B-B-A"],
@@ -5166,7 +5162,7 @@ export const universities: University[] = [
               {
                 code: "ECON 304",
                 name_en: "Economics of Labor",
-                name_ar: "Economics of Labor",
+                name_ar: "اقتصاديات العمل",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-HUMAN-RESOURCE-MANAGEMENT-B-B-A"],
@@ -5174,7 +5170,7 @@ export const universities: University[] = [
               {
                 code: "IR 309",
                 name_en: "Dynamics of Globalization",
-                name_ar: "Dynamics of Globalization",
+                name_ar: "ديناميكيات العولمة",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-HUMAN-RESOURCE-MANAGEMENT-B-B-A"],
@@ -5182,7 +5178,7 @@ export const universities: University[] = [
               {
                 code: "IR 345",
                 name_en: "Conflict Resolutions",
-                name_ar: "Conflict Resolutions",
+                name_ar: "حل النزاعات",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-HUMAN-RESOURCE-MANAGEMENT-B-B-A"],
@@ -5190,7 +5186,7 @@ export const universities: University[] = [
               {
                 code: "PSYC 332",
                 name_en: "Personality Theories",
-                name_ar: "Personality Theories",
+                name_ar: "نظريات الشخصية",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-HUMAN-RESOURCE-MANAGEMENT-B-B-A"],
@@ -5198,7 +5194,7 @@ export const universities: University[] = [
               {
                 code: "HR 325",
                 name_en: "Work and Well-Being",
-                name_ar: "Work and Well-Being",
+                name_ar: "العمل والرفاهية",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-HUMAN-RESOURCE-MANAGEMENT-B-B-A"],
@@ -5222,7 +5218,7 @@ export const universities: University[] = [
               {
                 code: "ACCT 201",
                 name_en: "Principles of Financial Accounting",
-                name_ar: "Principles of Financial Accounting",
+                name_ar: "مبادئ المحاسبة المالية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-MARKETING-B-B-A"],
@@ -5230,7 +5226,7 @@ export const universities: University[] = [
               {
                 code: "ACCT 205",
                 name_en: "Managerial Accounting",
-                name_ar: "Managerial Accounting",
+                name_ar: "المحاسبة الإدارية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-MARKETING-B-B-A"],
@@ -5238,7 +5234,7 @@ export const universities: University[] = [
               {
                 code: "BUS 209",
                 name_en: "Data Analytics 1",
-                name_ar: "Data Analytics 1",
+                name_ar: "تحليلات البيانات 1",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-MARKETING-B-B-A"],
@@ -5246,7 +5242,7 @@ export const universities: University[] = [
               {
                 code: "ECON 200",
                 name_en: "Principles of Microeconomics",
-                name_ar: "Principles of Microeconomics",
+                name_ar: "مبادئ الاقتصاد الجزئي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-MARKETING-B-B-A"],
@@ -5254,7 +5250,7 @@ export const universities: University[] = [
               {
                 code: "ECON 201",
                 name_en: "Principles of Macroeconomics",
-                name_ar: "Principles of Macroeconomics",
+                name_ar: "مبادئ الاقتصاد الكلي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-MARKETING-B-B-A"],
@@ -5262,7 +5258,7 @@ export const universities: University[] = [
               {
                 code: "FINC 232",
                 name_en: "Financial Management",
-                name_ar: "Financial Management",
+                name_ar: "الإدارة المالية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-MARKETING-B-B-A"],
@@ -5270,7 +5266,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 201",
                 name_en: "Principles of Management",
-                name_ar: "Principles of Management",
+                name_ar: "مبادئ الإدارة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-MARKETING-B-B-A"],
@@ -5278,7 +5274,7 @@ export const universities: University[] = [
               {
                 code: "MRKT 200",
                 name_en: "Principles of Marketing",
-                name_ar: "Principles of Marketing",
+                name_ar: "مبادئ التسويق",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-MARKETING-B-B-A"],
@@ -5286,7 +5282,7 @@ export const universities: University[] = [
               {
                 code: "BEAL 401",
                 name_en: "Legal & Ethical Issues in Business",
-                name_ar: "Legal & Ethical Issues in Business",
+                name_ar: "القضايا القانونية والأخلاقية في الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-MARKETING-B-B-A"],
@@ -5294,7 +5290,7 @@ export const universities: University[] = [
               {
                 code: "BUS 321",
                 name_en: "International Business Management",
-                name_ar: "International Business Management",
+                name_ar: "إدارة الأعمال الدولية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-MARKETING-B-B-A"],
@@ -5302,7 +5298,7 @@ export const universities: University[] = [
               {
                 code: "ENTR 313",
                 name_en: "Managing Entrepreneurial Ventures",
-                name_ar: "Managing Entrepreneurial Ventures",
+                name_ar: "إدارة المشاريع الريادية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-MARKETING-B-B-A"],
@@ -5310,7 +5306,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 346",
                 name_en: "Production & Operations Management",
-                name_ar: "Production & Operations Management",
+                name_ar: "إدارة الإنتاج والعمليات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-MARKETING-B-B-A"],
@@ -5318,7 +5314,7 @@ export const universities: University[] = [
               {
                 code: "BUS 490",
                 name_en: "Common Capstone",
-                name_ar: "Common Capstone",
+                name_ar: "مشروع التخرج المشترك",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-MARKETING-B-B-A"],
@@ -5326,7 +5322,7 @@ export const universities: University[] = [
               {
                 code: "PENDING",
                 name_en: "Internship (no course code given)",
-                name_ar: "Internship (no course code given)",
+                name_ar: "تدريب عملي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-MARKETING-B-B-A"],
@@ -5334,7 +5330,7 @@ export const universities: University[] = [
               {
                 code: "MRKT 309",
                 name_en: "Digital Marketing",
-                name_ar: "Digital Marketing",
+                name_ar: "التسويق الرقمي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-MARKETING-B-B-A"],
@@ -5342,7 +5338,7 @@ export const universities: University[] = [
               {
                 code: "MRKT 329 / 330",
                 name_en: "International Marketing OR Service Marketing",
-                name_ar: "International Marketing OR Service Marketing",
+                name_ar: "التسويق الدولي أو تسويق الخدمات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-MARKETING-B-B-A"],
@@ -5350,7 +5346,7 @@ export const universities: University[] = [
               {
                 code: "MRKT 349",
                 name_en: "Buyer Behavior",
-                name_ar: "Buyer Behavior",
+                name_ar: "سلوك المشتري",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-MARKETING-B-B-A"],
@@ -5358,7 +5354,7 @@ export const universities: University[] = [
               {
                 code: "MRKT 355",
                 name_en: "Promotion and Advertising",
-                name_ar: "Promotion and Advertising",
+                name_ar: "الترويج والإعلان",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-MARKETING-B-B-A"],
@@ -5366,7 +5362,7 @@ export const universities: University[] = [
               {
                 code: "MRKT 401",
                 name_en: "Marketing Research",
-                name_ar: "Marketing Research",
+                name_ar: "بحوث التسويق",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-MARKETING-B-B-A"],
@@ -5374,7 +5370,7 @@ export const universities: University[] = [
               {
                 code: "MRKT 413",
                 name_en: "Marketing Capstone",
-                name_ar: "Marketing Capstone",
+                name_ar: "مشروع التسويق الختامي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-MARKETING-B-B-A"],
@@ -5382,7 +5378,7 @@ export const universities: University[] = [
               {
                 code: "MRKT 329",
                 name_en: "International Marketing",
-                name_ar: "International Marketing",
+                name_ar: "التسويق الدولي",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-MARKETING-B-B-A"],
@@ -5390,7 +5386,7 @@ export const universities: University[] = [
               {
                 code: "MRKT 330",
                 name_en: "Service Marketing",
-                name_ar: "Service Marketing",
+                name_ar: "تسويق الخدمات",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-MARKETING-B-B-A"],
@@ -5398,7 +5394,7 @@ export const universities: University[] = [
               {
                 code: "MRKT 340",
                 name_en: "Social Media Marketing",
-                name_ar: "Social Media Marketing",
+                name_ar: "التسويق عبر وسائل التواصل الاجتماعي",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-MARKETING-B-B-A"],
@@ -5406,7 +5402,7 @@ export const universities: University[] = [
               {
                 code: "MRKT 389",
                 name_en: "Special Topics",
-                name_ar: "Special Topics",
+                name_ar: "موضوعات خاصة",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-MARKETING-B-B-A"],
@@ -5414,7 +5410,7 @@ export const universities: University[] = [
               {
                 code: "MRKT 415",
                 name_en: "Supply Chain Management",
-                name_ar: "Supply Chain Management",
+                name_ar: "إدارة سلسلة التوريد",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-MARKETING-B-B-A"],
@@ -5422,7 +5418,7 @@ export const universities: University[] = [
               {
                 code: "BUS 389",
                 name_en: "Special Topics",
-                name_ar: "Special Topics",
+                name_ar: "موضوعات خاصة",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-MARKETING-B-B-A"],
@@ -5430,7 +5426,7 @@ export const universities: University[] = [
               {
                 code: "BUS 489",
                 name_en: "Interdisciplinary Honors Seminar",
-                name_ar: "Interdisciplinary Honors Seminar",
+                name_ar: "حلقة دراسية شرفية متعددة التخصصات",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-MARKETING-B-B-A"],
@@ -5438,7 +5434,7 @@ export const universities: University[] = [
               {
                 code: "BEAL 403",
                 name_en: "Corporate Governance and Ethics",
-                name_ar: "Corporate Governance and Ethics",
+                name_ar: "حوكمة الشركات والأخلاقيات",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-MARKETING-B-B-A"],
@@ -5454,7 +5450,7 @@ export const universities: University[] = [
         departments: [
           {
             id: "KW-AUK-COLLEGE-OF-ENGINEERING-APPLIED-SCIENCES-ENGINEERING",
-            name_ar: "Engineering",
+            name_ar: "هندسة",
             name_en: "Engineering",
             degrees: ["BE"],
             programs: [
@@ -5473,7 +5469,7 @@ export const universities: University[] = [
               {
                 id: "KW-AUK-SYSTEMS-ENGINEERING-B-E",
                 name_en: "Systems Engineering (B.E.)",
-                name_ar: "Systems Engineering (B.E.)",
+                name_ar: "هندسة النظم (بكالوريوس هندسة)",
                 degree: "BE",
               },
             ],
@@ -5481,7 +5477,7 @@ export const universities: University[] = [
               {
                 code: "CPEG 210",
                 name_en: "Digital Logic Design",
-                name_ar: "Digital Logic Design",
+                name_ar: "تصميم المنطق الرقمي",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -5492,7 +5488,7 @@ export const universities: University[] = [
               {
                 code: "CPEG 210L",
                 name_en: "Digital Logic Design Laboratory",
-                name_ar: "Digital Logic Design Laboratory",
+                name_ar: "مختبر تصميم المنطق الرقمي",
                 credits: 1,
                 type: "Required",
                 program_ids: [
@@ -5503,7 +5499,7 @@ export const universities: University[] = [
               {
                 code: "CPEG 220",
                 name_en: "Computer Organization and Architecture",
-                name_ar: "Computer Organization and Architecture",
+                name_ar: "تنظيم وهندسة الحاسوب",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -5514,7 +5510,7 @@ export const universities: University[] = [
               {
                 code: "CPEG 330",
                 name_en: "Microprocessors and Interfacing",
-                name_ar: "Microprocessors and Interfacing",
+                name_ar: "المعالجات الدقيقة والربط البيني",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -5525,7 +5521,7 @@ export const universities: University[] = [
               {
                 code: "CPEG 330L",
                 name_en: "Microprocessors and Interfacing Laboratory",
-                name_ar: "Microprocessors and Interfacing Laboratory",
+                name_ar: "مختبر المعالجات الدقيقة والربط البيني",
                 credits: 1,
                 type: "Required",
                 program_ids: [
@@ -5536,7 +5532,7 @@ export const universities: University[] = [
               {
                 code: "CPEG 340",
                 name_en: "Embedded System Design",
-                name_ar: "Embedded System Design",
+                name_ar: "تصميم الأنظمة المدمجة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-COMPUTER-ENGINEERING-B-E"],
@@ -5544,7 +5540,7 @@ export const universities: University[] = [
               {
                 code: "CPEG 340L",
                 name_en: "Embedded System Design Laboratory",
-                name_ar: "Embedded System Design Laboratory",
+                name_ar: "مختبر تصميم الأنظمة المدمجة",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AUK-COMPUTER-ENGINEERING-B-E"],
@@ -5552,7 +5548,7 @@ export const universities: University[] = [
               {
                 code: "CPEG 350",
                 name_en: "Data Communications and Computer Networks",
-                name_ar: "Data Communications and Computer Networks",
+                name_ar: "اتصالات البيانات وشبكات الحاسوب",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-COMPUTER-ENGINEERING-B-E"],
@@ -5560,7 +5556,7 @@ export const universities: University[] = [
               {
                 code: "CPEG 475",
                 name_en: "Senior Design Capstone I",
-                name_ar: "Senior Design Capstone I",
+                name_ar: "المشروع الختامي في التصميم المتقدم I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-COMPUTER-ENGINEERING-B-E"],
@@ -5568,7 +5564,7 @@ export const universities: University[] = [
               {
                 code: "CPEG 480",
                 name_en: "Senior Design Capstone II",
-                name_ar: "Senior Design Capstone II",
+                name_ar: "المشروع الختامي في التصميم المتقدم II",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-COMPUTER-ENGINEERING-B-E"],
@@ -5576,7 +5572,7 @@ export const universities: University[] = [
               {
                 code: "CSIS 130",
                 name_en: "Computer Programming II",
-                name_ar: "Computer Programming II",
+                name_ar: "برمجة الحاسوب II",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AUK-COMPUTER-ENGINEERING-B-E"],
@@ -5584,7 +5580,7 @@ export const universities: University[] = [
               {
                 code: "CSIS 210",
                 name_en: "Data Structures and Algorithms",
-                name_ar: "Data Structures and Algorithms",
+                name_ar: "هياكل البيانات والخوارزميات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-COMPUTER-ENGINEERING-B-E"],
@@ -5592,7 +5588,7 @@ export const universities: University[] = [
               {
                 code: "CSIS 310",
                 name_en: "Introduction to Operating Systems",
-                name_ar: "Introduction to Operating Systems",
+                name_ar: "مقدمة في أنظمة التشغيل",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-COMPUTER-ENGINEERING-B-E"],
@@ -5600,7 +5596,7 @@ export const universities: University[] = [
               {
                 code: "CSIS 330",
                 name_en: "Software Engineering",
-                name_ar: "Software Engineering",
+                name_ar: "هندسة البرمجيات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-COMPUTER-ENGINEERING-B-E"],
@@ -5608,7 +5604,7 @@ export const universities: University[] = [
               {
                 code: "ELEG 220",
                 name_en: "Electric Circuits I",
-                name_ar: "Electric Circuits I",
+                name_ar: "الدوائر الكهربائية I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-COMPUTER-ENGINEERING-B-E"],
@@ -5616,7 +5612,7 @@ export const universities: University[] = [
               {
                 code: "ELEG 220L",
                 name_en: "Electric Circuits I Laboratory",
-                name_ar: "Electric Circuits I Laboratory",
+                name_ar: "مختبر الدوائر الكهربائية I",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AUK-COMPUTER-ENGINEERING-B-E"],
@@ -5624,7 +5620,7 @@ export const universities: University[] = [
               {
                 code: "ELEG 270",
                 name_en: "Electronics",
-                name_ar: "Electronics",
+                name_ar: "إلكترونيات",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -5635,7 +5631,7 @@ export const universities: University[] = [
               {
                 code: "ELEG 270L",
                 name_en: "Electronics Laboratory",
-                name_ar: "Electronics Laboratory",
+                name_ar: "مختبر إلكترونيات",
                 credits: 1,
                 type: "Required",
                 program_ids: [
@@ -5646,7 +5642,7 @@ export const universities: University[] = [
               {
                 code: "ELEG 320",
                 name_en: "Signals and Systems",
-                name_ar: "Signals and Systems",
+                name_ar: "الإشارات والأنظمة",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -5657,7 +5653,7 @@ export const universities: University[] = [
               {
                 code: "ENGR 330",
                 name_en: "Engineering Economics",
-                name_ar: "Engineering Economics",
+                name_ar: "الاقتصاد الهندسي",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -5669,7 +5665,7 @@ export const universities: University[] = [
               {
                 code: "MATH 201",
                 name_en: "Calculus I",
-                name_ar: "Calculus I",
+                name_ar: "حساب التفاضل والتكامل I",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -5681,7 +5677,7 @@ export const universities: University[] = [
               {
                 code: "MATH 203",
                 name_en: "Calculus II",
-                name_ar: "Calculus II",
+                name_ar: "حساب التفاضل والتكامل II",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -5693,7 +5689,7 @@ export const universities: University[] = [
               {
                 code: "MATH 205",
                 name_en: "Linear Algebra",
-                name_ar: "Linear Algebra",
+                name_ar: "الجبر الخطي",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -5705,7 +5701,7 @@ export const universities: University[] = [
               {
                 code: "MATH 210",
                 name_en: "Differential Equations",
-                name_ar: "Differential Equations",
+                name_ar: "المعادلات التفاضلية",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -5717,7 +5713,7 @@ export const universities: University[] = [
               {
                 code: "MATH 213",
                 name_en: "Discrete Mathematics",
-                name_ar: "Discrete Mathematics",
+                name_ar: "الرياضيات المتقطعة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-COMPUTER-ENGINEERING-B-E"],
@@ -5725,7 +5721,7 @@ export const universities: University[] = [
               {
                 code: "STAT 214",
                 name_en: "Statistics for Engineers",
-                name_ar: "Statistics for Engineers",
+                name_ar: "الإحصاء للمهندسين",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -5736,7 +5732,7 @@ export const universities: University[] = [
               {
                 code: "PHYS 115",
                 name_en: "General Physics I",
-                name_ar: "General Physics I",
+                name_ar: "الفيزياء العامة I",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -5748,7 +5744,7 @@ export const universities: University[] = [
               {
                 code: "PHYS 115L",
                 name_en: "General Physics I Laboratory",
-                name_ar: "General Physics I Laboratory",
+                name_ar: "مختبر الفيزياء العامة I",
                 credits: 1,
                 type: "Required",
                 program_ids: [
@@ -5760,7 +5756,7 @@ export const universities: University[] = [
               {
                 code: "PHYS 116",
                 name_en: "General Physics II",
-                name_ar: "General Physics II",
+                name_ar: "الفيزياء العامة II",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -5772,7 +5768,7 @@ export const universities: University[] = [
               {
                 code: "PHYS 116L",
                 name_en: "General Physics II Laboratory",
-                name_ar: "General Physics II Laboratory",
+                name_ar: "مختبر الفيزياء العامة II",
                 credits: 1,
                 type: "Required",
                 program_ids: [
@@ -5784,7 +5780,7 @@ export const universities: University[] = [
               {
                 code: "CHEM 101 / BIOL 101 + Lab",
                 name_en: "General Chemistry I OR General Biology I (with Lab)",
-                name_ar: "General Chemistry I OR General Biology I (with Lab)",
+                name_ar: "الكيمياء العامة I أو الأحياء العامة I (مع مختبر)",
                 credits: 4,
                 type: "Required",
                 program_ids: [
@@ -5796,7 +5792,7 @@ export const universities: University[] = [
               {
                 code: "CSIS 120",
                 name_en: "Computer Programming I",
-                name_ar: "Computer Programming I",
+                name_ar: "برمجة الحاسوب I",
                 credits: 4,
                 type: "Required",
                 program_ids: [
@@ -5808,7 +5804,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 201",
                 name_en: "Principles of Management",
-                name_ar: "Principles of Management",
+                name_ar: "مبادئ الإدارة",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -5820,7 +5816,7 @@ export const universities: University[] = [
               {
                 code: "ENGR 210",
                 name_en: "Engineering Entrepreneurship I",
-                name_ar: "Engineering Entrepreneurship I",
+                name_ar: "ريادة الأعمال الهندسية I",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -5833,8 +5829,7 @@ export const universities: University[] = [
                 code: "Elective 1",
                 name_en:
                   "Major Course Elective (choose from approved 200+ pool)",
-                name_ar:
-                  "Major Course Elective (choose from approved 200+ pool)",
+                name_ar: "مقرر اختياري تخصصي (يختار من مجموعة 200+ المعتمدة)",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -5847,8 +5842,7 @@ export const universities: University[] = [
                 code: "Elective 2",
                 name_en:
                   "Major Course Elective (choose from approved 200+ pool)",
-                name_ar:
-                  "Major Course Elective (choose from approved 200+ pool)",
+                name_ar: "مقرر اختياري تخصصي (يختار من مجموعة 200+ المعتمدة)",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -5861,8 +5855,7 @@ export const universities: University[] = [
                 code: "Elective 3",
                 name_en:
                   "Major Course Elective (choose from approved 200+ pool)",
-                name_ar:
-                  "Major Course Elective (choose from approved 200+ pool)",
+                name_ar: "مقرر اختياري تخصصي (يختار من مجموعة 200+ المعتمدة)",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -5875,8 +5868,7 @@ export const universities: University[] = [
                 code: "Elective 4",
                 name_en:
                   "Major Course Elective (choose from approved 200+ pool)",
-                name_ar:
-                  "Major Course Elective (choose from approved 200+ pool)",
+                name_ar: "مقرر اختياري تخصصي (يختار من مجموعة 200+ المعتمدة)",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -5888,7 +5880,8 @@ export const universities: University[] = [
               {
                 code: "Lab Elective 1",
                 name_en: "Major Lab Elective (choose from approved lab pool)",
-                name_ar: "Major Lab Elective (choose from approved lab pool)",
+                name_ar:
+                  "مقرر مختبر اختياري تخصصي (يختار من مجموعة المختبرات المعتمدة)",
                 credits: 1,
                 type: "Elective",
                 program_ids: [
@@ -5900,7 +5893,8 @@ export const universities: University[] = [
               {
                 code: "Lab Elective 2",
                 name_en: "Major Lab Elective (choose from approved lab pool)",
-                name_ar: "Major Lab Elective (choose from approved lab pool)",
+                name_ar:
+                  "مقرر مختبر اختياري تخصصي (يختار من مجموعة المختبرات المعتمدة)",
                 credits: 1,
                 type: "Elective",
                 program_ids: [
@@ -5912,7 +5906,7 @@ export const universities: University[] = [
               {
                 code: "CPEG 350",
                 name_en: "Data and Computer Communications",
-                name_ar: "Data and Computer Communications",
+                name_ar: "البيانات واتصالات الحاسوب",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ELECTRICAL-ENGINEERING-B-E"],
@@ -5920,7 +5914,7 @@ export const universities: University[] = [
               {
                 code: "ELEG 220",
                 name_en: "Electric Circuits",
-                name_ar: "Electric Circuits",
+                name_ar: "الدوائر الكهربائية",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -5931,7 +5925,7 @@ export const universities: University[] = [
               {
                 code: "ELEG 220L",
                 name_en: "Electric Circuits Laboratory",
-                name_ar: "Electric Circuits Laboratory",
+                name_ar: "مختبر الدوائر الكهربائية",
                 credits: 1,
                 type: "Required",
                 program_ids: [
@@ -5942,7 +5936,7 @@ export const universities: University[] = [
               {
                 code: "ELEG 300",
                 name_en: "Engineering Electromagnetics",
-                name_ar: "Engineering Electromagnetics",
+                name_ar: "الكهرومغناطيسية الهندسية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ELECTRICAL-ENGINEERING-B-E"],
@@ -5950,7 +5944,7 @@ export const universities: University[] = [
               {
                 code: "ELEG 310",
                 name_en: "Electric Machines and Power Fundamentals",
-                name_ar: "Electric Machines and Power Fundamentals",
+                name_ar: "أساسيات الآلات والطاقة الكهربائية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ELECTRICAL-ENGINEERING-B-E"],
@@ -5958,7 +5952,7 @@ export const universities: University[] = [
               {
                 code: "ELEG 310L",
                 name_en: "Electric Machines Laboratory",
-                name_ar: "Electric Machines Laboratory",
+                name_ar: "مختبر الآلات الكهربائية",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AUK-ELECTRICAL-ENGINEERING-B-E"],
@@ -5966,7 +5960,7 @@ export const universities: University[] = [
               {
                 code: "ELEG 330",
                 name_en: "Power System Analysis",
-                name_ar: "Power System Analysis",
+                name_ar: "تحليل أنظمة القوى",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ELECTRICAL-ENGINEERING-B-E"],
@@ -5974,7 +5968,7 @@ export const universities: University[] = [
               {
                 code: "ELEG 330L",
                 name_en: "Power Systems Laboratory",
-                name_ar: "Power Systems Laboratory",
+                name_ar: "مختبر أنظمة القوى",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AUK-ELECTRICAL-ENGINEERING-B-E"],
@@ -5982,7 +5976,7 @@ export const universities: University[] = [
               {
                 code: "ELEG 421",
                 name_en: "Control Systems",
-                name_ar: "Control Systems",
+                name_ar: "أنظمة التحكم",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -5993,7 +5987,7 @@ export const universities: University[] = [
               {
                 code: "ELEG 471",
                 name_en: "Power Electronics",
-                name_ar: "Power Electronics",
+                name_ar: "إلكترونيات القوى",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ELECTRICAL-ENGINEERING-B-E"],
@@ -6001,7 +5995,7 @@ export const universities: University[] = [
               {
                 code: "ELEG 475",
                 name_en: "Senior Design Capstone I",
-                name_ar: "Senior Design Capstone I",
+                name_ar: "المشروع الختامي في التصميم المتقدم I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ELECTRICAL-ENGINEERING-B-E"],
@@ -6009,7 +6003,7 @@ export const universities: University[] = [
               {
                 code: "ELEG 480",
                 name_en: "Senior Design Capstone II",
-                name_ar: "Senior Design Capstone II",
+                name_ar: "المشروع الختامي في التصميم المتقدم II",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ELECTRICAL-ENGINEERING-B-E"],
@@ -6017,7 +6011,7 @@ export const universities: University[] = [
               {
                 code: "MATH 206",
                 name_en: "Calculus III",
-                name_ar: "Calculus III",
+                name_ar: "حساب التفاضل والتكامل III",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ELECTRICAL-ENGINEERING-B-E"],
@@ -6025,7 +6019,7 @@ export const universities: University[] = [
               {
                 code: "STEG 210",
                 name_en: "Dynamic Systems",
-                name_ar: "Dynamic Systems",
+                name_ar: "الأنظمة الديناميكية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-SYSTEMS-ENGINEERING-B-E"],
@@ -6033,7 +6027,7 @@ export const universities: University[] = [
               {
                 code: "STEG 210L",
                 name_en: "Dynamic Systems Laboratory",
-                name_ar: "Dynamic Systems Laboratory",
+                name_ar: "مختبر الأنظمة الديناميكية",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AUK-SYSTEMS-ENGINEERING-B-E"],
@@ -6041,7 +6035,7 @@ export const universities: University[] = [
               {
                 code: "STEG 220",
                 name_en: "Engineering Statistical Analysis",
-                name_ar: "Engineering Statistical Analysis",
+                name_ar: "التحليل الإحصائي الهندسي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-SYSTEMS-ENGINEERING-B-E"],
@@ -6049,7 +6043,7 @@ export const universities: University[] = [
               {
                 code: "STEG 230",
                 name_en: "Introduction to Manufacturing Systems",
-                name_ar: "Introduction to Manufacturing Systems",
+                name_ar: "مقدمة في أنظمة التصنيع",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-SYSTEMS-ENGINEERING-B-E"],
@@ -6057,7 +6051,7 @@ export const universities: University[] = [
               {
                 code: "STEG 321",
                 name_en: "Systems Simulation",
-                name_ar: "Systems Simulation",
+                name_ar: "محاكاة النظم",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-SYSTEMS-ENGINEERING-B-E"],
@@ -6065,7 +6059,7 @@ export const universities: University[] = [
               {
                 code: "STEG 321L",
                 name_en: "Systems Simulation Laboratory",
-                name_ar: "Systems Simulation Laboratory",
+                name_ar: "مختبر محاكاة النظم",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AUK-SYSTEMS-ENGINEERING-B-E"],
@@ -6073,7 +6067,7 @@ export const universities: University[] = [
               {
                 code: "STEG 330",
                 name_en: "Operations Research I",
-                name_ar: "Operations Research I",
+                name_ar: "بحوث العمليات I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-SYSTEMS-ENGINEERING-B-E"],
@@ -6081,7 +6075,7 @@ export const universities: University[] = [
               {
                 code: "STEG 341",
                 name_en: "Production and Operations Management",
-                name_ar: "Production and Operations Management",
+                name_ar: "إدارة الإنتاج والعمليات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-SYSTEMS-ENGINEERING-B-E"],
@@ -6089,7 +6083,7 @@ export const universities: University[] = [
               {
                 code: "STEG 345",
                 name_en: "Quality Control",
-                name_ar: "Quality Control",
+                name_ar: "مراقبة الجودة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-SYSTEMS-ENGINEERING-B-E"],
@@ -6097,7 +6091,7 @@ export const universities: University[] = [
               {
                 code: "STEG 350",
                 name_en: "Human Factors Engineering",
-                name_ar: "Human Factors Engineering",
+                name_ar: "هندسة العوامل البشرية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-SYSTEMS-ENGINEERING-B-E"],
@@ -6105,7 +6099,7 @@ export const universities: University[] = [
               {
                 code: "STEG 431",
                 name_en: "Stochastic Operations Research",
-                name_ar: "Stochastic Operations Research",
+                name_ar: "بحوث العمليات العشوائية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-SYSTEMS-ENGINEERING-B-E"],
@@ -6113,7 +6107,7 @@ export const universities: University[] = [
               {
                 code: "STEG 442",
                 name_en: "Supply Chain Engineering",
-                name_ar: "Supply Chain Engineering",
+                name_ar: "هندسة سلسلة التوريد",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-SYSTEMS-ENGINEERING-B-E"],
@@ -6121,7 +6115,7 @@ export const universities: University[] = [
               {
                 code: "STEG 475",
                 name_en: "Senior Design Capstone I",
-                name_ar: "Senior Design Capstone I",
+                name_ar: "المشروع الختامي في التصميم المتقدم I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-SYSTEMS-ENGINEERING-B-E"],
@@ -6129,7 +6123,7 @@ export const universities: University[] = [
               {
                 code: "STEG 480",
                 name_en: "Senior Design Capstone II",
-                name_ar: "Senior Design Capstone II",
+                name_ar: "المشروع الختامي في التصميم المتقدم II",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-SYSTEMS-ENGINEERING-B-E"],
@@ -6137,7 +6131,7 @@ export const universities: University[] = [
               {
                 code: "ENGR 200",
                 name_en: "Engineering Design",
-                name_ar: "Engineering Design",
+                name_ar: "التصميم الهندسي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-SYSTEMS-ENGINEERING-B-E"],
@@ -6145,7 +6139,7 @@ export const universities: University[] = [
               {
                 code: "STAT 203",
                 name_en: "Probability and Statistics",
-                name_ar: "Probability and Statistics",
+                name_ar: "الاحتمالات والإحصاء",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-SYSTEMS-ENGINEERING-B-E"],
@@ -6153,7 +6147,7 @@ export const universities: University[] = [
               {
                 code: "ENGR 340",
                 name_en: "Engineering Project Management",
-                name_ar: "Engineering Project Management",
+                name_ar: "إدارة المشاريع الهندسية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-SYSTEMS-ENGINEERING-B-E"],
@@ -6162,7 +6156,7 @@ export const universities: University[] = [
           },
           {
             id: "KW-AUK-COLLEGE-OF-ENGINEERING-APPLIED-SCIENCES-COMPUTER-SCIENCE-INFORMATION-SYSTEMS",
-            name_ar: "Computer Science & Information Systems",
+            name_ar: "علوم الحاسوب ونظم المعلومات",
             name_en: "Computer Science & Information Systems",
             degrees: ["BSc"],
             programs: [
@@ -6183,7 +6177,7 @@ export const universities: University[] = [
               {
                 code: "CSIS 130",
                 name_en: "Computer Programming II",
-                name_ar: "Computer Programming II",
+                name_ar: "برمجة الحاسوب II",
                 credits: 4,
                 type: "Required",
                 program_ids: [
@@ -6194,7 +6188,7 @@ export const universities: University[] = [
               {
                 code: "CSIS 150",
                 name_en: "Professional and Ethical Issues in CSIS",
-                name_ar: "Professional and Ethical Issues in CSIS",
+                name_ar: "قضايا مهنية وأخلاقية في CSIS",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -6205,7 +6199,7 @@ export const universities: University[] = [
               {
                 code: "CSIS 210",
                 name_en: "Data Structures and Algorithms",
-                name_ar: "Data Structures and Algorithms",
+                name_ar: "هياكل البيانات والخوارزميات",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -6216,7 +6210,7 @@ export const universities: University[] = [
               {
                 code: "CSIS 220",
                 name_en: "Assembly Language Programming",
-                name_ar: "Assembly Language Programming",
+                name_ar: "برمجة لغة التجميع",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-COMPUTER-SCIENCE-B-S"],
@@ -6224,7 +6218,7 @@ export const universities: University[] = [
               {
                 code: "CSIS 240",
                 name_en: "Introduction to Data Science",
-                name_ar: "Introduction to Data Science",
+                name_ar: "مقدمة في علم البيانات",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -6235,7 +6229,7 @@ export const universities: University[] = [
               {
                 code: "CSIS 240L",
                 name_en: "Introduction to Data Science Laboratory",
-                name_ar: "Introduction to Data Science Laboratory",
+                name_ar: "مقدمة في مختبر علم البيانات",
                 credits: 1,
                 type: "Required",
                 program_ids: [
@@ -6246,7 +6240,7 @@ export const universities: University[] = [
               {
                 code: "CSIS 250",
                 name_en: "Database Systems",
-                name_ar: "Database Systems",
+                name_ar: "نظم قواعد البيانات",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -6257,7 +6251,7 @@ export const universities: University[] = [
               {
                 code: "CSIS 255",
                 name_en: "Web Technologies",
-                name_ar: "Web Technologies",
+                name_ar: "تقنيات الويب",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -6268,7 +6262,7 @@ export const universities: University[] = [
               {
                 code: "CSIS 310",
                 name_en: "Introduction to Operating Systems",
-                name_ar: "Introduction to Operating Systems",
+                name_ar: "مقدمة في أنظمة التشغيل",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-COMPUTER-SCIENCE-B-S"],
@@ -6276,7 +6270,7 @@ export const universities: University[] = [
               {
                 code: "CSIS 320",
                 name_en: "Theory and Implementation of Programming Languages",
-                name_ar: "Theory and Implementation of Programming Languages",
+                name_ar: "نظرية وتطبيق لغات البرمجة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-COMPUTER-SCIENCE-B-S"],
@@ -6284,7 +6278,7 @@ export const universities: University[] = [
               {
                 code: "CSIS 322",
                 name_en: "Computer Networks and Data Communication",
-                name_ar: "Computer Networks and Data Communication",
+                name_ar: "شبكات الحاسوب واتصالات البيانات",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -6295,7 +6289,7 @@ export const universities: University[] = [
               {
                 code: "CSIS 329",
                 name_en: "Introduction to Computer Architecture",
-                name_ar: "Introduction to Computer Architecture",
+                name_ar: "مقدمة في بنية الحاسوب",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-COMPUTER-SCIENCE-B-S"],
@@ -6303,7 +6297,7 @@ export const universities: University[] = [
               {
                 code: "CSIS 330",
                 name_en: "Software Engineering",
-                name_ar: "Software Engineering",
+                name_ar: "هندسة البرمجيات",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -6314,7 +6308,7 @@ export const universities: University[] = [
               {
                 code: "CSIS 401",
                 name_en: "Mobile Computing",
-                name_ar: "Mobile Computing",
+                name_ar: "الحوسبة المتنقلة",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -6325,7 +6319,7 @@ export const universities: University[] = [
               {
                 code: "CSIS 405",
                 name_en: "Analysis of Algorithms",
-                name_ar: "Analysis of Algorithms",
+                name_ar: "تحليل الخوارزميات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-COMPUTER-SCIENCE-B-S"],
@@ -6333,7 +6327,7 @@ export const universities: University[] = [
               {
                 code: "CSIS 476",
                 name_en: "Computer Security and Information Assurance",
-                name_ar: "Computer Security and Information Assurance",
+                name_ar: "أمن الحاسوب وضمان المعلومات",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -6344,7 +6338,8 @@ export const universities: University[] = [
               {
                 code: "CSIS 490",
                 name_en: "CSIS Capstone I",
-                name_ar: "CSIS Capstone I",
+                name_ar:
+                  "مشروع تخرج في نظم معلومات الحاسوب I (CSIS Capstone I)",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -6355,7 +6350,8 @@ export const universities: University[] = [
               {
                 code: "CSIS 491",
                 name_en: "CSIS Capstone II",
-                name_ar: "CSIS Capstone II",
+                name_ar:
+                  "مشروع تخرج في نظم معلومات الحاسوب II (CSIS Capstone II)",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -6366,7 +6362,7 @@ export const universities: University[] = [
               {
                 code: "CSIS 120",
                 name_en: "Computer Programming I",
-                name_ar: "Computer Programming I",
+                name_ar: "برمجة الحاسوب I",
                 credits: 4,
                 type: "Required",
                 program_ids: [
@@ -6377,7 +6373,7 @@ export const universities: University[] = [
               {
                 code: "MATH 201",
                 name_en: "Calculus I",
-                name_ar: "Calculus I",
+                name_ar: "حساب التفاضل والتكامل I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-COMPUTER-SCIENCE-B-S"],
@@ -6385,7 +6381,7 @@ export const universities: University[] = [
               {
                 code: "MATH 203",
                 name_en: "Calculus II",
-                name_ar: "Calculus II",
+                name_ar: "حساب التفاضل والتكامل II",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-COMPUTER-SCIENCE-B-S"],
@@ -6393,7 +6389,7 @@ export const universities: University[] = [
               {
                 code: "MATH 205",
                 name_en: "Linear Algebra",
-                name_ar: "Linear Algebra",
+                name_ar: "الجبر الخطي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-COMPUTER-SCIENCE-B-S"],
@@ -6401,7 +6397,7 @@ export const universities: University[] = [
               {
                 code: "MATH 213",
                 name_en: "Discrete Mathematics",
-                name_ar: "Discrete Mathematics",
+                name_ar: "الرياضيات المتقطعة",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -6412,7 +6408,7 @@ export const universities: University[] = [
               {
                 code: "STAT 201",
                 name_en: "Statistics",
-                name_ar: "Statistics",
+                name_ar: "الإحصاء",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -6423,7 +6419,7 @@ export const universities: University[] = [
               {
                 code: "CHEM 101 / BIOL 101 + Lab",
                 name_en: "General Chemistry I OR General Biology I (with Lab)",
-                name_ar: "General Chemistry I OR General Biology I (with Lab)",
+                name_ar: "الكيمياء العامة I أو الأحياء العامة I (مع مختبر)",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AUK-COMPUTER-SCIENCE-B-S"],
@@ -6431,7 +6427,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 201",
                 name_en: "Principles of Management",
-                name_ar: "Principles of Management",
+                name_ar: "مبادئ الإدارة",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -6442,7 +6438,7 @@ export const universities: University[] = [
               {
                 code: "ENGR 210",
                 name_en: "Engineering Entrepreneurship I",
-                name_ar: "Engineering Entrepreneurship I",
+                name_ar: "ريادة الأعمال الهندسية I",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -6454,8 +6450,7 @@ export const universities: University[] = [
                 code: "Elective 1",
                 name_en:
                   "Major Course Elective (choose from approved 200+ pool)",
-                name_ar:
-                  "Major Course Elective (choose from approved 200+ pool)",
+                name_ar: "مقرر اختياري تخصصي (يختار من مجموعة 200+ المعتمدة)",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -6467,8 +6462,7 @@ export const universities: University[] = [
                 code: "Elective 2",
                 name_en:
                   "Major Course Elective (choose from approved 200+ pool)",
-                name_ar:
-                  "Major Course Elective (choose from approved 200+ pool)",
+                name_ar: "مقرر اختياري تخصصي (يختار من مجموعة 200+ المعتمدة)",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -6480,8 +6474,7 @@ export const universities: University[] = [
                 code: "Elective 3",
                 name_en:
                   "Major Course Elective (choose from approved 200+ pool)",
-                name_ar:
-                  "Major Course Elective (choose from approved 200+ pool)",
+                name_ar: "مقرر اختياري تخصصي (يختار من مجموعة 200+ المعتمدة)",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -6492,7 +6485,7 @@ export const universities: University[] = [
               {
                 code: "CSIS 110",
                 name_en: "Foundations of Information Systems",
-                name_ar: "Foundations of Information Systems",
+                name_ar: "أسس نظم المعلومات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-INFORMATION-SYSTEMS-B-S"],
@@ -6500,7 +6493,7 @@ export const universities: University[] = [
               {
                 code: "CSIS 260",
                 name_en: "Systems Analysis, Design, and Acquisition",
-                name_ar: "Systems Analysis, Design, and Acquisition",
+                name_ar: "تحليل النظم وتصميمها واكتسابها",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-INFORMATION-SYSTEMS-B-S"],
@@ -6508,7 +6501,7 @@ export const universities: University[] = [
               {
                 code: "CSIS 302",
                 name_en: "IT Infrastructure",
-                name_ar: "IT Infrastructure",
+                name_ar: "البنية التحتية لتقنية المعلومات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-INFORMATION-SYSTEMS-B-S"],
@@ -6516,7 +6509,7 @@ export const universities: University[] = [
               {
                 code: "CSIS 440",
                 name_en: "Software Project Management",
-                name_ar: "Software Project Management",
+                name_ar: "إدارة مشاريع البرمجيات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-INFORMATION-SYSTEMS-B-S"],
@@ -6524,7 +6517,7 @@ export const universities: University[] = [
               {
                 code: "CSIS 480",
                 name_en: "Business Process Management",
-                name_ar: "Business Process Management",
+                name_ar: "إدارة عمليات الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-INFORMATION-SYSTEMS-B-S"],
@@ -6532,7 +6525,7 @@ export const universities: University[] = [
               {
                 code: "PHYS 101 / BIOL 101 + Lab",
                 name_en: "Intro to Physics I OR General Biology I (with Lab)",
-                name_ar: "Intro to Physics I OR General Biology I (with Lab)",
+                name_ar: "مقدمة في الفيزياء I أو الأحياء العامة I (مع مختبر)",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AUK-INFORMATION-SYSTEMS-B-S"],
@@ -6542,7 +6535,7 @@ export const universities: University[] = [
                 name_en:
                   "IS Theme course (choose 1 set: Mgmt/Accounting/Finance/Marketing)",
                 name_ar:
-                  "IS Theme course (choose 1 set: Mgmt/Accounting/Finance/Marketing)",
+                  "مقرر موضوع نظم المعلومات (اختر مجموعة 1: إدارة/محاسبة/مالية/تسويق)",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-INFORMATION-SYSTEMS-B-S"],
@@ -6552,7 +6545,7 @@ export const universities: University[] = [
                 name_en:
                   "IS Theme course (choose 1 set: Mgmt/Accounting/Finance/Marketing)",
                 name_ar:
-                  "IS Theme course (choose 1 set: Mgmt/Accounting/Finance/Marketing)",
+                  "مقرر موضوع نظم المعلومات (اختر مجموعة 1: إدارة/محاسبة/مالية/تسويق)",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-INFORMATION-SYSTEMS-B-S"],
@@ -6562,7 +6555,7 @@ export const universities: University[] = [
                 name_en:
                   "IS Theme course (choose 1 set: Mgmt/Accounting/Finance/Marketing)",
                 name_ar:
-                  "IS Theme course (choose 1 set: Mgmt/Accounting/Finance/Marketing)",
+                  "مقرر موضوع نظم المعلومات (اختر مجموعة 1: إدارة/محاسبة/مالية/تسويق)",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-INFORMATION-SYSTEMS-B-S"],
@@ -6578,14 +6571,14 @@ export const universities: University[] = [
         departments: [
           {
             id: "KW-AUK-COLLEGE-OF-ARTS-SCIENCES-ART-GRAPHIC-DESIGN",
-            name_ar: "Art & Graphic Design",
+            name_ar: "الفن والتصميم الجرافيكي",
             name_en: "Art & Graphic Design",
             degrees: ["BA"],
             programs: [
               {
                 id: "KW-AUK-DESIGN-GRAPHIC-DESIGN-B-A",
                 name_en: "Design - Graphic Design (B.A.)",
-                name_ar: "Design - Graphic Design (B.A.)",
+                name_ar: "التصميم - التصميم الجرافيكي (بكالوريوس)",
                 degree: "BA",
               },
             ],
@@ -6593,7 +6586,7 @@ export const universities: University[] = [
               {
                 code: "ART 120",
                 name_en: "2-D Design",
-                name_ar: "2-D Design",
+                name_ar: "تصميم ثنائي الأبعاد",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-DESIGN-GRAPHIC-DESIGN-B-A"],
@@ -6601,7 +6594,7 @@ export const universities: University[] = [
               {
                 code: "ART 121",
                 name_en: "Drawing I",
-                name_ar: "Drawing I",
+                name_ar: "الرسم I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-DESIGN-GRAPHIC-DESIGN-B-A"],
@@ -6609,7 +6602,7 @@ export const universities: University[] = [
               {
                 code: "GDES 110",
                 name_en: "Digital Foundations",
-                name_ar: "Digital Foundations",
+                name_ar: "الأسس الرقمية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-DESIGN-GRAPHIC-DESIGN-B-A"],
@@ -6617,7 +6610,7 @@ export const universities: University[] = [
               {
                 code: "ART 122",
                 name_en: "3-D Design",
-                name_ar: "3-D Design",
+                name_ar: "تصميم ثلاثي الأبعاد",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-DESIGN-GRAPHIC-DESIGN-B-A"],
@@ -6625,7 +6618,7 @@ export const universities: University[] = [
               {
                 code: "GDES 150",
                 name_en: "Introduction to Time-Based Media",
-                name_ar: "Introduction to Time-Based Media",
+                name_ar: "مقدمة في الوسائط القائمة على الوقت",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-DESIGN-GRAPHIC-DESIGN-B-A"],
@@ -6633,7 +6626,7 @@ export const universities: University[] = [
               {
                 code: "GDES 220",
                 name_en: "Graphic Design I",
-                name_ar: "Graphic Design I",
+                name_ar: "تصميم الجرافيك I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-DESIGN-GRAPHIC-DESIGN-B-A"],
@@ -6641,7 +6634,7 @@ export const universities: University[] = [
               {
                 code: "GDES 221",
                 name_en: "Typography I",
-                name_ar: "Typography I",
+                name_ar: "الطباعة I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-DESIGN-GRAPHIC-DESIGN-B-A"],
@@ -6649,7 +6642,7 @@ export const universities: University[] = [
               {
                 code: "GDES 242",
                 name_en: "Digital Imaging I",
-                name_ar: "Digital Imaging I",
+                name_ar: "التصوير الرقمي I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-DESIGN-GRAPHIC-DESIGN-B-A"],
@@ -6657,7 +6650,7 @@ export const universities: University[] = [
               {
                 code: "ARTH 315",
                 name_en: "History of Design",
-                name_ar: "History of Design",
+                name_ar: "تاريخ التصميم",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-DESIGN-GRAPHIC-DESIGN-B-A"],
@@ -6665,7 +6658,7 @@ export const universities: University[] = [
               {
                 code: "GDES 320",
                 name_en: "Graphic Design II",
-                name_ar: "Graphic Design II",
+                name_ar: "تصميم الجرافيك II",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-DESIGN-GRAPHIC-DESIGN-B-A"],
@@ -6673,7 +6666,7 @@ export const universities: University[] = [
               {
                 code: "GDES 321",
                 name_en: "Typography II",
-                name_ar: "Typography II",
+                name_ar: "الطباعة II",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-DESIGN-GRAPHIC-DESIGN-B-A"],
@@ -6681,7 +6674,7 @@ export const universities: University[] = [
               {
                 code: "GDES 330",
                 name_en: "Print Production",
-                name_ar: "Print Production",
+                name_ar: "إنتاج المطبوعات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-DESIGN-GRAPHIC-DESIGN-B-A"],
@@ -6689,7 +6682,7 @@ export const universities: University[] = [
               {
                 code: "GDES 420",
                 name_en: "Graphic Design III",
-                name_ar: "Graphic Design III",
+                name_ar: "تصميم الجرافيك III",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-DESIGN-GRAPHIC-DESIGN-B-A"],
@@ -6697,7 +6690,7 @@ export const universities: University[] = [
               {
                 code: "GDES 470",
                 name_en: "Internship in Graphic Design",
-                name_ar: "Internship in Graphic Design",
+                name_ar: "تدريب عملي في التصميم الجرافيكي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-DESIGN-GRAPHIC-DESIGN-B-A"],
@@ -6705,7 +6698,7 @@ export const universities: University[] = [
               {
                 code: "GDES 490",
                 name_en: "Capstone",
-                name_ar: "Capstone",
+                name_ar: "المشروع الختامي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-DESIGN-GRAPHIC-DESIGN-B-A"],
@@ -6713,7 +6706,7 @@ export const universities: University[] = [
               {
                 code: "Design Elec 1",
                 name_en: "Design Elective (GDES, upper-level)",
-                name_ar: "Design Elective (GDES, upper-level)",
+                name_ar: "اختياري التصميم (GDES، مستوى عليا)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-DESIGN-GRAPHIC-DESIGN-B-A"],
@@ -6721,7 +6714,7 @@ export const universities: University[] = [
               {
                 code: "Design Elec 2",
                 name_en: "Design Elective (GDES, upper-level)",
-                name_ar: "Design Elective (GDES, upper-level)",
+                name_ar: "اختياري التصميم (GDES، مستوى عليا)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-DESIGN-GRAPHIC-DESIGN-B-A"],
@@ -6729,7 +6722,7 @@ export const universities: University[] = [
               {
                 code: "Design Elec 3",
                 name_en: "Design Elective (GDES, upper-level)",
-                name_ar: "Design Elective (GDES, upper-level)",
+                name_ar: "اختياري التصميم (GDES، مستوى عليا)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-DESIGN-GRAPHIC-DESIGN-B-A"],
@@ -6737,7 +6730,7 @@ export const universities: University[] = [
               {
                 code: "Design Elec 4",
                 name_en: "Design Elective (GDES, upper-level)",
-                name_ar: "Design Elective (GDES, upper-level)",
+                name_ar: "اختياري التصميم (GDES، مستوى عليا)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-DESIGN-GRAPHIC-DESIGN-B-A"],
@@ -6745,7 +6738,8 @@ export const universities: University[] = [
               {
                 code: "Rel Field 1",
                 name_en: "Design Related Field Elective (ART or ARTH)",
-                name_ar: "Design Related Field Elective (ART or ARTH)",
+                name_ar:
+                  "مقرر اختياري في مجال ذي صلة بالتصميم (فنون أو تاريخ الفنون)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-DESIGN-GRAPHIC-DESIGN-B-A"],
@@ -6753,7 +6747,8 @@ export const universities: University[] = [
               {
                 code: "Rel Field 2",
                 name_en: "Design Related Field Elective (ART or ARTH)",
-                name_ar: "Design Related Field Elective (ART or ARTH)",
+                name_ar:
+                  "مقرر اختياري في مجال ذي صلة بالتصميم (فنون أو تاريخ الفنون)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-DESIGN-GRAPHIC-DESIGN-B-A"],
@@ -6761,7 +6756,7 @@ export const universities: University[] = [
               {
                 code: "Art Hist 1",
                 name_en: "Art History Field Elective (ARTH)",
-                name_ar: "Art History Field Elective (ARTH)",
+                name_ar: "مقرر اختياري في مجال تاريخ الفن (ARTH)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-DESIGN-GRAPHIC-DESIGN-B-A"],
@@ -6769,7 +6764,7 @@ export const universities: University[] = [
               {
                 code: "Art Hist 2",
                 name_en: "Art History Field Elective (ARTH)",
-                name_ar: "Art History Field Elective (ARTH)",
+                name_ar: "مقرر اختياري في مجال تاريخ الفن (ARTH)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-DESIGN-GRAPHIC-DESIGN-B-A"],
@@ -6777,7 +6772,7 @@ export const universities: University[] = [
               {
                 code: "Free Elec 1",
                 name_en: "Free Elective",
-                name_ar: "Free Elective",
+                name_ar: "اختياري حر",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-DESIGN-GRAPHIC-DESIGN-B-A"],
@@ -6785,7 +6780,7 @@ export const universities: University[] = [
               {
                 code: "Free Elec 2",
                 name_en: "Free Elective",
-                name_ar: "Free Elective",
+                name_ar: "اختياري حر",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-DESIGN-GRAPHIC-DESIGN-B-A"],
@@ -6793,7 +6788,7 @@ export const universities: University[] = [
               {
                 code: "Free Elec 3",
                 name_en: "Free Elective",
-                name_ar: "Free Elective",
+                name_ar: "اختياري حر",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-DESIGN-GRAPHIC-DESIGN-B-A"],
@@ -6802,14 +6797,14 @@ export const universities: University[] = [
           },
           {
             id: "KW-AUK-COLLEGE-OF-ARTS-SCIENCES-COMMUNICATION-MEDIA",
-            name_ar: "Communication & Media",
+            name_ar: "الاتصال والإعلام",
             name_en: "Communication & Media",
             degrees: ["BA"],
             programs: [
               {
                 id: "KW-AUK-COMMUNICATION-MEDIA-B-A",
                 name_en: "Communication & Media (B.A.)",
-                name_ar: "Communication & Media (B.A.)",
+                name_ar: "الاتصال والإعلام (B.A.)",
                 degree: "BA",
               },
             ],
@@ -6817,7 +6812,7 @@ export const universities: University[] = [
               {
                 code: "COMM 100",
                 name_en: "Media Literacy",
-                name_ar: "Media Literacy",
+                name_ar: "محو الأمية الإعلامية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-COMMUNICATION-MEDIA-B-A"],
@@ -6825,7 +6820,7 @@ export const universities: University[] = [
               {
                 code: "COMM 206",
                 name_en: "Media Writing",
-                name_ar: "Media Writing",
+                name_ar: "الكتابة الإعلامية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-COMMUNICATION-MEDIA-B-A"],
@@ -6833,7 +6828,7 @@ export const universities: University[] = [
               {
                 code: "COMM 211",
                 name_en: "Communication Theory",
-                name_ar: "Communication Theory",
+                name_ar: "نظرية الاتصال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-COMMUNICATION-MEDIA-B-A"],
@@ -6841,7 +6836,7 @@ export const universities: University[] = [
               {
                 code: "COMM 311",
                 name_en: "Research Methods in Media and Communication",
-                name_ar: "Research Methods in Media and Communication",
+                name_ar: "مناهج البحث في الإعلام والاتصال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-COMMUNICATION-MEDIA-B-A"],
@@ -6849,7 +6844,7 @@ export const universities: University[] = [
               {
                 code: "COMM 320",
                 name_en: "Media Law and Ethics",
-                name_ar: "Media Law and Ethics",
+                name_ar: "قانون وأخلاقيات الإعلام",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-COMMUNICATION-MEDIA-B-A"],
@@ -6857,7 +6852,7 @@ export const universities: University[] = [
               {
                 code: "COMM 470",
                 name_en: "Internship in Communication",
-                name_ar: "Internship in Communication",
+                name_ar: "تدريب عملي في الاتصال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-COMMUNICATION-MEDIA-B-A"],
@@ -6867,7 +6862,7 @@ export const universities: University[] = [
                 name_en:
                   "Concentration course (1 track: Promotional Media / Digital Media Production / Media Studies)",
                 name_ar:
-                  "Concentration course (1 track: Promotional Media / Digital Media Production / Media Studies)",
+                  "مساق تركيز (مسار واحد: إعلام ترويجي / إنتاج إعلام رقمي / دراسات إعلامية)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-COMMUNICATION-MEDIA-B-A"],
@@ -6877,7 +6872,7 @@ export const universities: University[] = [
                 name_en:
                   "Concentration course (1 track: Promotional Media / Digital Media Production / Media Studies)",
                 name_ar:
-                  "Concentration course (1 track: Promotional Media / Digital Media Production / Media Studies)",
+                  "مساق تركيز (مسار واحد: إعلام ترويجي / إنتاج إعلام رقمي / دراسات إعلامية)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-COMMUNICATION-MEDIA-B-A"],
@@ -6887,7 +6882,7 @@ export const universities: University[] = [
                 name_en:
                   "Concentration course (1 track: Promotional Media / Digital Media Production / Media Studies)",
                 name_ar:
-                  "Concentration course (1 track: Promotional Media / Digital Media Production / Media Studies)",
+                  "مساق تركيز (مسار واحد: إعلام ترويجي / إنتاج إعلام رقمي / دراسات إعلامية)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-COMMUNICATION-MEDIA-B-A"],
@@ -6897,7 +6892,7 @@ export const universities: University[] = [
                 name_en:
                   "Concentration course (1 track: Promotional Media / Digital Media Production / Media Studies)",
                 name_ar:
-                  "Concentration course (1 track: Promotional Media / Digital Media Production / Media Studies)",
+                  "مساق تركيز (مسار واحد: إعلام ترويجي / إنتاج إعلام رقمي / دراسات إعلامية)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-COMMUNICATION-MEDIA-B-A"],
@@ -6907,7 +6902,7 @@ export const universities: University[] = [
                 name_en:
                   "Concentration course (1 track: Promotional Media / Digital Media Production / Media Studies)",
                 name_ar:
-                  "Concentration course (1 track: Promotional Media / Digital Media Production / Media Studies)",
+                  "مساق تركيز (مسار واحد: إعلام ترويجي / إنتاج إعلام رقمي / دراسات إعلامية)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-COMMUNICATION-MEDIA-B-A"],
@@ -6915,7 +6910,7 @@ export const universities: University[] = [
               {
                 code: "COMM Elec 1",
                 name_en: "Communication Elective",
-                name_ar: "Communication Elective",
+                name_ar: "مقرر اختياري في الاتصال",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-COMMUNICATION-MEDIA-B-A"],
@@ -6923,7 +6918,7 @@ export const universities: University[] = [
               {
                 code: "COMM Elec 2",
                 name_en: "Communication Elective",
-                name_ar: "Communication Elective",
+                name_ar: "مقرر اختياري في الاتصال",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-COMMUNICATION-MEDIA-B-A"],
@@ -6931,7 +6926,7 @@ export const universities: University[] = [
               {
                 code: "COMM Elec 3",
                 name_en: "Communication Elective",
-                name_ar: "Communication Elective",
+                name_ar: "مقرر اختياري في الاتصال",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-COMMUNICATION-MEDIA-B-A"],
@@ -6939,7 +6934,7 @@ export const universities: University[] = [
               {
                 code: "COMM Elec 4",
                 name_en: "Communication Elective",
-                name_ar: "Communication Elective",
+                name_ar: "مقرر اختياري في الاتصال",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-COMMUNICATION-MEDIA-B-A"],
@@ -6947,7 +6942,7 @@ export const universities: University[] = [
               {
                 code: "COMM Elec 5",
                 name_en: "Communication Elective",
-                name_ar: "Communication Elective",
+                name_ar: "مقرر اختياري في الاتصال",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-COMMUNICATION-MEDIA-B-A"],
@@ -6955,7 +6950,7 @@ export const universities: University[] = [
               {
                 code: "COMM Elec 6",
                 name_en: "Communication Elective",
-                name_ar: "Communication Elective",
+                name_ar: "مقرر اختياري في الاتصال",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-COMMUNICATION-MEDIA-B-A"],
@@ -6979,7 +6974,7 @@ export const universities: University[] = [
               {
                 code: "ENGL 200",
                 name_en: "Introduction to Literary Studies",
-                name_ar: "Introduction to Literary Studies",
+                name_ar: "مقدمة في الدراسات الأدبية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ENGLISH-B-A"],
@@ -6987,7 +6982,7 @@ export const universities: University[] = [
               {
                 code: "ENGL 220",
                 name_en: "Survey of World Literatures I",
-                name_ar: "Survey of World Literatures I",
+                name_ar: "مسح الآداب العالمية I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ENGLISH-B-A"],
@@ -6995,7 +6990,7 @@ export const universities: University[] = [
               {
                 code: "ENGL 221",
                 name_en: "Survey of World Literatures II",
-                name_ar: "Survey of World Literatures II",
+                name_ar: "مسح الآداب العالمية II",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ENGLISH-B-A"],
@@ -7003,7 +6998,7 @@ export const universities: University[] = [
               {
                 code: "ENGL 300",
                 name_en: "History of the English Language",
-                name_ar: "History of the English Language",
+                name_ar: "تاريخ اللغة الإنجليزية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ENGLISH-B-A"],
@@ -7011,7 +7006,7 @@ export const universities: University[] = [
               {
                 code: "ENGL 415",
                 name_en: "Literary Theory and Criticism",
-                name_ar: "Literary Theory and Criticism",
+                name_ar: "النظرية والنقد الأدبي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ENGLISH-B-A"],
@@ -7019,7 +7014,7 @@ export const universities: University[] = [
               {
                 code: "ENGL 450",
                 name_en: "Senior Seminar",
-                name_ar: "Senior Seminar",
+                name_ar: "حلقة دراسية متقدمة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-ENGLISH-B-A"],
@@ -7029,7 +7024,7 @@ export const universities: University[] = [
                 name_en:
                   "English Elective (300/400-level ENGL, ENGL 207, or TRAN)",
                 name_ar:
-                  "English Elective (300/400-level ENGL, ENGL 207, or TRAN)",
+                  "اختياري لغة إنجليزية (مستوى 300/400 ENGL، أو ENGL 207، أو TRAN)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-ENGLISH-B-A"],
@@ -7039,7 +7034,7 @@ export const universities: University[] = [
                 name_en:
                   "English Elective (300/400-level ENGL, ENGL 207, or TRAN)",
                 name_ar:
-                  "English Elective (300/400-level ENGL, ENGL 207, or TRAN)",
+                  "اختياري لغة إنجليزية (مستوى 300/400 ENGL، أو ENGL 207، أو TRAN)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-ENGLISH-B-A"],
@@ -7049,7 +7044,7 @@ export const universities: University[] = [
                 name_en:
                   "English Elective (300/400-level ENGL, ENGL 207, or TRAN)",
                 name_ar:
-                  "English Elective (300/400-level ENGL, ENGL 207, or TRAN)",
+                  "اختياري لغة إنجليزية (مستوى 300/400 ENGL، أو ENGL 207، أو TRAN)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-ENGLISH-B-A"],
@@ -7059,7 +7054,7 @@ export const universities: University[] = [
                 name_en:
                   "English Elective (300/400-level ENGL, ENGL 207, or TRAN)",
                 name_ar:
-                  "English Elective (300/400-level ENGL, ENGL 207, or TRAN)",
+                  "اختياري لغة إنجليزية (مستوى 300/400 ENGL، أو ENGL 207، أو TRAN)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-ENGLISH-B-A"],
@@ -7069,7 +7064,7 @@ export const universities: University[] = [
                 name_en:
                   "English Elective (300/400-level ENGL, ENGL 207, or TRAN)",
                 name_ar:
-                  "English Elective (300/400-level ENGL, ENGL 207, or TRAN)",
+                  "اختياري لغة إنجليزية (مستوى 300/400 ENGL، أو ENGL 207، أو TRAN)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-ENGLISH-B-A"],
@@ -7079,7 +7074,7 @@ export const universities: University[] = [
                 name_en:
                   "English Elective (300/400-level ENGL, ENGL 207, or TRAN)",
                 name_ar:
-                  "English Elective (300/400-level ENGL, ENGL 207, or TRAN)",
+                  "اختياري لغة إنجليزية (مستوى 300/400 ENGL، أو ENGL 207، أو TRAN)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-ENGLISH-B-A"],
@@ -7089,7 +7084,7 @@ export const universities: University[] = [
                 name_en:
                   "English Elective (300/400-level ENGL, ENGL 207, or TRAN)",
                 name_ar:
-                  "English Elective (300/400-level ENGL, ENGL 207, or TRAN)",
+                  "اختياري لغة إنجليزية (مستوى 300/400 ENGL، أو ENGL 207، أو TRAN)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-ENGLISH-B-A"],
@@ -7099,7 +7094,7 @@ export const universities: University[] = [
                 name_en:
                   "English Elective (300/400-level ENGL, ENGL 207, or TRAN)",
                 name_ar:
-                  "English Elective (300/400-level ENGL, ENGL 207, or TRAN)",
+                  "اختياري لغة إنجليزية (مستوى 300/400 ENGL، أو ENGL 207، أو TRAN)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-ENGLISH-B-A"],
@@ -7109,7 +7104,7 @@ export const universities: University[] = [
                 name_en:
                   "English Elective (300/400-level ENGL, ENGL 207, or TRAN)",
                 name_ar:
-                  "English Elective (300/400-level ENGL, ENGL 207, or TRAN)",
+                  "اختياري لغة إنجليزية (مستوى 300/400 ENGL، أو ENGL 207، أو TRAN)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-ENGLISH-B-A"],
@@ -7119,7 +7114,7 @@ export const universities: University[] = [
                 name_en:
                   "English Elective (300/400-level ENGL, ENGL 207, or TRAN)",
                 name_ar:
-                  "English Elective (300/400-level ENGL, ENGL 207, or TRAN)",
+                  "اختياري لغة إنجليزية (مستوى 300/400 ENGL، أو ENGL 207، أو TRAN)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-ENGLISH-B-A"],
@@ -7129,7 +7124,7 @@ export const universities: University[] = [
                 name_en:
                   "English Elective (300/400-level ENGL, ENGL 207, or TRAN)",
                 name_ar:
-                  "English Elective (300/400-level ENGL, ENGL 207, or TRAN)",
+                  "اختياري لغة إنجليزية (مستوى 300/400 ENGL، أو ENGL 207، أو TRAN)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-ENGLISH-B-A"],
@@ -7139,7 +7134,7 @@ export const universities: University[] = [
                 name_en:
                   "English Elective (300/400-level ENGL, ENGL 207, or TRAN)",
                 name_ar:
-                  "English Elective (300/400-level ENGL, ENGL 207, or TRAN)",
+                  "اختياري لغة إنجليزية (مستوى 300/400 ENGL، أو ENGL 207، أو TRAN)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-ENGLISH-B-A"],
@@ -7149,7 +7144,7 @@ export const universities: University[] = [
                 name_en:
                   "English Elective (300/400-level ENGL, ENGL 207, or TRAN)",
                 name_ar:
-                  "English Elective (300/400-level ENGL, ENGL 207, or TRAN)",
+                  "اختياري لغة إنجليزية (مستوى 300/400 ENGL، أو ENGL 207، أو TRAN)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-ENGLISH-B-A"],
@@ -7159,7 +7154,7 @@ export const universities: University[] = [
                 name_en:
                   "English Elective (300/400-level ENGL, ENGL 207, or TRAN)",
                 name_ar:
-                  "English Elective (300/400-level ENGL, ENGL 207, or TRAN)",
+                  "اختياري لغة إنجليزية (مستوى 300/400 ENGL، أو ENGL 207، أو TRAN)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-ENGLISH-B-A"],
@@ -7167,7 +7162,7 @@ export const universities: University[] = [
               {
                 code: "Free Elec 1",
                 name_en: "Free Elective",
-                name_ar: "Free Elective",
+                name_ar: "اختياري حر",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-ENGLISH-B-A"],
@@ -7175,7 +7170,7 @@ export const universities: University[] = [
               {
                 code: "Free Elec 2",
                 name_en: "Free Elective",
-                name_ar: "Free Elective",
+                name_ar: "اختياري حر",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-ENGLISH-B-A"],
@@ -7183,7 +7178,7 @@ export const universities: University[] = [
               {
                 code: "Free Elec 3",
                 name_en: "Free Elective",
-                name_ar: "Free Elective",
+                name_ar: "اختياري حر",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-ENGLISH-B-A"],
@@ -7191,7 +7186,7 @@ export const universities: University[] = [
               {
                 code: "Free Elec 4",
                 name_en: "Free Elective",
-                name_ar: "Free Elective",
+                name_ar: "اختياري حر",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-ENGLISH-B-A"],
@@ -7199,7 +7194,7 @@ export const universities: University[] = [
               {
                 code: "Free Elec 5",
                 name_en: "Free Elective",
-                name_ar: "Free Elective",
+                name_ar: "اختياري حر",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-ENGLISH-B-A"],
@@ -7207,7 +7202,7 @@ export const universities: University[] = [
               {
                 code: "Free Elec 6",
                 name_en: "Free Elective",
-                name_ar: "Free Elective",
+                name_ar: "اختياري حر",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-ENGLISH-B-A"],
@@ -7231,7 +7226,7 @@ export const universities: University[] = [
               {
                 code: "HIST 105",
                 name_en: "World History Since 1900",
-                name_ar: "World History Since 1900",
+                name_ar: "تاريخ العالم منذ عام 1900",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-INTERNATIONAL-RELATIONS-B-A"],
@@ -7239,7 +7234,7 @@ export const universities: University[] = [
               {
                 code: "HIST 201",
                 name_en: "History and Politics of Kuwait",
-                name_ar: "History and Politics of Kuwait",
+                name_ar: "تاريخ وسياسات الكويت",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-INTERNATIONAL-RELATIONS-B-A"],
@@ -7247,7 +7242,7 @@ export const universities: University[] = [
               {
                 code: "IR 202",
                 name_en: "Trends in International Relations",
-                name_ar: "Trends in International Relations",
+                name_ar: "اتجاهات في العلاقات الدولية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-INTERNATIONAL-RELATIONS-B-A"],
@@ -7255,7 +7250,7 @@ export const universities: University[] = [
               {
                 code: "IR 206",
                 name_en: "International Political Economy",
-                name_ar: "International Political Economy",
+                name_ar: "الاقتصاد السياسي الدولي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-INTERNATIONAL-RELATIONS-B-A"],
@@ -7264,8 +7259,7 @@ export const universities: University[] = [
                 code: "IR 210 / PLSC 210",
                 name_en:
                   "Methods of Research in International Relations OR Political Science",
-                name_ar:
-                  "Methods of Research in International Relations OR Political Science",
+                name_ar: "طرق البحث في العلاقات الدولية أو العلوم السياسية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AUK-INTERNATIONAL-RELATIONS-B-A"],
@@ -7275,7 +7269,7 @@ export const universities: University[] = [
                 name_en:
                   "IR Field Concentration course (Diplomacy & Conflict / Intl Law & Orgs / Intl Political Economy / Security)",
                 name_ar:
-                  "IR Field Concentration course (Diplomacy & Conflict / Intl Law & Orgs / Intl Political Economy / Security)",
+                  "مقرر تركيز مجال العلاقات الدولية (الدبلوماسية والنزاعات / القانون الدولي والمنظمات / الاقتصاد السياسي الدولي / الأمن)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-INTERNATIONAL-RELATIONS-B-A"],
@@ -7285,7 +7279,7 @@ export const universities: University[] = [
                 name_en:
                   "IR Field Concentration course (Diplomacy & Conflict / Intl Law & Orgs / Intl Political Economy / Security)",
                 name_ar:
-                  "IR Field Concentration course (Diplomacy & Conflict / Intl Law & Orgs / Intl Political Economy / Security)",
+                  "مقرر تركيز مجال العلاقات الدولية (الدبلوماسية والنزاعات / القانون الدولي والمنظمات / الاقتصاد السياسي الدولي / الأمن)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-INTERNATIONAL-RELATIONS-B-A"],
@@ -7295,7 +7289,7 @@ export const universities: University[] = [
                 name_en:
                   "IR Field Concentration course (Diplomacy & Conflict / Intl Law & Orgs / Intl Political Economy / Security)",
                 name_ar:
-                  "IR Field Concentration course (Diplomacy & Conflict / Intl Law & Orgs / Intl Political Economy / Security)",
+                  "مقرر تركيز مجال العلاقات الدولية (الدبلوماسية والنزاعات / القانون الدولي والمنظمات / الاقتصاد السياسي الدولي / الأمن)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-INTERNATIONAL-RELATIONS-B-A"],
@@ -7305,7 +7299,7 @@ export const universities: University[] = [
                 name_en:
                   "IR Field Concentration course (Diplomacy & Conflict / Intl Law & Orgs / Intl Political Economy / Security)",
                 name_ar:
-                  "IR Field Concentration course (Diplomacy & Conflict / Intl Law & Orgs / Intl Political Economy / Security)",
+                  "مقرر تركيز مجال العلاقات الدولية (الدبلوماسية والنزاعات / القانون الدولي والمنظمات / الاقتصاد السياسي الدولي / الأمن)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-INTERNATIONAL-RELATIONS-B-A"],
@@ -7315,7 +7309,7 @@ export const universities: University[] = [
                 name_en:
                   "IR Field Concentration course (Diplomacy & Conflict / Intl Law & Orgs / Intl Political Economy / Security)",
                 name_ar:
-                  "IR Field Concentration course (Diplomacy & Conflict / Intl Law & Orgs / Intl Political Economy / Security)",
+                  "مقرر تركيز مجال العلاقات الدولية (الدبلوماسية والنزاعات / القانون الدولي والمنظمات / الاقتصاد السياسي الدولي / الأمن)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-INTERNATIONAL-RELATIONS-B-A"],
@@ -7325,7 +7319,7 @@ export const universities: University[] = [
                 name_en:
                   "IR Field Concentration course (Diplomacy & Conflict / Intl Law & Orgs / Intl Political Economy / Security)",
                 name_ar:
-                  "IR Field Concentration course (Diplomacy & Conflict / Intl Law & Orgs / Intl Political Economy / Security)",
+                  "مقرر تركيز مجال العلاقات الدولية (الدبلوماسية والنزاعات / القانون الدولي والمنظمات / الاقتصاد السياسي الدولي / الأمن)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-INTERNATIONAL-RELATIONS-B-A"],
@@ -7335,7 +7329,7 @@ export const universities: University[] = [
                 name_en:
                   "IR Field Concentration course (Diplomacy & Conflict / Intl Law & Orgs / Intl Political Economy / Security)",
                 name_ar:
-                  "IR Field Concentration course (Diplomacy & Conflict / Intl Law & Orgs / Intl Political Economy / Security)",
+                  "مقرر تركيز مجال العلاقات الدولية (الدبلوماسية والنزاعات / القانون الدولي والمنظمات / الاقتصاد السياسي الدولي / الأمن)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-INTERNATIONAL-RELATIONS-B-A"],
@@ -7345,7 +7339,7 @@ export const universities: University[] = [
                 name_en:
                   "IR Field Concentration course (Diplomacy & Conflict / Intl Law & Orgs / Intl Political Economy / Security)",
                 name_ar:
-                  "IR Field Concentration course (Diplomacy & Conflict / Intl Law & Orgs / Intl Political Economy / Security)",
+                  "مقرر تركيز مجال العلاقات الدولية (الدبلوماسية والنزاعات / القانون الدولي والمنظمات / الاقتصاد السياسي الدولي / الأمن)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-INTERNATIONAL-RELATIONS-B-A"],
@@ -7355,7 +7349,7 @@ export const universities: University[] = [
                 name_en:
                   "IR Field Concentration course (Diplomacy & Conflict / Intl Law & Orgs / Intl Political Economy / Security)",
                 name_ar:
-                  "IR Field Concentration course (Diplomacy & Conflict / Intl Law & Orgs / Intl Political Economy / Security)",
+                  "مقرر تركيز مجال العلاقات الدولية (الدبلوماسية والنزاعات / القانون الدولي والمنظمات / الاقتصاد السياسي الدولي / الأمن)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AUK-INTERNATIONAL-RELATIONS-B-A"],
@@ -7371,7 +7365,8 @@ export const universities: University[] = [
               {
                 id: "KW-AUK-SOCIAL-BEHAVIORAL-SCIENCES-ANTHROPOLOGY-",
                 name_en: "Social & Behavioral Sciences - Anthropology (B.A.)",
-                name_ar: "Social & Behavioral Sciences - Anthropology (B.A.)",
+                name_ar:
+                  "العلوم الاجتماعية والسلوكية - الأنثروبولوجيا (بكالوريوس آداب)",
                 degree: "BA",
               },
             ],
@@ -7379,7 +7374,7 @@ export const universities: University[] = [
               {
                 code: "SBSA 200",
                 name_en: "Ethnographic and Research Methods",
-                name_ar: "Ethnographic and Research Methods",
+                name_ar: "الأساليب الإثنوغرافية والبحثية",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -7391,7 +7386,7 @@ export const universities: University[] = [
                 name_en:
                   "Capstone: Seminar in Social and Behavioral Sciences - Anthropology",
                 name_ar:
-                  "Capstone: Seminar in Social and Behavioral Sciences - Anthropology",
+                  "المشروع الختامي: حلقة دراسية في العلوم الاجتماعية والسلوكية - الأنثروبولوجيا",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -7401,7 +7396,7 @@ export const universities: University[] = [
               {
                 code: "SBSA 205",
                 name_en: "Fundamentals of Arab Society",
-                name_ar: "Fundamentals of Arab Society",
+                name_ar: "أساسيات المجتمع العربي",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -7411,7 +7406,7 @@ export const universities: University[] = [
               {
                 code: "SBSA 210",
                 name_en: "Arab Society and Culture",
-                name_ar: "Arab Society and Culture",
+                name_ar: "المجتمع والثقافة العربية",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -7421,7 +7416,7 @@ export const universities: University[] = [
               {
                 code: "SBSA 222",
                 name_en: "Global Media and Spaces of Identity",
-                name_ar: "Global Media and Spaces of Identity",
+                name_ar: "الإعلام العالمي ومساحات الهوية",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -7431,7 +7426,7 @@ export const universities: University[] = [
               {
                 code: "SBSA 224",
                 name_en: "Shopping and Consumerism",
-                name_ar: "Shopping and Consumerism",
+                name_ar: "التسوق والنزعة الاستهلاكية",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -7441,7 +7436,7 @@ export const universities: University[] = [
               {
                 code: "SBSA 235",
                 name_en: "Identity, Difference and Deviance",
-                name_ar: "Identity, Difference and Deviance",
+                name_ar: "الهوية، الاختلاف والانحراف",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -7451,7 +7446,7 @@ export const universities: University[] = [
               {
                 code: "SBSA 239",
                 name_en: "Nation and Migration",
-                name_ar: "Nation and Migration",
+                name_ar: "الأمة والهجرة",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -7461,7 +7456,7 @@ export const universities: University[] = [
               {
                 code: "SBSA 249",
                 name_en: "Images of Women in the Media",
-                name_ar: "Images of Women in the Media",
+                name_ar: "صور المرأة في وسائل الإعلام",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -7471,7 +7466,7 @@ export const universities: University[] = [
               {
                 code: "SBSA 255",
                 name_en: "Health, Medicine and Curing",
-                name_ar: "Health, Medicine and Curing",
+                name_ar: "الصحة والطب والعلاج",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -7481,7 +7476,7 @@ export const universities: University[] = [
               {
                 code: "SBSA 260",
                 name_en: "Ethnographic Film",
-                name_ar: "Ethnographic Film",
+                name_ar: "الفيلم الإثنوغرافي",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -7491,7 +7486,7 @@ export const universities: University[] = [
               {
                 code: "SBSA 270",
                 name_en: "The Indigenous Americas",
-                name_ar: "The Indigenous Americas",
+                name_ar: "الأمريكتان الأصليتان",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -7501,7 +7496,7 @@ export const universities: University[] = [
               {
                 code: "SBSA 280",
                 name_en: "Kinship and Family in the Global Era",
-                name_ar: "Kinship and Family in the Global Era",
+                name_ar: "القرابة والأسرة في العصر العالمي",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -7511,7 +7506,7 @@ export const universities: University[] = [
               {
                 code: "SBSA 341",
                 name_en: "Women in Cross-Cultural Perspective",
-                name_ar: "Women in Cross-Cultural Perspective",
+                name_ar: "المرأة من منظور عبر ثقافي",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -7521,7 +7516,7 @@ export const universities: University[] = [
               {
                 code: "SBSA 344",
                 name_en: "Tourism and Culture Change",
-                name_ar: "Tourism and Culture Change",
+                name_ar: "السياحة والتغير الثقافي",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -7531,7 +7526,7 @@ export const universities: University[] = [
               {
                 code: "SBSA 345",
                 name_en: "Globalization: Opportunities and Challenges",
-                name_ar: "Globalization: Opportunities and Challenges",
+                name_ar: "العولمة: الفرص والتحديات",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -7541,7 +7536,7 @@ export const universities: University[] = [
               {
                 code: "SBSA 348",
                 name_en: "Anthropology of Human Rights",
-                name_ar: "Anthropology of Human Rights",
+                name_ar: "أنثروبولوجيا حقوق الإنسان",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -7551,7 +7546,7 @@ export const universities: University[] = [
               {
                 code: "SBSA 360",
                 name_en: "Genocide and Refugees",
-                name_ar: "Genocide and Refugees",
+                name_ar: "الإبادة الجماعية واللاجئون",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -7561,7 +7556,7 @@ export const universities: University[] = [
               {
                 code: "SBSA 370",
                 name_en: "Music of the Arabian Peninsula",
-                name_ar: "Music of the Arabian Peninsula",
+                name_ar: "موسيقى شبه الجزيرة العربية",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -7571,7 +7566,7 @@ export const universities: University[] = [
               {
                 code: "SBSA 372",
                 name_en: "Anthropology of Business",
-                name_ar: "Anthropology of Business",
+                name_ar: "أنثروبولوجيا الأعمال",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -7581,7 +7576,7 @@ export const universities: University[] = [
               {
                 code: "SBSA 389",
                 name_en: "Special Topics",
-                name_ar: "Special Topics",
+                name_ar: "موضوعات خاصة",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -7622,7 +7617,7 @@ export const universities: University[] = [
               {
                 id: "KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER",
                 name_en: "Bachelor of Technology in Civil Engineering",
-                name_ar: "Bachelor of Technology in Civil Engineering",
+                name_ar: "بكالوريوس التكنولوجيا في الهندسة المدنية",
                 degree: "BTech",
               },
             ],
@@ -7630,7 +7625,7 @@ export const universities: University[] = [
               {
                 code: "ENGL110",
                 name_en: "Technical Writing for Engineering",
-                name_ar: "Technical Writing for Engineering",
+                name_ar: "الكتابة الفنية للهندسة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7638,7 +7633,7 @@ export const universities: University[] = [
               {
                 code: "MATH100",
                 name_en: "Calculus I",
-                name_ar: "Calculus I",
+                name_ar: "حساب التفاضل والتكامل I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7646,7 +7641,7 @@ export const universities: University[] = [
               {
                 code: "PHYS100",
                 name_en: "Physics I",
-                name_ar: "Physics I",
+                name_ar: "فيزياء I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7654,7 +7649,7 @@ export const universities: University[] = [
               {
                 code: "CHEM100",
                 name_en: "Chemistry I",
-                name_ar: "Chemistry I",
+                name_ar: "الكيمياء I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7662,7 +7657,7 @@ export const universities: University[] = [
               {
                 code: "MECH120",
                 name_en: "Engineering Drawings",
-                name_ar: "Engineering Drawings",
+                name_ar: "الرسومات الهندسية",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7670,7 +7665,7 @@ export const universities: University[] = [
               {
                 code: "ENGI100",
                 name_en: "Introduction to Engineering",
-                name_ar: "Introduction to Engineering",
+                name_ar: "مقدمة في الهندسة",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7678,7 +7673,7 @@ export const universities: University[] = [
               {
                 code: "CHEM109",
                 name_en: "Chemistry I Lab",
-                name_ar: "Chemistry I Lab",
+                name_ar: "مختبر الكيمياء I",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7686,7 +7681,7 @@ export const universities: University[] = [
               {
                 code: "MATH101",
                 name_en: "Calculus II",
-                name_ar: "Calculus II",
+                name_ar: "حساب التفاضل والتكامل II",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7694,7 +7689,7 @@ export const universities: University[] = [
               {
                 code: "PHYS101",
                 name_en: "Physics II",
-                name_ar: "Physics II",
+                name_ar: "فيزياء II",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7702,7 +7697,7 @@ export const universities: University[] = [
               {
                 code: "CIVL100",
                 name_en: "Statics",
-                name_ar: "Statics",
+                name_ar: "السكون",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7710,7 +7705,7 @@ export const universities: University[] = [
               {
                 code: "AIEN120",
                 name_en: "Computer Programming",
-                name_ar: "Computer Programming",
+                name_ar: "برمجة الحاسوب",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7718,7 +7713,7 @@ export const universities: University[] = [
               {
                 code: "AIEN129",
                 name_en: "Computer Programming Lab",
-                name_ar: "Computer Programming Lab",
+                name_ar: "مختبر برمجة الحاسوب",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7726,7 +7721,7 @@ export const universities: University[] = [
               {
                 code: "MECH100",
                 name_en: "Workshop I",
-                name_ar: "Workshop I",
+                name_ar: "ورشة عمل I",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7734,7 +7729,7 @@ export const universities: University[] = [
               {
                 code: "PHYS109",
                 name_en: "Physics Lab",
-                name_ar: "Physics Lab",
+                name_ar: "معمل الفيزياء",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7742,7 +7737,7 @@ export const universities: University[] = [
               {
                 code: "CIVL200",
                 name_en: "Surveying",
-                name_ar: "Surveying",
+                name_ar: "المساحة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7750,7 +7745,7 @@ export const universities: University[] = [
               {
                 code: "CIVL210",
                 name_en: "Strength of Materials",
-                name_ar: "Strength of Materials",
+                name_ar: "مقاومة المواد",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7758,7 +7753,7 @@ export const universities: University[] = [
               {
                 code: "CIVL211",
                 name_en: "Civil Engineering Materials",
-                name_ar: "Civil Engineering Materials",
+                name_ar: "مواد الهندسة المدنية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7766,7 +7761,7 @@ export const universities: University[] = [
               {
                 code: "CIVL202",
                 name_en: "Hydraulics",
-                name_ar: "Hydraulics",
+                name_ar: "الهيدروليكا",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7774,7 +7769,7 @@ export const universities: University[] = [
               {
                 code: "CIVL209",
                 name_en: "Surveying Lab",
-                name_ar: "Surveying Lab",
+                name_ar: "مختبر المساحة",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7782,7 +7777,7 @@ export const universities: University[] = [
               {
                 code: "CIVL229",
                 name_en: "Hydraulics Lab",
-                name_ar: "Hydraulics Lab",
+                name_ar: "مختبر الهيدروليكا",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7790,7 +7785,7 @@ export const universities: University[] = [
               {
                 code: "CIVL212",
                 name_en: "Concrete Structures",
-                name_ar: "Concrete Structures",
+                name_ar: "المنشآت الخرسانية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7798,7 +7793,7 @@ export const universities: University[] = [
               {
                 code: "CIVL230",
                 name_en: "Highway and Pavement Engineering",
-                name_ar: "Highway and Pavement Engineering",
+                name_ar: "هندسة الطرق السريعة والأرصفة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7806,7 +7801,7 @@ export const universities: University[] = [
               {
                 code: "CIVL240",
                 name_en: "Geotechnical Engineering",
-                name_ar: "Geotechnical Engineering",
+                name_ar: "الهندسة الجيوتقنية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7814,7 +7809,7 @@ export const universities: University[] = [
               {
                 code: "CIVL249",
                 name_en: "Geotechnical and Materials Engineering Lab",
-                name_ar: "Geotechnical and Materials Engineering Lab",
+                name_ar: "مختبر هندسة التربة والمواد",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7822,7 +7817,7 @@ export const universities: University[] = [
               {
                 code: "CIVL290",
                 name_en: "Project 1 (PBL)",
-                name_ar: "Project 1 (PBL)",
+                name_ar: "مشروع 1 (PBL)",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7830,7 +7825,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "University Elective",
-                name_ar: "University Elective",
+                name_ar: "مقرر اختياري جامعي",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7838,7 +7833,7 @@ export const universities: University[] = [
               {
                 code: "MATH310",
                 name_en: "Linear Algebra and Differential Equations",
-                name_ar: "Linear Algebra and Differential Equations",
+                name_ar: "الجبر الخطي والمعادلات التفاضلية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7846,7 +7841,7 @@ export const universities: University[] = [
               {
                 code: "CIVL310",
                 name_en: "Analysis of Structures",
-                name_ar: "Analysis of Structures",
+                name_ar: "تحليل المنشآت",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7854,7 +7849,7 @@ export const universities: University[] = [
               {
                 code: "CIVL311",
                 name_en: "Advanced Reinforced Concrete Design",
-                name_ar: "Advanced Reinforced Concrete Design",
+                name_ar: "تصميم الخرسانة المسلحة المتقدم",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7862,7 +7857,7 @@ export const universities: University[] = [
               {
                 code: "CIVL319",
                 name_en: "Concrete Lab",
-                name_ar: "Concrete Lab",
+                name_ar: "مختبر الخرسانة",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7870,7 +7865,7 @@ export const universities: University[] = [
               {
                 code: "ENGI401",
                 name_en: "Engineering Economics",
-                name_ar: "Engineering Economics",
+                name_ar: "الاقتصاد الهندسي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7878,7 +7873,7 @@ export const universities: University[] = [
               {
                 code: "CIVL390",
                 name_en: "Project 2 (PBL)",
-                name_ar: "Project 2 (PBL)",
+                name_ar: "مشروع 2 (PBL)",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7886,7 +7881,7 @@ export const universities: University[] = [
               {
                 code: "STAT200",
                 name_en: "Probability and Statistics",
-                name_ar: "Probability and Statistics",
+                name_ar: "الاحتمالات والإحصاء",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7894,7 +7889,7 @@ export const universities: University[] = [
               {
                 code: "CIVL320",
                 name_en: "Construction Management",
-                name_ar: "Construction Management",
+                name_ar: "إدارة الإنشاءات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7902,7 +7897,7 @@ export const universities: University[] = [
               {
                 code: "CIVL329",
                 name_en: "Construction Management Lab",
-                name_ar: "Construction Management Lab",
+                name_ar: "مختبر إدارة الإنشاءات",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7910,7 +7905,7 @@ export const universities: University[] = [
               {
                 code: "CIVL340",
                 name_en: "Foundation Engineering",
-                name_ar: "Foundation Engineering",
+                name_ar: "هندسة الأساسات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7918,7 +7913,7 @@ export const universities: University[] = [
               {
                 code: "CIVL391",
                 name_en: "Project 3 (PBL)",
-                name_ar: "Project 3 (PBL)",
+                name_ar: "مشروع 3 (PBL)",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7926,7 +7921,7 @@ export const universities: University[] = [
               {
                 code: "CIVL410",
                 name_en: "Steel Structures",
-                name_ar: "Steel Structures",
+                name_ar: "المنشآت الفولاذية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7934,7 +7929,7 @@ export const universities: University[] = [
               {
                 code: "CIVL409",
                 name_en: "Structural Design Lab",
-                name_ar: "Structural Design Lab",
+                name_ar: "معمل التصميم الإنشائي",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7942,7 +7937,7 @@ export const universities: University[] = [
               {
                 code: "CIVL430",
                 name_en: "Traffic Engineering",
-                name_ar: "Traffic Engineering",
+                name_ar: "هندسة المرور",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7950,7 +7945,7 @@ export const universities: University[] = [
               {
                 code: "CIVL450",
                 name_en: "Water & Environmental Engineering",
-                name_ar: "Water & Environmental Engineering",
+                name_ar: "هندسة المياه والبيئة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7958,7 +7953,7 @@ export const universities: University[] = [
               {
                 code: "CIVL490",
                 name_en: "Graduation Project - Part I",
-                name_ar: "Graduation Project - Part I",
+                name_ar: "مشروع تخرج - الجزء I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7966,7 +7961,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "Department Elective 1",
-                name_ar: "Department Elective 1",
+                name_ar: "مقرر اختياري بالقسم 1",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7974,7 +7969,7 @@ export const universities: University[] = [
               {
                 code: "CIVL491",
                 name_en: "Graduation Project - Part II",
-                name_ar: "Graduation Project - Part II",
+                name_ar: "مشروع تخرج - الجزء II",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7982,7 +7977,7 @@ export const universities: University[] = [
               {
                 code: "CIVL421",
                 name_en: "Contract Administration and Procurement",
-                name_ar: "Contract Administration and Procurement",
+                name_ar: "إدارة العقود والمشتريات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7990,7 +7985,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "Department Elective 2",
-                name_ar: "Department Elective 2",
+                name_ar: "مقرر اختياري بالقسم 2",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -7998,7 +7993,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "College Elective",
-                name_ar: "College Elective",
+                name_ar: "مادة اختيارية للكلية",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-CIVIL-ENGINEER"],
@@ -8007,7 +8002,7 @@ export const universities: University[] = [
           },
           {
             id: "KW-AU-COLLEGE-OF-ENGINEERING-ELECTRICAL-ELECTRONICS-ENGINEERING",
-            name_ar: "Electrical & Electronics Engineering",
+            name_ar: "هندسة الكهرباء والإلكترونيات",
             name_en: "Electrical & Electronics Engineering",
             degrees: ["BTech"],
             programs: [
@@ -8016,7 +8011,7 @@ export const universities: University[] = [
                 name_en:
                   "Bachelor of Technology in Electrical & Electronics Engineering",
                 name_ar:
-                  "Bachelor of Technology in Electrical & Electronics Engineering",
+                  "بكالوريوس التكنولوجيا في الهندسة الكهربائية والإلكترونية",
                 degree: "BTech",
               },
             ],
@@ -8024,7 +8019,7 @@ export const universities: University[] = [
               {
                 code: "ENGL110",
                 name_en: "Technical Writing for Engineering",
-                name_ar: "Technical Writing for Engineering",
+                name_ar: "الكتابة الفنية للهندسة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8032,7 +8027,7 @@ export const universities: University[] = [
               {
                 code: "MATH100",
                 name_en: "Calculus I",
-                name_ar: "Calculus I",
+                name_ar: "حساب التفاضل والتكامل I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8040,7 +8035,7 @@ export const universities: University[] = [
               {
                 code: "PHYS100",
                 name_en: "Physics I",
-                name_ar: "Physics I",
+                name_ar: "فيزياء I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8048,7 +8043,7 @@ export const universities: University[] = [
               {
                 code: "CHEM100",
                 name_en: "Chemistry I",
-                name_ar: "Chemistry I",
+                name_ar: "الكيمياء I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8056,7 +8051,7 @@ export const universities: University[] = [
               {
                 code: "MECH120",
                 name_en: "Engineering Drawings",
-                name_ar: "Engineering Drawings",
+                name_ar: "الرسومات الهندسية",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8064,7 +8059,7 @@ export const universities: University[] = [
               {
                 code: "CHEM109",
                 name_en: "Chemistry I Lab",
-                name_ar: "Chemistry I Lab",
+                name_ar: "مختبر الكيمياء I",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8072,7 +8067,7 @@ export const universities: University[] = [
               {
                 code: "ENGI100",
                 name_en: "Introduction to Engineering",
-                name_ar: "Introduction to Engineering",
+                name_ar: "مقدمة في الهندسة",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8080,7 +8075,7 @@ export const universities: University[] = [
               {
                 code: "MATH101",
                 name_en: "Calculus II",
-                name_ar: "Calculus II",
+                name_ar: "حساب التفاضل والتكامل II",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8088,7 +8083,7 @@ export const universities: University[] = [
               {
                 code: "PHYS101",
                 name_en: "Physics II",
-                name_ar: "Physics II",
+                name_ar: "فيزياء II",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8096,7 +8091,7 @@ export const universities: University[] = [
               {
                 code: "AIEN120",
                 name_en: "Computer Programming",
-                name_ar: "Computer Programming",
+                name_ar: "برمجة الحاسوب",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8104,7 +8099,7 @@ export const universities: University[] = [
               {
                 code: "ELEC100",
                 name_en: "Electrical Circuits",
-                name_ar: "Electrical Circuits",
+                name_ar: "الدوائر الكهربائية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8112,7 +8107,7 @@ export const universities: University[] = [
               {
                 code: "MECH100",
                 name_en: "Workshop I",
-                name_ar: "Workshop I",
+                name_ar: "ورشة عمل I",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8120,7 +8115,7 @@ export const universities: University[] = [
               {
                 code: "PHYS109",
                 name_en: "Physics Lab",
-                name_ar: "Physics Lab",
+                name_ar: "معمل الفيزياء",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8128,7 +8123,7 @@ export const universities: University[] = [
               {
                 code: "AIEN129",
                 name_en: "Computer Programming Lab",
-                name_ar: "Computer Programming Lab",
+                name_ar: "مختبر برمجة الحاسوب",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8136,7 +8131,7 @@ export const universities: University[] = [
               {
                 code: "ELEC200",
                 name_en: "Electrical Circuits Analysis",
-                name_ar: "Electrical Circuits Analysis",
+                name_ar: "تحليل الدوائر الكهربائية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8144,7 +8139,7 @@ export const universities: University[] = [
               {
                 code: "ELEC220",
                 name_en: "Instrumentation and Measurement",
-                name_ar: "Instrumentation and Measurement",
+                name_ar: "الأجهزة والقياس",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8152,7 +8147,7 @@ export const universities: University[] = [
               {
                 code: "ELEC230",
                 name_en: "Digital Logic",
-                name_ar: "Digital Logic",
+                name_ar: "المنطق الرقمي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8160,7 +8155,7 @@ export const universities: University[] = [
               {
                 code: "ELEC209",
                 name_en: "Electrical Circuits Analysis Lab",
-                name_ar: "Electrical Circuits Analysis Lab",
+                name_ar: "معمل تحليل الدوائر الكهربائية",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8168,7 +8163,7 @@ export const universities: University[] = [
               {
                 code: "ELEC229",
                 name_en: "Instrumentation and Measurement Lab",
-                name_ar: "Instrumentation and Measurement Lab",
+                name_ar: "مختبر الأجهزة والقياس",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8176,7 +8171,7 @@ export const universities: University[] = [
               {
                 code: "ELEC239",
                 name_en: "Digital Logic Lab",
-                name_ar: "Digital Logic Lab",
+                name_ar: "مختبر المنطق الرقمي",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8184,7 +8179,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "University Elective",
-                name_ar: "University Elective",
+                name_ar: "مقرر اختياري جامعي",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8192,7 +8187,7 @@ export const universities: University[] = [
               {
                 code: "ELEC210",
                 name_en: "Electronics",
-                name_ar: "Electronics",
+                name_ar: "إلكترونيات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8200,7 +8195,7 @@ export const universities: University[] = [
               {
                 code: "ELEC240",
                 name_en: "Electric Machines and Power",
-                name_ar: "Electric Machines and Power",
+                name_ar: "الآلات والطاقة الكهربائية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8208,7 +8203,7 @@ export const universities: University[] = [
               {
                 code: "ELEC250",
                 name_en: "Communication Engineering",
-                name_ar: "Communication Engineering",
+                name_ar: "هندسة الاتصالات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8216,7 +8211,7 @@ export const universities: University[] = [
               {
                 code: "ELEC219",
                 name_en: "Electronics Lab",
-                name_ar: "Electronics Lab",
+                name_ar: "مختبر إلكترونيات",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8224,7 +8219,7 @@ export const universities: University[] = [
               {
                 code: "ELEC249",
                 name_en: "Electric Machines and Power Lab",
-                name_ar: "Electric Machines and Power Lab",
+                name_ar: "معمل الآلات والطاقة الكهربائية",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8232,7 +8227,7 @@ export const universities: University[] = [
               {
                 code: "ELEC259",
                 name_en: "Communication Engineering Lab",
-                name_ar: "Communication Engineering Lab",
+                name_ar: "مختبر هندسة الاتصالات",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8240,7 +8235,7 @@ export const universities: University[] = [
               {
                 code: "ELEC290",
                 name_en: "Project 1 (PBL)",
-                name_ar: "Project 1 (PBL)",
+                name_ar: "مشروع 1 (PBL)",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8248,7 +8243,7 @@ export const universities: University[] = [
               {
                 code: "MATH310",
                 name_en: "Linear Algebra and Differential Equations",
-                name_ar: "Linear Algebra and Differential Equations",
+                name_ar: "الجبر الخطي والمعادلات التفاضلية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8256,7 +8251,7 @@ export const universities: University[] = [
               {
                 code: "ELEC310",
                 name_en: "Linear Integrated Circuits",
-                name_ar: "Linear Integrated Circuits",
+                name_ar: "الدوائر المتكاملة الخطية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8264,7 +8259,7 @@ export const universities: University[] = [
               {
                 code: "ELEC350",
                 name_en: "Signals and Systems",
-                name_ar: "Signals and Systems",
+                name_ar: "الإشارات والأنظمة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8272,7 +8267,7 @@ export const universities: University[] = [
               {
                 code: "ELEC390",
                 name_en: "Project 2 (PBL)",
-                name_ar: "Project 2 (PBL)",
+                name_ar: "مشروع 2 (PBL)",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8280,7 +8275,7 @@ export const universities: University[] = [
               {
                 code: "ELEC319",
                 name_en: "Linear Integrated Circuits Lab",
-                name_ar: "Linear Integrated Circuits Lab",
+                name_ar: "معمل الدوائر المتكاملة الخطية",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8288,7 +8283,7 @@ export const universities: University[] = [
               {
                 code: "ELEC359",
                 name_en: "Signals and Systems Lab",
-                name_ar: "Signals and Systems Lab",
+                name_ar: "مختبر الإشارات والأنظمة",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8296,7 +8291,7 @@ export const universities: University[] = [
               {
                 code: "MATH320",
                 name_en: "Numerical Analysis",
-                name_ar: "Numerical Analysis",
+                name_ar: "التحليل العددي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8304,7 +8299,7 @@ export const universities: University[] = [
               {
                 code: "ELEC340",
                 name_en: "Electric Machines & Drives",
-                name_ar: "Electric Machines & Drives",
+                name_ar: "الآلات والمحركات الكهربائية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8312,7 +8307,7 @@ export const universities: University[] = [
               {
                 code: "ELEC351",
                 name_en: "Wireless Communication Systems",
-                name_ar: "Wireless Communication Systems",
+                name_ar: "أنظمة الاتصالات اللاسلكية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8320,7 +8315,7 @@ export const universities: University[] = [
               {
                 code: "ELEC391",
                 name_en: "Project 3 (PBL)",
-                name_ar: "Project 3 (PBL)",
+                name_ar: "مشروع 3 (PBL)",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8328,7 +8323,7 @@ export const universities: University[] = [
               {
                 code: "ELEC349",
                 name_en: "Electric Machines & Drives Lab",
-                name_ar: "Electric Machines & Drives Lab",
+                name_ar: "معمل الآلات والمحركات الكهربائية",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8336,7 +8331,7 @@ export const universities: University[] = [
               {
                 code: "ELEC358",
                 name_en: "Wireless Communication Systems Lab",
-                name_ar: "Wireless Communication Systems Lab",
+                name_ar: "مختبر أنظمة الاتصالات اللاسلكية",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8344,7 +8339,7 @@ export const universities: University[] = [
               {
                 code: "ELEC420",
                 name_en: "Mechatronics Systems",
-                name_ar: "Mechatronics Systems",
+                name_ar: "أنظمة الميكاترونكس",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8352,7 +8347,7 @@ export const universities: University[] = [
               {
                 code: "ELEC490",
                 name_en: "Graduation Project - Part I",
-                name_ar: "Graduation Project - Part I",
+                name_ar: "مشروع تخرج - الجزء I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8360,7 +8355,7 @@ export const universities: University[] = [
               {
                 code: "ELEC429",
                 name_en: "Mechatronics Systems Lab",
-                name_ar: "Mechatronics Systems Lab",
+                name_ar: "مختبر أنظمة الميكاترونكس",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8368,7 +8363,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "College Elective 1",
-                name_ar: "College Elective 1",
+                name_ar: "مادة اختيارية للكلية 1",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8376,7 +8371,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "Department Elective 1",
-                name_ar: "Department Elective 1",
+                name_ar: "مقرر اختياري بالقسم 1",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8384,7 +8379,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "Department Elective 2",
-                name_ar: "Department Elective 2",
+                name_ar: "مقرر اختياري بالقسم 2",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8392,7 +8387,7 @@ export const universities: University[] = [
               {
                 code: "ELEC441",
                 name_en: "Power Systems Analysis",
-                name_ar: "Power Systems Analysis",
+                name_ar: "تحليل أنظمة القوى",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8400,7 +8395,7 @@ export const universities: University[] = [
               {
                 code: "ELEC491",
                 name_en: "Graduation Project - Part II",
-                name_ar: "Graduation Project - Part II",
+                name_ar: "مشروع تخرج - الجزء II",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8408,7 +8403,7 @@ export const universities: University[] = [
               {
                 code: "ELEC449",
                 name_en: "Power Systems Analysis Lab",
-                name_ar: "Power Systems Analysis Lab",
+                name_ar: "مختبر تحليل أنظمة القوى",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8416,7 +8411,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "Department Elective 3",
-                name_ar: "Department Elective 3",
+                name_ar: "مقرر اختياري بالقسم 3",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8424,7 +8419,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "Department Elective 4",
-                name_ar: "Department Elective 4",
+                name_ar: "مقرر اختياري بالقسم 4",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-ELECTRICAL-ELE"],
@@ -8440,7 +8435,7 @@ export const universities: University[] = [
               {
                 id: "KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG",
                 name_en: "Bachelor of Technology in Mechanical Engineering",
-                name_ar: "Bachelor of Technology in Mechanical Engineering",
+                name_ar: "بكالوريوس التكنولوجيا في الهندسة الميكانيكية",
                 degree: "BTech",
               },
             ],
@@ -8448,7 +8443,7 @@ export const universities: University[] = [
               {
                 code: "ENGL110",
                 name_en: "Technical Writing for Engineering",
-                name_ar: "Technical Writing for Engineering",
+                name_ar: "الكتابة الفنية للهندسة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8456,7 +8451,7 @@ export const universities: University[] = [
               {
                 code: "MATH100",
                 name_en: "Calculus I",
-                name_ar: "Calculus I",
+                name_ar: "حساب التفاضل والتكامل I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8464,7 +8459,7 @@ export const universities: University[] = [
               {
                 code: "PHYS100",
                 name_en: "Physics I",
-                name_ar: "Physics I",
+                name_ar: "فيزياء I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8472,7 +8467,7 @@ export const universities: University[] = [
               {
                 code: "CHEM100",
                 name_en: "Chemistry I",
-                name_ar: "Chemistry I",
+                name_ar: "الكيمياء I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8480,7 +8475,7 @@ export const universities: University[] = [
               {
                 code: "MECH120",
                 name_en: "Engineering Drawings",
-                name_ar: "Engineering Drawings",
+                name_ar: "الرسومات الهندسية",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8488,7 +8483,7 @@ export const universities: University[] = [
               {
                 code: "ENGI100",
                 name_en: "Introduction to Engineering",
-                name_ar: "Introduction to Engineering",
+                name_ar: "مقدمة في الهندسة",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8496,7 +8491,7 @@ export const universities: University[] = [
               {
                 code: "CHEM109",
                 name_en: "Chemistry I Lab",
-                name_ar: "Chemistry I Lab",
+                name_ar: "مختبر الكيمياء I",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8504,7 +8499,7 @@ export const universities: University[] = [
               {
                 code: "MATH101",
                 name_en: "Calculus II",
-                name_ar: "Calculus II",
+                name_ar: "حساب التفاضل والتكامل II",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8512,7 +8507,7 @@ export const universities: University[] = [
               {
                 code: "PHYS101",
                 name_en: "Physics II",
-                name_ar: "Physics II",
+                name_ar: "فيزياء II",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8520,7 +8515,7 @@ export const universities: University[] = [
               {
                 code: "CIVL100",
                 name_en: "Statics",
-                name_ar: "Statics",
+                name_ar: "السكون",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8528,7 +8523,7 @@ export const universities: University[] = [
               {
                 code: "AIEN120",
                 name_en: "Computer Programming",
-                name_ar: "Computer Programming",
+                name_ar: "برمجة الحاسوب",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8536,7 +8531,7 @@ export const universities: University[] = [
               {
                 code: "MECH100",
                 name_en: "Workshop I",
-                name_ar: "Workshop I",
+                name_ar: "ورشة عمل I",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8544,7 +8539,7 @@ export const universities: University[] = [
               {
                 code: "AIEN129",
                 name_en: "Computer Programming Lab",
-                name_ar: "Computer Programming Lab",
+                name_ar: "مختبر برمجة الحاسوب",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8552,7 +8547,7 @@ export const universities: University[] = [
               {
                 code: "PHYS109",
                 name_en: "Physics Lab",
-                name_ar: "Physics Lab",
+                name_ar: "معمل الفيزياء",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8560,7 +8555,7 @@ export const universities: University[] = [
               {
                 code: "CIVL210",
                 name_en: "Strength of Materials",
-                name_ar: "Strength of Materials",
+                name_ar: "مقاومة المواد",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8568,7 +8563,7 @@ export const universities: University[] = [
               {
                 code: "MECH230",
                 name_en: "Thermodynamics I",
-                name_ar: "Thermodynamics I",
+                name_ar: "الديناميكا الحرارية I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8576,7 +8571,7 @@ export const universities: University[] = [
               {
                 code: "MECH240",
                 name_en: "Material Science",
-                name_ar: "Material Science",
+                name_ar: "علم المواد",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8584,7 +8579,7 @@ export const universities: University[] = [
               {
                 code: "MECH250",
                 name_en: "Fluid Mechanics",
-                name_ar: "Fluid Mechanics",
+                name_ar: "ميكانيكا الموائع",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8592,7 +8587,7 @@ export const universities: University[] = [
               {
                 code: "MECH259",
                 name_en: "Fluid Mechanics Lab",
-                name_ar: "Fluid Mechanics Lab",
+                name_ar: "مختبر ميكانيكا الموائع",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8600,7 +8595,7 @@ export const universities: University[] = [
               {
                 code: "MECH201",
                 name_en: "Preventive Maintenance",
-                name_ar: "Preventive Maintenance",
+                name_ar: "الصيانة الوقائية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8608,7 +8603,7 @@ export const universities: University[] = [
               {
                 code: "MECH260",
                 name_en: "Hydraulics & Pneumatics",
-                name_ar: "Hydraulics & Pneumatics",
+                name_ar: "الهيدروليكا والهوائيات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8616,7 +8611,7 @@ export const universities: University[] = [
               {
                 code: "MECH261",
                 name_en: "Pumps & Valves",
-                name_ar: "Pumps & Valves",
+                name_ar: "المضخات والصمامات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8624,7 +8619,7 @@ export const universities: University[] = [
               {
                 code: "MECH249",
                 name_en: "Mechanics of Materials Lab",
-                name_ar: "Mechanics of Materials Lab",
+                name_ar: "مختبر ميكانيكا المواد",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8632,7 +8627,7 @@ export const universities: University[] = [
               {
                 code: "MECH269",
                 name_en: "Hydraulics & Pneumatics Lab",
-                name_ar: "Hydraulics & Pneumatics Lab",
+                name_ar: "مختبر الهيدروليكا والهوائيات",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8640,7 +8635,7 @@ export const universities: University[] = [
               {
                 code: "MECH290",
                 name_en: "Project 1 (PBL)",
-                name_ar: "Project 1 (PBL)",
+                name_ar: "مشروع 1 (PBL)",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8648,7 +8643,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "University Elective",
-                name_ar: "University Elective",
+                name_ar: "مقرر اختياري جامعي",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8656,7 +8651,7 @@ export const universities: University[] = [
               {
                 code: "MATH310",
                 name_en: "Linear Algebra and Differential Equations",
-                name_ar: "Linear Algebra and Differential Equations",
+                name_ar: "الجبر الخطي والمعادلات التفاضلية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8664,7 +8659,7 @@ export const universities: University[] = [
               {
                 code: "MECH301",
                 name_en: "Dynamics",
-                name_ar: "Dynamics",
+                name_ar: "الديناميكا",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8672,7 +8667,7 @@ export const universities: University[] = [
               {
                 code: "MECH302",
                 name_en: "Workshop II",
-                name_ar: "Workshop II",
+                name_ar: "ورشة عمل II",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8680,7 +8675,7 @@ export const universities: University[] = [
               {
                 code: "MECH320",
                 name_en: "3D CAD",
-                name_ar: "3D CAD",
+                name_ar: "CAD ثلاثي الأبعاد",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8688,7 +8683,7 @@ export const universities: University[] = [
               {
                 code: "MECH330",
                 name_en: "Thermodynamics II",
-                name_ar: "Thermodynamics II",
+                name_ar: "الديناميكا الحرارية II",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8696,7 +8691,7 @@ export const universities: University[] = [
               {
                 code: "MECH390",
                 name_en: "Project 2 (PBL)",
-                name_ar: "Project 2 (PBL)",
+                name_ar: "مشروع 2 (PBL)",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8704,7 +8699,7 @@ export const universities: University[] = [
               {
                 code: "MATH320",
                 name_en: "Numerical Analysis",
-                name_ar: "Numerical Analysis",
+                name_ar: "التحليل العددي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8712,7 +8707,7 @@ export const universities: University[] = [
               {
                 code: "MECH321",
                 name_en: "Machine Dynamics",
-                name_ar: "Machine Dynamics",
+                name_ar: "ديناميكا الآلات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8720,7 +8715,7 @@ export const universities: University[] = [
               {
                 code: "MECH331",
                 name_en: "Heat Transfer",
-                name_ar: "Heat Transfer",
+                name_ar: "انتقال الحرارة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8728,7 +8723,7 @@ export const universities: University[] = [
               {
                 code: "MECH391",
                 name_en: "Project 3 (PBL)",
-                name_ar: "Project 3 (PBL)",
+                name_ar: "مشروع 3 (PBL)",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8736,7 +8731,7 @@ export const universities: University[] = [
               {
                 code: "MECH410",
                 name_en: "Mechanical Vibrations",
-                name_ar: "Mechanical Vibrations",
+                name_ar: "الاهتزازات الميكانيكية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8744,7 +8739,7 @@ export const universities: University[] = [
               {
                 code: "MECH411",
                 name_en: "Control Systems",
-                name_ar: "Control Systems",
+                name_ar: "أنظمة التحكم",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8752,7 +8747,7 @@ export const universities: University[] = [
               {
                 code: "MECH420",
                 name_en: "Design of Machine Elements",
-                name_ar: "Design of Machine Elements",
+                name_ar: "تصميم عناصر الآلات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8760,7 +8755,7 @@ export const universities: University[] = [
               {
                 code: "MECH490",
                 name_en: "Graduation Project - Part I",
-                name_ar: "Graduation Project - Part I",
+                name_ar: "مشروع تخرج - الجزء I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8768,7 +8763,7 @@ export const universities: University[] = [
               {
                 code: "MECH439",
                 name_en: "Thermal Science Lab",
-                name_ar: "Thermal Science Lab",
+                name_ar: "مختبر العلوم الحرارية",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8776,7 +8771,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "Department Elective 1",
-                name_ar: "Department Elective 1",
+                name_ar: "مقرر اختياري بالقسم 1",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8784,7 +8779,7 @@ export const universities: University[] = [
               {
                 code: "MECH460",
                 name_en: "Mechatronics",
-                name_ar: "Mechatronics",
+                name_ar: "الميكاترونكس",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8792,7 +8787,7 @@ export const universities: University[] = [
               {
                 code: "MECH491",
                 name_en: "Graduation Project - Part II",
-                name_ar: "Graduation Project - Part II",
+                name_ar: "مشروع تخرج - الجزء II",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8800,7 +8795,7 @@ export const universities: University[] = [
               {
                 code: "MECH469",
                 name_en: "Mechatronics Lab",
-                name_ar: "Mechatronics Lab",
+                name_ar: "مختبر الميكاترونكس",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8808,7 +8803,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "College Elective",
-                name_ar: "College Elective",
+                name_ar: "مادة اختيارية للكلية",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8816,7 +8811,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "Department Elective 2",
-                name_ar: "Department Elective 2",
+                name_ar: "مقرر اختياري بالقسم 2",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-MECHANICAL-ENG"],
@@ -8825,14 +8820,14 @@ export const universities: University[] = [
           },
           {
             id: "KW-AU-COLLEGE-OF-ENGINEERING-PETROLEUM-ENGINEERING",
-            name_ar: "Petroleum Engineering",
+            name_ar: "هندسة البترول",
             name_en: "Petroleum Engineering",
             degrees: ["BTech"],
             programs: [
               {
                 id: "KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI",
                 name_en: "Bachelor of Technology in Petroleum Engineering",
-                name_ar: "Bachelor of Technology in Petroleum Engineering",
+                name_ar: "بكالوريوس التكنولوجيا في هندسة البترول",
                 degree: "BTech",
               },
             ],
@@ -8840,7 +8835,7 @@ export const universities: University[] = [
               {
                 code: "ENGL110",
                 name_en: "Technical Writing for Engineering",
-                name_ar: "Technical Writing for Engineering",
+                name_ar: "الكتابة الفنية للهندسة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -8848,7 +8843,7 @@ export const universities: University[] = [
               {
                 code: "MATH100",
                 name_en: "Calculus I",
-                name_ar: "Calculus I",
+                name_ar: "حساب التفاضل والتكامل I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -8856,7 +8851,7 @@ export const universities: University[] = [
               {
                 code: "PHYS100",
                 name_en: "Physics I",
-                name_ar: "Physics I",
+                name_ar: "فيزياء I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -8864,7 +8859,7 @@ export const universities: University[] = [
               {
                 code: "CHEM100",
                 name_en: "Chemistry I",
-                name_ar: "Chemistry I",
+                name_ar: "الكيمياء I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -8872,7 +8867,7 @@ export const universities: University[] = [
               {
                 code: "MECH120",
                 name_en: "Engineering Drawings",
-                name_ar: "Engineering Drawings",
+                name_ar: "الرسومات الهندسية",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -8880,7 +8875,7 @@ export const universities: University[] = [
               {
                 code: "ENGI100",
                 name_en: "Introduction to Engineering",
-                name_ar: "Introduction to Engineering",
+                name_ar: "مقدمة في الهندسة",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -8888,7 +8883,7 @@ export const universities: University[] = [
               {
                 code: "CHEM109",
                 name_en: "Chemistry I Lab",
-                name_ar: "Chemistry I Lab",
+                name_ar: "مختبر الكيمياء I",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -8896,7 +8891,7 @@ export const universities: University[] = [
               {
                 code: "MATH101",
                 name_en: "Calculus II",
-                name_ar: "Calculus II",
+                name_ar: "حساب التفاضل والتكامل II",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -8904,7 +8899,7 @@ export const universities: University[] = [
               {
                 code: "PHYS101",
                 name_en: "Physics II",
-                name_ar: "Physics II",
+                name_ar: "فيزياء II",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -8912,7 +8907,7 @@ export const universities: University[] = [
               {
                 code: "MECH100",
                 name_en: "Workshop I",
-                name_ar: "Workshop I",
+                name_ar: "ورشة عمل I",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -8920,7 +8915,7 @@ export const universities: University[] = [
               {
                 code: "CIVL100",
                 name_en: "Statics",
-                name_ar: "Statics",
+                name_ar: "السكون",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -8928,7 +8923,7 @@ export const universities: University[] = [
               {
                 code: "AIEN120",
                 name_en: "Computer Programming",
-                name_ar: "Computer Programming",
+                name_ar: "برمجة الحاسوب",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -8936,7 +8931,7 @@ export const universities: University[] = [
               {
                 code: "PHYS109",
                 name_en: "Physics Lab",
-                name_ar: "Physics Lab",
+                name_ar: "معمل الفيزياء",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -8944,7 +8939,7 @@ export const universities: University[] = [
               {
                 code: "AIEN129",
                 name_en: "Computer Programming Lab",
-                name_ar: "Computer Programming Lab",
+                name_ar: "مختبر برمجة الحاسوب",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -8952,7 +8947,7 @@ export const universities: University[] = [
               {
                 code: "PETR200",
                 name_en: "Introduction to Petroleum Engineering",
-                name_ar: "Introduction to Petroleum Engineering",
+                name_ar: "مقدمة في هندسة البترول",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -8960,7 +8955,7 @@ export const universities: University[] = [
               {
                 code: "MECH250",
                 name_en: "Fluid Mechanics",
-                name_ar: "Fluid Mechanics",
+                name_ar: "ميكانيكا الموائع",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -8968,7 +8963,7 @@ export const universities: University[] = [
               {
                 code: "CIVL210",
                 name_en: "Strength of Materials",
-                name_ar: "Strength of Materials",
+                name_ar: "مقاومة المواد",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -8976,7 +8971,7 @@ export const universities: University[] = [
               {
                 code: "PETR220",
                 name_en: "Reservoir Rock & Fluid Properties",
-                name_ar: "Reservoir Rock & Fluid Properties",
+                name_ar: "خصائص صخور وسوائل المكمن",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -8984,7 +8979,7 @@ export const universities: University[] = [
               {
                 code: "MECH259",
                 name_en: "Fluid Mechanics Lab",
-                name_ar: "Fluid Mechanics Lab",
+                name_ar: "مختبر ميكانيكا الموائع",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -8992,7 +8987,7 @@ export const universities: University[] = [
               {
                 code: "PETR229",
                 name_en: "Reservoir Rock & Fluid Properties Lab",
-                name_ar: "Reservoir Rock & Fluid Properties Lab",
+                name_ar: "مختبر خصائص صخور وسوائل المكمن",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -9000,7 +8995,7 @@ export const universities: University[] = [
               {
                 code: "PETR201",
                 name_en: "Environmental Control in Petroleum Industry",
-                name_ar: "Environmental Control in Petroleum Industry",
+                name_ar: "التحكم البيئي في صناعة النفط",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -9008,7 +9003,7 @@ export const universities: University[] = [
               {
                 code: "PETR230",
                 name_en: "Drilling Equipment & Operations",
-                name_ar: "Drilling Equipment & Operations",
+                name_ar: "معدات وعمليات الحفر",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -9016,7 +9011,7 @@ export const universities: University[] = [
               {
                 code: "PETR240",
                 name_en: "Surface Production Facilities & Operations",
-                name_ar: "Surface Production Facilities & Operations",
+                name_ar: "منشآت وعمليات الإنتاج السطحية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -9024,7 +9019,7 @@ export const universities: University[] = [
               {
                 code: "PETR290",
                 name_en: "Project 1 (PBL)",
-                name_ar: "Project 1 (PBL)",
+                name_ar: "مشروع 1 (PBL)",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -9032,7 +9027,7 @@ export const universities: University[] = [
               {
                 code: "PETR239",
                 name_en: "Drilling Equipment & Operations (Lab)",
-                name_ar: "Drilling Equipment & Operations (Lab)",
+                name_ar: "معدات وعمليات الحفر (معمل)",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -9040,7 +9035,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "University Elective",
-                name_ar: "University Elective",
+                name_ar: "مقرر اختياري جامعي",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -9048,7 +9043,7 @@ export const universities: University[] = [
               {
                 code: "MATH310",
                 name_en: "Linear Algebra and Differential Equations",
-                name_ar: "Linear Algebra and Differential Equations",
+                name_ar: "الجبر الخطي والمعادلات التفاضلية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -9056,7 +9051,7 @@ export const universities: University[] = [
               {
                 code: "PETR301",
                 name_en: "Thermodynamics & Phase Behavior of Pet. Fluids",
-                name_ar: "Thermodynamics & Phase Behavior of Pet. Fluids",
+                name_ar: "الديناميكا الحرارية وسلوك الطور لسوائل البترول",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -9064,7 +9059,7 @@ export const universities: University[] = [
               {
                 code: "PETR310",
                 name_en: "Integrated Petroleum Geology",
-                name_ar: "Integrated Petroleum Geology",
+                name_ar: "جيولوجيا البترول المتكاملة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -9072,7 +9067,7 @@ export const universities: University[] = [
               {
                 code: "PETR390",
                 name_en: "Project 2 (PBL)",
-                name_ar: "Project 2 (PBL)",
+                name_ar: "مشروع 2 (PBL)",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -9080,7 +9075,8 @@ export const universities: University[] = [
               {
                 code: "PETR309",
                 name_en: "Thermodynamics & Phase Behavior of Pet. Fluids (Lab)",
-                name_ar: "Thermodynamics & Phase Behavior of Pet. Fluids (Lab)",
+                name_ar:
+                  "الديناميكا الحرارية وسلوك الطور لسوائل البترول (مختبر)",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -9088,7 +9084,7 @@ export const universities: University[] = [
               {
                 code: "PETR318",
                 name_en: "Integrated Petroleum Geology (Lab)",
-                name_ar: "Integrated Petroleum Geology (Lab)",
+                name_ar: "جيولوجيا البترول المتكاملة (مختبر)",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -9096,7 +9092,7 @@ export const universities: University[] = [
               {
                 code: "MATH320",
                 name_en: "Numerical Analysis",
-                name_ar: "Numerical Analysis",
+                name_ar: "التحليل العددي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -9104,7 +9100,7 @@ export const universities: University[] = [
               {
                 code: "PETR320",
                 name_en: "Reservoir Engineering",
-                name_ar: "Reservoir Engineering",
+                name_ar: "هندسة المكامن",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -9112,7 +9108,7 @@ export const universities: University[] = [
               {
                 code: "PETR311",
                 name_en: "Well Logging & Formation Evaluation",
-                name_ar: "Well Logging & Formation Evaluation",
+                name_ar: "تسجيل الآبار وتقييم التكوينات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -9120,7 +9116,7 @@ export const universities: University[] = [
               {
                 code: "PETR330",
                 name_en: "Drilling Engineering",
-                name_ar: "Drilling Engineering",
+                name_ar: "هندسة الحفر",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -9128,7 +9124,7 @@ export const universities: University[] = [
               {
                 code: "PETR391",
                 name_en: "Project 3 (PBL)",
-                name_ar: "Project 3 (PBL)",
+                name_ar: "مشروع 3 (PBL)",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -9136,7 +9132,7 @@ export const universities: University[] = [
               {
                 code: "PETR319",
                 name_en: "Well Logging & Formation Evaluation (Lab)",
-                name_ar: "Well Logging & Formation Evaluation (Lab)",
+                name_ar: "تسجيل الآبار وتقييم التكوينات (مختبر)",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -9144,7 +9140,7 @@ export const universities: University[] = [
               {
                 code: "PETR420",
                 name_en: "Well Testing",
-                name_ar: "Well Testing",
+                name_ar: "اختبار الآبار",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -9152,7 +9148,7 @@ export const universities: University[] = [
               {
                 code: "PETR440",
                 name_en: "Petroleum Production Engineering I",
-                name_ar: "Petroleum Production Engineering I",
+                name_ar: "هندسة إنتاج البترول I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -9160,7 +9156,7 @@ export const universities: University[] = [
               {
                 code: "PETR490",
                 name_en: "Graduation Project - Part I",
-                name_ar: "Graduation Project - Part I",
+                name_ar: "مشروع تخرج - الجزء I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -9168,7 +9164,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "Department Elective 1",
-                name_ar: "Department Elective 1",
+                name_ar: "مقرر اختياري بالقسم 1",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -9176,7 +9172,7 @@ export const universities: University[] = [
               {
                 code: "PETR400",
                 name_en: "Petroleum Econ. & Project Eval.",
-                name_ar: "Petroleum Econ. & Project Eval.",
+                name_ar: "اقتصاديات البترول وتقييم المشاريع",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -9184,7 +9180,7 @@ export const universities: University[] = [
               {
                 code: "PETR441",
                 name_en: "Petroleum Production Engineering II",
-                name_ar: "Petroleum Production Engineering II",
+                name_ar: "هندسة إنتاج البترول II",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -9192,7 +9188,7 @@ export const universities: University[] = [
               {
                 code: "PETR491",
                 name_en: "Graduation Project - Part II",
-                name_ar: "Graduation Project - Part II",
+                name_ar: "مشروع تخرج - الجزء II",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -9200,7 +9196,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "Department Elective 2",
-                name_ar: "Department Elective 2",
+                name_ar: "مقرر اختياري بالقسم 2",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -9208,7 +9204,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "College Elective",
-                name_ar: "College Elective",
+                name_ar: "مادة اختيارية للكلية",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-TECHNOLOGY-IN-PETROLEUM-ENGI"],
@@ -9231,7 +9227,7 @@ export const universities: University[] = [
               {
                 id: "KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT",
                 name_en: "Bachelor of Business Management",
-                name_ar: "Bachelor of Business Management",
+                name_ar: "بكالوريوس إدارة الأعمال",
                 degree: "BSc",
               },
             ],
@@ -9239,7 +9235,7 @@ export const universities: University[] = [
               {
                 code: "BMIS110",
                 name_en: "Business Computer Applications",
-                name_ar: "Business Computer Applications",
+                name_ar: "تطبيقات الحاسوب للأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9247,7 +9243,7 @@ export const universities: University[] = [
               {
                 code: "BMGT110",
                 name_en: "Management Principles",
-                name_ar: "Management Principles",
+                name_ar: "مبادئ الإدارة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9255,7 +9251,7 @@ export const universities: University[] = [
               {
                 code: "BACC110",
                 name_en: "Financial Accounting",
-                name_ar: "Financial Accounting",
+                name_ar: "المحاسبة المالية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9263,7 +9259,7 @@ export const universities: University[] = [
               {
                 code: "ENGL111",
                 name_en: "English for Business",
-                name_ar: "English for Business",
+                name_ar: "اللغة الإنجليزية للأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9271,7 +9267,7 @@ export const universities: University[] = [
               {
                 code: "MATH140",
                 name_en: "Business Mathematics",
-                name_ar: "Business Mathematics",
+                name_ar: "الرياضيات في الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9279,7 +9275,7 @@ export const universities: University[] = [
               {
                 code: "BECO191",
                 name_en: "Principles of Microeconomics",
-                name_ar: "Principles of Microeconomics",
+                name_ar: "مبادئ الاقتصاد الجزئي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9287,7 +9283,7 @@ export const universities: University[] = [
               {
                 code: "BDMC191",
                 name_en: "Business Communications",
-                name_ar: "Business Communications",
+                name_ar: "اتصالات الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9295,7 +9291,7 @@ export const universities: University[] = [
               {
                 code: "BMKT110",
                 name_en: "Marketing Principles",
-                name_ar: "Marketing Principles",
+                name_ar: "مبادئ التسويق",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9303,7 +9299,7 @@ export const universities: University[] = [
               {
                 code: "BFIN110",
                 name_en: "Financial Management",
-                name_ar: "Financial Management",
+                name_ar: "الإدارة المالية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9311,7 +9307,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "University Elective",
-                name_ar: "University Elective",
+                name_ar: "مقرر اختياري جامعي",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9319,7 +9315,7 @@ export const universities: University[] = [
               {
                 code: "BECO292",
                 name_en: "Principles of Macroeconomics",
-                name_ar: "Principles of Macroeconomics",
+                name_ar: "مبادئ الاقتصاد الكلي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9327,7 +9323,7 @@ export const universities: University[] = [
               {
                 code: "STAT201",
                 name_en: "Statistics for Business",
-                name_ar: "Statistics for Business",
+                name_ar: "الإحصاء للأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9335,7 +9331,7 @@ export const universities: University[] = [
               {
                 code: "BINT210",
                 name_en: "Fundamentals in Innovation and Entrepreneurship",
-                name_ar: "Fundamentals in Innovation and Entrepreneurship",
+                name_ar: "أساسيات في الابتكار وريادة الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9343,7 +9339,7 @@ export const universities: University[] = [
               {
                 code: "BINT233",
                 name_en: "Cross-Cultural Management",
-                name_ar: "Cross-Cultural Management",
+                name_ar: "الإدارة عبر الثقافات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9351,7 +9347,7 @@ export const universities: University[] = [
               {
                 code: "BINT221",
                 name_en: "Leadership and Change Management",
-                name_ar: "Leadership and Change Management",
+                name_ar: "القيادة وإدارة التغيير",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9359,7 +9355,7 @@ export const universities: University[] = [
               {
                 code: "BINT253",
                 name_en: "Operations Management",
-                name_ar: "Operations Management",
+                name_ar: "إدارة العمليات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9367,7 +9363,7 @@ export const universities: University[] = [
               {
                 code: "BMKT270",
                 name_en: "Business Research",
-                name_ar: "Business Research",
+                name_ar: "البحث في الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9375,7 +9371,7 @@ export const universities: University[] = [
               {
                 code: "BMGT292",
                 name_en: "Business Internship",
-                name_ar: "Business Internship",
+                name_ar: "تدريب أعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9383,7 +9379,7 @@ export const universities: University[] = [
               {
                 code: "BMIS211",
                 name_en: "Management Information System",
-                name_ar: "Management Information System",
+                name_ar: "نظام المعلومات الإدارية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9391,7 +9387,7 @@ export const universities: University[] = [
               {
                 code: "BMGT322",
                 name_en: "Quality Management",
-                name_ar: "Quality Management",
+                name_ar: "إدارة الجودة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9399,7 +9395,7 @@ export const universities: University[] = [
               {
                 code: "BMGT350",
                 name_en: "Business Law",
-                name_ar: "Business Law",
+                name_ar: "قانون الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9407,7 +9403,7 @@ export const universities: University[] = [
               {
                 code: "BHRM330",
                 name_en: "Organizational Behavior",
-                name_ar: "Organizational Behavior",
+                name_ar: "السلوك التنظيمي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9415,7 +9411,7 @@ export const universities: University[] = [
               {
                 code: "BHRM311",
                 name_en: "HR in Organizations",
-                name_ar: "HR in Organizations",
+                name_ar: "الموارد البشرية في المنظمات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9423,7 +9419,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "College Elective",
-                name_ar: "College Elective",
+                name_ar: "مادة اختيارية للكلية",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9431,7 +9427,7 @@ export const universities: University[] = [
               {
                 code: "BMGT380",
                 name_en: "Emotional Intelligence in Leadership",
-                name_ar: "Emotional Intelligence in Leadership",
+                name_ar: "الذكاء العاطفي في القيادة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9439,7 +9435,7 @@ export const universities: University[] = [
               {
                 code: "BMIS361",
                 name_en: "E-business",
-                name_ar: "E-business",
+                name_ar: "الأعمال الإلكترونية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9447,7 +9443,7 @@ export const universities: University[] = [
               {
                 code: "BINT313",
                 name_en: "Product and Service Innovation",
-                name_ar: "Product and Service Innovation",
+                name_ar: "ابتكار المنتجات والخدمات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9455,7 +9451,7 @@ export const universities: University[] = [
               {
                 code: "BMGT331",
                 name_en: "Service Management",
-                name_ar: "Service Management",
+                name_ar: "إدارة الخدمات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9463,7 +9459,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "Department Elective",
-                name_ar: "Department Elective",
+                name_ar: "مقرر اختياري بالقسم",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9471,7 +9467,7 @@ export const universities: University[] = [
               {
                 code: "BFIN412",
                 name_en: "Business Finance",
-                name_ar: "Business Finance",
+                name_ar: "مالية الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9479,7 +9475,7 @@ export const universities: University[] = [
               {
                 code: "BMGT470",
                 name_en: "Managing Organizational Change",
-                name_ar: "Managing Organizational Change",
+                name_ar: "إدارة التغيير التنظيمي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9487,7 +9483,7 @@ export const universities: University[] = [
               {
                 code: "BMGT493",
                 name_en: "Business Ethics",
-                name_ar: "Business Ethics",
+                name_ar: "أخلاقيات الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9495,7 +9491,7 @@ export const universities: University[] = [
               {
                 code: "BMGT440",
                 name_en: "Small Business Plan",
-                name_ar: "Small Business Plan",
+                name_ar: "خطة الأعمال الصغيرة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9503,7 +9499,7 @@ export const universities: University[] = [
               {
                 code: "BMGT420",
                 name_en: "Production and Operations Management",
-                name_ar: "Production and Operations Management",
+                name_ar: "إدارة الإنتاج والعمليات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9511,7 +9507,7 @@ export const universities: University[] = [
               {
                 code: "BHRM410",
                 name_en: "Contemporary Issues in HR",
-                name_ar: "Contemporary Issues in HR",
+                name_ar: "قضايا معاصرة في الموارد البشرية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9519,7 +9515,7 @@ export const universities: University[] = [
               {
                 code: "BINT443",
                 name_en: "International Business Management",
-                name_ar: "International Business Management",
+                name_ar: "إدارة الأعمال الدولية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9527,7 +9523,7 @@ export const universities: University[] = [
               {
                 code: "BMGT411",
                 name_en: "Strategic Management",
-                name_ar: "Strategic Management",
+                name_ar: "الإدارة الاستراتيجية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9535,7 +9531,7 @@ export const universities: University[] = [
               {
                 code: "BMGT491",
                 name_en: "Graduation Project in Management",
-                name_ar: "Graduation Project in Management",
+                name_ar: "مشروع تخرج في الإدارة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MANAGEMENT"],
@@ -9551,7 +9547,7 @@ export const universities: University[] = [
               {
                 id: "KW-AU-BACHELOR-OF-BUSINESS-MARKETING",
                 name_en: "Bachelor of Business Marketing",
-                name_ar: "Bachelor of Business Marketing",
+                name_ar: "بكالوريوس تسويق الأعمال",
                 degree: "BSc",
               },
             ],
@@ -9559,7 +9555,7 @@ export const universities: University[] = [
               {
                 code: "BMIS110",
                 name_en: "Business Computer Applications",
-                name_ar: "Business Computer Applications",
+                name_ar: "تطبيقات الحاسوب للأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9567,7 +9563,7 @@ export const universities: University[] = [
               {
                 code: "BMGT110",
                 name_en: "Management Principles",
-                name_ar: "Management Principles",
+                name_ar: "مبادئ الإدارة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9575,7 +9571,7 @@ export const universities: University[] = [
               {
                 code: "BACC110",
                 name_en: "Financial Accounting",
-                name_ar: "Financial Accounting",
+                name_ar: "المحاسبة المالية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9583,7 +9579,7 @@ export const universities: University[] = [
               {
                 code: "ENGL111",
                 name_en: "English for Business",
-                name_ar: "English for Business",
+                name_ar: "اللغة الإنجليزية للأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9591,7 +9587,7 @@ export const universities: University[] = [
               {
                 code: "MATH140",
                 name_en: "Business Mathematics",
-                name_ar: "Business Mathematics",
+                name_ar: "الرياضيات في الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9599,7 +9595,7 @@ export const universities: University[] = [
               {
                 code: "BECO191",
                 name_en: "Principles of Microeconomics",
-                name_ar: "Principles of Microeconomics",
+                name_ar: "مبادئ الاقتصاد الجزئي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9607,7 +9603,7 @@ export const universities: University[] = [
               {
                 code: "BDMC191",
                 name_en: "Business Communications",
-                name_ar: "Business Communications",
+                name_ar: "اتصالات الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9615,7 +9611,7 @@ export const universities: University[] = [
               {
                 code: "BMKT110",
                 name_en: "Marketing Principles",
-                name_ar: "Marketing Principles",
+                name_ar: "مبادئ التسويق",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9623,7 +9619,7 @@ export const universities: University[] = [
               {
                 code: "BFIN110",
                 name_en: "Financial Management",
-                name_ar: "Financial Management",
+                name_ar: "الإدارة المالية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9631,7 +9627,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "University Elective",
-                name_ar: "University Elective",
+                name_ar: "مقرر اختياري جامعي",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9639,7 +9635,7 @@ export const universities: University[] = [
               {
                 code: "BECO292",
                 name_en: "Principles of Macroeconomics",
-                name_ar: "Principles of Macroeconomics",
+                name_ar: "مبادئ الاقتصاد الكلي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9647,7 +9643,7 @@ export const universities: University[] = [
               {
                 code: "STAT201",
                 name_en: "Statistics for Business",
-                name_ar: "Statistics for Business",
+                name_ar: "الإحصاء للأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9655,7 +9651,7 @@ export const universities: University[] = [
               {
                 code: "BDMC210",
                 name_en: "Fundamentals of Digital Marketing",
-                name_ar: "Fundamentals of Digital Marketing",
+                name_ar: "أساسيات التسويق الرقمي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9663,7 +9659,7 @@ export const universities: University[] = [
               {
                 code: "BDMC292",
                 name_en: "Content Marketing",
-                name_ar: "Content Marketing",
+                name_ar: "تسويق المحتوى",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9671,7 +9667,7 @@ export const universities: University[] = [
               {
                 code: "BDMC211",
                 name_en: "Digital Advertising & Branding",
-                name_ar: "Digital Advertising & Branding",
+                name_ar: "الإعلان الرقمي والعلامة التجارية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9679,7 +9675,7 @@ export const universities: University[] = [
               {
                 code: "BMKT212",
                 name_en: "Consumer Behavior",
-                name_ar: "Consumer Behavior",
+                name_ar: "سلوك المستهلك",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9687,7 +9683,7 @@ export const universities: University[] = [
               {
                 code: "BMKT270",
                 name_en: "Business Research",
-                name_ar: "Business Research",
+                name_ar: "البحث في الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9695,7 +9691,7 @@ export const universities: University[] = [
               {
                 code: "BMKT292",
                 name_en: "Business Internship",
-                name_ar: "Business Internship",
+                name_ar: "تدريب أعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9703,7 +9699,7 @@ export const universities: University[] = [
               {
                 code: "BMIS211",
                 name_en: "Management Information System",
-                name_ar: "Management Information System",
+                name_ar: "نظام المعلومات الإدارية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9711,7 +9707,7 @@ export const universities: University[] = [
               {
                 code: "BHRM330",
                 name_en: "Organizational Behavior",
-                name_ar: "Organizational Behavior",
+                name_ar: "السلوك التنظيمي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9719,7 +9715,7 @@ export const universities: University[] = [
               {
                 code: "BMKT322",
                 name_en: "Develop a Promotional Campaign",
-                name_ar: "Develop a Promotional Campaign",
+                name_ar: "تطوير حملة ترويجية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9727,7 +9723,7 @@ export const universities: University[] = [
               {
                 code: "BMGT350",
                 name_en: "Business Law",
-                name_ar: "Business Law",
+                name_ar: "قانون الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9735,7 +9731,7 @@ export const universities: University[] = [
               {
                 code: "BDMC331",
                 name_en: "Social Media Marketing",
-                name_ar: "Social Media Marketing",
+                name_ar: "التسويق عبر وسائل التواصل الاجتماعي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9743,7 +9739,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "College Elective",
-                name_ar: "College Elective",
+                name_ar: "مادة اختيارية للكلية",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9751,7 +9747,7 @@ export const universities: University[] = [
               {
                 code: "BMIS361",
                 name_en: "E-business",
-                name_ar: "E-business",
+                name_ar: "الأعمال الإلكترونية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9759,7 +9755,7 @@ export const universities: University[] = [
               {
                 code: "BMKT381",
                 name_en: "Retail Marketing",
-                name_ar: "Retail Marketing",
+                name_ar: "تسويق التجزئة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9767,7 +9763,7 @@ export const universities: University[] = [
               {
                 code: "BMKT311",
                 name_en: "International Marketing",
-                name_ar: "International Marketing",
+                name_ar: "التسويق الدولي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9775,7 +9771,7 @@ export const universities: University[] = [
               {
                 code: "BMKT341",
                 name_en: "Consumers and Markets",
-                name_ar: "Consumers and Markets",
+                name_ar: "المستهلكون والأسواق",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9783,7 +9779,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "Department Elective",
-                name_ar: "Department Elective",
+                name_ar: "مقرر اختياري بالقسم",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9791,7 +9787,7 @@ export const universities: University[] = [
               {
                 code: "BMKT451",
                 name_en: "Customer Relationship Marketing",
-                name_ar: "Customer Relationship Marketing",
+                name_ar: "تسويق علاقات العملاء",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9799,7 +9795,7 @@ export const universities: University[] = [
               {
                 code: "BMKT470",
                 name_en: "Marketing Research",
-                name_ar: "Marketing Research",
+                name_ar: "بحوث التسويق",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9807,7 +9803,7 @@ export const universities: University[] = [
               {
                 code: "BMKT460",
                 name_en: "Marketing Planning and Strategy",
-                name_ar: "Marketing Planning and Strategy",
+                name_ar: "تخطيط واستراتيجية التسويق",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9815,7 +9811,7 @@ export const universities: University[] = [
               {
                 code: "BMGT493",
                 name_en: "Business Ethics",
-                name_ar: "Business Ethics",
+                name_ar: "أخلاقيات الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9823,7 +9819,7 @@ export const universities: University[] = [
               {
                 code: "BMKT490",
                 name_en: "Marketing Audits",
-                name_ar: "Marketing Audits",
+                name_ar: "مراجعات التسويق",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9831,7 +9827,7 @@ export const universities: University[] = [
               {
                 code: "BMKT492",
                 name_en: "Industrial Marketing",
-                name_ar: "Industrial Marketing",
+                name_ar: "التسويق الصناعي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9839,7 +9835,7 @@ export const universities: University[] = [
               {
                 code: "BMKT430",
                 name_en: "Marketing of Services",
-                name_ar: "Marketing of Services",
+                name_ar: "تسويق الخدمات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9847,7 +9843,7 @@ export const universities: University[] = [
               {
                 code: "BMGT411",
                 name_en: "Strategic Management",
-                name_ar: "Strategic Management",
+                name_ar: "الإدارة الاستراتيجية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9855,7 +9851,7 @@ export const universities: University[] = [
               {
                 code: "BMKT491",
                 name_en: "Graduation Project in Marketing",
-                name_ar: "Graduation Project in Marketing",
+                name_ar: "مشروع تخرج في التسويق",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BUSINESS-MARKETING"],
@@ -9864,14 +9860,14 @@ export const universities: University[] = [
           },
           {
             id: "KW-AU-COLLEGE-OF-BUSINESS-MARKETING-EVENTS-MANAGEMENT",
-            name_ar: "Marketing & Events Management",
+            name_ar: "إدارة التسويق والفعاليات",
             name_en: "Marketing & Events Management",
             degrees: ["BSc"],
             programs: [
               {
                 id: "KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT",
                 name_en: "Bachelor of Events Management",
-                name_ar: "Bachelor of Events Management",
+                name_ar: "بكالوريوس إدارة الفعاليات",
                 degree: "BSc",
               },
             ],
@@ -9879,7 +9875,7 @@ export const universities: University[] = [
               {
                 code: "BMIS110",
                 name_en: "Business Computer Applications",
-                name_ar: "Business Computer Applications",
+                name_ar: "تطبيقات الحاسوب للأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -9887,7 +9883,7 @@ export const universities: University[] = [
               {
                 code: "BMGT110",
                 name_en: "Management Principles",
-                name_ar: "Management Principles",
+                name_ar: "مبادئ الإدارة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -9895,7 +9891,7 @@ export const universities: University[] = [
               {
                 code: "BACC110",
                 name_en: "Financial Accounting",
-                name_ar: "Financial Accounting",
+                name_ar: "المحاسبة المالية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -9903,7 +9899,7 @@ export const universities: University[] = [
               {
                 code: "ENGL111",
                 name_en: "English for Business",
-                name_ar: "English for Business",
+                name_ar: "اللغة الإنجليزية للأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -9911,7 +9907,7 @@ export const universities: University[] = [
               {
                 code: "MATH140",
                 name_en: "Business Mathematics",
-                name_ar: "Business Mathematics",
+                name_ar: "الرياضيات في الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -9919,7 +9915,7 @@ export const universities: University[] = [
               {
                 code: "BECO191",
                 name_en: "Principles of Microeconomics",
-                name_ar: "Principles of Microeconomics",
+                name_ar: "مبادئ الاقتصاد الجزئي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -9927,7 +9923,7 @@ export const universities: University[] = [
               {
                 code: "BDMC191",
                 name_en: "Business Communications",
-                name_ar: "Business Communications",
+                name_ar: "اتصالات الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -9935,7 +9931,7 @@ export const universities: University[] = [
               {
                 code: "BMKT110",
                 name_en: "Marketing Principles",
-                name_ar: "Marketing Principles",
+                name_ar: "مبادئ التسويق",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -9943,7 +9939,7 @@ export const universities: University[] = [
               {
                 code: "BFIN110",
                 name_en: "Financial Management",
-                name_ar: "Financial Management",
+                name_ar: "الإدارة المالية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -9951,7 +9947,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "University Elective",
-                name_ar: "University Elective",
+                name_ar: "مقرر اختياري جامعي",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -9959,7 +9955,7 @@ export const universities: University[] = [
               {
                 code: "BECO292",
                 name_en: "Principles of Macroeconomics",
-                name_ar: "Principles of Macroeconomics",
+                name_ar: "مبادئ الاقتصاد الكلي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -9967,7 +9963,7 @@ export const universities: University[] = [
               {
                 code: "STAT201",
                 name_en: "Statistics for Business",
-                name_ar: "Statistics for Business",
+                name_ar: "الإحصاء للأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -9975,7 +9971,7 @@ export const universities: University[] = [
               {
                 code: "BEVM240",
                 name_en: "Cultural Tourism and Festivals",
-                name_ar: "Cultural Tourism and Festivals",
+                name_ar: "السياحة الثقافية والمهرجانات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -9983,7 +9979,7 @@ export const universities: University[] = [
               {
                 code: "BEVM213",
                 name_en: "Destination Management",
-                name_ar: "Destination Management",
+                name_ar: "إدارة الوجهات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -9991,7 +9987,7 @@ export const universities: University[] = [
               {
                 code: "BMKT212",
                 name_en: "Consumer Behavior",
-                name_ar: "Consumer Behavior",
+                name_ar: "سلوك المستهلك",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -9999,7 +9995,7 @@ export const universities: University[] = [
               {
                 code: "BEVM221",
                 name_en: "Tourism Product & Design",
-                name_ar: "Tourism Product & Design",
+                name_ar: "المنتجات والتصميم السياحي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -10007,7 +10003,7 @@ export const universities: University[] = [
               {
                 code: "BMKT270",
                 name_en: "Business Research",
-                name_ar: "Business Research",
+                name_ar: "البحث في الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -10015,7 +10011,7 @@ export const universities: University[] = [
               {
                 code: "BEVM290",
                 name_en: "Events Marketing",
-                name_ar: "Events Marketing",
+                name_ar: "تسويق الفعاليات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -10023,7 +10019,7 @@ export const universities: University[] = [
               {
                 code: "BMIS211",
                 name_en: "Management Information System",
-                name_ar: "Management Information System",
+                name_ar: "نظام المعلومات الإدارية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -10031,7 +10027,7 @@ export const universities: University[] = [
               {
                 code: "BEVM371",
                 name_en: "MICE Management",
-                name_ar: "MICE Management",
+                name_ar: "إدارة المؤتمرات والفعاليات والمعارض",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -10039,7 +10035,7 @@ export const universities: University[] = [
               {
                 code: "BEVM310",
                 name_en: "Managing Event Organizations",
-                name_ar: "Managing Event Organizations",
+                name_ar: "إدارة منظمات الفعاليات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -10047,7 +10043,7 @@ export const universities: University[] = [
               {
                 code: "BMGT350",
                 name_en: "Business Law",
-                name_ar: "Business Law",
+                name_ar: "قانون الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -10055,7 +10051,7 @@ export const universities: University[] = [
               {
                 code: "BEVM363",
                 name_en: "Quality in Tourism, Leisure, and Events",
-                name_ar: "Quality in Tourism, Leisure, and Events",
+                name_ar: "الجودة في السياحة والترفيه والفعاليات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -10063,7 +10059,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "College Elective",
-                name_ar: "College Elective",
+                name_ar: "مادة اختيارية للكلية",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -10071,7 +10067,7 @@ export const universities: University[] = [
               {
                 code: "BMIS361",
                 name_en: "E-business",
-                name_ar: "E-business",
+                name_ar: "الأعمال الإلكترونية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -10079,7 +10075,7 @@ export const universities: University[] = [
               {
                 code: "BEVM350",
                 name_en: "Leisure and Sports Events",
-                name_ar: "Leisure and Sports Events",
+                name_ar: "الترفيه والفعاليات الرياضية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -10087,7 +10083,7 @@ export const universities: University[] = [
               {
                 code: "BEVM312",
                 name_en: "Events in Practice",
-                name_ar: "Events in Practice",
+                name_ar: "الفعاليات في الممارسة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -10095,7 +10091,7 @@ export const universities: University[] = [
               {
                 code: "BEVM333",
                 name_en: "Destination Branding",
-                name_ar: "Destination Branding",
+                name_ar: "تحديد الهوية التسويقية للوجهة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -10103,7 +10099,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "Department Elective",
-                name_ar: "Department Elective",
+                name_ar: "مقرر اختياري بالقسم",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -10111,7 +10107,7 @@ export const universities: University[] = [
               {
                 code: "BEVM481",
                 name_en: "E-Tourism",
-                name_ar: "E-Tourism",
+                name_ar: "السياحة الإلكترونية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -10119,7 +10115,7 @@ export const universities: University[] = [
               {
                 code: "BMGT493",
                 name_en: "Business Ethics",
-                name_ar: "Business Ethics",
+                name_ar: "أخلاقيات الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -10127,7 +10123,7 @@ export const universities: University[] = [
               {
                 code: "BEVM460",
                 name_en: "Sustainability in Leisure, Tourism and Events",
-                name_ar: "Sustainability in Leisure, Tourism and Events",
+                name_ar: "الاستدامة في الترفيه والسياحة والفعاليات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -10135,7 +10131,7 @@ export const universities: University[] = [
               {
                 code: "BEVM492",
                 name_en: "Internship in Events Management",
-                name_ar: "Internship in Events Management",
+                name_ar: "تدريب عملي في إدارة الفعاليات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -10143,7 +10139,7 @@ export const universities: University[] = [
               {
                 code: "BEVM400",
                 name_en: "Managing Visitor Experience",
-                name_ar: "Managing Visitor Experience",
+                name_ar: "إدارة تجربة الزوار",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -10151,7 +10147,7 @@ export const universities: University[] = [
               {
                 code: "BEVM493",
                 name_en: "Contemporary Issues in Leisure, Tourism and Events",
-                name_ar: "Contemporary Issues in Leisure, Tourism and Events",
+                name_ar: "قضايا معاصرة في الترفيه والسياحة والفعاليات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -10159,7 +10155,7 @@ export const universities: University[] = [
               {
                 code: "BMGT411",
                 name_en: "Strategic Management",
-                name_ar: "Strategic Management",
+                name_ar: "الإدارة الاستراتيجية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -10167,7 +10163,7 @@ export const universities: University[] = [
               {
                 code: "BEVM423",
                 name_en: "Policy and Scenario Planning",
-                name_ar: "Policy and Scenario Planning",
+                name_ar: "تخطيط السياسات والسيناريوهات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -10175,7 +10171,7 @@ export const universities: University[] = [
               {
                 code: "BEVM491",
                 name_en: "Graduation Project in Events Management",
-                name_ar: "Graduation Project in Events Management",
+                name_ar: "مشروع تخرج في إدارة الفعاليات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-EVENTS-MANAGEMENT"],
@@ -10184,14 +10180,14 @@ export const universities: University[] = [
           },
           {
             id: "KW-AU-COLLEGE-OF-BUSINESS-BANKING-FINANCE-ACCOUNTING",
-            name_ar: "Banking, Finance & Accounting",
+            name_ar: "المصرفية والمالية والمحاسبة",
             name_en: "Banking, Finance & Accounting",
             degrees: ["BSc"],
             programs: [
               {
                 id: "KW-AU-BACHELOR-OF-BANKING-AND-FINANCE",
                 name_en: "Bachelor of Banking and Finance",
-                name_ar: "Bachelor of Banking and Finance",
+                name_ar: "بكالوريوس المصارف والمالية",
                 degree: "BSc",
               },
             ],
@@ -10199,7 +10195,7 @@ export const universities: University[] = [
               {
                 code: "BMIS110",
                 name_en: "Business Computer Applications",
-                name_ar: "Business Computer Applications",
+                name_ar: "تطبيقات الحاسوب للأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10207,7 +10203,7 @@ export const universities: University[] = [
               {
                 code: "BMGT110",
                 name_en: "Management Principles",
-                name_ar: "Management Principles",
+                name_ar: "مبادئ الإدارة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10215,7 +10211,7 @@ export const universities: University[] = [
               {
                 code: "BACC110",
                 name_en: "Financial Accounting",
-                name_ar: "Financial Accounting",
+                name_ar: "المحاسبة المالية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10223,7 +10219,7 @@ export const universities: University[] = [
               {
                 code: "ENGL111",
                 name_en: "English for Business",
-                name_ar: "English for Business",
+                name_ar: "اللغة الإنجليزية للأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10231,7 +10227,7 @@ export const universities: University[] = [
               {
                 code: "MATH140",
                 name_en: "Business Mathematics",
-                name_ar: "Business Mathematics",
+                name_ar: "الرياضيات في الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10239,7 +10235,7 @@ export const universities: University[] = [
               {
                 code: "BECO191",
                 name_en: "Principles of Microeconomics",
-                name_ar: "Principles of Microeconomics",
+                name_ar: "مبادئ الاقتصاد الجزئي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10247,7 +10243,7 @@ export const universities: University[] = [
               {
                 code: "BDMC191",
                 name_en: "Business Communications",
-                name_ar: "Business Communications",
+                name_ar: "اتصالات الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10255,7 +10251,7 @@ export const universities: University[] = [
               {
                 code: "BMKT110",
                 name_en: "Marketing Principles",
-                name_ar: "Marketing Principles",
+                name_ar: "مبادئ التسويق",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10263,7 +10259,7 @@ export const universities: University[] = [
               {
                 code: "BFIN110",
                 name_en: "Financial Management",
-                name_ar: "Financial Management",
+                name_ar: "الإدارة المالية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10271,7 +10267,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "University Elective",
-                name_ar: "University Elective",
+                name_ar: "مقرر اختياري جامعي",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10279,7 +10275,7 @@ export const universities: University[] = [
               {
                 code: "BECO292",
                 name_en: "Principles of Macroeconomics",
-                name_ar: "Principles of Macroeconomics",
+                name_ar: "مبادئ الاقتصاد الكلي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10287,7 +10283,7 @@ export const universities: University[] = [
               {
                 code: "STAT201",
                 name_en: "Statistics for Business",
-                name_ar: "Statistics for Business",
+                name_ar: "الإحصاء للأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10295,7 +10291,7 @@ export const universities: University[] = [
               {
                 code: "BFIN213",
                 name_en: "Financial Analysis",
-                name_ar: "Financial Analysis",
+                name_ar: "التحليل المالي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10303,7 +10299,7 @@ export const universities: University[] = [
               {
                 code: "BFIN230",
                 name_en: "Financial Markets and Institutions",
-                name_ar: "Financial Markets and Institutions",
+                name_ar: "الأسواق والمؤسسات المالية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10311,7 +10307,7 @@ export const universities: University[] = [
               {
                 code: "BFIN240",
                 name_en: "Insurance and Risk Management",
-                name_ar: "Insurance and Risk Management",
+                name_ar: "التأمين وإدارة المخاطر",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10319,7 +10315,7 @@ export const universities: University[] = [
               {
                 code: "BFIN251",
                 name_en: "Money and Banking",
-                name_ar: "Money and Banking",
+                name_ar: "المال والمصارف",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10327,7 +10323,7 @@ export const universities: University[] = [
               {
                 code: "BMKT270",
                 name_en: "Business Research",
-                name_ar: "Business Research",
+                name_ar: "البحث في الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10335,7 +10331,7 @@ export const universities: University[] = [
               {
                 code: "BACC231",
                 name_en: "Managerial Accounting",
-                name_ar: "Managerial Accounting",
+                name_ar: "المحاسبة الإدارية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10343,7 +10339,7 @@ export const universities: University[] = [
               {
                 code: "BMIS211",
                 name_en: "Management Information System",
-                name_ar: "Management Information System",
+                name_ar: "نظام المعلومات الإدارية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10351,7 +10347,7 @@ export const universities: University[] = [
               {
                 code: "BFIN393",
                 name_en: "Quantitative Approaches to Decision Making",
-                name_ar: "Quantitative Approaches to Decision Making",
+                name_ar: "المناهج الكمية لاتخاذ القرار",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10359,7 +10355,7 @@ export const universities: University[] = [
               {
                 code: "BFIN322",
                 name_en: "Capital Budgeting",
-                name_ar: "Capital Budgeting",
+                name_ar: "الموازنة الرأسمالية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10367,7 +10363,7 @@ export const universities: University[] = [
               {
                 code: "BMGT350",
                 name_en: "Business Law",
-                name_ar: "Business Law",
+                name_ar: "قانون الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10375,7 +10371,7 @@ export const universities: University[] = [
               {
                 code: "BACC311",
                 name_en: "International Financial Reporting Standards (IFRS)",
-                name_ar: "International Financial Reporting Standards (IFRS)",
+                name_ar: "معايير التقارير المالية الدولية (IFRS)",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10383,7 +10379,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "College Elective",
-                name_ar: "College Elective",
+                name_ar: "مادة اختيارية للكلية",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10391,7 +10387,7 @@ export const universities: University[] = [
               {
                 code: "BMIS361",
                 name_en: "E-business",
-                name_ar: "E-business",
+                name_ar: "الأعمال الإلكترونية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10399,7 +10395,7 @@ export const universities: University[] = [
               {
                 code: "BFIN362",
                 name_en: "Investment Banking Fundamentals",
-                name_ar: "Investment Banking Fundamentals",
+                name_ar: "أساسيات الخدمات المصرفية الاستثمارية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10407,7 +10403,7 @@ export const universities: University[] = [
               {
                 code: "BFIN310",
                 name_en: "Public Finance",
-                name_ar: "Public Finance",
+                name_ar: "المالية العامة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10415,7 +10411,7 @@ export const universities: University[] = [
               {
                 code: "BFIN303",
                 name_en: "Islamic Banking Principles",
-                name_ar: "Islamic Banking Principles",
+                name_ar: "مبادئ الصيرفة الإسلامية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10423,7 +10419,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "Department Elective",
-                name_ar: "Department Elective",
+                name_ar: "مقرر اختياري بالقسم",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10431,7 +10427,7 @@ export const universities: University[] = [
               {
                 code: "BFIN410",
                 name_en: "Financial Modeling and Valuation",
-                name_ar: "Financial Modeling and Valuation",
+                name_ar: "النمذجة المالية والتقييم",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10439,7 +10435,7 @@ export const universities: University[] = [
               {
                 code: "BMGT493",
                 name_en: "Business Ethics",
-                name_ar: "Business Ethics",
+                name_ar: "أخلاقيات الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10447,7 +10443,7 @@ export const universities: University[] = [
               {
                 code: "BFIN471",
                 name_en: "Asset and Wealth Management",
-                name_ar: "Asset and Wealth Management",
+                name_ar: "إدارة الأصول والثروات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10455,7 +10451,7 @@ export const universities: University[] = [
               {
                 code: "BFIN492",
                 name_en: "Internship in Banking & Finance",
-                name_ar: "Internship in Banking & Finance",
+                name_ar: "تدريب عملي في المصارف والمالية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10463,7 +10459,7 @@ export const universities: University[] = [
               {
                 code: "BFIN441",
                 name_en: "Risk Management",
-                name_ar: "Risk Management",
+                name_ar: "إدارة المخاطر",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10471,7 +10467,7 @@ export const universities: University[] = [
               {
                 code: "BFIN480",
                 name_en: "Portfolio Management",
-                name_ar: "Portfolio Management",
+                name_ar: "إدارة المحافظ",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10479,7 +10475,7 @@ export const universities: University[] = [
               {
                 code: "BMGT411",
                 name_en: "Strategic Management",
-                name_ar: "Strategic Management",
+                name_ar: "الإدارة الاستراتيجية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10487,7 +10483,7 @@ export const universities: University[] = [
               {
                 code: "BFIN413",
                 name_en: "International Banking and Finance",
-                name_ar: "International Banking and Finance",
+                name_ar: "الصيرفة والمالية الدولية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10495,7 +10491,7 @@ export const universities: University[] = [
               {
                 code: "BFIN491",
                 name_en: "Graduation Project in Banking and Finance",
-                name_ar: "Graduation Project in Banking and Finance",
+                name_ar: "مشروع تخرج في المصارف والتمويل",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-BANKING-AND-FINANCE"],
@@ -10504,14 +10500,14 @@ export const universities: University[] = [
           },
           {
             id: "KW-AU-COLLEGE-OF-BUSINESS-MANAGEMENT-INFORMATION-SYSTEMS",
-            name_ar: "Management Information Systems",
+            name_ar: "نظم المعلومات الإدارية",
             name_en: "Management Information Systems",
             degrees: ["BSc"],
             programs: [
               {
                 id: "KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE",
                 name_en: "Bachelor of Management Information Systems",
-                name_ar: "Bachelor of Management Information Systems",
+                name_ar: "بكالوريوس نظم معلومات الإدارة",
                 degree: "BSc",
               },
             ],
@@ -10519,7 +10515,7 @@ export const universities: University[] = [
               {
                 code: "BMIS110",
                 name_en: "Business Computer Applications",
-                name_ar: "Business Computer Applications",
+                name_ar: "تطبيقات الحاسوب للأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10527,7 +10523,7 @@ export const universities: University[] = [
               {
                 code: "BMGT110",
                 name_en: "Management Principles",
-                name_ar: "Management Principles",
+                name_ar: "مبادئ الإدارة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10535,7 +10531,7 @@ export const universities: University[] = [
               {
                 code: "BACC110",
                 name_en: "Financial Accounting",
-                name_ar: "Financial Accounting",
+                name_ar: "المحاسبة المالية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10543,7 +10539,7 @@ export const universities: University[] = [
               {
                 code: "ENGL111",
                 name_en: "English for Business",
-                name_ar: "English for Business",
+                name_ar: "اللغة الإنجليزية للأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10551,7 +10547,7 @@ export const universities: University[] = [
               {
                 code: "MATH140",
                 name_en: "Business Mathematics",
-                name_ar: "Business Mathematics",
+                name_ar: "الرياضيات في الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10559,7 +10555,7 @@ export const universities: University[] = [
               {
                 code: "BECO191",
                 name_en: "Principles of Microeconomics",
-                name_ar: "Principles of Microeconomics",
+                name_ar: "مبادئ الاقتصاد الجزئي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10567,7 +10563,7 @@ export const universities: University[] = [
               {
                 code: "BDMC191",
                 name_en: "Business Communications",
-                name_ar: "Business Communications",
+                name_ar: "اتصالات الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10575,7 +10571,7 @@ export const universities: University[] = [
               {
                 code: "BMKT110",
                 name_en: "Marketing Principles",
-                name_ar: "Marketing Principles",
+                name_ar: "مبادئ التسويق",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10583,7 +10579,7 @@ export const universities: University[] = [
               {
                 code: "BFIN110",
                 name_en: "Financial Management",
-                name_ar: "Financial Management",
+                name_ar: "الإدارة المالية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10591,7 +10587,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "University Elective",
-                name_ar: "University Elective",
+                name_ar: "مقرر اختياري جامعي",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10599,7 +10595,7 @@ export const universities: University[] = [
               {
                 code: "BECO292",
                 name_en: "Principles of Macroeconomics",
-                name_ar: "Principles of Macroeconomics",
+                name_ar: "مبادئ الاقتصاد الكلي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10607,7 +10603,7 @@ export const universities: University[] = [
               {
                 code: "STAT201",
                 name_en: "Statistics for Business",
-                name_ar: "Statistics for Business",
+                name_ar: "الإحصاء للأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10615,7 +10611,7 @@ export const universities: University[] = [
               {
                 code: "BMIS210",
                 name_en: "Information Technology Infrastructures",
-                name_ar: "Information Technology Infrastructures",
+                name_ar: "البنى التحتية لتكنولوجيا المعلومات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10623,7 +10619,7 @@ export const universities: University[] = [
               {
                 code: "BMIS213",
                 name_en: "Data and Information Management",
-                name_ar: "Data and Information Management",
+                name_ar: "إدارة البيانات والمعلومات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10632,8 +10628,7 @@ export const universities: University[] = [
                 code: "BMIS221",
                 name_en:
                   "Business Processes and Enterprise Systems / Database Design",
-                name_ar:
-                  "Business Processes and Enterprise Systems / Database Design",
+                name_ar: "عمليات الأعمال وأنظمة الشركات / تصميم قواعد البيانات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10641,7 +10636,7 @@ export const universities: University[] = [
               {
                 code: "BMIS222",
                 name_en: "Intro to Business Programming and Data Analytics",
-                name_ar: "Intro to Business Programming and Data Analytics",
+                name_ar: "مقدمة في برمجة الأعمال وتحليلات البيانات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10649,7 +10644,7 @@ export const universities: University[] = [
               {
                 code: "BMKT270",
                 name_en: "Business Research",
-                name_ar: "Business Research",
+                name_ar: "البحث في الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10657,7 +10652,7 @@ export const universities: University[] = [
               {
                 code: "BINT253",
                 name_en: "Operations Management",
-                name_ar: "Operations Management",
+                name_ar: "إدارة العمليات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10665,7 +10660,7 @@ export const universities: University[] = [
               {
                 code: "BMIS211",
                 name_en: "Management Information System",
-                name_ar: "Management Information System",
+                name_ar: "نظام المعلومات الإدارية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10673,7 +10668,7 @@ export const universities: University[] = [
               {
                 code: "BMIS333",
                 name_en: "The Internet of Things and Business Applications",
-                name_ar: "The Internet of Things and Business Applications",
+                name_ar: "إنترنت الأشياء وتطبيقات الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10681,7 +10676,7 @@ export const universities: University[] = [
               {
                 code: "BMIS352",
                 name_en: "Customer Experience Design",
-                name_ar: "Customer Experience Design",
+                name_ar: "تصميم تجربة العملاء",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10689,7 +10684,7 @@ export const universities: University[] = [
               {
                 code: "BMGT350",
                 name_en: "Business Law",
-                name_ar: "Business Law",
+                name_ar: "قانون الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10697,7 +10692,7 @@ export const universities: University[] = [
               {
                 code: "BMIS323",
                 name_en: "Data Science for Business Applications",
-                name_ar: "Data Science for Business Applications",
+                name_ar: "علم البيانات لتطبيقات الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10705,7 +10700,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "College Elective",
-                name_ar: "College Elective",
+                name_ar: "مادة اختيارية للكلية",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10713,7 +10708,7 @@ export const universities: University[] = [
               {
                 code: "BMIS361",
                 name_en: "E-business",
-                name_ar: "E-business",
+                name_ar: "الأعمال الإلكترونية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10721,7 +10716,7 @@ export const universities: University[] = [
               {
                 code: "BMIS340",
                 name_en: "Communicating with Data (CI-M)",
-                name_ar: "Communicating with Data (CI-M)",
+                name_ar: "التواصل باستخدام البيانات (CI-M)",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10729,7 +10724,7 @@ export const universities: University[] = [
               {
                 code: "BMIS362",
                 name_en: "Optimization Methods",
-                name_ar: "Optimization Methods",
+                name_ar: "طرق التحسين",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10737,7 +10732,7 @@ export const universities: University[] = [
               {
                 code: "BMIS373",
                 name_en: "Introduction to Machine Learning",
-                name_ar: "Introduction to Machine Learning",
+                name_ar: "مقدمة في تعلم الآلة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10745,7 +10740,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "Department Elective",
-                name_ar: "Department Elective",
+                name_ar: "مقرر اختياري بالقسم",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10753,7 +10748,7 @@ export const universities: University[] = [
               {
                 code: "BMIS460",
                 name_en: "Optimization Methods in Business Analytics",
-                name_ar: "Optimization Methods in Business Analytics",
+                name_ar: "طرق التحسين في تحليلات الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10761,7 +10756,7 @@ export const universities: University[] = [
               {
                 code: "BMGT493",
                 name_en: "Business Ethics",
-                name_ar: "Business Ethics",
+                name_ar: "أخلاقيات الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10769,7 +10764,7 @@ export const universities: University[] = [
               {
                 code: "BMIS471",
                 name_en: "Python Programming",
-                name_ar: "Python Programming",
+                name_ar: "برمجة بايثون",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10777,7 +10772,7 @@ export const universities: University[] = [
               {
                 code: "BMIS492",
                 name_en: "Internship in Management Information Systems",
-                name_ar: "Internship in Management Information Systems",
+                name_ar: "تدريب عملي في نظم المعلومات الإدارية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10785,7 +10780,7 @@ export const universities: University[] = [
               {
                 code: "BMIS480",
                 name_en: "Blockchain Applications and Smart Contracts",
-                name_ar: "Blockchain Applications and Smart Contracts",
+                name_ar: "تطبيقات البلوك تشين والعقود الذكية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10793,7 +10788,7 @@ export const universities: University[] = [
               {
                 code: "BMIS482",
                 name_en: "Blockchain for Business",
-                name_ar: "Blockchain for Business",
+                name_ar: "البلوك تشين للأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10801,7 +10796,7 @@ export const universities: University[] = [
               {
                 code: "BMIS493",
                 name_en: "MIS Project Management",
-                name_ar: "MIS Project Management",
+                name_ar: "إدارة مشاريع نظم المعلومات الإدارية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10809,7 +10804,7 @@ export const universities: University[] = [
               {
                 code: "BMGT411",
                 name_en: "Strategic Management",
-                name_ar: "Strategic Management",
+                name_ar: "الإدارة الاستراتيجية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10817,7 +10812,7 @@ export const universities: University[] = [
               {
                 code: "BMIS491",
                 name_en: "Graduation Project in MIS",
-                name_ar: "Graduation Project in MIS",
+                name_ar: "مشروع تخرج في MIS",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-MANAGEMENT-INFORMATION-SYSTE"],
@@ -10833,14 +10828,14 @@ export const universities: University[] = [
         departments: [
           {
             id: "KW-AU-SCHOOL-OF-AVIATION-AIRCRAFT-MAINTENANCE-ENGINEERING",
-            name_ar: "Aircraft Maintenance Engineering",
+            name_ar: "هندسة صيانة الطائرات",
             name_en: "Aircraft Maintenance Engineering",
             degrees: ["BSc"],
             programs: [
               {
                 id: "KW-AU-BACHELOR-OF-AIRCRAFT-MAINTENANCE-ENGINEE",
                 name_en: "Bachelor of Aircraft Maintenance Engineering",
-                name_ar: "Bachelor of Aircraft Maintenance Engineering",
+                name_ar: "بكالوريوس هندسة صيانة الطائرات",
                 degree: "BSc",
               },
             ],
@@ -10848,7 +10843,7 @@ export const universities: University[] = [
               {
                 code: "MATH100",
                 name_en: "Calculus I",
-                name_ar: "Calculus I",
+                name_ar: "حساب التفاضل والتكامل I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AIRCRAFT-MAINTENANCE-ENGINEE"],
@@ -10856,7 +10851,7 @@ export const universities: University[] = [
               {
                 code: "BMGT110",
                 name_en: "Management Principles",
-                name_ar: "Management Principles",
+                name_ar: "مبادئ الإدارة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AIRCRAFT-MAINTENANCE-ENGINEE"],
@@ -10864,7 +10859,7 @@ export const universities: University[] = [
               {
                 code: "AVIA300",
                 name_en: "Introduction to Computer Applications",
-                name_ar: "Introduction to Computer Applications",
+                name_ar: "مقدمة في تطبيقات الحاسوب",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AIRCRAFT-MAINTENANCE-ENGINEE"],
@@ -10872,7 +10867,7 @@ export const universities: University[] = [
               {
                 code: "ENGL100",
                 name_en: "Speech and Presentation",
-                name_ar: "Speech and Presentation",
+                name_ar: "الخطابة والعرض",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AIRCRAFT-MAINTENANCE-ENGINEE"],
@@ -10880,7 +10875,7 @@ export const universities: University[] = [
               {
                 code: "AVIA310",
                 name_en: "Aviation and Airport Security",
-                name_ar: "Aviation and Airport Security",
+                name_ar: "أمن الطيران والمطارات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AIRCRAFT-MAINTENANCE-ENGINEE"],
@@ -10888,7 +10883,7 @@ export const universities: University[] = [
               {
                 code: "BMIS110",
                 name_en: "Business Computer Applications",
-                name_ar: "Business Computer Applications",
+                name_ar: "تطبيقات الحاسوب للأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AIRCRAFT-MAINTENANCE-ENGINEE"],
@@ -10896,7 +10891,7 @@ export const universities: University[] = [
               {
                 code: "AVIA330",
                 name_en: "Aerospace Technology",
-                name_ar: "Aerospace Technology",
+                name_ar: "تكنولوجيا الطيران والفضاء",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AIRCRAFT-MAINTENANCE-ENGINEE"],
@@ -10904,7 +10899,7 @@ export const universities: University[] = [
               {
                 code: "BHRM330",
                 name_en: "Organizational Behavior",
-                name_ar: "Organizational Behavior",
+                name_ar: "السلوك التنظيمي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AIRCRAFT-MAINTENANCE-ENGINEE"],
@@ -10912,7 +10907,7 @@ export const universities: University[] = [
               {
                 code: "AVIA331",
                 name_en: "Aerospace Industry Studies",
-                name_ar: "Aerospace Industry Studies",
+                name_ar: "دراسات صناعة الطيران والفضاء",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AIRCRAFT-MAINTENANCE-ENGINEE"],
@@ -10920,7 +10915,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "School Elective 1",
-                name_ar: "School Elective 1",
+                name_ar: "مادة اختيارية مدرسية 1",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-AIRCRAFT-MAINTENANCE-ENGINEE"],
@@ -10928,7 +10923,7 @@ export const universities: University[] = [
               {
                 code: "AVIA420",
                 name_en: "Aviation Legislation",
-                name_ar: "Aviation Legislation",
+                name_ar: "التشريعات الجوية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AIRCRAFT-MAINTENANCE-ENGINEE"],
@@ -10936,7 +10931,7 @@ export const universities: University[] = [
               {
                 code: "ENGL110",
                 name_en: "Technical Writing",
-                name_ar: "Technical Writing",
+                name_ar: "الكتابة الفنية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AIRCRAFT-MAINTENANCE-ENGINEE"],
@@ -10944,7 +10939,7 @@ export const universities: University[] = [
               {
                 code: "MECH120",
                 name_en: "Engineering Drawings",
-                name_ar: "Engineering Drawings",
+                name_ar: "الرسومات الهندسية",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AIRCRAFT-MAINTENANCE-ENGINEE"],
@@ -10952,7 +10947,7 @@ export const universities: University[] = [
               {
                 code: "AVIA408",
                 name_en: "Introduction to Data Analysis",
-                name_ar: "Introduction to Data Analysis",
+                name_ar: "مقدمة في تحليل البيانات",
                 credits: 2,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AIRCRAFT-MAINTENANCE-ENGINEE"],
@@ -10960,7 +10955,7 @@ export const universities: University[] = [
               {
                 code: "AVIA421",
                 name_en: "Project Management",
-                name_ar: "Project Management",
+                name_ar: "إدارة المشاريع",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AIRCRAFT-MAINTENANCE-ENGINEE"],
@@ -10968,7 +10963,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "School Elective 2",
-                name_ar: "School Elective 2",
+                name_ar: "مادة اختيارية مدرسية 2",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-AIRCRAFT-MAINTENANCE-ENGINEE"],
@@ -10976,7 +10971,7 @@ export const universities: University[] = [
               {
                 code: "AVIA422",
                 name_en: "Management Information Systems",
-                name_ar: "Management Information Systems",
+                name_ar: "نظم المعلومات الإدارية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AIRCRAFT-MAINTENANCE-ENGINEE"],
@@ -10984,7 +10979,7 @@ export const universities: University[] = [
               {
                 code: "AVIA411",
                 name_en: "Aircraft Accident Investigation",
-                name_ar: "Aircraft Accident Investigation",
+                name_ar: "التحقيق في حوادث الطائرات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AIRCRAFT-MAINTENANCE-ENGINEE"],
@@ -10992,7 +10987,7 @@ export const universities: University[] = [
               {
                 code: "MECH201",
                 name_en: "Preventive Maintenance Techniques",
-                name_ar: "Preventive Maintenance Techniques",
+                name_ar: "تقنيات الصيانة الوقائية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AIRCRAFT-MAINTENANCE-ENGINEE"],
@@ -11000,7 +10995,7 @@ export const universities: University[] = [
               {
                 code: "MECH320",
                 name_en: "3D - CAD Modeling",
-                name_ar: "3D - CAD Modeling",
+                name_ar: "النمذجة ثلاثية الأبعاد - CAD",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AIRCRAFT-MAINTENANCE-ENGINEE"],
@@ -11008,7 +11003,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "University Elective",
-                name_ar: "University Elective",
+                name_ar: "مقرر اختياري جامعي",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-AIRCRAFT-MAINTENANCE-ENGINEE"],
@@ -11017,14 +11012,14 @@ export const universities: University[] = [
           },
           {
             id: "KW-AU-SCHOOL-OF-AVIATION-AVIATION-AIRPORT-OPERATIONS",
-            name_ar: "Aviation & Airport Operations",
+            name_ar: "عمليات الطيران والمطارات",
             name_en: "Aviation & Airport Operations",
             degrees: ["BSc"],
             programs: [
               {
                 id: "KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI",
                 name_en: "Bachelor of Aviation and Airport Operations",
-                name_ar: "Bachelor of Aviation and Airport Operations",
+                name_ar: "بكالوريوس الطيران وعمليات المطارات",
                 degree: "BSc",
               },
             ],
@@ -11032,7 +11027,7 @@ export const universities: University[] = [
               {
                 code: "MATH100",
                 name_en: "Calculus I",
-                name_ar: "Calculus I",
+                name_ar: "حساب التفاضل والتكامل I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11040,7 +11035,7 @@ export const universities: University[] = [
               {
                 code: "ENGL100",
                 name_en: "Speech and Presentation Skills",
-                name_ar: "Speech and Presentation Skills",
+                name_ar: "مهارات الخطابة والعرض",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11048,7 +11043,7 @@ export const universities: University[] = [
               {
                 code: "AVIA101",
                 name_en: "Introduction to Aviation",
-                name_ar: "Introduction to Aviation",
+                name_ar: "مقدمة في الطيران",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11056,7 +11051,7 @@ export const universities: University[] = [
               {
                 code: "AVIA102",
                 name_en: "Introduction to Airports",
-                name_ar: "Introduction to Airports",
+                name_ar: "مقدمة في المطارات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11064,7 +11059,7 @@ export const universities: University[] = [
               {
                 code: "ENGL110",
                 name_en: "Technical Writing",
-                name_ar: "Technical Writing",
+                name_ar: "الكتابة الفنية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11072,7 +11067,7 @@ export const universities: University[] = [
               {
                 code: "AVIA121",
                 name_en: "Safety Management Systems",
-                name_ar: "Safety Management Systems",
+                name_ar: "نظم إدارة السلامة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11080,7 +11075,7 @@ export const universities: University[] = [
               {
                 code: "AVIA105",
                 name_en: "Introduction to Logistics",
-                name_ar: "Introduction to Logistics",
+                name_ar: "مقدمة في اللوجستيات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11088,7 +11083,7 @@ export const universities: University[] = [
               {
                 code: "AVIA124",
                 name_en: "Human Factors",
-                name_ar: "Human Factors",
+                name_ar: "العوامل البشرية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11096,7 +11091,7 @@ export const universities: University[] = [
               {
                 code: "AVIA125",
                 name_en: "Air Traffic Control Management",
-                name_ar: "Air Traffic Control Management",
+                name_ar: "إدارة مراقبة الحركة الجوية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11104,7 +11099,7 @@ export const universities: University[] = [
               {
                 code: "BMIS110",
                 name_en: "Business Computer Application",
-                name_ar: "Business Computer Application",
+                name_ar: "تطبيقات الحاسوب للأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11112,7 +11107,7 @@ export const universities: University[] = [
               {
                 code: "AVIA2210",
                 name_en: "Airline & Airport Economics",
-                name_ar: "Airline & Airport Economics",
+                name_ar: "اقتصاديات الخطوط الجوية والمطارات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11120,7 +11115,7 @@ export const universities: University[] = [
               {
                 code: "BMGT110",
                 name_en: "Management Principles",
-                name_ar: "Management Principles",
+                name_ar: "مبادئ الإدارة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11128,7 +11123,7 @@ export const universities: University[] = [
               {
                 code: "AVIA2211",
                 name_en: "Ground Operation Management",
-                name_ar: "Ground Operation Management",
+                name_ar: "إدارة العمليات الأرضية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11136,7 +11131,7 @@ export const universities: University[] = [
               {
                 code: "AVIA210",
                 name_en: "Aviation Safety and Airport Security",
-                name_ar: "Aviation Safety and Airport Security",
+                name_ar: "سلامة الطيران وأمن المطارات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11144,7 +11139,7 @@ export const universities: University[] = [
               {
                 code: "AVIA204",
                 name_en: "Global Strategy and Policy",
-                name_ar: "Global Strategy and Policy",
+                name_ar: "الاستراتيجية والسياسة العالمية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11152,7 +11147,7 @@ export const universities: University[] = [
               {
                 code: "BACC110",
                 name_en: "Management Accounting",
-                name_ar: "Management Accounting",
+                name_ar: "المحاسبة الإدارية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11160,7 +11155,7 @@ export const universities: University[] = [
               {
                 code: "AVIA2212",
                 name_en: "Crisis Management and Communication",
-                name_ar: "Crisis Management and Communication",
+                name_ar: "إدارة الأزمات والاتصال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11168,7 +11163,7 @@ export const universities: University[] = [
               {
                 code: "AVIA2210",
                 name_en: "Aviation Environmental Management Systems",
-                name_ar: "Aviation Environmental Management Systems",
+                name_ar: "أنظمة الإدارة البيئية للطيران",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11176,7 +11171,7 @@ export const universities: University[] = [
               {
                 code: "AVIA2213",
                 name_en: "Aviation Business",
-                name_ar: "Aviation Business",
+                name_ar: "أعمال الطيران",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11184,7 +11179,7 @@ export const universities: University[] = [
               {
                 code: "AVIA205",
                 name_en: "Transportation Technology",
-                name_ar: "Transportation Technology",
+                name_ar: "تكنولوجيا النقل",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11192,7 +11187,7 @@ export const universities: University[] = [
               {
                 code: "AVIA330",
                 name_en: "Aerospace Technology",
-                name_ar: "Aerospace Technology",
+                name_ar: "تكنولوجيا الطيران والفضاء",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11200,7 +11195,7 @@ export const universities: University[] = [
               {
                 code: "AVIA3214",
                 name_en: "Air Cargo and Logistics Management",
-                name_ar: "Air Cargo and Logistics Management",
+                name_ar: "إدارة الشحن الجوي والخدمات اللوجستية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11208,7 +11203,7 @@ export const universities: University[] = [
               {
                 code: "AVIA3215",
                 name_en: "Crew Resource Management",
-                name_ar: "Crew Resource Management",
+                name_ar: "إدارة موارد الطاقم",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11216,7 +11211,7 @@ export const universities: University[] = [
               {
                 code: "AVIA3126",
                 name_en: "Corporate Aviation Management",
-                name_ar: "Corporate Aviation Management",
+                name_ar: "إدارة الطيران للشركات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11224,7 +11219,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "University Elective",
-                name_ar: "University Elective",
+                name_ar: "مقرر اختياري جامعي",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11232,7 +11227,7 @@ export const universities: University[] = [
               {
                 code: "AVIA311",
                 name_en: "Occupation Health and Safety",
-                name_ar: "Occupation Health and Safety",
+                name_ar: "الصحة والسلامة المهنية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11240,7 +11235,7 @@ export const universities: University[] = [
               {
                 code: "AVIA3217",
                 name_en: "Scheduling & Disruption Management",
-                name_ar: "Scheduling & Disruption Management",
+                name_ar: "الجدولة وإدارة الاضطرابات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11248,7 +11243,7 @@ export const universities: University[] = [
               {
                 code: "AVIA312",
                 name_en: "Aviation Investigation",
-                name_ar: "Aviation Investigation",
+                name_ar: "تحقيقات الطيران",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11256,7 +11251,7 @@ export const universities: University[] = [
               {
                 code: "AVIA306",
                 name_en: "Customer Care for the Aviation Industry",
-                name_ar: "Customer Care for the Aviation Industry",
+                name_ar: "رعاية العملاء في صناعة الطيران",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11264,7 +11259,7 @@ export const universities: University[] = [
               {
                 code: "BFIN110",
                 name_en: "Financial Management",
-                name_ar: "Financial Management",
+                name_ar: "الإدارة المالية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11272,7 +11267,7 @@ export const universities: University[] = [
               {
                 code: "AVIA420",
                 name_en: "Aviation Legislation",
-                name_ar: "Aviation Legislation",
+                name_ar: "التشريعات الجوية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11280,7 +11275,7 @@ export const universities: University[] = [
               {
                 code: "AVIA421",
                 name_en: "Project Management",
-                name_ar: "Project Management",
+                name_ar: "إدارة المشاريع",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11288,7 +11283,7 @@ export const universities: University[] = [
               {
                 code: "AVIA4218",
                 name_en: "Aviation Insurance and Risk Management",
-                name_ar: "Aviation Insurance and Risk Management",
+                name_ar: "تأمين الطيران وإدارة المخاطر",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11296,7 +11291,7 @@ export const universities: University[] = [
               {
                 code: "AVIA413",
                 name_en: "Emergency Preparedness and Response",
-                name_ar: "Emergency Preparedness and Response",
+                name_ar: "التأهب والاستجابة لحالات الطوارئ",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11304,7 +11299,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "School Elective",
-                name_ar: "School Elective",
+                name_ar: "مادة اختيارية مدرسية",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11312,7 +11307,7 @@ export const universities: University[] = [
               {
                 code: "AVIA407",
                 name_en: "Contemporary Aviation Issues",
-                name_ar: "Contemporary Aviation Issues",
+                name_ar: "قضايا الطيران المعاصرة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11320,7 +11315,7 @@ export const universities: University[] = [
               {
                 code: "AVIA4219",
                 name_en: "Airport Management",
-                name_ar: "Airport Management",
+                name_ar: "إدارة المطارات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11328,7 +11323,7 @@ export const universities: University[] = [
               {
                 code: "AVIA4220",
                 name_en: "Airline Management",
-                name_ar: "Airline Management",
+                name_ar: "إدارة الخطوط الجوية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11336,7 +11331,7 @@ export const universities: University[] = [
               {
                 code: "AVIA4221",
                 name_en: "Airport Planning and Design",
-                name_ar: "Airport Planning and Design",
+                name_ar: "تخطيط وتصميم المطارات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11344,7 +11339,7 @@ export const universities: University[] = [
               {
                 code: "AVIA4222",
                 name_en: "Sustainable Aviation Management",
-                name_ar: "Sustainable Aviation Management",
+                name_ar: "إدارة الطيران المستدام",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-AU-BACHELOR-OF-AVIATION-AND-AIRPORT-OPERATI"],
@@ -11383,25 +11378,29 @@ export const universities: University[] = [
               {
                 id: "KW-AOU-BA-HONS-BUSINESS-STUDIES-ACCOUNTING",
                 name_en: "BA (Hons) Business Studies - Accounting",
-                name_ar: "BA (Hons) Business Studies - Accounting",
+                name_ar:
+                  "بكالوريوس الآداب (مع مرتبة الشرف) دراسات الأعمال - المحاسبة",
                 degree: "BSc",
               },
               {
                 id: "KW-AOU-BA-HONS-BUSINESS-STUDIES-FINANCE",
                 name_en: "BA (Hons) Business Studies - Finance",
-                name_ar: "BA (Hons) Business Studies - Finance",
+                name_ar:
+                  "بكالوريوس الآداب (مع مرتبة الشرف) دراسات الأعمال - المالية",
                 degree: "BSc",
               },
               {
                 id: "KW-AOU-BA-HONS-BUSINESS-STUDIES-ECONOMICS",
                 name_en: "BA (Hons) Business Studies - Economics",
-                name_ar: "BA (Hons) Business Studies - Economics",
+                name_ar:
+                  "بكالوريوس الآداب (مع مرتبة الشرف) دراسات الأعمال - الاقتصاد",
                 degree: "BSc",
               },
               {
                 id: "KW-AOU-BA-HONS-BUSINESS-STUDIES-MANAGEMENT",
                 name_en: "BA (Hons) Business Studies - Management",
-                name_ar: "BA (Hons) Business Studies - Management",
+                name_ar:
+                  "بكالوريوس الآداب (مع مرتبة الشرف) دراسات الأعمال - الإدارة",
                 degree: "BSc",
               },
               {
@@ -11409,19 +11408,21 @@ export const universities: University[] = [
                 name_en:
                   "BA (Hons) Business Studies - Human Resource Management",
                 name_ar:
-                  "BA (Hons) Business Studies - Human Resource Management",
+                  "بكالوريوس الآداب (مع مرتبة الشرف) دراسات الأعمال - إدارة الموارد البشرية",
                 degree: "BSc",
               },
               {
                 id: "KW-AOU-BA-HONS-BUSINESS-STUDIES-MARKETING",
                 name_en: "BA (Hons) Business Studies - Marketing",
-                name_ar: "BA (Hons) Business Studies - Marketing",
+                name_ar:
+                  "بكالوريوس الآداب (مع مرتبة الشرف) دراسات الأعمال - التسويق",
                 degree: "BSc",
               },
               {
                 id: "KW-AOU-BA-HONS-BUSINESS-STUDIES-SYSTEMS",
                 name_en: "BA (Hons) Business Studies - Systems",
-                name_ar: "BA (Hons) Business Studies - Systems",
+                name_ar:
+                  "بكالوريوس الآداب (مع مرتبة الشرف) دراسات الأعمال - الأنظمة",
                 degree: "BSc",
               },
               {
@@ -11429,7 +11430,7 @@ export const universities: University[] = [
                 name_en:
                   "BA (Hons) Business Studies - Management Information Systems",
                 name_ar:
-                  "BA (Hons) Business Studies - Management Information Systems",
+                  "بكالوريوس الآداب (مع مرتبة الشرف) دراسات الأعمال - نظم معلومات الإدارة",
                 degree: "BSc",
               },
             ],
@@ -11437,7 +11438,7 @@ export const universities: University[] = [
               {
                 code: "AR113",
                 name_en: "Arabic Comm. Skills - I",
-                name_ar: "Arabic Comm. Skills - I",
+                name_ar: "مهارات التواصل باللغة العربية - I",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -11454,7 +11455,7 @@ export const universities: University[] = [
               {
                 code: "ACT111",
                 name_en: "Financial Accounting",
-                name_ar: "Financial Accounting",
+                name_ar: "المحاسبة المالية",
                 credits: 4,
                 type: "Required",
                 program_ids: [
@@ -11471,7 +11472,7 @@ export const universities: University[] = [
               {
                 code: "EL111",
                 name_en: "English Comm. Skills - I",
-                name_ar: "English Comm. Skills - I",
+                name_ar: "مهارات الاتصال باللغة الإنجليزية - I",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -11488,7 +11489,7 @@ export const universities: University[] = [
               {
                 code: "BUC111",
                 name_en: "Business communication 1",
-                name_ar: "Business communication 1",
+                name_ar: "اتصالات الأعمال 1",
                 credits: 4,
                 type: "Required",
                 program_ids: [
@@ -11505,7 +11506,7 @@ export const universities: University[] = [
               {
                 code: "GR118",
                 name_en: "Life Skills and Coexistence",
-                name_ar: "Life Skills and Coexistence",
+                name_ar: "مهارات الحياة والتعايش",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -11522,7 +11523,7 @@ export const universities: University[] = [
               {
                 code: "MKT111",
                 name_en: "Principles of Marketing I",
-                name_ar: "Principles of Marketing I",
+                name_ar: "مبادئ التسويق I",
                 credits: 4,
                 type: "Required",
                 program_ids: [
@@ -11539,7 +11540,7 @@ export const universities: University[] = [
               {
                 code: "GT101",
                 name_en: "Learning and Information Technology",
-                name_ar: "Learning and Information Technology",
+                name_ar: "التعلم وتقنية المعلومات",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -11556,7 +11557,7 @@ export const universities: University[] = [
               {
                 code: "MGT111",
                 name_en: "Principles of Management I",
-                name_ar: "Principles of Management I",
+                name_ar: "مبادئ الإدارة I",
                 credits: 4,
                 type: "Required",
                 program_ids: [
@@ -11573,7 +11574,7 @@ export const universities: University[] = [
               {
                 code: "BUS101",
                 name_en: "Introduction to Math for Business",
-                name_ar: "Introduction to Math for Business",
+                name_ar: "مقدمة في الرياضيات للأعمال",
                 credits: 4,
                 type: "Required",
                 program_ids: [
@@ -11590,7 +11591,7 @@ export const universities: University[] = [
               {
                 code: "EL112",
                 name_en: "English Comm. Skills - II",
-                name_ar: "English Comm. Skills - II",
+                name_ar: "مهارات الاتصال باللغة الإنجليزية - II",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -11607,7 +11608,7 @@ export const universities: University[] = [
               {
                 code: "ECO101",
                 name_en: "Principles of Microeconomics",
-                name_ar: "Principles of Microeconomics",
+                name_ar: "مبادئ الاقتصاد الجزئي",
                 credits: 4,
                 type: "Required",
                 program_ids: [
@@ -11624,7 +11625,7 @@ export const universities: University[] = [
               {
                 code: "BUS102",
                 name_en: "Introduction to Statistics",
-                name_ar: "Introduction to Statistics",
+                name_ar: "مقدمة في الإحصاء",
                 credits: 4,
                 type: "Required",
                 program_ids: [
@@ -11640,7 +11641,7 @@ export const universities: University[] = [
               {
                 code: "GB102",
                 name_en: "Principles of Entrepreneurship for Non-Specialists",
-                name_ar: "Principles of Entrepreneurship for Non-Specialists",
+                name_ar: "مبادئ ريادة الأعمال لغير المتخصصين",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -11657,7 +11658,7 @@ export const universities: University[] = [
               {
                 code: "ACT112",
                 name_en: "Managerial Accounting",
-                name_ar: "Managerial Accounting",
+                name_ar: "المحاسبة الإدارية",
                 credits: 4,
                 type: "Required",
                 program_ids: [
@@ -11674,7 +11675,7 @@ export const universities: University[] = [
               {
                 code: "B207A",
                 name_en: "Shaping business opportunities",
-                name_ar: "Shaping business opportunities",
+                name_ar: "صياغة الفرص التجارية",
                 credits: 8,
                 type: "Required",
                 program_ids: [
@@ -11691,7 +11692,7 @@ export const universities: University[] = [
               {
                 code: "BUC112",
                 name_en: "Business communication 2",
-                name_ar: "Business communication 2",
+                name_ar: "اتصالات الأعمال 2",
                 credits: 4,
                 type: "Required",
                 program_ids: [
@@ -11708,7 +11709,7 @@ export const universities: University[] = [
               {
                 code: "BB293",
                 name_en: "Financial Accounting in Context",
-                name_ar: "Financial Accounting in Context",
+                name_ar: "المحاسبة المالية في السياق",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-BA-HONS-BUSINESS-STUDIES-ACCOUNTING"],
@@ -11716,7 +11717,7 @@ export const universities: University[] = [
               {
                 code: "MKT112",
                 name_en: "Principles of Marketing II",
-                name_ar: "Principles of Marketing II",
+                name_ar: "مبادئ التسويق II",
                 credits: 4,
                 type: "Required",
                 program_ids: [
@@ -11731,7 +11732,7 @@ export const universities: University[] = [
               {
                 code: "MGT112",
                 name_en: "Principles of Management II",
-                name_ar: "Principles of Management II",
+                name_ar: "مبادئ الإدارة II",
                 credits: 4,
                 type: "Required",
                 program_ids: [
@@ -11748,7 +11749,7 @@ export const universities: University[] = [
               {
                 code: "B207B",
                 name_en: "Shaping Business opportunities",
-                name_ar: "Shaping Business opportunities",
+                name_ar: "صياغة الفرص التجارية",
                 credits: 8,
                 type: "Required",
                 program_ids: [
@@ -11765,7 +11766,7 @@ export const universities: University[] = [
               {
                 code: "BUS310",
                 name_en: "Strategic Management",
-                name_ar: "Strategic Management",
+                name_ar: "الإدارة الاستراتيجية",
                 credits: 8,
                 type: "Required",
                 program_ids: [
@@ -11782,7 +11783,7 @@ export const universities: University[] = [
               {
                 code: "B294",
                 name_en: "Financial Analysis and Decision Making",
-                name_ar: "Financial Analysis and Decision Making",
+                name_ar: "التحليل المالي واتخاذ القرار",
                 credits: 8,
                 type: "Required",
                 program_ids: [
@@ -11793,7 +11794,7 @@ export const universities: University[] = [
               {
                 code: "B326",
                 name_en: "Advanced Financial Accounting",
-                name_ar: "Advanced Financial Accounting",
+                name_ar: "المحاسبة المالية المتقدمة",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-BA-HONS-BUSINESS-STUDIES-ACCOUNTING"],
@@ -11801,7 +11802,7 @@ export const universities: University[] = [
               {
                 code: "GR (elective)",
                 name_en: "University Requirement Elective",
-                name_ar: "University Requirement Elective",
+                name_ar: "متطلب جامعي اختياري",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -11818,7 +11819,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "Faculty Elective",
-                name_ar: "Faculty Elective",
+                name_ar: "مقرر اختياري من الكلية",
                 credits: 4,
                 type: "Elective",
                 program_ids: [
@@ -11835,7 +11836,7 @@ export const universities: University[] = [
               {
                 code: "B391",
                 name_en: "Management accounting and finance",
-                name_ar: "Management accounting and finance",
+                name_ar: "المحاسبة الإدارية والمالية",
                 credits: 8,
                 type: "Required",
                 program_ids: [
@@ -11846,7 +11847,7 @@ export const universities: University[] = [
               {
                 code: "ACC302",
                 name_en: "Auditing Theory and Practice",
-                name_ar: "Auditing Theory and Practice",
+                name_ar: "نظرية وممارسة التدقيق",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-BA-HONS-BUSINESS-STUDIES-ACCOUNTING"],
@@ -11854,7 +11855,7 @@ export const universities: University[] = [
               {
                 code: "ACC300",
                 name_en: "Accounting Information Systems",
-                name_ar: "Accounting Information Systems",
+                name_ar: "نظم المعلومات المحاسبية",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-BA-HONS-BUSINESS-STUDIES-ACCOUNTING"],
@@ -11862,7 +11863,7 @@ export const universities: University[] = [
               {
                 code: "FIN241",
                 name_en: "Microfinance",
-                name_ar: "Microfinance",
+                name_ar: "التمويل الأصغر",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-BA-HONS-BUSINESS-STUDIES-FINANCE"],
@@ -11870,7 +11871,7 @@ export const universities: University[] = [
               {
                 code: "FIN301",
                 name_en: "Financial and Securities Markets",
-                name_ar: "Financial and Securities Markets",
+                name_ar: "الأسواق المالية وأسواق الأوراق المالية",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-BA-HONS-BUSINESS-STUDIES-FINANCE"],
@@ -11878,7 +11879,7 @@ export const universities: University[] = [
               {
                 code: "FIN242",
                 name_en: "Financial Technology",
-                name_ar: "Financial Technology",
+                name_ar: "التكنولوجيا المالية",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-BA-HONS-BUSINESS-STUDIES-FINANCE"],
@@ -11886,7 +11887,7 @@ export const universities: University[] = [
               {
                 code: "FIN341",
                 name_en: "Islamic Finance",
-                name_ar: "Islamic Finance",
+                name_ar: "التمويل الإسلامي",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-BA-HONS-BUSINESS-STUDIES-FINANCE"],
@@ -11894,7 +11895,7 @@ export const universities: University[] = [
               {
                 code: "FIN302",
                 name_en: "Portfolio Theory",
-                name_ar: "Portfolio Theory",
+                name_ar: "نظرية المحفظة",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-BA-HONS-BUSINESS-STUDIES-FINANCE"],
@@ -11902,7 +11903,7 @@ export const universities: University[] = [
               {
                 code: "FIN340",
                 name_en: "Corporate Finance",
-                name_ar: "Corporate Finance",
+                name_ar: "تمويل الشركات",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-BA-HONS-BUSINESS-STUDIES-FINANCE"],
@@ -11910,7 +11911,7 @@ export const universities: University[] = [
               {
                 code: "DD209A",
                 name_en: "Running the Economy",
-                name_ar: "Running the Economy",
+                name_ar: "إدارة الاقتصاد",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-BA-HONS-BUSINESS-STUDIES-ECONOMICS"],
@@ -11918,7 +11919,7 @@ export const universities: University[] = [
               {
                 code: "ECO102",
                 name_en: "Principles of Macroeconomics",
-                name_ar: "Principles of Macroeconomics",
+                name_ar: "مبادئ الاقتصاد الكلي",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-BA-HONS-BUSINESS-STUDIES-ECONOMICS"],
@@ -11926,7 +11927,7 @@ export const universities: University[] = [
               {
                 code: "DD209B",
                 name_en: "Running the Economy",
-                name_ar: "Running the Economy",
+                name_ar: "إدارة الاقتصاد",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-BA-HONS-BUSINESS-STUDIES-ECONOMICS"],
@@ -11934,7 +11935,7 @@ export const universities: University[] = [
               {
                 code: "DD309A",
                 name_en: "Doing Economics",
-                name_ar: "Doing Economics",
+                name_ar: "ممارسة الاقتصاد",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-BA-HONS-BUSINESS-STUDIES-ECONOMICS"],
@@ -11942,7 +11943,7 @@ export const universities: University[] = [
               {
                 code: "DD309B",
                 name_en: "Doing Economics",
-                name_ar: "Doing Economics",
+                name_ar: "ممارسة الاقتصاد",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-BA-HONS-BUSINESS-STUDIES-ECONOMICS"],
@@ -11950,7 +11951,7 @@ export const universities: University[] = [
               {
                 code: "ECO342",
                 name_en: "Economic Development & Contemporary Issues",
-                name_ar: "Economic Development & Contemporary Issues",
+                name_ar: "التنمية الاقتصادية والقضايا المعاصرة",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-BA-HONS-BUSINESS-STUDIES-ECONOMICS"],
@@ -11958,7 +11959,7 @@ export const universities: University[] = [
               {
                 code: "B205A",
                 name_en: "Exploring innovation and entrepreneurship",
-                name_ar: "Exploring innovation and entrepreneurship",
+                name_ar: "استكشاف الابتكار وريادة الأعمال",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-BA-HONS-BUSINESS-STUDIES-MANAGEMENT"],
@@ -11966,7 +11967,7 @@ export const universities: University[] = [
               {
                 code: "B205B",
                 name_en: "Exploring innovation and entrepreneurship",
-                name_ar: "Exploring innovation and entrepreneurship",
+                name_ar: "استكشاف الابتكار وريادة الأعمال",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-BA-HONS-BUSINESS-STUDIES-MANAGEMENT"],
@@ -11974,7 +11975,7 @@ export const universities: University[] = [
               {
                 code: "B329",
                 name_en: "Leadership in a changing world",
-                name_ar: "Leadership in a changing world",
+                name_ar: "القيادة في عالم متغير",
                 credits: 8,
                 type: "Required",
                 program_ids: [
@@ -11986,7 +11987,7 @@ export const universities: University[] = [
               {
                 code: "BUS628",
                 name_en: "Global HRM",
-                name_ar: "Global HRM",
+                name_ar: "إدارة الموارد البشرية العالمية",
                 credits: 8,
                 type: "Required",
                 program_ids: [
@@ -11997,7 +11998,7 @@ export const universities: University[] = [
               {
                 code: "BUS629",
                 name_en: "International Management",
-                name_ar: "International Management",
+                name_ar: "الإدارة الدولية",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-BA-HONS-BUSINESS-STUDIES-MANAGEMENT"],
@@ -12005,7 +12006,7 @@ export const universities: University[] = [
               {
                 code: "HRM205",
                 name_en: "Employment Law",
-                name_ar: "Employment Law",
+                name_ar: "قانون العمل",
                 credits: 4,
                 type: "Required",
                 program_ids: [
@@ -12015,7 +12016,7 @@ export const universities: University[] = [
               {
                 code: "HRM206",
                 name_en: "Staffing Organizations",
-                name_ar: "Staffing Organizations",
+                name_ar: "تزويد المنظمات بالموظفين",
                 credits: 4,
                 type: "Required",
                 program_ids: [
@@ -12025,7 +12026,7 @@ export const universities: University[] = [
               {
                 code: "HRM210",
                 name_en: "Training and development",
-                name_ar: "Training and development",
+                name_ar: "التدريب والتطوير",
                 credits: 4,
                 type: "Required",
                 program_ids: [
@@ -12035,7 +12036,7 @@ export const universities: University[] = [
               {
                 code: "HRM320",
                 name_en: "Workplace Health & Safety",
-                name_ar: "Workplace Health & Safety",
+                name_ar: "الصحة والسلامة في مكان العمل",
                 credits: 4,
                 type: "Required",
                 program_ids: [
@@ -12045,7 +12046,7 @@ export const universities: University[] = [
               {
                 code: "HRM215",
                 name_en: "Employment Compensation and Benefits",
-                name_ar: "Employment Compensation and Benefits",
+                name_ar: "تعويضات ومزايا التوظيف",
                 credits: 4,
                 type: "Required",
                 program_ids: [
@@ -12055,7 +12056,7 @@ export const universities: University[] = [
               {
                 code: "HRM330",
                 name_en: "Strategic Human Resource Management",
-                name_ar: "Strategic Human Resource Management",
+                name_ar: "الإدارة الاستراتيجية للموارد البشرية",
                 credits: 4,
                 type: "Required",
                 program_ids: [
@@ -12065,7 +12066,7 @@ export const universities: University[] = [
               {
                 code: "B206",
                 name_en: "Understanding Customers",
-                name_ar: "Understanding Customers",
+                name_ar: "فهم العملاء",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-BA-HONS-BUSINESS-STUDIES-MARKETING"],
@@ -12073,7 +12074,7 @@ export const universities: University[] = [
               {
                 code: "BUS208",
                 name_en: "Contemporary Issues in Marketing",
-                name_ar: "Contemporary Issues in Marketing",
+                name_ar: "قضايا معاصرة في التسويق",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-BA-HONS-BUSINESS-STUDIES-MARKETING"],
@@ -12081,7 +12082,7 @@ export const universities: University[] = [
               {
                 code: "MKT331",
                 name_en: "Digital Marketing",
-                name_ar: "Digital Marketing",
+                name_ar: "التسويق الرقمي",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-BA-HONS-BUSINESS-STUDIES-MARKETING"],
@@ -12089,7 +12090,7 @@ export const universities: University[] = [
               {
                 code: "MKT332",
                 name_en: "Services Marketing",
-                name_ar: "Services Marketing",
+                name_ar: "تسويق الخدمات",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-BA-HONS-BUSINESS-STUDIES-MARKETING"],
@@ -12097,7 +12098,7 @@ export const universities: University[] = [
               {
                 code: "B327",
                 name_en: "Sustainable enterprise and innovation",
-                name_ar: "Sustainable enterprise and innovation",
+                name_ar: "المشاريع المستدامة والابتكار",
                 credits: 8,
                 type: "Required",
                 program_ids: [
@@ -12108,7 +12109,7 @@ export const universities: University[] = [
               {
                 code: "B328",
                 name_en: "Marketing in Action",
-                name_ar: "Marketing in Action",
+                name_ar: "التسويق في العمل",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-BA-HONS-BUSINESS-STUDIES-MARKETING"],
@@ -12116,7 +12117,7 @@ export const universities: University[] = [
               {
                 code: "SYS210",
                 name_en: "Managing technology & innovation",
-                name_ar: "Managing technology & innovation",
+                name_ar: "إدارة التكنولوجيا والابتكار",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-BA-HONS-BUSINESS-STUDIES-SYSTEMS"],
@@ -12124,7 +12125,7 @@ export const universities: University[] = [
               {
                 code: "SYS280",
                 name_en: "Systems' Thinking & Practice",
-                name_ar: "Systems' Thinking & Practice",
+                name_ar: "فكر وممارسة النظم",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-BA-HONS-BUSINESS-STUDIES-SYSTEMS"],
@@ -12132,7 +12133,7 @@ export const universities: University[] = [
               {
                 code: "SYS380",
                 name_en: "Managing Systems Complexity",
-                name_ar: "Managing Systems Complexity",
+                name_ar: "إدارة تعقيد الأنظمة",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-BA-HONS-BUSINESS-STUDIES-SYSTEMS"],
@@ -12140,7 +12141,7 @@ export const universities: University[] = [
               {
                 code: "M218",
                 name_en: "Relational databases",
-                name_ar: "Relational databases",
+                name_ar: "قواعد البيانات العلائقية",
                 credits: 4,
                 type: "Required",
                 program_ids: [
@@ -12150,7 +12151,7 @@ export const universities: University[] = [
               {
                 code: "TM105",
                 name_en: "Introduction to Programming",
-                name_ar: "Introduction to Programming",
+                name_ar: "مقدمة في البرمجة",
                 credits: 4,
                 type: "Required",
                 program_ids: [
@@ -12160,7 +12161,7 @@ export const universities: University[] = [
               {
                 code: "MT248",
                 name_en: "Analyzing data",
-                name_ar: "Analyzing data",
+                name_ar: "تحليل البيانات",
                 credits: 4,
                 type: "Required",
                 program_ids: [
@@ -12170,7 +12171,7 @@ export const universities: University[] = [
               {
                 code: "MT131",
                 name_en: "Discrete Mathematics",
-                name_ar: "Discrete Mathematics",
+                name_ar: "الرياضيات المتقطعة",
                 credits: 4,
                 type: "Required",
                 program_ids: [
@@ -12180,7 +12181,7 @@ export const universities: University[] = [
               {
                 code: "M251",
                 name_en: "Object Oriented Programming using Java",
-                name_ar: "Object Oriented Programming using Java",
+                name_ar: "البرمجة الشيئية باستخدام Java",
                 credits: 8,
                 type: "Required",
                 program_ids: [
@@ -12190,7 +12191,7 @@ export const universities: University[] = [
               {
                 code: "TM354",
                 name_en: "Software Engineering",
-                name_ar: "Software Engineering",
+                name_ar: "هندسة البرمجيات",
                 credits: 8,
                 type: "Required",
                 program_ids: [
@@ -12200,7 +12201,7 @@ export const universities: University[] = [
               {
                 code: "MIS300",
                 name_en: "Project Management",
-                name_ar: "Project Management",
+                name_ar: "إدارة المشاريع",
                 credits: 8,
                 type: "Required",
                 program_ids: [
@@ -12210,7 +12211,7 @@ export const universities: University[] = [
               {
                 code: "TM351",
                 name_en: "Data management and Analysis",
-                name_ar: "Data management and Analysis",
+                name_ar: "إدارة البيانات وتحليلها",
                 credits: 8,
                 type: "Required",
                 program_ids: [
@@ -12287,7 +12288,7 @@ export const universities: University[] = [
               {
                 code: "EL111",
                 name_en: "English Communication Skills I",
-                name_ar: "English Communication Skills I",
+                name_ar: "مهارات الاتصال باللغة الإنجليزية I",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -12304,7 +12305,7 @@ export const universities: University[] = [
               {
                 code: "GR118",
                 name_en: "Life Skills and Coexistence",
-                name_ar: "Life Skills and Coexistence",
+                name_ar: "مهارات الحياة والتعايش",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -12321,7 +12322,7 @@ export const universities: University[] = [
               {
                 code: "GT101",
                 name_en: "Computing Essentials",
-                name_ar: "Computing Essentials",
+                name_ar: "أساسيات الحوسبة",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -12338,7 +12339,7 @@ export const universities: University[] = [
               {
                 code: "MST129",
                 name_en: "Applied Calculus",
-                name_ar: "Applied Calculus",
+                name_ar: "حساب التفاضل والتكامل التطبيقي",
                 credits: 4,
                 type: "Required",
                 program_ids: [
@@ -12355,7 +12356,7 @@ export const universities: University[] = [
               {
                 code: "AR113",
                 name_en: "Arabic Communication Skills",
-                name_ar: "Arabic Communication Skills",
+                name_ar: "مهارات التواصل باللغة العربية",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -12372,7 +12373,7 @@ export const universities: University[] = [
               {
                 code: "EL112",
                 name_en: "English Communication Skills II",
-                name_ar: "English Communication Skills II",
+                name_ar: "مهارات الاتصال باللغة الإنجليزية II",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -12389,7 +12390,7 @@ export const universities: University[] = [
               {
                 code: "MT131",
                 name_en: "Discrete Mathematics",
-                name_ar: "Discrete Mathematics",
+                name_ar: "الرياضيات المتقطعة",
                 credits: 4,
                 type: "Required",
                 program_ids: [
@@ -12406,7 +12407,7 @@ export const universities: University[] = [
               {
                 code: "MT132",
                 name_en: "Linear Algebra",
-                name_ar: "Linear Algebra",
+                name_ar: "الجبر الخطي",
                 credits: 4,
                 type: "Required",
                 program_ids: [
@@ -12423,7 +12424,7 @@ export const universities: University[] = [
               {
                 code: "GB102",
                 name_en: "Principles of Entrepreneurship for Non-Specialists",
-                name_ar: "Principles of Entrepreneurship for Non-Specialists",
+                name_ar: "مبادئ ريادة الأعمال لغير المتخصصين",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -12440,7 +12441,7 @@ export const universities: University[] = [
               {
                 code: "M110",
                 name_en: "Python Programming",
-                name_ar: "Python Programming",
+                name_ar: "برمجة بايثون",
                 credits: 8,
                 type: "Required",
                 program_ids: [
@@ -12457,7 +12458,7 @@ export const universities: University[] = [
               {
                 code: "GR111",
                 name_en: "Arabic Islamic Civilization",
-                name_ar: "Arabic Islamic Civilization",
+                name_ar: "الحضارة العربية الإسلامية",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -12474,7 +12475,7 @@ export const universities: University[] = [
               {
                 code: "TM112",
                 name_en: "Introduction to Computing and Information Technology",
-                name_ar: "Introduction to Computing and Information Technology",
+                name_ar: "مقدمة في الحوسبة وتقنية المعلومات",
                 credits: 8,
                 type: "Required",
                 program_ids: [
@@ -12489,7 +12490,7 @@ export const universities: University[] = [
               {
                 code: "TM105",
                 name_en: "Introduction to Programming",
-                name_ar: "Introduction to Programming",
+                name_ar: "مقدمة في البرمجة",
                 credits: 4,
                 type: "Required",
                 program_ids: [
@@ -12503,7 +12504,7 @@ export const universities: University[] = [
               {
                 code: "TM103",
                 name_en: "Computer Organization and Architecture",
-                name_ar: "Computer Organization and Architecture",
+                name_ar: "تنظيم وهندسة الحاسوب",
                 credits: 4,
                 type: "Required",
                 program_ids: [
@@ -12517,7 +12518,7 @@ export const universities: University[] = [
               {
                 code: "MS102",
                 name_en: "Physics",
-                name_ar: "Physics",
+                name_ar: "فيزياء",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -12534,7 +12535,7 @@ export const universities: University[] = [
               {
                 code: "M251",
                 name_en: "Object-Oriented Programming using Java",
-                name_ar: "Object-Oriented Programming using Java",
+                name_ar: "البرمجة كائنية التوجه باستخدام Java",
                 credits: 8,
                 type: "Required",
                 program_ids: [
@@ -12548,7 +12549,7 @@ export const universities: University[] = [
               {
                 code: "TM255",
                 name_en: "Communication and Information Technologies",
-                name_ar: "Communication and Information Technologies",
+                name_ar: "تقنيات الاتصال والمعلومات",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-INFORMATION-TECHNOLOGY-AND-COMPUTING"],
@@ -12556,7 +12557,7 @@ export const universities: University[] = [
               {
                 code: "M269",
                 name_en: "Algorithms, Data Structures and Computability",
-                name_ar: "Algorithms, Data Structures and Computability",
+                name_ar: "الخوارزميات، هياكل البيانات وقابلية الحوسبة",
                 credits: 8,
                 type: "Required",
                 program_ids: [
@@ -12568,7 +12569,7 @@ export const universities: University[] = [
               {
                 code: "T215B",
                 name_en: "Communication and Information Technologies – Part B",
-                name_ar: "Communication and Information Technologies – Part B",
+                name_ar: "تقنيات الاتصال والمعلومات – الجزء ب",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-INFORMATION-TECHNOLOGY-AND-COMPUTING"],
@@ -12576,7 +12577,7 @@ export const universities: University[] = [
               {
                 code: "TM260",
                 name_en: "Ethics, Law and the Governance in IT",
-                name_ar: "Ethics, Law and the Governance in IT",
+                name_ar: "الأخلاقيات والقانون والحوكمة في تقنية المعلومات",
                 credits: 4,
                 type: "Required",
                 program_ids: [
@@ -12593,7 +12594,7 @@ export const universities: University[] = [
               {
                 code: "TM351",
                 name_en: "Data Management and Analysis",
-                name_ar: "Data Management and Analysis",
+                name_ar: "إدارة البيانات وتحليلها",
                 credits: 8,
                 type: "Required",
                 program_ids: [
@@ -12606,7 +12607,7 @@ export const universities: University[] = [
               {
                 code: "TM354",
                 name_en: "Software Engineering",
-                name_ar: "Software Engineering",
+                name_ar: "هندسة البرمجيات",
                 credits: 8,
                 type: "Required",
                 program_ids: [
@@ -12619,7 +12620,7 @@ export const universities: University[] = [
               {
                 code: "TM471A",
                 name_en: "Graduation Project (ITC pathway) - Part A",
-                name_ar: "Graduation Project (ITC pathway) - Part A",
+                name_ar: "مشروع التخرج (مسار ITC) - الجزء أ",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-INFORMATION-TECHNOLOGY-AND-COMPUTING"],
@@ -12627,7 +12628,7 @@ export const universities: University[] = [
               {
                 code: "TM355",
                 name_en: "Communications Technology",
-                name_ar: "Communications Technology",
+                name_ar: "تكنولوجيا الاتصالات",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-INFORMATION-TECHNOLOGY-AND-COMPUTING"],
@@ -12635,7 +12636,7 @@ export const universities: University[] = [
               {
                 code: "TM471B",
                 name_en: "Graduation Project (ITC pathway) - Part B",
-                name_ar: "Graduation Project (ITC pathway) - Part B",
+                name_ar: "مشروع التخرج (مسار ITC) - الجزء ب",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-INFORMATION-TECHNOLOGY-AND-COMPUTING"],
@@ -12643,7 +12644,7 @@ export const universities: University[] = [
               {
                 code: "M109",
                 name_en: ".NET Programming",
-                name_ar: ".NET Programming",
+                name_ar: "برمجة .NET",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -12659,7 +12660,7 @@ export const universities: University[] = [
               {
                 code: "TT284",
                 name_en: "Web Technologies",
-                name_ar: "Web Technologies",
+                name_ar: "تقنيات الويب",
                 credits: 8,
                 type: "Required",
                 program_ids: [
@@ -12671,7 +12672,7 @@ export const universities: University[] = [
               {
                 code: "TM298",
                 name_en: "Operating Systems",
-                name_ar: "Operating Systems",
+                name_ar: "أنظمة التشغيل",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-COMPUTER-SCIENCE"],
@@ -12679,7 +12680,7 @@ export const universities: University[] = [
               {
                 code: "TM240",
                 name_en: "Computer Graphics and Multimedia",
-                name_ar: "Computer Graphics and Multimedia",
+                name_ar: "رسومات الحاسوب والوسائط المتعددة",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-COMPUTER-SCIENCE"],
@@ -12687,7 +12688,7 @@ export const universities: University[] = [
               {
                 code: "TM471A",
                 name_en: "Graduation Project (CS pathway) - Part A",
-                name_ar: "Graduation Project (CS pathway) - Part A",
+                name_ar: "مشروع التخرج (مسار علوم الحاسوب) - الجزء أ",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-COMPUTER-SCIENCE"],
@@ -12695,7 +12696,7 @@ export const universities: University[] = [
               {
                 code: "TM358",
                 name_en: "Machine learning and artificial intelligence",
-                name_ar: "Machine learning and artificial intelligence",
+                name_ar: "تعلم الآلة والذكاء الاصطناعي",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-COMPUTER-SCIENCE", "KW-AOU-DATA-SCIENCE"],
@@ -12703,7 +12704,7 @@ export const universities: University[] = [
               {
                 code: "TM471B",
                 name_en: "Graduation Project (CS pathway) - Part B",
-                name_ar: "Graduation Project (CS pathway) - Part B",
+                name_ar: "مشروع التخرج (مسار علوم الحاسوب) - الجزء ب",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-COMPUTER-SCIENCE"],
@@ -12711,7 +12712,7 @@ export const universities: University[] = [
               {
                 code: "T216A",
                 name_en: "Cisco Networking (CCNA)-A",
-                name_ar: "Cisco Networking (CCNA)-A",
+                name_ar: "شبكات سيسكو (CCNA)-أ",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-NETWORK-SECURITY"],
@@ -12719,7 +12720,7 @@ export const universities: University[] = [
               {
                 code: "TM254",
                 name_en: "Managing IT: the why, the what and the how",
-                name_ar: "Managing IT: the why, the what and the how",
+                name_ar: "إدارة تكنولوجيا المعلومات: لماذا، ماذا، وكيف",
                 credits: 8,
                 type: "Required",
                 program_ids: [
@@ -12731,7 +12732,7 @@ export const universities: University[] = [
               {
                 code: "T216B",
                 name_en: "Cisco Networking (CCNA)-B",
-                name_ar: "Cisco Networking (CCNA)-B",
+                name_ar: "شبكات سيسكو (CCNA)-ب",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-NETWORK-SECURITY"],
@@ -12739,7 +12740,7 @@ export const universities: University[] = [
               {
                 code: "T316",
                 name_en: "Advanced Networking",
-                name_ar: "Advanced Networking",
+                name_ar: "الشبكات المتقدمة",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-NETWORK-SECURITY"],
@@ -12747,7 +12748,7 @@ export const universities: University[] = [
               {
                 code: "T318",
                 name_en: "Applied Network Security",
-                name_ar: "Applied Network Security",
+                name_ar: "أمن الشبكات التطبيقي",
                 credits: 8,
                 type: "Required",
                 program_ids: [
@@ -12758,7 +12759,7 @@ export const universities: University[] = [
               {
                 code: "TM471A",
                 name_en: "Graduation Project (NS pathway) - Part A",
-                name_ar: "Graduation Project (NS pathway) - Part A",
+                name_ar: "مشروع تخرج (مسار NS) - الجزء أ",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-NETWORK-SECURITY"],
@@ -12766,7 +12767,7 @@ export const universities: University[] = [
               {
                 code: "T321",
                 name_en: "Operating System Server Administration",
-                name_ar: "Operating System Server Administration",
+                name_ar: "إدارة خوادم أنظمة التشغيل",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-NETWORK-SECURITY"],
@@ -12774,7 +12775,7 @@ export const universities: University[] = [
               {
                 code: "TM471B",
                 name_en: "Graduation Project (NS pathway) - Part B",
-                name_ar: "Graduation Project (NS pathway) - Part B",
+                name_ar: "مشروع تخرج (مسار NS) - الجزء ب",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-NETWORK-SECURITY"],
@@ -12782,7 +12783,7 @@ export const universities: University[] = [
               {
                 code: "M252",
                 name_en: "Internet Programming",
-                name_ar: "Internet Programming",
+                name_ar: "برمجة الإنترنت",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-WEB-DEVELOPMENT"],
@@ -12790,7 +12791,7 @@ export const universities: University[] = [
               {
                 code: "TM352",
                 name_en: "Web, Mobile and Cloud Technologies",
-                name_ar: "Web, Mobile and Cloud Technologies",
+                name_ar: "تقنيات الويب والجوال والحوسبة السحابية",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-WEB-DEVELOPMENT"],
@@ -12798,7 +12799,7 @@ export const universities: University[] = [
               {
                 code: "TM471A",
                 name_en: "Graduation Project (WD pathway) - Part A",
-                name_ar: "Graduation Project (WD pathway) - Part A",
+                name_ar: "مشروع تخرج (مسار WD) - الجزء أ",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-WEB-DEVELOPMENT"],
@@ -12806,7 +12807,7 @@ export const universities: University[] = [
               {
                 code: "TM356",
                 name_en: "Interaction Design and User Experience",
-                name_ar: "Interaction Design and User Experience",
+                name_ar: "تصميم التفاعل وتجربة المستخدم",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-WEB-DEVELOPMENT"],
@@ -12814,7 +12815,7 @@ export const universities: University[] = [
               {
                 code: "TM471B",
                 name_en: "Graduation Project (WD pathway) - Part B",
-                name_ar: "Graduation Project (WD pathway) - Part B",
+                name_ar: "مشروع تخرج (مسار WD) - الجزء ب",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-WEB-DEVELOPMENT"],
@@ -12822,7 +12823,7 @@ export const universities: University[] = [
               {
                 code: "BUS110",
                 name_en: "Introduction to Business",
-                name_ar: "Introduction to Business",
+                name_ar: "مقدمة في الأعمال التجارية",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-COMPUTING-WITH-BUSINESS"],
@@ -12830,7 +12831,7 @@ export const universities: University[] = [
               {
                 code: "B207A",
                 name_en: "Shaping Business Opportunities-A",
-                name_ar: "Shaping Business Opportunities-A",
+                name_ar: "صياغة الفرص التجارية-أ",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-COMPUTING-WITH-BUSINESS"],
@@ -12838,7 +12839,7 @@ export const universities: University[] = [
               {
                 code: "B207B",
                 name_en: "Shaping Business Opportunities-B",
-                name_ar: "Shaping Business Opportunities-B",
+                name_ar: "صياغة الفرص التجارية-ب",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-COMPUTING-WITH-BUSINESS"],
@@ -12846,7 +12847,7 @@ export const universities: University[] = [
               {
                 code: "BUS310",
                 name_en: "Strategic Management",
-                name_ar: "Strategic Management",
+                name_ar: "الإدارة الاستراتيجية",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-COMPUTING-WITH-BUSINESS"],
@@ -12854,7 +12855,7 @@ export const universities: University[] = [
               {
                 code: "TM471A",
                 name_en: "Graduation Project (CwB pathway) - Part A",
-                name_ar: "Graduation Project (CwB pathway) - Part A",
+                name_ar: "مشروع التخرج (مسار CwB) - الجزء أ",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-COMPUTING-WITH-BUSINESS"],
@@ -12862,7 +12863,7 @@ export const universities: University[] = [
               {
                 code: "TM471B",
                 name_en: "Graduation Project (CwB pathway) - Part B",
-                name_ar: "Graduation Project (CwB pathway) - Part B",
+                name_ar: "مشروع التخرج (مسار CwB) - الجزء ب",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-COMPUTING-WITH-BUSINESS"],
@@ -12870,7 +12871,7 @@ export const universities: University[] = [
               {
                 code: "M140",
                 name_en: "Introducing statistics",
-                name_ar: "Introducing statistics",
+                name_ar: "مقدمة في الإحصاء",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-DATA-SCIENCE"],
@@ -12878,7 +12879,7 @@ export const universities: University[] = [
               {
                 code: "M218",
                 name_en: "Relational Databases",
-                name_ar: "Relational Databases",
+                name_ar: "قواعد البيانات العلائقية",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-DATA-SCIENCE"],
@@ -12886,7 +12887,7 @@ export const universities: University[] = [
               {
                 code: "MT248",
                 name_en: "Analysing data",
-                name_ar: "Analysing data",
+                name_ar: "تحليل البيانات",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-DATA-SCIENCE"],
@@ -12894,7 +12895,7 @@ export const universities: University[] = [
               {
                 code: "M238",
                 name_en: "Data Visualization",
-                name_ar: "Data Visualization",
+                name_ar: "تصور البيانات",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-DATA-SCIENCE"],
@@ -12902,7 +12903,7 @@ export const universities: University[] = [
               {
                 code: "MST224",
                 name_en: "Mathematical Methods",
-                name_ar: "Mathematical Methods",
+                name_ar: "الأساليب الرياضية",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-DATA-SCIENCE"],
@@ -12910,7 +12911,7 @@ export const universities: University[] = [
               {
                 code: "MT249",
                 name_en: "Practical Modern Statistics",
-                name_ar: "Practical Modern Statistics",
+                name_ar: "الإحصاء الحديث العملي",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-DATA-SCIENCE"],
@@ -12918,7 +12919,7 @@ export const universities: University[] = [
               {
                 code: "M348",
                 name_en: "Applied Statistical Modelling",
-                name_ar: "Applied Statistical Modelling",
+                name_ar: "النمذجة الإحصائية التطبيقية",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-DATA-SCIENCE"],
@@ -12926,7 +12927,7 @@ export const universities: University[] = [
               {
                 code: "TM351",
                 name_en: "Data management and analysis",
-                name_ar: "Data management and analysis",
+                name_ar: "إدارة البيانات وتحليلها",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-DATA-SCIENCE"],
@@ -12934,7 +12935,7 @@ export const universities: University[] = [
               {
                 code: "TM471A",
                 name_en: "Graduation Project (DS pathway) - Part A",
-                name_ar: "Graduation Project (DS pathway) - Part A",
+                name_ar: "مشروع التخرج (مسار DS) - الجزء أ",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-DATA-SCIENCE"],
@@ -12942,7 +12943,7 @@ export const universities: University[] = [
               {
                 code: "TM471B",
                 name_en: "Graduation Project (DS pathway) - Part B",
-                name_ar: "Graduation Project (DS pathway) - Part B",
+                name_ar: "مشروع التخرج (مسار DS) - الجزء ب",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-DATA-SCIENCE"],
@@ -12951,8 +12952,7 @@ export const universities: University[] = [
                 code: "TM112",
                 name_en:
                   "Introduction to Computing and Information Technology - 2",
-                name_ar:
-                  "Introduction to Computing and Information Technology - 2",
+                name_ar: "مقدمة في الحوسبة وتقنية المعلومات - 2",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-CYBER-SECURITY"],
@@ -12960,7 +12960,7 @@ export const universities: University[] = [
               {
                 code: "TM129",
                 name_en: "Technologies in practice",
-                name_ar: "Technologies in practice",
+                name_ar: "التقنيات في الممارسة",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-CYBER-SECURITY"],
@@ -12968,7 +12968,7 @@ export const universities: University[] = [
               {
                 code: "TT284",
                 name_en: "Web technologies",
-                name_ar: "Web technologies",
+                name_ar: "تقنيات الويب",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-CYBER-SECURITY"],
@@ -12976,7 +12976,7 @@ export const universities: University[] = [
               {
                 code: "T216A",
                 name_en: "Cisco networking (CCNA) part1",
-                name_ar: "Cisco networking (CCNA) part1",
+                name_ar: "شبكات سيسكو (CCNA) الجزء 1",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-CYBER-SECURITY"],
@@ -12984,7 +12984,7 @@ export const universities: University[] = [
               {
                 code: "T216B",
                 name_en: "Cisco networking (CCNA) part2",
-                name_ar: "Cisco networking (CCNA) part2",
+                name_ar: "شبكات سيسكو (CCNA) الجزء 2",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-CYBER-SECURITY"],
@@ -12992,7 +12992,7 @@ export const universities: University[] = [
               {
                 code: "TM256",
                 name_en: "Cyber Security",
-                name_ar: "Cyber Security",
+                name_ar: "الأمن السيبراني",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-CYBER-SECURITY"],
@@ -13000,7 +13000,7 @@ export const universities: University[] = [
               {
                 code: "TM311",
                 name_en: "Information security",
-                name_ar: "Information security",
+                name_ar: "أمن المعلومات",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-CYBER-SECURITY"],
@@ -13008,7 +13008,7 @@ export const universities: University[] = [
               {
                 code: "TM359",
                 name_en: "System penetration testing",
-                name_ar: "System penetration testing",
+                name_ar: "اختبار اختراق النظم",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-CYBER-SECURITY"],
@@ -13016,7 +13016,7 @@ export const universities: University[] = [
               {
                 code: "TM471A",
                 name_en: "Graduation Project (CyS pathway) - Part A",
-                name_ar: "Graduation Project (CyS pathway) - Part A",
+                name_ar: "مشروع التخرج (مسار CyS) - الجزء أ",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-CYBER-SECURITY"],
@@ -13024,7 +13024,7 @@ export const universities: University[] = [
               {
                 code: "TM471B",
                 name_en: "Graduation Project (CyS pathway) - Part B",
-                name_ar: "Graduation Project (CyS pathway) - Part B",
+                name_ar: "مشروع التخرج (مسار CyS) - الجزء ب",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-CYBER-SECURITY"],
@@ -13032,7 +13032,7 @@ export const universities: University[] = [
               {
                 code: "MT141",
                 name_en: "Introduction to Probability and Statistics",
-                name_ar: "Introduction to Probability and Statistics",
+                name_ar: "مقدمة في الاحتمالات والإحصاء",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-ARTIFICIAL-INTELLIGENCE"],
@@ -13040,7 +13040,7 @@ export const universities: University[] = [
               {
                 code: "TM103",
                 name_en: "Computer Architecture and Organization",
-                name_ar: "Computer Architecture and Organization",
+                name_ar: "معمارية الحاسوب وتنظيمه",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-ARTIFICIAL-INTELLIGENCE"],
@@ -13048,7 +13048,7 @@ export const universities: University[] = [
               {
                 code: "M269",
                 name_en: "Algorithm, Data structure and Computability",
-                name_ar: "Algorithm, Data structure and Computability",
+                name_ar: "الخوارزمية، هياكل البيانات وقابلية الحوسبة",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-ARTIFICIAL-INTELLIGENCE"],
@@ -13056,7 +13056,7 @@ export const universities: University[] = [
               {
                 code: "TM270",
                 name_en: "Artificial intelligence",
-                name_ar: "Artificial intelligence",
+                name_ar: "الذكاء الاصطناعي",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-ARTIFICIAL-INTELLIGENCE"],
@@ -13064,7 +13064,7 @@ export const universities: University[] = [
               {
                 code: "TM271",
                 name_en: "Machine Learning and Deep learning",
-                name_ar: "Machine Learning and Deep learning",
+                name_ar: "تعلم الآلة والتعلم العميق",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-ARTIFICIAL-INTELLIGENCE"],
@@ -13072,7 +13072,7 @@ export const universities: University[] = [
               {
                 code: "TM275",
                 name_en: "Parallel and Distributed Systems",
-                name_ar: "Parallel and Distributed Systems",
+                name_ar: "الأنظمة المتوازية والموزعة",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-ARTIFICIAL-INTELLIGENCE"],
@@ -13080,7 +13080,7 @@ export const universities: University[] = [
               {
                 code: "TM276",
                 name_en: "Software Development Processes and Methodologies",
-                name_ar: "Software Development Processes and Methodologies",
+                name_ar: "عمليات ومنهجيات تطوير البرمجيات",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-ARTIFICIAL-INTELLIGENCE"],
@@ -13088,7 +13088,7 @@ export const universities: University[] = [
               {
                 code: "TM340",
                 name_en: "Natural Language Processing",
-                name_ar: "Natural Language Processing",
+                name_ar: "معالجة اللغات الطبيعية",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-ARTIFICIAL-INTELLIGENCE"],
@@ -13096,7 +13096,7 @@ export const universities: University[] = [
               {
                 code: "TM471A",
                 name_en: "Graduation Project - A",
-                name_ar: "Graduation Project - A",
+                name_ar: "مشروع تخرج - أ",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-ARTIFICIAL-INTELLIGENCE"],
@@ -13104,7 +13104,7 @@ export const universities: University[] = [
               {
                 code: "TM341",
                 name_en: "Computer Vision",
-                name_ar: "Computer Vision",
+                name_ar: "الرؤية الحاسوبية",
                 credits: 8,
                 type: "Required",
                 program_ids: ["KW-AOU-ARTIFICIAL-INTELLIGENCE"],
@@ -13112,7 +13112,7 @@ export const universities: University[] = [
               {
                 code: "TM471B",
                 name_en: "Graduation Project - B",
-                name_ar: "Graduation Project - B",
+                name_ar: "مشروع تخرج - ب",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-AOU-ARTIFICIAL-INTELLIGENCE"],
@@ -13186,7 +13186,7 @@ export const universities: University[] = [
               {
                 code: "ENGL 106",
                 name_en: "First-Year Composition",
-                name_ar: "First-Year Composition",
+                name_ar: "تكوين العام الأول",
                 credits: 4,
               },
               {
@@ -13234,7 +13234,7 @@ export const universities: University[] = [
               {
                 code: "PHYS 241",
                 name_en: "Electricity and Optics",
-                name_ar: "Electricity and Optics",
+                name_ar: "الكهرباء والبصريات",
                 credits: 3,
               },
               {
@@ -13386,7 +13386,7 @@ export const universities: University[] = [
               {
                 code: "ENGL 106",
                 name_en: "First-Year Composition",
-                name_ar: "First-Year Composition",
+                name_ar: "تكوين العام الأول",
                 credits: 4,
               },
               {
@@ -13482,25 +13482,25 @@ export const universities: University[] = [
               {
                 code: "CVL 340",
                 name_en: "Hydraulics",
-                name_ar: "Hydraulics",
+                name_ar: "الهيدروليكا",
                 credits: 3,
               },
               {
                 code: "CVL 343",
                 name_en: "Elementary Hydraulics Laboratory",
-                name_ar: "Elementary Hydraulics Laboratory",
+                name_ar: "مختبر الهيدروليكا الأساسية",
                 credits: 1,
               },
               {
                 code: "STAT 511",
                 name_en: "Statistical Methods",
-                name_ar: "Statistical Methods",
+                name_ar: "الأساليب الإحصائية",
                 credits: 3,
               },
               {
                 code: "PHYS 241",
                 name_en: "Electricity and Optics",
-                name_ar: "Electricity and Optics",
+                name_ar: "الكهرباء والبصريات",
                 credits: 3,
               },
               {
@@ -13561,7 +13561,7 @@ export const universities: University[] = [
               {
                 code: "CVL 440",
                 name_en: "Urban Hydraulics",
-                name_ar: "Urban Hydraulics",
+                name_ar: "هيدروليكا حضرية",
                 credits: 3,
               },
               {
@@ -13649,7 +13649,7 @@ export const universities: University[] = [
               {
                 code: "ENGL 106",
                 name_en: "First-Year Composition",
-                name_ar: "First-Year Composition",
+                name_ar: "تكوين العام الأول",
                 credits: 4,
               },
               {
@@ -13745,13 +13745,13 @@ export const universities: University[] = [
               {
                 code: "CVL 341",
                 name_en: "Hydraulics, Hydrology and Drainage",
-                name_ar: "Hydraulics, Hydrology and Drainage",
+                name_ar: "الهيدروليكا والهيدرولوجيا والصرف",
                 credits: 3,
               },
               {
                 code: "CVL 343",
                 name_en: "Elementary Hydraulics Laboratory",
-                name_ar: "Elementary Hydraulics Laboratory",
+                name_ar: "مختبر الهيدروليكا الأساسية",
                 credits: 1,
               },
               {
@@ -13763,7 +13763,7 @@ export const universities: University[] = [
               {
                 code: "PHYS 241",
                 name_en: "Electricity and Optics",
-                name_ar: "Electricity and Optics",
+                name_ar: "الكهرباء والبصريات",
                 credits: 3,
               },
               {
@@ -13805,19 +13805,19 @@ export const universities: University[] = [
               {
                 code: "STAT 511",
                 name_en: "Statistical Methods",
-                name_ar: "Statistical Methods",
+                name_ar: "الأساليب الإحصائية",
                 credits: 3,
               },
               {
                 code: "AE 513",
                 name_en: "Lighting in Buildings",
-                name_ar: "Lighting in Buildings",
+                name_ar: "الإضاءة في المباني",
                 credits: 3,
               },
               {
                 code: "AE 514",
                 name_en: "Building Controls",
-                name_ar: "Building Controls",
+                name_ar: "أنظمة التحكم في المباني",
                 credits: 3,
               },
               {
@@ -13841,7 +13841,7 @@ export const universities: University[] = [
               {
                 code: "AE 522",
                 name_en: "Indoor Environment",
-                name_ar: "Indoor Environment",
+                name_ar: "البيئة الداخلية",
                 credits: 3,
               },
             ],
@@ -13873,7 +13873,7 @@ export const universities: University[] = [
               {
                 code: "TECH 120",
                 name_en: "Technology and the Individual",
-                name_ar: "Technology and the Individual",
+                name_ar: "التكنولوجيا والفرد",
                 credits: 3,
               },
               {
@@ -13897,7 +13897,7 @@ export const universities: University[] = [
               {
                 code: "ENGL 106",
                 name_en: "First-Year Composition",
-                name_ar: "First-Year Composition",
+                name_ar: "تكوين العام الأول",
                 credits: 4,
               },
               {
@@ -13957,7 +13957,7 @@ export const universities: University[] = [
               {
                 code: "TECH 320",
                 name_en: "Technology and the Organization",
-                name_ar: "Technology and the Organization",
+                name_ar: "التكنولوجيا والمنظمة",
                 credits: 2,
               },
               {
@@ -13969,7 +13969,7 @@ export const universities: University[] = [
               {
                 code: "TECH 330",
                 name_en: "Technology and the Global Society",
-                name_ar: "Technology and the Global Society",
+                name_ar: "التكنولوجيا والمجتمع العالمي",
                 credits: 3,
               },
               {
@@ -13981,15 +13981,14 @@ export const universities: University[] = [
               {
                 code: "CNIT 480",
                 name_en: "Managing Information Technology Projects",
-                name_ar: "Managing Information Technology Projects",
+                name_ar: "إدارة مشاريع تكنولوجيا المعلومات",
                 credits: 3,
               },
               {
                 code: "CNIT 325",
                 name_en:
                   "Object-Oriented Application Development (alt. to CNIT 315)",
-                name_ar:
-                  "Object-Oriented Application Development (alt. to CNIT 315)",
+                name_ar: "تطوير التطبيقات كائنية التوجه (بديل لـ CNIT 315)",
                 credits: 3,
               },
               {
@@ -14041,7 +14040,7 @@ export const universities: University[] = [
               {
                 code: "STAT 301",
                 name_en: "Elementary Statistical Methods",
-                name_ar: "Elementary Statistical Methods",
+                name_ar: "الطرق الإحصائية الأولية",
                 credits: 3,
               },
               {
@@ -14170,7 +14169,7 @@ export const universities: University[] = [
               {
                 code: "ECON 251",
                 name_en: "Microeconomics",
-                name_ar: "Microeconomics",
+                name_ar: "الاقتصاد الجزئي",
                 credits: 3,
               },
               {
@@ -14194,7 +14193,7 @@ export const universities: University[] = [
               {
                 code: "ECON 252",
                 name_en: "Macroeconomics",
-                name_ar: "Macroeconomics",
+                name_ar: "الاقتصاد الكلي",
                 credits: 3,
               },
               {
@@ -14296,13 +14295,13 @@ export const universities: University[] = [
               {
                 code: "BUS 300",
                 name_en: "Career Planning",
-                name_ar: "Career Planning",
+                name_ar: "تخطيط المسار الوظيفي",
                 credits: 1,
               },
               {
                 code: "ACT 480",
                 name_en: "Auditing",
-                name_ar: "Auditing",
+                name_ar: "التدقيق",
                 credits: 3,
               },
               {
@@ -14412,7 +14411,7 @@ export const universities: University[] = [
               {
                 code: "ECON 251",
                 name_en: "Microeconomics",
-                name_ar: "Microeconomics",
+                name_ar: "الاقتصاد الجزئي",
                 credits: 3,
               },
               {
@@ -14430,7 +14429,7 @@ export const universities: University[] = [
               {
                 code: "ECON 252",
                 name_en: "Macroeconomics",
-                name_ar: "Macroeconomics",
+                name_ar: "الاقتصاد الكلي",
                 credits: 3,
               },
               {
@@ -14532,7 +14531,7 @@ export const universities: University[] = [
               {
                 code: "BUS 300",
                 name_en: "Career Planning",
-                name_ar: "Career Planning",
+                name_ar: "تخطيط المسار الوظيفي",
                 credits: 1,
               },
               {
@@ -14562,19 +14561,19 @@ export const universities: University[] = [
               {
                 code: "FIN 410",
                 name_en: "Money and Banking",
-                name_ar: "Money and Banking",
+                name_ar: "المال والمصارف",
                 credits: 3,
               },
               {
                 code: "FIN 435",
                 name_en: "Fixed Income Securities",
-                name_ar: "Fixed Income Securities",
+                name_ar: "أوراق الدخل الثابت",
                 credits: 3,
               },
               {
                 code: "FIN 440",
                 name_en: "Financial Institutions and Markets",
-                name_ar: "Financial Institutions and Markets",
+                name_ar: "المؤسسات والأسواق المالية",
                 credits: 3,
               },
               {
@@ -14648,7 +14647,7 @@ export const universities: University[] = [
               {
                 code: "ECON 251",
                 name_en: "Microeconomics",
-                name_ar: "Microeconomics",
+                name_ar: "الاقتصاد الجزئي",
                 credits: 3,
               },
               {
@@ -14666,7 +14665,7 @@ export const universities: University[] = [
               {
                 code: "ECON 252",
                 name_en: "Macroeconomics",
-                name_ar: "Macroeconomics",
+                name_ar: "الاقتصاد الكلي",
                 credits: 3,
               },
               {
@@ -14744,7 +14743,7 @@ export const universities: University[] = [
               {
                 code: "BUS 300",
                 name_en: "Career Planning",
-                name_ar: "Career Planning",
+                name_ar: "تخطيط المسار الوظيفي",
                 credits: 1,
               },
               {
@@ -14792,7 +14791,7 @@ export const universities: University[] = [
               {
                 code: "MIS 420",
                 name_en: "Electronic Commerce",
-                name_ar: "Electronic Commerce",
+                name_ar: "التجارة الإلكترونية",
                 credits: 3,
               },
               {
@@ -14816,7 +14815,7 @@ export const universities: University[] = [
               {
                 code: "MIS 455",
                 name_en: "Information Technology and Social and Ethical Issues",
-                name_ar: "Information Technology and Social and Ethical Issues",
+                name_ar: "تكنولوجيا المعلومات والقضايا الاجتماعية والأخلاقية",
                 credits: 3,
               },
               {
@@ -14886,7 +14885,7 @@ export const universities: University[] = [
               {
                 code: "ECON 251",
                 name_en: "Microeconomics",
-                name_ar: "Microeconomics",
+                name_ar: "الاقتصاد الجزئي",
                 credits: 3,
               },
               {
@@ -14904,7 +14903,7 @@ export const universities: University[] = [
               {
                 code: "ECON 252",
                 name_en: "Macroeconomics",
-                name_ar: "Macroeconomics",
+                name_ar: "الاقتصاد الكلي",
                 credits: 3,
               },
               {
@@ -14982,7 +14981,7 @@ export const universities: University[] = [
               {
                 code: "BUS 300",
                 name_en: "Career Planning",
-                name_ar: "Career Planning",
+                name_ar: "تخطيط المسار الوظيفي",
                 credits: 1,
               },
               {
@@ -15012,7 +15011,7 @@ export const universities: University[] = [
               {
                 code: "MKT 490",
                 name_en: "Retailing and Merchandising",
-                name_ar: "Retailing and Merchandising",
+                name_ar: "التجزئة والترويج",
                 credits: 3,
               },
               {
@@ -15030,19 +15029,19 @@ export const universities: University[] = [
               {
                 code: "MKT 470",
                 name_en: "New Product Development",
-                name_ar: "New Product Development",
+                name_ar: "تطوير المنتجات الجديدة",
                 credits: 3,
               },
               {
                 code: "MKT 430",
                 name_en: "Professional Selling",
-                name_ar: "Professional Selling",
+                name_ar: "البيع الاحترافي",
                 credits: 3,
               },
               {
                 code: "MKT 440",
                 name_en: "Advertising and Promotion",
-                name_ar: "Advertising and Promotion",
+                name_ar: "الإعلان والترويج",
                 credits: 3,
               },
               {
@@ -15122,7 +15121,7 @@ export const universities: University[] = [
               {
                 code: "ECON 251",
                 name_en: "Microeconomics",
-                name_ar: "Microeconomics",
+                name_ar: "الاقتصاد الجزئي",
                 credits: 3,
               },
               {
@@ -15140,7 +15139,7 @@ export const universities: University[] = [
               {
                 code: "ECON 252",
                 name_en: "Macroeconomics",
-                name_ar: "Macroeconomics",
+                name_ar: "الاقتصاد الكلي",
                 credits: 3,
               },
               {
@@ -15200,7 +15199,7 @@ export const universities: University[] = [
               {
                 code: "HRM 410",
                 name_en: "Techniques of Employee Selection and Recruitment",
-                name_ar: "Techniques of Employee Selection and Recruitment",
+                name_ar: "تقنيات اختيار الموظفين وتوظيفهم",
                 credits: 3,
               },
               {
@@ -15224,7 +15223,7 @@ export const universities: University[] = [
               {
                 code: "HRM 420",
                 name_en: "Training and Development",
-                name_ar: "Training and Development",
+                name_ar: "التدريب والتطوير",
                 credits: 3,
               },
               {
@@ -15242,13 +15241,13 @@ export const universities: University[] = [
               {
                 code: "BUS 300",
                 name_en: "Career Planning",
-                name_ar: "Career Planning",
+                name_ar: "تخطيط المسار الوظيفي",
                 credits: 1,
               },
               {
                 code: "HRM 430",
                 name_en: "Compensation and Benefits",
-                name_ar: "Compensation and Benefits",
+                name_ar: "التعويضات والمزايا",
                 credits: 3,
               },
               {
@@ -15367,7 +15366,7 @@ export const universities: University[] = [
               {
                 code: "ENGL 100",
                 name_en: "Academic English I",
-                name_ar: "Academic English I",
+                name_ar: "اللغة الإنجليزية الأكاديمية I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-SCIENCE-B-S"],
@@ -15375,7 +15374,7 @@ export const universities: University[] = [
               {
                 code: "CSC 122",
                 name_en: "Computational Problem Solving",
-                name_ar: "Computational Problem Solving",
+                name_ar: "حل المشكلات بالحاسوب",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-SCIENCE-B-S"],
@@ -15383,7 +15382,7 @@ export const universities: University[] = [
               {
                 code: "CSC 123",
                 name_en: "Fundamentals of Web Design",
-                name_ar: "Fundamentals of Web Design",
+                name_ar: "أساسيات تصميم الويب",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-SCIENCE-B-S"],
@@ -15391,7 +15390,7 @@ export const universities: University[] = [
               {
                 code: "MATH 131",
                 name_en: "Analytic Geometry & Calculus I",
-                name_ar: "Analytic Geometry & Calculus I",
+                name_ar: "الهندسة التحليلية وحساب التفاضل والتكامل I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-SCIENCE-B-S"],
@@ -15399,7 +15398,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "Social Sciences Offering",
-                name_ar: "Social Sciences Offering",
+                name_ar: "مقرر العلوم الاجتماعية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-SCIENCE-B-S"],
@@ -15407,7 +15406,7 @@ export const universities: University[] = [
               {
                 code: "ENGL 110",
                 name_en: "English Composition I",
-                name_ar: "English Composition I",
+                name_ar: "التعبير باللغة الإنجليزية I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-SCIENCE-B-S"],
@@ -15415,7 +15414,7 @@ export const universities: University[] = [
               {
                 code: "CSC 125",
                 name_en: "Object-Oriented Programming I",
-                name_ar: "Object-Oriented Programming I",
+                name_ar: "البرمجة كائنية التوجه I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-SCIENCE-B-S"],
@@ -15423,7 +15422,7 @@ export const universities: University[] = [
               {
                 code: "MATH 140",
                 name_en: "Elementary Linear Algebra",
-                name_ar: "Elementary Linear Algebra",
+                name_ar: "الجبر الخطي الأولي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-SCIENCE-B-S"],
@@ -15431,7 +15430,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "Arab Heritage",
-                name_ar: "Arab Heritage",
+                name_ar: "التراث العربي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-SCIENCE-B-S"],
@@ -15439,7 +15438,8 @@ export const universities: University[] = [
               {
                 code: "PHYS/CHEM/BIOL 110",
                 name_en: "Any 1 course from PHYS 110, CHEM 110, BIOL 110 + Lab",
-                name_ar: "Any 1 course from PHYS 110, CHEM 110, BIOL 110 + Lab",
+                name_ar:
+                  "أي مقرر واحد من PHYS 110 أو CHEM 110 أو BIOL 110 + مختبر",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-SCIENCE-B-S"],
@@ -15447,7 +15447,7 @@ export const universities: University[] = [
               {
                 code: "ENGL 112",
                 name_en: "English Composition II",
-                name_ar: "English Composition II",
+                name_ar: "التعبير باللغة الإنجليزية II",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-SCIENCE-B-S"],
@@ -15455,7 +15455,7 @@ export const universities: University[] = [
               {
                 code: "CSC 225",
                 name_en: "Programming & Data Structures",
-                name_ar: "Programming & Data Structures",
+                name_ar: "البرمجة وهياكل البيانات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-SCIENCE-B-S"],
@@ -15463,7 +15463,7 @@ export const universities: University[] = [
               {
                 code: "CSC 226",
                 name_en: "Object-Oriented Programming II",
-                name_ar: "Object-Oriented Programming II",
+                name_ar: "البرمجة كائنية التوجه II",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-SCIENCE-B-S"],
@@ -15471,7 +15471,7 @@ export const universities: University[] = [
               {
                 code: "CSC 300",
                 name_en: "Discrete Structure",
-                name_ar: "Discrete Structure",
+                name_ar: "البنية المتقطعة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-SCIENCE-B-S"],
@@ -15479,7 +15479,7 @@ export const universities: University[] = [
               {
                 code: "MATH 132",
                 name_en: "Analytic Geometry & Calculus II",
-                name_ar: "Analytic Geometry & Calculus II",
+                name_ar: "الهندسة التحليلية وحساب التفاضل والتكامل II",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-SCIENCE-B-S"],
@@ -15487,7 +15487,7 @@ export const universities: University[] = [
               {
                 code: "CSC 230",
                 name_en: "Digital Systems",
-                name_ar: "Digital Systems",
+                name_ar: "الأنظمة الرقمية",
                 credits: 4,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-SCIENCE-B-S"],
@@ -15495,7 +15495,7 @@ export const universities: University[] = [
               {
                 code: "CSC 313",
                 name_en: "Design and Analysis of Algorithms",
-                name_ar: "Design and Analysis of Algorithms",
+                name_ar: "تصميم وتحليل الخوارزميات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-SCIENCE-B-S"],
@@ -15503,7 +15503,7 @@ export const universities: University[] = [
               {
                 code: "MATH 221",
                 name_en: "Applied Statistics",
-                name_ar: "Applied Statistics",
+                name_ar: "الإحصاء التطبيقي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-SCIENCE-B-S"],
@@ -15511,7 +15511,7 @@ export const universities: University[] = [
               {
                 code: "CSC 270",
                 name_en: "Computer Systems: Arch and Org.",
-                name_ar: "Computer Systems: Arch and Org.",
+                name_ar: "أنظمة الحاسوب: هندسة وتنظيم",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-SCIENCE-B-S"],
@@ -15519,7 +15519,7 @@ export const universities: University[] = [
               {
                 code: "CSC 361",
                 name_en: "Database Management Systems",
-                name_ar: "Database Management Systems",
+                name_ar: "أنظمة إدارة قواعد البيانات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-SCIENCE-B-S"],
@@ -15527,7 +15527,7 @@ export const universities: University[] = [
               {
                 code: "PHIL 245",
                 name_en: "Ethics and The Computer",
-                name_ar: "Ethics and The Computer",
+                name_ar: "الأخلاق والحاسوب",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-SCIENCE-B-S"],
@@ -15535,7 +15535,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "Free Elective",
-                name_ar: "Free Elective",
+                name_ar: "اختياري حر",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-GUST-COMPUTER-SCIENCE-B-S"],
@@ -15543,7 +15543,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "CSC Major Elective",
-                name_ar: "CSC Major Elective",
+                name_ar: "مقرر تخصص اختياري في علوم الحاسوب (CSC)",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-GUST-COMPUTER-SCIENCE-B-S"],
@@ -15551,7 +15551,7 @@ export const universities: University[] = [
               {
                 code: "CSC 325",
                 name_en: "Programming Languages",
-                name_ar: "Programming Languages",
+                name_ar: "لغات البرمجة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-SCIENCE-B-S"],
@@ -15559,7 +15559,7 @@ export const universities: University[] = [
               {
                 code: "CSC 476",
                 name_en: "Operating Systems",
-                name_ar: "Operating Systems",
+                name_ar: "أنظمة التشغيل",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-SCIENCE-B-S"],
@@ -15567,7 +15567,7 @@ export const universities: University[] = [
               {
                 code: "CSC 430",
                 name_en: "Artificial Intelligence",
-                name_ar: "Artificial Intelligence",
+                name_ar: "الذكاء الاصطناعي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-SCIENCE-B-S"],
@@ -15575,7 +15575,7 @@ export const universities: University[] = [
               {
                 code: "MATH 331",
                 name_en: "Numerical Analysis I",
-                name_ar: "Numerical Analysis I",
+                name_ar: "التحليل العددي I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-SCIENCE-B-S"],
@@ -15583,7 +15583,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "Humanities & Fine Arts Offering",
-                name_ar: "Humanities & Fine Arts Offering",
+                name_ar: "عروض العلوم الإنسانية والفنون الجميلة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-SCIENCE-B-S"],
@@ -15591,7 +15591,7 @@ export const universities: University[] = [
               {
                 code: "CSC 350",
                 name_en: "Software Engineering",
-                name_ar: "Software Engineering",
+                name_ar: "هندسة البرمجيات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-SCIENCE-B-S"],
@@ -15599,7 +15599,7 @@ export const universities: University[] = [
               {
                 code: "CSC 492",
                 name_en: "Practicum in Computer Science",
-                name_ar: "Practicum in Computer Science",
+                name_ar: "تدريب عملي في علوم الحاسوب",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-SCIENCE-B-S"],
@@ -15607,7 +15607,7 @@ export const universities: University[] = [
               {
                 code: "CSC 473",
                 name_en: "Computer Networks & Communication",
-                name_ar: "Computer Networks & Communication",
+                name_ar: "شبكات الحاسوب والاتصالات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-SCIENCE-B-S"],
@@ -15615,7 +15615,7 @@ export const universities: University[] = [
               {
                 code: "CSC 451",
                 name_en: "Capstone Project",
-                name_ar: "Capstone Project",
+                name_ar: "مشروع التخرج",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-SCIENCE-B-S"],
@@ -15623,7 +15623,7 @@ export const universities: University[] = [
               {
                 code: "CSC 477",
                 name_en: "Security in Computing",
-                name_ar: "Security in Computing",
+                name_ar: "الأمن في الحوسبة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-SCIENCE-B-S"],
@@ -15631,7 +15631,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "Communication Offering",
-                name_ar: "Communication Offering",
+                name_ar: "مقرر الاتصال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-SCIENCE-B-S"],
@@ -15647,13 +15647,13 @@ export const universities: University[] = [
               {
                 id: "KW-GUST-PUBLIC-RELATIONS-AND-ADVERTISING-B-A",
                 name_en: "Public Relations and Advertising (B.A.)",
-                name_ar: "Public Relations and Advertising (B.A.)",
+                name_ar: "العلاقات العامة والإعلان (بكالوريوس آداب)",
                 degree: "BA",
               },
               {
                 id: "KW-GUST-DIGITAL-MEDIA-PRODUCTION-B-A",
                 name_en: "Digital Media Production (B.A.)",
-                name_ar: "Digital Media Production (B.A.)",
+                name_ar: "إنتاج الوسائط الرقمية (بكالوريوس فنون)",
                 degree: "BA",
               },
               {
@@ -15667,7 +15667,7 @@ export const universities: University[] = [
               {
                 code: "ENGL 100",
                 name_en: "Academic English I",
-                name_ar: "Academic English I",
+                name_ar: "اللغة الإنجليزية الأكاديمية I",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -15679,7 +15679,7 @@ export const universities: University[] = [
               {
                 code: "HFA",
                 name_en: "Humanities/Fine Arts Offering",
-                name_ar: "Humanities/Fine Arts Offering",
+                name_ar: "عروض العلوم الإنسانية/الفنون الجميلة",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -15691,7 +15691,7 @@ export const universities: University[] = [
               {
                 code: "IL",
                 name_en: "Information Literacy Offering",
-                name_ar: "Information Literacy Offering",
+                name_ar: "مقرر محو الأمية المعلوماتية",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -15703,7 +15703,7 @@ export const universities: University[] = [
               {
                 code: "LNS",
                 name_en: "Life/Natural Sciences Offering",
-                name_ar: "Life/Natural Sciences Offering",
+                name_ar: "عروض علوم الحياة/الطبيعية",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -15715,7 +15715,7 @@ export const universities: University[] = [
               {
                 code: "AH",
                 name_en: "Arab Heritage Offering",
-                name_ar: "Arab Heritage Offering",
+                name_ar: "مقرر التراث العربي",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -15727,7 +15727,7 @@ export const universities: University[] = [
               {
                 code: "ENGL 110",
                 name_en: "English Composition I",
-                name_ar: "English Composition I",
+                name_ar: "التعبير باللغة الإنجليزية I",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -15739,7 +15739,7 @@ export const universities: University[] = [
               {
                 code: "MCM",
                 name_en: "Communication Offering",
-                name_ar: "Communication Offering",
+                name_ar: "مقرر الاتصال",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -15750,7 +15750,7 @@ export const universities: University[] = [
               {
                 code: "SS",
                 name_en: "Social Sciences Offering",
-                name_ar: "Social Sciences Offering",
+                name_ar: "مقرر العلوم الاجتماعية",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -15762,7 +15762,7 @@ export const universities: University[] = [
               {
                 code: "MCM 103",
                 name_en: "Introduction to Mass Communication",
-                name_ar: "Introduction to Mass Communication",
+                name_ar: "مقدمة في الاتصال الجماهيري",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -15774,7 +15774,7 @@ export const universities: University[] = [
               {
                 code: "ENGL 112",
                 name_en: "English Composition II",
-                name_ar: "English Composition II",
+                name_ar: "التعبير باللغة الإنجليزية II",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -15786,7 +15786,7 @@ export const universities: University[] = [
               {
                 code: "MATH 120",
                 name_en: "Data Analysis I with Software",
-                name_ar: "Data Analysis I with Software",
+                name_ar: "تحليل البيانات I باستخدام البرمجيات",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -15798,7 +15798,7 @@ export const universities: University[] = [
               {
                 code: "MCM 102",
                 name_en: "Introduction to Public Speaking",
-                name_ar: "Introduction to Public Speaking",
+                name_ar: "مقدمة في الخطابة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-PUBLIC-RELATIONS-AND-ADVERTISING-B-A"],
@@ -15806,7 +15806,7 @@ export const universities: University[] = [
               {
                 code: "MCM 141",
                 name_en: "Intro to PR/Advertising",
-                name_ar: "Intro to PR/Advertising",
+                name_ar: "مقدمة في العلاقات العامة/الإعلان",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-PUBLIC-RELATIONS-AND-ADVERTISING-B-A"],
@@ -15814,7 +15814,7 @@ export const universities: University[] = [
               {
                 code: "LNS",
                 name_en: "Math or Life/Natural Sciences Offering",
-                name_ar: "Math or Life/Natural Sciences Offering",
+                name_ar: "مقرر الرياضيات أو العلوم الحياتية/الطبيعية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-PUBLIC-RELATIONS-AND-ADVERTISING-B-A"],
@@ -15822,7 +15822,7 @@ export const universities: University[] = [
               {
                 code: "MCM 206",
                 name_en: "Intro to Writing for Mass Media",
-                name_ar: "Intro to Writing for Mass Media",
+                name_ar: "مقدمة في الكتابة لوسائل الإعلام",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -15834,7 +15834,7 @@ export const universities: University[] = [
               {
                 code: "MCM 209",
                 name_en: "Fundamentals of Advertising",
-                name_ar: "Fundamentals of Advertising",
+                name_ar: "أساسيات الإعلان",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-PUBLIC-RELATIONS-AND-ADVERTISING-B-A"],
@@ -15842,7 +15842,7 @@ export const universities: University[] = [
               {
                 code: "MCM 200/300/400",
                 name_en: "MCM Major Elective",
-                name_ar: "MCM Major Elective",
+                name_ar: "اختياري تخصص MCM",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -15854,7 +15854,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "Minor Requirements / Free Elective",
-                name_ar: "Minor Requirements / Free Elective",
+                name_ar: "متطلبات تخصص فرعي / اختياري حر",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -15866,7 +15866,7 @@ export const universities: University[] = [
               {
                 code: "MATH 122",
                 name_en: "Data Analysis II with Software",
-                name_ar: "Data Analysis II with Software",
+                name_ar: "تحليل البيانات II باستخدام البرمجيات",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -15878,7 +15878,7 @@ export const universities: University[] = [
               {
                 code: "MCM 105",
                 name_en: "Communication Layout & Design",
-                name_ar: "Communication Layout & Design",
+                name_ar: "تخطيط وتصميم الاتصالات",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -15890,7 +15890,7 @@ export const universities: University[] = [
               {
                 code: "MCM 341",
                 name_en: "Cases in PR/Ad",
-                name_ar: "Cases in PR/Ad",
+                name_ar: "حالات في العلاقات العامة/الإعلان",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-PUBLIC-RELATIONS-AND-ADVERTISING-B-A"],
@@ -15898,7 +15898,7 @@ export const universities: University[] = [
               {
                 code: "MCM 211",
                 name_en: "Photography",
-                name_ar: "Photography",
+                name_ar: "التصوير الفوتوغرافي",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -15910,7 +15910,7 @@ export const universities: University[] = [
               {
                 code: "MCM 412",
                 name_en: "Communication Theory",
-                name_ar: "Communication Theory",
+                name_ar: "نظرية الاتصال",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -15922,7 +15922,7 @@ export const universities: University[] = [
               {
                 code: "MCM 212",
                 name_en: "Social Media Principles & Practice",
-                name_ar: "Social Media Principles & Practice",
+                name_ar: "مبادئ وممارسة وسائل التواصل الاجتماعي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-PUBLIC-RELATIONS-AND-ADVERTISING-B-A"],
@@ -15930,7 +15930,7 @@ export const universities: University[] = [
               {
                 code: "MCM 241",
                 name_en: "Writing for PR/Ad",
-                name_ar: "Writing for PR/Ad",
+                name_ar: "الكتابة للعلاقات العامة/الإعلان",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-PUBLIC-RELATIONS-AND-ADVERTISING-B-A"],
@@ -15938,7 +15938,7 @@ export const universities: University[] = [
               {
                 code: "MCM 411",
                 name_en: "Media Law & Ethics",
-                name_ar: "Media Law & Ethics",
+                name_ar: "قانون وأخلاقيات الإعلام",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -15950,7 +15950,7 @@ export const universities: University[] = [
               {
                 code: "MCM 305",
                 name_en: "Communication Campaigns",
-                name_ar: "Communication Campaigns",
+                name_ar: "الحملات الاتصالية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-PUBLIC-RELATIONS-AND-ADVERTISING-B-A"],
@@ -15958,7 +15958,7 @@ export const universities: University[] = [
               {
                 code: "MCM 455",
                 name_en: "Internship",
-                name_ar: "Internship",
+                name_ar: "تدريب عملي",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -15969,7 +15969,7 @@ export const universities: University[] = [
               {
                 code: "MCM 413",
                 name_en: "Research Methods in Mass Communication",
-                name_ar: "Research Methods in Mass Communication",
+                name_ar: "مناهج البحث في الاتصال الجماهيري",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -15981,7 +15981,7 @@ export const universities: University[] = [
               {
                 code: "MCM 102",
                 name_en: "Intro to Public Speaking",
-                name_ar: "Intro to Public Speaking",
+                name_ar: "مقدمة في الخطابة العامة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-DIGITAL-MEDIA-PRODUCTION-B-A"],
@@ -15989,7 +15989,7 @@ export const universities: University[] = [
               {
                 code: "MCM 121",
                 name_en: "Fundamentals of Media Broadcasting",
-                name_ar: "Fundamentals of Media Broadcasting",
+                name_ar: "أساسيات البث الإعلامي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-DIGITAL-MEDIA-PRODUCTION-B-A"],
@@ -15997,7 +15997,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "Minor Requirement / Free Elective",
-                name_ar: "Minor Requirement / Free Elective",
+                name_ar: "متطلب تخصص فرعي / اختياري حر",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-GUST-DIGITAL-MEDIA-PRODUCTION-B-A"],
@@ -16005,7 +16005,7 @@ export const universities: University[] = [
               {
                 code: "LNS",
                 name_en: "Math or Life/Natural Science Offering",
-                name_ar: "Math or Life/Natural Science Offering",
+                name_ar: "مقرر الرياضيات أو العلوم الحياتية/الطبيعية",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -16016,7 +16016,7 @@ export const universities: University[] = [
               {
                 code: "MCM 301",
                 name_en: "Mass Media Management",
-                name_ar: "Mass Media Management",
+                name_ar: "إدارة وسائل الإعلام الجماهيرية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-DIGITAL-MEDIA-PRODUCTION-B-A"],
@@ -16024,7 +16024,7 @@ export const universities: University[] = [
               {
                 code: "MCM 254",
                 name_en: "Visual Storytelling",
-                name_ar: "Visual Storytelling",
+                name_ar: "الرواية البصرية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-DIGITAL-MEDIA-PRODUCTION-B-A"],
@@ -16032,7 +16032,7 @@ export const universities: University[] = [
               {
                 code: "MCM 251",
                 name_en: "Introduction to Visual Communication",
-                name_ar: "Introduction to Visual Communication",
+                name_ar: "مقدمة في الاتصال المرئي",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -16043,7 +16043,7 @@ export const universities: University[] = [
               {
                 code: "MCM 332",
                 name_en: "Field Production",
-                name_ar: "Field Production",
+                name_ar: "الإنتاج الميداني",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-DIGITAL-MEDIA-PRODUCTION-B-A"],
@@ -16051,7 +16051,7 @@ export const universities: University[] = [
               {
                 code: "MCM 311",
                 name_en: "Creative Writing for Media",
-                name_ar: "Creative Writing for Media",
+                name_ar: "الكتابة الإبداعية للإعلام",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-DIGITAL-MEDIA-PRODUCTION-B-A"],
@@ -16059,7 +16059,7 @@ export const universities: University[] = [
               {
                 code: "MCM 380",
                 name_en: "Post-Production",
-                name_ar: "Post-Production",
+                name_ar: "ما بعد الإنتاج",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-DIGITAL-MEDIA-PRODUCTION-B-A"],
@@ -16067,7 +16067,7 @@ export const universities: University[] = [
               {
                 code: "MCM 432",
                 name_en: "Senior Project in Digital Media",
-                name_ar: "Senior Project in Digital Media",
+                name_ar: "المشروع المتقدم في الإعلام الرقمي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-DIGITAL-MEDIA-PRODUCTION-B-A"],
@@ -16075,7 +16075,7 @@ export const universities: University[] = [
               {
                 code: "MCM 245",
                 name_en: "Typography",
-                name_ar: "Typography",
+                name_ar: "الطباعة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-VISUAL-COMMUNICATION-B-A"],
@@ -16083,7 +16083,7 @@ export const universities: University[] = [
               {
                 code: "MCM 252",
                 name_en: "Graphic Design",
-                name_ar: "Graphic Design",
+                name_ar: "تصميم الجرافيك",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-VISUAL-COMMUNICATION-B-A"],
@@ -16091,7 +16091,7 @@ export const universities: University[] = [
               {
                 code: "MCM 253",
                 name_en: "Visual Culture",
-                name_ar: "Visual Culture",
+                name_ar: "الثقافة البصرية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-VISUAL-COMMUNICATION-B-A"],
@@ -16099,7 +16099,7 @@ export const universities: University[] = [
               {
                 code: "MCM 306",
                 name_en: "Promotion Design",
-                name_ar: "Promotion Design",
+                name_ar: "تصميم الترويج",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-VISUAL-COMMUNICATION-B-A"],
@@ -16107,7 +16107,7 @@ export const universities: University[] = [
               {
                 code: "MCM 352",
                 name_en: "Web Design",
-                name_ar: "Web Design",
+                name_ar: "تصميم الويب",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-VISUAL-COMMUNICATION-B-A"],
@@ -16115,7 +16115,7 @@ export const universities: University[] = [
               {
                 code: "MCM 353",
                 name_en: "Motion Graphics",
-                name_ar: "Motion Graphics",
+                name_ar: "رسوميات الحركة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-VISUAL-COMMUNICATION-B-A"],
@@ -16131,19 +16131,19 @@ export const universities: University[] = [
               {
                 id: "KW-GUST-ENGLISH-LITERATURE-B-A",
                 name_en: "English Literature (B.A.)",
-                name_ar: "English Literature (B.A.)",
+                name_ar: "الأدب الإنجليزي (بكالوريوس آداب)",
                 degree: "BA",
               },
               {
                 id: "KW-GUST-ENGLISH-EDUCATION-B-A",
                 name_en: "English Education (B.A.)",
-                name_ar: "English Education (B.A.)",
+                name_ar: "تربية اللغة الإنجليزية (بكالوريوس آداب)",
                 degree: "BA",
               },
               {
                 id: "KW-GUST-ENGLISH-LINGUISTICS-TRANSLATION-B-A",
                 name_en: "English Linguistics / Translation (B.A.)",
-                name_ar: "English Linguistics / Translation (B.A.)",
+                name_ar: "اللغويات الإنجليزية / الترجمة (بكالوريوس آداب)",
                 degree: "BA",
               },
             ],
@@ -16151,7 +16151,7 @@ export const universities: University[] = [
               {
                 code: "PENDING",
                 name_en: "PENDING",
-                name_ar: "PENDING",
+                name_ar: "قيد الانتظار",
                 credits: 3,
                 type: "PENDING",
                 program_ids: [
@@ -16192,7 +16192,7 @@ export const universities: University[] = [
               {
                 code: "ENGG 101",
                 name_en: "Study & Careers in Engineering",
-                name_ar: "Study & Careers in Engineering",
+                name_ar: "الدراسة والوظائف في الهندسة",
                 credits: 1,
                 type: "Required",
                 program_ids: [
@@ -16203,7 +16203,7 @@ export const universities: University[] = [
               {
                 code: "MATH 131",
                 name_en: "Analytic Geometry & Calculus I",
-                name_ar: "Analytic Geometry & Calculus I",
+                name_ar: "الهندسة التحليلية وحساب التفاضل والتكامل I",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -16214,7 +16214,7 @@ export const universities: University[] = [
               {
                 code: "CHEM 110",
                 name_en: "General Chemistry I",
-                name_ar: "General Chemistry I",
+                name_ar: "الكيمياء العامة I",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -16225,7 +16225,7 @@ export const universities: University[] = [
               {
                 code: "CHEM 110L",
                 name_en: "General Chemistry I Lab",
-                name_ar: "General Chemistry I Lab",
+                name_ar: "معمل الكيمياء العامة I",
                 credits: 1,
                 type: "Required",
                 program_ids: [
@@ -16236,7 +16236,7 @@ export const universities: University[] = [
               {
                 code: "CHEM 115L",
                 name_en: "Intro to Lab Safety & Hazardous Materials",
-                name_ar: "Intro to Lab Safety & Hazardous Materials",
+                name_ar: "مقدمة في السلامة المخبرية والمواد الخطرة",
                 credits: 1,
                 type: "Required",
                 program_ids: [
@@ -16247,7 +16247,7 @@ export const universities: University[] = [
               {
                 code: "CSC 122",
                 name_en: "Computational Problem Solving",
-                name_ar: "Computational Problem Solving",
+                name_ar: "حل المشكلات بالحاسوب",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -16258,7 +16258,7 @@ export const universities: University[] = [
               {
                 code: "ENGL 100",
                 name_en: "Academic English I",
-                name_ar: "Academic English I",
+                name_ar: "اللغة الإنجليزية الأكاديمية I",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -16269,7 +16269,7 @@ export const universities: University[] = [
               {
                 code: "ENGG 102",
                 name_en: "Engr Design with Computer Appl.",
-                name_ar: "Engr Design with Computer Appl.",
+                name_ar: "التصميم الهندسي بتطبيقات الحاسوب",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-ENGINEERING-B-S"],
@@ -16277,7 +16277,7 @@ export const universities: University[] = [
               {
                 code: "MATH 132",
                 name_en: "Analytic Geometry & Calculus II",
-                name_ar: "Analytic Geometry & Calculus II",
+                name_ar: "الهندسة التحليلية وحساب التفاضل والتكامل II",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -16288,7 +16288,7 @@ export const universities: University[] = [
               {
                 code: "PHYS 110",
                 name_en: "Physics I",
-                name_ar: "Physics I",
+                name_ar: "فيزياء I",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -16299,7 +16299,7 @@ export const universities: University[] = [
               {
                 code: "PHYS 110L",
                 name_en: "Physics I Lab",
-                name_ar: "Physics I Lab",
+                name_ar: "معمل فيزياء I",
                 credits: 1,
                 type: "Required",
                 program_ids: [
@@ -16310,7 +16310,7 @@ export const universities: University[] = [
               {
                 code: "ECON 101",
                 name_en: "Principles of Microeconomics",
-                name_ar: "Principles of Microeconomics",
+                name_ar: "مبادئ الاقتصاد الجزئي",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -16321,7 +16321,7 @@ export const universities: University[] = [
               {
                 code: "ENGL 110",
                 name_en: "English Composition I",
-                name_ar: "English Composition I",
+                name_ar: "التعبير باللغة الإنجليزية I",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -16332,7 +16332,7 @@ export const universities: University[] = [
               {
                 code: "MATH 231",
                 name_en: "Analytic Geometry & Calculus III",
-                name_ar: "Analytic Geometry & Calculus III",
+                name_ar: "الهندسة التحليلية وحساب التفاضل والتكامل III",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -16343,7 +16343,7 @@ export const universities: University[] = [
               {
                 code: "CSC 125",
                 name_en: "Object Oriented Programming I",
-                name_ar: "Object Oriented Programming I",
+                name_ar: "البرمجة الشيئية I",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -16354,7 +16354,7 @@ export const universities: University[] = [
               {
                 code: "ENGL 112",
                 name_en: "English Composition II",
-                name_ar: "English Composition II",
+                name_ar: "التعبير باللغة الإنجليزية II",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -16365,7 +16365,7 @@ export const universities: University[] = [
               {
                 code: "PHYS 112",
                 name_en: "Physics II",
-                name_ar: "Physics II",
+                name_ar: "فيزياء II",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -16376,7 +16376,7 @@ export const universities: University[] = [
               {
                 code: "PHYS 112L",
                 name_en: "Physics II Lab",
-                name_ar: "Physics II Lab",
+                name_ar: "معمل فيزياء II",
                 credits: 1,
                 type: "Required",
                 program_ids: [
@@ -16387,7 +16387,7 @@ export const universities: University[] = [
               {
                 code: "MATH 140",
                 name_en: "Elementary Linear Algebra",
-                name_ar: "Elementary Linear Algebra",
+                name_ar: "الجبر الخطي الأولي",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -16398,7 +16398,7 @@ export const universities: University[] = [
               {
                 code: "ELEN 251",
                 name_en: "Circuits I",
-                name_ar: "Circuits I",
+                name_ar: "دوائر كهربائية I",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -16409,7 +16409,7 @@ export const universities: University[] = [
               {
                 code: "ELEN 251L",
                 name_en: "Circuit Analysis Lab I",
-                name_ar: "Circuit Analysis Lab I",
+                name_ar: "مختبر تحليل الدوائر الكهربائية I",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-ENGINEERING-B-S"],
@@ -16417,7 +16417,7 @@ export const universities: University[] = [
               {
                 code: "COEN 225",
                 name_en: "Programming & Data Structures",
-                name_ar: "Programming & Data Structures",
+                name_ar: "البرمجة وهياكل البيانات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-ENGINEERING-B-S"],
@@ -16425,7 +16425,7 @@ export const universities: University[] = [
               {
                 code: "COEN 230",
                 name_en: "Digital Systems",
-                name_ar: "Digital Systems",
+                name_ar: "الأنظمة الرقمية",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -16436,7 +16436,7 @@ export const universities: University[] = [
               {
                 code: "COEN 230L",
                 name_en: "Digital Systems Lab",
-                name_ar: "Digital Systems Lab",
+                name_ar: "مختبر الأنظمة الرقمية",
                 credits: 1,
                 type: "Required",
                 program_ids: [
@@ -16447,7 +16447,7 @@ export const universities: University[] = [
               {
                 code: "MATH 232",
                 name_en: "Introduction to Differential Equations",
-                name_ar: "Introduction to Differential Equations",
+                name_ar: "مقدمة في المعادلات التفاضلية",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -16458,7 +16458,7 @@ export const universities: University[] = [
               {
                 code: "COEN 240",
                 name_en: "Discrete Structures",
-                name_ar: "Discrete Structures",
+                name_ar: "البنى المتقطعة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-ENGINEERING-B-S"],
@@ -16466,7 +16466,7 @@ export const universities: University[] = [
               {
                 code: "COEN 313",
                 name_en: "Microcontrollers & Embed Sys Design",
-                name_ar: "Microcontrollers & Embed Sys Design",
+                name_ar: "تصميم المتحكمات الدقيقة والأنظمة المدمجة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-ENGINEERING-B-S"],
@@ -16474,7 +16474,7 @@ export const universities: University[] = [
               {
                 code: "COEN 313L",
                 name_en: "Microcontroller & Embedded Sys Des Lab",
-                name_ar: "Microcontroller & Embedded Sys Des Lab",
+                name_ar: "مختبر تصميم المتحكمات الدقيقة والأنظمة المدمجة",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-ENGINEERING-B-S"],
@@ -16482,7 +16482,7 @@ export const universities: University[] = [
               {
                 code: "ELEN 221",
                 name_en: "Intro to Electronic Devices",
-                name_ar: "Intro to Electronic Devices",
+                name_ar: "مقدمة في الأجهزة الإلكترونية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-ENGINEERING-B-S"],
@@ -16490,7 +16490,7 @@ export const universities: University[] = [
               {
                 code: "ELEN 221L",
                 name_en: "Intro to Electronic Devices Lab",
-                name_ar: "Intro to Electronic Devices Lab",
+                name_ar: "مختبر مقدمة في الأجهزة الإلكترونية",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-ENGINEERING-B-S"],
@@ -16498,7 +16498,7 @@ export const universities: University[] = [
               {
                 code: "MCM 102",
                 name_en: "Intro to Public Speaking",
-                name_ar: "Intro to Public Speaking",
+                name_ar: "مقدمة في الخطابة العامة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-ENGINEERING-B-S"],
@@ -16506,7 +16506,7 @@ export const universities: University[] = [
               {
                 code: "ELEN 253",
                 name_en: "Circuits II",
-                name_ar: "Circuits II",
+                name_ar: "دوائر كهربائية II",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -16517,7 +16517,7 @@ export const universities: University[] = [
               {
                 code: "COEN 370",
                 name_en: "Computer Systems: Arch & Org",
-                name_ar: "Computer Systems: Arch & Org",
+                name_ar: "أنظمة الحاسوب: هندسة وتنظيم",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-ENGINEERING-B-S"],
@@ -16525,7 +16525,7 @@ export const universities: University[] = [
               {
                 code: "COEN 341",
                 name_en: "Digital Signal Processing",
-                name_ar: "Digital Signal Processing",
+                name_ar: "معالجة الإشارات الرقمية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-ENGINEERING-B-S"],
@@ -16533,7 +16533,7 @@ export const universities: University[] = [
               {
                 code: "COEN 341L",
                 name_en: "Digital Signal Processing Lab",
-                name_ar: "Digital Signal Processing Lab",
+                name_ar: "مختبر معالجة الإشارات الرقمية",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-ENGINEERING-B-S"],
@@ -16541,7 +16541,7 @@ export const universities: University[] = [
               {
                 code: "COEN 376",
                 name_en: "Operating Systems",
-                name_ar: "Operating Systems",
+                name_ar: "أنظمة التشغيل",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-ENGINEERING-B-S"],
@@ -16549,7 +16549,7 @@ export const universities: University[] = [
               {
                 code: "MATH 221",
                 name_en: "Applied Statistics",
-                name_ar: "Applied Statistics",
+                name_ar: "الإحصاء التطبيقي",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -16560,7 +16560,7 @@ export const universities: University[] = [
               {
                 code: "MATH 331",
                 name_en: "Numerical Analysis",
-                name_ar: "Numerical Analysis",
+                name_ar: "التحليل العددي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-ENGINEERING-B-S"],
@@ -16568,7 +16568,7 @@ export const universities: University[] = [
               {
                 code: "ENGL 202",
                 name_en: "Technical Writing",
-                name_ar: "Technical Writing",
+                name_ar: "الكتابة الفنية",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -16579,7 +16579,7 @@ export const universities: University[] = [
               {
                 code: "COEN 390",
                 name_en: "Computer Engineering Internship",
-                name_ar: "Computer Engineering Internship",
+                name_ar: "تدريب هندسة الحاسوب",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-ENGINEERING-B-S"],
@@ -16587,7 +16587,7 @@ export const universities: University[] = [
               {
                 code: "COEN 419",
                 name_en: "Digital Network Design",
-                name_ar: "Digital Network Design",
+                name_ar: "تصميم الشبكات الرقمية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-ENGINEERING-B-S"],
@@ -16595,7 +16595,7 @@ export const universities: University[] = [
               {
                 code: "COEN 419L",
                 name_en: "Digital Network Design Lab",
-                name_ar: "Digital Network Design Lab",
+                name_ar: "مختبر تصميم الشبكات الرقمية",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-ENGINEERING-B-S"],
@@ -16603,7 +16603,7 @@ export const universities: University[] = [
               {
                 code: "COEN 491",
                 name_en: "Senior Project I",
-                name_ar: "Senior Project I",
+                name_ar: "المشروع المتقدم I",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-ENGINEERING-B-S"],
@@ -16611,7 +16611,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "Social Sciences/Humanities Elective",
-                name_ar: "Social Sciences/Humanities Elective",
+                name_ar: "مادة اختيارية في العلوم الاجتماعية/الإنسانية",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -16622,7 +16622,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "Arab Heritage Requirement",
-                name_ar: "Arab Heritage Requirement",
+                name_ar: "متطلب التراث العربي",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -16633,7 +16633,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "COEN Elective A",
-                name_ar: "COEN Elective A",
+                name_ar: "مقرر COEN اختياري A",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-GUST-COMPUTER-ENGINEERING-B-S"],
@@ -16641,7 +16641,7 @@ export const universities: University[] = [
               {
                 code: "COEN 492",
                 name_en: "Senior Project II",
-                name_ar: "Senior Project II",
+                name_ar: "المشروع المتقدم II",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-ENGINEERING-B-S"],
@@ -16649,7 +16649,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "COEN Elective B",
-                name_ar: "COEN Elective B",
+                name_ar: "مقرر COEN اختياري B",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-GUST-COMPUTER-ENGINEERING-B-S"],
@@ -16657,7 +16657,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "COEN Elective C",
-                name_ar: "COEN Elective C",
+                name_ar: "مقرر COEN اختياري C",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-GUST-COMPUTER-ENGINEERING-B-S"],
@@ -16665,7 +16665,7 @@ export const universities: University[] = [
               {
                 code: "COEN 485",
                 name_en: "Computer Vision",
-                name_ar: "Computer Vision",
+                name_ar: "الرؤية الحاسوبية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-ENGINEERING-B-S"],
@@ -16673,7 +16673,7 @@ export const universities: University[] = [
               {
                 code: "COEN 485L",
                 name_en: "Computer Vision Lab",
-                name_ar: "Computer Vision Lab",
+                name_ar: "مختبر الرؤية الحاسوبية",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-ENGINEERING-B-S"],
@@ -16681,7 +16681,7 @@ export const universities: University[] = [
               {
                 code: "COEN 475",
                 name_en: "Fault-Tolerant Digital Systems",
-                name_ar: "Fault-Tolerant Digital Systems",
+                name_ar: "الأنظمة الرقمية المتسامحة مع الأخطاء",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-COMPUTER-ENGINEERING-B-S"],
@@ -16689,7 +16689,7 @@ export const universities: University[] = [
               {
                 code: "ENGG 102",
                 name_en: "Engineering Design with Computer Appl.",
-                name_ar: "Engineering Design with Computer Appl.",
+                name_ar: "التصميم الهندسي مع تطبيقات الحاسوب",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ELECTRICAL-ENGINEERING-B-S"],
@@ -16697,7 +16697,7 @@ export const universities: University[] = [
               {
                 code: "ELEN 251L",
                 name_en: "Circuit Lab I",
-                name_ar: "Circuit Lab I",
+                name_ar: "مختبر الدوائر الكهربائية I",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-GUST-ELECTRICAL-ENGINEERING-B-S"],
@@ -16705,7 +16705,7 @@ export const universities: University[] = [
               {
                 code: "ELEN 221",
                 name_en: "Introduction to Electronic Devices",
-                name_ar: "Introduction to Electronic Devices",
+                name_ar: "مقدمة في الأجهزة الإلكترونية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ELECTRICAL-ENGINEERING-B-S"],
@@ -16713,7 +16713,7 @@ export const universities: University[] = [
               {
                 code: "ELEN 221L",
                 name_en: "Introduction to Electronic Devices Lab",
-                name_ar: "Introduction to Electronic Devices Lab",
+                name_ar: "مقدمة في مختبر الأجهزة الإلكترونية",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-GUST-ELECTRICAL-ENGINEERING-B-S"],
@@ -16721,7 +16721,7 @@ export const universities: University[] = [
               {
                 code: "ENGG 105",
                 name_en: "Engineering Mechanics, Statics",
-                name_ar: "Engineering Mechanics, Statics",
+                name_ar: "الميكانيكا الهندسية، الإستاتيكا",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ELECTRICAL-ENGINEERING-B-S"],
@@ -16729,7 +16729,7 @@ export const universities: University[] = [
               {
                 code: "ELEN 353",
                 name_en: "Electronics I",
-                name_ar: "Electronics I",
+                name_ar: "إلكترونيات I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ELECTRICAL-ENGINEERING-B-S"],
@@ -16737,7 +16737,7 @@ export const universities: University[] = [
               {
                 code: "ELEN 353L",
                 name_en: "Electronics I Lab",
-                name_ar: "Electronics I Lab",
+                name_ar: "مختبر إلكترونيات I",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-GUST-ELECTRICAL-ENGINEERING-B-S"],
@@ -16745,7 +16745,7 @@ export const universities: University[] = [
               {
                 code: "ELEN 331",
                 name_en: "Linear Control Systems",
-                name_ar: "Linear Control Systems",
+                name_ar: "أنظمة التحكم الخطي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ELECTRICAL-ENGINEERING-B-S"],
@@ -16753,7 +16753,7 @@ export const universities: University[] = [
               {
                 code: "ELEN 331L",
                 name_en: "Linear Control Systems Lab",
-                name_ar: "Linear Control Systems Lab",
+                name_ar: "معمل أنظمة التحكم الخطي",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-GUST-ELECTRICAL-ENGINEERING-B-S"],
@@ -16761,7 +16761,7 @@ export const universities: University[] = [
               {
                 code: "MCM 102",
                 name_en: "Introduction to Public Speaking",
-                name_ar: "Introduction to Public Speaking",
+                name_ar: "مقدمة في الخطابة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ELECTRICAL-ENGINEERING-B-S"],
@@ -16769,7 +16769,7 @@ export const universities: University[] = [
               {
                 code: "ELEN 371",
                 name_en: "Electromagnetics",
-                name_ar: "Electromagnetics",
+                name_ar: "الكهرومغناطيسية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ELECTRICAL-ENGINEERING-B-S"],
@@ -16777,7 +16777,7 @@ export const universities: University[] = [
               {
                 code: "ELEN 343",
                 name_en: "Digital Communication I",
-                name_ar: "Digital Communication I",
+                name_ar: "الاتصالات الرقمية I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ELECTRICAL-ENGINEERING-B-S"],
@@ -16785,7 +16785,7 @@ export const universities: University[] = [
               {
                 code: "ELEN 343L",
                 name_en: "Digital Communication I Lab",
-                name_ar: "Digital Communication I Lab",
+                name_ar: "مختبر الاتصالات الرقمية I",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-GUST-ELECTRICAL-ENGINEERING-B-S"],
@@ -16793,7 +16793,7 @@ export const universities: University[] = [
               {
                 code: "ELEN 332",
                 name_en: "Introduction to Robotics",
-                name_ar: "Introduction to Robotics",
+                name_ar: "مقدمة في الروبوتات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ELECTRICAL-ENGINEERING-B-S"],
@@ -16801,7 +16801,7 @@ export const universities: University[] = [
               {
                 code: "ELEN 332L",
                 name_en: "Robotics Lab",
-                name_ar: "Robotics Lab",
+                name_ar: "مختبر الروبوتات",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-GUST-ELECTRICAL-ENGINEERING-B-S"],
@@ -16809,7 +16809,7 @@ export const universities: University[] = [
               {
                 code: "ELEN 390",
                 name_en: "Electrical Engineering Internship",
-                name_ar: "Electrical Engineering Internship",
+                name_ar: "تدريب الهندسة الكهربائية",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-GUST-ELECTRICAL-ENGINEERING-B-S"],
@@ -16817,7 +16817,7 @@ export const universities: University[] = [
               {
                 code: "ELEN 491",
                 name_en: "Senior Project I",
-                name_ar: "Senior Project I",
+                name_ar: "المشروع المتقدم I",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-GUST-ELECTRICAL-ENGINEERING-B-S"],
@@ -16825,7 +16825,7 @@ export const universities: University[] = [
               {
                 code: "ELEN 404",
                 name_en: "Renewable and Sustainable Energy Systems",
-                name_ar: "Renewable and Sustainable Energy Systems",
+                name_ar: "أنظمة الطاقة المتجددة والمستدامة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ELECTRICAL-ENGINEERING-B-S"],
@@ -16833,7 +16833,7 @@ export const universities: University[] = [
               {
                 code: "ELEN 404L",
                 name_en: "Renewable and Sustainable Energy Systems Lab",
-                name_ar: "Renewable and Sustainable Energy Systems Lab",
+                name_ar: "مختبر أنظمة الطاقة المتجددة والمستدامة",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-GUST-ELECTRICAL-ENGINEERING-B-S"],
@@ -16841,7 +16841,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "ELEN Elective A",
-                name_ar: "ELEN Elective A",
+                name_ar: "مادة اختيارية ELEN أ",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-GUST-ELECTRICAL-ENGINEERING-B-S"],
@@ -16849,7 +16849,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "ELEN Power Elective",
-                name_ar: "ELEN Power Elective",
+                name_ar: "مادة ELEN اختيارية في الطاقة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ELECTRICAL-ENGINEERING-B-S"],
@@ -16857,7 +16857,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "ELEN Power Elective Lab",
-                name_ar: "ELEN Power Elective Lab",
+                name_ar: "مختبر مادة ELEN الاختيارية في الطاقة",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-GUST-ELECTRICAL-ENGINEERING-B-S"],
@@ -16865,7 +16865,7 @@ export const universities: University[] = [
               {
                 code: "ELEN 492",
                 name_en: "Senior Project II",
-                name_ar: "Senior Project II",
+                name_ar: "المشروع المتقدم II",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ELECTRICAL-ENGINEERING-B-S"],
@@ -16873,7 +16873,7 @@ export const universities: University[] = [
               {
                 code: "ELEN 471",
                 name_en: "Antennas and Microwave Engineering",
-                name_ar: "Antennas and Microwave Engineering",
+                name_ar: "هندسة الهوائيات والموجات الدقيقة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ELECTRICAL-ENGINEERING-B-S"],
@@ -16881,7 +16881,7 @@ export const universities: University[] = [
               {
                 code: "ELEN 471L",
                 name_en: "Antennas and Microwave Engineering Lab",
-                name_ar: "Antennas and Microwave Engineering Lab",
+                name_ar: "مختبر هندسة الهوائيات والموجات الدقيقة",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-GUST-ELECTRICAL-ENGINEERING-B-S"],
@@ -16889,7 +16889,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "ELEN Elective B",
-                name_ar: "ELEN Elective B",
+                name_ar: "مادة اختيارية ELEN ب",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-GUST-ELECTRICAL-ENGINEERING-B-S"],
@@ -16897,7 +16897,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "ELEN Elective C",
-                name_ar: "ELEN Elective C",
+                name_ar: "مادة اختيارية ELEN ج",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-GUST-ELECTRICAL-ENGINEERING-B-S"],
@@ -16921,7 +16921,7 @@ export const universities: University[] = [
               {
                 code: "ENGG 101",
                 name_en: "Study & Careers in Engineering",
-                name_ar: "Study & Careers in Engineering",
+                name_ar: "الدراسة والوظائف في الهندسة",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -16929,7 +16929,7 @@ export const universities: University[] = [
               {
                 code: "CHEM 110",
                 name_en: "General Chemistry I",
-                name_ar: "General Chemistry I",
+                name_ar: "الكيمياء العامة I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -16937,7 +16937,7 @@ export const universities: University[] = [
               {
                 code: "CHEM 110L",
                 name_en: "General Chemistry I Lab",
-                name_ar: "General Chemistry I Lab",
+                name_ar: "معمل الكيمياء العامة I",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -16945,7 +16945,7 @@ export const universities: University[] = [
               {
                 code: "CHEM 115L",
                 name_en: "Intro to Lab Safety & Hazardous Materials",
-                name_ar: "Intro to Lab Safety & Hazardous Materials",
+                name_ar: "مقدمة في السلامة المخبرية والمواد الخطرة",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -16953,7 +16953,7 @@ export const universities: University[] = [
               {
                 code: "MATH 131",
                 name_en: "Analytic Geometry & Calculus I",
-                name_ar: "Analytic Geometry & Calculus I",
+                name_ar: "الهندسة التحليلية وحساب التفاضل والتكامل I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -16961,7 +16961,7 @@ export const universities: University[] = [
               {
                 code: "ENGL 100",
                 name_en: "Academic English I",
-                name_ar: "Academic English I",
+                name_ar: "اللغة الإنجليزية الأكاديمية I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -16969,7 +16969,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "Social Sciences/Humanities Elective",
-                name_ar: "Social Sciences/Humanities Elective",
+                name_ar: "مادة اختيارية في العلوم الاجتماعية/الإنسانية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -16977,7 +16977,7 @@ export const universities: University[] = [
               {
                 code: "ENGG 102",
                 name_en: "Engineering Design with Computer Appl.",
-                name_ar: "Engineering Design with Computer Appl.",
+                name_ar: "التصميم الهندسي مع تطبيقات الحاسوب",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -16985,7 +16985,7 @@ export const universities: University[] = [
               {
                 code: "MATH 132",
                 name_en: "Analytic Geometry & Calculus II",
-                name_ar: "Analytic Geometry & Calculus II",
+                name_ar: "الهندسة التحليلية وحساب التفاضل والتكامل II",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -16993,7 +16993,7 @@ export const universities: University[] = [
               {
                 code: "PHYS 110",
                 name_en: "Physics I",
-                name_ar: "Physics I",
+                name_ar: "فيزياء I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17001,7 +17001,7 @@ export const universities: University[] = [
               {
                 code: "PHYS 110L",
                 name_en: "Physics I Lab",
-                name_ar: "Physics I Lab",
+                name_ar: "معمل فيزياء I",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17009,7 +17009,7 @@ export const universities: University[] = [
               {
                 code: "ECON 101",
                 name_en: "Principles of Microeconomics",
-                name_ar: "Principles of Microeconomics",
+                name_ar: "مبادئ الاقتصاد الجزئي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17017,7 +17017,7 @@ export const universities: University[] = [
               {
                 code: "ENGL 110",
                 name_en: "English Composition I",
-                name_ar: "English Composition I",
+                name_ar: "التعبير باللغة الإنجليزية I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17025,7 +17025,7 @@ export const universities: University[] = [
               {
                 code: "MATH 231",
                 name_en: "Analytic Geometry & Calculus III",
-                name_ar: "Analytic Geometry & Calculus III",
+                name_ar: "الهندسة التحليلية وحساب التفاضل والتكامل III",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17033,7 +17033,7 @@ export const universities: University[] = [
               {
                 code: "PHYS 112",
                 name_en: "Physics II",
-                name_ar: "Physics II",
+                name_ar: "فيزياء II",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17041,7 +17041,7 @@ export const universities: University[] = [
               {
                 code: "PHYS 112L",
                 name_en: "Physics II Lab",
-                name_ar: "Physics II Lab",
+                name_ar: "معمل فيزياء II",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17049,7 +17049,7 @@ export const universities: University[] = [
               {
                 code: "ENGG 105",
                 name_en: "Engineering Mechanics, Statics",
-                name_ar: "Engineering Mechanics, Statics",
+                name_ar: "الميكانيكا الهندسية، الإستاتيكا",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17057,7 +17057,7 @@ export const universities: University[] = [
               {
                 code: "MATH 140",
                 name_en: "Elementary Linear Algebra",
-                name_ar: "Elementary Linear Algebra",
+                name_ar: "الجبر الخطي الأولي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17065,7 +17065,7 @@ export const universities: University[] = [
               {
                 code: "ENGL 112",
                 name_en: "English Composition II",
-                name_ar: "English Composition II",
+                name_ar: "التعبير باللغة الإنجليزية II",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17073,7 +17073,7 @@ export const universities: University[] = [
               {
                 code: "MATH 232",
                 name_en: "Introduction to Differential Equations",
-                name_ar: "Introduction to Differential Equations",
+                name_ar: "مقدمة في المعادلات التفاضلية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17081,7 +17081,7 @@ export const universities: University[] = [
               {
                 code: "MATH 221",
                 name_en: "Applied Statistics",
-                name_ar: "Applied Statistics",
+                name_ar: "الإحصاء التطبيقي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17089,7 +17089,7 @@ export const universities: University[] = [
               {
                 code: "ENMG 234",
                 name_en: "Managing Engineering & Technology",
-                name_ar: "Managing Engineering & Technology",
+                name_ar: "إدارة الهندسة والتكنولوجيا",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17097,7 +17097,7 @@ export const universities: University[] = [
               {
                 code: "ENMG 247",
                 name_en: "Engineering Managerial Accounting & Finance",
-                name_ar: "Engineering Managerial Accounting & Finance",
+                name_ar: "المحاسبة الإدارية والمالية الهندسية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17105,7 +17105,7 @@ export const universities: University[] = [
               {
                 code: "ENGG 216",
                 name_en: "Mechanics and Dynamics",
-                name_ar: "Mechanics and Dynamics",
+                name_ar: "الميكانيكا والديناميكا",
                 credits: 2,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17113,7 +17113,7 @@ export const universities: University[] = [
               {
                 code: "ENMG 231",
                 name_en: "Introduction to System Engineering",
-                name_ar: "Introduction to System Engineering",
+                name_ar: "مقدمة في هندسة النظم",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17121,7 +17121,7 @@ export const universities: University[] = [
               {
                 code: "ENMG 353",
                 name_en: "Operations & Production Management",
-                name_ar: "Operations & Production Management",
+                name_ar: "إدارة العمليات والإنتاج",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17129,7 +17129,7 @@ export const universities: University[] = [
               {
                 code: "ENGG 211",
                 name_en: "Mechanics of Materials",
-                name_ar: "Mechanics of Materials",
+                name_ar: "ميكانيكا المواد",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17137,7 +17137,7 @@ export const universities: University[] = [
               {
                 code: "ENGG 212",
                 name_en: "Materials Testing",
-                name_ar: "Materials Testing",
+                name_ar: "اختبار المواد",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17145,7 +17145,7 @@ export const universities: University[] = [
               {
                 code: "ENMG 351",
                 name_en: "Marketing Management",
-                name_ar: "Marketing Management",
+                name_ar: "إدارة التسويق",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17153,7 +17153,7 @@ export const universities: University[] = [
               {
                 code: "ENGG 330",
                 name_en: "Engineering Economy",
-                name_ar: "Engineering Economy",
+                name_ar: "الاقتصاد الهندسي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17161,7 +17161,7 @@ export const universities: University[] = [
               {
                 code: "MCM 102",
                 name_en: "Introduction to Public Speaking",
-                name_ar: "Introduction to Public Speaking",
+                name_ar: "مقدمة في الخطابة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17169,7 +17169,7 @@ export const universities: University[] = [
               {
                 code: "ENMG 366",
                 name_en: "Quality Philosophies & Methods",
-                name_ar: "Quality Philosophies & Methods",
+                name_ar: "فلسفات وأساليب الجودة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17177,7 +17177,7 @@ export const universities: University[] = [
               {
                 code: "ENGG 327",
                 name_en: "Thermodynamics",
-                name_ar: "Thermodynamics",
+                name_ar: "الديناميكا الحرارية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17185,7 +17185,7 @@ export const universities: University[] = [
               {
                 code: "ELEN 251",
                 name_en: "Circuits I",
-                name_ar: "Circuits I",
+                name_ar: "دوائر كهربائية I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17193,7 +17193,7 @@ export const universities: University[] = [
               {
                 code: "ENGL 202",
                 name_en: "Technical Writing",
-                name_ar: "Technical Writing",
+                name_ar: "الكتابة الفنية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17201,7 +17201,7 @@ export const universities: University[] = [
               {
                 code: "ENMG 354",
                 name_en: "Project Management",
-                name_ar: "Project Management",
+                name_ar: "إدارة المشاريع",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17209,7 +17209,7 @@ export const universities: University[] = [
               {
                 code: "ENMG 400",
                 name_en: "Engineering Management Internship",
-                name_ar: "Engineering Management Internship",
+                name_ar: "التدريب في الإدارة الهندسية",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17217,7 +17217,7 @@ export const universities: University[] = [
               {
                 code: "ENMG 360",
                 name_en: "General Management Design & Integration",
-                name_ar: "General Management Design & Integration",
+                name_ar: "تصميم وتكامل الإدارة العامة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17225,7 +17225,7 @@ export const universities: University[] = [
               {
                 code: "ENMG 411",
                 name_en: "Engineering Design Optimization",
-                name_ar: "Engineering Design Optimization",
+                name_ar: "تحسين التصميم الهندسي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17233,7 +17233,7 @@ export const universities: University[] = [
               {
                 code: "ENMG 411L",
                 name_en: "Engineering Design Lab",
-                name_ar: "Engineering Design Lab",
+                name_ar: "مختبر التصميم الهندسي",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17241,7 +17241,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "ENMG Elective",
-                name_ar: "ENMG Elective",
+                name_ar: "مادة ENMG اختيارية",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17249,7 +17249,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "Arab Heritage Requirement",
-                name_ar: "Arab Heritage Requirement",
+                name_ar: "متطلب التراث العربي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17257,7 +17257,7 @@ export const universities: University[] = [
               {
                 code: "ENMG 399",
                 name_en: "Senior Design",
-                name_ar: "Senior Design",
+                name_ar: "التصميم المتقدم",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17265,7 +17265,7 @@ export const universities: University[] = [
               {
                 code: "ENMG 452",
                 name_en: "Technical Entrepreneurship",
-                name_ar: "Technical Entrepreneurship",
+                name_ar: "ريادة الأعمال التقنية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17273,7 +17273,7 @@ export const universities: University[] = [
               {
                 code: "ENMG 430",
                 name_en: "Human Factors",
-                name_ar: "Human Factors",
+                name_ar: "العوامل البشرية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17281,7 +17281,7 @@ export const universities: University[] = [
               {
                 code: "ENMG 430L",
                 name_en: "Human Factors Lab",
-                name_ar: "Human Factors Lab",
+                name_ar: "مختبر العوامل البشرية",
                 credits: 1,
                 type: "Required",
                 program_ids: ["KW-GUST-ENGINEERING-MANAGEMENT-B-S"],
@@ -17297,7 +17297,7 @@ export const universities: University[] = [
         departments: [
           {
             id: "KW-GUST-COLLEGE-OF-BUSINESS-ADMINISTRATION-ACCOUNTING-MIS",
-            name_ar: "Accounting & MIS",
+            name_ar: "المحاسبة ونظم المعلومات الإدارية",
             name_en: "Accounting & MIS",
             degrees: ["BSc"],
             programs: [
@@ -17312,7 +17312,7 @@ export const universities: University[] = [
               {
                 code: "ENGL 100",
                 name_en: "Academic English I",
-                name_ar: "Academic English I",
+                name_ar: "اللغة الإنجليزية الأكاديمية I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17320,7 +17320,7 @@ export const universities: University[] = [
               {
                 code: "MIS 118",
                 name_en: "Computer & Information Systems",
-                name_ar: "Computer & Information Systems",
+                name_ar: "نظم الحاسوب والمعلومات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17328,7 +17328,7 @@ export const universities: University[] = [
               {
                 code: "MATH 111",
                 name_en: "College Algebra",
-                name_ar: "College Algebra",
+                name_ar: "جبر الكلية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17336,7 +17336,7 @@ export const universities: University[] = [
               {
                 code: "AH",
                 name_en: "Arabic Heritage",
-                name_ar: "Arabic Heritage",
+                name_ar: "التراث العربي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17344,7 +17344,7 @@ export const universities: University[] = [
               {
                 code: "HFA",
                 name_en: "Humanities/Fine Arts Offering",
-                name_ar: "Humanities/Fine Arts Offering",
+                name_ar: "عروض العلوم الإنسانية/الفنون الجميلة",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17352,7 +17352,7 @@ export const universities: University[] = [
               {
                 code: "ACCT 201",
                 name_en: "Fundamentals of Financial Accounting",
-                name_ar: "Fundamentals of Financial Accounting",
+                name_ar: "أساسيات المحاسبة المالية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17360,7 +17360,7 @@ export const universities: University[] = [
               {
                 code: "ECON 101",
                 name_en: "Microeconomics",
-                name_ar: "Microeconomics",
+                name_ar: "الاقتصاد الجزئي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17368,7 +17368,7 @@ export const universities: University[] = [
               {
                 code: "ENGL 110",
                 name_en: "Composition 1",
-                name_ar: "Composition 1",
+                name_ar: "تأليف 1",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17376,7 +17376,7 @@ export const universities: University[] = [
               {
                 code: "MATH 130",
                 name_en: "Basic Calculus",
-                name_ar: "Basic Calculus",
+                name_ar: "حساب التفاضل والتكامل الأساسي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17384,7 +17384,7 @@ export const universities: University[] = [
               {
                 code: "MIS 200",
                 name_en: "Information Systems Concepts & Applications",
-                name_ar: "Information Systems Concepts & Applications",
+                name_ar: "مفاهيم وتطبيقات نظم المعلومات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17392,7 +17392,7 @@ export const universities: University[] = [
               {
                 code: "MRKT 201",
                 name_en: "Basic Marketing",
-                name_ar: "Basic Marketing",
+                name_ar: "التسويق الأساسي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17400,7 +17400,7 @@ export const universities: University[] = [
               {
                 code: "ECON 102",
                 name_en: "Macroeconomics",
-                name_ar: "Macroeconomics",
+                name_ar: "الاقتصاد الكلي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17408,7 +17408,7 @@ export const universities: University[] = [
               {
                 code: "ENGL 112",
                 name_en: "Composition 2",
-                name_ar: "Composition 2",
+                name_ar: "تأليف 2",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17416,7 +17416,7 @@ export const universities: University[] = [
               {
                 code: "MATH 121",
                 name_en: "Basic Probability and Statistics",
-                name_ar: "Basic Probability and Statistics",
+                name_ar: "مبادئ الاحتمالات والإحصاء",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17424,7 +17424,7 @@ export const universities: University[] = [
               {
                 code: "ACCT 211",
                 name_en: "Managerial Accounting",
-                name_ar: "Managerial Accounting",
+                name_ar: "المحاسبة الإدارية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17432,7 +17432,7 @@ export const universities: University[] = [
               {
                 code: "ECON 380",
                 name_en: "Business Statistics",
-                name_ar: "Business Statistics",
+                name_ar: "إحصاءات الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17440,7 +17440,7 @@ export const universities: University[] = [
               {
                 code: "FIN 301",
                 name_en: "Financial Management",
-                name_ar: "Financial Management",
+                name_ar: "الإدارة المالية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17448,7 +17448,7 @@ export const universities: University[] = [
               {
                 code: "ACCT 301",
                 name_en: "Intermediate Accounting I",
-                name_ar: "Intermediate Accounting I",
+                name_ar: "المحاسبة المتوسطة I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17456,7 +17456,7 @@ export const universities: University[] = [
               {
                 code: "ENGL 201",
                 name_en: "Business Writing",
-                name_ar: "Business Writing",
+                name_ar: "الكتابة في الأعمال",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17464,7 +17464,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 321",
                 name_en: "Introduction to Operations Management",
-                name_ar: "Introduction to Operations Management",
+                name_ar: "مقدمة في إدارة العمليات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17472,7 +17472,7 @@ export const universities: University[] = [
               {
                 code: "ACCT 302",
                 name_en: "Intermediate Accounting II",
-                name_ar: "Intermediate Accounting II",
+                name_ar: "المحاسبة المتوسطة II",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17480,7 +17480,7 @@ export const universities: University[] = [
               {
                 code: "LNS",
                 name_en: "Life/Natural Sciences Offering",
-                name_ar: "Life/Natural Sciences Offering",
+                name_ar: "عروض علوم الحياة/الطبيعية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17488,7 +17488,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "Major Elective 1",
-                name_ar: "Major Elective 1",
+                name_ar: "مقرر اختياري تخصصي 1",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17496,7 +17496,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "Free Elective 1",
-                name_ar: "Free Elective 1",
+                name_ar: "اختياري حر 1",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17504,7 +17504,7 @@ export const universities: University[] = [
               {
                 code: "ACCT 303",
                 name_en: "Intermediate Accounting III",
-                name_ar: "Intermediate Accounting III",
+                name_ar: "المحاسبة المتوسطة III",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17512,7 +17512,7 @@ export const universities: University[] = [
               {
                 code: "ACCT 311",
                 name_en: "Cost Accounting",
-                name_ar: "Cost Accounting",
+                name_ar: "محاسبة التكاليف",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17520,7 +17520,7 @@ export const universities: University[] = [
               {
                 code: "CBA 440",
                 name_en: "Practicum in Business & MIS",
-                name_ar: "Practicum in Business & MIS",
+                name_ar: "تدريب عملي في الأعمال ونظم المعلومات الإدارية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17528,7 +17528,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "Major Elective 2",
-                name_ar: "Major Elective 2",
+                name_ar: "مقرر اختياري تخصصي 2",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17536,7 +17536,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 241",
                 name_en: "Introduction to Business Law & Ethics",
-                name_ar: "Introduction to Business Law & Ethics",
+                name_ar: "مقدمة في قانون الأعمال والأخلاقيات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17544,7 +17544,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 481",
                 name_en: "Strategic Management",
-                name_ar: "Strategic Management",
+                name_ar: "الإدارة الاستراتيجية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17552,7 +17552,7 @@ export const universities: University[] = [
               {
                 code: "ACCT 401",
                 name_en: "Advanced Accounting I",
-                name_ar: "Advanced Accounting I",
+                name_ar: "المحاسبة المتقدمة I",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17560,7 +17560,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "Major Elective 3",
-                name_ar: "Major Elective 3",
+                name_ar: "مقرر اختياري تخصصي 3",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17568,7 +17568,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "Free Elective 2",
-                name_ar: "Free Elective 2",
+                name_ar: "اختياري حر 2",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17576,7 +17576,7 @@ export const universities: University[] = [
               {
                 code: "ACCT 409",
                 name_en: "Senior Project II",
-                name_ar: "Senior Project II",
+                name_ar: "المشروع المتقدم II",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17586,7 +17586,7 @@ export const universities: University[] = [
                 name_en:
                   "PENDING - ACCT 431 title (GUST page shows wrong name)",
                 name_ar:
-                  "PENDING - ACCT 431 title (GUST page shows wrong name)",
+                  "قيد الانتظار - عنوان ACCT 431 (صفحة GUST تُظهر اسماً خاطئاً)",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17594,7 +17594,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "Major Elective 4",
-                name_ar: "Major Elective 4",
+                name_ar: "مقرر اختياري تخصصي 4",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17602,7 +17602,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "Major Elective 5",
-                name_ar: "Major Elective 5",
+                name_ar: "مقرر اختياري تخصصي 5",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17610,7 +17610,7 @@ export const universities: University[] = [
               {
                 code: "-",
                 name_en: "Free Elective 3",
-                name_ar: "Free Elective 3",
+                name_ar: "مادة اختيارية حرة 3",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-GUST-ACCOUNTING-B-SC"],
@@ -17619,14 +17619,14 @@ export const universities: University[] = [
           },
           {
             id: "KW-GUST-COLLEGE-OF-BUSINESS-ADMINISTRATION-MANAGEMENT-INFORMATION-SYSTEMS",
-            name_ar: "Management Information Systems",
+            name_ar: "نظم المعلومات الإدارية",
             name_en: "Management Information Systems",
             degrees: ["BSc"],
             programs: [
               {
                 id: "KW-GUST-MANAGEMENT-INFORMATION-SYSTEMS-B-S",
                 name_en: "Management Information Systems (B.S.)",
-                name_ar: "Management Information Systems (B.S.)",
+                name_ar: "نظم المعلومات الإدارية (بكالوريوس علوم)",
                 degree: "BSc",
               },
             ],
@@ -17634,7 +17634,7 @@ export const universities: University[] = [
               {
                 code: "PENDING",
                 name_en: "PENDING",
-                name_ar: "PENDING",
+                name_ar: "قيد الانتظار",
                 credits: 3,
                 type: "PENDING",
                 program_ids: ["KW-GUST-MANAGEMENT-INFORMATION-SYSTEMS-B-S"],
@@ -17643,7 +17643,7 @@ export const universities: University[] = [
           },
           {
             id: "KW-GUST-COLLEGE-OF-BUSINESS-ADMINISTRATION-ECONOMICS-FINANCE",
-            name_ar: "Economics & Finance",
+            name_ar: "الاقتصاد والمالية",
             name_en: "Economics & Finance",
             degrees: ["BSc"],
             programs: [
@@ -17658,7 +17658,7 @@ export const universities: University[] = [
               {
                 code: "FIN 304",
                 name_en: "Corporate Finance",
-                name_ar: "Corporate Finance",
+                name_ar: "تمويل الشركات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-FINANCE-B-S"],
@@ -17666,7 +17666,7 @@ export const universities: University[] = [
               {
                 code: "FIN 309",
                 name_en: "Computer Applications in Finance",
-                name_ar: "Computer Applications in Finance",
+                name_ar: "تطبيقات الحاسوب في المالية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-FINANCE-B-S"],
@@ -17674,7 +17674,7 @@ export const universities: University[] = [
               {
                 code: "FIN 320",
                 name_en: "Investments",
-                name_ar: "Investments",
+                name_ar: "الاستثمارات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-FINANCE-B-S"],
@@ -17682,7 +17682,7 @@ export const universities: University[] = [
               {
                 code: "FIN 321",
                 name_en: "Risk Management",
-                name_ar: "Risk Management",
+                name_ar: "إدارة المخاطر",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-FINANCE-B-S"],
@@ -17690,7 +17690,7 @@ export const universities: University[] = [
               {
                 code: "FIN 350",
                 name_en: "Financial Markets and Institutions",
-                name_ar: "Financial Markets and Institutions",
+                name_ar: "الأسواق والمؤسسات المالية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-FINANCE-B-S"],
@@ -17698,7 +17698,7 @@ export const universities: University[] = [
               {
                 code: "FIN 351",
                 name_en: "Islamic Banking and Finance",
-                name_ar: "Islamic Banking and Finance",
+                name_ar: "الصيرفة والتمويل الإسلامي",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-FINANCE-B-S"],
@@ -17706,7 +17706,7 @@ export const universities: University[] = [
               {
                 code: "FIN 380",
                 name_en: "International Finance",
-                name_ar: "International Finance",
+                name_ar: "المالية الدولية",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-FINANCE-B-S"],
@@ -17714,7 +17714,7 @@ export const universities: University[] = [
               {
                 code: "ECON 310",
                 name_en: "Money, Banking and Monetary Theory",
-                name_ar: "Money, Banking and Monetary Theory",
+                name_ar: "المال والمصارف والنظرية النقدية",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-GUST-FINANCE-B-S"],
@@ -17722,7 +17722,7 @@ export const universities: University[] = [
               {
                 code: "FIN 341",
                 name_en: "Commercial Bank Management",
-                name_ar: "Commercial Bank Management",
+                name_ar: "إدارة البنوك التجارية",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-GUST-FINANCE-B-S"],
@@ -17730,7 +17730,7 @@ export const universities: University[] = [
               {
                 code: "FIN 352",
                 name_en: "Islamic Banking and Finance II",
-                name_ar: "Islamic Banking and Finance II",
+                name_ar: "الصيرفة والتمويل الإسلامي II",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-GUST-FINANCE-B-S"],
@@ -17738,7 +17738,7 @@ export const universities: University[] = [
               {
                 code: "ECON 481",
                 name_en: "Introduction to Econometrics",
-                name_ar: "Introduction to Econometrics",
+                name_ar: "مقدمة في الاقتصاد القياسي",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-GUST-FINANCE-B-S"],
@@ -17746,7 +17746,7 @@ export const universities: University[] = [
               {
                 code: "ECON 495",
                 name_en: "Special Topics in Economics",
-                name_ar: "Special Topics in Economics",
+                name_ar: "مواضيع خاصة في الاقتصاد",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-GUST-FINANCE-B-S"],
@@ -17754,7 +17754,7 @@ export const universities: University[] = [
               {
                 code: "FIN 359",
                 name_en: "Portfolio Management",
-                name_ar: "Portfolio Management",
+                name_ar: "إدارة المحافظ",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-GUST-FINANCE-B-S"],
@@ -17762,7 +17762,7 @@ export const universities: University[] = [
               {
                 code: "FIN 361",
                 name_en: "Principles of Insurance",
-                name_ar: "Principles of Insurance",
+                name_ar: "مبادئ التأمين",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-GUST-FINANCE-B-S"],
@@ -17770,7 +17770,7 @@ export const universities: University[] = [
               {
                 code: "FIN 495",
                 name_en: "Special Topics in Finance",
-                name_ar: "Special Topics in Finance",
+                name_ar: "مواضيع خاصة في المالية",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-GUST-FINANCE-B-S"],
@@ -17778,7 +17778,7 @@ export const universities: University[] = [
               {
                 code: "FIN 327",
                 name_en: "Real Estate Investment",
-                name_ar: "Real Estate Investment",
+                name_ar: "الاستثمار العقاري",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-GUST-FINANCE-B-S"],
@@ -17802,15 +17802,14 @@ export const universities: University[] = [
                 name_en:
                   "Business Administration - Management & Organizational Behavior (B.S.)",
                 name_ar:
-                  "Business Administration - Management & Organizational Behavior (B.S.)",
+                  "إدارة الأعمال - الإدارة والسلوك التنظيمي (بكالوريوس علوم)",
                 degree: "BSc",
               },
               {
                 id: "KW-GUST-BUSINESS-ADMINISTRATION-INTERNATIONAL-BU",
                 name_en:
                   "Business Administration - International Business (B.S.)",
-                name_ar:
-                  "Business Administration - International Business (B.S.)",
+                name_ar: "إدارة الأعمال - الأعمال الدولية (بكالوريوس علوم)",
                 degree: "BSc",
               },
             ],
@@ -17818,7 +17817,7 @@ export const universities: University[] = [
               {
                 code: "MRKT 320",
                 name_en: "Services Marketing",
-                name_ar: "Services Marketing",
+                name_ar: "تسويق الخدمات",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-MARKETING-B-S"],
@@ -17826,7 +17825,7 @@ export const universities: University[] = [
               {
                 code: "MRKT 330",
                 name_en: "Consumer Behavior",
-                name_ar: "Consumer Behavior",
+                name_ar: "سلوك المستهلك",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-MARKETING-B-S"],
@@ -17834,7 +17833,7 @@ export const universities: University[] = [
               {
                 code: "MRKT 340",
                 name_en: "Management of Promotion",
-                name_ar: "Management of Promotion",
+                name_ar: "إدارة الترويج",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-MARKETING-B-S"],
@@ -17842,7 +17841,7 @@ export const universities: University[] = [
               {
                 code: "MRKT 370",
                 name_en: "Marketing Research",
-                name_ar: "Marketing Research",
+                name_ar: "بحوث التسويق",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-MARKETING-B-S"],
@@ -17850,7 +17849,7 @@ export const universities: University[] = [
               {
                 code: "MRKT 410",
                 name_en: "Internet Marketing",
-                name_ar: "Internet Marketing",
+                name_ar: "التسويق عبر الإنترنت",
                 credits: 3,
                 type: "Required",
                 program_ids: ["KW-GUST-MARKETING-B-S"],
@@ -17858,7 +17857,7 @@ export const universities: University[] = [
               {
                 code: "MRKT 460",
                 name_en: "International Marketing",
-                name_ar: "International Marketing",
+                name_ar: "التسويق الدولي",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -17870,7 +17869,7 @@ export const universities: University[] = [
               {
                 code: "MRKT 480",
                 name_en: "Quantitative Marketing Methods",
-                name_ar: "Quantitative Marketing Methods",
+                name_ar: "أساليب التسويق الكمي",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -17882,7 +17881,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 325",
                 name_en: "Supply Chain Management & Logistics",
-                name_ar: "Supply Chain Management & Logistics",
+                name_ar: "إدارة سلسلة التوريد واللوجستيات",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -17894,7 +17893,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 341",
                 name_en: "Industrial and Organizational Psychology",
-                name_ar: "Industrial and Organizational Psychology",
+                name_ar: "علم النفس الصناعي والتنظيمي",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -17906,7 +17905,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 351",
                 name_en: "Human Resources Management",
-                name_ar: "Human Resources Management",
+                name_ar: "إدارة الموارد البشرية",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -17918,7 +17917,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 383",
                 name_en: "Principles of Entrepreneurship",
-                name_ar: "Principles of Entrepreneurship",
+                name_ar: "مبادئ ريادة الأعمال",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -17930,7 +17929,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 422",
                 name_en: "Lean Production in Manufacturing and Service",
-                name_ar: "Lean Production in Manufacturing and Service",
+                name_ar: "الإنتاج المرن في الصناعة والخدمة",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -17941,7 +17940,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 451",
                 name_en: "Employee Training and Development",
-                name_ar: "Employee Training and Development",
+                name_ar: "تدريب وتطوير الموظفين",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -17953,7 +17952,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 471",
                 name_en: "Role of the Global Corporation",
-                name_ar: "Role of the Global Corporation",
+                name_ar: "دور الشركات العالمية",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -17965,7 +17964,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 484",
                 name_en: "Innovation Management",
-                name_ar: "Innovation Management",
+                name_ar: "إدارة الابتكار",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -17977,7 +17976,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 488",
                 name_en: "Corporate Social Responsibility and Sustainability",
-                name_ar: "Corporate Social Responsibility and Sustainability",
+                name_ar: "المسؤولية الاجتماعية للشركات والاستدامة",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -17989,7 +17988,7 @@ export const universities: University[] = [
               {
                 code: "MRKT 401",
                 name_en: "Marketing for Small and Medium Enterprises",
-                name_ar: "Marketing for Small and Medium Enterprises",
+                name_ar: "التسويق للمؤسسات الصغيرة والمتوسطة",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-GUST-MARKETING-B-S"],
@@ -17997,7 +17996,7 @@ export const universities: University[] = [
               {
                 code: "MRKT 402",
                 name_en: "Retail Marketing",
-                name_ar: "Retail Marketing",
+                name_ar: "تسويق التجزئة",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-GUST-MARKETING-B-S"],
@@ -18005,7 +18004,7 @@ export const universities: University[] = [
               {
                 code: "MRKT 450",
                 name_en: "Sales Management",
-                name_ar: "Sales Management",
+                name_ar: "إدارة المبيعات",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-GUST-MARKETING-B-S"],
@@ -18013,7 +18012,7 @@ export const universities: University[] = [
               {
                 code: "MRKT 451",
                 name_en: "Brand Management",
-                name_ar: "Brand Management",
+                name_ar: "إدارة العلامة التجارية",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-GUST-MARKETING-B-S"],
@@ -18021,7 +18020,7 @@ export const universities: University[] = [
               {
                 code: "MRKT 491",
                 name_en: "Business to Business Marketing",
-                name_ar: "Business to Business Marketing",
+                name_ar: "التسويق من الشركات إلى الشركات",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-GUST-MARKETING-B-S"],
@@ -18029,7 +18028,7 @@ export const universities: University[] = [
               {
                 code: "MRKT 495",
                 name_en: "Special Topics in Marketing",
-                name_ar: "Special Topics in Marketing",
+                name_ar: "مواضيع خاصة في التسويق",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-GUST-MARKETING-B-S"],
@@ -18037,7 +18036,7 @@ export const universities: University[] = [
               {
                 code: "MRKT 498",
                 name_en: "Capstone in Marketing",
-                name_ar: "Capstone in Marketing",
+                name_ar: "المشروع الختامي في التسويق",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-GUST-MARKETING-B-S"],
@@ -18045,7 +18044,7 @@ export const universities: University[] = [
               {
                 code: "MRKT 499",
                 name_en: "Marketing Internship",
-                name_ar: "Marketing Internship",
+                name_ar: "التدريب العملي في التسويق",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["KW-GUST-MARKETING-B-S"],
@@ -18053,7 +18052,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 301",
                 name_en: "Organizational Behavior",
-                name_ar: "Organizational Behavior",
+                name_ar: "السلوك التنظيمي",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -18063,7 +18062,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 361",
                 name_en: "Leadership",
-                name_ar: "Leadership",
+                name_ar: "القيادة",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -18074,7 +18073,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 371",
                 name_en: "International Management",
-                name_ar: "International Management",
+                name_ar: "الإدارة الدولية",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -18085,7 +18084,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 441",
                 name_en: "Organizational Development",
-                name_ar: "Organizational Development",
+                name_ar: "التطوير التنظيمي",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -18096,7 +18095,7 @@ export const universities: University[] = [
               {
                 code: "FIN 351",
                 name_en: "Islamic Banking and Finance",
-                name_ar: "Islamic Banking and Finance",
+                name_ar: "الصيرفة والتمويل الإسلامي",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -18107,7 +18106,7 @@ export const universities: University[] = [
               {
                 code: "FIN 380",
                 name_en: "International Finance",
-                name_ar: "International Finance",
+                name_ar: "المالية الدولية",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -18118,7 +18117,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 312",
                 name_en: "Business Forecasting",
-                name_ar: "Business Forecasting",
+                name_ar: "تنبؤات الأعمال",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -18129,7 +18128,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 315",
                 name_en: "Operations Research I",
-                name_ar: "Operations Research I",
+                name_ar: "بحوث العمليات I",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -18140,7 +18139,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 324",
                 name_en: "Quality Assurance in Business",
-                name_ar: "Quality Assurance in Business",
+                name_ar: "ضمان الجودة في الأعمال",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -18151,7 +18150,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 331",
                 name_en: "Project Management",
-                name_ar: "Project Management",
+                name_ar: "إدارة المشاريع",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -18162,7 +18161,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 415",
                 name_en: "Operations Research II",
-                name_ar: "Operations Research II",
+                name_ar: "بحوث العمليات II",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -18173,7 +18172,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 421",
                 name_en: "Business Logistics Systems",
-                name_ar: "Business Logistics Systems",
+                name_ar: "أنظمة اللوجستيات في الأعمال",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -18184,7 +18183,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 422",
                 name_en: "Lean Production in Manufacturing & Service",
-                name_ar: "Lean Production in Manufacturing & Service",
+                name_ar: "الإنتاج المرن في الصناعة والخدمة",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -18194,7 +18193,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 482",
                 name_en: "International Strategic Management",
-                name_ar: "International Strategic Management",
+                name_ar: "الإدارة الاستراتيجية الدولية",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -18205,7 +18204,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 495",
                 name_en: "Special Topics in Business Administration",
-                name_ar: "Special Topics in Business Administration",
+                name_ar: "مواضيع خاصة في إدارة الأعمال",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -18216,7 +18215,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 498",
                 name_en: "Capstone in MOB",
-                name_ar: "Capstone in MOB",
+                name_ar: "المشروع الختامي في MOB",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -18226,7 +18225,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 499",
                 name_en: "Management Internship",
-                name_ar: "Management Internship",
+                name_ar: "تدريب في الإدارة",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -18237,7 +18236,7 @@ export const universities: University[] = [
               {
                 code: "MIS 443",
                 name_en: "Decision Support Systems",
-                name_ar: "Decision Support Systems",
+                name_ar: "نظم دعم القرار",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -18248,7 +18247,7 @@ export const universities: University[] = [
               {
                 code: "MGMT 497",
                 name_en: "Capstone in International Business",
-                name_ar: "Capstone in International Business",
+                name_ar: "المشروع الختامي في الأعمال الدولية",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
