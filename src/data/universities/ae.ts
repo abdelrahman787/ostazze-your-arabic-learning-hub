@@ -27288,8 +27288,9 @@ export const universities: University[] = [
               },
               {
                 code: "PSG430",
-                name_en: "Special Topics",
-                name_ar: "موضوعات خاصة",
+                name_en: "",
+                name_ar: "",
+                name_status: "missing",
                 credits: 3,
                 year: 3,
                 semester: 1,
@@ -55261,8 +55262,9 @@ export const universities: University[] = [
               },
               {
                 code: "HSS397",
-                name_en: "Special Topics",
-                name_ar: "موضوعات خاصة",
+                name_en: "",
+                name_ar: "",
+                name_status: "missing",
                 credits: 3,
                 year: 4,
                 semester: 2,
@@ -96648,8 +96650,9 @@ export const universities: University[] = [
             courses: [
               {
                 code: "0104100",
-                name_en: "Course 0104100",
+                name_en: "",
                 name_ar: "الثقافة الإسلامية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -96661,8 +96664,9 @@ export const universities: University[] = [
               },
               {
                 code: "0201102",
-                name_en: "Course 0201102",
+                name_en: "",
                 name_ar: "اللغة العربية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -96674,8 +96678,9 @@ export const universities: University[] = [
               },
               {
                 code: "0202111",
-                name_en: "Course 0202111",
+                name_en: "",
                 name_ar: "اللغة الإنجليزية الأساسية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -96686,8 +96691,9 @@ export const universities: University[] = [
               },
               {
                 code: "1501101",
-                name_en: "Course 1501101",
+                name_en: "",
                 name_ar: "تقنية المعلومات باللغة العربية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -96698,8 +96704,9 @@ export const universities: University[] = [
               },
               {
                 code: "0204102",
-                name_en: "Course 0204102",
+                name_en: "",
                 name_ar: "مجتمع الإمارات",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -96711,8 +96718,9 @@ export const universities: University[] = [
               },
               {
                 code: "0302200",
-                name_en: "Course 0302200",
+                name_en: "",
                 name_ar: "مبادئ الابتكار وريادة الأعمال",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -96724,8 +96732,9 @@ export const universities: University[] = [
               },
               {
                 code: "0201140",
-                name_en: "Course 0201140",
+                name_en: "",
                 name_ar: "مقدمة في الأدب العربي",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -96737,8 +96746,9 @@ export const universities: University[] = [
               },
               {
                 code: "0202130",
-                name_en: "Course 0202130",
+                name_en: "",
                 name_ar: "اللغة الفرنسية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -96750,8 +96760,9 @@ export const universities: University[] = [
               },
               {
                 code: "0203100",
-                name_en: "Course 0203100",
+                name_en: "",
                 name_ar: "الحضارة الإسلامية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -96763,8 +96774,9 @@ export const universities: University[] = [
               },
               {
                 code: "0203102",
-                name_en: "Course 0203102",
+                name_en: "",
                 name_ar: "تاريخ الخليج العربي",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -96776,8 +96788,9 @@ export const universities: University[] = [
               },
               {
                 code: "0203200",
-                name_en: "Course 0203200",
+                name_en: "",
                 name_ar: "تاريخ العلوم عند المسلمين",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -96789,8 +96802,9 @@ export const universities: University[] = [
               },
               {
                 code: "0602246",
-                name_en: "Course 0602246",
+                name_en: "",
                 name_ar: "حقوق الإنسان في الإسلام والمواثيق الدولية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -96802,8 +96816,9 @@ export const universities: University[] = [
               },
               {
                 code: "0710109",
-                name_en: "Course 0710109",
+                name_en: "",
                 name_ar: "الفنون والطب",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -96815,8 +96830,9 @@ export const universities: University[] = [
               },
               {
                 code: "0900107",
-                name_en: "Course 0900107",
+                name_en: "",
                 name_ar: "تاريخ الطب والعلوم الصحية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -96828,8 +96844,9 @@ export const universities: University[] = [
               },
               {
                 code: "0103103",
-                name_en: "Course 0103103",
+                name_en: "",
                 name_ar: "نظام الإسلام",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -96841,8 +96858,9 @@ export const universities: University[] = [
               },
               {
                 code: "0104130",
-                name_en: "Course 0104130",
+                name_en: "",
                 name_ar: "فقه السيرة النبوية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -96854,8 +96872,9 @@ export const universities: University[] = [
               },
               {
                 code: "0206102",
-                name_en: "Course 0206102",
+                name_en: "",
                 name_ar: "أصول التربية الإسلامية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -96867,8 +96886,9 @@ export const universities: University[] = [
               },
               {
                 code: "0206103",
-                name_en: "Course 0206103",
+                name_en: "",
                 name_ar: "مبادئ علم النفس",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -96880,8 +96900,9 @@ export const universities: University[] = [
               },
               {
                 code: "0302150",
-                name_en: "Course 0302150",
+                name_en: "",
                 name_ar: "مدخل إلى إدارة الأعمال",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -96893,8 +96914,9 @@ export const universities: University[] = [
               },
               {
                 code: "0301131",
-                name_en: "Course 0301131",
+                name_en: "",
                 name_ar: "التمويل الشخصي",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -96905,8 +96927,9 @@ export const universities: University[] = [
               },
               {
                 code: "0301150",
-                name_en: "Course 0301150",
+                name_en: "",
                 name_ar: "مدخل إلى علم الاقتصاد (لغير طلبة الإدارة)",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -96917,8 +96940,9 @@ export const universities: University[] = [
               },
               {
                 code: "0401142",
-                name_en: "Course 0401142",
+                name_en: "",
                 name_ar: "الإنسان والبيئة",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -96930,8 +96954,9 @@ export const universities: University[] = [
               },
               {
                 code: "0503101",
-                name_en: "Course 0503101",
+                name_en: "",
                 name_ar: "الصحة والسلامة",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -96943,8 +96968,9 @@ export const universities: University[] = [
               },
               {
                 code: "0505101",
-                name_en: "Course 0505101",
+                name_en: "",
                 name_ar: "اللياقة البدنية والصحية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -96956,8 +96982,9 @@ export const universities: University[] = [
               },
               {
                 code: "0507101",
-                name_en: "Course 0507101",
+                name_en: "",
                 name_ar: "العناية الصحية والتغذية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -96969,8 +96996,9 @@ export const universities: University[] = [
               },
               {
                 code: "1430101",
-                name_en: "Course 1430101",
+                name_en: "",
                 name_ar: "علوم الفلك والفضاء",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -96982,8 +97010,9 @@ export const universities: University[] = [
               },
               {
                 code: "1450100",
-                name_en: "Course 1450100",
+                name_en: "",
                 name_ar: "علوم الحياة والمجتمع",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -96995,8 +97024,9 @@ export const universities: University[] = [
               },
               {
                 code: "1502233",
-                name_en: "Course 1502233",
+                name_en: "",
                 name_ar: "الذكاء الاصطناعي وتطبيقاته",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -97008,8 +97038,9 @@ export const universities: University[] = [
               },
               {
                 code: "0800100",
-                name_en: "Course 0800100",
+                name_en: "",
                 name_ar: "مدخل إلى علم الاتصال",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -97020,8 +97051,9 @@ export const universities: University[] = [
               },
               {
                 code: "0800112",
-                name_en: "Course 0800112",
+                name_en: "",
                 name_ar: "الكتابة الإعلامية",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Required",
                 program_ids: [
@@ -97032,8 +97064,9 @@ export const universities: University[] = [
               },
               {
                 code: "0800212",
-                name_en: "Course 0800212",
+                name_en: "",
                 name_ar: "مبادئ التصوير الرقمي (E)",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Required",
                 program_ids: [
@@ -97044,8 +97077,9 @@ export const universities: University[] = [
               },
               {
                 code: "0800214",
-                name_en: "Course 0800214",
+                name_en: "",
                 name_ar: "مبادئ الانتاج المرئي",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Required",
                 program_ids: [
@@ -97056,8 +97090,9 @@ export const universities: University[] = [
               },
               {
                 code: "0800216",
-                name_en: "Course 0800216",
+                name_en: "",
                 name_ar: "الاتصال الحكومي",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Required",
                 program_ids: [
@@ -97068,8 +97103,9 @@ export const universities: University[] = [
               },
               {
                 code: "0800300",
-                name_en: "Course 0800300",
+                name_en: "",
                 name_ar: "نظريات الاتصال",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -97080,8 +97116,9 @@ export const universities: University[] = [
               },
               {
                 code: "0800309",
-                name_en: "Course 0800309",
+                name_en: "",
                 name_ar: "مناهج بحوث الاتصال",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -97092,8 +97129,9 @@ export const universities: University[] = [
               },
               {
                 code: "0800312",
-                name_en: "Course 0800312",
+                name_en: "",
                 name_ar: "تشريعات الإعلام وأخلاقياته",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Required",
                 program_ids: [
@@ -97104,8 +97142,9 @@ export const universities: University[] = [
               },
               {
                 code: "0806241",
-                name_en: "Course 0806241",
+                name_en: "",
                 name_ar: "مقدمة في الصحافة الإلكترونية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -97114,8 +97153,9 @@ export const universities: University[] = [
               },
               {
                 code: "0806243",
-                name_en: "Course 0806243",
+                name_en: "",
                 name_ar: "التصميم الإلكتروني",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -97124,8 +97164,9 @@ export const universities: University[] = [
               },
               {
                 code: "0806245",
-                name_en: "Course 0806245",
+                name_en: "",
                 name_ar: "الكتابة للصحافة الإلكترونية (1)",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -97134,8 +97175,9 @@ export const universities: University[] = [
               },
               {
                 code: "0806341",
-                name_en: "Course 0806341",
+                name_en: "",
                 name_ar: "صحافة البيانات",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -97144,8 +97186,9 @@ export const universities: University[] = [
               },
               {
                 code: "0806343",
-                name_en: "Course 0806343",
+                name_en: "",
                 name_ar: "التصوير الصحفي الرقمي (E)",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -97154,8 +97197,9 @@ export const universities: University[] = [
               },
               {
                 code: "0806345",
-                name_en: "Course 0806345",
+                name_en: "",
                 name_ar: "تصميم مواقع الصحف الإلكترونية (1)",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -97164,8 +97208,9 @@ export const universities: University[] = [
               },
               {
                 code: "0806441",
-                name_en: "Course 0806441",
+                name_en: "",
                 name_ar: "أخلاقيات الصحافة الإلكترونية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -97174,8 +97219,9 @@ export const universities: University[] = [
               },
               {
                 code: "0806443",
-                name_en: "Course 0806443",
+                name_en: "",
                 name_ar: "الكتابة للصحافة الإلكترونية (2)",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -97184,8 +97230,9 @@ export const universities: University[] = [
               },
               {
                 code: "0806445",
-                name_en: "Course 0806445",
+                name_en: "",
                 name_ar: "مشروع التخرج في الصحافة الإلكترونية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -97194,8 +97241,9 @@ export const universities: University[] = [
               },
               {
                 code: "0806449",
-                name_en: "Course 0806449",
+                name_en: "",
                 name_ar: "التدريب الميداني في الصحافة الإلكترونية",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Required",
                 program_ids: [
@@ -97204,8 +97252,9 @@ export const universities: University[] = [
               },
               {
                 code: "0806242",
-                name_en: "Course 0806242",
+                name_en: "",
                 name_ar: "صحافة المدونات",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Elective",
                 program_ids: [
@@ -97214,8 +97263,9 @@ export const universities: University[] = [
               },
               {
                 code: "0806246",
-                name_en: "Course 0806246",
+                name_en: "",
                 name_ar: "صحافة الهاتف المحمول",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Elective",
                 program_ids: [
@@ -97224,8 +97274,9 @@ export const universities: University[] = [
               },
               {
                 code: "0806342",
-                name_en: "Course 0806342",
+                name_en: "",
                 name_ar: "الصحافة الاستقصائية",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Elective",
                 program_ids: [
@@ -97234,8 +97285,9 @@ export const universities: University[] = [
               },
               {
                 code: "0806344",
-                name_en: "Course 0806344",
+                name_en: "",
                 name_ar: "صحافة الشبكات",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Elective",
                 program_ids: [
@@ -97244,8 +97296,9 @@ export const universities: University[] = [
               },
               {
                 code: "0806442",
-                name_en: "Course 0806442",
+                name_en: "",
                 name_ar: "الحملات الصحفية الإلكترونية",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Elective",
                 program_ids: [
@@ -97254,8 +97307,9 @@ export const universities: University[] = [
               },
               {
                 code: "0806444",
-                name_en: "Course 0806444",
+                name_en: "",
                 name_ar: "تصميم مواقع الصحف الإلكترونية (2)",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Elective",
                 program_ids: [
@@ -97264,8 +97318,9 @@ export const universities: University[] = [
               },
               {
                 code: "0807228",
-                name_en: "Course 0807228",
+                name_en: "",
                 name_ar: "وسائل التواصل الاجتماعي",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Elective",
                 program_ids: [
@@ -97276,8 +97331,9 @@ export const universities: University[] = [
               },
               {
                 code: "0806201",
-                name_en: "Course 0806201",
+                name_en: "",
                 name_ar: "الإعلام في دولة الإمارات",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -97288,8 +97344,9 @@ export const universities: University[] = [
               },
               {
                 code: "0806305",
-                name_en: "Course 0806305",
+                name_en: "",
                 name_ar: "إدارة المؤسسات الإعلامية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -97300,8 +97357,9 @@ export const universities: University[] = [
               },
               {
                 code: "0806308",
-                name_en: "Course 0806308",
+                name_en: "",
                 name_ar: "مجتمع المعلومات",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -97312,8 +97370,9 @@ export const universities: University[] = [
               },
               {
                 code: "0806401",
-                name_en: "Course 0806401",
+                name_en: "",
                 name_ar: "موضوع خاص في الاتصال",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -97324,8 +97383,9 @@ export const universities: University[] = [
               },
               {
                 code: "0807428",
-                name_en: "Course 0807428",
+                name_en: "",
                 name_ar: "الرأي العام",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -97336,8 +97396,9 @@ export const universities: University[] = [
               },
               {
                 code: "0201125",
-                name_en: "Course 0201125",
+                name_en: "",
                 name_ar: "اللغة العربية والإعلام",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -97348,8 +97409,9 @@ export const universities: University[] = [
               },
               {
                 code: "0202113",
-                name_en: "Course 0202113",
+                name_en: "",
                 name_ar: "لغة إنجليزية للإنسانيات",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -97360,8 +97422,9 @@ export const universities: University[] = [
               },
               {
                 code: "0202114",
-                name_en: "Course 0202114",
+                name_en: "",
                 name_ar: "لغة إنجليزية للاتصال",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -97372,8 +97435,9 @@ export const universities: University[] = [
               },
               {
                 code: "0601111",
-                name_en: "Course 0601111",
+                name_en: "",
                 name_ar: "المدخل إلى علم القانون",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -97384,8 +97448,9 @@ export const universities: University[] = [
               },
               {
                 code: "1501114",
-                name_en: "Course 1501114",
+                name_en: "",
                 name_ar: "حل المشكلات",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -97396,8 +97461,9 @@ export const universities: University[] = [
               },
               {
                 code: "0201203",
-                name_en: "Course 0201203",
+                name_en: "",
                 name_ar: "فن الكتابة والتعبير",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -97408,8 +97474,9 @@ export const universities: University[] = [
               },
               {
                 code: "0204241",
-                name_en: "Course 0204241",
+                name_en: "",
                 name_ar: "علم النفس الاجتماعي",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -97420,8 +97487,9 @@ export const universities: University[] = [
               },
               {
                 code: "0807221",
-                name_en: "Course 0807221",
+                name_en: "",
                 name_ar: "مقدمة في العلاقات العامة",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -97432,8 +97500,9 @@ export const universities: University[] = [
               },
               {
                 code: "0807223",
-                name_en: "Course 0807223",
+                name_en: "",
                 name_ar: "البروتوكول والإتيكيت",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -97444,8 +97513,9 @@ export const universities: University[] = [
               },
               {
                 code: "1501240",
-                name_en: "Course 1501240",
+                name_en: "",
                 name_ar: "الرسم بواسطة الحاسوب",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -97456,8 +97526,9 @@ export const universities: University[] = [
               },
               {
                 code: "1501242",
-                name_en: "Course 1501242",
+                name_en: "",
                 name_ar: "الوسائط المتعددة التفاعلية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -97469,8 +97540,9 @@ export const universities: University[] = [
               },
               {
                 code: "0807325",
-                name_en: "Course 0807325",
+                name_en: "",
                 name_ar: "حملات العلاقات العامة",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -97481,8 +97553,9 @@ export const universities: University[] = [
               },
               {
                 code: "0203150",
-                name_en: "Course 0203150",
+                name_en: "",
                 name_ar: "المدخل إلى علم السياحة",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -97493,8 +97566,9 @@ export const universities: University[] = [
               },
               {
                 code: "0204331",
-                name_en: "Course 0204331",
+                name_en: "",
                 name_ar: "المشكلات الاجتماعية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -97505,8 +97579,9 @@ export const universities: University[] = [
               },
               {
                 code: "0204372",
-                name_en: "Course 0204372",
+                name_en: "",
                 name_ar: "المرأة والتنمية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -97517,8 +97592,9 @@ export const universities: University[] = [
               },
               {
                 code: "0807421",
-                name_en: "Course 0807421",
+                name_en: "",
                 name_ar: "إدارة الأزمات في العلاقات العامة",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -97529,8 +97605,9 @@ export const universities: University[] = [
               },
               {
                 code: "0203442",
-                name_en: "Course 0203442",
+                name_en: "",
                 name_ar: "تاريخ العرب الحديث والمعاصر",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -97541,8 +97618,9 @@ export const universities: University[] = [
               },
               {
                 code: "0204412",
-                name_en: "Course 0204412",
+                name_en: "",
                 name_ar: "التنظيمات الاجتماعية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -97553,8 +97631,9 @@ export const universities: University[] = [
               },
               {
                 code: "0203465",
-                name_en: "Course 0203465",
+                name_en: "",
                 name_ar: "التراث السياحي والثقافي",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -97589,136 +97668,153 @@ export const universities: University[] = [
               },
               {
                 code: "0806251",
-                name_en: "Course 0806251",
+                name_en: "",
                 name_ar: "مقدمة في الإذاعة والتلفزيون",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-COMMUNICATION-RADIO"],
               },
               {
                 code: "0806253",
-                name_en: "Course 0806253",
+                name_en: "",
                 name_ar: "التصوير التلفزيوني (E)",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-COMMUNICATION-RADIO"],
               },
               {
                 code: "0806255",
-                name_en: "Course 0806255",
+                name_en: "",
                 name_ar: "الدراما الإذاعية والتلفزيونية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-COMMUNICATION-RADIO"],
               },
               {
                 code: "0806351",
-                name_en: "Course 0806351",
+                name_en: "",
                 name_ar: "التقديم البرامجي في الإذاعة والتلفزيون (1)",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-COMMUNICATION-RADIO"],
               },
               {
                 code: "0806353",
-                name_en: "Course 0806353",
+                name_en: "",
                 name_ar: "المونتاج الإذاعي والتلفزيوني (1)",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-COMMUNICATION-RADIO"],
               },
               {
                 code: "0806355",
-                name_en: "Course 0806355",
+                name_en: "",
                 name_ar: "كتابة الأخبار للإذاعة والتلفزيون",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-COMMUNICATION-RADIO"],
               },
               {
                 code: "0806451",
-                name_en: "Course 0806451",
+                name_en: "",
                 name_ar: "الفيلم الوثائقي",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-COMMUNICATION-RADIO"],
               },
               {
                 code: "0806453",
-                name_en: "Course 0806453",
+                name_en: "",
                 name_ar: "الإخراج في الإذاعة والتلفزيون (1)",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-COMMUNICATION-RADIO"],
               },
               {
                 code: "0806455",
-                name_en: "Course 0806455",
+                name_en: "",
                 name_ar: "مشروع التخرج في الإذاعة والتلفزيون",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-COMMUNICATION-RADIO"],
               },
               {
                 code: "0806459",
-                name_en: "Course 0806459",
+                name_en: "",
                 name_ar: "التدريب الميداني في الإذاعة والتلفزيون",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Required",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-COMMUNICATION-RADIO"],
               },
               {
                 code: "0806252",
-                name_en: "Course 0806252",
+                name_en: "",
                 name_ar: "تخطيط وإعداد الدورات البرامجية",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-COMMUNICATION-RADIO"],
               },
               {
                 code: "0806254",
-                name_en: "Course 0806254",
+                name_en: "",
                 name_ar: "كتابة النصوص للإذاعة والتلفزيون",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-COMMUNICATION-RADIO"],
               },
               {
                 code: "0806354",
-                name_en: "Course 0806354",
+                name_en: "",
                 name_ar: "المونتاج الإذاعي والتلفزيوني (2)",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-COMMUNICATION-RADIO"],
               },
               {
                 code: "0806356",
-                name_en: "Course 0806356",
+                name_en: "",
                 name_ar: "التقرير الإذاعي والتلفزيوني",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-COMMUNICATION-RADIO"],
               },
               {
                 code: "0806454",
-                name_en: "Course 0806454",
+                name_en: "",
                 name_ar: "التقديم البرامجي في الإذاعة والتلفزيون (2)",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-COMMUNICATION-RADIO"],
               },
               {
                 code: "0806456",
-                name_en: "Course 0806456",
+                name_en: "",
                 name_ar: "الإخراج للإذاعة والتلفزيون (2)",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-COMMUNICATION-RADIO"],
               },
               {
                 code: "0806261",
-                name_en: "Course 0806261",
+                name_en: "",
                 name_ar: "مقدمة في التصميم الإعلامي الرقمي",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -97727,8 +97823,9 @@ export const universities: University[] = [
               },
               {
                 code: "0806263",
-                name_en: "Course 0806263",
+                name_en: "",
                 name_ar: "مبادئ التصميم",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -97737,8 +97834,9 @@ export const universities: University[] = [
               },
               {
                 code: "0806265",
-                name_en: "Course 0806265",
+                name_en: "",
                 name_ar: "التصميم للإنترنت (E)",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -97747,8 +97845,9 @@ export const universities: University[] = [
               },
               {
                 code: "0806361",
-                name_en: "Course 0806361",
+                name_en: "",
                 name_ar: "إعداد المواد للوسائط المتعددة (1)",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -97757,8 +97856,9 @@ export const universities: University[] = [
               },
               {
                 code: "0806363",
-                name_en: "Course 0806363",
+                name_en: "",
                 name_ar: "الرسوم المعلوماتية (1)",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -97767,8 +97867,9 @@ export const universities: University[] = [
               },
               {
                 code: "0806365",
-                name_en: "Course 0806365",
+                name_en: "",
                 name_ar: "الرسوم المتحركة (1)",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -97777,8 +97878,9 @@ export const universities: University[] = [
               },
               {
                 code: "0806461",
-                name_en: "Course 0806461",
+                name_en: "",
                 name_ar: "الرسم ثلاثي الأبعاد",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -97787,8 +97889,9 @@ export const universities: University[] = [
               },
               {
                 code: "0806463",
-                name_en: "Course 0806463",
+                name_en: "",
                 name_ar: "تطبيقات في التصميم الإعلامي الرقمي",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -97797,8 +97900,9 @@ export const universities: University[] = [
               },
               {
                 code: "0806465",
-                name_en: "Course 0806465",
+                name_en: "",
                 name_ar: "مشروع التخرج في التصميم الإعلامي الرقمي",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -97807,8 +97911,9 @@ export const universities: University[] = [
               },
               {
                 code: "0806460",
-                name_en: "Course 0806460",
+                name_en: "",
                 name_ar: "التدريب الميداني في التصميم الإعلامي الرقمي",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Required",
                 program_ids: [
@@ -97817,8 +97922,9 @@ export const universities: University[] = [
               },
               {
                 code: "0806262",
-                name_en: "Course 0806262",
+                name_en: "",
                 name_ar: "تصميم الهوية البصرية",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Elective",
                 program_ids: [
@@ -97827,8 +97933,9 @@ export const universities: University[] = [
               },
               {
                 code: "0806362",
-                name_en: "Course 0806362",
+                name_en: "",
                 name_ar: "إدارة الانتاج للتصميم الاعلامي",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Elective",
                 program_ids: [
@@ -97837,8 +97944,9 @@ export const universities: University[] = [
               },
               {
                 code: "0806462",
-                name_en: "Course 0806462",
+                name_en: "",
                 name_ar: "إعداد المواد للوسائط المتعددة (2)",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Elective",
                 program_ids: [
@@ -97847,8 +97955,9 @@ export const universities: University[] = [
               },
               {
                 code: "0806464",
-                name_en: "Course 0806464",
+                name_en: "",
                 name_ar: "الرسوم المعلوماتية (2)",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Elective",
                 program_ids: [
@@ -97857,8 +97966,9 @@ export const universities: University[] = [
               },
               {
                 code: "0806466",
-                name_en: "Course 0806466",
+                name_en: "",
                 name_ar: "الرسوم المتحركة (2)",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Elective",
                 program_ids: [
@@ -98506,8 +98616,9 @@ export const universities: University[] = [
             courses: [
               {
                 code: "0104100",
-                name_en: "Course 0104100",
+                name_en: "",
                 name_ar: "الثقافة الإسلامية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -98517,8 +98628,9 @@ export const universities: University[] = [
               },
               {
                 code: "0201102",
-                name_en: "Course 0201102",
+                name_en: "",
                 name_ar: "اللغة العربية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -98528,24 +98640,27 @@ export const universities: University[] = [
               },
               {
                 code: "0202111",
-                name_en: "Course 0202111",
+                name_en: "",
                 name_ar: "اللغة الإنجليزية الأساسية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "1501101",
-                name_en: "Course 1501101",
+                name_en: "",
                 name_ar: "تقنية المعلومات باللغة العربية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0204102",
-                name_en: "Course 0204102",
+                name_en: "",
                 name_ar: "مجتمع الإمارات",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -98555,8 +98670,9 @@ export const universities: University[] = [
               },
               {
                 code: "0302200",
-                name_en: "Course 0302200",
+                name_en: "",
                 name_ar: "مبادئ الابتكار وريادة الأعمال",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -98566,8 +98682,9 @@ export const universities: University[] = [
               },
               {
                 code: "0201140",
-                name_en: "Course 0201140",
+                name_en: "",
                 name_ar: "مقدمة في الأدب العربي",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -98577,8 +98694,9 @@ export const universities: University[] = [
               },
               {
                 code: "0202130",
-                name_en: "Course 0202130",
+                name_en: "",
                 name_ar: "اللغة الفرنسية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -98588,8 +98706,9 @@ export const universities: University[] = [
               },
               {
                 code: "0203100",
-                name_en: "Course 0203100",
+                name_en: "",
                 name_ar: "الحضارة الإسلامية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -98599,8 +98718,9 @@ export const universities: University[] = [
               },
               {
                 code: "0203102",
-                name_en: "Course 0203102",
+                name_en: "",
                 name_ar: "تاريخ الخليج العربي",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -98610,8 +98730,9 @@ export const universities: University[] = [
               },
               {
                 code: "0203200",
-                name_en: "Course 0203200",
+                name_en: "",
                 name_ar: "تاريخ العلوم عند المسلمين",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -98621,8 +98742,9 @@ export const universities: University[] = [
               },
               {
                 code: "0602246",
-                name_en: "Course 0602246",
+                name_en: "",
                 name_ar: "حقوق الإنسان في الإسلام والمواثيق الدولية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -98632,16 +98754,18 @@ export const universities: University[] = [
               },
               {
                 code: "0710109",
-                name_en: "Course 0710109",
+                name_en: "",
                 name_ar: "الفنون والطب",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0900107",
-                name_en: "Course 0900107",
+                name_en: "",
                 name_ar: "تاريخ الطب والعلوم الصحية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -98651,8 +98775,9 @@ export const universities: University[] = [
               },
               {
                 code: "0103103",
-                name_en: "Course 0103103",
+                name_en: "",
                 name_ar: "نظام الإسلام",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -98662,8 +98787,9 @@ export const universities: University[] = [
               },
               {
                 code: "0104130",
-                name_en: "Course 0104130",
+                name_en: "",
                 name_ar: "فقه السيرة النبوية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -98673,8 +98799,9 @@ export const universities: University[] = [
               },
               {
                 code: "0206102",
-                name_en: "Course 0206102",
+                name_en: "",
                 name_ar: "أصول التربية الإسلامية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -98684,8 +98811,9 @@ export const universities: University[] = [
               },
               {
                 code: "0206103",
-                name_en: "Course 0206103",
+                name_en: "",
                 name_ar: "مبادئ علم النفس",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -98695,8 +98823,9 @@ export const universities: University[] = [
               },
               {
                 code: "0302150",
-                name_en: "Course 0302150",
+                name_en: "",
                 name_ar: "مدخل إلى إدارة الأعمال",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -98706,24 +98835,27 @@ export const universities: University[] = [
               },
               {
                 code: "0301131",
-                name_en: "Course 0301131",
+                name_en: "",
                 name_ar: "التمويل الشخصي",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0301150",
-                name_en: "Course 0301150",
+                name_en: "",
                 name_ar: "مدخل إلى علم الاقتصاد (لغير طلبة الإدارة)",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0401142",
-                name_en: "Course 0401142",
+                name_en: "",
                 name_ar: "الإنسان والبيئة",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -98733,8 +98865,9 @@ export const universities: University[] = [
               },
               {
                 code: "0503101",
-                name_en: "Course 0503101",
+                name_en: "",
                 name_ar: "الصحة والسلامة",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -98744,8 +98877,9 @@ export const universities: University[] = [
               },
               {
                 code: "0505101",
-                name_en: "Course 0505101",
+                name_en: "",
                 name_ar: "اللياقة البدنية والصحية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -98755,8 +98889,9 @@ export const universities: University[] = [
               },
               {
                 code: "0507101",
-                name_en: "Course 0507101",
+                name_en: "",
                 name_ar: "العناية الصحية والتغذية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -98766,8 +98901,9 @@ export const universities: University[] = [
               },
               {
                 code: "1430101",
-                name_en: "Course 1430101",
+                name_en: "",
                 name_ar: "علوم الفلك والفضاء",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -98777,8 +98913,9 @@ export const universities: University[] = [
               },
               {
                 code: "1450100",
-                name_en: "Course 1450100",
+                name_en: "",
                 name_ar: "علوم الحياة والمجتمع",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -98788,336 +98925,378 @@ export const universities: University[] = [
               },
               {
                 code: "1502233",
-                name_en: "Course 1502233",
+                name_en: "",
                 name_ar: "الذكاء الاصطناعي وتطبيقاته",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0800100",
-                name_en: "Course 0800100",
+                name_en: "",
                 name_ar: "مدخل إلى علم الاتصال",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0800112",
-                name_en: "Course 0800112",
+                name_en: "",
                 name_ar: "الكتابة الإعلامية",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Required",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0800212",
-                name_en: "Course 0800212",
+                name_en: "",
                 name_ar: "مبادئ التصوير الرقمي (E)",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Required",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0800214",
-                name_en: "Course 0800214",
+                name_en: "",
                 name_ar: "مبادئ الانتاج المرئي",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Required",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0800216",
-                name_en: "Course 0800216",
+                name_en: "",
                 name_ar: "الاتصال الحكومي",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Required",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0800300",
-                name_en: "Course 0800300",
+                name_en: "",
                 name_ar: "نظريات الاتصال",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0800309",
-                name_en: "Course 0800309",
+                name_en: "",
                 name_ar: "مناهج بحوث الاتصال",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0800312",
-                name_en: "Course 0800312",
+                name_en: "",
                 name_ar: "تشريعات الإعلام وأخلاقياته",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Required",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0807221",
-                name_en: "Course 0807221",
+                name_en: "",
                 name_ar: "مقدمة في العلاقات العامة",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0807223",
-                name_en: "Course 0807223",
+                name_en: "",
                 name_ar: "البروتوكول والإتيكيت",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0807225",
-                name_en: "Course 0807225",
+                name_en: "",
                 name_ar: "العلاقات العامة عبر الإنترنت (E)",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0807321",
-                name_en: "Course 0807321",
+                name_en: "",
                 name_ar: "الكتابة للعلاقات العامة",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0807323",
-                name_en: "Course 0807323",
+                name_en: "",
                 name_ar: "إنتاج المواد المطبوعة في العلاقات العامة",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0807325",
-                name_en: "Course 0807325",
+                name_en: "",
                 name_ar: "حملات العلاقات العامة",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0807421",
-                name_en: "Course 0807421",
+                name_en: "",
                 name_ar: "إدارة الأزمات في العلاقات العامة",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0807423",
-                name_en: "Course 0807423",
+                name_en: "",
                 name_ar: "إنتاج المواد المسموعة والمرئية في العلاقات العامة",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0807425",
-                name_en: "Course 0807425",
+                name_en: "",
                 name_ar: "مشروع التخرج في العلاقات العامة",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0807429",
-                name_en: "Course 0807429",
+                name_en: "",
                 name_ar: "التدريب الميداني في العلاقات العامة",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Required",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0807222",
-                name_en: "Course 0807222",
+                name_en: "",
                 name_ar: "فن الحديث والتقديم",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0807224",
-                name_en: "Course 0807224",
+                name_en: "",
                 name_ar: "مهارات الإقناع والتفاوض",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0807226",
-                name_en: "Course 0807226",
+                name_en: "",
                 name_ar: "تنظيم الأحداث الخاصة",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0807228",
-                name_en: "Course 0807228",
+                name_en: "",
                 name_ar: "وسائل التواصل الاجتماعي",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0807322",
-                name_en: "Course 0807322",
+                name_en: "",
                 name_ar: "بحوث العلاقات العامة",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0807422",
-                name_en: "Course 0807422",
+                name_en: "",
                 name_ar: "الاتصال التنظيمي",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0807424",
-                name_en: "Course 0807424",
+                name_en: "",
                 name_ar: "دراسات حالة في العلاقات العامة",
+                name_status: "ar_only",
                 credits: 2,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0807326",
-                name_en: "Course 0807326",
+                name_en: "",
                 name_ar: "العلاقات العامة والإعلان الدوليين",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0807328",
-                name_en: "Course 0807328",
+                name_en: "",
                 name_ar: "الاتصالات التسويقية المتكاملة",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0807426",
-                name_en: "Course 0807426",
+                name_en: "",
                 name_ar: "الإدارة الإستراتيجية في العلاقات العامة",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0807428",
-                name_en: "Course 0807428",
+                name_en: "",
                 name_ar: "الرأي العام",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0201125",
-                name_en: "Course 0201125",
+                name_en: "",
                 name_ar: "اللغة العربية والإعلام",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0202113",
-                name_en: "Course 0202113",
+                name_en: "",
                 name_ar: "لغة إنجليزية للإنسانيات",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0202114",
-                name_en: "Course 0202114",
+                name_en: "",
                 name_ar: "لغة إنجليزية للاتصال",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0601111",
-                name_en: "Course 0601111",
+                name_en: "",
                 name_ar: "المدخل إلى علم القانون",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "1501114",
-                name_en: "Course 1501114",
+                name_en: "",
                 name_ar: "حل المشكلات",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0201203",
-                name_en: "Course 0201203",
+                name_en: "",
                 name_ar: "فن الكتابة والتعبير",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0204241",
-                name_en: "Course 0204241",
+                name_en: "",
                 name_ar: "علم النفس الاجتماعي",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0806241",
-                name_en: "Course 0806241",
+                name_en: "",
                 name_ar: "مقدمة في الصحافة الإلكترونية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0806251",
-                name_en: "Course 0806251",
+                name_en: "",
                 name_ar: "مقدمة في الإذاعة والتلفزيون",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0806261",
-                name_en: "Course 0806261",
+                name_en: "",
                 name_ar: "مقدمة في التصميم الإعلامي الرقمي",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "1501240",
-                name_en: "Course 1501240",
+                name_en: "",
                 name_ar: "الرسم بواسطة الحاسوب",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "1501242",
-                name_en: "Course 1501242",
+                name_en: "",
                 name_ar: "الوسائط المتعددة التفاعلية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -99127,56 +99306,63 @@ export const universities: University[] = [
               },
               {
                 code: "0203150",
-                name_en: "Course 0203150",
+                name_en: "",
                 name_ar: "المدخل إلى علم السياحة",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0204331",
-                name_en: "Course 0204331",
+                name_en: "",
                 name_ar: "المشكلات الاجتماعية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0204372",
-                name_en: "Course 0204372",
+                name_en: "",
                 name_ar: "المرأة والتنمية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0806308",
-                name_en: "Course 0806308",
+                name_en: "",
                 name_ar: "مجتمع المعلومات",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0203442",
-                name_en: "Course 0203442",
+                name_en: "",
                 name_ar: "تاريخ العرب الحديث والمعاصر",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0204412",
-                name_en: "Course 0204412",
+                name_en: "",
                 name_ar: "التنظيمات الاجتماعية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
               },
               {
                 code: "0203465",
-                name_en: "Course 0203465",
+                name_en: "",
                 name_ar: "التراث السياحي والثقافي",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: ["AE-UOS-BACHELOR-OF-ARTS-IN-PUBLIC-RELATIONS"],
@@ -110726,8 +110912,9 @@ export const universities: University[] = [
               },
               {
                 code: "",
-                name_en: "Special Topics",
-                name_ar: "موضوعات خاصة",
+                name_en: "",
+                name_ar: "",
+                name_status: "missing",
                 credits: 3,
                 year: 3,
                 semester: 1,
@@ -112265,8 +112452,9 @@ export const universities: University[] = [
               },
               {
                 code: "",
-                name_en: "Special Topics",
-                name_ar: "موضوعات خاصة",
+                name_en: "",
+                name_ar: "",
+                name_status: "missing",
                 credits: 3,
                 year: 3,
                 semester: 2,
@@ -112915,8 +113103,9 @@ export const universities: University[] = [
               },
               {
                 code: "",
-                name_en: "Special Topics",
-                name_ar: "موضوعات خاصة",
+                name_en: "",
+                name_ar: "",
+                name_status: "missing",
                 credits: 3,
                 year: 4,
                 semester: 1,
@@ -113591,8 +113780,9 @@ export const universities: University[] = [
               },
               {
                 code: "",
-                name_en: "Special Topics",
-                name_ar: "موضوعات خاصة",
+                name_en: "",
+                name_ar: "",
+                name_status: "missing",
                 credits: 3,
                 year: 3,
                 semester: 2,
@@ -120447,8 +120637,9 @@ export const universities: University[] = [
             courses: [
               {
                 code: "ARL 101",
-                name_en: "Course ARL 101",
+                name_en: "",
                 name_ar: "مهارات الاتصال باللغة العربية (1)",
+                name_status: "ar_only",
                 credits: 3,
                 year: 1,
                 semester: 1,
@@ -120478,8 +120669,9 @@ export const universities: University[] = [
               },
               {
                 code: "ITD 100",
-                name_en: "Course ITD 100",
+                name_en: "",
                 name_ar: "مدخل الى الحاسب الآلي و التقنية الرقمية",
+                name_status: "ar_only",
                 credits: 3,
                 year: 1,
                 semester: 1,
@@ -120492,8 +120684,9 @@ export const universities: University[] = [
               },
               {
                 code: "MMC 201",
-                name_en: "Course MMC 201",
+                name_en: "",
                 name_ar: "مدخل إلى الإتصال الجماهيري",
+                name_status: "ar_only",
                 credits: 3,
                 year: 1,
                 semester: 1,
@@ -120543,8 +120736,9 @@ export const universities: University[] = [
               },
               {
                 code: "MAC 207",
-                name_en: "Course MAC 207",
+                name_en: "",
                 name_ar: "مقدمة في التصميم الجرافيكي",
+                name_status: "ar_only",
                 credits: 3,
                 year: 1,
                 semester: 2,
@@ -120557,8 +120751,9 @@ export const universities: University[] = [
               },
               {
                 code: "MAC 201",
-                name_en: "Course MAC 201",
+                name_en: "",
                 name_ar: "التواصل بين الثقافات",
+                name_status: "ar_only",
                 credits: 3,
                 year: 1,
                 semester: 2,
@@ -120572,8 +120767,9 @@ export const universities: University[] = [
               },
               {
                 code: "ISL 100",
-                name_en: "Course ISL 100",
+                name_en: "",
                 name_ar: "الثقافة الإسلامية",
+                name_status: "ar_only",
                 credits: 3,
                 year: 1,
                 semester: 2,
@@ -120591,8 +120787,9 @@ export const universities: University[] = [
               },
               {
                 code: "MMC 203",
-                name_en: "Course MMC 203",
+                name_en: "",
                 name_ar: "الكتابة لوسائل الإعلام الجماهيرية",
+                name_status: "ar_only",
                 credits: 3,
                 year: 1,
                 semester: 2,
@@ -120619,8 +120816,9 @@ export const universities: University[] = [
               },
               {
                 code: "MAC 205",
-                name_en: "Course MAC 205",
+                name_en: "",
                 name_ar: "نظريات الإعلام",
+                name_status: "ar_only",
                 credits: 3,
                 year: 2,
                 semester: 1,
@@ -120633,8 +120831,9 @@ export const universities: University[] = [
               },
               {
                 code: "MAC 313",
-                name_en: "Course MAC 313",
+                name_en: "",
                 name_ar: "مبادئ العلاقات العامة الاستراتيجية",
+                name_status: "ar_only",
                 credits: 3,
                 year: 2,
                 semester: 1,
@@ -120646,8 +120845,9 @@ export const universities: University[] = [
               },
               {
                 code: "FWS 211",
-                name_en: "Course FWS 211",
+                name_en: "",
                 name_ar: "أساسيات الذكاء العاطفي",
+                name_status: "ar_only",
                 credits: 3,
                 year: 2,
                 semester: 1,
@@ -120662,8 +120862,9 @@ export const universities: University[] = [
               },
               {
                 code: "MAC 314",
-                name_en: "Course MAC 314",
+                name_en: "",
                 name_ar: "استراتيجية الاتصال في الاعلان",
+                name_status: "ar_only",
                 credits: 3,
                 year: 2,
                 semester: 1,
@@ -120705,8 +120906,9 @@ export const universities: University[] = [
               },
               {
                 code: "MAC 310",
-                name_en: "Course MAC 310",
+                name_en: "",
                 name_ar: "أخلاقيات ومسؤوليات وسائل الإعلام",
+                name_status: "ar_only",
                 credits: 3,
                 year: 2,
                 semester: 2,
@@ -120719,8 +120921,9 @@ export const universities: University[] = [
               },
               {
                 code: "MAC 308",
-                name_en: "Course MAC 308",
+                name_en: "",
                 name_ar: "التصوير الصحفي",
+                name_status: "ar_only",
                 credits: 3,
                 year: 2,
                 semester: 2,
@@ -120733,8 +120936,9 @@ export const universities: University[] = [
               },
               {
                 code: "MKT 200",
-                name_en: "Course MKT 200",
+                name_en: "",
                 name_ar: "مبادئ التسويق",
+                name_status: "ar_only",
                 credits: 3,
                 year: 2,
                 semester: 2,
@@ -120747,8 +120951,9 @@ export const universities: University[] = [
               },
               {
                 code: "ASC 301",
-                name_en: "Course ASC 301",
+                name_en: "",
                 name_ar: "كتابة تقرير البحث",
+                name_status: "ar_only",
                 credits: 3,
                 year: 3,
                 semester: 1,
@@ -120763,8 +120968,9 @@ export const universities: University[] = [
               },
               {
                 code: "FWS 205",
-                name_en: "Course FWS 205",
+                name_en: "",
                 name_ar: "مجتمع الإمارات و الخليج العربي",
+                name_status: "ar_only",
                 credits: 3,
                 year: 3,
                 semester: 1,
@@ -120782,8 +120988,9 @@ export const universities: University[] = [
               },
               {
                 code: "MAC 303",
-                name_en: "Course MAC 303",
+                name_en: "",
                 name_ar: "الاتصال التنظيمي",
+                name_status: "ar_only",
                 credits: 3,
                 year: 3,
                 semester: 1,
@@ -120795,8 +121002,9 @@ export const universities: University[] = [
               },
               {
                 code: "FWS 310",
-                name_en: "Course FWS 310",
+                name_en: "",
                 name_ar: "مدخل في ريادة الأعمال و الإبتكار",
+                name_status: "ar_only",
                 credits: 3,
                 year: 3,
                 semester: 2,
@@ -120813,8 +121021,9 @@ export const universities: University[] = [
               },
               {
                 code: "MAC 315",
-                name_en: "Course MAC 315",
+                name_en: "",
                 name_ar: "الكتابة للعلاقات العامة",
+                name_status: "ar_only",
                 credits: 3,
                 year: 3,
                 semester: 2,
@@ -120826,8 +121035,9 @@ export const universities: University[] = [
               },
               {
                 code: "MAC 301",
-                name_en: "Course MAC 301",
+                name_en: "",
                 name_ar: "البروتوكول والاتيكيت",
+                name_status: "ar_only",
                 credits: 3,
                 year: 3,
                 semester: 2,
@@ -120839,8 +121049,9 @@ export const universities: University[] = [
               },
               {
                 code: "FWS 301",
-                name_en: "Course FWS 301",
+                name_en: "",
                 name_ar: "تطوير قادة المستقبل",
+                name_status: "ar_only",
                 credits: 3,
                 year: 3,
                 semester: 2,
@@ -120853,8 +121064,9 @@ export const universities: University[] = [
               },
               {
                 code: "MAC 317",
-                name_en: "Course MAC 317",
+                name_en: "",
                 name_ar: "الخطابة العامة",
+                name_status: "ar_only",
                 credits: 3,
                 year: 3,
                 semester: 2,
@@ -120868,8 +121080,9 @@ export const universities: University[] = [
               },
               {
                 code: "MAC 499",
-                name_en: "Course MAC 499",
+                name_en: "",
                 name_ar: "التدريب الميداني",
+                name_status: "ar_only",
                 credits: 3,
                 year: 3,
                 semester: 3,
@@ -120882,8 +121095,9 @@ export const universities: University[] = [
               },
               {
                 code: "MAC 404",
-                name_en: "Course MAC 404",
+                name_en: "",
                 name_ar: "إدارة وسائل التواصل الإجتماعي",
+                name_status: "ar_only",
                 credits: 3,
                 year: 4,
                 semester: 1,
@@ -120896,8 +121110,9 @@ export const universities: University[] = [
               },
               {
                 code: "MAC 407",
-                name_en: "Course MAC 407",
+                name_en: "",
                 name_ar: "الاتصالات التسويقية المتكاملة",
+                name_status: "ar_only",
                 credits: 3,
                 year: 4,
                 semester: 1,
@@ -120909,8 +121124,9 @@ export const universities: University[] = [
               },
               {
                 code: "MAC 413",
-                name_en: "Course MAC 413",
+                name_en: "",
                 name_ar: "الحملات الإعلامية في العلاقات العامة",
+                name_status: "ar_only",
                 credits: 3,
                 year: 4,
                 semester: 1,
@@ -120922,8 +121138,9 @@ export const universities: University[] = [
               },
               {
                 code: "MAC 402",
-                name_en: "Course MAC 402",
+                name_en: "",
                 name_ar: "التذوق والنقد في الإعلام",
+                name_status: "ar_only",
                 credits: 3,
                 year: 4,
                 semester: 2,
@@ -120936,8 +121153,9 @@ export const universities: University[] = [
               },
               {
                 code: "MAC 490",
-                name_en: "Course MAC 490",
+                name_en: "",
                 name_ar: "تصميم مشروع التخرج (مساق التخرج)",
+                name_status: "ar_only",
                 credits: 3,
                 year: 4,
                 semester: 2,
@@ -120950,8 +121168,9 @@ export const universities: University[] = [
               },
               {
                 code: "MAC 412",
-                name_en: "Course MAC 412",
+                name_en: "",
                 name_ar: "إدارة الوسائل الاعلامية",
+                name_status: "ar_only",
                 credits: 3,
                 year: 3,
                 semester: 1,
@@ -120964,8 +121183,9 @@ export const universities: University[] = [
               },
               {
                 code: "MAC 403",
-                name_en: "Course MAC 403",
+                name_en: "",
                 name_ar: "الاتصال الدولي",
+                name_status: "ar_only",
                 credits: 3,
                 year: 3,
                 semester: 1,
@@ -120979,8 +121199,9 @@ export const universities: University[] = [
               },
               {
                 code: "MAC 206",
-                name_en: "Course MAC 206",
+                name_en: "",
                 name_ar: "مقدمة في الصحافة",
+                name_status: "ar_only",
                 credits: 3,
                 year: 3,
                 semester: 1,
@@ -120993,8 +121214,9 @@ export const universities: University[] = [
               },
               {
                 code: "MAC 204",
-                name_en: "Course MAC 204",
+                name_en: "",
                 name_ar: "الاتصال الشخصي",
+                name_status: "ar_only",
                 credits: 3,
                 year: 3,
                 semester: 1,
@@ -121007,8 +121229,9 @@ export const universities: University[] = [
               },
               {
                 code: "MAC 316",
-                name_en: "Course MAC 316",
+                name_en: "",
                 name_ar: "الاتصال والدبلوماسية",
+                name_status: "ar_only",
                 credits: 3,
                 year: 3,
                 semester: 1,
@@ -121022,8 +121245,9 @@ export const universities: University[] = [
               },
               {
                 code: "MAC 328",
-                name_en: "Course MAC 328",
+                name_en: "",
                 name_ar: "إدارة الفعاليات",
+                name_status: "ar_only",
                 credits: 3,
                 year: 3,
                 semester: 1,
@@ -121036,8 +121260,9 @@ export const universities: University[] = [
               },
               {
                 code: "FMP 180",
-                name_en: "Course FMP 180",
+                name_en: "",
                 name_ar: "مبادئ صناعة المحتوى الإعلامي",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -121046,8 +121271,9 @@ export const universities: University[] = [
               },
               {
                 code: "FMP 225",
-                name_en: "Course FMP 225",
+                name_en: "",
                 name_ar: "مقدمة في المؤثرات البصرية الرقمية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -121056,8 +121282,9 @@ export const universities: University[] = [
               },
               {
                 code: "FMP 300",
-                name_en: "Course FMP 300",
+                name_en: "",
                 name_ar: "صناعة الأفلام القصيرة",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -121066,8 +121293,9 @@ export const universities: University[] = [
               },
               {
                 code: "FMP 325",
-                name_en: "Course FMP 325",
+                name_en: "",
                 name_ar: "كتابة السيناريو",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -121076,8 +121304,9 @@ export const universities: University[] = [
               },
               {
                 code: "FMP 350",
-                name_en: "Course FMP 350",
+                name_en: "",
                 name_ar: "الإخراج الوثائقي",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -121086,8 +121315,9 @@ export const universities: University[] = [
               },
               {
                 code: "FMS 100",
-                name_en: "Course FMS 100",
+                name_en: "",
                 name_ar: "مقدمة في صناعة الفيلم السينمائي",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -121096,8 +121326,9 @@ export const universities: University[] = [
               },
               {
                 code: "MAC 410",
-                name_en: "Course MAC 410",
+                name_en: "",
                 name_ar: "تصميم المواقع الإلكترونية و المنشورات",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: [
@@ -123197,8 +123428,9 @@ export const universities: University[] = [
               },
               {
                 code: "CCLA 331",
-                name_en: "Course CCLA 331",
+                name_en: "",
                 name_ar: "الشركات التجارية والافلاس (باللغة الانجليزية)",
+                name_status: "ar_only",
                 credits: 3,
                 year: 3,
                 semester: 1,
@@ -133596,8 +133828,9 @@ export const universities: University[] = [
               },
               {
                 code: "LAW 113",
-                name_en: "Course LAW 113",
+                name_en: "",
                 name_ar: "تاريخ التشريع الإسلامي ومصادره",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: ["AE-AU-BACHELOR-OF-LAW"],
@@ -133668,8 +133901,9 @@ export const universities: University[] = [
               },
               {
                 code: "LAW 235",
-                name_en: "Course LAW 235",
+                name_en: "",
                 name_ar: "مناهج البحث في العلوم القانونية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: ["AE-AU-BACHELOR-OF-LAW"],
@@ -133693,9 +133927,10 @@ export const universities: University[] = [
               },
               {
                 code: "LAW 243",
-                name_en: "Course LAW 243",
+                name_en: "",
                 name_ar:
                   "قانون العقوبات الخاص (1) - الجرائم الواقعة على الأشخاص",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: ["AE-AU-BACHELOR-OF-LAW"],
@@ -133710,25 +133945,28 @@ export const universities: University[] = [
               },
               {
                 code: "LAW 303",
-                name_en: "Course LAW 303",
+                name_en: "",
                 name_ar: "فقه المواريث والوصايا والوقف",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: ["AE-AU-BACHELOR-OF-LAW"],
               },
               {
                 code: "LAW 351",
-                name_en: "Course LAW 351",
+                name_en: "",
                 name_ar:
                   "قانون العقوبات الخاص (2) - الجرائم الواقعة على الأموال",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: ["AE-AU-BACHELOR-OF-LAW"],
               },
               {
                 code: "LAW 352",
-                name_en: "Course LAW 352",
+                name_en: "",
                 name_ar: "قانون المعاملات المدنية (3) - العقود المسماة",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: ["AE-AU-BACHELOR-OF-LAW"],
@@ -133799,9 +134037,10 @@ export const universities: University[] = [
               },
               {
                 code: "LAW 474",
-                name_en: "Course LAW 474",
+                name_en: "",
                 name_ar:
                   "قانون المعاملات التجارية (3) - العمليات المصرفية وأحكام الشيك",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: ["AE-AU-BACHELOR-OF-LAW"],
@@ -147801,8 +148040,9 @@ export const universities: University[] = [
               },
               {
                 code: "FRE 212",
-                name_en: "Course FRE 212",
+                name_en: "",
                 name_ar: "Culture ،Francophone world: Language",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Elective",
                 program_ids: [
@@ -148249,8 +148489,9 @@ export const universities: University[] = [
               },
               {
                 code: "PRI 311",
-                name_en: "Course PRI 311",
+                name_en: "",
                 name_ar: "تصميم البيانات والمطبوعات المؤسسية",
+                name_status: "ar_only",
                 credits: 3,
                 type: "Required",
                 program_ids: ["AE-AU-BACHELOR-OF-MASS-COMMUNICATION-INTEGRATE"],
@@ -159454,8 +159695,9 @@ export const universities: University[] = [
               },
               {
                 code: "ITGN 465",
-                name_en: "Course ITGN 465",
+                name_en: "",
                 name_ar: "مقرر ITGN 465",
+                name_status: "ar_only",
                 credits: 3,
                 year: 4,
                 semester: 2,
@@ -159465,8 +159707,9 @@ export const universities: University[] = [
               },
               {
                 code: "ITGN 470",
-                name_en: "Course ITGN 470",
+                name_en: "",
                 name_ar: "مقرر ITGN 470",
+                name_status: "ar_only",
                 credits: 3,
                 year: 4,
                 semester: 2,
