@@ -242,7 +242,9 @@ const AdminMfaGate = ({ children }: { children: React.ReactNode }) => {
             </div>
             <button
               type="submit"
-              disabled={busy || (recovery ? code.length < 10 : code.length !== 6)}
+              disabled={
+                busy || (recovery ? code.length < 10 : code.length !== 6)
+              }
               className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
             >
               {busy && <Loader2 size={14} className="animate-spin" />}
