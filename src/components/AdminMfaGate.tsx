@@ -5,6 +5,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 type Stage =
   | { kind: "loading" }
   | { kind: "ok" }
+  | { kind: "codes"; codes: string[] }
   | { kind: "enroll"; factorId: string; qr: string; secret: string }
   | { kind: "verify"; factorId: string }
   | { kind: "error"; message: string };
@@ -23,12 +24,26 @@ const AdminMfaGate = ({ children }: { children: React.ReactNode }) => {
   const [code, setCode] = useState("");
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState("");
+  const [recovery, setRecovery] = useState(false);
+
+  // After a verified session, issue recovery codes once if none remain.
+  const afterVerified = useCallback(async () => {
+    try {
+      const m = await import("@/lib/adminRecovery.functions");
+      const { remaining } = await m.getRecoveryStatus();
+      if (remaining > 0) return setStage({ kind: "ok" });
+      const { codes } = await m.generateRecoveryCodes();
+      setStage({ kind: "codes", codes });
+    } catch {
+      setStage({ kind: "ok" });
+    }
+  }, []);
 
   const resolve = useCallback(async () => {
     const supabase = await getClient();
     const { data: aal } =
       await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
-    if (aal?.currentLevel === "aal2") return setStage({ kind: "ok" });
+    if (aal?.currentLevel === "aal2") return void afterVerified();
     const { data: factors, error } = await supabase.auth.mfa.listFactors();
     if (error) return setStage({ kind: "error", message: error.message });
     const verified = factors?.totp?.find((f) => f.status === "verified");
@@ -53,7 +68,7 @@ const AdminMfaGate = ({ children }: { children: React.ReactNode }) => {
       qr: data.totp.qr_code,
       secret: data.totp.secret,
     });
-  }, []);
+  }, [afterVerified]);
 
   useEffect(() => {
     void resolve();
@@ -64,6 +79,29 @@ const AdminMfaGate = ({ children }: { children: React.ReactNode }) => {
     if (stage.kind !== "enroll" && stage.kind !== "verify") return;
     setBusy(true);
     setErr("");
+    if (recovery) {
+      const m = await import("@/lib/adminRecovery.functions");
+      const res = await m
+        .redeemRecoveryCode({ data: { code } })
+        .catch(() => ({ ok: false }) as { ok: boolean; limited?: boolean });
+      setBusy(false);
+      if (!res.ok) {
+        setErr(
+          "limited" in res && res.limited
+            ? ar
+              ? "محاولات كثيرة. انتظر 15 دقيقة."
+              : "Too many attempts. Wait 15 minutes."
+            : ar
+              ? "رمز الاسترداد غير صالح أو مستخدم."
+              : "Recovery code is invalid or already used.",
+        );
+        return;
+      }
+      setCode("");
+      setRecovery(false);
+      setStage({ kind: "loading" });
+      return void resolve();
+    }
     const supabase = await getClient();
     const { error } = await supabase.auth.mfa.challengeAndVerify({
       factorId: stage.factorId,
@@ -77,7 +115,8 @@ const AdminMfaGate = ({ children }: { children: React.ReactNode }) => {
       return;
     }
     setCode("");
-    setStage({ kind: "ok" });
+    setStage({ kind: "loading" });
+    void afterVerified();
   };
 
   if (stage.kind === "ok") return <>{children}</>;
@@ -110,6 +149,31 @@ const AdminMfaGate = ({ children }: { children: React.ReactNode }) => {
           </p>
         )}
 
+        {stage.kind === "codes" && (
+          <div className="space-y-4">
+            <p className="text-sm text-muted-foreground">
+              {ar
+                ? "احفظ رموز الاسترداد هذه في مكان آمن. كل رمز يُستخدم مرة واحدة إذا فقدت تطبيق المصادقة. لن تظهر مرة أخرى."
+                : "Save these recovery codes somewhere safe. Each works once if you lose your authenticator. They won't be shown again."}
+            </p>
+            <ul
+              className="grid grid-cols-2 gap-2 rounded-xl bg-background p-3 border border-border font-mono text-sm text-foreground"
+              dir="ltr"
+            >
+              {stage.codes.map((c) => (
+                <li key={c}>{c}</li>
+              ))}
+            </ul>
+            <button
+              type="button"
+              onClick={() => setStage({ kind: "ok" })}
+              className="btn-primary w-full"
+            >
+              {ar ? "حفظتها، متابعة" : "I've saved them, continue"}
+            </button>
+          </div>
+        )}
+
         {(stage.kind === "enroll" || stage.kind === "verify") && (
           <form onSubmit={submit} className="space-y-4">
             {stage.kind === "enroll" ? (
@@ -136,9 +200,13 @@ const AdminMfaGate = ({ children }: { children: React.ReactNode }) => {
               </>
             ) : (
               <p className="text-sm text-muted-foreground">
-                {ar
-                  ? "أدخل الرمز المكوّن من 6 أرقام من تطبيق المصادقة."
-                  : "Enter the 6-digit code from your authenticator app."}
+                {recovery
+                  ? ar
+                    ? "أدخل أحد رموز الاسترداد. بعدها ستضبط تطبيق مصادقة جديدًا."
+                    : "Enter one of your recovery codes. You'll then set up a new authenticator."
+                  : ar
+                    ? "أدخل الرمز المكوّن من 6 أرقام من تطبيق المصادقة."
+                    : "Enter the 6-digit code from your authenticator app."}
               </p>
             )}
             <div>
@@ -150,13 +218,19 @@ const AdminMfaGate = ({ children }: { children: React.ReactNode }) => {
               </label>
               <input
                 id="mfa-code"
-                inputMode="numeric"
+                inputMode={recovery ? "text" : "numeric"}
                 autoComplete="one-time-code"
-                pattern="[0-9]{6}"
-                maxLength={6}
+                pattern={recovery ? undefined : "[0-9]{6}"}
+                maxLength={recovery ? 11 : 6}
                 required
                 value={code}
-                onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))}
+                onChange={(e) =>
+                  setCode(
+                    recovery
+                      ? e.target.value.toUpperCase().replace(/[^A-Z0-9-]/g, "")
+                      : e.target.value.replace(/\D/g, ""),
+                  )
+                }
                 className="input-base tracking-widest text-center"
                 dir="ltr"
               />
@@ -168,12 +242,31 @@ const AdminMfaGate = ({ children }: { children: React.ReactNode }) => {
             </div>
             <button
               type="submit"
-              disabled={busy || code.length !== 6}
+              disabled={busy || (recovery ? code.length < 10 : code.length !== 6)}
               className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
             >
               {busy && <Loader2 size={14} className="animate-spin" />}
               {ar ? "تحقق" : "Verify"}
             </button>
+            {stage.kind === "verify" && (
+              <button
+                type="button"
+                onClick={() => {
+                  setRecovery((r) => !r);
+                  setCode("");
+                  setErr("");
+                }}
+                className="w-full text-sm text-primary-dark dark:text-primary underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+              >
+                {recovery
+                  ? ar
+                    ? "استخدام تطبيق المصادقة"
+                    : "Use authenticator app"
+                  : ar
+                    ? "فقدت تطبيق المصادقة؟ استخدم رمز استرداد"
+                    : "Lost your authenticator? Use a recovery code"}
+              </button>
+            )}
           </form>
         )}
       </div>
