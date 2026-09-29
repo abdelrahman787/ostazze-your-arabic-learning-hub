@@ -94,7 +94,7 @@ function canonicalHostRedirect(request: Request): Response | null {
   if (url.hostname !== "www.ostaze.com") return null;
   return new Response(null, {
     status: 301,
-    headers: { location: `https://ostaze.com${url.pathname}${url.search}` },
+    headers: { location: `https://ostaze.com/${url.pathname.replace(/^\/+/, "")}${url.search}` },
   });
 }
 
