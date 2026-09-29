@@ -19,4 +19,5 @@
 
 ## Round 4 — quarantine
 - [x] Demo tutors/courses unpublished, demo history flagged, old admin + admin2 locked
-- [ ] Confirm real owner-admin email, grant admin, test MFA, then force reset admin1 — blocked: needs owner's email
+- [x] Owner-admin abdokhmeis446@gmail.com granted (email verified; MFA + recovery codes built)
+- [ ] Owner runs live MFA tests 1-6 on own screen, then revoke admin1 + force reset — blocked: needs owner's authenticator app
