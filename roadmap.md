@@ -32,3 +32,6 @@
 - [x] Run full pre-publish checks (build, Node start/health, tests, typecheck, lint, security, size budget, 412-URL sitemap audit)
 - [ ] Complete one-email live recovery verification — blocked: owner must open the one sent email in the same preview browser/profile
 - Do NOT publish.
+
+## Round 6 — materials
+- [x] Import courses from ALL_UNIVERSITIES_MASTER, UoS_Programs_16-45, ALL_IN_ONE_UoS46-61_HCT spreadsheets
