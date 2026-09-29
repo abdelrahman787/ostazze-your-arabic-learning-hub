@@ -13,8 +13,8 @@
     },
     "static": {
       "total": 11,
-      "pass": 10,
-      "fail": 1
+      "pass": 11,
+      "fail": 0
     },
     "country": {
       "total": 4,
@@ -42,17 +42,5 @@
       "fail": 0
     }
   },
-  "failures": [
-    {
-      "loc": "https://ostaze.com/igcse",
-      "type": "static",
-      "status": 200,
-      "title": "كورسات IGCSE | OSTAZE",
-      "h1": "استكشف كورسات IGCSE",
-      "fails": [
-        "2 titles",
-        "2 descriptions"
-      ]
-    }
-  ]
+  "failures": []
 }
