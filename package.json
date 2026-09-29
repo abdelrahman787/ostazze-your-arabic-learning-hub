@@ -18,7 +18,7 @@
     "perf:budget": "node scripts/perf-budget.mjs",
     "build:check": "vite build && node scripts/perf-budget.mjs",
     "format": "prettier --write .",
-    "build:node": "OSTAZE_NODE_BUILD=1 vite build",
+    "build:node": "env -u DEV_SERVER__PROJECT_PATH -u LOVABLE_SANDBOX OSTAZE_NODE_BUILD=1 vite build",
     "start": "node .output/server/index.mjs"
   },
   "overrides": {

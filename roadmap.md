@@ -27,7 +27,8 @@
 ## Round 5 — password recovery
 
 - [x] Audit and repair PKCE forgot-password → callback → reset flow
-- [ ] Configure exact production and preview recovery redirects — blocked: hosted control exposes current values but not a URL-config write
+- [ ] Set production Site URL to https://ostaze.com and narrow recovery redirects — blocked: hosted control is read-only here; current allowlist includes the required URLs plus broad wildcards
 - [x] Add automated callback and invalid/expired recovery tests
-- [ ] Run one-email live recovery verification and full pre-publish checks
+- [x] Run full pre-publish checks (build, Node start/health, tests, typecheck, lint, security, size budget, 412-URL sitemap audit)
+- [ ] Complete one-email live recovery verification — blocked: owner must open the one sent email in the same preview browser/profile
 - Do NOT publish.
