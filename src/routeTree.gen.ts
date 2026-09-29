@@ -36,6 +36,7 @@ import { Route as CoursesIdRouteImport } from './routes/courses/$id'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as DashboardTeacherRouteImport } from './routes/dashboard/teacher'
 import { Route as IgcseIndexRouteImport } from './routes/igcse/index'
+import { Route as IgcseCourseIdRouteImport } from './routes/igcse/$courseId'
 import { Route as LecturesIdRouteImport } from './routes/lectures/$id'
 import { Route as SubjectsIndexRouteImport } from './routes/subjects/index'
 import { Route as SubjectsSubjectSlugRouteImport } from './routes/subjects/$subjectSlug'
@@ -183,6 +184,11 @@ const IgcseIndexRoute = IgcseIndexRouteImport.update({
   path: '/igcse/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const IgcseCourseIdRoute = IgcseCourseIdRouteImport.update({
+  id: '/igcse/$courseId',
+  path: '/igcse/$courseId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LecturesIdRoute = LecturesIdRouteImport.update({
   id: '/lectures/$id',
   path: '/lectures/$id',
@@ -267,6 +273,7 @@ export interface FileRoutesByFullPath {
   '/checkout/return': typeof CheckoutReturnRoute
   '/courses/$id': typeof CoursesIdRoute
   '/dashboard/teacher': typeof DashboardTeacherRoute
+  '/igcse/$courseId': typeof IgcseCourseIdRoute
   '/lectures/$id': typeof LecturesIdRoute
   '/subjects/$subjectSlug': typeof SubjectsSubjectSlugRoute
   '/teacher/onboarding': typeof TeacherOnboardingRoute
@@ -307,6 +314,7 @@ export interface FileRoutesByTo {
   '/checkout/return': typeof CheckoutReturnRoute
   '/courses/$id': typeof CoursesIdRoute
   '/dashboard/teacher': typeof DashboardTeacherRoute
+  '/igcse/$courseId': typeof IgcseCourseIdRoute
   '/lectures/$id': typeof LecturesIdRoute
   '/subjects/$subjectSlug': typeof SubjectsSubjectSlugRoute
   '/teacher/onboarding': typeof TeacherOnboardingRoute
@@ -348,6 +356,7 @@ export interface FileRoutesById {
   '/checkout/return': typeof CheckoutReturnRoute
   '/courses/$id': typeof CoursesIdRoute
   '/dashboard/teacher': typeof DashboardTeacherRoute
+  '/igcse/$courseId': typeof IgcseCourseIdRoute
   '/lectures/$id': typeof LecturesIdRoute
   '/subjects/$subjectSlug': typeof SubjectsSubjectSlugRoute
   '/teacher/onboarding': typeof TeacherOnboardingRoute
@@ -390,6 +399,7 @@ export interface FileRouteTypes {
     | '/checkout/return'
     | '/courses/$id'
     | '/dashboard/teacher'
+    | '/igcse/$courseId'
     | '/lectures/$id'
     | '/subjects/$subjectSlug'
     | '/teacher/onboarding'
@@ -430,6 +440,7 @@ export interface FileRouteTypes {
     | '/checkout/return'
     | '/courses/$id'
     | '/dashboard/teacher'
+    | '/igcse/$courseId'
     | '/lectures/$id'
     | '/subjects/$subjectSlug'
     | '/teacher/onboarding'
@@ -470,6 +481,7 @@ export interface FileRouteTypes {
     | '/checkout/return'
     | '/courses/$id'
     | '/dashboard/teacher'
+    | '/igcse/$courseId'
     | '/lectures/$id'
     | '/subjects/$subjectSlug'
     | '/teacher/onboarding'
@@ -511,6 +523,7 @@ export interface RootRouteChildren {
   CheckoutReturnRoute: typeof CheckoutReturnRoute
   CoursesIdRoute: typeof CoursesIdRoute
   DashboardTeacherRoute: typeof DashboardTeacherRoute
+  IgcseCourseIdRoute: typeof IgcseCourseIdRoute
   LecturesIdRoute: typeof LecturesIdRoute
   SubjectsSubjectSlugRoute: typeof SubjectsSubjectSlugRoute
   TeacherOnboardingRoute: typeof TeacherOnboardingRoute
@@ -719,6 +732,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IgcseIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/igcse/$courseId': {
+      id: '/igcse/$courseId'
+      path: '/igcse/$courseId'
+      fullPath: '/igcse/$courseId'
+      preLoaderRoute: typeof IgcseCourseIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lectures/$id': {
       id: '/lectures/$id'
       path: '/lectures/$id'
@@ -823,6 +843,7 @@ const rootRouteChildren: RootRouteChildren = {
   CheckoutReturnRoute: CheckoutReturnRoute,
   CoursesIdRoute: CoursesIdRoute,
   DashboardTeacherRoute: DashboardTeacherRoute,
+  IgcseCourseIdRoute: IgcseCourseIdRoute,
   LecturesIdRoute: LecturesIdRoute,
   SubjectsSubjectSlugRoute: SubjectsSubjectSlugRoute,
   TeacherOnboardingRoute: TeacherOnboardingRoute,
