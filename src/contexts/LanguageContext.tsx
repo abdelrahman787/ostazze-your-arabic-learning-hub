@@ -908,8 +908,8 @@ const translations = {
     en: "Please read the terms and conditions carefully before using the platform",
   },
   terms_last_updated: {
-    ar: "آخر تحديث: أبريل 2026",
-    en: "Last updated: April 2026",
+    ar: "تاريخ السريان: 29 سبتمبر 2026",
+    en: "Effective date: September 29, 2026",
   },
   terms_section1_title: { ar: "قبول الشروط", en: "Acceptance of Terms" },
   terms_section1_content: {
@@ -937,8 +937,8 @@ const translations = {
     en: "Payments & Refunds",
   },
   terms_section4_content: {
-    ar: "تتم جميع المدفوعات بشكل آمن عبر مزود دفع معتمد. للكورسات الرقمية: يحق لك استرداد كامل القيمة خلال 14 يوماً من الشراء بشرط عدم إكمال أكثر من 25% من المحتوى. للجلسات الخاصة: يمكن الإلغاء قبل 24 ساعة من الموعد دون رسوم. للتفاصيل الكاملة، راجع سياسة الاسترداد.",
-    en: "All payments are processed securely through an approved payment provider. For digital courses: you are entitled to a full refund within 14 days of purchase, provided you have not completed more than 25% of the content. For private sessions: cancellation is allowed up to 24 hours before the scheduled time without charges. For full details, see our Refund Policy.",
+    ar: "تتم جميع المدفوعات بالجنيه المصري عبر مزود دفع معتمد. تُراجع طلبات الإلغاء والاسترداد بشكل فردي. للتقديم تواصل معنا عبر info@ostaze.com أو واتساب ‎+20 11 3038 2206‎ مع ذكر البريد المستخدم في الشراء وتفاصيل العملية. يُعاد المبلغ المعتمد عبر وسيلة الدفع الأصلية عند الإمكان. لا تؤثر هذه الشروط على أي حقوق إلزامية يكفلها القانون. للتفاصيل راجع سياسة الاسترداد.",
+    en: "All payments are charged in Egyptian pounds through an approved payment provider. Cancellation and refund requests are reviewed individually. To submit one, contact us at info@ostaze.com or on WhatsApp +20 11 3038 2206 with the email used for the purchase and the transaction details. Approved refunds are returned via the original payment method where possible. These terms do not affect any mandatory rights granted by law. For details, see our Refund Policy.",
   },
   terms_section5_title: {
     ar: "حقوق الملكية الفكرية",
@@ -958,8 +958,8 @@ const translations = {
     en: "Student & Tutor Responsibilities",
   },
   terms_section7_content: {
-    ar: "يلتزم الطلاب باحترام أوقات الجلسات والحضور في الموعد. يلتزم المعلمون بتقديم محتوى احترافي ومناسب للمستوى المُعلن، والاستجابة لرسائل الطلاب خلال 24 ساعة عمل. في حال عدم الحضور (No-Show) من الطالب دون إلغاء قبل ساعتين، تُعتبر الجلسة قد قُدمت ولا تُسترد. في حال عدم حضور المعلم، يُسترد المبلغ كاملاً للطالب أو يُعاد جدولة الجلسة.",
-    en: "Students must respect session times and attend on schedule. Tutors must deliver professional content appropriate to the advertised level and respond to student messages within 24 business hours. If a student no-shows without cancelling 2+ hours in advance, the session is considered delivered and non-refundable. If a tutor no-shows, the student receives a full refund or rescheduled session.",
+    ar: "يلتزم الطلاب باحترام أوقات الجلسات والحضور في الموعد. يلتزم المعلمون بتقديم محتوى احترافي ومناسب للمستوى المُعلن. في حال تغيّب المعلم عن جلسة مؤكدة، يحق للطالب طلب إعادة جدولة الجلسة أو استرداد قيمتها.",
+    en: "Students must respect session times and attend on schedule. Tutors must deliver professional content appropriate to the advertised level. If a tutor misses a confirmed session, the student may request a rescheduled session or a refund of that session.",
   },
   terms_section8_title: {
     ar: "تسجيل الجلسات والخصوصية",
@@ -974,8 +974,8 @@ const translations = {
     en: "Liability Limits & Governing Law",
   },
   terms_section9_content: {
-    ar: 'تُقدَّم الخدمة "كما هي" دون ضمانات صريحة أو ضمنية تتجاوز ما يفرضه القانون. لا تتحمل OSTAZE المسؤولية عن أي أضرار غير مباشرة أو تبعية. يُحكم هذه الشروط بموجب أنظمة المملكة العربية السعودية، وتختص المحاكم المختصة بمدينة الرياض بأي نزاع. يجوز للأطراف اللجوء أولاً إلى التسوية الودية عبر بريد disputes@ostaze.com.',
-    en: 'The service is provided "as is" without warranties beyond what the law mandates. OSTAZE is not liable for indirect or consequential damages. These terms are governed by the laws of the Kingdom of Saudi Arabia, and the competent courts in Riyadh have jurisdiction over any dispute. Parties are encouraged to first attempt amicable resolution via disputes@ostaze.com.',
+    ar: "تُقدَّم الخدمة \"كما هي\" في الحدود التي يسمح بها القانون. لا تتحمل OSTAZE المسؤولية عن الأضرار غير المباشرة أو التبعية إلا بالقدر الذي يفرضه القانون. تخضع هذه الشروط لقوانين جمهورية مصر العربية وتُفسَّر وفقًا لها، وتختص المحاكم المختصة في القاهرة، مصر، بنظر أي نزاع ينشأ عنها. ونشجع الطرفين على محاولة التسوية الودية أولًا عبر info@ostaze.com.",
+    en: "The service is provided \"as is\" to the extent permitted by law. OSTAZE is not liable for indirect or consequential damages except to the extent required by law. These terms are governed by and construed in accordance with the laws of the Arab Republic of Egypt, and the competent courts in Cairo, Egypt, have jurisdiction over any dispute arising from them. Both parties are encouraged to first seek an amicable resolution via info@ostaze.com.",
   },
 
   // Privacy page
@@ -1023,8 +1023,8 @@ const translations = {
   },
   privacy_section5_title: { ar: "حقوقك", en: "Your Rights" },
   privacy_section5_content: {
-    ar: "لديك الحق في: الوصول إلى بياناتك، تصحيحها، حذفها (الحق في النسيان)، نقلها إلى مزود آخر، الاعتراض على المعالجة، وسحب موافقتك في أي وقت. لممارسة أي حق، أرسل طلبك إلى privacy@ostaze.com وسنرد خلال 30 يوماً.",
-    en: "You have the right to: access your data, rectify it, erase it (right to be forgotten), port it to another provider, object to processing, and withdraw consent at any time. To exercise any right, email privacy@ostaze.com and we will respond within 30 days.",
+    ar: "لديك الحق في: الوصول إلى بياناتك، تصحيحها، حذفها (الحق في النسيان)، نقلها إلى مزود آخر، الاعتراض على المعالجة، وسحب موافقتك في أي وقت. لممارسة أي حق، أرسل طلبك إلى info@ostaze.com وسنرد خلال 30 يوماً.",
+    en: "You have the right to: access your data, rectify it, erase it (right to be forgotten), port it to another provider, object to processing, and withdraw consent at any time. To exercise any right, email info@ostaze.com and we will respond within 30 days.",
   },
   privacy_section6_title: {
     ar: "مدد الاحتفاظ بالبيانات",
@@ -1049,8 +1049,8 @@ const translations = {
   },
   privacy_section9_title: { ar: "تواصل بشأن الخصوصية", en: "Privacy Contact" },
   privacy_section9_content: {
-    ar: "لأي استفسار عن خصوصيتك أو لطلب ممارسة حقوقك: privacy@ostaze.com — أو عبر صفحة التواصل. نلتزم بالرد خلال 30 يوماً كحد أقصى.",
-    en: "For any privacy inquiry or to exercise your rights: privacy@ostaze.com — or via our Contact page. We commit to responding within a maximum of 30 days.",
+    ar: "لأي استفسار عن خصوصيتك أو لطلب ممارسة حقوقك: info@ostaze.com — أو عبر صفحة التواصل. نلتزم بالرد خلال 30 يوماً كحد أقصى.",
+    en: "For any privacy inquiry or to exercise your rights: info@ostaze.com — or via our Contact page. We commit to responding within a maximum of 30 days.",
   },
 
   // Teachers empty state
@@ -1115,7 +1115,7 @@ const translations = {
   // Trust badges (homepage)
   trust_verified: { ar: "معلمون موثقون", en: "Verified Tutors" },
   trust_pay_per_session: { ar: "دفع لكل جلسة", en: "Pay Per Session" },
-  trust_cancel_anytime: { ar: "إلغاء قبل 24 ساعة", en: "Cancel 24h Ahead" },
+  trust_cancel_anytime: { ar: "طلبات الإلغاء تُراجع فردياً", en: "Cancellation requests reviewed" },
 
   // Teachers empty CTA
   teachers_empty_register_cta: { ar: "سجّل كمعلم", en: "Register as a Tutor" },
@@ -1124,13 +1124,13 @@ const translations = {
   // Contact trust block
   contact_trust_entity_label: { ar: "الكيان القانوني", en: "Legal Entity" },
   contact_trust_entity_value: {
-    ar: "OSTAZE Educational Services (TODO: تأكيد الاسم المسجل)",
-    en: "OSTAZE Educational Services (TODO: confirm registered name)",
+    ar: "OSTAZE(TODO: تأكيد الاسم المسجل)",
+    en: "OSTAZE",
   },
   contact_trust_hours_label: { ar: "ساعات العمل", en: "Working Hours" },
   contact_trust_hours_value: {
-    ar: "الأحد – الخميس، 9 صباحاً – 6 مساءً (بتوقيت السعودية)",
-    en: "Sun–Thu, 9 AM – 6 PM (AST)",
+    ar: "الأحد – الخميس، 9 صباحاً – 6 مساءً (بتوقيت القاهرة)",
+    en: "Sun–Thu, 9 AM – 6 PM (Cairo time)",
   },
   contact_trust_sla_label: { ar: "وقت الاستجابة", en: "Response Time" },
   contact_trust_sla_value: {
@@ -1166,16 +1166,16 @@ const translations = {
   },
   faq_q_refund: { ar: "ما سياسة الاسترداد؟", en: "What is the refund policy?" },
   faq_a_refund: {
-    ar: "يمكنك طلب استرداد كامل خلال 14 يوماً من الشراء بشرط عدم استهلاك أكثر من 25% من المحتوى أو حضور أكثر من جلسة مباشرة واحدة. للتفاصيل راجع صفحة الاسترداد.",
-    en: "You may request a full refund within 14 days of purchase, provided you haven't consumed more than 25% of content or attended more than one live session. See our refund page for details.",
+    ar: "تُراجع طلبات الإلغاء والاسترداد بشكل فردي. للتقديم تواصل معنا عبر info@ostaze.com أو واتساب ‎+20 11 3038 2206‎ مع ذكر البريد المستخدم في الشراء وتفاصيل العملية. يُعاد المبلغ المعتمد عبر وسيلة الدفع الأصلية عند الإمكان. راجع صفحة سياسة الاسترداد للتفاصيل.",
+    en: "Cancellation and refund requests are reviewed individually. To submit one, contact us at info@ostaze.com or on WhatsApp +20 11 3038 2206 with the email used for the purchase and the transaction details. Approved refunds are returned via the original payment method where possible. See our Refund Policy page for details.",
   },
   faq_q_cancel: {
     ar: "كيف ألغي أو أعيد جدولة جلسة؟",
     en: "How do I cancel or reschedule a session?",
   },
   faq_a_cancel: {
-    ar: "يمكنك الإلغاء أو إعادة الجدولة قبل 12 ساعة من موعد الجلسة من لوحة التحكم > دروسي بدون أي رسوم.",
-    en: "You can cancel or reschedule up to 12 hours before the session from Dashboard > My Lessons at no cost.",
+    ar: "لإلغاء جلسة أو إعادة جدولتها، تواصل معنا في أقرب وقت عبر واتساب ‎+20 11 3038 2206‎ أو info@ostaze.com قبل موعد الجلسة، وسنراجع طلبك.",
+    en: "To cancel or reschedule a session, contact us as early as possible before the session on WhatsApp +20 11 3038 2206 or at info@ostaze.com, and we will review your request.",
   },
   faq_q_live: {
     ar: "كيف تتم الجلسات المباشرة؟",
@@ -1209,17 +1209,17 @@ const translations = {
 
   // ===== Refund note =====
   refund_note_title: {
-    ar: "ضمان استرداد 14 يوماً",
-    en: "14-Day Refund Guarantee",
+    ar: "الإلغاء والاسترداد",
+    en: "Cancellations & Refunds",
   },
   refund_note_body: {
-    ar: "استرداد كامل خلال 14 يوماً وفق الشروط.",
-    en: "Full refund within 14 days under our terms.",
+    ar: "تُراجع الطلبات بشكل فردي وفق سياسة الاسترداد.",
+    en: "Requests are reviewed individually under our Refund Policy.",
   },
   refund_note_link: { ar: "تفاصيل سياسة الاسترداد", en: "View refund policy" },
   checkout_terms_agree: {
-    ar: "بإتمام الدفع فأنت توافق على",
-    en: "By completing payment you agree to our",
+    ar: "أوافق على",
+    en: "I agree to the",
   },
   checkout_terms_link: { ar: "الشروط والأحكام", en: "Terms" },
   checkout_refund_link: { ar: "سياسة الاسترداد", en: "Refund Policy" },
