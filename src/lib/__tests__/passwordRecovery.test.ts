@@ -35,6 +35,16 @@ describe("password recovery", () => {
     );
   });
 
+  it("normalizes editor preview surfaces to the current stable preview", () => {
+    expect(
+      getRecoveryCallbackUrl(
+        "https://dc7db421-26c3-4945-8236-93600ec382aa.lovableproject.com",
+      ),
+    ).toBe(
+      "https://id-preview--dc7db421-26c3-4945-8236-93600ec382aa.lovable.app/auth/callback?next=%2Freset-password",
+    );
+  });
+
   it("rejects external and unapproved next destinations", () => {
     expect(getSafeRecoveryNext("https://attacker.example")).toBeNull();
     expect(getSafeRecoveryNext("//attacker.example")).toBeNull();

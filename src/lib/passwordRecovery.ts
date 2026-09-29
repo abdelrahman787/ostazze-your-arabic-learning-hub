@@ -3,6 +3,9 @@ export const RECOVERY_NEXT_PATH = "/reset-password";
 const RECOVERY_MARKER_KEY = "ostaze_password_recovery";
 const RECOVERY_MARKER_TTL_MS = 10 * 60 * 1000;
 const PRODUCTION_HOSTS = new Set(["ostaze.com", "www.ostaze.com"]);
+const PUBLISHED_HOST = "ostazze-learn-hub.lovable.app";
+const PREVIEW_ORIGIN =
+  "https://id-preview--dc7db421-26c3-4945-8236-93600ec382aa.lovable.app";
 
 type StorageLike = Pick<Storage, "getItem" | "setItem" | "removeItem">;
 
@@ -26,9 +29,12 @@ export type RecoveryCallbackResult =
 
 export function getRecoveryCallbackUrl(origin: string): string {
   const current = new URL(origin);
-  const callbackOrigin = PRODUCTION_HOSTS.has(current.hostname)
-    ? "https://ostaze.com"
-    : current.origin;
+  const callbackOrigin =
+    PRODUCTION_HOSTS.has(current.hostname) || current.hostname === PUBLISHED_HOST
+      ? "https://ostaze.com"
+      : current.hostname === "localhost" || current.hostname === "127.0.0.1"
+        ? current.origin
+        : PREVIEW_ORIGIN;
   const callback = new URL("/auth/callback", callbackOrigin);
   callback.searchParams.set("next", RECOVERY_NEXT_PATH);
   return callback.toString();
