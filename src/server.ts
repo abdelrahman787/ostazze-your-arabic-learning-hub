@@ -87,9 +87,22 @@ function trailingSlashRedirect(request: Request): Response | null {
   });
 }
 
+// www.ostaze.com -> https://ostaze.com (path + query preserved; host is fixed,
+// so the request cannot steer the redirect to another domain).
+function canonicalHostRedirect(request: Request): Response | null {
+  const url = new URL(request.url);
+  if (url.hostname !== "www.ostaze.com") return null;
+  return new Response(null, {
+    status: 301,
+    headers: { location: `https://ostaze.com${url.pathname}${url.search}` },
+  });
+}
+
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
+      const hostRedirect = canonicalHostRedirect(request);
+      if (hostRedirect) return hostRedirect;
       const slashRedirect = trailingSlashRedirect(request);
       if (slashRedirect) return slashRedirect;
       const handler = await getServerEntry();

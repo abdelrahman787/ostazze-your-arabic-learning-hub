@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from "vitest";
 import {
   completeRecoveryCallback,
   getRecoveryCallbackUrl,
+  getAuthCallbackUrl,
   getSafeRecoveryNext,
   hasValidRecoveryMarker,
 } from "@/lib/passwordRecovery";
@@ -22,6 +23,18 @@ describe("password recovery", () => {
     );
     expect(getRecoveryCallbackUrl("https://www.ostaze.com")).toBe(
       "https://ostaze.com/auth/callback?next=%2Freset-password",
+    );
+  });
+
+  it("never emits www, http or localhost callbacks", () => {
+    expect(getAuthCallbackUrl("http://localhost:8080")).toBe(
+      "https://ostaze.com/auth/callback",
+    );
+    expect(getAuthCallbackUrl("http://ostaze.com")).toBe(
+      "https://ostaze.com/auth/callback",
+    );
+    expect(getAuthCallbackUrl("https://www.ostaze.com")).toBe(
+      "https://ostaze.com/auth/callback",
     );
   });
 
