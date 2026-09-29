@@ -11,54 +11,66 @@ const Refund = () => {
     lang === "ar"
       ? [
           {
-            icon: ShieldCheck,
-            title: "مراجعة الطلبات",
-            content:
-              "تُراجع طلبات الإلغاء والاسترداد للكورسات والجلسات بشكل فردي. لا توجد مدة استرداد تلقائية أو نسبة ثابتة؛ يُتخذ القرار بعد مراجعة تفاصيل كل طلب.",
-          },
-          {
             icon: Clock,
-            title: "إلغاء الجلسات أو إعادة جدولتها",
+            title: "الجلسات المدفوعة: 24 ساعة أو أكثر قبل الموعد",
             content:
-              "تواصل معنا في أقرب وقت ممكن قبل موعد الجلسة لطلب الإلغاء أو إعادة الجدولة. إذا تغيّب المعلم عن جلسة مؤكدة، يحق لك طلب إعادة جدولتها أو استرداد قيمتها.",
+              "إذا طلبت الإلغاء قبل 24 ساعة أو أكثر من موعد بدء الجلسة المدفوعة، تكون مؤهلاً لاسترداد كامل بعد مراجعة الإدارة. بعد الدفع لا يمكن إلغاء الجلسة مباشرة، بل عبر زر «طلب إلغاء» في صفحة حجوزاتي أو بالتواصل معنا.",
           },
           {
-            icon: Mail,
-            title: "كيفية تقديم الطلب",
+            icon: ShieldCheck,
+            title: "أقل من 24 ساعة أو عدم حضور الطالب",
             content:
-              "أرسل طلبك إلى info@ostaze.com أو عبر واتساب ‎+20 11 3038 2206‎ متضمناً:\n• البريد الإلكتروني المستخدم في الشراء.\n• اسم الكورس أو الجلسة وتاريخها.\n• رقم العملية إن وجد.\n• سبب الطلب.",
+              "لا يوجد استرداد تلقائي للطلبات المقدمة قبل أقل من 24 ساعة من الموعد أو عند عدم حضور الطالب. يمكن مراجعة الظروف الاستثنائية الموثقة بشكل فردي.",
           },
           {
             icon: CheckCircle2,
-            title: "تنفيذ الاسترداد المعتمد",
+            title: "إلغاء من المعلم أو المنصة",
             content:
-              "يتم الدفع بالجنيه المصري، ويُعاد المبلغ المعتمد عبر وسيلة الدفع الأصلية عند الإمكان. تعتمد مدة وصول المبلغ على مزود الدفع والبنك.",
+              "إذا ألغى المعلم أو المنصة الجلسة، أو تعذّر تعيين معلم، أو تم الدفع مرتين، أو لم تُقدَّم الخدمة المدفوعة، يحق لك استرداد كامل أو رصيد في حسابك إذا اخترت الرصيد صراحةً.",
+          },
+          {
+            icon: Clock,
+            title: "الطلبات غير المدفوعة والحجوزات المباشرة",
+            content:
+              "يمكنك إلغاء طلب الجلسة قبل الدفع مباشرة. الحجوزات المباشرة مع المعلمين غير مدفوعة حالياً: يمكن إلغاء الحجز قيد الانتظار في أي وقت قبل موعده، والحجز المؤكد حتى 24 ساعة قبل موعده.",
+          },
+          {
+            icon: Mail,
+            title: "تنفيذ الاسترداد والتواصل",
+            content:
+              "يُعاد الاسترداد المالي المعتمد إلى وسيلة الدفع الأصلية متى أمكن، ولا يتم أي استرداد تلقائياً. تعتمد مدة المعالجة على مزوّد الدفع والبنك. للتواصل: info@ostaze.com أو واتساب ‎+20 11 3038 2206‎. لا تؤثر هذه السياسة على أي حقوق إلزامية للمستهلك بموجب القانون المصري.",
           },
         ]
       : [
           {
-            icon: ShieldCheck,
-            title: "How Requests Are Reviewed",
-            content:
-              "Cancellation and refund requests for courses and sessions are reviewed individually. There is no automatic refund period or fixed percentage; a decision is made after reviewing the details of each request.",
-          },
-          {
             icon: Clock,
-            title: "Cancelling or Rescheduling Sessions",
+            title: "Paid sessions: 24 hours or more before the start",
             content:
-              "Contact us as early as possible before the session to request a cancellation or reschedule. If a tutor misses a confirmed session, you may request a rescheduled session or a refund of that session.",
+              "If you request cancellation 24 hours or more before a paid session starts, you are eligible for a full refund after Admin review. After payment, a session cannot be cancelled directly; use the ‘Request cancellation’ button on My Bookings or contact us.",
           },
           {
-            icon: Mail,
-            title: "How to Submit a Request",
+            icon: ShieldCheck,
+            title: "Less than 24 hours or student no-show",
             content:
-              "Send your request to info@ostaze.com or on WhatsApp +20 11 3038 2206 including:\n• The email used for the purchase.\n• The course or session name and date.\n• The transaction ID, if available.\n• The reason for your request.",
+              "There is no automatic refund for requests made less than 24 hours before the start or when the student does not attend. Documented exceptional circumstances may be reviewed individually.",
           },
           {
             icon: CheckCircle2,
-            title: "Processing Approved Refunds",
+            title: "Tutor or platform cancellation",
             content:
-              "Payments are charged in Egyptian pounds, and approved refunds are returned via the original payment method where possible. The time for funds to arrive depends on the payment provider and bank.",
+              "If the tutor or the platform cancels, no tutor can be assigned, you were charged twice, or the purchased service was not provided, you are entitled to a full refund, or account credit if you explicitly choose credit.",
+          },
+          {
+            icon: Clock,
+            title: "Unpaid requests and direct bookings",
+            content:
+              "You can cancel a session request directly before paying. Direct tutor bookings are currently unpaid: a pending booking can be cancelled any time before it starts, and a confirmed booking up to 24 hours before it starts.",
+          },
+          {
+            icon: Mail,
+            title: "Processing and contact",
+            content:
+              "Approved monetary refunds are returned to the original payment method where possible; no refund is automatic. Processing time depends on the payment provider and bank. Contact: info@ostaze.com or WhatsApp +20 11 3038 2206. This policy does not affect any mandatory consumer rights under Egyptian law.",
           },
         ];
 
