@@ -64,15 +64,11 @@ export default function Igcse() {
       />
       <PageHeader
         title={ar ? "استكشف كورسات IGCSE" : "Explore IGCSE Courses"}
-        subtitle={
-          ar ? "اختر القسم والمعلم والمادة" : "Filter by department, teacher and subject"
-        }
         variant="teachers"
       />
 
       <div className="container mx-auto px-4 mt-10 grid lg:grid-cols-[18rem_1fr] gap-8">
         <aside className="card-base p-5 space-y-6 h-fit lg:sticky lg:top-24">
-          <h2 className="font-extrabold">{ar ? "الفلاتر" : "Filters"}</h2>
 
           <label className="block space-y-2">
             <span className="text-sm font-bold">{ar ? "القسم" : "Department"}</span>
