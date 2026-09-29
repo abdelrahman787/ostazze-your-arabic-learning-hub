@@ -1,5 +1,5 @@
 {
-  "base": "http://localhost:3999",
+  "base": "http://127.0.0.1:3999",
   "totals": {
     "home": {
       "total": 1,

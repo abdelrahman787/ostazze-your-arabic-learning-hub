@@ -13,6 +13,12 @@ const FALLBACK_SUPABASE_PUBLISHABLE_KEY =
 const FALLBACK_SUPABASE_PROJECT_ID = "dqqfzpghixfvhhpxfgwv";
 
 export default defineConfig({
+  // Keep Lovable's Cloudflare target for normal builds; use Node only for the
+  // explicit local production-start verification command.
+  nitro:
+    process.env.OSTAZE_NODE_BUILD === "1"
+      ? { preset: "node-server", output: { dir: ".output" } }
+      : undefined,
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
