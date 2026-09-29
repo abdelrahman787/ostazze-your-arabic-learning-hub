@@ -254,12 +254,12 @@ const TeacherDashboard = () => {
 
   return (
     <div
-      className="flex min-h-screen overflow-x-clip"
+      className="flex min-h-screen"
       style={{ paddingTop: "var(--navbar-h, 0px)" }}
     >
       <aside
         style={{ top: "var(--navbar-h, 0px)" }}
-        className={`fixed lg:sticky bottom-0 right-0 z-40 w-[260px] h-[calc(100vh-var(--navbar-h,0px))] bg-card border-l flex flex-col transition-transform duration-300 ${sidebarOpen ? "translate-x-0" : "translate-x-full lg:translate-x-0"}`}
+        className={`fixed lg:sticky bottom-0 start-0 z-40 w-[260px] h-[calc(100vh-var(--navbar-h,0px))] bg-card border-e flex flex-col transition-transform duration-300 ${sidebarOpen ? "translate-x-0" : "ltr:-translate-x-full rtl:translate-x-full lg:ltr:translate-x-0 lg:rtl:translate-x-0"}`}
       >
         <div className="p-5 border-b">
           <Link
