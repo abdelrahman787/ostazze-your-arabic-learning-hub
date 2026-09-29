@@ -974,8 +974,8 @@ const translations = {
     en: "Liability Limits & Governing Law",
   },
   terms_section9_content: {
-    ar: "تُقدَّم الخدمة \"كما هي\" في الحدود التي يسمح بها القانون. لا تتحمل OSTAZE المسؤولية عن الأضرار غير المباشرة أو التبعية إلا بالقدر الذي يفرضه القانون. تخضع هذه الشروط لقوانين جمهورية مصر العربية وتُفسَّر وفقًا لها، وتختص المحاكم المختصة في القاهرة، مصر، بنظر أي نزاع ينشأ عنها. ونشجع الطرفين على محاولة التسوية الودية أولًا عبر info@ostaze.com.",
-    en: "The service is provided \"as is\" to the extent permitted by law. OSTAZE is not liable for indirect or consequential damages except to the extent required by law. These terms are governed by and construed in accordance with the laws of the Arab Republic of Egypt, and the competent courts in Cairo, Egypt, have jurisdiction over any dispute arising from them. Both parties are encouraged to first seek an amicable resolution via info@ostaze.com.",
+    ar: 'تُقدَّم الخدمة "كما هي" في الحدود التي يسمح بها القانون. لا تتحمل OSTAZE المسؤولية عن الأضرار غير المباشرة أو التبعية إلا بالقدر الذي يفرضه القانون. تخضع هذه الشروط لقوانين جمهورية مصر العربية وتُفسَّر وفقًا لها، وتختص المحاكم المختصة في القاهرة، مصر، بنظر أي نزاع ينشأ عنها. ونشجع الطرفين على محاولة التسوية الودية أولًا عبر info@ostaze.com.',
+    en: 'The service is provided "as is" to the extent permitted by law. OSTAZE is not liable for indirect or consequential damages except to the extent required by law. These terms are governed by and construed in accordance with the laws of the Arab Republic of Egypt, and the competent courts in Cairo, Egypt, have jurisdiction over any dispute arising from them. Both parties are encouraged to first seek an amicable resolution via info@ostaze.com.',
   },
 
   // Privacy page
@@ -1115,7 +1115,10 @@ const translations = {
   // Trust badges (homepage)
   trust_verified: { ar: "معلمون موثقون", en: "Verified Tutors" },
   trust_pay_per_session: { ar: "دفع لكل جلسة", en: "Pay Per Session" },
-  trust_cancel_anytime: { ar: "طلبات الإلغاء تُراجع فردياً", en: "Cancellation requests reviewed" },
+  trust_cancel_anytime: {
+    ar: "طلبات الإلغاء تُراجع فردياً",
+    en: "Cancellation requests reviewed",
+  },
 
   // Teachers empty CTA
   teachers_empty_register_cta: { ar: "سجّل كمعلم", en: "Register as a Tutor" },

@@ -163,7 +163,9 @@ export default function Checkout() {
                 </div>
 
                 <div className="text-[12px] text-muted-foreground text-center whitespace-pre-line">
-                  {lang === "ar" ? "🔒 دفع آمن ومشفّر" : "🔒 Secure & encrypted payment"}
+                  {lang === "ar"
+                    ? "🔒 دفع آمن ومشفّر"
+                    : "🔒 Secure & encrypted payment"}
                 </div>
               </div>
             ) : (
@@ -233,8 +235,6 @@ export default function Checkout() {
                 </span>
               </div>
             </div>
-
-
           </motion.aside>
         </div>
       </div>
