@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import Igcse from "@/pages/Igcse";
 
-export const Route = createFileRoute("/igcse")({
+export const Route = createFileRoute("/igcse/")({
   head: () => ({
     meta: [
       { title: "كورسات IGCSE | OSTAZE" },

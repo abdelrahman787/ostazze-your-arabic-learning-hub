@@ -17,7 +17,6 @@ import { Route as CategoriesRouteImport } from './routes/categories'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
-import { Route as IgcseRouteImport } from './routes/igcse'
 import { Route as LanguagesRouteImport } from './routes/languages'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as MyBookingsRouteImport } from './routes/my-bookings'
@@ -36,6 +35,8 @@ import { Route as CoursesIndexRouteImport } from './routes/courses/index'
 import { Route as CoursesIdRouteImport } from './routes/courses/$id'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as DashboardTeacherRouteImport } from './routes/dashboard/teacher'
+import { Route as IgcseIndexRouteImport } from './routes/igcse/index'
+import { Route as IgcseCourseIdRouteImport } from './routes/igcse/$courseId'
 import { Route as LecturesIdRouteImport } from './routes/lectures/$id'
 import { Route as SubjectsIndexRouteImport } from './routes/subjects/index'
 import { Route as SubjectsSubjectSlugRouteImport } from './routes/subjects/$subjectSlug'
@@ -86,11 +87,6 @@ const FaqRoute = FaqRouteImport.update({
 const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
   id: '/forgot-password',
   path: '/forgot-password',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IgcseRoute = IgcseRouteImport.update({
-  id: '/igcse',
-  path: '/igcse',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LanguagesRoute = LanguagesRouteImport.update({
@@ -183,6 +179,16 @@ const DashboardTeacherRoute = DashboardTeacherRouteImport.update({
   path: '/dashboard/teacher',
   getParentRoute: () => rootRouteImport,
 } as any)
+const IgcseIndexRoute = IgcseIndexRouteImport.update({
+  id: '/igcse/',
+  path: '/igcse/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IgcseCourseIdRoute = IgcseCourseIdRouteImport.update({
+  id: '/igcse/$courseId',
+  path: '/igcse/$courseId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LecturesIdRoute = LecturesIdRouteImport.update({
   id: '/lectures/$id',
   path: '/lectures/$id',
@@ -252,7 +258,6 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/forgot-password': typeof ForgotPasswordRoute
-  '/igcse': typeof IgcseRoute
   '/languages': typeof LanguagesRoute
   '/login': typeof LoginRoute
   '/my-bookings': typeof MyBookingsRoute
@@ -268,6 +273,7 @@ export interface FileRoutesByFullPath {
   '/checkout/return': typeof CheckoutReturnRoute
   '/courses/$id': typeof CoursesIdRoute
   '/dashboard/teacher': typeof DashboardTeacherRoute
+  '/igcse/$courseId': typeof IgcseCourseIdRoute
   '/lectures/$id': typeof LecturesIdRoute
   '/subjects/$subjectSlug': typeof SubjectsSubjectSlugRoute
   '/teacher/onboarding': typeof TeacherOnboardingRoute
@@ -275,6 +281,7 @@ export interface FileRoutesByFullPath {
   '/checkout/': typeof CheckoutIndexRoute
   '/courses/': typeof CoursesIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/igcse/': typeof IgcseIndexRoute
   '/subjects/': typeof SubjectsIndexRoute
   '/teachers/': typeof TeachersIndexRoute
   '/universities/': typeof UniversitiesIndexRoute
@@ -292,7 +299,6 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/forgot-password': typeof ForgotPasswordRoute
-  '/igcse': typeof IgcseRoute
   '/languages': typeof LanguagesRoute
   '/login': typeof LoginRoute
   '/my-bookings': typeof MyBookingsRoute
@@ -308,6 +314,7 @@ export interface FileRoutesByTo {
   '/checkout/return': typeof CheckoutReturnRoute
   '/courses/$id': typeof CoursesIdRoute
   '/dashboard/teacher': typeof DashboardTeacherRoute
+  '/igcse/$courseId': typeof IgcseCourseIdRoute
   '/lectures/$id': typeof LecturesIdRoute
   '/subjects/$subjectSlug': typeof SubjectsSubjectSlugRoute
   '/teacher/onboarding': typeof TeacherOnboardingRoute
@@ -315,6 +322,7 @@ export interface FileRoutesByTo {
   '/checkout': typeof CheckoutIndexRoute
   '/courses': typeof CoursesIndexRoute
   '/dashboard': typeof DashboardIndexRoute
+  '/igcse': typeof IgcseIndexRoute
   '/subjects': typeof SubjectsIndexRoute
   '/teachers': typeof TeachersIndexRoute
   '/universities': typeof UniversitiesIndexRoute
@@ -333,7 +341,6 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/forgot-password': typeof ForgotPasswordRoute
-  '/igcse': typeof IgcseRoute
   '/languages': typeof LanguagesRoute
   '/login': typeof LoginRoute
   '/my-bookings': typeof MyBookingsRoute
@@ -349,6 +356,7 @@ export interface FileRoutesById {
   '/checkout/return': typeof CheckoutReturnRoute
   '/courses/$id': typeof CoursesIdRoute
   '/dashboard/teacher': typeof DashboardTeacherRoute
+  '/igcse/$courseId': typeof IgcseCourseIdRoute
   '/lectures/$id': typeof LecturesIdRoute
   '/subjects/$subjectSlug': typeof SubjectsSubjectSlugRoute
   '/teacher/onboarding': typeof TeacherOnboardingRoute
@@ -356,6 +364,7 @@ export interface FileRoutesById {
   '/checkout/': typeof CheckoutIndexRoute
   '/courses/': typeof CoursesIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/igcse/': typeof IgcseIndexRoute
   '/subjects/': typeof SubjectsIndexRoute
   '/teachers/': typeof TeachersIndexRoute
   '/universities/': typeof UniversitiesIndexRoute
@@ -375,7 +384,6 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/forgot-password'
-    | '/igcse'
     | '/languages'
     | '/login'
     | '/my-bookings'
@@ -391,6 +399,7 @@ export interface FileRouteTypes {
     | '/checkout/return'
     | '/courses/$id'
     | '/dashboard/teacher'
+    | '/igcse/$courseId'
     | '/lectures/$id'
     | '/subjects/$subjectSlug'
     | '/teacher/onboarding'
@@ -398,6 +407,7 @@ export interface FileRouteTypes {
     | '/checkout/'
     | '/courses/'
     | '/dashboard/'
+    | '/igcse/'
     | '/subjects/'
     | '/teachers/'
     | '/universities/'
@@ -415,7 +425,6 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/forgot-password'
-    | '/igcse'
     | '/languages'
     | '/login'
     | '/my-bookings'
@@ -431,6 +440,7 @@ export interface FileRouteTypes {
     | '/checkout/return'
     | '/courses/$id'
     | '/dashboard/teacher'
+    | '/igcse/$courseId'
     | '/lectures/$id'
     | '/subjects/$subjectSlug'
     | '/teacher/onboarding'
@@ -438,6 +448,7 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/courses'
     | '/dashboard'
+    | '/igcse'
     | '/subjects'
     | '/teachers'
     | '/universities'
@@ -455,7 +466,6 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/forgot-password'
-    | '/igcse'
     | '/languages'
     | '/login'
     | '/my-bookings'
@@ -471,6 +481,7 @@ export interface FileRouteTypes {
     | '/checkout/return'
     | '/courses/$id'
     | '/dashboard/teacher'
+    | '/igcse/$courseId'
     | '/lectures/$id'
     | '/subjects/$subjectSlug'
     | '/teacher/onboarding'
@@ -478,6 +489,7 @@ export interface FileRouteTypes {
     | '/checkout/'
     | '/courses/'
     | '/dashboard/'
+    | '/igcse/'
     | '/subjects/'
     | '/teachers/'
     | '/universities/'
@@ -496,7 +508,6 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
-  IgcseRoute: typeof IgcseRoute
   LanguagesRoute: typeof LanguagesRoute
   LoginRoute: typeof LoginRoute
   MyBookingsRoute: typeof MyBookingsRoute
@@ -512,6 +523,7 @@ export interface RootRouteChildren {
   CheckoutReturnRoute: typeof CheckoutReturnRoute
   CoursesIdRoute: typeof CoursesIdRoute
   DashboardTeacherRoute: typeof DashboardTeacherRoute
+  IgcseCourseIdRoute: typeof IgcseCourseIdRoute
   LecturesIdRoute: typeof LecturesIdRoute
   SubjectsSubjectSlugRoute: typeof SubjectsSubjectSlugRoute
   TeacherOnboardingRoute: typeof TeacherOnboardingRoute
@@ -519,6 +531,7 @@ export interface RootRouteChildren {
   CheckoutIndexRoute: typeof CheckoutIndexRoute
   CoursesIndexRoute: typeof CoursesIndexRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
+  IgcseIndexRoute: typeof IgcseIndexRoute
   SubjectsIndexRoute: typeof SubjectsIndexRoute
   TeachersIndexRoute: typeof TeachersIndexRoute
   UniversitiesIndexRoute: typeof UniversitiesIndexRoute
@@ -584,13 +597,6 @@ declare module '@tanstack/react-router' {
       path: '/forgot-password'
       fullPath: '/forgot-password'
       preLoaderRoute: typeof ForgotPasswordRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/igcse': {
-      id: '/igcse'
-      path: '/igcse'
-      fullPath: '/igcse'
-      preLoaderRoute: typeof IgcseRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/languages': {
@@ -719,6 +725,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardTeacherRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/igcse/': {
+      id: '/igcse/'
+      path: '/igcse'
+      fullPath: '/igcse/'
+      preLoaderRoute: typeof IgcseIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/igcse/$courseId': {
+      id: '/igcse/$courseId'
+      path: '/igcse/$courseId'
+      fullPath: '/igcse/$courseId'
+      preLoaderRoute: typeof IgcseCourseIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lectures/$id': {
       id: '/lectures/$id'
       path: '/lectures/$id'
@@ -808,7 +828,6 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
-  IgcseRoute: IgcseRoute,
   LanguagesRoute: LanguagesRoute,
   LoginRoute: LoginRoute,
   MyBookingsRoute: MyBookingsRoute,
@@ -824,6 +843,7 @@ const rootRouteChildren: RootRouteChildren = {
   CheckoutReturnRoute: CheckoutReturnRoute,
   CoursesIdRoute: CoursesIdRoute,
   DashboardTeacherRoute: DashboardTeacherRoute,
+  IgcseCourseIdRoute: IgcseCourseIdRoute,
   LecturesIdRoute: LecturesIdRoute,
   SubjectsSubjectSlugRoute: SubjectsSubjectSlugRoute,
   TeacherOnboardingRoute: TeacherOnboardingRoute,
@@ -831,6 +851,7 @@ const rootRouteChildren: RootRouteChildren = {
   CheckoutIndexRoute: CheckoutIndexRoute,
   CoursesIndexRoute: CoursesIndexRoute,
   DashboardIndexRoute: DashboardIndexRoute,
+  IgcseIndexRoute: IgcseIndexRoute,
   SubjectsIndexRoute: SubjectsIndexRoute,
   TeachersIndexRoute: TeachersIndexRoute,
   UniversitiesIndexRoute: UniversitiesIndexRoute,

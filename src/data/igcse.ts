@@ -80,3 +80,25 @@ export const IG_COURSES: IgCourse[] = [
   { id: "accounting", title: "Accounting", subject: "Accounting", teacherId: "t7", priceEGP: 17000, board: "Cambridge" },
   { id: "arabic", title: "Arabic First Language", subject: "Arabic", teacherId: "t13", priceEGP: 15000, board: "Cambridge" },
 ];
+
+// First classes shown in each course's outline, by subject.
+export const IG_TOPICS: Record<string, string[]> = {
+  Accounting: ["Introduction to Accounting", "Double-Entry Bookkeeping"],
+  Arabic: ["Reading Comprehension", "Writing Skills"],
+  Biology: ["Characteristics of Living Organisms", "Cell Structure"],
+  Business: ["Understanding Business Activity", "People in Business"],
+  Chemistry: ["States of Matter", "Atoms, Elements and Compounds"],
+  "Combined Science": ["Cells and Organisms", "States of Matter"],
+  CS: ["Data Representation", "Algorithm Design"],
+  Economics: ["The Basic Economic Problem", "Allocation of Resources"],
+  English: ["Reading Skills", "Directed Writing"],
+  "English Checkpoint": ["Reading", "Writing"],
+  Environmental: ["Rocks and Minerals", "Energy and the Environment"],
+  ICT: ["Types and Components of Computer Systems", "Input and Output Devices"],
+  Math: ["Number", "Algebra Basics"],
+  Physics: ["Motion", "Forces and Pressure"],
+  Psychology: ["Research Methods", "Memory"],
+  Sociology: ["Theory and Methods", "Culture and Identity"],
+  Speaking: ["Pronunciation", "Everyday Conversation"],
+};
+export const IG_START_DATE = "2026-10-01";

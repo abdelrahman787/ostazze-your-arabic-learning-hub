@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { BookOpen, Search, User } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import PageHelmet from "@/components/PageHelmet";
 import PageHeader from "@/components/PageHeader";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -171,11 +172,15 @@ export default function Igcse() {
                         <span className="font-bold text-primary">{subjectLabel(c.subject)}</span>
                         <span className="text-muted-foreground">{c.board}</span>
                       </div>
-                      <h3 className="font-extrabold leading-snug">{c.title}</h3>
+                      <h3 className="font-extrabold leading-snug"><Link to="/igcse/$courseId" params={{ courseId: c.id }} className="hover:underline focus-visible:underline">{c.title}</Link></h3>
                       <div className="flex items-center justify-between mt-auto pt-2 text-sm">
                         <span className="text-muted-foreground truncate">{tName}</span>
                         <span className="font-black text-primary whitespace-nowrap">{fmt(c.priceEGP)}</span>
                       </div>
+                      <div className="grid grid-cols-2 gap-2 mt-2">
+                      <Link to="/igcse/$courseId" params={{ courseId: c.id }} className="btn-outline text-center">
+                        {ar ? "التفاصيل" : "Details"}
+                      </Link>
                       <a
                         href={waLink(
                           ar
@@ -184,10 +189,11 @@ export default function Igcse() {
                         )}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="btn-primary w-full text-center mt-2"
+                        className="btn-primary text-center"
                       >
                         {ar ? "سجّل الآن" : "Enroll Now"}
                       </a>
+                      </div>
                     </div>
                   </article>
                 );
