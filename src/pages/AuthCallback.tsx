@@ -16,6 +16,24 @@ const AuthCallback = () => {
   useEffect(() => {
     let active = true;
     const params = new URLSearchParams(window.location.search);
+    if (params.get("next") === null) {
+      // Sign-up confirmation / Google sign-in return: the main client picks up
+      // the session from the URL; then continue to the dashboard.
+      void (async () => {
+        const { supabase } = await import("@/integrations/supabase/client");
+        const { data } = await supabase.auth.getSession();
+        if (!active) return;
+        if (data.session) {
+          window.location.replace("/dashboard");
+          return;
+        }
+        window.history.replaceState({}, "", "/auth/callback");
+        setState("invalid");
+      })();
+      return () => {
+        active = false;
+      };
+    }
     const client = getRecoveryAuthClient();
     // supabase-js stores the PKCE verifier under `${storageKey}-code-verifier`.
     const ref = new URL(import.meta.env.VITE_SUPABASE_URL).hostname.split(
