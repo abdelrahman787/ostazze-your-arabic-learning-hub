@@ -41,6 +41,7 @@ export default function Checkout() {
   const [country, setCountry] = useState<Country | null>(null);
   const [loadingCountry, setLoadingCountry] = useState(true);
   const [payNow, setPayNow] = useState(false);
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
 
   useEffect(() => {
     if (!state || !isLoggedIn) return;
@@ -126,12 +127,32 @@ export default function Checkout() {
                 <div className="rounded-2xl border-2 border-dashed border-border p-6 text-center bg-secondary/40">
                   <p className="text-sm text-muted-foreground leading-relaxed mb-3">
                     {lang === "ar"
-                      ? "بوابة الدفع قيد التجهيز. "
-                      : "Payment gateway is being set up. You can proceed with the Stripe test integration for now — it will be replaced with the final gateway later."}
+                      ? "بوابة الدفع قيد التجهيز."
+                      : "Payment gateway is being set up."}
                   </p>
+                  <label className="flex items-start gap-2 text-start text-sm mb-4 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={acceptedTerms}
+                      onChange={(e) => setAcceptedTerms(e.target.checked)}
+                      className="mt-1 accent-primary"
+                      required
+                    />
+                    <span>
+                      {t("checkout_terms_agree")}{" "}
+                      <Link to="/terms" className="text-primary underline">
+                        {t("checkout_terms_link")}
+                      </Link>
+                      {lang === "ar" ? " و" : " and "}
+                      <Link to="/refund" className="text-primary underline">
+                        {t("checkout_refund_link")}
+                      </Link>
+                    </span>
+                  </label>
                   <button
                     onClick={() => setPayNow(true)}
-                    disabled={loadingCountry}
+                    disabled={loadingCountry || !acceptedTerms}
+                    aria-disabled={loadingCountry || !acceptedTerms}
                     className="btn-primary inline-flex items-center gap-2"
                   >
                     {loadingCountry && (
@@ -142,7 +163,7 @@ export default function Checkout() {
                 </div>
 
                 <div className="text-[12px] text-muted-foreground text-center whitespace-pre-line">
-                  {lang === "ar" ? "\n" : "🔒 Secure & encrypted payment"}
+                  {lang === "ar" ? "🔒 دفع آمن ومشفّر" : "🔒 Secure & encrypted payment"}
                 </div>
               </div>
             ) : (
@@ -213,16 +234,7 @@ export default function Checkout() {
               </div>
             </div>
 
-            <p className="text-[11px] text-muted-foreground mt-5 leading-relaxed">
-              {t("checkout_terms_agree")}{" "}
-              <Link to="/terms" className="text-primary hover:underline">
-                {t("checkout_terms_link")}
-              </Link>
-              {" · "}
-              <Link to="/refund" className="text-primary hover:underline">
-                {t("checkout_refund_link")}
-              </Link>
-            </p>
+
           </motion.aside>
         </div>
       </div>
