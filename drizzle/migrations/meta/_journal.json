@@ -78,6 +78,13 @@
       "when": 1790683284946,
       "tag": "0010_owner_protection_and_admin_audit",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1790683319626,
+      "tag": "0011_owner_guard_invoker",
+      "breakpoints": true
     }
   ]
 }
