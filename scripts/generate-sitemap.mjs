@@ -24,7 +24,7 @@ const entries = [
   { path: "/languages", changefreq: "weekly", priority: "0.8" },
   { path: "/courses", changefreq: "daily", priority: "0.9" },
   { path: "/pricing", changefreq: "monthly", priority: "0.8" },
-  { path: "/igcse", changefreq: "weekly", priority: "0.8" },
+  // /igcse hidden until teachers, topics, dates, capacity and prices are verified.
   { path: "/apply-tutor", changefreq: "monthly", priority: "0.7" },
   { path: "/about", changefreq: "monthly", priority: "0.6" },
   { path: "/contact", changefreq: "monthly", priority: "0.6" },
