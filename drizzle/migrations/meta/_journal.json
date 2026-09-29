@@ -57,6 +57,13 @@
       "when": 1790618211340,
       "tag": "0007_require_admin_mfa",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1790657395105,
+      "tag": "0008_quarantine_legacy_demo",
+      "breakpoints": true
     }
   ]
 }
