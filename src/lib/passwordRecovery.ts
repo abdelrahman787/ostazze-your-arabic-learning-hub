@@ -22,8 +22,7 @@ type RecoveryAuth = {
 };
 
 export type RecoveryCallbackResult =
-  | { ok: true; next: typeof RECOVERY_NEXT_PATH }
-  | { ok: false };
+  { ok: true; next: typeof RECOVERY_NEXT_PATH } | { ok: false };
 
 export function getRecoveryCallbackUrl(origin: string): string {
   const current = new URL(origin);
@@ -35,7 +34,9 @@ export function getRecoveryCallbackUrl(origin: string): string {
   return callback.toString();
 }
 
-export function getSafeRecoveryNext(value: string | null): typeof RECOVERY_NEXT_PATH | null {
+export function getSafeRecoveryNext(
+  value: string | null,
+): typeof RECOVERY_NEXT_PATH | null {
   return value === RECOVERY_NEXT_PATH ? RECOVERY_NEXT_PATH : null;
 }
 
@@ -50,11 +51,7 @@ export async function completeRecoveryCallback(
 
   try {
     const { data, error } = await auth.exchangeCodeForSession(input.code);
-    if (
-      error ||
-      !data.session?.user.id ||
-      data.redirectType !== "recovery"
-    ) {
+    if (error || !data.session?.user.id || data.redirectType !== "recovery") {
       if (data.session) await auth.signOut({ scope: "local" });
       return { ok: false };
     }

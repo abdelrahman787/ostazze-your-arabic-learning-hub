@@ -37,10 +37,17 @@ const AuthCallback = () => {
   return (
     <main className="hero-gradient min-h-screen flex items-center justify-center p-4">
       <NoIndex title={isAr ? "استعادة الحساب" : "Account recovery"} />
-      <section className="card-base p-8 w-full max-w-md text-center" aria-live="polite">
+      <section
+        className="card-base p-8 w-full max-w-md text-center"
+        aria-live="polite"
+      >
         {state === "working" ? (
           <>
-            <Loader2 className="mx-auto mb-4 animate-spin text-primary" size={32} aria-hidden="true" />
+            <Loader2
+              className="mx-auto mb-4 animate-spin text-primary"
+              size={32}
+              aria-hidden="true"
+            />
             <h1 className="text-2xl font-extrabold">
               {isAr ? "جارٍ التحقق من الرابط" : "Checking your reset link"}
             </h1>
@@ -50,9 +57,15 @@ const AuthCallback = () => {
           </>
         ) : (
           <>
-            <AlertCircle className="mx-auto mb-4 text-destructive" size={32} aria-hidden="true" />
+            <AlertCircle
+              className="mx-auto mb-4 text-destructive"
+              size={32}
+              aria-hidden="true"
+            />
             <h1 className="text-2xl font-extrabold">
-              {isAr ? "رابط غير صالح أو منتهي" : "Invalid or expired reset link"}
+              {isAr
+                ? "رابط غير صالح أو منتهي"
+                : "Invalid or expired reset link"}
             </h1>
             <p className="mt-2 mb-6 text-sm text-muted-foreground">
               {isAr

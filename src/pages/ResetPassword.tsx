@@ -5,7 +5,10 @@ import { toast } from "sonner";
 import { useLanguage } from "@/contexts/LanguageContext";
 import NoIndex from "@/components/NoIndex";
 import { getRecoveryAuthClient } from "@/lib/recoveryAuth";
-import { clearRecoveryMarker, hasValidRecoveryMarker } from "@/lib/passwordRecovery";
+import {
+  clearRecoveryMarker,
+  hasValidRecoveryMarker,
+} from "@/lib/passwordRecovery";
 
 type RecoveryState = "checking" | "valid" | "invalid";
 
@@ -24,7 +27,9 @@ const ResetPassword = () => {
       if (!active) return;
       const userId = data.user?.id;
       setRecoveryState(
-        !error && typeof userId === "string" && hasValidRecoveryMarker(window.sessionStorage, userId)
+        !error &&
+          typeof userId === "string" &&
+          hasValidRecoveryMarker(window.sessionStorage, userId)
           ? "valid"
           : "invalid",
       );
@@ -52,12 +57,20 @@ const ResetPassword = () => {
     const { error } = await auth.updateUser({ password });
     if (error) {
       setSaving(false);
-      toast.error(isAr ? "تعذر تحديث كلمة المرور. اطلب رابطًا جديدًا." : "We couldn't update your password. Request a new reset link.");
+      toast.error(
+        isAr
+          ? "تعذر تحديث كلمة المرور. اطلب رابطًا جديدًا."
+          : "We couldn't update your password. Request a new reset link.",
+      );
       return;
     }
     clearRecoveryMarker(window.sessionStorage);
     await auth.signOut({ scope: "global" });
-    toast.success(isAr ? "تم تعيين كلمة المرور. سجّل الدخول من جديد." : "Password updated. Sign in again.");
+    toast.success(
+      isAr
+        ? "تم تعيين كلمة المرور. سجّل الدخول من جديد."
+        : "Password updated. Sign in again.",
+    );
     window.location.replace("/login");
   };
 
@@ -65,20 +78,43 @@ const ResetPassword = () => {
     return (
       <main className="hero-gradient min-h-screen flex items-center justify-center p-4">
         <NoIndex title={isAr ? "إعادة تعيين كلمة المرور" : "Reset Password"} />
-        <section className="card-base p-8 w-full max-w-md text-center" aria-live="polite">
+        <section
+          className="card-base p-8 w-full max-w-md text-center"
+          aria-live="polite"
+        >
           {recoveryState === "checking" ? (
             <>
-              <Loader2 className="mx-auto mb-4 animate-spin text-primary" size={32} aria-hidden="true" />
-              <h1 className="text-2xl font-extrabold">{isAr ? "جارٍ التحقق من الجلسة" : "Checking your recovery session"}</h1>
+              <Loader2
+                className="mx-auto mb-4 animate-spin text-primary"
+                size={32}
+                aria-hidden="true"
+              />
+              <h1 className="text-2xl font-extrabold">
+                {isAr
+                  ? "جارٍ التحقق من الجلسة"
+                  : "Checking your recovery session"}
+              </h1>
             </>
           ) : (
             <>
-              <AlertCircle className="mx-auto mb-4 text-destructive" size={32} aria-hidden="true" />
-              <h1 className="text-2xl font-extrabold">{isAr ? "الرابط غير صالح أو منتهي" : "Invalid or expired reset link"}</h1>
+              <AlertCircle
+                className="mx-auto mb-4 text-destructive"
+                size={32}
+                aria-hidden="true"
+              />
+              <h1 className="text-2xl font-extrabold">
+                {isAr
+                  ? "الرابط غير صالح أو منتهي"
+                  : "Invalid or expired reset link"}
+              </h1>
               <p className="mt-2 mb-6 text-sm text-muted-foreground">
-                {isAr ? "رابط إعادة تعيين كلمة المرور غير صالح أو منتهي. اطلب رابطًا جديدًا." : "This password reset link is invalid or expired. Request a new link."}
+                {isAr
+                  ? "رابط إعادة تعيين كلمة المرور غير صالح أو منتهي. اطلب رابطًا جديدًا."
+                  : "This password reset link is invalid or expired. Request a new link."}
               </p>
-              <Link to="/forgot-password" className="btn-primary inline-flex">{isAr ? "طلب رابط جديد" : "Request a new link"}</Link>
+              <Link to="/forgot-password" className="btn-primary inline-flex">
+                {isAr ? "طلب رابط جديد" : "Request a new link"}
+              </Link>
             </>
           )}
         </section>

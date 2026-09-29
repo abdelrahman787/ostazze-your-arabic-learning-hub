@@ -20,9 +20,10 @@ const ForgotPassword = () => {
     setLoading(true);
     setRequestFailed(false);
     try {
-      const { error } = await getRecoveryAuthClient().auth.resetPasswordForEmail(email, {
-        redirectTo: getRecoveryCallbackUrl(window.location.origin),
-      });
+      const { error } =
+        await getRecoveryAuthClient().auth.resetPasswordForEmail(email, {
+          redirectTo: getRecoveryCallbackUrl(window.location.origin),
+        });
       if (error) setRequestFailed(true);
       else setSent(true);
     } catch {
@@ -70,7 +71,8 @@ const ForgotPassword = () => {
           <form onSubmit={handleSubmit} className="space-y-4 text-start">
             {requestFailed && (
               <p role="alert" className="text-sm text-destructive text-center">
-                {t("forgot_error") || "We couldn't send a reset link right now. Please try again later."}
+                {t("forgot_error") ||
+                  "We couldn't send a reset link right now. Please try again later."}
               </p>
             )}
             <div>

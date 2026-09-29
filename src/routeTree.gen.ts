@@ -28,6 +28,7 @@ import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ZoomTestRouteImport } from './routes/zoom-test'
 import { Route as ApiHealthRouteImport } from './routes/api/health'
+import { Route as AuthCallbackRouteImport } from './routes/auth/callback'
 import { Route as CheckoutIndexRouteImport } from './routes/checkout/index'
 import { Route as CheckoutReturnRouteImport } from './routes/checkout/return'
 import { Route as CoursesIndexRouteImport } from './routes/courses/index'
@@ -141,6 +142,11 @@ const ApiHealthRoute = ApiHealthRouteImport.update({
   path: '/api/health',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthCallbackRoute = AuthCallbackRouteImport.update({
+  id: '/auth/callback',
+  path: '/auth/callback',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CheckoutIndexRoute = CheckoutIndexRouteImport.update({
   id: '/checkout/',
   path: '/checkout/',
@@ -251,6 +257,7 @@ export interface FileRoutesByFullPath {
   '/terms': typeof TermsRoute
   '/zoom-test': typeof ZoomTestRoute
   '/api/health': typeof ApiHealthRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/courses/$id': typeof CoursesIdRoute
   '/dashboard/teacher': typeof DashboardTeacherRoute
@@ -289,6 +296,7 @@ export interface FileRoutesByTo {
   '/terms': typeof TermsRoute
   '/zoom-test': typeof ZoomTestRoute
   '/api/health': typeof ApiHealthRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/courses/$id': typeof CoursesIdRoute
   '/dashboard/teacher': typeof DashboardTeacherRoute
@@ -328,6 +336,7 @@ export interface FileRoutesById {
   '/terms': typeof TermsRoute
   '/zoom-test': typeof ZoomTestRoute
   '/api/health': typeof ApiHealthRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/courses/$id': typeof CoursesIdRoute
   '/dashboard/teacher': typeof DashboardTeacherRoute
@@ -368,6 +377,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/zoom-test'
     | '/api/health'
+    | '/auth/callback'
     | '/checkout/return'
     | '/courses/$id'
     | '/dashboard/teacher'
@@ -406,6 +416,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/zoom-test'
     | '/api/health'
+    | '/auth/callback'
     | '/checkout/return'
     | '/courses/$id'
     | '/dashboard/teacher'
@@ -444,6 +455,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/zoom-test'
     | '/api/health'
+    | '/auth/callback'
     | '/checkout/return'
     | '/courses/$id'
     | '/dashboard/teacher'
@@ -483,6 +495,7 @@ export interface RootRouteChildren {
   TermsRoute: typeof TermsRoute
   ZoomTestRoute: typeof ZoomTestRoute
   ApiHealthRoute: typeof ApiHealthRoute
+  AuthCallbackRoute: typeof AuthCallbackRoute
   CheckoutReturnRoute: typeof CheckoutReturnRoute
   CoursesIdRoute: typeof CoursesIdRoute
   DashboardTeacherRoute: typeof DashboardTeacherRoute
@@ -637,6 +650,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiHealthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth/callback': {
+      id: '/auth/callback'
+      path: '/auth/callback'
+      fullPath: '/auth/callback'
+      preLoaderRoute: typeof AuthCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/checkout/': {
       id: '/checkout/'
       path: '/checkout'
@@ -779,6 +799,7 @@ const rootRouteChildren: RootRouteChildren = {
   TermsRoute: TermsRoute,
   ZoomTestRoute: ZoomTestRoute,
   ApiHealthRoute: ApiHealthRoute,
+  AuthCallbackRoute: AuthCallbackRoute,
   CheckoutReturnRoute: CheckoutReturnRoute,
   CoursesIdRoute: CoursesIdRoute,
   DashboardTeacherRoute: DashboardTeacherRoute,
