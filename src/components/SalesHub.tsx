@@ -222,6 +222,16 @@ const SalesHub = () => {
     completed: "مكتمل",
   };
 
+  const refundLabel: Record<string, string> = {
+    cancellation_requested: "طلب إلغاء مفتوح",
+    refund_not_required: "لا يتطلب استرداد",
+    refund_pending: "استرداد قيد المراجعة",
+    refund_approved: "استرداد موافق عليه — بانتظار التنفيذ",
+    refunded: "تم الاسترداد (مرجع مسجّل)",
+    refund_rejected: "استرداد مرفوض",
+    credit_issued: "رصيد في الحساب",
+  };
+
   const filteredRequests = useMemo(() => {
     return requests.filter((r) => {
       if (statusFilter !== "all" && r.status !== statusFilter) return false;
@@ -385,6 +395,11 @@ const SalesHub = () => {
                       >
                         {statusLabel[r.status] || r.status}
                       </span>
+                      {r.refund_status && (
+                        <span className="block mt-1 text-[11px] font-bold text-primary">
+                          {refundLabel[r.refund_status] || r.refund_status}
+                        </span>
+                      )}
                     </td>
                     <td className="py-3 px-2">
                       <div className="flex items-center gap-2 flex-wrap">

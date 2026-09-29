@@ -38,6 +38,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import SalesHub from "@/components/SalesHub";
+import BookingManager from "@/components/BookingManager";
 import NotificationBell from "@/components/NotificationBell";
 import AdminCourses from "@/components/AdminCourses";
 import AdminInvoices from "@/components/AdminInvoices";
@@ -1538,6 +1539,12 @@ const Admin = () => {
                 ))}
               </div>
               <SalesHub />
+              <div className="card-base p-6">
+                <h3 className="font-extrabold text-lg mb-4">
+                  {lang === "ar" ? "حجوزات المعلمين المباشرة" : "Direct tutor bookings"}
+                </h3>
+                <BookingManager role="admin" />
+              </div>
             </div>
           )}
 
