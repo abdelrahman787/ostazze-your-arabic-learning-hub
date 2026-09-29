@@ -28,7 +28,8 @@ export type RecoveryCallbackResult =
 export function getRecoveryCallbackUrl(origin: string): string {
   const current = new URL(origin);
   const callbackOrigin =
-    PRODUCTION_HOSTS.has(current.hostname) || current.hostname === PUBLISHED_HOST
+    PRODUCTION_HOSTS.has(current.hostname) ||
+    current.hostname === PUBLISHED_HOST
       ? "https://ostaze.com"
       : current.origin;
   const callback = new URL("/auth/callback", callbackOrigin);
