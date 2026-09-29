@@ -1,19 +1,19 @@
 {
-  "base": "http://localhost:8080",
+  "base": "http://localhost:3000",
   "totals": {
     "home": {
       "total": 1,
       "pass": 1,
       "fail": 0
     },
-    "static": {
-      "total": 10,
-      "pass": 10,
-      "fail": 0
-    },
     "list": {
       "total": 4,
       "pass": 4,
+      "fail": 0
+    },
+    "static": {
+      "total": 10,
+      "pass": 10,
       "fail": 0
     },
     "country": {
