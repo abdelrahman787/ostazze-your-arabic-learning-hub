@@ -35,6 +35,7 @@ import {
   isSubjectIndexable,
 } from "@/lib/subjectSlugs";
 import NotFound from "./NotFound";
+import { courseDisplayName, hasVerifiedName } from "@/lib/courseName";
 
 const categoryEnToAr = new Map<string, string>();
 mockCategories.forEach((c) => categoryEnToAr.set(c.name.en, c.name.ar));
@@ -111,6 +112,7 @@ const Subjects = ({
       code: string;
       name_en: string;
       name_ar: string;
+      name_status?: "missing" | "ar_only";
       credits: number;
     }[] = [];
     allUniversities.forEach((u) => {

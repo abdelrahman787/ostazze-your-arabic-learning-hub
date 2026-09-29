@@ -83,6 +83,8 @@ export function buildCatalogIndex(all: University[]): CatalogIndex {
       for (const d of c.departments) {
         departments++;
         totalCourses += d.courses.length;
+        // Unclassified import bucket: kept privately in the data, never a public subject.
+        if (d.name_en.trim().toUpperCase() === "PENDING") continue;
         let s = subjMap.get(d.name_en);
         if (!s) {
           s = {

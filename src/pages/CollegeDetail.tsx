@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import PageHelmet from "@/components/PageHelmet";
+import { courseDisplayName } from "@/lib/courseName";
 import { breadcrumbJsonLd, collectionPageJsonLd } from "@/lib/seo";
 import { useLanguage } from "@/contexts/LanguageContext";
 import type {
@@ -497,7 +498,7 @@ const CollegeDetail = ({
   return (
     <div className="min-h-screen">
       <PageHelmet
-        title={`${collegeName} — ${uniName}`}
+        title={`${collegeName} – ${uniName}`}
         noindex={!isCollegeIndexable(college)}
         description={
           lang === "ar"
@@ -534,7 +535,7 @@ const CollegeDetail = ({
         ]}
       />
 
-      <PageHeader title={collegeName} subtitle={uniName} variant="university">
+      <PageHeader title={`${collegeName} – ${uniName}`} variant="university">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
