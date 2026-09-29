@@ -44,6 +44,24 @@ serve(async (req) => {
     const body = await req.json();
     const { action } = body;
 
+    // Only the owner may act on the owner account (role, profile, teacher data).
+    const { data: owners } = await supabaseAdmin
+      .from("owner_accounts")
+      .select("user_id");
+    const ownerIds = new Set((owners ?? []).map((o) => o.user_id as string));
+    if (!ownerIds.has(caller.id) && ownerIds.size > 0) {
+      let targetId: string | undefined =
+        typeof body.user_id === "string" ? body.user_id : undefined;
+      if (!targetId && typeof body.email === "string") {
+        const { data: users } = await supabaseAdmin.auth.admin.listUsers();
+        targetId = users?.users?.find(
+          (u) => u.email?.toLowerCase() === String(body.email).toLowerCase(),
+        )?.id;
+      }
+      if (targetId && ownerIds.has(targetId))
+        throw new Error("The owner account cannot be modified");
+    }
+
     if (action === "create_teacher") {
       const { email, password, full_name, university, subjects, price } = body;
       if (!email || !password || !full_name)
