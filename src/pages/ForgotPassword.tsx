@@ -8,7 +8,7 @@ import { getRecoveryAuthClient } from "@/lib/recoveryAuth";
 import { getRecoveryCallbackUrl } from "@/lib/passwordRecovery";
 
 const ForgotPassword = () => {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [sent, setSent] = useState(false);
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
@@ -71,9 +71,9 @@ const ForgotPassword = () => {
           <form onSubmit={handleSubmit} className="space-y-4 text-start">
             {requestFailed && (
               <p role="alert" className="text-sm text-destructive text-center">
-                {
-                  "We couldn't send a reset link right now. Please try again later."
-                }
+                {lang === "ar"
+                  ? "تعذر إرسال رابط إعادة التعيين الآن. حاول مرة أخرى لاحقًا."
+                  : "We couldn't send a reset link right now. Please try again later."}
               </p>
             )}
             <div>

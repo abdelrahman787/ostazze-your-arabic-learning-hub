@@ -104,6 +104,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // The recovery callback owns its one-time PKCE exchange. Loading the normal
+    // client here would make two clients race to consume the same code.
+    if (window.location.pathname === "/auth/callback") {
+      setLoading(false);
+      return;
+    }
     let cancelled = false;
     let unsubscribe: (() => void) | undefined;
     void getSb().then((supabase) => {
