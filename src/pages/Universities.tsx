@@ -515,7 +515,7 @@ const Universities = () => {
 
                 return (
                   <MotionLink
-                    key={c.code}
+                    key={`${c.code}-${c.name_en}`}
                     to={countryPath(c.code)}
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -567,7 +567,7 @@ const Universities = () => {
                 };
                 return (
                   <motion.div
-                    key={c.code}
+                    key={`${c.code}-${c.name_en}`}
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: (countries.length + i) * 0.15 }}
