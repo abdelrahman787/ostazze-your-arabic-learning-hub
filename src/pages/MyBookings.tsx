@@ -224,7 +224,13 @@ const MyBookings = () => {
 
   const filtered = requests.filter((r) => {
     if (filter === "active")
-      return ["pending", "pending_payment", "paid_awaiting_assignment", "assigned", "confirmed"].includes(r.status);
+      return [
+        "pending",
+        "pending_payment",
+        "paid_awaiting_assignment",
+        "assigned",
+        "confirmed",
+      ].includes(r.status);
     if (filter === "past")
       return ["rejected", "cancelled", "completed"].includes(r.status);
     return true;
@@ -233,7 +239,13 @@ const MyBookings = () => {
   const counts = {
     all: requests.length,
     active: requests.filter((r) =>
-      ["pending", "pending_payment", "paid_awaiting_assignment", "assigned", "confirmed"].includes(r.status),
+      [
+        "pending",
+        "pending_payment",
+        "paid_awaiting_assignment",
+        "assigned",
+        "confirmed",
+      ].includes(r.status),
     ).length,
     past: requests.filter((r) =>
       ["rejected", "cancelled", "completed"].includes(r.status),

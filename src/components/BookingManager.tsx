@@ -326,7 +326,9 @@ const BookingManager = ({ role }: Props) => {
                       onClick={() => setAdminCancelId(b.id)}
                       className="flex-1 py-2 rounded-xl bg-destructive/10 text-destructive font-bold text-sm hover:bg-destructive/20 transition-colors"
                     >
-                      {lang === "ar" ? "إلغاء بواسطة الإدارة" : "Cancel as Admin"}
+                      {lang === "ar"
+                        ? "إلغاء بواسطة الإدارة"
+                        : "Cancel as Admin"}
                     </button>
                   )}
                   {role === "student" && !canStudentCancel(b) && (
@@ -368,21 +370,32 @@ const BookingManager = ({ role }: Props) => {
                   <textarea
                     value={adminReason}
                     onChange={(e) => setAdminReason(e.target.value)}
-                    placeholder={lang === "ar" ? "سبب الإلغاء (مطلوب)" : "Cancellation reason (required)"}
-                    aria-label={lang === "ar" ? "سبب الإلغاء" : "Cancellation reason"}
+                    placeholder={
+                      lang === "ar"
+                        ? "سبب الإلغاء (مطلوب)"
+                        : "Cancellation reason (required)"
+                    }
+                    aria-label={
+                      lang === "ar" ? "سبب الإلغاء" : "Cancellation reason"
+                    }
                     rows={2}
                     className="input-base resize-none text-sm"
                   />
                   <div className="flex gap-2">
                     <button
                       onClick={() => adminCancel(b.id)}
-                      disabled={actionLoading === b.id || adminReason.trim().length < 3}
+                      disabled={
+                        actionLoading === b.id || adminReason.trim().length < 3
+                      }
                       className="flex-1 py-2 rounded-xl bg-destructive text-destructive-foreground font-bold text-sm disabled:opacity-50"
                     >
                       {lang === "ar" ? "تأكيد الإلغاء" : "Confirm cancellation"}
                     </button>
                     <button
-                      onClick={() => { setAdminCancelId(null); setAdminReason(""); }}
+                      onClick={() => {
+                        setAdminCancelId(null);
+                        setAdminReason("");
+                      }}
                       className="px-4 py-2 rounded-xl bg-secondary text-sm font-bold"
                     >
                       {t("action_cancel")}

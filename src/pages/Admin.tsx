@@ -1541,7 +1541,9 @@ const Admin = () => {
               <SalesHub />
               <div className="card-base p-6">
                 <h3 className="font-extrabold text-lg mb-4">
-                  {lang === "ar" ? "حجوزات المعلمين المباشرة" : "Direct tutor bookings"}
+                  {lang === "ar"
+                    ? "حجوزات المعلمين المباشرة"
+                    : "Direct tutor bookings"}
                 </h3>
                 <BookingManager role="admin" />
               </div>

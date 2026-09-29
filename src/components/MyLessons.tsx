@@ -129,7 +129,12 @@ const MyLessons = ({ role }: { role: "student" | "teacher" }) => {
 
           {role === "teacher" && (
             <div className="mb-3">
-              <SessionRequestActions req={lesson} role="tutor" lang={lang} onChanged={fetch} />
+              <SessionRequestActions
+                req={lesson}
+                role="tutor"
+                lang={lang}
+                onChanged={fetch}
+              />
             </div>
           )}
           <div className="flex items-center gap-4 text-xs text-muted-foreground mb-3">

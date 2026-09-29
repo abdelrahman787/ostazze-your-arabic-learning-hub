@@ -468,7 +468,9 @@ const SalesHub = () => {
                           )}
                         {r.refund_status === "refund_approved" && (
                           <button
-                            onClick={() => setDialog({ mode: "record", req: r })}
+                            onClick={() =>
+                              setDialog({ mode: "record", req: r })
+                            }
                             className="text-xs font-bold text-primary hover:underline"
                           >
                             تسجيل الاسترداد المنفّذ

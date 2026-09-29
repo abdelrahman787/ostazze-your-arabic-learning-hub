@@ -7,7 +7,11 @@ export type RefundDialogMode = "cancel" | "decision" | "record";
 
 interface Props {
   mode: RefundDialogMode;
-  request: { id: string; payment_state?: string | null; subject: string | null };
+  request: {
+    id: string;
+    payment_state?: string | null;
+    subject: string | null;
+  };
   onClose: () => void;
   onDone: () => void;
 }
@@ -21,7 +25,12 @@ const decisionLabels: Record<string, string> = {
 };
 
 /** Admin-only (MFA enforced in the database) cancellation and refund workflow. */
-const SessionCancelRefundDialog = ({ mode, request, onClose, onDone }: Props) => {
+const SessionCancelRefundDialog = ({
+  mode,
+  request,
+  onClose,
+  onDone,
+}: Props) => {
   const paid = request.payment_state !== "unpaid";
   const [actor, setActor] = useState("admin");
   const [reason, setReason] = useState("");
@@ -104,7 +113,11 @@ const SessionCancelRefundDialog = ({ mode, request, onClose, onDone }: Props) =>
         {mode === "cancel" && (
           <label className="block text-sm font-bold">
             من طلب الإلغاء؟
-            <select value={actor} onChange={(e) => setActor(e.target.value)} className="input-base mt-1.5">
+            <select
+              value={actor}
+              onChange={(e) => setActor(e.target.value)}
+              className="input-base mt-1.5"
+            >
               <option value="student">الطالب</option>
               <option value="tutor">المعلم</option>
               <option value="admin">الإدارة</option>
@@ -116,18 +129,29 @@ const SessionCancelRefundDialog = ({ mode, request, onClose, onDone }: Props) =>
         {mode !== "record" && (
           <label className="block text-sm font-bold">
             السبب (مطلوب)
-            <textarea value={reason} onChange={(e) => setReason(e.target.value)} rows={2} className="input-base mt-1.5 resize-none" />
+            <textarea
+              value={reason}
+              onChange={(e) => setReason(e.target.value)}
+              rows={2}
+              className="input-base mt-1.5 resize-none"
+            />
           </label>
         )}
 
         {mode !== "record" && paid && (
           <label className="block text-sm font-bold">
             قرار الاسترداد
-            <select value={decision} onChange={(e) => setDecision(e.target.value)} className="input-base mt-1.5">
+            <select
+              value={decision}
+              onChange={(e) => setDecision(e.target.value)}
+              className="input-base mt-1.5"
+            >
               {Object.entries(decisionLabels)
                 .filter(([k]) => mode === "decision" || k !== "credit_issued")
                 .map(([k, v]) => (
-                  <option key={k} value={k}>{v}</option>
+                  <option key={k} value={k}>
+                    {v}
+                  </option>
                 ))}
             </select>
           </label>
@@ -136,37 +160,81 @@ const SessionCancelRefundDialog = ({ mode, request, onClose, onDone }: Props) =>
         {mode === "record" && (
           <>
             <p className="text-xs bg-warning/10 text-foreground rounded-lg p-2">
-              سجّل فقط استردادًا نُفّذ فعلًا عبر مزوّد الدفع. هذا الإجراء لا يحرّك أي أموال.
+              سجّل فقط استردادًا نُفّذ فعلًا عبر مزوّد الدفع. هذا الإجراء لا
+              يحرّك أي أموال.
             </p>
             <div className="grid grid-cols-2 gap-3">
-              <label className="block text-sm font-bold">المبلغ
-                <input type="number" min="0" step="0.01" value={amount} onChange={(e) => setAmount(e.target.value)} className="input-base mt-1.5" />
+              <label className="block text-sm font-bold">
+                المبلغ
+                <input
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                  className="input-base mt-1.5"
+                />
               </label>
-              <label className="block text-sm font-bold">العملة
-                <input value={currency} maxLength={3} onChange={(e) => setCurrency(e.target.value.toUpperCase())} className="input-base mt-1.5" />
+              <label className="block text-sm font-bold">
+                العملة
+                <input
+                  value={currency}
+                  maxLength={3}
+                  onChange={(e) => setCurrency(e.target.value.toUpperCase())}
+                  className="input-base mt-1.5"
+                />
               </label>
             </div>
-            <label className="block text-sm font-bold">مرجع الاسترداد لدى المزوّد
-              <input value={reference} onChange={(e) => setReference(e.target.value)} className="input-base mt-1.5" dir="ltr" />
+            <label className="block text-sm font-bold">
+              مرجع الاسترداد لدى المزوّد
+              <input
+                value={reference}
+                onChange={(e) => setReference(e.target.value)}
+                className="input-base mt-1.5"
+                dir="ltr"
+              />
             </label>
-            <label className="block text-sm font-bold">وقت تنفيذ الاسترداد
-              <input type="datetime-local" value={refundedAt} onChange={(e) => setRefundedAt(e.target.value)} className="input-base mt-1.5" />
+            <label className="block text-sm font-bold">
+              وقت تنفيذ الاسترداد
+              <input
+                type="datetime-local"
+                value={refundedAt}
+                onChange={(e) => setRefundedAt(e.target.value)}
+                className="input-base mt-1.5"
+              />
             </label>
-            <label className="block text-sm font-bold">ملاحظة داخلية (اختيارية، لا تظهر للطالب)
-              <textarea value={note} onChange={(e) => setNote(e.target.value)} rows={2} className="input-base mt-1.5 resize-none" />
+            <label className="block text-sm font-bold">
+              ملاحظة داخلية (اختيارية، لا تظهر للطالب)
+              <textarea
+                value={note}
+                onChange={(e) => setNote(e.target.value)}
+                rows={2}
+                className="input-base mt-1.5 resize-none"
+              />
             </label>
             <label className="flex items-start gap-2 text-sm">
-              <input type="checkbox" checked={confirmed} onChange={(e) => setConfirmed(e.target.checked)} className="mt-1" />
+              <input
+                type="checkbox"
+                checked={confirmed}
+                onChange={(e) => setConfirmed(e.target.checked)}
+                className="mt-1"
+              />
               أؤكد أن الاسترداد تم عبر مزوّد الدفع.
             </label>
           </>
         )}
 
         <div className="flex gap-3">
-          <button onClick={submit} disabled={!canSubmit || busy} className="btn-primary flex-1 flex items-center justify-center gap-2 disabled:opacity-50">
+          <button
+            onClick={submit}
+            disabled={!canSubmit || busy}
+            className="btn-primary flex-1 flex items-center justify-center gap-2 disabled:opacity-50"
+          >
             {busy && <Loader2 size={16} className="animate-spin" />} حفظ
           </button>
-          <button onClick={onClose} className="btn-outline flex-1">إغلاق</button>
+          <button onClick={onClose} className="btn-outline flex-1">
+            إغلاق
+          </button>
         </div>
       </div>
     </div>
