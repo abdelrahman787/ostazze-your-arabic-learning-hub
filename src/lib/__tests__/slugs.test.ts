@@ -36,6 +36,11 @@ describe("slugs", () => {
       const [, , c, us] = universityPath(u).split("/");
       expect(findUniversityBySlugs(c, us)?.id).toBe(u.id);
       for (const d of u.colleges.flatMap((c) => c.departments)) {
+        if (d.name_en.toUpperCase() === "PENDING") {
+          // Unclassified bucket stays private: no public subject page.
+          expect(subjectNameFromSlug("pending")).toBeUndefined();
+          continue;
+        }
         expect(subjectNameFromSlug(subjectPath(d.name_en).split("/")[2])).toBe(
           d.name_en,
         );
