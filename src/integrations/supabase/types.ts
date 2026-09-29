@@ -72,6 +72,7 @@ export type Database = {
           created_at: string
           id: string
           lecture_id: string | null
+          legacy_demo: boolean
           notes: string | null
           reject_reason: string | null
           scheduled_date: string
@@ -86,6 +87,7 @@ export type Database = {
           created_at?: string
           id?: string
           lecture_id?: string | null
+          legacy_demo?: boolean
           notes?: string | null
           reject_reason?: string | null
           scheduled_date: string
@@ -100,6 +102,7 @@ export type Database = {
           created_at?: string
           id?: string
           lecture_id?: string | null
+          legacy_demo?: boolean
           notes?: string | null
           reject_reason?: string | null
           scheduled_date?: string
@@ -424,6 +427,7 @@ export type Database = {
           bunny_video_id: string | null
           created_at: string
           id: string
+          legacy_demo: boolean
           pdf_url: string | null
           student_id: string
           subject: string | null
@@ -437,6 +441,7 @@ export type Database = {
           bunny_video_id?: string | null
           created_at?: string
           id?: string
+          legacy_demo?: boolean
           pdf_url?: string | null
           student_id: string
           subject?: string | null
@@ -450,6 +455,7 @@ export type Database = {
           bunny_video_id?: string | null
           created_at?: string
           id?: string
+          legacy_demo?: boolean
           pdf_url?: string | null
           student_id?: string
           subject?: string | null
@@ -513,6 +519,7 @@ export type Database = {
           full_name: string | null
           full_name_en: string | null
           id: string
+          legacy_demo: boolean
           onboarding_completed: boolean
           phone: string | null
           timezone: string | null
@@ -530,6 +537,7 @@ export type Database = {
           full_name?: string | null
           full_name_en?: string | null
           id?: string
+          legacy_demo?: boolean
           onboarding_completed?: boolean
           phone?: string | null
           timezone?: string | null
@@ -547,6 +555,7 @@ export type Database = {
           full_name?: string | null
           full_name_en?: string | null
           id?: string
+          legacy_demo?: boolean
           onboarding_completed?: boolean
           phone?: string | null
           timezone?: string | null
@@ -582,6 +591,7 @@ export type Database = {
           assigned_by: string | null
           created_at: string
           id: string
+          legacy_demo: boolean
           notes: string | null
           preferred_date: string | null
           preferred_time: string | null
@@ -599,6 +609,7 @@ export type Database = {
           assigned_by?: string | null
           created_at?: string
           id?: string
+          legacy_demo?: boolean
           notes?: string | null
           preferred_date?: string | null
           preferred_time?: string | null
@@ -616,6 +627,7 @@ export type Database = {
           assigned_by?: string | null
           created_at?: string
           id?: string
+          legacy_demo?: boolean
           notes?: string | null
           preferred_date?: string | null
           preferred_time?: string | null

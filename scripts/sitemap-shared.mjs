@@ -33,6 +33,6 @@ export async function fetchRows(path) {
 
 // Must match what the pages themselves query, so every URL renders real content.
 export const TEACHERS_QUERY =
-  "teacher_profiles?select=id,user_id,updated_at&user_id=not.is.null&limit=5000";
+  "teacher_profiles?select=id,user_id,updated_at&user_id=not.is.null&verified=eq.true&limit=5000";
 export const COURSES_QUERY =
   "courses?select=id,updated_at&is_published=eq.true&limit=5000";

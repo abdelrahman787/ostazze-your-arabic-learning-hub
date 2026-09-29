@@ -16,3 +16,7 @@
 - [x] Test-count discrepancy explained (placeholder test removed)
 - [x] Rechecks
 - [ ] Delete teacher1@ostazze.com — blocked: publicly listed tutor with lectures/bookings; needs owner confirmation
+
+## Round 4 — quarantine
+- [x] Demo tutors/courses unpublished, demo history flagged, old admin + admin2 locked
+- [ ] Confirm real owner-admin email, grant admin, test MFA, then force reset admin1 — blocked: needs owner's email

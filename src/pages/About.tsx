@@ -55,11 +55,13 @@ const About = () => {
     Promise.all([
       supabase
         .from("teacher_profiles")
-        .select("id", { count: "exact", head: true }),
+        .select("id", { count: "exact", head: true })
+        .eq("verified", true),
       supabase
         .from("session_requests")
         .select("id", { count: "exact", head: true })
-        .eq("status", "completed"),
+        .eq("status", "completed")
+        .eq("legacy_demo", false),
     ])
       .then(([tp, sr]) =>
         setCounts({ tutors: tp.count ?? null, sessions: sr.count ?? null }),
