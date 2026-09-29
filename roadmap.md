@@ -34,4 +34,4 @@
 - Do NOT publish.
 
 ## Round 6 — materials
-- [ ] Import courses from ALL_UNIVERSITIES_MASTER, UoS_Programs_16-45, ALL_IN_ONE_UoS46-61_HCT spreadsheets
+- [x] Import courses from ALL_UNIVERSITIES_MASTER, UoS_Programs_16-45, ALL_IN_ONE_UoS46-61_HCT spreadsheets
