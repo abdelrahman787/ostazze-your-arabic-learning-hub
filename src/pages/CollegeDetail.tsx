@@ -197,7 +197,7 @@ const DepartmentBlock = ({ dept, lang, index, onRequest }: DeptProps) => {
                         );
                         return (
                           <div
-                            key={course.code}
+                            key={`${course.code}-${course.name_en}`}
                             className="flex items-center gap-3 py-2.5 px-3 rounded-lg bg-card hover:bg-primary/5 dark:hover:bg-primary/10 border border-border/40 hover:border-primary/30 transition-colors"
                           >
                             <span className="text-sm text-foreground/90 truncate flex-1 font-medium">
@@ -278,7 +278,7 @@ const DepartmentBlock = ({ dept, lang, index, onRequest }: DeptProps) => {
                                   .includes("elective");
                                 return (
                                   <div
-                                    key={course.code}
+                                    key={`${course.code}-${course.name_en}`}
                                     className="flex items-center gap-2.5 py-2 px-2.5 rounded-lg bg-card hover:bg-primary/5 dark:hover:bg-primary/10 border border-border/40 hover:border-primary/30 transition-colors"
                                   >
                                     <div className="min-w-0 flex-1">
