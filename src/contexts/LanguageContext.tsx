@@ -986,8 +986,8 @@ const translations = {
   },
   privacy_badge: { ar: "بياناتك محمية", en: "Your Data is Protected" },
   privacy_last_updated: {
-    ar: "آخر تحديث: أبريل 2026",
-    en: "Last updated: April 2026",
+    ar: "تاريخ السريان: 29 سبتمبر 2026",
+    en: "Effective date: September 29, 2026",
   },
   privacy_section1_title: {
     ar: "المعلومات التي نجمعها",
@@ -1124,7 +1124,7 @@ const translations = {
   // Contact trust block
   contact_trust_entity_label: { ar: "الكيان القانوني", en: "Legal Entity" },
   contact_trust_entity_value: {
-    ar: "OSTAZE(TODO: تأكيد الاسم المسجل)",
+    ar: "OSTAZE / أستاذي",
     en: "OSTAZE",
   },
   contact_trust_hours_label: { ar: "ساعات العمل", en: "Working Hours" },
