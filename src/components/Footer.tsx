@@ -150,6 +150,12 @@ const Footer = () => {
               >
                 {lang === "ar" ? "الأسعار" : "Pricing"}
               </Link>
+              <Link
+                to="/igcse"
+                className="text-black/60 dark:text-white/60 hover:text-primary transition-colors"
+              >
+                {lang === "ar" ? "كورسات IGCSE" : "IGCSE Courses"}
+              </Link>
             </div>
           </div>
 
