@@ -49,7 +49,8 @@ export default function Igcse() {
 
   const courses = IG_COURSES.filter(
     (c) =>
-      (!teacher || c.teacherId === teacher) && (!subject || c.subject === subject),
+      (!teacher || c.teacherId === teacher) &&
+      (!subject || c.subject === subject),
   );
 
   return (
@@ -68,14 +69,15 @@ export default function Igcse() {
       />
 
       <div className="container mx-auto px-4 mt-10 ">
-
         <section aria-live="polite">
           <p className="text-sm text-muted-foreground mb-4">
             {ar ? `${courses.length} كورس` : `${courses.length} courses`}
           </p>
           {courses.length === 0 ? (
             <p className="card-base p-8 text-center text-muted-foreground">
-              {ar ? "لا توجد كورسات مطابقة." : "No courses match these filters."}
+              {ar
+                ? "لا توجد كورسات مطابقة."
+                : "No courses match these filters."}
             </p>
           ) : (
             <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-5">
@@ -83,7 +85,10 @@ export default function Igcse() {
                 const t = teacherById.get(c.teacherId)!;
                 const tName = ar ? t.name_ar : t.name;
                 return (
-                  <article key={c.id} className="card-base overflow-hidden flex flex-col">
+                  <article
+                    key={c.id}
+                    className="card-base overflow-hidden flex flex-col"
+                  >
                     <div className="h-32 bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center relative">
                       <BookOpen size={40} className="text-primary" />
                       <span className="absolute top-3 start-3 text-xs font-bold bg-background/90 text-foreground rounded-full px-2.5 py-1">
@@ -92,30 +97,48 @@ export default function Igcse() {
                     </div>
                     <div className="p-5 flex-1 flex flex-col gap-2">
                       <div className="flex items-center justify-between text-xs">
-                        <span className="font-bold text-primary">{subjectLabel(c.subject)}</span>
+                        <span className="font-bold text-primary">
+                          {subjectLabel(c.subject)}
+                        </span>
                         <span className="text-muted-foreground">{c.board}</span>
                       </div>
-                      <h3 className="font-extrabold leading-snug"><Link to="/igcse/$courseId" params={{ courseId: c.id }} className="hover:underline focus-visible:underline">{c.title}</Link></h3>
+                      <h3 className="font-extrabold leading-snug">
+                        <Link
+                          to="/igcse/$courseId"
+                          params={{ courseId: c.id }}
+                          className="hover:underline focus-visible:underline"
+                        >
+                          {c.title}
+                        </Link>
+                      </h3>
                       <div className="flex items-center justify-between mt-auto pt-2 text-sm">
-                        <span className="text-muted-foreground truncate">{tName}</span>
-                        <span className="font-black text-primary whitespace-nowrap">{fmt(c.priceEGP)}</span>
+                        <span className="text-muted-foreground truncate">
+                          {tName}
+                        </span>
+                        <span className="font-black text-primary whitespace-nowrap">
+                          {fmt(c.priceEGP)}
+                        </span>
                       </div>
                       <div className="grid grid-cols-2 gap-2 mt-2">
-                      <Link to="/igcse/$courseId" params={{ courseId: c.id }} className="btn-outline text-center">
-                        {ar ? "التفاصيل" : "Details"}
-                      </Link>
-                      <a
-                        href={waLink(
-                          ar
-                            ? `أرغب في التسجيل في كورس ${c.title} مع ${tName}`
-                            : `I'd like to enroll in ${c.title} with ${tName}`,
-                        )}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn-primary text-center"
-                      >
-                        {ar ? "سجّل الآن" : "Enroll Now"}
-                      </a>
+                        <Link
+                          to="/igcse/$courseId"
+                          params={{ courseId: c.id }}
+                          className="btn-outline text-center"
+                        >
+                          {ar ? "التفاصيل" : "Details"}
+                        </Link>
+                        <a
+                          href={waLink(
+                            ar
+                              ? `أرغب في التسجيل في كورس ${c.title} مع ${tName}`
+                              : `I'd like to enroll in ${c.title} with ${tName}`,
+                          )}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn-primary text-center"
+                        >
+                          {ar ? "سجّل الآن" : "Enroll Now"}
+                        </a>
                       </div>
                     </div>
                   </article>

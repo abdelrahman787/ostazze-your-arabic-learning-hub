@@ -10,7 +10,8 @@ export const Route = createFileRoute("/igcse/$courseId")({
     return { courseId: course.id };
   },
   head: ({ loaderData }) => {
-    const c = loaderData && IG_COURSES.find((x) => x.id === loaderData.courseId);
+    const c =
+      loaderData && IG_COURSES.find((x) => x.id === loaderData.courseId);
     if (!c)
       return {
         meta: [

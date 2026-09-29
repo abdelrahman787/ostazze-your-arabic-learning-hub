@@ -51,7 +51,10 @@ export default function IgcseCourseDetail({ courseId }: { courseId: string }) {
   const priceLabel = `${local.toLocaleString(ar ? "ar-EG" : "en-US")} ${ar ? cur.symbol : cur.currency}`;
 
   const classes = [
-    { title: ar ? "جلسة تعريفية" : "Orientation Session", lesson: ar ? "جلسة تعريفية" : "Orientation Session" },
+    {
+      title: ar ? "جلسة تعريفية" : "Orientation Session",
+      lesson: ar ? "جلسة تعريفية" : "Orientation Session",
+    },
     ...topics.map((tp, i) => ({
       title: `${ar ? "الحصة" : "Class"} ${i + 1} (${tp})`,
       lesson: `${ar ? "الحصة" : "Class"} ${i + 1} — ${tp}`,
@@ -77,20 +80,39 @@ export default function IgcseCourseDetail({ courseId }: { courseId: string }) {
 
   const Sep = ar ? ChevronLeft : ChevronRight;
   const facts = [
-    { icon: Layers, k: ar ? "الحصص" : "Classes", v: ar ? `${classes.length} حصص` : `${classes.length} classes` },
+    {
+      icon: Layers,
+      k: ar ? "الحصص" : "Classes",
+      v: ar ? `${classes.length} حصص` : `${classes.length} classes`,
+    },
     { icon: GraduationCap, k: ar ? "المستوى" : "Level", v: "IGCSE" },
-    { icon: Monitor, k: ar ? "نوع الكورس" : "Course Type", v: ar ? "أونلاين" : "Online" },
+    {
+      icon: Monitor,
+      k: ar ? "نوع الكورس" : "Course Type",
+      v: ar ? "أونلاين" : "Online",
+    },
     { icon: Calendar, k: ar ? "يبدأ" : "Starts", v: date(IG_START_DATE) },
-    { icon: Users, k: ar ? "الحد الأقصى" : "Max", v: ar ? "1,000 طالب" : "1,000 students" },
+    {
+      icon: Users,
+      k: ar ? "الحد الأقصى" : "Max",
+      v: ar ? "1,000 طالب" : "1,000 students",
+    },
   ];
 
   return (
     <div className="min-h-screen pt-page pb-16">
       <div className="container mx-auto px-4">
-        <nav aria-label={ar ? "مسار التنقل" : "Breadcrumb"} className="flex items-center gap-1.5 text-sm text-muted-foreground mb-6 flex-wrap">
-          <Link to="/" className="hover:text-primary">{ar ? "الرئيسية" : "Home"}</Link>
+        <nav
+          aria-label={ar ? "مسار التنقل" : "Breadcrumb"}
+          className="flex items-center gap-1.5 text-sm text-muted-foreground mb-6 flex-wrap"
+        >
+          <Link to="/" className="hover:text-primary">
+            {ar ? "الرئيسية" : "Home"}
+          </Link>
           <Sep size={14} />
-          <Link to="/igcse" className="hover:text-primary">{ar ? "الكورسات" : "Courses"}</Link>
+          <Link to="/igcse" className="hover:text-primary">
+            {ar ? "الكورسات" : "Courses"}
+          </Link>
           <Sep size={14} />
           <span className="text-foreground font-bold">{subj(c.subject)}</span>
         </nav>
@@ -98,7 +120,9 @@ export default function IgcseCourseDetail({ courseId }: { courseId: string }) {
         <div className="grid lg:grid-cols-[1fr_22rem] gap-8 items-start">
           <div className="space-y-8 order-2 lg:order-1">
             <section className="card-base p-6">
-              <h2 className="text-xl font-extrabold mb-3">{ar ? "عن هذا الكورس" : "About This Course"}</h2>
+              <h2 className="text-xl font-extrabold mb-3">
+                {ar ? "عن هذا الكورس" : "About This Course"}
+              </h2>
               <p className="text-muted-foreground leading-relaxed">
                 {ar
                   ? `هذا كورس ${subj(c.subject)} (منهج ${c.board}).`
@@ -113,7 +137,9 @@ export default function IgcseCourseDetail({ courseId }: { courseId: string }) {
 
             <section id="course-content" className="card-base p-6">
               <div className="flex items-baseline justify-between gap-3 flex-wrap mb-4">
-                <h2 className="text-xl font-extrabold">{ar ? "محتوى الكورس" : "Course Content"}</h2>
+                <h2 className="text-xl font-extrabold">
+                  {ar ? "محتوى الكورس" : "Course Content"}
+                </h2>
                 <span className="text-sm text-muted-foreground">
                   {ar
                     ? `${classes.length} حصص · ${classes.length} دروس · ${classes.length} معاينات مجانية`
@@ -122,21 +148,32 @@ export default function IgcseCourseDetail({ courseId }: { courseId: string }) {
               </div>
               <ol className="space-y-3">
                 {classes.map((cl, i) => (
-                  <li key={cl.title} className="rounded-xl border border-border">
+                  <li
+                    key={cl.title}
+                    className="rounded-xl border border-border"
+                  >
                     <div className="flex items-center gap-3 p-4 bg-muted/40 rounded-t-xl">
-                      <span className="w-8 h-8 rounded-full bg-primary/10 text-primary font-black flex items-center justify-center shrink-0">{i + 1}</span>
+                      <span className="w-8 h-8 rounded-full bg-primary/10 text-primary font-black flex items-center justify-center shrink-0">
+                        {i + 1}
+                      </span>
                       <div className="flex-1 min-w-0">
                         <h3 className="font-bold">{cl.title}</h3>
                         <p className="text-xs text-muted-foreground">
                           {ar ? "درس واحد" : "1 lesson"} · {date(IG_START_DATE)}
                         </p>
                       </div>
-                      <span className="text-xs font-bold text-primary bg-primary/10 rounded-full px-2.5 py-1">{ar ? "معاينة" : "Preview"}</span>
+                      <span className="text-xs font-bold text-primary bg-primary/10 rounded-full px-2.5 py-1">
+                        {ar ? "معاينة" : "Preview"}
+                      </span>
                     </div>
                     <div className="flex items-center gap-2 p-4 text-sm">
                       <PlayCircle size={16} className="text-primary shrink-0" />
-                      <span className="flex-1">{i + 1}.1 {cl.lesson}</span>
-                      <span className="text-xs text-muted-foreground">{ar ? "معاينة" : "Preview"}</span>
+                      <span className="flex-1">
+                        {i + 1}.1 {cl.lesson}
+                      </span>
+                      <span className="text-xs text-muted-foreground">
+                        {ar ? "معاينة" : "Preview"}
+                      </span>
                     </div>
                   </li>
                 ))}
@@ -144,14 +181,18 @@ export default function IgcseCourseDetail({ courseId }: { courseId: string }) {
             </section>
 
             <section className="card-base p-6">
-              <h2 className="text-xl font-extrabold mb-4">{ar ? "المعلم" : "Your Instructor"}</h2>
+              <h2 className="text-xl font-extrabold mb-4">
+                {ar ? "المعلم" : "Your Instructor"}
+              </h2>
               <div className="flex items-start gap-4">
                 <span className="w-16 h-16 rounded-full bg-muted flex items-center justify-center shrink-0">
                   <User size={28} className="text-muted-foreground" />
                 </span>
                 <div>
                   <h3 className="font-extrabold">{tName}</h3>
-                  <p className="text-sm text-primary font-bold">{t.subjects.map(subj).join("، ")}</p>
+                  <p className="text-sm text-primary font-bold">
+                    {t.subjects.map(subj).join("، ")}
+                  </p>
                   <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
                     {ar
                       ? `معلم متخصص في ${t.subjects.map(subj).join(" و")} لمناهج IGCSE، يقدّم دروساً منظمة وعملية بجودة عالية.`
@@ -170,10 +211,14 @@ export default function IgcseCourseDetail({ courseId }: { courseId: string }) {
               <div>
                 <h1 className="text-2xl font-black leading-tight">{c.title}</h1>
                 <p className="text-sm text-muted-foreground mt-1">
-                  {ar ? "بواسطة" : "By"} <span className="font-bold text-foreground">{tName}</span>
+                  {ar ? "بواسطة" : "By"}{" "}
+                  <span className="font-bold text-foreground">{tName}</span>
                 </p>
               </div>
-              <a href="#course-content" className="text-sm font-bold text-primary hover:underline inline-block">
+              <a
+                href="#course-content"
+                className="text-sm font-bold text-primary hover:underline inline-block"
+              >
                 {ar ? "دروس مجانية" : "Free lessons"}
               </a>
               <ul className="space-y-2 text-sm">
@@ -186,10 +231,20 @@ export default function IgcseCourseDetail({ courseId }: { courseId: string }) {
                 ))}
               </ul>
               <div className="grid grid-cols-2 gap-2">
-                <a href={waLink(enrollMsg)} target="_blank" rel="noopener noreferrer" className="btn-primary text-center">
+                <a
+                  href={waLink(enrollMsg)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary text-center"
+                >
                   {ar ? "سجّل الآن" : "Enroll Now"}
                 </a>
-                <a href={waLink(contactMsg)} target="_blank" rel="noopener noreferrer" className="btn-outline text-center inline-flex items-center justify-center gap-1.5">
+                <a
+                  href={waLink(contactMsg)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-outline text-center inline-flex items-center justify-center gap-1.5"
+                >
                   <MessageCircle size={15} /> {ar ? "تواصل" : "Contact"}
                 </a>
               </div>
@@ -200,12 +255,24 @@ export default function IgcseCourseDetail({ courseId }: { courseId: string }) {
               {country !== "EG" && (
                 <p className="text-center text-xs text-muted-foreground">
                   {ar ? "الدفع بالجنيه المصري: " : "Charged in EGP: "}
-                  {c.priceEGP.toLocaleString(ar ? "ar-EG" : "en-US")} {ar ? "ج.م" : "EGP"}
+                  {c.priceEGP.toLocaleString(ar ? "ar-EG" : "en-US")}{" "}
+                  {ar ? "ج.م" : "EGP"}
                 </p>
               )}
-              <button type="button" onClick={copyLink} className="w-full text-sm font-bold text-muted-foreground hover:text-primary inline-flex items-center justify-center gap-1.5" aria-live="polite">
+              <button
+                type="button"
+                onClick={copyLink}
+                className="w-full text-sm font-bold text-muted-foreground hover:text-primary inline-flex items-center justify-center gap-1.5"
+                aria-live="polite"
+              >
                 {copied ? <Check size={14} /> : <Copy size={14} />}
-                {copied ? (ar ? "تم نسخ الرابط" : "Link copied") : ar ? "نسخ رابط الكورس" : "Copy Course Link"}
+                {copied
+                  ? ar
+                    ? "تم نسخ الرابط"
+                    : "Link copied"
+                  : ar
+                    ? "نسخ رابط الكورس"
+                    : "Copy Course Link"}
               </button>
             </div>
           </aside>
