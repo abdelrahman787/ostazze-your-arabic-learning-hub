@@ -35,13 +35,13 @@ describe("password recovery", () => {
     );
   });
 
-  it("normalizes editor preview surfaces to the current stable preview", () => {
+  it("preserves the exact preview origin that holds the PKCE verifier", () => {
     expect(
       getRecoveryCallbackUrl(
         "https://dc7db421-26c3-4945-8236-93600ec382aa.lovableproject.com",
       ),
     ).toBe(
-      "https://id-preview--dc7db421-26c3-4945-8236-93600ec382aa.lovable.app/auth/callback?next=%2Freset-password",
+      "https://dc7db421-26c3-4945-8236-93600ec382aa.lovableproject.com/auth/callback?next=%2Freset-password",
     );
   });
 

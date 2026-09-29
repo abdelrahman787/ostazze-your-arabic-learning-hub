@@ -23,8 +23,8 @@
 - [ ] Owner runs live MFA tests 1-6 on own screen, then revoke admin1 + force reset — blocked: needs owner's authenticator app
 
 ## Round 5 — password recovery
-- [ ] Audit and repair PKCE forgot-password → callback → reset flow
-- [ ] Configure exact production and preview recovery redirects
-- [ ] Add automated callback and invalid/expired recovery tests
+- [x] Audit and repair PKCE forgot-password → callback → reset flow
+- [ ] Configure exact production and preview recovery redirects — blocked: hosted control exposes current values but not a URL-config write
+- [x] Add automated callback and invalid/expired recovery tests
 - [ ] Run one-email live recovery verification and full pre-publish checks
 - Do NOT publish.
