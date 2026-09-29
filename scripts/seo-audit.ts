@@ -122,7 +122,9 @@ const rows: Row[] = paths.map((path) => {
       r.units = unis.length;
       if (!unis.length) r.status = "thin";
     } else {
-      const u = findUniversityBySlugs(seg[1], seg[2]);
+      // The slug lookup returns a lightweight index entry; resolve the full record for colleges.
+      const idx = findUniversityBySlugs(seg[1], seg[2]);
+      const u = idx && allUniversities.find((x) => x.id === idx.id);
       if (!u) {
         r.status = "not_found";
         return r;
