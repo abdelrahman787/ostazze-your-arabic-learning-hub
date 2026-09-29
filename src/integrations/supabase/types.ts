@@ -120,6 +120,10 @@ export type Database = {
       }
       bookings: {
         Row: {
+          cancel_reason: string | null
+          cancelled_at: string | null
+          cancelled_by: string | null
+          cancelled_by_role: string | null
           created_at: string
           id: string
           lecture_id: string | null
@@ -135,6 +139,10 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          cancel_reason?: string | null
+          cancelled_at?: string | null
+          cancelled_by?: string | null
+          cancelled_by_role?: string | null
           created_at?: string
           id?: string
           lecture_id?: string | null
@@ -150,6 +158,10 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          cancel_reason?: string | null
+          cancelled_at?: string | null
+          cancelled_by?: string | null
+          cancelled_by_role?: string | null
           created_at?: string
           id?: string
           lecture_id?: string | null
@@ -173,6 +185,54 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      cancellation_requests: {
+        Row: {
+          created_at: string
+          hours_before_start: number | null
+          id: string
+          kind: string
+          reason: string
+          refund_eligibility: string | null
+          requester_id: string
+          requester_role: string
+          resolved_at: string | null
+          resolved_by: string | null
+          status: string
+          target_id: string
+          target_type: string
+        }
+        Insert: {
+          created_at?: string
+          hours_before_start?: number | null
+          id?: string
+          kind: string
+          reason: string
+          refund_eligibility?: string | null
+          requester_id: string
+          requester_role: string
+          resolved_at?: string | null
+          resolved_by?: string | null
+          status?: string
+          target_id: string
+          target_type: string
+        }
+        Update: {
+          created_at?: string
+          hours_before_start?: number | null
+          id?: string
+          kind?: string
+          reason?: string
+          refund_eligibility?: string | null
+          requester_id?: string
+          requester_role?: string
+          resolved_at?: string | null
+          resolved_by?: string | null
+          status?: string
+          target_id?: string
+          target_type?: string
+        }
+        Relationships: []
       }
       chat_messages: {
         Row: {
@@ -652,15 +712,60 @@ export type Database = {
         }
         Relationships: []
       }
+      refund_records: {
+        Row: {
+          admin_id: string
+          amount: number
+          created_at: string
+          currency: string
+          id: string
+          internal_note: string | null
+          provider_reference: string
+          refunded_at: string
+          target_id: string
+          target_type: string
+        }
+        Insert: {
+          admin_id: string
+          amount: number
+          created_at?: string
+          currency: string
+          id?: string
+          internal_note?: string | null
+          provider_reference: string
+          refunded_at: string
+          target_id: string
+          target_type: string
+        }
+        Update: {
+          admin_id?: string
+          amount?: number
+          created_at?: string
+          currency?: string
+          id?: string
+          internal_note?: string | null
+          provider_reference?: string
+          refunded_at?: string
+          target_id?: string
+          target_type?: string
+        }
+        Relationships: []
+      }
       session_requests: {
         Row: {
           assigned_by: string | null
+          cancel_reason: string | null
+          cancelled_at: string | null
+          cancelled_by: string | null
+          cancelled_by_role: string | null
           created_at: string
           id: string
           legacy_demo: boolean
           notes: string | null
+          payment_state: string
           preferred_date: string | null
           preferred_time: string | null
+          refund_status: string | null
           reject_reason: string | null
           status: string
           student_id: string
@@ -673,12 +778,18 @@ export type Database = {
         }
         Insert: {
           assigned_by?: string | null
+          cancel_reason?: string | null
+          cancelled_at?: string | null
+          cancelled_by?: string | null
+          cancelled_by_role?: string | null
           created_at?: string
           id?: string
           legacy_demo?: boolean
           notes?: string | null
+          payment_state?: string
           preferred_date?: string | null
           preferred_time?: string | null
+          refund_status?: string | null
           reject_reason?: string | null
           status?: string
           student_id: string
@@ -691,12 +802,18 @@ export type Database = {
         }
         Update: {
           assigned_by?: string | null
+          cancel_reason?: string | null
+          cancelled_at?: string | null
+          cancelled_by?: string | null
+          cancelled_by_role?: string | null
           created_at?: string
           id?: string
           legacy_demo?: boolean
           notes?: string | null
+          payment_state?: string
           preferred_date?: string | null
           preferred_time?: string | null
+          refund_status?: string | null
           reject_reason?: string | null
           status?: string
           student_id?: string
@@ -1028,6 +1145,35 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      admin_cancel_booking: {
+        Args: { _booking_id: string; _reason: string }
+        Returns: string
+      }
+      admin_cancel_session_request: {
+        Args: {
+          _actor: string
+          _reason: string
+          _refund_decision: string
+          _request_id: string
+        }
+        Returns: string
+      }
+      admin_record_refund: {
+        Args: {
+          _amount: number
+          _currency: string
+          _internal_note: string
+          _provider_reference: string
+          _refunded_at: string
+          _target_id: string
+          _target_type: string
+        }
+        Returns: string
+      }
+      admin_set_refund_decision: {
+        Args: { _decision: string; _reason: string; _request_id: string }
+        Returns: string
+      }
       get_admin_students: {
         Args: never
         Returns: {
@@ -1142,9 +1288,34 @@ export type Database = {
         Returns: boolean
       }
       is_owner: { Args: { _user_id: string }; Returns: boolean }
+      log_audit: {
+        Args: { _action: string; _details: Json; _target: string }
+        Returns: undefined
+      }
+      notify_admins: {
+        Args: { _body: string; _title: string; _type: string }
+        Returns: undefined
+      }
+      request_session_change: {
+        Args: { _kind: string; _reason: string; _request_id: string }
+        Returns: Json
+      }
+      session_start_at: {
+        Args: { _date: string; _student: string; _time: string }
+        Returns: string
+      }
+      student_cancel_booking: { Args: { _booking_id: string }; Returns: string }
+      student_cancel_session_request: {
+        Args: { _request_id: string }
+        Returns: string
+      }
       teacher_has_student_relationship: {
         Args: { _student_id: string; _teacher_id: string }
         Returns: boolean
+      }
+      tutor_decline_assignment: {
+        Args: { _reason: string; _request_id: string }
+        Returns: string
       }
       user_can_access_chat_audio: { Args: { _name: string }; Returns: boolean }
       user_can_access_lecture_file: {
