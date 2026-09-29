@@ -71,6 +71,13 @@
       "when": 1790657910296,
       "tag": "0009_admin_recovery_codes",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1790683284946,
+      "tag": "0010_owner_protection_and_admin_audit",
+      "breakpoints": true
     }
   ]
 }
