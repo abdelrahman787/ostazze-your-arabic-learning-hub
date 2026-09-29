@@ -3,7 +3,7 @@ export const RECOVERY_NEXT_PATH = "/reset-password";
 const RECOVERY_MARKER_KEY = "ostaze_password_recovery";
 const RECOVERY_MARKER_TTL_MS = 10 * 60 * 1000;
 const PRODUCTION_HOSTS = new Set(["ostaze.com", "www.ostaze.com"]);
-const PUBLISHED_HOST = "ostazze-learn-hub.lovable.app";
+const PRODUCTION_ORIGIN = "https://ostaze.com";
 
 type StorageLike = Pick<Storage, "getItem" | "setItem" | "removeItem">;
 
@@ -25,16 +25,26 @@ type RecoveryAuth = {
 export type RecoveryCallbackResult =
   { ok: true; next: typeof RECOVERY_NEXT_PATH } | { ok: false };
 
-export function getRecoveryCallbackUrl(origin: string): string {
+/**
+ * Single source of truth for every auth callback (sign-up confirmation,
+ * password recovery, Google sign-in). ostaze.com / www.ostaze.com and any
+ * non-HTTPS origin always resolve to https://ostaze.com/auth/callback. Other
+ * HTTPS origins (the Lovable-managed preview and published hosts) keep their
+ * exact current origin so the PKCE verifier stays on the same origin.
+ */
+export function getAuthCallbackUrl(origin: string, next?: string): string {
   const current = new URL(origin);
   const callbackOrigin =
-    PRODUCTION_HOSTS.has(current.hostname) ||
-    current.hostname === PUBLISHED_HOST
-      ? "https://ostaze.com"
+    PRODUCTION_HOSTS.has(current.hostname) || current.protocol !== "https:"
+      ? PRODUCTION_ORIGIN
       : current.origin;
   const callback = new URL("/auth/callback", callbackOrigin);
-  callback.searchParams.set("next", RECOVERY_NEXT_PATH);
+  if (next) callback.searchParams.set("next", next);
   return callback.toString();
+}
+
+export function getRecoveryCallbackUrl(origin: string): string {
+  return getAuthCallbackUrl(origin, RECOVERY_NEXT_PATH);
 }
 
 export function getSafeRecoveryNext(

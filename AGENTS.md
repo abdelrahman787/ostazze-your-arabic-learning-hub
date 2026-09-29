@@ -8,3 +8,4 @@
 - Admin access requires AAL2 in has_role, admin functions, and AdminMfaGate.
 - Admin recovery codes are SHA-256-only, service-only, one-use; redemption removes the lost authenticator for re-enrollment.
 - Password recovery explicitly exchanges PKCE at /auth/callback and requires a short-lived tab marker; reset success ends all sessions.
+- All auth return links come from getAuthCallbackUrl in src/lib/passwordRecovery.ts (ostaze.com/www/non-HTTPS -> https://ostaze.com/auth/callback); why: one allowlisted callback, no www/http/localhost redirects.

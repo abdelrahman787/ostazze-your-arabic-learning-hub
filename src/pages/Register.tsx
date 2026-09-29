@@ -1,3 +1,4 @@
+import { getAuthCallbackUrl } from "@/lib/passwordRecovery";
 import { useState, useMemo } from "react";
 import { Link } from "@/lib/router-compat";
 import { useAuth } from "@/contexts/AuthContext";
@@ -135,7 +136,7 @@ const Register = () => {
     setError("");
     try {
       const { error } = await lovable.auth.signInWithOAuth("google", {
-        redirect_uri: window.location.origin,
+        redirect_uri: getAuthCallbackUrl(window.location.origin),
       });
       if (error) setError(error.message || t("login_error"));
     } catch (caught) {

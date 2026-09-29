@@ -1,3 +1,4 @@
+import { getAuthCallbackUrl } from "@/lib/passwordRecovery";
 import {
   createContext,
   useContext,
@@ -164,7 +165,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       password,
       options: {
         data: { full_name: fullName, account_type: accountType, timezone },
-        emailRedirectTo: window.location.origin,
+        emailRedirectTo: getAuthCallbackUrl(window.location.origin),
       },
     });
     if (error) return { error: error.message };
