@@ -22,10 +22,13 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import PageHelmet from "@/components/PageHelmet";
 import PageHeader from "@/components/PageHeader";
 import { Skeleton } from "@/components/ui/skeleton";
+import SessionRequestActions from "@/components/SessionRequestActions";
 
 type RequestStatus =
   | "pending"
   | "pending_payment"
+  | "paid_awaiting_assignment"
+  | "assigned"
   | "confirmed"
   | "rejected"
   | "cancelled"
@@ -41,6 +44,8 @@ interface SessionRequest {
   notes: string | null;
   reject_reason: string | null;
   zoom_url: string | null;
+  payment_state?: string | null;
+  refund_status?: string | null;
   created_at: string;
   teacher_name?: string | null;
   teacher_avatar?: string | null;
@@ -143,6 +148,7 @@ const MyBookings = () => {
   const [requests, setRequests] = useState<SessionRequest[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<"all" | "active" | "past">("all");
+  const [reloadKey, setReloadKey] = useState(0);
 
   useEffect(() => {
     const load = async () => {
@@ -151,7 +157,7 @@ const MyBookings = () => {
       const { data, error } = await supabase
         .from("session_requests")
         .select(
-          "id, teacher_id, subject, preferred_date, preferred_time, status, notes, reject_reason, zoom_url, created_at",
+          "id, teacher_id, subject, preferred_date, preferred_time, status, notes, reject_reason, zoom_url, payment_state, refund_status, created_at",
         )
         .eq("student_id", user.id)
         .order("created_at", { ascending: false });
@@ -202,11 +208,11 @@ const MyBookings = () => {
       setLoading(false);
     };
     if (!authLoading) load();
-  }, [user, authLoading, lang]);
+  }, [user, authLoading, lang, reloadKey]);
 
   const filtered = requests.filter((r) => {
     if (filter === "active")
-      return ["pending", "pending_payment", "confirmed"].includes(r.status);
+      return ["pending", "pending_payment", "paid_awaiting_assignment", "assigned", "confirmed"].includes(r.status);
     if (filter === "past")
       return ["rejected", "cancelled", "completed"].includes(r.status);
     return true;
@@ -215,7 +221,7 @@ const MyBookings = () => {
   const counts = {
     all: requests.length,
     active: requests.filter((r) =>
-      ["pending", "pending_payment", "confirmed"].includes(r.status),
+      ["pending", "pending_payment", "paid_awaiting_assignment", "assigned", "confirmed"].includes(r.status),
     ).length,
     past: requests.filter((r) =>
       ["rejected", "cancelled", "completed"].includes(r.status),
@@ -460,6 +466,15 @@ const MyBookings = () => {
                       </p>
                       <p className="text-foreground/80">{req.reject_reason}</p>
                     </div>
+                  )}
+
+                  {user && (
+                    <SessionRequestActions
+                      req={req}
+                      role="student"
+                      lang={lang}
+                      onChanged={() => setReloadKey((k) => k + 1)}
+                    />
                   )}
 
                   {/* Action button */}
