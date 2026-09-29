@@ -254,7 +254,7 @@ const TeacherDashboard = () => {
 
   return (
     <div
-      className="flex min-h-screen"
+      className="flex min-h-screen overflow-x-clip"
       style={{ paddingTop: "var(--navbar-h, 0px)" }}
     >
       <aside
