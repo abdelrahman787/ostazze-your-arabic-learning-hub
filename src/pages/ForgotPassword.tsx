@@ -71,8 +71,9 @@ const ForgotPassword = () => {
           <form onSubmit={handleSubmit} className="space-y-4 text-start">
             {requestFailed && (
               <p role="alert" className="text-sm text-destructive text-center">
-                {t("forgot_error") ||
-                  "We couldn't send a reset link right now. Please try again later."}
+                {
+                  "We couldn't send a reset link right now. Please try again later."
+                }
               </p>
             )}
             <div>
