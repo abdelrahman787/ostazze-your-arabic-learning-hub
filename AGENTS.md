@@ -1,9 +1,10 @@
-- All country/university/college URLs are built only via src/lib/slugs.ts and subject URLs via src/lib/subjectSlugs.ts (split so university pages skip the subject index); the sitemap reads them via scripts/export-route-slugs.ts — one source of truth so links and sitemap never drift.
-- Business identity (name, phone, WhatsApp, location, socials, logo) lives only in src/config/site.ts; JSON-LD, footer, contact and WhatsApp links read from it so they never disagree.
-- University data is split per country (src/data/universities/{kw,qa,sa,ae}.ts), loaded only through loader.ts; UI reads the generated universityIndex/subjectIndex (scripts/build-catalog-index.ts, checked by a test); all.ts is for scripts/tests only — so no page downloads the whole catalog.
-- Footer stays eager (visible content) and there is no global TooltipProvider; initial JS target is <=180 KB gzip.
-- App runs on TanStack Start (SSR): pages are file routes in src/routes/, providers + head tags + client init live in src/routes/__root.tsx, shared frame in src/components/AppShell.tsx; page code imports routing via src/lib/router-compat — so crawlers get real HTML and real 404s.
-- tsconfig keeps `strict: true` but the extra template flags (exactOptionalPropertyTypes, noUncheckedIndexedAccess, noPropertyAccessFromIndexSignature, noImplicitOverride/Returns) are off — the existing codebase was written without them.
-- Public tutor availability/reviews are read only via get_public_teacher_availability / get_public_teacher_reviews RPCs; tutor applicant files upload only through the tutor-upload-url function (CVs: tutor-cvs, PDF ≤5MB, random names; photos: private tutor-photos; paths starting photo/ resolve via src/lib/tutorFiles.ts); avatars live at course-covers/teacher-avatars/<uid>/ — so tables and buckets stay closed to direct public access. Access tests: supabase/tests/security_matrix.sql.
-- Admin access requires a two-step verified (aal2) session: enforced in public.has_role (for the caller), in admin-only edge functions via supabase/functions/_shared/mfa.ts, and in the UI via AdminMfaGate — so a leaked admin password alone cannot reach admin data.
-- Admin MFA recovery codes are stored only as SHA-256 hashes in admin_recovery_codes (service-role only) and redeemed via src/lib/adminRecovery.functions.ts, which deletes the lost authenticator so the admin re-enrolls — codes are never logged or stored in plain text.
+- Build country/university/college URLs only with slugs.ts, subjects with subjectSlugs.ts; sitemap uses export-route-slugs.ts.
+- Business identity lives only in site.ts and feeds JSON-LD, footer, contact and WhatsApp.
+- University data stays country-split; UI uses loader.ts generated indexes; all.ts is scripts/tests only.
+- Keep the footer eager, no global TooltipProvider, and initial JS <=180 KB gzip.
+- TanStack Start SSR: file routes, root providers/head/init, AppShell frame, router-compat imports; preserve real HTML/404s.
+- Keep TypeScript strict; legacy-incompatible extra flags remain off.
+- Public tutor availability/reviews use public RPCs; applications use validated private uploads; security_matrix.sql verifies access.
+- Admin access requires AAL2 in has_role, admin functions, and AdminMfaGate.
+- Admin recovery codes are SHA-256-only, service-only, one-use; redemption removes the lost authenticator for re-enrollment.
+- Password recovery explicitly exchanges PKCE at /auth/callback and requires a short-lived tab marker; reset success ends all sessions.

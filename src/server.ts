@@ -64,6 +64,7 @@ const PRIVATE_PREFIXES = [
   "/register",
   "/forgot-password",
   "/reset-password",
+  "/auth/callback",
   "/teacher/onboarding",
   "/my-bookings",
   "/lectures",

@@ -3,22 +3,32 @@ import { Link } from "@/lib/router-compat";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { KeyRound, Mail } from "lucide-react";
 import { motion } from "framer-motion";
-import { supabase } from "@/integrations/supabase/client";
 import NoIndex from "@/components/NoIndex";
+import { getRecoveryAuthClient } from "@/lib/recoveryAuth";
+import { getRecoveryCallbackUrl } from "@/lib/passwordRecovery";
 
 const ForgotPassword = () => {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [sent, setSent] = useState(false);
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
+  const [requestFailed, setRequestFailed] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/reset-password`,
-    });
-    setSent(true);
+    setRequestFailed(false);
+    try {
+      const { error } =
+        await getRecoveryAuthClient().auth.resetPasswordForEmail(email, {
+          redirectTo: getRecoveryCallbackUrl(window.location.origin),
+        });
+      if (error) setRequestFailed(true);
+      else setSent(true);
+    } catch {
+      setRequestFailed(true);
+    }
     setLoading(false);
   };
 
@@ -59,6 +69,13 @@ const ForgotPassword = () => {
           </motion.div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4 text-start">
+            {requestFailed && (
+              <p role="alert" className="text-sm text-destructive text-center">
+                {lang === "ar"
+                  ? "تعذر إرسال رابط إعادة التعيين الآن. حاول مرة أخرى لاحقًا."
+                  : "We couldn't send a reset link right now. Please try again later."}
+              </p>
+            )}
             <div>
               <label className="block text-sm font-bold mb-1.5">
                 {t("login_email")}
@@ -83,6 +100,7 @@ const ForgotPassword = () => {
               whileTap={{ scale: 0.99 }}
               type="submit"
               disabled={loading}
+              aria-disabled={loading}
               className="btn-primary w-full flex items-center justify-center gap-2"
             >
               {loading && (
