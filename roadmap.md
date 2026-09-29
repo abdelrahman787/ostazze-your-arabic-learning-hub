@@ -8,3 +8,11 @@
 - [x] 6. Truth check of Pricing/Contact/tutor/course descriptions
 - [x] 7. Security: DB function warnings explained
 - Do NOT publish — user reviews first.
+
+# Round 3
+- [x] Tutor dashboard lecture cards contrast (light/dark)
+- [x] Setup banner below navbar, no layout shift, RTL/LTR, all widths
+- [x] Legacy test accounts: sessions revoked, passwords invalidated; admin MFA required
+- [x] Test-count discrepancy explained (placeholder test removed)
+- [x] Rechecks
+- [ ] Delete teacher1@ostazze.com — blocked: publicly listed tutor with lectures/bookings; needs owner confirmation
