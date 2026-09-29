@@ -185,8 +185,7 @@ const DepartmentBlock = ({ dept, lang, index, onRequest }: DeptProps) => {
                   return (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                       {dept.courses.map((course) => {
-                        const courseName =
-                          lang === "ar" ? course.name_ar : course.name_en;
+                        const courseName = courseDisplayName(course, lang);
                         const parentSubject = resolveCourseSubject(
                           course.code,
                           {
@@ -258,10 +257,10 @@ const DepartmentBlock = ({ dept, lang, index, onRequest }: DeptProps) => {
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                               {courses.map((course) => {
-                                const courseName =
-                                  lang === "ar"
-                                    ? course.name_ar
-                                    : course.name_en;
+                                const courseName = courseDisplayName(
+                                  course,
+                                  lang,
+                                );
                                 const parentSubject = resolveCourseSubject(
                                   course.code,
                                   {

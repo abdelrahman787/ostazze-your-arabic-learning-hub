@@ -9,6 +9,8 @@ export interface Course {
   term?: string;
   type?: "Required" | "Elective" | string;
   program_ids?: string[];
+  /** Data-quality flag: "missing" = verified code, no official name; "ar_only" = Arabic official name only. */
+  name_status?: "missing" | "ar_only";
 }
 
 export interface Program {

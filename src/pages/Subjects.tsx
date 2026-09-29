@@ -125,6 +125,7 @@ const Subjects = ({
               code: course.code,
               name_en: course.name_en,
               name_ar: course.name_ar,
+              name_status: course.name_status,
               credits: course.credits,
             });
           });
@@ -439,13 +440,20 @@ const Subjects = ({
                 transition={{ delay: Math.min(i * 0.02, 0.4) }}
               >
                 <div className="card-base p-5 h-full flex flex-col feature-card">
-                  <h2 className="font-bold text-sm leading-snug text-start flex-1">
-                    {lang === "ar" ? c.name_ar || c.name_en : c.name_en}
-                  </h2>
+                  {hasVerifiedName(c) ? (
+                    <h2 className="font-bold text-sm leading-snug text-start flex-1">
+                      {courseDisplayName(c, lang)}
+                    </h2>
+                  ) : (
+                    <p className="font-bold text-sm leading-snug text-start flex-1 text-muted-foreground">
+                      {courseDisplayName(c, lang)}
+                    </p>
+                  )}
                   <a
                     href={(() => {
-                      const courseName =
-                        lang === "ar" ? c.name_ar || c.name_en : c.name_en;
+                      const courseName = hasVerifiedName(c)
+                        ? courseDisplayName(c, lang)
+                        : c.code;
                       const text =
                         lang === "ar"
                           ? `مرحباً، أرغب في طلب مادة: ${courseName}`
