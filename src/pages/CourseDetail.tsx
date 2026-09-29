@@ -465,8 +465,9 @@ const CourseDetail = ({
               ) : (
                 <button
                   onClick={handleEnroll}
-                  disabled={enrolling}
-                  className="btn-primary w-full disabled:opacity-60"
+                  disabled={enrolling || course.price > 0}
+                  aria-disabled={enrolling || course.price > 0}
+                  className="btn-primary w-full disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   {enrolling
                     ? "..."
@@ -475,8 +476,8 @@ const CourseDetail = ({
                         ? "اشترك مجاناً"
                         : "Enroll for free"
                       : lang === "ar"
-                        ? "اشترك في الكورس"
-                        : "Enroll Now"}
+                        ? "التسجيل المدفوع غير متاح حالياً"
+                        : "Paid enrollment not available yet"}
                 </button>
               )}
 
