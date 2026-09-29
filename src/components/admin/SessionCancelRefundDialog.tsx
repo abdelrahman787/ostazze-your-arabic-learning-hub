@@ -79,8 +79,7 @@ const SessionCancelRefundDialog = ({ mode, request, onClose, onDone }: Props) =>
         reference.trim().length >= 3 &&
         !!refundedAt &&
         confirmed
-      : reason.trim().length >= 3 && (!paid || mode === "cancel" ? true : !!decision) &&
-        (mode !== "cancel" || !paid || !!decision);
+      : reason.trim().length >= 3 && (!paid || !!decision);
 
   const title =
     mode === "cancel"
