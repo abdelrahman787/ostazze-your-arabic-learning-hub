@@ -1,46 +1,5679 @@
 {
-  "base": "http://127.0.0.1:3999",
+  "base": "http://localhost:3000",
   "totals": {
     "home": {
       "total": 1,
-      "pass": 1,
-      "fail": 0
+      "pass": 0,
+      "fail": 1
     },
     "list": {
       "total": 4,
-      "pass": 4,
-      "fail": 0
+      "pass": 0,
+      "fail": 4
     },
     "static": {
-      "total": 10,
-      "pass": 10,
-      "fail": 0
+      "total": 11,
+      "pass": 0,
+      "fail": 11
     },
     "country": {
       "total": 4,
-      "pass": 4,
-      "fail": 0
+      "pass": 0,
+      "fail": 4
     },
     "university": {
-      "total": 22,
-      "pass": 22,
-      "fail": 0
+      "total": 29,
+      "pass": 0,
+      "fail": 29
     },
     "college": {
-      "total": 101,
-      "pass": 101,
-      "fail": 0
+      "total": 144,
+      "pass": 0,
+      "fail": 144
     },
     "subject": {
-      "total": 265,
-      "pass": 265,
-      "fail": 0
+      "total": 314,
+      "pass": 0,
+      "fail": 314
     },
     "tutor": {
       "total": 5,
-      "pass": 5,
-      "fail": 0
+      "pass": 0,
+      "fail": 5
     }
   },
-  "failures": []
+  "failures": [
+    {
+      "loc": "https://ostaze.com/",
+      "type": "home",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/teachers",
+      "type": "list",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects",
+      "type": "list",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities",
+      "type": "list",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/categories",
+      "type": "static",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/languages",
+      "type": "static",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/courses",
+      "type": "list",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/pricing",
+      "type": "static",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/igcse",
+      "type": "static",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/apply-tutor",
+      "type": "static",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/about",
+      "type": "static",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/contact",
+      "type": "static",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/faq",
+      "type": "static",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/terms",
+      "type": "static",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/privacy",
+      "type": "static",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/refund",
+      "type": "static",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/kuwait",
+      "type": "country",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/kuwait/ku",
+      "type": "university",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/kuwait/ku/colleges/kw-ku-arts",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/kuwait/ku/colleges/kw-ku-sci",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/kuwait/ku/colleges/kw-ku-eng",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/kuwait/ku/colleges/kw-ku-med",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/kuwait/ku/colleges/kw-ku-law",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/kuwait/ku/colleges/kw-ku-bus",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/kuwait/ku/colleges/kw-ku-edu",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/kuwait/ku/colleges/kw-ku-pharm",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/kuwait/ku/colleges/kw-ku-allied",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/kuwait/ku/colleges/kw-ku-sharia",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/kuwait/ku/colleges/kw-ku-nurs",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/kuwait/ku/colleges/kw-ku-fine",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/kuwait/auk",
+      "type": "university",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/kuwait/auk/colleges/kw-auk-college-of-business-economics",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/kuwait/auk/colleges/kw-auk-college-of-engineering-applied-sciences",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/kuwait/auk/colleges/kw-auk-college-of-arts-sciences",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/kuwait/au",
+      "type": "university",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/kuwait/au/colleges/kw-au-college-of-engineering",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/kuwait/au/colleges/kw-au-college-of-business",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/kuwait/au/colleges/kw-au-school-of-aviation",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/kuwait/aou",
+      "type": "university",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/kuwait/aou/colleges/kw-aou-faculty-of-business-studies",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/kuwait/aou/colleges/kw-aou-faculty-of-computer-studies",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/kuwait/aum",
+      "type": "university",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/kuwait/aum/colleges/kw-aum-college-of-engineering-and-tec",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/kuwait/aum/colleges/kw-aum-college-of-business-administra",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/kuwait/gust",
+      "type": "university",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/kuwait/gust/colleges/kw-gust-college-of-arts-sciences",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/kuwait/gust/colleges/kw-gust-college-of-engineering-architecture",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar",
+      "type": "country",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/kuwait/gust/colleges/kw-gust-college-of-business-administration",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/qu",
+      "type": "university",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/qu/colleges/qa-qu-eng",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/qu/colleges/qa-qu-med",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/qu/colleges/qa-qu-law",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/qu/colleges/qa-qu-pharm",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/qu/colleges/qa-qu-sharia",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/qu/colleges/qa-qu-arts",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/qu/colleges/qa-qu-bus",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/qu/colleges/qa-qu-edu",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/qu/colleges/qa-qu-hlth",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/qu/colleges/qa-qu-dent",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/qu/colleges/qa-qu-nurs",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/qu/colleges/qa-qu-sport",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/udst",
+      "type": "university",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/udst/colleges/qa-udst-computing-informat",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/udst/colleges/qa-udst-health-sciences",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/udst/colleges/qa-udst-engineering-techno",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/udst/colleges/qa-udst-business",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/udst/colleges/qa-udst-general-education",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/hbku",
+      "type": "university",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/hbku/colleges/qa-hbku-college-of-science",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/hbku/colleges/qa-hbku-islm",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/hbku/colleges/qa-hbku-hss",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/lu",
+      "type": "university",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/lu/colleges/qa-lu-college-of-commerce-business",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/lu/colleges/qa-lu-college-of-information-technology",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/lu/colleges/qa-lu-college-of-law",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/lu/colleges/qa-lu-college-of-education-arts",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/ccq",
+      "type": "university",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/ccq/colleges/qa-ccq-science-and-technology-division",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/ccq/colleges/qa-ccq-management-sciences-division",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/cmuq",
+      "type": "university",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/cmuq/colleges/qa-cmuq-tepper-school-of-business",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/cmuq/colleges/qa-cmuq-school-of-computer-science",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/cmuq/colleges/qa-cmuq-mellon-college-of-science",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/cmuq/colleges/qa-cmuq-dietrich-college-of-humanities-social-sc",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/guq",
+      "type": "university",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/guq/colleges/qa-guq-sfs",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/nuq",
+      "type": "university",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/nuq/colleges/qa-nuq-school-of-communicat",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/nuq/colleges/qa-nuq-medill-school-of-jou",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/vcuq",
+      "type": "university",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/vcuq/colleges/qa-vcuq-art",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/wcmq",
+      "type": "university",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/wcmq/colleges/qa-wcmq-med",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/tamuq",
+      "type": "university",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/qatar/tamuq/colleges/qa-tamuq-college-of-engineering",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/saudi-arabia",
+      "type": "country",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/saudi-arabia/ksu",
+      "type": "university",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/saudi-arabia/ksu/colleges/sa-ksu-college-of-engineering",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/saudi-arabia/ksu/colleges/sa-ksu-college-of-computer-and-information-scie",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/saudi-arabia/ksu/colleges/sa-ksu-college-of-science",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/saudi-arabia/ksu/colleges/sa-ksu-college-of-business-administration",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/saudi-arabia/ksu/colleges/sa-ksu-college-of-law-and-political-science",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/saudi-arabia/ksu/colleges/sa-ksu-college-of-tourism-and-archaeology",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/saudi-arabia/ksu/colleges/sa-ksu-college-of-nursing",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/saudi-arabia/ksu/colleges/sa-ksu-college-of-applied-medical-sciences",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/saudi-arabia/ksu/colleges/sa-ksu-college-of-architecture-and-planning",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/saudi-arabia/ksu/colleges/sa-ksu-college-of-food-and-agricultural-science",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/saudi-arabia/ksu/colleges/sa-ksu-college-of-sport-sciences-and-physical-a",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/saudi-arabia/ksu/colleges/sa-ksu-college-of-pharmacy",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/saudi-arabia/ksu/colleges/sa-ksu-college-of-dentistry",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/saudi-arabia/ksu/colleges/sa-ksu-college-of-medicine",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/saudi-arabia/ksu/colleges/sa-ksu-college-of-education",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/saudi-arabia/ksu/colleges/sa-ksu-college-of-languages-and-sciences",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/saudi-arabia/ksu/colleges/sa-ksu-college-of-humanities-and-social-science",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae",
+      "type": "country",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/ku",
+      "type": "university",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/ku/colleges/ae-ku-college-of-engineering-and-physical-scie",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/ku/colleges/ae-ku-college-of-computing-and-mathematical-sc",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/ku/colleges/ae-ku-college-of-medicine-and-health-sciences",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/uaeu",
+      "type": "university",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/uaeu/colleges/ae-uaeu-college-of-science",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/uaeu/colleges/ae-uaeu-college-of-humanities-and-social-science",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/uaeu/colleges/ae-uaeu-college-of-law",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/uaeu/colleges/ae-uaeu-college-of-education",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/uaeu/colleges/ae-uaeu-college-of-engineering",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/uaeu/colleges/ae-uaeu-college-of-computing-and-artificial-inte",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/uaeu/colleges/ae-uaeu-college-of-business-and-economics",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/uaeu/colleges/ae-uaeu-college-of-agriculture-and-veterinary-me",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/uaeu/colleges/ae-uaeu-college-of-medicine-and-health-sciences",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/zu",
+      "type": "university",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/zu/colleges/ae-zu-college-of-business",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/zu/colleges/ae-zu-college-of-communication-and-media-scien",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/zu/colleges/ae-zu-college-of-humanities-and-social-science",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/zu/colleges/ae-zu-college-of-natural-and-health-sciences",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/zu/colleges/ae-zu-college-of-technological-innovation",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/zu/colleges/ae-zu-college-of-arts-and-creative-enterprises",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/zu/colleges/ae-zu-college-of-interdisciplinary-studies",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/zu/colleges/ae-zu-university-wide",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/uos",
+      "type": "university",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/uos/colleges/ae-uos-college-of-sharia-and-islamic-studies",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/uos/colleges/ae-uos-college-of-law",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/uos/colleges/ae-uos-college-of-arts-humanities-and-social-sc",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/uos/colleges/ae-uos-college-of-business-administration",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/uos/colleges/ae-uos-college-of-engineering",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/uos/colleges/ae-uos-college-of-computing-and-informatics",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/uos/colleges/ae-uos-college-of-sciences",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/uos/colleges/ae-uos-college-of-health-sciences",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/uos/colleges/ae-uos-college-of-communication",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/uos/colleges/ae-uos-college-of-public-policy",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/uos/colleges/ae-uos-college-of-dental-medicine",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/uos/colleges/ae-uos-college-of-pharmacy",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/aus",
+      "type": "university",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/aus/colleges/ae-aus-college-of-architecture-art-and-design",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/aus/colleges/ae-aus-college-of-arts-and-sciences",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/aus/colleges/ae-aus-school-of-business-administration",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/aus/colleges/ae-aus-college-of-engineering",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/adu",
+      "type": "university",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/adu/colleges/ae-adu-college-of-arts-education-and-social-sci",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/adu/colleges/ae-adu-college-of-law",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/adu/colleges/ae-adu-college-of-business",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/adu/colleges/ae-adu-college-of-engineering",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/adu/colleges/ae-adu-college-of-health-sciences",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/au",
+      "type": "university",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/au/colleges/ae-au-college-of-law",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/au/colleges/ae-au-college-of-architecture-art-and-design",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/au/colleges/ae-au-college-of-business-administration",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/au/colleges/ae-au-college-of-dentistry",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/au/colleges/ae-au-college-of-engineering-and-information-t",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/au/colleges/ae-au-college-of-humanities-and-sciences",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/au/colleges/ae-au-college-of-mass-communication",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/au/colleges/ae-au-college-of-pharmacy-and-health-sciences",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/aud",
+      "type": "university",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/aud/colleges/ae-aud-school-of-architecture-art-and-design",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/aud/colleges/ae-aud-school-of-arts-and-sciences",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/aud/colleges/ae-aud-school-of-business",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/aud/colleges/ae-aud-mohammed-bin-rashid-school-for-communica",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/aud/colleges/ae-aud-school-of-engineering",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/ud",
+      "type": "university",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/ud/colleges/ae-ud-dubai-business-school",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/ud/colleges/ae-ud-college-of-engineering-and-information-t",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/aau",
+      "type": "university",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/aau/colleges/ae-aau-college-of-business",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/aau/colleges/ae-aau-college-of-communication-and-media",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/aau/colleges/ae-aau-college-of-education-humanities-and-soci",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/aau/colleges/ae-aau-college-of-engineering",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/aau/colleges/ae-aau-college-of-law",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/aau/colleges/ae-aau-college-of-pharmacy",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/hct",
+      "type": "university",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/hct/colleges/ae-hct-faculty-of-health-sciences",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/hct/colleges/ae-hct-faculty-of-business",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/hct/colleges/ae-hct-faculty-of-engineering-technology-and-sc",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/universities/uae/hct/colleges/ae-hct-faculty-of-applied-media",
+      "type": "college",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-arabic-language-and-literature",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-english-language-and-literature",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-history",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-philosophy",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-geography",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-sociology-and-social-work",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-psychology",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-library-and-information-science",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-mass-communication",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-mathematics",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-physics",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-chemistry",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-biological-sciences",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-statistics-and-operations-research",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-computer-science",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-cybersecurity",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-electrical-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-mechanical-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-chemical-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-computer-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-civil-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-petroleum-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-industrial-and-management-systems-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/basic-medical-sciences",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/clinical-sciences",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-public-law",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-private-law",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-accounting",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-finance-and-economics-2",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-management-and-marketing-2",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-quantitative-methods-and-information-systems",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-curriculum-and-instruction",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-pharmaceutics",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-medical-laboratory-sciences",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-islamic-jurisprudence",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-basic-nursing",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-graphic-design",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/accounting-and-finance",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/economics",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/management",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/marketing",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/computer-science-and-information-systems",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/art-and-graphic-design",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/communication-and-media",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/english",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/international-relations",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/social-and-behavioral-sciences",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/civil-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/electrical-and-electronics-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/mechanical-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/petroleum-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/marketing-and-events-management",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/banking-finance-and-accounting",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/management-information-systems",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/aircraft-maintenance-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/aviation-and-airport-operations",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/business-studies",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/computing",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/chemical-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/architectural-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/information-systems-and-technology",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/accounting",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/finance-business-administration",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/management-information-systems-business-administration",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/marketing-business-administration",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/human-resources-management-business-administration",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/computer-science",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/mass-communication-and-media",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/electrical-and-computer-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/engineering-management",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/accounting-and-mis",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/economics-and-finance",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/business-administration",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-architecture-and-urban-planning",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-civil-and-environmental-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-computer-science-and-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-mechanical-and-industrial-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/doctor-of-medicine-md-program",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/law",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/bachelor-of-science-in-pharmacy-program",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/islamic-studies",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-arabic-language",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-biological-and-environmental-sciences",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-chemistry-and-earth-sciences",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-mathematics-statistics-and-physics",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-english-literature-and-linguistics",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-geography-and-gis",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-social-sciences",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-international-affairs",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/shared-across-all-majors",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-accounting-and-information-systems",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-finance-and-economics",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-management-and-marketing",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/physical-education",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-biomedical-sciences",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-public-health",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-nutrition-sciences",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/doctor-of-dental-medicine-ddm-program",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/nursing",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/sport-science",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/information-technology",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/data-science-and-artificial-intelligence",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/cybersecurity",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/software-systems",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/digital-communications-and-media-production",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/paramedicine",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/dental-hygiene",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/respiratory-therapy",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/medical-radiography",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/pharmacy-technology",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/environmental-health",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/occupational-health-safety-and-environment",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/midwifery",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/construction-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/marine-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/electrical-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/aeronautical-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/human-resource-management",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/logistics-and-supply-chain-management",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/healthcare-management",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/aviation-management",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/applied-education",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/computer-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/education",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/engineering-technology",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/public-administration",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/project-management",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/human-resources-management",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/mathematics",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/mathematics-and-statistics",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/mathematics-physics-and-computer-science",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/chemistry",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/arab-studies",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/asian-studies",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/business-and-global-affairs",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/culture-and-politics",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/german-and-european-studies",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/global-business",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/global-human-development",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/international-affairs",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/international-economics",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/international-politics",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/intl-political-economy",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/jewish-civilization",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/latin-american-studies-program",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/m-s-in-foreign-service-prog",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/ma-int-l-business-and-policy",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/regional-and-comparative-studies",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/russian-and-east-europn-studies",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/science-technology-and-intl-af",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/security-studies",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/journalism",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/graphic-design",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/art-foundation",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/art-history",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/interior-design",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/kinetic-imaging",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/painting-and-printmaking",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/industrial-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/clinical-medicine",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/physics",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/statistics-and-operations-research",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/subject-72",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/petroleum-and-natural-gas-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/information-systems",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/subject-80",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/physics-and-astronomy",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/subject-43",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/botany-and-microbiology",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/zoology",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/geology-and-geophysics",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/subject-49",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/finance",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/subject-42",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/subject-41",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/political-science",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/subject-10",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/subject-7",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/archaeology",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/subject-6",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/subject-5",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/clinical-laboratory-sciences",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/subject-67",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/subject-73",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/subject-76",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/optometry-and-vision-sciences",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/architecture-and-building-sciences",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/urban-planning",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/subject-14",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/subject-18",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/subject-23",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/subject-68",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/subject-20",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/subject-83",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/subject-54",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/subject-86",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/subject-52",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/subject-77",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/subject-9",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/subject-4",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/subject-2",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/subject-3",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/subject-65",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/psychology",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/special-education",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/subject-28",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/art-education",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/subject-37",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/subject-45",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/subject-46",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/arabic-language-and-literature-2",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/aerospace-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/chemical-and-petroleum-engineering-2",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/civil-and-environmental-engineering-2",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/mechanical-and-nuclear-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/management-science-and-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/earth-sciences",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/computer-science-and-engineering-2",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/computer-and-information-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/biological-sciences",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/biomedical-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/biology",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/geosciences",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/mathematical-sciences",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/languages-and-literature",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/tourism-and-heritage",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/social-wellbeing",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/cognitive-sciences",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/media-and-creative-industries",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/government-and-society",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/geography-and-urban-sustainability",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/public-law-private-law",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/learning-and-educational-leadership",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/special-and-gifted-education",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/mechanical-and-aerospace-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/civil-and-environmental-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/arabic-language-and-literature",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/electrical-and-communication-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/chemical-and-petroleum-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/computer-science-and-software-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/information-systems-and-security",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/computer-and-network-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/economics-and-finance-2",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/marketing-and-entrepreneurship",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/integrative-agriculture",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/food-science",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/veterinary-medicine",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/medical-education",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/nutrition-and-health",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/speech-language-pathology",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/communication-and-media-sciences",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/humanities-and-social-sciences",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/natural-and-health-sciences",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/technological-innovation",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/arts-and-digital-media",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/design",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-sociology",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/interdisciplinary-studies",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-jurisprudence-and-its-foundations",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/various",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-history-and-islamic-civilization",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-foundations-of-religion",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-mechanical-and-nuclear-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-foreign-languages",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-management",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-education",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-industrial-engineering-and-engineering-management",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-sustainable-and-renewable-energy-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-architectural-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-information-systems",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-applied-biology",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-applied-physics-and-astronomy",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/department-of-medical-diagnostic-imaging",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/physiotherapy",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/environmental-health-sciences",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/clinical-nutrition-and-dietetics",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/health-care-management",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/audiology-and-speech-language-pathology",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/mass-communication",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/public-relations",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/dental-medicine",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/biology-chemistry-and-environmental-sciences",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/architecture",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/pharmacy",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/art-and-design",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/international-studies",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/media-communication",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/mathematics-and-statistics-2",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/accounting-and-information-systems",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/management-strategy-and-entrepreneurship",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/marketing-and-supply-chain-management",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/chemical-and-biological-engineering",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/pending",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/electrical-and-computer-engineering-2",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/sociology",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/visual-communication",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/game-design-and-development",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/communication-and-information-studies",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/health-information-management",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/medical-laboratory-science",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/international-business",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/logistics-and-supply-chain-management-2",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/tourism-management",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/actuarial-science",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/business-analytics",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/electrical-engineering-technology",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/mechanical-engineering-technology",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/mechatronics-engineering-technology",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/aviation-maintenance-engineering-technology",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/industrial-engineering-technology",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/civil-engineering-technology",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/chemical-engineering-technology",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/subjects/digital-media",
+      "type": "subject",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/teachers/1891393b-0145-4f93-9cb5-35a81a89952f",
+      "type": "tutor",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/teachers/3778e93e-9959-45b1-bbe0-50feafca75ac",
+      "type": "tutor",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/teachers/f5f86b1b-8c19-4baa-8fd4-bcbe76001dce",
+      "type": "tutor",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/teachers/1363a366-aa19-40e7-b529-04a378751a5e",
+      "type": "tutor",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    },
+    {
+      "loc": "https://ostaze.com/teachers/a8cbdcf9-2345-4a36-a4cd-4767a5d3a367",
+      "type": "tutor",
+      "fails": [
+        "fetch error fetch failed",
+        "0 titles",
+        "0 descriptions",
+        "0 canonicals",
+        "0 h1"
+      ]
+    }
+  ]
 }
