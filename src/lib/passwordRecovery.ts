@@ -32,15 +32,18 @@ export type RecoveryCallbackResult =
  * HTTPS origins (the Lovable-managed preview and published hosts) keep their
  * exact current origin so the PKCE verifier stays on the same origin.
  */
-export function getAuthCallbackUrl(origin: string, next?: string): string {
+export function getAuthCallbackUrl(
+  origin: string,
+  next?: typeof RECOVERY_NEXT_PATH,
+): string {
   const current = new URL(origin);
   const callbackOrigin =
     PRODUCTION_HOSTS.has(current.hostname) || current.protocol !== "https:"
       ? PRODUCTION_ORIGIN
       : current.origin;
-  const callback = new URL("/auth/callback", callbackOrigin);
-  if (next) callback.searchParams.set("next", next);
-  return callback.toString();
+  const callback = new URL("/auth/callback", callbackOrigin).toString();
+  // Literal (unencoded) slash so the URL matches the exact allowlist entry.
+  return next ? `${callback}?next=${next}` : callback;
 }
 
 export function getRecoveryCallbackUrl(origin: string): string {

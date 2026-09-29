@@ -19,10 +19,10 @@ function memoryStorage() {
 describe("password recovery", () => {
   it("uses the canonical callback on the production domains", () => {
     expect(getRecoveryCallbackUrl("https://ostaze.com")).toBe(
-      "https://ostaze.com/auth/callback?next=%2Freset-password",
+      "https://ostaze.com/auth/callback?next=/reset-password",
     );
     expect(getRecoveryCallbackUrl("https://www.ostaze.com")).toBe(
-      "https://ostaze.com/auth/callback?next=%2Freset-password",
+      "https://ostaze.com/auth/callback?next=/reset-password",
     );
   });
 
@@ -44,7 +44,7 @@ describe("password recovery", () => {
         "https://id-preview--dc7db421-26c3-4945-8236-93600ec382aa.lovable.app",
       ),
     ).toBe(
-      "https://id-preview--dc7db421-26c3-4945-8236-93600ec382aa.lovable.app/auth/callback?next=%2Freset-password",
+      "https://id-preview--dc7db421-26c3-4945-8236-93600ec382aa.lovable.app/auth/callback?next=/reset-password",
     );
   });
 
@@ -54,7 +54,7 @@ describe("password recovery", () => {
         "https://dc7db421-26c3-4945-8236-93600ec382aa.lovableproject.com",
       ),
     ).toBe(
-      "https://dc7db421-26c3-4945-8236-93600ec382aa.lovableproject.com/auth/callback?next=%2Freset-password",
+      "https://dc7db421-26c3-4945-8236-93600ec382aa.lovableproject.com/auth/callback?next=/reset-password",
     );
   });
 
