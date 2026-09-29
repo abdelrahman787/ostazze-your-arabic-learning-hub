@@ -16,6 +16,11 @@
       "pass": 10,
       "fail": 0
     },
+    "country": {
+      "total": 4,
+      "pass": 4,
+      "fail": 0
+    },
     "university": {
       "total": 22,
       "pass": 22,
@@ -26,24 +31,14 @@
       "pass": 101,
       "fail": 0
     },
-    "country": {
-      "total": 4,
-      "pass": 4,
-      "fail": 0
-    },
     "subject": {
       "total": 265,
       "pass": 265,
       "fail": 0
     },
-    "course": {
+    "tutor": {
       "total": 5,
       "pass": 5,
-      "fail": 0
-    },
-    "tutor": {
-      "total": 19,
-      "pass": 19,
       "fail": 0
     }
   },

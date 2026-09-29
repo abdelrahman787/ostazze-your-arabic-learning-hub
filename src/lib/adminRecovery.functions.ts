@@ -23,7 +23,8 @@ function randomCode() {
 }
 
 async function isAdminRow(userId: string) {
-  const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+  const { supabaseAdmin } =
+    await import("@/integrations/supabase/client.server");
   const { data } = await supabaseAdmin
     .from("user_roles")
     .select("id")
@@ -66,7 +67,9 @@ export const generateRecoveryCodes = createServerFn({ method: "POST" })
       .from("admin_recovery_codes")
       .delete()
       .eq("user_id", context.userId);
-    const { error } = await supabaseAdmin.from("admin_recovery_codes").insert(rows);
+    const { error } = await supabaseAdmin
+      .from("admin_recovery_codes")
+      .insert(rows);
     if (error) throw new Error("Could not save recovery codes");
     return { codes };
   });
