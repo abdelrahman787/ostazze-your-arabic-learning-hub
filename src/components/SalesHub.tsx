@@ -16,6 +16,9 @@ import {
   RefreshCw,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import SessionCancelRefundDialog, {
+  type RefundDialogMode,
+} from "@/components/admin/SessionCancelRefundDialog";
 
 interface SessionRequest {
   id: string;
@@ -26,6 +29,8 @@ interface SessionRequest {
   preferred_time: string | null;
   notes: string | null;
   status: string;
+  payment_state?: string | null;
+  refund_status?: string | null;
   zoom_url: string | null;
   created_at: string;
   student_name?: string;
@@ -51,6 +56,10 @@ const SalesHub = () => {
   const [assignZoom, setAssignZoom] = useState("");
   const [assigning, setAssigning] = useState(false);
   const [updatingId, setUpdatingId] = useState<string | null>(null);
+  const [dialog, setDialog] = useState<{
+    mode: RefundDialogMode;
+    req: SessionRequest;
+  } | null>(null);
 
   const fetchRequests = useCallback(async () => {
     setLoading(true);
@@ -211,6 +220,16 @@ const SalesHub = () => {
     rejected: "مرفوض",
     cancelled: "ملغي",
     completed: "مكتمل",
+  };
+
+  const refundLabel: Record<string, string> = {
+    cancellation_requested: "طلب إلغاء مفتوح",
+    refund_not_required: "لا يتطلب استرداد",
+    refund_pending: "استرداد قيد المراجعة",
+    refund_approved: "استرداد موافق عليه — بانتظار التنفيذ",
+    refunded: "تم الاسترداد (مرجع مسجّل)",
+    refund_rejected: "استرداد مرفوض",
+    credit_issued: "رصيد في الحساب",
   };
 
   const filteredRequests = useMemo(() => {
@@ -376,6 +395,11 @@ const SalesHub = () => {
                       >
                         {statusLabel[r.status] || r.status}
                       </span>
+                      {r.refund_status && (
+                        <span className="block mt-1 text-[11px] font-bold text-primary">
+                          {refundLabel[r.refund_status] || r.refund_status}
+                        </span>
+                      )}
                     </td>
                     <td className="py-3 px-2">
                       <div className="flex items-center gap-2 flex-wrap">
@@ -422,15 +446,36 @@ const SalesHub = () => {
                           r.status !== "rejected" && (
                             <button
                               disabled={updatingId === r.id}
-                              onClick={() => {
-                                if (confirm("هل تريد إلغاء الطلب؟"))
-                                  handleStatusChange(r.id, "cancelled");
-                              }}
+                              onClick={() =>
+                                setDialog({ mode: "cancel", req: r })
+                              }
                               className="text-xs font-bold text-destructive hover:underline flex items-center gap-1 disabled:opacity-50"
                             >
                               <XCircle size={12} /> إلغاء
                             </button>
                           )}
+                        {r.payment_state !== "unpaid" &&
+                          r.refund_status &&
+                          r.refund_status !== "refunded" && (
+                            <button
+                              onClick={() =>
+                                setDialog({ mode: "decision", req: r })
+                              }
+                              className="text-xs font-bold text-primary hover:underline"
+                            >
+                              قرار الاسترداد
+                            </button>
+                          )}
+                        {r.refund_status === "refund_approved" && (
+                          <button
+                            onClick={() =>
+                              setDialog({ mode: "record", req: r })
+                            }
+                            className="text-xs font-bold text-primary hover:underline"
+                          >
+                            تسجيل الاسترداد المنفّذ
+                          </button>
+                        )}
                         {r.zoom_url && (
                           <a
                             href={r.zoom_url}
@@ -450,6 +495,15 @@ const SalesHub = () => {
           </div>
         )}
       </div>
+
+      {dialog && (
+        <SessionCancelRefundDialog
+          mode={dialog.mode}
+          request={dialog.req}
+          onClose={() => setDialog(null)}
+          onDone={fetchRequests}
+        />
+      )}
 
       {/* Assignment modal */}
       {assigningId && (

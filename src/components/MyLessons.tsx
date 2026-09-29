@@ -11,6 +11,7 @@ import {
   BookOpen,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import SessionRequestActions from "@/components/SessionRequestActions";
 
 interface Lesson {
   id: string;
@@ -19,6 +20,8 @@ interface Lesson {
   preferred_time: string | null;
   status: string;
   zoom_url: string | null;
+  payment_state?: string | null;
+  refund_status?: string | null;
   teacher_name?: string;
   student_name?: string;
 }
@@ -124,6 +127,16 @@ const MyLessons = ({ role }: { role: "student" | "teacher" }) => {
             </span>
           </div>
 
+          {role === "teacher" && (
+            <div className="mb-3">
+              <SessionRequestActions
+                req={lesson}
+                role="tutor"
+                lang={lang}
+                onChanged={fetch}
+              />
+            </div>
+          )}
           <div className="flex items-center gap-4 text-xs text-muted-foreground mb-3">
             {lesson.preferred_date && (
               <span className="flex items-center gap-1">

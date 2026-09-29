@@ -937,8 +937,8 @@ const translations = {
     en: "Payments & Refunds",
   },
   terms_section4_content: {
-    ar: "تتم جميع المدفوعات بالجنيه المصري عبر مزود دفع معتمد. تُراجع طلبات الإلغاء والاسترداد بشكل فردي. للتقديم تواصل معنا عبر info@ostaze.com أو واتساب ‎+20 11 3038 2206‎ مع ذكر البريد المستخدم في الشراء وتفاصيل العملية. يُعاد المبلغ المعتمد عبر وسيلة الدفع الأصلية عند الإمكان. لا تؤثر هذه الشروط على أي حقوق إلزامية يكفلها القانون. للتفاصيل راجع سياسة الاسترداد.",
-    en: "All payments are charged in Egyptian pounds through an approved payment provider. Cancellation and refund requests are reviewed individually. To submit one, contact us at info@ostaze.com or on WhatsApp +20 11 3038 2206 with the email used for the purchase and the transaction details. Approved refunds are returned via the original payment method where possible. These terms do not affect any mandatory rights granted by law. For details, see our Refund Policy.",
+    ar: "تتم جميع المدفوعات بالجنيه المصري عبر مزود دفع معتمد. طلب إلغاء جلسة مدفوعة قبل 24 ساعة أو أكثر من موعدها يؤهل لاسترداد كامل بعد المراجعة. قبل أقل من 24 ساعة أو عند عدم حضور الطالب لا يوجد استرداد تلقائي، ويمكن مراجعة الحالات الاستثنائية. إذا لم يقدّم المعلم أو المنصة الخدمة يحق للطالب استرداد كامل أو رصيد متفق عليه. يُعاد الاسترداد المالي المعتمد إلى وسيلة الدفع الأصلية متى أمكن، وتعتمد مدة المعالجة على مزوّد الدفع والبنك. للتواصل: info@ostaze.com أو واتساب ‎+20 11 3038 2206‎. لا تؤثر هذه الشروط على الحقوق الإلزامية للمستهلك بموجب القانون المصري.",
+    en: "All payments are charged in Egyptian pounds through an approved payment provider. Cancelling a paid session 24 hours or more before its start makes it eligible for a full refund after review. Less than 24 hours before the start, or if the student does not attend, there is no automatic refund; exceptional cases may be reviewed. If the tutor or platform fails to provide the service, the student is entitled to a full refund or agreed account credit. Approved monetary refunds are returned to the original payment method where possible; processing time depends on the payment provider and bank. Contact: info@ostaze.com or WhatsApp +20 11 3038 2206. These terms do not affect mandatory consumer rights under Egyptian law.",
   },
   terms_section5_title: {
     ar: "حقوق الملكية الفكرية",
@@ -958,8 +958,8 @@ const translations = {
     en: "Student & Tutor Responsibilities",
   },
   terms_section7_content: {
-    ar: "يلتزم الطلاب باحترام أوقات الجلسات والحضور في الموعد. يلتزم المعلمون بتقديم محتوى احترافي ومناسب للمستوى المُعلن. في حال تغيّب المعلم عن جلسة مؤكدة، يحق للطالب طلب إعادة جدولة الجلسة أو استرداد قيمتها.",
-    en: "Students must respect session times and attend on schedule. Tutors must deliver professional content appropriate to the advertised level. If a tutor misses a confirmed session, the student may request a rescheduled session or a refund of that session.",
+    ar: "يلتزم الطلاب باحترام أوقات الجلسات والحضور في الموعد. يلتزم المعلمون بتقديم محتوى احترافي ومناسب للمستوى المُعلن. إذا تغيّب المعلم عن جلسة مؤكدة يحق للطالب استرداد كامل أو رصيد متفق عليه أو إعادة جدولة الجلسة.",
+    en: "Students must respect session times and attend on schedule. Tutors must deliver professional content appropriate to the advertised level. If a tutor misses a confirmed session, the student is entitled to a full refund, agreed account credit, or a rescheduled session.",
   },
   terms_section8_title: {
     ar: "تسجيل الجلسات والخصوصية",
@@ -1116,8 +1116,8 @@ const translations = {
   trust_verified: { ar: "معلمون موثقون", en: "Verified Tutors" },
   trust_pay_per_session: { ar: "دفع لكل جلسة", en: "Pay Per Session" },
   trust_cancel_anytime: {
-    ar: "طلبات الإلغاء تُراجع فردياً",
-    en: "Cancellation requests reviewed",
+    ar: "استرداد كامل عند الإلغاء قبل 24 ساعة",
+    en: "Full refund 24h+ before, after review",
   },
 
   // Teachers empty CTA
@@ -1169,16 +1169,16 @@ const translations = {
   },
   faq_q_refund: { ar: "ما سياسة الاسترداد؟", en: "What is the refund policy?" },
   faq_a_refund: {
-    ar: "تُراجع طلبات الإلغاء والاسترداد بشكل فردي. للتقديم تواصل معنا عبر info@ostaze.com أو واتساب ‎+20 11 3038 2206‎ مع ذكر البريد المستخدم في الشراء وتفاصيل العملية. يُعاد المبلغ المعتمد عبر وسيلة الدفع الأصلية عند الإمكان. راجع صفحة سياسة الاسترداد للتفاصيل.",
-    en: "Cancellation and refund requests are reviewed individually. To submit one, contact us at info@ostaze.com or on WhatsApp +20 11 3038 2206 with the email used for the purchase and the transaction details. Approved refunds are returned via the original payment method where possible. See our Refund Policy page for details.",
+    ar: "للجلسات المدفوعة: طلب الإلغاء قبل 24 ساعة أو أكثر يؤهل لاسترداد كامل بعد المراجعة. قبل أقل من 24 ساعة أو عند عدم الحضور لا يوجد استرداد تلقائي، ويمكن مراجعة الحالات الاستثنائية. إذا لم يقدّم المعلم أو المنصة الخدمة تحصل على استرداد كامل أو رصيد متفق عليه. يُعاد المبلغ المعتمد إلى وسيلة الدفع الأصلية متى أمكن، وتعتمد المدة على مزوّد الدفع والبنك. لا تتأثر حقوقك الإلزامية بموجب القانون المصري.",
+    en: "For paid sessions: requesting cancellation 24 hours or more before the start makes you eligible for a full refund after review. Less than 24 hours before, or a no-show, has no automatic refund; exceptional cases may be reviewed. If the tutor or platform fails to provide the service, you get a full refund or agreed account credit. Approved refunds return to the original payment method where possible; timing depends on the payment provider and bank. Your mandatory rights under Egyptian law are unaffected.",
   },
   faq_q_cancel: {
     ar: "كيف ألغي أو أعيد جدولة جلسة؟",
     en: "How do I cancel or reschedule a session?",
   },
   faq_a_cancel: {
-    ar: "لإلغاء جلسة أو إعادة جدولتها، تواصل معنا في أقرب وقت عبر واتساب ‎+20 11 3038 2206‎ أو info@ostaze.com قبل موعد الجلسة، وسنراجع طلبك.",
-    en: "To cancel or reschedule a session, contact us as early as possible before the session on WhatsApp +20 11 3038 2206 or at info@ostaze.com, and we will review your request.",
+    ar: "قبل الدفع يمكنك إلغاء الطلب مباشرة من صفحة حجوزاتي. بعد الدفع أو بعد تعيين المعلم استخدم زر «طلب إلغاء» أو «طلب إعادة جدولة» في حجوزاتي، أو تواصل معنا عبر واتساب ‎+20 11 3038 2206‎ أو info@ostaze.com، وستراجع الإدارة طلبك.",
+    en: "Before paying, you can cancel the request directly from My Bookings. After payment or tutor assignment, use ‘Request cancellation’ or ‘Request reschedule’ on My Bookings, or contact us on WhatsApp +20 11 3038 2206 or at info@ostaze.com, and an Admin will review it.",
   },
   faq_q_live: {
     ar: "كيف تتم الجلسات المباشرة؟",
@@ -1216,8 +1216,8 @@ const translations = {
     en: "Cancellations & Refunds",
   },
   refund_note_body: {
-    ar: "تُراجع الطلبات بشكل فردي وفق سياسة الاسترداد.",
-    en: "Requests are reviewed individually under our Refund Policy.",
+    ar: "الإلغاء قبل 24 ساعة أو أكثر من الجلسة المدفوعة: استرداد كامل بعد المراجعة. أقل من ذلك: لا استرداد تلقائي.",
+    en: "Cancel a paid session 24h+ before: full refund after review. Later: no automatic refund.",
   },
   refund_note_link: { ar: "تفاصيل سياسة الاسترداد", en: "View refund policy" },
   checkout_terms_agree: {

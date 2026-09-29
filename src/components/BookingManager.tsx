@@ -31,7 +31,7 @@ interface Booking {
 }
 
 interface Props {
-  role: "student" | "teacher";
+  role: "student" | "teacher" | "admin";
 }
 
 const BookingManager = ({ role }: Props) => {
@@ -43,6 +43,44 @@ const BookingManager = ({ role }: Props) => {
   const [rejectId, setRejectId] = useState<string | null>(null);
   const [rejectReason, setRejectReason] = useState("");
   const [actionLoading, setActionLoading] = useState<string | null>(null);
+  const [adminCancelId, setAdminCancelId] = useState<string | null>(null);
+  const [adminReason, setAdminReason] = useState("");
+
+  // Mirrors the server rule (the database enforces it with server time).
+  const canStudentCancel = (b: Booking) => {
+    const start = new Date(`${b.scheduled_date}T${b.scheduled_time}`).getTime();
+    const hours = (start - Date.now()) / 3_600_000;
+    if (b.status === "pending") return hours > 0;
+    if (b.status === "confirmed") return hours >= 24;
+    return false;
+  };
+
+  const studentCancel = async (id: string) => {
+    setActionLoading(id);
+    const { error } = await supabase.rpc("student_cancel_booking", {
+      _booking_id: id,
+    });
+    if (error) toast.error(error.message);
+    else toast.success(t("booking_updated"));
+    setActionLoading(null);
+    fetchBookings();
+  };
+
+  const adminCancel = async (id: string) => {
+    setActionLoading(id);
+    const { error } = await supabase.rpc("admin_cancel_booking", {
+      _booking_id: id,
+      _reason: adminReason,
+    });
+    if (error) toast.error(error.message);
+    else {
+      toast.success(t("booking_updated"));
+      setAdminCancelId(null);
+      setAdminReason("");
+    }
+    setActionLoading(null);
+    fetchBookings();
+  };
 
   const statusMap: Record<string, { label: string; color: string }> = {
     pending: {
@@ -70,13 +108,13 @@ const BookingManager = ({ role }: Props) => {
   const fetchBookings = useCallback(async () => {
     if (!user) return;
     const col = role === "teacher" ? "teacher_id" : "student_id";
-    const otherCol = role === "teacher" ? "student_id" : "teacher_id";
+    const otherCol = role === "student" ? "teacher_id" : "student_id";
 
     let query = supabase
       .from("bookings")
       .select("*")
-      .eq(col, user.id)
       .order("scheduled_date", { ascending: false });
+    if (role !== "admin") query = query.eq(col, user.id);
     if (filter !== "all")
       query = query.eq(
         "status",
@@ -219,7 +257,7 @@ const BookingManager = ({ role }: Props) => {
                   <div>
                     <div className="font-bold text-sm">{b.other_name}</div>
                     <div className="text-muted-foreground text-xs">
-                      {role === "teacher" ? t("the_student") : t("the_teacher")}
+                      {role === "student" ? t("the_teacher") : t("the_student")}
                     </div>
                   </div>
                 </div>
@@ -256,9 +294,10 @@ const BookingManager = ({ role }: Props) => {
                 </p>
               )}
 
-              {b.status === "pending" && (
+              {(b.status === "pending" ||
+                (b.status === "confirmed" && role !== "teacher")) && (
                 <div className="flex gap-2 mt-2">
-                  {role === "teacher" && (
+                  {role === "teacher" && b.status === "pending" && (
                     <>
                       <motion.button
                         whileTap={{ scale: 0.95 }}
@@ -282,10 +321,27 @@ const BookingManager = ({ role }: Props) => {
                       </motion.button>
                     </>
                   )}
-                  {role === "student" && (
+                  {role === "admin" && (
+                    <button
+                      onClick={() => setAdminCancelId(b.id)}
+                      className="flex-1 py-2 rounded-xl bg-destructive/10 text-destructive font-bold text-sm hover:bg-destructive/20 transition-colors"
+                    >
+                      {lang === "ar"
+                        ? "إلغاء بواسطة الإدارة"
+                        : "Cancel as Admin"}
+                    </button>
+                  )}
+                  {role === "student" && !canStudentCancel(b) && (
+                    <p className="text-xs text-muted-foreground">
+                      {lang === "ar"
+                        ? "لا يمكن إلغاء الحجز المؤكد قبل أقل من 24 ساعة من موعده. تواصل معنا عند الضرورة."
+                        : "Confirmed bookings can't be cancelled less than 24 hours before the start. Contact us if needed."}
+                    </p>
+                  )}
+                  {role === "student" && canStudentCancel(b) && (
                     <motion.button
                       whileTap={{ scale: 0.95 }}
-                      onClick={() => updateStatus(b.id, "cancelled")}
+                      onClick={() => studentCancel(b.id)}
                       disabled={actionLoading === b.id}
                       className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl bg-destructive/10 text-destructive font-bold text-sm hover:bg-destructive/20 transition-colors"
                     >
@@ -307,6 +363,45 @@ const BookingManager = ({ role }: Props) => {
                 >
                   {t("enter_lecture")}
                 </a>
+              )}
+
+              {adminCancelId === b.id && (
+                <div className="mt-3 p-3 bg-destructive/5 rounded-xl space-y-2">
+                  <textarea
+                    value={adminReason}
+                    onChange={(e) => setAdminReason(e.target.value)}
+                    placeholder={
+                      lang === "ar"
+                        ? "سبب الإلغاء (مطلوب)"
+                        : "Cancellation reason (required)"
+                    }
+                    aria-label={
+                      lang === "ar" ? "سبب الإلغاء" : "Cancellation reason"
+                    }
+                    rows={2}
+                    className="input-base resize-none text-sm"
+                  />
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => adminCancel(b.id)}
+                      disabled={
+                        actionLoading === b.id || adminReason.trim().length < 3
+                      }
+                      className="flex-1 py-2 rounded-xl bg-destructive text-destructive-foreground font-bold text-sm disabled:opacity-50"
+                    >
+                      {lang === "ar" ? "تأكيد الإلغاء" : "Confirm cancellation"}
+                    </button>
+                    <button
+                      onClick={() => {
+                        setAdminCancelId(null);
+                        setAdminReason("");
+                      }}
+                      className="px-4 py-2 rounded-xl bg-secondary text-sm font-bold"
+                    >
+                      {t("action_cancel")}
+                    </button>
+                  </div>
+                </div>
               )}
 
               {rejectId === b.id && (
