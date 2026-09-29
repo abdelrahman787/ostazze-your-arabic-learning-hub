@@ -18,23 +18,39 @@ const AuthCallback = () => {
     const params = new URLSearchParams(window.location.search);
     const client = getRecoveryAuthClient();
     // supabase-js stores the PKCE verifier under `${storageKey}-code-verifier`.
-    const ref = new URL(import.meta.env.VITE_SUPABASE_URL).hostname.split(".")[0];
+    const ref = new URL(import.meta.env.VITE_SUPABASE_URL).hostname.split(
+      ".",
+    )[0];
     const verifierKey = `sb-${ref}-auth-token-code-verifier`;
     void (async () => {
       const verifier = window.localStorage.getItem(verifierKey);
       // Diagnostics only: never logs the code, verifier or tokens.
-      console.info("[recovery] callback origin:", window.location.origin, "verifier present:", Boolean(verifier));
+      console.info(
+        "[recovery] callback origin:",
+        window.location.origin,
+        "verifier present:",
+        Boolean(verifier),
+      );
       if (!verifier) {
-        console.info("[recovery] exchange skipped: no verifier on this origin (request was made on a different origin)");
+        console.info(
+          "[recovery] exchange skipped: no verifier on this origin (request was made on a different origin)",
+        );
         window.history.replaceState({}, "", "/auth/callback");
         if (active) setState("mismatch");
         return;
       }
-      const result = await completeRecoveryCallback(client.auth, window.sessionStorage, {
-        code: params.get("code"),
-        next: params.get("next"),
-      });
-      console.info("[recovery] exchange result:", result.ok ? "success" : "failed");
+      const result = await completeRecoveryCallback(
+        client.auth,
+        window.sessionStorage,
+        {
+          code: params.get("code"),
+          next: params.get("next"),
+        },
+      );
+      console.info(
+        "[recovery] exchange result:",
+        result.ok ? "success" : "failed",
+      );
       if (!active) return;
       if (result.ok) {
         window.location.replace(result.next);

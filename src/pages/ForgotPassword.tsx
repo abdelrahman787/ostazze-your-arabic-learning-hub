@@ -24,11 +24,18 @@ const ForgotPassword = () => {
         await getRecoveryAuthClient().auth.resetPasswordForEmail(email, {
           redirectTo: getRecoveryCallbackUrl(window.location.origin),
         });
-      const ref = new URL(import.meta.env.VITE_SUPABASE_URL).hostname.split(".")[0];
+      const ref = new URL(import.meta.env.VITE_SUPABASE_URL).hostname.split(
+        ".",
+      )[0];
       console.info(
-        "[recovery] requesting origin:", window.location.origin,
-        "callback origin:", new URL(getRecoveryCallbackUrl(window.location.origin)).origin,
-        "verifier stored:", Boolean(window.localStorage.getItem(`sb-${ref}-auth-token-code-verifier`)),
+        "[recovery] requesting origin:",
+        window.location.origin,
+        "callback origin:",
+        new URL(getRecoveryCallbackUrl(window.location.origin)).origin,
+        "verifier stored:",
+        Boolean(
+          window.localStorage.getItem(`sb-${ref}-auth-token-code-verifier`),
+        ),
       );
       if (error) setRequestFailed(true);
       else setSent(true);

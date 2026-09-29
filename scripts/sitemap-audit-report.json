@@ -1,5 +1,5 @@
 {
-  "base": "http://127.0.0.1:3999",
+  "base": "http://localhost:3999",
   "totals": {
     "home": {
       "total": 1,
@@ -12,8 +12,8 @@
       "fail": 0
     },
     "static": {
-      "total": 10,
-      "pass": 10,
+      "total": 11,
+      "pass": 11,
       "fail": 0
     },
     "country": {
@@ -22,18 +22,18 @@
       "fail": 0
     },
     "university": {
-      "total": 22,
-      "pass": 22,
+      "total": 29,
+      "pass": 29,
       "fail": 0
     },
     "college": {
-      "total": 101,
-      "pass": 101,
+      "total": 144,
+      "pass": 144,
       "fail": 0
     },
     "subject": {
-      "total": 265,
-      "pass": 265,
+      "total": 314,
+      "pass": 314,
       "fail": 0
     },
     "tutor": {
