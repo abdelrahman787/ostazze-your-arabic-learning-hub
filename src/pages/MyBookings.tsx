@@ -71,6 +71,18 @@ const statusMeta = (
       tone: "bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/30",
       Icon: CreditCard,
     },
+    paid_awaiting_assignment: {
+      ar: "مدفوعة — بانتظار تعيين مدرس",
+      en: "Paid — awaiting tutor",
+      tone: "bg-primary/10 text-primary border-primary/30",
+      Icon: CreditCard,
+    },
+    assigned: {
+      ar: "تم تعيين مدرس",
+      en: "Tutor assigned",
+      tone: "bg-primary/10 text-primary border-primary/30",
+      Icon: CheckCircle2,
+    },
     confirmed: {
       ar: "مؤكدة ✅",
       en: "Confirmed ✅",
