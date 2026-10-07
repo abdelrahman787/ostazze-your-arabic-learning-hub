@@ -13,8 +13,8 @@ export const Route = createFileRoute("/subjects/$subjectSlug")({
     const { SUBJECT_INDEX } =
       await import("@/data/universities/subjectIndex.generated");
     const info = SUBJECT_INDEX.find((s) => s.name_en === name);
-    const { loadCountries } = await import("@/data/universities/loader");
-    const all = await loadCountries(info?.countries || []);
+    const { loadUniversities } = await import("@/data/universities/loader");
+    const all = await loadUniversities(info?.universityIds || []);
     const universities: University[] = all
       .map((u) => ({
         ...u,

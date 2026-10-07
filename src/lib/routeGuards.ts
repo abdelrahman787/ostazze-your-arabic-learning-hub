@@ -48,9 +48,8 @@ export async function requireCollege(
 ) {
   const summary = findUniversityBySlugs(cSlug, uSlug);
   if (!summary) throw notFound();
-  const { loadCountry } = await import("@/data/universities/loader");
-  const unis = await loadCountry(summary.country_code);
-  const uni = unis.find((u) => u.id === summary.id);
+  const { loadUniversity } = await import("@/data/universities/loader");
+  const uni = await loadUniversity(summary.id);
   if (
     !uni?.colleges.some((c) => c.id.toLowerCase() === collegeId.toLowerCase())
   )

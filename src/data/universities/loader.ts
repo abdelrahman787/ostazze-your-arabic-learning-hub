@@ -1,74 +1,86 @@
-// On-demand loading of per-country university data. Each country is its own chunk,
-// so visiting one country never downloads the others.
+// On-demand loading of university data. Each university is its own chunk,
+// so a page downloads only the universities it renders.
 import { useEffect, useState } from "react";
 import type { University } from "./types";
+import { UNIVERSITY_INDEX } from "./universityIndex.generated";
 
-type Mod = { universities: University[] };
-
-// Order matters: it is the catalog's canonical order (KW, QA, SA, AE).
-const importers: Record<string, () => Promise<Mod>> = {
-  KW: () => import("./kw"),
-  QA: () => import("./qa"),
-  SA: () => import("./sa"),
-  AE: () => import("./ae"),
+type Mod = { university: University };
+const modules = import.meta.glob<Mod>("./unis/*/*.ts");
+const importerFor = (id: string) => {
+  const cc = id.split("-")[0]!.toLowerCase();
+  return modules[`./unis/${cc}/${id.toLowerCase()}.ts`];
 };
 
-export const COUNTRY_MODULE_CODES = Object.keys(importers);
+// Order matters: it is the catalog's canonical order (KW, QA, SA, AE).
+export const COUNTRY_MODULE_CODES = ["KW", "QA", "SA", "AE"];
 
-const pending = new Map<string, Promise<University[]>>();
-const loaded = new Map<string, University[]>();
+const pending = new Map<string, Promise<University>>();
+const loaded = new Map<string, University>();
 
-export function loadCountry(code: string): Promise<University[]> {
-  const importer = importers[code];
-  if (!importer) return Promise.resolve([]);
-  let p = pending.get(code);
+export function loadUniversity(id: string): Promise<University | undefined> {
+  const importer = importerFor(id);
+  if (!importer) return Promise.resolve(undefined);
+  let p = pending.get(id);
   if (!p) {
     p = importer().then((m) => {
-      loaded.set(code, m.universities);
-      return m.universities;
+      loaded.set(id, m.university);
+      return m.university;
     });
-    p.catch(() => pending.delete(code)); // allow retry after a failed download
-    pending.set(code, p);
+    p.catch(() => pending.delete(id)); // allow retry after a failed download
+    pending.set(id, p);
   }
   return p;
 }
 
-const sortCodes = (codes: string[]) =>
-  COUNTRY_MODULE_CODES.filter((c) => codes.includes(c));
+/** Sorts ids into the catalog order (country order, then index order). */
+const sortIds = (ids: string[]) =>
+  UNIVERSITY_INDEX.filter((u) => ids.includes(u.id))
+    .sort(
+      (a, b) =>
+        COUNTRY_MODULE_CODES.indexOf(a.country_code) -
+        COUNTRY_MODULE_CODES.indexOf(b.country_code),
+    )
+    .map((u) => u.id);
 
+export const loadUniversities = (ids: string[]) =>
+  Promise.all(sortIds(ids).map(loadUniversity)).then((l) =>
+    l.filter((u): u is University => !!u),
+  );
+
+export const countryUniversityIds = (codes: string[]) =>
+  UNIVERSITY_INDEX.filter((u) => codes.includes(u.country_code)).map(
+    (u) => u.id,
+  );
+
+export const loadCountry = (code: string) =>
+  loadUniversities(countryUniversityIds([code]));
 export const loadCountries = (codes: string[]) =>
-  Promise.all(sortCodes(codes).map(loadCountry)).then((lists) => lists.flat());
-
+  loadUniversities(countryUniversityIds(codes));
 export const loadAllUniversities = () => loadCountries(COUNTRY_MODULE_CODES);
 
-const getLoaded = (codes: string[]) => {
-  const sorted = sortCodes(codes);
-  if (!sorted.every((c) => loaded.has(c))) return null;
-  return sorted.flatMap((c) => loaded.get(c)!);
-};
+const getLoaded = (ids: string[]) =>
+  ids.every((id) => loaded.has(id)) ? ids.map((id) => loaded.get(id)!) : null;
 
-/** Loads the given countries' universities. `data` is null while downloading. */
-export function useCountryUniversities(codes: string[]) {
-  const key = sortCodes(codes).join(",");
+/** Loads the given universities. `data` is null while downloading. */
+export function useUniversities(ids: string[]) {
+  const sorted = sortIds(ids);
+  const key = sorted.join(",");
   const [state, setState] = useState<{
     key: string;
     data: University[] | null;
     error: boolean;
-  }>(() => ({
-    key,
-    data: getLoaded(codes),
-    error: false,
-  }));
+  }>(() => ({ key, data: getLoaded(sorted), error: false }));
 
   useEffect(() => {
-    const ready = getLoaded(key ? key.split(",") : []);
+    const list = key ? key.split(",") : [];
+    const ready = getLoaded(list);
     if (ready) {
       setState({ key, data: ready, error: false });
       return;
     }
     let cancelled = false;
     setState({ key, data: null, error: false });
-    loadCountries(key ? key.split(",") : [])
+    loadUniversities(list)
       .then((data) => !cancelled && setState({ key, data, error: false }))
       .catch(() => !cancelled && setState({ key, data: null, error: true }));
     return () => {
@@ -77,6 +89,10 @@ export function useCountryUniversities(codes: string[]) {
   }, [key]);
 
   // Never hand back stale data from a previous key during the first render after a change.
-  if (state.key !== key) return { data: getLoaded(codes), error: false };
+  if (state.key !== key) return { data: getLoaded(sorted), error: false };
   return { data: state.data, error: state.error };
 }
+
+/** Loads every university in the given countries. */
+export const useCountryUniversities = (codes: string[]) =>
+  useUniversities(countryUniversityIds(codes));
