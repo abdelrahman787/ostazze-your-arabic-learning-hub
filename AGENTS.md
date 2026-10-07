@@ -1,6 +1,6 @@
 - Build country/university/college URLs only with slugs.ts, subjects with subjectSlugs.ts; sitemap uses export-route-slugs.ts.
 - Business identity lives only in site.ts and feeds JSON-LD, footer, contact and WhatsApp.
-- University data stays country-split; UI uses loader.ts generated indexes; all.ts is scripts/tests only.
+- University data is split per university (unis/<cc>/<id>.ts, written by scripts/split-catalog.ts); UI loads only rendered universities via loader.ts + generated indexes; all.ts is scripts/tests only. Why: a whole-country chunk (UAE 6.8 MB) stalled pages.
 - Keep the footer eager, no global TooltipProvider, and initial JS <=180 KB gzip.
 - TanStack Start SSR: file routes, root providers/head/init, AppShell frame, router-compat imports; preserve real HTML/404s.
 - Keep TypeScript strict; legacy-incompatible extra flags remain off.
