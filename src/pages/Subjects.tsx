@@ -20,7 +20,7 @@ import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useMemo, useState } from "react";
 import { SUBJECT_INDEX } from "@/data/universities/subjectIndex.generated";
-import { useCountryUniversities } from "@/data/universities/loader";
+import { useUniversities } from "@/data/universities/loader";
 import type { University } from "@/data/universities/types";
 import RouteSkeleton from "@/components/RouteSkeleton";
 import PageHeader from "@/components/PageHeader";
@@ -98,8 +98,8 @@ const Subjects = ({
   const subjectInfo = departmentParam
     ? subjectByName.get(departmentParam)
     : undefined;
-  const loadedUniversities = useCountryUniversities(
-    initialUniversities ? [] : subjectInfo?.countries || [],
+  const loadedUniversities = useUniversities(
+    initialUniversities ? [] : subjectInfo?.universityIds || [],
   );
   const allUniversities = initialUniversities ?? loadedUniversities.data;
   const subjectLoadError = initialUniversities

@@ -31,7 +31,7 @@ import type {
   University,
 } from "@/data/universities/types";
 import { findUniversitySummary } from "@/data/universities/countries";
-import { useCountryUniversities } from "@/data/universities/loader";
+import { useUniversities } from "@/data/universities/loader";
 import RouteSkeleton from "@/components/RouteSkeleton";
 import { getCollegeIcon } from "@/lib/collegeIconMap";
 import { groupByField } from "@/lib/collegeFieldMap";
@@ -355,8 +355,8 @@ const CollegeDetail = ({
         : findUniversitySummary(uniId),
     [uniId, countrySlug, universitySlug],
   );
-  const { data: loadedCountry, error: loadError } = useCountryUniversities(
-    summary && !initialUniversity ? [summary.country_code] : [],
+  const { data: loadedCountry, error: loadError } = useUniversities(
+    summary && !initialUniversity ? [summary.id] : [],
   );
   const countryData = initialUniversity ? [initialUniversity] : loadedCountry;
   const countryError = initialUniversity ? false : loadError;

@@ -33,6 +33,8 @@ export interface SubjectSummary {
   /** Distinct course codes (used for indexability). */
   uniqueCourses: number;
   countries: string[];
+  /** Universities that teach this subject (lets subject pages load only those). */
+  universityIds: string[];
 }
 
 export interface CategorySummary {
@@ -93,6 +95,7 @@ export function buildCatalogIndex(all: University[]): CatalogIndex {
             category_ar: collegeToCategory[catKey]?.ar || catKey,
             courses: 0,
             countries: [],
+            universityIds: [],
             codes: new Set(),
           };
           subjMap.set(d.name_en, s);
@@ -101,6 +104,7 @@ export function buildCatalogIndex(all: University[]): CatalogIndex {
         d.courses.forEach((x) => s!.codes.add(x.code || x.name_en));
         if (!s.countries.includes(u.country_code))
           s.countries.push(u.country_code);
+        if (!s.universityIds.includes(u.id)) s.universityIds.push(u.id);
       }
     }
   }

@@ -20,7 +20,7 @@ import {
   COUNTRY_INDEX,
   type UniversitySummary,
 } from "@/data/universities/countries";
-import { useCountryUniversities } from "@/data/universities/loader";
+import { useUniversities } from "@/data/universities/loader";
 import RouteSkeleton from "@/components/RouteSkeleton";
 import { getCollegeIcon } from "@/lib/collegeIconMap";
 import { groupByField } from "@/lib/collegeFieldMap";
@@ -224,8 +224,8 @@ const Universities = () => {
     () => (uSlug ? findUniversityBySlugs(cSlug, uSlug) || null : null),
     [cSlug, uSlug],
   );
-  const { data: countryData, error: countryError } = useCountryUniversities(
-    selectedSummary ? [selectedSummary.country_code] : [],
+  const { data: countryData, error: countryError } = useUniversities(
+    selectedSummary ? [selectedSummary.id] : [],
   );
   const selectedUni: University | null = useMemo(
     () =>
