@@ -56,7 +56,7 @@ const WhatsAppQuickBook = ({
       dir={isRtl ? "rtl" : "ltr"}
       className={`flex flex-col sm:flex-row items-center gap-4 sm:gap-6 justify-between rounded-2xl bg-gradient-to-r from-[#25D366]/10 via-[#25D366]/5 to-[#25D366]/10 border border-[#25D366]/25 px-5 py-4 md:px-6 md:py-5 ${className}`}
     >
-      <div className="flex items-center gap-3 min-w-0">
+      <div className="flex items-center gap-3 min-w-0 w-full sm:w-auto">
         <div className="w-11 h-11 rounded-full bg-[#25D366] text-white flex items-center justify-center shrink-0 shadow-md">
           <WhatsAppIcon size={22} />
         </div>
@@ -64,7 +64,7 @@ const WhatsAppQuickBook = ({
           <h3 className="font-black text-sm md:text-base leading-tight">
             {lang === "ar" ? "حجز سريع عبر واتساب" : "Quick Book via WhatsApp"}
           </h3>
-          <p className="text-xs md:text-sm text-muted-foreground mt-0.5 truncate">
+          <p className="text-xs md:text-sm text-muted-foreground mt-0.5 line-clamp-2">
             {context
               ? lang === "ar"
                 ? `تواصل معنا لحجز مدرس في ${context}`
