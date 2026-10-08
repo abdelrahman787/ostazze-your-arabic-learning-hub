@@ -50,7 +50,7 @@ export default function IgcseSection() {
     <section
       id="home-igcse"
       aria-labelledby="home-igcse-title"
-      className="bg-secondary py-16 md:py-24 overflow-hidden"
+      className="bg-background py-16 md:py-24 overflow-hidden"
       dir={ar ? "rtl" : "ltr"}
     >
       <div className="container">
