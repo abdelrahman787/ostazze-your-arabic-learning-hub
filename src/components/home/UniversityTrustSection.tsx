@@ -49,13 +49,20 @@ const UniversityTrustSection = () => {
           />
           <div className="absolute inset-y-0 left-0 w-[28%] flex flex-col items-center justify-center gap-2 md:gap-5 text-primary-foreground text-center px-1">
             <div>
-              <div className="text-xl sm:text-3xl md:text-4xl font-black leading-none">+12k</div>
-              <div className="text-[10px] sm:text-xs md:text-sm font-bold mt-1" dir={lang === "ar" ? "rtl" : "ltr"}>
+              <div className="text-xl sm:text-3xl md:text-4xl font-black leading-none">
+                +12k
+              </div>
+              <div
+                className="text-[10px] sm:text-xs md:text-sm font-bold mt-1"
+                dir={lang === "ar" ? "rtl" : "ltr"}
+              >
                 {t("stats_students")}
               </div>
             </div>
             <div>
-              <div className="text-base sm:text-xl md:text-2xl font-black leading-none">98%</div>
+              <div className="text-base sm:text-xl md:text-2xl font-black leading-none">
+                98%
+              </div>
               <div className="text-[10px] sm:text-xs md:text-sm font-semibold mt-1">
                 {lang === "ar" ? "رضا الطلاب" : "Student satisfaction"}
               </div>
@@ -64,7 +71,10 @@ const UniversityTrustSection = () => {
         </div>
 
         <div className="flex justify-center mt-8">
-          <Link to="/universities" className="btn-primary inline-flex items-center gap-2">
+          <Link
+            to="/universities"
+            className="btn-primary inline-flex items-center gap-2"
+          >
             <GraduationCap size={18} aria-hidden="true" />
             {t("home_logos_cta")}
           </Link>

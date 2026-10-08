@@ -1,10 +1,5 @@
 import { Link } from "@/lib/router-compat";
-import {
-  Sparkles,
-  GraduationCap,
-  CalendarCheck,
-  Video,
-} from "lucide-react";
+import { Sparkles, GraduationCap, CalendarCheck, Video } from "lucide-react";
 import {
   MotionConfig,
   motion,
@@ -429,7 +424,6 @@ const IndexBelowFold = () => {
 
         <UniversityTrustSection />
         <IgcseSection />
-
 
         {/* Bottom CTA */}
         <section className="py-20 md:py-24 px-4 lg:px-8 bg-section-alt">
