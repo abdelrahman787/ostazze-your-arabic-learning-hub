@@ -50,13 +50,13 @@ export default function IgcseSection() {
     <section
       id="home-igcse"
       aria-labelledby="home-igcse-title"
-      className="bg-study-surface py-16 md:py-24 overflow-hidden"
+      className="bg-secondary py-16 md:py-24 overflow-hidden"
       dir={ar ? "rtl" : "ltr"}
     >
       <div className="container">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           <div>
-            <div className="flex items-center gap-2 text-study-accent text-sm font-bold mb-5">
+            <div className="flex items-center gap-2 text-primary text-sm font-bold mb-5">
               <BookOpen size={18} aria-hidden="true" />
               <span>{ar ? "خطوتك القادمة تبدأ هنا" : "YOUR NEXT CHAPTER"}</span>
             </div>
@@ -78,7 +78,7 @@ export default function IgcseSection() {
                 : "From your first concept to exam preparation, start with the subject you need and explore a course that fits your syllabus and level."}
             </p>
             <p
-              className="text-sm text-study-accent font-semibold mb-8"
+              className="text-sm text-primary font-semibold mb-8"
               dir="ltr"
             >
               Cambridge · Edexcel · Oxford AQA
@@ -117,20 +117,20 @@ export default function IgcseSection() {
                   ? "طموح كبير. خطوة بخطوة."
                   : "Big ambitions. One step at a time."}
               </span>
-              <span className="text-study-accent text-xs font-bold" dir="ltr">
+              <span className="text-primary text-xs font-bold" dir="ltr">
                 O Level → AS / A Level
               </span>
             </div>
           </div>
         </div>
-        <div className="mt-10 md:mt-14 border-t border-study-accent/20 pt-6">
+        <div className="mt-10 md:mt-14 border-t border-primary/20 pt-6">
           <div className="flex flex-wrap items-baseline justify-between gap-3 mb-4">
             <h3 className="!font-sans !tracking-normal !font-bold text-base text-foreground">
               {ar ? "ابدأ بمادتك" : "Find your starting point"}
             </h3>
             <Link
               to="/igcse"
-              className="text-sm font-semibold text-study-accent underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="text-sm font-semibold text-primary underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               {ar ? "جميع المواد" : "All subjects"}
             </Link>
@@ -140,10 +140,10 @@ export default function IgcseSection() {
               <Link
                 key={id}
                 to={`/igcse/${id}`}
-                className="group flex items-center gap-3 min-h-24 p-3 md:p-4 bg-card text-card-foreground rounded-lg border border-border hover:border-study-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="group flex items-center gap-3 min-h-24 p-3 md:p-4 bg-card text-card-foreground rounded-lg border border-border hover:border-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <Icon
-                  className="text-study-accent shrink-0 w-5 h-5 md:w-6 md:h-6"
+                  className="text-primary shrink-0 w-5 h-5 md:w-6 md:h-6"
                   aria-hidden="true"
                 />
                 <div className="min-w-0 flex-1">
@@ -155,7 +155,7 @@ export default function IgcseSection() {
                   </span>
                 </div>
                 <ArrowUpRight
-                  className="hidden sm:block text-study-accent w-4 h-4 shrink-0 rtl:-scale-x-100 motion-safe:group-hover:-translate-y-0.5 transition-transform"
+                  className="hidden sm:block text-primary w-4 h-4 shrink-0 rtl:-scale-x-100 motion-safe:group-hover:-translate-y-0.5 transition-transform"
                   aria-hidden="true"
                 />
               </Link>
