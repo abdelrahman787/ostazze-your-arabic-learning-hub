@@ -1,6 +1,5 @@
 import { GraduationCap } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import PageHelmet from "@/components/PageHelmet";
 import HeroOrbit from "@/components/HeroOrbit";
 import { Suspense, lazy } from "react";
 import { useInViewOnce } from "@/hooks/useInViewOnce";
@@ -42,25 +41,6 @@ const HomePage = () => {
           }}
         />
       </div>
-
-      <PageHelmet
-        title={
-          lang === "ar"
-            ? "أستاذي OSTAZE | دروس خصوصية ولايف أونلاين"
-            : "OSTAZE | Ostaze - Online Private & Live Tutoring Platform"
-        }
-        description={
-          lang === "ar"
-            ? "منصة أستاذي (OSTAZE) لدروس خصوصية ولايف أونلاين مع أفضل المعلمين الجامعيين في السعودية والكويت وقطر — حصص زووم مباشرة وكورسات مسجلة."
-            : "OSTAZE (Ostaze) connects students with top university tutors in KSA, UAE, Kuwait & Qatar via Zoom live lessons and recorded courses at fair prices."
-        }
-        canonical="https://ostaze.com/"
-        keywords={
-          lang === "ar"
-            ? "منصة استاذي، موقع استاذي، أستاذي، استاذي، OSTAZE، Ostaze، منصة دروس لايف، دروس خصوصية اونلاين، حصص لايف زووم، كورسات مسجلة، حجز معلم خصوصي، جامعة الكويت، جامعة قطر"
-            : "ostaze, ostaze platform, online tutoring platform, private online tutors, live online lessons, zoom tutoring, university tutors Kuwait, university tutors Qatar"
-        }
-      />
 
       {/* Hero — CSS-only animations to keep framer-motion off the critical path */}
       <section className="hero-gradient min-h-[100dvh] lg:min-h-[100vh] flex items-center overflow-hidden relative pt-page-lg pb-20 sm:pb-16">
