@@ -40,5 +40,5 @@
 - [x] Restore the IGCSE catalog and course-detail pages, routes, and navigation without publishing
 
 ## Homepage IGCSE section
-- [ ] Add a bilingual, visually distinctive IGCSE section immediately before Languages, inspired by leading education sites
-- [ ] Verify placement, images and navigation without publishing
+- [x] Add a bilingual, visually distinctive IGCSE section immediately before Languages, inspired by leading education sites
+- [x] Verify placement, images and navigation without publishing
