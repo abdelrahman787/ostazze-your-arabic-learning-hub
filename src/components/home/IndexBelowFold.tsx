@@ -16,6 +16,7 @@ import {
 import { useRef, useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import OurTeam from "@/components/OurTeam";
+import IgcseSection from "@/components/home/IgcseSection";
 import { waLink } from "@/lib/whatsapp";
 
 import howStep1Asset from "@/assets/how-step-1.webp.asset.json";
@@ -427,6 +428,8 @@ const IndexBelowFold = () => {
             </motion.div>
           </div>
         </section>
+
+        <IgcseSection />
 
         {/* Languages */}
         <section className="relative py-20 md:py-24 overflow-hidden">
