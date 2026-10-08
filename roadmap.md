@@ -42,3 +42,6 @@
 ## Homepage IGCSE section
 - [x] Add a bilingual, visually distinctive IGCSE section immediately before Languages, inspired by leading education sites
 - [x] Verify placement, images and navigation without publishing
+
+## Homepage trust section
+- [ ] Restore the student-count and university trust section and verify Arabic/English display without publishing
