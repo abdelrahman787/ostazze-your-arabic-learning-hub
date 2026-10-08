@@ -18,7 +18,9 @@ export const Route = createFileRoute("/")({
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "keywords", content: "أستاذي، استاذي، OSTAZE، IGCSE، دروس خصوصية اونلاين، live online lessons, university tutors" },
     ],
+    links: [{ rel: "canonical", href: "https://ostaze.com/" }],
   }),
   component: Index,
 });
