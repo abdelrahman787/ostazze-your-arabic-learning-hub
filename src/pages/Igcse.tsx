@@ -1,7 +1,5 @@
-import { useMemo, useState } from "react";
-import { BookOpen, Search, User } from "lucide-react";
+import { BookOpen } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-import PageHelmet from "@/components/PageHelmet";
 import PageHeader from "@/components/PageHeader";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useVisitorCountry } from "@/hooks/useVisitorCountry";
@@ -9,7 +7,6 @@ import { CURRENCIES, SAR_TO_EGP } from "@/lib/pricing";
 import { waLink } from "@/lib/whatsapp";
 import {
   IG_COURSES,
-  IG_DEPARTMENTS,
   IG_SUBJECTS,
   IG_TEACHERS,
 } from "@/data/igcse";
@@ -20,11 +17,6 @@ export default function Igcse() {
   const { lang } = useLanguage();
   const ar = lang === "ar";
   const { country } = useVisitorCountry();
-  const [dept, setDept] = useState("");
-  const [teacher, setTeacher] = useState("");
-  const [teacherQuery, setTeacherQuery] = useState("");
-  const [subject, setSubject] = useState("");
-
   const subjectLabel = (en: string) =>
     ar ? (IG_SUBJECTS.find((s) => s.en === en)?.ar ?? en) : en;
 
@@ -36,33 +28,10 @@ export default function Igcse() {
     return ar ? `${s} ${c.symbol}` : `${s} ${c.currency}`;
   };
 
-  const teachers = useMemo(() => {
-    const q = teacherQuery.trim().toLowerCase();
-    return IG_TEACHERS.filter(
-      (t) =>
-        !q ||
-        t.name.toLowerCase().includes(q) ||
-        t.name_ar.includes(q) ||
-        t.subjects.some((s) => s.toLowerCase().includes(q)),
-    );
-  }, [teacherQuery]);
-
-  const courses = IG_COURSES.filter(
-    (c) =>
-      (!teacher || c.teacherId === teacher) &&
-      (!subject || c.subject === subject),
-  );
+  const courses = IG_COURSES;
 
   return (
     <div className="min-h-screen pb-16">
-      <PageHelmet
-        title={ar ? "كورسات IGCSE — استاذي" : "IGCSE Courses — OSTAZE"}
-        description={
-          ar
-            ? "كورسات IGCSE أونلاين في الفيزياء والكيمياء والأحياء والرياضيات والإنجليزية وغيرها، بسعر ثابت لكل كورس."
-            : "Online IGCSE courses in Physics, Chemistry, Biology, Math, English and more, each at a fixed price."
-        }
-      />
       <PageHeader
         title={ar ? "استكشف كورسات IGCSE" : "Explore IGCSE Courses"}
         variant="teachers"
@@ -82,7 +51,8 @@ export default function Igcse() {
           ) : (
             <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-5">
               {courses.map((c) => {
-                const t = teacherById.get(c.teacherId)!;
+                const t = teacherById.get(c.teacherId);
+                if (!t) return null;
                 const tName = ar ? t.name_ar : t.name;
                 return (
                   <article

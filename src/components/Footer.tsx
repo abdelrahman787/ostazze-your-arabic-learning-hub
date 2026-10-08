@@ -80,6 +80,7 @@ const Footer = () => {
                   label: lang === "ar" ? "اللغات" : "Languages",
                   path: "/languages",
                 },
+                { label: "IGCSE", path: "/igcse" },
                 // Country hubs (static list: keeps the heavy universities data out of every page).
                 ...[
                   ["kuwait", "الكويت", "Kuwait"],

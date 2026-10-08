@@ -35,3 +35,6 @@
 
 ## Round 6 — materials
 - [x] Import courses from ALL_UNIVERSITIES_MASTER, UoS_Programs_16-45, ALL_IN_ONE_UoS46-61_HCT spreadsheets
+
+## IGCSE restoration
+- [x] Restore the IGCSE catalog and course-detail pages, routes, and navigation without publishing
