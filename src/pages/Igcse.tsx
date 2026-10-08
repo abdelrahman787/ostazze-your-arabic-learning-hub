@@ -1,4 +1,3 @@
-import { useMemo, useState } from "react";
 import { BookOpen } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import PageHeader from "@/components/PageHeader";
@@ -18,10 +17,6 @@ export default function Igcse() {
   const { lang } = useLanguage();
   const ar = lang === "ar";
   const { country } = useVisitorCountry();
-  const [teacher] = useState("");
-  const [teacherQuery] = useState("");
-  const [subject] = useState("");
-
   const subjectLabel = (en: string) =>
     ar ? (IG_SUBJECTS.find((s) => s.en === en)?.ar ?? en) : en;
 
@@ -33,22 +28,7 @@ export default function Igcse() {
     return ar ? `${s} ${c.symbol}` : `${s} ${c.currency}`;
   };
 
-  const teachers = useMemo(() => {
-    const q = teacherQuery.trim().toLowerCase();
-    return IG_TEACHERS.filter(
-      (t) =>
-        !q ||
-        t.name.toLowerCase().includes(q) ||
-        t.name_ar.includes(q) ||
-        t.subjects.some((s) => s.toLowerCase().includes(q)),
-    );
-  }, [teacherQuery]);
-
-  const courses = IG_COURSES.filter(
-    (c) =>
-      (!teacher || c.teacherId === teacher) &&
-      (!subject || c.subject === subject),
-  );
+  const courses = IG_COURSES;
 
   return (
     <div className="min-h-screen pb-16">
