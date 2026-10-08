@@ -1,7 +1,5 @@
 import { Link } from "@/lib/router-compat";
 import {
-  Star,
-  ArrowLeft,
   Sparkles,
   GraduationCap,
   CalendarCheck,
@@ -17,7 +15,6 @@ import { useRef, useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import OurTeam from "@/components/OurTeam";
 import IgcseSection from "@/components/home/IgcseSection";
-import { waLink } from "@/lib/whatsapp";
 
 import howStep1Asset from "@/assets/how-step-1.webp.asset.json";
 import howStep2Asset from "@/assets/how-step-2.webp.asset.json";
