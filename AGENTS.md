@@ -3,6 +3,7 @@
 - University data is split per university (unis/<cc>/<id>.ts, written by scripts/split-catalog.ts); UI loads only rendered universities via loader.ts + generated indexes; all.ts is scripts/tests only. Why: a whole-country chunk (UAE 6.8 MB) stalled pages.
 - Keep the footer eager, no global TooltipProvider, and initial JS <=180 KB gzip.
 - Keep homepage course promotions inside the deferred below-fold module; why: imagery and course links must not enlarge the critical homepage bundle.
+- Keep the homepage university trust section inside the deferred below-fold module; why: its university logo images must not enlarge the initial homepage bundle.
 - TanStack Start SSR: file routes, root providers/head/init, AppShell frame, router-compat imports; preserve real HTML/404s.
 - Keep TypeScript strict; legacy-incompatible extra flags remain off.
 - Public tutor availability/reviews use public RPCs; applications use validated private uploads; security_matrix.sql verifies access.
