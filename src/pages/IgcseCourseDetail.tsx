@@ -32,8 +32,10 @@ export default function IgcseCourseDetail({ courseId }: { courseId: string }) {
   const ar = lang === "ar";
   const { country } = useVisitorCountry();
   const [copied, setCopied] = useState(false);
-  const c = IG_COURSES.find((x) => x.id === courseId)!;
-  const t = IG_TEACHERS.find((x) => x.id === c.teacherId)!;
+  const c = IG_COURSES.find((x) => x.id === courseId);
+  if (!c) return null;
+  const t = IG_TEACHERS.find((x) => x.id === c.teacherId);
+  if (!t) return null;
   const tName = ar ? t.name_ar : t.name;
   const subj = (en: string) =>
     ar ? (IG_SUBJECTS.find((s) => s.en === en)?.ar ?? en) : en;
